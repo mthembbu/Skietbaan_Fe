@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import './App.scss'
 import { getUser } from './api/github'
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Home from "./components/Home"
 import About from "./components/About"
 import Contact from "./components/Contact"
@@ -56,9 +56,9 @@ JSON.stringify(this.props)
 <Switch>
 <Route path="/home" component = {Home} exact/>
 <Route path="/" component = {Home} exact/>
-<Route path="/about" component = {About} />
-<Route path="/contact" component = {Contact} />
-<Route component={Home}/>
+<Route path="/about" component = {About} exact />
+<Route path="/contact" component = {Contact} exact/>
+<Redirect from="/" to="/"/>
 </Switch>
 </BrowserRouter>
 
