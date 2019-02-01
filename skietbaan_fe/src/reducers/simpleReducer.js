@@ -3,7 +3,11 @@
 /*
  src/reducers/simpleReducer.js
 */
-export default (state = {}, action) => {
+
+/**
+ * Create a Redux store that holds the app state.
+ */
+export default  (state = {}, action) => {
     switch (action.type) {
      case 'SIMPLE_ACTION':
       return {

@@ -1,6 +1,7 @@
 
 /* eslint-env jest */
 jest.mock('../request')
+
 const github = require('../github')
 
 // A simple example test
@@ -9,7 +10,14 @@ describe('#getUser() using Promises', () => {
     return github.getUser('vnglst')
     .then(data => {
       expect(data).toBeDefined()
-      expect(data.entity.name).toEqual('Koen van Gilst')
+      
     })
   })
+
+  it('should load user data', () => {
+    return github.getUser('vnglst')
+    .then(data => {
+      expect(data.entity.name).toEqual('Koen van Gilst')
+})
+})
 })
