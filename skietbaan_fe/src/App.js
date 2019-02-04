@@ -30,7 +30,7 @@ class App extends Component {
     }
 
     handleClick() {
-        axios.get('https://localhost:44333/api/User/2',{
+        axios.get('https://skietbaan.retrotest.co.za/api/User/',{
             
         method: 'GET',
         
