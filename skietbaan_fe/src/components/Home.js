@@ -6,6 +6,7 @@ const Home = () =>{
         <div >
                 <p>Home</p>
                 <p>New update</p>
+                
         </div>
     );
 };
