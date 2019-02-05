@@ -12,22 +12,67 @@ class App extends Component {
     this.state = {
       usernameValue : "",
       emailValue : "",
-      passwordValue:""
+      passwordValue:"",
+      invalid:false
     }
     this.showAlert = this.showAlert.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.postData = this.handleChange.bind(this);
   }
   handleChange({ target }) {
     this.setState({
       [target.name]: target.value
     });
   }
+   postData(url = ``, data = {}) {
+    // Default options are marked with *
+      return fetch(url, {
+          method: "POST", // *GET, POST, PUT, DELETE, etc.
+          mode: "cors", // no-cors, cors, *same-origin
+          cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: "same-origin", // include, *same-origin, omit
+          headers: {
+              "Content-Type": "application/json",
+              // "Content-Type": "application/x-www-form-urlencoded",
+          },
+          redirect: "follow", // manual, *follow, error
+          referrer: "no-referrer", // no-referrer, *client
+          body: JSON.stringify(data), // body data type must match "Content-Type" header
+      })
+      .then(response => response.json()); // parses response to JSON
+  }
   
   showAlert() {
-    console.log(this.state.usernameValue);
-    console.log(this.state.emailValue);
-    console.log(this.state.passwordValue);
-  }
+
+
+    if(this.state.passwordValue === "" || this.state.passwordValue === null)
+    this.setState({
+      invalid : true
+    });
+
+
+    var RequestObject = {
+        "Username":this.state.usernameValue,
+        "Password":this.state.emailValue,
+        "Surname":this.state.passwordValue
+    }
+    console.log(RequestObject);
+
+
+     fetch('http://skietbaan.retrotest.co.za/api/User', {
+     method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+     body: JSON.stringify(RequestObject)
+      }).then(function(response) {
+        console.log('Created Gist:');
+        return response.json();
+      }).then(function(data) {
+        console.log('Created Gist:', data.html_url);
+      });
+      }
 
 
 
