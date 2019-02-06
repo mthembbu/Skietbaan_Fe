@@ -11,8 +11,9 @@ import Home from "./components/Home"
 import About from "./components/About"
 import Welcome from "./components/Welcome"
 import Login from "./components/Login"
+import Register from "./components/Register"
 import { simpleAction } from './actions/simpleAction';
-import axios from 'axios';
+//import axios from 'axios';
 
 const mapDispatchToProps = dispatch => ({
 simpleAction: () => dispatch(simpleAction())
@@ -23,21 +24,25 @@ const mapStateToProps = state => ({
 //const renderLine = (user, key) => <li key={key}><b>{key}</b>: {user[key]}</li>
 
 class App extends Component {
-    constructor (props) {
-        super(props)
-        this.state = { user: {} }
-    }
-    simpleAction = (event) => {
-        this.props.simpleAction();
-    }
+//     constructor (props) {
+//         super(props)
+//         this.state = { user: {} }
+//     }
+//     simpleAction = (event) => {
+//         this.props.simpleAction();
+//     }
 
-    handleClick() {
-        axios.get('http://skietbaan.retrotest.co.za/api/values/',{
+//     handleClick() {
+//         axios.get('https://localhost:44333/api/User/2',{
+
+    //handleClick() {
+        //axios.get('http://skietbaan.retrotest.co.za/api/values/',{
+
             
-        method: 'GET',
+//         method: 'GET',
         
-    }).then(response => console.log(response.data))
-}
+//     }).then(response => console.log(response.data))
+// }
 
     componentDidMount () {
         getUser('vnglst').then(data => {
@@ -57,11 +62,20 @@ class App extends Component {
         <pre>{JSON.stringify(this.props)}</pre> */}
 
 
+
+                {/* <button onClick={this.simpleAction}>Test redux action</button>
+                <button onClick={this.handleClick}>Endpoint Test</button>
+                <pre>
+                    {
+                    JSON.stringify(this.props)
+                    }
+                </pre> */}
                 <BrowserRouter>
                 <Switch>
-                <Route path="/home" component = {Home} exact/>
+                <Route path="/home" component = {landing} exact/>
                 <Route path="/login" component = {Login} exact/>
                 <Route path="/" component = {Login} exact/>
+                <Route path="/register" component = {Register} exact/>
                 <Route path="/about" component = {About} exact />
                 <Route path="/welcome" component = {Welcome} exact/>
                 <Redirect from="/" to="/"/>

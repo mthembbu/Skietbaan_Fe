@@ -4,7 +4,7 @@ import {
   FormGroup, Label, Input,
   Button,
 } from 'reactstrap';
-import '../components/LoginStyles.css';
+import '../components/RegisterStyles.css';
 
 class App extends Component {
   constructor(props){
@@ -79,17 +79,17 @@ class App extends Component {
   render() {
     return (
       <Container className="App">
-        <div className="centre-login">
+        <div className="centre-register">
         <Form className="form">
-        <h2>Login</h2>
+        <h2>Register</h2>
           <Col className="no-padding">
             <FormGroup>
-              <Label>UserName</Label>
+              <Label>Username</Label>
               <Input
                 type="text"
                 name="usernameValue"
-                id="us"
-                placeholder="username"
+                id="username"
+                placeholder="Username"
                 value={ this.state.usernameValue }
                 onChange={ this.handleChange }
               />
@@ -108,6 +108,63 @@ class App extends Component {
               />
             </FormGroup>
           </Col>
+
+          <Col className="no-padding">
+            <FormGroup>
+              <Label for="MemberID">MemberID</Label>
+              <Input
+                type="memberID"
+                name="memberValue"
+                id="MemberID"
+                placeholder="MemberID"
+                value={ this.state.emailValue }
+                onChange={ this.handleChange }
+              />
+            </FormGroup>
+          </Col>
+
+          <Col className="no-padding">
+            <FormGroup>
+              <Label for="EntryDate">EntryDate</Label>
+              <Input
+                type="entryDate"
+                name="entryDateValue"
+                id="EntryDate"
+                placeholder="EntryDate"
+                value={ this.state.emailValue }
+                onChange={ this.handleChange }
+              />
+            </FormGroup>
+          </Col>
+
+          <Col className="no-padding">
+            <FormGroup>
+              <Label for="ExpireDateMember">ExpireDateMember</Label>
+              <Input
+                type="expireDate"
+                name="expireDateValue"
+                id="ExpireDateMember"
+                placeholder="ExpireDateMember"
+                value={ this.state.emailValue }
+                onChange={ this.handleChange }
+              />
+            </FormGroup>
+          </Col>
+
+          <Col className="no-padding">
+            <FormGroup>
+              <Label for="Admin">Admin</Label>
+              <Input
+                type="admin"
+                name="adminValue"
+                id="Admin"
+                placeholder="Admin"
+                value={ this.state.emailValue }
+                onChange={ this.handleChange }
+              />
+            </FormGroup>
+          </Col>
+          
           <Col className="no-padding">
             <FormGroup>
               <Label for="examplePassword">Password</Label>
