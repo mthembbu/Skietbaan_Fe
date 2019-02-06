@@ -70,9 +70,9 @@ class App extends Component {
                 </pre> */}
                 <BrowserRouter>
                 <Switch>
-                <Route path="/home" component = {Home} exact/>
+                <Route path="/home" component = {landing} exact/>
                 <Route path="/login" component = {Login} exact/>
-                <Route path="/" component = {Home} exact/>
+                <Route path="/" component = {landing} exact/>
                 <Route path="/register" component = {Register} exact/>
                 <Route path="/about" component = {About} exact />
                 <Route path="/welcome" component = {Welcome} exact/>
