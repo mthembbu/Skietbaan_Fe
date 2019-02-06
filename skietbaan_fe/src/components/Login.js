@@ -5,23 +5,21 @@ import {
 } from 'reactstrap';
 import '../components/LoginStyles.css';
 
-  function validatePassword(str)
-    {
+  function validatePassword(str) {
       var re = /(?=.*\d)(?=.*[a-z]).{6,}/;
       return re.test(str);
     }
 
     function validateEmail(email) {
-    var re = /.+@.+\..+/;
+      var re = /.+@.+\..+/;
       return re.test(String(email).toLowerCase());
     }
 
     function validateUsername(username) {
       var re = /[a-zA-Z]/;
         return !re.test(String(username));
-      }
+    }
     
-
 class App extends Component {
   constructor(props){
     super(props);
@@ -34,9 +32,8 @@ class App extends Component {
       invalidUsername: false,
       validForm:false
     }
-    this.showAlert = this.showAlert.bind(this);
+    this.Login = this.Login.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.postData = this.handleChange.bind(this);
   }
   handleChange({ target }) {
     this.setState({
@@ -71,25 +68,9 @@ class App extends Component {
     this.setState({
       validForm:Valid
     });
-    
-  }
-   postData(url = ``, data = {}) {
-      return fetch(url, {
-          method: "POST", 
-          mode: "cors", 
-          cache: "no-cache", 
-          credentials: "same-origin", 
-          headers: {
-              "Content-Type": "application/json",
-          },
-          redirect: "follow", 
-          referrer: "no-referrer", 
-          body: JSON.stringify(data), 
-      })
-      .then(response => response.json()); 
   }
   
-  showAlert() {
+  Login() {
     if(this.state.validForm)
     {
     var RequestObject = {
@@ -107,13 +88,13 @@ class App extends Component {
        },
        body: JSON.stringify(RequestObject)
       }).then(function(response) {
-        console.log('Hit');
         return response.json();
       }).then(function(data) {
         console.log('Backend output', data);
+      }).catch(function() {
+        console.log("error");
       });
       }
-    
     }
 
   render() {
@@ -181,7 +162,7 @@ class App extends Component {
               {invalidPasswordMessage}
             </FormGroup>
           </Col>
-          <Button onClick={this.showAlert} className={this.state.validForm ? "button-valid":"button-invalid"}>Submit</Button>
+          <Button onClick={this.Login} className={this.state.validForm ? "button-valid":"button-invalid"}>Submit</Button>
           </Form>
           </div >
       </Container>
