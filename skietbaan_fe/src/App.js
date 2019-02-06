@@ -2,7 +2,9 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import './App.scss'
+import './App.scss';
+import {Provider} from 'react-redux';
+import store from './store';
 import { getUser } from './api/github'
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Home from "./components/Home"
@@ -46,28 +48,20 @@ class App extends Component {
     render () {
     // const { user } = this.state
         return (
-            /** * <div className='App'>
-            <ul style={{ listStyle: 'none' }}>{
-            // Loop over the object keys and render each key
-            Object.keys(user).map(key => renderLine(user, key))
-            }
-            </ul>
-            */
 
+            <Provider store = {store}>
             <div className="App">
 
-                <button onClick={this.simpleAction}>Test redux action</button>
+                {/** <button onClick={this.simpleAction}>Test redux action</button>
                 <button onClick={this.handleClick}>Endpoint Test</button>
-                <pre>
-                    {
-                    JSON.stringify(this.props)
-                    }
-                </pre>
+        <pre>{JSON.stringify(this.props)}</pre> */}
+
+
                 <BrowserRouter>
                 <Switch>
                 <Route path="/home" component = {Home} exact/>
                 <Route path="/login" component = {Login} exact/>
-                <Route path="/" component = {Home} exact/>
+                <Route path="/" component = {Login} exact/>
                 <Route path="/about" component = {About} exact />
                 <Route path="/welcome" component = {Welcome} exact/>
                 <Redirect from="/" to="/"/>
@@ -75,8 +69,13 @@ class App extends Component {
                 </BrowserRouter>
 
             </div>
+            
+            
+            </Provider>
+          
         )
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
+//export default connect(mapStateToProps, mapDispatchToProps)(App);
