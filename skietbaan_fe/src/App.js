@@ -1,7 +1,6 @@
 
 
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
 import './App.scss';
 import {Provider} from 'react-redux';
 import store from './store';
@@ -12,17 +11,8 @@ import About from "./components/About"
 import Welcome from "./components/Welcome"
 import Login from "./components/Login"
 import Register from "./components/Register"
-import { simpleAction } from './actions/simpleAction';
 //import axios from 'axios';
-
-const mapDispatchToProps = dispatch => ({
-simpleAction: () => dispatch(simpleAction())
-})
-const mapStateToProps = state => ({
-...state
-})
-//const renderLine = (user, key) => <li key={key}><b>{key}</b>: {user[key]}</li>
-
+ 
 class App extends Component {
 //     constructor (props) {
 //         super(props)
@@ -51,17 +41,10 @@ class App extends Component {
     }
 
     render () {
-    // const { user } = this.state
         return (
 
             <Provider store = {store}>
             <div className="App">
-
-                {/** <button onClick={this.simpleAction}>Test redux action</button>
-                <button onClick={this.handleClick}>Endpoint Test</button>
-        <pre>{JSON.stringify(this.props)}</pre> */}
-
-
 
                 {/* <button onClick={this.simpleAction}>Test redux action</button>
                 <button onClick={this.handleClick}>Endpoint Test</button>
@@ -81,15 +64,9 @@ class App extends Component {
                 <Redirect from="/" to="/"/>
                 </Switch>
                 </BrowserRouter>
-
             </div>
-            
-            
             </Provider>
-          
         )
     }
 }
-
 export default App;
-//export default connect(mapStateToProps, mapDispatchToProps)(App);

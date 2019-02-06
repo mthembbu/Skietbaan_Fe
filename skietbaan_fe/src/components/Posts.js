@@ -5,16 +5,8 @@ import { fetchPosts } from '../actions/postActions'
 
 class Posts extends Component {
 
-  // a constructor that maintanes the state of the component
- /**  constructor(props ){
-    super(props);
-    this.state = {
-      posts: []
-    }
-  } */
 componentWillMount(){
   this.props.fetchPosts();
-
 }
 
 componentWillReceiveProps(nextProps){
@@ -23,7 +15,7 @@ componentWillReceiveProps(nextProps){
   }
 }
 
-//the method to render the 
+//the method to render the post data from the Fetch() method 
   render() {
 
     const postItems = this.props.posts.map(post => (

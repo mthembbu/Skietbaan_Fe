@@ -1,6 +1,7 @@
 
 import { FETCH_POSTS, NEW_POST } from './types';
 
+/** The method to feth the already available data for posts*/
 export const fetchPosts = () => dispatch => {
   fetch('https://jsonplaceholder.typicode.com/posts')
     .then(res => res.json())
@@ -11,7 +12,7 @@ export const fetchPosts = () => dispatch => {
       })
     );
 };
-
+{/** the method to post new data from the PostForm */}
 export const createPost = postData => dispatch => {
   fetch('https://jsonplaceholder.typicode.com/posts', {
     method: 'POST',
