@@ -1,10 +1,26 @@
 import React, { Component } from 'react';
 import {
-  Container, Col, Form,
-  FormGroup, Label, Input,
-  Button,
+  Container, Col,
+  FormGroup, Label, Input,Button,Form
 } from 'reactstrap';
 import '../components/LoginStyles.css';
+
+  function validatePassword(str)
+    {
+      var re = /(?=.*\d)(?=.*[a-z]).{6,}/;
+      return re.test(str);
+    }
+
+    function validateEmail(email) {
+    var re = /.+@.+\..+/;
+      return re.test(String(email).toLowerCase());
+    }
+
+    function validateUsername(username) {
+      var re = /[a-zA-Z]/;
+        return !re.test(String(username));
+      }
+    
 
 class App extends Component {
   constructor(props){
@@ -13,7 +29,10 @@ class App extends Component {
       usernameValue : "",
       emailValue : "",
       passwordValue:"",
-      invalid:false
+      invalidPassword:false,
+      invalidEmail:false,
+      invalidUsername: false,
+      validForm:false
     }
     this.showAlert = this.showAlert.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -21,62 +40,97 @@ class App extends Component {
   }
   handleChange({ target }) {
     this.setState({
-      [target.name]: target.value
+      [target.name]: target.value,
+      invalidPassword:false,
+      invalidEmail: false,
+      invalidUsername: false
     });
+
+    var Valid = true;
+    if(!validatePassword(this.state.passwordValue))
+    {
+        this.setState({
+          invalidPassword : true
+        });
+        Valid = false;
+    }
+    if(!validateEmail(this.state.emailValue))
+    {
+        this.setState({
+          invalidEmail : true
+        });
+        Valid = false;
+    }
+    if(validateUsername(this.state.usernameValue))
+    {
+        this.setState({
+          invalidUsername : true
+        });
+        Valid = false;
+    }
+    this.setState({
+      validForm:Valid
+    });
+    
   }
    postData(url = ``, data = {}) {
-    // Default options are marked with *
       return fetch(url, {
-          method: "POST", // *GET, POST, PUT, DELETE, etc.
-          mode: "cors", // no-cors, cors, *same-origin
-          cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-          credentials: "same-origin", // include, *same-origin, omit
+          method: "POST", 
+          mode: "cors", 
+          cache: "no-cache", 
+          credentials: "same-origin", 
           headers: {
               "Content-Type": "application/json",
-              // "Content-Type": "application/x-www-form-urlencoded",
           },
-          redirect: "follow", // manual, *follow, error
-          referrer: "no-referrer", // no-referrer, *client
-          body: JSON.stringify(data), // body data type must match "Content-Type" header
+          redirect: "follow", 
+          referrer: "no-referrer", 
+          body: JSON.stringify(data), 
       })
-      .then(response => response.json()); // parses response to JSON
+      .then(response => response.json()); 
   }
   
   showAlert() {
-
-
-    if(this.state.passwordValue === "" || this.state.passwordValue === null)
-    this.setState({
-      invalid : true
-    });
-
-
+    if(this.state.validForm)
+    {
     var RequestObject = {
-        "Username":this.state.usernameValue,
-        "Password":this.state.emailValue,
-        "Surname":this.state.passwordValue
+      "Username":this.state.usernameValue,
+      "Password":this.state.emailValue,
+      "Surname":this.state.passwordValue
     }
     console.log(RequestObject);
 
-
-     fetch('http://skietbaan.retrotest.co.za/api/User', {
-     method: 'post',
+    fetch('http://skietbaan.retrotest.co.za/api/values', {
+      method: 'post',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      },
-     body: JSON.stringify(RequestObject)
+       },
+       body: JSON.stringify(RequestObject)
       }).then(function(response) {
-        console.log('Created Gist:');
+        console.log('Hit');
         return response.json();
       }).then(function(data) {
-        console.log('Created Gist:', data.html_url);
+        console.log('Backend output', data);
       });
       }
-
-
+    
+    }
 
   render() {
+    let invalidPasswordMessage;
+    let invalidEmailMessage;
+    let invalidUsernameMessage;
+
+    if (this.state.invalidPassword) {
+      invalidPasswordMessage = <div className="invalid-message">Atleast one number and one letter and 6 characters</div>;
+    }
+    if (this.state.invalidEmail) {
+      invalidEmailMessage = <div className="invalid-message">Invalid email</div>;
+    } 
+    if (this.state.invalidUsername) {
+      invalidUsernameMessage = <div className="invalid-message">Please enter your username</div>;
+    } 
+
     return (
       <Container className="App">
         <div className="centre-login">
@@ -84,7 +138,7 @@ class App extends Component {
         <h2>Login</h2>
           <Col className="no-padding">
             <FormGroup>
-              <Label>UserName</Label>
+              <Label>Username</Label>
               <Input
                 type="text"
                 name="usernameValue"
@@ -92,7 +146,9 @@ class App extends Component {
                 placeholder="username"
                 value={ this.state.usernameValue }
                 onChange={ this.handleChange }
+                className={this.state.invalidUsername ? "invalid":""}
               />
+              {invalidUsernameMessage}
             </FormGroup>
           </Col>
           <Col className="no-padding">
@@ -105,7 +161,9 @@ class App extends Component {
                 placeholder="Email"
                 value={ this.state.emailValue }
                 onChange={ this.handleChange }
+                className={this.state.invalidEmail ? "invalid":""}
               />
+              {invalidEmailMessage}
             </FormGroup>
           </Col>
           <Col className="no-padding">
@@ -118,13 +176,16 @@ class App extends Component {
                 placeholder="********"
                 value={ this.state.passwordValue }
                 onChange={ this.handleChange }
+                className={this.state.invalidPassword ? "invalid":""}
               />
+              {invalidPasswordMessage}
             </FormGroup>
           </Col>
-          <Button onClick={this.showAlert}>Submit</Button>
+          <Button onClick={this.showAlert} className={this.state.validForm ? "button-valid":"button-invalid"}>Submit</Button>
           </Form>
           </div >
       </Container>
+      
     );
   }
 }

@@ -38,8 +38,28 @@ body{
   top:25%
 }
 }
+input.invalid{
+  border:1px solid red;
+}
+.invalid-message{
+  color:red;
+  font-size: 12px;
+}
+button{
+  border-radius: 30px !important;
+  width:125px;
+  height:35px;
 
+}
+button.button-invalid{
+  background-color: #e0e1e2;
+  border: none;
+}
 
+button.button-valid{
+  background-color: #545759;
+  color:white;
+}
 
 .no-padding{
   padding:0 !important;
