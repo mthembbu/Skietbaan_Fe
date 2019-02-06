@@ -5,3 +5,4 @@ export default combineReducers({
     posts: postReducer,
  simpleReducer
 });
+
