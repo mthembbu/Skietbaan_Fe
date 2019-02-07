@@ -46,7 +46,7 @@ input.invalid{
   font-size: 12px;
 }
 button{
-  border-radius: 30px !important;
+  border-radius: 30px ;
   width:125px;
   height:35px;
 
@@ -62,5 +62,5 @@ button.button-valid{
 }
 
 .no-padding{
-  padding:0 !important;
+  padding:0 ;
 }
