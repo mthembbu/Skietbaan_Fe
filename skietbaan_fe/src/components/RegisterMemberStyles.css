@@ -1,6 +1,6 @@
 @media all and (min-width: 480px) {
     .registermember {
-      padding: 60% 0;
+      margin: 0 auto;
     }
     .registermember form {
       margin: 0 auto;
