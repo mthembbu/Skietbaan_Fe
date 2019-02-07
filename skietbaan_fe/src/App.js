@@ -25,9 +25,9 @@ class App extends Component {
 						<Switch>
 							<Route path="/home" component={Landing} exact />
 							<Route path="/login" component={Login} exact />
-							<Route path="/" component={Landing} exact />
+							<Route path="/" component={Login} exact />
 							<Route path="/register" component={RegisterMember} exact />						
-							<Redirect from="/" to="/" />
+							<Redirect from="/" to="/home" />
 						</Switch>
 					</BrowserRouter>
 				</div>
