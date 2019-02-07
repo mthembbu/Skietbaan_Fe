@@ -64,13 +64,9 @@ class App extends Component {
       }).then(function(response) {
         return response.json();
       }).then( function(data) {
-        console.log("hi");
         window.location = "/home";
       }).catch(function(data) {
-        console.log(data);
-        console.log("error");
       });
- 
     }
   }
 
