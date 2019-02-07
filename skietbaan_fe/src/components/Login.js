@@ -10,9 +10,6 @@ class App extends Component {
       usernameValue: "",
       emailValue: "",
       passwordValue: "",
-      invalidPassword: false,
-      invalidEmail: false,
-      invalidUsername: false,
       validForm: false
     }
     this.Login = this.Login.bind(this);
@@ -22,38 +19,35 @@ class App extends Component {
   handleChange({ target }) {
     this.setState({
       [target.name]: target.value,
+    });
+    let isValid = true;
+    let stateUpdate = {
       invalidPassword: false,
       invalidEmail: false,
       invalidUsername: false
-    });
-  let stateUpdate ={};
-    var isValid = true;
+     }
     if (!validatePassword(this.state.passwordValue)) {
-      this.setState({
-        invalidPassword: true
-      });
-      isValid = false;
-    }
+      stateUpdate.invalidPassword= true;
+    };
+    isValid = false;
     if (!validateEmail(this.state.emailValue)) {
-      this.setState({
-        invalidEmail: true
-      });
-      isValid = false;
-    }
+      stateUpdate.invalidEmail= true;
+    }; 
+    isValid = false; 
     if (validateUsername(this.state.usernameValue)) {
-      this.setState({
-        invalidUsername: true
-      });
-      isValid = false;
-    }
+      stateUpdate.invalidUsername= true;
+    };
+    isValid = false;
+    
     this.setState({
+      ...stateUpdate ,
       validForm: isValid
     });
   }
 
   Login() {
     if (this.state.validForm) {
-      var RequestObject = {
+      let RequestObject = {
         "Username": this.state.usernameValue,
         "Password": this.state.emailValue,
         "Surname": this.state.passwordValue
