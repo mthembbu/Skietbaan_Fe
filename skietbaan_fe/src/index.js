@@ -10,7 +10,7 @@ import configureStore from './store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
-{/**GC. Reason: Still need to confirm if the App.js browserouter
+{/** TODO GC. Reason: Still need to confirm if the App.js browserouter
  can work without the <Provider>*/}
 /** ReactDOM.render(<Provider store={configureStore()}>
 <App />
