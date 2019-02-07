@@ -9,6 +9,29 @@ import NavbarMenu from './components/NavbarMenu';
 import RegisterMember from './components/RegisterMember';
 import landing from './components/landing';
 class App extends Component {
+
+    componentDidMount () {
+        getUser('vnglst').then(data => {
+            this.setState({ user: data.entity })
+        })
+    }
+
+    render () {
+        return (
+            <div className="App">
+                <BrowserRouter>
+                <Switch>
+                <Route path="/home" component = {Landing} exact/>
+                <Route path="/landing" component = {Landing} exact/>
+                <Route path="/login" component = {Login} exact/>
+                <Route path="/" component = {Login} exact/>
+                <Route path="/register" component = {RegisterMember} exact/>
+                <Redirect from="/" to="/"/>
+                </Switch>
+                </BrowserRouter>
+            </div>
+        )
+    }
 	componentDidMount() {
 		getUser('vnglst').then((data) => {
 			this.setState({ user: data.entity });
