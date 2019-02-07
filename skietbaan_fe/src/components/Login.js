@@ -28,32 +28,33 @@ class App extends Component {
      }
     if (!validatePassword(this.state.passwordValue)) {
       stateUpdate.invalidPassword= true;
+      isValid = false;
     };
-    isValid = false;
+    
     if (!validateEmail(this.state.emailValue)) {
       stateUpdate.invalidEmail= true;
+      isValid = false;
     }; 
-    isValid = false; 
+   
     if (validateUsername(this.state.usernameValue)) {
       stateUpdate.invalidUsername= true;
+      isValid = false;
     };
-    isValid = false;
     
     this.setState({
       ...stateUpdate ,
       validForm: isValid
     });
-  }
+  };
 
   Login() {
     if (this.state.validForm) {
       let RequestObject = {
         "Username": this.state.usernameValue,
-        "Password": this.state.emailValue,
-        "Surname": this.state.passwordValue
+        "Email": this.state.emailValue,
+        "Password": this.state.passwordValue
       }
-      const BASE_URL = 'http://skietbaan.retrotest.co.za/';
-      fetch(`${BASE_URL}`,"/api/values", {
+      fetch("http://skietbaan.retrotest.co.za/api/User", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -63,7 +64,8 @@ class App extends Component {
       }).then(function(response) {
         return response.json();
       }).then( function(data) {
-      }).catch(function() {
+        window.location = "/home";
+      }).catch(function(data) {
       });
     }
   }
@@ -86,8 +88,8 @@ class App extends Component {
     return (
       <Container className="App">
         <div className="centre-login">
-          <Form className="form">
-            <h2>Login</h2>
+          <Form className="form" autoComplete="off">
+            <h2>Register</h2>
             <Col className="no-padding">
               <FormGroup>
                 <Label>Username</Label>
@@ -133,7 +135,7 @@ class App extends Component {
                 {invalidPasswordMessage}
               </FormGroup>
             </Col>
-            <Button onClick={this.Login} className={this.state.validForm ? "button-valid" : "button-invalid"}>Submit</Button>
+            <Button onClick={this.Login} className={this.state.validForm ? "button-valid" : "button-invalid"} >Submit</Button>
           </Form>
         </div >
       </Container>
