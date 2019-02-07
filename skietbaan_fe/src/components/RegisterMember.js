@@ -60,7 +60,7 @@ class App extends Component {
 
     return (
       <Container className="App">
-        <div className="centre-registerMember">
+        <div className="centre-register-member">
         <Form className="form">
         <h2>Membership Sign In</h2>
         <Col className="no-padding">

@@ -1,8 +1,8 @@
 @media all and (min-width: 480px) {
-    .registerMember {
+    .registermember {
       padding: 60% 0;
     }
-    .registerMember form {
+    .registermember form {
       margin: 0 auto;
     }
   }
@@ -12,7 +12,7 @@
   .col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-10,.col-11,.col-12{
     float:left;
   }
-  .centre-registerMember{
+  .centre-register-member{
     margin:0 auto;
     position: absolute;
     left: 3%;
@@ -23,7 +23,7 @@
     box-shadow: 2px 2px rgba(0,0,0,0.24);
   }
   @media screen and (min-width:768px)  {
-  .centre-registerMember{
+  .centre-register-member{
     width: 50%;
     left:25%;
     top:8%;
@@ -37,5 +37,5 @@
     font-size: 12px;
   }
   .no-padding{
-    padding:0 !important;
+    padding:0 ;
   }
