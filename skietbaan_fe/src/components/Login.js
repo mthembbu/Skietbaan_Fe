@@ -68,6 +68,7 @@ class App extends Component {
       }).catch(function() {
         console.log("error")
       });
+      window.location = "/home";
     }
   }
 
@@ -136,7 +137,7 @@ class App extends Component {
                 {invalidPasswordMessage}
               </FormGroup>
             </Col>
-            <Button onClick={this.Login} className={this.state.validForm ? "button-valid" : "button-invalid"}>Submit</Button>
+            <Button onClick={this.Login} className={this.state.validForm ? "button-valid" : "button-invalid"} >Submit</Button>
           </Form>
         </div >
       </Container>
