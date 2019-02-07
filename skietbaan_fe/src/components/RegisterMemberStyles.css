@@ -15,8 +15,8 @@
   .centre-register-member{
     margin:0 auto;
     position: absolute;
-    left: 3%;
-    top: 15%;
+    left: 3px;
+    top: 15px;
     border: 1px solid rgba(0,0,0,0.35);
     padding: 20px;
     background-color: white;
@@ -24,9 +24,9 @@
   }
   @media screen and (min-width:768px)  {
   .centre-register-member{
-    width: 50%;
-    left:25%;
-    top:8%;
+    width: 700px;
+    left: 400px;
+    top:50px;
   }
   }
   input.invalid{
