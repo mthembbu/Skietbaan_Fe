@@ -8,14 +8,12 @@ import About from './components/About';
 import Welcome from './components/Welcome';
 import Login from './components/Login';
 import Register from './components/Register';
-
 class App extends Component {
 	componentDidMount() {
 		getUser('vnglst').then((data) => {
 			this.setState({ user: data.entity });
 		});
 	}
-
 	render() {
 		return (
 			<Provider store={store}>
@@ -37,4 +35,3 @@ class App extends Component {
 	}
 }
 export default App;
-
