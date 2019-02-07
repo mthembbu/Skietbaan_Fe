@@ -4,17 +4,6 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-       
-            <nav>
-                <ul class="topnav" id="dropdown">
-                <li><i class="fa fa-cloud"></i></li>
-                <li><a href="#news">LEADER BOURD</a></li>
-                <li><a href="#contact">PROFILE</a></li>
-                <li><a href="#about">SCORE CAPTURE</a></li>
-                <li><button class="hamburger">&#9776;</button></li>
- 
-            </ul>
-    </nav>
 
     <main className="t" data-simplebar data-simplebar-auto-hide="false">
         <p>
