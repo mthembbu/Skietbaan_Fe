@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './App.scss'
-import { getUser } from './api/github'
-import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
-import landing from "./components/landing"
-import About from "./components/About"
-import Welcome from "./components/Welcome"
-import Login from "./components/Login"
-import RegisterMember from "./components/RegisterMember"
+import './App.scss';
+import { getUser } from './api/github';
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
+import Landing from './components/Landing';
+import About from './components/About';
+import Welcome from './components/Welcome';
+import Login from './components/Login';
+import RegisterMember from './components/RegisterMember';
 import { simpleAction } from './actions/simpleAction';
 
 const mapDispatchToProps = dispatch => ({
@@ -30,9 +30,9 @@ class App extends Component {
             <div className="App">
                 <BrowserRouter>
                 <Switch>
-                <Route path="/home" component = {landing} exact/>
+                <Route path="/home" component = {Landing} exact/>
                 <Route path="/login" component = {Login} exact/>
-                <Route path="/" component = {landing} exact/>
+                <Route path="/" component = {Landing} exact/>
                 <Route path="/register" component = {RegisterMember} exact/>
                 <Route path="/about" component = {About} exact />
                 <Route path="/welcome" component = {Welcome} exact/>

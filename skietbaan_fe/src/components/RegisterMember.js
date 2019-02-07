@@ -2,16 +2,6 @@ import React, { Component } from 'react';
 import { Container, Col, Form, FormGroup, Label, Input, Button, } from 'reactstrap';
 import '../components/RegisterMemberStyles.css';
 
-function validatePassword(str) {
-  var re = /(?=.*\d)(?=.*[a-z]).{6,}/;
-  return re.test(str);
-}
-
- function validateEmail(email) {
-  var re = /.+@.+\..+/;
-  return re.test(String(email).toLowerCase());
-}
-
  function validateUsername(username) {
   var re = /[a-zA-Z]/;
     return !re.test(String(username));
@@ -22,10 +12,6 @@ class App extends Component {
     super(props);
     this.state = {
       usernameValue : "",
-      emailValue : "",
-      passwordValue:"",
-      invalidPassword:false,
-      invalidEmail:false,
       invalidUsername: false,
       validForm:false
     }
@@ -35,26 +21,9 @@ class App extends Component {
   handleChange({ target }) {
     this.setState({
       [target.name]: target.value,
-      invalidPassword:false,
-      invalidEmail: false,
       invalidUsername: false
     });
-
     var Valid = true;
-    if(!validatePassword(this.state.passwordValue))
-    {
-        this.setState({
-          invalidPassword : true
-        });
-        Valid = false;
-    }
-    if(!validateEmail(this.state.emailValue))
-    {
-        this.setState({
-          invalidEmail : true
-        });
-        Valid = false;
-    }
     if(validateUsername(this.state.usernameValue))
     {
         this.setState({
@@ -72,28 +41,15 @@ class App extends Component {
    {
     var RequestObject = {
         "Username":this.state.usernameValue,
-        "Password":this.state.emailValue,
-        "Surname":this.state.passwordValue
     }
-    console.log(RequestObject);
-
-      fetch('http://skietbaan.retrotest.co.za/api/User', {
-      method: 'put',	
-       headers: {
-         'Accept': 'application/json',
-         'Content-Type': 'application/json'
-       },
-      body: JSON.stringify(RequestObject)
-       }).then(function(response) {
-         console.log('Created Gist:');	
-         return response.json();
-       }).then(function(data) {
-         console.log('Created Gist:', data.html_url);
-       }).catch(function() {
-         console.log("error");
-       });
-       }	    
-     }
+      const BASE_URL = 'http://skietbaan.retrotest.co.za/';
+      fetch(`${BASE_URL}`,"/api/values", {
+      method: 'Get',	
+        headers: {'Accept': 'application/json','Content-Type': 'application/json'},
+        body: JSON.stringify(RequestObject)}).then(function(response) {
+          return response.json();}).then(function(data) {}).catch(function() {});
+    }	    
+  }
 
   render() {
     let invalidUsernameMessage;
@@ -122,11 +78,9 @@ class App extends Component {
               {invalidUsernameMessage}
             </FormGroup>
           </Col>
-          <p></p>
-          <p></p>
           <Button >Search</Button>
-          <p></p>
-          <p></p>
+          <br/>
+          <br/>
           <Col className="no-padding">
             <FormGroup>
               <Label><b>Email</b></Label>
@@ -147,7 +101,6 @@ class App extends Component {
               <Label for="member">Allow Membership</Label>
             </div>
           </Col>
-          <p></p>
           <Col className="no-padding">
             <FormGroup>
               <Label><b>EntryDate</b></Label><br/>
@@ -167,8 +120,6 @@ class App extends Component {
               <Label for="admin">Make Admin</Label>
             </div>
           </Col>
-          <p></p>
-          <p></p>
           <Button onClick={this.showAlert}>Submit</Button>
           </Form>
           </div >
