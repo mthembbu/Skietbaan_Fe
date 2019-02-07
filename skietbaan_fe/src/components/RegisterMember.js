@@ -60,7 +60,7 @@ class App extends Component {
 
     return (
       <Container className="App">
-        <div className="centre-registermember">
+        <div className="centre-registerMember">
         <Form className="form">
         <h2>Membership Sign In</h2>
         <Col className="no-padding">
@@ -78,7 +78,7 @@ class App extends Component {
               {invalidUsernameMessage}
             </FormGroup>
           </Col>
-          <Button >Search</Button>
+          <Button onClick={this.RegisterMember} className={this.state.validForm ? "button-valid" : "button-invalid"}>Search</Button>
           <br/>
           <br/>
           <Col className="no-padding">

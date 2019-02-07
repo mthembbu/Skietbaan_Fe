@@ -1,10 +1,10 @@
 @media all and (min-width: 480px) {
-    .RegisterMember {
-      padding: 60px 0;
+    .registerMember {
+      padding: 60% 0;
     }
-    .RegisterMember form {
+    .registerMember form {
       margin: 0 auto;
-      max-width: 320px;
+      max-width: 320%;
     }
   }
   body{
@@ -16,7 +16,7 @@
   .col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-10,.col-11,.col-12{
     float:left;
   }
-  .centre-registermember{
+  .centre-registerMember{
     width:94%;
     margin:0 auto;
     position: absolute;
@@ -28,10 +28,10 @@
     box-shadow: 2px 2px rgba(0,0,0,0.24);
   }
   @media screen and (min-width:768px)  {
-  .centre-registermember{
+  .centre-registerMember{
     width: 50%;
     left:25%;
-    top:3%;
+    top:8%;
   }
   }
   input.invalid{
