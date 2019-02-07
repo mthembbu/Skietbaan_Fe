@@ -28,32 +28,33 @@ class App extends Component {
      }
     if (!validatePassword(this.state.passwordValue)) {
       stateUpdate.invalidPassword= true;
+      isValid = false;
     };
-    isValid = false;
+    
     if (!validateEmail(this.state.emailValue)) {
       stateUpdate.invalidEmail= true;
+      isValid = false;
     }; 
-    isValid = false; 
+   
     if (validateUsername(this.state.usernameValue)) {
       stateUpdate.invalidUsername= true;
+      isValid = false;
     };
-    isValid = false;
     
     this.setState({
       ...stateUpdate ,
       validForm: isValid
     });
-  }
+  };
 
   Login() {
     if (this.state.validForm) {
       let RequestObject = {
         "Username": this.state.usernameValue,
-        "Password": this.state.emailValue,
-        "Surname": this.state.passwordValue
+        "Email": this.state.emailValue,
+        "Password": this.state.passwordValue
       }
-      const BASE_URL = 'http://skietbaan.retrotest.co.za/';
-      fetch(`${BASE_URL}`,"/api/values", {
+      fetch("http://skietbaan.retrotest.co.za/api/User", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -63,7 +64,9 @@ class App extends Component {
       }).then(function(response) {
         return response.json();
       }).then( function(data) {
+        console.log("hi");
       }).catch(function() {
+        console.log("error")
       });
     }
   }
