@@ -20,7 +20,7 @@ class List extends Component {
          <tr>
           <td><b>USER_ID</b></td>
           <td><b>USERNAME</b></td>
-          <td><b>EMAIL</b></td>
+          <td><b>SCORES</b></td>
           </tr>
         </thead>
         <tbody>
@@ -28,7 +28,7 @@ class List extends Component {
             <tr key={post.id.toString()}>
             <td><h5>{post.id}</h5></td>
               <td><h5>{post.username}</h5></td>
-              <td>{post.email}</td>
+              <td>{post.scores}</td>
             </tr>
           ))}
         </tbody>
