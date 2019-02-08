@@ -8,6 +8,7 @@ import Login from './components/Login';
 import NavbarMenu from './components/NavbarMenu';
 import RegisterMember from './components/RegisterMember';
 import Landing from './components/landing';
+import ScoreCapture from './components/ScoreCapture';
 class App extends Component {
 
     componentDidMount () {
@@ -26,7 +27,8 @@ class App extends Component {
 							<Route path="/home" component={Landing} exact />
 							<Route path="/login" component={Login} exact />
 							<Route path="/" component={Login} exact />
-							<Route path="/register" component={RegisterMember} exact />						
+							<Route path="/register" component={RegisterMember} exact />	
+							<Route path = "/scorecapture" component ={ScoreCapture} exact />				
 							<Redirect from="/" to="/home" />
 						</Switch>
 					</BrowserRouter>
