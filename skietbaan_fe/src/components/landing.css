@@ -1,0 +1,81 @@
+
+
+
+
+nav,footer,header{
+    display: block;
+}
+
+body{
+    line-height:1;
+    margin: 0;
+}
+
+/* ########################  NAV ######################## */
+
+nav{
+    width: 100%;
+    margin: 0;
+}
+
+nav ul{
+    background-color: #eee;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.topnav li{
+    list-style: none;
+    float: left;
+
+}
+
+.topnav .leftnav{
+    float:right;
+}
+.topnav .hamburger{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.topnav li a{
+    display: block;
+    text-decoration: none;
+    min-height: 16px;
+    padding: 14px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.topnav li a:hover{
+    background: blue;
+    color: white;
+
+}
+
+ul.topnav li.ham{
+    display: none;
+}
+
+.t{
+    height: 100vh;
+    font-family: 'Montserrat';
+    display: grid;
+    grid-template-columns: 80% auto;
+    margin: 0;
+
+}
+
+.t p{
+    margin: 1em;
+    padding: 1em;
+    background: lightgray;
+}
+.t .simplebar-scrollbar:before{
+    background-color: lightcyan;
+
+}
+.t .simplebar-scrollbar{
+    margin-right: 2px;
+}
