@@ -14,7 +14,6 @@ class App extends Component {
     }
     this.Login = this.Login.bind(this);
     this.handleChange = this.handleChange.bind(this);
-
   }
   handleChange({ target }) {
     this.setState({
@@ -30,23 +29,19 @@ class App extends Component {
       stateUpdate.invalidPassword= true;
       isValid = false;
     };
-    
     if (!validateEmail(this.state.emailValue)) {
       stateUpdate.invalidEmail= true;
       isValid = false;
     }; 
-   
     if (validateUsername(this.state.usernameValue)) {
       stateUpdate.invalidUsername= true;
       isValid = false;
     };
-    
     this.setState({
       ...stateUpdate ,
       validForm: isValid
     });
   };
-
   Login() {
     if (this.state.validForm) {
       let RequestObject = {
@@ -64,14 +59,11 @@ class App extends Component {
       }).then(function(response) {
         return response.json();
       }).then( function(data) {
-        console.log("hi");
-      }).catch(function() {
-        console.log("error")
+        window.location = "/home";
+      }).catch(function(data) {
       });
-      window.location = "/home";
     }
   }
-
   render() {
     let invalidPasswordMessage;
     let invalidEmailMessage;
@@ -86,12 +78,11 @@ class App extends Component {
     if (this.state.invalidUsername) {
       invalidUsernameMessage = <div className="invalid-message">Please enter your username</div>;
     }
-
     return (
       <Container className="App">
         <div className="centre-login">
-          <Form className="form">
-            <h2>Login</h2>
+          <Form className="form" autoComplete="off">
+            <h2>Register</h2>
             <Col className="no-padding">
               <FormGroup>
                 <Label>Username</Label>
