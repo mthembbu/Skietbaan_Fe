@@ -16,17 +16,17 @@ import { Navbar,
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
       <Nav.Link href="/home">Leader Board</Nav.Link>
-      <Nav.Link href="/Scores">Score Capture</Nav.Link>
-      <Nav.Link href="/login">Notifications</Nav.Link>
-      <Nav.Link href="/login">Documents</Nav.Link>
+      <Nav.Link href="/scores">Score Capture</Nav.Link>
+      <Nav.Link href="/">Notifications</Nav.Link>
+      <Nav.Link href="/">Documents</Nav.Link>
     </Nav>
     <Form inline>
       <NavDropdown title="Username" id="basic-nav-dropdown" variant="outline-dark">
-        <NavDropdown.Item href="/login">Awards</NavDropdown.Item>
-        <NavDropdown.Item href="/login">Statistics</NavDropdown.Item>
-        <NavDropdown.Item href="/login">Settings</NavDropdown.Item>
+        <NavDropdown.Item href="/">Awards</NavDropdown.Item>
+        <NavDropdown.Item href="/">Statistics</NavDropdown.Item>
+        <NavDropdown.Item href="/">Settings</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item href="/login">Sign In</NavDropdown.Item>
+        <NavDropdown.Item href="/">Sign In</NavDropdown.Item>
       </NavDropdown>
     </Form>
   </Navbar.Collapse>

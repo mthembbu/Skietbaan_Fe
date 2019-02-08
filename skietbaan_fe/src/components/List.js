@@ -25,7 +25,7 @@ class List extends Component {
         </thead>
         <tbody>
           {this.state.posts.map(post => (
-            <tr key={post.id}>
+            <tr key={post.id.toString()}>
             <td><h5>{post.id}</h5></td>
               <td><h5>{post.username}</h5></td>
               <td>{post.email}</td>
