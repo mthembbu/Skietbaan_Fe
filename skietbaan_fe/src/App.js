@@ -7,7 +7,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './components/Login';
 import NavbarMenu from './components/NavbarMenu';
 import RegisterMember from './components/RegisterMember';
-import Landing from './components/Landing';
+import Landing from './components/landing';
 class App extends Component {
 
     componentDidMount () {

@@ -44,10 +44,12 @@ class App extends Component {
   };
   Login() {
     if (this.state.validForm) {
+      let sha1 = require('sha1');  
+      let hash = sha1(this.state.passwordValue);
       let RequestObject = {
         "Username": this.state.usernameValue,
         "Email": this.state.emailValue,
-        "Password": this.state.passwordValue
+        "Password": hash,
       }
       fetch("http://skietbaan.retrotest.co.za/api/User", {
         method: 'post',
