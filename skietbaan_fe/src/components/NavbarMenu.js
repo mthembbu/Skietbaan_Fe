@@ -5,7 +5,6 @@ import { Navbar,
          Nav
          } from 'react-bootstrap';
 
-
  class NavbarMenu extends Component {
     render() {
         // rendering the basic navbar within the render class
@@ -17,7 +16,7 @@ import { Navbar,
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
       <Nav.Link href="/home">Leader Board</Nav.Link>
-      <Nav.Link href="/login">Score Capture</Nav.Link>
+      <Nav.Link href="/Scores">Score Capture</Nav.Link>
       <Nav.Link href="/login">Notifications</Nav.Link>
       <Nav.Link href="/login">Documents</Nav.Link>
     </Nav>
@@ -37,6 +36,5 @@ import { Navbar,
                 )
             }
         
-        }
-        
+        }      
 export default NavbarMenu;

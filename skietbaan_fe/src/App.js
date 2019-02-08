@@ -7,7 +7,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './components/Login';
 import NavbarMenu from './components/NavbarMenu';
 import RegisterMember from './components/RegisterMember';
-import Landing from './components/Landing';
+import List from './components/List';
 class App extends Component {
 
     componentDidMount () {
@@ -23,7 +23,7 @@ class App extends Component {
 				<NavbarMenu/> <hr/>
 					<BrowserRouter>
 						<Switch>
-							<Route path="/home" component={Landing} exact />
+							<Route path="/home" component={List} exact />
 							<Route path="/login" component={Login} exact />
 							<Route path="/" component={Login} exact />
 							<Route path="/register" component={RegisterMember} exact />						
