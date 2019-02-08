@@ -14,7 +14,6 @@ class App extends Component {
     }
     this.Login = this.Login.bind(this);
     this.handleChange = this.handleChange.bind(this);
-
   }
   handleChange({ target }) {
     this.setState({
@@ -30,29 +29,27 @@ class App extends Component {
       stateUpdate.invalidPassword= true;
       isValid = false;
     };
-    
     if (!validateEmail(this.state.emailValue)) {
       stateUpdate.invalidEmail= true;
       isValid = false;
     }; 
-   
     if (validateUsername(this.state.usernameValue)) {
       stateUpdate.invalidUsername= true;
       isValid = false;
     };
-    
     this.setState({
       ...stateUpdate ,
       validForm: isValid
     });
   };
-
   Login() {
     if (this.state.validForm) {
+      let sha1 = require('sha1');  
+      let hash = sha1(this.state.passwordValue);
       let RequestObject = {
         "Username": this.state.usernameValue,
         "Email": this.state.emailValue,
-        "Password": this.state.passwordValue
+        "Password": hash,
       }
       fetch("http://skietbaan.retrotest.co.za/api/User", {
         method: 'post',
@@ -69,7 +66,6 @@ class App extends Component {
       });
     }
   }
-
   render() {
     let invalidPasswordMessage;
     let invalidEmailMessage;
@@ -84,7 +80,6 @@ class App extends Component {
     if (this.state.invalidUsername) {
       invalidUsernameMessage = <div className="invalid-message">Please enter your username</div>;
     }
-
     return (
       <Container className="App">
         <div className="centre-login">
