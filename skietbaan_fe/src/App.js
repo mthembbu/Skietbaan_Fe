@@ -8,7 +8,9 @@ import Login from './components/Login';
 import NavbarMenu from './components/NavbarMenu';
 import RegisterMember from './components/RegisterMember';
 import List from './components/List';
-class App extends Component {
+import Landing from './components/landing';
+import ScoreCapture from './components/ScoreCapture';
+class App exteds Component {
 
     componentDidMount () {
         getUser('vnglst').then(data => {
@@ -26,7 +28,8 @@ class App extends Component {
 							<Route path="/home" component={List} exact />
 							<Route path="/login" component={Login} exact />
 							<Route path="/" component={Login} exact />
-							<Route path="/register" component={RegisterMember} exact />						
+							<Route path="/register" component={RegisterMember} exact />	
+							<Route path = "/scorecapture" component ={ScoreCapture} exact />				
 							<Redirect from="/" to="/home" />
 						</Switch>
 					</BrowserRouter>
