@@ -10,7 +10,7 @@ import RegisterMember from './components/RegisterMember';
 import List from './components/List';
 import Landing from './components/landing';
 import ScoreCapture from './components/ScoreCapture';
-class App exteds Component {
+class App extends Component {
 
     componentDidMount () {
         getUser('vnglst').then(data => {
