@@ -4,6 +4,14 @@ import { connect } from 'react-redux';
 import { fetchPosts } from '../actions/postActions';
 
 class Posts extends Component {
+/** *Here is a constructor for the Post component, this format of a constructor should reflect on the
+ * List aka Learder board as well
+*/
+  constructor(props){
+    super(props);
+    this.state = {
+      posts :[]
+    }
 
   componentWillMount() {
     this.props.fetchPosts();
@@ -26,6 +34,16 @@ class Posts extends Component {
     return (
       <div>
         {/*<h1>This is the Posts Page</h1> */}
+        <Jumbotron>
+						<h1>
+							<b>SkietBaan App</b>
+						</h1>
+						<p>
+						  <b>	This is a simple hero unit, a simple jumbotron-style component for calling extra attention
+							to featured content or information.
+              </b>
+						</p>
+					</Jumbotron>
         {postItems}
       </div>
     )
