@@ -8,7 +8,6 @@ import Login from './components/Login';
 import NavbarMenu from './components/NavbarMenu';
 import RegisterMember from './components/RegisterMember';
 import List from './components/List';
-import Landing from './components/landing';
 import ScoreCapture from './components/ScoreCapture';
 class App extends Component {
 	componentDidMount() {
