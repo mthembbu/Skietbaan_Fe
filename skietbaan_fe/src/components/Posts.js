@@ -12,7 +12,7 @@ class Posts extends Component {
     this.state = {
       posts :[]
     }
-
+  }
   componentWillMount() {
     this.props.fetchPosts();
   }
@@ -46,7 +46,7 @@ class Posts extends Component {
 					</Jumbotron>
         {postItems}
       </div>
-    )
+    );
   }
 }
 
