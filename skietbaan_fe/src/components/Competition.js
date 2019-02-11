@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Table, Jumbotron } from 'react-bootstrap';
 
 class Competition extends Component {
-  /**
+	/**
    * The constructo for the Competition component
    */
-  constructor(props){
-    super(props);
-  }
+	constructor(props) {
+		super(props);
+	}
 	/**
   * The method to fetch the list of competition objects from the json object
   */
@@ -18,7 +18,7 @@ class Competition extends Component {
      */
 	render() {
 		return (
-			<div main className="scrollbar" data-simplebar data-simplebar-auto-hide="false">
+			<div className="container">
 				<div>
 					<Jumbotron>
 						<h1>
@@ -30,8 +30,11 @@ class Competition extends Component {
 						</p>
 					</Jumbotron>
 				</div>
-				<h1>The competition page</h1>
-			</div>
+        
+				<div main className="scrollbar" data-simplebar data-simplebar-auto-hide="false">
+					<h1>The competition page</h1>
+				</div>
+			</div> /** End of the competitions container*/
 		);
 	}
 }

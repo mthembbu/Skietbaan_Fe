@@ -17,6 +17,7 @@ import { Navbar,
     <Nav className="mr-auto">
       <Nav.Link href="/home">Leader Board</Nav.Link>
       <Nav.Link href="/scores">Score Capture</Nav.Link>
+      <Nav.Link href="/competition">Competitions</Nav.Link>
       <Nav.Link href="/">Notifications</Nav.Link>
       <Nav.Link href="/">Documents</Nav.Link>
     </Nav>
