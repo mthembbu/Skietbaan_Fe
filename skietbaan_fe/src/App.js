@@ -10,26 +10,24 @@ import RegisterMember from './components/RegisterMember';
 import List from './components/List';
 import Landing from './components/landing';
 import ScoreCapture from './components/ScoreCapture';
-class App exteds Component {
-
-    componentDidMount () {
-        getUser('vnglst').then(data => {
-            this.setState({ user: data.entity })
-        })
-    }
-	
+class App extends Component {
+	componentDidMount() {
+		getUser('vnglst').then((data) => {
+			this.setState({ user: data.entity });
+		});
+	}
 	render() {
 		return (
 			<Provider store={store}>
 				<div className="App">
-				<NavbarMenu/> <hr/>
+					<NavbarMenu /> <hr />
 					<BrowserRouter>
 						<Switch>
 							<Route path="/home" component={List} exact />
 							<Route path="/login" component={Login} exact />
 							<Route path="/" component={Login} exact />
-							<Route path="/register" component={RegisterMember} exact />	
-							<Route path = "/scorecapture" component ={ScoreCapture} exact />				
+							<Route path="/register" component={RegisterMember} exact />
+							<Route path="/scorecapture" component={ScoreCapture} exact />
 							<Redirect from="/" to="/home" />
 						</Switch>
 					</BrowserRouter>
