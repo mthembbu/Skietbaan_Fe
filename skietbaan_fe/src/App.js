@@ -9,7 +9,7 @@ import NavbarMenu from './components/NavbarMenu';
 import RegisterMember from './components/RegisterMember';
 import List from './components/List';
 import ScoreCapture from './components/ScoreCapture';
-import Competitions from './components/competition/Competitions';
+import Competitions from './components/Competitions';
 class App extends Component {
 	componentDidMount() {
 		getUser('vnglst').then((data) => {
