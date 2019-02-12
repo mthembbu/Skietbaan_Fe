@@ -51,7 +51,7 @@ class App extends Component {
         "Email": this.state.emailValue,
         "Password": hash,
       }
-      fetch("http://skietbaan.retrotest.co.za/api/User", {
+      fetch("https://api.skietbaan.retrotest.co.za/api/User", {
         method: 'post',
         headers: {
           'Accept': 'application/json',

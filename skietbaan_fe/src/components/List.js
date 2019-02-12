@@ -9,7 +9,7 @@ class List extends Component {
     }
   }
   componentWillMount() {
-    fetch('http://skietbaan.retrotest.co.za/api/User')
+    fetch('https://api.skietbaan.retrotest.co.za/api/User')
     .then(res => res.json())
     .then(data =>this.setState({posts : data}));
   }

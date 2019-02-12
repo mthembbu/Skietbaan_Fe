@@ -11,11 +11,12 @@ import List from './components/List';
 import ScoreCapture from './components/ScoreCapture';
 import Competitions from './components/Competitions';
 class App extends Component {
-	componentDidMount() {
-		getUser('vnglst').then((data) => {
-			this.setState({ user: data.entity });
-		});
-	}
+
+    componentDidMount () {
+        getUser('vnglst').then(data => {
+            this.setState({ user: data.entity })
+        })
+    }
 	render() {
 		return (
 			<Provider store={store}>
