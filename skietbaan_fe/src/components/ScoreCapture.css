@@ -36,10 +36,12 @@
 .fourth{
     left: 78%;
 }
+
 .competition-container{
     padding-top:80px;
     list-style-type: none;
 }
+
 .competition-item{
     width: 150px;
     height: 35px;
@@ -47,11 +49,18 @@
     text-align: center;
     padding: 5px;
     border-radius: 5px;
-}.competition-item:hover{
+}
+
+.competition-item:hover{
     cursor: pointer;
     background-color: lightgray;
 
 }
 .hidden{
     display:none !important ;
+}
+
+.video{
+    width: 640px;
+    height: 480px
 }

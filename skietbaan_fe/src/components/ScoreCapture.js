@@ -22,6 +22,7 @@ export default class search extends Component {
     this.SubmitScore = this.SubmitScore.bind(this);
 
   }
+
   handleScore({ target }) {
     this.setState({
       [target.name]: target.value,
@@ -39,6 +40,7 @@ export default class search extends Component {
       validForm: isValid
     }); 
   }
+
   CompetitionClicked(item, competitionName) {
     this.setState({
       currState: 2,
@@ -46,6 +48,7 @@ export default class search extends Component {
       competitionName: competitionName
     });
   }
+
   _base64ToArrayBuffer(base64) {
     var binary_string = base64;
     var len = binary_string.length;
@@ -55,6 +58,7 @@ export default class search extends Component {
     }
     return bytes.buffer;
   }
+
   CameraClicked() {
     this.setState({
       currState: 3
@@ -69,6 +73,7 @@ export default class search extends Component {
 
     };
   }
+
   SubmitScore() {
    if(this.state.validForm){
     let RequestObject = {
@@ -105,6 +110,7 @@ export default class search extends Component {
       imageContent: image.src
     });
   }
+
   render() {
     let competitionItem = [];
     for (let i = 0; i < 6; i++) {
@@ -112,16 +118,22 @@ export default class search extends Component {
         this.state.clicked !== i ? "hidden" : "competition-item"}><li onClick={() => this.CompetitionClicked(i, "competition" + i)}>
           Competition {i} </li></div>);
     }
+
     if (this.state.clicked != null) {
-      competitionItem.push(<input name="score" key={'myKey' + 10} className={this.state.currState !== 2 ? "hidden":"inputScore" } onChange={this.handleScore}></input>,
+      competitionItem.push(<input name="score" key={'myKey' + 10} className={this.state.currState !== 2 ? "hidden":"inputScore" }
+       onChange={this.handleScore}></input>,
       <Button key={'myKey' + 1} id= "btnExtra"className={this.state.currState !== 2 ? "hidden" :"" } >S n Extra</Button>,
-      <Button key={'myKey' + 2} id="btnScoreCapture" className={this.state.currState ===2 ?  "": "hidden"} onClick={() => this.CameraClicked()} >Capture score</Button>,
-      <Button key={'myKey' + 3} onClick={() => this.SubmitScore()} className={this.state.currState ===2 ? "" : "hidden"} >Submit</Button>,
-      <video key={'myKey' + 4} id="video" width="640" height="480" className={this.state.currState ===4 ? "hidden" : ""} autoPlay></video>,
-      <button key={'myKey' + 5} onClick={() => this.TakePhoto()} id="snap" className={this.state.currState !==3 ?  "hidden":"" }>Snap</button>,
-      <canvas key={'myKey' + 6} id="canvas" width="640" height="480"className={this.state.currState !==4 ? "hidden" : ""}></canvas>
+      <Button key={'myKey' + 2} id="btnScoreCapture" className={this.state.currState ===2 ?  "": "hidden"} 
+      onClick={() => this.CameraClicked()} >Capture score</Button>,
+      <Button key={'myKey' + 3} onClick={() => this.SubmitScore()} className={this.state.currState ===2 ? "" : "hidden"} >
+      Submit</Button>,
+      <video key={'myKey' + 4} id="video"  className={this.state.currState ===4 ? "hidden" : "video"} autoPlay></video>,
+      <button key={'myKey' + 5} onClick={() => this.TakePhoto()} id="snap" className={this.state.currState !==3 ?  "hidden":"" }>
+      Snap</button>,
+      <canvas key={'myKey' + 6} id="canvas" className={this.state.currState !==4 ? "hidden" : "video"}></canvas>
       )
     }
+
     return (
 
       <div>
