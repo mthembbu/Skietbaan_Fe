@@ -1,0 +1,18 @@
+.container{
+    min-width: 100%;
+}
+   
+.filterNav{
+    min-width: 100%;
+    display: inline-flex;
+    background-color: darkgrey;
+    padding: 1%;
+}
+.competitionSelction{
+    width:100%;
+    background-color: black;
+    padding: 2%;
+}
+.competitionSelction div{
+    margin: auto;
+}

@@ -7,9 +7,8 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './components/Login';
 import NavbarMenu from './components/NavbarMenu';
 import RegisterMember from './components/RegisterMember';
-import List from './components/List';
+import LeaderboardPage from './components/LeaderboardPage';
 import ScoreCapture from './components/ScoreCapture';
-import Competitions from './components/Competitions';
 class App extends Component {
 
     componentDidMount () {
@@ -21,14 +20,13 @@ class App extends Component {
 		return (
 			<Provider store={store}>
 				<div className="App">
-					<NavbarMenu /> <hr />
+					<NavbarMenu />
 					<BrowserRouter>
 						<Switch>
-							<Route path="/home" component={List} exact />
+							<Route path="/home" component={LeaderboardPage} exact />
 							<Route path="/login" component={Login} exact />
 							<Route path="/" component={Login} exact />
 							<Route path="/register" component={RegisterMember} exact />
-							<Route path="/competition" component={Competitions} exact />
 							<Route path="/scorecapture" component={ScoreCapture} exact />
 							<Redirect from="/" to="/home" />
 						</Switch>

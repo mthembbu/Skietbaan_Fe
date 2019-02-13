@@ -4,12 +4,13 @@ import { Navbar,
          Form,
          Nav
          } from 'react-bootstrap';
+import '../bootstrap/NavbarMenuStyle.css';       
 
  class NavbarMenu extends Component {
     render() {
         // rendering the basic navbar within the render class
         return (
-            <div> {/** The default navigation menu */}
+            <div className="customNav"> {/** The default navigation menu */}
 <Navbar bg="light" expand="lg" >
   <Navbar.Brand href="#home">SKIETBAAN APP</Navbar.Brand>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
