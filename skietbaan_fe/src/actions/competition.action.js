@@ -1,5 +1,5 @@
 import { NEW_COMP, FETCH_COMP } from './types';
-/**A method to fetch competitions */
+/**A method to fetch all competitions */
 /**GC TODO: The method to fetch data from the  competition table 
 export const fetchComps = () => {
 	fetch('https://jsonplaceholder.typicalcode.com/posts')
@@ -9,7 +9,6 @@ export const fetchComps = () => {
 /** Amethod to create a new competition and posts comps data to the designated url
  * TO DO: don't forget to use the http://skietbaan.retrotest.co.za/api/
  */
-
 export const createcomp = (compData) => (dispatch) => {
 	fetch('https://jsonplaceholder.typicode.com/posts', {
 		method: 'POST',
@@ -25,4 +24,4 @@ export const createcomp = (compData) => (dispatch) => {
 				payload: comp
 			})
 		);
-}; 
+};
