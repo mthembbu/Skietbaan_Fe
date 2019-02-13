@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table } from "react-bootstrap";
+import { Table, Jumbotron } from "react-bootstrap";
 import '../components/ListStyle.css'
 class List extends Component {
   constructor(props){
@@ -36,6 +36,17 @@ class List extends Component {
     );
     return (
       <div main className="scrollbar" data-simplebar data-simplebar-auto-hide="false">
+      <div>
+					<Jumbotron>
+						<h1>
+							<b>SkietBaan App</b>
+						</h1>
+						<p>
+							This is a simple hero unit, a simple jumbotron-style component for calling extra attention
+							to featured content or information.
+						</p>
+					</Jumbotron>
+				</div>
         {postItems}
       </div>
     );

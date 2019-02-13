@@ -8,8 +8,8 @@ import Login from './components/Login';
 import NavbarMenu from './components/NavbarMenu';
 import RegisterMember from './components/RegisterMember';
 import List from './components/List';
-import Landing from './components/landing';
 import ScoreCapture from './components/ScoreCapture';
+import CreateComp from './components/CreateComp';
 class App extends Component {
 
     componentDidMount () {
@@ -17,19 +17,19 @@ class App extends Component {
             this.setState({ user: data.entity })
         })
     }
-	
 	render() {
 		return (
 			<Provider store={store}>
 				<div className="App">
-				<NavbarMenu/> <hr/>
+					<NavbarMenu /> <hr />
 					<BrowserRouter>
 						<Switch>
 							<Route path="/home" component={List} exact />
 							<Route path="/login" component={Login} exact />
 							<Route path="/" component={Login} exact />
-							<Route path="/register" component={RegisterMember} exact />	
-							<Route path = "/scorecapture" component ={ScoreCapture} exact />				
+							<Route path="/register" component={RegisterMember} exact />
+							<Route path="/new-competition" component={CreateComp} exact />
+							<Route path="/scorecapture" component={ScoreCapture} exact />
 							<Redirect from="/" to="/home" />
 						</Switch>
 					</BrowserRouter>
