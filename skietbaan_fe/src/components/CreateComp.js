@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Jumbotron, Form, Button } from 'react-bootstrap';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import '../components/createcomp.css';
+import '../scss/createcomp.css';
 import { createcomp } from '../actions/competition.action';
 class CreateComp extends Component {
 	constructor() {
