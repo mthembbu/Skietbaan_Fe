@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import '../components/RegisterMemberStyles.css';
-import { ToastContainer, ToastStore } from 'react-toasts';
 
 function validateUsername(username) {
   const re = /[a-zA-Z]/;
@@ -69,16 +68,15 @@ class App extends Component {
       "entryDate": document.getElementById("entrydate").value + "T00:00:00",
       "memberExpiry": document.getElementById("expdate").value + "T00:00:00"
     }
-    fetch("http://localhost:63474/api/Features/Update", {
+    fetch("https://api.skietbaan.retrotest.co.za/api/Features/User/Update", {
       method: 'Put',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify(RequestObject)
     })
       .then(function (response) {
-        ToastStore.success(document.getElementById("usernameValue").value + " is successfully registered as a member ");
         return response.json();})
       .then(function (data) {})
-      .catch(function (data) { ToastStore.success("Failed"); });
+      .catch(function (data) {});
   }
 
   render() {
@@ -143,7 +141,6 @@ class App extends Component {
               <Button onClick={this.UpdateMember} >Submit</Button>
             </Col>
           </Form>
-          <ToastContainer store={ToastStore} lightBackground />
         </div >
       </Container>
     );
