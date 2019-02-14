@@ -4,7 +4,7 @@ import '../components/RegisterMemberStyles.css';
 import { ToastContainer, ToastStore } from 'react-toasts';
 
 function validateUsername(username) {
-  var re = /[a-zA-Z]/;
+  const re = /[a-zA-Z]/;
   return !re.test(String(username));
 }
 
