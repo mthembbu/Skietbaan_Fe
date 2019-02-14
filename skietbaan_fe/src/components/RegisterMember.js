@@ -51,12 +51,7 @@ class App extends Component {
       }).then(function(response) {
           return response.json();})
           .then(function(data) {
-            if(data.memberID == null){
-              document.getElementById("membershipID").value = data.memberID;
-            }
-            else{
-              document.getElementById("membershipID").value = data.memberID;
-            }
+            document.getElementById("membershipID").value = data.memberID;
             let entDate = data.entryDate.split('T');
             let keepDate = data.entryDate.split('T');
             document.getElementById("entrydate").value = entDate[0];
