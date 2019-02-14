@@ -55,7 +55,7 @@ class App extends Component {
         "Email": this.state.emailValue,
         "Password": hash,
       }
-      fetch("https://api.skietbaan.retrotest.co.za/api/User", {
+      fetch("http://skietbaan.retrotest.co.za/api/User", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -65,7 +65,7 @@ class App extends Component {
       }).then(function(response) {
         return response.json();
       }).then( function(data) {
-        if(data)
+        if(typeof data === "object")
         {
           document.cookie = "token =" +data.token+"; expires =Wed, 18 Dec 2030 12:00:00 UTC";
           window.location = "/home";
