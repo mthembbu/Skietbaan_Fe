@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Col, Form, FormGroup, Label, Input, Button, } from 'reactstrap';
+import { Container, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import '../components/RegisterMemberStyles.css';
+import {ToastContainer, ToastStore} from 'react-toasts';
 
  function validateUsername(username) {
   var re = /[a-zA-Z]/;
@@ -12,16 +13,21 @@ class App extends Component {
     super(props);
     this.state = {
       usernameValue : "",
+      membershipID : "",
       invalidUsername: false,
-      validForm:false
+      validForm:false,
+      entryDate: "",
+      expiryDate:""
     }
-    this.RegisterMember = this.RegisterMember.bind(this);
+    this.SearchMember = this.SearchMember.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
+    
+  
   handleChange({ target }) {
     this.setState({
       [target.name]: target.value,
-      invalidUsername: false
+      invalidUsername: false,
     });
     var Valid = true;
     if(validateUsername(this.state.usernameValue))
@@ -36,20 +42,53 @@ class App extends Component {
     });
   }
 
-  RegisterMember() {
+  SearchMember() {
    if(this.state.validForm)
    {
-    var RequestObject = {
-        "Username":this.state.usernameValue,
-    }
-      const BASE_URL = 'http://skietbaan.retrotest.co.za/';
-      fetch(`${BASE_URL}`,"/api/values", {
+      fetch("http://api.skietbaan.retrotest.co.za/api/Features/Search?Username="+this.state.usernameValue, {
       method: 'Get',	
         headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-        body: JSON.stringify(RequestObject)}).then(function(response) {
-          return response.json();}).then(function(data) {}).catch(function() {});
+      }).then(function(response) {
+          return response.json();})
+          .then(function(data) {
+            if(data.memberID == null){
+              document.getElementById("membershipID").value = data.memberID;
+            }
+            else{
+              document.getElementById("membershipID").value = data.memberID;
+            }
+            let entDate = data.entryDate.split('T');
+            let keepDate = data.entryDate.split('T');
+            document.getElementById("entrydate").value = entDate[0];
+            let dateNew = keepDate[0].split('-');
+            let exDateYear = parseInt(dateNew[0],10) + 1;
+            document.getElementById("expdate").value = exDateYear + '-' + dateNew[1] + '-' + dateNew[2];
+          })
+          .catch(function() {});
     }	    
   }
+
+  UpdateMember() {
+    let RequestObject = {
+      "username": document.getElementById("usernameValue").value,
+      "memberID": document.getElementById("membershipID").value,
+      "entryDate": document.getElementById("entrydate").value + "T00:00:00",
+      "memberExpiry": document.getElementById("expdate").value + "T00:00:00"
+    }
+       fetch("http://api.skietbaan.retrotest.co.za/api/Features/Update" , {
+       method: 'Put',	
+         headers: {'Accept': 'application/json','Content-Type': 'application/json'},
+         body: JSON.stringify(RequestObject)
+       }).then(function(response) {
+          ToastStore.success(document.getElementById("usernameValue").value + " is successfully registered as a member ");
+          
+          
+          return response.json();})
+          .then(function(data) {
+          })
+          .catch(function(data) {ToastStore.success("Failed");});
+     	    
+   }
 
   render() {
     let invalidUsernameMessage;
@@ -62,14 +101,16 @@ class App extends Component {
       <Container className="App">
         <div className="centre-register-member">
         <Form className="form">
-        <h2>Membership Sign In</h2>
+        <Col>
+          <h2>Membership Sign In</h2>
+        </Col>
         <Col className="no-padding">
             <FormGroup>
               <Label><b>Username</b></Label>
               <Input
                 type="text"
                 name="usernameValue"
-                id="username"
+                id="usernameValue"
                 placeholder="Username"
                 value={ this.state.usernameValue }
                 onChange={ this.handleChange }
@@ -78,50 +119,40 @@ class App extends Component {
               {invalidUsernameMessage}
             </FormGroup>
           </Col>
-          <Button onClick={this.RegisterMember} className={this.state.validForm ? "button-valid" : "button-invalid"}>Search</Button>
-          <br/>
+          <Col>
+            <Button onClick={this.SearchMember} className={this.state.validForm ? "button-valid" : "button-invalid"}>Search</Button>
+          </Col>
           <br/>
           <Col className="no-padding">
             <FormGroup>
-              <Label><b>Email</b></Label>
+              <Label><b>MemberID</b></Label>
               <Input
-                type="email"
-                name="emailValue"
-                id="LoginEmail"
-                placeholder="Email"
-                value={ this.state.emailValue }
+                type="text"
+                name="membershipID"
+                id="membershipID"
+                placeholder="Enter Membership ID"
+                value={ this.state.membershipID }
                 onChange={ this.handleChange }
-                />
+              />
             </FormGroup>
-          </Col>
-          <Col className="no-padding">
-          <Label><b>Member</b></Label>
-            <div>
-              <input type="checkbox" id="member" name="member" value="True"/>
-              <Label for="member">Allow Membership</Label>
-            </div>
           </Col>
           <Col className="no-padding">
             <FormGroup>
               <Label><b>EntryDate</b></Label><br/>
-              <input type="date" name="entrydate" id="entrydate"/>
+              <input type="date" name="entrydate" id="entrydate" value={this.state.entrysDate} onChange={ this.handleChange }/>
             </FormGroup>
           </Col>
           <Col className="no-padding">
             <FormGroup>
               <Label><b>ExpireDateMember</b></Label><br/>
-              <input type="date" name="expdate" id="expdate"/>
+              <input type="date" name="expdate" id="expdate"  value={this.state.expirysDate} onChange={ this.handleChange }/>
             </FormGroup>
           </Col>
-          <Col className="no-padding">
-          <Label><b>Admin</b></Label>
-          <div>
-              <input type="checkbox" id="admin" name="admin" value="True"/>
-              <Label for="admin">Make Admin</Label>
-            </div>
+          <Col>
+            <Button onClick={this.UpdateMember} >Submit</Button>
           </Col>
-          <Button onClick={this.showAlert}>Submit</Button>
           </Form>
+          <ToastContainer store={ToastStore} position={ToastContainer.POSITION.TOP_CENTER} lightBackground/>
           </div >
       </Container>
     );

@@ -14,7 +14,7 @@
   }
   .centre-register-member{
     margin:0 auto;
-    position: absolute;
+    position: center;
     left: 3px;
     top: 15px;
     border: 1px solid rgba(0,0,0,0.35);
