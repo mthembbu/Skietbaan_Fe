@@ -68,7 +68,7 @@ class App extends Component {
       "entryDate": document.getElementById("entrydate").value + "T00:00:00",
       "memberExpiry": document.getElementById("expdate").value + "T00:00:00"
     }
-    fetch("https://api.skietbaan.retrotest.co.za/api/Features/Update", {
+    fetch("http://localhost:63474/api/Features/Update", {
       method: 'Put',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify(RequestObject)
