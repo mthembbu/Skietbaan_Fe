@@ -4,10 +4,11 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../scss/createcomp.css';
 import { createcomp } from '../actions/competition.action';
+//import axios from 'axios';
 class CreateComp extends Component {
 	constructor() {
 		super();
-		this.state = { compTitle: '', compStatus: '' };
+		this.state = { Name: '', Status: true };
 		//binding the onChange method to this commponents
 		this.onChange = this.onChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
@@ -23,8 +24,8 @@ class CreateComp extends Component {
 		/** Preventing the default button action event to occur automatically*/
 		e.preventDefault();
 		const compData = {
-			compTitle: this.state.compTitle,
-			compStatus: true
+			Name: this.state.Name,
+			Status: true
 		};
 		//calling the method to create a post => compData for the create competition
 		this.props.createcomp(compData);
@@ -43,10 +44,10 @@ class CreateComp extends Component {
 							<Form.Label>Competition Title:</Form.Label>
 							<Form.Control
 								type="text"
-								placeholder="Enter Competition Title"
-								name="compTitle"
+								placeholder="Enter Competition Name	"
+								name="Name"
 								id="compTitle"
-								value={this.state.compTitle}
+								value={this.state.Name}
 								onChange={this.onChange}
 							/>
 						</Form.Group>
