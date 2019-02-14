@@ -20,24 +20,21 @@ class NavbarMenu extends Component {
 							<Nav.Link href="/home">
 								<img src="" alt="" width="" height="" />Leader Board
 							</Nav.Link>
-							<Nav.Link href="/scores">Score Capture</Nav.Link>
+							<Nav.Link href="/scorecapture">Score Capture</Nav.Link>
 							<NavDropdown title="Create" id="basic-nav-dropdown" variant="outline-dark">
 								<NavDropdown.Item href="/new-competition">New Competition</NavDropdown.Item>
 								<NavDropdown.Item href="/">New Groups</NavDropdown.Item>
 								<NavDropdown.Item href="/register">New Members</NavDropdown.Item>
 								<NavDropdown.Divider />
 							</NavDropdown>
-							<Nav.Link href="/">Notifications</Nav.Link>
 							<Nav.Link href="/">Documents</Nav.Link>
 						</Nav>
 						<Form inline>
 						<i className="fa fa-user-circle"></i>
 							<NavDropdown title="Username" id="basic-nav-dropdown" variant="outline-dark">
-								<NavDropdown.Item href="/">Awards</NavDropdown.Item>
-								<NavDropdown.Item href="/">Statistics</NavDropdown.Item>
+								<NavDropdown.Item href="/">Profile</NavDropdown.Item>
+								<NavDropdown.Item href="/notifications">Notifications</NavDropdown.Item>
 								<NavDropdown.Item href="/">Settings</NavDropdown.Item>
-								<NavDropdown.Divider />
-								<NavDropdown.Item href="/">Sign In</NavDropdown.Item>
 							</NavDropdown>
 						</Form>
 					</Navbar.Collapse>
