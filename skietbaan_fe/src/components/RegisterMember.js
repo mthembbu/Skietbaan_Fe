@@ -69,7 +69,7 @@ class App extends Component {
       "entryDate": document.getElementById("entrydate").value + "T00:00:00",
       "memberExpiry": document.getElementById("expdate").value + "T00:00:00"
     }
-    fetch("https://api.skietbaan.retrotest.co.za/api/User/Update", {
+    fetch("http://localhost:63474/api/Features/Update", {
       method: 'Put',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify(RequestObject)
@@ -143,7 +143,7 @@ class App extends Component {
               <Button onClick={this.UpdateMember} >Submit</Button>
             </Col>
           </Form>
-          <ToastContainer store={ToastStore} position={ToastContainer.TOP_CENTER} lightBackground />
+          <ToastContainer store={ToastStore} position={ToastContainer} lightBackground />
         </div >
       </Container>
     );
