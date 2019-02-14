@@ -10,18 +10,23 @@ export const fetchComps = () => {
  * TO DO: don't forget to use the http://skietbaan.retrotest.co.za/api/
  */
 export const createcomp = (compData) => (dispatch) => {
-	fetch('https://jsonplaceholder.typicode.com/posts', {
+	fetch('http://localhost:63474/api/Competition', {
 		method: 'POST',
 		headers: {
-			'content-type': 'application/json'
+			'Accept': 'application/json',
+          'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(compData)
+		
 	})
 		.then((res) => res.json())
 		.then((comp) =>
 			dispatch({
 				type: NEW_COMP,
-				payload: comp
-			})
+				payload: comp,
+				
+			}),
+			window.location = "/home"
 		);
+ 
 };

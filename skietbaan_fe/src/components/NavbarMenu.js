@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { Navbar, NavDropdown, Form, Nav } from 'react-bootstrap';
+import { Navbar, NavDropdown, Form, Nav, Container } from 'react-bootstrap';
+import '../scss/navbar.css';
+import 'font-awesome/css/font-awesome.min.css';
 
 class NavbarMenu extends Component {
 	render() {
 		// rendering the basic navbar within the render class
 		return (
-			<div>
+			<div >
 				{/** The default navigation menu */}
-				<Navbar bg="light" expand="lg">
-					<Navbar.Brand href="#home">SKIETBAAN APP</Navbar.Brand>
+				<Container>
+				<Navbar bg="light" expand="lg" className="navbar-custom" fixed="top">
+					<Navbar.Brand href="#home">
+					 <i className="fa fa-home"></i>
+					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="mr-auto">
@@ -19,13 +24,14 @@ class NavbarMenu extends Component {
 							<NavDropdown title="Create" id="basic-nav-dropdown" variant="outline-dark">
 								<NavDropdown.Item href="/new-competition">New Competition</NavDropdown.Item>
 								<NavDropdown.Item href="/">New Groups</NavDropdown.Item>
-								<NavDropdown.Item href="/">New Members</NavDropdown.Item>
+								<NavDropdown.Item href="/register">New Members</NavDropdown.Item>
 								<NavDropdown.Divider />
 							</NavDropdown>
 							<Nav.Link href="/">Notifications</Nav.Link>
 							<Nav.Link href="/">Documents</Nav.Link>
 						</Nav>
 						<Form inline>
+						<i className="fa fa-user-circle"></i>
 							<NavDropdown title="Username" id="basic-nav-dropdown" variant="outline-dark">
 								<NavDropdown.Item href="/">Awards</NavDropdown.Item>
 								<NavDropdown.Item href="/">Statistics</NavDropdown.Item>
@@ -36,6 +42,7 @@ class NavbarMenu extends Component {
 						</Form>
 					</Navbar.Collapse>
 				</Navbar>
+				</Container>
 			</div>
 		);
 	}
