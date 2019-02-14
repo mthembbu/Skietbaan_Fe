@@ -12,3 +12,8 @@ export function validateUsername(username) {
     const re = /[a-zA-Z]/;
     return !re.test(String(username));
 }
+
+export function validateScore(score){
+    const re = /'^[0-9]+$'/;
+    return re.test(score);
+}
