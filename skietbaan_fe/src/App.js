@@ -9,6 +9,8 @@ import NavbarMenu from './components/NavbarMenu';
 import RegisterMember from './components/RegisterMember';
 import LeaderboardPage from './components/LeaderboardPage';
 import ScoreCapture from './components/ScoreCapture';
+import CreateComp from './components/CreateComp';
+
 class App extends Component {
 
     componentDidMount () {
@@ -27,6 +29,7 @@ class App extends Component {
 							<Route path="/login" component={Login} exact />
 							<Route path="/" component={Login} exact />
 							<Route path="/register" component={RegisterMember} exact />
+							<Route path="/new-competition" component={CreateComp} exact />
 							<Route path="/scorecapture" component={ScoreCapture} exact />
 							<Redirect from="/" to="/home" />
 						</Switch>
