@@ -143,7 +143,7 @@ class App extends Component {
               <Button onClick={this.UpdateMember} >Submit</Button>
             </Col>
           </Form>
-          <ToastContainer store={ToastStore} position={ToastContainer} lightBackground />
+          <ToastContainer store={ToastStore} lightBackground />
         </div >
       </Container>
     );
