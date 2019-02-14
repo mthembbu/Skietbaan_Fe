@@ -10,6 +10,7 @@ import RegisterMember from './components/RegisterMember';
 import LeaderboardPage from './components/LeaderboardPage';
 import ScoreCapture from './components/ScoreCapture';
 import CreateComp from './components/CreateComp';
+import notifications from './components/Notifications'
 
 class App extends Component {
 
@@ -23,6 +24,10 @@ class App extends Component {
 			<Provider store={store}>
 				<div className="App">
 					<NavbarMenu />
+					<hr></hr>
+					<hr></hr>
+					<hr></hr>
+					<hr></hr>
 					<BrowserRouter>
 						<Switch>
 							<Route path="/home" component={LeaderboardPage} exact />
@@ -31,6 +36,7 @@ class App extends Component {
 							<Route path="/register" component={RegisterMember} exact />
 							<Route path="/new-competition" component={CreateComp} exact />
 							<Route path="/scorecapture" component={ScoreCapture} exact />
+							<Route path="/notifications" component={notifications} exact />
 							<Redirect from="/" to="/home" />
 						</Switch>
 					</BrowserRouter>

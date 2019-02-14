@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../components/NotificationsStyle.css';
-import {Input, Button} from 'reactstrap'
+import { Table, Button } from 'reactstrap'
 
 class notifications extends Component {
 
@@ -21,10 +21,6 @@ class notifications extends Component {
       .then(function(response) {
          return response.json();})
       .then(function(data) { 
-        console.log(data);
-       document.getElementById("Label1").value = data[0].id;
-       document.getElementById("Label2").value = data[0].isRead;
-       document.getElementById("Label3").value = data[0].notificationsHeading;
         return data;
       }).then(data => this.setState({array:data}))
       .catch(function() {});
@@ -32,16 +28,39 @@ class notifications extends Component {
 
 
     render() {
+      const postItems = (
+        <Table striped hover condensed>
+        <thead>
+        <tr>
+        <td>
+        
+                                <b>#</b>
+                            </td>
+                            <td>
+                                <b>Notification Heading</b>
+                            </td>
+                            <td>
+                                <b>Notification Content</b>
+                            </td>
+                        </tr>
+                    </thead>
+        
+                    <tbody>
+                        {this.state.array.map((post) => (
+                            <tr key={post.id}>
+                                <td>{post.id}</td>
+                                <td>{post.notificationsHeading}</td>
+                                <td>{post.notificationContent}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+            );
     return (
-    
-    <form onSubmit={this.handleSubmit}>
-    <div className="centre"> 
-      <Input id="Label1"></Input>
-      <Input id="Label2"></Input>
-      <Input id="Label3"></Input>
+    <div > 
+      <div>{postItems}</div>
       <Button className="buttonCss" onClick={this.notfications}>Load previous notifications</Button>
     </div> 
-    </form>
     )
   }
 }
