@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import '../components/landing.css'
 
 export default class Home extends Component {
   render() {

@@ -1,0 +1,20 @@
+.scrollbar{
+    height: 100vh;
+    font-family: 'Montserrat';
+    display: grid;
+    grid-template-columns: 80% auto;
+    margin: 0;
+    
+    }
+    
+    .scrollbar p{
+    margin: 1em;
+    padding: 1em;
+    background: lightgray;
+    }
+    .scrollbar .simplebar-scrollbar:before{
+    background-color: lightcyan;
+    }
+    .scrollbar .simplebar-scrollbar{
+    margin-right: 2px;
+    }
