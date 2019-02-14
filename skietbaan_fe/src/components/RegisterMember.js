@@ -43,7 +43,7 @@ class App extends Component {
 
   SearchMember() {
     if (this.state.validForm) {
-      fetch("http://api.skietbaan.retrotest.co.za/api/Features/Search?Username=" + this.state.usernameValue, {
+      fetch("https://api.skietbaan.retrotest.co.za/api/Features/Search?Username=" + this.state.usernameValue, {
         method: 'Get',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       }).then(function (response) {
@@ -69,7 +69,7 @@ class App extends Component {
       "entryDate": document.getElementById("entrydate").value + "T00:00:00",
       "memberExpiry": document.getElementById("expdate").value + "T00:00:00"
     }
-    fetch("http://api.skietbaan.retrotest.co.za/api/Features/Update", {
+    fetch("https://api.skietbaan.retrotest.co.za/api/Features/Update", {
       method: 'Put',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify(RequestObject)
