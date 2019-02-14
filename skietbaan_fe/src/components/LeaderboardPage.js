@@ -1,66 +1,57 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
-import { Button } from 'react-bootstrap';
-//import ReactDOM from 'react-dom';
-//import { Navbar,
-//   NavDropdown,
-//   Nav,
-//   Container,
-//    Table
-//   } from 'react-bootstrap';
-//import { Table } from 'react-bootstrap';
 import '../bootstrap/LeaderboardStyle.css';
 
 
 
 class LeaderboardPage extends Component {
-    constructor(props, context) {
-        super(props, context);
-
-        this.handleClick = this.handleClick.bind(this);
-
-        this.state = {
-            isLoading: false,
-        };
+    constructor(props){
+        super(props);
+        this.state ={
+            user:{},
+            groups:["1","2"],
+            competitions:[],
+            selectedGroup:"",
+            selectedCompetition:"",
+            selectedST:""
+        }
+        this.checkselected = this.checkselected.bind(this);
+        this.checkselected2 = this.checkselected2.bind(this);
+    }
+    //executed when leaderboard in mounted on main app
+    componentWillMount(){
+       console.log("retrieving leaderboard data");
+       fetch('http://localhost:63474/api/Leaderboard/GetLeaderboardFilterData?UserID='+1)
+       .then(res => res.json())
+       .then(data => this.setState({groups:data.groups1,competitions:data.competitions1,id:data.id},console.log(data.competitions),console.log(data.groups),console.log(this.state.groups)));
     }
 
-    handleClick() {
-        //this.setState({ isLoading: true }, () => {
-        //  simulateNetworkRequest().then(() => {
-        //   this.setState({ isLoading: false });
-        // });
-        // });
+    
+    checkselected(){
+       console.log("changed");
     }
+    checkselected2(){
+        //console.log("changed2");
+     }
+   
+
+    
     render() {
-        const { isLoading } = this.state;
-
-        const techCompanies = [
-            { label: "Competition 1", value: 1 },
-            { label: "Competition 2", value: 2 },
-            { label: "Competition 3", value: 3 },
-            { label: "Competition 4", value: 4 },
-            { label: "Competition 5", value: 5 },
-        ];
-        const scoreType = [
+        const selectCompetitions = this.state.competitions;
+        const selectScoreType = [
             { label: "Average", value: 1 },
             { label: "Best", value: 2 },
             { label: "Total", value: 3 }
         ];
-        const goupsList = [
-            { label: "Global", value: 1 },
-            { label: "Retro rabbit", value: 2 },
-            { label: "One-Hit-Wonders", value: 3 },
-            { label: "Discovery", value: 4 }
-        ];
+        const selectGroups = this.state.groups;
         return (
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="competitionSelction">
                         <div className="col-md-4">
-                            <Select options={techCompanies} />
+                            <Select options={selectCompetitions} onChange={this.checkselected} />
                         </div>
                     </div>
-
                 </div>
                 <div className="row">
                     <div className="filterNav">
@@ -68,7 +59,7 @@ class LeaderboardPage extends Component {
                             <div className="groupFilt">
                                 <div className="groupLabel">Groups</div>
                                    <div className="groupChoose">
-                                      <Select options={goupsList} />
+                                      <Select options={selectGroups} onChange={this.checkselected} />
                                 </div>
                             </div>
                         </div>
@@ -77,7 +68,7 @@ class LeaderboardPage extends Component {
                              <div className="scoreTypeLabel">ScoreType</div>
                              <div className="row justify-content-center">
                                  <div className="col-md-2">
-                                    <div className="scoreTypeChoose"><Select options={scoreType} /></div>
+                                    <div className="scoreTypeChoose"><Select options={selectScoreType} onChange={this.checkselected}/></div>
                                  </div>
                              </div>
                         </div>
