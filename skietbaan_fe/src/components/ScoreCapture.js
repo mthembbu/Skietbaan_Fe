@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../components/ScoreCapture.css';
 import { Button } from 'reactstrap';
-import {validateScore} from './Validators.js';
+import { validateScore } from './Validators.js';
 
 export default class search extends Component {
   constructor(props) {
@@ -32,13 +32,13 @@ export default class search extends Component {
       invalidScore: false,
     }
     if (!validateScore(this.state.score)) {
-      stateUpdate.invalidPassword= true;
+      stateUpdate.invalidPassword = true;
       isValid = false;
-    };   
+    };
     this.setState({
-      ...stateUpdate ,
+      ...stateUpdate,
       validForm: isValid
-    }); 
+    });
   }
 
   CompetitionClicked(item, competitionName) {
@@ -63,35 +63,40 @@ export default class search extends Component {
     this.setState({
       currState: 3
     });
-    let video = document.getElementById('video');
-
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
-        video.srcObject = stream;
-        video.play();
-      });
-
+    const video = document.getElementById("video");
+    const constraints = {
+        advanced: [{
+            facingMode: "environment"
+        }]
     };
+    navigator.mediaDevices
+        .getUserMedia({
+            video: constraints
+        })
+        .then((stream) => {
+          video.srcObject=stream;
+          video.play();
+        });
   }
 
   SubmitScore() {
-   if(this.state.validForm){
-    let RequestObject = {
-      "UserScore": this.state.score,
-      "PictureURL": this.state.imageContent,
-      "Competition": this.state.competitionName
-    }
-    fetch("https://api.skietbaan.retrotest.co.za/api/Scores", {
+    if (this.state.validForm) {
+      let RequestObject = {
+        "UserScore": this.state.score,
+        "PictureURL": this.state.imageContent,
+        "Competition": this.state.competitionName
+      }
+      fetch("https://api.skietbaan.retrotest.co.za/api/Scores", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(RequestObject)
-      }).then(function(response) {
+      }).then(function (response) {
         return response.json();
-      }).then( function(data) {
-      }).catch(function(data) {
+      }).then(function (data) {
+      }).catch(function (data) {
       });
     }
   }
@@ -120,17 +125,17 @@ export default class search extends Component {
     }
 
     if (this.state.clicked != null) {
-      competitionItem.push(<input name="score" key={'myKey' + 10} className={this.state.currState !== 2 ? "hidden":"inputScore" }
-       onChange={this.handleScore}></input>,
-      <Button key={'myKey' + 1} id= "btnExtra"className={this.state.currState !== 2 ? "hidden" :"" } >S n Extra</Button>,
-      <Button key={'myKey' + 2} id="btnScoreCapture" className={this.state.currState ===2 ?  "": "hidden"} 
-      onClick={() => this.CameraClicked()} >Capture score</Button>,
-      <Button key={'myKey' + 3} onClick={() => this.SubmitScore()} className={this.state.currState ===2 ? "" : "hidden"} >
-      Submit</Button>,
-      <video key={'myKey' + 4} id="video"  className={this.state.currState ===4 ? "hidden" : "video"} autoPlay></video>,
-      <button key={'myKey' + 5} onClick={() => this.TakePhoto()} id="snap" className={this.state.currState !==3 ?  "hidden":"" }>
-      Snap</button>,
-      <canvas key={'myKey' + 6} id="canvas" className={this.state.currState !==4 ? "hidden" : "video"}></canvas>
+      competitionItem.push(<input name="score" key={'myKey' + 10} className={this.state.currState !== 2 ? "hidden" : "inputScore"}
+        onChange={this.handleScore}></input>,
+        <Button key={'myKey' + 1} id="btnExtra" className={this.state.currState !== 2 ? "hidden" : ""} >S n Extra</Button>,
+        <Button key={'myKey' + 2} id="btnScoreCapture" className={this.state.currState === 2 ? "" : "hidden"}
+          onClick={() => this.CameraClicked()} >Capture score</Button>,
+        <Button key={'myKey' + 3} onClick={() => this.SubmitScore()} className={this.state.currState === 2 ? "" : "hidden"} >
+          Submit</Button>,
+        <video key={'myKey' + 4} id="video" className={this.state.currState === 4 ? "hidden" : "video"} autoPlay></video>,
+        <button key={'myKey' + 5} onClick={() => this.TakePhoto()} id="snap" className={this.state.currState !== 3 ? "hidden" : ""}>
+          Snap</button>,
+        <canvas key={'myKey' + 6} id="canvas" className={this.state.currState !== 4 ? "hidden" : "video"}></canvas>
       )
     }
 
@@ -146,7 +151,7 @@ export default class search extends Component {
         <ul className="competition-container">
           {competitionItem}
         </ul>
-        
+
       </div>
     )
   }
