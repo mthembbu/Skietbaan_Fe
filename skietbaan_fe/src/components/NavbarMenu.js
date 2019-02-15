@@ -19,7 +19,8 @@ import { Navbar,
       <Nav.Link href="/scores">Score Capture</Nav.Link>
       <Nav.Link href="/competition">Competitions</Nav.Link>
       <Nav.Link href="/">Notifications</Nav.Link>
-      <Nav.Link href="/">Documents</Nav.Link>
+      <Nav.Link href="/GroupsName">Groups</Nav.Link>
+    
     </Nav>
     <Form inline>
       <NavDropdown title="Username" id="basic-nav-dropdown" variant="outline-dark">
