@@ -47,11 +47,11 @@ export default class search extends Component {
     });
   }
 
-  CompetitionClicked(item, competitionName) {
+  CompetitionClicked(item, compname) {
     this.setState({
       currState: 2,
       clicked: item,
-      competitionName: competitionName
+      competitionName: compname
     });
   }
 
@@ -64,8 +64,9 @@ export default class search extends Component {
     }
     return bytes.buffer;
   }
+
   componentDidMount() {
-    fetch("http://localhost:63474/api/Competition", {
+    fetch("http://localhost:63474/api/Competition/", {
       method: 'get',
       headers: {
         'Accept': 'application/json',
@@ -73,7 +74,7 @@ export default class search extends Component {
       }
     }).then(response => response.json()).then(data => this.setState({ competitionsList: data }));
 
-    var token = getCookie("token");
+    let token = getCookie("token");
     fetch("http://localhost:63474/api/features/getuserbytoken/" + token, {
       method: 'get',
       headers: {
@@ -82,8 +83,7 @@ export default class search extends Component {
       }
     }).then(response => response.json()).then(data => this.setState({ user: data }));
   }
-  
-  
+ 
 
   CameraClicked() {
     this.setState({
@@ -107,13 +107,12 @@ export default class search extends Component {
 
   SubmitScore() {
 
-
     if (this.state.validForm || true ) {
       let RequestObject = {
         "UserScore": this.state.score,
         "PictureURL": this.state.imageContent,
-        "Competition": this.state.competitionName,
-        "Username":this.state.user.username
+        "CompetitionName": this.state.competitionName,
+        "Token":this.state.user.token
       }
       fetch("http://localhost:63474/api/Scores", {
         method: 'post',
@@ -125,6 +124,7 @@ export default class search extends Component {
       }).then(response => response.json()).then(data => this.setState({ scoreSaved: true,currState:5 }));
     }
   }
+
   Reset()
   {
     this.setState({
@@ -169,7 +169,6 @@ export default class search extends Component {
     if (this.state.clicked != null) {
       competitionItem.push(<input name="score" key={'myKey' + 10} className={this.state.currState !== 2 ? "hidden" : "inputScore"}
         onChange={this.handleScore}></input>,
-        //<Button key={'myKey' + 1} id="btnExtra" className={this.state.currState !== 2 ? "hidden" : ""} >S n Extra</Button>,
         <Button key={'myKey' + 2} id="btnScoreCapture" className={this.state.currState === 2 ? "" : "hidden"}
           onClick={() => this.CameraClicked()} >Capture score</Button>,
         <Button key={'myKey' + 3} onClick={() => this.SubmitScore()} className={this.state.currState === 2 || this.state.currState === 4 ? "" : "hidden"} >
@@ -181,7 +180,7 @@ export default class search extends Component {
       )
     }
 
-      scoreSavedSucessMessage.push(<div key={'myKey' + 1} className={this.state.scoreSaved == false ? "hidden":""}>Sucesfully Saved Score</div>, 
+      scoreSavedSucessMessage.push(<div key={'myKey' + 1} className={this.state.scoreSaved == false ? "hidden":""}>Successfully Saved Score</div>, 
               <button key={'myKey' + 2} onClick={() => this.Reset()} id="snap" className={this.state.scoreSaved == false ? "hidden" : ""}>
       Another Score</button>,);
     return (
