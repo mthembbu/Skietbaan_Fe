@@ -24,7 +24,7 @@ class NavbarMenu extends Component {
 							<Nav.Link href="/scorecapture">Score Capture</Nav.Link>
 							<NavDropdown title="Create" id="basic-nav-dropdown" variant="outline-dark">
 								<NavDropdown.Item href="/new-competition">New Competition</NavDropdown.Item>
-								<NavDropdown.Item href="/">New Groups</NavDropdown.Item>
+								<NavDropdown.Item href="/groupsname">New Groups</NavDropdown.Item>
 								<NavDropdown.Item href="/register">New Members</NavDropdown.Item>
 								<NavDropdown.Divider />
 							</NavDropdown>

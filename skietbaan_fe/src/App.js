@@ -8,8 +8,6 @@ import NavbarMenu from './components/NavbarMenu';
 import RegisterMember from './components/RegisterMember';
 import LeaderboardPage from './components/LeaderboardPage';
 import ScoreCapture from './components/ScoreCapture';
-
-import Competitions from './components/Competitions';
 import GroupsName from './components/GroupsName';
 import Groups from './components/Groups';
 import GroupDone from './components/GroupDone';
