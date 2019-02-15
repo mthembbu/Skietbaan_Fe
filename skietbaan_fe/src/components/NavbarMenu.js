@@ -3,6 +3,7 @@ import { Navbar, NavDropdown, Form, Nav, Container } from 'react-bootstrap';
 import '../scss/navbar.css';
 import 'font-awesome/css/font-awesome.min.css';
 
+
 class NavbarMenu extends Component {
 	render() {
 		// rendering the basic navbar within the render class
