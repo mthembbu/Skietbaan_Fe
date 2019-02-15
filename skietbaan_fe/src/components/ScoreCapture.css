@@ -49,6 +49,8 @@
     text-align: center;
     padding: 5px;
     border-radius: 5px;
+    float:left;
+    margin:10px;
 }
 
 .competition-item:hover{
@@ -63,4 +65,7 @@
 .video{
     width: 640px;
     height: 480px
+}
+.page-content{
+    margin-top:65px;
 }
