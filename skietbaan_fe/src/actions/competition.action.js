@@ -10,7 +10,7 @@ export const fetchComps = () => {
  * TO DO: don't forget to use the http://skietbaan.retrotest.co.za/api/
  */
 export const createcomp = (compData) => (dispatch) => {
-	fetch('https://api.skietbaan.retrotest.co.za/api/Competition', {
+	fetch('http://localhost:63474/api/Competition', {
 		method: 'POST',
 		headers: {
 			'Accept': 'application/json',
@@ -24,9 +24,7 @@ export const createcomp = (compData) => (dispatch) => {
 			dispatch({
 				type: NEW_COMP,
 				payload: comp,
-				
 			}),
-			window.location = "/home"
 		);
- 
+		window.location = "/home"
 };
