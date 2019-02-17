@@ -69,7 +69,7 @@ class App extends Component {
       "memberExpiry": document.getElementById("expdate").value + "T00:00:00"
     }
     fetch("http://localhost:63474/api/Features/Update", {
-      method: 'Put',
+      method: 'Post',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify(RequestObject)
     })
