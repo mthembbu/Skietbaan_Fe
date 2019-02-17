@@ -1,0 +1,39 @@
+
+.card-view{
+    max-width: 100%;
+    margin: 0 auto auto auto;
+    position: relative;
+    /*border: 1px solid rgba(0,0,0,0.35);
+    box-shadow: 2px 2px rgba(0,0,0,0.24);*/
+}
+
+@media (min-width:650px){
+    .card-view{
+        max-width: 70%;
+    }
+}
+
+.profile-icon img{
+    width: 25%;
+    height: 25%;
+}
+
+.icon img{
+    width: 25%;
+    height: 25%;
+}
+
+#col-icon .profile-icon img{
+    float: right;
+    padding-right: 5%;
+}
+
+#col-profile .top-pane h5{
+    text-align: right;
+    font-size: 1.8rem;
+}
+
+.redButton{
+    background-color: black;
+    color: white;
+  }
