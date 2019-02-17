@@ -29,13 +29,14 @@ body{
   border: 1px solid rgba(0,0,0,0.35);
   padding: 20px;
   background-color: white;
+  position: absolute;
   box-shadow: 2px 2px rgba(0,0,0,0.24);
 }
 @media screen and (min-width:768px)  {
 .centre-login{
   width: 50%;
   left:25%;
-  top:25%
+  top: 30%;
 }
 }
 input.invalid{
@@ -63,4 +64,15 @@ button.button-valid{
 
 .no-padding{
   padding:0 ;
+}
+.register-anchhor{
+  float: right;
+  bottom: 0;
+  font-size: 12px;
+  padding-top: 30px;
+  padding-right: 15px;
+}
+.register-anchhor a{
+  color:#4b4d4f;
+  text-decoration: underline;
 }
