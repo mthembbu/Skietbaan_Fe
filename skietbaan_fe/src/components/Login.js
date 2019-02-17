@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Col,FormGroup, Label, Input, Button, Form} from 'reactstrap';
 import '../components/LoginStyles.css';
 import { validatePassword, validateEmail, validateUsername } from './Validators.js';
+import { getCookie } from './cookie.js';
 
 class App extends Component {
   constructor(props) {
@@ -10,10 +11,12 @@ class App extends Component {
       usernameValue: "",
       emailValue: "",
       passwordValue: "",
-      validForm: false
+      validForm: false,
+      tokenValue : "",
     }
     this.Login = this.Login.bind(this);
     this.handleChange = this.handleChange.bind(this);
+
   }
   handleChange({ target }) {
     this.setState({
@@ -42,6 +45,7 @@ class App extends Component {
       validForm: isValid
     });
   };
+
   Login() {
     if (this.state.validForm) {
       let sha1 = require('sha1');  
@@ -51,7 +55,7 @@ class App extends Component {
         "Email": this.state.emailValue,
         "Password": hash,
       }
-      fetch("https://api.skietbaan.retrotest.co.za/api/User", {
+      fetch("http://localhost:63474/api/User", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -61,12 +65,19 @@ class App extends Component {
       }).then(function(response) {
         return response.json();
       }).then( function(data) {
-        window.location = "/home";
+        if(typeof data === "object")
+        {
+          document.cookie = "token =" +data.token+"; expires =Wed, 18 Dec 2030 12:00:00 UTC";
+          window.location = "/home";
+        }
       }).catch(function(data) {
       });
     }
   }
   render() {
+    if(getCookie("token")){
+      window.location = "/home";
+    }
     let invalidPasswordMessage;
     let invalidEmailMessage;
     let invalidUsernameMessage;

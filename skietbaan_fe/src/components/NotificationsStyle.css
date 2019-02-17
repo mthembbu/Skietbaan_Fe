@@ -1,0 +1,18 @@
+@media all and (min-width: 480px) {
+    .Notifications {
+      padding: 60px 0;
+    }
+  
+    .Notifications form {
+      margin: 0 auto;
+      max-width: 320px;
+    }
+  }
+
+  .centre {
+    text-align: center; 
+  }
+
+  .buttonCss{
+    width: 250px;
+  }
