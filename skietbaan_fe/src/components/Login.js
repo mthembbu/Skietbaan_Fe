@@ -81,7 +81,6 @@ class App extends Component {
         if(typeof data === "object")
         {
           document.cookie = "token =" +data.token+"; expires =Wed, 18 Dec 2030 12:00:00 UTC";
-          window.location = "/home";
         }
       }).catch(function(data) {
       });
@@ -137,7 +136,7 @@ class App extends Component {
             </Col>
             <Button onClick={this.Login} className={this.state.validForm ? "button-valid" : "button-invalid"} >Submit</Button>
           </Form>
-          <div className="register-anchhor"> Not a member? <a href="/register-page">Register here</a></div> 
+          <div className="register-anchhor"> Not registered? <a href="/register-page">Register here</a></div> 
         </div >
       </Container>
 
