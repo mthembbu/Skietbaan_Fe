@@ -21,15 +21,12 @@ class App extends Component {
 				<div className="App">
 					<NavbarMenu />
 					<hr></hr>
-					<hr></hr>
-					<hr></hr>
-					<hr></hr>
 					<BrowserRouter>
 						<Switch>
 							<Route path="/home" component={LeaderboardPage} exact />
 							<Route path="/login" component={Login} exact />
 							<Route path="/" component={Login} exact />
-							<Route path="/register" component={RegisterMember} exact />
+							<Route path="/register-member" component={RegisterMember} exact />
 							<Route path="/new-competition" component={CreateComp} exact />
 							<Route path="/scorecapture" component={ScoreCapture} exact />
 							<Route path="/groupsname" component={GroupsName} exact />
