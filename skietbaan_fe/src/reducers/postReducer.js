@@ -1,7 +1,8 @@
-import { FETCH_POSTS, NEW_POST } from '../actions/types';
+import { FETCH_POSTS, NEW_POST, UPDATE_GROUPNAME } from '../actions/types';
 const initialState = {
 	allItems: [],
-	selectedItem: {}
+	selectedItem: {},
+	groupName: "",
 };
 //the function to detect the state change
 export default function(state = initialState, action) {
@@ -10,6 +11,11 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				allItems: action.payload
+			};
+		case UPDATE_GROUPNAME:
+			return {
+				...state,
+				groupName: action.payload
 			};
 		case NEW_POST:
 			return {
