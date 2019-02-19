@@ -4,3 +4,7 @@ export const FETCH_POSTS = 'FETCH_POSTS';
 export const NEW_POST = 'NEW_POST';
 export const NEW_COMP = 'NEW_COMP';
 export const FETCH_COMP = 'NEW_COMP';
+
+//leaderboard types
+export const FETCH_LEADERBOARDFILTER_DATA = 'FETCH_LEADERBOARDFILTER_DATA';
+export const FETCH_LEADERBOARDTABLE_DATA = 'FETCH_LEADERBOARDTABLE_DATA';

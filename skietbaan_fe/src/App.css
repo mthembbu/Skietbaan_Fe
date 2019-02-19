@@ -1,4 +1,4 @@
-@import url(c:\Users\Buhle Mthembu\Desktop\Stello\Skietbaan_Fe\skietbaan_fe\src\scss\navbar.css);
+ @import url(c:\Users\BuhleMthembu\Desktop\Stello\Skietbaan_Fe\skietbaan_fe\src\scss\navbar.css); 
 @media all and (min-width: 480px) {
   .Login {
     padding: 60px 0;
@@ -69,7 +69,9 @@ button.button-valid {
 .no-padding {
   padding: 0;
 }
-
+.fixed-top{
+  position:relative !important;
+}
 .App {
   text-align: center;
 }

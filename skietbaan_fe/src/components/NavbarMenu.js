@@ -9,7 +9,6 @@ class NavbarMenu extends Component {
 		return (
 			<div >
 				{/** The default navigation menu */}
-				<Container>
 				<Navbar bg="light" expand="lg" className="navbar-custom" fixed="top">
 					<Navbar.Brand href="#home">
 					 <i className="fa fa-home"></i>
@@ -42,7 +41,6 @@ class NavbarMenu extends Component {
 						</Form>
 					</Navbar.Collapse>
 				</Navbar>
-				</Container>
 			</div>
 		);
 	}
