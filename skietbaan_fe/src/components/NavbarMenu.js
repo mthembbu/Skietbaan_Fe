@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, NavDropdown, Form, Nav, Container } from 'react-bootstrap';
 import '../scss/navbar.css';
-import 'font-awesome/css/font-awesome.min.css';
+// import 'font-awesome/css/font-awesome.min.css';
 
 
 class NavbarMenu extends Component {
@@ -22,6 +22,7 @@ class NavbarMenu extends Component {
 								<img src="" alt="" width="" height="" />Leader Board
 							</Nav.Link>
 							<Nav.Link href="/scorecapture">Score Capture</Nav.Link>
+							<Nav.Link href="/theGroupsUser">CREATE GROUP</Nav.Link>
 							<NavDropdown title="Create" id="basic-nav-dropdown" variant="outline-dark">
 								<NavDropdown.Item href="/new-competition">New Competition</NavDropdown.Item>
 								<NavDropdown.Item href="/">New Groups</NavDropdown.Item>

@@ -1,49 +1,36 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import './groups.css'
-import { Table, Jumbotron } from "react-bootstrap";
+import { Table } from "react-bootstrap";
+import { fetchPosts } from '../actions/postActions';
 class Groups extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: [],
-      newArray:[],
-      count:0,
-      black: ''  
+      posts:[]
     }
+   console.log(this.props.allitems)
    this.toggleHighlight=this.toggleHighlight.bind(this);
    this.handleOnClick=this.handleOnClick.bind(this);
   } 
-  componentWillMount() {
-    fetch('http://localhost:63474/api/user')
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          posts: data.map(users => {
-              users.highlighted = false;
-            return {
-              ...users,
-              highlighted: false
-            };
-          })
-        }
-        )
-      });
+
+  componentWillMount(){
+
+    this.props.allitems.fetchPosts()
   }
 
-
   handleOnClick(){
-    const {newArray}=this.state
-       for(var i = 0; i < this.state.posts.length; i++){
+    const {newArray}=this.props
+       for(var i = 0; i < this.props.allitems.length; i++){
         
-         if(this.state.posts[i].highlighted===true){
-          newArray.push(this.state.posts[i]);
+         if(this.props.allitems[i].highlighted===true){
+          newArray.push(this.props.allitems[i]);
          }
-         delete this.state.posts[i].highlighted;
-         delete this.state.posts[i].id;
+         delete this.props.allitems[i].highlighted;
+         delete this.props.allitems[i].id;
         }
         let request = {
-          newArray:this.state.newArray
+          newArray:this.props.newArray
         }
          fetch("http://localhost:63474/api/groups/add", {
           method: 'post',
@@ -61,20 +48,21 @@ class Groups extends Component {
         window.location = "/GroupDone";
   }
   toggleHighlight = event => {
-     if (this.state.posts[(event)].highlighted  === true) {
-       this.state.posts[(event)].highlighted=false;
-       {this.setState({count:this.state.count-1})}
+     if (this.props.allitems[(event)].highlighted  === true) {
+       this.props.allitems[(event)].highlighted=false;
+       {this.setState({count:this.props.count-1})}
      }
      else {
-       this.state.posts[(event)].highlighted=true;
-       {this.setState({count:this.state.count+1})}
+       this.props.allitems[(event)].highlighted=true;
+       {this.setState({count:this.props.count+1})}
      }
+    
   }
   render() {
     const postItems = (   
       <Table striped hover condensed>
         <tbody >
-          {this.state.posts.map((post,index) => (
+          {this.props.allitems.map((post,index) => (
             <tr key={post.id.toString()}  onClick={()=>this.toggleHighlight(index)} value={post.id} onChange={()=>this.onChange(post.id)}>
               <td ><h5>{post.username} {index}</h5>
                 <h5>{post.email}</h5></td>
@@ -107,11 +95,9 @@ class Groups extends Component {
   }
 }
 const mapStateToProps = state => ({
-  posts: state.posts.items,
-  newPost: state.posts.item,
-  groupName: state.groupName,
+  allitems: state.posts.allItems
+  
 });
-const mapDispatchToProps = dispatch => ({
-  onGroupNameChange: (newGroupName) => dispatch({type: "UPDATE_GROUPNAME",payload:newGroupName})
-});
-export default connect(mapStateToProps,mapDispatchToProps)(Groups);
+
+export default connect(mapStateToProps)( Groups );
+
