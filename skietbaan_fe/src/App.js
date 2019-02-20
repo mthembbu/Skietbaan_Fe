@@ -12,7 +12,8 @@ import GroupsName from './components/GroupsName';
 import Groups from './components/Groups';
 import GroupDone from './components/GroupDone';
 import CreateComp from './components/CreateComp';
-import notifications from './components/Notifications'
+import CreatePage from './components/CreatePage';
+import notifications from './components/Notifications';
 class App extends Component {
 
 	render() {
@@ -31,6 +32,7 @@ class App extends Component {
 							<Route path="/scorecapture" component={ScoreCapture} exact />
 							<Route path="/groupsname" component={GroupsName} exact />
 							<Route path="/groups" component={Groups} exact />
+							<Route psth="/create" component={CreatePage} exact />
 							<Route path="/GroupDone" component={GroupDone} exact />
 							<Route path="/notifications" component={notifications} exact />
 
