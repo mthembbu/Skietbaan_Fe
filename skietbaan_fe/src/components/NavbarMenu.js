@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavDropdown, Form, Nav, Container } from 'react-bootstrap';
+import { Navbar, NavDropdown, Form, Nav, Container, Figure } from 'react-bootstrap';
 import '../scss/navbar.css';
 
 class NavbarMenu extends Component {

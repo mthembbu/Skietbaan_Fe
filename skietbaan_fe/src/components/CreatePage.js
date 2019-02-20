@@ -24,6 +24,7 @@ class CreatePage extends Component {
 		return (
 			<div>
 				<Container id="create-container">
+
 					<Collapsible
 						id="Competitions"
 						trigger={
@@ -140,6 +141,7 @@ class CreatePage extends Component {
 								<Tab.Pane eventKey="second">
 									<p>
 										<h1>This is the VIEW GROUPS page</h1>
+
 									</p>
 								</Tab.Pane>
 							</Tab.Content>
