@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, NavDropdown, Form, Nav, Container, Figure } from 'react-bootstrap';
 import '../scss/navbar.css';
 
+
 class NavbarMenu extends Component {
 	render() {
 		// rendering the basic navbar within the render class
@@ -42,29 +43,29 @@ class NavbarMenu extends Component {
 						</Form>
 					</Navbar.Collapse>
 				</Navbar> */}
-				<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-					<a class="navbar-brand" href="/home">
-						{/** *SKIETBAAN*/}
-					</a>
-					{/** The part of the Navigation-Bar that remains in a mobile device 
-					<ul class="navbar navbar-nav mr-auto">
-						<li class="nav-item">
-							<a class="nav-link" href="">
-								<img src="" width="30" height="30" alt=""/>
-								<i class="fa fa-trophy">
-								<span class=" badge badge-danger">1</span>
-								</i>
-							</a>
-						</li>
-					</ul>*/}
-
-					<button
-						id="h-btn"
-						class="navbar-toggler"
-						type="button"
-						data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent"
+										 {/*<img src="../resources/trophy.png" width="30" height="30" alt="Sbuda"/>*/}
+									 <i class="fa fa-trophy" width="30"><span class="badge badge-danger">2</span></i>
+									<a class="nav-link" href="/">
+									<a class="nav-link" href="/">
+										{/** <img src="../../public/img/trophy.png" width="30" height="30" alt=""> </img>*/}
+										<i class="fa fa-file-o">
+											<span class="badge badge-danger">11</span>
+										</i>
+										DOCUMENTS
+									</a>
+								</li>
+							</ul>
+							{/**<div>
+						<form class="form-inline my-2 my-md-0">
+							 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
+							<button class="btn btn-outline-success my-4 my-md-0" type="submit">
+								Search
+							</button>
+						</form>
+						</div> */}
+						</div>
+					</div>
+				</nav>
 						aria-expanded="false"
 						aria-label="Toggle navigation"
 					>
