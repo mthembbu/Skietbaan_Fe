@@ -6,8 +6,8 @@ const initialState = {
 	leaderboardCompetitions:[],
 	leaderboardScoreTypes: [
 		{ label: "Average", value: 1 },
-		{ label: "TOTAL", value: 2 },
-		{ label: "BEST", value: 3 }],
+		{ label: "Total", value: 2 },
+		{ label: "Best", value: 3 }],
 	leaderboardTableData:[],
 	leaderboardUserData:{
 		"rank": 0,

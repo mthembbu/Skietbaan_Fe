@@ -24,17 +24,17 @@
 }
 .row div .scrollableContainerC{
     overflow-y: auto;
-    height: 100px;
+    height: 150px;
+}
+.row .table td{
+  border: 0px;
 }
 .row div .scrollableContainerG{
     overflow-y: auto;
-    height: 100px;
+    height: 150px;
 }
 .container h4{
     color: #FF611D;
-}
-.filterContent{
-    padding: 2%;
 }
 .filterContent hr{
     color: #FF611D;
@@ -64,7 +64,7 @@
 .curentMember{
     background-color: #171F32 !important;
     color: white !important;
-    position: fixed;
+    position: fixed; 
     bottom: 0;
     left: 0;
     width: 100%;
@@ -74,3 +74,23 @@
 .filters{
     background-image: linear-gradient(-90deg, #FF611D, #171F32);
 }
+.body{
+    background-color: #171F32 !important;
+    width: 100%;
+}
+.row{
+    width: 100%;
+    margin: 0% !important;
+}
+.leaderboardContainer{
+    width: 100% !important;
+    height: 100%;
+}
+.rankingTableContainer{
+    width: 100%;
+}
+.rankingTableHeader{
+    width: 100%;
+    background-color: #171F32 !important;
+}
+
