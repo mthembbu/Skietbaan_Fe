@@ -3,6 +3,11 @@
     padding: 60px 0;
   }
 
+  .collapse-css-transition {
+    transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }  
+
   .Login form {
     margin: 0 auto;
     max-width: 320px;
@@ -10,7 +15,7 @@
 }
 
 body{
-  background-color:red;
+  background-color:#FFFFFF;
 }
 
 .test{
@@ -51,6 +56,12 @@ input.invalid{
   height:35px;
 
 }
+
+button {
+  width: 80%;
+  height: 100%;
+}
+
 button.button-invalid{
   background-color: #e0e1e2;
   border: none;
