@@ -12,8 +12,8 @@ import GroupsName from './components/GroupsName';
 import Groups from './components/Groups';
 import GroupDone from './components/GroupDone';
 import CreateComp from './components/CreateComp';
+import CreatePage from './components/CreatePage';
 import notifications from './components/Notifications';
-import Register from './components/Register';
 class App extends Component {
 
 	render() {
@@ -22,20 +22,18 @@ class App extends Component {
 				<div className="App">
 					<NavbarMenu />
 					<hr></hr>
-					<hr></hr>
-					<hr></hr>
-					<hr></hr>
 					<BrowserRouter>
 						<Switch>
 							<Route path="/home" component={LeaderboardPage} exact />
 							<Route path="/login" component={Login} exact />
 							<Route path="/register-page" component={Register} exact />
 							<Route path="/" component={Login} exact />
-							<Route path="/register" component={RegisterMember} exact />
+							<Route path="/register-member" component={RegisterMember} exact />
 							<Route path="/new-competition" component={CreateComp} exact />
 							<Route path="/scorecapture" component={ScoreCapture} exact />
 							<Route path="/groupsname" component={GroupsName} exact />
 							<Route path="/groups" component={Groups} exact />
+							<Route psth="/create" component={CreatePage} exact />
 							<Route path="/GroupDone" component={GroupDone} exact />
 							<Route path="/notifications" component={notifications} exact />
 
