@@ -5,7 +5,7 @@ import { validateEmail, validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
 import {URL} from '../actions/types.js';
 
-class App extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -81,7 +81,7 @@ class App extends Component {
         "Email": this.state.emailValue,
         "Password": hash,
       }
-      fetch(URL + "/api/User", {
+      fetch(URL + "/api/user", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -176,4 +176,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Register;
