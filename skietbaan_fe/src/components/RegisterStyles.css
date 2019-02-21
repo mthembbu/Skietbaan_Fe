@@ -10,7 +10,7 @@
 }
 
 body{
-  background-color:#FFFFFF;
+  background-image: url("../components/assets/Background.png");
 }
 
 .test{
@@ -28,12 +28,10 @@ body{
   position: center;
   left: 3%;
   top: 15%;
-  border: 1px solid rgba(0,0,0,0.35);
-  padding: 20px;
-  background-color: white;
+  padding: 35px;
   position: absolute;
-  box-shadow: 2px 2px rgba(0,0,0,0.24);
 }
+
 @media screen and (min-width:768px)  {
   .centre-login{
     width: 50%;
@@ -50,22 +48,60 @@ input.invalid{
   color:red;
   font-size: 12px;
 }
+.header-container{
+  margin-left: -15px;
+    margin-right: -15px;
+    background-color: white;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: center;
+
+}
+.front-white{
+  color:white
+}
+.button-container{
+  position: relative;
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+}
+.round-button{
+  width: 140px;
+  background-color: white;
+  color: darkblue;
+  border-radius: 25px;
+}
 
 button{
   border-radius: 30px ;
   width:125px;
   height:35px;
-
+  
 }
 
 button.button-invalid{
-  background-color: #e0e1e2;
-  border: none;
+  color: #ebebeb!important;
+  background-color: #999!important;
+  border-color: #999!important;
+  cursor: default;
+}
+button.button-invalid:hover{
+  color: #ebebeb!important;
+  background-color: #999!important;
+  border-color: #999!important;
+  cursor: default !important;
+}
+button.button-invalid:active{
+  color: #ebebeb!important;
+  background-color: #999!important;
+  border-color: #999!important;
+  cursor: default !important;
 }
 
 button.button-valid{
-  background-color: #545759;
-  color:white;
+  background-color: white;
+  color:#171F32;
 }
 
 .no-padding{
@@ -79,8 +115,9 @@ button.button-valid{
   padding-top: 30px;
   padding-right: 15px;
 }
-
+.register-anchhor{
+  color:white;
+}
 .register-anchhor a{
-  color:#4b4d4f;
   text-decoration: underline;
 }

@@ -23,17 +23,20 @@ class Login extends Component {
     this.setState({
       [target.name]: target.value,
     });
-    let isValid = true;
+    let isValid = false;
     let stateUpdate = {
       invalidPassword: this.state.invalidPassword,
       invalidUsername: this.state.invalidUsername
      }
     if (target.name === "passwordValue" ) {
       stateUpdate.invalidPassword= false;
-    };
+    }
     if (target.name === "usernameValue" ) {
       stateUpdate.invalidUsername= false;
-    };
+      isValid = false;
+    }
+    if(this.state.usernameValue && this.state.passwordValue)
+    isValid = true;
     this.setState({
       ...stateUpdate ,
       validForm: isValid
@@ -102,12 +105,15 @@ class Login extends Component {
     }
     return (
       <Container className="App">
+      <div className="header-container">
+      <h2>Login</h2>
+      </div>
         <div className="centre-login">
           <Form className="form" autoComplete="off">
-            <h2>Login</h2>
+
             <Col className="no-padding">
               <FormGroup>
-                <Label>Username</Label>
+                <Label className="front-white"> Type <strong>Username</strong></Label>
                 <Input
                   type="text"
                   name="usernameValue"
@@ -122,7 +128,7 @@ class Login extends Component {
             </Col>
             <Col className="no-padding">
               <FormGroup>
-                <Label for="examplePassword">Password</Label>
+                <Label className="front-white" for="examplePassword">Type <strong>Password</strong></Label>
                 <Input
                   type="password"
                   name="passwordValue"
@@ -135,9 +141,11 @@ class Login extends Component {
                 {invalidPasswordMessage}
               </FormGroup>
             </Col>
-            <Button onClick={this.Login} className={this.state.validForm ? "button-valid" : "button-invalid"} >Submit</Button>
+            <div className="button-container">
+            <Button onClick={this.Login} className={this.state.validForm ? "round-button" : "button-invalid round-button"} >Join</Button>
+            </div>
           </Form>
-          <div className="register-anchhor"> Not registered? <a href="/register-page">Register here</a></div> 
+          <div className="register-anchhor"> Not registered? <a className="front-white" href="/register-page">Register here</a></div> 
         </div >
       </Container>
 
