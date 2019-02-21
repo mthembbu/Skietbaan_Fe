@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './components/Login';
+import Register from './components/Register';
 import NavbarMenu from './components/NavbarMenu';
 import RegisterMember from './components/RegisterMember';
 import LeaderboardPage from './components/LeaderboardPage';
