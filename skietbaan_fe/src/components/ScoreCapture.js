@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../components/ScoreCapture.css';
 import { validateScore } from './Validators.js';
 import { getCookie } from './cookie.js';
-import { timingSafeEqual } from 'crypto';
 
 export default class search extends Component {
   constructor(props) {
@@ -30,10 +29,8 @@ export default class search extends Component {
     this.CompetitionClicked = this.CompetitionClicked.bind(this);
     this.handleScore = this.handleScore.bind(this);
     this.TakePhoto = this.TakePhoto.bind(this);
-    this._base64ToArrayBuffer = this._base64ToArrayBuffer.bind(this);
     this.SubmitScore = this.SubmitScore.bind(this);
     this.Flash = this.Flash.bind(this);
-    this.Reset = this.Reset.bind(this);
     this.RetakePhoto = this.RetakePhoto.bind(this);
     this.Validate = this.Validate.bind(this);
     this.GetLocation = this.GetLocation.bind(this);
@@ -55,8 +52,6 @@ export default class search extends Component {
         });
       }
   });
-
-
   }
 
   CompetitionClicked(item, compname) {
@@ -66,16 +61,6 @@ export default class search extends Component {
       competitionName: compname,
       validCompetition:true
     });
-  }
-
-  _base64ToArrayBuffer(base64) {
-    var binary_string = base64;
-    var len = binary_string.length;
-    var bytes = new Uint8Array(len);
-    for (var i = 0; i < len; i++) {
-      bytes[i] = binary_string.charCodeAt(i);
-    }
-    return bytes.buffer;
   }
 
   componentDidMount() {
@@ -237,24 +222,6 @@ export default class search extends Component {
     }
   }
 
-  Reset() {
-    if (!this.state.scoreSaved)
-      this.GetLocation();
-    this.setState({
-      currState: 1,
-      imageContent: null,
-      clicked: null,
-      competitionName: null,
-      scoreSaved: false,
-      ImageTaken: false,
-      showCamera: false,
-      score: 0,
-      scoreSaved: false
-    });
-    var scoreInput = document.getElementById("scoreInput");
-    scoreInput.value = "";
-  }
-
   TakePhoto() {
 
     let canvas = document.getElementById('canvas');
@@ -305,7 +272,6 @@ export default class search extends Component {
 
       })
       .catch(err => console.error('getUserMedia() failed: ', err));
-
     function onCapabilitiesReady(capabilities) {
       console.log(capabilities);
     }
@@ -322,19 +288,6 @@ export default class search extends Component {
 
       }
     }
-
-    let invalidEmptyScoreMessage = "Enter a score";
-    let invalidStringScoreMessage = "Enter digits only";
-    let invalidDecimalScoreMessage = "No decimal";
-    let invalidCompetitionMessage;
-
-    if (!this.state.competitionName) {
-      invalidCompetitionMessage = "Select a competition"
-    }
-
-    // if(parseInt(this.state.score) < 1){
-
-    // }
 
     return (
       <div className="position-relative">
@@ -375,6 +328,7 @@ export default class search extends Component {
                     alt=''>
                   </img>
                 </div>
+                <label className= "labelIcon">Retry</label>
               </div>
               <div className="submit-button-elements">
                 <div className="button-hover">
