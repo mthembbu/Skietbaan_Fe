@@ -15,13 +15,12 @@ import CreateComp from './components/CreateComp';
 import CreatePage from './components/CreatePage';
 import notifications from './components/Notifications';
 class App extends Component {
-
 	render() {
 		return (
 			<Provider store={store}>
 				<div className="App">
 					<NavbarMenu />
-					<hr></hr>
+					<hr />
 					<BrowserRouter>
 						<Switch>
 							<Route path="/home" component={LeaderboardPage} exact />
@@ -35,7 +34,6 @@ class App extends Component {
 							<Route psth="/create" component={CreatePage} exact />
 							<Route path="/GroupDone" component={GroupDone} exact />
 							<Route path="/notifications" component={notifications} exact />
-
 							<Redirect from="/" to="/home" />
 						</Switch>
 					</BrowserRouter>
