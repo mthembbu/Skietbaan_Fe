@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../components/ScoreCapture.css';
 import { validateScore } from './Validators.js';
 import { getCookie } from './cookie.js';
+import {URL} from '../actions/types.js';
 
 export default class search extends Component {
   constructor(props) {
@@ -64,7 +65,7 @@ export default class search extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:63474/api/Competition", {
+    fetch(URL + "/api/Competition", {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -78,7 +79,7 @@ export default class search extends Component {
       });
 
     let token = getCookie("token");
-    fetch("http://localhost:63474/api/features/getuserbytoken/" + token, {
+    fetch(URL + "/api/features/getuserbytoken/" + token, {
       method: 'Get',
       headers: {
         'Accept': 'application/json',
@@ -207,7 +208,7 @@ export default class search extends Component {
         "Longitude": this.state.longitude,
         "Latitude": this.state.latitude
       }
-      fetch("http://localhost:63474/api/Scores", {
+      fetch(URL + "/api/Scores", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -282,8 +283,9 @@ export default class search extends Component {
     let competitionItem = [];
     if (this.state.competitionsList && this.state.competitionsList.length > 0) {
       for (let i = 0; i < this.state.competitionsList.length; i++) {
-        competitionItem.push(<div className="competition-item-container"> <div key={'mykey' + i} className={this.state.clicked != null && this.state.clicked === i ? "active competition-item" : "competition-item"}><li onClick={() =>
-          this.CompetitionClicked(i, this.state.competitionsList[i].name)}>
+        competitionItem.push(<div className="competition-item-container"> <div key={'mykey' + i} 
+        className={this.state.clicked != null && this.state.clicked === i ? "active competition-item" : "competition-item"}>
+        <li onClick={() =>this.CompetitionClicked(i, this.state.competitionsList[i].name)}>
           {this.state.competitionsList[i].name} </li></div></div>);
 
       }
