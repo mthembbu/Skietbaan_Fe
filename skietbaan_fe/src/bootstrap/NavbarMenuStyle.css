@@ -28,5 +28,7 @@
     color: #FF611D !important;
     background-color: #FF611D !important;
   }
-
+  .dropdown-menu.show{
+    background-image: linear-gradient(0deg, #FF611D, #171F32);
+  }
 
