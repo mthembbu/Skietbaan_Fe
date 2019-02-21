@@ -1,3 +1,4 @@
+
 import { FETCH_POSTS, NEW_POST ,FETCH_LEADERBOARDFILTER_DATA ,FETCH_LEADERBOARDTABLE_DATA} from './types';
 /** The method to feth the already available data for posts*/
 export const fetchPosts = () => (dispatch) => {

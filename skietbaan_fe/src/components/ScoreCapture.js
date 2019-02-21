@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import '../components/ScoreCapture.css';
 import { Button } from 'reactstrap';
-import {validateScore} from './Validators.js';
+import { validateScore } from './Validators.js';
+import {getCookie} from './cookie.js'
+
 
 export default class search extends Component {
   constructor(props) {
@@ -14,12 +16,16 @@ export default class search extends Component {
       imageContent: "",
       competitionName: "",
       validForm: false,
+      competitionsList:[],
+      user:null,
+      scoreSaved:false
     }
     this.CompetitionClicked = this.CompetitionClicked.bind(this);
     this.handleScore = this.handleScore.bind(this);
     this.TakePhoto = this.TakePhoto.bind(this);
     this._base64ToArrayBuffer = this._base64ToArrayBuffer.bind(this);
     this.SubmitScore = this.SubmitScore.bind(this);
+    this.Reset = this.Reset.bind(this);
 
   }
 
@@ -32,20 +38,20 @@ export default class search extends Component {
       invalidScore: false,
     }
     if (!validateScore(this.state.score)) {
-      stateUpdate.invalidPassword= true;
+      stateUpdate.invalidPassword = true;
       isValid = false;
-    };   
+    };
     this.setState({
-      ...stateUpdate ,
+      ...stateUpdate,
       validForm: isValid
-    }); 
+    });
   }
 
-  CompetitionClicked(item, competitionName) {
+  CompetitionClicked(item, compname) {
     this.setState({
       currState: 2,
       clicked: item,
-      competitionName: competitionName
+      competitionName: compname
     });
   }
 
@@ -59,41 +65,76 @@ export default class search extends Component {
     return bytes.buffer;
   }
 
+  componentDidMount() {
+    fetch("http://localhost:63474/api/Competition/", {
+      method: 'get',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(data => this.setState({ competitionsList: data }));
+
+    let token = getCookie("token");
+    fetch("http://localhost:63474/api/features/getuserbytoken/" + token, {
+      method: 'get',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(data => this.setState({ user: data }));
+  }
+ 
+
   CameraClicked() {
     this.setState({
       currState: 3
-    });
-    let video = document.getElementById('video');
-
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
-        video.srcObject = stream;
-        video.play();
-      });
-
+        });
+    const video = document.getElementById("video");
+    const constraints = {
+        advanced: [{
+            facingMode: "environment"
+        }]
     };
+    navigator.mediaDevices
+        .getUserMedia({
+            video: constraints
+        })
+        .then((stream) => {
+          video.srcObject=stream;
+          video.play();
+        });
   }
 
   SubmitScore() {
-   if(this.state.validForm){
-    let RequestObject = {
-      "UserScore": this.state.score,
-      "PictureURL": this.state.imageContent,
-      "Competition": this.state.competitionName
-    }
-    fetch("https://api.skietbaan.retrotest.co.za/api/Scores", {
+
+    if (this.state.validForm || true ) {
+      let RequestObject = {
+        "UserScore": this.state.score,
+        "PictureURL": this.state.imageContent,
+        "CompetitionName": this.state.competitionName,
+        "Token":this.state.user.token
+      }
+      fetch("http://localhost:63474/api/Scores", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(RequestObject)
-      }).then(function(response) {
-        return response.json();
-      }).then( function(data) {
-      }).catch(function(data) {
-      });
+      }).then(response => response.json()).then(data => this.setState({ scoreSaved: true,currState:5 }));
     }
+  }
+
+  Reset()
+  {
+    this.setState({
+      scoreSaved: null,
+      currState:1,
+      imageContent:null,
+      clicked:null,
+      competitionName:null,
+      scoreSaved:false
+    });
   }
 
   TakePhoto() {
@@ -109,34 +150,42 @@ export default class search extends Component {
       hideCamera: true,
       imageContent: image.src
     });
+    video.pause();
   }
 
   render() {
+
     let competitionItem = [];
-    for (let i = 0; i < 6; i++) {
-      competitionItem.push(<div key={'mykey' + i} className={this.state.clicked != null &&
-        this.state.clicked !== i ? "hidden" : "competition-item"}><li onClick={() => this.CompetitionClicked(i, "competition" + i)}>
-          Competition {i} </li></div>);
+    let scoreSavedSucessMessage = [];
+    if(this.state.competitionsList && this.state.competitionsList.length > 0)
+    {
+      for (let i = 0; i < this.state.competitionsList.length; i++) {
+        competitionItem.push(<div key={'mykey' + i} className={this.state.clicked != null &&
+          this.state.clicked !== i ? "hidden" : "competition-item"}><li onClick={() => this.CompetitionClicked(i, this.state.competitionsList[i].name)}>
+            {this.state.competitionsList[i].name} </li></div>);
     }
+  }
 
     if (this.state.clicked != null) {
-      competitionItem.push(<input name="score" key={'myKey' + 10} className={this.state.currState !== 2 ? "hidden":"inputScore" }
-       onChange={this.handleScore}></input>,
-      <Button key={'myKey' + 1} id= "btnExtra"className={this.state.currState !== 2 ? "hidden" :"" } >S n Extra</Button>,
-      <Button key={'myKey' + 2} id="btnScoreCapture" className={this.state.currState ===2 ?  "": "hidden"} 
-      onClick={() => this.CameraClicked()} >Capture score</Button>,
-      <Button key={'myKey' + 3} onClick={() => this.SubmitScore()} className={this.state.currState ===2 ? "" : "hidden"} >
-      Submit</Button>,
-      <video key={'myKey' + 4} id="video"  className={this.state.currState ===4 ? "hidden" : "video"} autoPlay></video>,
-      <button key={'myKey' + 5} onClick={() => this.TakePhoto()} id="snap" className={this.state.currState !==3 ?  "hidden":"" }>
-      Snap</button>,
-      <canvas key={'myKey' + 6} id="canvas" className={this.state.currState !==4 ? "hidden" : "video"}></canvas>
+      competitionItem.push(<input name="score" key={'myKey' + 10} className={this.state.currState !== 2 ? "hidden" : "inputScore"}
+        onChange={this.handleScore}></input>,
+        <Button key={'myKey' + 2} id="btnScoreCapture" className={this.state.currState === 2 ? "" : "hidden"}
+          onClick={() => this.CameraClicked()} >Capture score</Button>,
+        <Button key={'myKey' + 3} onClick={() => this.SubmitScore()} className={this.state.currState === 2 || this.state.currState === 4 ? "" : "hidden"} >
+          Submit</Button>,
+        <video key={'myKey' + 4} id="video" className={this.state.currState === 4 ? "hidden" : "video"} autoPlay></video>,
+        <button key={'myKey' + 5} onClick={() => this.TakePhoto()} id="snap" className={this.state.currState !== 3 ? "hidden" : ""}>
+          Snap</button>,
+        <canvas key={'myKey' + 6} id="canvas" className={this.state.currState !== 4 ? "hidden" : "video"}></canvas>
       )
     }
 
+      scoreSavedSucessMessage.push(<div key={'myKey' + 1} className={this.state.scoreSaved == false ? "hidden":""}>Successfully Saved Score</div>, 
+              <button key={'myKey' + 2} onClick={() => this.Reset()} id="snap" className={this.state.scoreSaved == false ? "hidden" : ""}>
+      Another Score</button>,);
     return (
 
-      <div>
+      <div className="page-content">
         <div className="ProgressBar">
           <div className={this.state.currState >= 1 ? "Circle first active" : "Circle first "}>1</div>
           <div className={this.state.currState >= 2 ? "Circle second active" : "Circle second "}>2</div>
@@ -144,9 +193,10 @@ export default class search extends Component {
           <div className={this.state.currState >= 4 ? "Circle fourth active" : "Circle fourth "}>4</div>
         </div>
         <ul className="competition-container">
+        {scoreSavedSucessMessage}
           {competitionItem}
         </ul>
-        
+
       </div>
     )
   }

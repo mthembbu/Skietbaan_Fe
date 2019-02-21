@@ -55,7 +55,7 @@ class App extends Component {
         "Email": this.state.emailValue,
         "Password": hash,
       }
-      fetch("http://skietbaan.retrotest.co.za/api/User", {
+      fetch("http://localhost:63474/api/User", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
