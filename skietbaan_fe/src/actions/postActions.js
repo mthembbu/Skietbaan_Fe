@@ -28,7 +28,7 @@ export const createPost = (postData) => (dispatch) => {
 /** The method to feth leaderboard filter data (groups array and competitions array*/
 	export const fetchleaderboadfilterdata = () => (dispatch) => {
 		console.log("getting filter data");
-		fetch('http://localhost:63474/api/Leaderboard/GetLeaderboardFilterData?UserID=' + 1)
+		fetch('https://api.skietbaan.retrotest.co.za/api/Leaderboard/GetLeaderboardFilterData?UserID=' + 1)
 				.then(res => res.json())
 				.then(data => dispatch({
 				type: FETCH_LEADERBOARDFILTER_DATA,
@@ -41,7 +41,7 @@ export const createPost = (postData) => (dispatch) => {
 		console.log("getting table data");
 		console.log("filter selection");
 			console.log(filterSelection);
-		fetch('http://localhost:63474/api/Leaderboard/GetLeaderboardRankings?competitionID=' + filterSelection.selectedCompetition  + '&groupID=' + filterSelection.selectedGroup  + '&userToken=' + filterSelection.userToken)
+		fetch('https://api.skietbaan.retrotest.co.za/api/Leaderboard/GetLeaderboardRankings?competitionID=' + filterSelection.selectedCompetition  + '&groupID=' + filterSelection.selectedGroup  + '&userToken=' + filterSelection.userToken)
 			.then(res => res.json())
 			.then(data =>
 			dispatch({

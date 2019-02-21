@@ -2,3 +2,31 @@
 .fixed-top{
     position:relative !important;
   }
+  .navbar-custom{
+    background-color: #171F32 !important;
+  }
+  .App div .navbar {
+    background-color: #171F32 !important;
+    color: white !important;
+  }
+  .App div .navbar a{
+    color: white !important;
+  }
+  .App div .navbar .fa{
+    display: grid;
+    text-align: -webkit-center;
+   }
+  .App div .navbar .fa:hover{
+    color: #FF611D;
+    align-content: center
+   }
+  .App div .navbar button{
+    color: white !important;
+    background-color: white !important;
+  }
+  .App div .navbar button:hover{
+    color: #FF611D !important;
+    background-color: #FF611D !important;
+  }
+
+

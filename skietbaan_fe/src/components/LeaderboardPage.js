@@ -6,9 +6,15 @@ import { Collapse } from 'react-collapse';
 import { Table } from "react-bootstrap";
 import { getCookie } from './cookie.js'
 import { MDBBtn, MDBIcon } from "mdbreact";
+import {
+    BrowserView,
+    MobileView,
+    isBrowser,
+    isMobile
+} from "react-device-detect";
 
 import '../bootstrap/LeaderboardStyle.css';
-import '../bootstrap/NavbarMenuStyle.css';
+/* import '../bootstrap/NavbarMenuStyle.css'; */
 import { runInThisContext } from 'vm';
 
 
@@ -34,7 +40,6 @@ class LeaderboardPage extends Component {
         this.setGroupValue = this.setGroupValue.bind(this);
         this.setScoreTypeValue = this.setScoreTypeValue.bind(this);
         this.getLeaderboardData = this.getLeaderboardData.bind(this);
-        /* this.onHover = this.onHover.bind(this); */
         this.onMouseClickFilter = this.onMouseClickFilter.bind(this);
         this.print = this.print.bind(this);
         this.displayScoreByType = this.displayScoreByType.bind(this);
@@ -45,14 +50,12 @@ class LeaderboardPage extends Component {
     componentWillMount() {
         //get function to get filter data from api
         this.props.fetchleaderboadfilterdata();
-        /* fetch('http://localhost:63474/api/Leaderboard/GetLeaderboardFilterData?UserID=' + 1)
-            .then(res => res.json())
-            .then(data => this.setState({ groups: data.groups1, competitions: data.competitions1, id: data.id }));
-            this.updateLeaderboard(); */
         this.getLeaderboardData();
     }
     getLeaderboardData() {
-        let token = "e352a676f7a5"; //getCookie("token")"";
+        let token = getCookie("token"); 
+        console.log("displaying tokken")
+        console.log(token);
         const filterSelection = {
             selectedCompetition: this.state.selectedGroup,
             selectedGroups: this.state.selectedCompetition,
@@ -117,12 +120,6 @@ class LeaderboardPage extends Component {
         }
         console.log("show collapse: " + this.props.tableData[index].showMore);
     }
-
-    /* onHover() {
-        this.setState({
-            collapseFilter: true
-        });
-    } */
     onMouseClickFilter() {
         console.log("before: " + this.state.collapseFilter)
         if (this.state.collapseFilter) {
@@ -198,18 +195,20 @@ class LeaderboardPage extends Component {
             <tr key={post.rank.toString()} value={post.rank} onChange={() => this.onChange(post.id)}>
                 <td className="firstcoll">{post.rank}</td>
                 <td >{post.username}</td>
-                <td><MDBBtn tag="a" size="lg" floating gradient="black" /* onMouseEnter={this.onHover} */
+                {/* <td><MDBBtn tag="a" size="lg" floating gradient="black" 
                     onClick={() => this.showMoreScores(index)} >
                     <MDBIcon icon="filter" size="sm" />
                 </MDBBtn>
-                </td>
-                <td >{this.displayScoreByType(post)}</td>
+                </td> */}
+                {/* <td >{this.displayScoreByType(post)}</td> */}
+                <td >{post.average}</td>
+                <td >{post.bestScore}</td>
+                <td >{post.total}</td>
             </tr>
 
         ));
         console.log("Table body : ", tablebody)
         console.log("checking competitions array")
-        ///console.log(this.props.competitions[0].label)
         return (
             <div className="leaderboardContainer">
                 <div className="row justify-content-center">
@@ -232,7 +231,7 @@ class LeaderboardPage extends Component {
                                             {/* </Fragment> */}
                                         </td>
                                         <td>{this.props.groups.length > 0 ? this.props.groups[this.state.selectedGroup].label : null}</td>
-                                        <td>{this.props.scoreTypes[this.state.selectedScoreType].label}</td>
+                                        {/*  <td>{this.props.scoreTypes[this.state.selectedScoreType].label}</td> */}
                                     </tr>
                                 </thead>
                             </table>
@@ -254,12 +253,12 @@ class LeaderboardPage extends Component {
                                                 {groupsList}
                                             </div>
                                         </div>
-                                        <div className="col-sm-4">
+                                        {/* <div className="col-sm-4">
                                             <p>Select scoreType</p>
                                             <div className="scrollableContainerS">
                                                 {scoretypesList}
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                                 <hr />
@@ -271,6 +270,11 @@ class LeaderboardPage extends Component {
                 <div className="row">
 
                     <table className="table">
+                        <thead className="rankTableHead">
+                            <tr>
+                                <td className="firstcoll">Rank</td><td></td> <td>Avg</td><td>Best</td><td>Total</td>
+                            </tr>
+                        </thead>
                         {/* <thead>
                             <tr>
                                 <Collapse isOpened={this.state.displayMore}>{moreScores}</Collapse>
@@ -283,16 +287,26 @@ class LeaderboardPage extends Component {
                     </table>
                 </div>
                 <hr />
+                <div className="row">
                 <div className="curentMember">
                     <table className="table">
                         <thead>
                             <tr className="filters">
                                 <td className="firstcoll">{this.props.userResults.username.length > 0 ? this.props.userResults.rank : null}</td>
                                 <td >{this.props.userResults.username.length > 0 ? this.props.userResults.username : null}</td>
-                                <td >{this.props.userResults.username.length > 0 ? this.displayScoreByType(this.props.userResults) : null}</td>
+                                {/* <td><MDBBtn tag="a" size="lg" floating gradient="black" 
+                                    onClick={() => this.showMoreScores(-1)} >
+                                    <MDBIcon icon="filter" size="sm" />
+                                </MDBBtn>
+                                </td>
+                                <td >{this.props.userResults.username.length > 0 ? this.displayScoreByType(this.props.userResults) : null}</td> */}
+                                <td >{this.props.userResults.username.length > 0 ? this.props.userResults.average : null}</td>
+                                <td >{this.props.userResults.username.length > 0 ? this.props.userResults.bestScore : null}</td>
+                                <td >{this.props.userResults.username.length > 0 ? this.props.userResults.total : null}</td>
                             </tr>
                         </thead>
                     </table>
+                </div>
                 </div>
             </div>
         );

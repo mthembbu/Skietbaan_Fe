@@ -93,4 +93,8 @@
     width: 100%;
     background-color: #171F32 !important;
 }
+.rankTableHead{
+    color:white;
+    background-image: linear-gradient(-90deg, #FF611D, #171F32);
+}
 
