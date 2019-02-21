@@ -3,6 +3,7 @@ import { Container, Col,FormGroup, Label, Input, Button, Form} from 'reactstrap'
 import '../components/RegisterStyles.css';
 import {  validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
+import {URL} from '../actions/types.js';
 
 class App extends Component {
   constructor(props) {
@@ -68,7 +69,7 @@ class App extends Component {
         "Username": this.state.usernameValue,
         "Password": hash,
       }
-      fetch("https://api.skietbaan.retrotest.co.za/api/features/login", {
+      fetch( URL +"/api/features/login", {
         method: 'post',
         headers: {
           'Accept': 'application/json',

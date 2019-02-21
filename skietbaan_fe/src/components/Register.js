@@ -3,6 +3,7 @@ import { Container, Col,FormGroup, Label, Input, Button, Form} from 'reactstrap'
 import '../components/RegisterStyles.css';
 import { validateEmail, validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
+import {URL} from '../actions/types.js';
 
 class App extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class App extends Component {
     this.setState({
       [target.name]: target.value,
     });
+    console.log("here");
     let isValid = true;
     let stateUpdate = {
       invalidPassword: this.state.invalidPassword,
@@ -79,7 +81,7 @@ class App extends Component {
         "Email": this.state.emailValue,
         "Password": hash,
       }
-      fetch("https://api.skietbaan.retrotest.co.za/api/User", {
+      fetch(URL + "/api/User", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -126,8 +128,8 @@ class App extends Component {
                 <Input
                   type="text"
                   name="usernameValue"
-                  id="us"
-                  placeholder="username"
+                  id="usernamerValue"
+                  placeholder="Username"
                   value={this.state.usernameValue}
                   onChange={this.handleChange}
                   className={this.state.invalidUsername ? "invalid" : ""}
