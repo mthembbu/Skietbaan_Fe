@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import '../scss/createcomp.css';
 import Collapsible from 'react-collapsible';
-import { Button, Nav, Tab } from 'react-bootstrap';
+import { Button, Nav, Tab, Container, Row, Col } from 'react-bootstrap';
+import CreateComp from './CreateComp';
 class CreatePage extends Component {
 	constructor(props, context) {
 		super(props, context);
@@ -22,19 +23,21 @@ class CreatePage extends Component {
 	render() {
 		return (
 			<div>
-				<div>
+				<Container id="create-container">
+
 					<Collapsible
 						id="Competitions"
 						trigger={
 							<a href="">
-								<Button variant="outline-secondary" size="lg" width="125px">
+								<Button variant="outline-secondary" size="md" width="125px">
 									<strong>Competitions</strong>
 								</Button>
 							</a>
 						}
 					>
+						<Container id="competition-container" />
 						<Tab.Container>
-							<Nav className="justify-content-center" fill variant="tabs" defaultActiveKey="/home">
+							<Nav className="justify-content-center" fill variant="tabs" defaultActiveKey="">
 								<Nav.Item>
 									<Nav.Link eventKey="first">COMPETITION</Nav.Link>
 								</Nav.Item>
@@ -42,35 +45,33 @@ class CreatePage extends Component {
 									<Nav.Link eventKey="second">VIEW COMPETITION</Nav.Link>
 								</Nav.Item>
 							</Nav>
-
-							<Tab.Content>
-								<Tab.Pane eventKey="first">
-									<p>
-										Against that time, if ever that time come, When I shall see thee frown on my
-										defects, When as thy love hath cast his utmost sum, Call'd to that audit by
-										advis'd respects; Against that time when thou shalt strangely pass, And scarcely
-										greet me with that sun, thine eye, When love, converted from the thing it was,
-										Shall reasons find of settled gravity; Against that time do I ensconce me here,
-										Within the knowledge of mine own desert,
-									</p>
-								</Tab.Pane>
-							</Tab.Content>
-							<Tab.Content>
-								<Tab.Pane eventKey="second">
-									<p>
-										I never saw that you did painting need, And therefore to your fair no painting
-										set; I found, or thought I found, you did exceed That barren tender of a poet's
-										debt: And therefore have I slept in your report, That you yourself, being
-										extant, well might show How far a modern quill doth come too short, Speaking of
-										worth, what worth in you doth grow. This silence for my sin you did impute,
-										Which shall be most my glory being dumb;
-									</p>
-								</Tab.Pane>
-							</Tab.Content>
+							<Container>
+								<Row>
+									<Col>
+										<Tab.Content>
+											<Tab.Pane eventKey="first">
+												<p>
+													<CreateComp />
+												</p>
+											</Tab.Pane>
+										</Tab.Content>
+									</Col>
+									<Col>
+										<Tab.Content>
+											<Tab.Pane eventKey="second">
+												<p>
+													2 of 2
+													<h1>The VIEW COMPETITION PAGE</h1>
+												</p>
+											</Tab.Pane>
+										</Tab.Content>
+									</Col>
+								</Row>
+							</Container>
 						</Tab.Container>
-						<br />
 					</Collapsible>
-					<hr />
+					<br />
+					{/** The collapse for creating and view the Member  */}
 					<Collapsible
 						id="Members"
 						trigger={
@@ -82,7 +83,7 @@ class CreatePage extends Component {
 						}
 					>
 						<Tab.Container>
-							<Nav className="justify-content-center" fill variant="tabs" defaultActiveKey="/home">
+							<Nav className="justify-content-center" fill variant="tabs" defaultActiveKey="">
 								<Nav.Item>
 									<Nav.Link eventKey="first">CREATE MEMBER</Nav.Link>
 								</Nav.Item>
@@ -94,31 +95,22 @@ class CreatePage extends Component {
 							<Tab.Content>
 								<Tab.Pane eventKey="first">
 									<p>
-										Against that time, if ever that time come, When I shall see thee frown on my
-										defects, When as thy love hath cast his utmost sum, Call'd to that audit by
-										advis'd respects; Against that time when thou shalt strangely pass, And scarcely
-										greet me with that sun, thine eye, When love, converted from the thing it was,
-										Shall reasons find of settled gravity; Against that time do I ensconce me here,
-										Within the knowledge of mine own desert,
+										<h1>the CREATE MEMBER page</h1>
 									</p>
 								</Tab.Pane>
 							</Tab.Content>
 							<Tab.Content>
 								<Tab.Pane eventKey="second">
 									<p>
-										I never saw that you did painting need, And therefore to your fair no painting
-										set; I found, or thought I found, you did exceed That barren tender of a poet's
-										debt: And therefore have I slept in your report, That you yourself, being
-										extant, well might show How far a modern quill doth come too short, Speaking of
-										worth, what worth in you doth grow. This silence for my sin you did impute,
-										Which shall be most my glory being dumb;
+										<h1>the VIEW MEMBER</h1>
 									</p>
 								</Tab.Pane>
 							</Tab.Content>
 						</Tab.Container>
 						<br />
 					</Collapsible>
-					<hr />
+					<br />
+					{/** The collapse for creating and view the group  */}
 					<Collapsible
 						id="Groups"
 						trigger={
@@ -138,35 +130,25 @@ class CreatePage extends Component {
 									<Nav.Link eventKey="second">VIEW GROUPS</Nav.Link>
 								</Nav.Item>
 							</Nav>
-
 							<Tab.Content>
 								<Tab.Pane eventKey="first">
 									<p>
-										Against that time, if ever that time come, When I shall see thee frown on my
-										defects, When as thy love hath cast his utmost sum, Call'd to that audit by
-										advis'd respects; Against that time when thou shalt strangely pass, And scarcely
-										greet me with that sun, thine eye, When love, converted from the thing it was,
-										Shall reasons find of settled gravity; Against that time do I ensconce me here,
-										Within the knowledge of mine own desert,
+										<h1>This is the CREATE GROUP page</h1>
 									</p>
 								</Tab.Pane>
 							</Tab.Content>
 							<Tab.Content>
 								<Tab.Pane eventKey="second">
 									<p>
-										I never saw that you did painting need, And therefore to your fair no painting
-										set; I found, or thought I found, you did exceed That barren tender of a poet's
-										debt: And therefore have I slept in your report, That you yourself, being
-										extant, well might show How far a modern quill doth come too short, Speaking of
-										worth, what worth in you doth grow. This silence for my sin you did impute,
-										Which shall be most my glory being dumb;
+										<h1>This is the VIEW GROUPS page</h1>
+
 									</p>
 								</Tab.Pane>
 							</Tab.Content>
 						</Tab.Container>
 					</Collapsible>
-					<hr />
-				</div>
+					<br />
+				</Container>
 			</div>
 		);
 	}
