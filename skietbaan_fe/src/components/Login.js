@@ -68,7 +68,7 @@ class App extends Component {
         "Username": this.state.usernameValue,
         "Password": hash,
       }
-      fetch("http://localhost:63474/api/features/login", {
+      fetch("https://api.skietbaan.retrotest.co.za/api/features/login", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
