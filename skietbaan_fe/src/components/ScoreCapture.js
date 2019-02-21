@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../components/ScoreCapture.css';
 import { Button } from 'reactstrap';
 import { validateScore } from './Validators.js';
-import {getCookie} from './cookie.js'
+import { getCookie } from './cookie.js'
 
 
 export default class search extends Component {
@@ -15,10 +15,12 @@ export default class search extends Component {
       hideCamera: false,
       imageContent: "",
       competitionName: "",
-      validForm: false,
-      competitionsList:[],
-      user:null,
-      scoreSaved:false
+      validForm: true,
+      competitionsList: [],
+      user: null,
+      scoreSaved: false,
+      showCamera: false,
+      ImageTaken: false
     }
     this.CompetitionClicked = this.CompetitionClicked.bind(this);
     this.handleScore = this.handleScore.bind(this);
@@ -26,6 +28,8 @@ export default class search extends Component {
     this._base64ToArrayBuffer = this._base64ToArrayBuffer.bind(this);
     this.SubmitScore = this.SubmitScore.bind(this);
     this.Reset = this.Reset.bind(this);
+    this.RetakePhoto = this.RetakePhoto.bind(this);
+  
 
   }
 
@@ -33,17 +37,15 @@ export default class search extends Component {
     this.setState({
       [target.name]: target.value,
     });
-    let isValid = true;
     let stateUpdate = {
       invalidScore: false,
     }
     if (!validateScore(this.state.score)) {
       stateUpdate.invalidPassword = true;
-      isValid = false;
+
     };
     this.setState({
-      ...stateUpdate,
-      validForm: isValid
+      ...stateUpdate
     });
   }
 
@@ -66,53 +68,99 @@ export default class search extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:63474/api/Competition/", {
-      method: 'get',
+    console.log("in function");
+    fetch("http://localhost:63474/api/Competition", {
+      method: 'GET',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       }
-    }).then(response => response.json()).then(data => this.setState({ competitionsList: data }));
+    })
+      .then(response => response.json())
+      .then(data => this.setState({ competitionsList: data }))
+      .catch(function (data) {
+        console.log("error")
+      });
 
     let token = getCookie("token");
     fetch("http://localhost:63474/api/features/getuserbytoken/" + token, {
-      method: 'get',
+      method: 'Get',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       }
-    }).then(response => response.json()).then(data => this.setState({ user: data }));
+    })
+      .then(response => response.json())
+      .then(function (data) {
+        this.state.user = data;
+      })
+      .catch(function (data) {
+        console.log("error")
+      });
+
   }
- 
 
   CameraClicked() {
-    this.setState({
-      currState: 3
-        });
-    const video = document.getElementById("video");
-    const constraints = {
+    if (!this.state.competitionName != "" || this.state.score < 1)
+      this.state.validForm = false;
+    else
+      this.state.validForm = true;
+
+    if (this.state.validForm) {
+      this.setState({
+        currState: 3,
+        showCamera: true
+      });
+      const video = document.getElementById("video");
+      const constraints = {
         advanced: [{
-            facingMode: "environment"
+          facingMode: "environment"
         }]
-    };
-    navigator.mediaDevices
+      };
+      navigator.mediaDevices
         .getUserMedia({
-            video: constraints
+          video: constraints
         })
         .then((stream) => {
-          video.srcObject=stream;
+          video.srcObject = stream;
           video.play();
         });
+    }
+
+  }
+  RetakePhoto()
+  {
+      this.setState({
+        currState: 3,
+        showCamera: true,
+        ImageTaken:false
+
+      });
+      const video = document.getElementById("video");
+      const constraints = {
+        advanced: [{
+          facingMode: "environment"
+        }]
+      };
+      navigator.mediaDevices
+        .getUserMedia({
+          video: constraints
+        })
+        .then((stream) => {
+          video.srcObject = stream;
+          video.play();
+        });
+
   }
 
   SubmitScore() {
 
-    if (this.state.validForm || true ) {
+    if (this.state.validForm && !this.state.scoreSaved) {
       let RequestObject = {
         "UserScore": this.state.score,
         "PictureURL": this.state.imageContent,
         "CompetitionName": this.state.competitionName,
-        "Token":this.state.user.token
+        "Token": getCookie("token")
       }
       fetch("http://localhost:63474/api/Scores", {
         method: 'post',
@@ -121,82 +169,125 @@ export default class search extends Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(RequestObject)
-      }).then(response => response.json()).then(data => this.setState({ scoreSaved: true,currState:5 }));
+      }).then(response => response.json()).then(data => this.setState({ scoreSaved: true, currState: 5 }));
     }
   }
 
-  Reset()
-  {
+  Reset() {
+    if(!this.state.scoreSaved)
+    this.SubmitScore();
     this.setState({
-      scoreSaved: null,
-      currState:1,
-      imageContent:null,
-      clicked:null,
-      competitionName:null,
+      currState: 1,
+      imageContent: null,
+      clicked: null,
+      competitionName: null,
+      scoreSaved: false,
+      ImageTaken:false,
+      showCamera:false,
+      score:0,
       scoreSaved:false
     });
+    var scoreInput = document.getElementById("scoreInput");
+    scoreInput.value = "";
   }
 
   TakePhoto() {
     let canvas = document.getElementById('canvas');
     let context = canvas.getContext('2d');
     let video = document.getElementById('video');
-    context.drawImage(video, 0, 0, 640, 480);
+    context.drawImage(video, 0, 0, 480, 480);
     const image = new Image()
     image.src = canvas.toDataURL();
-    console.log("photo")
     this.setState({
       currState: 4,
       hideCamera: true,
-      imageContent: image.src
+      imageContent: image.src,
+      ImageTaken: true
     });
     video.pause();
   }
 
   render() {
-
     let competitionItem = [];
-    let scoreSavedSucessMessage = [];
-    if(this.state.competitionsList && this.state.competitionsList.length > 0)
-    {
+    if (this.state.competitionsList && this.state.competitionsList.length > 0) {
       for (let i = 0; i < this.state.competitionsList.length; i++) {
-        competitionItem.push(<div key={'mykey' + i} className={this.state.clicked != null &&
-          this.state.clicked !== i ? "hidden" : "competition-item"}><li onClick={() => this.CompetitionClicked(i, this.state.competitionsList[i].name)}>
-            {this.state.competitionsList[i].name} </li></div>);
-    }
-  }
+        competitionItem.push(<div className="competition-item-container"> <div key={'mykey' + i} className={this.state.clicked != null && this.state.clicked === i ? "active competition-item" : "competition-item"}><li onClick={() =>
+          this.CompetitionClicked(i, this.state.competitionsList[i].name)}>
+          {this.state.competitionsList[i].name} </li></div></div>);
 
+      }
+    }
     if (this.state.clicked != null) {
-      competitionItem.push(<input name="score" key={'myKey' + 10} className={this.state.currState !== 2 ? "hidden" : "inputScore"}
-        onChange={this.handleScore}></input>,
-        <Button key={'myKey' + 2} id="btnScoreCapture" className={this.state.currState === 2 ? "" : "hidden"}
-          onClick={() => this.CameraClicked()} >Capture score</Button>,
-        <Button key={'myKey' + 3} onClick={() => this.SubmitScore()} className={this.state.currState === 2 || this.state.currState === 4 ? "" : "hidden"} >
-          Submit</Button>,
-        <video key={'myKey' + 4} id="video" className={this.state.currState === 4 ? "hidden" : "video"} autoPlay></video>,
-        <button key={'myKey' + 5} onClick={() => this.TakePhoto()} id="snap" className={this.state.currState !== 3 ? "hidden" : ""}>
-          Snap</button>,
-        <canvas key={'myKey' + 6} id="canvas" className={this.state.currState !== 4 ? "hidden" : "video"}></canvas>
-      )
+
+      //<canvas key={'myKey' + 6} id="canvas" className={this.state.currState !== 4 ? "hidden" : "video"}></canvas>
     }
+    //  scoreSavedSucessMessage.push(<div key={'myKey' + 1} className={this.state.scoreSaved == false ? "hidden":""}>
+    //  Successfully Saved Score</div>, 
 
-      scoreSavedSucessMessage.push(<div key={'myKey' + 1} className={this.state.scoreSaved == false ? "hidden":""}>Successfully Saved Score</div>, 
-              <button key={'myKey' + 2} onClick={() => this.Reset()} id="snap" className={this.state.scoreSaved == false ? "hidden" : ""}>
-      Another Score</button>,);
     return (
+      <div>
+        <div className={this.state.showCamera && !this.state.ImageTaken ? "back-white page-content no-padding" : this.state.ImageTaken ? "opacity-85 page-content no-padding" : "page-content no-padding"}>
+          <div className={this.state.showCamera && !this.state.ImageTaken ? "hidden" : ""}>>
+        <div className="label-score">
+              <label>Type in score</label>
+              <div className="input-container">
+                <input id = "scoreInput"name="score" className="score"
+                  onChange={this.handleScore}></input>
+              </div>
+              <div className={this.state.validForm ? "hidden" : ""}>Invalid Form</div>
+              {this.state.validForm}
+            </div>
+            <div className="centre-label">
+              <label className="label-competition">Select Competition</label>
+            </div>
+            <div className="competition-container">
+              {competitionItem}
+            </div>
+            <div className={this.state.scoreSaved ? "sucess-container":"hidden"}> 
+                <div className="success"> Score Saved successfully </div>
+            </div>
+            <div className="submit-container">
+              <div className="submit-button-elements">
+                <Button onClick={() => this.Reset()} id="snap" className="">Another Score</Button>
+              </div>
+              <div className="submit-button-elements">
+                <Button className={this.state.ImageTaken ? "hidden":""} id="btnScoreCapture" onClick={() => this.CameraClicked()}>Capture score</Button>
+              </div>
+              <div className="submit-button-elements">
+                <Button className={this.state.ImageTaken ? "":"hidden"} id="btnScoreCapture" onClick={() => this.RetakePhoto()}>Retake score</Button>
+              </div>
+              <div className="submit-button-elements">
+                <Button onClick={() => this.SubmitScore()} className="" >Submit</Button>
+              </div>
+            </div>
 
-      <div className="page-content">
-        <div className="ProgressBar">
-          <div className={this.state.currState >= 1 ? "Circle first active" : "Circle first "}>1</div>
-          <div className={this.state.currState >= 2 ? "Circle second active" : "Circle second "}>2</div>
-          <div className={this.state.currState >= 3 ? "Circle third active" : "Circle third "}>3</div>
-          <div className={this.state.currState >= 4 ? "Circle fourth active" : "Circle fourth "}>4</div>
+
+          </div>
+          <div className={this.state.showCamera ? "" : "hidden"}>
+            <div className="video-container">
+            <div className="label-score">
+            <label className={this.state.ImageTaken ? "hidden" :"front-dark"}>Capture score</label>
+            </div>
+              <video id="video" className={this.state.ImageTaken ? "hidden" : "video"} autoPlay></video>
+            </div>
+            <div className="submit-container">
+              <div className="submit-button-elements">
+                <button onClick={() => console.log("flash on")} id="Flash"
+                  className={this.state.currState !== 3 ? "hidden" : ""}>flash</button>
+              </div>
+              <div className="submit-button-elements">
+                <button onClick={() => this.TakePhoto()} id="snap"
+                  className={this.state.currState !== 3 ? "hidden" : ""}>Snap</button>
+              </div>
+            </div>
+
+
+          </div>
+
         </div>
-        <ul className="competition-container">
-        {scoreSavedSucessMessage}
-          {competitionItem}
-        </ul>
-
+        <div className="video-container">
+          <canvas key={'myKey' + 6} id="canvas" className={this.state.ImageTaken ? "image-view" : "hidden"}></canvas>
+        </div>
       </div>
     )
   }
