@@ -161,14 +161,10 @@ class App extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-              <br />
             </div>
             <div className="expiry-date-member">
               <Label><b>Membership Expiry Date</b></Label><br />
               <input type="date" className="expdate" id="expdate" value={this.GetDate()} onChange={this.handleChange} />
-              <br />
-              <br />
-              <br />
             </div>
             <div className="create-member">
               <button className="create-button" onClick={this.UpdateMember} >CreateMember</button>
