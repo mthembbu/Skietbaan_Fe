@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Label, Table, Input, Button } from 'reactstrap';
 import '../components/Documents.css';
+import {BASE_URL} from '../actions/types.js';
 
 class Documents extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class Documents extends Component {
     }
 
     GetMembers() {
-        fetch("https://api.skietbaan.retrotest.co.za/api/Features/SearchMember", {
+        fetch(BASE_URL,"/api/Features/SearchMember", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         })

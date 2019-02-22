@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Label, Table } from 'reactstrap';
 import '../components/RegisterMemberStyles.css';
+import {BASE_URL} from '../actions/types.js';
 
 function validateUsername(username) {
   const re = /[a-zA-Z]/;
@@ -50,7 +51,7 @@ class App extends Component {
   }
 
   SearchAllMember() {
-    fetch("https://api.skietbaan.retrotest.co.za/api/User", {
+    fetch(BASE_URL,"/api/User", {
       method: 'Get',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     }).then(function (response) {
@@ -71,7 +72,7 @@ class App extends Component {
       usernameValue: user
     });
     let name = this.state.arrayUsers[user].username;
-    fetch("https://api.skietbaan.retrotest.co.za/api/Features/Search?Username=" + name, {
+    fetch(BASE_URL,"/api/Features/Search?Username=" + name, {
       method: 'Get',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     }).then(function (response) {
@@ -93,7 +94,7 @@ class App extends Component {
       "memberID": document.getElementById("membershipID").value,
       "memberExpiryDate": document.getElementById("expdate").value + "T00:00:00"
     }
-    fetch("https://api.skietbaan.retrotest.co.za/api/Features/Update", {
+    fetch(BASE_URL,"/api/Features/Update", {
       method: 'Post',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify(RequestObject)

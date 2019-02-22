@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Table, Label, Input } from 'reactstrap';
 import '../components/ViewMembers.css';
 import Collapsible from 'react-collapsible';
+import {BASE_URL} from '../actions/types.js';
 
 class ViewMembers extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class ViewMembers extends Component {
     }
 
     GetMembers() {
-        fetch("https://api.skietbaan.retrotest.co.za/api/Features/SearchMember", {
+        fetch(BASE_URL,"/api/Features/SearchMember", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         })
@@ -36,7 +37,7 @@ class ViewMembers extends Component {
     }
 
     GetTimeLeft() {
-        fetch("https://api.skietbaan.retrotest.co.za/api/Features/TimeLeft", {
+        fetch(BASE_URL,"/api/Features/TimeLeft", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         })
@@ -60,7 +61,6 @@ class ViewMembers extends Component {
         this.GetMembers();
         this.setState({filterText: event.target.value});
         this.GetTimeLeft();
-        //this.DoAllThese();
     }
 
     render() {

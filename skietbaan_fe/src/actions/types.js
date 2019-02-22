@@ -5,3 +5,4 @@ export const NEW_POST = 'NEW_POST';
 export const UPDATE_GROUPNAME = 'UPDATE_GROUPNAME';
 export const NEW_COMP = 'NEW_COMP';
 export const FETCH_COMP = 'NEW_COMP';
+export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
