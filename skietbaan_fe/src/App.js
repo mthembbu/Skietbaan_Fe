@@ -13,6 +13,8 @@ import Groups from './components/Groups';
 import GroupDone from './components/GroupDone';
 import CreateComp from './components/CreateComp';
 import notifications from './components/Notifications'
+import ViewMembers from './components/ViewMembers'
+import Documents from './components/Documents';
 class App extends Component {
 
 	render() {
@@ -29,14 +31,15 @@ class App extends Component {
 							<Route path="/home" component={LeaderboardPage} exact />
 							<Route path="/login" component={Login} exact />
 							<Route path="/" component={Login} exact />
-							<Route path="/register" component={RegisterMember} exact />
+							<Route path="/registermember" component={RegisterMember} exact />
 							<Route path="/new-competition" component={CreateComp} exact />
 							<Route path="/scorecapture" component={ScoreCapture} exact />
 							<Route path="/groupsname" component={GroupsName} exact />
 							<Route path="/groups" component={Groups} exact />
 							<Route path="/GroupDone" component={GroupDone} exact />
 							<Route path="/notifications" component={notifications} exact />
-
+							<Route path="/documents" component={Documents} exact />
+							<Route path="/viewmembers" component={ViewMembers} exact />
 							<Redirect from="/" to="/home" />
 						</Switch>
 					</BrowserRouter>
