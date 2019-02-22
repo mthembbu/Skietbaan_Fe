@@ -1,46 +1,90 @@
 import React, { Component } from 'react';
-import { Navbar, NavDropdown, Form, Nav, Container } from 'react-bootstrap';
+import { Navbar, NavDropdown, Form, Nav, Container, Figure } from 'react-bootstrap';
 import '../scss/navbar.css';
-import 'font-awesome/css/font-awesome.min.css';
-
 
 class NavbarMenu extends Component {
 	render() {
 		// rendering the basic navbar within the render class
 		return (
-			<div >
-				{/** The default navigation menu */}
-				<Container>
-				<Navbar bg="light" expand="lg" className="navbar-custom" fixed="top">
-					<Navbar.Brand href="#home">
-					 <i className="fa fa-home"></i>
-					</Navbar.Brand>
-					<Navbar.Toggle aria-controls="basic-navbar-nav" />
-					<Navbar.Collapse id="basic-navbar-nav">
-						<Nav className="mr-auto">
-							<Nav.Link href="/home">
-								<img src="" alt="" width="" height="" />Leader Board
-							</Nav.Link>
-							<Nav.Link href="/scorecapture">Score Capture</Nav.Link>
-							<NavDropdown title="Create" id="basic-nav-dropdown" variant="outline-dark">
-								<NavDropdown.Item href="/new-competition">New Competition</NavDropdown.Item>
-								<NavDropdown.Item href="/groupsname">New Groups</NavDropdown.Item>
-								<NavDropdown.Item href="/register">New Members</NavDropdown.Item>
-								<NavDropdown.Divider />
-							</NavDropdown>
-							<Nav.Link href="/">Documents</Nav.Link>
-						</Nav>
-						<Form inline>
-						<i className="fa fa-user-circle"></i>
-							<NavDropdown title="Username" id="basic-nav-dropdown" variant="outline-dark">
-								<NavDropdown.Item href="/">Profile</NavDropdown.Item>
-								<NavDropdown.Item href="/notifications">Notifications</NavDropdown.Item>
-								<NavDropdown.Item href="/">Settings</NavDropdown.Item>
-							</NavDropdown>
-						</Form>
-					</Navbar.Collapse>
-				</Navbar>
-				</Container>
+			<div>
+				<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+					<a class="navbar-brand" href="/home">
+						{/** *SKIETBAAN*/}
+					</a>
+					<button
+						id="h-btn"
+						class="navbar-toggler"
+						type="button"
+						data-toggle="collapse"
+						data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent"
+						aria-expanded="false"
+						aria-label="Toggle navigation"
+					>
+						<span class="navbar-toggler-icon" />
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<div class="container-fluid">
+							<ul class="navbar-nav mr-auto nav-fill">
+								<li class="nav-item ">
+									<a class="nav-link" href="/home">
+										{/*GC TODO: Refactor for Image displays: <img src="../resources/trophy.png" width="30" height="30" alt="Sbuda"/>*/}
+										<i class="fa fa-trophy" width="30">
+											<span class="badge badge-danger">2</span>
+										</i>
+										LEADERBOARD
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="/create">
+										{/***GC TODO: Refactor for Image displays: <img src="../../public/img/trophy.png" width="30" height="30" alt=""> </img>*/}
+										<i class="fa fa-plus-circle">
+											<span class="badge badge-danger" />
+										</i>
+										CREATE
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link " href="/scorecapture">
+										{/***GC TODO: Refactor for Image displays: <img src="../../public/img/trophy.png" width="30" height="30" alt=""> </img>*/}
+										<i class="fa fa-dot-circle-o">
+											<span class="badge badge-warning" />
+										</i>
+										ADD SCORE
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="/notifications">
+										{/***GC TODO: Refactor for Image displays: <img src="../../public/img/trophy.png" width="30" height="30" alt=""> </img>*/}
+										<i class="fa fa-bell">
+											<span class="badge badge-danger">11</span>
+										</i>
+										NOTIFICATIONS
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="/">
+										{/***GC TODO: Refactor for Image displays: <img src="../../public/img/trophy.png" width="30" height="30" alt=""> </img>*/}
+										<i class="fa fa-user">
+											<span class="badge badge-success" />
+										</i>
+										PROFILE
+									</a>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link" href="/">
+										{/***GC TODO: Refactor for Image displays: <img src="../../public/img/trophy.png" width="30" height="30" alt=""> </img>*/}
+										<i class="fa fa-file-o">
+											<span class="badge badge-danger">11</span>
+										</i>
+										DOCUMENTS
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
 			</div>
 		);
 	}
