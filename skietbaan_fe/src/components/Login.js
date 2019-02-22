@@ -85,6 +85,7 @@ class Login extends Component {
         if(typeof data === "object")
         {
           document.cookie = "token =" +data.token+"; expires =Wed, 18 Dec 2030 12:00:00 UTC";
+          window.location = "/home";
         }
       }).catch(function(data) {
       });

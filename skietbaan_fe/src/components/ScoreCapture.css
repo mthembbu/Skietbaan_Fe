@@ -135,11 +135,10 @@ label.front-dark{
 
 .submit-container{
     position: absolute;
-    bottom: 80px;
+    bottom: 125px;
     margin: 0 auto;
     text-align: center;
     width: 100%;
-    padding-bottom: 10px;
 }
 
 .submit-button-elements{
