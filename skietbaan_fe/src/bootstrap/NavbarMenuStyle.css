@@ -1,7 +1,3 @@
-
-.fixed-top{
-    position:relative !important;
-  }
   .navbar-custom{
     background-color: #171F32 !important;
   }
@@ -21,8 +17,13 @@
     align-content: center
    }
   .App div .navbar button{
+    padding: 0%;
+    width: fit-content;
     color: white !important;
     background-color: white !important;
+  }
+.fixed-top{
+    position:relative !important;
   }
   .App div .navbar button:hover{
     color: #FF611D !important;
