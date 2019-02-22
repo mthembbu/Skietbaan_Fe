@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Navbar, NavDropdown, Form, Nav, Container, Figure } from 'react-bootstrap';
+import { Navbar, NavDropdown, Form, Nav, Container } from 'react-bootstrap';
 import '../scss/navbar.css';
 import 'font-awesome/css/font-awesome.min.css';
 import '../bootstrap/NavbarMenuStyle.css';
+
 class NavbarMenu extends Component {
 	render() {
 		// rendering the basic navbar within the render class
@@ -15,10 +16,14 @@ class NavbarMenu extends Component {
 					</Navbar.Brand>
                    
 					<Navbar.Brand href="/scorecapture">
-						<i className="fa fa-plus-circle">Add Score</i>
+						<i className="fa fa-dot-circle-o">Add Score</i>
 					</Navbar.Brand>
+					
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
+					<Navbar.Brand href="/scorecapture">
+						<i className="fa fa-plus-circle">Create</i>
+					</Navbar.Brand>
 						<Navbar.Brand href="#">
 							<i className="fa fa-user">Profile</i>
 						</Navbar.Brand>

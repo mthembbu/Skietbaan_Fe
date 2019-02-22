@@ -12,9 +12,7 @@ import {
     isBrowser,
     isMobile
 } from "react-device-detect";
-
 import '../bootstrap/LeaderboardStyle.css';
-/* import '../bootstrap/NavbarMenuStyle.css'; */
 import { runInThisContext } from 'vm';
 
 
@@ -53,7 +51,7 @@ class LeaderboardPage extends Component {
         this.getLeaderboardData();
     }
     getLeaderboardData() {
-        let token = getCookie("token"); 
+        let token = getCookie("token");
         console.log("displaying tokken")
         console.log(token);
         const filterSelection = {
@@ -83,7 +81,6 @@ class LeaderboardPage extends Component {
         this.setState({
             selectedScoreType: value
         });
-        //this.getLeaderboardData();
     }
     displayScoreByType = (result) => {
 
@@ -107,8 +104,6 @@ class LeaderboardPage extends Component {
         } else {
             return null;
         }
-
-
     }
     showMoreScores(index) {
         console.log("index -->");
@@ -136,8 +131,6 @@ class LeaderboardPage extends Component {
     print() {
         console.log("clicked on list");
     }
-
-
     render() {
         const groupsList = (
             <Table>
@@ -176,62 +169,46 @@ class LeaderboardPage extends Component {
                 </tbody>
             </Table>
         )
-        const moreScores = (
-            <Table striped hover condensed>
-                <tbody>
-                    <tr>
-                        <td>Total</td><td>Average</td><td>Average</td><td>Best</td>
-                    </tr>
-                </tbody>
-                <thead>
-                    <tr>
-                        {/* <td>{this.props.tablebody[this.selectedRank].To == total}</td><td>{this.props.tablebody[this.selectedRank].average}}</td><td>{this.props.tablebody[this.selectedRank].bestScore}}</td> */}
-                    </tr>
-                </thead>
-            </Table>
-        )
-
         const tablebody = this.props.tableData.map((post, index) => (
             <tr key={post.rank.toString()} value={post.rank} onChange={() => this.onChange(post.id)}>
-                <td className="firstcoll">{post.rank}</td>
-                <td >{post.username}</td>
-                {/* <td><MDBBtn tag="a" size="lg" floating gradient="black" 
-                    onClick={() => this.showMoreScores(index)} >
-                    <MDBIcon icon="filter" size="sm" />
-                </MDBBtn>
-                </td> */}
-                {/* <td >{this.displayScoreByType(post)}</td> */}
-                <td >{post.average}</td>
-                <td >{post.bestScore}</td>
-                <td >{post.total}</td>
+                <td>
+                    <table className="rankUsernameRowTable">
+                        <tr>
+                            <td className="rankingNumberCol"><h6>{post.rank}</h6></td><td className="usernameCol"><h6>{post.username}</h6></td>
+                        </tr>
+                    </table>
+                    <table className="rankScoresRowTable">
+                        <tr>
+                            <td className="invisibleCol">rank</td><td><h5>{post.total}</h5></td><td><h5>{post.average}</h5></td><td><h5>{post.best}</h5></td>
+                        </tr>
+                    </table>
+                    <hr />
+                </td>
             </tr>
 
         ));
-        console.log("Table body : ", tablebody)
-        console.log("checking competitions array")
         return (
             <div className="leaderboardContainer">
-                <div className="row justify-content-center">
-                    <div className="competitionSelction">
-                        <h2> {this.props.competitions.length > 0 ? this.props.competitions[this.state.selectedCompetition].label : null}</h2>
+                <div className="CompetitionName">
+                    <div className="row justify-content-center">
+                        <div className="competitionSelction">
+                            <h2> {this.props.competitions.length > 0 ? this.props.competitions[this.state.selectedCompetition].label : null}</h2>
+                        </div>
                     </div>
                 </div>
                 <div className="row">
                     <div className="filterSection">
-                        <div className="">
+                        <div>
                             <table className="filterTableAlwaysVisible">
                                 <thead>
                                     <tr>
                                         <td>
-                                            {/*  <Fragment> */}
-                                            <MDBBtn tag="a" size="lg" floating gradient="purple" /* onMouseEnter={this.onHover} */
+                                            <MDBBtn tag="a" size="lg" floating gradient="purple"
                                                 onClick={this.onMouseClickFilter} >
                                                 <MDBIcon icon="filter" size="lg" />
                                             </MDBBtn>
-                                            {/* </Fragment> */}
                                         </td>
                                         <td>{this.props.groups.length > 0 ? this.props.groups[this.state.selectedGroup].label : null}</td>
-                                        {/*  <td>{this.props.scoreTypes[this.state.selectedScoreType].label}</td> */}
                                     </tr>
                                 </thead>
                             </table>
@@ -253,17 +230,11 @@ class LeaderboardPage extends Component {
                                                 {groupsList}
                                             </div>
                                         </div>
-                                        {/* <div className="col-sm-4">
-                                            <p>Select scoreType</p>
-                                            <div className="scrollableContainerS">
-                                                {scoretypesList}
-                                            </div>
-                                        </div> */}
                                     </div>
                                 </div>
                                 <hr />
                             </Collapse>
-
+ 
                         </div>
                     </div>
                 </div>
@@ -272,41 +243,43 @@ class LeaderboardPage extends Component {
                     <table className="table">
                         <thead className="rankTableHead">
                             <tr>
-                                <td className="firstcoll">Rank</td><td></td> <td>Avg</td><td>Best</td><td>Total</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td className="invisibleCol">rank</td><td className="invisibleCol">rank</td><td>Total</td><td>Average</td><td>Best</td>
+                                        </tr>
+                                    </table>
+                                </td>
                             </tr>
                         </thead>
-                        {/* <thead>
-                            <tr>
-                                <Collapse isOpened={this.state.displayMore}>{moreScores}</Collapse>
-                            </tr>
-
-                        </thead> */}
+                    </table>
+                    <table className="rankTableBody">
                         <tbody>
                             {tablebody}
                         </tbody>
                     </table>
                 </div>
-                <hr />
                 <div className="row">
-                <div className="curentMember">
-                    <table className="table">
-                        <thead>
-                            <tr className="filters">
-                                <td className="firstcoll">{this.props.userResults.username.length > 0 ? this.props.userResults.rank : null}</td>
-                                <td >{this.props.userResults.username.length > 0 ? this.props.userResults.username : null}</td>
-                                {/* <td><MDBBtn tag="a" size="lg" floating gradient="black" 
-                                    onClick={() => this.showMoreScores(-1)} >
-                                    <MDBIcon icon="filter" size="sm" />
-                                </MDBBtn>
-                                </td>
-                                <td >{this.props.userResults.username.length > 0 ? this.displayScoreByType(this.props.userResults) : null}</td> */}
-                                <td >{this.props.userResults.username.length > 0 ? this.props.userResults.average : null}</td>
-                                <td >{this.props.userResults.username.length > 0 ? this.props.userResults.bestScore : null}</td>
-                                <td >{this.props.userResults.username.length > 0 ? this.props.userResults.total : null}</td>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
+                    <div className="curentMember">
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <td>
+                                        <table className="rankUsernameRowTable">
+                                            <tr>
+                                                <td className="rankingNumberCol">{this.props.userResults.username.length > 0 ? this.props.userResults.rank : null}</td><td className="usernameCol">{this.props.userResults.username.length > 0 ? this.props.userResults.username : null}</td>
+                                            </tr>
+                                        </table>
+                                        <table className="rankScoresRowTable">
+                                            <tr>
+                                                <td className="invisibleCol">rank</td><td>{this.props.userResults.username.length > 0 ? this.props.userResults.total : null}</td><td>{this.props.userResults.username.length > 0 ? this.props.userResults.average : null}</td><td>{this.props.userResults.username.length > 0 ? this.props.userResults.best : null}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         );
