@@ -6,16 +6,8 @@ import { Collapse } from 'react-collapse';
 import { Table } from "react-bootstrap";
 import { getCookie } from './cookie.js'
 import { MDBBtn, MDBIcon } from "mdbreact";
-import {
-    BrowserView,
-    MobileView,
-    isBrowser,
-    isMobile
-} from "react-device-detect";
 import '../bootstrap/LeaderboardStyle.css';
 import { runInThisContext } from 'vm';
-
-
 
 class LeaderboardPage extends Component {
     constructor(props) {
@@ -52,8 +44,6 @@ class LeaderboardPage extends Component {
     }
     getLeaderboardData() {
         let token = getCookie("token");
-        console.log("displaying tokken")
-        console.log(token);
         const filterSelection = {
             selectedCompetition: this.state.selectedGroup,
             selectedGroups: this.state.selectedCompetition,
@@ -61,8 +51,6 @@ class LeaderboardPage extends Component {
             userToken: token
         }
         this.props.fetchleaderboadtabledata(filterSelection);
-        console.log("filter selection");
-        console.log(filterSelection);
     }
 
     setCompetitionValue = (value) => {
@@ -106,17 +94,13 @@ class LeaderboardPage extends Component {
         }
     }
     showMoreScores(index) {
-        console.log("index -->");
-        console.log(index);
         if (this.props.tableData[index].showMore) {
             this.props.tableData[index].showMore = false;
         } else {
             this.props.tableData[index].showMore = true;
         }
-        console.log("show collapse: " + this.props.tableData[index].showMore);
     }
     onMouseClickFilter() {
-        console.log("before: " + this.state.collapseFilter)
         if (this.state.collapseFilter) {
             this.setState({
                 collapseFilter: false
@@ -126,10 +110,6 @@ class LeaderboardPage extends Component {
                 collapseFilter: true
             });
         }
-        console.log("after: " + this.state.collapseFilter)
-    }
-    print() {
-        console.log("clicked on list");
     }
     render() {
         const groupsList = (

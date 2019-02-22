@@ -8,6 +8,7 @@
   .App div .navbar {
     background-color: #171F32 !important;
     color: white !important;
+    margin: 0%;
   }
   .App div .navbar a{
     color: white !important;
