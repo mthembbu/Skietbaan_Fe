@@ -48,6 +48,7 @@ input.invalid{
   color:red;
   font-size: 12px;
 }
+
 .header-container{
   margin-left: -15px;
     margin-right: -15px;
@@ -57,15 +58,18 @@ input.invalid{
     text-align: center;
 
 }
+
 .front-white{
   color:white
 }
+
 .button-container{
   position: relative;
     width: 100%;
     text-align: center;
     padding-top: 20px;
 }
+
 .round-button{
   width: 140px;
   background-color: white;
@@ -86,12 +90,14 @@ button.button-invalid{
   border-color: #999!important;
   cursor: default;
 }
+
 button.button-invalid:hover{
   color: #ebebeb!important;
   background-color: #999!important;
   border-color: #999!important;
   cursor: default !important;
 }
+
 button.button-invalid:active{
   color: #ebebeb!important;
   background-color: #999!important;
@@ -115,9 +121,11 @@ button.button-valid{
   padding-top: 30px;
   padding-right: 15px;
 }
+
 .register-anchhor{
   color:white;
 }
+
 .register-anchhor a{
   text-decoration: underline;
 }

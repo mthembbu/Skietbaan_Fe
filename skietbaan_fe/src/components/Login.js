@@ -35,13 +35,15 @@ class Login extends Component {
       stateUpdate.invalidUsername= false;
       isValid = false;
     }
-    if(this.state.usernameValue && this.state.passwordValue)
-    isValid = true;
+    if(this.state.usernameValue && this.state.passwordValue){
+      isValid = true;
+    }
     this.setState({
       ...stateUpdate ,
       validForm: isValid
     });
   };
+
   Validate()
   {
     let isValid = true;
@@ -91,6 +93,7 @@ class Login extends Component {
       });
     }
   }
+
   render() {
     if(getCookie("token")){
       window.location = "/home";
@@ -104,6 +107,7 @@ class Login extends Component {
     if (this.state.invalidUsername) {
       invalidUsernameMessage = <div className="invalid-message">Please enter your username</div>;
     }
+    
     return (
       <Container className="App">
       <div className="header-container">
