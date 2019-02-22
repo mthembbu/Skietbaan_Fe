@@ -31,7 +31,6 @@ class LeaderboardPage extends Component {
         this.setScoreTypeValue = this.setScoreTypeValue.bind(this);
         this.getLeaderboardData = this.getLeaderboardData.bind(this);
         this.onMouseClickFilter = this.onMouseClickFilter.bind(this);
-        this.print = this.print.bind(this);
         this.displayScoreByType = this.displayScoreByType.bind(this);
         this.getCurentUserRankNumber = this.getCurentUserRankNumber.bind(this);
         this.showMoreScores = this.showMoreScores.bind(this);
