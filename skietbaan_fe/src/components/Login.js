@@ -19,6 +19,7 @@ class Login extends Component {
     this.Validate = this.Validate.bind(this);
 
   }
+  
   handleChange({ target }) {
     this.setState({
       [target.name]: target.value,
@@ -107,7 +108,7 @@ class Login extends Component {
     if (this.state.invalidUsername) {
       invalidUsernameMessage = <div className="invalid-message">Please enter your username</div>;
     }
-    
+
     return (
       <Container className="App">
       <div className="header-container">
