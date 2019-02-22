@@ -1,12 +1,8 @@
-.top_bar {
+.Top_Bar {
     background: white;
   }
   
-  .center_label {
-    display: flex;
-  
-  }
-  .center_label {
+  .Center_Label {
     width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -14,7 +10,7 @@
     text-align: center;
   }
   
-  .middle_bar {
+  .Middle_Bar {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -23,10 +19,10 @@
   
   }
   
-  .text {
+  .Texts {
     border-radius: 25px;
   }
-  .page {
+  .Page {
     background: #101727;
     height: -webkit-fill-available;
   }
@@ -35,8 +31,13 @@
     color: white;
   }
   
-  .add {
-    border-radius: 16px;
+  .TheAdd {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-radius: 30px;
+    width: 125px;
+    height: 35px;
   }
   
   .texts {

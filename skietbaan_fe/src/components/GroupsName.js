@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import './groupStyle.css'
-
 class GroupsName extends Component {
     constructor(props){
         super(props);

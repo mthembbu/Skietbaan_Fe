@@ -85,7 +85,8 @@ class Groups extends Component {
 
           {this.state.posts.filter(
             (post) => {
-              return (!this.state.filterText || post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) || post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase()))
+              return (!this.state.filterText || post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) 
+              || post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase()))
             }
           ).map((post, index) => (
             <li class="list-group-item list-group-item-light" key={post.id}>
@@ -108,20 +109,20 @@ class Groups extends Component {
       <main className="TheMain" >
         <div className="TheNavBar">
           <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
-          <div className="center_label">
+          <div className="Center_Label">
             <b>Retro Rabbit</b>
           </div>
         </div>
-        <div className="BNavBar">
+        <div className="NavBar">
           <input
-            className="theText"
+            className="TheText"
             id="username"
             type="text"
             placeholder="Search.." 
             onChange={this.onChange}
             autoComplete="off"
           />
-          <button className="select" onClick={this.handleOnClick}>
+          <button className="Select" onClick={this.handleOnClick}>
            CREATE
           </button>
         </div>
@@ -130,7 +131,7 @@ class Groups extends Component {
         <br />
         <br />
         <div
-          className="scrollbar"
+          className="Scrollbar"
           data-simplebar
           data-simplebar-auto-hide="false"
         >

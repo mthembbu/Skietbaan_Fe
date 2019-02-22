@@ -31,31 +31,34 @@ class AddGroup extends Component {
    }
   render() {
     return (
-      <div className="page">
-        <div className="top_bar">
+      <div className="Page">
+        <div className="Top_Bar">
           <a href="#" class="fa fa-angle-left" />
-          <div className="center_label">
+          <div className="Center_Label">
             <b>GROUPS</b>
           </div>
         </div>
-        <div className="middle_bar">
+        <div className="Middle_Bar">
           <label className="name">
             <b>Enter Group Name</b>
           </label>
           <br />
+      
           <input
-            className="texts"
+            className="Texts"
             type="text"
             name="name"
             onChange={this.onChange}
             value={this.state.name}
           />
+      
           <br />
           <br />
-
-          <button className="add" type="submit" onClick={this.onClick}>
+          <div className="TheAdd">
+          <button className="Add" type="submit" onClick={this.onClick}>
             Add users
           </button>
+          </div>
         </div>
       </div>
     );

@@ -4,12 +4,15 @@ import {
 	UPDATENAME,
 	CREATEGROUP,
 	GETGROUP,
-	GETNAME
+	GETNAME,
+	URLADD,
+	URLUSER,
+	URLGROUP
   } from "./types";
   
   /** The method to feth the already available data for posts*/
   export const fetchPosts = () => dispatch => {
-	fetch("http://localhost:63474/api/User")
+	fetch(URLUSER)
 	  .then(res => res.json())
 	  .then(posts => {
 		const newdata = posts.map(users => {
@@ -23,7 +26,7 @@ import {
 	  });
   };
   export const createGroups = usersadded => dispatch => {
-	fetch("http://localhost:63474/api/groups", {
+	fetch(URLGROUP, {
 	  method: "POST",
 	  headers: {
 		"content-type": "application/json"
@@ -43,7 +46,7 @@ import {
 	/** the method to post new data from the PostForm */
   }
   export const createPost = users => dispatch => {
-	fetch("http://localhost:63474/api/groups/add", {
+	fetch(URLADD, {
 	  method: "Post",
 	  headers: {
 		Accept: "application/json",
@@ -58,7 +61,6 @@ import {
   
   export const getname = name => {
 	//Return an action
-	console.log(name)
 	return dispatch => {
 	  dispatch({
 		type: UPDATENAME,
@@ -68,7 +70,7 @@ import {
   };
   
   export const getGroup = () => dispatch => {
-	fetch("http://localhost:63474/api/User")
+	fetch(URLUSER)
 	  .then(res => res.json())
 	  .then(posts =>
 		dispatch({

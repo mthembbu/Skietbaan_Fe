@@ -1,10 +1,10 @@
-.boxs {
+.Boxs {
   float: right;
   margin-right: 15px;
   margin-top: 20px;
 }
 
-.check {
+.Check {
   background: #101727;
 }
 
@@ -15,7 +15,7 @@
   display: flex;
 }
 
-.center_label {
+.Center_Label {
   text-align: center;
   margin-top: 10px;
   color: black;
@@ -24,7 +24,6 @@
   width: 8em;
   display: flex;
 }
-
 .TheMain {
   background: black;
 }
@@ -36,16 +35,16 @@
   font-size: 48px;
 }
 
-.BNavBar {
+.NavBar {
   height: 0px;
 }
 
-.theText {
+.TheText {
   margin-top: 7px;
   margin-left: 5px;
   border-radius: 25px;
 }
-.select {
+.Select {
   margin-top: 7px;
   margin-right: 5px;
   float: right;
