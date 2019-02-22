@@ -42,8 +42,7 @@ class Documents extends Component {
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         }).then(function (response) {
             return response.json();
-        })
-            .then(function (data) {
+        }).then(function (data) {
                 document.getElementById("usernameValue").value = email;
             })
             .catch(function () { });
