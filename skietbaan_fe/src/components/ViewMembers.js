@@ -113,7 +113,7 @@ class ViewMembers extends Component {
                     <br />
                 </div>
                 <div className="table-search-members" >
-                    {this.GetMembers}
+                    {this.DoAllThese}
                     {postItems}
                 </div>
             </div>
