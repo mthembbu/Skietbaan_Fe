@@ -12,7 +12,7 @@ class Documents extends Component {
     }
 
     GetMembers() {
-        fetch("http://localhost:63474/api/Features/SearchMember", {
+        fetch("https://api.skietbaan.retrotest.co.za/api/Features/SearchMember", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         })
@@ -23,8 +23,8 @@ class Documents extends Component {
                 return data;
             }).then(data => this.setState({
                 array: data.filter(function (datas) {
-                    return ((datas.username).startsWith(document.getElementById("usernameValue").value) 
-                    || (datas.email).startsWith(document.getElementById("usernameValue").value));
+                    return ((datas.username).startsWith(document.getElementById("usernameValue").value)
+                        || (datas.email).startsWith(document.getElementById("usernameValue").value));
                 })
             }))
             .catch(function () { });
@@ -32,31 +32,31 @@ class Documents extends Component {
 
     SearchMember(user) {
         this.setState({
-          usernameValue: user
+            usernameValue: user
         });
         let name = this.state.array[user].username;
         let email = this.state.array[user].email;
-        fetch("http://localhost:63474/api/Features/Search?Username=" + name, {
-          method: 'Get',
-          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        fetch("https://api.skietbaan.retrotest.co.za/api/Features/Search?Username=" + name, {
+            method: 'Get',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         }).then(function (response) {
-          return response.json();
+            return response.json();
         })
-          .then(function (data) {
-            document.getElementById("usernameValue").value = email;
-          })
-          .catch(function () { });
-      }
+            .then(function (data) {
+                document.getElementById("usernameValue").value = email;
+            })
+            .catch(function () { });
+    }
 
     render() {
         const postItems = (
             <Table striped hover condensed>
                 <tbody>
-                    {this.state.array.map((post,index) => (
+                    {this.state.array.map((post, index) => (
                         <tr key={post.id} onClick={() => this.SearchMember(index)}>
                             <td>
-                            <b>{post.username}</b>
-                            <p>{post.email}</p>
+                                <b>{post.username}</b>
+                                <p>{post.email}</p>
                             </td>
                         </tr>
                     ))}

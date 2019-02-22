@@ -1,0 +1,41 @@
+@media all and (min-width: 480px) {
+    .viewmember {
+      margin: 0 auto;
+    }
+    .viewmember form {
+      margin: 0 auto;
+    }
+  }
+  
+  body{
+    background-color:red;
+  }
+
+  .col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-10,.col-11,.col-12{
+    float:left;
+  }
+
+  .centre-view-member{
+    margin:0 auto;
+    position: center;
+    background-color: white;
+  }
+
+  .search-member-name{
+    background-color: #171F32;
+  }
+
+  .table-search-members{
+    background-color: white;
+  }
+
+  .page-name{
+    position: center;
+    text-align: center
+  }
+
+  .label-search{
+    position: center;
+    text-align: center;
+    color: white
+  }

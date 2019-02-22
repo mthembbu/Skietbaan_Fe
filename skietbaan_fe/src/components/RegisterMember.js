@@ -50,7 +50,7 @@ class App extends Component {
   }
 
   SearchAllMember() {
-    fetch("http://localhost:63474/api/User", {
+    fetch("https://api.skietbaan.retrotest.co.za/api/User", {
       method: 'Get',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     }).then(function (response) {
@@ -71,7 +71,7 @@ class App extends Component {
       usernameValue: user
     });
     let name = this.state.arrayUsers[user].username;
-    fetch("http://localhost:63474/api/Features/Search?Username=" + name, {
+    fetch("https://api.skietbaan.retrotest.co.za/api/Features/Search?Username=" + name, {
       method: 'Get',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     }).then(function (response) {
@@ -93,7 +93,7 @@ class App extends Component {
       "memberID": document.getElementById("membershipID").value,
       "memberExpiryDate": document.getElementById("expdate").value + "T00:00:00"
     }
-    fetch("http://localhost:63474/api/Features/Update", {
+    fetch("https://api.skietbaan.retrotest.co.za/api/Features/Update", {
       method: 'Post',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify(RequestObject)

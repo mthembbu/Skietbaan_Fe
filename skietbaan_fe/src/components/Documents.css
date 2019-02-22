@@ -1,21 +1,26 @@
 .documents-container{
     background-color: #171F32
 }
+
 .page-name{
     background-color: white
 }
+
 .documents-body{
     background-color: #171F32
 }
+
 .label-select-member{
     position: center;
     text-align: center;
     color: white
 }
+
 .button-upload-document{
     position: center;
     text-align: center
 }
+
 .table-search-members{
     background-color:white
 }
