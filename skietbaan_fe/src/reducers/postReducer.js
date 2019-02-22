@@ -2,7 +2,6 @@ import { FETCH_POSTS, NEW_POST,FETCH_LEADERBOARDFILTER_DATA ,FETCH_LEADERBOARDTA
 const initialState = {
 	allItems: [],
 	selectedItem: {},
-  groupName: "",
 	leaderboardGroups:[],
 	leaderboardCompetitions:[],
 	leaderboardScoreTypes: [
@@ -26,27 +25,18 @@ export default function(state = initialState, action) {
 				...state,
 				allItems: action.payload
 			};
-		case UPDATE_GROUPNAME:
-			return {
-				...state,
-				groupName: action.payload
-			};
 		case NEW_POST:
 			return {
 				...state,
 				selectedItem: action.payload
 			};
 			case FETCH_LEADERBOARDFILTER_DATA:
-		console.log("fetching filter data");
-		console.log(action.payload);
 			return {
 				...state,
 				leaderboardGroups: action.payload.groups1,
 				leaderboardCompetitions: action.payload.competitions1
 			};
 		case FETCH_LEADERBOARDTABLE_DATA:
-		console.log("fetching table data");
-		console.log(action.payload);
 			return {
 				...state,
 				leaderboardTableData: action.payload.rankResults,
