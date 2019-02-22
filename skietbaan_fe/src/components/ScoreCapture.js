@@ -42,7 +42,7 @@ export default class search extends Component {
     this.setState({
       [target.name]: target.value,
     }, () => {
-      if (!validateScore(this.state.score)) {
+      if (validateScore(this.state.score)) {
         this.setState({
           validScore: false,
         });
