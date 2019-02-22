@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import "./groups.css";
-
+import { URLADD, URLUSER } from "../actions/types";
 
 class Groups extends Component {
   constructor(props) {
     super(props);
     this.state = {
       posts: [],
+
       newArray: [],
       count: 0,
       black: "",
@@ -18,7 +19,7 @@ class Groups extends Component {
     this.onChange = this.onChange.bind(this);
   }
   componentWillMount() {
-    fetch("https://api.skietbaan.retrotest.co.za/api/user")
+    fetch(URLUSER)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -48,7 +49,7 @@ class Groups extends Component {
     let request = {
       newArray: this.state.newArray
     };
-    fetch("https://api.skietbaan.retrotest.co.za/api/groups/add", {
+    fetch(URLADD, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -62,7 +63,6 @@ class Groups extends Component {
      window.location = "/GroupDone";
   }
   toggleHighlight = event => {
-    console.log(event);
     if (this.state.posts[event].highlighted === true) {
       this.state.posts[event].highlighted = false;
       {
@@ -140,6 +140,5 @@ class Groups extends Component {
     );
   }
 }
-
 export default(Groups);
 

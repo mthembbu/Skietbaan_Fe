@@ -10,7 +10,6 @@
     width: 800px;
     margin-left: auto;
     margin-right: auto;
-    width: 8em;
     color: black;
     text-align: center;
   }
@@ -54,7 +53,6 @@
     position: absolute;
     bottom: 0;
     right: 0;
-    position: fixed;
     margin: 2%;
   }
   
