@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.scss';
+import './bootstrap/NavbarMenuStyle.css';
 import { Provider } from 'react-redux';
 import store from './store';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
@@ -8,7 +8,7 @@ import Register from './components/Register';
 import NavbarMenu from './components/NavbarMenu';
 import RegisterMember from './components/RegisterMember';
 import LeaderboardPage from './components/LeaderboardPage';
-import ScoreCapture from './components/ScoreCapture';
+/* import ScoreCapture from './components/ScoreCapture'; */
 import GroupsName from './components/GroupsName';
 import Groups from './components/Groups';
 import GroupDone from './components/GroupDone';
@@ -23,7 +23,6 @@ class App extends Component {
 			<Provider store={store}>
 				<div className="App">
 					<NavbarMenu />
-					<hr />
 					<BrowserRouter>
 						<Switch>
 							<Route path="/home" component={LeaderboardPage} exact />
@@ -32,7 +31,7 @@ class App extends Component {
 							<Route path="/" component={Login} exact />
 							<Route path="/registermember" component={RegisterMember} exact />
 							<Route path="/new-competition" component={CreateComp} exact />
-							<Route path="/scorecapture" component={ScoreCapture} exact />
+							{/* <Route path="/scorecapture" component={ScoreCapture} exact /> */}
 							<Route path="/groupsname" component={GroupsName} exact />
 							<Route path="/groups" component={Groups} exact />
 							<Route psth="/create" component={CreatePage} exact />
