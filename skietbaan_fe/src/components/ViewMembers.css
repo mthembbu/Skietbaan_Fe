@@ -6,7 +6,7 @@
       margin: 0 auto;
     }
   }
-  
+
   body{
     background-color:red;
   }
@@ -31,11 +31,11 @@
 
   .page-name{
     position: center;
-    text-align: center
+    text-align: center;
   }
 
   .label-search{
     position: center;
     text-align: center;
-    color: white
+    color: white;
   }

@@ -37,7 +37,7 @@ class Documents extends Component {
         });
         let name = this.state.array[user].username;
         let email = this.state.array[user].email;
-        fetch("https://api.skietbaan.retrotest.co.za/api/Features/Search?Username=" + name, {
+        fetch(BASE_URL,"/api/Features/Search?Username=" + name, {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         }).then(function (response) {

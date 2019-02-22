@@ -74,7 +74,9 @@ class ViewMembers extends Component {
                 </thead>
                 <tbody>
                     {this.state.array.filter((post) => {
-                        return (!this.state.filterText || post.username.toLowerCase().startsWith(this.state.filterText.toLocaleLowerCase()) || post.email.toLowerCase().startsWith(this.state.filterText.toLocaleLowerCase()))
+                        return (!this.state.filterText || 
+                            post.username.toLowerCase().startsWith(this.state.filterText.toLocaleLowerCase()) || 
+                            post.email.toLowerCase().startsWith(this.state.filterText.toLocaleLowerCase()))
                     }).map((post,index) => (
                         <tr key={post.id}>
                             <td>
