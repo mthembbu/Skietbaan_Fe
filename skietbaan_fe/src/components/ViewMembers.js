@@ -20,7 +20,7 @@ class ViewMembers extends Component {
     }
 
     GetMembers() {
-        fetch("http://localhost:63474/api/Features/SearchMember", {
+        fetch("https://api.skietbaan.retrotest.co.za/api/Features/SearchMember", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         })
@@ -36,7 +36,7 @@ class ViewMembers extends Component {
     }
 
     GetTimeLeft() {
-        fetch("http://localhost:63474/api/Features/TimeLeft", {
+        fetch("https://api.skietbaan.retrotest.co.za/api/Features/TimeLeft", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         })
