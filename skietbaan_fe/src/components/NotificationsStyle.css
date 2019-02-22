@@ -8,11 +8,100 @@
       max-width: 320px;
     }
   }
+  body{
+    background-image: url("Notification-Img/Rectangle.png");
+    color: white;
+    border-style: none;
+    border: none;
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 640px;
+  }
+
+  .viewButton{
+    background-color: white;
+    color: black;
+    border-radius: 25px;
+    border-color: transparent;
+  }
 
   .centre {
     text-align: center; 
   }
 
+  b{
+    font-size: 25px;
+    font-family: helvetica;
+    padding-right: 90px
+  }
+
+  img{
+    padding-right: 70px;
+    padding-bottom: 8px;
+  }
+
+  div.PageHeading{
+    height: 49px;
+    padding-top: 8px;
+  }
+
+  .PageHeading{
+    text-align: center;
+    align-content: center;
+    background-color: white;
+    color: #101727;
+    height: 49px;
+  }
+
   .buttonCss{
     width: 250px;
+    background-color: white;
+    border-radius: 25px;
+    color: black;
+    position: bottom;
   }
+
+  div.buttonCss{
+    position: absolute;
+    top: 600px;
+  }
+
+  table td{
+    color: white;
+    padding-left: 35px;
+    padding: 1.75rem; 
+    font-size: 13px;
+    border-bottom-style: none;
+  }
+
+  table tbody{
+    border-bottom: none;
+  }
+
+  table table{
+    text-align: center;
+    border-bottom-style: none;
+    border-bottom: none;
+  }
+
+  button.btn.btn-secondary{
+    border-radius: 25px;
+    background-color: white;
+    color: black;
+    font-size: 16px;
+  }
+
+  button.buttonCss.btn.btn-secondary{
+    border-radius: 25px;
+    background-color: white;
+    color: black;
+    position: fixed;
+    font-size: 16px;
+  }
+
+  nav.navbar-custom.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top{
+    padding-left: inherit;
+  }
+  
