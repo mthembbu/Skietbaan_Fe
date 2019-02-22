@@ -25,7 +25,7 @@ onSubmit(){
         "Name": this.state.name,
       }
       localStorage.setItem(this.state.name,this.state.name);
-      fetch("http://localhost:63474/api/groups", {
+      fetch("https://api.skietbaan.retrotest.co.za/api/groups", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -53,12 +53,4 @@ onSubmit(){
     )
   }
 }
-// const mapStateToProps = state => ({
-//     posts: state.posts.items,
-//     newPost: state.posts.item,
-//     groupName: state.groupName,
-//   });
-// const mapDispatchToProps = dispatch => ({
-//     onGroupNameChange: (newGroupName) => dispatch({type: "UPDATE_GROUPNAME",payload:newGroupName})
-//   });
   export default(GroupsName);

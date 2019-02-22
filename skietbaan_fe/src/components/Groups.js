@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import "./groups.css";
-import { getname } from "../actions/postActions";
-import * as groupactions from "../actions/types";
+
 
 class Groups extends Component {
   constructor(props) {
@@ -20,7 +18,7 @@ class Groups extends Component {
     this.onChange = this.onChange.bind(this);
   }
   componentWillMount() {
-    fetch("http://localhost:63474/api/user")
+    fetch("https://api.skietbaan.retrotest.co.za/api/user")
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -50,8 +48,7 @@ class Groups extends Component {
     let request = {
       newArray: this.state.newArray
     };
-    console.log(request);
-    fetch("http://localhost:63474/api/groups/add", {
+    fetch("https://api.skietbaan.retrotest.co.za/api/groups/add", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -82,7 +79,6 @@ class Groups extends Component {
     window.location = "/AddGroup";
   }
   render() {
-  //  console.log(this.props.groupNames.groupName)
     const postitems = (
       <div className="check">
         <ul class="list-group">
