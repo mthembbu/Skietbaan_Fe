@@ -13,12 +13,10 @@ class CreateComp extends Component {
 		this.onChange = this.onChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
 	}
-	//------------------------------------------------------------------------
 	/** A method that detects the change in the change in thw textfield */
 	onChange(e) {
 		this.setState({ [e.target.name]: e.target.value });
 	}
-	//------------------------------------------------------------------------
 	/** A method that handles the submit enent for the submit button*/
 	onSubmit(e) {
 		/** Preventing the default button action event to occur automatically*/
@@ -30,7 +28,6 @@ class CreateComp extends Component {
 		//calling the method to create a post => compData for the create competition
 		this.props.createcomp(compData);
 	}
-	//--------------------------------------------------------------------------
 	/** A method that renders the HTML content for this component*/
 	render() {
 		return (
@@ -51,7 +48,6 @@ class CreateComp extends Component {
 								onChange={this.onChange}
 							/>
 						</Form.Group>
-
 						<Button variant="primary" type="submit" onClick={this.onSubmit}>
 							Create
 						</Button>
