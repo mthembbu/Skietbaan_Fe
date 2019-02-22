@@ -53,12 +53,12 @@ onSubmit(){
     )
   }
 }
-const mapStateToProps = state => ({
-    posts: state.posts.items,
-    newPost: state.posts.item,
-    groupName: state.groupName,
-  });
-const mapDispatchToProps = dispatch => ({
-    onGroupNameChange: (newGroupName) => dispatch({type: "UPDATE_GROUPNAME",payload:newGroupName})
-  });
-  export default connect(mapStateToProps,mapDispatchToProps)(GroupsName);
+// const mapStateToProps = state => ({
+//     posts: state.posts.items,
+//     newPost: state.posts.item,
+//     groupName: state.groupName,
+//   });
+// const mapDispatchToProps = dispatch => ({
+//     onGroupNameChange: (newGroupName) => dispatch({type: "UPDATE_GROUPNAME",payload:newGroupName})
+//   });
+  export default(GroupsName);

@@ -7,3 +7,9 @@ export const NEW_COMP = 'NEW_COMP';
 export const FETCH_COMP = 'NEW_COMP';
 export const URL = "https://api.skietbaan.retrotest.co.za"; 
 
+export const UPDATENAME = 'UPDATENAME';
+export const CREATEGROUP = 'CREATEGROUP';
+export const GETGROUP = 'GETGROUP';
+export const GETNAME = 'GETNAME';
+
+

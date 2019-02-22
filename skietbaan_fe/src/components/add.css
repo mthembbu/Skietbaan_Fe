@@ -1,0 +1,68 @@
+.top_bar {
+    background: white;
+  }
+  
+  .center_label {
+    display: flex;
+  
+  }
+  .center_label {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 8em;
+    color: black;
+    text-align: center;
+  }
+  
+  .middle_bar {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2px;
+  
+  }
+  
+  .text {
+    border-radius: 25px;
+  }
+  .page {
+    background: #101727;
+    height: -webkit-fill-available;
+  }
+  
+  .name {
+    color: white;
+  }
+  
+  .add {
+    border-radius: 16px;
+  }
+  
+  .texts {
+    border-radius: 25px;
+    border: 2px solid;
+  }
+  
+  .fa-angle-left {
+    color: black;
+    font-size: 48px;
+  }
+  
+  .nextpage {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    margin: 2%;
+  }
+  
+  .theList{
+      background: #CCCFD3;
+  }
+  
+  .circles{
+    border-radius: 50%;
+  }
+  
