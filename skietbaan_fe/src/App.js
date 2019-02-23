@@ -11,6 +11,7 @@ import LeaderboardPage from './components/LeaderboardPage';
  import AddGroup from './components/AddGroup';
 import GroupsName from './components/GroupsName';
 import Groups from './components/Groups';
+import ViewGroups from './components/ViewGroups';
 import GroupDone from './components/GroupDone';
 import CreateComp from './components/CreateComp';
 import CreatePage from './components/CreatePage';
@@ -36,6 +37,7 @@ class App extends Component {
 							<Route psth="/create" component={CreatePage} exact />
 							<Route path="/GroupDone" component={GroupDone} exact />
 							<Route path="/notifications" component={notifications} exact />
+							<Route path="/ViewGroups" component={ViewGroups} exact />
 							<Redirect from="/" to="/home" />
 						</Switch>
 					</BrowserRouter>

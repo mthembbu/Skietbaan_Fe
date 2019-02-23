@@ -96,7 +96,6 @@ class Groups extends Component {
                 onClick={() => this.toggleHighlight(index)}
               />
               <label className="blabe">
-                {" "}
                 {post.username} <br />
                 {post.email}
               </label>
@@ -126,7 +125,6 @@ class Groups extends Component {
            CREATE
           </button>
         </div>
-
         <div className="OnToTheNextOne" />
         <br />
         <br />

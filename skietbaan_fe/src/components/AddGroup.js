@@ -42,8 +42,7 @@ class AddGroup extends Component {
           <label className="name">
             <b>Enter Group Name</b>
           </label>
-          <br />
-      
+        <div className="input-container">
           <input
             className="Texts"
             type="text"
@@ -51,6 +50,7 @@ class AddGroup extends Component {
             onChange={this.onChange}
             value={this.state.name}
           />
+          </div>
       
           <br />
           <br />

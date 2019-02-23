@@ -9,7 +9,6 @@ export const URL = "https://api.skietbaan.retrotest.co.za";
 export const URLADD = "https://api.skietbaan.retrotest.co.za/api/groups/add"; 
 export const URLUSER = "https://api.skietbaan.retrotest.co.za/api/user"; 
 export const URLGROUP = "https://api.skietbaan.retrotest.co.za/api/groups"; 
-
 export const UPDATENAME = 'UPDATENAME';
 export const CREATEGROUP = 'CREATEGROUP';
 export const GETGROUP = 'GETGROUP';
