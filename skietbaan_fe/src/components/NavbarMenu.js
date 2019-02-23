@@ -28,7 +28,7 @@ class NavbarMenu extends Component {
 							<i className="fa fa-user">Profile</i>
 						</Navbar.Brand>
 						<Navbar.Brand href="#">
-							<i className="fa fa-file">Documents</i>
+							<i className="fa fa-group">Documents</i>
 						</Navbar.Brand>
 						<Navbar.Brand href="#">
 							<i className="fa fa-bell">Notification</i>

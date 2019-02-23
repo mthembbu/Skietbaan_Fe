@@ -29,7 +29,7 @@ class App extends Component {
 							<Route path="/" component={Login} exact />
 							<Route path="/register-member" component={RegisterMember} exact />
 							<Route path="/new-competition" component={CreateComp} exact />
-							{/* <Route path="/scorecapture" component={ScoreCapture} exact /> */}
+							<Route path="/scorecapture" component={ScoreCapture} exact /> 
 							<Route path="/groupsname" component={GroupsName} exact />
 							<Route path="/groups" component={Groups} exact />
 							<Route psth="/create" component={CreatePage} exact />
