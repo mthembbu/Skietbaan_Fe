@@ -18,7 +18,6 @@ class NavbarMenu extends Component {
 					<Navbar.Brand href="/scorecapture">
 						<i className="fa fa-dot-circle-o">Add Score</i>
 					</Navbar.Brand>
-					
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 					<Navbar.Brand href="/scorecapture">
@@ -27,8 +26,11 @@ class NavbarMenu extends Component {
 						<Navbar.Brand href="#">
 							<i className="fa fa-user">Profile</i>
 						</Navbar.Brand>
-						<Navbar.Brand href="#">
-							<i className="fa fa-group">Documents</i>
+						<Navbar.Brand href="/viewmembers">
+							<i className="fa fa-group">View Members</i>
+						</Navbar.Brand>
+						<Navbar.Brand href="/documents">
+							<i className="fa fa-file">Documents</i>
 						</Navbar.Brand>
 						<Navbar.Brand href="#">
 							<i className="fa fa-bell">Notification</i>

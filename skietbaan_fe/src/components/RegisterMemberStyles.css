@@ -6,22 +6,21 @@
       margin: 0 auto;
     }
   }
+
   body{
-    background-color:#FFFFFF;
+    background-color: red;
   }
+
   .col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-10,.col-11,.col-12{
     float:left;
   }
+
   .centre-register-member{
     margin:0 auto;
     position: center;
-    left: 3px;
-    top: 15px;
-    border: 1px solid rgba(0,0,0,0.35);
-    padding: 20px;
     background-color: white;
-    box-shadow: 2px 2px rgba(0,0,0,0.24);
   }
+
   @media screen and (min-width:768px)  {
   .centre-register-member{
     width: 700px;
@@ -29,13 +28,60 @@
     top:100px;
   }
   }
-  input.invalid{
-    border:1px solid red;
+
+  .search-name{
+    position: center;
+    text-align: center;
+    height: 36px;
+    line-height: 36px;
+    background-color: #171F32;
   }
-  .invalid-message{
-    color:red;
-    font-size: 12px;
+
+  .table-search-users{
+    background-color: white;
   }
-  .no-padding{
-    padding:0 ;
+  
+  .membership-number{
+    padding-top: 110px;
+    position: center;
+    text-align: center;
+  }
+
+  .expiry-date-member{
+    padding-top: 80px;
+    position: center;
+    text-align: center;
+  }
+
+  .create-member{
+    position: center;
+    text-align: center;
+  }
+
+  .expdate{
+    border-radius: 15px;
+    width: fit-content;
+    background-color: lightgray;
+    text-align: center;
+  }
+
+  .create-button{
+    border-radius: 15px;
+    width: fit-content;
+    border: 1.5px solid;
+    background-color: #171F32;
+    color: white;
+    margin-top: 100px;
+  }
+
+  .usernameValue{
+    border-radius: 10px;
+    line-height: 22px;
+    text-align: center;
+  }
+
+  .membershipID{
+    border-radius: 10px;
+    width: 210px;
+    text-align: center;
   }
