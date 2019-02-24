@@ -33,7 +33,7 @@ class NavbarMenu extends Component {
 						<Form inline>
 						<i className="fa fa-user-circle"></i>
 							<NavDropdown title="Username" id="basic-nav-dropdown" variant="outline-dark">
-								<NavDropdown.Item href="/">Profile</NavDropdown.Item>
+								<NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
 								<NavDropdown.Item href="/notifications">Notifications</NavDropdown.Item>
 								<NavDropdown.Item href="/">Settings</NavDropdown.Item>
 							</NavDropdown>

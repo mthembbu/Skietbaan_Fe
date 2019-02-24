@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
-import './UserProfile.css';
+import '../bootstrap/UserProfile.css';
 
 class UserProfile extends Component {
     constructor(props){
@@ -12,11 +12,10 @@ class UserProfile extends Component {
         }
 
         this.StatsClick = this.StatsClick.bind(this);
-        this.AwardsClick = this.AwardsClick.bind(this);
     }
 
-    componentWillMount(){
-        fetch('http://localhost:63474/api/awards/worked',{
+    UNSAFE_componentWillMount(){
+        fetch('http://localhost:63474/api/awards/zintle',{
             method : 'GET',
             headers: {
                 'content-type' : 'application/json'
@@ -31,10 +30,6 @@ class UserProfile extends Component {
             this.setState({isAwardsPressed : false});
             this.setState({isStats : true});
         }
-    }
-
-    AwardsClick(){
-        Icon(this)
     }
 
     render() {      
@@ -67,7 +62,7 @@ class UserProfile extends Component {
                     </Row>
                     <br/>
                     <Row>
-                        <Col>
+                        <Col className="award-info">
                             {this.state.awards.length > 0 ? ForEach(this) : null}
                         </Col>
                     </Row>
@@ -77,20 +72,35 @@ class UserProfile extends Component {
     }
 }
 
-function Icon(iconURL, id){
+function AwardDetails(element){
     return(
-        <div className="icon" key={id}>
-            <img src={iconURL} alt="icon"></img>
-        </div>
+        <Container key={element.id}>
+            <Row className="award-details">
+                <Col>
+                    <div> 
+                        <img src={element.iconURL} alt="icon"></img>
+                    </div>
+                </Col>
+                <Col>
+                    <div>
+                        <h6>{element.description}</h6>
+                    </div>
+                </Col>
+                <Col>
+                    <div><h6>{element.stat}</h6></div>
+                </Col>
+            </Row>
+        </Container>
+        
     )
 }
 
 function ForEach(props){
-    var x = [];
+    var array = [];
     props.state.awards.forEach(element =>{
-        x.push(Icon(element.iconURL, element.id))
+        array.push(AwardDetails(element))
     })
-    return x;
+    return array;
 }
 
 export default UserProfile;

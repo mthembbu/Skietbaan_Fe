@@ -18,9 +18,9 @@
     height: 25%;
 }
 
-.icon img{
-    width: 25%;
-    height: 25%;
+.award-details{
+    padding-bottom: 10%;
+    margin-bottom: 5%;
 }
 
 #col-icon .profile-icon img{
