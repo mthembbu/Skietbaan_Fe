@@ -319,7 +319,7 @@ export default class search extends Component {
                 <div className="button-hover">
 
                   <img src={require('../components/assets/scoreCapture.png')} 
-                    id="btnScoreCapture" onClick={() => this.CameraClicked()} alt=''></img>
+                    id="btnScoreCapture" className="btnScoreCapture" onClick={() => this.CameraClicked()} alt=''></img>
                 </div>
                 <label className="labelIcon">Capture score</label>
               </div>
@@ -327,7 +327,7 @@ export default class search extends Component {
                 <div className="button-hover">
                   <img src={require('../components/assets/retakeImage.png')}
                     id="btnScoreCapture" onClick={() => this.RetakePhoto()}
-                    alt=''>
+                    alt='' className="retake">
                   </img>
                 </div>
                 <label className= "labelIcon">Retry</label>
@@ -351,8 +351,8 @@ export default class search extends Component {
             <div className="submit-container">
             <div className={this.state.currState !== 3 ? "hidden" : "submit-button-elements"} >
               <div className="button-hover">
-                <img src={require('../components/assets/FlashOn.png')} onClick={() => this.Flash()} id="Flash"
-                  className="flash" alt=''></img>
+                <div onClick={() => this.Flash()} id="Flash" className={!this.state.Flashon ? "flash" : "flashOff"}>  
+                </div>
               </div>
               </div>
               <div  className={this.state.currState !== 3 ? "hidden" : "submit-button-elements"}>

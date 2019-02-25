@@ -135,15 +135,25 @@ label.front-dark{
 
 .submit-container{
     position: absolute;
-    bottom: 125px;
+    bottom: 70px;
     margin: 0 auto;
     text-align: center;
     width: 100%;
 }
 
+@media screen and (max-height:580px)  {
+    .submit-container{
+        bottom: 170px;
+    }
+}
+
+.retake{
+    height: 30px;
+}
+
 .submit-button-elements{
     float: left;
-    width: 33.33%;
+    width: 50%;
     height: 80px;
     position: relative;
 }
@@ -197,9 +207,10 @@ hr{
 }
 
 .score-capture-black{
-    height: 45px;
+    height: 30px;
     margin-top: 0px;
 }
+
 .position-relative{
     position: relative;;
 }
@@ -214,8 +225,28 @@ hr{
     left: 0;
 }
 
+.btnScoreCapture{
+    height: 30px;
+}
+
+.button-that-submits{
+    height: 30px;
+}
+
 .flash{
-    height: 45px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-image: url("../components/assets/FlashOn.png");
+}
+
+.flashOff{
+    height: 30px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-image: url("../components/assets/FlashOff.png");
 }
 
 .label-container{
