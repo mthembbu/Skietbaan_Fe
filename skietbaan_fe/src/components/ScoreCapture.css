@@ -25,11 +25,13 @@
 }
 
 .video{
-    width: 100%;
-    height: 100%;
     border-radius: 50%;
     object-fit: cover;
     border: 5px solid #FF611D;
+}
+
+.retake{
+    height: 40px;
 }
 
 .page-content{
@@ -135,16 +137,21 @@ label.front-dark{
 
 .submit-container{
     position: absolute;
-    bottom: 80px;
+    bottom: 70px;
     margin: 0 auto;
     text-align: center;
     width: 100%;
-    padding-bottom: 10px;
+}
+
+@media screen and (max-height:580px)  {
+    .submit-container{
+        bottom: 170px;
+    }
 }
 
 .submit-button-elements{
     float: left;
-    width: 33.33%;
+    width: 50%;
     height: 80px;
     position: relative;
 }
@@ -198,11 +205,12 @@ hr{
 }
 
 .score-capture-black{
-    height: 45px;
     margin-top: 0px;
 }
+
+
 .position-relative{
-    position: relative;;
+    position: relative;
 }
 
 .labelIcon{
@@ -217,11 +225,26 @@ hr{
 
 .flash{
     height: 45px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-image: url("../components/assets/FlashOn.png");
 }
 
+.flashOff{
+    height: 45px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-image: url("../components/assets/FlashOff.png");
+}
 .label-container{
     text-align: center;
     padding-bottom: 10px;
+}
+
+.button-that-submits{
+    height: 40px;
 }
 
 input::-webkit-outer-spin-button,
