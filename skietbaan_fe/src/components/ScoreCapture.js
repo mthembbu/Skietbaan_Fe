@@ -229,7 +229,7 @@ export default class search extends Component {
     let context = canvas.getContext('2d');
     let video = document.getElementById('video');
     video.pause();
-    context.drawImage(video, 0, 0, 360, 360);
+    context.drawImage(video, 0, 0, 310, 310);
     const image = new Image()
     image.src = canvas.toDataURL();
     this.setState({
@@ -319,15 +319,16 @@ export default class search extends Component {
                 <div className="button-hover">
 
                   <img src={require('../components/assets/scoreCapture.png')} 
-                    id="btnScoreCapture" className="btnScoreCapture" onClick={() => this.CameraClicked()} alt=''></img>
+                    id="btnScoreCapture" className ="btnScoreCapture"
+                    onClick={() => this.CameraClicked()} alt=''></img>
                 </div>
                 <label className="labelIcon">Capture score</label>
               </div>
               <div className={this.state.ImageTaken ? "submit-button-elements" : "hidden"} >
                 <div className="button-hover">
                   <img src={require('../components/assets/retakeImage.png')}
-                    id="btnScoreCapture" onClick={() => this.RetakePhoto()}
-                    alt='' className="retake">
+                    id="btnScoreCapture" className="retake" onClick={() => this.RetakePhoto()}
+                    alt=''>
                   </img>
                 </div>
                 <label className= "labelIcon">Retry</label>
@@ -346,12 +347,12 @@ export default class search extends Component {
               <div className="label-score">
                 <label className={this.state.ImageTaken ? "hidden" : "front-dark"}>Capture Score</label>
               </div>
-              <video id="video" width="360" height="360" className="video" autoPlay></video>
+              <video id="video" width="310" height="310" className="video" autoPlay></video>
             </div>
             <div className="submit-container">
             <div className={this.state.currState !== 3 ? "hidden" : "submit-button-elements"} >
               <div className="button-hover">
-                <div onClick={() => this.Flash()} id="Flash" className={!this.state.Flashon ? "flash" : "flashOff"}>  
+              <div onClick={() => this.Flash()} id="Flash" className={!this.state.Flashon ? "flash" : "flashOff"}>  
                 </div>
               </div>
               </div>
@@ -365,7 +366,7 @@ export default class search extends Component {
           </div>
         </div>
         <div className={this.state.ImageTaken ? "image-container" : "hidden"}>
-            <canvas id="canvas" width="360" height="360" className="image-view background" ></canvas>
+        <canvas id="canvas" width="310" height="310" className="image-view background" ></canvas>
           </div>
       </div>
     )
