@@ -7,13 +7,15 @@ class Documents extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            array: []
+            array: [],
+            email: ""
         }
         this.GetMembers = this.GetMembers.bind(this);
+        this.SendMail = this.SendMail.bind(this);
     }
-
+    
     GetMembers() {
-        fetch(BASE_URL,"/api/Features/SearchMember", {
+        fetch(BASE_URL+"/api/Features/SearchMember", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         })
@@ -31,29 +33,46 @@ class Documents extends Component {
             .catch(function () { });
     }
 
-    SearchMember(user) {
+    SearchMember(index,user) {
         this.setState({
-            usernameValue: user
+            email: user.email
         });
-        let name = this.state.array[user].username;
-        let email = this.state.array[user].email;
-        fetch(BASE_URL,"/api/Features/Search?Username=" + name, {
+     
+        document.getElementById("usernameValue").value = user.email;
+        
+        fetch(BASE_URL,"/api/Features/Search?Username=" + user.name, {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         }).then(function (response) {
             return response.json();
         }).then(function (data) {
-                document.getElementById("usernameValue").value = email;
+                document.getElementById("usernameValue").value = data.email;
             })
             .catch(function () { });
     }
+
+    SendMail(){
+        (async () => {
+            const rawResponse = await fetch(BASE_URL+`/api/Documents/Email/${this.state.email}`, {
+              method: 'PUT',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                "email": this.state.email
+                })
+            });
+      })();
+    }
+
 
     render() {
         const postItems = (
             <Table striped hover condensed>
                 <tbody>
                     {this.state.array.map((post, index) => (
-                        <tr key={post.id} onClick={() => this.SearchMember(index)}>
+                        <tr key={post.id} onClick={() => this.SearchMember(index,post)}>
                             <td>
                                 <b>{post.username}</b>
                                 <p>{post.email}</p>
@@ -72,13 +91,13 @@ class Documents extends Component {
                     <div className="label-select-member">
                         <Label>Select Member</Label>
                     </div>
-                    <div className="search-member-name">
+                    <div className="search-name">
                         <Input
                             type="text"
                             name="usernameValue"
                             id="usernameValue"
                             placeholder="Username or Email"
-                            value={this.state.usernamesValue}
+                            value={this.state.email}
                             onChange={this.GetMembers} />
                     </div>
                     <div className="table-search-members">
@@ -93,7 +112,7 @@ class Documents extends Component {
                         <br />
                     </div>
                     <div className="button-upload-document">
-                        <Button className="send-email">SendEmail</Button>
+                        <Button className="send-email" onClick={this.SendMail}>SendEmail</Button>
                     </div>
                     <br />
                 </div>

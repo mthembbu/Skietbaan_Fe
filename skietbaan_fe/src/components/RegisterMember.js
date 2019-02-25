@@ -51,7 +51,7 @@ class App extends Component {
   }
 
   SearchAllMember() {
-    fetch(BASE_URL,"/api/User", {
+    fetch(BASE_URL+"/api/User", {
       method: 'Get',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     }).then(function (response) {
@@ -72,7 +72,7 @@ class App extends Component {
       usernameValue: user
     });
     let name = this.state.arrayUsers[user].username;
-    fetch(BASE_URL,"/api/Features/Search?Username=" + name, {
+    fetch(BASE_URL+"/api/Features/Search?Username=" + name, {
       method: 'Get',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     }).then(function (response) {

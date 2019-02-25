@@ -34,7 +34,7 @@ class App extends Component {
 							<Route path="/scorecapture" component={ScoreCapture} exact />
 							<Route path="/groupsname" component={GroupsName} exact />
 							<Route path="/groups" component={Groups} exact />
-							<Route psth="/create" component={CreatePage} exact />
+							<Route path="/create" component={CreatePage} exact />
 							<Route path="/GroupDone" component={GroupDone} exact />
 							<Route path="/notifications" component={notifications} exact />
 							<Route path="/documents" component={Documents} exact />
