@@ -256,13 +256,6 @@ hr{
     background-image: url("../components/assets/FlashOff.png");
 }
 
-.flashOff{
-    height: 45px;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    background-image: url("../components/assets/FlashOff.png");
-}
 .label-container{
     text-align: center;
     padding-bottom: 10px;
