@@ -319,7 +319,8 @@ export default class search extends Component {
                 <div className="button-hover">
 
                   <img src={require('../components/assets/scoreCapture.png')} 
-                    id="btnScoreCapture" onClick={() => this.CameraClicked()} alt=''></img>
+                    id="btnScoreCapture" className ="btnScoreCapture"
+                    onClick={() => this.CameraClicked()} alt=''></img>
                 </div>
                 <label className="labelIcon">Capture score</label>
               </div>

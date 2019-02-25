@@ -15,6 +15,10 @@
     border-radius: 5px;
 }
 
+.btnScoreCapture{
+    height: 30px;
+}
+
 .competition-item:hover{
     cursor: pointer;
     color: #FF611D;
@@ -244,7 +248,7 @@ hr{
 }
 
 .button-that-submits{
-    height: 40px;
+    height: 30px;
 }
 
 input::-webkit-outer-spin-button,
