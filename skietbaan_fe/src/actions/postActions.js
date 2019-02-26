@@ -1,18 +1,15 @@
-import {
-	FETCH_POSTS,
-	NEW_POST,
-	UPDATENAME,
-	CREATEGROUP,
-	GETGROUP,
-	GETNAME,
+import { FETCH_POSTS,NEW_POST,UPDATENAME,CREATEGROUP,GETGROUP,GETNAME,URLADD,URLUSER,URLGROUP,FETCH_LEADERBOARDFILTER_DATA ,FETCH_LEADERBOARDTABLE_DATA} from './types';
 	PASS_ID,
-	URLADD,
-	URLUSER,
 	URLGROUP,
 	FETCH_LEADERBOARDFILTER_DATA,
 	FETCH_LEADERBOARDTABLE_DATA
-  } from "./types";
 
+		dispatch({
+		  type: FETCH_POSTS,
+		  payload: newdata
+		});
+	  });
+  };
   /** The method to feth the already available data for posts*/
   export const fetchPosts = () => dispatch => {
 	fetch(URLUSER)
@@ -22,12 +19,6 @@ import {
 		  users.highlighted = false;
 		  return users;
 		});
-		dispatch({
-		  type: FETCH_POSTS,
-		  payload: newdata
-		});
-	  });
-  };
   export const createGroups = usersadded => dispatch => {
 	fetch(URLGROUP, {
 	  method: "POST",
@@ -56,7 +47,7 @@ import {
 		"Content-Type": "application/json"
 	  },
 	  body: JSON.stringify(users)
-	})
+	}).then((res) => res.json())
 	  .then(function(response) {})
 	  .then(function(data) {})
 	  .catch(function(data) {});
@@ -81,6 +72,25 @@ import {
 		  payload: posts
 		})
 		);	
+  };
+export const getname = name => {
+	//Return an action
+	return dispatch => {
+	  dispatch({
+		type: UPDATENAME,
+		payload: name
+	  });
+	};
+  };
+  export const getGroup = () => dispatch => {
+	fetch(URLUSER)
+	  .then(res => res.json())
+	  .then(posts =>
+		dispatch({
+		  type: GETGROUP,
+		  payload: posts
+		})
+	  );
   };
 /** The method to feth leaderboard filter data (groups array and competitions array*/
 	export const fetchleaderboadfilterdata = () => (dispatch) => {
