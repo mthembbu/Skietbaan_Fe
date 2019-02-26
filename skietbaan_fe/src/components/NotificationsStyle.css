@@ -18,14 +18,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     padding-bottom: 640px;
-  }
-
-  .viewButton{
-    background-color: white;
-    color: black;
-    border-radius: 25px;
-    border-color: transparent;
-  }
+  } 
 
   .centre {
     text-align: center; 
@@ -34,17 +27,18 @@
   b{
     font-size: 25px;
     font-family: helvetica;
-    padding-right: 90px
+    padding-left: 100px;
   }
 
   img{
-    padding-right: 70px;
-    padding-bottom: 8px;
+    padding-bottom: 6px;
+    padding-right: 35px;
   }
 
   div.PageHeading{
     height: 49px;
     padding-top: 8px;
+    padding-right: 90px;
   }
 
   .PageHeading{
@@ -56,7 +50,7 @@
   }
 
   .buttonCss{
-    width: 250px;
+    width: 200px;
     background-color: white;
     border-radius: 25px;
     color: black;
@@ -74,16 +68,51 @@
     padding: 1.75rem; 
     font-size: 13px;
     border-bottom-style: none;
+    font-family: helvetica;
   }
 
   table tbody{
     border-bottom: none;
+    font-family: helvetica;
+    background-image: url("Notification-Img/Rectangle.png");
+    color: white;
+    border-style: none;
+    border: none;
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 640px;
   }
 
   table table{
     text-align: center;
     border-bottom-style: none;
     border-bottom: none;
+    background-image: url("Notification-Img/Rectangle.png");
+    color: white;
+    border-style: none;
+    border: none;
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 640px;
+  }
+
+  table{
+    border-bottom: none;
+    border-style: none;
+    border: none;
+    background-image: url("Notification-Img/Rectangle.png");
+    color: white;
+    border-style: none;
+    border: none;
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 640px;
   }
 
   button.btn.btn-secondary{
@@ -91,17 +120,41 @@
     background-color: white;
     color: black;
     font-size: 16px;
+    padding-right: 30px;
+    padding-top: 4px;
+  }
+  div.col{
+    position: fixed;
+    bottom: 45px;
   }
 
   button.buttonCss.btn.btn-secondary{
     border-radius: 25px;
-    background-color: white;
-    color: black;
-    position: fixed;
+    position: absolute;
     font-size: 16px;
+    padding-bottom: 30px;
+    width: 230px;
+    padding-left: 25px;
+    background-color: transparent;
+    border-style: solid;
+    border-width: thin;
+    border-color: white;
+    color: white;
+    font-family: helvetica;
+  }
+
+  .Buttons{
+    padding-right: 23px;
+  }
+
+  div.a.img.Buttons{
+    padding-right: 23px;
   }
 
   nav.navbar-custom.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top{
     padding-left: inherit;
   }
-  
+
+  p{
+    color: white;
+  }
