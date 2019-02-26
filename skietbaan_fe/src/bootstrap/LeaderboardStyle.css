@@ -1,53 +1,152 @@
 .container{
     min-width: 100%;
 }
-   
-.filterNav{
-    min-width: 100%;
-    display: inline-flex;
-    background-color: darkgrey;
-    padding: 1%;
+.leaderboardContainer{
+    background-color: aqua;
+    height: -webkit-fill-available !important;  
+    background-color: rgb(212, 212, 212);
 }
-.competitionSelction{
+.leaderboardContainer .row justify-content-center{
+   background-color: white !important;
+ }
+.filterSection{
+    background-color: #171F32;
+    color: white;
+    width: 100%;
+}
+.filterTableAlwaysVisible{
     width:100%;
-    background-color: black;
-    padding: 2%;
 }
-.competitionSelction div{
-    margin: auto;
+.filterContent{
+    background-color: #171F32;
+    color: white;
+    width: 100%;
+    padding-left: 3%;
+    padding-right: 3%;
+    align-content: center;
+}
+.CompetitionName{
+    background-color: white;
+}
+.row div p{
+    color: #FF611D;
+}
+.row div .scrollableContainerC{
+    overflow-y: auto;
+    height: 150px;
+}
+.row .table td{
+  border: 0px;
+}
+.row div .scrollableContainerG{
+    overflow-y: auto;
+    height: 150px;
+}
+.container h4{
+    color: #FF611D;
+}
+.filterContent hr{
+    color: #FF611D;
+    background-color: #FF611D;
+}
+.row .table thead{
+    padding-left: 2%;
+    background-color: #171F32;
+    color: white;
+}
+.row .table td{
+    padding-right: 3%;
+}
+.row .table{
+    margin: 0px;
+}
+.nav-link{
+    color: white;
+}
+.firstcoll{
+   text-align: center
 }
 .curentMember{
-    background-color: black;
-    color: white;
+    background-color: #171F32 !important;background-image: linear-gradient(-90deg, #FF611D, #171F32);
+    color: white !important;
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
+    padding: 0%;
 }
-.filterNav .col-md-4 .row{
-    display: -webkit-inline-box;
+.curentMember table{
+    background-image: linear-gradient(-90deg, #FF611D, #171F32);
 }
-.groupFilt{
-    width:100%;
-    margin: 1%;
-    display: inline-block;
+.curentMember table td{
+    padding: 0% !important;
 }
-.groupLabel{
-    text-align: center;
+.filters{
+    background-image: linear-gradient(-90deg, #FF611D, #171F32);
 }
-.groupChoose{
-    width:100%;
+.body{
+    background-color: #171F32 !important;
+    width: 100%;
 }
+.row{
+    width: 100%;
+    margin: 0% !important;
+}
+.leaderboardContainer{
+    width: 100% !important;
+    height: 100%;
+}
+.rankingTableContainer{
+    width: 100%;
+}
+.rankingTableHeader{
+    width: 100%;
+    background-color: #171F32 !important;
+}
+.rankTableHead{
+    color:white;
+    background-color: #171F32 !important;
+}
+.rankTableBody{
+    color:black;
+    background-color: transparent;
+    width: -webkit-fill-available;
+    height: 100%;
+    overflow-y: scroll !important;
 
-.scoreType{
-    width:100%;
-    margin: 1%;
-    display: inline-block;
 }
-.scoreTypeLabel{
+.rankTableHead table{
+    width: -webkit-fill-available;
+}
+.rankTableHead table td{
+    padding: 0%;
     text-align: center;
+    padding-left: 2%;
 }
-.scoreTypeChoose{
-    width:100%;
-    padding: 1%;
+.invisibleCol{
+    color: transparent !important;
 }
+.rankUsernameRowTable{
+    width: -webkit-fill-available;
+}
+.rankUsernameRowTable td{
+   padding-left: 3%;
+   text-align: center;
+}
+.rankScoresRowTable{
+    width: -webkit-fill-available;
+}
+.rankScoresRowTable tr .invisibleCol{
+   color: transparent !important;
+}
+.rankScoresRowTable tr td{
+    text-align: center;
+ }
+ .rankingNumberCol{
+     width: 20%;
+     padding-left: 10%;
+     text-align: center !important;
+ }
+ .usernameCol{
+    text-align: left !important;
+ }

@@ -52,8 +52,6 @@ class AddGroup extends Component {
           />
           </div>
       
-          <br />
-          <br />
           <div className="TheAdd">
           <button className="Add" type="submit" onClick={this.onClick}>
             Add users

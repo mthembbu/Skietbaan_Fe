@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Container, Col,FormGroup, Label, Input, Button, Form} from 'reactstrap';
+import { Container, Col, FormGroup, Label, Input, Button, Form } from 'reactstrap';
 import '../components/RegisterStyles.css';
 import { validateEmail, validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
-import {URL} from '../actions/types.js';
+import { URL } from '../actions/types.js';
 
 class Register extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class Register extends Component {
       emailValue: "",
       passwordValue: "",
       validForm: false,
-      tokenValue : "",
+      tokenValue: "",
     }
     this.Register = this.Register.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -30,43 +30,42 @@ class Register extends Component {
       invalidPassword: this.state.invalidPassword,
       invalidEmail: this.state.invalidEmail,
       invalidUsername: this.state.invalidUsername
-     }
-    if (target.name === "passwordValue" ) {
-      stateUpdate.invalidPassword= false;
+    }
+    if (target.name === "passwordValue") {
+      stateUpdate.invalidPassword = false;
     };
     if (target.name === "emailValue" && !validateEmail(this.state.emailValue)) {
-      stateUpdate.invalidEmail= false;
-    }; 
-    if (target.name === "usernameValue" ) {
-      stateUpdate.invalidUsername= false;
+      stateUpdate.invalidEmail = false;
+    };
+    if (target.name === "usernameValue") {
+      stateUpdate.invalidUsername = false;
     };
     this.setState({
-      ...stateUpdate ,
+      ...stateUpdate,
       validForm: isValid
     });
   };
-  Validate()
-  {
+  Validate() {
     let isValid = true;
     let stateUpdate = {
       invalidPassword: false,
       invalidEmail: false,
       invalidUsername: false
-     }
+    }
     if (this.state.passwordValue.length === 0) {
-      stateUpdate.invalidPassword= true;
+      stateUpdate.invalidPassword = true;
       isValid = false;
     };
     if (!validateEmail(this.state.emailValue)) {
-      stateUpdate.invalidEmail= true;
+      stateUpdate.invalidEmail = true;
       isValid = false;
-    }; 
+    };
     if (validateUsername(this.state.usernameValue)) {
-      stateUpdate.invalidUsername= true;
+      stateUpdate.invalidUsername = true;
       isValid = false;
     };
     this.setState({
-      ...stateUpdate ,
+      ...stateUpdate,
       validForm: isValid
     });
   }
@@ -74,7 +73,7 @@ class Register extends Component {
   Register() {
     this.Validate();
     if (this.state.validForm) {
-      let sha1 = require('sha1');  
+      let sha1 = require('sha1');
       let hash = sha1(this.state.passwordValue);
       let RequestObject = {
         "Username": this.state.usernameValue,
@@ -88,20 +87,19 @@ class Register extends Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(RequestObject)
-      }).then(function(response) {
+      }).then(function (response) {
         return response.json();
-      }).then( function(data) {
-        if(typeof data === "object")
-        {
-          document.cookie = "token =" +data.token+"; expires =Wed, 18 Dec 2030 12:00:00 UTC";
+      }).then(function (data) {
+        if (typeof data === "object") {
+          document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
           window.location = "/home";
         }
-      }).catch(function(data) {
+      }).catch(function (data) {
       });
     }
   }
   render() {
-    if(getCookie("token")){
+    if (getCookie("token")) {
       window.location = "/home";
     }
     let invalidPasswordMessage;
@@ -119,13 +117,16 @@ class Register extends Component {
     }
     return (
       <Container className="App">
+        <div className="header-container">
+          <h2>Register</h2>
+        </div>
         <div className="centre-login">
           <Form className="form" autoComplete="off">
-            <h2>Register</h2>
+
             <Col className="no-padding">
               <FormGroup>
-                <Label>Username</Label>
-                <Input
+              <Label className="front-white"> Type <strong>Username</strong></Label>
+              <Input
                   type="text"
                   name="usernameValue"
                   id="usernamerValue"
@@ -139,7 +140,7 @@ class Register extends Component {
             </Col>
             <Col className="no-padding">
               <FormGroup>
-                <Label for="examplePassword">Email</Label>
+              <Label className="front-white"> Type <strong>Email Address</strong></Label>
                 <Input
                   type="email"
                   name="emailValue"
@@ -154,7 +155,7 @@ class Register extends Component {
             </Col>
             <Col className="no-padding">
               <FormGroup>
-                <Label for="examplePassword">Password</Label>
+              <Label className="front-white"> Type <strong>Password</strong></Label>
                 <Input
                   type="password"
                   name="passwordValue"
@@ -167,8 +168,12 @@ class Register extends Component {
                 {invalidPasswordMessage}
               </FormGroup>
             </Col>
-            <Button onClick={this.Login} className={this.state.validForm ? "button-valid" : "button-invalid"} >Submit</Button>
+            <div className="button-container">
+            <Button onClick={this.Register} className={this.state.validForm ? "round-button" : "button-invalid round-button"} >Join</Button>
+            </div>
           </Form>
+          <div className="register-anchhor"> Already Registered? <a className="front-white" href="/login">Login here</a></div> 
+
         </div >
       </Container>
 

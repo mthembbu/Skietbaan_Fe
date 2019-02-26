@@ -1,39 +1,37 @@
-.customNav .navbar{
-    background-color: darkgray !important;
-}
-.curentMember{
-    background-color: black;
-    color: white;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-}
-.filterNav .col-md-4 .row{
-    display: -webkit-inline-box;
-}
-.groupFilt{
-    width:100%;
-    margin: 1%;
-    display: inline-block;
-}
-.groupLabel{
-    text-align: center;
-}
-.groupChoose{
-    width:100%;
-}
 
-s
-.scoreType{
-    width:100%;
-    margin: 1%;
-    display: inline-block;
-}
-.scoreTypeLabel{
-    text-align: center;
-}
-.scoreTypeChoose{
-    width:100%;
-    padding: 1%;
-}
+.fixed-top{
+    position:relative !important;
+  }
+  .navbar-custom{
+    background-color: #171F32 !important;
+  }
+  .App div .navbar {
+    background-color: #171F32 !important;
+    color: white !important;
+    margin: 0%;
+  }
+  .App div .navbar a{
+    color: white !important;
+  }
+  .App div .navbar .fa{
+    display: grid;
+    text-align: -webkit-center;
+   }
+  .App div .navbar .fa:hover{
+    color: #FF611D;
+    align-content: center
+   }
+  .App div .navbar button{
+    padding: 0%;
+    width: fit-content;
+    color: white !important;
+    background-color: white !important;
+  }
+  .App div .navbar button:hover{
+    color: #FF611D !important;
+    background-color: #FF611D !important;
+  }
+  .dropdown-menu.show{
+    background-image: linear-gradient(0deg, #FF611D, #171F32);
+  }
+

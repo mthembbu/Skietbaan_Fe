@@ -9,7 +9,7 @@ import {
 	URLUSER,
 	URLGROUP
   } from "./types";
-  
+
   /** The method to feth the already available data for posts*/
   export const fetchPosts = () => dispatch => {
 	fetch(URLUSER)
@@ -77,6 +77,26 @@ import {
 		  type: GETGROUP,
 		  payload: posts
 		})
-	  );
+		);	
   };
-  
+/** The method to feth leaderboard filter data (groups array and competitions array*/
+	export const fetchleaderboadfilterdata = () => (dispatch) => {
+		fetch('https://api.skietbaan.retrotest.co.za/api/Leaderboard/GetLeaderboardFilterData?UserID=' + 1)
+				.then(res => res.json())
+				.then(data => dispatch({
+				type: FETCH_LEADERBOARDFILTER_DATA,
+				payload: data
+			})
+		);
+	};
+	/** The method to feth leaderboard rank table data ( arrayy of users scores)*/
+	export const fetchleaderboadtabledata = (filterSelection) => (dispatch) => {
+		fetch('https://api.skietbaan.retrotest.co.za/api/Leaderboard/GetLeaderboardRankings?competitionID=' + filterSelection.selectedCompetition  + '&groupID=' + filterSelection.selectedGroup  + '&userToken=' + filterSelection.userToken)
+			.then(res => res.json())
+			.then(data =>
+			dispatch({
+				type: FETCH_LEADERBOARDTABLE_DATA,
+				payload: data
+			})
+		);
+	};
