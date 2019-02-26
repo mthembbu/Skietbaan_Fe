@@ -1,13 +1,13 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./groups.css";
-import { URLADD, URLUSER } from "../actions/types";
-
+import history from './history';
+// import $ from 'jquery';
 class Groups extends Component {
   constructor(props) {
     super(props);
     this.state = {
       posts: [],
-
       newArray: [],
       count: 0,
       black: "",
@@ -17,9 +17,10 @@ class Groups extends Component {
     this.handleOnClick = this.handleOnClick.bind(this);
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
+    
   }
   componentWillMount() {
-    fetch(URLUSER)
+    fetch("http://localhost:63474/api/user")
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -49,7 +50,7 @@ class Groups extends Component {
     let request = {
       newArray: this.state.newArray
     };
-    fetch(URLADD, {
+    fetch("http://localhost:63474/api/groups/add", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -76,8 +77,11 @@ class Groups extends Component {
     }
   };
   onBack() {
-    window.location = "/AddGroup";
+    history.push("/addGroup");
   }
+
+ 
+
   render() {
     const postitems = (
       <div className="check">
@@ -85,8 +89,7 @@ class Groups extends Component {
 
           {this.state.posts.filter(
             (post) => {
-              return (!this.state.filterText || post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) 
-              || post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase()))
+              return (!this.state.filterText || post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) || post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase()))
             }
           ).map((post, index) => (
             <li class="list-group-item list-group-item-light" key={post.id}>
@@ -108,28 +111,29 @@ class Groups extends Component {
       <main className="TheMain" >
         <div className="TheNavBar">
           <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
-          <div className="Center_Label">
-            <b>Retro Rabbit</b>
+          <div className="center_label">
+            <h2><b>{this.props.name}</b></h2>
           </div>
         </div>
-        <div className="NavBar">
+        <div className="BNavBar">
           <input
-            className="TheText"
+            className="theText"
             id="username"
             type="text"
             placeholder="Search.." 
             onChange={this.onChange}
             autoComplete="off"
           />
-          <button className="Select" onClick={this.handleOnClick}>
+          <button className="select" id="check" onClick={this.checktheboxs}>
            CREATE
           </button>
         </div>
+
         <div className="OnToTheNextOne" />
         <br />
         <br />
         <div
-          className="Scrollbar"
+          className="scrollbar"
           data-simplebar
           data-simplebar-auto-hide="false"
         >
@@ -139,5 +143,13 @@ class Groups extends Component {
     );
   }
 }
-export default(Groups);
+const mapStateToProps = state => ({
+ name:state.posts.groupName
+});
+
+
+export default connect(
+  mapStateToProps,
+  
+)(Groups);
 

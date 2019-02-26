@@ -5,9 +5,12 @@ import {
 	CREATEGROUP,
 	GETGROUP,
 	GETNAME,
+	PASS_ID,
 	URLADD,
 	URLUSER,
-	URLGROUP
+	URLGROUP,
+	FETCH_LEADERBOARDFILTER_DATA,
+	FETCH_LEADERBOARDTABLE_DATA
   } from "./types";
 
   /** The method to feth the already available data for posts*/
@@ -99,4 +102,13 @@ import {
 				payload: data
 			})
 		);
+	};
+
+	export const passId = id => {
+		return dispatch => {
+			dispatch({
+				type: PASS_ID,
+				payload: id
+			});
+		};
 	};

@@ -1,10 +1,12 @@
-import { FETCH_POSTS, NEW_POST,FETCH_LEADERBOARDFILTER_DATA ,FETCH_LEADERBOARDTABLE_DATA } from '../actions/types';
+import { FETCH_POSTS, NEW_POST,FETCH_LEADERBOARDFILTER_DATA ,FETCH_LEADERBOARDTABLE_DATA,PASS_ID,UPDATENAME } from '../actions/types';
 const initialState = {
   selectedItem: {},
 	allItems: [],
 	selectedItem: {},
 	leaderboardGroups:[],
 	leaderboardCompetitions:[],
+	groupId:0,
+	groupName:"",
 	leaderboardScoreTypes: [
 		{ label: "Average", value: 1 },
 		{ label: "Total", value: 2 },
@@ -46,8 +48,21 @@ export default function(state = initialState, action) {
 				...state,
 				leaderboardTableData: action.payload.rankResults,
 				leaderboardUserData: action.payload.userResults
-      };
+			};
+
+		case PASS_ID:
+			return {
+				...state,
+				groupId:action.payload
+			};
+		case UPDATENAME:
+			return {
+				...state,
+				groupName:action.payload
+			};
     default:
       return state;
   }
 }
+
+

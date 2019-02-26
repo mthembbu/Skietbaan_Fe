@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createGroups } from "../actions/postActions";
+import { getname } from "../actions/postActions";
 import "./add.css";
-import { bindActionCreators } from 'redux';
-import * as groupactions from "../actions/postActions";
+import { checkPropTypes } from "prop-types";
+import history from './history';
+
 
 class AddGroup extends Component {
   constructor(props) {
@@ -26,37 +27,41 @@ class AddGroup extends Component {
     let RequestObject = {
       "Name": this.state.name,
     };
-    this.props.createGroups(RequestObject);
-    window.location = "/Groups";
+  
+   this.props.getname(this.state.name);
+   this.props.createGroups(RequestObject);
+   history.push("/Groups");
    }
   render() {
+    console.log(this.props)
     return (
-      <div className="Page">
-        <div className="Top_Bar">
+      <div className="page">
+        <div className="top_bar">
           <a href="#" class="fa fa-angle-left" />
-          <div className="Center_Label">
-            <b>GROUPS</b>
+          <div className="center_label">
+          <label className="groups">
+            <h3><b>GROUPS</b></h3>
+            </label>
           </div>
         </div>
-        <div className="Middle_Bar">
+        <div className="middle_bar">
           <label className="name">
-            <b>Enter Group Name</b>
+            <h3>Enter Group Name</h3>
           </label>
-        <div className="input-container">
+          <br />
           <input
-            className="Texts"
+            className="texts"
             type="text"
             name="name"
             onChange={this.onChange}
             value={this.state.name}
           />
-          </div>
-      
-          <div className="TheAdd">
-          <button className="Add" type="submit" onClick={this.onClick}>
-            Add users
+          <br />
+          <br />
+
+          <button className="add" type="submit" onClick={this.onClick}>
+            ADD GROUP
           </button>
-          </div>
         </div>
       </div>
     );
@@ -64,17 +69,10 @@ class AddGroup extends Component {
 }
 
 const mapStateToProps = state => ({
-
-});
-
-const mapDispatchToProps = dispatch =>{
-    return {
-      group: bindActionCreators(groupactions,dispatch)
-    }
-  }
-  
+  name:state.posts.groupName,
+ });
 
 export default connect(
   mapStateToProps,
-  {createGroups}
+  {createGroups,getname}
 )(AddGroup);
