@@ -1,4 +1,4 @@
-import { FETCH_POSTS, NEW_POST,FETCH_LEADERBOARDFILTER_DATA ,FETCH_LEADERBOARDTABLE_DATA,PASS_ID,UPDATENAME } from '../actions/types';
+import { FETCH_POSTS, UPDATE_GROUPNAME,FETCH_LEADERBOARDFILTER_DATA ,FETCH_LEADERBOARDTABLE_DATA,PASS_ID,CREATEGROUP } from '../actions/types';
 const initialState = {
   selectedItem: {},
   allItems: [],
@@ -39,15 +39,12 @@ export default function(state = initialState, action) {
         ...state,
         selectedItem: action.payload
       };
-      return {
-        ...state,
-      };
 
-		case PASS_ID:
-    default:
-      return state;
-  }
-	switch (action.type) {
+			case PASS_ID:
+			return {
+				...state,
+				groupId:action.payload
+			};
 		case FETCH_POSTS:
 			return {
 				...state,
@@ -67,7 +64,7 @@ export default function(state = initialState, action) {
 			};
 		default:
 			return state;
-	}
+		}
 }
 
 

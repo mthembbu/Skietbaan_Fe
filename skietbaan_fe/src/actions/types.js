@@ -16,6 +16,7 @@ export const URLADD = "http://localhost:63474/api/groups/add";
 export const URLUSER = "http://localhost:63474/api/user"; 
 export const URLGROUP = "http://localhost:63474/api/groups"; 
 export const UPDATENAME = 'UPDATENAME';
+export const UPDATE_GROUPNAME = 'UPDATE_GROUPNAME';
 export const CREATEGROUP = 'CREATEGROUP';
 export const GETGROUP = 'GETGROUP';
 export const PASS_ID = 'PASS_ID';

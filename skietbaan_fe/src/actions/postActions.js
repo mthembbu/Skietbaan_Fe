@@ -1,24 +1,21 @@
-import { FETCH_POSTS,NEW_POST,UPDATENAME,CREATEGROUP,GETGROUP,GETNAME,URLADD,URLUSER,URLGROUP,FETCH_LEADERBOARDFILTER_DATA ,FETCH_LEADERBOARDTABLE_DATA} from './types';
-	PASS_ID,
-	URLGROUP,
-	FETCH_LEADERBOARDFILTER_DATA,
-	FETCH_LEADERBOARDTABLE_DATA
+import { PASS_ID,FETCH_POSTS,UPDATENAME,CREATEGROUP,GETGROUP,GETNAME,URLADD,URLUSER,URLGROUP,FETCH_LEADERBOARDFILTER_DATA ,FETCH_LEADERBOARDTABLE_DATA} from './types';
+	
 
-		dispatch({
-		  type: FETCH_POSTS,
-		  payload: newdata
-		});
-	  });
-  };
   /** The method to feth the already available data for posts*/
-  export const fetchPosts = () => dispatch => {
-	fetch(URLUSER)
-	  .then(res => res.json())
-	  .then(posts => {
-		const newdata = posts.map(users => {
-		  users.highlighted = false;
-		  return users;
-		});
+	export const fetchPosts = () => dispatch => {
+		fetch(URLUSER)
+			.then(res => res.json())
+			.then(posts => {
+			const newdata = posts.map(users => {
+				users.highlighted = false;
+				return users;
+			});
+			dispatch({
+				type: FETCH_POSTS,
+				payload: newdata
+			});
+			});
+		};
   export const createGroups = usersadded => dispatch => {
 	fetch(URLGROUP, {
 	  method: "POST",
@@ -63,25 +60,6 @@ import { FETCH_POSTS,NEW_POST,UPDATENAME,CREATEGROUP,GETGROUP,GETNAME,URLADD,URL
 	};
   };
   
-  export const getGroup = () => dispatch => {
-	fetch(URLUSER)
-	  .then(res => res.json())
-	  .then(posts =>
-		dispatch({
-		  type: GETGROUP,
-		  payload: posts
-		})
-		);	
-  };
-export const getname = name => {
-	//Return an action
-	return dispatch => {
-	  dispatch({
-		type: UPDATENAME,
-		payload: name
-	  });
-	};
-  };
   export const getGroup = () => dispatch => {
 	fetch(URLUSER)
 	  .then(res => res.json())
