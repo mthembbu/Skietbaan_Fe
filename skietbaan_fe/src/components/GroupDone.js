@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Table } from "react-bootstrap";
 
-class App extends Component {
+class GroupDone extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,4 +42,4 @@ class App extends Component {
     );
   }
 }
-export default App;
+export default GroupDone;

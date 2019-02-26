@@ -6,3 +6,7 @@ export const GROUPNAME = 'GROUPNAME';
 export const NEW_COMP = 'NEW_COMP';
 export const FETCH_COMP = 'NEW_COMP';
 export const UPDATENAME = 'UPDATENAME';
+export const CREATEGROUP = 'CREATEGROUP';
+export const GETGROUP = 'GETGROUP';
+export const GETNAME = 'GETNAME';
+export const PASS_ID = 'PASS_ID';

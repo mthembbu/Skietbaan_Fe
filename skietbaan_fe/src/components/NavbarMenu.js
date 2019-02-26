@@ -22,7 +22,7 @@ class NavbarMenu extends Component {
 								<img src="" alt="" width="" height="" />Leader Board
 							</Nav.Link>
 							<Nav.Link href="/scorecapture">Score Capture</Nav.Link>
-							<Nav.Link href="/theGroupsUser">CREATE GROUP</Nav.Link>
+							<Nav.Link href="/Groups">CREATE GROUP</Nav.Link>
 							<NavDropdown title="Create" id="basic-nav-dropdown" variant="outline-dark">
 								<NavDropdown.Item href="/new-competition">New Competition</NavDropdown.Item>
 								<NavDropdown.Item href="/">New Groups</NavDropdown.Item>

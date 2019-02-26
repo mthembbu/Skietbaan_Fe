@@ -1,0 +1,29 @@
+.Top-bar{
+    display: flex;
+    background: #cccfd3;
+    color: white;
+    height: 50px;
+}
+
+.The-name{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+  .MenuDot{
+      color: black;
+      float: right;
+  }
+
+  .btn-sm{
+    float: right;
+    margin-right: 15px;
+    margin-top: 20px;
+    width: 10px;
+    margin-left: 80%;
+  }
+
+  .list-group-item-light{
+      display: flex;
+  }
+

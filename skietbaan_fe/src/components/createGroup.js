@@ -1,36 +1,37 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Table } from "react-bootstrap";
 import { fetchPosts } from "../actions/postActions";
 import { createPost } from "../actions/postActions";
+import './add.css'
 
 export class createGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isChecked: [],
-      check: false
+      checked: false,
+      userss:[]
     };
     this.submitChange = this.submitChange.bind(this);
     this.onClick = this.onClick.bind(this);
     this.onSave = this.onSave.bind(this);
-    // this.checked = this.checked.bind(this);
+     this.changeColor = this.changeColor.bind(this);
   }
   static propTypes = {
     prop: PropTypes
   };
   componentWillMount() {
     this.props.fetchPosts();
-    
   }
   onClick(e) {
     if (this.state.isChecked.indexOf(e) >= 0) {
-      let index = this.state.isChecked.indexOf(e);
+      let index = this.state.isChecked.indexOf(e)
       this.state.isChecked.splice(index, 1);
-      console.log(this.state.isChecked.length);
+      
     } else {
       this.state.isChecked.push(e);
+      console.log(this.state.isChecked)
     }
   }
   submitChange() {
@@ -39,47 +40,48 @@ export class createGroup extends Component {
         this.state.isChecked.push(this.props.data[i].id);
         this.setState({ check: true });
       }
-      console.log(this.state.isChecked.length);
     } else {
       for (let i = 0; i < this.props.data.length; i++) {
         this.state.isChecked.splice(i, 1);
         this.setState({ check: false });
       }
-      console.log(this.state.isChecked.length);
     }
   }
 
   onSave() {
-    const postsitems = {
-      usersSelected: this.state.isChecked
-    };
+    
+    for(let i=0;i<this.state.isChecked.length;i++){
+      console.log(this.state.userss.push(this.props.data[this.state.isChecked.indexOf(this.state.isChecked[i])]))
+      this.state.userss.push(this.props.data[this.state.isChecked[i]]);
 
+    }
+    
+    const postsitems = {
+      users: this.state.userss
+    };
+    console.log(postsitems)
     this.props.createPost(postsitems);
   }
 
+  changeColor(){
+    if(this.state.checked==false){
+      this.setState({checked:true})
+    }else{
+      this.setState({checked:false})
+    }
+  }
   render() {
-    console.log(this.props.data)
-    const theList = (
-      <Table striped hover condensed>
-        <tbody>
-          {this.props.data.map((post, index) => (
-            <tr key={post.id.toString()}>
-              <td>
-                <h5>{post.username}</h5>
-                <input
-                  type="checkbox"
-                  name={post.username}
-                  id={post.id}
-                  onc
-                  onClick={() => this.onClick(post.id)}
-                />
-                <h5>{post.email}</h5>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    );
+   
+   
+    const postitems = (
+      <div class="list-group">
+        {this.state.posts.map((post, index)=>(
+          <a key={post} href="#" class="list-group-item">Second item</a>
+        
+        ))
+        }
+        </div>
+      );
     return (
       <div className="Top">
         <div className="top_bar">
@@ -90,16 +92,15 @@ export class createGroup extends Component {
         </div>
         <div className="the_middle">
           <input className="theText" type="text" placeholder="Search.." />
-          <button className="select" onClick={this.submitChange}>
+          <button className="select" onClick={this.changeColor}>
             {" "}
             Select all
           </button>
           <div className="nextpage">
-            <button onClick={this.onSave}>NEXT</button>
+            <button  className="circles" onClick={this.onSave}>NEXT</button>
           </div>
         </div>
-
-        {theList}
+        <div className="theList">{postitems}</div>
       </div>
     );
   }

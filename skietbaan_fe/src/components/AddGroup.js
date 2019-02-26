@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
-//import { getname } from "../actions/postActions";
+import { createGroups } from "../actions/postActions";
+import { getname } from "../actions/postActions";
 import "./add.css";
-import { bindActionCreators } from 'redux';
-import * as groupactions from "../actions/postActions";
+import { checkPropTypes } from "prop-types";
+import history from './history';
+
 
 class AddGroup extends Component {
   constructor(props) {
@@ -20,13 +21,19 @@ class AddGroup extends Component {
     this.setState({ [e.target.name]: e.target.value});
   }
 
-  onClick() {
-    this.props.group.getname({
-        groupName:this.state.name
-    })
-  }
+  componentDidCatch(){}
 
+   onClick() {
+    let RequestObject = {
+      "Name": this.state.name,
+    };
+  
+    this.props.getname(this.state.name);
+   this.props.createGroups(RequestObject);
+    history.push("/Groups");
+   }
   render() {
+
     return (
       <div className="page">
         <div className="top_bar">
@@ -51,7 +58,7 @@ class AddGroup extends Component {
           <br />
 
           <button className="add" type="submit" onClick={this.onClick}>
-            Add users
+            ADD GROUP
           </button>
         </div>
       </div>
@@ -59,19 +66,11 @@ class AddGroup extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  data: state.groupData.groupName,
-  groupName: state.groupData.groupName
-});
-
-const mapDispatchToProps = dispatch =>{
-    return {
-      group: bindActionCreators(groupactions,dispatch)
-    }
-  }
-  
+const mapStateToProps = state => {
+console.log(state)
+};
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  {createGroups,getname}
 )(AddGroup);
