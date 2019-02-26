@@ -56,6 +56,7 @@ class ViewGroups extends Component {
       .catch(function(data) {});
   }
   render() {
+    console.log(this.state.posts)
     const postitems = (
       <div className="check">
         <ul class="list-group">
@@ -64,11 +65,17 @@ class ViewGroups extends Component {
               return (!this.state.filterText || post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) || post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase()))
             }
           ).map((post, index) => (
-            <li class="list-group-item list-group-item-light" key={post.id}>
-             <img src={require("./GroupImages/Group.png")} className="boxes" onClick={()=>this.editGroup(post.id,post.name)}  />
-              <label className="blabe">
-                {post.username} <br />
-                {post.email}
+            <li style={{width:"100%" }} class="list-group-item list-group-item-light" key={post.id}>
+              <label style={{width:"100%"}} className="blabe">
+                {post.name}
+              <div style={{float:"right" , paddingLeft:"20px"}}>
+              <img src={require("./GroupImages/submit plus add score.png")}  className="boxes" /><br/>delete
+              
+              </div>
+              <div style={{float:"right"}}>
+             <img src={require("./GroupImages/Group.png")}  className="boxes" onClick={()=>this.editGroup(post.id,post.name)}  /><br/>edit
+             </div>
+                <br/>
               </label>
             </li>
           ))}
