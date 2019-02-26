@@ -1,18 +1,28 @@
 .competition-container{
-    padding-top: 40px;
+    padding-top: 6px;
     list-style-type: none;
-    width: 80%;
+    width: 70%;
     margin: 0 auto;
 }
 
 .competition-item{
     width: 100%;
     height: 35px;
-    background-color: #171F32 ;
-    color: white;
+    background-color: white ;
+    color: #0e0942;
     text-align: center;
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-family: 'helvetica';
+}
+
+@media screen and (min-width:580px)  {
+    .competition-item{
+        width:100%;
+        text-align: center;
+
+    }
 }
 
 .btnScoreCapture{
@@ -21,7 +31,6 @@
 
 .competition-item:hover{
     cursor: pointer;
-    color: #FF611D;
 }
 
 .hidden{
@@ -34,10 +43,6 @@
     border: 5px solid #FF611D;
 }
 
-.retake{
-    height: 40px;
-}
-
 .page-content{
     width: auto;
     height: stretch;
@@ -45,7 +50,7 @@
     width:100%;
     z-index: 50;
     position: relative;
-    height: 670px;
+    height: 100vh;
 }
 
 .opacity-85{
@@ -53,12 +58,12 @@
 }
 
 .score{
-    border-radius: 5px;
+    border-radius: 10px;
     border-color: #0e0942;
-    width: 36%;
+    width: 48%;
     margin: 0 auto;
     text-align: center;
-    color:#FF611D;
+    color:black;
 }
 
 @media screen and (min-width:580px)  {
@@ -66,6 +71,29 @@
     width:24%;
 
     }
+}
+
+.invalidScore{
+    background-image: url("../components/assets/Error.png");
+    background-size: 22px;
+    height: 22px;
+    width: 22px;
+    color: #0e0942;
+    float: right;
+    margin-top: -37px;
+    margin-right: 17%;
+}
+
+.invalidComp{
+    background-image: url("../components/assets/Error.png");
+    background-size: 22px;
+    height: 22px;
+    width: 22px;
+    float: right;
+    margin-top: -36px;
+    padding-right: 2px;
+    margin-right: 28px;
+
 }
 
 .invalid{
@@ -88,7 +116,7 @@
 
 .label-score{
     color: white;
-    font-size: x-large;
+    font-size: 25px;
     text-align: center;
     width:100%;
 }
@@ -96,20 +124,25 @@
 .label-competition{
     color: white;
     font-size: x-large;
-    padding-top: 30px;
+    padding-top: 20px;
+}
+
+.scorelabel{
+    padding-top: 10px;
 }
 
 .centre-label{
     width:100%;
+    font-size: 25px;
     text-align: center;
+    font-weight: lighter;
 }
 
-.active{
-    color:#FF611D
-}
-
-label.front-dark{
-    color:white;
+.photo-top-label{
+    padding-top:20px;
+    margin-bottom:20px;
+    color:#0e0942;
+    background-color:white;
 }
 
 .no-padding{
@@ -117,40 +150,32 @@ label.front-dark{
 }
 
 .competition-item-container{
-
-    width:50%;
-    float: left;
-    padding:15px;
+    text-align: center;
+    padding:5px;
 }
 
 @media screen and (min-width:768px)  {
     .competition-item-container{
-        width: 25%;
-      left:25%;
-
+        width: 50%;
+        left:25%;
     }
 }
 
 @media screen and (min-width:580px)  {
     .competition-item-container{
-        width: 33.33%;
-        left:25%;
+        width: 40%;
+        margin-left:30%;
 
     }
 }
 
 .submit-container{
     position: absolute;
-    bottom: 70px;
+    bottom: 125px;
     margin: 0 auto;
     text-align: center;
-    width: 100%;
-}
-
-@media screen and (max-height:580px)  {
-    .submit-container{
-        bottom: 170px;
-    }
+    width: 80%;
+    margin-left: 10%;
 }
 
 .retake{
@@ -160,8 +185,26 @@ label.front-dark{
 .submit-button-elements{
     float: left;
     width: 50%;
-    height: 80px;
+    height: 20px;
     position: relative;
+}
+
+.icon-pushdown{
+    position: fixed;
+    bottom: 70px;
+    width: 80%;
+    left: 0;
+    margin-left:10%;
+    margin-right:10%;
+}
+
+.icon-pushdown.no-margin{
+    margin:0;
+    width:100%;
+}
+
+.submit-button-elements.third{
+    width:33%;
 }
 
 .video-container{
@@ -172,14 +215,13 @@ label.front-dark{
 
 @media screen and (max-width:510px)  {
     .video-container{
-        height: 350px;
-        width: 350px;
+        height: 310px;
+        width: 310px;
         border-radius:25%;
     }
 }
 
 .image-view{
-    top: 44px;
     display: block;
     position: relative;
     margin: 0 auto;
@@ -191,10 +233,15 @@ label.front-dark{
 }
 
 .image-view.background{
-    border:none;
-    width:90%;
-    height:90%
+    width: 310px;
+    height: 320px;
+}
 
+@media screen and (min-width:510px)  {
+    .image-view.background{
+        width: 320px;
+        height: 320px;
+    }
 }
 
 .image-container{
@@ -217,19 +264,31 @@ hr{
     margin-top: 0px;
 }
 
-
 .position-relative{
     position: relative;
 }
 
 .labelIcon{
     color: white;
-    width: 100%;
-    margin-top: 7px;
-    position: absolute;
+    width: 60%;
+    margin-top: 13px;
     bottom: 0;
     text-align: center;
     left: 0;
+    font-size: 12px;
+    font-family: 'helvetica';
+}
+
+.labelIcon2{
+    color: white;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    left: 0;
+    font-size: 12px;
+    font-family: 'helvetica';
+    padding-left: 38%;
+    padding-top: 13px;
 }
 
 .btnScoreCapture{
@@ -238,6 +297,20 @@ hr{
 
 .button-that-submits{
     height: 30px;
+}
+
+.button-that-submits2{
+    height: 30px;
+    float: right;
+    margin-top: 28%;
+    margin-right: 26%;
+}
+
+@media screen and (min-height:600px)  {
+    .button-that-submits2{
+        margin-top: 35%;
+        margin-right: 26%;
+    }
 }
 
 .flash{
@@ -273,4 +346,32 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
     -moz-appearance:textfield; /* Firefox */
+}
+
+.active{
+    background-color: #0F5F79;
+    color: white;
+}
+
+.btnBack{
+    float: left;
+    padding-left: 15px;
+    height: 30px;
+}
+
+.spacing{
+    padding-top: 47%;
+    width: 100%;
+    padding-right: 73%;
+}
+
+.white-border{
+    height: 5px;
+    width: 100%;
+    background-color: white;
+}
+
+.back-spacing{
+    width: 100%;
+    height: 30px;
 }
