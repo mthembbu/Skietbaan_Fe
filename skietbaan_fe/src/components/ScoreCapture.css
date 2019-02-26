@@ -16,7 +16,9 @@
     font-size: 16px;
     font-family: 'helvetica';
 }
-
+.float-right{
+    float:right;
+}
 @media screen and (min-width:580px)  {
     .competition-item{
         width:100%;
@@ -141,8 +143,8 @@
 .photo-top-label{
     padding-top:20px;
     margin-bottom:20px;
-    color:#0e0942;
-    background-color:white;
+    background-color:#171F32;
+    color:white;
 }
 
 .no-padding{

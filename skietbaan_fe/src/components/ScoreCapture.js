@@ -25,7 +25,8 @@ export default class search extends Component {
       error: null,
       Flashon: false,
       validScore: true,
-      validCompetition: true
+      validCompetition: true,
+      scoreEntered:false
     }
     this.CompetitionClicked = this.CompetitionClicked.bind(this);
     this.handleScore = this.handleScore.bind(this);
@@ -45,12 +46,14 @@ export default class search extends Component {
     }, () => {
       if (validateScore(this.state.score)) {
         this.setState({
-          validScore: false,
+          validScore: true,
+          scoreEntered:true
         });
       }
       else {
         this.setState({
-          validScore: true,
+          validScore: false,
+          scoreEntered:false
         });
       }
     });
@@ -332,6 +335,7 @@ export default class search extends Component {
               </div>
 
             </div>
+            <div className={this.state.scoreEntered ? "":"hidden"}>
             <div className="centre-label">
               <label className="label-competition">Select Competition</label>
             </div>
@@ -340,12 +344,13 @@ export default class search extends Component {
             <div className="competition-container">
               {competitionItem}
             </div>
+            </div>
             <div className={this.state.scoreSaved ? "sucess-container" : "hidden"}>
               <div className="success"> Score Saved successfully </div>
             </div>
           </div>
           <div className="submit-container">
-            <div className={this.state.ImageTaken || this.state.showCamera ? "hidden" : "submit-button-elements"}>
+            <div className={this.state.ImageTaken || this.state.showCamera || !this.state.scoreEntered ? "hidden" : "submit-button-elements"}>
               <div className="button-hover">
 
                 <img src={require('../components/assets/scoreCapture.png')}
@@ -355,15 +360,22 @@ export default class search extends Component {
               <label className="labelIcon">Capture score</label>
             </div>
             <div className={(this.state.showCamera && !this.state.ImageTaken) 
-              || this.state.ImageTaken ? "hidden" : "submit-button-elements"}>
+              || this.state.ImageTaken || !this.state.scoreEntered ? "hidden" : "submit-button-elements"}>
               <div className="button-hover ">
                 <img src={require('../components/assets/submitScore.png')} onClick={() => this.GetLocation()}
                   className="button-that-submits" alt=''></img>
               </div>
               <label className="labelIcon">Submit</label>
             </div>
-            <div className=" icon-pushdown">
-              <div className={this.state.ImageTaken ? "submit-button-elements" : "hidden"} >
+            <div className="icon-pushdown no-margin">
+            <div className={!this.state.ImageTaken ? "hidden" : "submit-button-elements third float-right"}>
+                <div className="button-hover ">
+                  <img src={require('../components/assets/submitScore.png')} onClick={() => this.GetLocation()}
+                    className="button-that-submits" alt=''></img>
+                </div>
+                <label className="labelIcon">Submit</label>
+              </div>
+              <div className={this.state.ImageTaken ? "submit-button-elements third float-right" : "hidden"} >
                 <div className="button-hover">
                   <img src={require('../components/assets/retakeImage.png')}
                     id="btnScoreCapture" className="retake" onClick={() => this.RetakePhoto()}
@@ -371,13 +383,6 @@ export default class search extends Component {
                   </img>
                 </div>
                 <label className="labelIcon">Re-Capture Score</label>
-              </div>
-              <div className={!this.state.ImageTaken ? "hidden" : "submit-button-elements"}>
-                <div className="button-hover ">
-                  <img src={require('../components/assets/submitScore.png')} onClick={() => this.GetLocation()}
-                    className="button-that-submits" alt=''></img>
-                </div>
-                <label className="labelIcon">Submit</label>
               </div>
             </div>
 
