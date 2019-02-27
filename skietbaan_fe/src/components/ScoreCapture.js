@@ -308,6 +308,7 @@ export default class search extends Component {
 
 
   render() {
+    const stateOne = this.state.showCamera || this.state.ImageTaken
     let competitionItem = [];
     if (this.state.competitionsList && this.state.competitionsList.length > 0) {
       for (let i = 0; i < this.state.competitionsList.length; i++) {
@@ -321,9 +322,9 @@ export default class search extends Component {
 
     return (
       <div className="position-relative">
-        <div className={this.state.showCamera || this.state.ImageTaken ? "" : "white-border"}></div>
-        <div className={this.state.showCamera || this.state.ImageTaken ? "page-content-video" : "page-content"}>
-          <div className={this.state.showCamera || this.state.ImageTaken ? "hidden" : ""}>
+        <div className={stateOne ? "" : "white-border"}></div>
+        <div className={stateOne ? "page-content-video" : "page-content"}>
+          <div className={stateOne ? "hidden" : ""}>
 
             <div className="label-score">
               <div className="centre-label">
