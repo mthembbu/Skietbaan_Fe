@@ -320,8 +320,8 @@ export default class search extends Component {
 
     return (
       <div className="position-relative">
-        <div className="white-border"></div>
-        <div className="page-content">
+        <div className={this.state.showCamera || this.state.ImageTaken ? "" : "white-border"}></div>
+        <div className={this.state.showCamera || this.state.ImageTaken ? "page-content-video" : "page-content"}>
           <div className={this.state.showCamera || this.state.ImageTaken ? "hidden" : ""}>
 
             <div className="label-score">
@@ -331,7 +331,7 @@ export default class search extends Component {
               <div className={this.state.validScore ? "hidden" : "invalidScore"}>.</div>
               <div className="input-container">
                 <input type="number" id="scoreInput" min="0" step="1" name="score" className="score"
-                  onChange={this.handleScore} placeholder="Score"></input>
+                  onChange={this.handleScore}></input>
               </div>
 
             </div>
@@ -350,7 +350,8 @@ export default class search extends Component {
             </div>
           </div>
           <div className="submit-container">
-            <div className={this.state.ImageTaken || this.state.showCamera || !this.state.scoreEntered ? "hidden" : "submit-button-elements"}>
+            <div className={this.state.ImageTaken || this.state.showCamera 
+              || !this.state.scoreEntered ? "hidden" : "submit-button-elements"}>
               <div className="button-hover">
 
                 <img src={require('../components/assets/scoreCapture.png')}
@@ -392,7 +393,7 @@ export default class search extends Component {
               Capture Score
               </div>
             <div className="back-spacing">
-              <img src={require('../components/assets/Back.png')} onClick={() => this.goBack()} id="back"
+              <img src={require('../components/assets/grayBack.png')} onClick={() => this.goBack()} id="back"
                 className="btnBack" alt=''></img>
             </div>
             <div className={this.state.ImageTaken ? "hidden" : "video-container"}>
@@ -421,10 +422,10 @@ export default class search extends Component {
           <div className={this.state.ImageTaken ? "image-container" : "hidden"}>
             <div className="centre-label">
               <div className={!this.state.ImageTaken ? "hidden" : "label-score photo-top-label"}>
-                <strong>Score Captured</strong>
+                <b>Score Captured</b>
               </div>
               <div className="back-spacing">
-                <img src={require('../components/assets/Back.png')} onClick={() => this.goBack()} id="back"
+                <img src={require('../components/assets/grayBack.png')} onClick={() => this.goBack()} id="back"
                   className="btnBack" alt=''>
                 </img>
               </div>

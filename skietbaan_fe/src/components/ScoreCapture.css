@@ -42,13 +42,23 @@
 .video{
     border-radius: 50%;
     object-fit: cover;
-    border: 5px solid #FF611D;
+    border: 5px solid #e11e2b;
 }
 
 .page-content{
     width: auto;
     height: stretch;
-    background-color: #171F32;
+    background-color: #504f51;
+    width:100%;
+    z-index: 50;
+    position: relative;
+    height: 100vh;
+}
+
+.page-content-video{
+    width: auto;
+    height: stretch;
+    background-color: #bbbcbd;
     width:100%;
     z-index: 50;
     position: relative;
@@ -61,7 +71,7 @@
 
 .score{
     border-radius: 10px;
-    border-color: #0e0942;
+    border:none;
     width: 48%;
     margin: 0 auto;
     text-align: center;
@@ -76,7 +86,7 @@
 }
 
 .invalidScore{
-    background-image: url("../components/assets/Error.png");
+    background-image: url("../components/assets/redError.png");
     background-size: 22px;
     height: 22px;
     width: 22px;
@@ -87,7 +97,7 @@
 }
 
 .invalidComp{
-    background-image: url("../components/assets/Error.png");
+    background-image: url("../components/assets/redError.png");
     background-size: 22px;
     height: 22px;
     width: 22px;
@@ -107,7 +117,7 @@
 }
 
 .success{
-    color:#FF611D;
+    color:#e11e2b;
 }
 
 .sucess-container{
@@ -143,7 +153,7 @@
 .photo-top-label{
     padding-top:20px;
     margin-bottom:20px;
-    background-color:#171F32;
+    background-color:#bbbcbd;
     color:white;
 }
 
@@ -230,7 +240,7 @@
     border-radius: 50%;
     -o-object-fit: cover;
     object-fit: cover;
-    border: 5px solid #FF611D;
+    border: 5px solid #e11e2b;
     text-align: center;
 }
 
@@ -351,7 +361,7 @@ input[type=number] {
 }
 
 .active{
-    background-color: #0F5F79;
+    background-color: #e11e2b;
     color: white;
 }
 
