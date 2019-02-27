@@ -103,7 +103,8 @@ export default class search extends Component {
 
   Validate() {
     let Valid = false;
-    if (parseInt(this.state.score) < 1 || this.state.score === null || this.state.score === "" || (this.state.score % 1) !== 0) {
+    if (parseInt(this.state.score) < 1 || this.state.score === null 
+    || this.state.score === "" || (this.state.score % 1) !== 0) {
       this.setState({
         validForm: false,
         validScore: false
