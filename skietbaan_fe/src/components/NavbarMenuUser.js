@@ -3,13 +3,13 @@ import { Navbar } from 'react-bootstrap';
 import '../scss/navbar.css';
 import 'font-awesome/css/font-awesome.min.css';
 import '../bootstrap/NavbarMenuStyle.css';
-class NavbarMenu extends Component {
+
+class NavbarMenuUser extends Component {
 	constructor(props) {
 		super(props);
 
 		this.isActive = this.isActive.bind(this);
 		this.isHome = this.isHome.bind(this);
-		this.isCreate = this.isCreate.bind(this);
 		this.isScoreCapture = this.isScoreCapture.bind(this);
 		this.isProfile = this.isProfile.bind(this);
 		this.isDocuments = this.isDocuments.bind(this);
@@ -35,16 +35,7 @@ class NavbarMenu extends Component {
 						className="leaderboard-icon-grey" alt=''></img>
 		}
 	}
-	isCreate(){
-		if (window.location.pathname.endsWith("/create")) {
-			return <img src={require('../components/navbar-icons/create-red.png')}
-						className="create-icon-grey" alt=''></img>
-		}
-		else {
-			return <img src={require('../components/navbar-icons/create-grey.png')}
-						className="create-icon-grey" alt=''></img>
-		}
-	}
+
 	isScoreCapture(){
 		if (window.location.pathname.endsWith("/scorecapture")) {
 			return <img src={require('../components/navbar-icons/add-score-red.png')}
@@ -55,6 +46,7 @@ class NavbarMenu extends Component {
 						className="add-score-icon-grey" alt=''></img>
 		}
 	}
+
 	isProfile(){
 		if (window.location.pathname.endsWith("/profile")) {
 			return <img src={require('../components/navbar-icons/profile-red.png')}
@@ -65,6 +57,7 @@ class NavbarMenu extends Component {
 						className="profile-icon-grey" alt=''></img>
 		}
 	}
+
 	isDocuments(){
 		if (window.location.pathname.endsWith("/documents")) {
 			return <img src={require('../components/navbar-icons/docs-red.png')}
@@ -75,6 +68,7 @@ class NavbarMenu extends Component {
 						className="docs-icon-grey" alt=''></img>
 		}
 	}
+
 	isNotifications(){
 		if (window.location.pathname.endsWith("/notifications")) {
 			return <img src={require('../components/navbar-icons/notifications-red.png')}
@@ -96,12 +90,12 @@ class NavbarMenu extends Component {
 						{this.isHome()}
 					</Navbar.Brand>
 
-					<Navbar.Brand className={this.isActive('/create')} href="/create">
-						{this.isCreate()}
-					</Navbar.Brand>
-
 					<Navbar.Brand className={this.isActive('/scorecapture')} href="/scorecapture">
 						{this.isScoreCapture()}
+					</Navbar.Brand>
+
+					<Navbar.Brand href="#">
+						{this.isProfile()}
 					</Navbar.Brand>
 
 					<Navbar.Toggle aria-controls="basic-navbar-nav" className="more-icon-grey">
@@ -110,10 +104,6 @@ class NavbarMenu extends Component {
 					</Navbar.Toggle>
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Navbar>
-						<Navbar.Brand href="#">
-							{this.isProfile()}
-						</Navbar.Brand>
-
 						<Navbar.Brand className={this.isActive('/documents')} href="/documents">
 							{this.isDocuments()}
 						</Navbar.Brand>
@@ -128,4 +118,4 @@ class NavbarMenu extends Component {
 		);
 	}
 }
-export default NavbarMenu;
+export default NavbarMenuUser;
