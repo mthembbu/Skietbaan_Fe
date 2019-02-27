@@ -1,17 +1,24 @@
 import { PASS_ID,FETCH_POSTS,UPDATENAME,CREATEGROUP,GETGROUP,GETNAME,URLADD,URLUSER,URLGROUP,FETCH_LEADERBOARDFILTER_DATA ,FETCH_LEADERBOARDTABLE_DATA} from './types';
 	
+  NEW_POST,
+  UPDATENAME,
+  CREATEGROUP,
+  GETGROUP,
+  GETNAME,
+  PASS_ID
+} from "./types";
 
   /** The method to feth the already available data for posts*/
-	export const fetchPosts = () => dispatch => {
-		fetch(URLUSER)
-			.then(res => res.json())
-			.then(posts => {
-			const newdata = posts.map(users => {
-				users.highlighted = false;
-				return users;
-			});
-			dispatch({
-				type: FETCH_POSTS,
+export const fetchPosts = () => dispatch => {
+  fetch("http://localhost:63474/api/User")
+    .then(res => res.json())
+    .then(posts => {
+      const newdata = posts.map(users => {
+        users.highlighted = false;
+        return users;
+      });
+      dispatch({
+        type: FETCH_POSTS,
 				payload: newdata
 			});
 			});
@@ -29,7 +36,7 @@ import { PASS_ID,FETCH_POSTS,UPDATENAME,CREATEGROUP,GETGROUP,GETNAME,URLADD,URLU
 		dispatch({
 		  type: CREATEGROUP,
 		  payload: post
-		})
+      })
 	  );
   };
   
@@ -75,6 +82,13 @@ import { PASS_ID,FETCH_POSTS,UPDATENAME,CREATEGROUP,GETGROUP,GETNAME,URLADD,URLU
 		fetch('https://api.skietbaan.retrotest.co.za/api/Leaderboard/GetLeaderboardFilterData?UserID=' + 1)
 				.then(res => res.json())
 				.then(data => dispatch({
+    .then(function(response) {})
+    .then(function(data) {})
+    .catch(function(data) {});
+};
+
+export const getname = name => {
+  return dispatch => {
 				type: FETCH_LEADERBOARDFILTER_DATA,
 				payload: data
 			})
@@ -85,11 +99,22 @@ import { PASS_ID,FETCH_POSTS,UPDATENAME,CREATEGROUP,GETGROUP,GETNAME,URLADD,URLU
 		fetch('https://api.skietbaan.retrotest.co.za/api/Leaderboard/GetLeaderboardRankings?competitionID=' + filterSelection.selectedCompetition  + '&groupID=' + filterSelection.selectedGroup  + '&userToken=' + filterSelection.userToken)
 			.then(res => res.json())
 			.then(data =>
-			dispatch({
-				type: FETCH_LEADERBOARDTABLE_DATA,
-				payload: data
-			})
-		);
+    dispatch({
+      type: UPDATENAME,
+      payload: name
+    });
+  };
+};
+
+export const getGroup = () => dispatch => {
+  fetch("http://localhost:63474/api/User")
+    .then(res => res.json())
+    .then(posts =>
+      dispatch({
+        type: GETGROUP,
+        payload: posts
+      })
+    );
 	};
 
 	export const passId = id => {

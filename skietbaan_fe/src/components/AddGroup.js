@@ -28,25 +28,23 @@ class AddGroup extends Component {
       "Name": this.state.name,
     };
   
-   this.props.getname(this.state.name);
+    this.props.getname(this.state.name);
    this.props.createGroups(RequestObject);
    history.push("/Groups");
    }
   render() {
-    console.log(this.props)
+
     return (
       <div className="page">
         <div className="top_bar">
           <a href="#" class="fa fa-angle-left" />
           <div className="center_label">
-          <label className="groups">
-            <h3><b>GROUPS</b></h3>
-            </label>
+            <b>GROUPS</b>
           </div>
         </div>
         <div className="middle_bar">
           <label className="name">
-            <h3>Enter Group Name</h3>
+            <b>Enter Group Name</b>
           </label>
           <br />
           <input

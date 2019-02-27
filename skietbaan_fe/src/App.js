@@ -9,11 +9,14 @@ import NavbarMenu from './components/NavbarMenu';
 import RegisterMember from './components/RegisterMember';
 import LeaderboardPage from './components/LeaderboardPage';
  import AddGroup from './components/AddGroup';
-import GroupsName from './components/GroupsName';
+import theGroupsUser from './components/theGroupsUser';
 import Groups from './components/Groups';
-import ViewGroups from './components/ViewGroups';
+import GroupsName from './components/GroupsName';
+import AddGroup from './components/AddGroup';
 import GroupDone from './components/GroupDone';
+import ViewGroups from './components/ViewGroups';
 import CreateComp from './components/CreateComp';
+import AddMembersGroup from './components/AddMembersGroup';
 import notifications from './components/Notifications'
 import ViewMembers from './components/ViewMembers'
 import Documents from './components/Documents';
@@ -25,9 +28,9 @@ import history from './components/history';
 class App extends Component {
 	render() {
 		return (
-			<Provider store={store}>
 				<div className="App">
 					<NavbarMenu />
+					<Router history={history}>
 					<Router history={history}>
 						<Switch>
 							<Route path="/home" component={LeaderboardPage} exact />
@@ -39,19 +42,19 @@ class App extends Component {
 							<Route path="/AddGroup" component={AddGroup} exact /> 
 							<Route path="/scorecapture" component={ScoreCapture} exact />
 							<Route path="/groupsname" component={GroupsName} exact />
-							<Route path="/groups" component={Groups} exact />
+							<Route path="/AddGroup" component={AddGroup} exact />
 							<Route path="/create" component={CreatePage} exact />
 							<Route path="/ViewGroups" component={ViewGroups} exact />
 							<Route path="/GroupDone" component={GroupDone} exact />
 							<Route path="/notifications" component={notifications} exact />
-							<Route path="/viewmembers" component={ViewMembers} exact />
+							<Route path="/theGroupsUser" component={theGroupsUser} exact />
+							<Route path="/ViewGroups" component={ViewGroups} exact />
+							<Route path="/Groups" component={Groups} exact />
 							<Route path="/AddMembersGroup" component={AddMembersGroup} exact />
-							<Route path="/EditGroup" component={EditGroup} exact />
 							<Redirect from="/" to="/home" />
 						</Switch>
 					</Router>
 				</div>
-			</Provider>
 		);
 	}
 }

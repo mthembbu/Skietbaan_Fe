@@ -1,13 +1,17 @@
-/*
- * src/store.js
- * With initialState
-*/
-import {createStore, applyMiddleware} from 'redux';
+import { createStore,applyMiddleware,compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
-const initialState = {};
-const middleware = [thunk];
-const store = createStore(rootReducer,initialState,applyMiddleware(...middleware));
-  
-export default store;
+const initialState={};
+
+const middleware=[thunk];
+
+const Store=createStore(
+    rootReducer,
+    initialState,
+    compose(
+    applyMiddleware(...middleware)),
+    window.__REDUX__DEVTOOLS__EXTENSION__  &&  window.__REDUX__DEVTOOLS__EXTENSION__()
+    );
+
+export default Store;

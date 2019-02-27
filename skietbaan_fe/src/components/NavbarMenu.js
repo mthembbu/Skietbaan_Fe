@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, NavDropdown, Form, Nav, Container } from 'react-bootstrap';
 import '../scss/navbar.css';
-import 'font-awesome/css/font-awesome.min.css';
+// import 'font-awesome/css/font-awesome.min.css';
 import '../bootstrap/NavbarMenuStyle.css';
 
 class NavbarMenu extends Component {

@@ -8,17 +8,17 @@
   background: #101727;
 }
 
-.TheNavBar {
-  background: #cccfd3;
+.TheNavBar{
+  background: #CCCFD3;
   color: white;
   height: 50px;
   display: flex;
 }
 
-.center_label {
+.center_label{
   text-align: center;
   margin-top: 10px;
-  color: black;
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
   width: 8em;
@@ -28,7 +28,7 @@
   background: #101727;
 }
 
-.fa-angle-left {
+.fa-angle-left{
   margin-top: 2px;
   margin-left: 10px;
   color: black;
@@ -39,8 +39,8 @@
   height: 0px;
 }
 
-.theText {
-  margin-top: 1px;
+.theText{
+  margin-top: 7px;
   margin-left: 5px;
   border-radius: 25px;
   /* width: 208px; */
@@ -48,14 +48,13 @@
   height: 39px;
   padding-left: 5px;
 }
-.select {
-  margin-top: 1px;
+.select{
+  margin-top: 7px;
   margin-right: 5px;
   float: right;
   height: 39px;
   border-radius: 25px;
   width: 30%;  
-}
 .BNavBar{
   height: 15px;
 }

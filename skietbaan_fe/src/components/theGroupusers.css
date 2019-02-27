@@ -1,0 +1,15 @@
+.select{
+    float: right;
+    height: 30px;
+    border-radius: 25px;
+}
+
+.theText{
+    border-radius: 25px;
+    
+}
+
+.the_middle{
+    background: #101727;
+    display: block;
+}

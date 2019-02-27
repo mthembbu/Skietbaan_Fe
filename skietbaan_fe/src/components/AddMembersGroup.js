@@ -76,7 +76,6 @@ class AddMembersGroup extends Component {
     history.push("/EditGroup");
   }
   render() {
-    console.log(this.props.id)
     const postitems = (
       <div className="check">
         <ul class="list-group">

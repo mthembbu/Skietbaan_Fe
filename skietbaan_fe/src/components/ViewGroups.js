@@ -14,6 +14,8 @@ class ViewGroups extends Component {
       count: 0,
       black: ""
     };
+    this.toggleHighlight = this.toggleHighlight.bind(this);
+    this.handleOnClick = this.handleOnClick.bind(this);
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
     this.delete = this.delete.bind(this);
@@ -30,12 +32,14 @@ class ViewGroups extends Component {
 
   onBack() {
     history.push("/ViewGroups");
-  }
+      }
+      delete this.state.posts[i].highlighted;
+      delete this.state.posts[i].id;
   editGroup(event, name) {
     this.props.getname(name);
     this.props.passId(event);
     history.push("/EditGroup");
-  }
+    }
 
   delete(e, index) {
     const newarry = [...this.state.posts];
@@ -54,9 +58,36 @@ class ViewGroups extends Component {
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
+    window.location = "/GroupDone";
   }
+  toggleHighlight = event => {
+    if (this.state.posts[event].highlighted === true) {
+      this.state.posts[event].highlighted = false;
+      {
+        this.setState({ count: this.state.count - 1 });
+      }
+    } else {
+      this.state.posts[event].highlighted = true;
+      {
+        this.setState({ count: this.state.count + 1 });
+      }
+    }
+  };
+  onBack() {
+    
+    //window.location = "/AddGroup";
+  }
+  editGroup(event,name){ 
+    this.props.getname(name);
+    this.props.passId(event);
+    history.push("/AddMembersGroup");
+  }
+
+  delete(e){
+    console.log(123)
+  }
+
   render() {
-    console.log(this.state.posts)
     const postitems = (
       <div className="check">
         <ul class="list-group">

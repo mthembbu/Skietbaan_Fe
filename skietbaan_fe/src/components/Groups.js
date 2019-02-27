@@ -52,6 +52,7 @@ class Groups extends Component {
     };
     fetch("http://localhost:63474/api/groups/add", {
       method: "post",
+      method: "post",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
@@ -61,7 +62,7 @@ class Groups extends Component {
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
-     window.location = "/GroupDone";
+  
   }
   toggleHighlight = event => {
     if (this.state.posts[event].highlighted === true) {
@@ -74,14 +75,19 @@ class Groups extends Component {
       {
         this.setState({ count: this.state.count + 1 });
       }
+    } else {
+      this.state.posts[event].highlighted = true;
+      {
+        this.setState({ count: this.state.count + 1 });
+    }
+  };
+  onBack() {
+    history.push("/addGroup");
     }
   };
   onBack() {
     history.push("/addGroup");
   }
-
- 
-
   render() {
     const postitems = (
       <div className="check">
@@ -103,6 +109,7 @@ class Groups extends Component {
                 {post.email}
               </label>
             </li>
+            </li>
           ))}
         </ul>
       </div>
@@ -112,7 +119,7 @@ class Groups extends Component {
         <div className="TheNavBar">
           <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
           <div className="center_label">
-            <h2><b>{this.props.name}</b></h2>
+            <b>{this.props.name}</b>
           </div>
         </div>
         <div className="BNavBar">
@@ -124,7 +131,7 @@ class Groups extends Component {
             onChange={this.onChange}
             autoComplete="off"
           />
-          <button className="select" id="check" onClick={this.checktheboxs}>
+          <button className="select" onClick={this.handleOnClick}>
            CREATE
           </button>
         </div>
@@ -144,7 +151,7 @@ class Groups extends Component {
   }
 }
 const mapStateToProps = state => ({
- name:state.posts.groupName
+ name:state.thename
 });
 
 
