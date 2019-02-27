@@ -16,7 +16,7 @@ class AddMembersGroup extends Component {
     this.onChange = this.onChange.bind(this);
   }
   componentWillMount() {
-    fetch("http://localhost:63474/api/Groups/list?id=3009")
+    fetch("http://localhost:63474/api/Groups/list?id="+this.props.id)
       .then(res => res.json())
       .then(data => {
         this.setState({

@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
 import history from './history';
-// import $ from 'jquery';
+import {createGroups} from "../actions/postActions";
+
 class Groups extends Component {
   constructor(props) {
     super(props);
@@ -39,6 +40,7 @@ class Groups extends Component {
   }
 
   handleOnClick() {
+    this.props.createGroups(this.props.name);
     const { newArray } = this.state;
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === true) {
@@ -61,7 +63,7 @@ class Groups extends Component {
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
-     window.location = "/GroupDone";
+ 
   }
   toggleHighlight = event => {
     if (this.state.posts[event].highlighted === true) {
@@ -79,10 +81,8 @@ class Groups extends Component {
   onBack() {
     history.push("/addGroup");
   }
-
- 
-
   render() {
+    console.log(this.props.name,this.props.thegroup)
     const postitems = (
       <div className="check">
         <ul class="list-group">
@@ -124,7 +124,7 @@ class Groups extends Component {
             onChange={this.onChange}
             autoComplete="off"
           />
-          <button className="select" id="check" onClick={this.checktheboxs}>
+          <button className="select" id="check" onClick={this.handleOnClick}>
            CREATE
           </button>
         </div>
@@ -143,14 +143,15 @@ class Groups extends Component {
     );
   }
 }
-const mapStateToProps = state => {
- //name:state.posts.groupName
- console.log(state)
-};
+const mapStateToProps = state => ({
+ name:state.posts.groupName,
+ thegroup:state.posts.selectedItem
+ 
+});
 
 
 export default connect(
   mapStateToProps,
-  
+  {createGroups}
 )(Groups);
 

@@ -47,13 +47,14 @@ class EditGroup extends Component {
     let request = {
       newArray: this.state.newArray
     };
+    console.log(request)
     fetch("http://localhost:63474/api/groups/deleteMember/"+this.props.id, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(newArray)
+      body: request
     })
       .then(function(response) {})
       .then(function(data) {})

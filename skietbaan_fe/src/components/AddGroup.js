@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import {bindActionCreators} from "redux";
 import * as GroupActions from "../actions/postActions";
 import "./add.css";
-import { checkPropTypes } from "prop-types";
 import history from './history';
 
 
@@ -29,7 +28,7 @@ class AddGroup extends Component {
     };
   
    this.props.groupActions.getname(this.state.name);
-   this.props.groupActions.createGroups(RequestObject);
+   //this.props.groupActions.createGroups(RequestObject);
    history.push("/Groups");
    }
   render() {
@@ -39,7 +38,7 @@ class AddGroup extends Component {
           <a href="#" class="fa fa-angle-left" />
           <div className="center_label">
           <label className="groups">
-            <h3><b>GROUPS</b></h3>
+            <h3><b> Create GROUPS</b></h3>
             </label>
           </div>
         </div>

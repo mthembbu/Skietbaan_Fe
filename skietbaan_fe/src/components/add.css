@@ -2,6 +2,7 @@
   background: white;
   height: 50px;
   display: flex;
+  background: black;
 }
 
 .center_label {
@@ -74,6 +75,5 @@
   border-radius: 50%;
 }
 .groups{
-  size: 49px;
-  padding-top: 8px;
+  
 }

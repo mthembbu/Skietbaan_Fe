@@ -67,9 +67,12 @@ class ViewGroups extends Component {
             <li style={{width:"100%" }} class="list-group-item list-group-item-light" key={post.id}>
               <label style={{width:"100%"}} className="blabe">
                 {post.name}
-              <div style={{float:"right" , paddingLeft:"20px"}}>
+
+              {/* <div style={{float:"right" , paddingLeft:"20px"}}>
               <img src={require("./GroupImages/submit plus add score.png")} onClick={()=>this.delete(post.id,index)}  className="boxes" /><br/>delete
-              
+              </div> */}
+              <div style={{float:"right" , paddingLeft:"20px"}}>
+              <img src={require("./GroupImages/3dots.png")} onClick={()=>this.delete(post.id,index)}  className="boxes" /><br/>delete
               </div>
               <div style={{float:"right"}}>
              <img src={require("./GroupImages/Group.png")}  className="boxes" onClick={()=>this.editGroup(post.id,post.name)}  /><br/>edit
