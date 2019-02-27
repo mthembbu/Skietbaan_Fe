@@ -16,7 +16,7 @@ class AddMembersGroup extends Component {
     this.onChange = this.onChange.bind(this);
   }
   componentWillMount() {
-    fetch("http://localhost:63474/api/Groups/list?id="+this.props.id)
+    fetch("http://localhost:63474/api/Groups/list?id=3009")
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -76,7 +76,7 @@ class AddMembersGroup extends Component {
     history.push("/EditGroup");
   }
   render() {
-    console.log(this.props.id)
+    console.log("we are here",this.props.id)
     const postitems = (
       <div className="check">
         <ul class="list-group">

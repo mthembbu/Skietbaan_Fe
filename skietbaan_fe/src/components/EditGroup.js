@@ -16,7 +16,7 @@ class EditGroup extends Component {
     this.onChange = this.onChange.bind(this);
   }
   componentWillMount() {
-    fetch("http://localhost:63474/api/Groups/edit?id=3009")
+    fetch("http://localhost:63474/api/Groups/edit?id="+this.props.id)
       .then(res => res.json())
       .then(data => {
         console.log(data)
@@ -47,8 +47,8 @@ class EditGroup extends Component {
     let request = {
       newArray: this.state.newArray
     };
-    fetch("http://localhost:63474/api/groups/add", {
-      method: "post",
+    fetch("http://localhost:63474/api/groups/deleteMember/"+this.props.id, {
+      method: "DELETE",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
@@ -58,7 +58,7 @@ class EditGroup extends Component {
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
-      history.push("/AddMembersGroup");
+     
      
   }
   toggleHighlight = event => {
@@ -76,6 +76,10 @@ class EditGroup extends Component {
   };
   onBack() {
     history.push("/ViewGroups");
+  }
+
+  goToNext=()=>{
+    history.push("/AddMembersGroup");
   }
   render() {
     console.log(this.props.id)
@@ -119,7 +123,7 @@ class EditGroup extends Component {
             onChange={this.onChange}
             autoComplete="off"
           />
-          <button className="select" onClick={this.handleOnClick}>
+          <button className="select" onClick={this.goToNext}>
            Add new
           </button>
         </div>
@@ -132,8 +136,12 @@ class EditGroup extends Component {
           data-simplebar
           data-simplebar-auto-hide="false"
         >
+        
           {postitems}
         </div>
+        <label className="bottomlabel">
+        <button className="deleteUser" onClick={this.handleOnClick}>delete</button>
+        </label>
       </main>
     );
   }

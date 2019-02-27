@@ -1,4 +1,4 @@
-import { PASS_ID,FETCH_POSTS,UPDATENAME,CREATEGROUP,GETGROUP,GETNAME,URLADD,URLUSER,URLGROUP,FETCH_LEADERBOARDFILTER_DATA ,FETCH_LEADERBOARDTABLE_DATA} from './types';
+import { PASS_ID,FETCH_POSTS,UPDATE_GROUPNAME,UPDATENAME,CREATEGROUP,GETGROUP,GETNAME,URLADD,URLUSER,URLGROUP,FETCH_LEADERBOARDFILTER_DATA ,FETCH_LEADERBOARDTABLE_DATA} from './types';
 	
 
   /** The method to feth the already available data for posts*/
@@ -52,9 +52,10 @@ import { PASS_ID,FETCH_POSTS,UPDATENAME,CREATEGROUP,GETGROUP,GETNAME,URLADD,URLU
   
   export const getname = name => {
 	//Return an action
+	console.log(name)
 	return dispatch => {
 	  dispatch({
-		type: UPDATENAME,
+		type: UPDATE_GROUPNAME,
 		payload: name
 	  });
 	};

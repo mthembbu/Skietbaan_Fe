@@ -29,7 +29,8 @@ export default function(state = initialState, action) {
         ...state,
         allItems: action.payload
       };
-    case UPDATE_GROUPNAME:
+		case UPDATE_GROUPNAME:
+		console.log(action.payload)
       return {
         ...state,
         groupName: action.payload
@@ -39,7 +40,6 @@ export default function(state = initialState, action) {
         ...state,
         selectedItem: action.payload
       };
-
 			case PASS_ID:
 			return {
 				...state,

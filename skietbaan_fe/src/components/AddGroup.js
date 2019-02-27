@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createGroups } from "../actions/postActions";
-import { getname } from "../actions/postActions";
+import {bindActionCreators} from "redux";
+import * as GroupActions from "../actions/postActions";
 import "./add.css";
 import { checkPropTypes } from "prop-types";
 import history from './history';
@@ -28,12 +28,11 @@ class AddGroup extends Component {
       "Name": this.state.name,
     };
   
-   this.props.getname(this.state.name);
-   this.props.createGroups(RequestObject);
+   this.props.groupActions.getname(this.state.name);
+   this.props.groupActions.createGroups(RequestObject);
    history.push("/Groups");
    }
   render() {
-    console.log(this.props)
     return (
       <div className="page">
         <div className="top_bar">
@@ -67,12 +66,16 @@ class AddGroup extends Component {
     );
   }
 }
-
+const mapDispatchToProps = dispatch => {
+  return {
+    groupActions: bindActionCreators(GroupActions, dispatch)
+  }
+}
 const mapStateToProps = state => ({
   name:state.posts.groupName,
  });
 
 export default connect(
   mapStateToProps,
-  {createGroups,getname}
+  mapDispatchToProps
 )(AddGroup);

@@ -12,7 +12,7 @@ class ViewGroups extends Component {
       posts: [],
       newArray: [],
       count: 0,
-      black: ""
+      ShowMe:true
     };
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -42,7 +42,6 @@ class ViewGroups extends Component {
 
     newarry.splice(index, 1);
     this.setState({ posts: newarry });
-    console.log("here");
     fetch("http://localhost:63474/api/groups/" + e, {
       method: "delete",
       headers: {
@@ -69,7 +68,7 @@ class ViewGroups extends Component {
               <label style={{width:"100%"}} className="blabe">
                 {post.name}
               <div style={{float:"right" , paddingLeft:"20px"}}>
-              <img src={require("./GroupImages/submit plus add score.png")}  className="boxes" /><br/>delete
+              <img src={require("./GroupImages/submit plus add score.png")} onClick={()=>this.delete(post.id,index)}  className="boxes" /><br/>delete
               
               </div>
               <div style={{float:"right"}}>
@@ -88,7 +87,7 @@ class ViewGroups extends Component {
         <div className="TheNavBar">
           <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
           <div className="center_label">
-            <b>GROUP</b>
+            <h2>GROUP</h2>
           </div>
         </div>
         <div className="BNavBar" />

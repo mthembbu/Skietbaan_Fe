@@ -143,9 +143,10 @@ class Groups extends Component {
     );
   }
 }
-const mapStateToProps = state => ({
- name:state.posts.groupName
-});
+const mapStateToProps = state => {
+ //name:state.posts.groupName
+ console.log(state)
+};
 
 
 export default connect(

@@ -54,8 +54,26 @@
   float: right;
   height: 39px;
   border-radius: 25px;
-  width: 30%;  
+  width: 30%;
 }
-.BNavBar{
+.BNavBar {
   height: 15px;
+}
+
+.deleteUser {
+
+
+  
+}
+
+.bottomlabel{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: #e11e2b;
+  width:100%;
+  height:35px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
 }
