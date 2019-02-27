@@ -14,8 +14,6 @@ class ViewGroups extends Component {
       count: 0,
       black: ""
     };
-    this.toggleHighlight = this.toggleHighlight.bind(this);
-    this.handleOnClick = this.handleOnClick.bind(this);
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
     this.delete = this.delete.bind(this);
@@ -32,14 +30,12 @@ class ViewGroups extends Component {
 
   onBack() {
     history.push("/ViewGroups");
-      }
-      delete this.state.posts[i].highlighted;
-      delete this.state.posts[i].id;
+  }
   editGroup(event, name) {
     this.props.getname(name);
     this.props.passId(event);
     history.push("/EditGroup");
-    }
+  }
 
   delete(e, index) {
     const newarry = [...this.state.posts];
@@ -58,35 +54,7 @@ class ViewGroups extends Component {
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
-    window.location = "/GroupDone";
   }
-  toggleHighlight = event => {
-    if (this.state.posts[event].highlighted === true) {
-      this.state.posts[event].highlighted = false;
-      {
-        this.setState({ count: this.state.count - 1 });
-      }
-    } else {
-      this.state.posts[event].highlighted = true;
-      {
-        this.setState({ count: this.state.count + 1 });
-      }
-    }
-  };
-  onBack() {
-    
-    //window.location = "/AddGroup";
-  }
-  editGroup(event,name){ 
-    this.props.getname(name);
-    this.props.passId(event);
-    history.push("/AddMembersGroup");
-  }
-
-  delete(e){
-    console.log(123)
-  }
-
   render() {
     const postitems = (
       <div className="check">
@@ -96,17 +64,11 @@ class ViewGroups extends Component {
               return (!this.state.filterText || post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) || post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase()))
             }
           ).map((post, index) => (
-            <li style={{width:"100%" }} class="list-group-item list-group-item-light" key={post.id}>
-              <label style={{width:"100%"}} className="blabe">
-                {post.name}
-              <div style={{float:"right" , paddingLeft:"20px"}}>
-              <img src={require("./GroupImages/submit plus add score.png")}  className="boxes" /><br/>delete
-              
-              </div>
-              <div style={{float:"right"}}>
-             <img src={require("./GroupImages/Group.png")}  className="boxes" onClick={()=>this.editGroup(post.id,post.name)}  /><br/>edit
-             </div>
-                <br/>
+            <li class="list-group-item list-group-item-light" key={post.id}>
+             <img src={require("./GroupImages/Group.png")} className="boxes" onClick={()=>this.editGroup(post.id,post.name)}  />
+              <label className="blabe">
+                {post.username} <br />
+                {post.email}
               </label>
             </li>
           ))}

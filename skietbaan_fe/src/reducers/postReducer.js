@@ -1,11 +1,6 @@
-import { FETCH_POSTS, UPDATE_GROUPNAME,FETCH_LEADERBOARDFILTER_DATA ,FETCH_LEADERBOARDTABLE_DATA,PASS_ID,CREATEGROUP } from '../actions/types';
-  FETCH_POSTS,
-  NEW_POST,
-  UPDATENAME,
-  CREATEGROUP,
-  GETGROUP,
-  PASS_ID
-} from "../actions/types";
+import { FETCH_POSTS,CREATEGROUP,PASS_ID,GETGROUP,NEW_POST,UPDATENAME, UPDATE_GROUPNAME,FETCH_LEADERBOARDFILTER_DATA ,FETCH_LEADERBOARDTABLE_DATA,PASS_ID,CREATEGROUP } from '../actions/types';
+
+
 import { combineReducers } from 'redux';
 
 const initialState = {
@@ -16,40 +11,23 @@ const initialState = {
   allGroups:[]
 };
 
-export const selectedSongReducer = (xxx=null, action) =>{
+export const thenameofthegroup = (xxx=null, action) =>{
   switch(action.type){
     case UPDATENAME:
     return action.payload
     };
   return xxx;
-}
-export const sendId = (xxx=null, action) =>{
-  switch(action.type){
-    case PASS_ID:
-    return action.payload
-        "average": 0
-	}
-    };
-  return xxx;
-}
-export const selectedGroupReducer = (id=null, action) =>{
+  }
+
+//the function to detect the state change
+export const sendId = (id=null, action) =>{
   switch(action.type){
     case PASS_ID:
     return action.payload
     };
   return id;
 }
-
-
-//the function to detect the state change
-export const alldatareducer =(state=initialState,action)=> {
-  switch (action.type) {
-    case FETCH_POSTS:
-      return {
-        ...state,
-        allItems: action.payload
-      };
-export default function(state = initialState, action) {
+export const alldatareducer = (state=initialState,action) =>  {
   switch (action.type) {
     case FETCH_POSTS:
       return {
@@ -68,11 +46,6 @@ export default function(state = initialState, action) {
       };
 
 			case PASS_ID:
-			return {
-				...state,
-				groupId:action.payload
-			};
-		case FETCH_POSTS:
 			return {
 				...state,
 				groupId:action.payload
@@ -97,7 +70,7 @@ export default function(state = initialState, action) {
 
 export default combineReducers({
   thereducer: alldatareducer,
-  thename:selectedSongReducer,
+  thename:thenameofthegroup,
   theID:sendId
 });
 

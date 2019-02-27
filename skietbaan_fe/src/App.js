@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import './bootstrap/NavbarMenuStyle.css';
 import { Provider } from 'react-redux';
 import store from './store';
+import ViewGroups from './components/ViewGroups';
+import CreateComp from './components/CreateComp';;
+import ScoreCapture from './components/ScoreCapture';
+import CreatePage from './components/CreatePage';
+import AddMembersGroup from './components/AddMembersGroup';
+import EditGroup from './components/EditGroup';
+import history from './components/history';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -12,26 +19,19 @@ import LeaderboardPage from './components/LeaderboardPage';
 import theGroupsUser from './components/theGroupsUser';
 import Groups from './components/Groups';
 import GroupsName from './components/GroupsName';
-import AddGroup from './components/AddGroup';
 import GroupDone from './components/GroupDone';
-import ViewGroups from './components/ViewGroups';
-import CreateComp from './components/CreateComp';
-import AddMembersGroup from './components/AddMembersGroup';
+
 import notifications from './components/Notifications'
 import ViewMembers from './components/ViewMembers'
 import Documents from './components/Documents';
-import ScoreCapture from './components/ScoreCapture';
-import CreatePage from './components/CreatePage';
-import AddMembersGroup from './components/AddMembersGroup';
-import EditGroup from './components/EditGroup';
-import history from './components/history';
+
 class App extends Component {
 	render() {
 		return (
 				<div className="App">
 					<NavbarMenu />
 					<Router history={history}>
-					<Router history={history}>
+			
 						<Switch>
 							<Route path="/home" component={LeaderboardPage} exact />
 							<Route path="/login" component={Login} exact />

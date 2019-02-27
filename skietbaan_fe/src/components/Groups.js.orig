@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
-import history from "./history";
+import history from './history';
+<<<<<<< HEAD
 // import $ from 'jquery';
+=======
+>>>>>>> Groups
 class Groups extends Component {
   constructor(props) {
     super(props);
@@ -17,9 +20,16 @@ class Groups extends Component {
     this.handleOnClick = this.handleOnClick.bind(this);
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
+<<<<<<< HEAD
+    
   }
   componentWillMount() {
     fetch("http://localhost:63474/api/user")
+=======
+  }
+  componentWillMount() {
+    fetch("https://api.skietbaan.retrotest.co.za/api/user")
+>>>>>>> Groups
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -31,10 +41,10 @@ class Groups extends Component {
             };
           })
         });
-      });
+      });    
   }
-  onChange(event) {
-    this.setState({ filterText: event.target.value });
+  onChange(event){
+    this.setState({filterText: event.target.value});
   }
 
   handleOnClick() {
@@ -49,8 +59,12 @@ class Groups extends Component {
     let request = {
       newArray: this.state.newArray
     };
+<<<<<<< HEAD
     fetch("http://localhost:63474/api/groups/add", {
-      method: "post",
+=======
+    console.log(request)
+    fetch("https://api.skietbaan.retrotest.co.za/api/groups/add", {
+>>>>>>> Groups
       method: "post",
       headers: {
         Accept: "application/json",
@@ -61,60 +75,83 @@ class Groups extends Component {
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
+<<<<<<< HEAD
+     window.location = "/GroupDone";
+=======
+  
+>>>>>>> Groups
   }
   toggleHighlight = event => {
     if (this.state.posts[event].highlighted === true) {
       this.state.posts[event].highlighted = false;
-
-      this.setState({ count: this.state.count - 1 });
+      {
+        this.setState({ count: this.state.count - 1 });
+      }
     } else {
       this.state.posts[event].highlighted = true;
-
-      this.setState({ count: this.state.count + 1 });
+      {
+        this.setState({ count: this.state.count + 1 });
+      }
     }
   };
-
   onBack() {
     history.push("/addGroup");
   }
 
+ 
+
   render() {
+<<<<<<< HEAD
+=======
+    console.log("i am here",this.props.name)
+>>>>>>> Groups
     const postitems = (
       <div className="check">
         <ul class="list-group">
-          {this.state.posts
-            .filter(post => {
-              return (
-                !this.state.filterText ||
-                post.username
-                  .toLowerCase()
-                  .startsWith(this.state.filterText.toLowerCase()) ||
-                post.email
-                  .toLowerCase()
-                  .startsWith(this.state.filterText.toLowerCase())
-              );
-            })
-            .map((post, index) => (
-              <li class="list-group-item list-group-item-light" key={post.id}>
-                <input
-                  type="checkbox"
-                  className="boxs"
-                  onClick={() => this.toggleHighlight(index)}
-                />
-                <label className="blabe">
-                  {post.username} <br />
-                  {post.email}
-                </label>
-              </li>
-            ))}
+
+          {this.state.posts.filter(
+            (post) => {
+              return (!this.state.filterText || post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) || post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase()))
+            }
+          ).map((post, index) => (
+            <li class="list-group-item list-group-item-light" key={post.id}>
+              <input
+                type="checkbox"
+                className="boxs"
+                onClick={() => this.toggleHighlight(index)}
+              />
+              <label className="blabe">
+                {post.username} <br />
+                {post.email}
+              </label>
+            </li>
+          ))}
         </ul>
       </div>
     );
     return (
-      <main className="TheMain">
+      <main className="TheMain" >
         <div className="TheNavBar">
           <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
           <div className="center_label">
+<<<<<<< HEAD
+            <h2><b>{this.props.name}</b></h2>
+          </div>
+        </div>
+        <div className="BNavBar">
+          <input
+            className="theText"
+            id="username"
+            type="text"
+            placeholder="Search.." 
+            onChange={this.onChange}
+            autoComplete="off"
+          />
+          <button className="select" id="check" onClick={this.checktheboxs}>
+           CREATE
+          </button>
+        </div>
+=======
             <b>{this.props.name}</b>
           </div>
         </div>
@@ -123,14 +160,15 @@ class Groups extends Component {
             className="theText"
             id="username"
             type="text"
-            placeholder="Search.."
+            placeholder="Search.." 
             onChange={this.onChange}
             autoComplete="off"
           />
           <button className="select" onClick={this.handleOnClick}>
-            CREATE
+           CREATE
           </button>
         </div>
+>>>>>>> Groups
 
         <div className="OnToTheNextOne" />
         <br />
@@ -147,7 +185,16 @@ class Groups extends Component {
   }
 }
 const mapStateToProps = state => ({
-  name: state.thename
+<<<<<<< HEAD
+ name:state.posts.groupName
+=======
+ name:state.thename
+>>>>>>> Groups
 });
 
-export default connect(mapStateToProps)(Groups);
+
+export default connect(
+  mapStateToProps,
+  
+)(Groups);
+
