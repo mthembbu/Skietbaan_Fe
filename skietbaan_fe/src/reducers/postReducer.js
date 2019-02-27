@@ -1,9 +1,13 @@
-import { FETCH_POSTS, NEW_POST,FETCH_LEADERBOARDFILTER_DATA ,FETCH_LEADERBOARDTABLE_DATA } from '../actions/types';
+import { FETCH_POSTS, UPDATE_GROUPNAME,FETCH_LEADERBOARDFILTER_DATA ,FETCH_LEADERBOARDTABLE_DATA,PASS_ID,CREATEGROUP } from '../actions/types';
 const initialState = {
-	allItems: [],
-	selectedItem: {},
+  selectedItem: {},
+  allItems: [],
+  selectedItem: {},
+  groupName: "",
 	leaderboardGroups:[],
 	leaderboardCompetitions:[],
+	groupId:0,
+	groupName:"",
 	leaderboardScoreTypes: [
 		{ label: "Average", value: 1 },
 		{ label: "Total", value: 2 },
@@ -19,16 +23,32 @@ const initialState = {
 };
 //the function to detect the state change
 export default function(state = initialState, action) {
-	switch (action.type) {
+  switch (action.type) {
+    case FETCH_POSTS:
+      return {
+        ...state,
+        allItems: action.payload
+      };
+    case UPDATE_GROUPNAME:
+      return {
+        ...state,
+        groupName: action.payload
+      };
+    case CREATEGROUP:
+      return {
+        ...state,
+        selectedItem: action.payload
+      };
+
+			case PASS_ID:
+			return {
+				...state,
+				groupId:action.payload
+			};
 		case FETCH_POSTS:
 			return {
 				...state,
-				allItems: action.payload
-			};
-		case NEW_POST:
-			return {
-				...state,
-				selectedItem: action.payload
+				groupId:action.payload
 			};
 			case FETCH_LEADERBOARDFILTER_DATA:
 			return {
@@ -44,5 +64,7 @@ export default function(state = initialState, action) {
 			};
 		default:
 			return state;
-	}
+		}
 }
+
+
