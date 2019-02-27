@@ -1,41 +1,61 @@
 import React, { Component } from 'react';
 import { Container, Col,FormGroup, Label, Input, Button, Form} from 'reactstrap';
-import '../components/LoginStyles.css';
-import { validatePassword, validateEmail, validateUsername } from './Validators.js';
+import '../components/RegisterStyles.css';
+import {  validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
+import {URL} from '../actions/types.js';
 
-class App extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       usernameValue: "",
-      emailValue: "",
       passwordValue: "",
       validForm: false,
       tokenValue : "",
     }
     this.Login = this.Login.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.Validate = this.Validate.bind(this);
 
   }
+  
   handleChange({ target }) {
     this.setState({
       [target.name]: target.value,
     });
+    let isValid = false;
+    let stateUpdate = {
+      invalidPassword: this.state.invalidPassword,
+      invalidUsername: this.state.invalidUsername
+     }
+    if (target.name === "passwordValue" ) {
+      stateUpdate.invalidPassword= false;
+    }
+    if (target.name === "usernameValue" ) {
+      stateUpdate.invalidUsername= false;
+      isValid = false;
+    }
+    if(this.state.usernameValue && this.state.passwordValue){
+      isValid = true;
+    }
+    this.setState({
+      ...stateUpdate ,
+      validForm: isValid
+    });
+  };
+
+  Validate()
+  {
     let isValid = true;
     let stateUpdate = {
       invalidPassword: false,
-      invalidEmail: false,
       invalidUsername: false
      }
-    if (!validatePassword(this.state.passwordValue)) {
+    if (this.state.passwordValue.length === 0) {
       stateUpdate.invalidPassword= true;
       isValid = false;
     };
-    if (!validateEmail(this.state.emailValue)) {
-      stateUpdate.invalidEmail= true;
-      isValid = false;
-    }; 
     if (validateUsername(this.state.usernameValue)) {
       stateUpdate.invalidUsername= true;
       isValid = false;
@@ -44,18 +64,18 @@ class App extends Component {
       ...stateUpdate ,
       validForm: isValid
     });
-  };
+  }
 
   Login() {
+    this.Validate();
     if (this.state.validForm) {
       let sha1 = require('sha1');  
       let hash = sha1(this.state.passwordValue);
       let RequestObject = {
         "Username": this.state.usernameValue,
-        "Email": this.state.emailValue,
         "Password": hash,
       }
-      fetch("http://localhost:63474/api/User", {
+      fetch( URL +"/api/features/login", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -74,31 +94,32 @@ class App extends Component {
       });
     }
   }
+
   render() {
     if(getCookie("token")){
       window.location = "/home";
     }
     let invalidPasswordMessage;
-    let invalidEmailMessage;
     let invalidUsernameMessage;
 
     if (this.state.invalidPassword) {
-      invalidPasswordMessage = <div className="invalid-message">Atleast one number and one letter and 6 characters</div>;
-    }
-    if (this.state.invalidEmail) {
-      invalidEmailMessage = <div className="invalid-message">Invalid email</div>;
+      invalidPasswordMessage = <div className="invalid-message">Please choose a password</div>;
     }
     if (this.state.invalidUsername) {
       invalidUsernameMessage = <div className="invalid-message">Please enter your username</div>;
     }
+
     return (
       <Container className="App">
+      <div className="header-container">
+      <h2>Login</h2>
+      </div>
         <div className="centre-login">
           <Form className="form" autoComplete="off">
-            <h2>Register</h2>
+
             <Col className="no-padding">
               <FormGroup>
-                <Label>Username</Label>
+                <Label className="front-white"> Type <strong>Username</strong></Label>
                 <Input
                   type="text"
                   name="usernameValue"
@@ -113,22 +134,7 @@ class App extends Component {
             </Col>
             <Col className="no-padding">
               <FormGroup>
-                <Label for="examplePassword">Email</Label>
-                <Input
-                  type="email"
-                  name="emailValue"
-                  id="LoginEmail"
-                  placeholder="Email"
-                  value={this.state.emailValue}
-                  onChange={this.handleChange}
-                  className={this.state.invalidEmail ? "invalid" : ""}
-                />
-                {invalidEmailMessage}
-              </FormGroup>
-            </Col>
-            <Col className="no-padding">
-              <FormGroup>
-                <Label for="examplePassword">Password</Label>
+                <Label className="front-white" for="examplePassword">Type <strong>Password</strong></Label>
                 <Input
                   type="password"
                   name="passwordValue"
@@ -141,8 +147,11 @@ class App extends Component {
                 {invalidPasswordMessage}
               </FormGroup>
             </Col>
-            <Button onClick={this.Login} className={this.state.validForm ? "button-valid" : "button-invalid"} >Submit</Button>
+            <div className="button-container">
+            <Button onClick={this.Login} className={this.state.validForm ? "round-button" : "button-invalid round-button"} >Join</Button>
+            </div>
           </Form>
+          <div className="register-anchhor"> Not registered? <a className="front-white" href="/register-page">Register here</a></div> 
         </div >
       </Container>
 
@@ -150,4 +159,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Login;

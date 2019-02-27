@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Container, Label, Table } from 'reactstrap';
 import '../components/RegisterMemberStyles.css';
+import {BASE_URL} from '../actions/types.js';
 
 function validateUsername(username) {
   const re = /[a-zA-Z]/;
@@ -11,6 +12,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      arrayUsers: [],
       usernameValue: "",
       membershipID: "",
       invalidUsername: false,
@@ -19,7 +21,9 @@ class App extends Component {
       expiryDate: ""
     }
     this.SearchMember = this.SearchMember.bind(this);
+    this.SearchAllMember = this.SearchAllMember.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.GetDate = this.GetDate.bind(this);
   }
 
 
@@ -40,107 +44,132 @@ class App extends Component {
     });
   }
 
-  SearchMember() {
-    if (this.state.validForm) {
-      fetch("https://api.skietbaan.retrotest.co.za/api/Features/Search?Username=" + this.state.usernameValue, {
-        method: 'Get',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      }).then(function (response) {
-        return response.json();
-      })
-        .then(function (data) {
-          document.getElementById("membershipID").value = data.memberID;
-          let entDate = data.entryDate.split('T');
-          let keepDate = data.entryDate.split('T');
-          document.getElementById("entrydate").value = entDate[0];
-          let dateNew = keepDate[0].split('-');
-          let exDateYear = parseInt(dateNew[0], 10) + 1;
-          document.getElementById("expdate").value = exDateYear + '-' + dateNew[1] + '-' + dateNew[2];
+  dateChange() {
+    let entDate = document.getElementById("entrydate").value.split('-');
+    let newDate = parseInt(entDate[0], 10) + 1;
+    document.getElementById("expdate").value = newDate + "-" + entDate[1] + "-" + entDate[2];
+  }
+
+  SearchAllMember() {
+    fetch(BASE_URL,"/api/User", {
+      method: 'Get',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    }).then(function (response) {
+      return response.json();
+    })
+      .then(function (data) {
+        return data;
+      }).then(data => this.setState({
+        arrayUsers: data.filter(function (datas) {
+          return (datas.username).startsWith(document.getElementById("usernameValue").value);
         })
-        .catch(function () { });
-    }
+      }))
+      .catch(function () { });
+  }
+
+  SearchMember(user) {
+    this.setState({
+      usernameValue: user
+    });
+    let name = this.state.arrayUsers[user].username;
+    fetch(BASE_URL,"/api/Features/Search?Username=" + name, {
+      method: 'Get',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    }).then(function (response) {
+      return response.json();
+    })
+      .then(function (data) {
+        document.getElementById("membershipID").value = data.memberID;
+        document.getElementById("usernameValue").value = name;
+        if (data.memberExpiryDate !== null) {
+          document.getElementById("expdate").value = data.memberExpiryDate.substring(0, 10);
+        }
+      })
+      .catch(function () { });
   }
 
   UpdateMember() {
     let RequestObject = {
       "username": document.getElementById("usernameValue").value,
       "memberID": document.getElementById("membershipID").value,
-      "entryDate": document.getElementById("entrydate").value + "T00:00:00",
-      "memberExpiry": document.getElementById("expdate").value + "T00:00:00"
+      "memberExpiryDate": document.getElementById("expdate").value + "T00:00:00"
     }
-    fetch("http://localhost:63474/api/Features/Update", {
+    fetch(BASE_URL,"/api/Features/Update", {
       method: 'Post',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify(RequestObject)
     })
       .then(function (response) {
-        return response.json();})
-      .then(function (data) {})
-      .catch(function (data) {});
+        return response.json();
+      })
+      .then(function (data) { })
+      .catch(function (data) { });
+  }
+
+  GetDate() {
+    let curr = new Date();
+    curr.setDate(curr.getDate() + 365);
+    let date = curr.toISOString().substr(0, 10);
+    return date;
   }
 
   render() {
-    let invalidUsernameMessage;
-
-    if (this.state.invalidUsername) {
-      invalidUsernameMessage = <div className="invalid-message">Please enter a Username</div>;
-    }
-
+    const postItems = (
+      <Table striped hover condensed
+        className="table-member">
+        <tbody>
+          {this.state.arrayUsers.map((post, index) => (
+            <tr key={post.id} onClick={() => this.SearchMember(index)}>
+              <td >
+                <b>{post.username}</b>
+                <p>{post.email}</p>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    );
     return (
       <Container className="App">
         <div className="centre-register-member">
-          <Form className="form">
-            <Col>
-              <h2>Membership Sign In</h2>
-            </Col>
-            <Col className="no-padding">
-              <FormGroup>
-                <Label><b>Username</b></Label>
-                <Input
+          <div className="page-name">
+            <h2>Create Member</h2>
+          </div>
+          <div className="search-name">
+            <input
+              type="text"
+              className="usernameValue"
+              id="usernameValue"
+              placeholder="Search By Username"
+              value={this.state.usernamesValue}
+              onChange={this.SearchAllMember} />
+          </div>
+          <div className="table-search-users">
+            {this.SearchAllMember}
+            {postItems}
+          </div>
+          <div className="rest-body">
+            <div className="membership-number">
+              <Label><b>Membership Number</b></Label>
+              <div className="input-member-number">
+                <input
                   type="text"
-                  name="usernameValue"
-                  id="usernameValue"
-                  placeholder="Username"
-                  value={this.state.usernameValue}
-                  onChange={this.handleChange}
-                  className={this.state.invalidUsername ? "invalid" : ""}
-                />
-                {invalidUsernameMessage}
-              </FormGroup>
-            </Col>
-            <Col>
-              <Button onClick={this.SearchMember} className={this.state.validForm ? "button-valid" : "button-invalid"}>Search</Button>
-            </Col>
-            <br />
-            <Col className="no-padding">
-              <FormGroup>
-                <Label><b>MemberID</b></Label>
-                <Input
-                  type="text"
-                  name="membershipID"
+                  className="membershipID"
                   id="membershipID"
-                  placeholder="Enter Membership ID"
-                  value={this.state.membershipID}
+                  placeholder="Enter Membership Number"
+                  value={this.state.membershipsID}
                   onChange={this.handleChange}
                 />
-              </FormGroup>
-            </Col>
-            <Col className="no-padding">
-              <FormGroup>
-                <Label><b>EntryDate</b></Label><br />
-                <input type="date" name="entrydate" id="entrydate" value={this.state.entrysDate} onChange={this.handleChange} />
-              </FormGroup>
-            </Col>
-            <Col className="no-padding">
-              <FormGroup>
-                <Label><b>ExpireDateMember</b></Label><br />
-                <input type="date" name="expdate" id="expdate" value={this.state.expirysDate} onChange={this.handleChange} />
-              </FormGroup>
-            </Col>
-            <Col>
-              <Button onClick={this.UpdateMember} >Submit</Button>
-            </Col>
-          </Form>
+              </div>
+            </div>
+            <div className="expiry-date-member">
+              <Label><b>Membership Expiry Date</b></Label><br />
+              <input type="date" className="expdate" id="expdate" value={this.GetDate()} onChange={this.handleChange} />
+            </div>
+            <div className="create-member">
+              <button className="create-button" onClick={this.UpdateMember} >CreateMember</button>
+            </div>
+          </div>
         </div >
       </Container>
     );
