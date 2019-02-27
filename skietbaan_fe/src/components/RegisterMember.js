@@ -182,6 +182,7 @@ class App extends Component {
             {postItems}
           </div>
           <div className="rest-body">
+          <div className="container-labels">
             <div className="membership-number">
               <label className="membership-id-number">Membership No.</label>
               <div className="input-member-number">
@@ -197,6 +198,7 @@ class App extends Component {
             <div className="expiry-date-member">
               <label className="membership-expiry-date">Membership Expiry Date</label><br />
               <input type="text" className="expdate" id="expdate" value={this.GetDate()} onChange={this.handleChange} />
+            </div>
             </div>
             <div className="create-member">
               <button className={this.state.hideButton ? "hide-create-button" : "create-button"} onClick={this.UpdateMember} >CreateMember</button>

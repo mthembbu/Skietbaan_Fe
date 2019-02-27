@@ -56,16 +56,18 @@
   
   .membership-number{
     padding-top: 10px;
+    padding-left: 13%;
     position: center;
-    text-align: center;
+    text-align: left;
     color:white;
     font-size: 18px;
   }
 
   .expiry-date-member{
     padding-top: 35px;
+    padding-left: 13%;
     position: center;
-    text-align: center;
+    text-align: left;
     color: white;
   }
 
@@ -203,4 +205,8 @@
     margin-top: 100px;
     width: 152px;
     height: 38px;
+  }
+
+  .container-labels{
+    text-align: left;
   }
