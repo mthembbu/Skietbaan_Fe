@@ -10,7 +10,6 @@ class UserProfile extends Component {
         super(props);
         this.state = {
             awardCompetitions : [],
-            mapStyleNameToStyle : {}
         }
     }
 
