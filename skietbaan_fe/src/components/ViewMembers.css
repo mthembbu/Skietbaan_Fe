@@ -59,79 +59,77 @@
     text-align: center;
     width: 100%;
     border: none;
-}
+  }
 
-.search {
-  padding-left: 45px;
-  padding-right: 45px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: #504f51;
-}
+  .search {
+    padding-left: 45px;
+    padding-right: 45px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #504f51;
+  }
 
-.userValue{
-  background: url('../components/assets/search.png') no-repeat right center;
-  background-color: white;
-  background-size: 22px;
-  height: 40px;
-  background-position-x: 95%;
-  border-radius: 7px;
-}
+  .userValue{
+    background: url('../components/assets/search.png') no-repeat right center;
+    background-color: white;
+    background-size: 22px;
+    height: 40px;
+    background-position-x: 95%;
+    border-radius: 7px;
+  }
 
-.go-back-to-creat-page{
-  float: left;
-  padding-top: 10px;
-  padding-left: 25px;
-  background-size: 15px;
-  height: 40px;
-}
+  .go-back-to-creat-page{
+    float: left;
+    padding-top: 10px;
+    padding-left: 25px;
+    background-size: 15px;
+    height: 40px;
+  }
 
-.table-member{
-  background-color: white;
-  width: 100%;
-  font-size: 16px;
-  font-family: helvetica;
-}
+  .table-member{
+    background-color: white;
+    width: 100%;
+    font-size: 16px;
+  }
 
-.view-members{
-  size:49px;
-  padding-top: 7px;
-  font-family: helvetica;
-  font-weight: bolder;
-  font-size: 26px;
-  color: #fdfdfd;
-}
+  .view-members{
+    size:49px;
+    padding-top: 7px;
+    font-weight: bolder;
+    font-size: 26px;
+    color: #fdfdfd;
+  }
 
-.view-members-user{
-  border-bottom: solid 2px #bbbcbd;
-}
+  .view-members-user{
+    border-bottom: solid 2px #bbbcbd;
+  }
 
-.view-members-user::selection{
-  background-color: #bbbcbd;
-}
+  .view-members-user::selection{
+    background-color: #bbbcbd;
+  }
 
-.view-members-user:hover{
-  background-color: lightgray;
-}
+  .view-members-user:hover{
+    background-color: lightgray;
+  }
 
-.first-column{
-  padding-left: 30px;
-  width: 65%;
-}
+  .first-column{
+    padding-left: 30px;
+    width: 65%;
+  }
 
-.username-and-email{
-  width: 80%;
-}
+  .username-and-email{
+    width: 80%;
+  }
 
-.bad{
-  color: red;
-  font-weight: bold;
-}
+  .bad{
+    color: red;
+    font-weight: bold;
+  }
 
-.okay{
-  color:black;
-}
+  .okay{
+    color:black;
+  }
 
-.second-column{
-  vertical-align: top;
-}
+  .second-column{
+    vertical-align: top;
+  }

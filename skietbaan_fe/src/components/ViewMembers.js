@@ -36,7 +36,6 @@ class ViewMembers extends Component {
             }).then(data => this.setState({
                 array: data
             }))
-            .catch(function () { });
     }
 
 
@@ -53,7 +52,6 @@ class ViewMembers extends Component {
             }).then(data => this.setState({
                 array: data
             }))
-            .catch(function () { });
     }
 
     GetTimeLeft() {
@@ -69,7 +67,6 @@ class ViewMembers extends Component {
             }).then(data => this.setState({
                 timeLeftOnMembership: data
             }))
-            .catch(function () { });
     }
 
     DoAllThese() {
@@ -97,13 +94,14 @@ class ViewMembers extends Component {
     }
 
     render() {
+        this.GetAllMembers();
         const postItems = (
             <table striped hover condensed className="table-member">
                 <tbody >
                     {this.state.array.filter((post) => {
-                        return (this.state.filterText
-                            || post.username.toLowerCase().startsWith(this.state.filterText.toLocaleLowerCase())
-                            || post.email.toLowerCase().startsWith(this.state.filterText.toLocaleLowerCase())
+                        return (!this.state.filterText
+                            || post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase())
+                            || post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
                             || post.memberID.startsWith(this.state.filterText))
                     }).map((post, index) => (
                         <tr className="view-members-user" key={post.id}>
