@@ -12,7 +12,7 @@ class ViewGroups extends Component {
       posts: [],
       newArray: [],
       count: 0,
-      ShowMe:true
+      ShowMe: true
     };
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -54,50 +54,84 @@ class ViewGroups extends Component {
       .then(function(data) {})
       .catch(function(data) {});
   }
+
+  changeSate = () => {
+    this.setState({ ShowMe: false });
+  };
+  do = () => {
+    this.setState({ ShowMe: false });
+  };
   render() {
-    console.log(this.state.posts)
+    console.log(this.state.posts);
     const postitems = (
       <div className="check">
         <ul class="list-group">
-          {this.state.posts.filter(
-            (post) => {
-              return (!this.state.filterText || post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) || post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase()))
-            }
-          ).map((post, index) => (
-            <li style={{width:"100%" }} class="list-group-item list-group-item-light" key={post.id}>
-              <label style={{width:"100%"}} className="blabe">
-                {post.name}
-
-              {/* <div style={{float:"right" , paddingLeft:"20px"}}>
-              <img src={require("./GroupImages/submit plus add score.png")} onClick={()=>this.delete(post.id,index)}  className="boxes" /><br/>delete
-              </div> */}
-              <div style={{float:"right" , paddingLeft:"20px"}}>
-              <img src={require("./GroupImages/3dots.png")} onClick={()=>this.delete(post.id,index)}  className="boxes" /><br/>delete
-              </div>
-              <div style={{float:"right"}}>
-             <img src={require("./GroupImages/Group.png")}  className="boxes" onClick={()=>this.editGroup(post.id,post.name)}  /><br/>edit
-             </div>
-                <br/>
-              </label>
-            </li>
-          ))}
+          {this.state.posts
+            .filter(post => {
+              return (
+                !this.state.filterText ||
+                post.username
+                  .toLowerCase()
+                  .startsWith(this.state.filterText.toLowerCase()) ||
+                post.email
+                  .toLowerCase()
+                  .startsWith(this.state.filterText.toLowerCase())
+              );
+            })
+            .map((post, index) => (
+              <li
+                style={{ width: "100%", background: "#bbbcbd" }}
+                class="list-group-item list-group-item-light"
+                key={post.id}
+              >
+                <label style={{ width: "100%" }} className="blabe">
+                  {post.name}
+                  {this.state.ShowMe ? (
+                    <div style={{ float: "right", paddingLeft: "20px" }}>
+                      <img
+                        src={require("./GroupImages/3dots.png")}
+                        onClick={() => this.changeSate()}
+                        className="boxes"
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <div style={{ float: "right", paddingLeft: "20px" }}>
+                        <img
+                          src={require("./GroupImages/submit plus add score.png")}
+                          onClick={() => this.delete(post.id, index)}
+                          className="boxes"
+                        />
+                        <br />
+                        delete
+                      </div>
+                      <div style={{ float: "right"}}>
+                        <img
+                          src={require("./GroupImages/Group.png")}
+                          className="boxes"
+                          onClick={() => this.editGroup(post.id, post.name)}
+                        />
+                        <br />
+                        edit
+                      </div>
+                    </div>
+                  )}
+                  <br />
+                </label>
+              </li>
+            ))}
         </ul>
       </div>
     );
 
     return (
-      <main className="TheMain">
+      <main className="TheMain" onClick={() => this.do()}>
         <div className="TheNavBar">
           <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
-          <div className="center_label">
-            <h2>GROUP</h2>
-          </div>
+          
+            <h2 className="center_label">View Groups</h2>
+          
         </div>
-        <div className="BNavBar" />
-
-        <div className="OnToTheNextOne" />
-        <br />
-        <br />
         <div
           className="scrollbar"
           data-simplebar

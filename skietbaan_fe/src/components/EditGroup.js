@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
-import history from './history';
+import history from "./history";
 class EditGroup extends Component {
   constructor(props) {
     super(props);
@@ -16,10 +16,10 @@ class EditGroup extends Component {
     this.onChange = this.onChange.bind(this);
   }
   componentWillMount() {
-    fetch("http://localhost:63474/api/Groups/edit?id="+this.props.id)
+    fetch("http://localhost:63474/api/Groups/edit?id=" + this.props.id)
       .then(res => res.json())
       .then(data => {
-        console.log(data)
+        console.log(data);
         this.setState({
           posts: data.map(users => {
             users.highlighted = false;
@@ -29,10 +29,10 @@ class EditGroup extends Component {
             };
           })
         });
-      });    
+      });
   }
-  onChange(event){
-    this.setState({filterText: event.target.value});
+  onChange(event) {
+    this.setState({ filterText: event.target.value });
   }
 
   handleOnClick() {
@@ -47,8 +47,8 @@ class EditGroup extends Component {
     let request = {
       newArray: this.state.newArray
     };
-    console.log(request)
-    fetch("http://localhost:63474/api/groups/deleteMember/"+this.props.id, {
+    console.log(request);
+    fetch("http://localhost:63474/api/groups/deleteMember/" + this.props.id, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -59,8 +59,6 @@ class EditGroup extends Component {
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
-     
-     
   }
   toggleHighlight = event => {
     if (this.state.posts[event].highlighted === true) {
@@ -79,36 +77,44 @@ class EditGroup extends Component {
     history.push("/ViewGroups");
   }
 
-  goToNext=()=>{
+  goToNext = () => {
     history.push("/AddMembersGroup");
-  }
+  };
   render() {
-    console.log(this.props.id)
+    console.log(this.props.id);
     const postitems = (
       <div className="check">
         <ul class="list-group">
-          {this.state.posts.filter(
-            (post) => {
-              return (!this.state.filterText || post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) || post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase()))
-            }
-          ).map((post, index) => (
-            <li class="list-group-item list-group-item-light" key={post.id}>
-              <input
-                type="checkbox"
-                className="boxs"
-                onClick={() => this.toggleHighlight(index)}
-              />
-              <label className="blabe">
-                {post.username} <br />
-                {post.email}
-              </label>
-            </li>
-          ))}
+          {this.state.posts
+            .filter(post => {
+              return (
+                !this.state.filterText ||
+                post.username
+                  .toLowerCase()
+                  .startsWith(this.state.filterText.toLowerCase()) ||
+                post.email
+                  .toLowerCase()
+                  .startsWith(this.state.filterText.toLowerCase())
+              );
+            })
+            .map((post, index) => (
+              <li class="list-group-item list-group-item-light" key={post.id}>
+                <input
+                  type="checkbox"
+                  className="boxs"
+                  onClick={() => this.toggleHighlight(index)}
+                />
+                <label className="blabe">
+                  {post.username} <br />
+                  {post.email}
+                </label>
+              </li>
+            ))}
         </ul>
       </div>
     );
     return (
-      <main className="TheMain" >
+      <main className="TheMain">
         <div className="TheNavBar">
           <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
           <div className="center_label">
@@ -120,12 +126,12 @@ class EditGroup extends Component {
             className="theText"
             id="username"
             type="text"
-            placeholder="Search.." 
+            placeholder="Search.."
             onChange={this.onChange}
             autoComplete="off"
           />
           <button className="select" onClick={this.goToNext}>
-           Add new
+            Add new
           </button>
         </div>
 
@@ -137,23 +143,20 @@ class EditGroup extends Component {
           data-simplebar
           data-simplebar-auto-hide="false"
         >
-        
           {postitems}
         </div>
         <label className="bottomlabel">
-        <button className="deleteUser" onClick={this.handleOnClick}>delete</button>
+          <button className="deleteUser" onClick={this.handleOnClick}>
+            delete
+          </button>
         </label>
       </main>
     );
   }
 }
 const mapStateToProps = state => ({
-    id:state.posts.groupId,
-    name:state.posts.groupName
-   });
-   
-export default connect(
-  mapStateToProps,
-  
-)(EditGroup);
+  id: state.posts.groupId,
+  name: state.posts.groupName
+});
 
+export default connect(mapStateToProps)(EditGroup);

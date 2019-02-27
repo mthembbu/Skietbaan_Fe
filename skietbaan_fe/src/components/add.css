@@ -7,7 +7,9 @@
 
 .center_label {
   display: flex;
-  
+  margin-left: auto;
+  margin-left: auto;
+  text-align: center;
 
 }
 /* .center_label {
@@ -27,15 +29,17 @@
   width: 100%;
   margin-bottom: 2px;
   font-size: 20px;
-
+  margin-top: 10px;
 }
 
 .texts {
   border-radius: 10px;
   height: 40px;
+  padding-left: 5px;
+  margin-bottom: 15px;
 }
 .page {
-  background: #101727;
+  background: #504f51;
   height: -webkit-fill-available;
 }
 
@@ -52,6 +56,7 @@
 .texts {
   border-radius: 10px;
   border: 2px solid;
+  margin-bottom: 15px;
 }
 
 .fa-angle-left {
@@ -67,13 +72,14 @@
   margin: 2%;
 }
 
-.theList{
-    background: #CCCFD3;
+.theList {
+  background: #cccfd3;
 }
 
-.circles{
+.circles {
   border-radius: 50%;
 }
-.groups{
-  
+.name{
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
