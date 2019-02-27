@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Container, Label, Table } from 'reactstrap';
 import '../components/RegisterMemberStyles.css';
 import {BASE_URL} from '../actions/types.js';
 
@@ -18,12 +17,16 @@ class App extends Component {
       invalidUsername: false,
       validForm: false,
       entryDate: "",
-      expiryDate: ""
+      expiryDate: "",
+      clicked: false,
+      hideButton: true
     }
     this.SearchMember = this.SearchMember.bind(this);
     this.SearchAllMember = this.SearchAllMember.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.GetDate = this.GetDate.bind(this);
+    this.ChangeColor = this.ChangeColor.bind(this);
+    this.HideCreateButton = this.HideCreateButton.bind(this);
   }
 
 
@@ -51,7 +54,7 @@ class App extends Component {
   }
 
   SearchAllMember() {
-    fetch(BASE_URL,"/api/User", {
+    fetch(BASE_URL+"/api/User", {
       method: 'Get',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     }).then(function (response) {
@@ -61,7 +64,8 @@ class App extends Component {
         return data;
       }).then(data => this.setState({
         arrayUsers: data.filter(function (datas) {
-          return (datas.username).startsWith(document.getElementById("usernameValue").value);
+          return (datas.username.toLowerCase().startsWith(document.getElementById("usernameValue").value.toLocaleLowerCase())
+          || datas.email.toLowerCase().startsWith(document.getElementById("usernameValue").value.toLocaleLowerCase()))
         })
       }))
       .catch(function () { });
@@ -69,10 +73,12 @@ class App extends Component {
 
   SearchMember(user) {
     this.setState({
-      usernameValue: user
+      usernameValue: user,
+      clicked: "actives",
+      hideButton: false
     });
     let name = this.state.arrayUsers[user].username;
-    fetch(BASE_URL,"/api/Features/Search?Username=" + name, {
+    fetch(BASE_URL+"/api/Features/Search?Username=" + name, {
       method: 'Get',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     }).then(function (response) {
@@ -85,7 +91,7 @@ class App extends Component {
           document.getElementById("expdate").value = data.memberExpiryDate.substring(0, 10);
         }
       })
-      .catch(function () { });
+      .catch(function () { console.log("Failed") });
   }
 
   UpdateMember() {
@@ -94,7 +100,7 @@ class App extends Component {
       "memberID": document.getElementById("membershipID").value,
       "memberExpiryDate": document.getElementById("expdate").value + "T00:00:00"
     }
-    fetch(BASE_URL,"/api/Features/Update", {
+    fetch(BASE_URL+"/api/Features/Update", {
       method: 'Post',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify(RequestObject)
@@ -113,34 +119,61 @@ class App extends Component {
     return date;
   }
 
+  ChangeColor(){
+    this.setState({
+      clicked: "actives"
+    });
+  }
+
+  HideCreateButton(){
+    if(document.getElementById("membershipID").value === ""){
+      this.setState({
+        hideButton: true
+      });
+    }
+    else{
+      this.setState({
+        hideButton: false
+      });
+    }
+  }
+
   render() {
     const postItems = (
-      <Table striped hover condensed
-        className="table-member">
-        <tbody>
+      <table striped hover condensed
+        className="table-register-member">
+        <tbody className="table-body-create-members">
           {this.state.arrayUsers.map((post, index) => (
-            <tr key={post.id} onClick={() => this.SearchMember(index)}>
-              <td >
+            <tr className="register-member-user-column" key={post.id} onClick={() => this.SearchMember(index)}>
+              <td className={this.state.clicked ? "actives" : "register-member-user-row"} onClick={() => this.ChangeColor()}>
                 <b>{post.username}</b>
                 <p>{post.email}</p>
               </td>
             </tr>
           ))}
         </tbody>
-      </Table>
+      </table>
     );
     return (
-      <Container className="App">
         <div className="centre-register-member">
-          <div className="page-name">
-            <h2>Create Member</h2>
+          <div className="page-name-create-members">
+          <div className="image-comtainer">
+          <img src={require('../components/assets/back-button-white.png')} onClick={this.BackToCreate}
+              className="go-back-to-create-page" alt=''></img>
+          </div>
+          <div>
+          <label className="create-members">Create Member</label>
+          </div>
+          </div>
+          <div className="div-label-enter-user-name">
+            <label className="label-enter-user-name">Enter User Name</label>
           </div>
           <div className="search-name">
             <input
+            autoComplete="off"
               type="text"
-              className="usernameValue"
+              className="username"
               id="usernameValue"
-              placeholder="Search By Username"
               value={this.state.usernamesValue}
               onChange={this.SearchAllMember} />
           </div>
@@ -150,28 +183,26 @@ class App extends Component {
           </div>
           <div className="rest-body">
             <div className="membership-number">
-              <Label><b>Membership Number</b></Label>
+              <label className="membership-id-number">Membership No.</label>
               <div className="input-member-number">
                 <input
                   type="text"
                   className="membershipID"
                   id="membershipID"
-                  placeholder="Enter Membership Number"
                   value={this.state.membershipsID}
                   onChange={this.handleChange}
                 />
               </div>
             </div>
             <div className="expiry-date-member">
-              <Label><b>Membership Expiry Date</b></Label><br />
-              <input type="date" className="expdate" id="expdate" value={this.GetDate()} onChange={this.handleChange} />
+              <label className="membership-expiry-date">Membership Expiry Date</label><br />
+              <input type="text" className="expdate" id="expdate" value={this.GetDate()} onChange={this.handleChange} />
             </div>
             <div className="create-member">
-              <button className="create-button" onClick={this.UpdateMember} >CreateMember</button>
+              <button className={this.state.hideButton ? "hide-create-button" : "create-button"} onClick={this.UpdateMember} >CreateMember</button>
             </div>
           </div>
         </div >
-      </Container>
     );
   }
 }
