@@ -1,4 +1,4 @@
-import {NEW_COMP, FETCH_COMP} from '../actions/types';
+import {NEW_COMP, FETCH_COMP, UPDATE_COMP_STATUS} from '../actions/types';
 const initialState = {
 	allComps: [],
 	selectedComp: {}
@@ -17,6 +17,11 @@ export default function(state = initialState, action){
 				...state,
 				allComps: action.payload
 			};
+		case UPDATE_COMP_STATUS:
+			return{
+				...state,
+				allComps: action.payload
+			}	
 		default :
 			return state;	
 	}
