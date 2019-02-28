@@ -7,10 +7,10 @@
 
 .competition-item{
     width: 100%;
-    height: 35px;
+    height: 42px;
     color: white;
     text-align: center;
-    padding: 5px;
+    padding: 7px;
     border-radius: 25px;
     font-size: 16px;
     border: #e11e2b 1px solid;
@@ -73,7 +73,7 @@
 .score{
     border-radius: 10px;
     border:none;
-    width: 48%;
+    width: 157px;
     margin: 0 auto;
     text-align: center;
     color:black;

@@ -18,8 +18,22 @@ class Register extends Component {
     this.Register = this.Register.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.Validate = this.Validate.bind(this);
+    this.togglePassword = this.togglePassword.bind(this);
+    this.ToggleNavbar = this.ToggleNavbar.bind(this);
+    this.goToLogin = this.goToLogin.bind(this);
 
   }
+
+  ToggleNavbar() {
+    var Navbar = document.querySelector(".navbar-custom");
+    if (Navbar.classList.contains("hidden")) {
+      Navbar.classList.remove("hidden");
+    }
+    else {
+      Navbar.classList.add("hidden");
+    }
+  }
+
   handleChange({ target }) {
     this.setState({
       [target.name]: target.value,
@@ -98,86 +112,98 @@ class Register extends Component {
       });
     }
   }
+
+  togglePassword() {
+    var x = document.getElementById("PasswordValue");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+  
+  goToLogin() {
+    window.location = "/Login"
+  }
+
   render() {
     if (getCookie("token")) {
       window.location = "/home";
     }
-    let invalidPasswordMessage;
-    let invalidEmailMessage;
-    let invalidUsernameMessage;
+    document.addEventListener('DOMContentLoaded', () => {
+      this.ToggleNavbar();
+   }, false);
 
-    if (this.state.invalidPassword) {
-      invalidPasswordMessage = <div className="invalid-message">Please choose a password</div>;
-    }
-    if (this.state.invalidEmail) {
-      invalidEmailMessage = <div className="invalid-message">Invalid email</div>;
-    }
-    if (this.state.invalidUsername) {
-      invalidUsernameMessage = <div className="invalid-message">Please enter your username</div>;
-    }
     return (
-      <Container className="App">
-        <div className="header-container">
-          <h2>Register</h2>
-        </div>
+      <div className="Page-content">
+      <div className = "welcome-header"><label className="welcome-label">Welcome to skietbaan</label>
+      <img src={require('../components/assets/bullet.png')}
+                  className="bullet-button" alt=''></img></div>
+      <div className="header-container">
+      <label className = "header-label">Register</label>
+      <button className="button-login">Login</button>
+      </div>
         <div className="centre-login">
           <Form className="form" autoComplete="off">
 
             <Col className="no-padding">
               <FormGroup>
-              <Label className="front-white"> Type <strong>Username</strong></Label>
-              <Input
+              <label className="front-white input-label">Username <div 
+                className={this.state.invalidUsername ? "invalid-icon" :"hidden"}></div></label>
+                
+                <div className="input-container">
+                <input
                   type="text"
                   name="usernameValue"
-                  id="usernamerValue"
-                  placeholder="Username"
+                  id="us"
                   value={this.state.usernameValue}
                   onChange={this.handleChange}
-                  className={this.state.invalidUsername ? "invalid" : ""}
+                  className= "input"
                 />
-                {invalidUsernameMessage}
+                </div>
               </FormGroup>
             </Col>
             <Col className="no-padding">
               <FormGroup>
-              <Label className="front-white"> Type <strong>Email Address</strong></Label>
-                <Input
-                  type="email"
+              <label className="front-white input-label">Email Address <div 
+                className={this.state.invalidUsername ? "invalid-icon" :"hidden"}></div></label>
+                <div className="input-container">
+                <input
+                  type="text"
                   name="emailValue"
-                  id="LoginEmail"
-                  placeholder="Email"
+                  id="email"
                   value={this.state.emailValue}
                   onChange={this.handleChange}
-                  className={this.state.invalidEmail ? "invalid" : ""}
+                  className= "input"
                 />
-                {invalidEmailMessage}
+                </div>
               </FormGroup>
             </Col>
             <Col className="no-padding">
               <FormGroup>
-              <Label className="front-white"> Type <strong>Password</strong></Label>
-                <Input
+              <label className="front-white input-label" for="examplePassword">
+                Password <div className={this.state.invalidPassword ? "invalid-icon":"hidden"}></div></label>
+                <div className="input-container">
+                <input
                   type="password"
                   name="passwordValue"
-                  id="examplePassword"
-                  placeholder="********"
+                  id="PasswordValue"
                   value={this.state.passwordValue}
                   onChange={this.handleChange}
-                  className={this.state.invalidPassword ? "invalid" : ""}
+                  onClick={this.togglePassword}
+                  className= "input-Password"
                 />
-                {invalidPasswordMessage}
+                </div>
               </FormGroup>
             </Col>
             <div className="button-container">
-            <Button onClick={this.Register} className={this.state.validForm ? "round-button" : "button-invalid round-button"} >Join</Button>
+            <Button onClick={this.Register} className={this.state.validForm ? "round-button" : "buttons-invalid round-button"} >Join</Button>
             </div>
           </Form>
-          <div className="register-anchhor"> Already Registered? <a className="front-white" href="/login">Login here</a></div> 
-
-        </div >
-      </Container>
-
+         </div>
+         </div>
     );
+
   }
 }
 
