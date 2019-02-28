@@ -10,3 +10,4 @@ export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
 export const FETCH_LEADERBOARDFILTER_DATA = 'FETCH_LEADERBOARDFILTER_DATA';
 export const FETCH_LEADERBOARDTABLE_DATA = 'FETCH_LEADERBOARDTABLE_DATA';
 export const URL = "https://api.skietbaan.retrotest.co.za"; 
+export const LOCAL_URL = "http://localhost:63474";

@@ -1,7 +1,8 @@
 import {NEW_COMP, FETCH_COMP, UPDATE_COMP_STATUS} from '../actions/types';
 const initialState = {
 	allComps: [],
-	selectedComp: {}
+	selectedComp: {},
+	updatedComp:{}
 };
 /** A function to detect the state change*/
 export default function(state = initialState, action){

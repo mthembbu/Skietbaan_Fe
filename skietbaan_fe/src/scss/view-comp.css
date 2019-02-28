@@ -1,9 +1,20 @@
 .activeButton button {
-	background-color: #e11e2b !important;
-	border-radius: 20px;
+	background-color: #e11e2b;
+    border-radius: 20px;
+    border: none;
+	color: black;
+	width: 116px;
+    height: 42px;
+    font-weight: lighter;
 }
-.inactiveButton button:hover {
-	background-color: #101727 !important;
+.inactiveButton button {
+	background-color: #504f51;
+    border-radius: 20px;
+    border: 1px #e11e2b solid;
+    color: #fbfbfb;
+    width: 116px;
+    height: 42px;
+    font-weight: lighter;
 }
 .view-header {
 	position: center;
@@ -28,6 +39,14 @@
 	color: #fdfdfd;
 	font-family: helvetica;
 }
+.competition-containers {
+	margin-bottom: .5rem;
+    font-size: helvetica;
+    font-weight: lighter;
+    line-height: 1.2;
+    font-size: 18px;
+    color: #fbfbfb;
+}
 .table-view-competitions {
 	background-color: #504f51;
 	width: 80%;
@@ -35,11 +54,14 @@
 	margin-left: 10%;
 }
 .table-competition-container {
-	position: center !important;
-	text-align: center !important;
+	position: center ;
+	text-align: center t;
 }
 .table-competition-row {
 	border-bottom: solid 1px #bbbcbd;
-	padding-bottom: 1px !important;
-	padding-top: 10px !important;
+	padding-bottom: 1px ;
+	padding-top: 10px ;
+}
+.page-contents{
+	background-color: #504f51;
 }

@@ -1,10 +1,12 @@
-import { NEW_COMP, FETCH_COMP, UPDATE_COMP_STATUS,URL } from './types';
+import { NEW_COMP, FETCH_COMP, UPDATE_COMP_STATUS,URL,LOCAL_URL } from './types';
 export const fetchcomp = () => (dispatch) => {
-	fetch(URL+"api/Competition/all").then((res) => res.json()).then((compData) =>
-		dispatch({
+	fetch(URL+"/api/Competition/all").then((res) => res.json()).then((compData) => {
+	//debugger;	
+	dispatch({
 			type: FETCH_COMP,
 			payload: compData
 		})
+	}
 	);
 };
 /** A method to create a new competition and posts comps data to the designated url
@@ -38,10 +40,12 @@ export const updateByIDcomp = (compData, Id) => (dispatch) => {
 		body: JSON.stringify(compData)
 	})
 		.then((res) => {res.json(); console.log(res)})
-		.then((comp) =>
+		.then((comp) => {
+			//debugger;
 			dispatch({
 				type: UPDATE_COMP_STATUS,
 				payload: comp
 			})
+		}
 		);
 };

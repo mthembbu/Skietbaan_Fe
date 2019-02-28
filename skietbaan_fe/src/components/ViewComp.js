@@ -12,31 +12,37 @@ class ViewComp extends Component {
 			updatedComp: {}
 		};
 		this.changeActive = this.changeStatus.bind(this);
+		this.onClick = this.onClick.bind(this);
+	}
+	onClick(){
+		window.location = "/create";
+
 	}
 	// The method that mounts everytime there is an action detected
 	componentWillMount() {
 		this.props.fetchcomp();
 	}
 	componentWillReceiveProps(val) {
-		for (let i = 0; i < val.compOBJ.length; i++) {
+		for (let i = 0; i < val.length; i++) {
 			this.state.status.push(val.compOBJ[i].status);
 		}
 	}
 	//The method that detects the current status and perform the changes
 	changeStatus(status, i) {
 		const newCompOBJArr = [ ...this.props.compOBJ ]; //cloning an array of competition
-		newCompOBJArr[i].status = !status; //changing the status of a newly cloned array
+		newCompOBJArr[i].statucompOBJs = !status; //changing the status of a newly cloned array
 		this.props.updateByIDcomp(newCompOBJArr[i], i); //updating the competition status by ID in the back-end
 		this.setState({ compOBJ: newCompOBJArr });
 	}
 	render() {
 		const displayCompetitions = (
+			<div className="page-contents">
 			<table class="table-view-competitions">
 				<tbody>
 					{this.props.compOBJ.map((compVar, i) => (
 						<tr key={compVar.id} className="table-competition-row">
 							<td>
-								<h5>{compVar.name}</h5>
+								<label class="competition-containers">{compVar.name}</label>
 							</td>
 							<td>
 								<strong />
@@ -63,6 +69,7 @@ class ViewComp extends Component {
 					))}
 				</tbody>
 			</table>
+			</div>
 		);
 		return (
 			<div className="view-page">
