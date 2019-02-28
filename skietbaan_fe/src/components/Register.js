@@ -114,11 +114,11 @@ class Register extends Component {
   }
 
   togglePassword() {
-    let x = document.getElementById("PasswordValue");
-    if (x.type === "password") {
-      x.type = "text";
+    let password = document.getElementById("PasswordValue");
+    if (password.type === "password") {
+      password.type = "text";
     } else {
-      x.type = "password";
+      password.type = "password";
     }
   }
   
@@ -141,7 +141,7 @@ class Register extends Component {
                   className="bullet-button" alt=''></img></div>
       <div className="header-container">
       <label className = "header-label">Register</label>
-      <button className="button-login" onClick={goToLogin}>Login</button>
+      <button className="button-login" onClick={() => this.goToLogin()}>Login</button>
       </div>
         <div className="centre-login">
           <Form className="form" autoComplete="off">

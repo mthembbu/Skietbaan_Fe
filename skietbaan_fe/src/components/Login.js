@@ -106,11 +106,11 @@ class Login extends Component {
   }
 
   togglePassword() {
-    let x = document.getElementById("PasswordValue");
-    if (x.type === "password") {
-      x.type = "text";
+    let password = document.getElementById("PasswordValue");
+    if (password.type === "password") {
+      password.type = "text";
     } else {
-      x.type = "password";
+      password.type = "password";
     }
   }
 
