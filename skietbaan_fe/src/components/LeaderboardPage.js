@@ -4,7 +4,7 @@ import { fetchleaderboadfilterdata } from '../actions/postActions';
 import { fetchleaderboadtabledata } from '../actions/postActions';
 import { Collapse } from 'react-collapse';
 import { Table } from "react-bootstrap";
-import Img from 'react-image'
+import {Img} from 'react-image'
 import { getCookie } from './cookie.js'
 import { MDBBtn, MDBIcon } from "mdbreact";
 import '../bootstrap/LeaderboardStyle.css';
