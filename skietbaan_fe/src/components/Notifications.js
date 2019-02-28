@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "../components/NotificationsStyle.css";
 import { getCookie } from "./cookie";
+import history from "./history";
+import { URL } from "../actions/types.js";
+
 class notification extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +26,7 @@ class notification extends Component {
     newArray.splice(key, 1);
     this.setState({ array: newArray });
 
-    fetch(`http://localhost:63474/api/Notification/${id}`, {
+    fetch(URL + `/api/Notification/${id}`, {
       method: "Delete"
     }).catch(err => {
       console.error("err", err);
@@ -37,50 +40,35 @@ class notification extends Component {
   }
 
   onClick_View = Notification => {
-    if (!this.state.viewClicked) {
-        if (Notification === "Award") {
-          window.location("./Leaderboard");
-        } else if (Notification === "Confirmation") {
-          window.location("");
-        } else if (Notification === "Renewal") {
-          window.location("");
-        } else if (Notification === "Competition") {
-          window.location("./Competition");
-        } else if (Notification === "Document") {
-          window.location("");
-        } else if (Notification === "Group") {
-          window.location("./Group");
-        }else{
-          return null;
-        }
+    if (Notification === "Award") {
+    } else if (Notification === "Confirmation") {
+    } else if (Notification === "Renewal") {
+    } else if (Notification === "Competition") {
+      history.push("/home");
+    } else if (Notification === "Document") {
+    } else if (Notification === "Group") {
+    } else {
+      history.push("/notify");
     }
-    this.setState({
-      typeOfNotification:Notification
-    })
-  }
+  };
 
   componentDidMount() {
     if (getCookie("token")) {
       var token = document.cookie;
-      fetch("http://localhost:63474/api/Notification?" + token)
+      fetch(URL + "/api/Notification?" + token)
         .then(response => response.json())
         .then(data => {
           this.setState({
             array: data
           });
-        })
-        .catch(function(data) {});
+        });
     }
   }
-
-  // redirect() {
-  //   history.push("/notify");
-  // }
 
   render() {
     const headingItems = (
       <div className="PageHeading">
-        <b className="pageheading">Notifications</b>
+        <b>Notifications</b>
       </div>
     );
 
@@ -89,13 +77,11 @@ class notification extends Component {
         <tbody className="">
           {this.state.array.map((post, i) => (
             <tr className="trClass" key={i}>
-              <td className="tdNotification text">
-                <a 
+              <td className="tdNotification">
+                <a
                   className="text"
                   href=""
-                  onClick={() => {
-                    this.onClick_View(post.typeOfNotification);
-                  }}
+                  onClick={() => this.onClick_View(post.typeOfNotification)}
                 >
                   {post.notificationMessage}
                 </a>
