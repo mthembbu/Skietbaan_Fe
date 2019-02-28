@@ -1,9 +1,19 @@
-@media all and (min-width: 480px) {
-  .collapse-css-transition {
-    transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
-  }  
+.comp-input{
+  width: 218px;
+  height: 39px;
+  border-radius: 5px;
+  border: none;
+}
 
+.comp-submit-btn{
+  width: 218px;
+  height: 42px;
+}
+.create-comp-containers{
+  text-align: center;
+}
+
+@media all and (min-width: 480px) {
   .collapse-css-transition {
     transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
@@ -14,6 +24,7 @@
     max-width: 320px;
   }
 }
+
 .col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-10,.col-11,.col-12{
   float:left;
 
