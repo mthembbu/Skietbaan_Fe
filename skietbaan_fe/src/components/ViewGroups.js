@@ -12,7 +12,9 @@ class ViewGroups extends Component {
       posts: [],
       newArray: [],
       count: 0,
-      ShowMe: true
+      ShowMe: true,
+      ids:0,
+      index:0
     };
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -20,7 +22,7 @@ class ViewGroups extends Component {
     this.editGroup = this.editGroup.bind(this);
   }
   componentWillMount() {
-    fetch("http://localhost:63474/api/Groups")
+    fetch("http://localhost:64444/api/Groups")
       .then(res => res.json())
       .then(data => this.setState({ posts: data }));
   }
@@ -34,37 +36,55 @@ class ViewGroups extends Component {
   editGroup(event, name) {
     this.props.getname(name);
     this.props.passId(event);
-    history.push("/EditGroup");
+      history.push("/EditGroup");
   }
 
-  delete(e, index) {
+  update=(post,indexs)=>{
+    
+    this.setState({ids:post})
+    this.setState({index:indexs})
+    
+  }
+
+  delete() {
+    this.setState({ ShowMe: false });
     const newarry = [...this.state.posts];
 
-    newarry.splice(index, 1);
+    newarry.splice(this.state.index, 1);
     this.setState({ posts: newarry });
-    fetch("http://localhost:63474/api/groups/" + e, {
+    fetch("http://localhost:64444/api/groups/" + this.state.ids, {
       method: "delete",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(e)
+      body: JSON.stringify(this.state.ids)
     })
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
+      
   }
 
-  changeSate = () => {
+  changeState = () => {
     this.setState({ ShowMe: false });
   };
+
   do = () => {
-    this.setState({ ShowMe: false });
+    if(this.state.ShowMe==true){
+      this.setState({ ShowMe: false });
+    }
+    else{
+      this.setState({ ShowMe: true });
+
+    }
+    
   };
+
+  handleOnClick = () => {};
   render() {
-    console.log(this.state.posts);
     const postitems = (
-      <div className="check">
+      <div className="check" onClick={()=>this.do()}>
         <ul class="list-group">
           {this.state.posts
             .filter(post => {
@@ -84,53 +104,33 @@ class ViewGroups extends Component {
                 class="list-group-item list-group-item-light"
                 key={post.id}
               >
-                <label style={{ width: "100%" }} className="blabe">
-                  {post.name}
-                  {this.state.ShowMe ? (
-                    <div style={{ float: "right", paddingLeft: "20px" }}>
-                      <img
-                        src={require("./GroupImages/3dots.png")}
-                        onClick={() => this.changeSate()}
-                        className="boxes"
-                      />
-                    </div>
-                  ) : (
-                    <div>
-                      <div style={{ float: "right", paddingLeft: "20px" }}>
-                        <img
-                          src={require("./GroupImages/submit plus add score.png")}
-                          onClick={() => this.delete(post.id, index)}
-                          className="boxes"
-                        />
-                        <br />
-                        delete
-                      </div>
-                      <div style={{ float: "right"}}>
-                        <img
-                          src={require("./GroupImages/Group.png")}
-                          className="boxes"
-                          onClick={() => this.editGroup(post.id, post.name)}
-                        />
-                        <br />
-                        edit
-                      </div>
-                    </div>
-                  )}
-                  <br />
+                <label className="the-container">
+                  <label
+                    className="nn"
+                    onClick={() => this.editGroup(post.id, post.name)}
+                  >
+                   <div className="groupNames">  {post.name}</div>
+                  </label>
+                  <div className="im">
+                    <img
+                      src={require("./GroupImages/submit plus add score.png")}
+                      alt="" onClick={()=>this.update(post.id,index)}
+                    />
+                  </div>
                 </label>
               </li>
             ))}
         </ul>
+        
       </div>
     );
 
     return (
-      <main className="TheMain" onClick={() => this.do()}>
+      <main className="TheMain" onClick={()=>this.do()}>
         <div className="TheNavBar">
           <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
-          
-            <h2 className="center_label">View Groups</h2>
-          
+
+          <h2 className="center_label">View Groups</h2>
         </div>
         <div
           className="scrollbar"
@@ -139,6 +139,18 @@ class ViewGroups extends Component {
         >
           {postitems}
         </div>
+        {this.state.ShowMe?null:
+        <div className="bottompanel">
+          <div className="ctext">
+            <label className="confirmText">Delete Group C</label>
+          </div>
+          <div className="cbutns">
+            <button className="confirm"  onClick={() => this.delete()}>Confirm</button>
+          </div>
+          <div className="ubutns">
+            <button className="undo">undo</button>
+          </div>
+        </div>}
       </main>
     );
   }

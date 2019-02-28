@@ -37,6 +37,7 @@
   height: 40px;
   padding-left: 5px;
   margin-bottom: 15px;
+  font-weight: lighter;
 }
 .page {
   background: #504f51;
@@ -45,12 +46,30 @@
 
 .name {
   color: white;
+  font-weight: lighter;
+  font-size: 18px;
 }
-
 .add {
-  border-radius: 16px;
+ 
   height: 40px;
   width: 150px;
+  font-weight: lighter;
+  background: #504f51;
+  font-size: 18px;
+  color: white;
+  border: 1px lightgrey solid;
+  border-radius: 30px;
+}
+
+.add2 {
+  border-radius: 30px;
+  height: 40px;
+  width: 150px;
+  font-weight: lighter;
+  background: #504f51;
+  font-size: 18px;
+  color: white;
+  border: 1px red solid;
 }
 
 .texts {
@@ -80,6 +99,10 @@
   border-radius: 50%;
 }
 .name{
-  margin-top: 10px;
-  margin-bottom: 15px;
+  margin-top: 37px;
+  margin-bottom: 14px;
+  font-size: 18px;
+}
+.bpanel{
+  padding-top: 15px;
 }

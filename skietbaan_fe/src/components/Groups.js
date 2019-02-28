@@ -11,9 +11,8 @@ class Groups extends Component {
       posts: [],
       newArray: [],
       count: 0,
-      black: "",
       filterText: "",
-      check: "selectAll"
+      check: "select all"
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -22,7 +21,7 @@ class Groups extends Component {
     this.selectall = this.selectall.bind(this);
   }
   componentWillMount() {
-    fetch("http://localhost:63474/api/user")
+    fetch("http://localhost:64444/api/user")
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -53,7 +52,7 @@ class Groups extends Component {
     let request = {
       newArray: this.state.newArray
     };
-    fetch("http://localhost:63474/api/groups/add", {
+    fetch("http://localhost:64444/api/groups/add", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -85,20 +84,17 @@ class Groups extends Component {
   toggleHighlight = event => {
     if (this.state.posts[event].highlighted === true) {
       this.state.posts[event].highlighted = false;
-      {
-        this.setState({ count: this.state.count - 1 });
-      }
+      this.setState({ count: this.state.count + 1 });
     } else {
       this.state.posts[event].highlighted = true;
-      {
-        this.setState({ count: this.state.count + 1 });
-      }
+      this.setState({ count: this.state.count - 1 });
     }
   };
   onBack() {
     history.push("/addGroup");
   }
   render() {
+    console.log(123);
     const postitems = (
       <div className="check">
         <ul class="list-group">
@@ -123,7 +119,7 @@ class Groups extends Component {
                   checked={post.highlighted}
                 />
                 <label className="blabe">
-                  <div className="userName">{post.username}</div> 
+                  <div className="userName">{post.username}</div>
                   <div className="emails">{post.email}</div>
                 </label>
               </li>
@@ -135,22 +131,24 @@ class Groups extends Component {
       <main className="TheMain">
         <div className="TheNavBar">
           <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
-          <div className="center_label">
-            <h2>
-              <b>{this.props.name}</b>
-            </h2>
-          </div>
+
+          <h2 className="center_label">
+            <b>{this.props.name}</b>
+          </h2>
         </div>
         <div className="BNavBar">
           <input
             className="theText"
             id="username"
             type="text"
-            placeholder="Search.."
             onChange={this.onChange}
             autoComplete="off"
           />
-          <button className="select" id="check" onClick={this.selectall}>
+          <button
+            className={this.state.count == 0 ? "select" : "select2"}
+            id="check"
+            onClick={this.selectall}
+          >
             {this.state.check}
           </button>
         </div>

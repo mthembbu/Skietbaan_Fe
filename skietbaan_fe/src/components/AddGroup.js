@@ -9,7 +9,8 @@ class AddGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ""
+      name: "",
+      colors:true
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
@@ -21,7 +22,9 @@ class AddGroup extends Component {
     let RequestObject = {
       Name: this.state.name
     };
-    this.props.groupActions.getname(this.state.name);
+    this.props.groupActions.getname(RequestObject);
+    this.props.groupActions.createGroups(RequestObject);
+
     history.push("/Groups");
   }
   render() {
@@ -30,13 +33,13 @@ class AddGroup extends Component {
         <div className="top_bar">
           <a href="#" class="fa fa-angle-left" />
 
-          <h3 className="center_label">
-            <b> Create Group</b>
-          </h3>
+          <label className="center_label">
+             Create Group
+          </label>
         </div>
         <div className="middle_bar">
           <label className="name">
-            <h3>Enter Group Name</h3>
+            Enter Group Name
           </label>
           <input
             className="texts"
@@ -46,7 +49,7 @@ class AddGroup extends Component {
             value={this.state.name}
             autoComplete="off"
           />
-          <button className="add" type="submit" onClick={this.onClick}>
+          <button className={this.state.name==""? "add":"add2"} type="submit" onClick={this.onClick}>
             Add Users
           </button>
         </div>
