@@ -7,9 +7,13 @@ import { createcomp } from '../actions/competition.action';
 class CreateComp extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { Name: '', BestScoresNumber: 0, Status: true, 
-						validNumScore: true, validCompName: true 
-					};
+		this.state = {
+			Name: '',
+			BestScoresNumber: 0,
+			Status: true,
+			validNumScore: true,
+			validCompName: true
+		};
 		//binding the onChange method to this commponents
 		this.onChange = this.onChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
@@ -20,10 +24,11 @@ class CreateComp extends Component {
 	}
 	/** A method that detects the change in the change in thw textfield */
 	onChange(e) {
-		this.setState({ [e.target.name]: e.target.value });
+		this.setState({ [e.target.name] : e.target.value });
 	}
+	
 	onChangeInt(e) {
-		this.setState({ [e.target.name]: e.target.value });
+		this.setState({ [e.target.name]:e.target.value });
 	}
 	/** A method that handles the submit enent for the submit button*/
 	onSubmit(e) {
@@ -40,25 +45,30 @@ class CreateComp extends Component {
 	render() {
 		return (
 			<div>
+				<div className="view-page">
+					<div className="view-header">
+						<div className="image-comtainer">
+							<img
+								src={require('../components/assets/back-button-white.png')}
+								onClick={this.onClick}
+								className="go-back-to-create-page"
+								alt=""
+							/>
+						</div>
+						<div>
+							<label className="label-create-competitions">Create Competition</label>
+						</div>
+					</div>
+				</div>
 				<div class="container create-comp-container">
-					<Row>
-						<Col>
-							<a href="/create">
-								<i class="fa fa-angle-left" onClick={this.onClick} />
-							</a>
-						</Col>
-						<Col>
-							<strong>
-								<h4>Create Competition</h4>
-							</strong>
-						</Col>
-					</Row>
 					<Row>
 						<Col>
 							<Jumbotron>
 								<Form onSubmit={this.onSubmit}>
 									<Form.Group controlId="titleInput">
-										<Form.Label><strong>Competition Name:</strong></Form.Label>
+										<Form.Label>
+											<strong>Competition Name:</strong>
+										</Form.Label>
 										<Form.Control
 											type="text"
 											placeholder="Enter Competition Name	"
@@ -96,6 +106,6 @@ CreateComp.propTypes = {
 	createcomp: propTypes.func.isRequired
 };
 const mapStatesToprops = (state) => ({
-	newComp: state.compOBJ.selectedComp	
+	newComp: state.compOBJ.selectedComp
 });
 export default connect(null, { createcomp })(CreateComp);

@@ -1,4 +1,6 @@
-import {NEW_COMP, FETCH_COMP, UPDATE_COMP_STATUS} from '../actions/types';
+import {NEW_COMP, 
+		FETCH_COMP,
+		UPDATE_COMP_STATUS } from '../actions/types';
 const initialState = {
 	allComps: [],
 	selectedComp: {},

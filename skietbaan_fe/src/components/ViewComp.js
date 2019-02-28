@@ -11,9 +11,10 @@ class ViewComp extends Component {
 			status: [],
 			updatedComp: {}
 		};
-		this.changeActive = this.changeStatus.bind(this);
+		this.changeStatus = this.changeStatus.bind(this);
 		this.onClick = this.onClick.bind(this);
 	}
+
 	onClick(){
 		window.location = "/create";
 
@@ -22,6 +23,7 @@ class ViewComp extends Component {
 	componentWillMount() {
 		this.props.fetchcomp();
 	}
+	
 	componentWillReceiveProps(val) {
 		for (let i = 0; i < val.length; i++) {
 			this.state.status.push(val.compOBJ[i].status);
@@ -45,7 +47,6 @@ class ViewComp extends Component {
 								<label class="competition-containers">{compVar.name}</label>
 							</td>
 							<td>
-								<strong />
 								<div className={compVar.status ? 'activeButton' : 'inactiveButton'}>
 									<button
 										type="button"
