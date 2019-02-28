@@ -15,16 +15,16 @@ class Register extends Component {
       validForm: false,
       tokenValue: "",
     }
-    this.Register = this.Register.bind(this);
+    this.register = this.register.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.Validate = this.Validate.bind(this);
+    this.validate = this.validate.bind(this);
     this.togglePassword = this.togglePassword.bind(this);
-    this.ToggleNavbar = this.ToggleNavbar.bind(this);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
     this.goToLogin = this.goToLogin.bind(this);
 
   }
 
-  ToggleNavbar() {
+  toggleNavbar() {
     let Navbar = document.querySelector(".navbar-custom");
     if (Navbar.classList.contains("hidden")) {
       Navbar.classList.remove("hidden");
@@ -59,7 +59,7 @@ class Register extends Component {
       validForm: isValid
     });
   };
-  Validate() {
+  validate() {
     let isValid = true;
     let stateUpdate = {
       invalidPassword: false,
@@ -84,8 +84,8 @@ class Register extends Component {
     });
   }
 
-  Register() {
-    this.Validate();
+  register() {
+    this.validate();
     if (this.state.validForm) {
       let sha1 = require('sha1');
       let hash = sha1(this.state.passwordValue);
@@ -131,7 +131,7 @@ class Register extends Component {
       window.location = "/home";
     }
     document.addEventListener('DOMContentLoaded', () => {
-      this.ToggleNavbar();
+      this.toggleNavbar();
    }, false);
 
     return (
@@ -197,7 +197,7 @@ class Register extends Component {
               </FormGroup>
             </Col>
             <div className="button-container">
-            <Button onClick={this.Register} className={this.state.validForm ? "round-button" :
+            <Button onClick={this.register} className={this.state.validForm ? "round-button" :
              "buttons-invalid round-button"} >Join</Button>
             </div>
           </Form>

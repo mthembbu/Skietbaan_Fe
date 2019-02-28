@@ -14,13 +14,13 @@ class Login extends Component {
       validForm: false,
       tokenValue : "",
     }
-    this.Login = this.Login.bind(this);
+    this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.Validate = this.Validate.bind(this);
+    this.validate = this.validate.bind(this);
     this.togglePassword = this.togglePassword.bind(this);
-    this.ToggleNavbar = this.ToggleNavbar.bind(this);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
   }
-  ToggleNavbar() {
+  toggleNavbar() {
     let Navbar = document.querySelector(".navbar-custom");
     if (Navbar.classList.contains("hidden")) {
       Navbar.classList.remove("hidden");
@@ -55,7 +55,7 @@ class Login extends Component {
     });
   };
 
-  Validate()
+  validate()
   {
     let isValid = true;
     let stateUpdate = {
@@ -76,8 +76,8 @@ class Login extends Component {
     });
   }
 
-  Login() {
-    this.Validate();
+  login() {
+    this.validate();
     if (this.state.validForm) {
       let sha1 = require('sha1');  
       let hash = sha1(this.state.passwordValue);
@@ -116,7 +116,7 @@ class Login extends Component {
 
   render() {
     document.addEventListener('DOMContentLoaded', () => {
-      this.ToggleNavbar();
+      this.toggleNavbar();
    }, false);
     if(getCookie("token")){
       window.location = "/home";
@@ -166,7 +166,7 @@ class Login extends Component {
               </FormGroup>
             </Col>
             <div className="button-container">
-            <Button onClick={this.Login} className={this.state.validForm ? "round-button" 
+            <Button onClick={this.login} className={this.state.validForm ? "round-button" 
             : "buttons-invalid round-button"} >Join</Button>
             </div>
           </Form> 
