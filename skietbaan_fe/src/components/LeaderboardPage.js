@@ -141,7 +141,8 @@ class LeaderboardPage extends Component {
     top3Display(object) {
         if (object.rank == 1 || object.rank == 2 || object.rank == 3) {
             return <div className="visibleStar">
-                <img className="rankNumberIcon" src={require('../resources/Star.png')} /><div className="rankPading">{object.rank}</div>
+                <img className="rankNumberIcon" src={require('../resources/Star.png')} />
+                <div className="rankPading">{object.rank}</div>
             </div>
         } else {
             return <div className="invisibleStar">
@@ -234,7 +235,10 @@ class LeaderboardPage extends Component {
                     </table>
                     <table className="rankingListTable">
                         <tr className="rowLast">
-                            <td className="rankScoreList" colSpan="1"></td> <td className="rankScoreList" colSpan="1" >{post.total}</td><td className="rankScoreList2" colSpan="1" >{post.average}</td><td className="rankScoreList2" colSpan="1" >{post.best}</td>
+                            <td className="rankScoreList" colSpan="1"></td> 
+                            <td className="rankScoreList" colSpan="1" >{post.total}</td>
+                            <td className="rankScoreList2" colSpan="1" >{post.average}</td>
+                            <td className="rankScoreList2" colSpan="1" >{post.best}</td>
                         </tr>
                     </table>
                     <table className="rowUnderline">
@@ -332,7 +336,9 @@ class LeaderboardPage extends Component {
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td className="ScoreColLabel" colSpan="1">Total</td><td className="ScoreColLabel2" colSpan="1">Average</td><td className="ScoreColLabel2" colSpan="1">Best</td>
+                                                        <td className="ScoreColLabel" colSpan="1">Total</td>
+                                                        <td className="ScoreColLabel2" colSpan="1">Average</td>
+                                                        <td className="ScoreColLabel2" colSpan="1">Best</td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -371,7 +377,10 @@ class LeaderboardPage extends Component {
                                         </table>
                                         <table className="rankingListTable">
                                             <tr className="rowLast">
-                                                <td className="rankScoreList" colSpan="1"></td> <td className="rankScoreList" colSpan="1" >{this.props.userResults.total}</td><td className="rankScoreList2" colSpan="1" >{this.props.userResults.average}</td><td className="rankScoreList2" colSpan="1" >{this.props.userResults.best}</td>
+                                                <td className="rankScoreList" colSpan="1"></td> 
+                                                <td className="rankScoreList" colSpan="1" >{this.props.userResults.total}</td>
+                                                <td className="rankScoreList2" colSpan="1" >{this.props.userResults.average}</td>
+                                                <td className="rankScoreList2" colSpan="1" >{this.props.userResults.best}</td>
                                             </tr>
                                         </table>
                                     </td>
