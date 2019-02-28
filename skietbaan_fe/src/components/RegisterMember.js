@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../components/RegisterMemberStyles.css';
-import {BASE_URL} from '../actions/types.js';
+import { BASE_URL } from '../actions/types.js';
 
 function validateUsername(username) {
   const re = /[a-zA-Z]/;
@@ -54,7 +54,7 @@ class App extends Component {
   }
 
   SearchAllMember() {
-    fetch(BASE_URL+"/api/User", {
+    fetch(BASE_URL + "/api/User", {
       method: 'Get',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     }).then(function (response) {
@@ -65,7 +65,7 @@ class App extends Component {
       }).then(data => this.setState({
         arrayUsers: data.filter(function (datas) {
           return (datas.username.toLowerCase().startsWith(document.getElementById("usernameValue").value.toLocaleLowerCase())
-          || datas.email.toLowerCase().startsWith(document.getElementById("usernameValue").value.toLocaleLowerCase()))
+            || datas.email.toLowerCase().startsWith(document.getElementById("usernameValue").value.toLocaleLowerCase()))
         })
       }))
       .catch(function () { });
@@ -78,7 +78,7 @@ class App extends Component {
       hideButton: false
     });
     let name = this.state.arrayUsers[user].username;
-    fetch(BASE_URL+"/api/Features/Search?Username=" + name, {
+    fetch(BASE_URL + "/api/Features/Search?Username=" + name, {
       method: 'Get',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     }).then(function (response) {
@@ -100,7 +100,7 @@ class App extends Component {
       "memberID": document.getElementById("membershipID").value,
       "memberExpiryDate": document.getElementById("expdate").value + "T00:00:00"
     }
-    fetch(BASE_URL+"/api/Features/Update", {
+    fetch(BASE_URL + "/api/Features/Update", {
       method: 'Post',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify(RequestObject)
@@ -119,19 +119,19 @@ class App extends Component {
     return date;
   }
 
-  ChangeColor(){
+  ChangeColor() {
     this.setState({
       clicked: "actives"
     });
   }
 
-  HideCreateButton(){
-    if(document.getElementById("membershipID").value === ""){
+  HideCreateButton() {
+    if (document.getElementById("membershipID").value === "") {
       this.setState({
         hideButton: true
       });
     }
-    else{
+    else {
       this.setState({
         hideButton: false
       });
@@ -158,20 +158,21 @@ class App extends Component {
       <div className="content-of-page">
         <div className="centre-register-member">
           <div className="page-name-create-members">
-          <div className="image-comtainer">
-          <img src={require('../components/assets/back-button-white.png')} onClick={this.BackToCreate}
-              className="go-back-to-create-page" alt=''></img>
-          </div>
-          <div>
-          <label className="create-members">Create Member</label>
-          </div>
+            <div className="image-comtainer">
+              <img src={require('../components/assets/back-button-white.png')} onClick={this.BackToCreate}
+                className="go-back-to-create-page" alt=''></img>
+            </div>
+            <div>
+              <label className="create-members">Create Member</label>
+            </div>
           </div>
           <div className="div-label-enter-user-name">
             <label className="label-enter-user-name">Enter User Name</label>
           </div>
+          <div className="input-container">
           <div className="search-name">
             <input
-            autoComplete="off"
+              autoComplete="off"
               type="text"
               className="username"
               id="usernameValue"
@@ -183,27 +184,28 @@ class App extends Component {
             {postItems}
           </div>
           <div className="rest-body">
-          <div className="container-labels">
-            <div className="membership-number">
-            <div className="input-spacing">
-              <label className="membership-id-number">Membership No.</label>
-              <div className="input-member-number">
-              
-                <input
-                  type="text"
-                  className="membershipID"
-                  id="membershipID"
-                  value={this.state.membershipsID}
-                  onChange={this.handleChange}
-                />
+            <div className="container-labels">
+              <div className="membership-number">
+                <div className="input-spacing">
+                  <label className="membership-id-number">Membership No.</label>
+                  <div className="input-member-number">
+
+                    <input
+                      type="text"
+                      className="membershipID"
+                      id="membershipID"
+                      value={this.state.membershipID}
+                      onChange={this.handleChange}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="expiry-date-member">
-            <div className="input-spacing">
-              <label className="membership-expiry-date">Membership Expiry Date</label><br />
-              <input type="text" className="expdate" id="expdate" 
-              value={this.GetDate()} onChange={this.handleChange} />
+              <div className="expiry-date-member">
+                <div className="input-spacing">
+                  <label className="membership-expiry-date">Membership Expiry Date</label><br />
+                  <input type="text" className="expdate" id="expdate"
+                    value={this.GetDate()} onChange={this.handleChange} />
+                </div>
               </div>
             </div>
             </div>
@@ -212,7 +214,7 @@ class App extends Component {
             </div>
           </div>
         </div>
-        </div>
+      </div>
     );
   }
 }
