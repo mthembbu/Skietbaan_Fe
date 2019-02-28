@@ -141,7 +141,7 @@ class Register extends Component {
                   className="bullet-button" alt=''></img></div>
       <div className="header-container">
       <label className = "header-label">Register</label>
-      <button className="button-login">Login</button>
+      <button className="button-login" onClick={goToLogin}>Login</button>
       </div>
         <div className="centre-login">
           <Form className="form" autoComplete="off">
@@ -197,7 +197,8 @@ class Register extends Component {
               </FormGroup>
             </Col>
             <div className="button-container">
-            <Button onClick={this.Register} className={this.state.validForm ? "round-button" : "buttons-invalid round-button"} >Join</Button>
+            <Button onClick={this.Register} className={this.state.validForm ? "round-button" :
+             "buttons-invalid round-button"} >Join</Button>
             </div>
           </Form>
          </div>
