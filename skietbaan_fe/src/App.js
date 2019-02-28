@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import NavbarMenu from './components/NavbarMenu';
+import NavbarMenuUser from './components/NavbarMenuUser';
 import RegisterMember from './components/RegisterMember';
 import LeaderboardPage from './components/LeaderboardPage';
 import ScoreCapture from './components/ScoreCapture';
