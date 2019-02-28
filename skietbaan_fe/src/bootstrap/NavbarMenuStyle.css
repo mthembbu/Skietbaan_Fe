@@ -3,12 +3,12 @@
     position:relative ;
   }
 
-  .navbar-custom{
-    background-color: #f0f0f0 !important;
+  .navbar .navbar-custom{
+    background-color: #f0f0f0;
+    color: #f0f0f0;
   }
 
   .App div .navbar {
-    background-color: #f0f0f0;
     margin: 0%;
   }
 
