@@ -14,6 +14,7 @@ class UserProfile extends Component {
     }
 
     UNSAFE_componentWillMount(){
+        /*user the remote URL*/
         fetch('http://localhost:63472/api/awards/9d44cbcf4b81',{
             method : 'GET',
             headers: {
@@ -33,7 +34,7 @@ class UserProfile extends Component {
             
             if (degreees<=180){
                 activeBorder.css('background-image','linear-gradient(' + (90 + degreees) + 
-                                    'deg, transparent 50%, #171F32 50%),linear-gradient(90deg, transparent 50%, white 50%)');
+                                    'deg, transparent 50%, #0c0c0e 50%),linear-gradient(90deg, transparent 50%, white 50%)');
             }
             else{
                 activeBorder.css('background-image','linear-gradient(' + (degreees - 90) + 
@@ -74,42 +75,78 @@ class UserProfile extends Component {
         return(
             <div className="lay-horizontal">
                 <div className={isCompetitionLocked ? "box box-grey-background" : "box box-white-background"}>
-                    <div className={isCompetitionLocked ? "grey-text" : "black-text"}><h5>{_array[0]}</h5></div>
+                    <div className={isCompetitionLocked ? "grey-text" : "black-text"}><label className="box-label-text">
+                    {_array[0]}</label></div>
                 </div>
                 <div className={isCompetitionLocked ? "box box-grey-background" : "box box-white-background"}>
-                    <div className={isCompetitionLocked ? "grey-text" : "black-text"}><h5>{_array[1]}</h5></div>
+                    <div className={isCompetitionLocked ? "grey-text" : "black-text"}><label className="box-label-text">
+                    {_array[1]}</label></div>
                 </div>
                 <div className={isCompetitionLocked ? "box box-grey-background" : "box box-white-background"}>
-                    <div className={isCompetitionLocked ? "grey-text" : "black-text"}><h5>{_array[2]}</h5></div>
+                    <div className={isCompetitionLocked ? "grey-text" : "black-text"}><label className="box-label-text">
+                    {_array[2]}</label></div>
                 </div>
                 <div className={isCompetitionLocked ? "box box-grey-background" : "box box-white-background"}>
-                    <div className={isCompetitionLocked ? "grey-text" : "black-text"}><h5>{_array[3]}</h5></div>
+                    <div className={isCompetitionLocked ? "grey-text" : "black-text"}><label className="box-label-text">
+                    {_array[3]}</label></div>
                 </div>
             </div>
         )
     }    
+    
+    RenderLockedIcon(){
+        return(
+            <div className="locked-icon" style={{display: "inline"}}>
+                <img src={require("../resources/awardIcons/locked.png")} alt="lock-icon" />
+            </div>
+        )
+    }
 
-    CompetitionsStats(element, index){
+    CompetitionsStat(element, index){
         return(
             <div className={element.isCompetitionLocked ? "shooting-award push-shooting-award-bottom grey-text" :
              "shooting-award push-shooting-award-bottom white-text"} key={index}>
                 <Row>
-                    <Col className="month-col" xs={9} sm={9} md={9} lg={9} xl={9}>
+                    <Row>
+                        <Col>
+                            <div className="float-left">
+                                <h3>{element.competitionName}</h3>
+                            </div>
+                        </Col>
+                        <Col>
+                            {element.isCompetitionLocked ? this.RenderLockedIcon() : null}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col style={{paddingLeft : "0px"}}>
+                            <div className="month-award">
+                                    {/*make month and year dynamic | remove if no month award*/}
+                                    <label className="light-weight">January 2019 - <span id="month-award-description">Best Shooter</span></label>
+                            </div>
+                        </Col>
+                        <Col className="bullet-col" xs={3} sm={3} md={3} lg={3} xl={3}>
+                            <div className="bullet-img-scale">
+                                <img src={require("../resources/awardIcons/bullet.png")}></img>
+                            </div>
+                        </Col>
+                    </Row>
+                    {/*<Col className="month-col" xs={9} sm={9} md={9} lg={9} xl={9}>
                         <div className="float-left">
                             <div>
                                 <h3>{element.competitionName}</h3>
+                                {element.isCompetitionLocked ? this.RenderLockedIcon() : null}
                             </div>
                             <div className="month-award">
-                                {/*make month and year dynamic | remove if no month award*/}
+                                {/*make month and year dynamic | remove if no month award}
                                 <label className="light-weight">January 2019 - <span id="month-award-description">Best Shooter</span></label>
                             </div>
                         </div>
                     </Col>
                     <Col className="bullet-col" xs={3} sm={3} md={3} lg={3} xl={3}>
                         <div className="bullet-img-scale">
-                            <img src={require("../resources/awardIcons/gold-bullet.png")}></img>
+                            <img src={require("../resources/awardIcons/bullet.png")}></img>
                         </div>
-                    </Col>
+                </Col>*/}
                 </Row>
                 <div className="push-bottom-27px">
                     <Row>
@@ -123,12 +160,12 @@ class UserProfile extends Component {
                         </Col>
                         <Col>
                             <div className="lay-horizontal scale-img">
-                                <img src={element.isCompetitionLocked ? require('../resources/awardIcons/locked-award.png') :
-                                    require('../resources/awardIcons/gold-award.png')} alt="locked award" />
-                                <img src={element.isCompetitionLocked ? require('../resources/awardIcons/locked-award.png') :
-                                    require('../resources/awardIcons/silver-award.png')} alt="silver award" />
-                                <img src={element.isCompetitionLocked ? require('../resources/awardIcons/locked-award.png') :
-                                    require('../resources/awardIcons/bronze-award.png')} alt="bronze award" />
+                                <img src={element.isCompetitionLocked ? require('../resources/awardIcons/black-icon.png') :
+                                    require('../resources/awardIcons/gold-icon.png')} alt="locked award" />
+                                <img src={element.isCompetitionLocked ? require('../resources/awardIcons/black-icon.png') :
+                                    require('../resources/awardIcons/silver-icon.png')} alt="silver award" />
+                                <img src={element.isCompetitionLocked ? require('../resources/awardIcons/black-icon.png') :
+                                    require('../resources/awardIcons/bronze-icon.png')} alt="bronze award" />
                             </div>
                         </Col>
                     </Row>
@@ -147,12 +184,12 @@ class UserProfile extends Component {
                     </Col>
                     <Col>
                         <div className="lay-horizontal scale-img">
-                            <img src={element.isCompetitionLocked ? require('../resources/awardIcons/locked-award.png') :
-                                require('../resources/awardIcons/gold-award.png')} alt="locked award" />
-                            <img src={element.isCompetitionLocked ? require('../resources/awardIcons/locked-award.png') :
-                                require('../resources/awardIcons/silver-award.png')} alt="silver award" />
-                            <img src={element.isCompetitionLocked ? require('../resources/awardIcons/locked-award.png') :
-                                require('../resources/awardIcons/bronze-award.png')} alt="bronze award" />
+                            <img src={element.isCompetitionLocked ? require('../resources/awardIcons/black-icon.png') :
+                                require('../resources/awardIcons/gold-icon.png')} alt="gold award" />
+                            <img src={element.isCompetitionLocked ? require('../resources/awardIcons/black-icon.png') :
+                                require('../resources/awardIcons/silver-icon.png')} alt="silver award" />
+                            <img src={element.isCompetitionLocked ? require('../resources/awardIcons/black-icon.png') :
+                                require('../resources/awardIcons/bronze-icon.png')} alt="bronze award" />
                         </div>
                     </Col>
                 </Row>
@@ -166,7 +203,7 @@ class UserProfile extends Component {
         let renderArray = []
         var i = 1
         this.state.awardCompetitions.forEach((element, index) => {
-            renderArray.push(this.CompetitionsStats(element, index))
+            renderArray.push(this.CompetitionsStat(element, index))
         })
         
         return renderArray;
@@ -175,16 +212,11 @@ class UserProfile extends Component {
     render() {
         return (
             <div>
-                {/*ask gideon to make the angle left icon*/}
-                <div className="row" style={{backgroundColor: 'white'}}>
-                    <Col xs={1} sm={1} md={1} lg={1} xl={1}>
-                        <span className="font">
-                            <i className="fa fa-angle-left"></i>
-                        </span>
-                    </Col>
-                    <Col xs={11} sm={11} md={11} lg={11} xl={11} className="username"><h2>
-                        {this.state.awardCompetitions.length > 0 ? this.state.awardCompetitions[0].username : null}    
-                    </h2></Col>
+                <div className="row" style={{backgroundColor: "black"}}>
+                    <Col>
+                        <label className="username">
+                            {this.state.awardCompetitions.length > 0 ? this.state.awardCompetitions[0].username : null}    
+                        </label></Col>
                 </div>
                 <Container>
                     <div className="member-number white-text">
@@ -207,9 +239,9 @@ class UserProfile extends Component {
                             </Col>
                             <Col>
                                 <div className="lay-horizontal scale-img">
-                                    <img src={require('../resources/awardIcons/locked-award.png')} alt="locked award" />
-                                    <img src={require('../resources/awardIcons/silver-award.png')} alt="silver award" />
-                                    <img src={require('../resources/awardIcons/bronze-award.png')} alt="bronze award" />
+                                    <img src={require('../resources/awardIcons/black-icon.png')} alt="locked award" />
+                                    <img src={require('../resources/awardIcons/silver-icon.png')} alt="silver award" />
+                                    <img src={require('../resources/awardIcons/bronze-icon.png')} alt="bronze award" />
                                 </div>
                             </Col>
                         </Row>
