@@ -1,50 +1,48 @@
 
 .fixed-top{
-    position:relative !important;
+    position:relative ;
   }
+
   .navbar-custom{
-    background-color: #bbbcbd !important;
+    background-color: #f0f0f0 !important;
   }
+
   .App div .navbar {
-    background-color: #bbbcbd  !important;
-    color: #504f51 !important;
+    background-color: #f0f0f0;
     margin: 0%;
   }
+
   .App div .navbar a{
-    color: #504f51 !important;
+    color: #f0f0f0;
   }
+
   .App div .navbar .fa{
     display: grid;
     text-align: center;
    }
+
   .App div .navbar .fa:hover{
-    color: red;
     align-content: center
    }
+
   .App div .navbar button{
     padding: 0%;
     width: fit-content;
-    color: #504f51 !important;
-    background-color: #bbbcbd !important;
+    color: #f0f0f0;
+    background-color: #f0f0f0;
   }
-  .App div .navbar button:hover{
-    color: red !important;
-    background-color: red !important;
-  }
-  .App div .navbar .nav-active{
-    color: red;
-  }
+
   .dropdown-menu.show{
-    background-color: #bbbcbd;
+    background-color: #f0f0f0;
     border: none;
-    border: 1px solid  #bbbcbd;
-    color: #504f51;
+    border: 1px solid  #f0f0f0;
   }
 
   .leaderboard-icon-grey{
     height: 40px;
     width: 59px;
   }
+
   .add-score-icon-grey{
     height: 40px;
     width: 49px;
@@ -59,10 +57,12 @@
     height: 40px;
     width: 54px;
   }
+
   .notifications-icon-grey{
     height: 40px;
     width: 57px;
   }
+
   .profile-icon-grey{
     height: 40px;
     width: 30px;
@@ -71,6 +71,5 @@
   .more-icon-grey{
     height: 38px;
     width: 28px;
-    background-color: #bbbcbd;
   }
   
