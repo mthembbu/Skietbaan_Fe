@@ -187,7 +187,7 @@ class Register extends Component {
                 <input
                   type="password"
                   name="passwordValue"
-                  id="PasswordValue"
+                  id="passwordValue"
                   value={this.state.passwordValue}
                   onChange={this.handleChange}
                   onClick={this.togglePassword}
