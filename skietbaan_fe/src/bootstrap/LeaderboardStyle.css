@@ -2,45 +2,71 @@
     min-width: 100%;
 }
 .leaderboardContainer{
-    background-color: aqua;
-    height: -webkit-fill-available !important;  
-    background-color: rgb(212, 212, 212);
+    background-image: url('../resources/desktopBackground.png') !important;
+    position: fixed;
 }
 .leaderboardContainer .row justify-content-center{
-   background-color: white !important;
+   background-color: #fdfdfd !important;
  }
 .filterSection{
-    background-color: #171F32;
-    color: white;
+    background-color: #fdfdfd;
+    color: #0c0c0e;
     width: 100%;
 }
 .filterTableAlwaysVisible{
     width:100%;
 }
 .filterContent{
-    background-color: #171F32;
-    color: white;
+    color: #0c0c0e;
+    background-color: #fdfdfd;
     width: 100%;
     padding-left: 3%;
     padding-right: 3%;
     align-content: center;
+    height: -webkit-fill-available;
 }
-.CompetitionName{
-    background-color: white;
-}
-.row div p{
-    color: #FF611D;
+.CompetitionName *{
+    background-color: #0c0c0e;
+    color: #fdfdfd;
 }
 .row div .scrollableContainerC{
     overflow-y: auto;
     height: 150px;
+    background-color: #fdfdfd;
+    color: #0c0c0e;
+}
+.row div .scrollableContainerC *{
+    background-color: #fdfdfd;
+    color: #0c0c0e;
+}
+.row .table{
+    padding: 2% !important;
 }
 .row .table td{
   border: 0px;
+  padding: 0% !important;
 }
 .row div .scrollableContainerG{
     overflow-y: auto;
     height: 150px;
+    background-color: #fdfdfd;
+    color: #0c0c0e;
+}
+.row div .scrollableContainerG *{
+    background-color: #fdfdfd;
+    color: #0c0c0e;
+}
+.row div .scrollableContainerG table tr td{
+    border: solid;
+    border-radius: 10px;
+    border-color: black; 
+    padding: 2%;
+}
+.row div .scrollableContainerC table tr td{
+    border: solid;
+    border-radius: 10px;
+    border-color: black; 
+    padding: 2%;
 }
 .container h4{
     color: #FF611D;
@@ -51,11 +77,8 @@
 }
 .row .table thead{
     padding-left: 2%;
-    background-color: #171F32;
-    color: white;
-}
-.row .table td{
-    padding-right: 3%;
+    background-color: white;
+    color: #0c0c0e;
 }
 .row .table{
     margin: 0px;
@@ -67,22 +90,21 @@
    text-align: center
 }
 .curentMember{
-    background-color: #171F32 !important;background-image: linear-gradient(-90deg, #FF611D, #171F32);
-    color: white !important;
-    position: fixed;
+    color: #fdfdfd !important;
+    /* position: fixed; */
     bottom: 0;
     left: 0;
     width: 100%;
     padding: 0%;
+    background-color: #e11e2b;
 }
-.curentMember table{
-    background-image: linear-gradient(-90deg, #FF611D, #171F32);
+.curentMember *{
+    background-color: #e11e2b !important;
+    color: #fdfdfd !important;
 }
-.curentMember table td{
-    padding: 0% !important;
-}
-.filters{
-    background-image: linear-gradient(-90deg, #FF611D, #171F32);
+.rankRows .tr .td{
+    padding-top: 2% !important;
+    padding-bottom: 2% !important;
 }
 .body{
     background-color: #171F32 !important;
@@ -96,57 +118,258 @@
     width: 100% !important;
     height: 100%;
 }
-.rankingTableContainer{
-    width: 100%;
+.scrollableContainerC table tr td:hover{
+    background-color: #e11e2b !important;
 }
-.rankingTableHeader{
-    width: 100%;
-    background-color: #171F32 !important;
+.scrollableContainerC table tr td:active{
+    background-color: #e11e2b !important;
 }
-.rankTableHead{
-    color:white;
-    background-color: #171F32 !important;
+.scrollableContainerC table{
+    border-collapse: separate;
+    border-spacing: 1em;
 }
-.rankTableBody{
-    color:black;
-    background-color: transparent;
-    width: -webkit-fill-available;
-    height: 100%;
-    overflow-y: scroll !important;
+.scrollableContainerG table{
+    border-collapse: separate;
+    border-spacing: 1em;
+}
+.scrollableContainerC table tr *:active{
+    background-color: #e11e2b !important;
+} 
+.scrollableContainerG table tr *:active{
+    background-color: #e11e2b !important;
+} 
 
+.scrollableContainerG table tr td:hover{
+    background-color: #e11e2b !important;
 }
-.rankTableHead table{
-    width: -webkit-fill-available;
+.scrollableContainerG table tr td:active{
+    background-color: #e11e2b !important;
 }
-.rankTableHead table td{
-    padding: 0%;
+.scrollableContainerC table tr td{
+    border: solid;
+    border-radius: 5px;
+    border-color: black;
+}
+.scrollableContainerG table tr td{
+    border: solid;
+    border-radius: 5px;
+    border-color: black;
+} 
+.curentMember{
+    padding: 3% !important;
+   
+}
+.curentMember .table thead td{
+    text-align: left;
+}
+.curentMember .table tbody td{
     text-align: center;
-    padding-left: 2%;
+    padding: 0%;
 }
-.invisibleCol{
+.UserPerformance{
+    display: inline-grid;
+}
+.curentMember .table tbody td img{
+    width: 10px;
+    height: 10px;
+}
+.colScore{
+    padding-bottom: 2% !important;
+}
+.curentMember .table .currentUsername{
+    padding-bottom: 0% !important;
+    padding-left: 11% !important;
+}
+.tableIcons{
+    width: 48px;
+    height: 48px;
+}
+.tableIcons *{
+    width: 48px;
+    height: 48px;
+}
+.filterIconCOl{
+    text-align: -webkit-center;
+    width: 25%;
+}
+.tableTextContainer{
+    width: 100%;
+}
+.ScoreColLabel{
+    text-align: left;
+    width: 25%;
+    font-weight: lighter;
+}
+.ScoreColLabel2{
+    text-align: center;
+    width: 25%;
+    font-weight: lighter;
+}
+.rankScoreList{
+    font-weight: lighter;
+}
+.rankScoreList2{
+    text-align: center;
+    width: 25%;
+    font-weight: lighter;
+}
+.tableText .tableTextContainer .GroupLabelCol{
+    text-align: left;
+    width: 25%;
+    font-weight: bold;
+}
+.rankingListTable{
+    width: 100% !important;
+    color:#0c0c0e !important;
+}
+.userNames{
+    display: inline-flex;
+    width: 25%;
+    padding: 2% !important;
+}
+.userNames2{
+    width: 75%;
+}
+.userNames .rankNumberIcon{
+    width: 15px;
+    height: 12px;
+    padding-top: 0%;
     color: transparent !important;
 }
-.rankUsernameRowTable{
+.rankingListTable tr .userNames{
+    width: 100% !important;
+}
+.rankScoreList{
+    width: 25%;
+    text-align: left;
+}
+.rankingListTable .rowLast .rankScoreList{
+    padding: 0% !important;
+}
+.rankRows .rowUnderline{
+    height: 2%;
+    border-bottom: inset;
+    border-color: lightgrey;
+    width: 82% !important;
+    margin: auto;
+    margin-left: 9%;
+    margin-right: 9%;
+}
+.rankRows table{
+    width: 100% !important;
+    margin: auto;
+}
+.visibleStar{
+   display: block;
+   padding-left: 65%;
+}
+.invisibleStar *{
+    padding-left: 65%;
+    display: block;
+ color: transparent !important;
+ background-color: transparent !important;
+}
+.invisibleStar *{
+    color: transparent !important;
+}
+
+.UserAcuracyDetails .rankAndUsername .usernametd{
+    padding-left: 8% !important;
     width: -webkit-fill-available;
 }
-.rankUsernameRowTable td{
-   padding-left: 3%;
+.UserAcuracyDetails tr td .rankNumberIcon{
+    padding-top: 1% !important;
+    width: 10px;
+    height: 10px;
+}
+ .curentMember .table .userNames div{
+     padding-top: 0% !important;
+ }
+ .curentMember{
+     padding-bottom: 0% !important;
+ }
+ .row table thead tr .filterIconCOl{
+     padding: 2% !important
+ }
+ .tableText{
+     padding-top: 2% !important;
+ }
+ .leaderboardContainer col-sm-8{
+    margin: auto;
+    border: solid;
+ }
+ .selectCompetition{
+   width: 100%;
+   height: 100%;
+   background-color: #fdfdfd;
+   color: #0c0c0e;
    text-align: center;
-}
-.rankScoresRowTable{
-    width: -webkit-fill-available;
-}
-.rankScoresRowTable tr .invisibleCol{
-   color: transparent !important;
-}
-.rankScoresRowTable tr td{
-    text-align: center;
+   padding: 2.5%;
+   font-weight: bolder;
+   font-size: larger;
  }
- .rankingNumberCol{
-     width: 20%;
-     padding-left: 10%;
-     text-align: center !important;
+ .collapsedFilter{
+     width: 100% !important;
+     background-color: #fdfdfd;
  }
- .usernameCol{
-    text-align: left !important;
- }
+ 
+
+ @media screen and (min-width: 601px) {
+    .centerContainerResponsive {
+        margin: auto;
+        margin-top: 10% !important;
+        background-color: #504f51 !important;
+        height: 100% !important;
+    }
+    .visibleStar{
+        padding-left: 80%;
+        display: inline-flex;
+        display: -webkit-inline-box;
+    }
+    .invisibleStar{
+        padding-left: 80%;
+    }
+    .leaderboardContainer{
+        background-color: #504f51 !important;
+        height: 100% !important;
+    }
+    .rankPading{
+        padding-left: 2%;
+        font-weight: lighter;
+    }
+  }
+  
+
+  .centerContainerResponsive .row .table thead{
+      
+  }
+  
+  /* On screens that are 600px or less, set the background color to olive */
+  @media screen and (max-width: 600px) {
+    .centerContainerResponsive {
+        margin: auto !important;
+        background-color: #504f51 !important;
+        height: 100% !important;
+    }
+    .leaderboardContainer{
+        background-color: #504f51 !important;
+        height: 100% !important;
+    }
+    .rankPading{
+        padding-left: 2%;
+    }
+    .visibleStar{
+        padding-left: 50% !important;
+        display: -webkit-inline-box;;
+    }
+    .invisibleStar{
+        padding-left: 50%!important;
+    }
+  }
+  .rankTableBody *
+  {
+      color:#fdfdfd !important
+  }
+  .usernameContainer{
+    font-weight: normal;;
+  }

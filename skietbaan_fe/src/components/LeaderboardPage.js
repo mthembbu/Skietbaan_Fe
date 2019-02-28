@@ -4,6 +4,7 @@ import { fetchleaderboadfilterdata } from '../actions/postActions';
 import { fetchleaderboadtabledata } from '../actions/postActions';
 import { Collapse } from 'react-collapse';
 import { Table } from "react-bootstrap";
+import Img from 'react-image'
 import { getCookie } from './cookie.js'
 import { MDBBtn, MDBIcon } from "mdbreact";
 import '../bootstrap/LeaderboardStyle.css';
@@ -34,6 +35,11 @@ class LeaderboardPage extends Component {
         this.displayScoreByType = this.displayScoreByType.bind(this);
         this.getCurentUserRankNumber = this.getCurentUserRankNumber.bind(this);
         this.showMoreScores = this.showMoreScores.bind(this);
+        this.top3Display = this.top3Display.bind(this);
+        this.accuracyUpDisplay = this.accuracyUpDisplay.bind(this);
+        this.accuracyDownDisplay = this.accuracyDownDisplay.bind(this);
+        this.responsiveStyle = this.responsiveStyle.bind(this);
+        this.closeMain = this.closeMain.bind(this);
     }
     //executed when leaderboard in mounted on main app
     componentWillMount() {
@@ -110,6 +116,49 @@ class LeaderboardPage extends Component {
             });
         }
     }
+    closeMain(isopen){
+        if(isopen === true){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    accuracyUpDisplay(show) {
+        if (show) {
+            return <img className="rankNumberIcon" src={require('../resources/accuracyUp.png')} />;
+        } else {
+            return null
+        }
+    }
+    accuracyDownDisplay(show) {
+        if (show) {
+            return <img className="rankNumberIcon" src={require('../resources/accuracyDown.png')} />;
+        } else {
+            return null
+        }
+    }
+
+    top3Display(object) {
+        if (object.rank == 1 || object.rank == 2 || object.rank == 3) {
+            return <div className="visibleStar">
+                <img className="rankNumberIcon" src={require('../resources/Star.png')} /><div className="rankPading">{object.rank}</div>
+            </div>
+        } else {
+            return <div className="invisibleStar">
+                <label className="rankNumberIcon">{object.rank}</label>
+            </div>
+        }
+    }
+    responsiveStyle(phoneStyles, desktopStyles) {
+        console.log("checking screen size")
+        if (window.innerWidth < 600) {
+            console.log("mobile")
+            return phoneStyles;
+        } else {
+            console.log("desktop")
+            return desktopStyles;
+        }
+    }
     render() {
         const groupsList = (
             <Table>
@@ -123,9 +172,31 @@ class LeaderboardPage extends Component {
                 </tbody>
             </Table>
         )
+        var centerContainerStyles = {
+            margin: 'auto',
+            padding: '0%',
+            height: '75%',
+        }
+        var centerRow = {
+            height: '100% !important'
+        }
+        var footer = {
+            margin: 'auto',
+            padding: '0%',
+        };
+        var ranktableStyle = {
+            height: '100% !important'
+        }
+        var pStyle = {
+            margin: 'auto',
+            paddingTop:'5%'
+        }
+        var rankingIn={
+            fontWeight:'bolder'
+        }
 
         const competitionsList = (
-            <Table striped hover condensed>
+            <Table >
                 <tbody>
                     {this.props.competitions.map((competition, index) => (
                         <tr key={competition.value.toString()} onClick={() => this.setCompetitionValue(index)}
@@ -137,7 +208,7 @@ class LeaderboardPage extends Component {
             </Table>
         )
         const scoretypesList = (
-            <Table striped hover condensed>
+            <Table >
                 <tbody>
                     {this.props.scoreTypes.map((scoreType, index) => (
                         <tr key={scoreType.value.toString()} onClick={() => this.setScoreTypeValue(index)}
@@ -149,21 +220,32 @@ class LeaderboardPage extends Component {
             </Table>
         )
         const tablebody = this.props.tableData.map((post, index) => (
-            <tr key={post.rank.toString()} value={post.rank} onChange={() => this.onChange(post.id)}>
-                <td>
-                    <table className="rankUsernameRowTable">
+
+            <tr className="rankRows" key={post.rank.toString()} value={post.rank} onChange={() => this.onChange(post.id)}>
+                <td colSpan="4">
+                    <table>
                         <tr>
-                            <td className="rankingNumberCol"><h6>{post.rank}</h6></td><td className="usernameCol"><h6>{post.username}</h6></td>
+                            <td className="userNames" colSpan="1">{this.top3Display(post)}
+                            </td>
+                            <td className="userNames2" colSpan="3">
+                                <div className="usernameContainer">{post.username}</div>
+                            </td>
                         </tr>
                     </table>
-                    <table className="rankScoresRowTable">
-                        <tr>
-                            <td className="invisibleCol">rank</td><td><h5>{post.total}</h5></td><td><h5>{post.average}</h5></td><td><h5>{post.best}</h5></td>
+                    <table className="rankingListTable">
+                        <tr className="rowLast">
+                            <td className="rankScoreList" colSpan="1"></td> <td className="rankScoreList" colSpan="1" >{post.total}</td><td className="rankScoreList2" colSpan="1" >{post.average}</td><td className="rankScoreList2" colSpan="1" >{post.best}</td>
                         </tr>
                     </table>
-                    <hr />
+                    <table className="rowUnderline">
+                        <tr>
+                            <td colSpan="4">
+                                <div className="Underline"></div>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
-            </tr>
+            </tr >
 
         ));
         return (
@@ -171,95 +253,135 @@ class LeaderboardPage extends Component {
                 <div className="CompetitionName">
                     <div className="row justify-content-center">
                         <div className="competitionSelction">
-                            <h2> {this.props.competitions.length > 0 ? this.props.competitions[this.state.selectedCompetition].label : null}</h2>
+                            {this.props.competitions.length > 0 ? this.props.competitions[this.state.selectedCompetition].label : null}
                         </div>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="filterSection">
-                        <div>
-                            <table className="filterTableAlwaysVisible">
-                                <thead>
+                <div className="col-sm-8 text-left" style={centerContainerStyles}>
+                    <div className="centerContainerResponsive">
+                        <Collapse isOpened={this.state.collapseFilter}>
+                            <div className="row justify-content-center"                                     >
+                                <table className="collapsedFilter">
                                     <tr>
-                                        <td>
-                                            <MDBBtn tag="a" size="lg" floating gradient="purple"
-                                                onClick={this.onMouseClickFilter} >
-                                                <MDBIcon icon="filter" size="lg" />
-                                            </MDBBtn>
+                                        <td className="filterIconCOl" colSpan="1">
+                                            <div className="tableIcons">
+                                                <MDBBtn tag="a" size="lg" floating gradient="purple"
+                                                    onClick={this.onMouseClickFilter} >
+                                                    <img src={require('../resources/filterback.png')} />
+                                                </MDBBtn>
+                                            </div>
                                         </td>
-                                        <td>{this.props.groups.length > 0 ? this.props.groups[this.state.selectedGroup].label : null}</td>
+                                        <td colSpan="3">
+                                            <div className="selectCompetition"> Select Competition</div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div className="col-sm-8">
+                                </div>
+                                <div className="col-sm-8">
+                                </div>
+                            </div>
+                            <div className="row justify-content-center">
+                                <div className="filterContent">
+                                    <Collapse isOpened={this.state.collapseFilter}>
+                                        <hr />
+                                        <div className="container text-center">
+                                            <div className="row justify-content-center" >
+                                                <div className="col-sm-4">
+                                                    <div className="scrollableContainerC">
+                                                        {competitionsList}
+                                                    </div>
+                                                </div>
+                                                <div className="col-sm-4">
+                                                    <p style={pStyle}>Rankings in</p>
+
+                                                    
+                                                    <div className="scrollableContainerG">
+                                                       <div className="row justify-content-center" style={rankingIn}>
+                                                             Groups
+                                                       </div>
+                                                        {groupsList}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                    </Collapse>
+                                </div>
+                            </div>
+                        </Collapse>
+                        <Collapse isOpened={this.closeMain(this.state.collapseFilter)}>
+                        <div className="row justify-content-center" style={ranktableStyle}>
+                            <table className="table">
+                                <thead >
+                                    <tr>
+                                        <td className="filterIconCOl" colSpan="1">
+                                            <div className="tableIcons">
+                                                <MDBBtn tag="a" size="lg" floating gradient="purple"
+                                                    onClick={this.onMouseClickFilter} >
+                                                    <img src={require('../resources/filter.png')} />
+                                                </MDBBtn>
+                                            </div>
+                                        </td>
+                                        <td className="LabelsCol" colSpan="3">
+                                            <div className="tableText">
+                                                <table className="tableTextContainer">
+                                                    <tr>
+                                                        <td className="GroupLabelCol" colSpan="3">
+                                                            {this.props.groups.length > 0 ? this.props.groups[this.state.selectedGroup].label : null}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="ScoreColLabel" colSpan="1">Total</td><td className="ScoreColLabel2" colSpan="1">Average</td><td className="ScoreColLabel2" colSpan="1">Best</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan="4">
+
+                                        </td>
                                     </tr>
                                 </thead>
+                                <tbody className="rankTableBody">
+                                    {tablebody}
+                                </tbody>
                             </table>
                         </div>
-                        <div className="filterContent">
-                            <Collapse isOpened={this.state.collapseFilter}>
-                                <hr />
-                                <div className="container text-center">
-                                    <div className="row">
-                                        <div className="col-sm-4">
-                                            <p>Select Competition</p>
-                                            <div className="scrollableContainerC">
-                                                {competitionsList}
-                                            </div>
-                                        </div>
-                                        <div className="col-sm-4">
-                                            <p>Select Group</p>
-                                            <div className="scrollableContainerG">
-                                                {groupsList}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr />
-                            </Collapse>
- 
-                        </div>
+                        </Collapse>
                     </div>
                 </div>
-                <div className="row">
-
-                    <table className="table">
-                        <thead className="rankTableHead">
-                            <tr>
-                                <td>
-                                    <table>
-                                        <tr>
-                                            <td className="invisibleCol">rank</td><td className="invisibleCol">rank</td><td>Total</td><td>Average</td><td>Best</td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </thead>
-                    </table>
-                    <table className="rankTableBody">
-                        <tbody>
-                            {tablebody}
-                        </tbody>
-                    </table>
-                </div>
-                <div className="row">
-                    <div className="curentMember">
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <td>
-                                        <table className="rankUsernameRowTable">
+                <Collapse isOpened={this.closeMain(this.state.collapseFilter)}>
+                <div className="col-sm-8 text-left" style={footer}>
+                    <div className="row justify-content-center">
+                        <div className="curentMember">
+                            <table className="table">
+                                <tr className="rankRows">
+                                    <td colSpan="4">
+                                        <table>
                                             <tr>
-                                                <td className="rankingNumberCol">{this.props.userResults.username.length > 0 ? this.props.userResults.rank : null}</td><td className="usernameCol">{this.props.userResults.username.length > 0 ? this.props.userResults.username : null}</td>
+                                                <td className="userNames" colSpan="1">
+                                                    {this.top3Display(this.props.userResults.rank)}<div className="rankPading">{this.props.userResults.rank}</div>
+                                                </td>
+                                                <td className="userNames2" colSpan="3">
+                                                    <div className="usernameContainer">{this.props.userResults.username}</div>
+                                                </td>
                                             </tr>
                                         </table>
-                                        <table className="rankScoresRowTable">
-                                            <tr>
-                                                <td className="invisibleCol">rank</td><td>{this.props.userResults.username.length > 0 ? this.props.userResults.total : null}</td><td>{this.props.userResults.username.length > 0 ? this.props.userResults.average : null}</td><td>{this.props.userResults.username.length > 0 ? this.props.userResults.best : null}</td>
+                                        <table className="rankingListTable">
+                                            <tr className="rowLast">
+                                                <td className="rankScoreList" colSpan="1"></td> <td className="rankScoreList" colSpan="1" >{this.props.userResults.total}</td><td className="rankScoreList2" colSpan="1" >{this.props.userResults.average}</td><td className="rankScoreList2" colSpan="1" >{this.props.userResults.best}</td>
                                             </tr>
                                         </table>
                                     </td>
-                                </tr>
-                            </thead>
-                        </table>
+                                </tr >
+
+                            </table>
+                        </div>
                     </div>
                 </div>
+                </Collapse>
             </div>
         );
     }
