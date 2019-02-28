@@ -114,7 +114,7 @@ class Register extends Component {
   }
 
   togglePassword() {
-    let password = document.getElementById("PasswordValue");
+    let password = document.getElementById("passwordValue");
     if (password.type === "password") {
       password.type = "text";
     } else {
