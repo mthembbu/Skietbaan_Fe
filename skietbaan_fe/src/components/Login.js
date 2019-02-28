@@ -21,7 +21,7 @@ class Login extends Component {
     this.ToggleNavbar = this.ToggleNavbar.bind(this);
   }
   ToggleNavbar() {
-    var Navbar = document.querySelector(".navbar-custom");
+    let Navbar = document.querySelector(".navbar-custom");
     if (Navbar.classList.contains("hidden")) {
       Navbar.classList.remove("hidden");
     }
@@ -106,7 +106,7 @@ class Login extends Component {
   }
 
   togglePassword() {
-    var x = document.getElementById("PasswordValue");
+    let x = document.getElementById("PasswordValue");
     if (x.type === "password") {
       x.type = "text";
     } else {

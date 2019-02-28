@@ -25,7 +25,7 @@ class Register extends Component {
   }
 
   ToggleNavbar() {
-    var Navbar = document.querySelector(".navbar-custom");
+    let Navbar = document.querySelector(".navbar-custom");
     if (Navbar.classList.contains("hidden")) {
       Navbar.classList.remove("hidden");
     }
@@ -114,7 +114,7 @@ class Register extends Component {
   }
 
   togglePassword() {
-    var x = document.getElementById("PasswordValue");
+    let x = document.getElementById("PasswordValue");
     if (x.type === "password") {
       x.type = "text";
     } else {
