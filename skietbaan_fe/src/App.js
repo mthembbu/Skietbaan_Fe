@@ -6,6 +6,7 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import NavbarMenu from './components/NavbarMenu';
+import NavbarMenuUser from './components/NavbarMenuUser';
 import RegisterMember from './components/RegisterMember';
 import LeaderboardPage from './components/LeaderboardPage';
 import ScoreCapture from './components/ScoreCapture';
@@ -16,6 +17,7 @@ import history from './components/history';
 import notifications from './components/Notifications'
 import ViewMembers from './components/ViewMembers'
 import Documents from './components/Documents';
+import ViewComp from './components/ViewComp';
 class App extends Component {
 	render() {
 		return (
@@ -33,7 +35,9 @@ class App extends Component {
 							<Route path="/scorecapture" component={ScoreCapture} exact />
 							<Route path="/groupsname" component={GroupsName} exact />
 							<Route path="/groups" component={Groups} exact />
-							{/* <Route psth="/create" component={CreatePage} exact /> */}
+							<Route path="/create" component={CreatePage} exact />
+							<Route path="/view-comp" component={ViewComp } exact />
+							<Route path="/create-comp" component={ CreateComp} exact />
 							<Route path="/GroupDone" component={GroupDone} exact />
 							<Route path="/notify" component={notification} exact />
 							<Route path="/documents" component={Documents} exact />
