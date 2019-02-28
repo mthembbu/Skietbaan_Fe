@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Jumbotron, Form, Button, Row, Col, Container } from 'react-bootstrap';
+import { Form,
+		Button,
+		Row,
+		Col} from 'react-bootstrap';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../scss/createcomp.css';
@@ -24,11 +27,11 @@ class CreateComp extends Component {
 	}
 	/** A method that detects the change in the change in thw textfield */
 	onChange(e) {
-		this.setState({ [e.target.name] : e.target.value });
+		this.setState({ [e.target.name]: e.target.value });
 	}
-	
+
 	onChangeInt(e) {
-		this.setState({ [e.target.name]:e.target.value });
+		this.setState({ [e.target.name]: e.target.value });
 	}
 	/** A method that handles the submit enent for the submit button*/
 	onSubmit(e) {
@@ -63,38 +66,40 @@ class CreateComp extends Component {
 				<div class="container create-comp-container">
 					<Row>
 						<Col>
-							<Jumbotron>
-								<Form onSubmit={this.onSubmit}>
-									<Form.Group controlId="titleInput">
-										<Form.Label>
-											<strong>Competition Name:</strong>
-										</Form.Label>
-										<Form.Control
+							<Form onSubmit={this.onSubmit}>
+								<div className="containers-input">
+									<label className="comp-label-container">Competition Name</label>
+									<div className="comp-input-control">
+										<input
+											className="comp-input"
 											type="text"
-											placeholder="Enter Competition Name	"
 											name="Name"
 											id="titleInput"
 											value={this.state.Name}
 											onChange={this.onChange}
 										/>
-									</Form.Group>
-									<Form.Group controlId="NumOfScores">
-										<Form.Label>Number of Scores:</Form.Label>
-										<Form.Control
-											type="number"
-											placeholder="Number of Scores for a Competition"
-											name="BestScoresNumber"
-											id="NumOfScores"
-											value={this.state.BestScoresNumber}
-											onChange={this.onChange}
-										/>
-									</Form.Group>
-									<Button variant="primary" type="submit">
+									</div>
+								</div>
+								<div>
+									<label className="comp-label-container">Number of Scores</label>
+								</div>
+								<div className="comp-input-control">
+									<input
+										className="comp-input"
+										type="number"
+										name="BestScoresNumber"
+										id="NumOfScores"
+										value={this.state.BestScoresNumber}
+										onChange={this.onChange}
+									/>
+								</div>
+								<div class="comp-submit-btn">
+									<Button variant="secondary" type="submit">
 										Create
 									</Button>
-								</Form>
-								<br />
-							</Jumbotron>
+								</div>
+							</Form>
+							<br />
 						</Col>
 					</Row>
 				</div>
