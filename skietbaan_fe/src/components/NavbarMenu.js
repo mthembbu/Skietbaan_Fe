@@ -28,61 +28,66 @@ class NavbarMenu extends Component {
 	isHome(){
 		if (window.location.pathname.endsWith("/home")) {
 			return <img src={require('../components/navbar-icons/leaderboard-red.png')}
-						className="leaderboard-icon-grey" alt=''></img>
+						className="leaderboard-icon-grey" alt='Leaderboard tab Selected'></img>
 		}
 		else {
 			return <img src={require('../components/navbar-icons/leaderboard-grey.png')}
-						className="leaderboard-icon-grey" alt=''></img>
+						className="leaderboard-icon-grey" alt='Leaderboard tab not Selected'></img>
 		}
 	}
+
 	isCreate(){
 		if (window.location.pathname.endsWith("/create")) {
 			return <img src={require('../components/navbar-icons/create-red.png')}
-						className="create-icon-grey" alt=''></img>
+						className="create-icon-grey" alt='Create tab Selected'></img>
 		}
 		else {
 			return <img src={require('../components/navbar-icons/create-grey.png')}
-						className="create-icon-grey" alt=''></img>
+						className="create-icon-grey" alt='Create tab not Selected'></img>
 		}
 	}
+
 	isScoreCapture(){
 		if (window.location.pathname.endsWith("/scorecapture")) {
 			return <img src={require('../components/navbar-icons/add-score-red.png')}
-						className="add-score-icon-grey" alt=''></img>
+						className="add-score-icon-grey" alt='ScoreCapture tab Selected'></img>
 		}
 		else {
 			return <img src={require('../components/navbar-icons/add-score-grey.png')}
-						className="add-score-icon-grey" alt=''></img>
+						className="add-score-icon-grey" alt='ScoreCapture tab not Selected'></img>
 		}
 	}
+
 	isProfile(){
 		if (window.location.pathname.endsWith("/profile")) {
 			return <img src={require('../components/navbar-icons/profile-red.png')}
-						className="profile-icon-grey" alt=''></img>
+						className="profile-icon-grey" alt='Profile tab Selected'></img>
 		}
 		else {
 			return <img src={require('../components/navbar-icons/profile-grey.png')}
-						className="profile-icon-grey" alt=''></img>
+						className="profile-icon-grey" alt='Profile tab not Selected'></img>
 		}
 	}
+
 	isDocuments(){
 		if (window.location.pathname.endsWith("/documents")) {
 			return <img src={require('../components/navbar-icons/docs-red.png')}
-						className="docs-icon-grey{" alt=''></img>
+						className="docs-icon-grey{" alt='Document tab Selected'></img>
 		}
 		else {
 			return <img src={require('../components/navbar-icons/docs-grey.png')}
-						className="docs-icon-grey" alt=''></img>
+						className="docs-icon-grey" alt='Document tab not Selected'></img>
 		}
 	}
+
 	isNotifications(){
 		if (window.location.pathname.endsWith("/notifications")) {
 			return <img src={require('../components/navbar-icons/notifications-red.png')}
-						className="notifications-icon-grey" alt=''></img>
+						className="notifications-icon-grey" alt='Notification tab Selected'></img>
 		}
 		else {
 			return <img src={require('../components/navbar-icons/notifications-grey.png')}
-						className="notifications-icon-grey" alt=''></img>
+						className="notifications-icon-grey" alt='Notification tab not Selected'></img>
 		}
 	}
 
