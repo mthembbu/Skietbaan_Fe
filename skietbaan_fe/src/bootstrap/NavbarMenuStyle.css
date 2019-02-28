@@ -1,38 +1,4 @@
-
-.fixed-top{
-    position:relative ;
-  }
-
-  .navbar .navbar-custom{
-    background-color: #f0f0f0;
-    color: #f0f0f0;
-  }
-
-  .App div .navbar {
-    margin: 0%;
-  }
-
-  .App div .navbar a{
-    color: #f0f0f0;
-  }
-
-  .App div .navbar .fa{
-    display: grid;
-    text-align: center;
-   }
-
-  .App div .navbar .fa:hover{
-    align-content: center
-   }
-
-  .App div .navbar button{
-    padding: 0%;
-    width: fit-content;
-    color: #f0f0f0;
-    background-color: #f0f0f0;
-  }
-
-  .dropdown-menu.show{
+.dropdown-menu.show{
     background-color: #f0f0f0;
     border: none;
     border: 1px solid  #f0f0f0;
@@ -73,3 +39,35 @@
     width: 28px;
   }
   
+  .second-row-navbar{
+    height: 71px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+    display: none;
+  }
+
+  .first-row-navbar{
+    height: 71px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+  }
+
+  .navbar-admin{
+    background-color: #f0f0f0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .second-row-navbar.expand{
+    display: table-row;
+    height: 71px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+  }
+
+  .columns{
+    width: 25%;
+  }
