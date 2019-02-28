@@ -155,6 +155,7 @@ class App extends Component {
       </table>
     );
     return (
+      <div className="content-of-page">
         <div className="centre-register-member">
           <div className="page-name-create-members">
           <div className="image-comtainer">
@@ -184,8 +185,10 @@ class App extends Component {
           <div className="rest-body">
           <div className="container-labels">
             <div className="membership-number">
+            <div className="input-spacing">
               <label className="membership-id-number">Membership No.</label>
               <div className="input-member-number">
+              
                 <input
                   type="text"
                   className="membershipID"
@@ -193,18 +196,23 @@ class App extends Component {
                   value={this.state.membershipsID}
                   onChange={this.handleChange}
                 />
+                </div>
               </div>
             </div>
             <div className="expiry-date-member">
+            <div className="input-spacing">
               <label className="membership-expiry-date">Membership Expiry Date</label><br />
-              <input type="text" className="expdate" id="expdate" value={this.GetDate()} onChange={this.handleChange} />
+              <input type="text" className="expdate" id="expdate" 
+              value={this.GetDate()} onChange={this.handleChange} />
+              </div>
             </div>
             </div>
             <div className="create-member">
               <button className={this.state.hideButton ? "hide-create-button" : "create-button"} onClick={this.UpdateMember} >CreateMember</button>
             </div>
           </div>
-        </div >
+        </div>
+        </div>
     );
   }
 }

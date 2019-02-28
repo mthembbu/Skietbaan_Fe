@@ -121,10 +121,21 @@
   width: 267px;
   height: 39px;
   text-align: center;
+}
+.centre-div{
+  margin:0 auto;
+}
+.password-view-icon{
   background: url("../components/assets/password.png") no-repeat right center;
-  background-color: white;
+  height:30px;
   background-size: 30px;
-  background-position-x: 95%;
+  width: 30px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.password-view-icon:hover{
+  cursor: pointer;
 }
 
 .header-label{
