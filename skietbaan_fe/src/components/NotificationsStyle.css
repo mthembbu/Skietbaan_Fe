@@ -1,160 +1,125 @@
 @media all and (min-width: 480px) {
-    .Notifications {
-      padding: 60px 0;
-    }
-  
-    .Notifications form {
-      margin: 0 auto;
-      max-width: 320px;
-    }
-  }
-  body{
-    background-image: url("Notification-Img/Rectangle.png");
-    color: white;
-    border-style: none;
-    border: none;
-    height: 100%; 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-bottom: 640px;
-  } 
-
-  .centre {
-    text-align: center; 
+  .Notifications {
+    padding: 60px 0;
   }
 
-  b{
-    font-size: 25px;
-    font-family: helvetica;
-    padding-left: 100px;
+  .Notifications form {
+    margin: 0 auto;
+    max-width: 320px;
   }
+}
 
-  img{
-    padding-bottom: 6px;
-    padding-right: 35px;
-  }
+.bodyClass {
+  background-color: #504f51;
+  color: white;
+  border-style: none;
+  border: none;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 640px;
+  padding-top: 5px;
+}
 
-  div.PageHeading{
-    height: 49px;
-    padding-top: 8px;
-    padding-right: 90px;
-  }
+.centre {
+  text-align: center;
+}
 
-  .PageHeading{
-    text-align: center;
-    align-content: center;
-    background-color: white;
-    color: #101727;
-    height: 49px;
-  }
+.images {
+  padding-bottom: 6px;
+  padding-right: 35px;
+}
 
-  .buttonCss{
-    width: 200px;
-    background-color: white;
-    border-radius: 25px;
-    color: black;
-    position: bottom;
-  }
+.PageHeading {
+  text-align: center;
+  align-content: center;
+  background-color: #0c0c0c;
+  color: #fdfdfd;
+  height: 49px;
+  padding-top: 8px;
+  padding-right: 90px;
+  font-size: 25px;
+  font-family: helvetica;
+  padding-left: 100px;
+}
 
-  div.buttonCss{
-    position: absolute;
-    top: 600px;
-  }
+.buttonCss {
+  width: 200px;
+  background-color: #504f51;
+  border-radius: 25px;
+  border-color: #e11e2b;
+  border-style: thin;
+  color: #fdfdfd;
+  position: relative;
+  top: 15px;
+  padding-left: 13px;
+}
 
-  table td{
-    color: white;
-    padding-left: 35px;
-    padding: 1.75rem; 
-    font-size: 13px;
-    border-bottom-style: none;
-    font-family: helvetica;
-  }
+.tdDelete {
+  padding-left: 50px;
+  color: white;
+  padding-top: 30px;
+  font-size: 13px;
+  border-bottom-style: none;
+  font-family: helvetica;
+  width: 0px;
+}
 
-  table tbody{
-    border-bottom: none;
-    font-family: helvetica;
-    background-image: url("Notification-Img/Rectangle.png");
-    color: white;
-    border-style: none;
-    border: none;
-    height: 100%; 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-bottom: 640px;
-  }
+.tdNotification {
+  color: white;
+  padding-left: 20px;
+  padding-top: 30px;
+  font-size: 13px;
+  font-family: helvetica;
+  text-align: left;
+}
 
-  table table{
-    text-align: center;
-    border-bottom-style: none;
-    border-bottom: none;
-    background-image: url("Notification-Img/Rectangle.png");
-    color: white;
-    border-style: none;
-    border: none;
-    height: 100%; 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-bottom: 640px;
-  }
+.trClass {
+  border-bottom: solid 2px #bbbcbb;
+  height: 35px;
+  border-bottom-width: thin;
+  text-align: center;
+  padding-top: 50px;
+}
 
-  table{
-    border-bottom: none;
-    border-style: none;
-    border: none;
-    background-image: url("Notification-Img/Rectangle.png");
-    color: white;
-    border-style: none;
-    border: none;
-    height: 100%; 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-bottom: 640px;
-  }
+.tbody {
+  border-bottom: none;
+  font-family: helvetica;
+  background-color: #504f51;
+  color: white;
+  border-style: none;
+  border: none;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 640px;
+}
 
-  button.btn.btn-secondary{
-    border-radius: 25px;
-    background-color: white;
-    color: black;
-    font-size: 16px;
-    padding-right: 30px;
-    padding-top: 4px;
-  }
-  div.col{
-    position: fixed;
-    bottom: 45px;
-  }
+.postItems {
+  text-align: center;
+  background-color: #504f51;
+  color: white;
+  border-style: none;
+  border: none;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 640px;
+  padding-left: 5px;
+}
 
-  button.buttonCss.btn.btn-secondary{
-    border-radius: 25px;
-    position: absolute;
-    font-size: 16px;
-    padding-bottom: 30px;
-    width: 230px;
-    padding-left: 25px;
-    background-color: transparent;
-    border-style: solid;
-    border-width: thin;
-    border-color: white;
-    color: white;
-    font-family: helvetica;
-  }
+.a.img.Buttons {
+  padding-right: 23px;
+}
 
-  .Buttons{
-    padding-right: 23px;
-  }
+.navbar-custom.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top {
+  padding-left: inherit;
+}
 
-  div.a.img.Buttons{
-    padding-right: 23px;
-  }
-
-  nav.navbar-custom.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top{
-    padding-left: inherit;
-  }
-
-  p{
-    color: white;
-  }
+.text{
+  color: white;
+  font-family: helvetica;
+}
