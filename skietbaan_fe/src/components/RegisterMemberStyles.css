@@ -8,7 +8,7 @@
   }
 
   body{
-    background-color: red;
+    background-color: #504f51;
   }
 
   .col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-10,.col-11,.col-12{
@@ -18,7 +18,7 @@
   .centre-register-member{
     margin:0 auto;
     position: center;
-    background-color: white;
+    background-color: #504f51;;
   }
 
   @media screen and (min-width:768px)  {
@@ -29,28 +29,46 @@
   }
   }
 
+  .page-name-create-members{
+    position: center;
+    text-align: center;
+    text-size-adjust: 25px;
+    background-size: 15px;
+    height: 49px;
+    background-color: #0c0c0c;
+  }
+
   .search-name{
     position: center;
     text-align: center;
-    height: 36px;
+    height: 60px;
     line-height: 36px;
-    background-color: #171F32;
+    background-color: #504f51;
+    padding-top: 15px;
   }
 
   .table-search-users{
-    background-color: white;
+    background-color: #504f51;
+    width: 267px;
+    margin-left: 80px;
+    border-radius: 10px;
   }
   
   .membership-number{
-    padding-top: 110px;
+    padding-top: 10px;
+    padding-left: 13%;
     position: center;
-    text-align: center;
+    text-align: left;
+    color:white;
+    font-size: 18px;
   }
 
   .expiry-date-member{
-    padding-top: 80px;
+    padding-top: 35px;
+    padding-left: 13%;
     position: center;
-    text-align: center;
+    text-align: left;
+    color: white;
   }
 
   .create-member{
@@ -59,29 +77,136 @@
   }
 
   .expdate{
-    border-radius: 15px;
-    width: fit-content;
-    background-color: lightgray;
+    border-radius: 9px;
+    width: 149px;
+    height: 42px;
     text-align: center;
+    border: none;
+    font-size: 18px;
+    font-weight: lighter;
   }
 
   .create-button{
-    border-radius: 15px;
-    width: fit-content;
-    border: 1.5px solid;
-    background-color: #171F32;
-    color: white;
+    border-radius: 18px;
+    border: 1.5px red solid;
+    background-color: #504f51;
+    color: #bbbcbd;
     margin-top: 100px;
+    width: 152px;
+    height: 38px;
   }
 
-  .usernameValue{
-    border-radius: 10px;
-    line-height: 22px;
+  input.username{
+    background: url('../components/assets/search-red.png') no-repeat right center;
+    background-size: 22px;
+    height: 40px;
+    background-position-x: 95%;
+    border-radius: 4px;
     text-align: center;
+    width: 267px;
+    background-color: white;
+    border: none;
   }
 
   .membershipID{
-    border-radius: 10px;
-    width: 210px;
+    border-radius: 9px;
+    width: 149px;
+    height: 42px;
     text-align: center;
+    border: none;
+    font-size: 18px;
+    font-weight: lighter;
+  }
+
+  .search{
+    background-color: #171F32;
+  }
+
+  .create-members{
+    size:49px;
+    padding-top: 7px;
+    font-weight: bolder;
+    font-size: 26px;
+    color: #fdfdfd;
+  }
+
+  .div-label-enter-user-name{
+    text-align: center;
+    color: white;
+    padding-top: 15px;
+    font-size: 26px
+  }
+
+  .label-enter-user-name{
+    text-align: center;
+    color: white;
+    padding-top: 15px;
+    font-size: 20px;
+    font-weight: lighter;
+  }
+
+  .table-register-member{
+    width: 267px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    background-color: #504f51;
+  }
+
+  .register-member-user-column{
+    border: none;
+    border-radius: 10px;
+  }
+  
+  .register-member-user-column{
+    background-color: white;
+    border-radius: 10px;
+    border: none;
+  }
+  
+  .actives{
+    border-radius: 10px;
+    background-color: #e11e2b;
+    color: white;
+    border: none;
+  }
+
+  .register-member-user-column:hover{
+    background-color: lightgray;
+    border: none;
+    border-radius: 10px;
+  }
+
+  .register-member-user-row{
+    border: none;
+    border-radius: 10px;
+  }
+  
+  .register-member-user-column{
+    border: none;
+    border-radius: 10px;
+  }
+
+  .membership-expiry-date{
+    font-size: 18px;
+    font-weight: lighter;
+  }
+
+  .membership-id-number{
+    font-size: 18px;
+    font-weight: lighter;
+  }
+
+  .hide-create-button{
+    border-radius: 18px;
+    border: 1.5px #bbbcbd solid;
+    background-color: #504f51;
+    color: #bbbcbd;
+    margin-top: 100px;
+    width: 152px;
+    height: 38px;
+  }
+
+  .container-labels{
+    text-align: left;
   }
