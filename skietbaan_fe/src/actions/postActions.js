@@ -30,7 +30,7 @@ export const fetchPosts = () => dispatch => {
     });
 };
 export const createGroups = usersadded => dispatch => {
-  fetch(URLGROUP, {
+  fetch("https://api.skietbaan.retrotest.co.za/api/groups/add", {
     method: "POST",
     headers: {
       "content-type": "application/json"

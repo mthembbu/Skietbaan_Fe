@@ -17,7 +17,7 @@ class AddMembersGroup extends Component {
     this.onChange = this.onChange.bind(this);
   }
   componentWillMount() {
-    fetch("http://localhost:64444/api/Groups/list?id=" + this.props.id)
+    fetch("https://api.skietbaan.retrotest.co.za/api/Groups/list?id=" + this.props.id)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -48,7 +48,7 @@ class AddMembersGroup extends Component {
       users: this.state.newArray,
       GroupIds: this.props.id
     };
-    fetch("http://localhost:64444/api/groups/postMember/", {
+    fetch("https://api.skietbaan.retrotest.co.za/api/groups/postMember/", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -68,7 +68,7 @@ class AddMembersGroup extends Component {
         this.setState({ count: this.state.count - 1 });
       
     } else {
-      console.log(this.state.selected)
+    
       this.setState({selected:name})
       this.state.posts[event].highlighted = true;
       

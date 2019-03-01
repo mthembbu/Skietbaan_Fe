@@ -21,7 +21,7 @@ class Groups extends Component {
     this.selectall = this.selectall.bind(this);
   }
   componentWillMount() {
-    fetch("http://localhost:64444/api/user")
+    fetch("https://api.skietbaan.retrotest.co.za/api/user")
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -52,7 +52,7 @@ class Groups extends Component {
     let request = {
       newArray: this.state.newArray
     };
-    fetch("http://localhost:64444/api/groups/add", {
+    fetch("https://api.skietbaan.retrotest.co.za/api/groups/add", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -94,7 +94,6 @@ class Groups extends Component {
     history.push("/addGroup");
   }
   render() {
-    console.log(123);
     const postitems = (
       <div className="check">
         <ul class="list-group">

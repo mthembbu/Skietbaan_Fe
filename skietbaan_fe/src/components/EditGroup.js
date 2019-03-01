@@ -17,7 +17,7 @@ class EditGroup extends Component {
     this.onChange = this.onChange.bind(this);
   }
   componentWillMount() {
-    fetch("http://localhost:64444/api/Groups/edit?id=" + this.props.id)
+    fetch("https://api.skietbaan.retrotest.co.za/api/Groups/edit?id=" + this.props.id)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -53,7 +53,7 @@ class EditGroup extends Component {
       GroupIds:this.props.id,
       users: this.state.newArray
     };
-    fetch("http://localhost:64444/api/groups/deleteMember/", {
+    fetch("https://api.skietbaan.retrotest.co.za/api/groups/deleteMember/", {
       method: "DELETE",
       headers: {
         Accept: "application/json",
