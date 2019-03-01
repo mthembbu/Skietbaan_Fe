@@ -10,8 +10,8 @@
   margin-left: auto;
   margin-left: auto;
   text-align: center;
-
 }
+
 .middle_bar {
   margin-left: auto;
   margin-right: auto;
@@ -39,8 +39,8 @@
   font-weight: lighter;
   font-size: 18px;
 }
+
 .add {
- 
   height: 40px;
   width: 150px;
   font-weight: lighter;
@@ -88,11 +88,13 @@
 .circles {
   border-radius: 50%;
 }
+
 .name{
   margin-top: 37px;
   margin-bottom: 14px;
   font-size: 18px;
 }
+
 .bpanel{
   padding-top: 15px;
 }
