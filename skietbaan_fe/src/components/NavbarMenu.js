@@ -21,12 +21,7 @@ class NavbarMenu extends Component {
 		this.isNotifications = this.isNotifications.bind(this);
 		this.expand = this.expand.bind(this);
 		this.isMore = this.isMore.bind(this);
-		this.GoToLeaderboard = this.GoToLeaderboard.bind(this);
-		this.GoToCreate = this.GoToCreate.bind(this);
-		this.GoToScoreCapture = this.GoToScoreCapture.bind(this);
-		this.GoToProfile = this.GoToProfile.bind(this);
-		this.GoToDocuments = this.GoToDocuments.bind(this);
-		this.GoToNotifications = this.GoToNotifications.bind(this);
+		this.GoTo= this.GoTo.bind(this);
 	}
 
 	expand() {
@@ -104,28 +99,8 @@ class NavbarMenu extends Component {
 			className="more-icon-grey" alt='More icon to expand tray'></img>
 	}
 
-	GoToLeaderboard (){
-		window.location = "/home";
-	}
-
-	GoToCreate(){
-		window.location = "/create";
-	}
-
-	GoToScoreCapture(){
-		window.location = "/scorecapture";
-	}
-
-	GoToProfile(){
-		window.location = "/profile";
-	}
-
-	GoToDocuments(){
-		window.location = "/documents";
-	}
-
-	GoToNotifications(){
-		window.location = "/notifications";
+	GoTo (page){
+		window.location = page;
 	}
 
 	render() {
@@ -134,13 +109,13 @@ class NavbarMenu extends Component {
 				<table className="navbar-admin">
 				<tbody>
 					<tr className="first-row-navbar">
-						<td className="columns" onClick={() => this.GoToLeaderboard()}>
+						<td className="columns" onClick={() => this.GoTo("/home")}>
 							{this.isHome()}
 						</td>
-						<td className="columns" onClick={() => this.GoToCreate()}>
+						<td className="columns" onClick={() => this.GoTo("/create")}>
 							{this.isCreate()}
 						</td>
-						<td className="columns" onClick={() => this.GoToScoreCapture()} >
+						<td className="columns" onClick={() => this.GoTo("/scorecapture")} >
 							{this.isScoreCapture()}
 						</td>
 						<td onClick={this.expand}>
@@ -151,10 +126,10 @@ class NavbarMenu extends Component {
 						<td className="columns">
 							{this.isProfile()}
 						</td>
-						<td className="columns" onClick={() => this.GoToDocuments()}>
+						<td className="columns" onClick={() => this.GoTo("/documents")}>
 							{this.isDocuments()}
 						</td>
-						<td className="columns" onClick={() => this.GoToNotifications()}>
+						<td className="columns" onClick={() => this.GoTo("notify")}>
 							{this.isNotifications()}
 						</td>
 						<td></td>
