@@ -8,112 +8,118 @@ class NavbarMenuUser extends Component {
 	constructor(props) {
 		super(props);
 
-		this.isActive = this.isActive.bind(this);
+		this.state = {
+			expanded: false
+		};
+
 		this.isHome = this.isHome.bind(this);
 		this.isScoreCapture = this.isScoreCapture.bind(this);
 		this.isProfile = this.isProfile.bind(this);
 		this.isDocuments = this.isDocuments.bind(this);
 		this.isNotifications = this.isNotifications.bind(this);
+		this.expand = this.expand.bind(this);
+		this.isMore = this.isMore.bind(this);
+		this.GoTo= this.GoTo.bind(this);
 	}
 
-	isActive(route) {
-		if (window.location.pathname.endsWith(route)) {
-			return "nav-active";
-		}
-		else {
-			return "";
-		}
+	expand() {
+		this.setState({ expanded: !this.state.expanded });
 	}
 
-	isHome(){
+	isHome() {
 		if (window.location.pathname.endsWith("/home")) {
 			return <img src={require('../components/navbar-icons/leaderboard-red.png')}
-						className="leaderboard-icon-grey" alt='Leaderboard tab Selected'></img>
+				className="leaderboard-icon-grey" alt='Leaderboard tab Selected'></img>
 		}
 		else {
 			return <img src={require('../components/navbar-icons/leaderboard-grey.png')}
-						className="leaderboard-icon-grey" alt='Leaderboard tab not Selected'></img>
+				className="leaderboard-icon-grey" alt='Leaderboard tab not Selected'></img>
 		}
 	}
 
-	isScoreCapture(){
+	isScoreCapture() {
 		if (window.location.pathname.endsWith("/scorecapture")) {
 			return <img src={require('../components/navbar-icons/add-score-red.png')}
-						className="add-score-icon-grey" alt='ScoreCapture tab Selected'></img>
+				className="add-score-icon-grey" alt='ScoreCapture tab Selected'></img>
 		}
 		else {
 			return <img src={require('../components/navbar-icons/add-score-grey.png')}
-						className="add-score-icon-grey" alt='ScoreCapture tab not Selected'></img>
+				className="add-score-icon-grey" alt='ScoreCapture tab not Selected'></img>
 		}
 	}
 
-	isProfile(){
+	isProfile() {
 		if (window.location.pathname.endsWith("/profile")) {
 			return <img src={require('../components/navbar-icons/profile-red.png')}
-						className="profile-icon-grey" alt='Profile tab Selected'></img>
+				className="profile-icon-grey" alt='Profile tab Selected'></img>
 		}
 		else {
 			return <img src={require('../components/navbar-icons/profile-grey.png')}
-						className="profile-icon-grey" alt='Profile tab not Selected'></img>
+				className="profile-icon-grey" alt='Profile tab not Selected'></img>
 		}
 	}
 
-	isDocuments(){
+	isDocuments() {
 		if (window.location.pathname.endsWith("/documents")) {
 			return <img src={require('../components/navbar-icons/docs-red.png')}
-						className="docs-icon-grey{" alt='Document tab Selected'></img>
+				className="docs-icon-grey" alt='Document tab Selected'></img>
 		}
 		else {
 			return <img src={require('../components/navbar-icons/docs-grey.png')}
-						className="docs-icon-grey" alt='Document tab not Selected'></img>
+				className="docs-icon-grey" alt='Document tab not Selected'></img>
 		}
 	}
 
-	isNotifications(){
+	isNotifications() {
 		if (window.location.pathname.endsWith("/notifications")) {
 			return <img src={require('../components/navbar-icons/notifications-red.png')}
-						className="notifications-icon-grey" alt='Notification tab Selected'></img>
+				className="notifications-icon-grey" alt='Notification tab Selected'></img>
 		}
 		else {
 			return <img src={require('../components/navbar-icons/notifications-grey.png')}
-						className="notifications-icon-grey" alt='Notification tab not Selected'></img>
+				className="notifications-icon-grey" alt='Notification tab not Selected'></img>
 		}
 	}
 
+	isMore() {
+		return <img src={require('../components/navbar-icons/more-grey.png')}
+			className="more-icon-grey" alt='More icon to expand tray'></img>
+	}
+
+	GoTo (page){
+		window.location = page;
+	}
 	render() {
 		// rendering the basic navbar within the render class
 		return (
 			<div >
-				{/** The default navigation menu */}
-				<Navbar bg="light" expand="lg" className="navbar-custom" fixed="top">
-					<Navbar.Brand className={this.isActive('/home') ? "nav-active":""} href="/home">
-						{this.isHome()}
-					</Navbar.Brand>
-
-					<Navbar.Brand className={this.isActive('/scorecapture')} href="/scorecapture">
-						{this.isScoreCapture()}
-					</Navbar.Brand>
-
-					<Navbar.Brand href="#">
-						{this.isProfile()}
-					</Navbar.Brand>
-
-					<Navbar.Toggle aria-controls="basic-navbar-nav" className="more-icon-grey">
-						{<img src={require('../components/navbar-icons/more-grey.png')}
-							className="more-icon-grey" alt=''></img>}
-					</Navbar.Toggle>
-					<Navbar.Collapse id="basic-navbar-nav">
-						<Navbar>
-						<Navbar.Brand className={this.isActive('/documents')} href="/documents">
+				<table className="navbar-admin">
+				<tbody>
+					<tr className="first-row-navbar">
+						<td className="columns" onClick={() => this.GoTo("/home")}>
+							{this.isHome()}
+						</td>
+						<td className="columns" onClick={() => this.GoTo("/scorecapture")} >
+							{this.isScoreCapture()}
+						</td>
+						<td className="columns" onClick={() => this.GoTo("#")}>
+							{this.isProfile()}
+						</td>
+						<td onClick={this.expand}>
+							{this.isMore()}
+						</td>
+					</tr>
+					<tr className={this.state.expanded ? "second-row-navbar expand":"second-row-navbar"}>
+						<td className="columns" onClick={() => this.GoTo("/documents")}>
 							{this.isDocuments()}
-						</Navbar.Brand>
-
-						<Navbar.Brand className={this.isActive('/notifications')} href="/notifications">
+						</td>
+						<td className="columns" onClick={() => this.GoTo("/notify")}>
 							{this.isNotifications()}
-						</Navbar.Brand>
-						</Navbar>
-					</Navbar.Collapse>
-				</Navbar>
+						</td>
+						<td></td>
+					</tr>
+					</tbody>
+				</table>
 			</div>
 		);
 	}
