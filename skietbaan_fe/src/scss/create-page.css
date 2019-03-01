@@ -29,6 +29,8 @@ body{background-color: #504F51;}
 .container{
     background: transparent;
     min-width: width 80%;
+    background: transparent;
+    text-align: left;
 }
 
 .create-page-header{
@@ -41,7 +43,7 @@ body{background-color: #504F51;}
     font: helvetica;
     text-align: center;
     border-radius: 50px;
-    width: 150px;
+    width: 127px;
     height: 42px;
     font-size: 16px;
     color: #0c0c0c;
@@ -108,5 +110,4 @@ body{background-color: #504F51;}
     min-height: 50px;
     margin-left: inherit;
 }
-
 
