@@ -8,7 +8,7 @@ class CreatePage extends Component {
 					<div class="row create-menu">
 						<div class="col-12">
 							<p align="centre">
-								<h4 className="create-menu-header">Create</h4>
+								<label className="create-menu-header">Create</label>
 							</p>
 						</div>
 					</div>
@@ -17,36 +17,36 @@ class CreatePage extends Component {
 					<div class="row mb-1 pb-1">
 						<div class="col col-sm-6 col-xm-6">
 							<a href="/create-comp" class="btn btn-create" role="button">
-								<p class="btn-create-text">Competitions</p>
+								<label className="color-create-red" class="btn-create-text">Competitions</label>
 							</a>
 						</div>
 						<div class="col col-sm-6 col-xm-6">
 							<a href="/view-comp" class="btn btn-outline-secondary btn-view" role="button">
-								<p class="create-view-text">View </p>
+								<label className="color-create-red" class="create-view-text">View </label>
 							</a>
 						</div>
 					</div>
 					<div class="row mb-1 pb-1">
 						<div class="col col-sm-6 col-xm-6">
 							<a href="/registermember" class="btn btn-create-m" role="button">
-								<p class="btn-create-text">Members</p>
+								<label className="color-create-red" class="btn-create-text">Members</label>
 							</a>
 						</div>
 						<div class="col col-sm-6 col-xm-6">
 							<a href="/viewmembers" class="btn btn-outline-secondary btn-view" role="button">
-								<p class="create-view-text">View </p>
+								<label className="color-create-red" class="create-view-text">View </label>
 							</a>
 						</div>
 					</div>
 					<div class="row mb-1 pb-1">
 						<div class="col col-sm-6 col-xm-6">
 							<a href="/create-comp" class="btn btn-create-gr" role="button">
-								<p class="btn-create-text">Groups</p>
+								<label className="color-create-red" class="btn-create-text">Groups</label>
 							</a>
 						</div>
 						<div class="col col-sm-6 col-xm-6">
 							<a class="btn btn-outline-secondary btn-view" href="#" role="button">
-								<p class="create-view-text">View </p>
+								<label className="color-create-red" class="create-view-text">View </label>
 							</a>
 						</div>
 					</div>

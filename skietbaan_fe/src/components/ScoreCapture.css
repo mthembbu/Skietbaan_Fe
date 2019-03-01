@@ -79,13 +79,6 @@
     color:black;
 }
 
-@media screen and (min-width:580px)  {
-    .score{
-    width:24%;
-
-    }
-}
-
 .invalidScore{
     background-image: url("../components/assets/redError.png");
     background-size: 22px;

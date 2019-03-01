@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Form,
-		Button,
-		Row,
-		Col} from 'react-bootstrap';
+import { Form, 
+		Button, 
+		Row, 
+		Col 
+} from 'react-bootstrap';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../scss/createcomp.css';
@@ -12,7 +13,7 @@ class CreateComp extends Component {
 		super(props);
 		this.state = {
 			Name: '',
-			BestScoresNumber: 0,
+			BestScoresNumber: '',
 			Status: true,
 			validNumScore: true,
 			validCompName: true
@@ -23,7 +24,7 @@ class CreateComp extends Component {
 		this.onClick = this.onClick.bind(this);
 	}
 	onClick() {
-		Window.location = '/create';
+		window.location = "/create";
 	}
 	/** A method that detects the change in the change in thw textfield */
 	onChange(e) {
@@ -63,45 +64,41 @@ class CreateComp extends Component {
 						</div>
 					</div>
 				</div>
-				<div class="container create-comp-container">
-					<Row>
-						<Col>
-							<Form onSubmit={this.onSubmit}>
-								<div className="containers-input">
-									<label className="comp-label-container">Competition Name</label>
-									<div className="comp-input-control">
-										<input
-											className="comp-input"
-											type="text"
-											name="Name"
-											id="titleInput"
-											value={this.state.Name}
-											onChange={this.onChange}
-										/>
-									</div>
-								</div>
-								<div>
-									<label className="comp-label-container">Number of Scores</label>
-								</div>
-								<div className="comp-input-control">
-									<input
-										className="comp-input"
-										type="number"
-										name="BestScoresNumber"
-										id="NumOfScores"
-										value={this.state.BestScoresNumber}
-										onChange={this.onChange}
-									/>
-								</div>
-								<div class="comp-submit-btn">
-									<Button variant="secondary" type="submit">
-										Create
-									</Button>
-								</div>
-							</Form>
-							<br />
-						</Col>
-					</Row>
+				<div class="create-comp-container">
+					<Form onSubmit={this.onSubmit}>
+						<div className="containers-input">
+							<label className="comp-label-container">Competition Name</label>
+							<div className="comp-input-control">
+								<input
+									className="comp-input"
+									type="text"
+									name="Name"
+									id="titleInput"
+									value={this.state.Name}
+									onChange={this.onChange}
+								/>
+							</div>
+						</div>
+
+						<div className="comp-input-control">
+							<div>
+								<label className="comp-label-container">Number of Scores</label>
+							</div>
+							<input
+								className="comp-input"
+								type="number"
+								name="BestScoresNumber"
+								id="NumOfScores"
+								value={this.state.BestScoresNumber}
+								onChange={this.onChange}
+							/>
+						</div>
+						<div className="comp-submit-btn-container">
+							<button variant="secondary" type="submit" className="comp-submit-btn">
+								Create Competition
+							</button>
+						</div>
+					</Form>
 				</div>
 			</div>
 		);
