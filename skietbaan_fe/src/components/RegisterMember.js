@@ -27,6 +27,7 @@ class App extends Component {
     this.GetDate = this.GetDate.bind(this);
     this.ChangeColor = this.ChangeColor.bind(this);
     this.HideCreateButton = this.HideCreateButton.bind(this);
+    this.BackToCreate = this.BackToCreate.bind(this);
   }
 
 
@@ -138,6 +139,10 @@ class App extends Component {
     }
   }
 
+  BackToCreate(){
+    window.location = "/create";
+  }
+
   render() {
     const postItems = (
       <table striped hover condensed
@@ -159,8 +164,8 @@ class App extends Component {
         <div className="centre-register-member">
           <div className="page-name-create-members">
             <div className="image-comtainer">
-              <img src={require('../components/assets/back-button-white.png')} onClick={this.BackToCreate}
-                className="go-back-to-create-page" alt=''></img>
+            <img src={require('../components/assets/back-button-white.png')} onClick={this.BackToCreate}
+              className="go-back-to-create-page" alt=''></img>
             </div>
             <div>
               <label className="create-members">Create Member</label>
