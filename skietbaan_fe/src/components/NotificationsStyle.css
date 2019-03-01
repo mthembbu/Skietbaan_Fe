@@ -1,18 +1,130 @@
 @media all and (min-width: 480px) {
-    .Notifications {
-      padding: 60px 0;
-    }
-  
-    .Notifications form {
-      margin: 0 auto;
-      max-width: 320px;
-    }
+  .Notifications {
+    padding: 60px 0;
   }
 
-  .centre {
-    text-align: center; 
+  .Notifications form {
+    margin: 0 auto;
+    max-width: 320px;
   }
+}
 
-  .buttonCss{
-    width: 250px;
-  }
+.bodyClass {
+  background-color: #504f51;
+  color: white;
+  border-style: none;
+  border: none;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 640px;
+  padding-top: 5px;
+}
+
+.centre {
+  text-align: center;
+}
+
+.images {
+  padding-bottom: 6px;
+  padding-right: 35px;
+}
+
+.pageHeading {
+  text-align: center;
+  align-content: center;
+  background-color: #0c0c0c;
+  color: #fdfdfd;
+  height: 49px;
+  padding-top: 8px;
+  padding-right: 90px;
+  font-size: 25px;
+  font-family: helvetica;
+  padding-left: 100px;
+}
+
+.buttonCss {
+  width: 200px;
+  background-color: #504f51;
+  border-radius: 25px;
+  border-color: #e11e2b;
+  border-style: thin;
+  color: #fdfdfd;
+  position: relative;
+  top: 15px;
+  padding-left: 13px;
+}
+
+.tdDelete {
+  padding-left: 50px;
+  color: white;
+  padding-top: 30px;
+  font-size: 13px;
+  border-bottom-style: none;
+  font-family: helvetica;
+}
+
+.tdNotification {
+  color: white;
+  padding-left: 20px;
+  padding-top: 30px;
+  font-size: 13px;
+  font-family: helvetica;
+  text-align: left;
+}
+
+.trClass {
+  border-bottom: solid 2px #bbbcbb;
+  height: 35px;
+  border-bottom-width: thin;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.tbody {
+  border-bottom: none;
+  font-family: helvetica;
+  background-color: #504f51;
+  color: white;
+  border-style: none;
+  border: none;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 640px;
+}
+
+.postItems {
+  text-align: center;
+  background-color: #504f51;
+  color: white;
+  border-style: none;
+  border: none;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 640px;
+  padding-left: 5px;
+}
+
+.navbar-custom.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top {
+  padding-left: inherit;
+}
+
+.text {
+  color: white;
+  font-family: helvetica;
+  text-decoration-line: none
+}
+
+#Notifications a:hover {
+  color: red;
+}
+a:active {
+  color: red;
+  text-decoration: none;
+}
+
