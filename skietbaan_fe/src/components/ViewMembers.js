@@ -80,21 +80,22 @@ class ViewMembers extends Component {
         this.GetTimeLeft();
     }
 
-    BackToCreate(){
+    BackToCreate() {
         window.location = "/create";
     }
 
-    Status(timeLeft){
-        if(timeLeft < 2 || timeLeft === 2){
+    Status(timeLeft) {
+        if (timeLeft < 2 || timeLeft === 2) {
             return true;
         }
-        else{
+        else {
             return false;
         }
     }
 
     render() {
         this.GetAllMembers();
+        this.GetTimeLeft();
         const postItems = (
             <table striped hover condensed className="table-member">
                 <tbody >
@@ -106,15 +107,24 @@ class ViewMembers extends Component {
                     }).map((post, index) => (
                         <tr className="view-members-user" key={post.id}>
                             <td className="first-column">
-                                <Collapsible trigger={<div className="username-and-email"><b>{post.username}</b><p>{post.email}</p></div>}>
-                                    <p>Membership No: <b>{post.memberID}</b></p>
-                                    <p>Start of Membership: <b>{post.memberStartDate.substring(0, 10)}</b></p>
+                                <Collapsible trigger={<div className="username-and-email">
+                                    <b>{post.username}</b>
+                                    <div>{post.email}</div>
+                                </div>}>
+                                    <div className="membership-details">Membership No: <b>{post.memberID}</b>
+                                        <div>Start of Membership: <b>{post.memberStartDate.substring(0, 10)}</b>
+                                        </div>
+                                    </div>
                                 </Collapsible>
                             </td>
                             <td className="second-column">
-                                {this.state.timeLeftOnMembership[index]} Months<br />
-                                <label className={(this.Status(this.state.timeLeftOnMembership[index])) ? "bad":"okay"}>
-                                {post.memberExpiryDate.substring(0, 10)}</label>
+                                <div className="expiry-time-column">
+                                    <div className={(this.Status(this.state.timeLeftOnMembership[index])) ? "bad" : "okay"}>
+                                        {post.memberExpiryDate.substring(0, 10)}
+                                    </div>
+                                    <div>{this.state.timeLeftOnMembership[index]} Months
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     ))}
@@ -125,14 +135,14 @@ class ViewMembers extends Component {
             <div className="centre-view-member">
                 <div className="page-name-view">
                     <div className="image-comtainer">
-                     <img src={require('../components/assets/back-button-white.png')} onClick={this.BackToCreate}
-                        className="go-back-to-create-page" alt=''></img>
-                        </div>
-                    <div className ="view-members-container">   
-                    <label className="view-members">
-                        View Members
+                        <img src={require('../components/assets/back-button-white.png')} onClick={this.BackToCreate}
+                            className="go-back-to-create-page" alt=''></img>
+                    </div>
+                    <div className="view-members-container">
+                        <label className="view-members">
+                            View Members
                     </label>
-                    </div> 
+                    </div>
                 </div>
                 <div className="username-search">
                     <div className="search">

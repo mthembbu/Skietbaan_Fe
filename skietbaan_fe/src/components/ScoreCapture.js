@@ -137,7 +137,7 @@ export default class search extends Component {
   }
 
   ToggleNavbar() {
-    var Navbar = document.querySelector(".navbar-custom");
+    var Navbar = document.querySelector(".navbar-admin");
     if (Navbar.classList.contains("hidden")) {
       Navbar.classList.remove("hidden");
     }

@@ -3,14 +3,40 @@
   height: 39px;
   border-radius: 5px;
   border: none;
+  padding: 20px;
 }
 
 .comp-submit-btn{
+  background: #bbbcbd;
   width: 218px;
   height: 42px;
+  border-color: #e11e2b;
+  border-radius: 25px;
+  font-size: 16px;
+  font: helvetica;
+  font-weight: lighter;
+  margin-top: 20px;
+  color: white;
 }
-.create-comp-containers{
+
+.comp-submit-btn-constainer{
+      padding: 20px;
+  margin: 20px;
+}
+
+.comp-label-container{
+  color: #fbfbfb;
+  font-size: 16px;
+  margin-bottom: 20px;
+  padding: 10px;
+  margin: 10px;
+  font-weight: lighter; 
+}
+.create-comp-container{
+  margin: 20px;
+  padding: 20px;
   text-align: center;
+
 }
 
 @media all and (min-width: 480px) {
@@ -29,6 +55,7 @@
   float:left;
 
 }
+
 .centre-comp{
   width:94%;
   margin:0 auto;
@@ -40,13 +67,8 @@
   background-color: white;
   box-shadow: 2px 2px rgba(0,0,0,0.24);
 }
-@media screen and (min-width:768px)  {
-.centre-login{
-  width: 50%;
-  left:25%;
-  top:25%
-}
-}
+
+
 input.invalid{
   border:1px solid red;
 }
