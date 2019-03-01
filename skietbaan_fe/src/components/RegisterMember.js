@@ -27,6 +27,7 @@ class App extends Component {
     this.GetDate = this.GetDate.bind(this);
     this.ChangeColor = this.ChangeColor.bind(this);
     this.HideCreateButton = this.HideCreateButton.bind(this);
+    this.BackToCreate = this.BackToCreate.bind(this);
   }
 
 
@@ -138,6 +139,10 @@ class App extends Component {
     }
   }
 
+  BackToCreate() {
+    window.location = "/create";
+  }
+
   render() {
     const postItems = (
       <table striped hover condensed
@@ -170,44 +175,44 @@ class App extends Component {
             <label className="label-enter-user-name">Enter User Name</label>
           </div>
           <div className="input-container">
-          <div className="search-name">
-            <input
-              autoComplete="off"
-              type="text"
-              className="username"
-              id="usernameValue"
-              value={this.state.usernamesValue}
-              onChange={this.SearchAllMember} />
-          </div>
-          <div className="table-search-users">
-            {this.SearchAllMember}
-            {postItems}
-          </div>
-          <div className="rest-body">
-            <div className="container-labels">
-              <div className="membership-number">
-                <div className="input-spacing">
-                  <label className="membership-id-number">Membership No.</label>
-                  <div className="input-member-number">
+            <div className="search-name">
+              <input
+                autoComplete="off"
+                type="text"
+                className="username"
+                id="usernameValue"
+                value={this.state.usernamesValue}
+                onChange={this.SearchAllMember} />
+            </div>
+            <div className="table-search-users">
+              {this.SearchAllMember}
+              {postItems}
+            </div>
+            <div className="rest-body">
+              <div className="container-labels">
+                <div className="membership-number">
+                  <div className="input-spacing">
+                    <label className="membership-id-number">Membership No.</label>
+                    <div className="input-member-number">
 
-                    <input
-                      type="text"
-                      className="membershipID"
-                      id="membershipID"
-                      value={this.state.membershipID}
-                      onChange={this.handleChange}
-                    />
+                      <input
+                        type="text"
+                        className="membershipID"
+                        id="membershipID"
+                        value={this.state.membershipID}
+                        onChange={this.handleChange}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="expiry-date-member">
+                  <div className="input-spacing">
+                    <label className="membership-expiry-date">Membership Expiry Date</label><br />
+                    <input type="text" className="expdate" id="expdate"
+                      value={this.GetDate()} onChange={this.handleChange} />
                   </div>
                 </div>
               </div>
-              <div className="expiry-date-member">
-                <div className="input-spacing">
-                  <label className="membership-expiry-date">Membership Expiry Date</label><br />
-                  <input type="text" className="expdate" id="expdate"
-                    value={this.GetDate()} onChange={this.handleChange} />
-                </div>
-              </div>
-            </div>
             </div>
             <div className="create-member">
               <button className={this.state.hideButton ? "hide-create-button" : "create-button"} onClick={this.UpdateMember} >CreateMember</button>
