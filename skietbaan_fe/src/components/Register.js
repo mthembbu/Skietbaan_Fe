@@ -184,15 +184,17 @@ class Register extends Component {
               <label className="front-white input-label" for="examplePassword">
                 Password <div className={this.state.invalidPassword ? "invalid-icon":"hidden"}></div></label>
                 <div className="input-container">
+                <div className="input-label centre-div">
                 <input
                   type="password"
                   name="passwordValue"
                   id="passwordValue"
                   value={this.state.passwordValue}
                   onChange={this.handleChange}
-                  onClick={this.togglePassword}
                   className= "input-Password"
                 />
+                <div onClick={this.togglePassword} className="password-view-icon"></div>
+                </div>
                 </div>
               </FormGroup>
             </Col>
