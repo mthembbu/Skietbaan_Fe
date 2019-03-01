@@ -139,18 +139,20 @@ class ViewGroups extends Component {
         >
           {postitems}
         </div>
-        {this.state.ShowMe?null:
-        <div className="bottompanel">
-          <div className="ctext">
-            <label className="confirmText">Delete Group C</label>
+        <div className="bpanel">
+          <div className="thetextname">
+            <div className="thes">Delete Group{this.state.name}</div>
+        
           </div>
-          <div className="cbutns">
-            <button className="confirm"  onClick={() => this.delete()}>Confirm</button>
+          <div className="cntra">
+          <button className="hdre">
+          Confirm
+          </button>
           </div>
-          <div className="ubutns">
-            <button className="undo">undo</button>
+          <div className="botname">
+          <button className="updatess">Undo</button>
           </div>
-        </div>}
+        </div>
       </main>
     );
   }
