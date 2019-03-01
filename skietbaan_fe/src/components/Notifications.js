@@ -1,67 +1,113 @@
-import React, { Component } from 'react';
-import '../components/NotificationsStyle.css';
-import { Table, Button } from 'reactstrap'
+import React, { Component } from "react";
+import "../components/NotificationsStyle.css";
+import { getCookie } from "./cookie";
+import history from "./history";
+import { URL } from "../actions/types.js";
 
-class notifications extends Component {
-
-    constructor(props) {
-      super(props);
-      this.state = {
-        array:[]
-      }
-      this.notfications = this.notfications.bind(this);
-    }
-  
- 
-  notfications(){
-      fetch("http://localhost:63474/api/Notification", {
-      method: 'Get',
-      headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-      })
-      .then(function(response) {
-         return response.json();})
-      .then(function(data) { 
-        return data;
-      }).then(data => this.setState({array:data}))
-      .catch(function() {});
+class notification extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      array: [],
+      notificationMsg: "",
+      typeOfNotification: "",
+      tokenValue: "",
+      isRead: false,
+      showDelete: false,
+      deleteClicked: false,
+      viewClicked: false
+    };
+    this.onDelete = this.onDelete.bind(this);
   }
 
+  onDelete = key => {
+    let id = this.state.array[key].id;
+    let newArray = this.state.array;
+    newArray.splice(key, 1);
+    this.setState({ array: newArray });
 
-    render() {
-      const postItems = (
-        <Table striped hover condensed>
-        <thead>
-        <tr>
-        <td>
-        
-                                <b>#</b>
-                            </td>
-                            <td>
-                                <b>Notification Heading</b>
-                            </td>
-                            <td>
-                                <b>Notification Content</b>
-                            </td>
-                        </tr>
-                    </thead>
-        
-                    <tbody>
-                        {this.state.array.map((post) => (
-                            <tr key={post.id}>
-                                <td>{post.id}</td>
-                                <td>{post.notificationsHeading}</td>
-                                <td>{post.notificationContent}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </Table>
-            );
+    fetch(URL + `/api/Notification/${id}`, {
+      method: "Delete"
+    }).catch(err => {
+      console.error("err", err);
+    });
+  };
+
+  initialState() {
+    return this.setState({
+      showDelete: false
+    });
+  }
+
+  onClick_View = Notification => {
+    if (Notification === "Award") {
+    } else if (Notification === "Confirmation") {
+    } else if (Notification === "Renewal") {
+    } else if (Notification === "Competition") {
+      history.push("/home");
+    } else if (Notification === "Document") {
+    } else if (Notification === "Group") {
+    } else {
+      history.push("/notify");
+    }
+  };
+
+  componentDidMount() {
+    if (getCookie("token")) {
+      var token = document.cookie;
+      fetch( URL + "/api/Notification?" + token)
+        .then(response => response.json())
+        .then(data => {
+          this.setState({
+            array: data
+          });
+        });
+    }
+  }
+
+  render() {
+    const headingItems = (
+      <div className="pageHeading">
+        <b>Notifications</b>
+      </div>
+    );
+
+    const postItems = (
+      <table className="postItems">
+        <tbody className="">
+          {this.state.array.map((post, i) => (
+            <tr className="trClass" key={i}>
+              <td className="tdNotification">
+                <a
+                  className="text"
+                  href=""
+                  onClick={() => this.onClick_View(post.typeOfNotification)}
+                >
+                  {post.notificationMessage}
+                </a>
+              </td>
+              <td className="tdDelete">
+                <img
+                  onClick={() => {
+                    this.onDelete(i);
+                  }}
+                  className="images"
+                  src={require("./Notification-Img/delete.png")}
+                  alt="redirect"
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+
     return (
-    <div > 
-      <div>{postItems}</div>
-      <Button className="buttonCss" onClick={this.notfications}>Load previous notifications</Button>
-    </div> 
-    )
+      <div className="bodyClass">
+        <div>{headingItems}</div>
+        <div>{postItems}</div>
+      </div>
+    );
   }
 }
-export default notifications;
+export default notification;

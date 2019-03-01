@@ -101,7 +101,7 @@ class LeaderboardPage extends Component {
             return this.state.individual;
         }else{
             if(this.props.competitions.length > 0){
-                return this.props.competitions[this.state.selectedCompetition].label;
+                return this.props.groups[this.state.selectedGroup].label;
             }else{
                 return null;
             }
