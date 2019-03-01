@@ -6,6 +6,7 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import NavbarMenu from './components/NavbarMenu';
+import NavbarMenuUser from './components/NavbarMenuUser';
 import RegisterMember from './components/RegisterMember';
 import LeaderboardPage from './components/LeaderboardPage';
  import AddGroup from './components/AddGroup';
@@ -19,6 +20,7 @@ import ViewMembers from './components/ViewMembers'
 import Documents from './components/Documents';
 import ScoreCapture from './components/ScoreCapture';
 import CreatePage from './components/CreatePage';
+import ViewComp from './components/ViewComp';
 import AddMembersGroup from './components/AddMembersGroup';
 import EditGroup from './components/EditGroup';
 import history from './components/history';
@@ -41,7 +43,9 @@ class App extends Component {
 							<Route path="/groupsname" component={GroupsName} exact />
 							<Route path="/groups" component={Groups} exact />
 							<Route path="/create" component={CreatePage} exact />
+							<Route path="/view-comp" component={ViewComp } exact />
 							<Route path="/ViewGroups" component={ViewGroups} exact />
+							<Route path="/create-comp" component={ CreateComp} exact />
 							<Route path="/GroupDone" component={GroupDone} exact />
 							<Route path="/notifications" component={notifications} exact />
 							<Route path="/viewmembers" component={ViewMembers} exact />
