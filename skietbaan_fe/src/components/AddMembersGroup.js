@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
+import { BASE_URL } from "../actions/types";
 import history from "./history";
 class AddMembersGroup extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class AddMembersGroup extends Component {
     this.onChange = this.onChange.bind(this);
   }
   componentWillMount() {
-    fetch("https://api.skietbaan.retrotest.co.za/api/Groups/list?id=" + this.props.id)
+    fetch(BASE_URL + "/api/Groups/list?id=" + this.props.id)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -48,7 +49,7 @@ class AddMembersGroup extends Component {
       users: this.state.newArray,
       GroupIds: this.props.id
     };
-    fetch("https://api.skietbaan.retrotest.co.za/api/groups/postMember/", {
+    fetch(BASE_URL + "/api/groups/postMember/", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -60,20 +61,14 @@ class AddMembersGroup extends Component {
       .then(function(data) {})
       .catch(function(data) {});
   }
-  toggleHighlight =(name,event)  => {
-
+  toggleHighlight = (name, event) => {
     if (this.state.posts[event].highlighted === true) {
       this.state.posts[event].highlighted = false;
-      
-        this.setState({ count: this.state.count - 1 });
-      
+      this.setState({ count: this.state.count - 1 });
     } else {
-    
-      this.setState({selected:name})
+      this.setState({ selected: name });
       this.state.posts[event].highlighted = true;
-      
-        this.setState({ count: this.state.count + 1 });
-      
+      this.setState({ count: this.state.count + 1 });
     }
   };
   onBack() {
@@ -100,7 +95,7 @@ class AddMembersGroup extends Component {
                 <input
                   type="checkbox"
                   className="boxs"
-                  onClick={() => this.toggleHighlight(post.username,index)}
+                  onClick={() => this.toggleHighlight(post.username, index)}
                 />
                 <label className="blabe">
                   <div className="userName"> {post.username}</div>
@@ -141,14 +136,14 @@ class AddMembersGroup extends Component {
         >
           {postitems}
         </div>
-       
+
         <div className="bpanel">
           <div className="thetextname">
             <div className="thes">Adding</div>
             <div className="usersname">{this.state.selected}</div>
           </div>
           <div className="botname">
-          <button className="updates">Update Group</button>
+            <button className="updates">Update Group</button>
           </div>
         </div>
       </main>
@@ -159,5 +154,4 @@ const mapStateToProps = state => ({
   id: state.posts.groupId,
   name: state.posts.groupName
 });
-
 export default connect(mapStateToProps)(AddMembersGroup);

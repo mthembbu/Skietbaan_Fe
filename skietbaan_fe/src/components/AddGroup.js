@@ -22,9 +22,7 @@ class AddGroup extends Component {
     let RequestObject = {
       Name: this.state.name
     };
-
     this.props.groupActions.getname(RequestObject);
-
     history.push("/Groups");
   }
   render() {

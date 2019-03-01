@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
 import history from "./history";
+import { BASE_URL } from "../actions/types";
 class EditGroup extends Component {
   constructor(props) {
     super(props);
@@ -16,8 +17,8 @@ class EditGroup extends Component {
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
   }
-  componentWillMount() {
-    fetch("https://api.skietbaan.retrotest.co.za/api/Groups/edit?id=" + this.props.id)
+ UNSAFE_componentWillMount() {
+    fetch(BASE_URL+"/api/Groups/edit?id=" + this.props.id)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -53,7 +54,7 @@ class EditGroup extends Component {
       GroupIds:this.props.id,
       users: this.state.newArray
     };
-    fetch("https://api.skietbaan.retrotest.co.za/api/groups/deleteMember/", {
+    fetch(BASE_URL+"/api/groups/deleteMember/", {
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -62,7 +63,6 @@ class EditGroup extends Component {
       body: JSON.stringify(request)
     })
       .then(function(response) {})
-      .then(function(data) {})
       .catch(function(data) {});
   }
   toggleHighlight = event => {

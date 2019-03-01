@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import "./groups.css";
 import history from "./history";
 import { createGroups } from "../actions/postActions";
-
+import { BASE_URL } from "../actions/types";
 class Groups extends Component {
   constructor(props) {
     super(props);
@@ -20,8 +20,8 @@ class Groups extends Component {
     this.onChange = this.onChange.bind(this);
     this.selectall = this.selectall.bind(this);
   }
-  componentWillMount() {
-    fetch("https://api.skietbaan.retrotest.co.za/api/user")
+ UNSAFE_componentWillMount() {
+    fetch(BASE_URL+"/api/user")
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -52,7 +52,7 @@ class Groups extends Component {
     let request = {
       newArray: this.state.newArray
     };
-    fetch("https://api.skietbaan.retrotest.co.za/api/groups/add", {
+    fetch(BASE_URL+"/api/groups/add", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -61,7 +61,6 @@ class Groups extends Component {
       body: JSON.stringify(newArray)
     })
       .then(function(response) {})
-      .then(function(data) {})
       .catch(function(data) {});
   }
 
@@ -96,7 +95,7 @@ class Groups extends Component {
   render() {
     const postitems = (
       <div className="check">
-        <ul class="list-group">
+        <ul className="list-group">
           {this.state.posts
             .filter(post => {
               return (
@@ -110,7 +109,7 @@ class Groups extends Component {
               );
             })
             .map((post, index) => (
-              <li class="list-group-item list-group-item-light" key={post.id}>
+              <li className="list-group-item list-group-item-light" key={post.id}>
                 <input
                   type="checkbox"
                   className="boxs"
@@ -129,10 +128,10 @@ class Groups extends Component {
     return (
       <main className="TheMain">
         <div className="TheNavBar">
-          <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
+          <a href="#" className="fa fa-angle-left" onClick={this.onBack} />
 
           <h2 className="center_label">
-            <b>{this.props.name}</b>
+            {this.props.name}
           </h2>
         </div>
         <div className="BNavBar">

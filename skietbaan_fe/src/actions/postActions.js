@@ -30,7 +30,7 @@ export const fetchPosts = () => dispatch => {
     });
 };
 export const createGroups = usersadded => dispatch => {
-  fetch("https://api.skietbaan.retrotest.co.za/api/groups/add", {
+  fetch(BASE_URL+"/api/groups/add", {
     method: "POST",
     headers: {
       "content-type": "application/json"
@@ -50,7 +50,7 @@ export const createGroups = usersadded => dispatch => {
   /** the method to post new data from the PostForm */
 }
 export const createPost = users => dispatch => {
-  fetch(URLADD, {
+  fetch(BASE_URL+"/api/groups/add", {
     method: "Post",
     headers: {
       Accept: "application/json",
@@ -75,7 +75,7 @@ export const getname = name => {
 };
 
 export const getGroup = () => dispatch => {
-  fetch(URLUSER)
+  fetch(BASE_URL+"/api/user")
     .then(res => res.json())
     .then(posts =>
       dispatch({

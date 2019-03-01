@@ -4,7 +4,7 @@ import "./groups.css";
 import history from "./history";
 import { passId } from "../actions/postActions";
 import { getname } from "../actions/postActions";
-
+import { BASE_URL } from "../actions/types";
 class ViewGroups extends Component {
   constructor(props) {
     super(props);
@@ -21,8 +21,8 @@ class ViewGroups extends Component {
     this.delete = this.delete.bind(this);
     this.editGroup = this.editGroup.bind(this);
   }
-  componentWillMount() {
-    fetch("https://api.skietbaan.retrotest.co.za/api/Groups")
+  UNSAFE_componentWillMount() {
+    fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
       .then(data => this.setState({ posts: data }));
   }
@@ -50,15 +50,14 @@ class ViewGroups extends Component {
 
     newarry.splice(this.state.index, 1);
     this.setState({ posts: newarry });
-    fetch("https://api.skietbaan.retrotest.co.za/api/groups/" + this.state.ids,{
-        method: "delete",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(this.state.ids)
-      }
-    )
+    fetch(BASE_URL + "/api/groups/" + this.state.ids, {
+      method: "delete",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state.ids)
+    })
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
@@ -95,7 +94,7 @@ class ViewGroups extends Component {
             })
             .map((post, index) => (
               <li
-                style={{ width: "100%", background: "#bbbcbd" }}
+                style={{ width: "100%", background: "#504F51" }}
                 class="list-group-item list-group-item-light"
                 key={post.id}
               >
