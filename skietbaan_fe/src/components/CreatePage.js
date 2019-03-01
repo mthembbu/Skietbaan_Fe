@@ -1,154 +1,56 @@
 import React, { Component } from 'react';
-import '../scss/createcomp.css';
-import Collapsible from 'react-collapsible';
-import { Button, Nav, Tab, Container, Row, Col } from 'react-bootstrap';
-import CreateComp from './CreateComp';
+import '../scss/create-page.css';
 class CreatePage extends Component {
-	constructor(props, context) {
-		super(props, context);
-
-		this.state = {
-			open: false
-		};
-		this.toggleOpenClose = this.toggleOpenClose.bind(this);
-	}
-	// a function to Toggle the mini-menus
-	toggleOpenClose() {
-		this.setState({ open: !this.state.open });
-	}
-	// a function to Toggle the mini-menus
-	toggleCloseOpen() {
-		this.setState({ close: !this.state.close });
-	}
 	render() {
 		return (
 			<div>
-				<Container id="create-container">
-
-					<Collapsible
-						id="Competitions"
-						trigger={
-							<a href="">
-								<Button variant="outline-secondary" size="md" width="125px">
-									<strong>Competitions</strong>
-								</Button>
+				<div class="container ">
+					<div class="row create-menu">
+						<div class="col-12">
+							<p align="centre">
+								<h4 className="create-menu-header">Create</h4>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="container centre create-page-centre m-4 p-4">
+					<div class="row mb-1 pb-1">
+						<div class="col col-sm-6 col-xm-6">
+							<a href="/create-comp" class="btn btn-create" role="button">
+								<p class="btn-create-text">Competitions</p>
 							</a>
-						}
-					>
-						<Container id="competition-container" />
-						<Tab.Container>
-							<Nav className="justify-content-center" fill variant="tabs" defaultActiveKey="">
-								<Nav.Item>
-									<Nav.Link eventKey="first">COMPETITION</Nav.Link>
-								</Nav.Item>
-								<Nav.Item>
-									<Nav.Link eventKey="second">VIEW COMPETITION</Nav.Link>
-								</Nav.Item>
-							</Nav>
-							<Container>
-								<Row>
-									<Col>
-										<Tab.Content>
-											<Tab.Pane eventKey="first">
-												<p>
-													<CreateComp />
-												</p>
-											</Tab.Pane>
-										</Tab.Content>
-									</Col>
-									<Col>
-										<Tab.Content>
-											<Tab.Pane eventKey="second">
-												<p>
-													2 of 2
-													<h1>The VIEW COMPETITION PAGE</h1>
-												</p>
-											</Tab.Pane>
-										</Tab.Content>
-									</Col>
-								</Row>
-							</Container>
-						</Tab.Container>
-					</Collapsible>
-					<br />
-					{/** The collapse for creating and view the Member  */}
-					<Collapsible
-						id="Members"
-						trigger={
-							<a href="">
-								<Button variant="outline-secondary" size="lg" width="125px">
-									<strong>Member</strong>
-								</Button>
+						</div>
+						<div class="col col-sm-6 col-xm-6">
+							<a href="/view-comp" class="btn btn-outline-secondary btn-view" role="button">
+								<p class="create-view-text">View </p>
 							</a>
-						}
-					>
-						<Tab.Container>
-							<Nav className="justify-content-center" fill variant="tabs" defaultActiveKey="">
-								<Nav.Item>
-									<Nav.Link eventKey="first">CREATE MEMBER</Nav.Link>
-								</Nav.Item>
-								<Nav.Item>
-									<Nav.Link eventKey="second">VIEW MEMBERS</Nav.Link>
-								</Nav.Item>
-							</Nav>
-
-							<Tab.Content>
-								<Tab.Pane eventKey="first">
-									<p>
-										<h1>the CREATE MEMBER page</h1>
-									</p>
-								</Tab.Pane>
-							</Tab.Content>
-							<Tab.Content>
-								<Tab.Pane eventKey="second">
-									<p>
-										<h1>the VIEW MEMBER</h1>
-									</p>
-								</Tab.Pane>
-							</Tab.Content>
-						</Tab.Container>
-						<br />
-					</Collapsible>
-					<br />
-					{/** The collapse for creating and view the group  */}
-					<Collapsible
-						id="Groups"
-						trigger={
-							<a href="">
-								<Button variant="outline-secondary" size="lg" width="125px">
-									<strong>Groups</strong>
-								</Button>
+						</div>
+					</div>
+					<div class="row mb-1 pb-1">
+						<div class="col col-sm-6 col-xm-6">
+							<a href="/registermember" class="btn btn-create-m" role="button">
+								<p class="btn-create-text">Members</p>
 							</a>
-						}
-					>
-						<Tab.Container>
-							<Nav className="justify-content-center" fill variant="tabs" defaultActiveKey="/home">
-								<Nav.Item>
-									<Nav.Link eventKey="first"> CREATE GROUP </Nav.Link>
-								</Nav.Item>
-								<Nav.Item>
-									<Nav.Link eventKey="second">VIEW GROUPS</Nav.Link>
-								</Nav.Item>
-							</Nav>
-							<Tab.Content>
-								<Tab.Pane eventKey="first">
-									<p>
-										<h1>This is the CREATE GROUP page</h1>
-									</p>
-								</Tab.Pane>
-							</Tab.Content>
-							<Tab.Content>
-								<Tab.Pane eventKey="second">
-									<p>
-										<h1>This is the VIEW GROUPS page</h1>
-
-									</p>
-								</Tab.Pane>
-							</Tab.Content>
-						</Tab.Container>
-					</Collapsible>
-					<br />
-				</Container>
+						</div>
+						<div class="col col-sm-6 col-xm-6">
+							<a href="/viewmembers" class="btn btn-outline-secondary btn-view" role="button">
+								<p class="create-view-text">View </p>
+							</a>
+						</div>
+					</div>
+					<div class="row mb-1 pb-1">
+						<div class="col col-sm-6 col-xm-6">
+							<a href="/create-comp" class="btn btn-create-gr" role="button">
+								<p class="btn-create-text">Groups</p>
+							</a>
+						</div>
+						<div class="col col-sm-6 col-xm-6">
+							<a class="btn btn-outline-secondary btn-view" href="#" role="button">
+								<p class="create-view-text">View </p>
+							</a>
+						</div>
+					</div>
+				</div>
 			</div>
 		);
 	}

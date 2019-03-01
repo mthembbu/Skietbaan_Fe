@@ -6,6 +6,7 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import NavbarMenu from './components/NavbarMenu';
+import NavbarMenuUser from './components/NavbarMenuUser';
 import RegisterMember from './components/RegisterMember';
 import LeaderboardPage from './components/LeaderboardPage';
  import AddGroup from './components/AddGroup';
@@ -22,6 +23,7 @@ import CreatePage from './components/CreatePage';
 import AddMembersGroup from './components/AddMembersGroup';
 import EditGroup from './components/EditGroup';
 import history from './components/history';
+import ViewComp from './components/ViewComp';
 class App extends Component {
 	render() {
 		return (
@@ -42,6 +44,8 @@ class App extends Component {
 							<Route path="/groups" component={Groups} exact />
 							<Route path="/create" component={CreatePage} exact />
 							<Route path="/ViewGroups" component={ViewGroups} exact />
+							<Route path="/view-comp" component={ViewComp } exact />
+							<Route path="/create-comp" component={ CreateComp} exact />
 							<Route path="/GroupDone" component={GroupDone} exact />
 							<Route path="/notifications" component={notifications} exact />
 							<Route path="/viewmembers" component={ViewMembers} exact />
