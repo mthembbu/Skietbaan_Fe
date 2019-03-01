@@ -14,13 +14,7 @@ class LeaderboardPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            names: ["name 1",
-                "name 2",
-                "name 3",
-                "name 4",
-                "name 5",
-                "name 6",
-                "name 7",],
+            individual:"Individual Ranking",
             selectedGroup: "1",
             selectedCompetition: "1",
             selectedScoreType: "1",
@@ -35,6 +29,7 @@ class LeaderboardPage extends Component {
         this.getCurentUserRankNumber = this.getCurentUserRankNumber.bind(this);
         this.top3Display = this.top3Display.bind(this);
         this.closeMain = this.closeMain.bind(this);
+        this.displaySelectedGroup = this.displaySelectedGroup.bind(this);
     }
     //executed when leaderboard in mounted on main app
     componentWillMount() {
@@ -101,71 +96,87 @@ class LeaderboardPage extends Component {
             return true;
         }
     }
+    displaySelectedGroup(value){
+        if(value == -1){
+            return this.state.individual;
+        }else{
+            if(this.props.competitions.length > 0){
+                return this.props.competitions[this.state.selectedCompetition].label;
+            }else{
+                return null;
+            }
+        }
+    }
     top3Display(object) {
-        if (object.rank == 1) {
-            return <div className="rankNumberContainer">
-                <table className="rankNumTable">
-                    <tr className="upArrow">
-
-                    </tr>
-                    <tr className="Icon">
-                        <td className="firstCol">
-                            <img src={require('../resources/rank1.png')} />
-                        </td>
-                    </tr>
-                    <tr className="downArrow">
-
-                    </tr>
-                </table>
-            </div>;
-        } else if (object.rank == 2) {
-            return <div className="rankNumberContainer">
-                <table className="rankNumTable">
-                    <tr className="upArrow">
-
-                    </tr>
-                    <tr className="Icon">
-                        <td className="firstCol">
-                            <img src={require('../resources/rank2.png')} />
-                        </td>
-                    </tr>
-                    <tr className="downArrow">
-
-                    </tr>
-                </table>
-            </div>;
-        } else if (object.rank == 3) {
-            return <div className="rankNumberContainer">
-                <table className="rankNumTable">
-                    <tr className="upArrow">
-
-                    </tr>
-                    <tr className="Icon">
-                        <td className="firstCol">
-                            <img src={require('../resources/rank3.png')} />
-                        </td>
-                    </tr>
-                    <tr className="downArrow">
-
-                    </tr>
-                </table>
-            </div>;
-        } else {
-            return <div className="rankNumberContainer">
-                <table className="rankNumTable">
-                    <tr className="upArrow">
-
-                    </tr>
-                    <tr className="Icon">
-                        <td className="firstCol">
-                            {object.rank}
-                        </td>
-                    </tr>
-                    <tr className="downArrow">
-
-                    </tr>
-                </table>
-            </div>;
+        console.log("object",object);
+        if(object !=null){
+            if (object.rank == 1) {
+                return <div className="rankNumberContainer">
+                    <table className="rankNumTable">
+                        <tr className="upArrow">
+    
+                        </tr>
+                        <tr className="Icon">
+                            <td className="firstCol">
+                                <img src={require('../resources/rank1.png')} />
+                            </td>
+                        </tr>
+                        <tr className="downArrow">
+    
+                        </tr>
+                    </table>
+                </div>;
+            } else if (object.rank == 2) {
+                return <div className="rankNumberContainer">
+                    <table className="rankNumTable">
+                        <tr className="upArrow">
+    
+                        </tr>
+                        <tr className="Icon">
+                            <td className="firstCol">
+                                <img src={require('../resources/rank2.png')} />
+                            </td>
+                        </tr>
+                        <tr className="downArrow">
+    
+                        </tr>
+                    </table>
+                </div>;
+            } else if (object.rank == 3) {
+                return <div className="rankNumberContainer">
+                    <table className="rankNumTable">
+                        <tr className="upArrow">
+    
+                        </tr>
+                        <tr className="Icon">
+                            <td className="firstCol">
+                                <img src={require('../resources/rank3.png')} />
+                            </td>
+                        </tr>
+                        <tr className="downArrow">
+    
+                        </tr>
+                    </table>
+                </div>;
+            } else {
+                return <div className="rankNumberContainer">
+                    <table className="rankNumTable">
+                        <tr className="upArrow">
+    
+                        </tr>
+                        <tr className="Icon">
+                            <td className="firstCol">
+                                {object.rank}
+                            </td>
+                        </tr>
+                        <tr className="downArrow">
+    
+                        </tr>
+                    </table>
+                </div>;
+            }
+        }else{
+            return null;
         }
     }
     render() {
@@ -278,7 +289,8 @@ class LeaderboardPage extends Component {
                                             <div className="GroupsList">
                                                 {groupsList}
                                             </div>
-                                            <div className="Single">
+                                            <div className="Single" key={-1} onClick={() => this.setGroupValue(-1)}
+                                                value={-1}>
                                                 Individual rank
                                           </div>
                                         </div>
@@ -307,7 +319,7 @@ class LeaderboardPage extends Component {
                                             <table className="HeadTableLabels">
                                                 <tr>
                                                     <td className="GroupNameCol" colSpan="3">
-                                                        {this.props.groups.length > 0 ? this.props.groups[this.state.selectedGroup].label : null}
+                                                        {this.displaySelectedGroup(this.state.selectedGroup)}
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -345,13 +357,13 @@ class LeaderboardPage extends Component {
                                             <table className="HeadTableLabels">
                                                 <tr>
                                                     <td className="UsernameCol" colSpan="3">
-                                                        {this.props.userResults.username}
+                                                        {this.props.userResults != null ? this.props.userResults.username : null}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td className="ScoreColLeft">{this.props.userResults.total}</td>
-                                                    <td className="ScoreColCenter">{this.props.userResults.average}</td>
-                                                    <td className="ScoreColCenter">{this.props.userResults.best}</td>
+                                                    <td className="ScoreColLeft">{this.props.userResults != null ? this.props.userResults.total : null}</td>
+                                                    <td className="ScoreColCenter">{this.props.userResults != null ? this.props.userResults.average : null}</td>
+                                                    <td className="ScoreColCenter">{this.props.userResults != null ? this.props.userResults.best : null}</td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -376,3 +388,4 @@ const mapStateToProps = state => ({
     selectedScoreType: state.posts.leaderboardSelectedScoreType
 });
 export default connect(mapStateToProps, { fetchleaderboadfilterdata, fetchleaderboadtabledata })(LeaderboardPage);
+
