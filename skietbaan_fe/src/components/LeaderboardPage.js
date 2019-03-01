@@ -4,7 +4,7 @@ import { fetchleaderboadfilterdata } from '../actions/postActions';
 import { fetchleaderboadtabledata } from '../actions/postActions';
 import { Collapse } from 'react-collapse';
 import { Table } from "react-bootstrap";
-import Img from 'react-image'
+import { Img } from 'react-image'
 import { getCookie } from './cookie.js'
 import { MDBBtn, MDBIcon } from "mdbreact";
 import '../bootstrap/LeaderboardStyle.css';
@@ -205,8 +205,11 @@ class LeaderboardPage extends Component {
                                 {post.username}
                             </td>
                         </tr>
+
                         <tr>
-                            <td className="ScoreColLeft">{post.total}</td><td className="ScoreColCenter">{post.average}</td><td className="ScoreColCenter">{post.best}</td>
+                            <td className="ScoreColLeft">{post.total}</td>
+                            <td className="ScoreColCenter">{post.average}</td>
+                            <td className="ScoreColCenter">{post.best}</td>
                         </tr>
                     </table>
                     <table className="rowUnderline">
@@ -257,30 +260,30 @@ class LeaderboardPage extends Component {
                     <div className="row justify-content-center">
                         <div className="col-sm-8">
                             <div className="FilterSelections">
-                               <div className="row justify-content-center">
-                                         {competitionsList}
-                               </div>
-                               <div className="row justify-content-center">
-                                  <div className="Groups">
-                                  <div className="row justify-content-center">
-                                        <div className="rakingsLabel">Ranking in</div>
-                                  </div>
-                                  <div className="row">
-                                    <div className="categoriesLabels">
-                                        <div className="groupsLabel">Groups</div>
-                                        <div className="singleLabel">Single</div>
+                                <div className="row justify-content-center">
+                                    {competitionsList}
+                                </div>
+                                <div className="row justify-content-center">
+                                    <div className="Groups">
+                                        <div className="row justify-content-center">
+                                            <div className="rakingsLabel">Ranking in</div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="categoriesLabels">
+                                                <div className="groupsLabel">Groups</div>
+                                                <div className="singleLabel">Single</div>
+                                            </div>
+                                        </div>
+                                        <div className="groupsSlection">
+                                            <div className="GroupsList">
+                                                {groupsList}
+                                            </div>
+                                            <div className="Single">
+                                                Individual rank
+                                          </div>
+                                        </div>
                                     </div>
-                                  </div>
-                                       <div className="groupsSlection">
-                                          <div className="GroupsList">
-                                             {groupsList}
-                                          </div>
-                                          <div className="Single">
-                                              Individual rank
-                                          </div>
-                                       </div>
-                                  </div>
-                               </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -308,7 +311,9 @@ class LeaderboardPage extends Component {
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td className="ScoreColLeft">Total</td><td className="ScoreColCenter">Average</td><td className="ScoreColCenter">Best</td>
+                                                    <td className="ScoreColLeft">Total</td>
+                                                    <td className="ScoreColCenter">Average</td>
+                                                    <td className="ScoreColCenter">Best</td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -344,7 +349,9 @@ class LeaderboardPage extends Component {
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td className="ScoreColLeft">{this.props.userResults.total}</td><td className="ScoreColCenter">{this.props.userResults.average}</td><td className="ScoreColCenter">{this.props.userResults.best}</td>
+                                                    <td className="ScoreColLeft">{this.props.userResults.total}</td>
+                                                    <td className="ScoreColCenter">{this.props.userResults.average}</td>
+                                                    <td className="ScoreColCenter">{this.props.userResults.best}</td>
                                                 </tr>
                                             </table>
                                         </td>
