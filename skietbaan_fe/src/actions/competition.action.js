@@ -1,7 +1,8 @@
 import { NEW_COMP,
 	 	FETCH_COMP,
 	  	UPDATE_COMP_STATUS,
-	   	URL } from './types';
+		URL }
+from './types';
 export const fetchcomp = () => (dispatch) => {
 	fetch(URL+ '/api/Competition/all')
 		.then((res) => res.json())

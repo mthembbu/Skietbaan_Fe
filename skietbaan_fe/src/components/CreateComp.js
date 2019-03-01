@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, 
+		Button, 
+		Row, 
+		Col 
+} from 'react-bootstrap';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../scss/createcomp.css';
