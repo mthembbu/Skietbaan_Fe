@@ -55,7 +55,7 @@ class notification extends Component {
   componentDidMount() {
     if (getCookie("token")) {
       var token = document.cookie;
-      fetch(URL + "/api/Notification?" + token)
+      fetch( URL + "/api/Notification?" + token)
         .then(response => response.json())
         .then(data => {
           this.setState({
@@ -67,7 +67,7 @@ class notification extends Component {
 
   render() {
     const headingItems = (
-      <div className="PageHeading">
+      <div className="pageHeading">
         <b>Notifications</b>
       </div>
     );
@@ -96,7 +96,6 @@ class notification extends Component {
                   alt="redirect"
                 />
               </td>
-              <hr />
             </tr>
           ))}
         </tbody>
