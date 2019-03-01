@@ -33,7 +33,6 @@ class App extends Component {
 							<Route path="/register-page" component={Register} exact />
 							<Route path="/" component={Register} exact />
 							<Route path="/registermember" component={RegisterMember} exact />
-							{/* <Route path="/new-competition" component={CreateComp} exact /> */}
 							<Route path="/scorecapture" component={ScoreCapture} exact />
 							<Route path="/groupsname" component={GroupsName} exact />
 							<Route path="/groups" component={Groups} exact />

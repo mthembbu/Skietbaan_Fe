@@ -23,7 +23,7 @@ export default function(state = initialState, action){
 		case UPDATE_COMP_STATUS:
 			return{
 				...state,
-				allComps: action.payload
+				updatedComp: action.payload
 			}	
 		default :
 			return state;	
