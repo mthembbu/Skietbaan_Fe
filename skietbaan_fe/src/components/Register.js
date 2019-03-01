@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Col, FormGroup, Label, Input, Button, Form } from 'reactstrap';
+import { Col, FormGroup, Button, Form } from 'reactstrap';
 import '../components/RegisterStyles.css';
 import { validateEmail, validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
