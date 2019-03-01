@@ -1,26 +1,102 @@
 .documents-container{
-    background-color: #171F32;
+    background-color: #504f51;
 }
 
 .page-name{
-    background-color: white;
+    background-color:#0c0c0E;
+    align-content: center;
+    text-align: center;
+    height: 49px;
 }
+.page-name2{
+    font-family: Helvetica;
+    font-weight: bolder;
+    font-size: 25px;
+    color: #fdfdfd;
+}
+.resize {
+    height: 14px;
+    width: 60px;
+  }
 
+.btn-default {
+    font-family: Helvetica;
+    font-size: 16px;
+    color: #fdfdfd;
+    letter-spacing: 1px;
+    line-height: 15px;
+    border: 2px solid #e11e2b;
+    border-radius: 40px;
+    background: #504f51;
+    transition: all 0.3s ease 0s;
+  }
+
+  .btn-active {
+    font-family: Helvetica;
+    font-size: 16px;
+    color: #fdfdfd;
+    letter-spacing: 1px;
+    line-height: 15px;
+    border: 2px solid #e11e2b;
+    border-radius: 40px;
+    background: #e11e2b;
+    transition: all 0.3s ease 0s;
+  }
+  .send-button {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 100px;
+  }
+  .btn-bottom-1{
+    width: 180px;
+    height: 42px;
+  }
+
+  .btn-bottom-2{
+    width: 180px;
+    height: 42px;
+    
+}
+.btn-bottom-3{
+    
+    width: 230px;
+    height: 42px;
+}  
 .documents-body{
-    background-color: #171F32;
+    background-color: #504f51;
 }
-
-.label-select-member{
-    position: center;
+.button-upload-document-3{
+    font-family: HelveticaNeue-Light;
     text-align: center;
-    color: white;
+    align-content:center;
+    padding-top: 5%;
 }
 
-.button-upload-document{
-    position: center;
+.button-upload-document-2{
+    font-family: HelveticaNeue-Light;
+    font-size: 20px;
     text-align: center;
+    align-content:center;
+    padding-top: 5%;
 }
 
-.table-search-members{
-    background-color:white;
+.label-select-document{
+    padding-top: 5%;
+    font-family: HelveticaNeue-Light;
+    font-size: 20px;
+    color: #fdfdfd;
+    text-align: center;
+    align-content:center;
+}
+
+.document-requirements{ 
+    padding-top: 100%;
+    text-align: center;
+    align-content:center;
+}
+
+.button-upload-document{ 
+    padding-bottom: 5%;
+    text-align: center;
+    align-content:center;
 }
