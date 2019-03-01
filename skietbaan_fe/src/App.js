@@ -30,7 +30,7 @@ class App extends Component {
 							<Route path="/home" component={LeaderboardPage} exact />
 							<Route path="/login" component={Login} exact />
 							<Route path="/register-page" component={Register} exact />
-							<Route path="/" component={Login} exact />
+							<Route path="/" component={Register} exact />
 							<Route path="/registermember" component={RegisterMember} exact />
 							<Route path="/new-competition" component={CreateComp} exact />
 							<Route path="/scorecapture" component={ScoreCapture} exact />
