@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Table, Label, Input } from 'reactstrap';
 import '../components/ViewMembers.css';
+import { Table } from 'react-bootstrap';
 import Collapsible from 'react-collapsible';
-import {BASE_URL} from '../actions/types.js';
+import { BASE_URL } from '../actions/types.js';
 
 class ViewMembers extends Component {
     constructor(props) {
@@ -12,16 +12,19 @@ class ViewMembers extends Component {
             isOpened: false,
             height: 100,
             timeLeftOnMembership: [],
-            filterText:""
+            filterText: ""
         }
-        this.GetMembers = this.GetMembers.bind(this);
+        this.GetFilteredMembers = this.GetFilteredMembers.bind(this);
+        this.GetAllMembers = this.GetAllMembers.bind(this);
         this.GetTimeLeft = this.GetTimeLeft.bind(this);
         this.DoAllThese = this.DoAllThese.bind(this);
         this.onChangeText = this.onChangeText.bind(this);
+        this.BackToCreate = this.BackToCreate.bind(this);
+        this.Status = this.Status.bind(this);
     }
 
-    GetMembers() {
-        fetch(BASE_URL,"/api/Features/SearchMember", {
+    GetAllMembers() {
+        fetch(BASE_URL + "/api/Features/SearchMember", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         })
@@ -33,11 +36,26 @@ class ViewMembers extends Component {
             }).then(data => this.setState({
                 array: data
             }))
-            .catch(function() { });
+    }
+
+
+    GetFilteredMembers() {
+        fetch(BASE_URL + "/api/Features/SearchMember", {
+            method: 'Get',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                return data;
+            }).then(data => this.setState({
+                array: data
+            }))
     }
 
     GetTimeLeft() {
-        fetch(BASE_URL,"/api/Features/TimeLeft", {
+        fetch(BASE_URL + "/api/Features/TimeLeft", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         })
@@ -49,70 +67,95 @@ class ViewMembers extends Component {
             }).then(data => this.setState({
                 timeLeftOnMembership: data
             }))
-            .catch(function () { });
     }
 
     DoAllThese() {
-        this.GetMembers();
+        this.GetFilteredMembers();
         this.GetTimeLeft();
     }
 
-    onChangeText(event){
-        this.GetMembers();
-        this.setState({filterText: event.target.value});
+    onChangeText(event) {
+        this.GetFilteredMembers();
+        this.setState({ filterText: event.target.value });
         this.GetTimeLeft();
+    }
+
+    BackToCreate() {
+        window.location = "/create";
+    }
+
+    Status(timeLeft) {
+        if (timeLeft < 2 || timeLeft === 2) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     render() {
+        this.GetAllMembers();
+        this.GetTimeLeft();
         const postItems = (
-            <Table striped hover condensed className="table-member">
-                <thead>
-                    <tr>
-                        <td><b>Member</b></td>
-                        <td><b>Membership Expiry Date</b></td>
-                    </tr>
-                </thead>
-                <tbody>
+            <table striped hover condensed className="table-member">
+                <tbody >
                     {this.state.array.filter((post) => {
-                        return (!this.state.filterText 
-                            || post.username.toLowerCase().startsWith(this.state.filterText.toLocaleLowerCase()) 
-                            || post.email.toLowerCase().startsWith(this.state.filterText.toLocaleLowerCase()))
-                    }).map((post,index) => (
-                        <tr key={post.id}>
-                            <td>
-                                <Collapsible trigger={<b>{post.username}</b>}>
-                                    <p>{post.email}</p>
-                                    <p>Membership Number: <b>{post.memberID}</b></p>
-                                    <p>Start of Membership: <b>{post.memberStartDate.substring(0, 10)}</b></p>
+                        return (!this.state.filterText
+                            || post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase())
+                            || post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
+                            || post.memberID.startsWith(this.state.filterText))
+                    }).map((post, index) => (
+                        <tr className="view-members-user" key={post.id}>
+                            <td className="first-column">
+                                <Collapsible trigger={<div className="username-and-email">
+                                    <b>{post.username}</b>
+                                    <div>{post.email}</div>
+                                </div>}>
+                                    <div className="membership-details">Membership No: <b>{post.memberID}</b>
+                                        <div>Start of Membership: <b>{post.memberStartDate.substring(0, 10)}</b>
+                                        </div>
+                                    </div>
                                 </Collapsible>
                             </td>
-                            <td>
-                                <Collapsible trigger={<b>{post.memberExpiryDate.substring(0, 10)}</b>}>
-                                    <p>{this.state.timeLeftOnMembership[index]} Months</p>
-                                </Collapsible>
+                            <td className="second-column">
+                                <div className="expiry-time-column">
+                                    <div className={(this.Status(this.state.timeLeftOnMembership[index])) ? "bad" : "okay"}>
+                                        {post.memberExpiryDate.substring(0, 10)}
+                                    </div>
+                                    <div>{this.state.timeLeftOnMembership[index]} Months
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     ))}
                 </tbody>
-            </Table>
+            </table>
         );
         return (
-            <div className="centre-register-member">
-                <div className="page-name">
-                    <h2>View Members</h2>
-                </div>
-                <div className="search-member-name">
-                    <div className="label-search">
-                        <Label><b>Search</b></Label>
+            <div className="centre-view-member">
+                <div className="page-name-view">
+                    <div className="image-comtainer">
+                        <img src={require('../components/assets/back-button-white.png')} onClick={this.BackToCreate}
+                            className="go-back-to-create-page" alt=''></img>
                     </div>
-                    <Input
-                        type="text"
-                        name="usernameValue"
-                        id="usernameValue"
-                        placeholder="Username or Email"
-                        value={this.state.usernamesValue}
-                        onChange={this.onChangeText} />
-                    <br />
+                    <div className="view-members-container">
+                        <label className="view-members">
+                            View Members
+                    </label>
+                    </div>
+                </div>
+                <div className="username-search">
+                    <div className="search">
+                        <input
+                            autoComplete="off"
+                            type="text"
+                            className="userValue"
+                            id="usernameValue"
+                            placeholder="Username or Email"
+                            value={this.state.filterText}
+                            onChange={this.onChangeText}
+                        />
+                    </div>
                 </div>
                 <div className="table-search-members" >
                     {this.DoAllThese}

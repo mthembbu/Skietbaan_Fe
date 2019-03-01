@@ -1,23 +1,39 @@
 .competition-container{
-    padding-top: 40px;
+    padding-top: 6px;
     list-style-type: none;
-    width: 80%;
+    width: 70%;
     margin: 0 auto;
 }
 
 .competition-item{
     width: 100%;
-    height: 35px;
-    background-color: #171F32 ;
+    height: 42px;
     color: white;
     text-align: center;
-    padding: 5px;
-    border-radius: 5px;
+    padding: 7px;
+    border-radius: 25px;
+    font-size: 16px;
+    border: #e11e2b 1px solid;
+}
+
+.float-right{
+    float:right;
+}
+
+@media screen and (min-width:580px)  {
+    .competition-item{
+        width:100%;
+        text-align: center;
+
+    }
+}
+
+.btnScoreCapture{
+    height: 30px;
 }
 
 .competition-item:hover{
     cursor: pointer;
-    color: #FF611D;
 }
 
 .hidden{
@@ -25,21 +41,29 @@
 }
 
 .video{
-    width: 100%;
-    height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    border: 5px solid #FF611D;
+    border: 5px solid #e11e2b;
 }
 
 .page-content{
     width: auto;
     height: stretch;
-    background-color: #171F32;
+    background-color: #504f51;
     width:100%;
     z-index: 50;
     position: relative;
-    height: 670px;
+    height: 100vh;
+}
+
+.page-content-video{
+    width: auto;
+    height: stretch;
+    background-color: #bbbcbd;
+    width:100%;
+    z-index: 50;
+    position: relative;
+    height: 100vh;
 }
 
 .opacity-85{
@@ -47,19 +71,35 @@
 }
 
 .score{
-    border-radius: 5px;
-    border-color: #0e0942;
-    width: 36%;
+    border-radius: 10px;
+    border:none;
+    width: 157px;
     margin: 0 auto;
     text-align: center;
-    color:#FF611D;
+    color:black;
 }
 
-@media screen and (min-width:580px)  {
-    .score{
-    width:24%;
+.invalidScore{
+    background-image: url("../components/assets/redError.png");
+    background-size: 22px;
+    height: 22px;
+    width: 22px;
+    color: #0e0942;
+    float: right;
+    margin-top: -37px;
+    margin-right: 17%;
+}
 
-    }
+.invalidComp{
+    background-image: url("../components/assets/redError.png");
+    background-size: 22px;
+    height: 22px;
+    width: 22px;
+    float: right;
+    margin-top: -36px;
+    padding-right: 2px;
+    margin-right: 28px;
+
 }
 
 .invalid{
@@ -71,7 +111,7 @@
 }
 
 .success{
-    color:#FF611D;
+    color:#e11e2b;
 }
 
 .sucess-container{
@@ -82,7 +122,7 @@
 
 .label-score{
     color: white;
-    font-size: x-large;
+    font-size: 25px;
     text-align: center;
     width:100%;
 }
@@ -90,19 +130,24 @@
 .label-competition{
     color: white;
     font-size: x-large;
-    padding-top: 30px;
+    padding-top: 20px;
+}
+
+.scorelabel{
+    padding-top: 10px;
 }
 
 .centre-label{
     width:100%;
+    font-size: 25px;
     text-align: center;
+    font-weight: lighter;
 }
 
-.active{
-    color:#FF611D
-}
-
-label.front-dark{
+.photo-top-label{
+    padding-top:20px;
+    margin-bottom:20px;
+    background-color:#bbbcbd;
     color:white;
 }
 
@@ -111,24 +156,21 @@ label.front-dark{
 }
 
 .competition-item-container{
-
-    width:50%;
-    float: left;
-    padding:15px;
+    text-align: center;
+    padding:5px;
 }
 
 @media screen and (min-width:768px)  {
     .competition-item-container{
-        width: 25%;
-      left:25%;
-
+        width: 50%;
+        left:25%;
     }
 }
 
 @media screen and (min-width:580px)  {
     .competition-item-container{
-        width: 33.33%;
-        left:25%;
+        width: 40%;
+        margin-left:30%;
 
     }
 }
@@ -138,14 +180,37 @@ label.front-dark{
     bottom: 125px;
     margin: 0 auto;
     text-align: center;
-    width: 100%;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.retake{
+    height: 30px;
 }
 
 .submit-button-elements{
     float: left;
-    width: 33.33%;
-    height: 80px;
+    width: 50%;
+    height: 20px;
     position: relative;
+}
+
+.icon-pushdown{
+    position: fixed;
+    bottom: 70px;
+    width: 80%;
+    left: 0;
+    margin-left:10%;
+    margin-right:10%;
+}
+
+.icon-pushdown.no-margin{
+    margin:0;
+    width:100%;
+}
+
+.submit-button-elements.third{
+    width:33%;
 }
 
 .video-container{
@@ -156,29 +221,33 @@ label.front-dark{
 
 @media screen and (max-width:510px)  {
     .video-container{
-        height: 350px;
-        width: 350px;
+        height: 310px;
+        width: 310px;
         border-radius:25%;
     }
 }
 
 .image-view{
-    top: 44px;
     display: block;
     position: relative;
     margin: 0 auto;
     border-radius: 50%;
     -o-object-fit: cover;
     object-fit: cover;
-    border: 5px solid #FF611D;
+    border: 5px solid #e11e2b;
     text-align: center;
 }
 
 .image-view.background{
-    border:none;
-    width:90%;
-    height:90%
+    width: 310px;
+    height: 320px;
+}
 
+@media screen and (min-width:510px)  {
+    .image-view.background{
+        width: 320px;
+        height: 320px;
+    }
 }
 
 .image-container{
@@ -197,30 +266,82 @@ hr{
 }
 
 .score-capture-black{
-    height: 45px;
+    height: 30px;
     margin-top: 0px;
 }
+
 .position-relative{
-    position: relative;;
+    position: relative;
 }
 
 .labelIcon{
     color: white;
-    width: 100%;
-    margin-top: 7px;
-    position: absolute;
+    width: 60%;
+    margin-top: 13px;
     bottom: 0;
     text-align: center;
     left: 0;
+    font-size: 12px;
+    font-family: 'helvetica';
+}
+
+.labelIcon2{
+    color: white;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    left: 0;
+    font-size: 12px;
+    font-family: 'helvetica';
+    padding-left: 38%;
+    padding-top: 13px;
+}
+
+.btnScoreCapture{
+    height: 30px;
+}
+
+.button-that-submits{
+    height: 30px;
+}
+
+.button-that-submits2{
+    height: 30px;
+    float: right;
+    margin-top: 28%;
+    margin-right: 26%;
+}
+
+@media screen and (min-height:600px)  {
+    .button-that-submits2{
+        margin-top: 35%;
+        margin-right: 26%;
+    }
 }
 
 .flash{
-    height: 45px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-image: url("../components/assets/FlashOn.png");
+}
+
+.flashOff{
+    height: 30px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-image: url("../components/assets/FlashOff.png");
 }
 
 .label-container{
     text-align: center;
     padding-bottom: 10px;
+}
+
+.button-that-submits{
+    height: 30px;
 }
 
 input::-webkit-outer-spin-button,
@@ -231,4 +352,32 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
     -moz-appearance:textfield; /* Firefox */
+}
+
+.active{
+    background-color: #e11e2b;
+    color: white;
+}
+
+.btnBack{
+    float: left;
+    padding-left: 15px;
+    height: 30px;
+}
+
+.spacing{
+    padding-top: 47%;
+    width: 100%;
+    padding-right: 73%;
+}
+
+.white-border{
+    height: 5px;
+    width: 100%;
+    background-color: white;
+}
+
+.back-spacing{
+    width: 100%;
+    height: 30px;
 }

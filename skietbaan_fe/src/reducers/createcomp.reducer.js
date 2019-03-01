@@ -1,7 +1,10 @@
-import {NEW_COMP, FETCH_COMP} from '../actions/types';
+import {NEW_COMP, 
+		FETCH_COMP,
+		UPDATE_COMP_STATUS } from '../actions/types';
 const initialState = {
 	allComps: [],
-	selectedComp: {}
+	selectedComp: {},
+	updatedComp:{}
 };
 /** A function to detect the state change*/
 export default function(state = initialState, action){
@@ -17,6 +20,11 @@ export default function(state = initialState, action){
 				...state,
 				allComps: action.payload
 			};
+		case UPDATE_COMP_STATUS:
+			return{
+				...state,
+				updatedComp: action.payload
+			}	
 		default :
 			return state;	
 	}
