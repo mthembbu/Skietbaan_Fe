@@ -21,7 +21,7 @@ class Login extends Component {
     this.toggleNavbar = this.toggleNavbar.bind(this);
   }
   toggleNavbar() {
-    let Navbar = document.querySelector(".navbar-custom");
+    let Navbar = document.querySelector(".navbar-admin");
     if (Navbar.classList.contains("hidden")) {
       Navbar.classList.remove("hidden");
     }
