@@ -31,15 +31,18 @@
   float: right;
   margin-top: 20px;
 }
+
 .blabe{
     font-Size:"16px";
     color: #fdfdfd;
 }
+
 .c{
   text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
+
 .delete{
   float: left;
 }
@@ -50,13 +53,18 @@
   font-size: 18px;
   color: #fdfdfd;
 }
+
 .theList{
   display: flex;
   font-weight: lighter;
   color:white;
   font-size: 18px;
 }
+
 .groupNames{
   font-size: 18px;
   font-weight: lighter;
+}
+.bpanel{
+  position: fixed;
 }

@@ -17,8 +17,8 @@ class AddMembersGroup extends Component {
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
   }
-  componentWillMount() {
-    fetch(BASE_URL + "/api/Groups/list?id=" + this.props.id)
+ UNSAFE_componentWillMount() {
+    fetch( BASE_URL+"/api/Groups/list?id=" + this.props.id)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -49,7 +49,7 @@ class AddMembersGroup extends Component {
       users: this.state.newArray,
       GroupIds: this.props.id
     };
-    fetch(BASE_URL + "/api/groups/postMember/", {
+    fetch(BASE_URL+"/api/groups/postMember/", {
       method: "post",
       headers: {
         Accept: "application/json",
