@@ -14,10 +14,12 @@ import GroupsName from './components/GroupsName';
 import Groups from './components/Groups';
 import GroupDone from './components/GroupDone';
 import history from './components/history';
-import notifications from './components/Notifications'
+import notification from './components/Notifications'
 import ViewMembers from './components/ViewMembers'
 import Documents from './components/Documents';
 import ViewComp from './components/ViewComp';
+import CreatePage from './components/CreatePage';
+import CreateComp from './components/CreateComp';
 class App extends Component {
 	render() {
 		return (
@@ -29,7 +31,7 @@ class App extends Component {
 							<Route path="/home" component={LeaderboardPage} exact />
 							<Route path="/login" component={Login} exact />
 							<Route path="/register-page" component={Register} exact />
-							<Route path="/" component={Login} exact />
+							<Route path="/" component={Register} exact />
 							<Route path="/registermember" component={RegisterMember} exact />
 							{/* <Route path="/new-competition" component={CreateComp} exact /> */}
 							<Route path="/scorecapture" component={ScoreCapture} exact />
