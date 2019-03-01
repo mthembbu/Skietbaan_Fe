@@ -7,17 +7,16 @@ class ViewComp extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			allComps: [],
+			allcomps: [],
 			status: [],
 			updatedComp: {}
 		};
-		this.changeStatus = this.changeStatus.bind(this);
+		this.changeActive = this.changeStatus.bind(this);
 		this.onClick = this.onClick.bind(this);
 	}
 
 	onClick(){
 		window.location = "/create";
-
 	}
 	// The method that mounts everytime there is an action detected
 	componentWillMount() {
@@ -32,7 +31,8 @@ class ViewComp extends Component {
 	//The method that detects the current status and perform the changes
 	changeStatus(status, i) {
 		const newCompOBJArr = [ ...this.props.compOBJ ]; //cloning an array of competition
-		newCompOBJArr[i].statucompOBJs = !status; //changing the status of a newly cloned array
+		newCompOBJArr[i].status = !status; //changing the status of a newly cloned array
+		console.log('data status',newCompOBJArr[i].status)
 		this.props.updateByIDcomp(newCompOBJArr[i], i); //updating the competition status by ID in the back-end
 		this.setState({ compOBJ: newCompOBJArr });
 	}
@@ -52,13 +52,7 @@ class ViewComp extends Component {
 										type="button"
 										class="btn btn-outline-secondary "
 										data-toggle="tooltip"
-										title={
-											compVar.status ? (
-												'Deactivate '.concat(compVar.name)
-											) : (
-												'Activate '.concat(compVar.name)
-											)
-										}
+										title={compVar.status ? ('Deactivate '.concat(compVar.name)) : ('Activate '.concat(compVar.name))}
 										onClick={() => this.changeStatus(compVar.status, i)}
 									>
 										<strong>{String(compVar.status ? 'De-activate' : 'Re-activate')}</strong>
@@ -106,4 +100,3 @@ const mapStateToProps = (state) => ({
 	updatedComp: state.compOBJ.updatedComp
 });
 export default connect(mapStateToProps, { fetchcomp, updateByIDcomp })(ViewComp);
-
