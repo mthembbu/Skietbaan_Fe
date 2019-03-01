@@ -40,7 +40,11 @@ class NavbarMenu extends Component {
 	}
 
 	isCreate() {
-		if (window.location.pathname.endsWith("/create")) {
+		if (window.location.pathname.endsWith("/create")
+			|| window.location.pathname.endsWith("/registermember")
+			|| window.location.pathname.endsWith("/viewmembers")
+			|| window.location.pathname.endsWith("/create-comp")
+			|| window.location.pathname.endsWith("/view-comp")) {
 			return <img src={require('../components/navbar-icons/create-red.png')}
 				className="create-icon-grey" alt='Create tab Selected'></img>
 		}
