@@ -120,11 +120,11 @@ class NavbarMenuUser extends Component {
 						<td className="columns" onClick={() => this.GoToLeaderboard()}>
 							{this.isHome()}
 						</td>
-						<td className="columns" onClick={() => this.GoToProfile()}>
-							{this.isProfile()}
-						</td>
 						<td className="columns" onClick={() => this.GoToScoreCapture()} >
 							{this.isScoreCapture()}
+						</td>
+						<td className="columns" onClick={() => this.GoToProfile()}>
+							{this.isProfile()}
 						</td>
 						<td onClick={this.expand}>
 							{this.isMore()}
