@@ -1,37 +1,4 @@
 
-/* .fixed-top{
-    position:relative ;
-  }
-
-  .navbar .navbar-custom{
-    background-color: #f0f0f0;
-    color: #f0f0f0;
-  }
-
-  .App div .navbar {
-    margin: 0%;
-  }
-
-  .App div .navbar a{
-    color: #f0f0f0;
-  }
-
-  .App div .navbar .fa{
-    display: grid;
-    text-align: center;
-   }
-
-  .App div .navbar .fa:hover{
-    align-content: center
-   }
-
-  .App div .navbar button{
-    padding: 0%;
-    width: fit-content;
-    color: #f0f0f0;
-    background-color: #f0f0f0;
-  }
-*/
   .dropdown-menu.show{
     background-color: #f0f0f0;
     border: none;
@@ -71,14 +38,6 @@
   .more-icon-grey{
     height: 38px;
     width: 28px;
-  }
-  
-  .second-row-navbar{
-    display: none;
-
-    &.expanded{
-      
-    }
   }
 
   .navbar-admin{

@@ -112,13 +112,19 @@ class ViewMembers extends Component {
                                     <div>{post.email}</div>
                                 </div>}>
                                     <div className="membership-details">Membership No: <b>{post.memberID}</b>
-                                        <div>Start of Membership: <b>{post.memberStartDate.substring(0, 10)}</b></div></div>
+                                        <div>Start of Membership: <b>{post.memberStartDate.substring(0, 10)}</b>
+                                        </div>
+                                    </div>
                                 </Collapsible>
                             </td>
                             <td className="second-column">
-                                <div className="expiry-time-column"><div className={(this.Status(this.state.timeLeftOnMembership[index])) ? "bad" : "okay"}>
-                                    {post.memberExpiryDate.substring(0, 10)}</div>
-                                    <div>{this.state.timeLeftOnMembership[index]} Months</div></div>
+                                <div className="expiry-time-column">
+                                    <div className={(this.Status(this.state.timeLeftOnMembership[index])) ? "bad" : "okay"}>
+                                        {post.memberExpiryDate.substring(0, 10)}
+                                    </div>
+                                    <div>{this.state.timeLeftOnMembership[index]} Months
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     ))}
