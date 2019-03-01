@@ -96,13 +96,13 @@ class NavbarMenuUser extends Component {
 				<table className="navbar-admin">
 				<tbody>
 					<tr className="first-row-navbar">
-						<td className="columns" onClick={() => this.GoToLeaderboard("/home")}>
+						<td className="columns" onClick={() => this.GoTo("/home")}>
 							{this.isHome()}
 						</td>
-						<td className="columns" onClick={() => this.GoToScoreCapture("/scorecapture")} >
+						<td className="columns" onClick={() => this.GoTo("/scorecapture")} >
 							{this.isScoreCapture()}
 						</td>
-						<td className="columns" onClick={() => this.GoToProfile("#")}>
+						<td className="columns" onClick={() => this.GoTo("#")}>
 							{this.isProfile()}
 						</td>
 						<td onClick={this.expand}>
@@ -110,10 +110,10 @@ class NavbarMenuUser extends Component {
 						</td>
 					</tr>
 					<tr className={this.state.expanded ? "second-row-navbar expand":"second-row-navbar"}>
-						<td className="columns" onClick={() => this.GoToDocuments("/documents")}>
+						<td className="columns" onClick={() => this.GoTo("/documents")}>
 							{this.isDocuments()}
 						</td>
-						<td className="columns" onClick={() => this.GoToNotifications("/notify")}>
+						<td className="columns" onClick={() => this.GoTo("/notify")}>
 							{this.isNotifications()}
 						</td>
 						<td></td>
