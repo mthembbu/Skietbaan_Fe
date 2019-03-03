@@ -26,7 +26,8 @@ export default class search extends Component {
       Flashon: false,
       validScore: true,
       validCompetition: true,
-      scoreEntered:false
+      scoreEntered:false,
+      iconhouseUrl : '../components/assets/FlashOff.png'
     }
     this.CompetitionClicked = this.CompetitionClicked.bind(this);
     this.handleScore = this.handleScore.bind(this);
@@ -37,6 +38,7 @@ export default class search extends Component {
     this.Validate = this.Validate.bind(this);
     this.GetLocation = this.GetLocation.bind(this);
     this.ToggleNavbar = this.ToggleNavbar.bind(this);
+    this.ToggleIcon = this.ToggleIcon.bind(this);
 
   }
 
@@ -258,6 +260,7 @@ export default class search extends Component {
   }
 
   Flash() {
+    this.ToggleIcon()
     this.setState({
       Flashon : !this.Flashon
     })
@@ -295,6 +298,19 @@ export default class search extends Component {
 
   }
 
+  ToggleIcon(){
+    var flash = document.getElementById("FlashImage");
+    if(flash.classList.contains("flash"))
+    {
+      flash.classList.remove("flash");
+      flash.classList.add("flashOff");
+    }
+    else{
+      flash.classList.add("flash");
+      flash.classList.remove("flashOff");
+    }
+      
+ }
 
   goBack() {
     this.setState({
@@ -406,8 +422,7 @@ export default class search extends Component {
               <div className={this.state.currState !== 3 ? "hidden" : "submit-button-elements third"} >
                 <div className="button-hover">
                   <div className={this.state.currState !== 3 ? "hidden" : ""}>
-                    <div onClick={() => this.Flash()} id="Flash" className={!this.state.Flashon ? "flash" : "flashOff"}>
-                    </div>
+                  <div id="FlashImage"alt="" className="img-responsive flash" onClick={() => this.Flash()}></div>
                   </div>
                 </div>
               </div>
