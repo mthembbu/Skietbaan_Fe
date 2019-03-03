@@ -12,7 +12,7 @@ class Groups extends Component {
       newArray: [],
       count: 0,
       filterText: "",
-      check: "select all"
+      check: "Select all"
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -20,27 +20,34 @@ class Groups extends Component {
     this.onChange = this.onChange.bind(this);
     this.selectall = this.selectall.bind(this);
   }
- UNSAFE_componentWillMount() {
-    fetch(BASE_URL+"/api/user")
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          posts: data.map(users => {
-            users.highlighted = false;
-            return {
-              ...users,
-              highlighted: false
-            };
-          })
+  UNSAFE_componentWillMount() {
+    if (this.props.name.length != 0) {
+      fetch(BASE_URL + "/api/user")
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            posts: data.map(users => {
+              users.highlighted = false;
+              return {
+                ...users,
+                highlighted: false
+              };
+            })
+          });
         });
-      });
+    } else {
+      history.push("/AddGroup");
+    }
   }
   onChange(event) {
     this.setState({ filterText: event.target.value });
   }
 
   handleOnClick() {
-    this.props.createGroups(this.props.name);
+    const requestedObj = {
+      name: this.props.name
+    };
+    this.props.createGroups(requestedObj);
     const { newArray } = this.state;
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === true) {
@@ -49,10 +56,8 @@ class Groups extends Component {
       delete this.state.posts[i].highlighted;
       delete this.state.posts[i].id;
     }
-    let request = {
-      newArray: this.state.newArray
-    };
-    fetch(BASE_URL+"/api/groups/add", {
+   
+    fetch("http://localhost:50209/api/groups/add", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -65,19 +70,23 @@ class Groups extends Component {
   }
 
   selectall() {
+  
     const newarry = [...this.state.posts];
     if (this.state.check == "Select all") {
+    
       for (var i = 0; i < this.state.posts.length; i++) {
         newarry[i].highlighted = true;
       }
       this.setState({ check: "Unselect" });
+      this.setState({posts:newarry})
     } else {
       for (var i = 0; i < this.state.posts.length; i++) {
         newarry[i].highlighted = false;
       }
       this.setState({ check: "Select all" });
+      this.setState({ posts: newarry });
     }
-    this.setState({ posts: newarry });
+    
   }
 
   toggleHighlight = event => {
@@ -109,10 +118,15 @@ class Groups extends Component {
               );
             })
             .map((post, index) => (
-              <li className="list-group-item list-group-item-light" key={post.id}>
+              <li
+                className="list-group-item list-group-item-light"
+                style={{ borderColor: "#0c0c0e" }}
+                key={post.id}
+              >
                 <input
                   type="checkbox"
                   className="boxs"
+                  style={{ marginRight: "32px", marginTop: "16px" }}
                   onClick={() => this.toggleHighlight(index)}
                   checked={post.highlighted}
                 />
@@ -130,9 +144,7 @@ class Groups extends Component {
         <div className="TheNavBar">
           <a href="#" className="fa fa-angle-left" onClick={this.onBack} />
 
-          <h2 className="center_label">
-            {this.props.name}
-          </h2>
+          <h2 className="center_label">{this.props.name}</h2>
         </div>
         <div className="BNavBar">
           <input

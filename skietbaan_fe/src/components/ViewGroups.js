@@ -14,7 +14,8 @@ class ViewGroups extends Component {
       count: 0,
       ShowMe: true,
       ids: 0,
-      index: 0
+      index: 0,
+      selected: ""
     };
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -39,9 +40,10 @@ class ViewGroups extends Component {
     history.push("/EditGroup");
   }
 
-  update = (post, indexs) => {
+  update = (post, indexs, name) => {
     this.setState({ ids: post });
     this.setState({ index: indexs });
+    this.setState({ selected: name });
   };
 
   delete() {
@@ -94,7 +96,11 @@ class ViewGroups extends Component {
             })
             .map((post, index) => (
               <li
-                style={{ width: "100%", background: "#504F51" }}
+                style={{
+                  width: "100%",
+                  background: "#504F51",
+                  borderColor: "white"
+                }}
                 class="list-group-item list-group-item-light"
                 key={post.id}
               >
@@ -105,11 +111,11 @@ class ViewGroups extends Component {
                   >
                     <div className="groupNames"> {post.name}</div>
                   </label>
-                  <div className="im">
+                  <div className="im" style={{ marginRight: "32px" }}>
                     <img
                       src={require("./GroupImages/submit plus add score.png")}
                       alt=""
-                      onClick={() => this.update(post.id, index)}
+                      onClick={() => this.update(post.id, index, post.name)}
                     />
                   </div>
                 </label>
@@ -135,9 +141,7 @@ class ViewGroups extends Component {
         </div>
         {this.state.ShowMe ? null : (
           <div className="bpanel">
-            <div className="thetextname">
-              <div className="thes">Delete Group{this.state.name}</div>
-            </div>
+            <div className="thetextname">Delete {this.state.selected}</div>
             <div className="cntra">
               <button className="hdre" onClick={() => this.delete()}>
                 Confirm

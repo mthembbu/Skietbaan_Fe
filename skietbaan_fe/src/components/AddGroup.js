@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as GroupActions from "../actions/postActions";
+import { createGroups, getname } from "../actions/postActions";
 import "./add.css";
 import history from "./history";
 
@@ -10,7 +9,8 @@ class AddGroup extends Component {
     super(props);
     this.state = {
       name: "",
-      colors: true
+      colors: true,
+      txt: ""
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
@@ -19,11 +19,12 @@ class AddGroup extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
   onClick() {
-    let RequestObject = {
-      Name: this.state.name
-    };
-    this.props.groupActions.getname(RequestObject);
-    history.push("/Groups");
+    if (this.state.name.length != 0) {
+      this.props.getname(this.state.name);
+      history.push("/Groups");
+    } else {
+      this.setState({ txt: "group name can't be empty" });
+    }
   }
   render() {
     return (
@@ -42,6 +43,8 @@ class AddGroup extends Component {
             onChange={this.onChange}
             value={this.state.name}
             autoComplete="off"
+            autoCorrect="off"
+            placeholder={this.state.txt}
           />
           <button
             className={this.state.name == "" ? "add" : "add2"}
@@ -55,16 +58,11 @@ class AddGroup extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    groupActions: bindActionCreators(GroupActions, dispatch)
-  };
-};
 const mapStateToProps = state => ({
   name: state.posts.groupName
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { createGroups, getname }
 )(AddGroup);

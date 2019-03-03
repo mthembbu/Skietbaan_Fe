@@ -18,7 +18,8 @@ class AddMembersGroup extends Component {
     this.onChange = this.onChange.bind(this);
   }
  UNSAFE_componentWillMount() {
-    fetch( BASE_URL+"/api/Groups/list?id=" + this.props.id)
+   if(this.props.id!=0){
+    fetch( "http://localhost:50209/api/Groups/list?id=" + this.props.id)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -31,6 +32,10 @@ class AddMembersGroup extends Component {
           })
         });
       });
+   }else{
+    history.push("/ViewGroups");
+   }
+
   }
   onChange(event) {
     this.setState({ filterText: event.target.value });
@@ -49,7 +54,7 @@ class AddMembersGroup extends Component {
       users: this.state.newArray,
       GroupIds: this.props.id
     };
-    fetch(BASE_URL+"/api/groups/postMember/", {
+    fetch("http://localhost:50209/api/groups/postMember/", {
       method: "post",
       headers: {
         Accept: "application/json",

@@ -18,19 +18,25 @@ class EditGroup extends Component {
     this.onChange = this.onChange.bind(this);
   }
  UNSAFE_componentWillMount() {
-    fetch(BASE_URL+"/api/Groups/edit?id=" + this.props.id)
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          posts: data.map(users => {
-            users.highlighted = false;
-            return {
-              ...users,
-              highlighted: false
-            };
-          })
-        });
+   if(this.props.id!=0){
+    fetch("http://localhost:50209/api/Groups/edit?id=" + this.props.id)
+    .then(res => res.json())
+    .then(data => {
+      this.setState({
+        posts: data.map(users => {
+          users.highlighted = false;
+          return {
+            ...users,
+            highlighted: false
+          };
+        })
       });
+    });
+   }
+   else{
+    history.push("/ViewGroups");
+   }
+ 
   }
   onChange(event) {
     this.setState({ filterText: event.target.value });
@@ -53,8 +59,8 @@ class EditGroup extends Component {
     let request = {
       GroupIds:this.props.id,
       users: this.state.newArray
-    };
-    fetch(BASE_URL+"/api/groups/deleteMember/", {
+    }
+    fetch("http://localhost:50209/api/groups/deleteMember/", {
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -62,7 +68,7 @@ class EditGroup extends Component {
       },
       body: JSON.stringify(request)
     })
-      .then(function(response) {})
+      .then(res =>res.json())
       .catch(function(data) {});
   }
   toggleHighlight = event => {
@@ -84,7 +90,6 @@ class EditGroup extends Component {
     history.push("/AddMembersGroup");
   };
   render() {
-    console.log(this.state.posts);
     const postitems = (
       <div className="check">
         <ul class="list-group">
