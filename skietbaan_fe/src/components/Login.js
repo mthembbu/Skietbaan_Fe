@@ -134,7 +134,7 @@ class Login extends Component {
     }
 
     return (
-      <div className="Page-content">
+      <div className="page-content">
       <div className="red-background">
       <div className = "welcome-header">
         <img src={require('../components/assets/header.png')} 
