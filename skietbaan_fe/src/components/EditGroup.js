@@ -19,7 +19,7 @@ class EditGroup extends Component {
   }
  UNSAFE_componentWillMount() {
    if(this.props.id!=0){
-    fetch("http://localhost:50209/api/Groups/edit?id=" + this.props.id)
+    fetch(BASE_URL+"/api/Groups/edit?id=" + this.props.id)
     .then(res => res.json())
     .then(data => {
       this.setState({
@@ -60,7 +60,7 @@ class EditGroup extends Component {
       GroupIds:this.props.id,
       users: this.state.newArray
     }
-    fetch("http://localhost:50209/api/groups/deleteMember/", {
+    fetch(BASE_URL+"/api/groups/deleteMember/", {
       method: "DELETE",
       headers: {
         Accept: "application/json",

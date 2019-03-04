@@ -19,7 +19,7 @@ class AddMembersGroup extends Component {
   }
  UNSAFE_componentWillMount() {
    if(this.props.id!=0){
-    fetch( "http://localhost:50209/api/Groups/list?id=" + this.props.id)
+    fetch( BASE_URL+"/api/Groups/list?id=" + this.props.id)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -54,7 +54,7 @@ class AddMembersGroup extends Component {
       users: this.state.newArray,
       GroupIds: this.props.id
     };
-    fetch("http://localhost:50209/api/groups/postMember/", {
+    fetch(BASE_URL+"/api/groups/postMember/", {
       method: "post",
       headers: {
         Accept: "application/json",

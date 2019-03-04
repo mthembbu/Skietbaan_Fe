@@ -51,10 +51,6 @@ class Groups extends Component {
     const requestedObj = {
       name: this.props.name.toLowerCase()
     };
-    console.log(this.state.groups)
-    // if(this.state.groups.indexOf(this.props.name.toLowerCase())!=-1){
-    //   console.log("the group name does not exist")
-    // }
     this.props.createGroups(requestedObj);
     const { newArray } = this.state;
     for (var i = 0; i < this.state.posts.length; i++) {
@@ -65,7 +61,7 @@ class Groups extends Component {
       delete this.state.posts[i].id;
     }
    
-    fetch("http://localhost:50209/api/groups/add", {
+    fetch(BASE_URL+"/api/groups/add", {
       method: "post",
       headers: {
         Accept: "application/json",
