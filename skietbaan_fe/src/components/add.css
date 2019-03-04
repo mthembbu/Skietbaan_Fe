@@ -1,0 +1,98 @@
+.top_bar {
+  background: white;
+  height: 50px;
+  display: flex;
+  background: black;
+}
+
+.center_label {
+  display: flex;
+  margin-left: auto;
+  margin-left: auto;
+  text-align: center;
+
+}
+.middle_bar {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 2px;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.texts {
+  border-radius: 10px;
+  height: 40px;
+  padding-left: 5px;
+  margin-bottom: 15px;
+  font-weight: lighter;
+}
+.page {
+  background: #504f51;
+  height: -webkit-fill-available;
+}
+
+.name {
+  color: white;
+  font-weight: lighter;
+  font-size: 18px;
+}
+.add {
+ 
+  height: 40px;
+  width: 150px;
+  font-weight: lighter;
+  background: #504f51;
+  font-size: 18px;
+  color: white;
+  border: 1px lightgrey solid;
+  border-radius: 30px;
+}
+
+.add2 {
+  border-radius: 30px;
+  height: 40px;
+  width: 150px;
+  font-weight: lighter;
+  background: #504f51;
+  font-size: 18px;
+  color: white;
+  border: 1px red solid;
+}
+
+.texts {
+  border-radius: 10px;
+  border: 2px solid;
+  margin-bottom: 15px;
+}
+
+.fa-angle-left {
+  color: black;
+  font-size: 48px;
+}
+
+.nextpage {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  margin: 2%;
+}
+
+.theList {
+  background: #cccfd3;
+}
+
+.circles {
+  border-radius: 50%;
+}
+.name{
+  margin-top: 37px;
+  margin-bottom: 14px;
+  font-size: 18px;
+}
+.bpanel{
+  padding-top: 15px;
+}
