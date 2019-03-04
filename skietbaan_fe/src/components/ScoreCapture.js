@@ -339,7 +339,6 @@ export default class search extends Component {
 
     return (
       <div className="position-relative">
-        <div className={stateOne ? "" : "white-border"}></div>
         <div className={stateOne ? "page-content-video" : "page-content"}>
           <div className={stateOne ? "hidden" : ""}>
 
@@ -410,7 +409,7 @@ export default class search extends Component {
           <div className={this.state.showCamera ? "" : "hidden"}>
             <div className={this.state.ImageTaken ? "hidden" : "label-score photo-top-label"}>
               Capture Score
-              <img src={require('../components/assets/grayBack.png')} onClick={() => this.goBack()} id="back"
+              <img src={require('../components/assets/lightgrayback.png')} onClick={() => this.goBack()} id="back"
                 className="btnBack" alt=''></img>
               </div>
             <div className="back-spacing">
@@ -441,7 +440,7 @@ export default class search extends Component {
           <div className={this.state.ImageTaken ? "image-container" : "hidden"}>
             <div className="centre-label">
               <div className={!this.state.ImageTaken ? "hidden" : "label-score photo-top-label"}>
-                <b>Score Captured</b>
+                Score Captured
               </div>
               <div className="back-spacing">
               </div>
