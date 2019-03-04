@@ -1,11 +1,23 @@
+.view-header{
+    position: center;
+	text-align: center;
+	text-size-adjust: 25px;
+	background-size: 15px;
+	height: 49px;
+    background-color: #ea241a;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+}
+
 .create-page-centre {
     width:64%;
     margin:0 auto;
     position: center;
     left: 3%;
     top: 15%;
-    padding: 20px;
-    background-color: #bbbcbd;
+    padding: 20px; 
+    background-color: transparent;
 }
 
 .create-menu {
@@ -19,14 +31,12 @@
 /**the create header for the Create-Page*/
 .create-menu-header {
     color: #fdfdfd;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bolder;
-    font: helvetica;
+    text-align: center;
+    padding-top: 8px;
 }
-/**This is to be removed as it collides with the rest of everyone's component*/
-body{background-color: #504F51;}
-
-.container{
+.create-page-container{
     background: transparent;
     min-width: width 80%;
     background: transparent;
@@ -37,9 +47,21 @@ body{background-color: #504F51;}
     min-width: 95%;
 }
 /** The button to create [Competition, Groups, Member]*/
-.btn-create{
+.create-btn-c{
     font-weight: lighter;
+    font: helvetica;
     text-align: center;
+    border-radius: 50px;
+    width: 127px;
+    height: 42px;
+    font-size: 16px;
+    color: #fdfdfd;
+    background: #6F839E;
+    
+}
+
+.btn-create-m{
+    font-weight: lighter;
     font: helvetica;
     text-align: center;
     border-radius: 50px;
@@ -47,59 +69,43 @@ body{background-color: #504F51;}
     height: 42px;
     font-size: 16px;
     color: #0c0c0c;
-    background: #FDFDFD;
-    
-}
-
-.btn-create-m{
-    font-weight: lighter;
-    text-align: center;
-    font: helvetica;
-    text-align: center;
-    border-radius: 50px;
-    width: 110px;
-    height: 42px;
-    font-size: 16px;
-    color: #0c0c0c;
-    background: #FDFDFD;
+    background: #6F839E;
     
 }
 
 .btn-create-gr{
     font-weight: lighter;
-    text-align: center;
     font: helvetica;
     text-align: center;
     border-radius: 50px;
-    width: 90px;
+    width: 127px;
     height: 42px;
     font-size: 16px;
-    color: #0c0c0c;
-    background: #FDFDFD;
-
+    color: #fdfdfd;
+    background: #6F839E;
 }
 /** The button to view [Competition, Groups, Member]*/
 .btn-view{
     border-radius: 20px;
     width: 90px;
     height: 42px;
-    border-color: #e11e2b;
+    border-color: #6F839E;
     font-size:16px;
     font-weight: normal;
     text-align: center;
     font: helvetica;
 }
 /** THe text for the Create [Competition, Groups, Member] button*/
-.btn-create-tex{
+.btn-create-text{
     font-weight: lighter;
     text-align: center;
     font-size: 16px;
     font: helvetica;
-    color:#0c0c0c;
+    color:#fdfdfd;
 }
 /** THe text for the view [Competition, Groups, Member] button*/
 .create-view-text{
-    color:#FFFFFF;
+    color:#6F839E;
     font: helvetica;
     font-size: 16px;
     font-weight: lighter;

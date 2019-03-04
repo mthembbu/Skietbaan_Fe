@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { fetchcomp, updateByIDcomp } from '../actions/competition.action';
+import { fetchcomp, 
+		updateByIDcomp 
+	} from '../actions/competition.action';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../scss/view-comp.css';
