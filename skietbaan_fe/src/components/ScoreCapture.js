@@ -372,7 +372,7 @@ export default class search extends Component {
               || !this.state.scoreEntered ? "hidden" : "submit-button-elements"}>
               <div className="button-hover">
 
-                <img src={require('../components/assets/scoreCapture.png')}
+                <img src={require('../components/assets/cameraGray.png')}
                   id="btnScoreCapture" className="btnScoreCapture"
                   onClick={() => this.CameraClicked()} alt=''></img>
               </div>
@@ -429,7 +429,7 @@ export default class search extends Component {
               <div className={this.state.currState !== 3 ? "hidden" : "submit-button-elements third"}>
                 <div className="button-hover">
                   <div className={this.state.currState !== 3 ? "hidden" : ""}>
-                    <img src={require('../components/assets/scoreCapture.png')} onClick={() => this.TakePhoto()} id="snap"
+                    <img src={require('../components/assets/cameraGray.png')} onClick={() => this.TakePhoto()} id="snap"
                       className="score-capture-black" alt=''></img>
                   </div>
                 </div>
