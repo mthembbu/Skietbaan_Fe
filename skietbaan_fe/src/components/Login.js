@@ -24,6 +24,8 @@ class Login extends Component {
     this.validate = this.validate.bind(this);
     this.togglePassword = this.togglePassword.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.goToRegister = this.goToRegister.bind(this);
+
   }
   toggleNavbar() {
     let Navbar = document.querySelector(".navbar-admin");
@@ -119,6 +121,10 @@ class Login extends Component {
     }
   }
 
+  goToRegister() {
+    window.location = "/Register-page"
+  }
+
   render() {
     document.addEventListener('DOMContentLoaded', () => {
       this.toggleNavbar();
@@ -129,9 +135,19 @@ class Login extends Component {
 
     return (
       <div className="Page-content">
-      <div className = "welcome-header"><label className="welcome-label">Welcome back to skietbaan</label></div>
+      <div className="red-background">
+      <div className = "welcome-header">
+        <img src={require('../components/assets/header.png')} 
+        className="header-image"></img>
+      </div>
       <div className="header-container">
-      <label className = "header-label">Login</label>
+      <div className="centre-label">
+        <label className = "header-label">Login</label>
+        </div>
+      <img src={require('../components/assets/Back.png')} 
+      className="back-btn" 
+      onClick={() => this.goToRegister()}></img>
+      </div>
       </div>
         <div className="centre-login">
           <Form className="form" autoComplete="off">
@@ -148,7 +164,7 @@ class Login extends Component {
                   id="us"
                   value={this.state.usernameValue}
                   onChange={this.handleChange}
-                  className= "input"
+                  className= "input-user"
                 />
                 </div>
               </FormGroup>
@@ -167,7 +183,9 @@ class Login extends Component {
                   onChange={this.handleChange}
                   className= "input-Password"
                 />
-                <div onClick={this.togglePassword} className="password-view-icon"></div>
+               <div className={this.state.passwordValue !== "" ? "password-view-icon": "hidden"}
+                onClick={this.togglePassword}>
+                </div>
                 </div>
                 </div>
               </FormGroup>

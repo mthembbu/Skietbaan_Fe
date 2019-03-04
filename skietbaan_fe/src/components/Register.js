@@ -141,12 +141,15 @@ class Register extends Component {
 
     return (
       <div className="Page-content">
+      <div className="red-background">
       <div className = "welcome-header">
         <img src={require('../components/assets/header.png')} className="header-image"></img>
       </div>
+      
       <div className="header-container">
       <label className = "header-label">Register</label>
       <button className="button-login" onClick={() => this.goToLogin()}>Login</button>
+      </div>
       </div>
         <div className="centre-login">
           <Form className="form" autoComplete="off">
