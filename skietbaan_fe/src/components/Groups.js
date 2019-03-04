@@ -10,6 +10,7 @@ class Groups extends Component {
     this.state = {
       posts: [],
       newArray: [],
+      groups:[],
       count: 0,
       filterText: "",
       check: "Select all"
@@ -38,6 +39,9 @@ class Groups extends Component {
     } else {
       history.push("/AddGroup");
     }
+    fetch(BASE_URL + "/api/Groups")
+    .then(res => res.json())
+    .then(data => this.setState({ groups: data.name }));
   }
   onChange(event) {
     this.setState({ filterText: event.target.value });
@@ -45,8 +49,12 @@ class Groups extends Component {
 
   handleOnClick() {
     const requestedObj = {
-      name: this.props.name
+      name: this.props.name.toLowerCase()
     };
+    console.log(this.state.groups)
+    // if(this.state.groups.indexOf(this.props.name.toLowerCase())!=-1){
+    //   console.log("the group name does not exist")
+    // }
     this.props.createGroups(requestedObj);
     const { newArray } = this.state;
     for (var i = 0; i < this.state.posts.length; i++) {
