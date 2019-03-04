@@ -22,7 +22,7 @@ class ViewGroups extends Component {
     this.delete = this.delete.bind(this);
     this.editGroup = this.editGroup.bind(this);
   }
-  UNSAFE_componentWillMount() {
+  componentWillMount() {
     fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
       .then(data => this.setState({ posts: data }));
@@ -111,7 +111,7 @@ class ViewGroups extends Component {
                   >
                     <div className="groupNames"> {post.name}</div>
                   </label>
-                  <div className="im" style={{ marginRight: "32px" }}>
+                  <div className="group-delete" style={{ marginRight: "32px" }}>
                     <img
                       src={require("./GroupImages/submit plus add score.png")}
                       alt=""
@@ -143,7 +143,7 @@ class ViewGroups extends Component {
           <div className="bpanel">
             <div className="thetextname">Delete {this.state.selected}</div>
             <div className="cntra">
-              <button className="hdre" onClick={() => this.delete()}>
+              <button className="group-confirm" onClick={() => this.delete()}>
                 Confirm
               </button>
             </div>

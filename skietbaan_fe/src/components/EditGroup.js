@@ -17,7 +17,7 @@ class EditGroup extends Component {
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
   }
- UNSAFE_componentWillMount() {
+ componentWillMount() {
    if(this.props.id!=0){
     fetch(BASE_URL+"/api/Groups/edit?id=" + this.props.id)
     .then(res => res.json())

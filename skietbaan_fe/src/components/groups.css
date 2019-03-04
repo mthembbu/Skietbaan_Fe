@@ -19,7 +19,6 @@
   height: 50px;
   display: flex;
   background: black;
-  
 }
 
 .center_label {
@@ -157,7 +156,7 @@
   color: white;
 }
 
-.im {
+.group-delete {
   float: right;
   padding-left: 20px;
 }
@@ -167,8 +166,7 @@
   font-size: 18px;
   color: white;
   width: 60%;
-  margin-left:32px;
- 
+  margin-left: 32px;
 }
 
 .bottompanel {
@@ -275,7 +273,7 @@
   display: inline-block;
   width: 110px;
   white-space: nowrap;
-  overflow: hidden !important;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -284,7 +282,7 @@
   font-size: 18px;
 }
 
-.hdre {
+.group-confirm {
   border-radius: 40px;
   width: 96px;
   height: 42px;
@@ -299,4 +297,8 @@
   font-weight: lighter;
   font-size: 16px;
 }
-
+.list-group-item {
+  width: "100%" !important;
+  background: "#504F51" !important;
+  border-color: "white" !important;
+}
