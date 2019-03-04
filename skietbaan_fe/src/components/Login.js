@@ -14,12 +14,22 @@ class Login extends Component {
       validForm: false,
       tokenValue : "",
     }
-    this.Login = this.Login.bind(this);
+    this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.Validate = this.Validate.bind(this);
-
+    this.validate = this.validate.bind(this);
+    this.togglePassword = this.togglePassword.bind(this);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
   }
-  
+  toggleNavbar() {
+    let Navbar = document.querySelector(".navbar-custom");
+    if (Navbar.classList.contains("hidden")) {
+      Navbar.classList.remove("hidden");
+    }
+    else {
+      Navbar.classList.add("hidden");
+    }
+  }
+
   handleChange({ target }) {
     this.setState({
       [target.name]: target.value,
@@ -45,7 +55,7 @@ class Login extends Component {
     });
   };
 
-  Validate()
+  validate()
   {
     let isValid = true;
     let stateUpdate = {
@@ -66,8 +76,8 @@ class Login extends Component {
     });
   }
 
-  Login() {
-    this.Validate();
+  login() {
+    this.validate();
     if (this.state.validForm) {
       let sha1 = require('sha1');  
       let hash = sha1(this.state.passwordValue);
@@ -95,65 +105,73 @@ class Login extends Component {
     }
   }
 
+  togglePassword() {
+    let password = document.getElementById("PasswordValue");
+    if (password.type === "password") {
+      password.type = "text";
+    } else {
+      password.type = "password";
+    }
+  }
+
   render() {
+    document.addEventListener('DOMContentLoaded', () => {
+      this.toggleNavbar();
+   }, false);
     if(getCookie("token")){
       window.location = "/home";
     }
-    let invalidPasswordMessage;
-    let invalidUsernameMessage;
-
-    if (this.state.invalidPassword) {
-      invalidPasswordMessage = <div className="invalid-message">Please choose a password</div>;
-    }
-    if (this.state.invalidUsername) {
-      invalidUsernameMessage = <div className="invalid-message">Please enter your username</div>;
-    }
 
     return (
-      <Container className="App">
+      <div className="Page-content">
+      <div className = "welcome-header"><label className="welcome-label">Welcome back to skietbaan</label></div>
       <div className="header-container">
-      <h2>Login</h2>
+      <label className = "header-label">Login</label>
       </div>
         <div className="centre-login">
           <Form className="form" autoComplete="off">
 
             <Col className="no-padding">
               <FormGroup>
-                <Label className="front-white"> Type <strong>Username</strong></Label>
-                <Input
+                <label className="front-white input-label">Username <div 
+                className={this.state.invalidUsername ? "invalid-icon" :"hidden"}></div></label>
+                
+                <div className="input-container">
+                <input
                   type="text"
                   name="usernameValue"
                   id="us"
-                  placeholder="username"
                   value={this.state.usernameValue}
                   onChange={this.handleChange}
-                  className={this.state.invalidUsername ? "invalid" : ""}
+                  className= "input"
                 />
-                {invalidUsernameMessage}
+                </div>
               </FormGroup>
             </Col>
             <Col className="no-padding">
               <FormGroup>
-                <Label className="front-white" for="examplePassword">Type <strong>Password</strong></Label>
-                <Input
+                <label className="front-white input-label" for="examplePassword">
+                Password <div className={this.state.invalidPassword ? "invalid-icon":"hidden"}></div></label>
+                <div className="input-container">
+                <input
                   type="password"
                   name="passwordValue"
-                  id="examplePassword"
-                  placeholder="********"
+                  id="passwordValue"
                   value={this.state.passwordValue}
                   onChange={this.handleChange}
-                  className={this.state.invalidPassword ? "invalid" : ""}
+                  onClick={this.togglePassword}
+                  className= "input-Password"
                 />
-                {invalidPasswordMessage}
+                </div>
               </FormGroup>
             </Col>
             <div className="button-container">
-            <Button onClick={this.Login} className={this.state.validForm ? "round-button" : "button-invalid round-button"} >Join</Button>
+            <Button onClick={this.login} className={this.state.validForm ? "round-button" 
+            : "buttons-invalid round-button"} >Join</Button>
             </div>
-          </Form>
-          <div className="register-anchhor"> Not registered? <a className="front-white" href="/register-page">Register here</a></div> 
+          </Form> 
         </div >
-      </Container>
+      </div>
 
     );
   }
