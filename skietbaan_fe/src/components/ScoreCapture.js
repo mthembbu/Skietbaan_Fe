@@ -26,7 +26,8 @@ export default class search extends Component {
       Flashon: false,
       validScore: true,
       validCompetition: true,
-      scoreEntered:false
+      scoreEntered:false,
+      iconhouseUrl : '../components/assets/FlashOff.png'
     }
     this.CompetitionClicked = this.CompetitionClicked.bind(this);
     this.handleScore = this.handleScore.bind(this);
@@ -37,6 +38,7 @@ export default class search extends Component {
     this.Validate = this.Validate.bind(this);
     this.GetLocation = this.GetLocation.bind(this);
     this.ToggleNavbar = this.ToggleNavbar.bind(this);
+    this.ToggleIcon = this.ToggleIcon.bind(this);
 
   }
 
@@ -103,7 +105,8 @@ export default class search extends Component {
 
   Validate() {
     let Valid = false;
-    if (parseInt(this.state.score) < 1 || this.state.score === null 
+    if (parseInt(this.state.score,0) < 1 
+    || this.state.score === null 
     || (this.state.score % 1) !== 0) {
       this.setState({
         validForm: false,
@@ -258,7 +261,11 @@ export default class search extends Component {
   }
 
   Flash() {
-    this.state.Flashon = !this.state.Flashon;
+    this.ToggleIcon()
+    this.setState({
+      Flashon : !this.Flashon
+    })
+    
     var IsFlashOn = this.state.Flashon;
     navigator.mediaDevices.getUserMedia({
       video: {
@@ -289,12 +296,22 @@ export default class search extends Component {
 
       })
       .catch(err => console.error('getUserMedia() failed: ', err));
-    function onCapabilitiesReady(capabilities) {
-      console.log(capabilities);
-    }
 
   }
 
+  ToggleIcon(){
+    var flash = document.getElementById("FlashImage");
+    if(flash.classList.contains("flash"))
+    {
+      flash.classList.remove("flash");
+      flash.classList.add("flashOff");
+    }
+    else{
+      flash.classList.add("flash");
+      flash.classList.remove("flashOff");
+    }
+      
+ }
 
   goBack() {
     this.setState({
@@ -312,7 +329,7 @@ export default class search extends Component {
     let competitionItem = [];
     if (this.state.competitionsList && this.state.competitionsList.length > 0) {
       for (let i = 0; i < this.state.competitionsList.length; i++) {
-        competitionItem.push(<div className="competition-item-container"> <div key={'mykey' + i}
+        competitionItem.push(<div className="competition-item-container" key={'mykey' + i}> <div key={'mykey' + i}
           className={this.state.clicked != null && this.state.clicked === i ? "active competition-item" : "competition-item"}>
           <li onClick={() => this.CompetitionClicked(i, this.state.competitionsList[i].name)}>
             {this.state.competitionsList[i].name} </li></div></div>);
@@ -406,8 +423,7 @@ export default class search extends Component {
               <div className={this.state.currState !== 3 ? "hidden" : "submit-button-elements third"} >
                 <div className="button-hover">
                   <div className={this.state.currState !== 3 ? "hidden" : ""}>
-                    <div onClick={() => this.Flash()} id="Flash" className={!this.state.Flashon ? "flash" : "flashOff"}>
-                    </div>
+                  <div id="FlashImage"alt="" className="img-responsive flash" onClick={() => this.Flash()}></div>
                   </div>
                 </div>
               </div>
