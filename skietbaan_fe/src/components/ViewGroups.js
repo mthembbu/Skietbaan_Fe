@@ -37,13 +37,15 @@ class ViewGroups extends Component {
   editGroup(event, name) {
     this.props.getname(name);
     this.props.passId(event);
-    history.push("/EditGroup");
+  //  history.push("/EditGroup");
   }
 
   update = (post, indexs, name) => {
+    console.log(post,indexs,name)
     this.setState({ ids: post });
     this.setState({ index: indexs });
     this.setState({ selected: name });
+    this.setState({ ShowMe: false });
   };
 
   delete() {
@@ -99,11 +101,21 @@ class ViewGroups extends Component {
               .map((post, index) => (
                 <tr className="view-group" key={post.id}>
                   <td className="first-row">
+                  
                     <div
                       className="group-name"
                       key={post.id}
                       onClick={() => this.editGroup(post.id, post.name)}
                     >
+                      <div className="im">
+                    <img
+                      src={require("./GroupImages/submit plus add score.png")}
+                      alt=""
+                      onClick={() => this.update(post.id, index)}
+                    />
+              
+                  </div>
+
                       {post.name}
                     </div>
                   </td>

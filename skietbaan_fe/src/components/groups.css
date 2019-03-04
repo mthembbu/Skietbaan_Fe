@@ -200,15 +200,21 @@
 }
 
 .undo {
-  width: 96px;
-  height: 42px;
-  border-radius: 39px;
+ 
+  
   font-weight: lighter;
   font-size: 16px;
   position: absolute;
   right: 0;
   bottom: 0;
+
+
+  border-radius: 24.5px;
+  width: 96px;
+  height: 42px;
   background: white;
+  margin-left: 40px;
+  border: 1px solid;
 }
 
 .btplane {
@@ -227,7 +233,7 @@
   position: fixed;
   right: 0;
   bottom: 0;
-  background: #fdfdfd;
+  background: #282829;
   width: 100%;
   margin: 0px;
   font-size: 16px;
@@ -235,7 +241,9 @@
   padding-top: 10px;
   display: flex;
   float: bottom;
-  height: 63px;
+  height: 56px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 .updatess {
@@ -285,11 +293,14 @@
 }
 
 .group-confirm {
-  border-radius: 40px;
+  border-radius: 24.5px;
   width: 96px;
   height: 42px;
   background: white;
   margin-left: 40px;
+  border: 1px solid;
+
+
 }
 
 .updates {

@@ -144,9 +144,9 @@ class Login extends Component {
       <div className="centre-label">
         <label className = "header-label">Login</label>
         </div>
-      <img src={require('../components/assets/back.png')} 
+      {/* <img src={require('../components/assets/back.png')} 
       className="back-btn" 
-      onClick={() => this.goToRegister()}></img>
+      onClick={() => this.goToRegister()}></img> */}
       </div>
       </div>
         <div className="centre-login">

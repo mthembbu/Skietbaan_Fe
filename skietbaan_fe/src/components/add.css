@@ -126,8 +126,9 @@
   padding-left: 5px;
   margin-bottom: 5px;
   font-weight: lighter;
-  margin-left: 71px;
-  margin-right: 71px;
+  margin-left: auto;
+  margin-right: auto;
   width: 171px;
   font-size: 14px;
+  color:red;
 }

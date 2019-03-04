@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createGroups, getname } from "../actions/postActions";
 import "./add.css";
+import { BASE_URL } from "../actions/types";
 import history from "./history";
 
 class AddGroup extends Component {
@@ -10,21 +11,38 @@ class AddGroup extends Component {
     this.state = {
       name: "",
       colors: true,
-      txt: ""
+      txt: "",
+      groups: [],
+      exist: true
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+   
   }
   onClick() {
-    if (this.state.name.length != 0) {
-      this.props.getname(this.state.name);
-      history.push("/Groups");
+    if (this.state.groups.indexOf(this.state.name) == -1) {
+      if (this.state.name.length != 0) {
+        this.props.getname(this.state.name);
+        history.push("/Groups");
+      } else {
+        this.setState({ txt: "group name can't be empty" });
+      }
     } else {
-      this.setState({ txt: "group name can't be empty" });
+      this.setState({ exist: false });
     }
+  }
+
+  componentWillMount() {
+    fetch(BASE_URL + "/api/Groups")
+      .then(res => res.json())
+      .then(data =>
+        this.setState({
+          groups: data.map(group => group.name)
+        })
+      );
   }
   render() {
     return (
@@ -32,12 +50,13 @@ class AddGroup extends Component {
         <div className="top_bar">
           <a href="#" class="fa fa-angle-left" />
 
-          <label className="center_label">Create Group</label>
+          <label className="center_labels">Create Group</label>
         </div>
+
         <div className="middle_bar">
           <label className="name">Enter Group Name</label>
           <input
-            className="texts"
+            className={this.state.name==""? "texts2":"texts"}
             type="text"
             name="name"
             onChange={this.onChange}
@@ -46,6 +65,10 @@ class AddGroup extends Component {
             autoCorrect="off"
             placeholder={this.state.txt}
           />
+          {this.state.exist ? null : (
+            <div className="group-error">Group name already taken</div>
+          
+          )}
           <button
             className={this.state.name == "" ? "add" : "add2"}
             type="submit"
