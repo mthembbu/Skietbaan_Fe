@@ -146,8 +146,8 @@
 
 .button-login{
   background-color: #EA241A;
-  color: white;
-  border: 1px white solid;
+  color: #fdfdfd;
+  border: 1px #fdfdfd solid;
   border-radius: 25px;
   height: 38px;
   width: 100px;
