@@ -34,7 +34,7 @@ class EditGroup extends Component {
     });
    }
    else{
-    history.push("/ViewGroups");
+    // history.push("/ViewGroups");
    }
  
   }

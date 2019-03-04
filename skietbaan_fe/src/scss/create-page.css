@@ -24,7 +24,6 @@
     font: helvetica;
 }
 /**This is to be removed as it collides with the rest of everyone's component*/
-body{background-color: #504F51;}
 
 .container{
     background: transparent;

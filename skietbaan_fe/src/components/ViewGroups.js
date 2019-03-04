@@ -80,53 +80,42 @@ class ViewGroups extends Component {
   handleOnClick = () => {};
   render() {
     const postitems = (
-      <div className="check" onClick={() => this.do()}>
-        <ul class="list-group">
-          {this.state.posts
-            .filter(post => {
-              return (
-                !this.state.filterText ||
-                post.username
-                  .toLowerCase()
-                  .startsWith(this.state.filterText.toLowerCase()) ||
-                post.email
-                  .toLowerCase()
-                  .startsWith(this.state.filterText.toLowerCase())
-              );
-            })
-            .map((post, index) => (
-              <li
-                style={{
-                  width: "100%",
-                  background: "#504F51",
-                  borderColor: "white"
-                }}
-                class="list-group-item list-group-item-light"
-                key={post.id}
-              >
-                <label className="the-container">
-                  <label
-                    className="nn"
-                    onClick={() => this.editGroup(post.id, post.name)}
-                  >
-                    <div className="groupNames"> {post.name}</div>
-                  </label>
-                  <div className="group-delete" style={{ marginRight: "32px" }}>
-                    <img
-                      src={require("./GroupImages/submit plus add score.png")}
-                      alt=""
-                      onClick={() => this.update(post.id, index, post.name)}
-                    />
-                  </div>
-                </label>
-              </li>
-            ))}
-        </ul>
+      <div className="the-main">
+        <table className="table-member">
+          <tbody>
+            {this.state.posts
+              .filter(post => {
+                return (
+                  !this.state.filterText ||
+                  post.username
+                    .toLowerCase()
+                    .startsWith(this.state.filterText.toLowerCase()) ||
+                  post.email
+                    .toLowerCase()
+                    .startsWith(this.state.filterText.toLowerCase()) ||
+                  post.memberID.startsWith(this.state.filterText)
+                );
+              })
+              .map((post, index) => (
+                <tr className="view-group" key={post.id}>
+                  <td className="first-row">
+                    <div
+                      className="group-name"
+                      key={post.id}
+                      onClick={() => this.editGroup(post.id, post.name)}
+                    >
+                      {post.name}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </div>
     );
 
     return (
-      <main className="TheMain" onClick={() => this.do()}>
+      <main className="TheMain" >
         <div className="TheNavBar">
           <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
 

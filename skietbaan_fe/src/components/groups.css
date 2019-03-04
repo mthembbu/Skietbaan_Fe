@@ -16,9 +16,11 @@
 .TheNavBar {
   background: #cccfd3;
   color: white;
-  height: 50px;
+  height: 52px;
   display: flex;
-  background: black;
+  background: red;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .center_label {
@@ -297,8 +299,26 @@
   font-weight: lighter;
   font-size: 16px;
 }
-.list-group-item {
-  width: "100%" !important;
-  background: "#504F51" !important;
-  border-color: "white" !important;
+
+
+.the-main {
+  margin-left: 32px;
+  margin-right: 32px;
+}
+.group-name {
+  margin-left: 6px;
+  font-weight: lighter;
+  font-size: 18px;
+  float: left;
+}
+.group-delete {
+  margin-right: 32px;
+  float:right;
+}
+
+.first-row{
+  display: flex;
+  border-bottom: solid 2px #bbbcbd;
+  height: 64px;
+  display: flex;
 }
