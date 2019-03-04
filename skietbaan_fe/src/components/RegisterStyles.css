@@ -9,7 +9,7 @@
   }
 }
 
-.Page-content{
+.page-content{
   height: stretch;
   background-color: #fdfdfd;
   width:100%;
@@ -22,7 +22,7 @@
   margin:0 auto;
   position: center;
   text-align: center;
-  padding-top: 20px;
+  padding-top: 40px;
 }
 
 @media screen and (min-width:768px)  {
@@ -37,7 +37,8 @@
   background-color: #EA241A;
   text-align: center;
   height: 73px;
-
+  border-radius: 13px;
+  box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);
 }
 
 .front-white{
@@ -57,13 +58,12 @@
   height: 42px;
   color: white;
   border-radius: 25px;
-  background-color: #504f51;
-  border: 1px red solid;
+  background-color: #6F839E;
   font-size: 16px;
 }
 
 .buttons-invalid{
-  background-color: #504f51;
+  background-color: #fdfdfd;
   color: #ebebeb;
   cursor: default;
   border: 1px lightgray solid;
@@ -124,13 +124,13 @@
 }
 
 .password-view-icon{
-  background: url("../components/assets/password.png") no-repeat right center;
+  background: url("../components/assets/graypassword.png") no-repeat right center;
   height:30px;
   background-size: 30px;
   width: 30px;
   position: absolute;
   top: 5px;
-  right: 5px;
+  right: 18px;
 }
 
 .password-view-icon:hover{
@@ -141,7 +141,7 @@
   font-size: 25px;
   color: white;
   font-weight: 400;
-  padding-top: 21px;
+  padding-top: 18px;
 }
 
 .button-login{
@@ -212,4 +212,24 @@
 .header-image{
   height: 94px;
   width: 100%;
+}
+
+.red-background{
+  background-color: #EA241A;
+  border-radius: 13px;
+}
+
+.position-relative{
+  padding: 12px;
+}
+
+.back-btn{
+  float: left;
+  margin-top: -38px;
+  margin-left: 30px;
+  height: 34px;
+}
+
+.centre-label{
+  text-align: center;
 }
