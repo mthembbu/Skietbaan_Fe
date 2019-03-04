@@ -8,5 +8,4 @@ export default combineReducers({
   simpleReducer,
   comps: competition,
 	compOBJ: competition
-  comps: competition
 });

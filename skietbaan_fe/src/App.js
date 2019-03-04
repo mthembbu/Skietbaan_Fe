@@ -23,10 +23,8 @@ import ScoreCapture from './components/ScoreCapture';
 import CreatePage from './components/CreatePage';
 import AddMembersGroup from './components/AddMembersGroup';
 import EditGroup from './components/EditGroup';
-import history from './components/history';
 
 import ViewComp from './components/ViewComp';
-import CreatePage from './components/CreatePage';
 import CreateComp from './components/CreateComp';
 class App extends Component {
 	render() {
