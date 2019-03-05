@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
-import history from "./history";
+import {withRouter} from 'react-router-dom';
 import { BASE_URL } from "../actions/types";
 class EditGroup extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class EditGroup extends Component {
           });
         });
     } else {
-      history.push("/ViewGroups");
+       this.props.history.push("/ViewGroups");
     }
   }
   onChange(event) {
@@ -82,11 +82,11 @@ class EditGroup extends Component {
     }
   };
   onBack() {
-    history.push("/ViewGroups");
+    this.props.history.push("/ViewGroups");
   }
 
   goToNext = () => {
-    history.push("/AddMembersGroup");
+    this.props.history.push("/AddMembersGroup");
   };
   render() {
     const postitems = (
@@ -163,4 +163,4 @@ const mapStateToProps = state => ({
   name: state.posts.groupName
 });
 
-export default connect(mapStateToProps)(EditGroup);
+export default withRouter(connect(mapStateToProps)(EditGroup));

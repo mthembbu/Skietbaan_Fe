@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
 import { BASE_URL } from "../actions/types";
-import history from "./history";
+import { withRouter } from 'react-router-dom'
 class AddMembersGroup extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +33,7 @@ class AddMembersGroup extends Component {
           });
         });
     } else {
-      history.push("/ViewGroups");
+       this.props.history.push("/ViewGroups");
     }
   }
   onChange(event) {
@@ -76,7 +76,7 @@ class AddMembersGroup extends Component {
     }
   };
   onBack() {
-    history.push("/EditGroup");
+    this.props.history.push("/EditGroup");
   }
   render() {
     const postitems = (
@@ -95,7 +95,11 @@ class AddMembersGroup extends Component {
               );
             })
             .map((post, index) => (
-              <li class="list-group-item list-group-item-light" key={post.id}>
+              <li
+                class="list-group-item list-group-item-light"
+                key={post.id}
+                style={{ borderLeftStyle: "none", borderRightStyle: "none" ,marginRight:"44px",marginLeft:"44px"}}
+              >
                 <input
                   type="checkbox"
                   className="boxs"
@@ -126,9 +130,6 @@ class AddMembersGroup extends Component {
             onChange={this.onChange}
             autoComplete="off"
           />
-          <button className="select" >
-            Add new
-          </button>
         </div>
 
         <div className="OnToTheNextOne" />
@@ -146,8 +147,36 @@ class AddMembersGroup extends Component {
             <div className="usersname">{this.state.selected}</div>
           </div>
           <div className="botname">
-            <button className="updates" onClick={this.handleOnClick}>Update Group</button>
+            <button className="updates" onClick={this.handleOnClick}>
+              Update Group
+            </button>
           </div>
+        </div>
+
+        <div className="bpanel">
+          <table className="group-delete-table">
+            <tbody>
+              <tr>
+                <td>
+                  <div className="thetextname">Add</div>
+                </td>
+                <td>
+                  <div>{this.state.selected} </div>
+                </td>
+                <td>
+                  <button
+                    className="group-confirm"
+                    onClick={() => this.delete()}
+                  >
+                    Confirm
+                  </button>
+                </td>
+                <td className="group-undo">
+                  <button className="updatess">Cancel</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </main>
     );
@@ -157,4 +186,4 @@ const mapStateToProps = state => ({
   id: state.posts.groupId,
   name: state.posts.groupName
 });
-export default connect(mapStateToProps)(AddMembersGroup);
+export default withRouter(connect(mapStateToProps)(AddMembersGroup));

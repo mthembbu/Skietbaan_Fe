@@ -37,7 +37,7 @@ class Groups extends Component {
           });
         });
     } else {
-      history.push("/AddGroup");
+     // history.push("/AddGroup");
     }
     fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
-import history from "./history";
-import { passId } from "../actions/postActions";
-import { getname } from "../actions/postActions";
+import { withRouter } from 'react-router-dom'
+import { passId , getname } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
 class ViewGroups extends Component {
   constructor(props) {
@@ -32,19 +31,17 @@ class ViewGroups extends Component {
   }
 
   onBack() {
-    history.push("/ViewGroups");
+    this.props.history.push("/ViewGroups")
+    // history.push("/ViewGroups");
   }
   editGroup(event, name) {
     this.props.getname(name);
     this.props.passId(event);
-    history.push("/EditGroup");
+    this.props.history.push("/EditGroup");
   }
 
   update = (id, indexs, name) => {
-    this.setState({ ids: id });
-    this.setState({ index: indexs });
-    this.setState({ selected: name });
-    this.setState({ ShowMe: false });
+    this.setState({ ids: id,index: indexs ,selected: name ,ShowMe: false  });
   };
 
   delete() {
@@ -170,7 +167,7 @@ const mapStateToProps = state => ({
   id: state.posts.groupId
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   { passId, getname }
-)(ViewGroups);
+)(ViewGroups));

@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { createGroups, getname } from "../actions/postActions";
 import "./add.css";
 import { BASE_URL } from "../actions/types";
-import history from "./history";
+import { withRouter } from 'react-router-dom'
+
 
 class AddGroup extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class AddGroup extends Component {
     if (this.state.groups.indexOf(this.state.name) == -1) {
       if (this.state.name.length != 0) {
         this.props.getname(this.state.name);
-        history.push("/Groups");
+        this.props.history.push("/Groups");
       } else {
         this.setState({ txt: "group name can't be empty" });
       }
@@ -85,7 +86,7 @@ const mapStateToProps = state => ({
   name: state.posts.groupName
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   { createGroups, getname }
-)(AddGroup);
+)(AddGroup));
