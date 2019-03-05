@@ -140,7 +140,7 @@ class Register extends Component {
    }, false);
 
     return (
-      <div className="page-content">
+      <div className="page-content-login">
       <div className="red-background">
       <div className = "welcome-header">
         <img src={require('../components/assets/header.png')} className="header-image"></img>

@@ -9,7 +9,7 @@
   }
 }
 
-.page-content{
+.page-content-login{
   height: stretch;
   background-color: #fdfdfd;
   width:100%;
@@ -217,10 +217,6 @@
 .red-background{
   background-color: #EA241A;
   border-radius: 13px;
-}
-
-.position-relative{
-  padding: 12px;
 }
 
 .back-btn{
