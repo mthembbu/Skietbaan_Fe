@@ -18,7 +18,7 @@
   color: white;
   height: 52px;
   display: flex;
-  background: red;
+  background: #DC0600;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
 }
@@ -71,10 +71,10 @@
   height: 42px;
   border-radius: 30px;
   width: 102px;
-  color: white;
+  color: #282829;
   font-weight: lighter;
   font-size: 16px;
-  background: #504f51;
+  background: white;
   border: 1px lightgrey solid;
 }
 
@@ -94,7 +94,7 @@
 
 .BNavBar {
   height: 50px;
-  background: #504f51;
+  background: white;
 }
 
 .deleteUser {
@@ -132,14 +132,14 @@
   font-size: 16px;
   font-weight: bold;
   font-size: 16px;
-  color: black;
+  color: #6f839e;
 }
 
 .emails {
   font-size: 14px;
   font-weight: lighter;
   font-size: 16px;
-  color: black;
+  color: #6f839e;
 }
 
 .blabe {
@@ -200,14 +200,11 @@
 }
 
 .undo {
- 
-  
   font-weight: lighter;
   font-size: 16px;
   position: absolute;
   right: 0;
   bottom: 0;
-
 
   border-radius: 24.5px;
   width: 96px;
@@ -287,9 +284,10 @@
   text-overflow: ellipsis;
 }
 
-.thetxt {
+.theText {
   font-weight: bold;
   font-size: 18px;
+  border-radius: 5px;
 }
 
 .group-confirm {
@@ -299,8 +297,6 @@
   background: white;
   margin-left: 40px;
   border: 1px solid;
-
-
 }
 
 .updates {
@@ -310,7 +306,6 @@
   font-weight: lighter;
   font-size: 16px;
 }
-
 
 .the-main {
   margin-left: 32px;
@@ -324,12 +319,17 @@
 }
 .group-delete {
   margin-right: 32px;
-  float:right;
+  float: right;
+}
+.group-view{
+  float: right;
 }
 
-.first-row{
-  display: flex;
+.view-group{
   border-bottom: solid 2px #bbbcbd;
-  height: 64px;
-  display: flex;
+    height: 55px;
+    font-size: 18px;
+    font-weight: lighter;
+    color: #6F839E;
 }
+

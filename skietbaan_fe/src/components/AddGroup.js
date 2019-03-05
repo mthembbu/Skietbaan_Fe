@@ -26,7 +26,7 @@ class AddGroup extends Component {
     if (this.state.groups.indexOf(this.state.name) == -1) {
       if (this.state.name.length != 0) {
         this.props.getname(this.state.name);
-        //history.push("/Groups");
+        history.push("/Groups");
       } else {
         this.setState({ txt: "group name can't be empty" });
       }

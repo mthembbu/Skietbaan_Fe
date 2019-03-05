@@ -10,7 +10,7 @@ class Groups extends Component {
     this.state = {
       posts: [],
       newArray: [],
-      groups:[],
+      groups: [],
       count: 0,
       filterText: "",
       check: "Select all"
@@ -22,7 +22,7 @@ class Groups extends Component {
     this.selectall = this.selectall.bind(this);
   }
   UNSAFE_componentWillMount() {
-    if (this.props.name.length != 0) {
+    if (this.props.name.length === 0) {
       fetch(BASE_URL + "/api/user")
         .then(res => res.json())
         .then(data => {
@@ -40,8 +40,8 @@ class Groups extends Component {
       history.push("/AddGroup");
     }
     fetch(BASE_URL + "/api/Groups")
-    .then(res => res.json())
-    .then(data => this.setState({ groups: data.name }));
+      .then(res => res.json())
+      .then(data => this.setState({ groups: data.name }));
   }
   onChange(event) {
     this.setState({ filterText: event.target.value });
@@ -60,8 +60,8 @@ class Groups extends Component {
       delete this.state.posts[i].highlighted;
       delete this.state.posts[i].id;
     }
-   
-    fetch(BASE_URL+"/api/groups/add", {
+
+    fetch(BASE_URL + "/api/groups/add", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -74,15 +74,13 @@ class Groups extends Component {
   }
 
   selectall() {
-  
     const newarry = [...this.state.posts];
     if (this.state.check == "Select all") {
-    
       for (var i = 0; i < this.state.posts.length; i++) {
         newarry[i].highlighted = true;
       }
       this.setState({ check: "Unselect" });
-      this.setState({posts:newarry})
+      this.setState({ posts: newarry });
     } else {
       for (var i = 0; i < this.state.posts.length; i++) {
         newarry[i].highlighted = false;
@@ -90,7 +88,6 @@ class Groups extends Component {
       this.setState({ check: "Select all" });
       this.setState({ posts: newarry });
     }
-    
   }
 
   toggleHighlight = event => {
@@ -124,7 +121,13 @@ class Groups extends Component {
             .map((post, index) => (
               <li
                 className="list-group-item list-group-item-light"
-                style={{ borderColor: "#0c0c0e" }}
+                style={{
+                  borderColor: "#F3F4F9",
+                  height: "55px",
+                  borderLeft: "none",
+                  borderRight: "none",
+                  marginBottom: "3px"
+                }}
                 key={post.id}
               >
                 <input
@@ -175,6 +178,7 @@ class Groups extends Component {
         >
           {postitems}
         </div>
+
         <label className="bottomlabel">
           <button className="deleteUser" onClick={this.handleOnClick}>
             Create Group
