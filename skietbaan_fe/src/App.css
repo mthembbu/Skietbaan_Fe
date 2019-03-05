@@ -12,6 +12,7 @@
 
 body, html{
   height: 100%; 
+  width: 100%;
   background-color: #504f51;
   /* Center and scale the image nicely */
   background-position: center;
@@ -27,9 +28,7 @@ body, html{
 .test {
   width: 50%;
 }
-.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
-  float: left;
-}
+
 .centre-comp {
   width: 94%;
   margin: 0 auto;

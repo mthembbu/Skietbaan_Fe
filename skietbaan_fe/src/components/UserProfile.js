@@ -10,11 +10,13 @@ class UserProfile extends Component {
         this.state = {
             awardCompetitions : [],
         }
+        this.sendRequest = this.sendRequest.bind(this);
     }
 
     UNSAFE_componentWillMount(){
+        window.addEventListener('beforeunload', this.sendRequest);	
         /*use the remote URL*/
-        //Must push backend to master for this to work
+
         fetch('http://localhost:50963//api/awards/dec953316347',{
             method : 'GET',
             headers: {
@@ -25,6 +27,24 @@ class UserProfile extends Component {
         .then(data => this.setState({awardCompetitions : data}));   
     }
 
+    /*componentWillUnmount(){
+		fetch('http://localhost:50963/api/awards/start-time',{
+            method : 'GET',
+            headers: {
+                'content-type' : 'application/json'
+            }
+        }) 
+	}*/
+
+    sendRequest(){
+		fetch('http://localhost:50963/api/awards/start-time',{
+            method : 'GET',
+            headers: {
+                'content-type' : 'application/json'
+            }
+        }) 
+    }
+    
     AnimateAccuracyCircle(counter, element, index){
         
         if(counter <= element.accuracy){
@@ -104,100 +124,108 @@ class UserProfile extends Component {
 
     CompetitionsStat(element, index){
         return(
-            <div className={element.isCompetitionLocked ? "shooting-award push-shooting-award-bottom grey-text" :
-             "shooting-award push-shooting-award-bottom white-text"} key={index}>
-                <Row>
+            <Container key={index}>
+                <div className={element.isCompetitionLocked ? "shooting-award push-shooting-award-bottom grey-text" :
+                                "shooting-award push-shooting-award-bottom white-text"} key={index}>
                     <Row>
-                        <Col>
-                            <div className="float-left">
-                                <h3>{element.competitionName}</h3>
-                            </div>
-                        </Col>
-                        <Col>
-                            {element.isCompetitionLocked ? this.RenderLockedIcon() : null}
-                        </Col>
+                        <Container>
+                        <Row>
+                            <Col>
+                                <div className="float-left">
+                                    <label className="competition-name-size">{element.competitionName}</label>
+                                </div>
+                            </Col>
+                            {/*<Col>
+                                {element.isCompetitionLocked ? this.RenderLockedIcon() : null}
+                            </Col>*/}
+                        </Row>
+                        
+                        <Row>
+                            <Col /*style={{paddingLeft : "0px"}}*/>
+                                <div className="month-award">
+                                        {/*make month and year dynamic | remove if no month award*/}
+                                        <label className="light-weight float-left font-size-14px">January 2019 - 
+                                            <span id="month-award-description">Best Shooter</span></label>
+                                </div>
+                            </Col>
+                            <Col className="bullet-col" xs={3} sm={3} md={3} lg={3} xl={3}>
+                                <div className="bullet-img-scale">
+                                    <img src={require("../resources/awardIcons/bullet.png")}></img>
+                                </div>
+                            </Col>
+                        </Row>
+                        </Container>
                     </Row>
-                    <Row>
-                        <Col style={{paddingLeft : "0px"}}>
-                            <div className="month-award">
-                                    {/*make month and year dynamic | remove if no month award*/}
-                                    <label className="light-weight">January 2019 - <span id="month-award-description">Best Shooter</span></label>
-                            </div>
-                        </Col>
-                        <Col className="bullet-col" xs={3} sm={3} md={3} lg={3} xl={3}>
-                            <div className="bullet-img-scale">
-                                <img src={require("../resources/awardIcons/bullet.png")}></img>
-                            </div>
-                        </Col>
-                    </Row>
-                </Row>
-                <div className="push-bottom-27px">
+                    <div className="push-bottom-27px">
+                        <Row style={{marginTop: "15px"}}>
+                            <Col>
+                                <div className="shooting-award-left push-bottom hours-heading">
+                                    My Total Score
+                                </div>
+                                <div className="right push-bottom">
+                                    {this.SetDigits(element.total, element.isCompetitionLocked)}
+                                </div>
+                            </Col>
+                            <Col>
+                                <div className="lay-horizontal scale-img">
+                                    <img src={!element.isCompetitionLocked && element.totalAward.gold ?
+                                        require('../resources/awardIcons/gold-icon.png') :
+                                        require('../resources/awardIcons/black-icon.png')} alt="locked award" />
+                                    <img src={!element.isCompetitionLocked && element.totalAward.silver ?
+                                        require('../resources/awardIcons/silver-icon.png') :
+                                        require('../resources/awardIcons/black-icon.png')} alt="silver award" />
+                                    <img src={!element.isCompetitionLocked && element.totalAward.bronze ?
+                                        require('../resources/awardIcons/bronze-icon.png') :
+                                        require('../resources/awardIcons/black-icon.png')} alt="bronze award" />
+                                </div>
+                            </Col>
+                        </Row>
+                    </div>
                     <Row>
                         <Col>
-                            <div className="shooting-award-left push-bottom hours-heading">
-                                My Total Score
+                            <div className="shooting-award-left">
+                                <div className="push-bottom-8px hours-heading">My Accuracy</div>
+                                <div id={index} className="active-border">
+                                    <div id={`circle${index}`} className="circle">
+                                        <label>0%</label>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="right push-bottom">
-                                {this.SetDigits(element.total, element.isCompetitionLocked)}
-                            </div>
+                            <div>{this.AnimateAccuracyCircle(1, element, index)}</div>
                         </Col>
                         <Col>
                             <div className="lay-horizontal scale-img">
-                                <img src={!element.isCompetitionLocked && element.totalAward.gold ?
+                                <img src={!element.isCompetitionLocked && element.accuracyAward.gold ? 
                                     require('../resources/awardIcons/gold-icon.png') :
-                                    require('../resources/awardIcons/black-icon.png')} alt="locked award" />
-                                <img src={!element.isCompetitionLocked && element.totalAward.silver ?
+                                    require('../resources/awardIcons/black-icon.png')} alt="gold award" />
+                                <img src={!element.isCompetitionLocked && element.accuracyAward.silver ? 
                                     require('../resources/awardIcons/silver-icon.png') :
                                     require('../resources/awardIcons/black-icon.png')} alt="silver award" />
-                                <img src={!element.isCompetitionLocked && element.totalAward.bronze ?
+                                <img src={!element.isCompetitionLocked && element.accuracyAward.bronze?
                                     require('../resources/awardIcons/bronze-icon.png') :
                                     require('../resources/awardIcons/black-icon.png')} alt="bronze award" />
                             </div>
                         </Col>
                     </Row>
                 </div>
-                <Row>
-                    <Col>
-                        <div className="shooting-award-left">
-                            <div className="push-bottom-8px hours-heading">My Accuracy</div>
-                            <div id={index} className="active-border">
-                                <div id={`circle${index}`} className="circle">
-                                    <label>0%</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div>{this.AnimateAccuracyCircle(1, element, index)}</div>
-                    </Col>
-                    <Col>
-                        <div className="lay-horizontal scale-img">
-                            <img src={!element.isCompetitionLocked && element.accuracyAward.gold ? 
-                                require('../resources/awardIcons/gold-icon.png') :
-                                require('../resources/awardIcons/black-icon.png')} alt="gold award" />
-                            <img src={!element.isCompetitionLocked && element.accuracyAward.silver ? 
-                                require('../resources/awardIcons/silver-icon.png') :
-                                require('../resources/awardIcons/black-icon.png')} alt="silver award" />
-                            <img src={!element.isCompetitionLocked && element.accuracyAward.bronze?
-                                require('../resources/awardIcons/bronze-icon.png') :
-                                require('../resources/awardIcons/black-icon.png')} alt="bronze award" />
-                        </div>
-                    </Col>
-                </Row>
-            </div>
+            </Container>
         )
     }
 
     RenderHoursIcons(){
         console.log(this.state.awardCompetitions.hoursAward)
         return(
-            <div className="lay-horizontal scale-img">
-                <img src={this.state.awardCompetitions[0].hoursAward.gold ?
-                    require('../resources/awardIcons/gold-icon.png') : require('../resources/awardIcons/black-icon.png')} alt="gold award" />
-                <img src={this.state.awardCompetitions[0].hoursAward.silver ?
-                    require('../resources/awardIcons/silver-icon.png') : require('../resources/awardIcons/black-icon.png')} alt="silver award" />
-                <img src={this.state.awardCompetitions[0].hoursAward.bronze ?
-                    require('../resources/awardIcons/bronze-icon.png') : require('../resources/awardIcons/black-icon.png')} alt="bronze award" />
+           
+                <div className="lay-horizontal scale-img">
+                    <img src={this.state.awardCompetitions[0].hoursAward.gold ?
+                        require('../resources/awardIcons/gold-icon.png') : require('../resources/awardIcons/black-icon.png')} alt="gold award" />
+                    <img src={this.state.awardCompetitions[0].hoursAward.silver ?
+                        require('../resources/awardIcons/silver-icon.png') : require('../resources/awardIcons/black-icon.png')} alt="silver award" />
+                    <img src={this.state.awardCompetitions[0].hoursAward.bronze ?
+                        require('../resources/awardIcons/bronze-icon.png') : require('../resources/awardIcons/black-icon.png')} alt="bronze award" />
                 </div>
-            )
+            
+        )
     }
 
     RenderAllCompetitionsStats(){
@@ -212,40 +240,47 @@ class UserProfile extends Component {
 
     render() {
         return (
-            <div>
-                <div className="row" style={{backgroundColor: "black"}}>
-                    <Col>
-                        <label className="username">
-                            {this.state.awardCompetitions.length > 0 ? this.state.awardCompetitions[0].username : null}    
-                        </label></Col>
-                </div>
-                <Container>
-                    <div className="member-number white-text">
-                        <label className="light-weight">Membership No:<span id="member-number-span">{this.state.awardCompetitions.length > 0 ?
-                            this.state.awardCompetitions[0].membershipNumber : null}</span>
-                        </label>
+            <Container>
+                <div>
+                    <div className="row" style={{backgroundColor: "black"}}>
+                        <Col>
+                            <label className="username">
+                                {this.state.awardCompetitions.length > 0 ? this.state.awardCompetitions[0].username : null}    
+                            </label>
+                        </Col>
                     </div>
-                    <div className="page-title white-text"><label>Awards & Statistics</label></div>
-                    <div className="restrict-row-height">
-                        <Row>
-                            <Col>
-                                <div className="hours-award">
-                                    <div className=" hours-heading white-text"><label>Hours Shooting</label></div>
-                                    <div className="lay-horizontal center">
-                                        {/*make hours dynamic*/}
-                                        {this.state.awardCompetitions.length > 0 ?
-                                            this.SetDigits("0900") : this.SetDigits(null)}
+                    <div>
+                        <div className="member-number white-text">
+                            <label className="light-weight">Membership No:<span id="member-number-span">{this.state.awardCompetitions.length > 0 ?
+                                this.state.awardCompetitions[0].membershipNumber : null}</span>
+                            </label>
+                        </div>
+                        <div className="page-title white-text"><label>Awards & Statistics</label></div>
+                        <Container>
+                        <div className="restrict-row-height">
+                            <Row>
+                                <Col className="remove-padding-right inherit-height">
+                                    <div>
+                                        <div className="hours-heading white-text">
+                                            <label className="light-weight">Hours Shooting</label>
+                                        </div>
+                                        <div className="lay-horizontal center">
+                                            {/*make hours dynamic*/}
+                                            {this.state.awardCompetitions.length > 0 ?
+                                                this.SetDigits("0900") : this.SetDigits(null)}
+                                        </div>
                                     </div>
-                                </div>
-                            </Col>
-                            <Col>
-                                {this.state.awardCompetitions.length > 0 && this.state.awardCompetitions[0].hoursAward != null ? this.RenderHoursIcons() : null}
-                            </Col>
-                        </Row>
+                                </Col>
+                                <Col className="inherit-height">
+                                    {this.state.awardCompetitions.length > 0 && this.state.awardCompetitions[0].hoursAward != null ? this.RenderHoursIcons() : null}
+                                </Col>
+                            </Row>
+                        </div>
+                        </Container>
+                        {this.state.awardCompetitions.length > 0 ? this.RenderAllCompetitionsStats() : null}
                     </div>
-                    <div>{this.state.awardCompetitions.length > 0 ? this.RenderAllCompetitionsStats() : null}</div>
-                </Container>
-            </div>
+                </div>
+            </Container>
         )
     }
 }

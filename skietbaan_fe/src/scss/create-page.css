@@ -26,12 +26,8 @@
 /**This is to be removed as it collides with the rest of everyone's component*/
 body{background-color: #504F51;}
 
-.container{
-    background: transparent;
-    min-width: width 80%;
-}
-
 .create-page-header{
+    
     min-width: 95%;
 }
 /** The button to create [Competition, Groups, Member]*/
@@ -41,7 +37,7 @@ body{background-color: #504F51;}
     font: helvetica;
     text-align: center;
     border-radius: 50px;
-    width: 150px;
+    width: 127px;
     height: 42px;
     font-size: 16px;
     color: #0c0c0c;
@@ -103,10 +99,3 @@ body{background-color: #504F51;}
     font-weight: lighter;
     text-align: center;
 }
-
-.col{
-    min-height: 50px;
-    margin-left: inherit;
-}
-
-

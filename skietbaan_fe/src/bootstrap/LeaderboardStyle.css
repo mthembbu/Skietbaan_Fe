@@ -1,152 +1,372 @@
 .container{
     min-width: 100%;
 }
-.leaderboardContainer{
-    background-color: aqua;
-    height: -webkit-fill-available !important;  
-    background-color: rgb(212, 212, 212);
+.App{
+    height: -webkit-fill-available;
 }
-.leaderboardContainer .row justify-content-center{
-   background-color: white !important;
- }
-.filterSection{
-    background-color: #171F32;
-    color: white;
-    width: 100%;
-}
-.filterTableAlwaysVisible{
-    width:100%;
-}
-.filterContent{
-    background-color: #171F32;
-    color: white;
-    width: 100%;
-    padding-left: 3%;
-    padding-right: 3%;
-    align-content: center;
-}
-.CompetitionName{
-    background-color: white;
-}
-.row div p{
-    color: #FF611D;
-}
-.row div .scrollableContainerC{
-    overflow-y: auto;
-    height: 150px;
-}
-.row .table td{
-  border: 0px;
-}
-.row div .scrollableContainerG{
-    overflow-y: auto;
-    height: 150px;
-}
-.container h4{
-    color: #FF611D;
-}
-.filterContent hr{
-    color: #FF611D;
-    background-color: #FF611D;
-}
-.row .table thead{
-    padding-left: 2%;
-    background-color: #171F32;
-    color: white;
-}
-.row .table td{
-    padding-right: 3%;
-}
-.row .table{
-    margin: 0px;
-}
-.nav-link{
-    color: white;
-}
-.firstcoll{
-   text-align: center
-}
-.curentMember{
-    background-color: #171F32 !important;background-image: linear-gradient(-90deg, #FF611D, #171F32);
-    color: white !important;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 0%;
-}
-.curentMember table{
-    background-image: linear-gradient(-90deg, #FF611D, #171F32);
-}
-.curentMember table td{
-    padding: 0% !important;
-}
-.filters{
-    background-image: linear-gradient(-90deg, #FF611D, #171F32);
-}
-.body{
-    background-color: #171F32 !important;
-    width: 100%;
-}
-.row{
-    width: 100%;
-    margin: 0% !important;
-}
-.leaderboardContainer{
-    width: 100% !important;
-    height: 100%;
-}
-.rankingTableContainer{
-    width: 100%;
-}
-.rankingTableHeader{
-    width: 100%;
-    background-color: #171F32 !important;
-}
-.rankTableHead{
-    color:white;
-    background-color: #171F32 !important;
-}
-.rankTableBody{
-    color:black;
-    background-color: transparent;
-    width: -webkit-fill-available;
-    height: 100%;
-    overflow-y: scroll !important;
 
-}
-.rankTableHead table{
-    width: -webkit-fill-available;
-}
-.rankTableHead table td{
-    padding: 0%;
+/* Leaderboard Page Main Container */
+.leaderboardContainer{
+   background-color: #fdfdfd;
+   height: -webkit-fill-available;
+ }
+
+ /* Competition name section styles*/
+ .CompetitionName{
+    background-color: #0c0c0e;
+    color: #fdfdfd;
+    height: 49px;
+    width: 100%;
     text-align: center;
-    padding-left: 2%;
+    font-size: 25px;
+    font-family: helvetica;
+    font-weight: bold;
+    padding-top: 2%;
 }
-.invisibleCol{
-    color: transparent !important;
-}
-.rankUsernameRowTable{
-    width: -webkit-fill-available;
-}
-.rankUsernameRowTable td{
-   padding-left: 3%;
-   text-align: center;
-}
-.rankScoresRowTable{
-    width: -webkit-fill-available;
-}
-.rankScoresRowTable tr .invisibleCol{
-   color: transparent !important;
-}
-.rankScoresRowTable tr td{
-    text-align: center;
- }
- .rankingNumberCol{
-     width: 20%;
-     padding-left: 10%;
-     text-align: center !important;
- }
- .usernameCol{
-    text-align: left !important;
- }
+ /* end of Competition name section styles*/
+ 
+ /* FilterSection*/ 
+    /*open filter section*/
+    .OpenFilterSection{
+        height: 57px;
+        width: 100%;
+        background-color: #fdfdfd;
+        color: #0c0c0e;
+    }
+    .OpenFilterSection .FilterTable{
+        width: 100%;
+        height: 100%;
+    }
+    .OpenFilterSection .FilterTable tr .FilterIconCol{
+        width:25%;
+        height: 100%;
+    }
+    .OpenFilterSection .FilterTable tr .FilterLabelsCol{
+        width:75%;
+        height: 100%;
+    }
+    .OpenFilterSection .FilterTable tr .FilterLabelsCol .selectCompetition{
+        font-family: helvetica;
+        font-size: 18px;
+        font-weight: lighter;
+        padding-left:5%;
+    }
+    .OpenFilterSection .FilterTable tr .FilterIconCol .FilterIcon{
+        width:100%;
+        height: 100%;
+        text-align: center;
+    } 
+    .OpenFilterSection .FilterTable tr .FilterIconCol .FilterIcon *{
+        width:100%;
+        height: 100%;
+    }
+    .OpenFilterSection .FilterTable tr .FilterIconCol .FilterIcon a i{
+        font-size: -webkit-xxx-large ;
+        font-weight: lighter;
+        width: 37px;
+        height: 34px;
+    }
+    .FilterSelections{
+        width:100%;
+        height:-webkit-fill-available;
+        background-color:#fdfdfd;
+        color: #0c0c0e;
+        font-family: helvetica;
+        margin: auto;
+    }
+    /*competitionsList Container*/
+    .FilterSelections .row .competitionsTable{
+        width: 75%;
+        height: 60px;
+        overflow-y: scroll;
+        border-collapse: separate;
+        border-spacing: 5px;
+    }
+    .FilterSelections .row .competitionsTable tr td{
+        width: 144px;
+        height: 30px;
+        border: solid;
+        border-radius: 10px;
+        border-color: black;
+        text-align: center;
+        border-width: thin;
+    }
+    .FilterSelections .row .competitionsTable tr td:hover{
+        background-color:#e11e2b;
+        color: #fdfdfd;
+    }
+    .FilterSelections .row .competitionsTable tr td:active{
+        background-color:#e11e2b;
+        color: #fdfdfd;
+    }
+    /*GroupsList Container*/
+    .FilterSelections .row .Groups{
+        width: 75%;
+        height: 300px;
+    }
+    .categoriesLabels{
+        display: inline-flex;
+        width: 75%;
+        margin: auto;
+    }
+    .categoriesLabels .groupsLabel{
+        text-align: center;
+        width: 50%;
+        font-weight: bold;
+    }
+    .categoriesLabels .singleLabel{
+        text-align: center;
+        width: 50%;
+        font-weight: bold;
+    }
+    .groupsSlection{
+        display:inline-flex;
+        width: 100%;
+    }
+    .groupsSlection .GroupsList{
+        text-align: center;
+        width: 50%;
+        height: 180px;
+        overflow-y: scroll;
+        overflow-x: auto;
+    }
+    .groupsSlection .GroupsList .groupsTable{
+        overflow-y: scroll;
+        border-collapse: separate;
+        border-spacing: 5px;
+    }
+    .groupsSlection .GroupsList .groupsTable tr td{
+        width: 144px;
+        height: 30px;
+        padding: 0%;
+        padding-top: 2%;
+        border: solid;
+        border-radius: 10px;
+        border-color: black;
+        border-width: thin;
+    }
+    .groupsSlection .GroupsList .groupsTable tr td:hover{
+        background-color:#e11e2b;
+        color: #fdfdfd;
+    }
+    .groupsSlection .GroupsList .groupsTable tr td:active{
+        background-color:#e11e2b;
+        color: #fdfdfd;
+    }
+    .groupsSlection .Single{
+        width: 144px;
+        height: 30px;
+        text-align: center;
+        width: 50%;
+        font-weight: lighter;
+        border: solid;
+        border-color: #0c0c0e;
+        border-radius: 10px;
+        margin: 1%;
+        height: fit-content;
+        border-width: thin;
+        margin-top: 2%;
+    }
+    .groupsSlection .Single:hover{
+        background-color:#e11e2b;
+        color: #fdfdfd;
+    }
+    .groupsSlection .Single:active{
+        background-color:#e11e2b;
+        color: #fdfdfd;
+    }
+    /*closed filter section*/
+    .ClosedFilterSection{
+        height: 57px;
+        width: 100%;
+        background-color: #fdfdfd;
+        color: #0c0c0e;
+    }
+    .ClosedFilterSection .FilterTable{
+        width: 100%;
+        height: 100%;
+    }
+    .ClosedFilterSection .FilterTable tr .FilterIconCol{
+        width:25%;
+        height: 100%;
+    }
+    .ClosedFilterSection .FilterTable tr .FilterLabelsCol{
+        width:75%;
+        height: 100%;
+        font-family: helvetica;
+    } 
+    .ClosedFilterSection .FilterTable tr .FilterLabelsCol .HeadTableLabels{
+        width: 100%;
+        height: 100%;
+    }
+    .ClosedFilterSection .FilterTable tr .FilterLabelsCol .HeadTableLabels tr .GroupNameCol{
+        font-weight: lighter;
+        font-size: 17px;
+    }
+    .ClosedFilterSection .FilterTable tr .FilterLabelsCol .HeadTableLabels tr .ScoreColLeft{
+        font-weight: lighter;
+        font-size: 15px;
+        text-align: left;
+        width: 25%;
+    }
+    .ClosedFilterSection .FilterTable tr .FilterLabelsCol .HeadTableLabels tr .ScoreColCenter{
+        font-weight: lighter;
+        font-size: 15px;
+        text-align: center;
+        width: 25%;
+    }
+    .ClosedFilterSection .FilterTable tr .FilterIconCol .FilterIcon{
+        width:100%;
+        height: 100%;
+        text-align: center;
+        padding-top: 6%;
+    } 
+    .ClosedFilterSection .FilterTable tr .FilterIconCol .FilterIcon *{
+        width:100%;
+        height: 100%;
+    }
+    .ClosedFilterSection .FilterTable tr .FilterIconCol .FilterIcon a{
+        width: fit-content;
+        height: auto;
+    }
+    .ClosedFilterSection .FilterTable tr .FilterIconCol .FilterIcon a img{
+        width: 37px;
+        height: 34px;
+    }
+/* end of filter section*/
+/* Ranking table section */
+    .RankingTableSection{
+        height: -webkit-fill-available;
+        width: 100%;
+        background-color: #504f51;
+        color: #fdfdfd;
+        overflow-y: scroll;
+    }
+    .RankingTableSection .RankingTable{
+        height: 100%;
+        width: 100%;
+        overflow-y: scroll;
+    }
+    .RankingTableSection .RankingTable .rankRow{
+        height: 66px;
+        width: 100%;
+        border-bottom: solid;
+        border-bottom-width: thin;
+        border-bottom-style: outset;
+    }
+    .RankingTableSection .RankingTable .rankRow .RankIconCol{
+        height: 100%;
+        width: 25%;
+        text-align: center;
+    }
+    .rankNumberContainer{
+        text-align: -webkit-center;
+    }
+    .rankNumberContainer .rankNumTable .tr{
+        width: 15px;
+     }
+    .rankNumberContainer .rankNumTable .upArrow{
+        height: 5px
+    }
+    .rankNumberContainer .rankNumTable .Icon{
+       width: 15px;
+       height: 15px;
+    }
+    .rankNumberContainer .rankNumTable .Icon img{
+        width: 25px;
+        height: 25px
+     }
+    .rankNumberContainer .rankNumTable .downArrow{
+        height: 5px
+    }
+    .RankingTableSection .RankingTable .rankRow .RankIconCol .RankContainer{
+        height: 100%;
+        width: 100%;
+    }
+    .RankingTableSection .RankingTable .rankRow .RankLabelsCol{
+        height: 100%;
+        width: 75%;
+        text-align: center
+    }
+    .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels{
+        height: 100%;
+        width: 100%;
+    }
+    .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr{
+        height: 33px;
+        width: 100%;
+    }
+    .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .UsernameCol{
+        width: 100%;
+        height: 100%;
+        font-weight: bold;
+        font-size: 15px;
+        text-align: left;
+    }
+    .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColLeft{        
+        width: 25%;
+        height:100%;
+        font-weight: lighter;
+        font-size: 15px;
+        text-align: left;
+    }
+    .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColCenter{        
+        height:100%;
+        font-weight: lighter;
+        font-size: 15px;
+        text-align: center;
+        width: 25%;
+    }
+    
+    
+/* Cunrent User table section*/
+    .CurrentUserTableSection{
+        height: 66px;
+        width: 100%;
+        background-color: #e11e2b;
+        color: #fdfdfd;
+        
+    }
+    .CurrentUserTableSection .RankingTable{
+        width: 100%;
+    }
+    .CurrentUserTableSection .RankingTable .rankRow .RankIconCol .RankContainer{
+        height: 100%;
+        width: 100%;
+    }
+    .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol{
+        height: 100%;
+        width: 75%;
+        text-align: center;
+    }
+    .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels{
+        height: 100%;
+        width: 100%;
+    }
+    .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr{
+        height: 33px;
+        width: 100%;
+    }
+    .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .UsernameCol{
+        width: 100%;
+        height: 100%;
+        font-weight: normal;
+        font-size: 17px;
+        text-align: left;
+    }
+    .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColLeft{        
+        width: 25%;
+        height:100%;
+        font-weight: bold;
+        font-size: 17px;
+        text-align: left;
+    }
+    .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColCenter{        
+        height:100%;
+        font-weight: bold;
+        font-size: 17px;
+        text-align: center;
+        width: 25%;
+    }   
+ /* end of filter section*/
+

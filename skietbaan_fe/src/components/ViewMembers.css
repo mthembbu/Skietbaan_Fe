@@ -7,10 +7,6 @@
     }
   }
 
-  .col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-10,.col-11,.col-12{
-    float:left;
-  }
-
   .centre-view-member{
     margin:0 auto;
     position: center;
@@ -36,7 +32,7 @@
   .go-back-to-create-page{
     float: left;
     padding-top: 10px;
-    padding-left: 10px;
+    padding-left: 35px;
     background-size: 15px;
     height: 40px;
   }
@@ -93,15 +89,18 @@
   }
 
   .view-members{
-    size:49px;
+    size: 49px;
     padding-top: 7px;
-    font-weight: bolder;
-    font-size: 26px;
+    font-weight: bold;
+    font-size: 25px;
+    font-family: helvetica;
     color: #fdfdfd;
+    padding-right: 50px;
   }
 
   .view-members-user{
     border-bottom: solid 2px #bbbcbd;
+    height: 55px;
   }
 
   .view-members-user::selection{
@@ -115,10 +114,12 @@
   .first-column{
     padding-left: 30px;
     width: 65%;
+    height: 55px;
   }
 
   .username-and-email{
-    width: 80%;
+    font-size: 16px;
+    height: 55px;
   }
 
   .bad{
@@ -132,4 +133,15 @@
 
   .second-column{
     vertical-align: top;
+    height: 55px;
+  }
+  
+  .expiry-time-column{
+    font-size: 15px;
+    height: 55px;
+  }
+
+  .membership-details{
+    font-size: 13px;
+    height: 55px;
   }

@@ -47,7 +47,7 @@
 }
 
 .hours-heading{
-    font-size: 21px;
+    font-size: 20px;
     font-weight: lighter;
 }
 
@@ -57,7 +57,6 @@
 
 .lay-horizontal{
     display: flex;
-    justify-content: inherit;
 }
 
 .right{
@@ -65,11 +64,6 @@
 }
 .center{
     justify-content: center;
-}
-
-.shooting-award h3{
-    text-align: left;
-    margin-bottom:  10px;
 }
 
 .month-award{
@@ -163,7 +157,7 @@
 }
 
 .restrict-row-height .row{
-    height: 120px;
+    height: 100px;
 }
 
 .float-left{
@@ -199,4 +193,28 @@
 .locked-icon img{
     width: 20px; 
     height: 25px;
+}
+
+.my-container{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.inherit-height{
+    height: inherit;
+}
+
+.remove-padding-right{
+    padding-right: -10px;
+}
+
+.competition-name-size{
+    font-size:  24px;
+}
+
+.font-size-14px{
+    font-size: 14px;
 }
