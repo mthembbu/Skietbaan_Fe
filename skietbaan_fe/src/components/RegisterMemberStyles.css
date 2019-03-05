@@ -7,16 +7,6 @@
     }
   }
 
-  .content-of-page{
-    background-color: #504f51;
-    width: 100%;
-    height: 100vh;
-  }
-
-  .col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-10,.col-11,.col-12{
-    float:left;
-  }
-
   .centre-register-member{
     margin:0 auto;
     position: center;
@@ -25,6 +15,7 @@
 
   @media screen and (min-width:768px)  {
   .centre-register-member{
+    width: 700px;
     left: 400px;
     top:100px;
   }
