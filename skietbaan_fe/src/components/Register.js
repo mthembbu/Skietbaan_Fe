@@ -27,12 +27,6 @@ class Register extends Component {
     this.togglePassword = this.togglePassword.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.goToLogin = this.goToLogin.bind(this);
-    this.getUsers = this.getUsers.bind(this);
-  }
-
-  getUsers() {
-    let self = this;
-
   }
 
   componentDidMount() {
@@ -46,8 +40,7 @@ class Register extends Component {
       .then(response => response.json())
       .then(data => this.setState({
         users: data,
-      }),
-        console.log(this.state.users))
+      }))
       .catch(function (data) {
         console.log("error")
       });
