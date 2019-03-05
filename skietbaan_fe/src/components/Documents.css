@@ -1,12 +1,35 @@
 .documents-container{
-    background-color: #504f51;
+    background-color: #fdfdfd;
 }
 
 .page-name{
-    background-color:#0c0c0E;
     align-content: center;
     text-align: center;
     height: 49px;
+    width: 123px;
+}
+
+.docuements-heading{
+    text-align: center;
+    align-content: center;
+    background-image: linear-gradient(to right, #ef3024  , #Dc0600);
+    height: 57px;
+    padding-left: 100px;
+    margin-bottom: 15px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: -2px 0px 14px -1px #674D4D;
+}
+
+.documents-text{
+
+    color: #fdfdfd;
+    padding-top: 15px;
+    padding-right: 90px;
+    font-size: 20px;
+    font-family: helvetica;
+    font-weight: bolder;
+
 }
 .page-name2{
     font-family: Helvetica;
@@ -14,22 +37,18 @@
     font-size: 25px;
     color: #fdfdfd;
 }
-.resize {
-    height: 14px;
-    width: 60px;
-  }
-
 .btn-default {
     font-weight: lighter;
     font-size: 16px;
-    color: #fdfdfd;
+    color: #6F839E;
     letter-spacing: 1px;
     line-height: 15px;
-    border: 2px solid #e11e2b;
+    border: 1px solid #6F839E;
     border-radius: 40px;
-    background: #504f51;
+    background: #fdfdfd;
     transition: all 0.3s ease 0s;
   }
+  
 
   .btn-active {
     font-weight: lighter;
@@ -37,9 +56,9 @@
     color: #fdfdfd;
     letter-spacing: 1px;
     line-height: 15px;
-    border: 2px solid #e11e2b;
+    border: 2px solid #6F839E;
     border-radius: 40px;
-    background: #e11e2b;
+    background: #6F839E;
     transition: all 0.3s ease 0s;
   }
   .send-button {
@@ -52,24 +71,25 @@
     height: 42px;
   }
 
-  .btn-bottom-2{
-    width: 180px;
+.btn-bottom-2{
+    width: 250px;
     height: 42px;
     
 }
-.btn-bottom-3{
-    
-    width: 230px;
+
+.btn-bottom-3{    
+    width: 300px;
     height: 42px;
 }  
+
 .documents-body{
-    background-color: #504f51;
+    background-color: #fdfdfd;
 }
 .button-upload-document-3{
     font-weight: lighter;
     text-align: center;
     align-content:center;
-    padding-top: 5%;
+    padding-top: 8px;
 }
 
 .button-upload-document-2{
@@ -77,14 +97,15 @@
     font-size: 20px;
     text-align: center;
     align-content:center;
-    padding-top: 5%;
+    padding-top: 22px;
 }
 
 .label-select-document{
-    padding-top: 5%;
-    font-weight: lighter;
-    font-size: 20px;
-    color: #fdfdfd;
+    padding-top: 62px;
+    font-family: Helvetica;
+    font-weight: bolder;
+    font-size: 18px;
+    color: #6F839E;
     text-align: center;
     align-content:center;
 }
@@ -95,10 +116,25 @@
     align-content:center;
 }
 
-.button-upload-document{ 
-    padding-bottom: 5%;
+
+.document-requirements3{ 
+    padding-top: 8px;
+    font-weight: lighter;
     text-align: center;
-    align-content:center;
+    font-size: 16px;
+    color: #6F839E;
+    padding-left: 42px;
+    padding-right: 42px;    
+}
+
+.document-requirements4{ 
+    text-align: center;
+    padding-top: 22px;
+    font-weight: lighter;
+    font-size: 16px;
+    color: #6F839E;
+    padding-left: 42px;
+    padding-right: 42px;    
 }
 
 .testing-align{
