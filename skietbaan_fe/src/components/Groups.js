@@ -79,7 +79,7 @@ class Groups extends Component {
       for (var i = 0; i < this.state.posts.length; i++) {
         newarry[i].highlighted = true;
       }
-      this.setState({ check: "Unselect" });
+      this.setState({ check: "Unselect all" });
       this.setState({ posts: newarry });
     } else {
       for (var i = 0; i < this.state.posts.length; i++) {
@@ -162,7 +162,7 @@ class Groups extends Component {
             autoComplete="off"
           />
           <button
-            className={this.state.count == 0 ? "select" : "select2"}
+            className={this.state.check=="Select all" ? "select" : "select2"}
             id="check"
             onClick={this.selectall}
           >

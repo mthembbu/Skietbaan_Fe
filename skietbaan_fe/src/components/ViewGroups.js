@@ -56,7 +56,8 @@ class ViewGroups extends Component {
       index: indexs,
       selected: name,
       ShowMe: false,
-      posts: newarry
+      posts: newarry,
+      ShowMe:false
     });
   };
 
@@ -83,15 +84,18 @@ class ViewGroups extends Component {
   };
 
   do = () => {
-    const newarry = [...this.state.posts];
-    newarry[this.state.index].colors = "black";
+    // const newarry = [...this.state.posts];
+    // newarry[this.state.index].colors = "black";
     if (this.state.ShowMe == false) {
       this.setState({ ShowMe: true });
     }
   };
 
   cancel = () => {
-    this.setState({ selected: "" });
+
+    const newarry = [...this.state.posts];
+   newarry[this.state.index].colors = "black";
+    this.setState({ selected: "" ,posts:newarry});
   };
 
   handleOnClick = () => {};
@@ -152,7 +156,7 @@ class ViewGroups extends Component {
         >
           {postitems}
         </div>
-
+      {this.state.ShowMe?null:
         <div className="bpanel">
           <table className="group-delete-table">
             <tbody>
@@ -179,7 +183,7 @@ class ViewGroups extends Component {
               </tr>
             </tbody>
           </table>
-        </div>
+        </div>}
       </main>
     );
   }

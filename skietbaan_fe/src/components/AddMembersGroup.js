@@ -10,7 +10,8 @@ class AddMembersGroup extends Component {
       posts: [],
       newArray: [],
       filterText: "",
-      selected: ""
+      selected: "",
+      count: 0
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -25,7 +26,6 @@ class AddMembersGroup extends Component {
         .then(data => {
           this.setState({
             posts: data.map(users => {
-              users.highlighted = false;
               return {
                 ...users,
                 highlighted: false
@@ -36,7 +36,6 @@ class AddMembersGroup extends Component {
     } else {
       
         this.props.history.push("/ViewGroups");
-      //  window.location = "/ViewGroups"
        
     }
   }
@@ -81,8 +80,6 @@ class AddMembersGroup extends Component {
   };
   onBack() {
      this.props.history.push("/EditGroup");
-    // window.location = "/EditGroup"
-
   }
   render() {
     const postitems = (
@@ -158,7 +155,7 @@ class AddMembersGroup extends Component {
             </button>
           </div>
         </div>
-
+        {this.state.count == 0 ?null:
         <div className="bpanel">
           <table className="group-delete-table">
             <tbody>
@@ -183,7 +180,7 @@ class AddMembersGroup extends Component {
               </tr>
             </tbody>
           </table>
-        </div>
+        </div>}
       </main>
     );
   }
