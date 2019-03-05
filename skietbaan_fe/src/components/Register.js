@@ -90,7 +90,11 @@ class Register extends Component {
         }
       };
       }
-      if(this.state.usernameValue && this.state.passwordValue && this.state.emailValue && validateEmail(this.state.emailValue) && !stateUpdate.invalidUsername){
+      if(this.state.usernameValue 
+        && this.state.passwordValue 
+        && this.state.emailValue 
+        && validateEmail(this.state.emailValue) 
+        && !stateUpdate.invalidUsername){
         isValid = true;
     }
     this.setState({
