@@ -87,8 +87,8 @@
     width: 22px;
     color: #0e0942;
     float: right;
-    margin-top: -37px;
-    margin-right: 17%;
+    margin-top: -30px;
+    margin-right: 36px;
 }
 
 .invalidComp{
@@ -97,9 +97,8 @@
     height: 22px;
     width: 22px;
     float: right;
-    margin-top: -36px;
-    padding-right: 2px;
-    margin-right: 28px;
+    margin-top: -30px;
+    margin-right: 36px;
 
 }
 
@@ -330,7 +329,7 @@ hr{
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    background-image: url("../components/assets/FlashOn.png");
+    background-image: url("../components/assets/grayFlashOn.png");
 }
 
 .flashOff{
@@ -338,7 +337,7 @@ hr{
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    background-image: url("../components/assets/FlashOff.png");
+    background-image: url("../components/assets/grayFlashOff.png");
 }
 
 .label-container{

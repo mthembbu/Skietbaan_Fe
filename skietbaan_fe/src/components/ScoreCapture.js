@@ -27,8 +27,9 @@ export default class search extends Component {
       validScore: true,
       validCompetition: true,
       scoreEntered:false,
-      iconhouseUrl : '../components/assets/FlashOff.png'
+      iconhouseUrl : '../components/assets/grayFlashOff.png'
     }
+
     this.CompetitionClicked = this.CompetitionClicked.bind(this);
     this.handleScore = this.handleScore.bind(this);
     this.TakePhoto = this.TakePhoto.bind(this);
@@ -336,7 +337,9 @@ export default class search extends Component {
 
       }
     }
-
+    if(!getCookie("token")){
+      window.location = "/register-page";
+    }
     return (
       <div className="position-relative">
         <div className={stateOne ? "page-content-video" : "page-content"}>
@@ -346,7 +349,7 @@ export default class search extends Component {
               <div className="centre-label">
                 <label className="scorelabel">Type in score</label>
               </div>
-              <div className={this.state.validScore ? "hidden" : "invalidScore"}>.</div>
+              <div className={this.state.validScore ? "hidden" : "invalidScore"}></div>
               <div className="input-container">
                 <input type="number" id="scoreInput" min="0" step="1" name="score" className="score"
                   onChange={this.handleScore}></input>
@@ -381,7 +384,7 @@ export default class search extends Component {
             <div className={(this.state.showCamera && !this.state.ImageTaken) 
               || this.state.ImageTaken || !this.state.scoreEntered ? "hidden" : "submit-button-elements"}>
               <div className="button-hover ">
-                <img src={require('../components/assets/submitScore.png')} onClick={() => this.GetLocation()}
+                <img src={require('../components/assets/graySubmit.png')} onClick={() => this.GetLocation()}
                   className="button-that-submits" alt=''></img>
               </div>
               <label className="labelIcon">Submit</label>
@@ -389,14 +392,14 @@ export default class search extends Component {
             <div className="icon-pushdown no-margin">
             <div className={!this.state.ImageTaken ? "hidden" : "submit-button-elements third float-right"}>
                 <div className="button-hover ">
-                  <img src={require('../components/assets/submitScore.png')} onClick={() => this.GetLocation()}
+                  <img src={require('../components/assets/graySubmit.png')} onClick={() => this.GetLocation()}
                     className="button-that-submits" alt=''></img>
                 </div>
                 <label className="labelIcon">Submit</label>
               </div>
               <div className={this.state.ImageTaken ? "submit-button-elements third float-right" : "hidden"} >
                 <div className="button-hover">
-                  <img src={require('../components/assets/retakeImage.png')}
+                  <img src={require('../components/assets/grayRetry.png')}
                     id="btnScoreCapture" className="retake" onClick={() => this.RetakePhoto()}
                     alt=''>
                   </img>
