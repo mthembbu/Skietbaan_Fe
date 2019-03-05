@@ -18,11 +18,11 @@
   }
 
   .search-member-name{
-    background-color: #171F32;
+    background-color: white;
   }
 
   .table-search-members{
-    background-color: #171F32;
+    background-color: white;
   }
 
   .page-name-view{
@@ -39,7 +39,7 @@
   .go-back-to-create-page{
     float: left;
     padding-top: 10px;
-    padding-left: 35px;
+    padding-left: 40px;
     background-size: 15px;
     height: 40px;
     margin-top: 3px;
@@ -87,10 +87,10 @@
     width: 300px;
   }
 
-  .go-back-to-creat-page{
+  .go-back-to-create-page-from-view-members{
     float: left;
     padding-top: 10px;
-    padding-left: 25px;
+    padding-left: 40px;
     background-size: 15px;
     height: 40px;
   }
@@ -108,7 +108,7 @@
     font-weight: bold;
     font-size: 20px;
     color: #fdfdfd;
-    padding-right: 22px;
+    padding-right: 52px;
   }
 
   .view-members-user{
@@ -157,4 +157,10 @@
   .membership-details{
     font-size: 13px;
     height: 55px;
+  }
+
+  .membership-icon{
+    height: 17px;
+    width: 17px;
+    margin-left: 4px;
   }

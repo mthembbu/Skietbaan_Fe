@@ -10,12 +10,12 @@
   .centre-register-member{
     margin:0 auto;
     position: center;
-    background-color: #504f51;;
+    background-color: white;
   }
 
   @media screen and (min-width:768px)  {
   .centre-register-member{
-    width: 700px;
+    width: 100%;
     left: 400px;
     top:100px;
   }
@@ -37,8 +37,8 @@
     text-align: center;
     height: 60px;
     line-height: 36px;
-    background-color: #504f51;
-    padding-top: 15px;
+    background-color: white;
+    padding-top: 8px;
   }
 
   .table-search-users{
@@ -48,14 +48,17 @@
   }
   
   .membership-number{
-    padding-top: 35px;
+    display:inline-block;
+    padding-top: 31px;
     text-align: left;
-    color:white;
+    color: #798CA5;
     font-size: 18px;
+    font-weight: 900;
   }
 
   .expiry-date-member{
-    padding-top: 16px;
+    display:inline-block;
+    padding-top: 31px;
     text-align: left;
     color: white;
   }
@@ -63,31 +66,31 @@
   .create-member{
     position: center;
     text-align: center;
+    padding-top: 108px;
   }
 
   .expdate{
     border-radius: 6px;
-    width: 149px;
-    height: 42px;
+    width: 202px;
+    height: 39px;
     text-align: center;
     border: none;
     font-size: 18px;
-    font-weight: lighter;
-    color: black;
-    text-align: center;
+    font-weight: bold;
+    color: #6B6B6C;
+    background-color: #F3F4F9;
+    border: 1.5px #798CA5 solid;
   }
 
   .create-button{
     display: inline-block;
     border-radius: 18px;
-    border: 1.5px red solid;
-    background-color: #504f51;
-    color: #bbbcbd;
-    margin-top: 100px;
+    border: 1.5px #798CA5 solid;
+    background-color: #798CA5;
+    color: white;
     width: 152px;
     height: 38px;
     font-size: 16px;
-
   }
 
   .username{
@@ -102,17 +105,20 @@
     border: none;
     font-size: 18px;
     color: #6B6B6C;
+    border: 1.5px #798CA5 solid;
   }
 
   .membershipID{
     border-radius: 6px;
-    width: 149px;
-    height: 42px;
+    width: 202px;
+    height: 39px;
     text-align: center;
     border: none;
     font-size: 18px;
-    font-weight: lighter;
-    color: black;
+    font-weight: bold;
+    color: #6B6B6C;
+    background-color: #F3F4F9;
+    border: 1.5px #798CA5 solid;
   }
 
   .search{
@@ -120,18 +126,19 @@
   }
 
   .create-members{
-    size:49px;
-    padding-top: 7px;
+    size: 49px;
+    padding-top: 10px;
     font-weight: bolder;
     font-size: 20px;
     color: #fdfdfd;
+    padding-right: 52px;
   }
 
   .div-label-enter-user-name{
     text-align: center;
     color: white;
-    padding-top: 15px;
-    font-size: 26px
+    padding-top: 56px;
+    font-size: 26px;
   }
 
   .label-enter-user-name{
@@ -147,7 +154,7 @@
     font-size: 16px;
     border-radius: 10px;
     border: none;
-    background-color: #504f51;
+    background-color: white;
     position: absolute;
   }
 
@@ -157,9 +164,11 @@
   }
   
   .register-member-user-column{
-    background-color: white;
+    background-color: #798CA5;
+    color: white;
     border-radius: 10px;
     border: none;
+    padding-left: 10px;
   }
   
   .actives{
@@ -189,12 +198,14 @@
 
   .membership-expiry-date{
     font-size: 18px;
-    font-weight: lighter;
+    font-weight: bold;
+    color: #8899B0;
   }
 
   .membership-id-number{
     font-size: 18px;
     font-weight: lighter;
+    color: #8899B0;
   }
 
   .hide-create-button{
@@ -206,9 +217,26 @@
   }
 
   .container-labels{
-    text-align: left;
+    text-align: center;
   }
 
   .input-spacing{
     text-align: center;
+  }
+
+  .hide-membership-number{
+    display:none;
+  }
+
+  .hide-expiry-date-member{
+    display:none;
+  }
+
+  .go-back-to-create-page-from-create-member{
+    float: left;
+    padding-top: 10px;
+    padding-left: 40px;
+    background-size: 15px;
+    height: 40px;
+    margin-top: 3px;
   }

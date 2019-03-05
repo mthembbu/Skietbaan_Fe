@@ -114,6 +114,8 @@ class App extends Component {
       })
       .then(function (data) { })
       .catch(function (data) { });
+
+      window.location = "/viewmembers";
   }
 
   GetDate() {
@@ -168,7 +170,7 @@ class App extends Component {
           <div className="page-name-create-members">
             <div className="image-comtainer">
               <img src={require('../components/assets/back-button-white.png')} onClick={this.BackToCreate}
-                className="go-back-to-create-page" alt=''></img>
+                className="go-back-to-create-page-from-create-member" alt=''></img>
             </div>
             <div>
               <label className="create-members">Create Member</label>
@@ -193,7 +195,7 @@ class App extends Component {
             </div>
             <div className="rest-body">
               <div className="container-labels">
-                <div className="membership-number">
+                <div className={this.state.hideButton ? "hide-membership-number":"membership-number"}>
                   <div className="input-spacing">
                     <label className="membership-id-number">Membership No.</label>
                     <div className="input-member-number">
@@ -208,7 +210,7 @@ class App extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="expiry-date-member">
+                <div className={this.state.hideButton ? "hide-expiry-date-member":"expiry-date-member"}>
                   <div className="input-spacing">
                     <label className="membership-expiry-date">Membership Expiry Date</label><br />
                     <input type="date" className="expdate" id="expdate"
