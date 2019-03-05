@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { createGroups, getname } from "../actions/postActions";
 import "./add.css";
 import { BASE_URL } from "../actions/types";
-import { withRouter } from 'react-router-dom'
+import history from './history'
 
 
 class AddGroup extends Component {
@@ -27,7 +27,8 @@ class AddGroup extends Component {
     if (this.state.groups.indexOf(this.state.name) == -1) {
       if (this.state.name.length != 0) {
         this.props.getname(this.state.name);
-        this.props.history.push("/Groups");
+        // history.push("/Groups");
+        window.location = "/Groups"
       } else {
         this.setState({ txt: "group name can't be empty" });
       }
@@ -35,8 +36,9 @@ class AddGroup extends Component {
       this.setState({ exist: false });
     }
   }
+  
 
-  componentWillMount() {
+  componentdidmount() {
     fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
       .then(data =>
@@ -47,6 +49,7 @@ class AddGroup extends Component {
   }
   render() {
     return (
+      <div className="addgroup-main">
       <div className="page">
         <div className="top_bar">
           <a href="#" class="fa fa-angle-left" />
@@ -79,6 +82,7 @@ class AddGroup extends Component {
           </button>
         </div>
       </div>
+      </div>
     );
   }
 }
@@ -86,7 +90,7 @@ const mapStateToProps = state => ({
   name: state.posts.groupName
 });
 
-export default withRouter(connect(
+export default (connect(
   mapStateToProps,
   { createGroups, getname }
 )(AddGroup));

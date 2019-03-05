@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
-import { withRouter } from 'react-router-dom'
-import { passId , getname } from "../actions/postActions";
+import { withRouter } from "react-router-dom";
+import { passId, getname } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
 class ViewGroups extends Component {
   constructor(props) {
@@ -24,15 +24,23 @@ class ViewGroups extends Component {
   componentWillMount() {
     fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
-      .then(data => this.setState({ posts: data }));
+      .then(data =>
+        this.setState({
+          posts: data.map(users => {
+            return {
+              ...users,
+              colors: "black"
+            };
+          })
+        })
+      );
   }
   onChange(event) {
     this.setState({ filterText: event.target.value });
   }
 
   onBack() {
-    this.props.history.push("/ViewGroups")
-    // history.push("/ViewGroups");
+    this.props.history.push("/ViewGroups");
   }
   editGroup(event, name) {
     this.props.getname(name);
@@ -41,13 +49,20 @@ class ViewGroups extends Component {
   }
 
   update = (id, indexs, name) => {
-    this.setState({ ids: id,index: indexs ,selected: name ,ShowMe: false  });
+    const newarry = [...this.state.posts];
+    newarry[indexs].colors = "red";
+    this.setState({
+      ids: id,
+      index: indexs,
+      selected: name,
+      ShowMe: false,
+      posts: newarry
+    });
   };
 
   delete() {
     this.setState({ ShowMe: false });
     const newarry = [...this.state.posts];
-
     newarry.splice(this.state.index, 1);
     this.setState({ posts: newarry });
     fetch(BASE_URL + "/api/Groups" + this.state.ids, {
@@ -68,9 +83,15 @@ class ViewGroups extends Component {
   };
 
   do = () => {
+    const newarry = [...this.state.posts];
+    newarry[this.state.index].colors = "black";
     if (this.state.ShowMe == false) {
       this.setState({ ShowMe: true });
     }
+  };
+
+  cancel = () => {
+    this.setState({ selected: "" });
   };
 
   handleOnClick = () => {};
@@ -97,6 +118,7 @@ class ViewGroups extends Component {
                   <td
                     className="first-row"
                     onClick={() => this.editGroup(post.id, post.name)}
+                    style={{ color: post.colors }}
                   >
                     {post.name}
                   </td>
@@ -136,12 +158,10 @@ class ViewGroups extends Component {
             <tbody>
               <tr>
                 <td>
-                  <div className="thetextname">
-                    Delete
-                  </div>
+                  <div className="thetextname">Delete</div>
                 </td>
                 <td>
-                  <div>{this.state.selected} </div>
+                  <span className="name-of-group">{this.state.selected} </span>
                 </td>
                 <td>
                   <button
@@ -152,7 +172,9 @@ class ViewGroups extends Component {
                   </button>
                 </td>
                 <td className="group-undo">
-                  <button className="updatess">Cancel</button>
+                  <button className="updatess" onClick={() => this.cancel()}>
+                    Cancel
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -167,7 +189,9 @@ const mapStateToProps = state => ({
   id: state.posts.groupId
 });
 
-export default withRouter(connect(
-  mapStateToProps,
-  { passId, getname }
-)(ViewGroups));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { passId, getname }
+  )(ViewGroups)
+);

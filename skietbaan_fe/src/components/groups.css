@@ -110,6 +110,7 @@
   margin-right: auto;
   margin-left: auto;
   text-align: center;
+  z-index: 1;
   margin: 0px;
   padding-bottom: 50px;
   font-size: 16px;
@@ -329,4 +330,12 @@
 
 .first-row{
   height: 63px;
+}
+.name-of-group{
+  display: inline-block;
+  color:white;
+  margin-left: -40px;
+  width: 10%;
+  white-space: pre;
+
 }

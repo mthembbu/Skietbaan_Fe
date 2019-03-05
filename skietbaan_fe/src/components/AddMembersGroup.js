@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
 import { BASE_URL } from "../actions/types";
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 class AddMembersGroup extends Component {
   constructor(props) {
     super(props);
@@ -17,8 +17,9 @@ class AddMembersGroup extends Component {
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
   }
-  componentWillMount() {
+  componentwillmount() {
     if (this.props.id != 0) {
+      console.log(123)
       fetch(BASE_URL + "/api/Groups/list?id=" + this.props.id)
         .then(res => res.json())
         .then(data => {
@@ -33,7 +34,10 @@ class AddMembersGroup extends Component {
           });
         });
     } else {
-       this.props.history.push("/ViewGroups");
+      
+        this.props.history.push("/ViewGroups");
+      //  window.location = "/ViewGroups"
+       
     }
   }
   onChange(event) {
@@ -76,7 +80,9 @@ class AddMembersGroup extends Component {
     }
   };
   onBack() {
-    this.props.history.push("/EditGroup");
+     this.props.history.push("/EditGroup");
+    // window.location = "/EditGroup"
+
   }
   render() {
     const postitems = (

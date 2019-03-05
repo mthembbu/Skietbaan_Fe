@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
-import history from "./history";
+import { withRouter } from 'react-router-dom';
 import { createGroups } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
 class Groups extends Component {
@@ -21,8 +21,8 @@ class Groups extends Component {
     this.onChange = this.onChange.bind(this);
     this.selectall = this.selectall.bind(this);
   }
-  UNSAFE_componentWillMount() {
-    if (this.props.name.length === 0) {
+  componentdidmount() {
+    if (this.props.name.length != 0) {
       fetch(BASE_URL + "/api/user")
         .then(res => res.json())
         .then(data => {
@@ -37,7 +37,7 @@ class Groups extends Component {
           });
         });
     } else {
-     // history.push("/AddGroup");
+      this.props.history.push("/AddGroup");
     }
     fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
@@ -100,7 +100,7 @@ class Groups extends Component {
     }
   };
   onBack() {
-    history.push("/addGroup");
+  this.props.history.push("/addGroup");
   }
   render() {
     const postitems = (
@@ -193,7 +193,7 @@ const mapStateToProps = state => ({
   thegroup: state.posts.selectedItem
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   { createGroups }
-)(Groups);
+)(Groups));
