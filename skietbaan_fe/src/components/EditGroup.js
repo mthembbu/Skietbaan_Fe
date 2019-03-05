@@ -19,7 +19,7 @@ class EditGroup extends Component {
   }
  componentWillMount() {
    if(this.props.id!=0){
-    fetch(BASE_URL+"/api/Groups/edit?id=" + this.props.id)
+    fetch(BASE_URL+"/api/Groups/edit?id=?33" )
     .then(res => res.json())
     .then(data => {
       this.setState({
@@ -134,7 +134,6 @@ class EditGroup extends Component {
             className="theText"
             id="username"
             type="text"
-            placeholder="Search.."
             onChange={this.onChange}
             autoComplete="off"
           />

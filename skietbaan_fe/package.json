@@ -19,6 +19,7 @@
     "react-collapsible": "^2.6.0",
     "react-dom": "^16.0.0",
     "react-element-query": "^3.0.3",
+    "react-history": "^0.18.2",
     "react-image": "^2.0.0",
     "react-motion": "^0.5.2",
     "react-redux": "^5.1.1",

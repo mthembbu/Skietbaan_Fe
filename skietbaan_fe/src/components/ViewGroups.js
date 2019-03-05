@@ -37,8 +37,7 @@ class ViewGroups extends Component {
   editGroup(event, name) {
     this.props.getname(name);
     this.props.passId(event);
-    history.push("/EditGroup")
-
+    history.push("/EditGroup");
   }
 
   update = (post, indexs, name) => {
@@ -74,13 +73,13 @@ class ViewGroups extends Component {
   do = () => {
     if (this.state.ShowMe == false) {
       this.setState({ ShowMe: true });
-    } 
+    }
   };
 
   handleOnClick = () => {};
   render() {
     const postitems = (
-      <div className="the-main" onClick={()=>this.do()}>
+      <div className="the-main" >
         <table className="table-member">
           <tbody>
             {this.state.posts
@@ -97,26 +96,21 @@ class ViewGroups extends Component {
                 );
               })
               .map((post, index) => (
-                <tr className="view-group" key={post.id}  onClick={() => this.editGroup(post.id, post.name)}>
-                  <td className="first-row">
-                    <div
-                      className="group-name"
-                      key={post.id}
-                     
-                    >
+                <tr className="view-group" key={post.id}>
+                  <td
+                    className="first-row"
+                    onClick={() => this.editGroup(post.id, post.name)}
+                  >
+                    {post.name}
+                  </td>
+                  <td>
+                    <div className="group-view">
+                      <img
+                        src={require("./GroupImages/submit plus add score.png")}
+                        alt=""
+                        onClick={() => this.update(post.id, index, post.name)}
+                      />
                     </div>
-                    </td>
-                    <td>
-                      <div className="group-view">
-                        <img
-                          src={require("./GroupImages/submit plus add score.png")}
-                          alt=""
-                          onClick={() => this.update(post.id, index ,post.name)}
-                        />
-                      </div>
-
-                      {post.name}
-                
                   </td>
                 </tr>
               ))}
@@ -126,11 +120,11 @@ class ViewGroups extends Component {
     );
 
     return (
-      <main className="TheMain">
+      <main className="TheMain" onClick={() => this.do()}>
         <div className="TheNavBar">
           <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
 
-          <h2 className="center_label">View Groups</h2>
+          <label className="center_label">View Groups</label>
         </div>
         <div
           className="scrollbar"
@@ -139,6 +133,9 @@ class ViewGroups extends Component {
         >
           {postitems}
         </div>
+
+
+
         {this.state.ShowMe ? null : (
           <div className="bpanel">
             <div className="thetextname">Delete {this.state.selected}</div>

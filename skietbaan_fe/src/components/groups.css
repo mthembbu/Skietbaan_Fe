@@ -16,7 +16,7 @@
 .TheNavBar {
   background: #cccfd3;
   color: white;
-  height: 52px;
+  height: 56px;
   display: flex;
   background: #DC0600;
   border-bottom-left-radius: 20px;
@@ -30,10 +30,11 @@
   margin-right: auto;
   width: 7em;
   display: flex;
+
   color: white;
   font-weight: bold;
   font-size: 18px;
-  font-size: 25px;
+  font-size: 20px;
   display: inline-block;
   text-align: center;
   white-space: nowrap;
@@ -55,13 +56,14 @@
 
 .theText {
   margin-left: 5px;
-  border-radius: 10px;
   margin-top: 5px;
   width: 218px;
   height: 39px;
-  font-weight: regular;
+  font-weight: lighter;
   font-size: 18px;
   padding-left: 5px;
+  font-size: 18px;
+  border-radius: 10px;
 }
 
 .select {
@@ -285,9 +287,7 @@
 }
 
 .theText {
-  font-weight: bold;
-  font-size: 18px;
-  border-radius: 5px;
+ 
 }
 
 .group-confirm {
@@ -308,8 +308,8 @@
 }
 
 .the-main {
-  margin-left: 32px;
-  margin-right: 32px;
+  margin-left: 26px;
+  margin-right: 26px;
 }
 .group-name {
   margin-left: 6px;
