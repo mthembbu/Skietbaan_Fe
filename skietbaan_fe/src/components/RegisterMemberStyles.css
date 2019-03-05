@@ -26,8 +26,10 @@
     text-align: center;
     text-size-adjust: 25px;
     background-size: 15px;
-    height: 49px;
-    background-color: #0c0c0c;
+    height: 56px;
+    background-color: #DC0600;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
   }
 
   .search-name{
@@ -46,7 +48,7 @@
   }
   
   .membership-number{
-    padding-top: 91px;;
+    padding-top: 35px;
     text-align: left;
     color:white;
     font-size: 18px;
@@ -71,9 +73,12 @@
     border: none;
     font-size: 18px;
     font-weight: lighter;
+    color: black;
+    text-align: center;
   }
 
   .create-button{
+    display: inline-block;
     border-radius: 18px;
     border: 1.5px red solid;
     background-color: #504f51;
@@ -81,18 +86,22 @@
     margin-top: 100px;
     width: 152px;
     height: 38px;
+    font-size: 16px;
+
   }
 
-  input.username{
+  .username{
     background: url('../components/assets/search-red.png') no-repeat right center;
     background-size: 22px;
-    height: 40px;
+    height: 39px;
     background-position-x: 95%;
     border-radius: 4px;
     text-align: center;
     width: 267px;
-    background-color: white;
+    background-color: #F3F4F9;
     border: none;
+    font-size: 18px;
+    color: #6B6B6C;
   }
 
   .membershipID{
@@ -103,6 +112,7 @@
     border: none;
     font-size: 18px;
     font-weight: lighter;
+    color: black;
   }
 
   .search{
@@ -113,7 +123,7 @@
     size:49px;
     padding-top: 7px;
     font-weight: bolder;
-    font-size: 26px;
+    font-size: 20px;
     color: #fdfdfd;
   }
 
@@ -126,10 +136,10 @@
 
   .label-enter-user-name{
     text-align: center;
-    color: white;
+    color: #6F839E;
     padding-top: 15px;
-    font-size: 20px;
-    font-weight: lighter;
+    font-size: 18px;
+    font-weight: bold;
   }
 
   .table-register-member{
@@ -153,10 +163,11 @@
   }
   
   .actives{
+    border-color: red;
     border-radius: 10px;
-    background-color: #e11e2b;
     color: white;
     border: none;
+    display: none;
   }
 
   .register-member-user-column:hover{
@@ -166,6 +177,7 @@
   }
 
   .register-member-user-row{
+    display: block;
     border: none;
     border-radius: 10px;
   }
@@ -186,13 +198,7 @@
   }
 
   .hide-create-button{
-    border-radius: 18px;
-    border: 1.5px #bbbcbd solid;
-    background-color: #504f51;
-    color: #bbbcbd;
-    margin-top: 69px;
-    width: 152px;
-    height: 38px;
+    display: none;
   }
   .input-container{
     width:267px;
@@ -201,4 +207,8 @@
 
   .container-labels{
     text-align: left;
+  }
+
+  .input-spacing{
+    text-align: center;
   }

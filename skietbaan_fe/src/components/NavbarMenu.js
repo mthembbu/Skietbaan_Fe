@@ -98,6 +98,39 @@ class NavbarMenu extends Component {
 		}
 	}
 
+	isProfilev2() {
+		if (window.location.pathname.endsWith("/profile")) {
+			return <img src={require('../components/navbar-icons/profile-red.png')}
+				className="profile-icon-grey-v2" alt='Profile tab Selected'></img>
+		}
+		else {
+			return <img src={require('../components/navbar-icons/profile-grey.png')}
+				className="profile-icon-grey-v2" alt='Profile tab not Selected'></img>
+		}
+	}
+
+	isDocumentsv2() {
+		if (window.location.pathname.endsWith("/documents")) {
+			return <img src={require('../components/navbar-icons/docs-red.png')}
+				className="docs-icon-grey-v2" alt='Document tab Selected'></img>
+		}
+		else {
+			return <img src={require('../components/navbar-icons/docs-grey.png')}
+				className="docs-icon-grey-v2" alt='Document tab not Selected'></img>
+		}
+	}
+
+	isNotificationsv2() {
+		if (window.location.pathname.endsWith("/notifications")) {
+			return <img src={require('../components/navbar-icons/notifications-red.png')}
+				className="notifications-icon-grey-v2" alt='Notification tab Selected'></img>
+		}
+		else {
+			return <img src={require('../components/navbar-icons/notifications-grey.png')}
+				className="notifications-icon-grey-v2" alt='Notification tab not Selected'></img>
+		}
+	}
+
 	isMore() {
 		return <img src={require('../components/navbar-icons/more-grey.png')}
 			className="more-icon-grey" alt='More icon to expand tray'></img>
@@ -122,8 +155,17 @@ class NavbarMenu extends Component {
 						<td className="columns" onClick={() => this.GoTo("/scorecapture")} >
 							{this.isScoreCapture()}
 						</td>
-						<td onClick={this.expand}>
+						<td className="columns-more" onClick={this.expand}>
 							{this.isMore()}
+						</td>
+						<td className="columns-v2">
+							{this.isProfilev2()}
+						</td>
+						<td className="columns-v2" onClick={() => this.GoTo("/documents")}>
+							{this.isDocumentsv2()}
+						</td>
+						<td className="columns-v2" onClick={() => this.GoTo("notify")}>
+							{this.isNotificationsv2()}
 						</td>
 					</tr>
 					<tr className={this.state.expanded ? "second-row-navbar expand":"second-row-navbar"}>

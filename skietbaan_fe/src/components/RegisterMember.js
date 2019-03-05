@@ -49,12 +49,15 @@ class App extends Component {
   }
 
   dateChange() {
-    let entDate = document.getElementById("entrydate").value.split('-');
+    let entDate = document.getElementById("expdate").value.split('/');
     let newDate = parseInt(entDate[0], 10) + 1;
     document.getElementById("expdate").value = newDate + "-" + entDate[1] + "-" + entDate[2];
   }
 
   SearchAllMember() {
+    this.setState({
+      clicked: false
+    });
     fetch(BASE_URL + "/api/User", {
       method: 'Get',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -75,7 +78,7 @@ class App extends Component {
   SearchMember(user) {
     this.setState({
       usernameValue: user,
-      clicked: "actives",
+      clicked: true,
       hideButton: false
     });
     let name = this.state.arrayUsers[user].username;
@@ -150,7 +153,7 @@ class App extends Component {
         <tbody className="table-body-create-members">
           {this.state.arrayUsers.map((post, index) => (
             <tr className="register-member-user-column" key={post.id} onClick={() => this.SearchMember(index)}>
-              <td className={this.state.clicked ? "actives" : "register-member-user-row"} onClick={() => this.ChangeColor()}>
+              <td className={this.state.clicked ? "actives" : "register-member-user-column"} onClick={() => this.ChangeColor()}>
                 <b>{post.username}</b>
                 <p>{post.email}</p>
               </td>
@@ -199,7 +202,7 @@ class App extends Component {
                         type="text"
                         className="membershipID"
                         id="membershipID"
-                        value={this.state.membershipID}
+                        value={this.state.membershipsID}
                         onChange={this.handleChange}
                       />
                     </div>
@@ -208,8 +211,8 @@ class App extends Component {
                 <div className="expiry-date-member">
                   <div className="input-spacing">
                     <label className="membership-expiry-date">Membership Expiry Date</label><br />
-                    <input type="text" className="expdate" id="expdate"
-                      value={this.GetDate()} onChange={this.handleChange} />
+                    <input type="date" className="expdate" id="expdate"
+                      value={this.GetDate()} onChange={this.handleChangeChange} />
                   </div>
                 </div>
               </div>

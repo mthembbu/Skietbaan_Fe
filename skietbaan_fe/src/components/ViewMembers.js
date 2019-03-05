@@ -151,7 +151,6 @@ class ViewMembers extends Component {
                             type="text"
                             className="userValue"
                             id="usernameValue"
-                            placeholder="Username or Email"
                             value={this.state.filterText}
                             onChange={this.onChangeText}
                         />

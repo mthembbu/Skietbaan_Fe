@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Navbar } from 'react-bootstrap';
 import '../scss/navbar.css';
 import 'font-awesome/css/font-awesome.min.css';
-import '../bootstrap/NavbarMenuStyle.css';
+import '../bootstrap/NavbarMenuUserStyles.css';
 
 class NavbarMenuUser extends Component {
 	constructor(props) {
@@ -81,6 +80,28 @@ class NavbarMenuUser extends Component {
 		}
 	}
 
+	isDocumentsv2() {
+		if (window.location.pathname.endsWith("/documents")) {
+			return <img src={require('../components/navbar-icons/docs-red.png')}
+				className="docs-icon-grey-v2" alt='Document tab Selected'></img>
+		}
+		else {
+			return <img src={require('../components/navbar-icons/docs-grey.png')}
+				className="docs-icon-grey-v2" alt='Document tab not Selected'></img>
+		}
+	}
+
+	isNotificationsv2() {
+		if (window.location.pathname.endsWith("/notifications")) {
+			return <img src={require('../components/navbar-icons/notifications-red.png')}
+				className="notifications-icon-grey-v2" alt='Notification tab Selected'></img>
+		}
+		else {
+			return <img src={require('../components/navbar-icons/notifications-grey.png')}
+				className="notifications-icon-grey-v2" alt='Notification tab not Selected'></img>
+		}
+	}
+
 	isMore() {
 		return <img src={require('../components/navbar-icons/more-grey.png')}
 			className="more-icon-grey" alt='More icon to expand tray'></img>
@@ -105,8 +126,14 @@ class NavbarMenuUser extends Component {
 						<td className="columns" onClick={() => this.GoTo("#")}>
 							{this.isProfile()}
 						</td>
-						<td onClick={this.expand}>
+						<td className="columns-more" onClick={this.expand}>
 							{this.isMore()}
+						</td>
+						<td className="columns-v2" onClick={() => this.GoTo("/documents")}>
+							{this.isDocumentsv2()}
+						</td>
+						<td className="columns-v2" onClick={() => this.GoTo("notify")}>
+							{this.isNotificationsv2()}
 						</td>
 					</tr>
 					<tr className={this.state.expanded ? "second-row-navbar expand":"second-row-navbar"}>
