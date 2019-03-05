@@ -18,6 +18,7 @@ class Login extends Component {
       passwordValue: "",
       validForm: false,
       tokenValue : "",
+      usernames: []
     }
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -27,6 +28,24 @@ class Login extends Component {
     this.goToRegister = this.goToRegister.bind(this);
 
   }
+  componentDidMount(){
+    fetch(URL + "/api/user", {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => this.setState({ 
+        usernames: data,
+      }),
+      console.log(this.usernames))
+      .catch(function (data) {
+        console.log("error")
+      });
+  }
+
   toggleNavbar() {
     let Navbar = document.querySelector(".navbar-admin");
     if (Navbar.classList.contains("hidden")) {
@@ -106,6 +125,7 @@ class Login extends Component {
         {
           document.cookie = "token =" +data.token+"; expires =Wed, 18 Dec 2030 12:00:00 UTC";
           window.location = "/home";
+
         }
       }).catch(function(data) {
       });
