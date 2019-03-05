@@ -140,7 +140,7 @@ class ViewGroups extends Component {
               <tr>
                 <td>
                   <div className="thetextname">
-                    Delete {this.state.selected}
+                    Delete
                   </div>
                 </td>
                 <td>

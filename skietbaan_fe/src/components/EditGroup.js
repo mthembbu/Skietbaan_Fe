@@ -105,7 +105,7 @@ class EditGroup extends Component {
               );
             })
             .map((post, index) => (
-              <li class="list-group-item list-group-item-light" key={post.id}>
+              <li class="list-group-item list-group-item-light" key={post.id} style={{borderLeftStyle:"none",borderRightStyle:"none"}}>
                 <input
                   type="checkbox"
                   className="boxs"
@@ -134,7 +134,7 @@ class EditGroup extends Component {
             onChange={this.onChange}
             autoComplete="off"
           />
-          <button className="select2" onClick={this.goToNext}>
+          <button className="select" onClick={this.goToNext}>
             Add new
           </button>
         </div>
