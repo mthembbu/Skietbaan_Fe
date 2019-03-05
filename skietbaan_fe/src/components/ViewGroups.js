@@ -53,7 +53,7 @@ class ViewGroups extends Component {
 
     newarry.splice(this.state.index, 1);
     this.setState({ posts: newarry });
-    fetch(BASE_URL + "/api/groups/" + this.state.ids, {
+    fetch(BASE_URL + "/api/Groups" + this.state.ids, {
       method: "delete",
       headers: {
         Accept: "application/json",
