@@ -18,7 +18,7 @@ class Login extends Component {
       passwordValue: "",
       validForm: false,
       tokenValue : "",
-      usernames: []
+      user: []
     }
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -27,23 +27,6 @@ class Login extends Component {
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.goToRegister = this.goToRegister.bind(this);
 
-  }
-  componentDidMount(){
-    fetch(URL + "/api/user", {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(data => this.setState({ 
-        usernames: data,
-      }),
-      console.log(this.usernames))
-      .catch(function (data) {
-        console.log("error")
-      });
   }
 
   toggleNavbar() {
@@ -174,7 +157,7 @@ class Login extends Component {
 
             <Col className="no-padding">
               <FormGroup>
-                <label className="front-white input-label">Username <div 
+                <label className="front-white input-label">Enter Username <div 
                 className={this.state.invalidUsername ? "invalid-icon" :"hidden"}></div></label>
                 
                 <div className="input-container">
