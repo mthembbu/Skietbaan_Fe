@@ -40,8 +40,8 @@ class ViewGroups extends Component {
     history.push("/EditGroup");
   }
 
-  update = (post, indexs, name) => {
-    this.setState({ ids: post });
+  update = (id, indexs, name) => {
+    this.setState({ ids: id });
     this.setState({ index: indexs });
     this.setState({ selected: name });
     this.setState({ ShowMe: false });
@@ -79,7 +79,7 @@ class ViewGroups extends Component {
   handleOnClick = () => {};
   render() {
     const postitems = (
-      <div className="the-main" >
+      <div className="the-main">
         <table className="table-member">
           <tbody>
             {this.state.posts
@@ -134,21 +134,33 @@ class ViewGroups extends Component {
           {postitems}
         </div>
 
-
-
-        {this.state.ShowMe ? null : (
-          <div className="bpanel">
-            <div className="thetextname">Delete {this.state.selected}</div>
-            <div className="cntra">
-              <button className="group-confirm" onClick={() => this.delete()}>
-                Confirm
-              </button>
-            </div>
-            <div className="botname">
-              <button className="updatess">Undo</button>
-            </div>
-          </div>
-        )}
+        <div className="bpanel">
+          <table className="group-delete-table">
+            <tbody>
+              <tr>
+                <td>
+                  <div className="thetextname">
+                    Delete {this.state.selected}
+                  </div>
+                </td>
+                <td>
+                  <div>{this.state.selected} </div>
+                </td>
+                <td>
+                  <button
+                    className="group-confirm"
+                    onClick={() => this.delete()}
+                  >
+                    Confirm
+                  </button>
+                </td>
+                <td className="group-undo">
+                  <button className="updatess">Cancel</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </main>
     );
   }

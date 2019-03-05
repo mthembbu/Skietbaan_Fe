@@ -6,7 +6,7 @@ export const NEW_COMP = 'NEW_COMP';
 export const FETCH_COMP = 'FETCH_COMP';
 export const UPDATE_COMP_STATUS = 'UPDATE_COMP_STATUS';
 // export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
-export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
+export const BASE_URL = "http://localhost:50209";
 //leaderboard types
 export const FETCH_LEADERBOARDFILTER_DATA = 'FETCH_LEADERBOARDFILTER_DATA';
 export const FETCH_LEADERBOARDTABLE_DATA = 'FETCH_LEADERBOARDTABLE_DATA';

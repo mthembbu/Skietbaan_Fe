@@ -17,25 +17,24 @@ class AddMembersGroup extends Component {
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
   }
- componentWillMount() {
-   if(this.props.id!=0){
-    fetch( BASE_URL+"/api/Groups/list?id=" + this.props.id)
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          posts: data.map(users => {
-            users.highlighted = false;
-            return {
-              ...users,
-              highlighted: false
-            };
-          })
+  componentWillMount() {
+    if (this.props.id != 0) {
+      fetch(BASE_URL + "/api/Groups/list?id=" + this.props.id)
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            posts: data.map(users => {
+              users.highlighted = false;
+              return {
+                ...users,
+                highlighted: false
+              };
+            })
+          });
         });
-      });
-   }else{
-    history.push("/ViewGroups");
-   }
-
+    } else {
+      history.push("/ViewGroups");
+    }
   }
   onChange(event) {
     this.setState({ filterText: event.target.value });
@@ -54,7 +53,7 @@ class AddMembersGroup extends Component {
       users: this.state.newArray,
       GroupIds: this.props.id
     };
-    fetch(BASE_URL+"/api/groups/postMember/", {
+    fetch(BASE_URL + "/api/groups/postMember/", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -124,11 +123,10 @@ class AddMembersGroup extends Component {
             className="theText"
             id="username"
             type="text"
-            placeholder="Search.."
             onChange={this.onChange}
             autoComplete="off"
           />
-          <button className="select" onClick={this.handleOnClick}>
+          <button className="select" >
             Add new
           </button>
         </div>
@@ -148,7 +146,7 @@ class AddMembersGroup extends Component {
             <div className="usersname">{this.state.selected}</div>
           </div>
           <div className="botname">
-            <button className="updates">Update Group</button>
+            <button className="updates" onClick={this.handleOnClick}>Update Group</button>
           </div>
         </div>
       </main>

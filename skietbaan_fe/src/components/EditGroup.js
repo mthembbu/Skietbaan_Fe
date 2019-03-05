@@ -10,57 +10,58 @@ class EditGroup extends Component {
       posts: [],
       newArray: [],
       filterText: "",
-      count:0
+      count: 0
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
   }
- componentWillMount() {
-   if(this.props.id!=0){
-    fetch(BASE_URL+"/api/Groups/edit?id=?33" )
-    .then(res => res.json())
-    .then(data => {
-      this.setState({
-        posts: data.map(users => {
-          users.highlighted = false;
-          return {
-            ...users,
-            highlighted: false
-          };
-        })
-      });
-    });
-   }
-   else{
-    // history.push("/ViewGroups");
-   }
- 
+  componentWillMount() {
+    if (this.props.id != 0) {
+      fetch(BASE_URL + "/api/Groups/edit?id=" + this.props.id)
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            posts: data.map(users => {
+              users.highlighted = false;
+              return {
+                ...users,
+                highlighted: false
+              };
+            })
+          });
+        });
+    } else {
+      history.push("/ViewGroups");
+    }
   }
   onChange(event) {
     this.setState({ filterText: event.target.value });
   }
 
   handleOnClick() {
-    this.setState({count:0})
+    this.setState({ count: 0 });
+
     const { newArray } = this.state;
     const newarry = [...this.state.posts];
 
-    newarry.splice(this.state.index, 1);
-    this.setState({ posts: newarry });
+    
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === true) {
         newArray.push(this.state.posts[i]);
+        newarry.splice(i, 1);
       }
       delete this.state.posts[i].highlighted;
       delete this.state.posts[i].id;
     }
+    this.setState({ posts: newarry });
+
     let request = {
-      GroupIds:this.props.id,
+      GroupIds: this.props.id,
       users: this.state.newArray
-    }
-    fetch(BASE_URL+"/api/groups/deleteMember/", {
+    };
+    fetch(BASE_URL + "/api/groups/deleteMember/", {
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -68,17 +69,15 @@ class EditGroup extends Component {
       },
       body: JSON.stringify(request)
     })
-      .then(res =>res.json())
+      .then(res => res.json())
       .catch(function(data) {});
   }
   toggleHighlight = event => {
     if (this.state.posts[event].highlighted === true) {
       this.state.posts[event].highlighted = false;
-
       this.setState({ count: this.state.count - 1 });
     } else {
       this.state.posts[event].highlighted = true;
-
       this.setState({ count: this.state.count + 1 });
     }
   };
@@ -125,9 +124,7 @@ class EditGroup extends Component {
       <main className="TheMain">
         <div className="TheNavBar">
           <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
-          <div className="center_label">
-            {this.props.name}
-          </div>
+          <div className="center_label">{this.props.name}</div>
         </div>
         <div className="BNavBar">
           <input
@@ -150,12 +147,13 @@ class EditGroup extends Component {
         >
           {postitems}
         </div>
-        {this.state.count==0?null:
-        <label className="bottomlabel">
-          <button className="deleteUser" onClick={this.handleOnClick}>
-            delete
-          </button>
-        </label>}
+        {this.state.count == 0 ? null : (
+          <label className="bottomlabel">
+            <button className="deleteUser" onClick={this.handleOnClick}>
+              delete
+            </button>
+          </label>
+        )}
       </main>
     );
   }

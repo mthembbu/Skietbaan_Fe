@@ -207,13 +207,13 @@
   position: absolute;
   right: 0;
   bottom: 0;
-
   border-radius: 24.5px;
   width: 96px;
   height: 42px;
-  background: white;
   margin-left: 40px;
   border: 1px solid;
+    
+    margin-top: 1px;
 }
 
 .btplane {
@@ -232,7 +232,7 @@
   position: fixed;
   right: 0;
   bottom: 0;
-  background: #282829;
+  background-image: linear-gradient(to right, #282829  , #6D6D6D);
   width: 100%;
   margin: 0px;
   font-size: 16px;
@@ -240,19 +240,21 @@
   padding-top: 10px;
   display: flex;
   float: bottom;
-  height: 56px;
+  height: 66px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
 
 .updatess {
-  width: 150px;
-  height: 39px;
+  height: 42px;
   border-radius: 40px;
   width: 96px;
-  height: 42px;
-  background: white;
+  margin-left: 11px;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
 }
+
 
 .botname {
   float: right;
@@ -277,17 +279,15 @@
 
 .thetextname {
   font-size: 16px;
-  padding-right: 30px;
+  /* padding-right: 30px; */
   font-weight: lighter;
   display: inline-block;
   width: 110px;
   white-space: nowrap;
   overflow: hidden;
+  color:white;
   text-overflow: ellipsis;
-}
-
-.theText {
- 
+  padding-left: 20px;
 }
 
 .group-confirm {
@@ -297,6 +297,10 @@
   background: white;
   margin-left: 40px;
   border: 1px solid;
+  padding-left: 5px;
+  background: red;
+  color: white;
+  border: 1px solid red;
 }
 
 .updates {
@@ -333,3 +337,6 @@
     color: #6F839E;
 }
 
+.first-row{
+  height: 63px;
+}
