@@ -6,7 +6,7 @@ import { URL } from '../actions/types.js';
 import cameraGray from '../components/assets/cameraGray.png';
 import graySubmit from '../components/assets/graySubmit.png';
 import grayRetry from '../components/assets/grayRetry.png';
-import lightGrayBack from '../components/assets/lightGrayBack.png'
+import lightGrayBack from '../components/assets/lightgrayback.png'
 
 export default class search extends Component {
   constructor(props) {
