@@ -26,7 +26,6 @@ class notification extends Component {
           method: "Delete"
         });
       } catch (err) {
-        console.error("err", err);
       }
     };
 
