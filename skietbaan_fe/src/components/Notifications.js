@@ -9,35 +9,42 @@ class notification extends Component {
     super(props);
     this.state = {
       array: [],
-      notificationMsg: "",
       typeOfNotification: "",
       tokenValue: "",
-      isRead: false,
-      showDelete: false,
       deleteClicked: false,
-      viewClicked: false
+      deleted: true,
+      cancelClicked: false
     };
     this.onDelete = this.onDelete.bind(this);
+    this.markForDeletion = this.markForDeletion.bind(this);
   }
 
-  onDelete = key => {
-    let id = this.state.array[key].id;
-    let newArray = this.state.array;
-    newArray.splice(key, 1);
-    this.setState({ array: newArray });
+  onDelete = async () => {
+    const deleteNotification = async id => {
+      try {
+        await fetch(URL + `/api/Notification/${id}`, {
+          method: "Delete"
+        });
+      } catch (err) {
+        console.error("err", err);
+      }
+    };
 
-    fetch(URL + `/api/Notification/${id}`, {
-      method: "Delete"
-    }).catch(err => {
-      console.error("err", err);
+    const deletedIds = this.state.array
+      .filter(notification => notification.markedForDeletion)
+      .map(notification => notification.id);
+
+    const newArray = this.state.array.filter(
+      notification => !notification.markedForDeletion
+    );
+
+    const deletions = deletedIds.map(deleteNotification);
+    await Promise.all(deletions);
+
+    this.setState({
+      array: newArray
     });
   };
-
-  initialState() {
-    return this.setState({
-      showDelete: false
-    });
-  }
 
   onClick_View = Notification => {
     if (Notification === "Award") {
@@ -52,14 +59,31 @@ class notification extends Component {
     }
   };
 
+  markForDeletion(id) {
+    const newArray = [...this.state.array];
+    const index = newArray.findIndex(notification => notification.id === id);
+    newArray[index].markedForDeletion = !newArray[index].markedForDeletion;
+    this.setState({
+      array: newArray
+    });
+  }
+
+  onClick_cancel() {
+    window.location = "/notify";
+  }
+
   componentDidMount() {
     if (getCookie("token")) {
-      var token = document.cookie;
-      fetch( URL + "/api/Notification?" + token)
+      const token = document.cookie;
+      fetch(URL + "/api/Notification?" + token)
         .then(response => response.json())
         .then(data => {
+          const newArray = data.map(notification => {
+            notification.markedForDeletion = false;
+            return notification
+          });
           this.setState({
-            array: data
+            array: newArray
           });
         });
     }
@@ -67,8 +91,13 @@ class notification extends Component {
 
   render() {
     const headingItems = (
-      <div className="pageHeading">
-        <b>Notifications</b>
+      <div>
+        <div className="pageHeading">
+          <div>
+            <a className="notifications-aClass" href="" />
+          </div>
+          <b>Notifications</b>
+        </div>
       </div>
     );
 
@@ -79,7 +108,9 @@ class notification extends Component {
             <tr className="trClass" key={i}>
               <td className="tdNotification">
                 <a
-                  className="text"
+                  className={
+                    post.markedForDeletion ? "selected-text" : "text"
+                  }
                   href=""
                   onClick={() => this.onClick_View(post.typeOfNotification)}
                 >
@@ -87,12 +118,13 @@ class notification extends Component {
                 </a>
               </td>
               <td className="tdDelete">
-                <img
-                  onClick={() => {
-                    this.onDelete(i);
-                  }}
-                  className="images"
-                  src={require("./Notification-Img/delete.png")}
+                <div
+                  onClick={() => this.markForDeletion(post.id)}
+                  className={
+                      post.markedForDeletion
+                      ? "selected notifications-slider"
+                      : "notifications-images"
+                  }
                   alt="redirect"
                 />
               </td>
@@ -102,10 +134,50 @@ class notification extends Component {
       </table>
     );
 
+    const markedItems = this.state.array.filter(post => post.markForDeletion);
+    const markedItemsCount = markedItems.length;
+    const modalText = `Delete ${markedItemsCount > 1 ? `${markedItemsCount} ` : ''}Notification${markedItemsCount > 1 ? 's' : ''}?`;
+
+    const deleteModal = (
+      <table
+        className={
+          this.state.array.some(post => 
+              post.markedForDeletion
+            )
+            ? "notifications-modal notifications-slider"
+            : "hidden"
+        }
+      >
+      
+          <tr className="trClass">
+            <td>
+              <p>{modalText}</p>
+            </td>
+            <td>
+              <button
+                className="notifications-modal-confirm"
+                onClick={this.onDelete}
+              >
+                Confirm
+              </button>
+            </td>
+            <td>
+              <button
+                onClick={() => this.onClick_cancel()}
+                className="notifications-modal-cancel"
+              >
+                Cancel
+              </button>
+            </td>
+          </tr>
+      </table>
+    );
+
     return (
       <div className="bodyClass">
         <div>{headingItems}</div>
         <div>{postItems}</div>
+        <div>{deleteModal}</div>
       </div>
     );
   }

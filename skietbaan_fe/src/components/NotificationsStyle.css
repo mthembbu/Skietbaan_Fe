@@ -10,7 +10,7 @@
 }
 
 .bodyClass {
-  background-color: #504f51;
+  background-color: #fdfdfd;
   color: white;
   border-style: none;
   border: none;
@@ -18,33 +18,52 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding-bottom: 640px;
+  padding-bottom: 100%;
   padding-top: 5px;
-}
-
-.centre {
   text-align: center;
+  position: static;
+  right: -25px;
+  left: 25px; 
 }
 
-.images {
+.notifications-images {
+  background-image: url("./Notification-Img/delete3.png");
   padding-bottom: 6px;
-  padding-right: 35px;
+  padding-right: 11px;
+  text-align: justify;
+  background-repeat: no-repeat;
+  height: 24px;
+}
+
+.selected{
+  background: url("./Notification-Img/submit plus add score.png");
+  padding-bottom: 6px;
+  padding-right: 11px;
+  text-align: justify;
+  background-repeat: no-repeat;
+  height: 24px;
 }
 
 .pageHeading {
   text-align: center;
   align-content: center;
-  background-color: #0c0c0c;
+  background-image: linear-gradient(to right, #Dc0600, #ef3024);
   color: #fdfdfd;
-  height: 49px;
-  padding-top: 8px;
+  height: 56px;
+  width: 100%;
+  padding-top: 9px;
   padding-right: 90px;
   font-size: 25px;
   font-family: helvetica;
   padding-left: 100px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);
+  margin-top: -8px;
 }
 
 .buttonCss {
+  text-align: center;
   width: 200px;
   background-color: #504f51;
   border-radius: 25px;
@@ -57,36 +76,35 @@
 }
 
 .tdDelete {
-  padding-left: 50px;
+  padding-right: 0px;
   color: white;
-  padding-top: 30px;
   font-size: 13px;
   border-bottom-style: none;
   font-family: helvetica;
+  text-align: right;
 }
 
 .tdNotification {
-  color: white;
-  padding-left: 20px;
-  padding-top: 30px;
-  font-size: 13px;
+  color: #6F839E;
+  font-size: 14px;
   font-family: helvetica;
   text-align: left;
+  vertical-align: middle;
+  padding-left: 30px;
 }
 
 .trClass {
   border-bottom: solid 2px #bbbcbb;
-  height: 35px;
+  height: 64px;
   border-bottom-width: thin;
-  text-align: center;
-  padding-top: 50px;
+  margin: 1em auto;
 }
 
 .tbody {
   border-bottom: none;
   font-family: helvetica;
-  background-color: #504f51;
-  color: white;
+  background-color: #fdfdfd;
+  color: #6F839E;
   border-style: none;
   border: none;
   height: 100%;
@@ -94,12 +112,13 @@
   background-repeat: no-repeat;
   background-size: cover;
   padding-bottom: 640px;
+  text-align: justify;
 }
 
 .postItems {
   text-align: center;
-  background-color: #504f51;
-  color: white;
+  background-color: #fdfdfd;
+  color: #6F839E;
   border-style: none;
   border: none;
   height: 100%;
@@ -107,7 +126,9 @@
   background-repeat: no-repeat;
   background-size: cover;
   padding-bottom: 640px;
-  padding-left: 5px;
+  width: 100%;
+  padding-top: 50px;
+  margin-top: 23px;
 }
 
 .navbar-custom.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top {
@@ -115,12 +136,26 @@
 }
 
 .text {
-  color: white;
+  color: #6F839E;
   font-family: helvetica;
-  text-decoration-line: none
+  text-decoration-line: none;
+  text-align: center;
 }
 
-#Notifications a:hover {
+.selected-text{
+  color: red;
+  font-family: helvetica;
+  text-decoration-line: none;
+  text-align: center;
+}
+
+.notifications-a{
+  padding-left: 47px;
+  text-align: justify;
+  text-justify: newspaper;
+}
+
+#notifications a:hover {
   color: red;
 }
 a:active {
@@ -128,3 +163,61 @@ a:active {
   text-decoration: none;
 }
 
+.notifications-slider {
+	overflow-y: hidden;
+	max-height: 500px; /* approximate max height */
+
+	transition-property: all;
+  transition-duration: .5s;
+  transition: all .5s ease-in-out;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+.notifications-slider-closed{
+  max-height: 0;
+}
+
+.notifications-modal{
+  font-family: helvetica;
+  font-weight: thin;
+  bottom: 0px;
+  position: fixed;
+  width: 100%;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  background-image: linear-gradient(to right, #282829, #6D6D6D);
+  height: 56px;
+}
+
+.notifications-modal-confirm{
+  font-family: helvetica;
+  background-color:  #Dc0600;
+  border-radius: 25px;
+  width: 96px;
+  height: 42px;
+  border-color: #Dc0600;
+  border-width: 1.5px
+}
+
+.notifications-modal-cancel{
+  font-family: helvetica;
+  background-color: transparent;
+  border-style: thin;
+  border-radius: 25px;
+  width: 96px;
+  height: 42px;
+  border-color: #fdfdfd;
+  border-width: 1.5px;
+}
+.text{
+  font-weight: lighter;
+  font-family: helvetica;
+}
+
+.notifications-aClass{
+  text-align: left;
+}
+
+.hidden{
+  display: none;
+}
