@@ -56,10 +56,10 @@
   .btn-default:focus {
     font-weight: lighter;
     font-size: 16px;
-    color: #ffffff;
+    color: #838383;
     letter-spacing: 1px;
     line-height: 15px;
-    border: 1px solid #ffffff;
+    border: 1px solid #c0c1c2;
     border-radius: 40px;
     background: transparent;
     transition: all 0.3s ease 0s;
@@ -83,13 +83,27 @@
   .btn-active {
     font-weight: lighter;
     font-size: 16px;
-    color: #fdfdfd;
+    color: #ffffff;
     letter-spacing: 1px;
     line-height: 15px;
-    border: 2px solid #6F839E;
+    border: 1px solid #ffffff;
     border-radius: 40px;
-    background: #6F839E;
+    background: transparent;
     transition: all 0.3s ease 0s;
+  }
+
+  .document-image-icon{
+      margin-right: 20px;
+      float: right;
+  }
+  .documents-collapse{
+    padding-top: 8px;
+    font-family: Helvetica;
+    font-weight: bolder;
+    font-size: 18px;
+    color: #ffffff;
+    text-align: center;
+    align-content:center;
   }
   .send-button {
     margin-left: 10px;
