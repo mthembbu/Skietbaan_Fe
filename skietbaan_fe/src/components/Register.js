@@ -45,6 +45,7 @@ class Register extends Component {
       .catch(function (data) {
         console.log("error")
       });
+      console.log(this.state.users);
   }
 
   toggleNavbar() {
@@ -178,7 +179,7 @@ class Register extends Component {
   render() {
     if (getCookie("token")) {
       window.location = "/home";
-    }
+     }
     document.addEventListener('DOMContentLoaded', () => {
       this.toggleNavbar();
     }, false);
