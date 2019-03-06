@@ -7,6 +7,5 @@ export default combineReducers({
   posts: postReducer,
   simpleReducer,
   comps: competition,
-	compOBJ: competition,
-  comps: competition
+	compOBJ: competition
 });

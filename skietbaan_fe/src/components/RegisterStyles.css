@@ -9,29 +9,20 @@
   }
 }
 
-.Page-Scontent{
+.page-content-login{
   height: stretch;
-  background-color: #504f51;
+  background-color: #fdfdfd;
   width:100%;
   z-index: 50;
   position: relative;
   height: 100vh;
 }
 
-.test{
-  width:50%
-}
-
-.col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-10,.col-11,.col-12{
-  float:left;
-
-}
-
 .centre-login{
   margin:0 auto;
   position: center;
   text-align: center;
-  padding-top: 20px;
+  padding-top: 40px;
 }
 
 @media screen and (min-width:768px)  {
@@ -43,16 +34,16 @@
 }
 
 .header-container{
-  background-color: black;
+  background-color: #EA241A;
   text-align: center;
-  height: 49px;
-
+  height: 73px;
+  border-radius: 13px;
+  box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);
 }
 
 .front-white{
-  color:white;
+  color: #6F839E;
   font-size: 18px;
-  font-weight: lighter;
 }
 
 .button-container{
@@ -67,15 +58,16 @@
   height: 42px;
   color: white;
   border-radius: 25px;
-  background-color: #504f51;
-  border: 1px red solid;
+  background-color: #6F839E;
+  font-size: 16px;
 }
 
 .buttons-invalid{
-  background-color: #504f51;
+  background-color: #fdfdfd;
   color: #ebebeb;
   cursor: default;
   border: 1px lightgray solid;
+  font-size: 16px;
 }
 
 .buttons-invalid:active{
@@ -107,33 +99,40 @@
   text-decoration: underline;
 }
 
-.input{
+.input-user{
   border-radius: 9px;
-  border: none;
+  border: 1px #6F839E solid;
   width: 267px;
   height: 39px;
   text-align: center;
+  font-size: 18px;
+  background-color: #F3F4F9;
 }
 
 .input-Password{
   border-radius: 9px;
-  border: none;
   width: 267px;
   height: 39px;
   text-align: center;
+  font-size: 18px;
+  background-color: #F3F4F9;
+  border: 1px #6F839E solid;
 }
+
 .centre-div{
   margin:0 auto;
 }
+
 .password-view-icon{
-  background: url("../components/assets/password.png") no-repeat right center;
+  background: url("../components/assets/graypassword.png") no-repeat right center;
   height:30px;
   background-size: 30px;
   width: 30px;
   position: absolute;
   top: 5px;
-  right: 5px;
+  right: 18px;
 }
+
 .password-view-icon:hover{
   cursor: pointer;
 }
@@ -141,21 +140,22 @@
 .header-label{
   font-size: 25px;
   color: white;
-  font-weight: bold;
-  padding-top: 4px;
+  font-weight: 400;
+  padding-top: 18px;
 }
 
 .button-login{
-  background-color: black;
-  color: white;
-  border: 1px red solid;
+  background-color: #EA241A;
+  color: #fdfdfd;
+  border: 1px #fdfdfd solid;
   border-radius: 25px;
   height: 38px;
   width: 100px;
   font-weight: lighter;
   position: absolute;
   right: 10px;
-  top: 86px;
+  top: 95px;
+  font-size: 16px;
 }
 
 .invalid-icon{
@@ -177,20 +177,55 @@
 
 .welcome-header{
   width: 100%;
-  height: 80px;
-  background-color: lightgray;
+  height: 79px;
+  background-color: #EA241A;
   text-align: center;
 }
 
 .welcome-label{
   text-align: center;
+  padding-top: 9px;
+  font-size: 21px;
+  color: white;
+  font-weight: 100;
+  float: right;
+  padding-right: 24px;
+}
+
+.skietbaan-label{
+  text-align: center;
   padding-top: 23px;
-  font-size: 22px;
-  color: #e11e2b;
+  font-size: 19px;
+  color: #EA241A;
 }
 
 .bullet-button{
   height: 14px;
   margin-left: 10px;
   margin-top: -4px;
+}
+
+.hidden{
+  display: none;
+}
+
+.header-image{
+  height: 94px;
+  width: 100%;
+}
+
+.red-background{
+  background-color: #EA241A;
+  border-radius: 13px;
+}
+
+.back-btn{
+  float: left;
+  margin-top: -38px;
+  margin-left: 30px;
+  height: 34px;
+}
+
+.centre-label{
+  text-align: center;
 }

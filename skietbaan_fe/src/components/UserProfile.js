@@ -10,11 +10,12 @@ class UserProfile extends Component {
         this.state = {
             awardCompetitions : [],
         }
-        this.sendRequest = this.sendRequest.bind(this);
     }
 
     UNSAFE_componentWillMount(){
-        window.addEventListener('beforeunload', this.sendRequest);	
+        //token = getToke();
+        //TODO: if the token doesnt exist redirect to the register page!!!!
+
         /*use the remote URL*/
 
         fetch('http://localhost:50963//api/awards/dec953316347',{
@@ -27,24 +28,6 @@ class UserProfile extends Component {
         .then(data => this.setState({awardCompetitions : data}));   
     }
 
-    /*componentWillUnmount(){
-		fetch('http://localhost:50963/api/awards/start-time',{
-            method : 'GET',
-            headers: {
-                'content-type' : 'application/json'
-            }
-        }) 
-	}*/
-
-    sendRequest(){
-		fetch('http://localhost:50963/api/awards/start-time',{
-            method : 'GET',
-            headers: {
-                'content-type' : 'application/json'
-            }
-        }) 
-    }
-    
     AnimateAccuracyCircle(counter, element, index){
         
         if(counter <= element.accuracy){
@@ -215,16 +198,14 @@ class UserProfile extends Component {
     RenderHoursIcons(){
         console.log(this.state.awardCompetitions.hoursAward)
         return(
-           
-                <div className="lay-horizontal scale-img">
-                    <img src={this.state.awardCompetitions[0].hoursAward.gold ?
-                        require('../resources/awardIcons/gold-icon.png') : require('../resources/awardIcons/black-icon.png')} alt="gold award" />
-                    <img src={this.state.awardCompetitions[0].hoursAward.silver ?
-                        require('../resources/awardIcons/silver-icon.png') : require('../resources/awardIcons/black-icon.png')} alt="silver award" />
-                    <img src={this.state.awardCompetitions[0].hoursAward.bronze ?
-                        require('../resources/awardIcons/bronze-icon.png') : require('../resources/awardIcons/black-icon.png')} alt="bronze award" />
-                </div>
-            
+            <div className="lay-horizontal scale-img">
+                <img src={this.state.awardCompetitions[0].hoursAward.gold ?
+                    require('../resources/awardIcons/gold-icon.png') : require('../resources/awardIcons/black-icon.png')} alt="gold award" />
+                <img src={this.state.awardCompetitions[0].hoursAward.silver ?
+                    require('../resources/awardIcons/silver-icon.png') : require('../resources/awardIcons/black-icon.png')} alt="silver award" />
+                <img src={this.state.awardCompetitions[0].hoursAward.bronze ?
+                    require('../resources/awardIcons/bronze-icon.png') : require('../resources/awardIcons/black-icon.png')} alt="bronze award" />
+            </div>
         )
     }
 

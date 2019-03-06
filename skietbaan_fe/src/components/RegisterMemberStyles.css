@@ -8,12 +8,6 @@
   }
   
 
-  body{
-    width: 100%;
-    height: 100vh;
-    float:left;
-  }
-
   .centre-register-member{
     margin:0 auto;
     position: center;
