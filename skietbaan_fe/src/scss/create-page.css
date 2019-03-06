@@ -1,4 +1,4 @@
-.create-page-centre {
+/* .create-page-centre {
     width:64%;
     margin:0 auto;
     position: center;
@@ -17,15 +17,8 @@
     
 }
 /**the create header for the Create-Page*/
-.create-menu-header {
-    color: #fdfdfd;
-    font-size: 25px;
-    font-weight: bolder;
-    font: helvetica;
-}
-/**This is to be removed as it collides with the rest of everyone's component*/
-body{background-color: #504F51;}
 
+/*
 .container{
     background: transparent;
     min-width: width 80%;
@@ -37,7 +30,7 @@ body{background-color: #504F51;}
     min-width: 95%;
 }
 /** The button to create [Competition, Groups, Member]*/
-.btn-create{
+/* .btn-create{
     font-weight: lighter;
     text-align: center;
     font: helvetica;
@@ -77,9 +70,9 @@ body{background-color: #504F51;}
     color: #0c0c0c;
     background: #FDFDFD;
 
-}
+} */
 /** The button to view [Competition, Groups, Member]*/
-.btn-view{
+/* .btn-view{
     border-radius: 20px;
     width: 90px;
     height: 42px;
@@ -88,26 +81,148 @@ body{background-color: #504F51;}
     font-weight: normal;
     text-align: center;
     font: helvetica;
-}
+} */
 /** THe text for the Create [Competition, Groups, Member] button*/
-.btn-create-tex{
+/* .btn-create-tex{
     font-weight: lighter;
     text-align: center;
     font-size: 16px;
     font: helvetica;
     color:#0c0c0c;
-}
+} */
 /** THe text for the view [Competition, Groups, Member] button*/
-.create-view-text{
+/* .create-view-text{
     color:#FFFFFF;
     font: helvetica;
     font-size: 16px;
     font-weight: lighter;
     text-align: center;
-}
+} */
 
-.col{
+/* .col{
     min-height: 50px;
     margin-left: inherit;
+} */
+
+.page-name-create-page{
+    position: center;
+    text-align: center;
+    text-size-adjust: 25px;
+    background-size: 15px;
+    height: 56px;
+    background-color: #DC0600;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
+.create-menu-header {
+    color: #fdfdfd;
+    font-size: 20px;
+    font-weight: bolder;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.create-page-container{
+    background-image: url('../components/assets/gun-image.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.centre{
+    height: 100vh;
+}
+
+.button-create-competitions{
+    height: 42px;
+    width: 150px;
+    border-radius: 42px;
+    background-color: #fdfdfd;
+    border: none;
+    font-size: 16px;
+    font-family: helvetica;
+    font-weight: 300;
+    color: #6F839E;
+    margin-top: 12px;
+}
+
+.button-create-members{
+    height: 42px;
+    width: 150px;
+    border-radius: 42px;
+    background-color: #fdfdfd;
+    border: none;
+    font-size: 16px;
+    font-family: helvetica;
+    font-weight: 300;
+    color: #6F839E;
+    margin-top: 12px;
+}
+
+.button-create-groups{
+    height: 42px;
+    width: 150px;
+    border-radius: 42px;
+    background-color: #fdfdfd;
+    border: none;
+    font-size: 16px;
+    font-family: helvetica;
+    font-weight: 300;
+    color: #6F839E;
+    margin-top: 12px;
+}
+
+.button-view-competitions{
+    height: 42px;
+    width: 81px;
+    border-radius: 21px;
+    border: 1px #fdfdfd solid;
+    opacity: unset;
+    color: #fdfdfd;
+    background-color: transparent;
+    font-size: 16px;
+    font-family: helvetica;
+    font-weight: 300;
+    margin-top: 12px;
+}
+
+.button-view-members{
+    height: 42px;
+    width: 81px;
+    border-radius: 21px;
+    border: 1px #fdfdfd solid;
+    opacity: unset;
+    color: #fdfdfd;
+    background-color: transparent;
+    font-size: 16px;
+    font-family: helvetica;
+    font-weight: 300;
+    margin-top: 12px;
+}
+
+.button-view-groups{
+    height: 42px;
+    width: 81px;
+    border-radius: 21px;
+    border: 1px #fdfdfd solid;
+    opacity: unset;
+    color: #fdfdfd;
+    background-color: transparent;
+    font-size: 16px;
+    font-family: helvetica;
+    font-weight: 300;
+    margin-top: 12px;
+}
+
+.buttons-create{
+    width: 60%;
+    float: left;
+    padding-top: 67px;
+}
+
+.buttons-view{
+    width: 40%;
+    float: right;
+    padding-top: 67px;
+}
