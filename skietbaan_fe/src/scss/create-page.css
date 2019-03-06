@@ -1,109 +1,3 @@
-/* .create-page-centre {
-    width:64%;
-    margin:0 auto;
-    position: center;
-    left: 3%;
-    top: 15%;
-    padding: 20px;
-    background-color: #bbbcbd;
-}
-
-.create-menu {
-    background-color: #0c0c0c;
-    text-align: center;
-    padding-top: 15px;
-    height: 49px;
-    width: 100%;
-    
-}
-/**the create header for the Create-Page*/
-
-/*
-.container{
-    background: transparent;
-    min-width: width 80%;
-    background: transparent;
-    text-align: left;
-}
-
-.create-page-header{
-    min-width: 95%;
-}
-/** The button to create [Competition, Groups, Member]*/
-/* .btn-create{
-    font-weight: lighter;
-    text-align: center;
-    font: helvetica;
-    text-align: center;
-    border-radius: 50px;
-    width: 127px;
-    height: 42px;
-    font-size: 16px;
-    color: #0c0c0c;
-    background: #FDFDFD;
-    
-}
-
-.btn-create-m{
-    font-weight: lighter;
-    text-align: center;
-    font: helvetica;
-    text-align: center;
-    border-radius: 50px;
-    width: 110px;
-    height: 42px;
-    font-size: 16px;
-    color: #0c0c0c;
-    background: #FDFDFD;
-    
-}
-
-.btn-create-gr{
-    font-weight: lighter;
-    text-align: center;
-    font: helvetica;
-    text-align: center;
-    border-radius: 50px;
-    width: 90px;
-    height: 42px;
-    font-size: 16px;
-    color: #0c0c0c;
-    background: #FDFDFD;
-
-} */
-/** The button to view [Competition, Groups, Member]*/
-/* .btn-view{
-    border-radius: 20px;
-    width: 90px;
-    height: 42px;
-    border-color: #e11e2b;
-    font-size:16px;
-    font-weight: normal;
-    text-align: center;
-    font: helvetica;
-} */
-/** THe text for the Create [Competition, Groups, Member] button*/
-/* .btn-create-tex{
-    font-weight: lighter;
-    text-align: center;
-    font-size: 16px;
-    font: helvetica;
-    color:#0c0c0c;
-} */
-/** THe text for the view [Competition, Groups, Member] button*/
-/* .create-view-text{
-    color:#FFFFFF;
-    font: helvetica;
-    font-size: 16px;
-    font-weight: lighter;
-    text-align: center;
-} */
-
-/* .col{
-    min-height: 50px;
-    margin-left: inherit;
-} */
-
 .page-name-create-page{
     position: center;
     text-align: center;
@@ -216,13 +110,27 @@
 }
 
 .buttons-create{
-    width: 60%;
+    width: 50%;
     float: left;
     padding-top: 67px;
 }
 
 .buttons-view{
-    width: 40%;
+    width: 50%;
     float: right;
     padding-top: 67px;
+}
+
+.container-of-buttons{
+    text-align: center;
+}
+
+.view-spacing{
+    text-align: left;
+    margin-left: 34px;
+}
+
+.create-spacing{
+    text-align: right;
+    margin-right: -15px;
 }

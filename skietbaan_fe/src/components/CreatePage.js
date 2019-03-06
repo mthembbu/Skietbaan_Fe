@@ -44,32 +44,34 @@ class CreatePage extends Component {
 					<label className="create-menu-header">Create</label>
 				</div>
 				<div class="container centre">
-					<div className="buttons-create">
-						<div className="create-spacing">
-							<button className="button-create-competitions" onClick={this.GoComps}>
-								Competitions</button>
+					<div className="container-of-buttons">
+						<div className="buttons-create">
+							<div className="create-spacing">
+								<button className="button-create-competitions" onClick={this.GoComps}>
+									Competitions</button>
+							</div>
+							<div className="create-spacing">
+								<button className="button-create-members" onClick={this.GoMembers}>
+									Members</button>
+							</div>
+							<div className="create-spacing">
+								<button className="button-create-groups" onClick={this.GoGroups}>
+									Groups</button>
+							</div>
 						</div>
-						<div className="create-spacing">
-							<button className="button-create-members" onClick={this.GoMembers}>
-								Members</button>
-						</div>
-						<div className="create-spacing">
-							<button className="button-create-groups" onClick={this.GoGroups}>
-								Groups</button>
-						</div>
-					</div>
-					<div className="buttons-view">
-						<div className="view-spacing">
-							<button className="button-view-competitions" onClick={this.ViewComps}>
-								View</button>
-						</div>
-						<div className="view-spacing">
-							<button className="button-view-members" onClick={this.ViewMembers}>
-								View</button>
-						</div>
-						<div className="view-spacing">
-							<button className="button-view-groups" onClick={this.ViewGroups}>
-								View</button>
+						<div className="buttons-view">
+							<div className="view-spacing">
+								<button className="button-view-competitions" onClick={this.ViewComps}>
+									View</button>
+							</div>
+							<div className="view-spacing">
+								<button className="button-view-members" onClick={this.ViewMembers}>
+									View</button>
+							</div>
+							<div className="view-spacing">
+								<button className="button-view-groups" onClick={this.ViewGroups}>
+									View</button>
+							</div>
 						</div>
 					</div>
 				</div>
