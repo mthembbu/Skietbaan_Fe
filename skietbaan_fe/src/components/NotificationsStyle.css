@@ -1,14 +1,3 @@
-@media all and (min-width: 480px) {
-  .Notifications {
-    padding: 60px 0;
-  }
-
-  .Notifications form {
-    margin: 0 auto;
-    max-width: 320px;
-  }
-}
-
 .body-class {
   background-color: #fdfdfd;
   color: white;
@@ -23,7 +12,7 @@
   text-align: center;
   position: static;
   right: -25px;
-  left: 25px; 
+  left: 25px;
 }
 
 .notifications-images {
@@ -35,7 +24,7 @@
   height: 24px;
 }
 
-.selected{
+.selected {
   background: url("./Notification-Img/submit plus add score.png");
   padding-bottom: 6px;
   padding-right: 11px;
@@ -47,7 +36,7 @@
 .page-heading {
   text-align: center;
   align-content: center;
-  background-image: linear-gradient(to right, #Dc0600, #ef3024);
+  background-image: linear-gradient(to right, #dc0600, #ef3024);
   color: #fdfdfd;
   height: 56px;
   width: 100%;
@@ -58,7 +47,7 @@
   padding-left: 100px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);
+  box-shadow: 0px 10px 16px -6px rgba(0, 0, 0, 0.33);
   margin-top: -8px;
 }
 
@@ -72,7 +61,7 @@
 }
 
 .td-notification {
-  color: #6F839E;
+  color: #6f839e;
   font-size: 14px;
   font-family: helvetica;
   text-align: left;
@@ -91,7 +80,7 @@
   border-bottom: none;
   font-family: helvetica;
   background-color: #fdfdfd;
-  color: #6F839E;
+  color: #6f839e;
   border-style: none;
   border: none;
   height: 100%;
@@ -105,7 +94,7 @@
 .post-items {
   text-align: center;
   background-color: #fdfdfd;
-  color: #6F839E;
+  color: #6f839e;
   border-style: none;
   border: none;
   height: 100%;
@@ -123,7 +112,7 @@
 }
 
 .text {
-  color: #6F839E;
+  color: #6f839e;
   font-family: helvetica;
   text-decoration-line: none;
   text-align: center;
@@ -133,14 +122,14 @@
   padding-top: 9px;
 }
 
-.selected-text{
+.selected-text {
   color: red;
   font-family: helvetica;
   text-decoration-line: none;
   text-align: center;
 }
 
-.notifications-a{
+.notifications-a {
   padding-left: 47px;
   text-align: justify;
   text-justify: newspaper;
@@ -155,20 +144,20 @@ a:active {
 }
 
 .notifications-slider {
-	overflow-y: hidden;
-	max-height: 500px; /* approximate max height */
+  overflow-y: hidden;
+  max-height: 500px; /* approximate max height */
 
-	transition-property: all;
-  transition-duration: .5s;
-  transition: all .5s ease-in-out;
-	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition: all 0.5s ease-in-out;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
 
-.notifications-slider-closed{
+.notifications-slider-closed {
   max-height: 0;
 }
 
-.notifications-modal{
+.notifications-modal {
   font-family: helvetica;
   font-weight: thin;
   bottom: 0px;
@@ -176,23 +165,23 @@ a:active {
   width: 100%;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
-  background-image: linear-gradient(to right, #282829, #6D6D6D);
+  background-image: linear-gradient(to right, #282829, #6d6d6d);
   height: 56px;
 }
 
-.notifications-modal-confirm{
+.notifications-modal-confirm {
   font-weight: lighter;
   font-size: 16px;
-  background-color:  #Dc0600;
+  background-color: #dc0600;
   border-radius: 25px;
   width: 96px;
   height: 42px;
-  border-color: #Dc0600;
+  border-color: #dc0600;
   border-width: 1.5px;
   border: none;
 }
 
-.notifications-modal-cancel{
+.notifications-modal-cancel {
   font-weight: lighter;
   font-size: 16px;
   background-color: transparent;
@@ -205,7 +194,7 @@ a:active {
   border: 1px #fdfdfd solid;
 }
 
-.empty-screen{
+.empty-screen {
   font-weight: lighter;
   font-family: helvetica;
   font-size: 14px;
@@ -213,19 +202,19 @@ a:active {
   align-content: center;
 }
 
-.notifications-text{
+.notifications-text {
   color: #fdfdfd;
 }
 
-.notifications-a-class{
+.notifications-a-class {
   text-align: left;
 }
 
-.hidden{
+.hidden {
   display: none;
 }
 
-.format-content{
+.format-content {
   padding-left: 25px;
   padding-right: 25px;
 }

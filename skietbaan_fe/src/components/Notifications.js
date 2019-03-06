@@ -66,9 +66,6 @@ class notification extends Component {
     this.setState({
       array: newArray
     });
-    const markedItems = this.state.array.filter(post => post.markForDeletion);
-    const markedItemsCount = markedItems.length;
-    const modalText = "Delete " + markedItemsCount + " Notifications";
   }
 
   onClick_cancel() {
