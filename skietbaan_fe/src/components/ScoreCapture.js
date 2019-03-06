@@ -6,7 +6,7 @@ import { URL } from '../actions/types.js';
 import cameraGray from '../components/assets/cameraGray.png';
 import graySubmit from '../components/assets/graySubmit.png';
 import grayRetry from '../components/assets/grayRetry.png';
-import lightGrayBack from '../components/assets/lightGrayBack.png'
+import lightgrayback from '../components/assets/lightgrayback.png'
 
 export default class search extends Component {
   constructor(props) {
@@ -416,7 +416,7 @@ export default class search extends Component {
           <div className={this.state.showCamera ? "" : "hidden"}>
             <div className={this.state.ImageTaken ? "hidden" : "label-score photo-top-label"}>
               Capture Score
-              <img src={lightGrayBack} onClick={() => this.goBack()} id="back"
+              <img src={lightgrayback} onClick={() => this.goBack()} id="back"
                 className="btnBack" alt=''></img>
               </div>
             <div className="back-spacing">
