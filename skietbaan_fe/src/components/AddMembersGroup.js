@@ -1,27 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
-import history from "./history";
-import { createGroups } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
-class Groups extends Component {
+import history from "./history";
+class AddMembersGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
       posts: [],
       newArray: [],
-      count: 0,
       filterText: "",
-      check: "select all"
+      selected: ""
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.selectall = this.selectall.bind(this);
   }
  UNSAFE_componentWillMount() {
-    fetch(BASE_URL+"/api/user")
+    fetch( BASE_URL+"/api/Groups/list?id=" + this.props.id)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -40,7 +37,6 @@ class Groups extends Component {
   }
 
   handleOnClick() {
-    this.props.createGroups(this.props.name);
     const { newArray } = this.state;
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === true) {
@@ -50,52 +46,38 @@ class Groups extends Component {
       delete this.state.posts[i].id;
     }
     let request = {
-      newArray: this.state.newArray
+      users: this.state.newArray,
+      GroupIds: this.props.id
     };
-    fetch(BASE_URL+"/api/groups/add", {
+    fetch(BASE_URL+"/api/groups/postMember/", {
       method: "post",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(newArray)
+      body: JSON.stringify(request)
     })
       .then(function(response) {})
+      .then(function(data) {})
       .catch(function(data) {});
   }
-
-  selectall() {
-    const newarry = [...this.state.posts];
-    if (this.state.check == "Select all") {
-      for (var i = 0; i < this.state.posts.length; i++) {
-        newarry[i].highlighted = true;
-      }
-      this.setState({ check: "Unselect" });
-    } else {
-      for (var i = 0; i < this.state.posts.length; i++) {
-        newarry[i].highlighted = false;
-      }
-      this.setState({ check: "Select all" });
-    }
-    this.setState({ posts: newarry });
-  }
-
-  toggleHighlight = event => {
+  toggleHighlight = (name, event) => {
     if (this.state.posts[event].highlighted === true) {
       this.state.posts[event].highlighted = false;
-      this.setState({ count: this.state.count + 1 });
-    } else {
-      this.state.posts[event].highlighted = true;
       this.setState({ count: this.state.count - 1 });
+    } else {
+      this.setState({ selected: name });
+      this.state.posts[event].highlighted = true;
+      this.setState({ count: this.state.count + 1 });
     }
   };
   onBack() {
-    history.push("/addGroup");
+    history.push("/EditGroup");
   }
   render() {
     const postitems = (
       <div className="check">
-        <ul className="list-group">
+        <ul class="list-group">
           {this.state.posts
             .filter(post => {
               return (
@@ -109,15 +91,14 @@ class Groups extends Component {
               );
             })
             .map((post, index) => (
-              <li className="list-group-item list-group-item-light" key={post.id}>
+              <li class="list-group-item list-group-item-light" key={post.id}>
                 <input
                   type="checkbox"
                   className="boxs"
-                  onClick={() => this.toggleHighlight(index)}
-                  checked={post.highlighted}
+                  onClick={() => this.toggleHighlight(post.username, index)}
                 />
                 <label className="blabe">
-                  <div className="userName">{post.username}</div>
+                  <div className="userName"> {post.username}</div>
                   <div className="emails">{post.email}</div>
                 </label>
               </li>
@@ -128,26 +109,22 @@ class Groups extends Component {
     return (
       <main className="TheMain">
         <div className="TheNavBar">
-          <a href="#" className="fa fa-angle-left" onClick={this.onBack} />
-
-          <h2 className="center_label">
-            {this.props.name}
-          </h2>
+          <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
+          <div className="center_label">
+            <b>{this.props.name}</b>
+          </div>
         </div>
         <div className="BNavBar">
           <input
             className="theText"
             id="username"
             type="text"
+            placeholder="Search.."
             onChange={this.onChange}
             autoComplete="off"
           />
-          <button
-            className={this.state.count == 0 ? "select" : "select2"}
-            id="check"
-            onClick={this.selectall}
-          >
-            {this.state.check}
+          <button className="select" onClick={this.handleOnClick}>
+            Add new
           </button>
         </div>
 
@@ -159,21 +136,22 @@ class Groups extends Component {
         >
           {postitems}
         </div>
-        <label className="bottomlabel">
-          <button className="deleteUser" onClick={this.handleOnClick}>
-            Create Group
-          </button>
-        </label>
+
+        <div className="bpanel">
+          <div className="thetextname">
+            <div className="thes">Adding</div>
+            <div className="usersname">{this.state.selected}</div>
+          </div>
+          <div className="botname">
+            <button className="updates">Update Group</button>
+          </div>
+        </div>
       </main>
     );
   }
 }
 const mapStateToProps = state => ({
-  name: state.posts.groupName,
-  thegroup: state.posts.selectedItem
+  id: state.posts.groupId,
+  name: state.posts.groupName
 });
-
-export default connect(
-  mapStateToProps,
-  { createGroups }
-)(Groups);
+export default connect(mapStateToProps)(AddMembersGroup);

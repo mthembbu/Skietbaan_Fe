@@ -1,85 +1,279 @@
-/* Add a black background color to the top navigation bar */
-.topnav {
-  overflow: hidden;
-  background-color: #e9e9e9;
-}
-
-/* Style the links inside the navigation bar */
-
-/* Style the search box inside the navigation bar */
-.topnav input[type=text] {
+.boxs {
   float: right;
-  padding: 6px;
-  border: none;
-  margin-top: 8px;
-  margin-right: 16px;
-  font-size: 17px;
+  margin-top: 20px;
+  margin-right: 39px;
+  height: 17px;
+  width: 17px;
+  margin-top: 37px;
+  margin-bottom: 37px;
 }
 
-/* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
-@media screen and (max-width: 600px) {
-  .topnav a input[type=text] {
-    float: none;
-    display: block;
-    text-align: left;
-    width: 100%;
-    margin: 0;
-    padding: 14px;
-  }
-  .topnav input[type=text] {
-    border: 1px solid #ccc;
-  }
-  .topnav .texts input[type=text]{
-      float: right;
-  }
+.Check {
+  background: #504f51;
+  margin-top: 3px;
+}
+
+.TheNavBar {
+  background: #cccfd3;
+  color: white;
+  height: 50px;
+  display: flex;
+  background: black;
+}
+
+.center_label {
+  margin-top: 10px;
+  color: black;
+  margin-left: auto;
+  margin-right: auto;
+  width: 7em;
+  display: flex;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  font-size: 25px;
+  display: inline-block;
+  text-align: center;
+}
+.TheMain {
+  background: #101727;
+}
+
+.fa-angle-left {
+  margin-top: 2px;
+  margin-left: 10px;
+  color: black;
+  font-size: 48px;
+  color: white;
+}
+
+.NavBar {
+  height: 0px;
+}
+
+.theText {
+  margin-left: 5px;
+  border-radius: 10px;
+  margin-top: 5px;
+  width: 218px;
+  height: 39px;
+  font-weight: regular;
+  font-size: 18px;
+  padding-left: 5px;
+}
+.select {
+  margin-top: 5px;
+  margin-right: 5px;
+  float: right;
+  height: 42px;
+  border-radius: 30px;
+  width: 102px;
+  color: white;
+  font-weight: lighter;
+  font-size: 16px;
+  background: #504f51;
+  border: 1px lightgrey solid;
+}
+.select2 {
+  margin-top: 5px;
+  margin-right: 5px;
+  float: right;
+  height: 42px;
+  border-radius: 30px;
+  width: 102px;
+  font-weight: lighter;
+  color: white;
+  font-size: 16px;
+  background: #504f51;
+  border: 1px red solid;
+}
+.BNavBar {
+  height: 50px;
+  background: #504f51;
+}
+
+.deleteUser {
+  margin-right: 30px;
+  margin-left: 30px;
+  width: 218px;
+  height: 42px;
+  background: transparent;
+  border: 2px solid white;
+  border-radius: 20px;
+  font-weight: lighter;
+  font-size: 16px;
+  color:white;
+}
+
+.bottomlabel {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: #e11e2b;
+  width: 100%;
+  height: 35px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  margin: 0px;
+  padding-bottom: 50px;
+  font-size: 16px;
+  font-weight: lighter;
+  padding-top: 10px;
+}
+.userName {
+  font-size: 16px;
+  font-weight: bold;
+  font-size: 16px;
+  color: black;
+}
+.emails {
+  font-size: 14px;
+  font-weight: lighter;
+  font-size: 16px;
+  color: black;
+}
+.blabe {
+  margin-left: 39px;
+}
+.theboxes{
+  float: right;
+}
+
+.the-container{
+  width: 100%;
+  font-Weight: lighter;
+  font-size: 18px;
+  width: 100%;
+  color:white;
+}
+.im{
+  float: right;
+  padding-left: 20px;
+}
+
+.nn{
+  font-Weight: lighter;
+  font-size: 18px;
+  color:white;
+  width: 87%;
+
+}
+
+.bottompanel{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: #fdfdfd;
+  width: 100%;
+  height: 42px;
+  margin: 0px;
+  padding-bottom: 50px;
+  font-size: 16px;
+  font-weight: lighter;
+  padding-top: 10px;
+  display: flex;
+  float: bottom;
+}
+
+.confirmText{
+  color:black;
+}
+
+.confirm{
+  width: 96px;
+  height: 42px;
+  border-radius: 39px;
+  font-weight: lighter;
+  font-size: 16px;
+}
+
+.undo{
+  width: 96px;
+  height: 42px;
+  border-radius: 39px;
+  font-weight: lighter;
+  font-size: 16px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.btplane{
+  display: flex;
+}
+
+.ubutns{
+  float: right;
+}
+
+.cbutns{
+  text-align: center;
+}
+.bpanel{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  background: #fdfdfd;
+  width: 100%;
+  height: 42px;
+  margin: 0px;
+
+  font-size: 16px;
+  font-weight: lighter;
+  padding-top: 10px;
+  display: flex;
+  float: bottom;
+  height: 63px;
+}
+.updatess{
+  width: 150px;
+  height: 39px;
+  border-radius: 40px;
+  width: 96px;
+  height: 42px;
+
+}
+.botname{
+  float: right;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 12px;
+  padding-right: 9px;
+  font-weight: lighter;
+  font-size: 16px;
+}
+
+.thes{
+  font-weight: lighter;
+  padding-left: 15px;
+
+}
+.usersname{
+  font-weight: bold;
+  padding-left: 15px;
   
 }
-
-/* ###########################################################################################3 */
-.topnav .texts{
-  border-radius: 12px;
-  float: right;
+.thetextname{
+  font-size: 16px;
+  padding-right: 30px;
+  font-weight: lighter;
+}
+.thetxt{
+  font-weight: bold;
+  font-size: 18px;
+}
+.hdre{
+  border-radius: 40px;
+  width: 96px;
+  height: 42px;
 }
 
-.topnav .create{
-    font-size: 20px;
-    margin: 0;
-    padding: 0;
-
+.updates{
+  width: 136px;
+  height: 42px;
+  border-radius: 40px;
+  font-weight: lighter;
+  font-size: 16px;
 }
-
-.previous{
-  float: left;
-  margin-top: 5%;
-  margin-left: 2%;
-}
-
-.table .group{
-    font-size: 40px;
-
-}
-
-.topnav .create{
-    margin-left: 30px;
-   
-   
-}
-.topnav .label{
-    float: right;
-    font-size: 20px;
-    color: black;
-}
-
-.middle .add{
-  float: right;
-  border-radius: 8px;
-  width:80px;
-  background: burlywood;
-  border: black;
-  margin-right: 2.5%;
-  margin-top: 0.5%;
-}
-
-
-
-
