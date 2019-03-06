@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 import { createGroups } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
 class Groups extends Component {
@@ -21,7 +21,7 @@ class Groups extends Component {
     this.onChange = this.onChange.bind(this);
     this.selectall = this.selectall.bind(this);
   }
-  componentdidmount() {
+  UNSAFE_componentWillMount() {
     if (this.props.name.length != 0) {
       fetch(BASE_URL + "/api/user")
         .then(res => res.json())
@@ -39,7 +39,7 @@ class Groups extends Component {
     } else {
       this.props.history.push("/AddGroup");
     }
-    fetch(BASE_URL + "/api/Groups")
+    fetch("http://localhost:50209/api/Groups")
       .then(res => res.json())
       .then(data => this.setState({ groups: data.name }));
   }
@@ -100,12 +100,12 @@ class Groups extends Component {
     }
   };
   onBack() {
-  this.props.history.push("/addGroup");
+    this.props.history.push("/addGroup");
   }
   render() {
     const postitems = (
       <div className="check">
-        <ul className="list-group">
+        <ul class="list-group">
           {this.state.posts
             .filter(post => {
               return (
@@ -120,26 +120,30 @@ class Groups extends Component {
             })
             .map((post, index) => (
               <li
-                className="list-group-item list-group-item-light"
-                style={{
-                  borderColor: "#F3F4F9",
-                  height: "55px",
-                  borderLeft: "none",
-                  borderRight: "none",
-                  marginBottom: "3px"
-                }}
+                class="list-group-item list-group-item-light"
                 key={post.id}
+                style={{
+                  borderLeftStyle: "none",
+                  borderRightStyle: "none",
+                  color: "red",
+                  background:post.backgrnd
+                }}
               >
                 <input
                   type="checkbox"
                   className="boxs"
-                  style={{ marginRight: "32px", marginTop: "16px" }}
                   onClick={() => this.toggleHighlight(index)}
                   checked={post.highlighted}
+                  style={{border:"2px solid black", marginTop:"17px" ,marginRight:"23px"}}
                 />
                 <label className="blabe">
-                  <div className="userName">{post.username}</div>
-                  <div className="emails">{post.email}</div>
+                  <div className="userName" style={{ color: post.colors }}>
+                    {" "}
+                    {post.username}
+                  </div>
+                  <div className="emails" style={{ color: post.colors }}>
+                    {post.email}
+                  </div>
                 </label>
               </li>
             ))}
@@ -162,7 +166,7 @@ class Groups extends Component {
             autoComplete="off"
           />
           <button
-            className={this.state.check=="Select all" ? "select" : "select2"}
+            className={this.state.check == "Select all" ? "select" : "select2"}
             id="check"
             onClick={this.selectall}
           >
@@ -193,7 +197,9 @@ const mapStateToProps = state => ({
   thegroup: state.posts.selectedItem
 });
 
-export default withRouter(connect(
-  mapStateToProps,
-  { createGroups }
-)(Groups));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { createGroups }
+  )(Groups)
+);

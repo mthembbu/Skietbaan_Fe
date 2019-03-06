@@ -38,7 +38,7 @@ class AddGroup extends Component {
   }
   
 
-  componentdidmount() {
+ UNSAFE_componentWillMount() {
     fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
       .then(data =>
@@ -69,7 +69,7 @@ class AddGroup extends Component {
             autoCorrect="off"
             placeholder={this.state.txt}
           />
-          {this.state.exist ? null : (
+          {this.state.exist? null : (
             <div className="group-error">Group name already taken</div>
           
           )}

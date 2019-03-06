@@ -13,11 +13,10 @@ class EditGroup extends Component {
       count: 0
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
-    this.handleOnClick = this.handleOnClick.bind(this);
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
   }
-  componentwillmount() {
+  UNSAFE_componentWillMount() {
     if (this.props.id != 0) {
       fetch(BASE_URL + "/api/Groups/edit?id=" + this.props.id)
         .then(res => res.json())
@@ -27,7 +26,8 @@ class EditGroup extends Component {
               return {
                 ...users,
                 highlighted: true,
-                colors: "black"
+                colors: "black",
+                backgrnd:"#F3F4F9"
               };
             })
           });
@@ -40,9 +40,9 @@ class EditGroup extends Component {
     this.setState({ filterText: event.target.value });
   }
 
-  handleOnClick() {
+  delete=()=> {
     this.setState({ count: 0 });
-
+    console.log(this.state.newArray)
     const { newArray } = this.state;
     const newarry = [...this.state.posts];
 
@@ -54,6 +54,7 @@ class EditGroup extends Component {
       delete this.state.posts[i].highlighted;
       delete this.state.posts[i].id;
       delete this.state.posts[i].colors;
+      delete this.state.posts[i].backgrnd;
     }
     this.setState({ posts: newarry });
 
@@ -76,13 +77,16 @@ class EditGroup extends Component {
     if (this.state.posts[event].highlighted === true) {
       this.state.posts[event].highlighted = false;
       this.state.posts[event].colors = "red";
+      this.state.posts[event].backgrnd = "white";
+
       this.setState({ count: this.state.count - 1 });
     } else {
       this.state.posts[event].highlighted = true;
       this.state.posts[event].colors = "black";
+      this.state.posts[event].backgrnd = "#F3F4F9";
       this.setState({ count: this.state.count + 1 });
     }
-  };
+  };rt
   onBack() {
     this.props.history.push("/ViewGroups");
   }
@@ -113,7 +117,8 @@ class EditGroup extends Component {
                 style={{
                   borderLeftStyle: "none",
                   borderRightStyle: "none",
-                  color: "red"
+                  color: "red",
+                  background:post.backgrnd
                 }}
               >
                 <input
@@ -121,6 +126,7 @@ class EditGroup extends Component {
                   className="boxs"
                   onClick={() => this.toggleHighlight(index)}
                   checked={post.highlighted}
+                  style={{border:"2px solid black", marginTop:"17px" ,marginRight:"23px"}}
                 />
                 <label className="blabe">
                   <div className="userName" style={{ color: post.colors }}>
@@ -150,7 +156,7 @@ class EditGroup extends Component {
             onChange={this.onChange}
             autoComplete="off"
           />
-          <button className="select" onClick={this.goToNext}>
+          <button className="select2" onClick={this.goToNext}>
             Add new
           </button>
         </div>
@@ -163,12 +169,36 @@ class EditGroup extends Component {
         >
           {postitems}
         </div>
-        {this.state.count == 0 ? null : (
-          <label className="bottomlabel">
-            <button className="deleteUser" onClick={this.handleOnClick}>
-              delete
-            </button>
-          </label>
+        {this.state.count==0 ? null : (
+          <div className="bpanel">
+            <table className="group-delete-table">
+              <tbody>
+                <tr>
+                  <td>
+                    <div className="thetextname">Delete</div>
+                  </td>
+                  <td>
+                    <span className="name-of-group">
+                      {this.state.selected}{" "}
+                    </span>
+                  </td>
+                  <td>
+                    <button
+                      className="group-confirm"
+                      onClick={() => this.delete()}
+                    >
+                      Confirm
+                    </button>
+                  </td>
+                  <td className="group-undo">
+                    <button className="updatess" onClick={() => this.cancel()}>
+                      Cancel
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         )}
       </main>
     );

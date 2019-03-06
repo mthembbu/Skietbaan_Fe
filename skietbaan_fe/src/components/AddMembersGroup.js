@@ -18,7 +18,7 @@ class AddMembersGroup extends Component {
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
   }
-  componentwillmount() {
+  UNSAFE_componentWillMount() {
     if (this.props.id != 0) {
       console.log(123)
       fetch(BASE_URL + "/api/Groups/list?id=" + this.props.id)
@@ -101,11 +101,12 @@ class AddMembersGroup extends Component {
               <li
                 class="list-group-item list-group-item-light"
                 key={post.id}
-                style={{ borderLeftStyle: "none", borderRightStyle: "none" ,marginRight:"44px",marginLeft:"44px"}}
+                style={{ borderLeftStyle: "none", borderRightStyle: "none" }}
               >
                 <input
                   type="checkbox"
                   className="boxs"
+                  style={{marginRight:"23px"}}
                   onClick={() => this.toggleHighlight(post.username, index)}
                 />
                 <label className="blabe">
@@ -144,43 +145,38 @@ class AddMembersGroup extends Component {
           {postitems}
         </div>
 
-        <div className="bpanel">
-          <div className="thetextname">
-            <div className="thes">Adding</div>
-            <div className="usersname">{this.state.selected}</div>
+        {this.state.count==0 ? null : (
+          <div className="bpanel">
+            <table className="group-delete-table">
+              <tbody>
+                <tr>
+                  <td>
+                    <div className="thetextname">Delete</div>
+                  </td>
+                  <td>
+                    <span className="name-of-group">
+                      {this.state.selected}{" "}
+                    </span>
+                  </td>
+                  <td>
+                    <button
+                      className="group-confirm"
+                      onClick={()=>this.handleOnClick()}
+                      style={{background:"white",color:"black",border:"1px solid white"}}
+                    >
+                      Confirm
+                    </button>
+                  </td>
+                  <td className="group-undo">
+                    <button className="updatess" onClick={() => this.cancel()}>
+                      Cancel
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div className="botname">
-            <button className="updates" onClick={this.handleOnClick}>
-              Update Group
-            </button>
-          </div>
-        </div>
-        {this.state.count == 0 ?null:
-        <div className="bpanel">
-          <table className="group-delete-table">
-            <tbody>
-              <tr>
-                <td>
-                  <div className="thetextname">Add</div>
-                </td>
-                <td>
-                  <div>{this.state.selected} </div>
-                </td>
-                <td>
-                  <button
-                    className="group-confirm"
-                    onClick={() => this.delete()}
-                  >
-                    Confirm
-                  </button>
-                </td>
-                <td className="group-undo">
-                  <button className="updatess">Cancel</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>}
+        )}
       </main>
     );
   }

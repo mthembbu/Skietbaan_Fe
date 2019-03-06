@@ -4,6 +4,8 @@ import "./groups.css";
 import { withRouter } from "react-router-dom";
 import { passId, getname } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
+import deleteState from "./GroupImages/deleteState.png"
+import normalstate from "./GroupImages/submit-plus.png"
 class ViewGroups extends Component {
   constructor(props) {
     super(props);
@@ -14,22 +16,24 @@ class ViewGroups extends Component {
       ShowMe: true,
       ids: 0,
       index: 0,
-      selected: ""
+      selected: "",
+      deleteState:false
     };
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
     this.delete = this.delete.bind(this);
     this.editGroup = this.editGroup.bind(this);
   }
-  componentWillMount() {
-    fetch(BASE_URL + "/api/Groups")
+  UNSAFE_componentWillMount() {
+    fetch(BASE_URL+ "/api/Groups")
       .then(res => res.json())
       .then(data =>
         this.setState({
           posts: data.map(users => {
             return {
               ...users,
-              colors: "black"
+              colors: "black",
+              image:normalstate
             };
           })
         })
@@ -51,13 +55,15 @@ class ViewGroups extends Component {
   update = (id, indexs, name) => {
     const newarry = [...this.state.posts];
     newarry[indexs].colors = "red";
+    newarry[indexs].image = deleteState;
     this.setState({
       ids: id,
       index: indexs,
       selected: name,
       ShowMe: false,
       posts: newarry,
-      ShowMe:false
+      ShowMe: false,
+      deleteState:true
     });
   };
 
@@ -66,7 +72,7 @@ class ViewGroups extends Component {
     const newarry = [...this.state.posts];
     newarry.splice(this.state.index, 1);
     this.setState({ posts: newarry });
-    fetch(BASE_URL + "/api/Groups" + this.state.ids, {
+    fetch(BASE_URL+ "/api/Groups" + this.state.ids, {
       method: "delete",
       headers: {
         Accept: "application/json",
@@ -84,19 +90,21 @@ class ViewGroups extends Component {
   };
 
   do = () => {
-    // const newarry = [...this.state.posts];
-    // newarry[this.state.index].colors = "black";
+    const newarry = [...this.state.posts];
+     newarry[this.state.index].colors = "black";
+     newarry[this.state.index].image = normalstate;
     if (this.state.ShowMe == false) {
       this.setState({ ShowMe: true });
     }
   };
 
   cancel = () => {
-
     const newarry = [...this.state.posts];
-   newarry[this.state.index].colors = "black";
-    this.setState({ selected: "" ,posts:newarry});
+    newarry[this.state.index].colors = "black";
+    newarry[this.state.index].image = normalstate;
+    this.setState({ selected: "", posts: newarry });
   };
+S
 
   handleOnClick = () => {};
   render() {
@@ -127,12 +135,9 @@ class ViewGroups extends Component {
                     {post.name}
                   </td>
                   <td>
-                    <div className="group-view">
-                      <img
-                        src={require("./GroupImages/submit plus add score.png")}
-                        alt=""
-                        onClick={() => this.update(post.id, index, post.name)}
-                      />
+                    <div className="group-view"
+                     onClick={() => this.update(post.id, index, post.name)}>
+                      <img src={post.image} alt="" />
                     </div>
                   </td>
                 </tr>
@@ -156,34 +161,40 @@ class ViewGroups extends Component {
         >
           {postitems}
         </div>
-      {this.state.ShowMe?null:
-        <div className="bpanel">
-          <table className="group-delete-table">
-            <tbody>
-              <tr>
-                <td>
-                  <div className="thetextname">Delete</div>
-                </td>
-                <td>
-                  <span className="name-of-group">{this.state.selected} </span>
-                </td>
-                <td>
-                  <button
-                    className="group-confirm"
-                    onClick={() => this.delete()}
-                  >
-                    Confirm
-                  </button>
-                </td>
-                <td className="group-undo">
-                  <button className="updatess" onClick={() => this.cancel()}>
-                    Cancel
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>}
+        {this.state.ShowMe ? null : (
+          <div className="bpanel">
+            <table className="group-delete-table">
+              <tbody>
+                <tr>
+      
+                  <td>
+                    <div className="thetextname">Delete</div>
+                  </td>
+                  <td>
+                    <span className="name-of-group">
+                      {this.state.selected}{" "}
+                    </span>
+                  </td>
+                  <div className="confrim-cancel">
+                  <td>
+                    <button
+                      className="group-confirm"
+                      onClick={() => this.delete()}
+                    >
+                      Confirm
+                    </button>
+                  </td>
+                  <td className="group-undo">
+                    <button className="updatess" onClick={() => this.cancel()}>
+                      Cancel
+                    </button>
+                  </td>
+                  </div>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )}
       </main>
     );
   }
