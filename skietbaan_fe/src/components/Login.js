@@ -9,6 +9,8 @@ import '../components/RegisterStyles.css';
 import {  validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
 import {URL} from '../actions/types.js';
+import header from'../components/assets/header.png';
+import back from '../components/assets/back.png';
 
 class Login extends Component {
   constructor(props) {
@@ -137,14 +139,14 @@ class Login extends Component {
       <div className="page-content-login">
       <div className="red-background">
       <div className = "welcome-header">
-        <img src={require('../components/assets/header.png')} 
+        <img src={header} 
         className="header-image"></img>
       </div>
       <div className="header-container">
       <div className="centre-label">
         <label className = "header-label">Login</label>
         </div>
-      <img src={require('../components/assets/Back.png')} 
+      <img src={back} 
       className="back-btn" 
       onClick={() => this.goToRegister()}></img>
       </div>
