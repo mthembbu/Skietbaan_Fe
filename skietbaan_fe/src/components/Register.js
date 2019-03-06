@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { Container, Col, FormGroup, Label, Input, Button, Form } from 'reactstrap';
+import { 
+  Col, 
+  FormGroup, 
+  Button, 
+  Form 
+} from 'reactstrap';
 import '../components/RegisterStyles.css';
 import { validateEmail, validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
@@ -38,7 +43,6 @@ class Register extends Component {
     this.setState({
       [target.name]: target.value,
     });
-    console.log("here");
     let isValid = true;
     let stateUpdate = {
       invalidPassword: this.state.invalidPassword,
@@ -59,6 +63,7 @@ class Register extends Component {
       validForm: isValid
     });
   };
+  
   validate() {
     let isValid = true;
     let stateUpdate = {
@@ -135,20 +140,23 @@ class Register extends Component {
    }, false);
 
     return (
-      <div className="Page-content">
-      <div className = "welcome-header"><label className="welcome-label">Welcome to skietbaan</label>
-      <img src={require('../components/assets/bullet.png')}
-                  className="bullet-button" alt=''></img></div>
+      <div className="page-content-login">
+      <div className="red-background">
+      <div className = "welcome-header">
+        <img src={require('../components/assets/header.png')} className="header-image"></img>
+      </div>
+      
       <div className="header-container">
       <label className = "header-label">Register</label>
       <button className="button-login" onClick={() => this.goToLogin()}>Login</button>
+      </div>
       </div>
         <div className="centre-login">
           <Form className="form" autoComplete="off">
 
             <Col className="no-padding">
               <FormGroup>
-              <label className="front-white input-label">Username <div 
+              <label className="front-white input-label">Enter Username <div 
                 className={this.state.invalidUsername ? "invalid-icon" :"hidden"}></div></label>
                 
                 <div className="input-container">
@@ -158,7 +166,7 @@ class Register extends Component {
                   id="us"
                   value={this.state.usernameValue}
                   onChange={this.handleChange}
-                  className= "input"
+                  className= "input-user"
                 />
                 </div>
               </FormGroup>
@@ -174,7 +182,7 @@ class Register extends Component {
                   id="email"
                   value={this.state.emailValue}
                   onChange={this.handleChange}
-                  className= "input"
+                  className= "input-user"
                 />
                 </div>
               </FormGroup>
@@ -193,7 +201,10 @@ class Register extends Component {
                   onChange={this.handleChange}
                   className= "input-Password"
                 />
-                <div onClick={this.togglePassword} className="password-view-icon"></div>
+                <div className={this.state.passwordValue !== "" ? "password-view-icon": "hidden"}
+                onClick={this.togglePassword}>
+                </div>
+                
                 </div>
                 </div>
               </FormGroup>
