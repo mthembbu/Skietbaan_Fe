@@ -9,7 +9,7 @@
   }
 }
 
-.bodyClass {
+.body-class {
   background-color: #fdfdfd;
   color: white;
   border-style: none;
@@ -44,7 +44,7 @@
   height: 24px;
 }
 
-.pageHeading {
+.page-heading {
   text-align: center;
   align-content: center;
   background-image: linear-gradient(to right, #Dc0600, #ef3024);
@@ -62,21 +62,8 @@
   margin-top: -8px;
 }
 
-.buttonCss {
-  text-align: center;
-  width: 200px;
-  background-color: #504f51;
-  border-radius: 25px;
-  border-color: #e11e2b;
-  border-style: thin;
-  color: #fdfdfd;
-  position: relative;
-  top: 15px;
-  padding-left: 13px;
-}
-
-.tdDelete {
-  padding-right: 0px;
+.td-delete {
+  padding-left: 31px;
   color: white;
   font-size: 13px;
   border-bottom-style: none;
@@ -84,23 +71,23 @@
   text-align: right;
 }
 
-.tdNotification {
+.td-notification {
   color: #6F839E;
   font-size: 14px;
   font-family: helvetica;
   text-align: left;
   vertical-align: middle;
-  padding-left: 30px;
+  padding-left: 12px;
+  width: 80%;
 }
 
-.trClass {
-  border-bottom: solid 2px #bbbcbb;
+.tr-class {
+  border-bottom: solid 1px #bbbcbb;
   height: 64px;
-  border-bottom-width: thin;
   margin: 1em auto;
 }
 
-.tbody {
+.t-body {
   border-bottom: none;
   font-family: helvetica;
   background-color: #fdfdfd;
@@ -115,7 +102,7 @@
   text-align: justify;
 }
 
-.postItems {
+.post-items {
   text-align: center;
   background-color: #fdfdfd;
   color: #6F839E;
@@ -140,6 +127,10 @@
   font-family: helvetica;
   text-decoration-line: none;
   text-align: center;
+  font-weight: lighter;
+  font-family: helvetica;
+  font-size: 14px;
+  padding-top: 9px;
 }
 
 .selected-text{
@@ -190,17 +181,20 @@ a:active {
 }
 
 .notifications-modal-confirm{
-  font-family: helvetica;
+  font-weight: lighter;
+  font-size: 16px;
   background-color:  #Dc0600;
   border-radius: 25px;
   width: 96px;
   height: 42px;
   border-color: #Dc0600;
-  border-width: 1.5px
+  border-width: 1.5px;
+  border: none;
 }
 
 .notifications-modal-cancel{
-  font-family: helvetica;
+  font-weight: lighter;
+  font-size: 16px;
   background-color: transparent;
   border-style: thin;
   border-radius: 25px;
@@ -208,16 +202,30 @@ a:active {
   height: 42px;
   border-color: #fdfdfd;
   border-width: 1.5px;
-}
-.text{
-  font-weight: lighter;
-  font-family: helvetica;
+  border: 1px #fdfdfd solid;
 }
 
-.notifications-aClass{
+.empty-screen{
+  font-weight: lighter;
+  font-family: helvetica;
+  font-size: 14px;
+  padding-top: 9px;
+  align-content: center;
+}
+
+.notifications-text{
+  color: #fdfdfd;
+}
+
+.notifications-a-class{
   text-align: left;
 }
 
 .hidden{
   display: none;
+}
+
+.format-content{
+  padding-left: 25px;
+  padding-right: 25px;
 }

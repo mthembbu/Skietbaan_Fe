@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../components/NotificationsStyle.css";
 import { getCookie } from "./cookie";
 import history from "./history";
-import { URL } from "../actions/types.js";
+import { LOCALURL } from "../actions/types.js";
 
 class notification extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class notification extends Component {
   onDelete = async () => {
     const deleteNotification = async id => {
       try {
-        await fetch(URL + `/api/Notification/${id}`, {
+        await fetch(LOCALURL + `/api/Notification/${id}`, {
           method: "Delete"
         });
       } catch (err) {
@@ -66,6 +66,9 @@ class notification extends Component {
     this.setState({
       array: newArray
     });
+    const markedItems = this.state.array.filter(post => post.markForDeletion);
+    const markedItemsCount = markedItems.length;
+    const modalText = "Delete " + markedItemsCount + " Notifications";
   }
 
   onClick_cancel() {
@@ -75,12 +78,12 @@ class notification extends Component {
   componentDidMount() {
     if (getCookie("token")) {
       const token = document.cookie;
-      fetch(URL + "/api/Notification?" + token)
+      fetch(LOCALURL + "/api/Notification?" + token)
         .then(response => response.json())
         .then(data => {
           const newArray = data.map(notification => {
             notification.markedForDeletion = false;
-            return notification
+            return notification;
           });
           this.setState({
             array: newArray
@@ -92,9 +95,9 @@ class notification extends Component {
   render() {
     const headingItems = (
       <div>
-        <div className="pageHeading">
+        <div className="page-heading">
           <div>
-            <a className="notifications-aClass" href="" />
+            <a className="notifications-a-class" href="" />
           </div>
           <b>Notifications</b>
         </div>
@@ -102,26 +105,25 @@ class notification extends Component {
     );
 
     const postItems = (
-      <table className="postItems">
+      <table className="post-items">
         <tbody className="">
+          {this.state.array.length <= 0 ? <p className="empty-screen">No Notifications Available</p> : ""}
           {this.state.array.map((post, i) => (
-            <tr className="trClass" key={i}>
-              <td className="tdNotification">
+            <tr className="tr-class" key={i}>
+              <td className="td-notification">
                 <a
-                  className={
-                    post.markedForDeletion ? "selected-text" : "text"
-                  }
+                  className={post.markedForDeletion ? "selected-text" : "text"}
                   href=""
                   onClick={() => this.onClick_View(post.typeOfNotification)}
                 >
                   {post.notificationMessage}
                 </a>
               </td>
-              <td className="tdDelete">
+              <td className="td-Delete">
                 <div
                   onClick={() => this.markForDeletion(post.id)}
                   className={
-                      post.markedForDeletion
+                    post.markedForDeletion
                       ? "selected notifications-slider"
                       : "notifications-images"
                   }
@@ -134,49 +136,55 @@ class notification extends Component {
       </table>
     );
 
-    const markedItems = this.state.array.filter(post => post.markForDeletion);
-    const markedItemsCount = markedItems.length;
-    const modalText = `Delete ${markedItemsCount > 1 ? `${markedItemsCount} ` : ''}Notification${markedItemsCount > 1 ? 's' : ''}?`;
+    let markedItems = [];
+
+    this.state.array.forEach(function(notifications) {
+      if (notifications.markedForDeletion) {
+        markedItems.push(notifications);
+      }
+    });
+    let markedItemsCount = markedItems.length;
+
+    const modalText = "Delete " + markedItemsCount + " Notifications?";
 
     const deleteModal = (
       <table
         className={
-          this.state.array.some(post => 
-              post.markedForDeletion
-            )
+          this.state.array.some(post => post.markedForDeletion)
             ? "notifications-modal notifications-slider"
             : "hidden"
         }
       >
-      
-          <tr className="trClass">
-            <td>
-              <p>{modalText}</p>
-            </td>
-            <td>
-              <button
-                className="notifications-modal-confirm"
-                onClick={this.onDelete}
-              >
-                Confirm
-              </button>
-            </td>
-            <td>
-              <button
-                onClick={() => this.onClick_cancel()}
-                className="notifications-modal-cancel"
-              >
-                Cancel
-              </button>
-            </td>
-          </tr>
+        <tr className="tr-Class">
+          <td>
+            <p className="text notifications-text">{modalText}</p>
+          </td>
+          <td>
+            <button
+              className="notifications-modal-confirm"
+              onClick={this.onDelete}
+            >
+              Confirm
+            </button>
+          </td>
+          <td>
+            <button
+              onClick={() => this.onClick_cancel()}
+              className="notifications-modal-cancel"
+            >
+              Cancel
+            </button>
+          </td>
+        </tr>
       </table>
     );
 
     return (
-      <div className="bodyClass">
+      <div className="body-class">
         <div>{headingItems}</div>
-        <div>{postItems}</div>
+        <div>
+          <div className="format-content">{postItems}</div>
+        </div>
         <div>{deleteModal}</div>
       </div>
     );
