@@ -26,17 +26,17 @@ import EditGroup from './components/EditGroup';
 
 import ViewComp from './components/ViewComp';
 import CreateComp from './components/CreateComp';
-import { BASE_URL, URL } from './actions/types.js';
+import {BASE_URL, URL} from './actions/types.js';
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			user: []
+		  user: []
 		}
 		this.TypeUser = this.TypeUser.bind(this);
 	}
 
-	TypeUser() {
+	TypeUser(){
 		let token = getCookie("token");
 		fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
 			method: 'Get',
@@ -47,19 +47,24 @@ class App extends Component {
 		})
 			.then(response => response.json())
 			.then(data => this.setState({
-				user: data
+				user:data
 			}))
-			.then(function (data) { })
+			.then(function (data) {})
 			.catch(function (data) {
 				console.log("error")
 			});
+		if(this.state.user.admin === true){
+			return true
+		}else{
+			return false
+		}
 	}
 
 	render() {
 		return (
 			<Provider store={store}>
 				<div className="App">
-					{this.state.user.admin === true ? <NavbarMenu /> : <NavbarMenuUser />}
+				{this.TypeUser() ? <NavbarMenu />:<NavbarMenuUser />}
 					<Router history={history}>
 						<Switch>
 							<Route path="/home" component={LeaderboardPage} exact />
