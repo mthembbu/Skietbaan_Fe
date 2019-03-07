@@ -219,7 +219,7 @@ class Login extends Component {
                       id="passwordValue"
                       value={this.state.passwordValue}
                       onChange={this.handleChange}
-                      className="input-Password"
+                      className="input-password"
                     />
                     <div className={this.state.passwordValue !== "" ? "password-view-icon" : "hidden"}
                       onClick={this.togglePassword}>
