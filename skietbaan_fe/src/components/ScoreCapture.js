@@ -31,7 +31,6 @@ export default class search extends Component {
       validScore: true,
       validCompetition: true,
       scoreEntered:false,
-      iconhouseUrl : '../components/assets/grayFlashOff.png'
     }
 
     this.CompetitionClicked = this.CompetitionClicked.bind(this);
