@@ -150,7 +150,7 @@ class EditGroup extends Component {
     return (
       <main className="The-Main">
         <div className="the-nav-bar">
-          <img className="back-Image" onClick={this.onBack} src={back} alt="" />
+          <img className="back-image" onClick={this.onBack} src={back} alt="" />
           <label className="center-labels">{this.props.name}</label>
         </div>
         <div className="BNavBar">
