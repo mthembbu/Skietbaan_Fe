@@ -10,19 +10,22 @@
 }
 
 .page-content-login{
-  height: stretch;
+  background: url('../components/assets/backgroundBullets.png');
   background-color: #fdfdfd;
-  width:100%;
+  width: 100%;
   z-index: 50;
   position: relative;
+  background-repeat: no-repeat;
   height: 100vh;
+  background-size: cover;
+  background-position: center;
 }
 
 .centre-login{
   margin:0 auto;
   position: center;
   text-align: center;
-  padding-top: 40px;
+  padding-top: 34px;
 }
 
 @media screen and (min-width:768px)  {
@@ -36,13 +39,15 @@
 .header-container{
   background-color: #EA241A;
   text-align: center;
-  height: 73px;
-  border-radius: 21px;
+  height: 57px;
+  margin-top: 15px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
   box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);
 }
 
 .front-white{
-  color: #6F839E;
+  color: #fdfdfd;
   font-size: 18px;
 }
 
@@ -60,6 +65,14 @@
   border-radius: 25px;
   background-color: #6F839E;
   font-size: 16px;
+  margin-top: -22px;
+}
+
+.round-button:disabled{
+  color: #fdfdfd;
+  background-color: transparent;
+  border-color: #fdfdfd;
+  opacity: 80;
 }
 
 .buttons-invalid{
@@ -79,8 +92,9 @@
   color:#171F32;
 }
 
-.no-padding{
-  padding:0 ;
+.spacing-login{
+  padding:8px;
+  height: 100px;
 }
 
 .register-anchhor{
@@ -141,7 +155,6 @@
   font-size: 25px;
   color: white;
   font-weight: 400;
-  padding-top: 18px;
 }
 
 .button-login{
@@ -178,25 +191,34 @@
 .welcome-header{
   width: 100%;
   height: 79px;
-  background-color: #EA241A;
+  background-color: #6F839E;
   text-align: center;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);
+  padding-right: 20px;
 }
 
 .welcome-label{
   text-align: center;
-  padding-top: 9px;
-  font-size: 21px;
+  padding-top: 12px;
+  font-size: 18px;
   color: white;
   font-weight: 100;
   float: right;
-  padding-right: 24px;
+  width: 100px;
+}
+
+@media all and (min-width: 750px) {
+  .welcome-label{
+    width: 100px;
+  }
 }
 
 .skietbaan-label{
   text-align: center;
-  padding-top: 23px;
-  font-size: 19px;
-  color: #EA241A;
+  font-size: 18px;
+  color: #000000;
 }
 
 .bullet-button{
@@ -228,4 +250,10 @@
 
 .centre-label{
   text-align: center;
+}
+
+.error-message{
+  color: #EA241A;
+  font-size: 12px;
+  padding-top: 3px;
 }
