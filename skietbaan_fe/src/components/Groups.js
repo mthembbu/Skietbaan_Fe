@@ -44,7 +44,7 @@ class Groups extends Component {
     } else {
       this.props.history.push("/AddGroup");
     }
-    fetch("http://localhost:50209/api/Groups")
+    fetch(BASE_URL +"/api/Groups")
       .then(res => res.json())
       .then(data => this.setState({ groups: data.name }));
   }
@@ -67,7 +67,7 @@ class Groups extends Component {
     }
 
     fetch(BASE_URL + "/api/groups/add", {
-      method: "post",
+      method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
@@ -135,6 +135,7 @@ class Groups extends Component {
                 class="list-group-item list-group-item-light"
                 key={post.id}
                 style={{
+
                   background:post.backgrnd
                 }}
               >
@@ -159,14 +160,14 @@ class Groups extends Component {
       </div>
     );
     return (
-      <main className="TheMain">
-       <div className="TheNavBar">
-          <img className="backImage" onClick={this.onBack} src={back} alt="" />
-          <label className="center_labels">{this.props.name}</label>
+      <main className="The-Main">
+       <div className="The-NavBar">
+          <img className="back-Image" onClick={this.onBack} src={back} alt="" />
+          <label className="center-label">{this.props.name}</label>
         </div>
         <div className="BNavBar">
           <input
-            className="theText"
+            className="the-Text"
             id="username"
             type="text"
             onChange={this.onChange}
@@ -182,7 +183,6 @@ class Groups extends Component {
           </button>
         </div>
 
-        <div className="OnToTheNextOne" />
         <div
           className="scrollbar"
           data-simplebar
@@ -191,8 +191,8 @@ class Groups extends Component {
           {postitems}
         </div>
       {this.state.count==0?null:
-        <label className="bottomlabel">
-          <button className="deleteUser" onClick={this.handleOnClick}>
+        <label className="bottom-label">
+          <button className="delete-User" onClick={this.handleOnClick}>
             Create Group
           </button>
         </label>}

@@ -48,24 +48,22 @@ class AddGroup extends Component {
       );
   }
 
-
-
   render() {
     return (
-      <div className="addgroup-main">
+      <div className="add-group-main">
         <div className="page">
-          <div className="TheNavBar">
+          <div className="The-NavBar">
            <div>
             <img
-              className="backImage"
+              className="back-Image"
               onClick={this.onBack}
               src={back}
               alt=""
             /></div>
-              <label className="center_label">Create Groups</label>
+              <label className="center-label">Create Groups</label>
             </div>
         
-          <div className="middle_bar">
+          <div className="middle-bar">
             <label className="name">
               Enter Group Name{" "}
               {this.state.exist ? null : <img src={error} alt="" />}

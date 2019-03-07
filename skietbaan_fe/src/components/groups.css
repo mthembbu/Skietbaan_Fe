@@ -8,7 +8,7 @@
   margin-top: 15px;
 }
 
-.TheNavBar {
+.The-NavBar {
   background: #cccfd3;
   color: white;
   height: 56px;
@@ -18,10 +18,10 @@
   border-bottom-right-radius: 20px;
 }
 
-.center_label {
+.center-label {
   margin-top: 10px;
   margin-left: auto;
-  margin-right: 105px;
+  margin-right: auto;
   width: 7em;
   display: flex;
   color: white;
@@ -66,7 +66,7 @@
   height: 0px;
 }
 
-.theText {
+.the-Text {
   margin-left: 19px;
   margin-top: 17px;
   width: 208px;
@@ -116,7 +116,7 @@
   background: white;
 }
 
-.deleteUser {
+.delete-User {
   margin-right: 30px;
   margin-left: 30px;
   width: 136px;
@@ -129,7 +129,7 @@
   color: black;
 }
 
-.bottomlabel {
+.bottom-label {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -183,7 +183,7 @@
   color: #6f839e;
 }
 
-.theboxes {
+.the-boxes {
   float: right;
 }
 
@@ -208,11 +208,11 @@
   margin-left: 32px;
 }
 
-.bottompanel {
+.bottom-panel {
   position: absolute;
   right: 0;
   bottom: 0;
-  background: #fdfdfd;
+  background-image: linear-gradient(to right, #282829, #6d6d6d);
   width: 100%;
   height: 42px;
   margin: 0px;
@@ -297,7 +297,7 @@
   color: "#F3F4F9";
 }
 
-.thetextname {
+.the-textname {
   font-size: 16px;
   font-weight: lighter;
   display: inline-block;
@@ -395,7 +395,7 @@
   right:1%;
 }
 
-.backImage {
+.back-Image {
   padding-left: 30px;
   margin-top: 11px;
   height: 30px;

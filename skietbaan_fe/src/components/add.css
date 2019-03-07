@@ -6,7 +6,7 @@
   border-bottom-right-radius: 20px;
 }
 
-.center_labels {
+.center-labels {
   display: flex;
   margin-left: 56px;
   margin-right: 56px;
@@ -20,7 +20,7 @@
   font-size: 25px;
 }
 
-.middle_bar {
+.middle-bar {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -100,24 +100,8 @@
   margin-left: 22px;
 }
 
-.nextpage {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  position: fixed;
-  margin: 2%;
-}
-
-.theList {
+.the-List {
   background: #cccfd3;
-}
-
-.circles {
-  border-radius: 50%;
-}
-
-.bpanel {
-  padding-top: 15px;
 }
 
 .group-error {

@@ -76,7 +76,7 @@ class ViewGroups extends Component {
     newarry.splice(this.state.index, 1);
     this.setState({ posts: newarry });
 
-    fetch((BASE_URL + "/api/Groups/"+this.state.ids), {
+    fetch(BASE_URL + "/api/Groups/"+this.state.ids, {
       method:"POST",
       headers: {
         Accept: "application/json",
@@ -154,10 +154,10 @@ class ViewGroups extends Component {
     );
 
     return (
-      <main className="TheMain" onClick={() => this.do()}>
-        <div className="TheNavBar">
-          <img className="backImage" onClick={this.onBack} src={back} alt="" />
-          <label className="center_label">View Groups</label>
+      <main className="The-Main" onClick={() => this.do()}>
+        <div className="The-NavBar">
+          <img className="back-Image" onClick={this.onBack} src={back} alt="" />
+          <label className="center-label">View Groups</label>
         </div>
         <div
           className="scrollbar"
@@ -172,7 +172,7 @@ class ViewGroups extends Component {
               <tbody>
                 <tr>
                   <td>
-                    <div className="thetextname">Delete</div>
+                    <div className="the-textname">Delete</div>
                   </td>
                   <td>
                     <span className="name-of-group">

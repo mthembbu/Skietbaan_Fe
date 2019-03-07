@@ -46,24 +46,24 @@ class EditGroup extends Component {
 
   delete = () => {
     this.setState({ count: 0 });
-    console.log(this.state.newArray);
     const { newArray } = this.state;
-    const newarry = [...this.state.posts];
+    const updateArray = [...this.state.posts];
 
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === false) {
         let indexofs=newArray.indexOf(this.state.posts[i])
         newArray.push(this.state.posts[i]);
-        newarry.splice(indexofs, 1);
+        updateArray.splice(indexofs, 1);
         delete this.state.posts[i].colors;
         delete this.state.posts[i].backgrnd;
         delete this.state.posts[i].image;
         delete this.state.posts[i].highlighted;
         delete this.state.posts[i].id;
+       
       }
+      this.setState({ posts: updateArray });
     }
-    this.setState({ posts: newarry });
-
+     
     let request = {
       GroupIds: this.props.id,
       users: this.state.newArray
@@ -148,14 +148,14 @@ class EditGroup extends Component {
       </div>
     );
     return (
-      <main className="TheMain">
-        <div className="TheNavBar">
-          <img className="backImage" onClick={this.onBack} src={back} alt="" />
-          <label className="center_labels">{this.props.name}</label>
+      <main className="The-Main">
+        <div className="The-NavBar">
+          <img className="back-Image" onClick={this.onBack} src={back} alt="" />
+          <label className="center-labels">{this.props.name}</label>
         </div>
         <div className="BNavBar">
           <input
-            className="theText"
+            className="the-Text"
             id="username"
             type="text"
             onChange={this.onChange}
@@ -180,7 +180,7 @@ class EditGroup extends Component {
               <tbody>
                 <tr>
                   <td>
-                    <div className="thetextname">Delete</div>
+                    <div className="the-textname">Delete</div>
                   </td>
                   <td>
                     <span className="name-of-group">
