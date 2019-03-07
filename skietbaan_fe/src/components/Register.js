@@ -178,7 +178,7 @@ class Register extends Component {
   render() {
     if (getCookie("token")) {
       window.location = "/home";
-    }
+     }
     document.addEventListener('DOMContentLoaded', () => {
       this.toggleNavbar();
     }, false);
