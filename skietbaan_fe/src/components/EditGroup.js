@@ -153,7 +153,6 @@ class EditGroup extends Component {
           <img className="backImage" onClick={this.onBack} src={back} alt="" />
           <label className="center_labels">{this.props.name}</label>
         </div>
-  
         <div className="BNavBar">
           <input
             className="theText"
@@ -174,8 +173,8 @@ class EditGroup extends Component {
           data-simplebar-auto-hide="false"
         >
           {postitems}
-        </div>
-        {this.state.count == 0 ? null : (
+          </div>
+        {this.state.count==0  ? null : (
           <div className="bpanel">
             <table className="group-delete-table">
               <tbody>
@@ -188,19 +187,24 @@ class EditGroup extends Component {
                       {this.state.selected}{" "}
                     </span>
                   </td>
-                  <td>
-                    <button
-                      className="group-confirm"
-                      onClick={() => this.delete()}
-                    >
-                      Confirm
-                    </button>
-                  </td>
-                  <td className="group-undo">
-                    <button className="updatess" onClick={() => this.cancel()}>
-                      Cancel
-                    </button>
-                  </td>
+                  <div className="confrim-cancel">
+                    <td>
+                      <button
+                        className="group-confirm"
+                        onClick={() => this.delete()}
+                      >
+                        Confirm
+                      </button>
+                    </td>
+                    <td className="group-undo">
+                      <button
+                        className="updatess"
+                        onClick={() => this.cancel()}
+                      >
+                        Cancel
+                      </button>
+                    </td>
+                  </div>
                 </tr>
               </tbody>
             </table>

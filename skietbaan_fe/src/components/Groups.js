@@ -135,13 +135,10 @@ class Groups extends Component {
                 class="list-group-item list-group-item-light"
                 key={post.id}
                 style={{
-                  borderLeftStyle: "none",
-                  borderRightStyle: "none",
-            
                   background:post.backgrnd
                 }}
               >
-                <img
+               <img
                   className="checkbox-delete"
                   onClick={() => this.toggleHighlight(index)}
                   src={post.image}

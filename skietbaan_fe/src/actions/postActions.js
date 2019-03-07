@@ -64,7 +64,7 @@ export const createPost = users => dispatch => {
     .catch(function(data) {});
 };
 
-export const getname = name => {
+export const getName = name => {
   //Return an action
   return dispatch => {
     dispatch({

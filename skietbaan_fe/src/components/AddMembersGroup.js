@@ -18,7 +18,6 @@ class AddMembersGroup extends Component {
       count: 0
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
-    this.handleOnClick = this.handleOnClick.bind(this);
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
   }
@@ -45,7 +44,7 @@ class AddMembersGroup extends Component {
     this.setState({ filterText: event.target.value });
   }
 
-  handleOnClick() {
+  addUsers=()=> {
     const { newArray } = this.state;
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === true) {
@@ -147,7 +146,7 @@ class AddMembersGroup extends Component {
           {postitems}
         </div>
 
-        {this.state.count == 0 ? null : (
+        {this.state.count==0  ? null : (
           <div className="bpanel">
             <table className="group-delete-table">
               <tbody>
@@ -160,24 +159,24 @@ class AddMembersGroup extends Component {
                       {this.state.selected}{" "}
                     </span>
                   </td>
-                  <td>
-                    <button
-                      className="group-confirm"
-                      onClick={() => this.handleOnClick()}
-                      style={{
-                        background: "white",
-                        color: "black",
-                        border: "1px solid white"
-                      }}
-                    >
-                      Confirm
-                    </button>
-                  </td>
-                  <td className="group-undo">
-                    <button className="updatess" onClick={() => this.cancel()}>
-                      Cancel
-                    </button>
-                  </td>
+                  <div className="confrim-cancel">
+                    <td>
+                      <button
+                        className="group-confirm-add"
+                        onClick={() => this.addUsers()}
+                      >
+                        Confirm
+                      </button>
+                    </td>
+                    <td className="group-undo">
+                      <button
+                        className="updatess"
+                        onClick={() => this.cancel()}
+                      >
+                        Cancel
+                      </button>
+                    </td>
+                  </div>
                 </tr>
               </tbody>
             </table>

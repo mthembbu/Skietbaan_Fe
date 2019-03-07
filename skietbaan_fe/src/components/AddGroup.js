@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createGroups, getname } from "../actions/postActions";
+import { createGroups, getName } from "../actions/postActions";
 import "./add.css";
 import { BASE_URL } from "../actions/types";
 import error from "./GroupImages/error.png";
@@ -25,7 +25,7 @@ class AddGroup extends Component {
   onClick() {
     if (this.state.groups.indexOf(this.state.name) == -1) {
       if (this.state.name.length != 0) {
-        this.props.getname(this.state.name);
+        this.props.getName(this.state.name);
         // history.push("/Groups");
         window.location = "/Groups";
       } else {
@@ -46,14 +46,21 @@ class AddGroup extends Component {
       );
   }
   render() {
- 
     return (
       <div className="addgroup-main">
         <div className="page">
-        <div className="TheNavBar">
-          <img className="backImage" onClick={this.onBack} src={back} alt="" />
-          <label className="center_label">Create Groups</label>
-        </div>
+          <div className="TheNavBar">
+           <div>
+            <img
+              className="backImage"
+              onClick={this.onBack}
+              src={back}
+              alt=""
+            /></div>
+            
+              <label className="center_label">Create Groups</label>
+            </div>
+          
 
           <div className="middle_bar">
             <label className="name">
@@ -94,5 +101,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createGroups, getname }
+  { createGroups, getName }
 )(AddGroup);

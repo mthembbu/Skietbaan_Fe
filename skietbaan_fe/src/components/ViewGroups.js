@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
 import { withRouter } from "react-router-dom";
-import { passId, getname } from "../actions/postActions";
+import { passId, getName } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
 import deleteState from "./GroupImages/deleteState.png";
 import normalstate from "./GroupImages/submit-plus.png";
@@ -26,6 +26,7 @@ class ViewGroups extends Component {
     this.delete = this.delete.bind(this);
     this.editGroup = this.editGroup.bind(this);
   }
+
   UNSAFE_componentWillMount() {
     fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
@@ -49,7 +50,7 @@ class ViewGroups extends Component {
     this.props.history.push("/ViewGroups");
   }
   editGroup(event, name) {
-    this.props.getname(name);
+    this.props.getName(name);
     this.props.passId(event);
     this.props.history.push("/EditGroup");
   }
@@ -212,6 +213,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { passId, getname }
+    { passId, getName }
   )(ViewGroups)
 );
