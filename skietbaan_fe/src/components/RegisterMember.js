@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../components/RegisterMemberStyles.css';
 import { BASE_URL } from '../actions/types.js';
+import { getCookie } from '../components/cookie.js';
 
 function validateUsername(username) {
   const re = /[a-zA-Z]/;
@@ -149,6 +150,9 @@ class App extends Component {
   }
 
   render() {
+    if(!getCookie("token")){
+      window.location = "/register-page";
+      }
     const postItems = (
       <table striped hover condensed
         className="table-register-member">

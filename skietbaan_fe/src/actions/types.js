@@ -1,3 +1,33 @@
+import profilered from '../components/navbar-icons/profile-red.png';
+import profilegray from '../components/navbar-icons/profile-grey.png';
+import docsred from '../components/navbar-icons/docs-red.png';
+import docsgray from '../components/navbar-icons/docs-grey.png';
+import createred from '../components/navbar-icons/create-red.png';
+import creategray from '../components/navbar-icons/create-grey.png';
+import leaderboardred from '../components/navbar-icons/leaderboard-red.png';
+import leaderboardgray from '../components/navbar-icons/leaderboard-grey.png';
+import notificationsred from '../components/navbar-icons/notifications-red.png';
+import notificationsgray from '../components/navbar-icons/notifications-grey.png';
+import scorecapturered from '../components/navbar-icons/add-score-red.png';
+import scorecapturegray from '../components/navbar-icons/add-score-grey.png';
+import moregray from '../components/navbar-icons/more-grey.png';
+
+export const NAV_BAR_ICONS = {
+    PROFILE_RED: profilered,
+    PROFILE_GRAY: profilegray,
+    DOCS_RED: docsred,
+    DOCS_GRAY: docsgray,
+    CREATE_RED: createred,
+    CREATE_GRAY: creategray,
+    LEADERBOARD_RED: leaderboardred,
+    LEADERBOARD_GRAY: leaderboardgray,
+    NOTIFICATIONS_RED: notificationsred,
+    NOTIFICATIONS_GRAY: notificationsgray,
+    SCORE_CAPTURE_RED: scorecapturered,
+    SCORE_CAPTURE_GRAY: scorecapturegray,
+    MORE_GRAY: moregray
+}
+
 export const ADD_BOOKMARK = 'ADD_BOOKMARK';
 export const DELETE_BOOKMARK = 'DELETE_BOOKMARK';
 export const FETCH_POSTS = 'FETCH_POSTS';

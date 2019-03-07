@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../scss/create-page.css';
+import { getCookie } from '../components/cookie.js';
 class CreatePage extends Component {
 
 	constructor(props) {
@@ -38,6 +39,9 @@ class CreatePage extends Component {
 	}
 
 	render() {
+		if(!getCookie("token")){
+            window.location = "/register-page";
+        }
 		return (
 			<div className="create-page-container">
 				<div class="page-name-create-page">

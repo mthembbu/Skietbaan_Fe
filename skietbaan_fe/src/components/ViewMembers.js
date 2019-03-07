@@ -4,7 +4,7 @@ import { Table } from 'react-bootstrap';
 import Collapsible from 'react-collapsible';
 import { BASE_URL } from '../actions/types.js';
 import membericon from '../components/assets/membership-icon.png';
-
+import { getCookie } from '../components/cookie.js';
 class ViewMembers extends Component {
     constructor(props) {
         super(props);
@@ -95,6 +95,9 @@ class ViewMembers extends Component {
     }
 
     render() {
+        if(!getCookie("token")){
+            window.location = "/register-page";
+        }
         this.GetAllMembers();
         this.GetTimeLeft();
         const postItems = (
