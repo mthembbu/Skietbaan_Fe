@@ -6,6 +6,5 @@ import competition from "./createcomp.reducer";
 export default combineReducers({
   posts: postReducer,
   simpleReducer,
-  comps: competition,
 	compOBJ: competition
 });
