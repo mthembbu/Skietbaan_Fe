@@ -74,6 +74,16 @@
   border-color: #fdfdfd;
   opacity: 80;
 }
+.round-button:focus{
+  background-color:#fdfdfd;
+  color: #ebebeb;
+  border:1px lightgray solid;
+}
+.round-button:active{
+  background-color:#fdfdfd;
+  color: #ebebeb;
+  border:1px lightgray solid;
+}
 
 .buttons-invalid{
   background-color: #fdfdfd;
@@ -180,7 +190,11 @@
   float: right;
   position: absolute;
   top: 1px;
+<<<<<<< HEAD
   right: 38px;
+=======
+  right: 42px;
+>>>>>>> 9de315a7d4f3607a8167ec0fdc072054b40adbb7
 }
 
 .input-label{
