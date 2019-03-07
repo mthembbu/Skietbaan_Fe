@@ -51,7 +51,7 @@ export const UPDATE_GROUPNAME = 'UPDATE_GROUPNAME';
 export const CREATEGROUP = 'CREATEGROUP';
 export const GETGROUP = 'GETGROUP';
 export const PASS_ID = 'PASS_ID';
-export const GETNAME = 'GETNAME';
+export const GET_NAME = 'GET_NAME';
 export const LOCALURL = "http://localhost:50859"
 
 FETCH_LEADERBOARDFILTER_DATA
