@@ -71,7 +71,7 @@ class App extends Component {
 							<Route path="/login" component={Login} exact />
 							<Route path="/register-page" component={Register} exact />
 							<Route path="/" component={Register} exact />
-							<Route path="/registermember" component={RegisterMember} exact />
+							<Route path="/registerMember" component={RegisterMember} exact />
 							<Route path="/new-competition" component={CreateComp} exact />
 							<Route path="/AddGroup" component={AddGroup} exact />
 							<Route path="/scorecapture" component={ScoreCapture} exact />
@@ -86,7 +86,7 @@ class App extends Component {
 							<Route path="/notify" component={notification} exact />
 							<Route path="/documents" component={Documents} exact />
 
-							<Route path="/viewmembers" component={ViewMembers} exact />
+							<Route path="/viewMembers" component={ViewMembers} exact />
 							<Route path="/AddMembersGroup" component={AddMembersGroup} exact />
 							<Route path="/EditGroup" component={EditGroup} exact />
 							<Redirect from="/" to="/home" />

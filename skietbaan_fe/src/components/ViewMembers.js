@@ -3,7 +3,8 @@ import '../components/ViewMembers.css';
 import { Table } from 'react-bootstrap';
 import Collapsible from 'react-collapsible';
 import { BASE_URL } from '../actions/types.js';
-
+import memberIcon from '../components/assets/membership-icon.png';
+import { getCookie } from '../components/cookie.js';
 class ViewMembers extends Component {
     constructor(props) {
         super(props);
@@ -94,6 +95,9 @@ class ViewMembers extends Component {
     }
 
     render() {
+        if(!getCookie("token")){
+            window.location = "/registerPage";
+        }
         this.GetAllMembers();
         this.GetTimeLeft();
         const postItems = (
@@ -109,7 +113,7 @@ class ViewMembers extends Component {
                             <td className="first-column">
                                 <Collapsible trigger={<div className="username-and-email">
                                     <b>{post.username}</b>
-                                    <img src={require('../components/assets/membership-icon.png')}
+                                    <img src={memberIcon}
                                         className="membership-icon" alt='Is a Member'></img>
                                     <div>{post.email}</div>
                                 </div>}>
