@@ -151,7 +151,7 @@ class App extends Component {
 
   render() {
     if(!getCookie("token")){
-      window.location = "/register-page";
+      window.location = "/registerPage";
       }
     const postItems = (
       <table striped hover condensed

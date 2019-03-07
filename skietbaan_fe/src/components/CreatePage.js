@@ -40,7 +40,7 @@ class CreatePage extends Component {
 
 	render() {
 		if(!getCookie("token")){
-            window.location = "/register-page";
+            window.location = "/registerPage";
         }
 		return (
 			<div className="create-page-container">
