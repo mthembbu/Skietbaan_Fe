@@ -83,11 +83,6 @@ input.invalid{
 
 }
 
-button {
-  width: 80%;
-  height: 100%;
-}
-
 button.button-invalid{
   background-color: #e0e1e2;
   border: none;

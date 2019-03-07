@@ -1,0 +1,172 @@
+@media only screen and (min-width: 580px){
+  .dropdown-menu.show{
+    background-color: #F3F4F9;
+    border: none;
+    border: 1px solid  #F3F4F9;
+    
+  }
+
+  .leaderboard-icon-grey{
+    height: 40px;
+    width: 59px;
+  }
+
+  .add-score-icon-grey{
+    height: 40px;
+    width: 49px;
+  }
+
+  .create-icon-grey{
+    height: 40px;
+    width: 31px;
+  }
+
+  .columns-more{
+    display:none;
+  }
+
+  .more-icon-grey{
+    height: 38px;
+    width: 28px;
+    display: none;
+    width: 0%;
+  }
+
+  .profile-icon-grey{
+    height: 40px;
+    width: 30px;
+  }
+  
+  .docs-icon-grey-v2{
+    height: 40px;
+    width: 54px;
+  }
+
+  .notifications-icon-grey-v2{
+    height: 40px;
+    width: 57px;
+  }
+
+  .second-row-navbar{
+    height: 68px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+    display: none;
+  }
+
+  .columns-v2{
+    width: 12%;
+  }
+
+  .columns{
+    width: 12%;
+  }
+
+  .first-row-navbar{
+    height: 68px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+  }
+  
+  .navbar-admin{
+    background-color: #F3F4F9;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width:579px){
+  .dropdown-menu.show{
+    background-color: #F3F4F9;
+    border: none;
+    border: 1px solid  #F3F4F9;
+  }
+
+  .leaderboard-icon-grey{
+    height: 40px;
+    width: 59px;
+  }
+
+  .add-score-icon-grey{
+    height: 40px;
+    width: 49px;
+  }
+
+  .create-icon-grey{
+    height: 40px;
+    width: 31px;
+  }
+
+  .docs-icon-grey{
+    height: 40px;
+    width: 54px;
+  }
+
+  .notifications-icon-grey{
+    height: 40px;
+    width: 57px;
+  }
+
+  .profile-icon-grey{
+    height: 40px;
+    width: 30px;
+  }
+
+  .more-icon-grey{
+    height: 38px;
+    width: 28px;
+  }
+
+  .profile-icon-grey-v2{
+    height: 40px;
+    width: 30px;
+    display: none;
+  }
+
+  .docs-icon-grey-v2{
+    height: 40px;
+    width: 54px;
+    display:none;
+  }
+
+  .notifications-icon-grey-v2{
+    height: 40px;
+    width: 57px;
+    display:none;
+  }
+
+  .second-row-navbar{
+    height: 68px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+    display: none;
+  }
+
+  .first-row-navbar{
+    height: 68px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+  }
+
+  .navbar-admin{
+    background-color: #F3F4F9;
+    width: 100%;
+    text-align: center;
+  }
+
+  .second-row-navbar.expand{
+    display: table-row;
+    height: 68px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+  }
+
+  .columns{
+    width: 25%;
+  }
+}
