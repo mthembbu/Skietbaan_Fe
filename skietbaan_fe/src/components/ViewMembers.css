@@ -69,10 +69,7 @@
   }
 
   .search {
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 18px;
-    padding-bottom: 10px;
+    padding: 18px 30px 10px 30px;
     background-color: #fdfdfd;
     height: 74px;
   }
