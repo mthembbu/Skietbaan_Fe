@@ -1,102 +1,121 @@
 import React, { Component } from 'react';
-import { Label, Table, Input, Button } from 'reactstrap';
 import '../components/Documents.css';
-import {BASE_URL} from '../actions/types.js';
+import { getCookie } from './cookie.js';
+import { Collapse } from 'react-collapse';
+import { BASE_URL } from "../actions/types.js";
+import { availableIcon } from "../resources/sendDoc.png";
+import { notAvailableIcon } from "../resources/sendDoc.png";
 
 class Documents extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            array: []
+          value: "",
+          value2: "",
+          collapseFilterLOGS: false,
+          collapseFilterLOS: false
+
+        };
+        this.SendLOGS = this.SendLOGS.bind(this)
+        this.SendLOS = this.SendLOS.bind(this)
+    }
+
+    componentWillMount(){
+        let token = getCookie("token");
+        fetch(BASE_URL+"/api/Documents/UserLOGS/" + token)
+        .then(res=>res.json())
+        .then(data=>this.setState({value:data}))
+
+        fetch(BASE_URL+"/api/Documents/UserLOS/" + token)
+        .then(res=>res.json())
+        .then(data=>this.setState({value2:data}))
+    }
+
+    SendLOGS(){
+        let token =getCookie("token");
+        fetch(BASE_URL+"/api/Documents/SendLOGS/" + token)
+
+        if (this.state.collapseFilterLOGS) {
+            this.setState({
+                collapseFilterLOGS: false
+            });
+        } else {
+            this.setState({
+                collapseFilterLOGS: true
+            });
         }
-        this.GetMembers = this.GetMembers.bind(this);
     }
 
-    GetMembers() {
-        fetch(BASE_URL,"/api/Features/SearchMember", {
-            method: 'Get',
-            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        })
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (data) {
-                return data;
-            }).then(data => this.setState({
-                array: data.filter(function (datas) {
-                    return ((datas.username).startsWith(document.getElementById("usernameValue").value)
-                        || (datas.email).startsWith(document.getElementById("usernameValue").value));
-                })
-            }))
-            .catch(function () { });
-    }
+    SendLOS(){
+        let token =getCookie("token");
+        fetch(BASE_URL+"/api/Documents/SendLOS/" + token)
 
-    SearchMember(user) {
-        this.setState({
-            usernameValue: user
-        });
-        let name = this.state.array[user].username;
-        let email = this.state.array[user].email;
-        fetch(BASE_URL,"/api/Features/Search?Username=" + name, {
-            method: 'Get',
-            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-                document.getElementById("usernameValue").value = email;
-            })
-            .catch(function () { });
+        if (this.state.collapseFilterLOS) {
+            this.setState({
+                collapseFilterLOS: false
+            });
+        } else {
+            this.setState({
+                collapseFilterLOS: true
+            });
+        }
     }
-
+   
     render() {
-        const postItems = (
-            <Table striped hover condensed>
-                <tbody>
-                    {this.state.array.map((post, index) => (
-                        <tr key={post.id} onClick={() => this.SearchMember(index)}>
-                            <td>
-                                <b>{post.username}</b>
-                                <p>{post.email}</p>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-        );
         return (
-            <div className="documents-container">
-                <div className="page-name">
-                    <h2>Documents</h2>
-                </div>
-                <div className="documents-body">
-                    <div className="label-select-member">
-                        <Label>Select Member</Label>
+            <div className="documents_background ">
+                    <div className="docuements-heading">
+                        <div className="documents-text">Documents</div>
                     </div>
-                    <div className="search-member-name">
-                        <Input
-                            type="text"
-                            name="usernameValue"
-                            id="usernameValue"
-                            placeholder="Username or Email"
-                            value={this.state.usernamesValue}
-                            onChange={this.GetMembers} />
-                    </div>
-                    <div className="table-search-members">
-                        {this.GetMembers}
-                        {postItems}
-                    </div>
-                    <br />
-                    <div>
-                        <div className="button-upload-document">
-                            <Button className="upload-document-button">UploadDocument</Button>
+                <div className="center" >
+                        <div className="label-select-document">                        
+                                Documents have requirements                            
                         </div>
-                        <br />
-                    </div>
-                    <div className="button-upload-document">
-                        <Button className="send-email">SendEmail</Button>
-                    </div>
-                    <br />
+                                
+                        <div className="button-upload-document-3">
+                            <button className={this.state.value=="Document"? "btn-active send-email btn-bottom-3":"btn-default send-email btn-bottom-3"} 
+                                onClick={this.state.value=="Document"? this.SendLOGS: null}> 
+                                Letter of Good Standing {this.state.value=="Document"? 
+                                <img className="document-image-icon" src={availableIcon}/>:
+                                <img className="document-image-icon" src={notAvailableIcon}/>}
+                            </button>
+                            <Collapse isOpened={this.state.collapseFilterLOGS}>
+                                <div className="documents-collapse">
+                                    Document Sent 
+                                </div>                           
+                            </Collapse>                                
+                        </div>
+                            <div className="button-upload-document-2">
+                                <button className={this.state.value2=="Document"? "btn-active send-email btn-bottom-2":
+                                    "btn-default send-email btn-bottom-2"} 
+                                    onClick={this.state.value2=="Document"? this.SendLOS: null}>
+                                    Letter of Status {this.state.value2=="Document"? 
+                                    <img className="document-image-icon" src={availableIcon}/>:
+                                    <img className="document-image-icon" src={notAvailableIcon}/>}
+                                </button>                       
+
+                                <Collapse isOpened={this.state.collapseFilterLOS}>
+                                    <div className="documents-collapse">
+                                        Document Sent
+                                    </div>                             
+                                </Collapse>                               
+                            </div>
+                        <div className="documents-rectangle">
+                            <div className="label-select-document2"> 
+                                {this.state.value=="Document" && this.state.value2=="Document" ? null: "What is needed"}
+                            </div>
+
+                            <div className="document-requirements3">
+                                {this.state.value !== "Document"? <div><b>Letter of Good Standing:</b> 
+                                <p>requires 5 more shoots.</p></div>: null}
+                            </div>
+                            <div className="document-requirements3"> 
+                                {this.state.value2 !== "Document"? <div><b>Letter of Status:</b> 
+                                <p>requires further shooting documentation.</p></div>: null}
+                            </div>  
+                        </div>                  
                 </div>
+                
             </div>
         );
     }

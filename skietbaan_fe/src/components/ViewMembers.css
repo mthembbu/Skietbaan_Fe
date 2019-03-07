@@ -14,14 +14,15 @@
   .centre-view-member{
     margin:0 auto;
     position: center;
+    background: white;
   }
 
   .search-member-name{
-    background-color: #171F32;
+    background-color: white;
   }
 
   .table-search-members{
-    background-color: #171F32;
+    background-color: white;
   }
 
   .page-name-view{
@@ -29,16 +30,19 @@
     text-align: center;
     text-size-adjust: 25px;
     background-size: 15px;
-    height: 49px;
-    background-color: #0c0c0c;
+    height: 56px;
+    background-color: #DC0600;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
   }
 
   .go-back-to-create-page{
     float: left;
     padding-top: 10px;
-    padding-left: 35px;
+    padding-left: 40px;
     background-size: 15px;
     height: 40px;
+    margin-top: 3px;
   }
 
   .label-search{
@@ -53,35 +57,40 @@
   }
 
   .userValue {
-    background-color: white;
+    background-color: #F3F4F9;
     border-radius: 4px;
     line-height: 22px;
     text-align: center;
     width: 100%;
     border: none;
+    font-size: 18px;
+    color: #798CA5;
+    border: 1.5px #798CA5 solid;
   }
 
   .search {
-    padding-left: 45px;
-    padding-right: 45px;
-    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 18px;
     padding-bottom: 10px;
-    background-color: #504f51;
+    background-color: white;
+    height: 74px;
   }
 
   .userValue{
-    background: url('../components/assets/search.png') no-repeat right center;
-    background-color: white;
+    background: url('../components/assets/search-red.png') no-repeat right center;
+    background-color: #F3F4F9;
     background-size: 22px;
     height: 40px;
     background-position-x: 95%;
     border-radius: 7px;
+    width: 300px;
   }
 
-  .go-back-to-creat-page{
+  .go-back-to-create-page-from-view-members{
     float: left;
     padding-top: 10px;
-    padding-left: 25px;
+    padding-left: 40px;
     background-size: 15px;
     height: 40px;
   }
@@ -90,29 +99,32 @@
     background-color: white;
     width: 100%;
     font-size: 16px;
+    color: #798CA5;
   }
 
   .view-members{
     size: 49px;
-    padding-top: 7px;
+    padding-top: 11px;
     font-weight: bold;
-    font-size: 25px;
-    font-family: helvetica;
+    font-size: 20px;
     color: #fdfdfd;
-    padding-right: 50px;
+    padding-right: 52px;
   }
 
   .view-members-user{
-    border-bottom: solid 2px #bbbcbd;
+    border-bottom: solid 1.5px #bbbcbd;
+    border-top: solid 1.5px #bbbcbd;
     height: 55px;
   }
 
   .view-members-user::selection{
-    background-color: #bbbcbd;
+    background-color: #6F839E;
+    color:white;
   }
 
   .view-members-user:hover{
-    background-color: lightgray;
+    background-color: #6F839E;
+    color:white;
   }
 
   .first-column{
@@ -131,10 +143,6 @@
     font-weight: bold;
   }
 
-  .okay{
-    color:black;
-  }
-
   .second-column{
     vertical-align: top;
     height: 55px;
@@ -143,9 +151,16 @@
   .expiry-time-column{
     font-size: 15px;
     height: 55px;
+    padding-left: 20px;
   }
 
   .membership-details{
     font-size: 13px;
     height: 55px;
+  }
+
+  .membership-icon{
+    height: 17px;
+    width: 17px;
+    margin-left: 4px;
   }

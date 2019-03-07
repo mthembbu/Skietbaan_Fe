@@ -109,6 +109,8 @@ class ViewMembers extends Component {
                             <td className="first-column">
                                 <Collapsible trigger={<div className="username-and-email">
                                     <b>{post.username}</b>
+                                    <img src={require('../components/assets/membership-icon.png')}
+                                        className="membership-icon" alt='Is a Member'></img>
                                     <div>{post.email}</div>
                                 </div>}>
                                     <div className="membership-details">Membership No: <b>{post.memberID}</b>
@@ -136,7 +138,7 @@ class ViewMembers extends Component {
                 <div className="page-name-view">
                     <div className="image-comtainer">
                         <img src={require('../components/assets/back-button-white.png')} onClick={this.BackToCreate}
-                            className="go-back-to-create-page" alt=''></img>
+                            className="go-back-to-create-page-from-view-members" alt=''></img>
                     </div>
                     <div className="view-members-container">
                         <label className="view-members">
@@ -151,7 +153,6 @@ class ViewMembers extends Component {
                             type="text"
                             className="userValue"
                             id="usernameValue"
-                            placeholder="Username or Email"
                             value={this.state.filterText}
                             onChange={this.onChangeText}
                         />
