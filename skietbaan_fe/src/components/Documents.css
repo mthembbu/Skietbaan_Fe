@@ -46,13 +46,6 @@
     transition: all 0.3s ease 0s;
   }
 
-  html, body{
-
-    position: absolute;
-    width: 100% !important;
-    height: 100% !important;
-    }
-
   .btn-default:focus {
     font-weight: lighter;
     font-size: 16px;
