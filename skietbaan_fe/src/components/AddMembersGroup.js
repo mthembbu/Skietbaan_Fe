@@ -28,7 +28,8 @@ class AddMembersGroup extends Component {
             posts: data.map(users => {
               return {
                 ...users,
-                highlighted: false
+                highlighted: false,
+                backgrnd: "white" 
               };
             })
           });
@@ -70,10 +71,12 @@ class AddMembersGroup extends Component {
   }
   toggleHighlight = (name, event) => {
     if (this.state.posts[event].highlighted === true) {
+      this.state.posts[event].backgrnd="white";
       this.state.posts[event].highlighted = false;
       this.setState({ count: this.state.count - 1 });
     } else {
       this.setState({ selected: name });
+      this.state.posts[event].backgrnd="#F3F4F9";
       this.state.posts[event].highlighted = true;
       this.setState({ count: this.state.count + 1 });
     }
@@ -101,7 +104,7 @@ class AddMembersGroup extends Component {
               <li
                 class="list-group-item list-group-item-light"
                 key={post.id}
-                style={{ borderLeftStyle: "none", borderRightStyle: "none" }}
+                style={{background:post.backgrnd}}
               >
                 <input
                   type="checkbox"

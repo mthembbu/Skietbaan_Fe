@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { createGroups, getname } from "../actions/postActions";
 import "./add.css";
 import { BASE_URL } from "../actions/types";
-import history from './history'
+import error from "./GroupImages/error.png"
+import back from "./GroupImages/back.png"
 
 
 class AddGroup extends Component {
@@ -52,15 +53,17 @@ class AddGroup extends Component {
       <div className="addgroup-main">
       <div className="page">
         <div className="top_bar">
-          <a href="#" class="fa fa-angle-left" />
-
+        <img className="fa-angle-left" src={back} alt="" />
           <label className="center_labels">Create Group</label>
         </div>
 
         <div className="middle_bar">
-          <label className="name">Enter Group Name</label>
+          <label className="name">Enter Group Name {" "}
+          {this.state.exist?null:
+          <img src={error} alt="" />}
+          </label>
           <input
-            className={this.state.name==""? "texts2":"texts"}
+            className={this.state.name==""? "texts":"texts-active"}
             type="text"
             name="name"
             onChange={this.onChange}
@@ -69,7 +72,7 @@ class AddGroup extends Component {
             autoCorrect="off"
             placeholder={this.state.txt}
           />
-          {this.state.exist? null : (
+          {this.state.exist? <div className="group-error"></div> : (
             <div className="group-error">Group name already taken</div>
           
           )}

@@ -34,7 +34,7 @@
   margin-top: 10px;
 }
 
-.texts {
+.texts-active {
   border-radius: 8px;
   height: 39px;
   padding-left: 5px;
@@ -47,7 +47,7 @@
   font: #6f839e;
   border: 1px solid #6f839e;
 }
-.texts2 {
+.texts {
   border-radius: 8px;
   height: 39px;
   padding-left: 5px;
@@ -58,6 +58,8 @@
   margin-right: 71px;
   border: 1px solid #6f839e;
 }
+
+
 .page {
   background: #ffffffff;
   height: -webkit-fill-available;

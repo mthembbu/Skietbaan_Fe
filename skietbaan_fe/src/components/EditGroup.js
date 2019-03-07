@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import "./groups.css";
 import { withRouter } from "react-router-dom";
 import { BASE_URL } from "../actions/types";
+import marked from "./GroupImages/marked.png";
+import redbox from "./GroupImages/Rectangle.png";
+
 class EditGroup extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +13,8 @@ class EditGroup extends Component {
       posts: [],
       newArray: [],
       filterText: "",
-      count: 0
+      count: 0,
+      selected: ""
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.onBack = this.onBack.bind(this);
@@ -26,8 +30,8 @@ class EditGroup extends Component {
               return {
                 ...users,
                 highlighted: true,
-                colors: "black",
-                backgrnd:"#F3F4F9"
+                backgrnd: "#F3F4F9",
+                image: marked
               };
             })
           });
@@ -40,21 +44,23 @@ class EditGroup extends Component {
     this.setState({ filterText: event.target.value });
   }
 
-  delete=()=> {
+  delete = () => {
     this.setState({ count: 0 });
-    console.log(this.state.newArray)
+    console.log(this.state.newArray);
     const { newArray } = this.state;
     const newarry = [...this.state.posts];
 
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === false) {
+        let indexofs=newArray.indexOf(this.state.posts[i])
         newArray.push(this.state.posts[i]);
-        newarry.splice(i, 1);
+        newarry.splice(indexofs, 1);
+        delete this.state.posts[i].colors;
+        delete this.state.posts[i].backgrnd;
+        delete this.state.posts[i].image;
+        delete this.state.posts[i].highlighted;
+        delete this.state.posts[i].id;
       }
-      delete this.state.posts[i].highlighted;
-      delete this.state.posts[i].id;
-      delete this.state.posts[i].colors;
-      delete this.state.posts[i].backgrnd;
     }
     this.setState({ posts: newarry });
 
@@ -72,21 +78,23 @@ class EditGroup extends Component {
     })
       .then(res => res.json())
       .catch(function(data) {});
-  }
-  toggleHighlight = event => {
+  };
+  toggleHighlight = (user, event) => {
+    this.setState({ selected: user });
     if (this.state.posts[event].highlighted === true) {
       this.state.posts[event].highlighted = false;
-      this.state.posts[event].colors = "red";
+      this.state.posts[event].image = redbox;
       this.state.posts[event].backgrnd = "white";
 
       this.setState({ count: this.state.count - 1 });
     } else {
       this.state.posts[event].highlighted = true;
-      this.state.posts[event].colors = "black";
+      this.state.posts[event].image = marked;
       this.state.posts[event].backgrnd = "#F3F4F9";
       this.setState({ count: this.state.count + 1 });
     }
-  };rt
+  };
+  rt;
   onBack() {
     this.props.history.push("/ViewGroups");
   }
@@ -115,25 +123,22 @@ class EditGroup extends Component {
                 class="list-group-item list-group-item-light"
                 key={post.id}
                 style={{
-                  borderLeftStyle: "none",
-                  borderRightStyle: "none",
-                  color: "red",
-                  background:post.backgrnd
+                  background: post.backgrnd
                 }}
               >
-                <input
-                  type="checkbox"
-                  className="boxs"
-                  onClick={() => this.toggleHighlight(index)}
-                  checked={post.highlighted}
-                  style={{border:"2px solid black", marginTop:"17px" ,marginRight:"23px"}}
+                <img
+                  className="checkbox-delete"
+                  onClick={() => this.toggleHighlight(post.username, index)}
+                  src={post.image}
+                  alt=""
                 />
+
                 <label className="blabe">
-                  <div className="userName" style={{ color: post.colors }}>
+                  <div className="userName" className={post.image==marked?"userName":"userName-active"}>
                     {" "}
                     {post.username}
                   </div>
-                  <div className="emails" style={{ color: post.colors }}>
+                  <div className="emails" className={post.image==marked?"emails":"emails-active"}>
                     {post.email}
                   </div>
                 </label>
@@ -169,7 +174,7 @@ class EditGroup extends Component {
         >
           {postitems}
         </div>
-        {this.state.count==0 ? null : (
+        {this.state.count == 0 ? null : (
           <div className="bpanel">
             <table className="group-delete-table">
               <tbody>

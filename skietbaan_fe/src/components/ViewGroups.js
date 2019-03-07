@@ -4,8 +4,10 @@ import "./groups.css";
 import { withRouter } from "react-router-dom";
 import { passId, getname } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
-import deleteState from "./GroupImages/deleteState.png"
-import normalstate from "./GroupImages/submit-plus.png"
+import deleteState from "./GroupImages/deleteState.png";
+import normalstate from "./GroupImages/submit-plus.png";
+import back from "./GroupImages/back.png";
+
 class ViewGroups extends Component {
   constructor(props) {
     super(props);
@@ -72,7 +74,7 @@ class ViewGroups extends Component {
     const newarry = [...this.state.posts];
     newarry.splice(this.state.index, 1);
     this.setState({ posts: newarry });
-    fetch(BASE_URL+ "/api/Groups" + this.state.ids, {
+    fetch(BASE_URL+ "/api/Groups/" + this.state.ids, {
       method: "delete",
       headers: {
         Accept: "application/json",
@@ -150,7 +152,8 @@ S
     return (
       <main className="TheMain" onClick={() => this.do()}>
         <div className="TheNavBar">
-          <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
+          {/* <a href="#" class="fa fa-angle-left"  /> */}
+          <img className="backImage" onClick={this.onBack} src={back} alt="" />
 
           <label className="center_label">View Groups</label>
         </div>

@@ -4,6 +4,8 @@ import "./groups.css";
 import { withRouter } from "react-router-dom";
 import { createGroups } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
+import back from "./GroupImages/back.png"
+
 class Groups extends Component {
   constructor(props) {
     super(props);
@@ -28,10 +30,11 @@ class Groups extends Component {
         .then(data => {
           this.setState({
             posts: data.map(users => {
-              users.highlighted = false;
+              users.highlighted=false;
               return {
                 ...users,
-                highlighted: false
+                highlighted: false,
+                backgrnd:"white"
               };
             })
           });
@@ -78,12 +81,14 @@ class Groups extends Component {
     if (this.state.check == "Select all") {
       for (var i = 0; i < this.state.posts.length; i++) {
         newarry[i].highlighted = true;
+        this.state.posts[i].backgrnd = "#F3F4F9";
       }
       this.setState({ check: "Unselect all" });
       this.setState({ posts: newarry });
     } else {
       for (var i = 0; i < this.state.posts.length; i++) {
         newarry[i].highlighted = false;
+        this.state.posts[i].backgrnd = "white";
       }
       this.setState({ check: "Select all" });
       this.setState({ posts: newarry });
@@ -93,9 +98,12 @@ class Groups extends Component {
   toggleHighlight = event => {
     if (this.state.posts[event].highlighted === true) {
       this.state.posts[event].highlighted = false;
+      this.state.posts[event].backgrnd = "white";
+      
       this.setState({ count: this.state.count + 1 });
     } else {
       this.state.posts[event].highlighted = true;
+      this.state.posts[event].backgrnd = "#F3F4F9";
       this.setState({ count: this.state.count - 1 });
     }
   };
@@ -125,7 +133,7 @@ class Groups extends Component {
                 style={{
                   borderLeftStyle: "none",
                   borderRightStyle: "none",
-                  color: "red",
+            
                   background:post.backgrnd
                 }}
               >
@@ -153,9 +161,8 @@ class Groups extends Component {
     return (
       <main className="TheMain">
         <div className="TheNavBar">
-          <a href="#" className="fa fa-angle-left" onClick={this.onBack} />
-
-          <h2 className="center_label">{this.props.name}</h2>
+          <img className="backImage" src={back} alt="" />
+          <div className="center_label">{this.props.name}</div>
         </div>
         <div className="BNavBar">
           <input
@@ -164,6 +171,7 @@ class Groups extends Component {
             type="text"
             onChange={this.onChange}
             autoComplete="off"
+            placeholder="Search user"
           />
           <button
             className={this.state.check == "Select all" ? "select" : "select2"}
