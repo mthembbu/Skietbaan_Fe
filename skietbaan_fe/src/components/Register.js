@@ -9,7 +9,6 @@ import '../components/RegisterStyles.css';
 import { validateEmail, validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
 import { URL } from '../actions/types.js';
-import header from '../components/assets/header.png';
 
 class Register extends Component {
   constructor(props) {
@@ -28,9 +27,20 @@ class Register extends Component {
     this.togglePassword = this.togglePassword.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.goToLogin = this.goToLogin.bind(this);
+    this.disableButton = this.disableButton.bind(this);
+  }
+
+  disableButton() {
+    if (this.state.validForm === true) {
+      document.getElementById("roundButton").disabled = false;
+    }
+    else
+      document.getElementById("roundButton").disabled = true;
+
   }
 
   componentDidMount() {
+    this.disableButton();
     fetch(URL + "/api/User", {
       method: 'GET',
       headers: {
@@ -60,6 +70,7 @@ class Register extends Component {
     this.setState({
       [target.name]: target.value,
     });
+    this.disableButton();
     let isValid = false;
     let stateUpdate = {
       invalidPassword: this.state.invalidPassword,
@@ -128,7 +139,7 @@ class Register extends Component {
     };
     this.setState({
       ...stateUpdate,
-      validForm: isValid
+      validForm: isValid,
     });
   }
 
@@ -177,7 +188,7 @@ class Register extends Component {
   render() {
     if (getCookie("token")) {
       window.location = "/home";
-     }
+    }
     document.addEventListener('DOMContentLoaded', () => {
       this.toggleNavbar();
     }, false);
@@ -186,7 +197,9 @@ class Register extends Component {
       <div className="page-content-login">
         <div className="red-background">
           <div className="welcome-header">
-            <img src={header} className="header-image"></img>
+            <label className="welcome-label">Welcome to
+          <label className="skietbaan-label">Skietbaan</label>
+            </label>
           </div>
 
           <div className="header-container">
@@ -197,7 +210,7 @@ class Register extends Component {
         <div className="centre-login">
           <Form className="form" autoComplete="off">
 
-            <Col className="no-padding">
+            <div className="spacing-login">
               <FormGroup>
                 <label className="front-white input-label">Enter Username <div
                   className={this.state.invalidUsername ? "invalid-icon" : "hidden"}></div></label>
@@ -212,10 +225,10 @@ class Register extends Component {
                     className="input-user"
                   />
                 </div>
-                <div className={this.state.usernameTaken ? "" : "hidden"} > Username Taken</div>
+                <div className={this.state.usernameTaken ? "error-message" : "hidden"} > Username Taken</div>
               </FormGroup>
-            </Col>
-            <Col className="no-padding">
+            </div>
+            <div className="spacing-login">
               <FormGroup>
                 <label className="front-white input-label">Email Address <div
                   className={this.state.invalidEmail ? "invalid-icon" : "hidden"}></div></label>
@@ -229,10 +242,10 @@ class Register extends Component {
                     className="input-user"
                   />
                 </div>
-                <div className={this.state.emailTaken ? "" : "hidden"} > Email Taken</div>
+                <div className={this.state.emailTaken ? "error-message" : "hidden"} > Email Taken</div>
               </FormGroup>
-            </Col>
-            <Col className="no-padding">
+            </div>
+            <div className="spacing-login">
               <FormGroup>
                 <label className="front-white input-label" for="examplePassword">
                   Password <div className={this.state.invalidPassword ? "invalid-icon" : "hidden"}></div></label>
@@ -253,9 +266,9 @@ class Register extends Component {
                   </div>
                 </div>
               </FormGroup>
-            </Col>
+            </div>
             <div className="button-container">
-              <Button onClick={this.register} className={this.state.validForm ? "round-button" :
+              <Button onClick={this.register} id="roundButton" className={this.state.validForm ? "round-button" :
                 "buttons-invalid round-button"} >Join</Button>
             </div>
           </Form>
