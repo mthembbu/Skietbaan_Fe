@@ -22,5 +22,6 @@ export const CREATEGROUP = 'CREATEGROUP';
 export const GETGROUP = 'GETGROUP';
 export const PASS_ID = 'PASS_ID';
 export const GETNAME = 'GETNAME';
+export const LOCALURL = "http://localhost:50859"
 
 FETCH_LEADERBOARDFILTER_DATA
