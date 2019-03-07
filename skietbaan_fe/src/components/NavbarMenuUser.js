@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import '../scss/navbar.css';
 import 'font-awesome/css/font-awesome.min.css';
 import '../bootstrap/NavbarMenuUserStyles.css';
-import profileRed from '../components/navbar-icons/profile-red.png';
-import profileGray from '../components/navbar-icons/profile-grey.png';
-import docsRed from '../components/navbar-icons/docs-red.png';
-import docsGray from '../components/navbar-icons/docs-grey.png';
-import leaderboardRed from '../components/navbar-icons/leaderboard-red.png';
-import leaderboardGray from '../components/navbar-icons/leaderboard-grey.png';
-import notificationsRed from '../components/navbar-icons/notifications-red.png';
-import notificationsGray from '../components/navbar-icons/notifications-grey.png';
-import scorecaptureRed from '../components/navbar-icons/add-score-red.png';
-import scorecaptureGray from '../components/navbar-icons/add-score-grey.png';
-import moreGray from '../components/navbar-icons/more-grey.png';
+import profilered from '../components/navbar-icons/profile-red.png';
+import profilegray from '../components/navbar-icons/profile-grey.png';
+import docsred from '../components/navbar-icons/docs-red.png';
+import docsgray from '../components/navbar-icons/docs-grey.png';
+import leaderboardred from '../components/navbar-icons/leaderboard-red.png';
+import leaderboardgray from '../components/navbar-icons/leaderboard-grey.png';
+import notificationsred from '../components/navbar-icons/notifications-red.png';
+import notificationsgray from '../components/navbar-icons/notifications-grey.png';
+import scorecapturered from '../components/navbar-icons/add-score-red.png';
+import scorecapturegray from '../components/navbar-icons/add-score-grey.png';
+import moregray from '../components/navbar-icons/more-grey.png';
 
 class NavbarMenuUser extends Component {
 	constructor(props) {
@@ -38,83 +38,83 @@ class NavbarMenuUser extends Component {
 
 	isHome() {
 		if (window.location.pathname.endsWith("/home")) {
-			return <img src={leaderboardRed}
+			return <img src={leaderboardred}
 				className="leaderboard-icon-grey" alt='Leaderboard tab Selected'></img>
 		}
 		else {
-			return <img src={leaderboardGray}
+			return <img src={leaderboardgray}
 				className="leaderboard-icon-grey" alt='Leaderboard tab not Selected'></img>
 		}
 	}
 
 	isScoreCapture() {
 		if (window.location.pathname.endsWith("/scorecapture")) {
-			return <img src={scorecaptureRed}
+			return <img src={scorecapturered}
 				className="add-score-icon-grey" alt='ScoreCapture tab Selected'></img>
 		}
 		else {
-			return <img src={scorecaptureGray}
+			return <img src={scorecapturegray}
 				className="add-score-icon-grey" alt='ScoreCapture tab not Selected'></img>
 		}
 	}
 
 	isProfile() {
 		if (window.location.pathname.endsWith("/profile")) {
-			return <img src={profileRed}
+			return <img src={profilered}
 				className="profile-icon-grey" alt='Profile tab Selected'></img>
 		}
 		else {
-			return <img src={profileGray}
+			return <img src={profilegray}
 				className="profile-icon-grey" alt='Profile tab not Selected'></img>
 		}
 	}
 
 	isDocuments() {
 		if (window.location.pathname.endsWith("/documents")) {
-			return <img src={docsRed}
+			return <img src={docsred}
 				className="docs-icon-grey" alt='Document tab Selected'></img>
 		}
 		else {
-			return <img src={docsGray}
+			return <img src={docsgray}
 				className="docs-icon-grey" alt='Document tab not Selected'></img>
 		}
 	}
 
 	isNotifications() {
 		if (window.location.pathname.endsWith("/notifications")) {
-			return <img src={notificationsRed}
+			return <img src={notificationsred}
 				className="notifications-icon-grey" alt='Notification tab Selected'></img>
 		}
 		else {
-			return <img src={notificationsGray}
+			return <img src={notificationsgray}
 				className="notifications-icon-grey" alt='Notification tab not Selected'></img>
 		}
 	}
 
 	isDocumentsv2() {
 		if (window.location.pathname.endsWith("/documents")) {
-			return <img src={docsRed}
+			return <img src={docsred}
 				className="docs-icon-grey-v2" alt='Document tab Selected'></img>
 		}
 		else {
-			return <img src={docsGray}
+			return <img src={docsgray}
 				className="docs-icon-grey-v2" alt='Document tab not Selected'></img>
 		}
 	}
 
 	isNotificationsv2() {
 		if (window.location.pathname.endsWith("/notifications")) {
-			return <img src={notificationsRed}
+			return <img src={notificationsred}
 				className="notifications-icon-grey-v2" alt='Notification tab Selected'></img>
 		}
 		else {
-			return <img src={notificationsGray}
+			return <img src={notificationsgray}
 				className="notifications-icon-grey-v2" alt='Notification tab not Selected'></img>
 		}
 	}
 
 	isMore() {
-		return <img src={moreGray}
+		return <img src={moregray}
 			className="more-icon-grey" alt='More icon to expand tray'></img>
 	}
 
