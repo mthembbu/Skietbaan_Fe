@@ -3,6 +3,7 @@ import '../components/ViewMembers.css';
 import { Table } from 'react-bootstrap';
 import Collapsible from 'react-collapsible';
 import { BASE_URL } from '../actions/types.js';
+import membericon from '../components/assets/membership-icon.png';
 
 class ViewMembers extends Component {
     constructor(props) {
@@ -109,7 +110,7 @@ class ViewMembers extends Component {
                             <td className="first-column">
                                 <Collapsible trigger={<div className="username-and-email">
                                     <b>{post.username}</b>
-                                    <img src={require('../components/assets/membership-icon.png')}
+                                    <img src={membericon}
                                         className="membership-icon" alt='Is a Member'></img>
                                     <div>{post.email}</div>
                                 </div>}>
