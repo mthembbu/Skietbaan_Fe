@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { fetchcomp, 
+import { 
+		fetchcomp, 
 		updateByIdComp
 } from '../actions/competition.action';
 import { connect } from 'react-redux';
