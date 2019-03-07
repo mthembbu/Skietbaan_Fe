@@ -1,0 +1,137 @@
+.top_bar {
+  height: 59px;
+  display: flex;
+  background: red;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.center_labels {
+  display: flex;
+  margin-left: 56px;
+  margin-right: 56px;
+  text-align: center;
+  margin-top: 10px;
+  width: 7em;
+  display: flex;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  font-size: 25px;
+}
+
+.middle_bar {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 2px;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.texts-active {
+  border-radius: 8px;
+  height: 39px;
+  padding-left: 5px;
+  margin-bottom: 8px;
+  font-weight: lighter;
+  border: solid 1px;
+  margin-left: 71px;
+  margin-right: 71px;
+  background: #f3f4f9;
+  font: #6f839e;
+  border: 1px solid #6f839e;
+}
+
+.texts {
+  border-radius: 8px;
+  height: 39px;
+  padding-left: 5px;
+  margin-bottom: 8px;
+  font-weight: lighter;
+  border: solid 1px;
+  margin-left: 71px;
+  margin-right: 71px;
+  border: 1px solid #6f839e;
+}
+
+.page {
+  background: #ffffffff;
+  height: -webkit-fill-available;
+  text-align: center;
+}
+
+.name {
+  color: #6f839e;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 56px;
+  margin-bottom: 8px;
+  font-size: 18px;
+  width: 285px;
+  height: 34px;
+}
+
+.add {
+  height: 42px;
+  width: 146px;
+  font-weight: lighter;
+  background: white;
+  font-size: 18px;
+  color: #6f839e;
+  border: 1px lightgrey solid;
+  border-radius: 22px;
+}
+
+.add2 {
+  border-radius: 22px;
+  height: 42px;
+  width: 150px;
+  font-weight: lighter;
+  background: #6f839e;
+  font-size: 18px;
+  color: white;
+}
+
+.fa-angle-left {
+  color: black;
+  font-size: 48px;
+  margin-left: 22px;
+}
+
+.nextpage {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  margin: 2%;
+}
+
+.theList {
+  background: #cccfd3;
+}
+
+.circles {
+  border-radius: 50%;
+}
+
+.bpanel {
+  padding-top: 15px;
+}
+
+.group-error {
+  height: 29px;
+  padding-left: 5px;
+  margin-bottom: 5px;
+  font-weight: lighter;
+  margin-left: auto;
+  margin-right: auto;
+  width: 171px;
+  font-size: 14px;
+  color: red;
+}
+
+.addgroup-main {
+  text-align: center;
+}

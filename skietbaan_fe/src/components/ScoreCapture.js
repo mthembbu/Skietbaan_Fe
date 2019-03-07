@@ -3,6 +3,10 @@ import '../components/ScoreCapture.css';
 import { validateScore } from './Validators.js';
 import { getCookie } from './cookie.js';
 import { URL } from '../actions/types.js';
+import cameraGray from '../components/assets/cameraGray.png';
+import graySubmit from '../components/assets/graySubmit.png';
+import grayRetry from '../components/assets/grayRetry.png';
+import lightgrayback from '../components/assets/lightgrayback.png'
 
 export default class search extends Component {
   constructor(props) {
@@ -26,8 +30,9 @@ export default class search extends Component {
       Flashon: false,
       validScore: true,
       validCompetition: true,
-      scoreEntered:false
+      scoreEntered:false,
     }
+
     this.CompetitionClicked = this.CompetitionClicked.bind(this);
     this.handleScore = this.handleScore.bind(this);
     this.TakePhoto = this.TakePhoto.bind(this);
@@ -37,6 +42,7 @@ export default class search extends Component {
     this.Validate = this.Validate.bind(this);
     this.GetLocation = this.GetLocation.bind(this);
     this.ToggleNavbar = this.ToggleNavbar.bind(this);
+    this.ToggleIcon = this.ToggleIcon.bind(this);
 
   }
 
@@ -79,7 +85,6 @@ export default class search extends Component {
       .then(response => response.json())
       .then(data => this.setState({ competitionsList: data }))
       .catch(function (data) {
-        console.log("error")
       });
 
     let token = getCookie("token");
@@ -103,7 +108,8 @@ export default class search extends Component {
 
   Validate() {
     let Valid = false;
-    if (parseInt(this.state.score) < 1 || this.state.score === null 
+    if (parseInt(this.state.score,0) < 1 
+    || this.state.score === null 
     || (this.state.score % 1) !== 0) {
       this.setState({
         validForm: false,
@@ -258,7 +264,11 @@ export default class search extends Component {
   }
 
   Flash() {
-    this.state.Flashon = !this.state.Flashon;
+    this.ToggleIcon()
+    this.setState({
+      Flashon : !this.Flashon
+    })
+    
     var IsFlashOn = this.state.Flashon;
     navigator.mediaDevices.getUserMedia({
       video: {
@@ -289,12 +299,22 @@ export default class search extends Component {
 
       })
       .catch(err => console.error('getUserMedia() failed: ', err));
-    function onCapabilitiesReady(capabilities) {
-      console.log(capabilities);
-    }
 
   }
 
+  ToggleIcon(){
+    var flash = document.getElementById("FlashImage");
+    if(flash.classList.contains("flash"))
+    {
+      flash.classList.remove("flash");
+      flash.classList.add("flashOff");
+    }
+    else{
+      flash.classList.add("flash");
+      flash.classList.remove("flashOff");
+    }
+      
+ }
 
   goBack() {
     this.setState({
@@ -312,17 +332,18 @@ export default class search extends Component {
     let competitionItem = [];
     if (this.state.competitionsList && this.state.competitionsList.length > 0) {
       for (let i = 0; i < this.state.competitionsList.length; i++) {
-        competitionItem.push(<div className="competition-item-container"> <div key={'mykey' + i}
+        competitionItem.push(<div className="competition-item-container" key={'mykey' + i}> <div key={'mykey' + i}
           className={this.state.clicked != null && this.state.clicked === i ? "active competition-item" : "competition-item"}>
           <li onClick={() => this.CompetitionClicked(i, this.state.competitionsList[i].name)}>
             {this.state.competitionsList[i].name} </li></div></div>);
 
       }
     }
-
+    if(!getCookie("token")){
+      window.location = "/register-page";
+    }
     return (
       <div className="position-relative">
-        <div className={stateOne ? "" : "white-border"}></div>
         <div className={stateOne ? "page-content-video" : "page-content"}>
           <div className={stateOne ? "hidden" : ""}>
 
@@ -330,7 +351,7 @@ export default class search extends Component {
               <div className="centre-label">
                 <label className="scorelabel">Type in score</label>
               </div>
-              <div className={this.state.validScore ? "hidden" : "invalidScore"}>.</div>
+              <div className={this.state.validScore ? "hidden" : "invalidScore"}></div>
               <div className="input-container">
                 <input type="number" id="scoreInput" min="0" step="1" name="score" className="score"
                   onChange={this.handleScore}></input>
@@ -355,8 +376,7 @@ export default class search extends Component {
             <div className={this.state.ImageTaken || this.state.showCamera 
               || !this.state.scoreEntered ? "hidden" : "submit-button-elements"}>
               <div className="button-hover">
-
-                <img src={require('../components/assets/scoreCapture.png')}
+                <img src={cameraGray}
                   id="btnScoreCapture" className="btnScoreCapture"
                   onClick={() => this.CameraClicked()} alt=''></img>
               </div>
@@ -365,7 +385,7 @@ export default class search extends Component {
             <div className={(this.state.showCamera && !this.state.ImageTaken) 
               || this.state.ImageTaken || !this.state.scoreEntered ? "hidden" : "submit-button-elements"}>
               <div className="button-hover ">
-                <img src={require('../components/assets/submitScore.png')} onClick={() => this.GetLocation()}
+                <img src={graySubmit} onClick={() => this.GetLocation()}
                   className="button-that-submits" alt=''></img>
               </div>
               <label className="labelIcon">Submit</label>
@@ -373,14 +393,14 @@ export default class search extends Component {
             <div className="icon-pushdown no-margin">
             <div className={!this.state.ImageTaken ? "hidden" : "submit-button-elements third float-right"}>
                 <div className="button-hover ">
-                  <img src={require('../components/assets/submitScore.png')} onClick={() => this.GetLocation()}
+                  <img src={graySubmit} onClick={() => this.GetLocation()}
                     className="button-that-submits" alt=''></img>
                 </div>
                 <label className="labelIcon">Submit</label>
               </div>
               <div className={this.state.ImageTaken ? "submit-button-elements third float-right" : "hidden"} >
                 <div className="button-hover">
-                  <img src={require('../components/assets/retakeImage.png')}
+                  <img src={grayRetry}
                     id="btnScoreCapture" className="retake" onClick={() => this.RetakePhoto()}
                     alt=''>
                   </img>
@@ -393,7 +413,7 @@ export default class search extends Component {
           <div className={this.state.showCamera ? "" : "hidden"}>
             <div className={this.state.ImageTaken ? "hidden" : "label-score photo-top-label"}>
               Capture Score
-              <img src={require('../components/assets/grayBack.png')} onClick={() => this.goBack()} id="back"
+              <img src={lightgrayback} onClick={() => this.goBack()} id="back"
                 className="btnBack" alt=''></img>
               </div>
             <div className="back-spacing">
@@ -406,15 +426,14 @@ export default class search extends Component {
               <div className={this.state.currState !== 3 ? "hidden" : "submit-button-elements third"} >
                 <div className="button-hover">
                   <div className={this.state.currState !== 3 ? "hidden" : ""}>
-                    <div onClick={() => this.Flash()} id="Flash" className={!this.state.Flashon ? "flash" : "flashOff"}>
-                    </div>
+                  <div id="FlashImage"alt="" className="img-responsive flash" onClick={() => this.Flash()}></div>
                   </div>
                 </div>
               </div>
               <div className={this.state.currState !== 3 ? "hidden" : "submit-button-elements third"}>
                 <div className="button-hover">
                   <div className={this.state.currState !== 3 ? "hidden" : ""}>
-                    <img src={require('../components/assets/scoreCapture.png')} onClick={() => this.TakePhoto()} id="snap"
+                    <img src={cameraGray} onClick={() => this.TakePhoto()} id="snap"
                       className="score-capture-black" alt=''></img>
                   </div>
                 </div>
@@ -425,7 +444,7 @@ export default class search extends Component {
           <div className={this.state.ImageTaken ? "image-container" : "hidden"}>
             <div className="centre-label">
               <div className={!this.state.ImageTaken ? "hidden" : "label-score photo-top-label"}>
-                <b>Score Captured</b>
+                Score Captured
               </div>
               <div className="back-spacing">
               </div>
