@@ -13,7 +13,7 @@ class CreatePage extends Component {
 					<div class="row mb-1 pb-1">
 						<div class="col col-sm-6 col-xm-6">
 							<a href="/create-comp" class="btn create-btn-c" role="button">
-								<label  class="btn-create-text">Competitions</label>
+								<label class="btn-create-text">Competitions</label>
 							</a>
 						</div>
 						<div class="col col-sm-6 col-xm-6">
@@ -30,7 +30,7 @@ class CreatePage extends Component {
 						</div>
 						<div class="col col-sm-6 col-xm-6">
 							<a href="/viewmembers" class="btn btn-outline-secondary btn-view" role="button">
-								<label  class="create-view-text">View </label>
+								<label class="create-view-text">View </label>
 							</a>
 						</div>
 					</div>
@@ -42,7 +42,7 @@ class CreatePage extends Component {
 						</div>
 						<div class="col col-sm-6 col-xm-6">
 							<a class="btn btn-outline-secondary btn-view" href="#" role="button">
-								<label  class="create-view-text">View </label>
+								<label class="create-view-text">View </label>
 							</a>
 						</div>
 					</div>
