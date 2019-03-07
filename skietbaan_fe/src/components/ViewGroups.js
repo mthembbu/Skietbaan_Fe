@@ -155,7 +155,7 @@ class ViewGroups extends Component {
 
     return (
       <main className="The-Main" onClick={() => this.do()}>
-        <div className="The-NavBar">
+        <div className="The-nav-bar">
           <img className="back-Image" onClick={this.onBack} src={back} alt="" />
           <label className="center-label">View Groups</label>
         </div>

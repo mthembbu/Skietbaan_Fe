@@ -161,7 +161,7 @@ class Groups extends Component {
     );
     return (
       <main className="The-Main">
-       <div className="The-NavBar">
+       <div className="the-nav-bar">
           <img className="back-Image" onClick={this.onBack} src={back} alt="" />
           <label className="center-label">{this.props.name}</label>
         </div>

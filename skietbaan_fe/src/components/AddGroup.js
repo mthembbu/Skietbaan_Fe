@@ -52,7 +52,7 @@ class AddGroup extends Component {
     return (
       <div className="add-group-main">
         <div className="page">
-          <div className="The-NavBar">
+          <div className="the-nav-bar">
            <div>
             <img
               className="back-Image"
