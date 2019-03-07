@@ -169,7 +169,7 @@ class Login extends Component {
   }
 
   goToRegister() {
-    window.location = "/RegisterPage"
+    window.location = "/registerPage"
   }
 
   render() {
