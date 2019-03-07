@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
-import history from "./history";
-import { passId } from "../actions/postActions";
-import { getname } from "../actions/postActions";
+import { withRouter } from "react-router-dom";
+import { passId, getName } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
+import deleteState from "./GroupImages/deleteState.png";
+import normalstate from "./GroupImages/submit-plus.png";
+import back from "./GroupImages/back.png";
+
 class ViewGroups extends Component {
   constructor(props) {
     super(props);
@@ -14,44 +17,67 @@ class ViewGroups extends Component {
       count: 0,
       ShowMe: true,
       ids: 0,
-      index: 0
+      index: 0,
+      selected: "",
+      deleteState: false
     };
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
     this.delete = this.delete.bind(this);
     this.editGroup = this.editGroup.bind(this);
   }
+
   UNSAFE_componentWillMount() {
     fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
-      .then(data => this.setState({ posts: data }));
+      .then(data =>
+        this.setState({
+          posts: data.map(users => {
+            return {
+              ...users,
+              colors: "black",
+              image: normalstate
+            };
+          })
+        })
+      );
   }
   onChange(event) {
     this.setState({ filterText: event.target.value });
   }
 
   onBack() {
-    history.push("/ViewGroups");
+    this.props.history.push("/ViewGroups");
   }
   editGroup(event, name) {
-    this.props.getname(name);
+    this.props.getName(name);
     this.props.passId(event);
-    history.push("/EditGroup");
+    this.props.history.push("/EditGroup");
   }
 
-  update = (post, indexs) => {
-    this.setState({ ids: post });
-    this.setState({ index: indexs });
+  update = (id, indexs, name) => {
+    const newarry = [...this.state.posts];
+    newarry[indexs].colors = "red";
+    newarry[indexs].image = deleteState;
+    this.setState({
+      ids: id,
+      index: indexs,
+      selected: name,
+      ShowMe: false,
+      posts: newarry,
+      ShowMe: false,
+      deleteState: true
+    });
   };
 
   delete() {
     this.setState({ ShowMe: false });
     const newarry = [...this.state.posts];
-
     newarry.splice(this.state.index, 1);
     this.setState({ posts: newarry });
-    fetch(BASE_URL + "/api/groups/" + this.state.ids, {
-      method: "delete",
+
+    fetch((BASE_URL + "/api/Groups/"+this.state.ids), {
+      method:"POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
@@ -68,63 +94,70 @@ class ViewGroups extends Component {
   };
 
   do = () => {
-    if (this.state.ShowMe == true) {
-      this.setState({ ShowMe: false });
-    } else {
+    const newarry = [...this.state.posts];
+    newarry[this.state.index].colors = "black";
+    newarry[this.state.index].image = normalstate;
+    if (this.state.ShowMe == false) {
       this.setState({ ShowMe: true });
     }
   };
 
+  cancel = () => {
+    const newarry = [...this.state.posts];
+    newarry[this.state.index].colors = "black";
+    newarry[this.state.index].image = normalstate;
+    this.setState({ selected: "", posts: newarry });
+  };
+  S;
+
   handleOnClick = () => {};
   render() {
     const postitems = (
-      <div className="check" onClick={() => this.do()}>
-        <ul class="list-group">
-          {this.state.posts
-            .filter(post => {
-              return (
-                !this.state.filterText ||
-                post.username
-                  .toLowerCase()
-                  .startsWith(this.state.filterText.toLowerCase()) ||
-                post.email
-                  .toLowerCase()
-                  .startsWith(this.state.filterText.toLowerCase())
-              );
-            })
-            .map((post, index) => (
-              <li
-                style={{ width: "100%", background: "#504F51" }}
-                class="list-group-item list-group-item-light"
-                key={post.id}
-              >
-                <label className="the-container">
-                  <label
-                    className="nn"
+      <div className="the-main">
+        <table className="table-member">
+          <tbody>
+            {this.state.posts
+              .filter(post => {
+                return (
+                  !this.state.filterText ||
+                  post.username
+                    .toLowerCase()
+                    .startsWith(this.state.filterText.toLowerCase()) ||
+                  post.email
+                    .toLowerCase()
+                    .startsWith(this.state.filterText.toLowerCase()) ||
+                  post.memberID.startsWith(this.state.filterText)
+                );
+              })
+              .map((post, index) => (
+                <tr className="view-group" key={post.id}>
+                  <td
+                    className="first-row"
                     onClick={() => this.editGroup(post.id, post.name)}
+                    style={{ color: post.colors }}
                   >
-                    <div className="groupNames"> {post.name}</div>
-                  </label>
-                  <div className="im">
-                    <img
-                      src={require("./GroupImages/submit plus add score.png")}
-                      alt=""
-                      onClick={() => this.update(post.id, index)}
-                    />
-                  </div>
-                </label>
-              </li>
-            ))}
-        </ul>
+                    {post.name}
+                  </td>
+                  <td>
+                    <div
+                      className="group-view"
+                      onClick={() => this.update(post.id, index, post.name)}
+                    >
+                      <img src={post.image} alt="" />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </div>
     );
 
     return (
       <main className="TheMain" onClick={() => this.do()}>
         <div className="TheNavBar">
-          <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
-
-          <h2 className="center_label">View Groups</h2>
+          <img className="backImage" onClick={this.onBack} src={back} alt="" />
+          <label className="center_label">View Groups</label>
         </div>
         <div
           className="scrollbar"
@@ -133,19 +166,40 @@ class ViewGroups extends Component {
         >
           {postitems}
         </div>
-        {this.state.ShowMe ? null : (
+        {this.state.ShowMe  ? null : (
           <div className="bpanel">
-            <div className="thetextname">
-              <div className="thes">Delete Group{this.state.name}</div>
-            </div>
-            <div className="cntra">
-              <button className="hdre" onClick={() => this.delete()}>
-                Confirm
-              </button>
-            </div>
-            <div className="botname">
-              <button className="updatess">Undo</button>
-            </div>
+            <table className="group-delete-table">
+              <tbody>
+                <tr>
+                  <td>
+                    <div className="thetextname">Delete</div>
+                  </td>
+                  <td>
+                    <span className="name-of-group">
+                      {this.state.selected}{" "}
+                    </span>
+                  </td>
+                  <div className="confrim-cancel">
+                    <td>
+                      <button
+                        className="group-confirm"
+                        onClick={() => this.delete()}
+                      >
+                        Confirm
+                      </button>
+                    </td>
+                    <td className="group-undo">
+                      <button
+                        className="updatess"
+                        onClick={() => this.cancel()}
+                      >
+                        Cancel
+                      </button>
+                    </td>
+                  </div>
+                </tr>
+              </tbody>
+            </table>
           </div>
         )}
       </main>
@@ -157,7 +211,9 @@ const mapStateToProps = state => ({
   id: state.posts.groupId
 });
 
-export default connect(
-  mapStateToProps,
-  { passId, getname }
-)(ViewGroups);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { passId, getName }
+  )(ViewGroups)
+);

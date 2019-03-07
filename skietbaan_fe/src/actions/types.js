@@ -40,7 +40,6 @@ export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
 export const FETCH_LEADERBOARDFILTER_DATA = 'FETCH_LEADERBOARDFILTER_DATA';
 export const FETCH_LEADERBOARDTABLE_DATA = 'FETCH_LEADERBOARDTABLE_DATA';
 
-
 //groups types and constants
 export const URL = "https://api.skietbaan.retrotest.co.za"; 
 export const URLADD = "https://api.skietbaan.retrotest.co.za/api/groups/add"; 
@@ -52,6 +51,5 @@ export const CREATEGROUP = 'CREATEGROUP';
 export const GETGROUP = 'GETGROUP';
 export const PASS_ID = 'PASS_ID';
 export const GETNAME = 'GETNAME';
-export const LOCALURL = "http://localhost:50859"
-
 FETCH_LEADERBOARDFILTER_DATA
+

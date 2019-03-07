@@ -14,7 +14,7 @@ const initialState = {
   groupName: "",
   leaderboardGroups: [],
   leaderboardCompetitions: [],
-  groupId: 0,
+  groupId: "",
   groupName: "",
   leaderboardScoreTypes: [
     { label: "Average", value: 1 },
@@ -47,6 +47,7 @@ export default function(state = initialState, action) {
       };
 
     case CREATEGROUP:
+    console.log("bathande tuman")
       return {
         ...state,
         selectedItem: action.payload

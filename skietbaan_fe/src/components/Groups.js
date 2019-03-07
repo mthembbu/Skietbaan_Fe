@@ -1,18 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
-import history from "./history";
+import { withRouter } from "react-router-dom";
 import { createGroups } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
+import back from "./GroupImages/back.png"
+import unmarked from "./GroupImages/unmarked.png";
+import marked from "./GroupImages/marked.png";
 class Groups extends Component {
   constructor(props) {
     super(props);
     this.state = {
       posts: [],
       newArray: [],
+      groups: [],
       count: 0,
       filterText: "",
-      check: "select all"
+      check: "Select all"
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -20,27 +24,39 @@ class Groups extends Component {
     this.onChange = this.onChange.bind(this);
     this.selectall = this.selectall.bind(this);
   }
- UNSAFE_componentWillMount() {
-    fetch(BASE_URL+"/api/user")
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          posts: data.map(users => {
-            users.highlighted = false;
-            return {
-              ...users,
-              highlighted: false
-            };
-          })
+  UNSAFE_componentWillMount() {
+    if (this.props.name.length != 0) {
+      fetch(BASE_URL + "/api/user")
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            posts: data.map(users => {
+              users.highlighted=false;
+              return {
+                ...users,
+                highlighted: false,
+                backgrnd:"white",
+                image:unmarked
+              };
+            })
+          });
         });
-      });
+    } else {
+      this.props.history.push("/AddGroup");
+    }
+    fetch("http://localhost:50209/api/Groups")
+      .then(res => res.json())
+      .then(data => this.setState({ groups: data.name }));
   }
   onChange(event) {
     this.setState({ filterText: event.target.value });
   }
 
   handleOnClick() {
-    this.props.createGroups(this.props.name);
+    const requestedObj = {
+      name: this.props.name.toLowerCase()
+    };
+    this.props.createGroups(requestedObj);
     const { newArray } = this.state;
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === true) {
@@ -49,10 +65,8 @@ class Groups extends Component {
       delete this.state.posts[i].highlighted;
       delete this.state.posts[i].id;
     }
-    let request = {
-      newArray: this.state.newArray
-    };
-    fetch(BASE_URL+"/api/groups/add", {
+
+    fetch(BASE_URL + "/api/groups/add", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -69,33 +83,41 @@ class Groups extends Component {
     if (this.state.check == "Select all") {
       for (var i = 0; i < this.state.posts.length; i++) {
         newarry[i].highlighted = true;
+        this.state.posts[i].backgrnd = "#F3F4F9";
       }
-      this.setState({ check: "Unselect" });
+      this.setState({ check: "Unselect all" });
+      this.setState({ posts: newarry });
     } else {
       for (var i = 0; i < this.state.posts.length; i++) {
         newarry[i].highlighted = false;
+        this.state.posts[i].backgrnd = "white";
       }
       this.setState({ check: "Select all" });
+      this.setState({ posts: newarry });
     }
-    this.setState({ posts: newarry });
   }
 
   toggleHighlight = event => {
-    if (this.state.posts[event].highlighted === true) {
+    if (this.state.posts[event].highlighted == true) {
       this.state.posts[event].highlighted = false;
+      this.state.posts[event].image = unmarked;
+      this.state.posts[event].backgrnd = "white";
+      
       this.setState({ count: this.state.count + 1 });
     } else {
       this.state.posts[event].highlighted = true;
+      this.state.posts[event].backgrnd = "#F3F4F9";
+      this.state.posts[event].image = marked;
       this.setState({ count: this.state.count - 1 });
     }
   };
   onBack() {
-    history.push("/addGroup");
+    this.props.history.push("/addGroup");
   }
   render() {
     const postitems = (
       <div className="check">
-        <ul className="list-group">
+        <ul class="list-group">
           {this.state.posts
             .filter(post => {
               return (
@@ -109,16 +131,27 @@ class Groups extends Component {
               );
             })
             .map((post, index) => (
-              <li className="list-group-item list-group-item-light" key={post.id}>
-                <input
-                  type="checkbox"
-                  className="boxs"
+              <li
+                class="list-group-item list-group-item-light"
+                key={post.id}
+                style={{
+                  background:post.backgrnd
+                }}
+              >
+               <img
+                  className="checkbox-delete"
                   onClick={() => this.toggleHighlight(index)}
-                  checked={post.highlighted}
+                  src={post.image}
+                  alt=""
                 />
                 <label className="blabe">
-                  <div className="userName">{post.username}</div>
-                  <div className="emails">{post.email}</div>
+                  <div className="userName" style={{ color: post.colors }}>
+                    {" "}
+                    {post.username}
+                  </div>
+                  <div className="emails" style={{ color: post.colors }}>
+                    {post.email}
+                  </div>
                 </label>
               </li>
             ))}
@@ -127,12 +160,9 @@ class Groups extends Component {
     );
     return (
       <main className="TheMain">
-        <div className="TheNavBar">
-          <a href="#" className="fa fa-angle-left" onClick={this.onBack} />
-
-          <h2 className="center_label">
-            {this.props.name}
-          </h2>
+       <div className="TheNavBar">
+          <img className="backImage" onClick={this.onBack} src={back} alt="" />
+          <label className="center_labels">{this.props.name}</label>
         </div>
         <div className="BNavBar">
           <input
@@ -141,9 +171,10 @@ class Groups extends Component {
             type="text"
             onChange={this.onChange}
             autoComplete="off"
+            placeholder="Search user"
           />
           <button
-            className={this.state.count == 0 ? "select" : "select2"}
+            className={this.state.check == "Select all" ? "select" : "select2"}
             id="check"
             onClick={this.selectall}
           >
@@ -159,11 +190,12 @@ class Groups extends Component {
         >
           {postitems}
         </div>
+      {this.state.count==0?null:
         <label className="bottomlabel">
           <button className="deleteUser" onClick={this.handleOnClick}>
             Create Group
           </button>
-        </label>
+        </label>}
       </main>
     );
   }
@@ -173,7 +205,9 @@ const mapStateToProps = state => ({
   thegroup: state.posts.selectedItem
 });
 
-export default connect(
-  mapStateToProps,
-  { createGroups }
-)(Groups);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { createGroups }
+  )(Groups)
+);
