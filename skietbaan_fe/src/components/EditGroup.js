@@ -69,7 +69,7 @@ class EditGroup extends Component {
       users: this.state.newArray
     };
     fetch(BASE_URL + "/api/groups/deleteMember/", {
-      method: "DELETE",
+      method: "Post",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
