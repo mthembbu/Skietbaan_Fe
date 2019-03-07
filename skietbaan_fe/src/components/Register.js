@@ -43,7 +43,6 @@ class Register extends Component {
         users: data,
       }))
       .catch(function (data) {
-        console.log("error")
       });
   }
 
@@ -245,7 +244,7 @@ class Register extends Component {
                       id="passwordValue"
                       value={this.state.passwordValue}
                       onChange={this.handleChange}
-                      className="input-Password"
+                      className="input-password"
                     />
                     <div className={this.state.passwordValue !== "" ? "password-view-icon" : "hidden"}
                       onClick={this.togglePassword}>

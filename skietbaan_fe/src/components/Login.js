@@ -10,7 +10,7 @@ import { validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
 import {URL} from '../actions/types.js';
 import header from'../components/assets/header.png';
-import back from '../components/assets/Back.png';
+import back from '../components/assets/back.png';
 
 class Login extends Component {
   constructor(props) {
@@ -219,7 +219,7 @@ class Login extends Component {
                       id="passwordValue"
                       value={this.state.passwordValue}
                       onChange={this.handleChange}
-                      className="input-Password"
+                      className="input-password"
                     />
                     <div className={this.state.passwordValue !== "" ? "password-view-icon" : "hidden"}
                       onClick={this.togglePassword}>
