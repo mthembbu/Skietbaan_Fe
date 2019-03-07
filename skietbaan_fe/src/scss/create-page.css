@@ -1,115 +1,137 @@
-.view-header {
-	position: center;
-	text-align: center;
-	text-size-adjust: 25px;
-	background-size: 15px;
-	height: 49px;
-	background-color: #ea241a;
-	border-bottom-left-radius: 20px;
-	border-bottom-right-radius: 20px;
-	box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+.page-name-create-page{
+    position: center;
+    text-align: center;
+    text-size-adjust: 25px;
+    background-size: 15px;
+    height: 56px;
+    background-color: #DC0600;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+
 }
 
-.create-page-centre {
-	width: 64%;
-	margin: 0 auto;
-	position: center;
-	left: 3%;
-	top: 15%;
-	padding: 20px;
-	background-color: transparent;
-}
-
-.create-menu {
-	background-color: #0c0c0c;
-	text-align: center;
-	padding-top: 15px;
-	height: 49px;
-	width: 100%;
-}
-/**the create header for the Create-Page*/
 .create-menu-header {
-	color: #fdfdfd;
-	font-size: 20px;
-	font-weight: bolder;
-	text-align: center;
-	padding-top: 8px;
+    color: #fdfdfd;
+    font-size: 20px;
+    font-weight: bolder;
+    padding-top: 10px;
+    text-align: center;
 }
 
-.create-page-container {
-	background: transparent;
-	min-width: width 80%;
-	text-align: left;
+.create-page-container{
+    background-image: url('../components/assets/gun-image.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
-.create-page-header {
-	min-width: 95%;
-}
-/** The button to create [Competition, Groups, Member]*/
-.create-btn-c {
-	font-weight: lighter;
-	font: helvetica;
-	text-align: center;
-	border-radius: 50px;
-	width: 127px;
-	height: 42px;
-	font-size: 16px;
-	color: #fdfdfd;
-	background: #6f839e;
+.centre{
+    height: 100vh;
 }
 
-.btn-create-m {
-	font-weight: lighter;
-	font: helvetica;
-	text-align: center;
-	border-radius: 50px;
-	width: 127px;
-	height: 42px;
-	font-size: 16px;
-	color: #0c0c0c;
-	background: #6f839e;
+.button-create-competitions{
+    height: 42px;
+    width: 150px;
+    border-radius: 42px;
+    background-color: #fdfdfd;
+    border: none;
+    font-size: 16px;
+    font-family: helvetica;
+    font-weight: 300;
+    color: #6F839E;
+    margin-top: 12px;
 }
 
-.btn-create-gr {
-	font-weight: lighter;
-	font: helvetica;
-	text-align: center;
-	border-radius: 50px;
-	width: 127px;
-	height: 42px;
-	font-size: 16px;
-	color: #fdfdfd;
-	background: #6f839e;
-}
-/** The button to view [Competition, Groups, Member]*/
-.btn-view {
-	border-radius: 20px;
-	width: 90px;
-	height: 42px;
-	border-color: #6f839e;
-	font-size: 16px;
-	font-weight: normal;
-	text-align: center;
-	font: helvetica;
-}
-/** THe text for the Create [Competition, Groups, Member] button*/
-.btn-create-text {
-	font-weight: lighter;
-	text-align: center;
-	font-size: 16px;
-	font: helvetica;
-	color: #fdfdfd;
-}
-/** THe text for the view [Competition, Groups, Member] button*/
-.create-view-text {
-	color: #6f839e;
-	font: helvetica;
-	font-size: 16px;
-	font-weight: lighter;
-	text-align: center;
+.button-create-members{
+    height: 42px;
+    width: 150px;
+    border-radius: 42px;
+    background-color: #fdfdfd;
+    border: none;
+    font-size: 16px;
+    font-family: helvetica;
+    font-weight: 300;
+    color: #6F839E;
+    margin-top: 12px;
 }
 
-.col {
-	min-height: 50px;
-	margin-left: inherit;
+.button-create-groups{
+    height: 42px;
+    width: 150px;
+    border-radius: 42px;
+    background-color: #fdfdfd;
+    border: none;
+    font-size: 16px;
+    font-family: helvetica;
+    font-weight: 300;
+    color: #6F839E;
+    margin-top: 12px;
+}
+
+.button-view-competitions{
+    height: 42px;
+    width: 81px;
+    border-radius: 21px;
+    border: 1px #fdfdfd solid;
+    opacity: unset;
+    color: #fdfdfd;
+    background-color: transparent;
+    font-size: 16px;
+    font-family: helvetica;
+    font-weight: 300;
+    margin-top: 12px;
+}
+
+.button-view-members{
+    height: 42px;
+    width: 81px;
+    border-radius: 21px;
+    border: 1px #fdfdfd solid;
+    opacity: unset;
+    color: #fdfdfd;
+    background-color: transparent;
+    font-size: 16px;
+    font-family: helvetica;
+    font-weight: 300;
+    margin-top: 12px;
+}
+
+.button-view-groups{
+    height: 42px;
+    width: 81px;
+    border-radius: 21px;
+    border: 1px #fdfdfd solid;
+    opacity: unset;
+    color: #fdfdfd;
+    background-color: transparent;
+    font-size: 16px;
+    font-family: helvetica;
+    font-weight: 300;
+    margin-top: 12px;
+}
+
+.buttons-create{
+    width: 50%;
+    float: left;
+    padding-top: 67px;
+}
+
+.buttons-view{
+    width: 50%;
+    float: right;
+    padding-top: 67px;
+}
+
+.container-of-buttons{
+    text-align: center;
+}
+
+.view-spacing{
+    text-align: left;
+    margin-left: 34px;
+}
+
+.create-spacing{
+    text-align: right;
+    margin-right: -15px;
 }

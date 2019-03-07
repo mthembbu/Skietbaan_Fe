@@ -1,49 +1,81 @@
 import React, { Component } from 'react';
 import '../scss/create-page.css';
+import { getCookie } from '../components/cookie.js';
 class CreatePage extends Component {
+
+	constructor(props) {
+		super(props);
+
+		this.GoComps = this.GoComps.bind(this);
+		this.GoMembers = this.GoMembers.bind(this);
+		this.GoGroups = this.GoGroups.bind(this);
+		this.ViewComps = this.ViewComps.bind(this);
+		this.ViewMembers = this.ViewMembers.bind(this);
+		this.ViewGroups = this.ViewGroups.bind(this);
+	}
+
+	GoComps() {
+		window.location = "/create-comp";
+	}
+
+	GoMembers() {
+		window.location = "/registerMember";
+	}
+
+	GoGroups() {
+		window.location = "#";
+	}
+
+	ViewComps() {
+		window.location = "/view-comp";
+	}
+
+	ViewMembers() {
+		window.location = "/viewMembers";
+	}
+
+	ViewGroups() {
+		window.location = "#";
+	}
+
 	render() {
+		if(!getCookie("token")){
+            window.location = "/registerPage";
+        }
 		return (
-			<div>
-				<div className="view-header">
-					<div>
-						<label className="create-menu-header">Create</label>
-					</div>
+			<div className="create-page-container">
+				<div class="page-name-create-page">
+					<label className="create-menu-header">Create</label>
 				</div>
-				<div class="container centre create-page-centre m-4 p-4">
-					<div class="row mb-1 pb-1">
-						<div class="col col-sm-6 col-xm-6">
-							<a href="/create-comp" class="btn create-btn-c" role="button">
-								<label class="btn-create-text">Competitions</label>
-							</a>
+				<div class="container centre">
+					<div className="container-of-buttons">
+						<div className="buttons-create">
+							<div className="create-spacing">
+								<button className="button-create-competitions" onClick={this.GoComps}>
+									Competitions</button>
+							</div>
+							<div className="create-spacing">
+								<button className="button-create-members" onClick={this.GoMembers}>
+									Members</button>
+							</div>
+							<div className="create-spacing">
+								<button className="button-create-groups" onClick={this.GoGroups}>
+									Groups</button>
+							</div>
 						</div>
-						<div class="col col-sm-6 col-xm-6">
-							<a href="/view-comp" class="btn btn-outline-secondary btn-view" role="button">
-								<label class="create-view-text">View </label>
-							</a>
-						</div>
-					</div>
-					<div class="row mb-1 pb-1">
-						<div class="col col-sm-6 col-xm-6">
-							<a href="/registermember" class="btn btn-create-m" role="button">
-								<label class="btn-create-text">Members</label>
-							</a>
-						</div>
-						<div class="col col-sm-6 col-xm-6">
-							<a href="/viewmembers" class="btn btn-outline-secondary btn-view" role="button">
-								<label class="create-view-text">View </label>
-							</a>
-						</div>
-					</div>
-					<div class="row mb-1 pb-1">
-						<div class="col col-sm-6 col-xm-6">
-							<a href="/create-comp" class="btn btn-create-gr" role="button">
-								<label class="btn-create-text">Groups</label>
-							</a>
-						</div>
-						<div class="col col-sm-6 col-xm-6">
-							<a class="btn btn-outline-secondary btn-view" href="#" role="button">
-								<label class="create-view-text">View </label>
-							</a>
+						<div className="buttons-view">
+							<div className="view-spacing">
+								<button className="button-view-competitions" onClick={this.ViewComps}>
+									View</button>
+							</div>
+							<div className="view-spacing">
+								<button className="button-view-members" onClick={this.ViewMembers}>
+									View</button>
+							</div>
+							<div className="view-spacing">
+								<button className="button-view-groups" onClick={this.ViewGroups}>
+									View</button>
+							</div>
 						</div>
 					</div>
 				</div>
