@@ -43,7 +43,6 @@ class Register extends Component {
         users: data,
       }))
       .catch(function (data) {
-        console.log("error")
       });
   }
 
