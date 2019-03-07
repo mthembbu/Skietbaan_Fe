@@ -154,7 +154,7 @@
     font-size: 16px;
     border-radius: 10px;
     border: none;
-    background-color: white;
+    background-color: #fdfdfd;
     position: absolute;
   }
 
@@ -165,7 +165,7 @@
   
   .register-member-user-column{
     background-color: #798CA5;
-    color: white;
+    color: #fdfdfd;
     border-radius: 10px;
     border: none;
     padding-left: 10px;
