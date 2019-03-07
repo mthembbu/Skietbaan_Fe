@@ -1,31 +1,31 @@
-import profilered from '../components/navbar-icons/profile-red.png';
-import profilegray from '../components/navbar-icons/profile-grey.png';
-import docsred from '../components/navbar-icons/docs-red.png';
-import docsgray from '../components/navbar-icons/docs-grey.png';
-import createred from '../components/navbar-icons/create-red.png';
-import creategray from '../components/navbar-icons/create-grey.png';
-import leaderboardred from '../components/navbar-icons/leaderboard-red.png';
-import leaderboardgray from '../components/navbar-icons/leaderboard-grey.png';
-import notificationsred from '../components/navbar-icons/notifications-red.png';
-import notificationsgray from '../components/navbar-icons/notifications-grey.png';
-import scorecapturered from '../components/navbar-icons/add-score-red.png';
-import scorecapturegray from '../components/navbar-icons/add-score-grey.png';
-import moregray from '../components/navbar-icons/more-grey.png';
+import profileRed from '../components/navbar-icons/profile-red.png';
+import profileGray from '../components/navbar-icons/profile-grey.png';
+import docsRed from '../components/navbar-icons/docs-red.png';
+import docsGray from '../components/navbar-icons/docs-grey.png';
+import createRed from '../components/navbar-icons/create-red.png';
+import createGray from '../components/navbar-icons/create-grey.png';
+import leaderboardRed from '../components/navbar-icons/leaderboard-red.png';
+import leaderboardGray from '../components/navbar-icons/leaderboard-grey.png';
+import notificationsRed from '../components/navbar-icons/notifications-red.png';
+import notificationsGray from '../components/navbar-icons/notifications-grey.png';
+import scorecaptureRed from '../components/navbar-icons/add-score-red.png';
+import scorecaptureGray from '../components/navbar-icons/add-score-grey.png';
+import moreGray from '../components/navbar-icons/more-grey.png';
 
 export const NAV_BAR_ICONS = {
-    PROFILE_RED: profilered,
-    PROFILE_GRAY: profilegray,
-    DOCS_RED: docsred,
-    DOCS_GRAY: docsgray,
-    CREATE_RED: createred,
-    CREATE_GRAY: creategray,
-    LEADERBOARD_RED: leaderboardred,
-    LEADERBOARD_GRAY: leaderboardgray,
-    NOTIFICATIONS_RED: notificationsred,
-    NOTIFICATIONS_GRAY: notificationsgray,
-    SCORE_CAPTURE_RED: scorecapturered,
-    SCORE_CAPTURE_GRAY: scorecapturegray,
-    MORE_GRAY: moregray
+    PROFILE_RED: profileRed,
+    PROFILE_GRAY: profileGray,
+    DOCS_RED: docsRed,
+    DOCS_GRAY: docsGray,
+    CREATE_RED: createRed,
+    CREATE_GRAY: createGray,
+    LEADERBOARD_RED: leaderboardRed,
+    LEADERBOARD_GRAY: leaderboardGray,
+    NOTIFICATIONS_RED: notificationsRed,
+    NOTIFICATIONS_GRAY: notificationsGray,
+    SCORE_CAPTURE_RED: scorecaptureRed,
+    SCORE_CAPTURE_GRAY: scorecaptureGray,
+    MORE_GRAY: moreGray
 }
 
 export const ADD_BOOKMARK = 'ADD_BOOKMARK';
