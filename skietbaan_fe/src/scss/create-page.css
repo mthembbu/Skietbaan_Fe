@@ -17,6 +17,13 @@
     padding-top: 10px;
     text-align: center;
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
+/**This is to be removed as it collides with the rest of everyone's component*/
+=======
+>>>>>>> fd4f77b840f0486634c58dc0f42897e09aec09aa
+=======
+>>>>>>> 3a6b9347979f599a00cacaac6848ac0abc037081
 
 .create-page-container{
     background-image: url('../components/assets/gun-image.png');

@@ -1,47 +1,62 @@
 .boxs {
   float: right;
-  margin-top: 20px;
-  margin-right: 39px;
   height: 17px;
   width: 17px;
   margin-top: 37px;
   margin-bottom: 37px;
-}
-
-.Check {
-  background: #504f51;
-  margin-top: 3px;
+  margin-right: 42px;
+  margin-top: 15px;
 }
 
 .TheNavBar {
   background: #cccfd3;
   color: white;
-  height: 50px;
+  height: 56px;
   display: flex;
-  background: black;
+  background: #dc0600;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .center_label {
   margin-top: 10px;
-  color: black;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: 105px;
   width: 7em;
   display: flex;
   color: white;
   font-weight: bold;
   font-size: 18px;
-  font-size: 25px;
-  display: inline-block;
+  font-size: 20px;
+  display: flex;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  padding-right: 21px;
 }
-.TheMain {
-  background: #101727;
+
+.center_labels {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: 90px;
+  width: 7em;
+  display: flex;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  font-size: 20px;
+  display: flex;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  padding-right: 21px;
 }
 
 .fa-angle-left {
   margin-top: 2px;
-  margin-left: 10px;
+  margin-left: 20px;
   color: black;
   font-size: 48px;
   color: white;
@@ -52,115 +67,148 @@
 }
 
 .theText {
-  margin-left: 5px;
-  border-radius: 10px;
-  margin-top: 5px;
-  width: 218px;
+  margin-left: 19px;
+  margin-top: 17px;
+  width: 208px;
   height: 39px;
-  font-weight: regular;
+  font-weight: lighter;
+  background: url("../components/GroupImages/search.png") no-repeat;
+  background-position: right;
+  background-position-x: 175px;
   font-size: 18px;
   padding-left: 5px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: 1px solid #6f839e;
+  padding-right: 10px;
 }
+
 .select {
-  margin-top: 5px;
-  margin-right: 5px;
+  margin-top: 17px;
+  margin-right: 18px;
   float: right;
-  height: 42px;
+  height: 38px;
   border-radius: 30px;
   width: 102px;
-  color: white;
+  color: #6f839e;
   font-weight: lighter;
   font-size: 16px;
-  background: #504f51;
+  background: white;
   border: 1px lightgrey solid;
 }
+
 .select2 {
-  margin-top: 5px;
-  margin-right: 5px;
+  margin-top: 17px;
+  margin-right: 18px;
   float: right;
-  height: 42px;
+  height: 38px;
   border-radius: 30px;
   width: 102px;
-  font-weight: lighter;
   color: white;
+  font-weight: lighter;
   font-size: 16px;
-  background: #504f51;
-  border: 1px red solid;
+  background: #6f839e;
+  border: 1px lightgrey solid;
 }
+
 .BNavBar {
-  height: 50px;
-  background: #504f51;
+  height: 73px;
+  background: white;
 }
 
 .deleteUser {
   margin-right: 30px;
   margin-left: 30px;
-  width: 218px;
+  width: 136px;
   height: 42px;
-  background: transparent;
   border: 2px solid white;
   border-radius: 20px;
-  font-weight: lighter;
+  font-weight: no;
+  background: white;
   font-size: 16px;
-  color:white;
+  color: black;
 }
 
 .bottomlabel {
   position: absolute;
   right: 0;
   bottom: 0;
-  background: #e11e2b;
+  background-image: linear-gradient(to right, #282829, #6d6d6d);
   width: 100%;
   height: 35px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   margin-right: auto;
   margin-left: auto;
   text-align: center;
+  z-index: 1px;
   margin: 0px;
   padding-bottom: 50px;
   font-size: 16px;
   font-weight: lighter;
   padding-top: 10px;
+  position: fixed;
 }
+
 .userName {
   font-size: 16px;
   font-weight: bold;
   font-size: 16px;
-  color: black;
+  color: #6f839e;
 }
+
+.userName-active {
+  font-size: 16px;
+  font-weight: bold;
+  font-size: 16px;
+  color: red;
+}
+
 .emails {
   font-size: 14px;
   font-weight: lighter;
   font-size: 16px;
-  color: black;
+  color: #6f839e;
 }
+
+.emails-active {
+  font-size: 14px;
+  font-weight: lighter;
+  font-size: 16px;
+  color: red;
+}
+
 .blabe {
-  margin-left: 39px;
+  margin-left: 19px;
+  color: #6f839e;
 }
-.theboxes{
+
+.theboxes {
   float: right;
 }
 
-.the-container{
+.the-container {
   width: 100%;
-  font-Weight: lighter;
+  font-weight: lighter;
   font-size: 18px;
   width: 100%;
-  color:white;
+  color: white;
 }
-.im{
+
+.group-delete {
   float: right;
   padding-left: 20px;
 }
 
-.nn{
-  font-Weight: lighter;
+.nn {
+  font-weight: lighter;
   font-size: 18px;
-  color:white;
-  width: 87%;
-
+  color: white;
+  width: 60%;
+  margin-left: 32px;
 }
 
-.bottompanel{
+.bottompanel {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -176,11 +224,7 @@
   float: bottom;
 }
 
-.confirmText{
-  color:black;
-}
-
-.confirm{
+.confirm {
   width: 96px;
   height: 42px;
   border-radius: 39px;
@@ -188,53 +232,50 @@
   font-size: 16px;
 }
 
-.undo{
-  width: 96px;
-  height: 42px;
-  border-radius: 39px;
+.undo {
   font-weight: lighter;
   font-size: 16px;
   position: absolute;
   right: 0;
   bottom: 0;
+  border-radius: 24.5px;
+  width: 96px;
+  height: 42px;
+  margin-left: 40px;
+  border: 1px solid;
+
+  margin-top: 1px;
 }
 
-.btplane{
-  display: flex;
-}
-
-.ubutns{
-  float: right;
-}
-
-.cbutns{
-  text-align: center;
-}
-.bpanel{
+.bpanel {
   position: fixed;
   right: 0;
   bottom: 0;
-  background: #fdfdfd;
+  background-image: linear-gradient(to right, #282829, #6d6d6d);
   width: 100%;
-  height: 42px;
   margin: 0px;
-
+  z-index: 5px;
   font-size: 16px;
   font-weight: lighter;
   padding-top: 10px;
   display: flex;
   float: bottom;
-  height: 63px;
+  height: 66px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
-.updatess{
-  width: 150px;
-  height: 39px;
+
+.updatess {
+  height: 42px;
   border-radius: 40px;
   width: 96px;
-  height: 42px;
-
+  margin-left: 8px;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
 }
-.botname{
+
+.botname {
   float: right;
   position: fixed;
   right: 0;
@@ -245,35 +286,128 @@
   font-size: 16px;
 }
 
-.thes{
+.thes {
   font-weight: lighter;
   padding-left: 15px;
+}
 
-}
-.usersname{
+.usersname {
   font-weight: bold;
   padding-left: 15px;
-  
+  color: "#F3F4F9";
 }
-.thetextname{
+
+.thetextname {
   font-size: 16px;
-  padding-right: 30px;
   font-weight: lighter;
+  display: inline-block;
+  width: 110px;
+  white-space: nowrap;
+  overflow: hidden;
+  color: white;
+  display: flex;
+  text-overflow: ellipsis;
+  padding-left: 20px;
 }
-.thetxt{
-  font-weight: bold;
-  font-size: 18px;
-}
-.hdre{
-  border-radius: 40px;
+
+.group-confirm {
+  border-radius: 24.5px;
   width: 96px;
   height: 42px;
+  background: white;
+  border: 1px solid;
+  padding-left: 5px;
+  background: red;
+  color: white;
+  border: 1px solid red;
+}
+.group-confirm-add {
+  border-radius: 24.5px;
+  width: 96px;
+  height: 42px;
+  background: white;
+  border: 1px solid;
+  padding-left: 5px;
+  background:white;
+  color: black;
+  border: 1px solid black;
 }
 
-.updates{
+.updates {
   width: 136px;
   height: 42px;
   border-radius: 40px;
   font-weight: lighter;
   font-size: 16px;
+}
+
+.the-main {
+  margin-left: 26px;
+  margin-right: 26px;
+}
+
+.group-name {
+  margin-left: 6px;
+  font-weight: lighter;
+  font-size: 18px;
+  float: left;
+}
+
+.group-delete {
+  margin-right: 32px;
+  float: right;
+}
+
+.group-view {
+  float: right;
+}
+
+.view-group {
+  border-bottom: solid 2px #bbbcbd;
+  height: 55px;
+  font-size: 18px;
+  font-weight: lighter;
+  color: #6f839e;
+}
+
+.first-row {
+  height: 63px;
+}
+
+.name-of-group {
+  display: inline-block;
+  color: white;
+  margin-left: -40px;
+  width: 10%;
+  white-space: pre;
+}
+
+.list-group-item-light {
+  height: 65px;
+  color: #f3f4f9;
+  border-left-style: none;
+  border-right: none;
+}
+
+.confrim-cancel {
+  padding-left: 7%;
+  position: fixed;
+  right:1%;
+}
+
+.backImage {
+  padding-left: 30px;
+  margin-top: 11px;
+  height: 30px;
+
+}
+
+.checkbox-delete {
+  float: right;
+  margin-top: 37px;
+  margin-bottom: 37px;
+  margin-right: 42px;
+  background-color: #f3f4f9;
+  margin-top: 15px;
+  z-index: 5px;
 }

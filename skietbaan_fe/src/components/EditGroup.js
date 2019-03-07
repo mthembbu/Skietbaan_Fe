@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
-import history from "./history";
+import { withRouter } from "react-router-dom";
 import { BASE_URL } from "../actions/types";
+import marked from "./GroupImages/marked.png";
+import redbox from "./GroupImages/Rectangle.png";
+import back from "./GroupImages/back.png";
 class EditGroup extends Component {
   constructor(props) {
     super(props);
@@ -10,81 +13,96 @@ class EditGroup extends Component {
       posts: [],
       newArray: [],
       filterText: "",
-      count:0
+      count: 0,
+      selected: ""
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
-    this.handleOnClick = this.handleOnClick.bind(this);
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
   }
- UNSAFE_componentWillMount() {
-    fetch(BASE_URL+"/api/Groups/edit?id=" + this.props.id)
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          posts: data.map(users => {
-            users.highlighted = false;
-            return {
-              ...users,
-              highlighted: false
-            };
-          })
+  UNSAFE_componentWillMount() {
+    if (this.props.id != 0) {
+      fetch(BASE_URL + "/api/Groups/edit?id=" + this.props.id)
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            posts: data.map(users => {
+              return {
+                ...users,
+                highlighted: true,
+                backgrnd: "#F3F4F9",
+                image: marked
+              };
+            })
+          });
         });
-      });
+    } else {
+      this.props.history.push("/ViewGroups");
+    }
   }
   onChange(event) {
     this.setState({ filterText: event.target.value });
   }
 
-  handleOnClick() {
-    this.setState({count:0})
+  delete = () => {
+    this.setState({ count: 0 });
+    console.log(this.state.newArray);
     const { newArray } = this.state;
     const newarry = [...this.state.posts];
 
-    newarry.splice(this.state.index, 1);
-    this.setState({ posts: newarry });
     for (var i = 0; i < this.state.posts.length; i++) {
-      if (this.state.posts[i].highlighted === true) {
+      if (this.state.posts[i].highlighted === false) {
+        let indexofs=newArray.indexOf(this.state.posts[i])
         newArray.push(this.state.posts[i]);
+        newarry.splice(indexofs, 1);
+        delete this.state.posts[i].colors;
+        delete this.state.posts[i].backgrnd;
+        delete this.state.posts[i].image;
+        delete this.state.posts[i].highlighted;
+        delete this.state.posts[i].id;
       }
-      delete this.state.posts[i].highlighted;
-      delete this.state.posts[i].id;
     }
+    this.setState({ posts: newarry });
+
     let request = {
-      GroupIds:this.props.id,
+      GroupIds: this.props.id,
       users: this.state.newArray
     };
-    fetch(BASE_URL+"/api/groups/deleteMember/", {
-      method: "DELETE",
+    fetch(BASE_URL + "/api/groups/deleteMember/", {
+      method: "Post",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify(request)
     })
-      .then(function(response) {})
+      .then(res => res.json())
       .catch(function(data) {});
-  }
-  toggleHighlight = event => {
+  };
+  toggleHighlight = (user, event) => {
+    this.setState({ selected: user });
     if (this.state.posts[event].highlighted === true) {
       this.state.posts[event].highlighted = false;
+      this.state.posts[event].image = redbox;
+      this.state.posts[event].backgrnd = "white";
 
       this.setState({ count: this.state.count - 1 });
     } else {
       this.state.posts[event].highlighted = true;
-
+      this.state.posts[event].image = marked;
+      this.state.posts[event].backgrnd = "#F3F4F9";
       this.setState({ count: this.state.count + 1 });
     }
   };
+  rt;
   onBack() {
-    history.push("/ViewGroups");
+    this.props.history.push("/ViewGroups");
   }
 
   goToNext = () => {
-    history.push("/AddMembersGroup");
+    this.props.history.push("/AddMembersGroup");
   };
   render() {
-    console.log(this.state.posts);
     const postitems = (
       <div className="check">
         <ul class="list-group">
@@ -101,15 +119,28 @@ class EditGroup extends Component {
               );
             })
             .map((post, index) => (
-              <li class="list-group-item list-group-item-light" key={post.id}>
-                <input
-                  type="checkbox"
-                  className="boxs"
-                  onClick={() => this.toggleHighlight(index)}
+              <li
+                class="list-group-item list-group-item-light"
+                key={post.id}
+                style={{
+                  background: post.backgrnd
+                }}
+              >
+                <img
+                  className="checkbox-delete"
+                  onClick={() => this.toggleHighlight(post.username, index)}
+                  src={post.image}
+                  alt=""
                 />
+
                 <label className="blabe">
-                  <div className="userName"> {post.username}</div>
-                  <div className="emails">{post.email}</div>
+                  <div className="userName" className={post.image==marked?"userName":"userName-active"}>
+                    {" "}
+                    {post.username}
+                  </div>
+                  <div className="emails" className={post.image==marked?"emails":"emails-active"}>
+                    {post.email}
+                  </div>
                 </label>
               </li>
             ))}
@@ -119,17 +150,14 @@ class EditGroup extends Component {
     return (
       <main className="TheMain">
         <div className="TheNavBar">
-          <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
-          <div className="center_label">
-            {this.props.name}
-          </div>
+          <img className="backImage" onClick={this.onBack} src={back} alt="" />
+          <label className="center_labels">{this.props.name}</label>
         </div>
         <div className="BNavBar">
           <input
             className="theText"
             id="username"
             type="text"
-            placeholder="Search.."
             onChange={this.onChange}
             autoComplete="off"
           />
@@ -145,13 +173,43 @@ class EditGroup extends Component {
           data-simplebar-auto-hide="false"
         >
           {postitems}
-        </div>
-        {this.state.count==0?null:
-        <label className="bottomlabel">
-          <button className="deleteUser" onClick={this.handleOnClick}>
-            delete
-          </button>
-        </label>}
+          </div>
+        {this.state.count==0  ? null : (
+          <div className="bpanel">
+            <table className="group-delete-table">
+              <tbody>
+                <tr>
+                  <td>
+                    <div className="thetextname">Delete</div>
+                  </td>
+                  <td>
+                    <span className="name-of-group">
+                      {this.state.selected}{" "}
+                    </span>
+                  </td>
+                  <div className="confrim-cancel">
+                    <td>
+                      <button
+                        className="group-confirm"
+                        onClick={() => this.delete()}
+                      >
+                        Confirm
+                      </button>
+                    </td>
+                    <td className="group-undo">
+                      <button
+                        className="updatess"
+                        onClick={() => this.cancel()}
+                      >
+                        Cancel
+                      </button>
+                    </td>
+                  </div>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )}
       </main>
     );
   }
@@ -161,4 +219,4 @@ const mapStateToProps = state => ({
   name: state.posts.groupName
 });
 
-export default connect(mapStateToProps)(EditGroup);
+export default withRouter(connect(mapStateToProps)(EditGroup));

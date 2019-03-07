@@ -30,7 +30,7 @@ export const fetchPosts = () => dispatch => {
     });
 };
 export const createGroups = usersadded => dispatch => {
-  fetch(BASE_URL+"/api/groups/add", {
+  fetch(BASE_URL + "/api/groups", {
     method: "POST",
     headers: {
       "content-type": "application/json"
@@ -50,7 +50,7 @@ export const createGroups = usersadded => dispatch => {
   /** the method to post new data from the PostForm */
 }
 export const createPost = users => dispatch => {
-  fetch(BASE_URL+"/api/groups/add", {
+  fetch(BASE_URL + "/api/groups", {
     method: "Post",
     headers: {
       Accept: "application/json",
@@ -64,7 +64,7 @@ export const createPost = users => dispatch => {
     .catch(function(data) {});
 };
 
-export const getname = name => {
+export const getName = name => {
   //Return an action
   return dispatch => {
     dispatch({
@@ -75,7 +75,7 @@ export const getname = name => {
 };
 
 export const getGroup = () => dispatch => {
-  fetch(BASE_URL+"/api/user")
+  fetch(BASE_URL + "/api/user")
     .then(res => res.json())
     .then(posts =>
       dispatch({

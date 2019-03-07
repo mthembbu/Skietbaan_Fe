@@ -1,16 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as GroupActions from "../actions/postActions";
+import { createGroups, getName } from "../actions/postActions";
+import history from './history';
 import "./add.css";
-import history from "./history";
+import { BASE_URL } from "../actions/types";
+import error from "./GroupImages/error.png";
+import back from "./GroupImages/back.png";
 
 class AddGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: "",
-      colors: true
+      colors: true,
+      txt: "",
+      groups: [],
+      exist: true
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
@@ -19,52 +24,85 @@ class AddGroup extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
   onClick() {
-    let RequestObject = {
-      Name: this.state.name
-    };
-    this.props.groupActions.getname(RequestObject);
-    history.push("/Groups");
+    if (this.state.groups.indexOf(this.state.name) == -1) {
+    
+      if (this.state.name.length != 0) {
+        this.props.getName(this.state.name);
+        history.push("/Groups");
+      
+      } else {
+        this.setState({ txt: "group name can't be empty" });
+      }
+    } else {
+      this.setState({ exist: false });
+    }
   }
+
+  UNSAFE_componentWillMount() {
+    fetch(BASE_URL + "/api/Groups")
+      .then(res => res.json())
+      .then(data =>
+        this.setState({
+          groups: data.map(group => group.name)
+        })
+      );
+  }
+
+
+
   render() {
     return (
-      <div className="page">
-        <div className="top_bar">
-          <a href="#" class="fa fa-angle-left" />
-
-          <label className="center_label">Create Group</label>
-        </div>
-        <div className="middle_bar">
-          <label className="name">Enter Group Name</label>
-          <input
-            className="texts"
-            type="text"
-            name="name"
-            onChange={this.onChange}
-            value={this.state.name}
-            autoComplete="off"
-          />
-          <button
-            className={this.state.name == "" ? "add" : "add2"}
-            type="submit"
-            onClick={this.onClick}
-          >
-            Add Users
-          </button>
+      <div className="addgroup-main">
+        <div className="page">
+          <div className="TheNavBar">
+           <div>
+            <img
+              className="backImage"
+              onClick={this.onBack}
+              src={back}
+              alt=""
+            /></div>
+              <label className="center_label">Create Groups</label>
+            </div>
+        
+          <div className="middle_bar">
+            <label className="name">
+              Enter Group Name{" "}
+              {this.state.exist ? null : <img src={error} alt="" />}
+            </label>
+            <input
+              className={this.state.name == "" ? "texts" : "texts-active"}
+              type="text"
+              name="name"
+              onChange={this.onChange}
+              value={this.state.name}
+              autoComplete="off"
+              autoCorrect="off"
+              placeholder={this.state.txt}
+            />
+            {this.state.exist ? (
+              <div className="group-error" />
+            ) : (
+              <div className="group-error">Group name already taken</div>
+            )}
+            <button
+              className={this.state.name == "" ? "add" : "add2"}
+              type="submit"
+              onClick={this.onClick}
+            >
+              Add Users
+            </button>
+          </div>
         </div>
       </div>
     );
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    groupActions: bindActionCreators(GroupActions, dispatch)
-  };
-};
 const mapStateToProps = state => ({
   name: state.posts.groupName
 });
 
-export default connect(
+export default (connect(
   mapStateToProps,
-  mapDispatchToProps
-)(AddGroup);
+  { createGroups, getName }
+)(AddGroup));
