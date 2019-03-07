@@ -45,7 +45,6 @@ class Register extends Component {
       .catch(function (data) {
         console.log("error")
       });
-      console.log(this.state.users);
   }
 
   toggleNavbar() {
