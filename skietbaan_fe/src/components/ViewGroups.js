@@ -164,7 +164,7 @@ class ViewGroups extends Component {
         >
           {postitems}
         </div>
-        {this.state.ShowMe ? null : (
+        {this.state.ShowMe  ? null : (
           <div className="bpanel">
             <table className="group-delete-table">
               <tbody>
