@@ -6,6 +6,7 @@ import {
   PASS_ID,
   CREATEGROUP
 } from "../actions/types";
+
 const initialState = {
   selectedItem: {},
   allItems: [],
@@ -29,6 +30,7 @@ const initialState = {
     average: 0
   }
 };
+
 //the function to detect the state change
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -37,11 +39,13 @@ export default function(state = initialState, action) {
         ...state,
         allItems: action.payload
       };
+
     case UPDATE_GROUPNAME:
       return {
         ...state,
         groupName: action.payload
       };
+
     case CREATEGROUP:
     console.log("bathande tuman")
       return {
@@ -53,23 +57,27 @@ export default function(state = initialState, action) {
         ...state,
         groupId: action.payload
       };
+
     case FETCH_POSTS:
       return {
         ...state,
         groupId: action.payload
       };
+
     case FETCH_LEADERBOARDFILTER_DATA:
       return {
         ...state,
         leaderboardGroups: action.payload.groups1,
         leaderboardCompetitions: action.payload.competitions1
       };
+
     case FETCH_LEADERBOARDTABLE_DATA:
       return {
         ...state,
         leaderboardTableData: action.payload.rankResults,
         leaderboardUserData: action.payload.userResults
       };
+      
     default:
       return state;
   }

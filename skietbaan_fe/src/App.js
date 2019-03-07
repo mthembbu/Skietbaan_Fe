@@ -32,7 +32,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-		  user: []
+		  nav: null
 		}
 		this.TypeUser = this.TypeUser.bind(this);
 	}
@@ -48,31 +48,45 @@ class App extends Component {
 		})
 			.then(response => response.json())
 			.then(data => this.setState({
-				user:data
+				nav:data.admin
 			}))
 			.then(function (data) {})
 			.catch(function (data) {
 				console.log("error")
 			});
-		if(this.state.user.admin === true){
-			return true
-		}else{
-			return false
-		}
+	}
+
+	componentDidMount(){
+		let token = getCookie("token");
+		fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
+			method: 'Get',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			}
+		})
+			.then(response => response.json())
+			.then(data => this.setState({
+				nav:data.admin
+			}))
+			.then(function (data) {})
+			.catch(function (data) {
+				console.log("error")
+			});
 	}
 
 	render() {
 		return (
 			<Provider store={store}>
 				<div className="App">
-				{this.TypeUser() ? <NavbarMenu />:<NavbarMenuUser />}
+				{this.state.nav ? <NavbarMenu />:<NavbarMenuUser />}
 					<Router history={history}>
 						<Switch>
 							<Route path="/home" component={LeaderboardPage} exact />
 							<Route path="/login" component={Login} exact />
 							<Route path="/register-page" component={Register} exact />
 							<Route path="/" component={Register} exact />
-							<Route path="/registermember" component={RegisterMember} exact />
+							<Route path="/registerMember" component={RegisterMember} exact />
 							<Route path="/new-competition" component={CreateComp} exact />
 							<Route path="/AddGroup" component={AddGroup} exact />
 							<Route path="/scorecapture" component={ScoreCapture} exact />
@@ -85,21 +99,17 @@ class App extends Component {
 							<Route path="/GroupDone" component={GroupDone} exact />
                 <Route path="/notify" component={notification} exact />
                 <Route path="/documents" component={Documents} exact />
-
-                <Route path="/viewmembers" component={ViewMembers} exact />
-                <Route
-                  path="/AddMembersGroup"
-                  component={AddMembersGroup}
-                  exact
-                />
-                <Route path="/EditGroup" component={EditGroup} exact />
-                <Redirect from="/" to="/home" />
-              </Switch>
-            </Router >
-          </div>
-        </PersistGate>
-      </Provider>
-    );
-  }
+							<Route path="/notify" component={notification} exact />
+							<Route path="/documents" component={Documents} exact />
+							<Route path="/viewMembers" component={ViewMembers} exact />
+							<Route path="/AddMembersGroup" component={AddMembersGroup} exact />
+							<Route path="/EditGroup" component={EditGroup} exact />
+							<Redirect from="/" to="/home" />
+						</Switch>
+					</Router>
+				</div>
+			</Provider>
+		);
+	}
 }
 export default App;

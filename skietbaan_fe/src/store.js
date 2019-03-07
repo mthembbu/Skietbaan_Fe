@@ -19,4 +19,7 @@ export const store = createStore(
   pReducer,initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 );
+
 export const persistor = persistStore(store);
+export default store;
+

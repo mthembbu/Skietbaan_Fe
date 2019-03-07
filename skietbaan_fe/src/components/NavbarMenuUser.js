@@ -2,17 +2,7 @@ import React, { Component } from 'react';
 import '../scss/navbar.css';
 import 'font-awesome/css/font-awesome.min.css';
 import '../bootstrap/NavbarMenuUserStyles.css';
-import profileRed from '../components/navbar-icons/profile-red.png';
-import profileGray from '../components/navbar-icons/profile-grey.png';
-import docsRed from '../components/navbar-icons/docs-red.png';
-import docsGray from '../components/navbar-icons/docs-grey.png';
-import leaderboardRed from '../components/navbar-icons/leaderboard-red.png';
-import leaderboardGray from '../components/navbar-icons/leaderboard-grey.png';
-import notificationsRed from '../components/navbar-icons/notifications-red.png';
-import notificationsGray from '../components/navbar-icons/notifications-grey.png';
-import scorecaptureRed from '../components/navbar-icons/add-score-red.png';
-import scorecaptureGray from '../components/navbar-icons/add-score-grey.png';
-import moreGray from '../components/navbar-icons/more-grey.png';
+import { NAV_BAR_ICONS } from '../actions/types.js'
 
 class NavbarMenuUser extends Component {
 	constructor(props) {
@@ -38,83 +28,83 @@ class NavbarMenuUser extends Component {
 
 	isHome() {
 		if (window.location.pathname.endsWith("/home")) {
-			return <img src={leaderboardRed}
+			return <img src={NAV_BAR_ICONS.LEADERBOARD_RED}
 				className="leaderboard-icon-grey" alt='Leaderboard tab Selected'></img>
 		}
 		else {
-			return <img src={leaderboardGray}
+			return <img src={NAV_BAR_ICONS.LEADERBOARD_GRAY}
 				className="leaderboard-icon-grey" alt='Leaderboard tab not Selected'></img>
 		}
 	}
 
 	isScoreCapture() {
 		if (window.location.pathname.endsWith("/scorecapture")) {
-			return <img src={scorecaptureRed}
+			return <img src={NAV_BAR_ICONS.SCORE_CAPTURE_RED}
 				className="add-score-icon-grey" alt='ScoreCapture tab Selected'></img>
 		}
 		else {
-			return <img src={scorecaptureGray}
+			return <img src={NAV_BAR_ICONS.SCORE_CAPTURE_GRAY}
 				className="add-score-icon-grey" alt='ScoreCapture tab not Selected'></img>
 		}
 	}
 
 	isProfile() {
 		if (window.location.pathname.endsWith("/profile")) {
-			return <img src={profileRed}
+			return <img src={NAV_BAR_ICONS.PROFILE_RED}
 				className="profile-icon-grey" alt='Profile tab Selected'></img>
 		}
 		else {
-			return <img src={profileGray}
+			return <img src={NAV_BAR_ICONS.PROFILE_GRAY}
 				className="profile-icon-grey" alt='Profile tab not Selected'></img>
 		}
 	}
 
 	isDocuments() {
 		if (window.location.pathname.endsWith("/documents")) {
-			return <img src={docsRed}
+			return <img src={NAV_BAR_ICONS.DOCS_RED}
 				className="docs-icon-grey" alt='Document tab Selected'></img>
 		}
 		else {
-			return <img src={docsGray}
+			return <img src={NAV_BAR_ICONS.DOCS_GRAY}
 				className="docs-icon-grey" alt='Document tab not Selected'></img>
 		}
 	}
 
 	isNotifications() {
 		if (window.location.pathname.endsWith("/notifications")) {
-			return <img src={notificationsRed}
+			return <img src={NAV_BAR_ICONS.NOTIFICATIONS_RED}
 				className="notifications-icon-grey" alt='Notification tab Selected'></img>
 		}
 		else {
-			return <img src={notificationsGray}
+			return <img src={NAV_BAR_ICONS.NOTIFICATIONS_GRAY}
 				className="notifications-icon-grey" alt='Notification tab not Selected'></img>
 		}
 	}
 
 	isDocumentsv2() {
 		if (window.location.pathname.endsWith("/documents")) {
-			return <img src={docsRed}
+			return <img src={NAV_BAR_ICONS.DOCS_RED}
 				className="docs-icon-grey-v2" alt='Document tab Selected'></img>
 		}
 		else {
-			return <img src={docsGray}
+			return <img src={NAV_BAR_ICONS.DOCS_GRAY}
 				className="docs-icon-grey-v2" alt='Document tab not Selected'></img>
 		}
 	}
 
 	isNotificationsv2() {
 		if (window.location.pathname.endsWith("/notifications")) {
-			return <img src={notificationsRed}
+			return <img src={NAV_BAR_ICONS.NOTIFICATIONS_RED}
 				className="notifications-icon-grey-v2" alt='Notification tab Selected'></img>
 		}
 		else {
-			return <img src={notificationsGray}
+			return <img src={NAV_BAR_ICONS.NOTIFICATIONS_GRAY}
 				className="notifications-icon-grey-v2" alt='Notification tab not Selected'></img>
 		}
 	}
 
 	isMore() {
-		return <img src={moreGray}
+		return <img src={NAV_BAR_ICONS.MORE_GRAY}
 			className="more-icon-grey" alt='More icon to expand tray'></img>
 	}
 

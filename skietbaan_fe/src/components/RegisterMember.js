@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../components/RegisterMemberStyles.css';
 import { BASE_URL } from '../actions/types.js';
+import { getCookie } from '../components/cookie.js';
 
 function validateUsername(username) {
   const re = /[a-zA-Z]/;
@@ -115,7 +116,7 @@ class App extends Component {
       .then(function (data) { })
       .catch(function (data) { });
 
-      window.location = "/viewmembers";
+      window.location = "/viewMembers";
   }
 
   GetDate() {
@@ -149,13 +150,18 @@ class App extends Component {
   }
 
   render() {
+    if(!getCookie("token")){
+      window.location = "/registerPage";
+      }
     const postItems = (
       <table striped hover condensed
         className="table-register-member">
         <tbody className="table-body-create-members">
           {this.state.arrayUsers.map((post, index) => (
-            <tr className="register-member-user-column" key={post.id} onClick={() => this.SearchMember(index)}>
-              <td className={this.state.clicked ? "actives" : "register-member-user-column"} onClick={() => this.ChangeColor()}>
+            <tr className="register-member-user-column" key={post.id} 
+                onClick={() => this.SearchMember(index)}>
+              <td className={this.state.clicked ? "actives" : "register-member-user-column"} 
+                onClick={() => this.ChangeColor()}>
                 <b>{post.username}</b>
                 <p>{post.email}</p>
               </td>
