@@ -66,14 +66,10 @@
   }
   
 .documents_background{
-
     background-image: url('../resources/Documents_Back.png');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
-
-
-    
+    background-position: center;    
 }
 
 .center{
@@ -188,14 +184,14 @@
 }
 
 .documents-rectangle {
-    padding-top: 15px;
-    margin-top: 62px;
-    margin-left: auto;
-    margin-right: auto;
+    	padding-top: 15px;
+    	margin-top: 62px;
+    	margin-left: auto;
+    	margin-right: auto;
 	height: 205px;
 	width: 300px;
 	border-radius: 10px;
-	background-color: rgba(231,31,21,0.8);
+	background-color: #e71f15;
 }
 
 .testing-align{
