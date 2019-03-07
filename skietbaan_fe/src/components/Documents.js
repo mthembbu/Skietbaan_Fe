@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import '../components/Documents.css';
 import { getCookie } from './cookie.js';
 import { Collapse } from 'react-collapse';
-import {BASE_URL} from "../actions/types.js";
-import {availableIcon} from "../resources/sendDoc.png";
-import {notAvailableIcon} from "../resources/sendDoc.png";
+import { BASE_URL } from "../actions/types.js";
+import { availableIcon } from "../resources/sendDoc.png";
+import { notAvailableIcon } from "../resources/sendDoc.png";
 
 class Documents extends Component {
     constructor(props) {
@@ -12,8 +12,8 @@ class Documents extends Component {
         this.state = {
           value: "",
           value2: "",
-          collapseFilter: false,
-          collapseFilter2: false
+          collapseFilterLOGS: false,
+          collapseFilterLOS: false
 
         };
         this.SendLOGS = this.SendLOGS.bind(this)
@@ -35,13 +35,13 @@ class Documents extends Component {
         let token =getCookie("token");
         fetch(BASE_URL+"/api/Documents/SendLOGS/" + token)
 
-        if (this.state.collapseFilter) {
+        if (this.state.collapseFilterLOGS) {
             this.setState({
-                collapseFilter: false
+                collapseFilterLOGS: false
             });
         } else {
             this.setState({
-                collapseFilter: true
+                collapseFilterLOGS: true
             });
         }
     }
@@ -50,13 +50,13 @@ class Documents extends Component {
         let token =getCookie("token");
         fetch(BASE_URL+"/api/Documents/SendLOS/" + token)
 
-        if (this.state.collapseFilter2) {
+        if (this.state.collapseFilterLOS) {
             this.setState({
-                collapseFilter2: false
+                collapseFilterLOS: false
             });
         } else {
             this.setState({
-                collapseFilter2: true
+                collapseFilterLOS: true
             });
         }
     }
@@ -79,7 +79,7 @@ class Documents extends Component {
                                 <img className="document-image-icon" src={availableIcon}/>:
                                 <img className="document-image-icon" src={notAvailableIcon}/>}
                             </button>
-                            <Collapse isOpened={this.state.collapseFilter}>
+                            <Collapse isOpened={this.state.collapseFilterLOGS}>
                                 <div className="documents-collapse">
                                     Document Sent 
                                 </div>                           
@@ -93,7 +93,7 @@ class Documents extends Component {
                                     <img className="document-image-icon" src={notAvailableIcon}/>}
                                 </button>                       
 
-                                <Collapse isOpened={this.state.collapseFilter2}>
+                                <Collapse isOpened={this.state.collapseFilterLOS}>
                                     <div className="documents-collapse">
                                         Document Sent
                                     </div>                             
