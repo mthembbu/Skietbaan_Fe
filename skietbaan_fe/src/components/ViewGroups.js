@@ -75,8 +75,8 @@ class ViewGroups extends Component {
     const newarry = [...this.state.posts];
     newarry.splice(this.state.index, 1);
     this.setState({ posts: newarry });
-    fetch(BASE_URL + "/api/Groups/" + this.state.ids, {
-      method: "delete",
+
+    fetch(BASE_URL + "/api/Groups/"+console.log(this.state.ids), {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"

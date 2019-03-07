@@ -5,8 +5,7 @@ export const NEW_POST = 'NEW_POST';
 export const NEW_COMP = 'NEW_COMP';
 export const FETCH_COMP = 'FETCH_COMP';
 export const UPDATE_COMP_STATUS = 'UPDATE_COMP_STATUS';
-// export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
- export const BASE_URL = "http://localhost:50209";
+export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
 //leaderboard types
 export const FETCH_LEADERBOARDFILTER_DATA = 'FETCH_LEADERBOARDFILTER_DATA';
 export const FETCH_LEADERBOARDTABLE_DATA = 'FETCH_LEADERBOARDTABLE_DATA';
@@ -22,5 +21,4 @@ export const CREATEGROUP = 'CREATEGROUP';
 export const GETGROUP = 'GETGROUP';
 export const PASS_ID = 'PASS_ID';
 export const GETNAME = 'GETNAME';
-
 FETCH_LEADERBOARDFILTER_DATA

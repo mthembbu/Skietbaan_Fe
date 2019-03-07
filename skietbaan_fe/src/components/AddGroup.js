@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createGroups, getName } from "../actions/postActions";
+import history from './history';
 import "./add.css";
 import { BASE_URL } from "../actions/types";
 import error from "./GroupImages/error.png";
@@ -24,10 +25,11 @@ class AddGroup extends Component {
   }
   onClick() {
     if (this.state.groups.indexOf(this.state.name) == -1) {
+    
       if (this.state.name.length != 0) {
         this.props.getName(this.state.name);
-        // history.push("/Groups");
-        window.location = "/Groups";
+        history.push("/Groups");
+      
       } else {
         this.setState({ txt: "group name can't be empty" });
       }
@@ -45,6 +47,9 @@ class AddGroup extends Component {
         })
       );
   }
+
+
+
   render() {
     return (
       <div className="addgroup-main">
@@ -57,11 +62,9 @@ class AddGroup extends Component {
               src={back}
               alt=""
             /></div>
-            
               <label className="center_label">Create Groups</label>
             </div>
-          
-
+        
           <div className="middle_bar">
             <label className="name">
               Enter Group Name{" "}
@@ -99,7 +102,7 @@ const mapStateToProps = state => ({
   name: state.posts.groupName
 });
 
-export default connect(
+export default (connect(
   mapStateToProps,
   { createGroups, getName }
-)(AddGroup);
+)(AddGroup));
