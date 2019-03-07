@@ -1,21 +1,23 @@
 .activeButton button {
-	background-color: #e11e2b;
-	border-radius: 20px;
-	border: none;
-	color: black;
-	width: 116px;
-	height: 42px;
-	font-weight: lighter;
+	background: #6F839E;
+    border-radius: 20px;
+    color: #fdfdfd;
+    width: 116px;
+    height: 35px;
+    font-weight: lighter;
+	font-family: helvetica;	
 }
 
 .inactiveButton button {
-	background-color: #504f51;
-	border-radius: 20px;
-	border: 1px #e11e2b solid;
-	color: #fbfbfb;
-	width: 116px;
-	height: 42px;
-	font-weight: lighter;
+	background-color: #fdfdfd;
+    border-radius: 20px;
+    border: 1px #6F839E solid;
+    color: #6F839E;
+    width: 116px;
+    height: 35px;
+    font-weight: lighter;
+    font-family: helvetica;
+    border-color: #6F839E;
 }
 
 .view-header {
@@ -45,16 +47,19 @@
 }
 
 .competition-containers {
-	margin-bottom: .5rem;
-	font-size: helvetica;
-	font-weight: lighter;
-	line-height: 1.2;
-	font-size: 18px;
-	color: #fbfbfb;
+	margin: 5px;
+    font-family: helvetica;
+    font-weight: normal;
+    line-height: 1.2;
+    font-size: 18px;
+    color: #6F839E;
+    width: 174px;
+    height: 30px;
+    padding: 7px;
 }
 
 .table-view-competitions {
-	background-color: #504f51;
+	background-color: transparent;
 	width: 80%;
 	font-size: 16px;
 	margin-left: 10%;
@@ -66,11 +71,18 @@
 }
 
 .table-competition-row {
-	border-bottom: solid 1px #bbbcbd;
-	padding-bottom: 1px;
-	padding-top: 10px;
+    border-bottom: solid 1px #bbbcbd;
+    padding-bottom: 1px;
+    padding: 11px;
+    height: 64px;
+}
+
+.td-col{
+	padding-top: 11px;
+    padding-bottom: 11px;
 }
 
 .page-contents {
-	background-color: #504f51;
+	background-color: transparent;
+	padding-top: 60px;
 }
