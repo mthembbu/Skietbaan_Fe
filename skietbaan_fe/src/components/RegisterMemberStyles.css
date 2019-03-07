@@ -10,7 +10,7 @@
   .centre-register-member{
     margin:0 auto;
     position: center;
-    background-color: white;
+    background-color: #fdfdfd;
   }
 
   @media screen and (min-width:768px)  {
@@ -37,7 +37,7 @@
     text-align: center;
     height: 60px;
     line-height: 36px;
-    background-color: white;
+    background-color: #fdfdfd;
     padding-top: 8px;
   }
 
@@ -60,7 +60,7 @@
     display:inline-block;
     padding-top: 31px;
     text-align: left;
-    color: white;
+    color: #fdfdfd;
   }
 
   .create-member{
@@ -87,7 +87,7 @@
     border-radius: 18px;
     border: 1.5px #798CA5 solid;
     background-color: #798CA5;
-    color: white;
+    color: #fdfdfd;
     width: 152px;
     height: 38px;
     font-size: 16px;
@@ -136,7 +136,7 @@
 
   .div-label-enter-user-name{
     text-align: center;
-    color: white;
+    color: #fdfdfd;
     padding-top: 56px;
     font-size: 26px;
   }
@@ -154,7 +154,7 @@
     font-size: 16px;
     border-radius: 10px;
     border: none;
-    background-color: white;
+    background-color: #fdfdfd;
     position: absolute;
   }
 
@@ -165,7 +165,7 @@
   
   .register-member-user-column{
     background-color: #798CA5;
-    color: white;
+    color: #fdfdfd;
     border-radius: 10px;
     border: none;
     padding-left: 10px;
@@ -174,7 +174,7 @@
   .actives{
     border-color: red;
     border-radius: 10px;
-    color: white;
+    color: #fdfdfd;
     border: none;
     display: none;
   }
