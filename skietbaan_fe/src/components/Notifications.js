@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../components/NotificationsStyle.css";
 import { getCookie } from "./cookie";
 import history from "./history";
-import { LOCALURL } from "../actions/types.js";
+import { BASE_URL } from "../actions/types.js";
 
 class notification extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class notification extends Component {
   onDelete = async () => {
     const deleteNotification = async id => {
       try {
-        await fetch(LOCALURL + `/api/Notification/${id}`, {
+        await fetch(BASE_URL + `/api/Notification/${id}`, {
           method: "Delete"
         });
       } catch (err) {
@@ -74,7 +74,7 @@ class notification extends Component {
   componentDidMount() {
     if (getCookie("token")) {
       const token = document.cookie;
-      fetch(LOCALURL + "/api/Notification?" + token)
+      fetch(BASE_URL + "/api/Notification?" + token)
         .then(response => response.json())
         .then(data => {
           const newArray = data.map(notification => {

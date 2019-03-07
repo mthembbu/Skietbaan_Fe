@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../scss/create-page.css';
+import { getCookie } from '../components/cookie.js';
 class CreatePage extends Component {
 
 	constructor(props) {
@@ -18,7 +19,7 @@ class CreatePage extends Component {
 	}
 
 	GoMembers() {
-		window.location = "/registermember";
+		window.location = "/registerMember";
 	}
 
 	GoGroups() {
@@ -30,7 +31,7 @@ class CreatePage extends Component {
 	}
 
 	ViewMembers() {
-		window.location = "/viewmembers";
+		window.location = "/viewMembers";
 	}
 
 	ViewGroups() {
@@ -38,6 +39,9 @@ class CreatePage extends Component {
 	}
 
 	render() {
+		if(!getCookie("token")){
+            window.location = "/registerPage";
+        }
 		return (
 			<div className="create-page-container">
 				<div class="page-name-create-page">
