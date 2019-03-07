@@ -154,8 +154,10 @@ class App extends Component {
         className="table-register-member">
         <tbody className="table-body-create-members">
           {this.state.arrayUsers.map((post, index) => (
-            <tr className="register-member-user-column" key={post.id} onClick={() => this.SearchMember(index)}>
-              <td className={this.state.clicked ? "actives" : "register-member-user-column"} onClick={() => this.ChangeColor()}>
+            <tr className="register-member-user-column" key={post.id} 
+                onClick={() => this.SearchMember(index)}>
+              <td className={this.state.clicked ? "actives" : "register-member-user-column"} 
+                onClick={() => this.ChangeColor()}>
                 <b>{post.username}</b>
                 <p>{post.email}</p>
               </td>
