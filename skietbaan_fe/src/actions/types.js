@@ -51,4 +51,4 @@ export const CREATEGROUP = 'CREATEGROUP';
 export const GETGROUP = 'GETGROUP';
 export const PASS_ID = 'PASS_ID';
 export const GETNAME = 'GETNAME';
-FETCH_LEADERBOARDFILTER_DATA
+
