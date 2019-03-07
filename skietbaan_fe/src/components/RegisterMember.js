@@ -115,7 +115,7 @@ class App extends Component {
       .then(function (data) { })
       .catch(function (data) { });
 
-      window.location = "/viewmembers";
+      window.location = "/viewMembers";
   }
 
   GetDate() {

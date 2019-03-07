@@ -18,7 +18,7 @@ class CreatePage extends Component {
 	}
 
 	GoMembers() {
-		window.location = "/registermember";
+		window.location = "/registerMember";
 	}
 
 	GoGroups() {
@@ -30,7 +30,7 @@ class CreatePage extends Component {
 	}
 
 	ViewMembers() {
-		window.location = "/viewmembers";
+		window.location = "/viewMembers";
 	}
 
 	ViewGroups() {
