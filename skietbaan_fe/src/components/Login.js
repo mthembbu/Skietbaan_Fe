@@ -28,11 +28,21 @@ class Login extends Component {
     this.validate = this.validate.bind(this);
     this.togglePassword = this.togglePassword.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.goToRegister = this.goToRegister.bind(this);
+    this.goToRegister = this.goToRegister.bind(this);    
+    this.disableButton = this.disableButton.bind(this);
+  }
+
+  disableButton() {
+    if (this.state.validForm === true) {
+      document.getElementById("roundButton").disabled = false;
+    }
+    else
+      document.getElementById("roundButton").disabled = true;
 
   }
 
   componentDidMount() {
+    this.disableButton();
     fetch(URL + "/api/User", {
       method: 'GET',
       headers: {
@@ -63,6 +73,7 @@ class Login extends Component {
     this.setState({
       [target.name]: target.value,
     });
+    this.disableButton();
     let isValid = false;
     let stateUpdate = {
       invalidPassword: this.state.invalidPassword,
@@ -173,8 +184,9 @@ class Login extends Component {
       <div className="page-content-login">
         <div className="red-background">
           <div className="welcome-header">
-            <img src={header}
-              className="header-image"></img>
+          <label className="welcome-label">Welcome to
+          <label className="skietbaan-label">Skietbaan</label>
+            </label>
           </div>
           <div className="header-container">
             <div className="centre-label">
@@ -188,7 +200,7 @@ class Login extends Component {
         <div className="centre-login">
           <Form className="form" autoComplete="off">
 
-            <Col className="no-padding">
+            <div className="spacing-login">
               <FormGroup>
                 <label className="front-white input-label">Enter Username <div
                   className={this.state.invalidUsername ? "invalid-icon" : "hidden"}></div></label>
@@ -204,10 +216,10 @@ class Login extends Component {
                   />
                 </div>
                 <div className={typeof this.state.usernameFound !== "undefined" 
-                && !this.state.usernameFound ? "" : "hidden"} > Username not found</div>
+                && !this.state.usernameFound ? "error-message" : "hidden"} > Username not found</div>
               </FormGroup>
-            </Col>
-            <Col className="no-padding">
+            </div>
+            <div className="spacing-login">
               <FormGroup>
                 <label className="front-white input-label" for="examplePassword">
                   Password <div className={this.state.invalidPassword ? "invalid-icon" : "hidden"}></div></label>
@@ -227,11 +239,11 @@ class Login extends Component {
                   </div>
                 </div>
                 <div className={this.state.passwordFound 
-                  && this.passwordValue !=="" ? "hidden":""}>Invalid Password</div>
+                  && this.passwordValue !=="" ? "hidden":"error-message"}>Invalid Password</div>
               </FormGroup>
-            </Col>
+            </div>
             <div className="button-container">
-              <Button onClick={this.login} className={this.state.validForm ? "round-button"
+              <Button onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
                 : "buttons-invalid round-button"} >Join</Button>
             </div>
           </Form>
