@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
 import { BASE_URL } from "../actions/types";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
+import marked from "./GroupImages/marked.png";
+import unmarked from "./GroupImages/unmarked.png";
+
 class AddMembersGroup extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +23,6 @@ class AddMembersGroup extends Component {
   }
   UNSAFE_componentWillMount() {
     if (this.props.id != 0) {
-      console.log(123)
       fetch(BASE_URL + "/api/Groups/list?id=" + this.props.id)
         .then(res => res.json())
         .then(data => {
@@ -29,15 +31,13 @@ class AddMembersGroup extends Component {
               return {
                 ...users,
                 highlighted: false,
-                backgrnd: "white" 
+                backgrnd: "white"
               };
             })
           });
         });
     } else {
-      
-        this.props.history.push("/ViewGroups");
-       
+      this.props.history.push("/ViewGroups");
     }
   }
   onChange(event) {
@@ -71,18 +71,18 @@ class AddMembersGroup extends Component {
   }
   toggleHighlight = (name, event) => {
     if (this.state.posts[event].highlighted === true) {
-      this.state.posts[event].backgrnd="white";
+      this.state.posts[event].backgrnd = "white";
       this.state.posts[event].highlighted = false;
       this.setState({ count: this.state.count - 1 });
     } else {
       this.setState({ selected: name });
-      this.state.posts[event].backgrnd="#F3F4F9";
+      this.state.posts[event].backgrnd = "#F3F4F9";
       this.state.posts[event].highlighted = true;
       this.setState({ count: this.state.count + 1 });
     }
   };
   onBack() {
-     this.props.history.push("/EditGroup");
+    this.props.history.push("/EditGroup");
   }
   render() {
     const postitems = (
@@ -104,13 +104,13 @@ class AddMembersGroup extends Component {
               <li
                 class="list-group-item list-group-item-light"
                 key={post.id}
-                style={{background:post.backgrnd}}
+                style={{ background: post.backgrnd }}
               >
-                <input
-                  type="checkbox"
-                  className="boxs"
-                  style={{marginRight:"23px"}}
+                <img
+                  className="checkbox-delete"
                   onClick={() => this.toggleHighlight(post.username, index)}
+                  src={post.highlighted?marked:unmarked}
+                  alt=""
                 />
                 <label className="blabe">
                   <div className="userName"> {post.username}</div>
@@ -148,7 +148,7 @@ class AddMembersGroup extends Component {
           {postitems}
         </div>
 
-        {this.state.count==0 ? null : (
+        {this.state.count == 0 ? null : (
           <div className="bpanel">
             <table className="group-delete-table">
               <tbody>
@@ -164,8 +164,12 @@ class AddMembersGroup extends Component {
                   <td>
                     <button
                       className="group-confirm"
-                      onClick={()=>this.handleOnClick()}
-                      style={{background:"white",color:"black",border:"1px solid white"}}
+                      onClick={() => this.handleOnClick()}
+                      style={{
+                        background: "white",
+                        color: "black",
+                        border: "1px solid white"
+                      }}
                     >
                       Confirm
                     </button>
