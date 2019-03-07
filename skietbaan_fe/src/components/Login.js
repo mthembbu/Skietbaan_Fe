@@ -8,7 +8,7 @@ import {
 import '../components/RegisterStyles.css';
 import { validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
-import { BASE_URL, URL } from '../actions/types.js';
+import { URL } from '../actions/types.js';
 import header from '../components/assets/header.png';
 import back from '../components/assets/back.png';
 
@@ -44,12 +44,9 @@ class Login extends Component {
       .then(data => this.setState({
         users: data,
       })).then(function (data) {
-        console.log(data);
       })
       .catch(function (data) {
-        console.log("error")
       });
-    console.log(this.state.users);
   }
 
   toggleNavbar() {
