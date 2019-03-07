@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Navbar } from 'react-bootstrap';
 import '../scss/navbar.css';
 import 'font-awesome/css/font-awesome.min.css';
-import '../bootstrap/NavbarMenuStyle.css';
+import '../bootstrap/NavbarMenuUserStyles.css';
+import { NAV_BAR_ICONS } from '../actions/types.js'
 
 class NavbarMenuUser extends Component {
 	constructor(props) {
@@ -28,61 +28,83 @@ class NavbarMenuUser extends Component {
 
 	isHome() {
 		if (window.location.pathname.endsWith("/home")) {
-			return <img src={require('../components/navbar-icons/leaderboard-red.png')}
+			return <img src={NAV_BAR_ICONS.LEADERBOARD_RED}
 				className="leaderboard-icon-grey" alt='Leaderboard tab Selected'></img>
 		}
 		else {
-			return <img src={require('../components/navbar-icons/leaderboard-grey.png')}
+			return <img src={NAV_BAR_ICONS.LEADERBOARD_GRAY}
 				className="leaderboard-icon-grey" alt='Leaderboard tab not Selected'></img>
 		}
 	}
 
 	isScoreCapture() {
 		if (window.location.pathname.endsWith("/scorecapture")) {
-			return <img src={require('../components/navbar-icons/add-score-red.png')}
+			return <img src={NAV_BAR_ICONS.SCORE_CAPTURE_RED}
 				className="add-score-icon-grey" alt='ScoreCapture tab Selected'></img>
 		}
 		else {
-			return <img src={require('../components/navbar-icons/add-score-grey.png')}
+			return <img src={NAV_BAR_ICONS.SCORE_CAPTURE_GRAY}
 				className="add-score-icon-grey" alt='ScoreCapture tab not Selected'></img>
 		}
 	}
 
 	isProfile() {
 		if (window.location.pathname.endsWith("/profile")) {
-			return <img src={require('../components/navbar-icons/profile-red.png')}
+			return <img src={NAV_BAR_ICONS.PROFILE_RED}
 				className="profile-icon-grey" alt='Profile tab Selected'></img>
 		}
 		else {
-			return <img src={require('../components/navbar-icons/profile-grey.png')}
+			return <img src={NAV_BAR_ICONS.PROFILE_GRAY}
 				className="profile-icon-grey" alt='Profile tab not Selected'></img>
 		}
 	}
 
 	isDocuments() {
 		if (window.location.pathname.endsWith("/documents")) {
-			return <img src={require('../components/navbar-icons/docs-red.png')}
+			return <img src={NAV_BAR_ICONS.DOCS_RED}
 				className="docs-icon-grey" alt='Document tab Selected'></img>
 		}
 		else {
-			return <img src={require('../components/navbar-icons/docs-grey.png')}
+			return <img src={NAV_BAR_ICONS.DOCS_GRAY}
 				className="docs-icon-grey" alt='Document tab not Selected'></img>
 		}
 	}
 
 	isNotifications() {
 		if (window.location.pathname.endsWith("/notifications")) {
-			return <img src={require('../components/navbar-icons/notifications-red.png')}
+			return <img src={NAV_BAR_ICONS.NOTIFICATIONS_RED}
 				className="notifications-icon-grey" alt='Notification tab Selected'></img>
 		}
 		else {
-			return <img src={require('../components/navbar-icons/notifications-grey.png')}
+			return <img src={NAV_BAR_ICONS.NOTIFICATIONS_GRAY}
 				className="notifications-icon-grey" alt='Notification tab not Selected'></img>
 		}
 	}
 
+	isDocumentsv2() {
+		if (window.location.pathname.endsWith("/documents")) {
+			return <img src={NAV_BAR_ICONS.DOCS_RED}
+				className="docs-icon-grey-v2" alt='Document tab Selected'></img>
+		}
+		else {
+			return <img src={NAV_BAR_ICONS.DOCS_GRAY}
+				className="docs-icon-grey-v2" alt='Document tab not Selected'></img>
+		}
+	}
+
+	isNotificationsv2() {
+		if (window.location.pathname.endsWith("/notifications")) {
+			return <img src={NAV_BAR_ICONS.NOTIFICATIONS_RED}
+				className="notifications-icon-grey-v2" alt='Notification tab Selected'></img>
+		}
+		else {
+			return <img src={NAV_BAR_ICONS.NOTIFICATIONS_GRAY}
+				className="notifications-icon-grey-v2" alt='Notification tab not Selected'></img>
+		}
+	}
+
 	isMore() {
-		return <img src={require('../components/navbar-icons/more-grey.png')}
+		return <img src={NAV_BAR_ICONS.MORE_GRAY}
 			className="more-icon-grey" alt='More icon to expand tray'></img>
 	}
 
@@ -105,8 +127,14 @@ class NavbarMenuUser extends Component {
 						<td className="columns" onClick={() => this.GoTo("#")}>
 							{this.isProfile()}
 						</td>
-						<td onClick={this.expand}>
+						<td className="columns-more" onClick={this.expand}>
 							{this.isMore()}
+						</td>
+						<td className="columns-v2" onClick={() => this.GoTo("/documents")}>
+							{this.isDocumentsv2()}
+						</td>
+						<td className="columns-v2" onClick={() => this.GoTo("notify")}>
+							{this.isNotificationsv2()}
 						</td>
 					</tr>
 					<tr className={this.state.expanded ? "second-row-navbar expand":"second-row-navbar"}>

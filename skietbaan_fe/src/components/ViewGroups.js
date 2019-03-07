@@ -76,7 +76,8 @@ class ViewGroups extends Component {
     newarry.splice(this.state.index, 1);
     this.setState({ posts: newarry });
 
-    fetch(BASE_URL + "/api/Groups/"+console.log(this.state.ids), {
+    fetch((BASE_URL + "/api/Groups/"+this.state.ids), {
+      method:"POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../components/RegisterMemberStyles.css';
 import { BASE_URL } from '../actions/types.js';
+import { getCookie } from '../components/cookie.js';
 
 function validateUsername(username) {
   const re = /[a-zA-Z]/;
@@ -49,12 +50,15 @@ class App extends Component {
   }
 
   dateChange() {
-    let entDate = document.getElementById("entrydate").value.split('-');
+    let entDate = document.getElementById("expdate").value.split('/');
     let newDate = parseInt(entDate[0], 10) + 1;
     document.getElementById("expdate").value = newDate + "-" + entDate[1] + "-" + entDate[2];
   }
 
   SearchAllMember() {
+    this.setState({
+      clicked: false
+    });
     fetch(BASE_URL + "/api/User", {
       method: 'Get',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -75,7 +79,7 @@ class App extends Component {
   SearchMember(user) {
     this.setState({
       usernameValue: user,
-      clicked: "actives",
+      clicked: true,
       hideButton: false
     });
     let name = this.state.arrayUsers[user].username;
@@ -111,6 +115,8 @@ class App extends Component {
       })
       .then(function (data) { })
       .catch(function (data) { });
+
+      window.location = "/viewMembers";
   }
 
   GetDate() {
@@ -144,13 +150,18 @@ class App extends Component {
   }
 
   render() {
+    if(!getCookie("token")){
+      window.location = "/registerPage";
+      }
     const postItems = (
       <table striped hover condensed
         className="table-register-member">
         <tbody className="table-body-create-members">
           {this.state.arrayUsers.map((post, index) => (
-            <tr className="register-member-user-column" key={post.id} onClick={() => this.SearchMember(index)}>
-              <td className={this.state.clicked ? "actives" : "register-member-user-row"} onClick={() => this.ChangeColor()}>
+            <tr className="register-member-user-column" key={post.id} 
+                onClick={() => this.SearchMember(index)}>
+              <td className={this.state.clicked ? "actives" : "register-member-user-column"} 
+                onClick={() => this.ChangeColor()}>
                 <b>{post.username}</b>
                 <p>{post.email}</p>
               </td>
@@ -165,7 +176,7 @@ class App extends Component {
           <div className="page-name-create-members">
             <div className="image-comtainer">
               <img src={require('../components/assets/back-button-white.png')} onClick={this.BackToCreate}
-                className="go-back-to-create-page" alt=''></img>
+                className="go-back-to-create-page-from-create-member" alt=''></img>
             </div>
             <div>
               <label className="create-members">Create Member</label>
@@ -190,7 +201,7 @@ class App extends Component {
             </div>
             <div className="rest-body">
               <div className="container-labels">
-                <div className="membership-number">
+                <div className={this.state.hideButton ? "hide-membership-number":"membership-number"}>
                   <div className="input-spacing">
                     <label className="membership-id-number">Membership No.</label>
                     <div className="input-member-number">
@@ -199,17 +210,17 @@ class App extends Component {
                         type="text"
                         className="membershipID"
                         id="membershipID"
-                        value={this.state.membershipID}
+                        value={this.state.membershipsID}
                         onChange={this.handleChange}
                       />
                     </div>
                   </div>
                 </div>
-                <div className="expiry-date-member">
+                <div className={this.state.hideButton ? "hide-expiry-date-member":"expiry-date-member"}>
                   <div className="input-spacing">
                     <label className="membership-expiry-date">Membership Expiry Date</label><br />
-                    <input type="text" className="expdate" id="expdate"
-                      value={this.GetDate()} onChange={this.handleChange} />
+                    <input type="date" className="expdate" id="expdate"
+                      value={this.GetDate()} onChange={this.handleChangeChange} />
                   </div>
                 </div>
               </div>
