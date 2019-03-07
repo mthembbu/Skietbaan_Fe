@@ -21,6 +21,7 @@ class Login extends Component {
       validForm: false,
       tokenValue: "",
       users: [],
+      passwordFound: true
     }
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -70,6 +71,7 @@ class Login extends Component {
       invalidPassword: this.state.invalidPassword,
       invalidUsername: this.state.invalidUsername,
       usernameFound: true,
+      passwordFound: true
     }
     if (target.name === "passwordValue" && target.value.length > 0) {
       stateUpdate.invalidPassword = false;
@@ -141,6 +143,7 @@ class Login extends Component {
         else if (typeof data === "string" && data.indexOf("Invalid Password") > -1) {
           this.setState({
             invalidPassword: true,
+            passwordFound:false
           });
         }
       }).catch(function (data) {
@@ -203,7 +206,8 @@ class Login extends Component {
                     className="input-user"
                   />
                 </div>
-                <div className={typeof this.state.usernameFound !== "undefined" && !this.state.usernameFound ? "" : "hidden"} > Username not found</div>
+                <div className={typeof this.state.usernameFound !== "undefined" 
+                && !this.state.usernameFound ? "" : "hidden"} > Username not found</div>
               </FormGroup>
             </Col>
             <Col className="no-padding">
@@ -225,6 +229,8 @@ class Login extends Component {
                     </div>
                   </div>
                 </div>
+                <div className={this.state.passwordFound 
+                  && this.passwordValue !=="" ? "hidden":""}>Invalid Password</div>
               </FormGroup>
             </Col>
             <div className="button-container">
