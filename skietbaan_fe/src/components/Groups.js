@@ -5,7 +5,8 @@ import { withRouter } from "react-router-dom";
 import { createGroups } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
 import back from "./GroupImages/back.png"
-
+import unmarked from "./GroupImages/unmarked.png";
+import marked from "./GroupImages/marked.png";
 class Groups extends Component {
   constructor(props) {
     super(props);
@@ -34,7 +35,8 @@ class Groups extends Component {
               return {
                 ...users,
                 highlighted: false,
-                backgrnd:"white"
+                backgrnd:"white",
+                image:unmarked
               };
             })
           });
@@ -96,14 +98,16 @@ class Groups extends Component {
   }
 
   toggleHighlight = event => {
-    if (this.state.posts[event].highlighted === true) {
+    if (this.state.posts[event].highlighted == true) {
       this.state.posts[event].highlighted = false;
+      this.state.posts[event].image = unmarked;
       this.state.posts[event].backgrnd = "white";
       
       this.setState({ count: this.state.count + 1 });
     } else {
       this.state.posts[event].highlighted = true;
       this.state.posts[event].backgrnd = "#F3F4F9";
+      this.state.posts[event].image = marked;
       this.setState({ count: this.state.count - 1 });
     }
   };
@@ -137,12 +141,11 @@ class Groups extends Component {
                   background:post.backgrnd
                 }}
               >
-                <input
-                  type="checkbox"
-                  className="boxs"
+                <img
+                  className="checkbox-delete"
                   onClick={() => this.toggleHighlight(index)}
-                  checked={post.highlighted}
-                  style={{border:"2px solid black", marginTop:"17px" ,marginRight:"23px"}}
+                  src={post.image}
+                  alt=""
                 />
                 <label className="blabe">
                   <div className="userName" style={{ color: post.colors }}>
@@ -160,9 +163,9 @@ class Groups extends Component {
     );
     return (
       <main className="TheMain">
-        <div className="TheNavBar">
-          <img className="backImage" src={back} alt="" />
-          <div className="center_label">{this.props.name}</div>
+       <div className="TheNavBar">
+          <img className="backImage" onClick={this.onBack} src={back} alt="" />
+          <label className="center_labels">{this.props.name}</label>
         </div>
         <div className="BNavBar">
           <input
@@ -190,12 +193,12 @@ class Groups extends Component {
         >
           {postitems}
         </div>
-
+      {this.state.count==0?null:
         <label className="bottomlabel">
           <button className="deleteUser" onClick={this.handleOnClick}>
             Create Group
           </button>
-        </label>
+        </label>}
       </main>
     );
   }

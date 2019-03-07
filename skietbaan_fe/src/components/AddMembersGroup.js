@@ -5,6 +5,7 @@ import { BASE_URL } from "../actions/types";
 import { withRouter } from "react-router-dom";
 import marked from "./GroupImages/marked.png";
 import unmarked from "./GroupImages/unmarked.png";
+import back from "./GroupImages/back.png";
 
 class AddMembersGroup extends Component {
   constructor(props) {
@@ -109,7 +110,7 @@ class AddMembersGroup extends Component {
                 <img
                   className="checkbox-delete"
                   onClick={() => this.toggleHighlight(post.username, index)}
-                  src={post.highlighted?marked:unmarked}
+                  src={post.highlighted ? marked : unmarked}
                   alt=""
                 />
                 <label className="blabe">
@@ -124,10 +125,8 @@ class AddMembersGroup extends Component {
     return (
       <main className="TheMain">
         <div className="TheNavBar">
-          <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
-          <div className="center_label">
-            <b>{this.props.name}</b>
-          </div>
+          <img className="backImage" onClick={this.onBack} src={back} alt="" />
+          <label className="center_labels">{this.props.name}</label>
         </div>
         <div className="BNavBar">
           <input

@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { BASE_URL } from "../actions/types";
 import marked from "./GroupImages/marked.png";
 import redbox from "./GroupImages/Rectangle.png";
-
+import back from "./GroupImages/back.png";
 class EditGroup extends Component {
   constructor(props) {
     super(props);
@@ -150,9 +150,10 @@ class EditGroup extends Component {
     return (
       <main className="TheMain">
         <div className="TheNavBar">
-          <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
-          <div className="center_label">{this.props.name}</div>
+          <img className="backImage" onClick={this.onBack} src={back} alt="" />
+          <label className="center_labels">{this.props.name}</label>
         </div>
+  
         <div className="BNavBar">
           <input
             className="theText"

@@ -19,7 +19,7 @@ class ViewGroups extends Component {
       ids: 0,
       index: 0,
       selected: "",
-      deleteState:false
+      deleteState: false
     };
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -27,7 +27,7 @@ class ViewGroups extends Component {
     this.editGroup = this.editGroup.bind(this);
   }
   UNSAFE_componentWillMount() {
-    fetch(BASE_URL+ "/api/Groups")
+    fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
       .then(data =>
         this.setState({
@@ -35,7 +35,7 @@ class ViewGroups extends Component {
             return {
               ...users,
               colors: "black",
-              image:normalstate
+              image: normalstate
             };
           })
         })
@@ -65,7 +65,7 @@ class ViewGroups extends Component {
       ShowMe: false,
       posts: newarry,
       ShowMe: false,
-      deleteState:true
+      deleteState: true
     });
   };
 
@@ -74,7 +74,7 @@ class ViewGroups extends Component {
     const newarry = [...this.state.posts];
     newarry.splice(this.state.index, 1);
     this.setState({ posts: newarry });
-    fetch(BASE_URL+ "/api/Groups/" + this.state.ids, {
+    fetch(BASE_URL + "/api/Groups/" + this.state.ids, {
       method: "delete",
       headers: {
         Accept: "application/json",
@@ -93,8 +93,8 @@ class ViewGroups extends Component {
 
   do = () => {
     const newarry = [...this.state.posts];
-     newarry[this.state.index].colors = "black";
-     newarry[this.state.index].image = normalstate;
+    newarry[this.state.index].colors = "black";
+    newarry[this.state.index].image = normalstate;
     if (this.state.ShowMe == false) {
       this.setState({ ShowMe: true });
     }
@@ -106,7 +106,7 @@ class ViewGroups extends Component {
     newarry[this.state.index].image = normalstate;
     this.setState({ selected: "", posts: newarry });
   };
-S
+  S;
 
   handleOnClick = () => {};
   render() {
@@ -137,8 +137,10 @@ S
                     {post.name}
                   </td>
                   <td>
-                    <div className="group-view"
-                     onClick={() => this.update(post.id, index, post.name)}>
+                    <div
+                      className="group-view"
+                      onClick={() => this.update(post.id, index, post.name)}
+                    >
                       <img src={post.image} alt="" />
                     </div>
                   </td>
@@ -152,9 +154,7 @@ S
     return (
       <main className="TheMain" onClick={() => this.do()}>
         <div className="TheNavBar">
-          {/* <a href="#" class="fa fa-angle-left"  /> */}
           <img className="backImage" onClick={this.onBack} src={back} alt="" />
-
           <label className="center_label">View Groups</label>
         </div>
         <div
@@ -169,7 +169,6 @@ S
             <table className="group-delete-table">
               <tbody>
                 <tr>
-      
                   <td>
                     <div className="thetextname">Delete</div>
                   </td>
@@ -179,19 +178,22 @@ S
                     </span>
                   </td>
                   <div className="confrim-cancel">
-                  <td>
-                    <button
-                      className="group-confirm"
-                      onClick={() => this.delete()}
-                    >
-                      Confirm
-                    </button>
-                  </td>
-                  <td className="group-undo">
-                    <button className="updatess" onClick={() => this.cancel()}>
-                      Cancel
-                    </button>
-                  </td>
+                    <td>
+                      <button
+                        className="group-confirm"
+                        onClick={() => this.delete()}
+                      >
+                        Confirm
+                      </button>
+                    </td>
+                    <td className="group-undo">
+                      <button
+                        className="updatess"
+                        onClick={() => this.cancel()}
+                      >
+                        Cancel
+                      </button>
+                    </td>
                   </div>
                 </tr>
               </tbody>

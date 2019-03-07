@@ -26,18 +26,36 @@
 .center_label {
   margin-top: 10px;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: 105px;
   width: 7em;
   display: flex;
   color: white;
   font-weight: bold;
   font-size: 18px;
   font-size: 20px;
-  display: inline-block;
+  display: flex;
   text-align: center;
   white-space: nowrap;
   overflow: hidden !important;
   text-overflow: ellipsis;
+  padding-right: 21px;
+}
+.center_labels {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: 90px;
+  width: 7em;
+  display: flex;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  font-size: 20px;
+  display: flex;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  padding-right: 21px;
 }
 
 .fa-angle-left {
@@ -58,7 +76,7 @@
   width: 208px;
   height: 39px;
   font-weight: lighter;
-  background: url("../components/GroupImages/error.png") no-repeat;
+  background: url("../components/GroupImages/search.png") no-repeat;
   background-position: right;
   background-position-x: 175px;
   font-size: 18px;
@@ -108,7 +126,7 @@
   height: 42px;
   border: 2px solid white;
   border-radius: 20px;
-  font-weight: lighter;
+  font-weight: normal;
   background: white;
   font-size: 16px;
   color: black;
@@ -367,7 +385,7 @@
   height: 65px;
   color: #f3f4f9;
   border-left-style: none;
-  border-right: none
+  border-right: none;
 }
 
 .confrim-cancel {
@@ -379,7 +397,10 @@
   position: fixed;
 }
 .backImage {
-  padding-left: 20px;
+  padding-left: 30px;
+  margin-top: 11px;
+  height: 30px;
+
 }
 
 .checkbox-delete {
