@@ -86,7 +86,8 @@ class Documents extends Component {
                             </Collapse>                                
                         </div>
                             <div className="button-upload-document-2">
-                                <button className={this.state.value2=="Document"? "btn-active send-email btn-bottom-2":"btn-default send-email btn-bottom-2"} 
+                                <button className={this.state.value2=="Document"? "btn-active send-email btn-bottom-2":
+                                    "btn-default send-email btn-bottom-2"} 
                                     onClick={this.state.value2=="Document"? this.SendLOS: null}>
                                     Letter of Status {this.state.value2=="Document"? 
                                     <img className="document-image-icon" src={availableIcon}/>:
@@ -105,11 +106,12 @@ class Documents extends Component {
                             </div>
 
                             <div className="document-requirements3">
-                                {this.state.value !== "Document"? <div><b>Letter of Good Standing:</b> <p>requires 5 more shoots.</p></div>: null}
+                                {this.state.value !== "Document"? <div><b>Letter of Good Standing:</b> 
+                                <p>requires 5 more shoots.</p></div>: null}
                             </div>
-
                             <div className="document-requirements3"> 
-                                {this.state.value2 !== "Document"? <div><b>Letter of Status:</b> <p>requires further shooting documentation.</p></div>: null}
+                                {this.state.value2 !== "Document"? <div><b>Letter of Status:</b> 
+                                <p>requires further shooting documentation.</p></div>: null}
                             </div>  
                         </div>                  
                 </div>
