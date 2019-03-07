@@ -1,4 +1,5 @@
-import { NEW_COMP,
+import { 
+		NEW_COMP,
 	 	FETCH_COMP,
 	  	UPDATE_COMP_STATUS,
 		URL
@@ -37,7 +38,7 @@ export const createcomp = (compData) => (dispatch) => {
 	window.location = '/create';//remove this later
 };
 /** A method to update an existing competition and posts comps data to the designated url /api/competition/{Id}*/
-export const updateByIDcomp = (compData, Id) => (dispatch) => {
+export const updateByIdComp = (compData, Id) => (dispatch) => {
 	fetch(URL + '/api/Competition/' + Id, {
 		method: 'POST',
 		headers: {

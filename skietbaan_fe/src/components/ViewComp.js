@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { fetchcomp, 
-		 updateByIDcomp 
+		updateByIdComp
 } from '../actions/competition.action';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -34,8 +34,7 @@ class ViewComp extends Component {
 	changeStatus(status, i) {
 		const newCompOBJArr = [ ...this.props.compOBJ ]; //cloning an array of competition
 		newCompOBJArr[i].status = !status; //changing the status of a newly cloned array
-		console.log('data status', newCompOBJArr[i].status);
-		this.props.updateByIDcomp(newCompOBJArr[i], i + 1); //updating the competition status by ID in the back-end
+		this.props.updateByIdComp(newCompOBJArr[i], i + 1); //updating the competition status by ID in the back-end
 		this.setState({ compOBJ: newCompOBJArr });
 	}
 	render() {
@@ -93,11 +92,11 @@ ViewComp.propTypes = {
 	fetchcomp: PropTypes.func.isRequired,
 	compOBJ: PropTypes.array.isRequired,
 	postOBJ: PropTypes.array.isRequired,
-	updateByIDcomp: PropTypes.func.isRequired
+	updateByIdComp: PropTypes.func.isRequired
 };
 const mapStateToProps = (state) => ({
 	compOBJ: state.compOBJ.allComps,
 	newcompOBJ: state.compOBJ.selectedComp,
 	updatedComp: state.compOBJ.updatedComp
 });
-export default connect(mapStateToProps, { fetchcomp, updateByIDcomp })(ViewComp);
+export default connect(mapStateToProps, { fetchcomp, updateByIdComp })(ViewComp);
