@@ -80,7 +80,7 @@ class App extends Component {
 						<Switch>
 							<Route path="/home" component={LeaderboardPage} exact />
 							<Route path="/login" component={Login} exact />
-							<Route path="/register-page" component={Register} exact />
+							<Route path="/registerPage" component={Register} exact />
 							<Route path="/" component={Register} exact />
 							<Route path="/registerMember" component={RegisterMember} exact />
 							<Route path="/new-competition" component={CreateComp} exact />
