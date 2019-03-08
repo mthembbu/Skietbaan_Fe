@@ -16,7 +16,6 @@ class UserProfile extends Component {
         this.Logout = this.Logout.bind(this);
     }
 
-
     UNSAFE_componentWillMount(){
         var token = getCookie("token");
         if(token === undefined){
@@ -25,7 +24,6 @@ class UserProfile extends Component {
         }
         
         /*use the remote URL*/
-        console.log(BASE_URL + "/api/awards/" + token)
         fetch(BASE_URL + "/api/awards/" + token,{
             method : 'GET',
             headers: {
@@ -37,8 +35,9 @@ class UserProfile extends Component {
     }
 
     AnimateAccuracyCircle(counter, element, index){
-        
+        if(counter > element.accuracy) return;
         if(counter <= element.accuracy){
+            
             var degreees = (360 * counter) / 100;
             var activeBorder = $(`#${index}`);
             $(`#circle${index}`).html(Math.round(counter)+"%");
@@ -54,7 +53,7 @@ class UserProfile extends Component {
             counter++;
             setTimeout(() => {
                 this.AnimateAccuracyCircle(counter, element, index)
-            }, 80)
+            }, 0)
         }
     }
 
@@ -209,14 +208,13 @@ class UserProfile extends Component {
                             </Col>
                         </Row>
                     </Col>
-                    <div>{this.AnimateAccuracyCircle(1, element, index)}</div>
+                    <div>{this.AnimateAccuracyCircle(element.accuracy, element, index)}</div>
                 </Row>
             </div>
         )
     }
 
     RenderHoursIcons(){
-        console.log(this.state.awardCompetitions.hoursAward)
         return(
             <div className="lay-horizontal scale-img center-block-content">
                 <img src={this.state.awardCompetitions[0].hoursAward.gold ?
@@ -231,17 +229,18 @@ class UserProfile extends Component {
 
     RenderAllCompetitionsStats(){
         let renderArray = []
-        var i = 1
         this.state.awardCompetitions.forEach((element, index) => {
             renderArray.push(this.CompetitionsStat(element, index))
         })
+       /* for(var i = 0; i < 1; i++){
+            renderArray.push(this.CompetitionsStat(this.state.awardCompetitions[i], i))
+        }*/
         
         return renderArray;
     }
 
     Logout(){
         var res = document.cookie;
-        console.log(res);
         var multiple = res.split(";");
         for(var i = 0; i < multiple.length; i++) {
             var key = multiple[i].split("=");
@@ -288,7 +287,7 @@ class UserProfile extends Component {
                             
                                 <Row>
                                     <Col className="push-bottom-12px">
-                                        <div className="lay-horizontal center">
+                                        <div className="lay-horizontal justify-center">
                                             {/*make hours dynamic*/}
                                             {this.state.awardCompetitions.length > 0 ?
                                                 this.SetDigits("0000") : this.SetDigits(null)}

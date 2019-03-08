@@ -59,7 +59,7 @@
 .right{
     justify-content: flex-end;
 }
-.center{
+.justify-center{
     justify-content: center;
 }
 
@@ -118,6 +118,7 @@
     border-radius: 100%;
     font-size: 28px;
     font-weight: bold;
+    padding-top: 18px;
     padding-left: 5px;
     background-color: #F3F4F9;
     color: #EA241A;
