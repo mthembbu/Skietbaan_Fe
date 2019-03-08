@@ -170,7 +170,7 @@ class NavbarMenu extends Component {
 						</td>
 					</tr>
 					<tr className={this.state.expanded ? "second-row-navbar expand":"second-row-navbar"}>
-						<td className="columns">
+						<td className="columns" onClick={() => this.GoTo("/profile")}>
 							{this.isProfile()}
 						</td>
 						<td className="columns" onClick={() => this.GoTo("/documents")}>
