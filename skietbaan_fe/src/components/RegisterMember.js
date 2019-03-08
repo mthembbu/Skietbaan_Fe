@@ -116,7 +116,7 @@ class App extends Component {
       .then(function (data) { })
       .catch(function (data) { });
 
-      window.location = "/viewMembers";
+      setTimeout(function () { window.location = "/viewMembers"; }, 2000);
   }
 
   GetDate() {

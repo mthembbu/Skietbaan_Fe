@@ -48,7 +48,6 @@ class AddGroup extends Component {
         })
       );
   }
-
   render() {
     if(!getCookie("token")){
       window.location = "/registerPage";
@@ -57,7 +56,7 @@ class AddGroup extends Component {
       <div className="add-group-main">
         <div className="page">
           <div className="the-nav-bar">
-          <a href="" className="back-container">
+          <a href="/create" className="back-container">
             <img
               className="back-image"
               onClick={this.onBack}

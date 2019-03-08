@@ -35,7 +35,7 @@ export const createcomp = (compData) => (dispatch) => {
 					type: NEW_COMP,
 					payload: comp
 			}));
-	window.location = '/create';//remove this later
+	setTimeout(function () { window.location = "/view-comp"; }, 3000);
 };
 /** A method to update an existing competition and posts comps data to the designated url /api/competition/{Id}*/
 export const updateByIdComp = (compData, Id) => (dispatch) => {
