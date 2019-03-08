@@ -35,13 +35,13 @@ export const NEW_POST = 'NEW_POST';
 export const NEW_COMP = 'NEW_COMP';
 export const FETCH_COMP = 'FETCH_COMP';
 export const UPDATE_COMP_STATUS = 'UPDATE_COMP_STATUS';
-export const BASE_URL = "http://localhost:58488";
+export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
 //leaderboard types
 export const FETCH_LEADERBOARDFILTER_DATA = 'FETCH_LEADERBOARDFILTER_DATA';
 export const FETCH_LEADERBOARDTABLE_DATA = 'FETCH_LEADERBOARDTABLE_DATA';
 
 //groups types and constants
-export const URL = "http://localhost:58488"; 
+export const URL = "https://api.skietbaan.retrotest.co.za"; 
 export const URLADD = "https://api.skietbaan.retrotest.co.za/api/groups/add"; 
 export const URLUSER = "https://api.skietbaan.retrotest.co.za/api/user"; 
 export const URLGROUP = "https://api.skietbaan.retrotest.co.za/api/groups"; 
