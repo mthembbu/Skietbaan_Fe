@@ -265,10 +265,7 @@ export default class search extends Component {
 
   Flash() {
     this.ToggleIcon()
-    this.setState({
-      Flashon : !this.Flashon
-    })
-    
+    this.state.Flashon = !this.state.Flashon
     var IsFlashOn = this.state.Flashon;
     navigator.mediaDevices.getUserMedia({
       video: {
