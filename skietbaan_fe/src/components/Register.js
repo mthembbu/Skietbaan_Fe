@@ -70,7 +70,6 @@ class Register extends Component {
     this.setState({
       [target.name]: target.value,
     });
-    this.disableButton();
     let isValid = false;
     let stateUpdate = {
       invalidPassword: this.state.invalidPassword,
@@ -79,9 +78,13 @@ class Register extends Component {
       usernameTaken: false,
       emailTaken: false
     }
-    if (target.name === "passwordValue" && target.value.length > 0) {
-      stateUpdate.invalidPassword = false;
-    };
+    if (target.name === "passwordValue") {
+      if (target.value.length > 0)
+        stateUpdate.invalidPassword = false;
+        else {
+          stateUpdate.invalidPassword = true;
+        }
+    }
     if (target.name === "emailValue") {
       stateUpdate.invalidEmail = false;
       for (var i = 0; i < this.state.users.length; i++) {
@@ -93,7 +96,7 @@ class Register extends Component {
 
       };
     };
-    if (target.name === "usernameValue") {
+    if (target.name === "usernameValue" && target.value.length > 0) {
       stateUpdate.invalidUsername = false;
       for (var i = 0; i < this.state.users.length; i++) {
         if (this.state.users[i].username == target.value) {
@@ -104,17 +107,23 @@ class Register extends Component {
 
       };
     }
+    else if(target.name === "usernameValue"){
+      stateUpdate.invalidUsername = true;
+    }
     if (this.state.usernameValue
       && this.state.passwordValue
       && this.state.emailValue
       && validateEmail(this.state.emailValue)
       && !stateUpdate.invalidUsername
-      && !stateUpdate.invalidEmail) {
+      && !stateUpdate.invalidEmail
+      && !stateUpdate.invalidPassword) {
       isValid = true;
     }
     this.setState({
       ...stateUpdate,
       validForm: isValid
+    }, () => {
+      this.disableButton();
     });
   };
 
