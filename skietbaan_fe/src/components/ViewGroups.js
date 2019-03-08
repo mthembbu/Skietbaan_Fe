@@ -28,11 +28,7 @@ class ViewGroups extends Component {
   }
 
   UNSAFE_componentWillMount() {
-    if(!getCookie("token")){
-      window.location = "/registerPage";
-  }
     fetch(BASE_URL + "/api/Groups")
-
       .then(res => res.json())
       .then(data =>
         this.setState({
@@ -45,7 +41,6 @@ class ViewGroups extends Component {
           })
         })
       )
-      .catch(console.log("there is an error when fetching"));
   }
 
   onChange(event) {
