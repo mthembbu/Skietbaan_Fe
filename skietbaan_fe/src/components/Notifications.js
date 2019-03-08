@@ -89,6 +89,9 @@ class notification extends Component {
   }
 
   render() {
+    if(!getCookie("token")){
+      window.location = "/registerPage";
+  }
     const headingItems = (
       <div>
         <div className="page-heading">

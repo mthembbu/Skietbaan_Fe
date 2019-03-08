@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../scss/createcomp.css';
 import { createcomp } from '../actions/competition.action';
+import { getCookie } from '../components/cookie.js';
 class CreateComp extends Component {
 	constructor(props) {
 		super(props);
@@ -52,6 +53,9 @@ class CreateComp extends Component {
 		this.props.createcomp(compData);
 	}
 	render() {
+		if(!getCookie("token")){
+            window.location = "/registerPage";
+        }
 		return (
 			<div>
 				<div className="view-page">

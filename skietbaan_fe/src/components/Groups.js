@@ -8,6 +8,7 @@ import back from "./GroupImages/back.png";
 import unmarked from "./GroupImages/unmarked.png";
 import marked from "./GroupImages/marked.png";
 
+import { getCookie } from '../components/cookie.js';
 
 class Groups extends Component {
   constructor(props) {
@@ -27,6 +28,9 @@ class Groups extends Component {
     this.selectall = this.selectall.bind(this);
   }
   UNSAFE_componentWillMount() {
+    if(!getCookie("token")){
+      window.location = "/registerPage";
+  }
     if (this.props.name.length != 0) {
       fetch(BASE_URL + "/api/user")
         .then(res => res.json())
