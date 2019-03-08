@@ -28,7 +28,7 @@ class ViewGroups extends Component {
   }
 
   UNSAFE_componentWillMount() {
-    fetch(BASE_URL+"/api/groups")
+    fetch(BASE_URL + "/api/groups")
       .then(res => res.json())
       .then(data =>
         this.setState({
@@ -40,9 +40,8 @@ class ViewGroups extends Component {
             };
           })
         })
-      ).catch(
-        console.log("there is an error when fetching")
-      ) 
+      )
+      .catch(console.log("there is an error when fetching"));
   }
 
   onChange(event) {
@@ -50,7 +49,7 @@ class ViewGroups extends Component {
   }
 
   onBack() {
-    this.props.history.push("/ViewGroups");
+    this.props.history.push("/create");
   }
   editGroup(event, name) {
     this.props.getName(name);
@@ -79,8 +78,8 @@ class ViewGroups extends Component {
     newarry.splice(this.state.index, 1);
     this.setState({ posts: newarry });
 
-    fetch(BASE_URL + "/api/Groups/"+this.state.ids, {
-      method:"POST",
+    fetch(BASE_URL + "/api/Groups/" + this.state.ids, {
+      method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
@@ -108,7 +107,7 @@ class ViewGroups extends Component {
     newarry[this.state.index].image = normalstate;
     this.setState({ selected: "", posts: newarry });
   };
-  
+
   render() {
     const postitems = (
       <div className="the-main">
@@ -164,7 +163,7 @@ class ViewGroups extends Component {
         >
           {postitems}
         </div>
-        {this.state.ShowMe  ? null : (
+        {this.state.ShowMe ? null : (
           <div className="bpanel">
             <table className="group-delete-table">
               <tbody>
