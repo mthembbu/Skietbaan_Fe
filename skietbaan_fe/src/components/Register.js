@@ -27,9 +27,20 @@ class Register extends Component {
     this.togglePassword = this.togglePassword.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.goToLogin = this.goToLogin.bind(this);
+    this.disableButton = this.disableButton.bind(this);
+  }
+
+  disableButton() {
+    if (this.state.validForm === true) {
+      document.getElementById("roundButton").disabled = false;
+    }
+    else
+      document.getElementById("roundButton").disabled = true;
+
   }
 
   componentDidMount() {
+    this.disableButton();
     fetch(URL + "/api/User", {
       method: 'GET',
       headers: {
@@ -61,10 +72,11 @@ class Register extends Component {
     });
     let isValid = false;
     let stateUpdate = {
-      invalidPassword: this.state.invalidPassword ,
-      invalidEmail: this.state.invalidEmail ,
+      invalidPassword: this.state.invalidPassword,
+      invalidEmail: this.state.invalidEmail,
       invalidUsername: this.state.invalidUsername,
-      usernameTaken: false
+      usernameTaken: false,
+      emailTaken: false
     }
     if (target.name === "passwordValue") {
       if (target.value.length > 0)
@@ -92,6 +104,7 @@ class Register extends Component {
           stateUpdate.invalidUsername = true;
           break;
         }
+
       };
     }
     else if(target.name === "usernameValue"){
@@ -130,10 +143,6 @@ class Register extends Component {
       isValid = false;
     };
     if (validateUsername(this.state.usernameValue)) {
-      stateUpdate.invalidUsername = true;
-      isValid = false;
-    };
-    if (this.state.usernameValue) {
       stateUpdate.invalidUsername = true;
       isValid = false;
     };
@@ -197,7 +206,9 @@ class Register extends Component {
       <div className="page-content-login">
         <div className="red-background">
           <div className="welcome-header">
-            <img src={require('../components/assets/header.png')} className="header-image"></img>
+            <label className="welcome-label">Welcome to
+          <label className="skietbaan-label">Skietbaan</label>
+            </label>
           </div>
 
           <div className="header-container">
@@ -223,7 +234,7 @@ class Register extends Component {
                     className="input-user"
                   />
                 </div>
-                <div className={this.state.usernameTaken ? "" : "hidden"} > Username Taken my dude</div>
+                <div className={this.state.usernameTaken ? "error-message" : "hidden"} > Username Taken</div>
               </FormGroup>
             </div>
             <div className="spacing-login">
@@ -255,7 +266,7 @@ class Register extends Component {
                       id="passwordValue"
                       value={this.state.passwordValue}
                       onChange={this.handleChange}
-                      className="input-Password"
+                      className="input-password"
                     />
                     <div className={this.state.passwordValue !== "" ? "password-view-icon" : "hidden"}
                       onClick={this.togglePassword}>
@@ -266,7 +277,7 @@ class Register extends Component {
               </FormGroup>
             </div>
             <div className="button-container">
-              <Button onClick={this.register} className={this.state.validForm ? "round-button" :
+              <Button onClick={this.register} id="roundButton" className={this.state.validForm ? "round-button" :
                 "buttons-invalid round-button"} >Join</Button>
             </div>
           </Form>
