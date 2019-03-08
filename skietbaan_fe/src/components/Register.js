@@ -27,26 +27,9 @@ class Register extends Component {
     this.togglePassword = this.togglePassword.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.goToLogin = this.goToLogin.bind(this);
-<<<<<<< HEAD
-    this.disableButton = this.disableButton.bind(this);
-  }
-
-  disableButton() {
-    if (this.state.validForm === true) {
-      document.getElementById("roundButton").disabled = false;
-    }
-    else
-      document.getElementById("roundButton").disabled = true;
-
   }
 
   componentDidMount() {
-    this.disableButton();
-=======
-  }
-
-  componentDidMount() {
->>>>>>> 9de315a7d4f3607a8167ec0fdc072054b40adbb7
     fetch(URL + "/api/User", {
       method: 'GET',
       headers: {
@@ -59,10 +42,6 @@ class Register extends Component {
         users: data,
       }))
       .catch(function (data) {
-<<<<<<< HEAD
-=======
-        console.log("error")
->>>>>>> 9de315a7d4f3607a8167ec0fdc072054b40adbb7
       });
   }
 
@@ -80,23 +59,12 @@ class Register extends Component {
     this.setState({
       [target.name]: target.value,
     });
-<<<<<<< HEAD
-    this.disableButton();
-    let isValid = false;
-    let stateUpdate = {
-      invalidPassword: this.state.invalidPassword,
-      invalidEmail: this.state.invalidEmail,
-      invalidUsername: this.state.invalidUsername,
-      usernameTaken: false,
-      emailTaken: false
-=======
     let isValid = false;
     let stateUpdate = {
       invalidPassword: this.state.invalidPassword ,
       invalidEmail: this.state.invalidEmail ,
       invalidUsername: this.state.invalidUsername,
       usernameTaken: false
->>>>>>> 9de315a7d4f3607a8167ec0fdc072054b40adbb7
     }
     if (target.name === "passwordValue" && target.value.length > 0) {
       stateUpdate.invalidPassword = false;
@@ -120,18 +88,6 @@ class Register extends Component {
           stateUpdate.invalidUsername = true;
           break;
         }
-<<<<<<< HEAD
-
-      };
-    }
-    if (this.state.usernameValue
-      && this.state.passwordValue
-      && this.state.emailValue
-      && validateEmail(this.state.emailValue)
-      && !stateUpdate.invalidUsername
-      && !stateUpdate.invalidEmail) {
-      isValid = true;
-=======
       };
       }
       if(this.state.usernameValue 
@@ -140,7 +96,6 @@ class Register extends Component {
         && validateEmail(this.state.emailValue) 
         && !stateUpdate.invalidUsername){
         isValid = true;
->>>>>>> 9de315a7d4f3607a8167ec0fdc072054b40adbb7
     }
     this.setState({
       ...stateUpdate,
@@ -231,13 +186,7 @@ class Register extends Component {
       <div className="page-content-login">
         <div className="red-background">
           <div className="welcome-header">
-<<<<<<< HEAD
-            <label className="welcome-label">Welcome to
-          <label className="skietbaan-label">Skietbaan</label>
-            </label>
-=======
             <img src={require('../components/assets/header.png')} className="header-image"></img>
->>>>>>> 9de315a7d4f3607a8167ec0fdc072054b40adbb7
           </div>
 
           <div className="header-container">
@@ -263,11 +212,7 @@ class Register extends Component {
                     className="input-user"
                   />
                 </div>
-<<<<<<< HEAD
-                <div className={this.state.usernameTaken ? "error-message" : "hidden"} > Username Taken</div>
-=======
                 <div className={this.state.usernameTaken ? "" : "hidden"} > Username Taken my dude</div>
->>>>>>> 9de315a7d4f3607a8167ec0fdc072054b40adbb7
               </FormGroup>
             </div>
             <div className="spacing-login">
@@ -299,11 +244,7 @@ class Register extends Component {
                       id="passwordValue"
                       value={this.state.passwordValue}
                       onChange={this.handleChange}
-<<<<<<< HEAD
-                      className="input-password"
-=======
                       className="input-Password"
->>>>>>> 9de315a7d4f3607a8167ec0fdc072054b40adbb7
                     />
                     <div className={this.state.passwordValue !== "" ? "password-view-icon" : "hidden"}
                       onClick={this.togglePassword}>
@@ -314,11 +255,7 @@ class Register extends Component {
               </FormGroup>
             </div>
             <div className="button-container">
-<<<<<<< HEAD
-              <Button onClick={this.register} id="roundButton" className={this.state.validForm ? "round-button" :
-=======
               <Button onClick={this.register} className={this.state.validForm ? "round-button" :
->>>>>>> 9de315a7d4f3607a8167ec0fdc072054b40adbb7
                 "buttons-invalid round-button"} >Join</Button>
             </div>
           </Form>
