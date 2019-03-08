@@ -48,7 +48,6 @@ class AddGroup extends Component {
         })
       );
   }
-
   render() {
     if(!getCookie("token")){
       window.location = "/registerPage";
