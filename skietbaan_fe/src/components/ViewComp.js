@@ -80,7 +80,7 @@ class ViewComp extends Component {
 						/>
 					</div>
 					<div>
-						<label className="label-create-competitions">Create Competition</label>
+						<label className="label-create-competitions">View Competitions</label>
 					</div>
 				</div>
 				<div className="table-competition-container">
