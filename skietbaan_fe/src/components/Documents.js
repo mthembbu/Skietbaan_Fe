@@ -74,7 +74,7 @@ class Documents extends Component {
                     <div className="docuements-heading">
                         <div className="documents-text">Documents</div>
                     </div>
-                <div className="center" >
+                <div className="documents-center" >
                         <div className="label-select-document">                        
                                 Documents have requirements                            
                         </div>
