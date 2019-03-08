@@ -217,17 +217,9 @@
 }
 
 .video-container{
-    width:360px;
-    height:360px;
+    width:310px;
+    height:310px;
     margin:0 auto;
-}
-
-@media screen and (max-width:510px)  {
-    .video-container{
-        height: 310px;
-        width: 310px;
-        border-radius:25%;
-    }
 }
 
 .image-view{
@@ -243,14 +235,7 @@
 
 .image-view.background{
     width: 310px;
-    height: 320px;
-}
-
-@media screen and (min-width:510px)  {
-    .image-view.background{
-        width: 320px;
-        height: 320px;
-    }
+    height: 310px;
 }
 
 .image-container{
@@ -275,7 +260,6 @@ hr{
 
 .position-relative{
     position: relative;
-    background-color: #fdfdfd;
 }
 
 .labelIcon{
