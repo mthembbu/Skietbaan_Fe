@@ -23,7 +23,12 @@ class notification extends Component {
     const deleteNotification = async id => {
       try {
         await fetch(BASE_URL + `/api/Notification/${id}`, {
-          method: "Delete"
+          method: 'post',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(id)
         });
       } catch (err) {
       }
