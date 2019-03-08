@@ -7,7 +7,7 @@ import { BASE_URL } from "../actions/types";
 import deleteState from "./GroupImages/deleteState.png";
 import normalstate from "./GroupImages/submit-plus.png";
 import back from "./GroupImages/back.png";
-
+import { getCookie } from '../components/cookie.js';
 class ViewGroups extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +28,11 @@ class ViewGroups extends Component {
   }
 
   UNSAFE_componentWillMount() {
+    if(!getCookie("token")){
+      window.location = "/registerPage";
+  }
     fetch(BASE_URL + "/api/Groups")
+
       .then(res => res.json())
       .then(data =>
         this.setState({
@@ -40,14 +44,16 @@ class ViewGroups extends Component {
             };
           })
         })
-      );
+      )
+      .catch(console.log("there is an error when fetching"));
   }
+
   onChange(event) {
     this.setState({ filterText: event.target.value });
   }
 
   onBack() {
-    this.props.history.push("/ViewGroups");
+    this.props.history.push("/create");
   }
   editGroup(event, name) {
     this.props.getName(name);
@@ -76,8 +82,8 @@ class ViewGroups extends Component {
     newarry.splice(this.state.index, 1);
     this.setState({ posts: newarry });
 
-    fetch((BASE_URL + "/api/Groups/"+this.state.ids), {
-      method:"POST",
+    fetch(BASE_URL + "/api/Groups/" + this.state.ids, {
+      method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
@@ -94,9 +100,6 @@ class ViewGroups extends Component {
   };
 
   do = () => {
-    const newarry = [...this.state.posts];
-    newarry[this.state.index].colors = "black";
-    newarry[this.state.index].image = normalstate;
     if (this.state.ShowMe == false) {
       this.setState({ ShowMe: true });
     }
@@ -108,9 +111,7 @@ class ViewGroups extends Component {
     newarry[this.state.index].image = normalstate;
     this.setState({ selected: "", posts: newarry });
   };
-  S;
 
-  handleOnClick = () => {};
   render() {
     const postitems = (
       <div className="the-main">
@@ -154,10 +155,10 @@ class ViewGroups extends Component {
     );
 
     return (
-      <main className="TheMain" onClick={() => this.do()}>
-        <div className="TheNavBar">
-          <img className="backImage" onClick={this.onBack} src={back} alt="" />
-          <label className="center_label">View Groups</label>
+      <main className="The-Main" onClick={() => this.do()}>
+        <div className="the-nav-bar">
+          <img className="back-image" onClick={this.onBack} src={back} alt="" />
+          <label className="center-label">View Groups</label>
         </div>
         <div
           className="scrollbar"
@@ -166,13 +167,13 @@ class ViewGroups extends Component {
         >
           {postitems}
         </div>
-        {this.state.ShowMe  ? null : (
+        {this.state.ShowMe ? null : (
           <div className="bpanel">
             <table className="group-delete-table">
               <tbody>
                 <tr>
                   <td>
-                    <div className="thetextname">Delete</div>
+                    <div className="the-textname">Delete</div>
                   </td>
                   <td>
                     <span className="name-of-group">

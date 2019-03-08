@@ -6,6 +6,7 @@ import { BASE_URL } from "../actions/types";
 import marked from "./GroupImages/marked.png";
 import redbox from "./GroupImages/Rectangle.png";
 import back from "./GroupImages/back.png";
+import { getCookie } from '../components/cookie.js';
 class EditGroup extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +22,9 @@ class EditGroup extends Component {
     this.onChange = this.onChange.bind(this);
   }
   UNSAFE_componentWillMount() {
+    if(!getCookie("token")){
+      window.location = "/registerPage";
+  }
     if (this.props.id != 0) {
       fetch(BASE_URL + "/api/Groups/edit?id=" + this.props.id)
         .then(res => res.json())
@@ -30,7 +34,7 @@ class EditGroup extends Component {
               return {
                 ...users,
                 highlighted: true,
-                backgrnd: "#F3F4F9",
+                background: "#F3F4F9",
                 image: marked
               };
             })
@@ -46,24 +50,24 @@ class EditGroup extends Component {
 
   delete = () => {
     this.setState({ count: 0 });
-    console.log(this.state.newArray);
     const { newArray } = this.state;
-    const newarry = [...this.state.posts];
+    const updateArray = [...this.state.posts];
 
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === false) {
         let indexofs=newArray.indexOf(this.state.posts[i])
         newArray.push(this.state.posts[i]);
-        newarry.splice(indexofs, 1);
+        updateArray.splice(indexofs, 1);
         delete this.state.posts[i].colors;
-        delete this.state.posts[i].backgrnd;
+        delete this.state.posts[i].background;
         delete this.state.posts[i].image;
         delete this.state.posts[i].highlighted;
         delete this.state.posts[i].id;
+       
       }
+      this.setState({ posts: updateArray });
     }
-    this.setState({ posts: newarry });
-
+     
     let request = {
       GroupIds: this.props.id,
       users: this.state.newArray
@@ -84,13 +88,13 @@ class EditGroup extends Component {
     if (this.state.posts[event].highlighted === true) {
       this.state.posts[event].highlighted = false;
       this.state.posts[event].image = redbox;
-      this.state.posts[event].backgrnd = "white";
+      this.state.posts[event].background = "white";
 
       this.setState({ count: this.state.count - 1 });
     } else {
       this.state.posts[event].highlighted = true;
       this.state.posts[event].image = marked;
-      this.state.posts[event].backgrnd = "#F3F4F9";
+      this.state.posts[event].background = "#F3F4F9";
       this.setState({ count: this.state.count + 1 });
     }
   };
@@ -123,7 +127,7 @@ class EditGroup extends Component {
                 class="list-group-item list-group-item-light"
                 key={post.id}
                 style={{
-                  background: post.backgrnd
+                  background: post.background
                 }}
               >
                 <img
@@ -132,10 +136,8 @@ class EditGroup extends Component {
                   src={post.image}
                   alt=""
                 />
-
                 <label className="blabe">
                   <div className="userName" className={post.image==marked?"userName":"userName-active"}>
-                    {" "}
                     {post.username}
                   </div>
                   <div className="emails" className={post.image==marked?"emails":"emails-active"}>
@@ -148,14 +150,14 @@ class EditGroup extends Component {
       </div>
     );
     return (
-      <main className="TheMain">
-        <div className="TheNavBar">
-          <img className="backImage" onClick={this.onBack} src={back} alt="" />
-          <label className="center_labels">{this.props.name}</label>
+      <main className="The-Main">
+        <div className="the-nav-bar">
+          <img className="back-image" onClick={this.onBack} src={back} alt="" />
+          <label className="center-labels">{this.props.name}</label>
         </div>
         <div className="BNavBar">
           <input
-            className="theText"
+            className="the-Text"
             id="username"
             type="text"
             onChange={this.onChange}
@@ -180,7 +182,7 @@ class EditGroup extends Component {
               <tbody>
                 <tr>
                   <td>
-                    <div className="thetextname">Delete</div>
+                    <div className="the-textname">Delete</div>
                   </td>
                   <td>
                     <span className="name-of-group">

@@ -6,6 +6,7 @@ import {
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../scss/view-comp.css';
+import { getCookie } from '../components/cookie.js';
 class ViewComp extends Component {
 	constructor(props) {
 		super(props);
@@ -79,7 +80,7 @@ class ViewComp extends Component {
 						/>
 					</div>
 					<div>
-						<label className="label-create-competitions">Create Competition</label>
+						<label className="label-create-competitions">View Competitions</label>
 					</div>
 				</div>
 				<div className="table-competition-container">
