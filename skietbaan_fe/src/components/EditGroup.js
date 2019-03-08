@@ -30,7 +30,7 @@ class EditGroup extends Component {
               return {
                 ...users,
                 highlighted: true,
-                backgrnd: "#F3F4F9",
+                background: "#F3F4F9",
                 image: marked
               };
             })
@@ -55,7 +55,7 @@ class EditGroup extends Component {
         newArray.push(this.state.posts[i]);
         updateArray.splice(indexofs, 1);
         delete this.state.posts[i].colors;
-        delete this.state.posts[i].backgrnd;
+        delete this.state.posts[i].background;
         delete this.state.posts[i].image;
         delete this.state.posts[i].highlighted;
         delete this.state.posts[i].id;
@@ -84,13 +84,13 @@ class EditGroup extends Component {
     if (this.state.posts[event].highlighted === true) {
       this.state.posts[event].highlighted = false;
       this.state.posts[event].image = redbox;
-      this.state.posts[event].backgrnd = "white";
+      this.state.posts[event].background = "white";
 
       this.setState({ count: this.state.count - 1 });
     } else {
       this.state.posts[event].highlighted = true;
       this.state.posts[event].image = marked;
-      this.state.posts[event].backgrnd = "#F3F4F9";
+      this.state.posts[event].background = "#F3F4F9";
       this.setState({ count: this.state.count + 1 });
     }
   };
@@ -123,7 +123,7 @@ class EditGroup extends Component {
                 class="list-group-item list-group-item-light"
                 key={post.id}
                 style={{
-                  background: post.backgrnd
+                  background: post.background
                 }}
               >
                 <img
@@ -132,10 +132,8 @@ class EditGroup extends Component {
                   src={post.image}
                   alt=""
                 />
-
                 <label className="blabe">
                   <div className="userName" className={post.image==marked?"userName":"userName-active"}>
-                    {" "}
                     {post.username}
                   </div>
                   <div className="emails" className={post.image==marked?"emails":"emails-active"}>

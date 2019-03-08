@@ -4,9 +4,11 @@ import "./groups.css";
 import { withRouter } from "react-router-dom";
 import { createGroups } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
-import back from "./GroupImages/back.png"
+import back from "./GroupImages/back.png";
 import unmarked from "./GroupImages/unmarked.png";
 import marked from "./GroupImages/marked.png";
+
+
 class Groups extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +18,7 @@ class Groups extends Component {
       groups: [],
       count: 0,
       filterText: "",
-      check: "Select all"
+      check: "Select all",
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -31,12 +33,12 @@ class Groups extends Component {
         .then(data => {
           this.setState({
             posts: data.map(users => {
-              users.highlighted=false;
+              users.highlighted = false;
               return {
                 ...users,
                 highlighted: false,
-                backgrnd:"white",
-                image:unmarked
+                background: "white",
+                image: unmarked
               };
             })
           });
@@ -44,7 +46,7 @@ class Groups extends Component {
     } else {
       this.props.history.push("/AddGroup");
     }
-    fetch(BASE_URL +"/api/Groups")
+    fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
       .then(data => this.setState({ groups: data.name }));
   }
@@ -76,21 +78,28 @@ class Groups extends Component {
     })
       .then(function(response) {})
       .catch(function(data) {});
+      this.props.history.push("/ViewGroups");
+
   }
 
   selectall() {
+
     const newarry = [...this.state.posts];
     if (this.state.check == "Select all") {
+      this.setState({count:newarry.length})
       for (var i = 0; i < this.state.posts.length; i++) {
         newarry[i].highlighted = true;
-        this.state.posts[i].backgrnd = "#F3F4F9";
+        this.state.posts[i].image = marked;
+        this.state.posts[i].background = "#F3F4F9";
       }
       this.setState({ check: "Unselect all" });
       this.setState({ posts: newarry });
     } else {
+      this.setState({count:0})
       for (var i = 0; i < this.state.posts.length; i++) {
         newarry[i].highlighted = false;
-        this.state.posts[i].backgrnd = "white";
+        this.state.posts[i].image = unmarked;
+        this.state.posts[i].background = "white";
       }
       this.setState({ check: "Select all" });
       this.setState({ posts: newarry });
@@ -101,12 +110,12 @@ class Groups extends Component {
     if (this.state.posts[event].highlighted == true) {
       this.state.posts[event].highlighted = false;
       this.state.posts[event].image = unmarked;
-      this.state.posts[event].backgrnd = "white";
-      
+      this.state.posts[event].background = "white";
+
       this.setState({ count: this.state.count + 1 });
     } else {
       this.state.posts[event].highlighted = true;
-      this.state.posts[event].backgrnd = "#F3F4F9";
+      this.state.posts[event].background = "#F3F4F9";
       this.state.posts[event].image = marked;
       this.setState({ count: this.state.count - 1 });
     }
@@ -135,11 +144,10 @@ class Groups extends Component {
                 class="list-group-item list-group-item-light"
                 key={post.id}
                 style={{
-
-                  background:post.backgrnd
+                  background: post.background
                 }}
               >
-               <img
+                <img
                   className="checkbox-delete"
                   onClick={() => this.toggleHighlight(index)}
                   src={post.image}
@@ -147,7 +155,6 @@ class Groups extends Component {
                 />
                 <label className="blabe">
                   <div className="userName" style={{ color: post.colors }}>
-                    {" "}
                     {post.username}
                   </div>
                   <div className="emails" style={{ color: post.colors }}>
@@ -161,7 +168,7 @@ class Groups extends Component {
     );
     return (
       <main className="The-Main">
-       <div className="the-nav-bar">
+        <div className="the-nav-bar">
           <img className="back-image" onClick={this.onBack} src={back} alt="" />
           <label className="center-label">{this.props.name}</label>
         </div>
@@ -190,12 +197,13 @@ class Groups extends Component {
         >
           {postitems}
         </div>
-      {this.state.count==0?null:
-        <label className="bottom-label">
-          <button className="delete-User" onClick={this.handleOnClick}>
-            Create Group
-          </button>
-        </label>}
+        {this.state.count == 0 ? null : (
+          <label className="bottom-label">
+            <button className="delete-User" onClick={this.handleOnClick}>
+              Create Group
+            </button>
+          </label>
+        )}
       </main>
     );
   }

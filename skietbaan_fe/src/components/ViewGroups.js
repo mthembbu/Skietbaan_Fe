@@ -28,7 +28,7 @@ class ViewGroups extends Component {
   }
 
   UNSAFE_componentWillMount() {
-    fetch(BASE_URL + "/api/Groups")
+    fetch(BASE_URL + "/api/groups")
       .then(res => res.json())
       .then(data =>
         this.setState({
@@ -40,7 +40,10 @@ class ViewGroups extends Component {
             };
           })
         })
-      );
+      ).catch(
+        console.log("there is an error when fetching")
+      )
+      
   }
   onChange(event) {
     this.setState({ filterText: event.target.value });
@@ -94,9 +97,6 @@ class ViewGroups extends Component {
   };
 
   do = () => {
-    const newarry = [...this.state.posts];
-    newarry[this.state.index].colors = "black";
-    newarry[this.state.index].image = normalstate;
     if (this.state.ShowMe == false) {
       this.setState({ ShowMe: true });
     }
@@ -108,9 +108,7 @@ class ViewGroups extends Component {
     newarry[this.state.index].image = normalstate;
     this.setState({ selected: "", posts: newarry });
   };
-  S;
-
-  handleOnClick = () => {};
+  
   render() {
     const postitems = (
       <div className="the-main">
@@ -155,7 +153,7 @@ class ViewGroups extends Component {
 
     return (
       <main className="The-Main" onClick={() => this.do()}>
-        <div className="The-nav-bar">
+        <div className="the-nav-bar">
           <img className="back-image" onClick={this.onBack} src={back} alt="" />
           <label className="center-label">View Groups</label>
         </div>
