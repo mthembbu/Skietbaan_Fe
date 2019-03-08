@@ -62,6 +62,10 @@ class Documents extends Component {
     }
    
     render() {
+
+        if(!getCookie("token")){
+            window.location = "/registerPage";
+        }
         return (
             <div className="documents_background ">
                     <div className="docuements-heading">
