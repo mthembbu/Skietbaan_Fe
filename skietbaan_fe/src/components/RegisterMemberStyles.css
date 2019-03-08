@@ -162,6 +162,7 @@
   .register-member-user-column{
     border: none;
     border-radius: 10px;
+    text-align: left;
   }
   
   .register-member-user-column{
