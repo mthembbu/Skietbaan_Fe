@@ -7,7 +7,7 @@ import { BASE_URL } from "../actions/types";
 import deleteState from "./GroupImages/deleteState.png";
 import normalstate from "./GroupImages/submit-plus.png";
 import back from "./GroupImages/back.png";
-
+import { getCookie } from '../components/cookie.js';
 class ViewGroups extends Component {
   constructor(props) {
     super(props);
@@ -28,6 +28,9 @@ class ViewGroups extends Component {
   }
 
   UNSAFE_componentWillMount() {
+    if(!getCookie("token")){
+      window.location = "/registerPage";
+  }
     fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
       .then(data =>
