@@ -1,14 +1,16 @@
 .comp-input {
 	width: 218px;
-	height: 39px;
-	border-radius: 10px;
-	border: 1px solid #6f839e;
-	padding: 20px;
-	text-decoration-color: black;
-	background-color: #f3f4f9;
-	font-family: helvetica;
-	font-weight: lighter;
-	text-align: center;
+    height: 39px;
+    border-radius: 10px;
+    border: 1px solid #6f839e;
+    padding: 20px;
+    -webkit-text-decoration-color: black;
+    text-decoration-color: #6B6B6C;
+    background-color: #f3f4f9;
+    font-weight: normal;
+    text-align: center;
+    font-size: 18px;
+    color: #6B6B6C;
 }
 
 .comp-submit-btn {

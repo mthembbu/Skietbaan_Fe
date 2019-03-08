@@ -23,7 +23,7 @@ class CreatePage extends Component {
 	}
 
 	GoGroups() {
-		window.location = "#";
+		window.location = "/AddGroup";
 	}
 
 	ViewComps() {
@@ -35,7 +35,7 @@ class CreatePage extends Component {
 	}
 
 	ViewGroups() {
-		window.location = "#";
+		window.location = "/EditGroup";
 	}
 
 	render() {
