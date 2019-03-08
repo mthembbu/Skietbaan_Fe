@@ -41,7 +41,7 @@ class EditGroup extends Component {
           });
         });
     } else {
-      this.props.history.push("/ViewGroups");
+      // this.props.history.push("/ViewGroups");
     }
   }
   onChange(event) {
