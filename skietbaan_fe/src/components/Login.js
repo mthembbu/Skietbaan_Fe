@@ -8,8 +8,8 @@ import {
 import '../components/RegisterStyles.css';
 import { validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
-import {URL} from '../actions/types.js';
-import header from'../components/assets/header.png';
+import { URL } from '../actions/types.js';
+import header from '../components/assets/header.png';
 import back from '../components/assets/back.png';
 
 class Login extends Component {
@@ -28,7 +28,7 @@ class Login extends Component {
     this.validate = this.validate.bind(this);
     this.togglePassword = this.togglePassword.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.goToRegister = this.goToRegister.bind(this);    
+    this.goToRegister = this.goToRegister.bind(this);
     this.disableButton = this.disableButton.bind(this);
   }
 
@@ -67,19 +67,21 @@ class Login extends Component {
       usernameFound: true,
       passwordFound: true
     }
-    if (target.name === "passwordValue" && target.value.length > 0) {
-      stateUpdate.invalidPassword = false;
+    if (target.name === "passwordValue") {
+      if (target.value.length > 0)
+        stateUpdate.invalidPassword = false;
+        else {
+          stateUpdate.invalidPassword = true;
+        }
     }
-    else if(target.name === "passwordValue"){
-      stateUpdate.invalidPassword = true;
+    if (target.name === "usernameValue") {
+      if (target.value.length > 0)
+        stateUpdate.invalidUsername = false;
+        else {
+          stateUpdate.invalidUsername = true;
+        }
     }
-    if (target.name === "usernameValue" && target.value.length > 0) {
-      stateUpdate.invalidUsername = false;
-    }
-    else if(target.name === "usernameValue")
-    {
-      stateUpdate.invalidUsername = true;
-    }
+    
     if (this.state.usernameValue
       && this.state.passwordValue
       && !stateUpdate.invalidUsername
@@ -135,13 +137,13 @@ class Login extends Component {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
           window.location = "/home";
         }
-        else if (typeof data === "string" 
-        && data.indexOf("Invalid Password") > -1 
-        || data.indexOf("not found")) {
+        else if (typeof data === "string"
+          && data.indexOf("Invalid Password") > -1
+          || data.indexOf("not found")) {
           this.setState({
             invalidPassword: true,
-            passwordFound:false,
-            invalidUsername:true
+            passwordFound: false,
+            invalidUsername: true
           });
         }
 
@@ -175,7 +177,7 @@ class Login extends Component {
       <div className="page-content-login">
         <div className="red-background">
           <div className="welcome-header">
-          <label className="welcome-label">Welcome to
+            <label className="welcome-label">Welcome to
           <label className="skietbaan-label">Skietbaan</label>
             </label>
           </div>
@@ -227,8 +229,8 @@ class Login extends Component {
                     </div>
                   </div>
                 </div>
-                <div className={this.state.passwordFound 
-                  && this.passwordValue !=="" ? "hidden":"error-message"}>Invalid credentials</div>
+                <div className={this.state.passwordFound
+                  && this.passwordValue !== "" ? "hidden" : "error-message"}>Invalid credentials</div>
               </FormGroup>
             </div>
             <div className="button-container">
