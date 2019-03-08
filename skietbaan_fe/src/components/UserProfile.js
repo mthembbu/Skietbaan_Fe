@@ -3,29 +3,37 @@ import { Container, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
 import '../bootstrap/UserProfile.css';
 import $ from "jquery";
 import { getCookie } from './cookie.js';
+import {BASE_URL} from '../actions/types.js'
 
 class UserProfile extends Component {
     constructor(props){
         super(props);
         this.state = {
             awardCompetitions : [],
+            userToken: ""
         }
+
+        this.Logout = this.Logout.bind(this);
     }
 
+
     UNSAFE_componentWillMount(){
-        //token = getToke();
-        //TODO: if the token doesnt exist redirect to the register page!!!!
-
+        var token = getCookie("token");
+        if(token === undefined){
+            this.props.history.push('/register-page');
+            return;
+        }
+        
         /*use the remote URL*/
-
-        fetch('http://localhost:50963//api/awards/dec953316347',{
+        console.log(BASE_URL + "/api/awards/" + token)
+        fetch(BASE_URL + "/api/awards/" + token,{
             method : 'GET',
             headers: {
                 'content-type' : 'application/json'
             }
         })
         .then(res => res.json())
-        .then(data => this.setState({awardCompetitions : data}));   
+        .then(data => this.setState({awardCompetitions : data, userToken: token}));
     }
 
     AnimateAccuracyCircle(counter, element, index){
@@ -37,11 +45,11 @@ class UserProfile extends Component {
             
             if (degreees<=180){
                 activeBorder.css('background-image','linear-gradient(' + (90 + degreees) + 
-                                    'deg, transparent 50%, #0c0c0e 50%),linear-gradient(90deg, transparent 50%, white 50%)');
+                                    'deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');
             }
             else{
                 activeBorder.css('background-image','linear-gradient(' + (degreees - 90) + 
-                                'deg, transparent 50%, white 50%),linear-gradient(90deg, transparent 50%, white 50%)');
+                                'deg, transparent 50%, #EA241A 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');
             }
             counter++;
             setTimeout(() => {
@@ -100,111 +108,123 @@ class UserProfile extends Component {
     RenderLockedIcon(){
         return(
             <div className="locked-icon" style={{display: "inline"}}>
-                <img src={require("../resources/awardIcons/locked.png")} alt="lock-icon" />
+                <img src={require("../resources/awardIcons/locked-icon.png")} alt="lock-icon" />
+            </div>
+        )
+    }
+
+    RenderActiveCircle(index){
+        return(
+            <div id={index} className="active-border">
+                <div id={`circle${index}`} className="circle">
+                    <label className="accuracy-text">0%</label>
+                </div>
+            </div>
+        )
+    }
+
+    RenderBulletIcons(){
+        return(
+            <div className="bullet-img-scale bullet-padding-right">
+                <img src={require("../resources/awardIcons/bullet.png")}></img>
+            </div>
+        )
+    }
+
+    RenderRedLockIcon(){
+        return(
+            <div className="lock-img-scale">
+                <img src={require("../resources/awardIcons/red-locked-icon.png")}></img>
             </div>
         )
     }
 
     CompetitionsStat(element, index){
         return(
-            <Container key={index}>
-                <div className={element.isCompetitionLocked ? "shooting-award push-shooting-award-bottom grey-text" :
-                                "shooting-award push-shooting-award-bottom white-text"} key={index}>
-                    <Row>
-                        <Container>
-                        <Row>
+            <div className="shooting-award push-shooting-award-bottom text-color" key={index}>
+                <Row>
+                    <Col>
+                        <Row className="center-block-content">
                             <Col>
-                                <div className="float-left">
+                                <div>
                                     <label className="competition-name-size">{element.competitionName}</label>
                                 </div>
                             </Col>
-                            {/*<Col>
-                                {element.isCompetitionLocked ? this.RenderLockedIcon() : null}
-                            </Col>*/}
                         </Row>
-                        
-                        <Row>
-                            <Col /*style={{paddingLeft : "0px"}}*/>
-                                <div className="month-award">
-                                        {/*make month and year dynamic | remove if no month award*/}
-                                        <label className="light-weight float-left font-size-14px">January 2019 - 
-                                            <span id="month-award-description">Best Shooter</span></label>
-                                </div>
-                            </Col>
-                            <Col className="bullet-col" xs={3} sm={3} md={3} lg={3} xl={3}>
-                                <div className="bullet-img-scale">
-                                    <img src={require("../resources/awardIcons/bullet.png")}></img>
-                                </div>
-                            </Col>
-                        </Row>
-                        </Container>
-                    </Row>
-                    <div className="push-bottom-27px">
-                        <Row style={{marginTop: "15px"}}>
+                        <Row className="push-bottom-67px">
                             <Col>
-                                <div className="shooting-award-left push-bottom hours-heading">
-                                    My Total Score
-                                </div>
-                                <div className="right push-bottom">
-                                    {this.SetDigits(element.total, element.isCompetitionLocked)}
-                                </div>
-                            </Col>
-                            <Col>
-                                <div className="lay-horizontal scale-img">
-                                    <img src={!element.isCompetitionLocked && element.totalAward.gold ?
-                                        require('../resources/awardIcons/gold-icon.png') :
-                                        require('../resources/awardIcons/black-icon.png')} alt="locked award" />
-                                    <img src={!element.isCompetitionLocked && element.totalAward.silver ?
-                                        require('../resources/awardIcons/silver-icon.png') :
-                                        require('../resources/awardIcons/black-icon.png')} alt="silver award" />
-                                    <img src={!element.isCompetitionLocked && element.totalAward.bronze ?
-                                        require('../resources/awardIcons/bronze-icon.png') :
-                                        require('../resources/awardIcons/black-icon.png')} alt="bronze award" />
+                                <div className="rectangle lay-horizontal">
+                                    <Row className="inherit-width">
+                                        <Col>
+                                            <div><label className="accuracy-label">Accuracy</label></div>
+                                            <div className="circle-bigger">
+                                               {!element.isCompetitionLocked ? this.RenderActiveCircle(index) : this.RenderRedLockIcon()}
+                                            </div>
+                                            <Row className="center-block-content">
+                                                <Col className="center-icons-col">
+                                                    <div className="lay-horizontal scale-img">
+                                                        <img src={!element.isCompetitionLocked && element.accuracyAward.gold ? 
+                                                            require('../resources/awardIcons/gold-icon.png') :
+                                                            require('../resources/awardIcons/locked-icon.png')} alt="gold award" />
+                                                        <img src={!element.isCompetitionLocked && element.accuracyAward.silver ? 
+                                                            require('../resources/awardIcons/silver-icon.png') :
+                                                            require('../resources/awardIcons/locked-icon.png')} alt="silver award" />
+                                                        <img src={!element.isCompetitionLocked && element.accuracyAward.bronze?
+                                                            require('../resources/awardIcons/bronze-icon.png') :
+                                                            require('../resources/awardIcons/locked-icon.png')} alt="bronze award" />
+                                                    </div>
+                                                </Col>
+                                            </Row>
+                                        </Col>
+                                        <Col>
+                                            <div className="float-right">
+                                                <div><label className="total-label">Total</label></div>
+                                                <div className="circle-bigger">
+                                                    {!element.isCompetitionLocked ? this.RenderBulletIcons() : null}
+                                                    <div>
+                                                        {!element.isCompetitionLocked ? 
+                                                            <label className="total-text">{element.total}</label> : this.RenderRedLockIcon()}
+                                                    </div>
+                                                    {!element.isCompetitionLocked ? this.RenderBulletIcons() : null}
+                                                </div>
+                                                <Row className="center-block-content">
+                                                <Col className="center-icons-col">
+                                                    <div className="lay-horizontal scale-img">
+                                                        <img src={!element.isCompetitionLocked && element.totalAward.gold ?
+                                                            require('../resources/awardIcons/gold-icon.png') :
+                                                            require('../resources/awardIcons/locked-icon.png')} alt="locked award" />
+                                                        <img src={!element.isCompetitionLocked && element.totalAward.silver ?
+                                                            require('../resources/awardIcons/silver-icon.png') :
+                                                            require('../resources/awardIcons/locked-icon.png')} alt="silver award" />
+                                                        <img src={!element.isCompetitionLocked && element.totalAward.bronze ?
+                                                            require('../resources/awardIcons/bronze-icon.png') :
+                                                            require('../resources/awardIcons/locked-icon.png')} alt="bronze award" />
+                                                    </div>
+                                                </Col>
+                                            </Row>
+                                            </div>
+                                        </Col>
+                                    </Row>
                                 </div>
                             </Col>
                         </Row>
-                    </div>
-                    <Row>
-                        <Col>
-                            <div className="shooting-award-left">
-                                <div className="push-bottom-8px hours-heading">My Accuracy</div>
-                                <div id={index} className="active-border">
-                                    <div id={`circle${index}`} className="circle">
-                                        <label>0%</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>{this.AnimateAccuracyCircle(1, element, index)}</div>
-                        </Col>
-                        <Col>
-                            <div className="lay-horizontal scale-img">
-                                <img src={!element.isCompetitionLocked && element.accuracyAward.gold ? 
-                                    require('../resources/awardIcons/gold-icon.png') :
-                                    require('../resources/awardIcons/black-icon.png')} alt="gold award" />
-                                <img src={!element.isCompetitionLocked && element.accuracyAward.silver ? 
-                                    require('../resources/awardIcons/silver-icon.png') :
-                                    require('../resources/awardIcons/black-icon.png')} alt="silver award" />
-                                <img src={!element.isCompetitionLocked && element.accuracyAward.bronze?
-                                    require('../resources/awardIcons/bronze-icon.png') :
-                                    require('../resources/awardIcons/black-icon.png')} alt="bronze award" />
-                            </div>
-                        </Col>
-                    </Row>
-                </div>
-            </Container>
+                    </Col>
+                    <div>{this.AnimateAccuracyCircle(1, element, index)}</div>
+                </Row>
+            </div>
         )
     }
 
     RenderHoursIcons(){
         console.log(this.state.awardCompetitions.hoursAward)
         return(
-            <div className="lay-horizontal scale-img">
+            <div className="lay-horizontal scale-img center-block-content">
                 <img src={this.state.awardCompetitions[0].hoursAward.gold ?
-                    require('../resources/awardIcons/gold-icon.png') : require('../resources/awardIcons/black-icon.png')} alt="gold award" />
+                    require('../resources/awardIcons/gold-icon.png') : require('../resources/awardIcons/locked-icon.png')} alt="gold award" />
                 <img src={this.state.awardCompetitions[0].hoursAward.silver ?
-                    require('../resources/awardIcons/silver-icon.png') : require('../resources/awardIcons/black-icon.png')} alt="silver award" />
+                    require('../resources/awardIcons/silver-icon.png') : require('../resources/awardIcons/locked-icon.png')} alt="silver award" />
                 <img src={this.state.awardCompetitions[0].hoursAward.bronze ?
-                    require('../resources/awardIcons/bronze-icon.png') : require('../resources/awardIcons/black-icon.png')} alt="bronze award" />
+                    require('../resources/awardIcons/bronze-icon.png') : require('../resources/awardIcons/locked-icon.png')} alt="bronze award" />
             </div>
         )
     }
@@ -219,49 +239,73 @@ class UserProfile extends Component {
         return renderArray;
     }
 
+    Logout(){
+        var res = document.cookie;
+        console.log(res);
+        var multiple = res.split(";");
+        for(var i = 0; i < multiple.length; i++) {
+            var key = multiple[i].split("=");
+            document.cookie = key[0]+" =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
+        }
+        this.props.history.push('/login');
+        return false;
+    }
+
     render() {
         return (
-            <Container>
-                <div>
-                    <div className="row" style={{backgroundColor: "black"}}>
-                        <Col>
+            <div>
+                <Row className="top-bar-rectangle">
+                    <Col className="lay-horizontal">
+                        <div className="center-block-content">
                             <label className="username">
                                 {this.state.awardCompetitions.length > 0 ? this.state.awardCompetitions[0].username : null}    
                             </label>
-                        </Col>
-                    </div>
+                        </div>
+                        <a href="#" onClick={this.Logout}>
+                            <div className="logout-button">
+                                <label className="logout-text">Logout</label>
+                            </div>
+                        </a>
+                    </Col>
+                </Row>
+                <Container>
                     <div>
-                        <div className="member-number white-text">
+                        <div className="member-number text-color">
                             <label className="light-weight">Membership No:<span id="member-number-span">{this.state.awardCompetitions.length > 0 ?
                                 this.state.awardCompetitions[0].membershipNumber : null}</span>
                             </label>
                         </div>
-                        <div className="page-title white-text"><label>Awards & Statistics</label></div>
-                        <Container>
-                        <div className="restrict-row-height">
-                            <Row>
-                                <Col className="remove-padding-right inherit-height">
-                                    <div>
-                                        <div className="hours-heading white-text">
-                                            <label className="light-weight">Hours Shooting</label>
+                        <div className="page-title text-color"><label>Awards & Statistics</label></div>
+                        <Row className="push-shooting-award-bottom">
+                            <Col>
+                                <Row>
+                                    <Col>
+                                        <div className="hours-heading text-color">
+                                            <label>Hours Shooting</label>
                                         </div>
+                                    </Col>
+                                </Row>
+                            
+                                <Row>
+                                    <Col className="push-bottom-12px">
                                         <div className="lay-horizontal center">
                                             {/*make hours dynamic*/}
                                             {this.state.awardCompetitions.length > 0 ?
-                                                this.SetDigits("0900") : this.SetDigits(null)}
+                                                this.SetDigits("0000") : this.SetDigits(null)}
                                         </div>
-                                    </div>
-                                </Col>
-                                <Col className="inherit-height">
-                                    {this.state.awardCompetitions.length > 0 && this.state.awardCompetitions[0].hoursAward != null ? this.RenderHoursIcons() : null}
-                                </Col>
-                            </Row>
-                        </div>
-                        </Container>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        {this.state.awardCompetitions.length > 0 && this.state.awardCompetitions[0].hoursAward != null ? this.RenderHoursIcons() : null} 
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Row>
                         {this.state.awardCompetitions.length > 0 ? this.RenderAllCompetitionsStats() : null}
                     </div>
-                </div>
-            </Container>
+                </Container>
+            </div>
         )
     }
 }
