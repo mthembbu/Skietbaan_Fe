@@ -28,7 +28,7 @@ class ViewGroups extends Component {
   }
 
   UNSAFE_componentWillMount() {
-    fetch(BASE_URL + "/api/groups")
+    fetch(BASE_URL+"/api/groups")
       .then(res => res.json())
       .then(data =>
         this.setState({
@@ -42,9 +42,9 @@ class ViewGroups extends Component {
         })
       ).catch(
         console.log("there is an error when fetching")
-      )
-      
+      ) 
   }
+
   onChange(event) {
     this.setState({ filterText: event.target.value });
   }
