@@ -235,7 +235,7 @@ class Login extends Component {
             </div>
             <div className="button-container">
               <Button onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
-                : "buttons-invalid round-button"} >Join</Button>
+                : "buttons-invalid round-button"} >Login</Button>
             </div>
           </Form>
         </div >
