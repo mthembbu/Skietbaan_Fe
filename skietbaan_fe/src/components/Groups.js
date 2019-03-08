@@ -46,10 +46,7 @@ class Groups extends Component {
               };
             })
           });
-        }).catch{
-
-        }
-      
+        });
     } else {
       this.props.history.push("/AddGroup");
     }
@@ -85,7 +82,8 @@ class Groups extends Component {
     })
       .then(function(response) {})
       .catch(function(data) {});
-      this.props.history.push("/ViewGroups");
+      setTimeout(function () { window.location = "/ViewGroups"; }, 2000);
+    
   }
 
   selectall() {
