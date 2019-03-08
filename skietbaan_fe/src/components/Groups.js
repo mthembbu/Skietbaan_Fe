@@ -86,7 +86,6 @@ class Groups extends Component {
   }
 
   selectall() {
-
     const newarry = [...this.state.posts];
     if (this.state.check == "Select all") {
       this.setState({count:newarry.length})
@@ -160,7 +159,7 @@ class Groups extends Component {
                   <div className="userName" style={{ color: post.colors }}>
                     {post.username}
                   </div>
-                  <div className="emails" style={{ color: post.colors }}>
+                  <div className="email" style={{ color: post.colors }}>
                     {post.email}
                   </div>
                 </label>

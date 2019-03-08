@@ -35,7 +35,7 @@ class CreatePage extends Component {
 	}
 
 	ViewGroups() {
-		window.location = "/EditGroup";
+		window.location = "/ViewGroups";
 	}
 
 	render() {

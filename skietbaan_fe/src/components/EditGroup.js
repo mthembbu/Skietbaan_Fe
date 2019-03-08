@@ -63,11 +63,11 @@ class EditGroup extends Component {
         delete this.state.posts[i].image;
         delete this.state.posts[i].highlighted;
         delete this.state.posts[i].id;
-       
       }
-      this.setState({ posts: updateArray });
     }
-     
+    console.log(updateArray)
+    this.setState({ posts: updateArray });
+    
     let request = {
       GroupIds: this.props.id,
       users: this.state.newArray
@@ -98,7 +98,6 @@ class EditGroup extends Component {
       this.setState({ count: this.state.count + 1 });
     }
   };
-  rt;
   onBack() {
     this.props.history.push("/ViewGroups");
   }
@@ -140,7 +139,7 @@ class EditGroup extends Component {
                   <div className="userName" className={post.image==marked?"userName":"userName-active"}>
                     {post.username}
                   </div>
-                  <div className="emails" className={post.image==marked?"emails":"emails-active"}>
+                  <div className="email">
                     {post.email}
                   </div>
                 </label>
