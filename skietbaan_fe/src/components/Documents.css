@@ -185,10 +185,10 @@
     	margin-top: 62px;
     	margin-left: auto;
     	margin-right: auto;
-	height: 205px;
-	width: 300px;
-	border-radius: 10px;
-	background-color: #e71f15;
+        height: 205px;
+        width: 300px;
+        border-radius: 10px;
+        background-color: #00000099;
 }
 
 .testing-align{

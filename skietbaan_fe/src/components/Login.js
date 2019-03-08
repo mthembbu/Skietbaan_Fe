@@ -27,7 +27,7 @@ class Login extends Component {
     this.validate = this.validate.bind(this);
     this.togglePassword = this.togglePassword.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.goToRegister = this.goToRegister.bind(this);    
+    this.goToRegister = this.goToRegister.bind(this);
     this.disableButton = this.disableButton.bind(this);
   }
 
@@ -38,6 +38,10 @@ class Login extends Component {
     else
       document.getElementById("roundButton").disabled = true;
 
+  }
+
+  componentDidMount() {
+    this.disableButton();
   }
 
   toggleNavbar() {
@@ -62,29 +66,32 @@ class Login extends Component {
       usernameFound: true,
       passwordFound: true
     }
-    if (target.name === "passwordValue" && target.value.length > 0) {
-      stateUpdate.invalidPassword = false;
-    };
-    if (target.name === "usernameValue") {
-      stateUpdate.invalidUsername = true;
-      for (var i = 0; i < this.state.users.length; i++) {
-        if (this.state.users[i].username == target.value) {
-          stateUpdate.usernameFound = true;
-          stateUpdate.invalidUsername = false;
-          break;
+    if (target.name === "passwordValue") {
+      if (target.value.length > 0)
+        stateUpdate.invalidPassword = false;
+        else {
+          stateUpdate.invalidPassword = true;
         }
-        stateUpdate.usernameFound = false;
-      }
-
     }
+    if (target.name === "usernameValue") {
+      if (target.value.length > 0)
+        stateUpdate.invalidUsername = false;
+        else {
+          stateUpdate.invalidUsername = true;
+        }
+    }
+    
     if (this.state.usernameValue
       && this.state.passwordValue
-      && !stateUpdate.invalidUsername) {
+      && !stateUpdate.invalidUsername
+      && !stateUpdate.invalidPassword) {
       isValid = true;
     }
     this.setState({
       ...stateUpdate,
       validForm: isValid
+    }, () => {
+      this.disableButton();
     });
   };
 
@@ -130,12 +137,16 @@ class Login extends Component {
           window.location = "/home";
 
         }
-        else if (typeof data === "string" && data.indexOf("Invalid Password") > -1) {
+        else if (typeof data === "string"
+          && data.indexOf("Invalid Password") > -1
+          || data.indexOf("not found")) {
           this.setState({
             invalidPassword: true,
-            passwordFound:false
+            passwordFound: false,
+            invalidUsername: true
           });
         }
+
       }).catch(function (data) {
       });
     }
@@ -166,7 +177,7 @@ class Login extends Component {
       <div className="page-content-login">
         <div className="red-background">
           <div className="welcome-header">
-          <label className="welcome-label">Welcome to
+            <label className="welcome-label">Welcome to
           <label className="skietbaan-label">Skietbaan</label>
             </label>
           </div>
@@ -197,8 +208,6 @@ class Login extends Component {
                     className="input-user"
                   />
                 </div>
-                <div className={typeof this.state.usernameFound !== "undefined" 
-                && !this.state.usernameFound ? "error-message" : "hidden"} > Username not found</div>
               </FormGroup>
             </div>
             <div className="spacing-login">
@@ -220,8 +229,8 @@ class Login extends Component {
                     </div>
                   </div>
                 </div>
-                <div className={this.state.passwordFound 
-                  && this.passwordValue !=="" ? "hidden":"error-message"}>Invalid Password</div>
+                <div className={this.state.passwordFound
+                  && this.passwordValue !== "" ? "hidden" : "error-message"}>Invalid credentials</div>
               </FormGroup>
             </div>
             <div className="button-container">

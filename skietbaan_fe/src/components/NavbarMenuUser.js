@@ -124,7 +124,7 @@ class NavbarMenuUser extends Component {
 						<td className="columns" onClick={() => this.GoTo("/scorecapture")} >
 							{this.isScoreCapture()}
 						</td>
-						<td className="columns" onClick={() => this.GoTo("#")}>
+						<td className="columns" onClick={() => this.GoTo("/profile")}>
 							{this.isProfile()}
 						</td>
 						<td className="columns-more" onClick={this.expand}>
