@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 import marked from "./GroupImages/marked.png";
 import unmarked from "./GroupImages/unmarked.png";
 import back from "./GroupImages/back.png";
-
+import { getCookie } from '../components/cookie.js';
 class AddMembersGroup extends Component {
   constructor(props) {
     super(props);
@@ -22,6 +22,9 @@ class AddMembersGroup extends Component {
     this.onChange = this.onChange.bind(this);
   }
   UNSAFE_componentWillMount() {
+    if(!getCookie("token")){
+      window.location = "/registerPage";
+  }
     if (this.props.id != 0) {
       fetch(BASE_URL + "/api/Groups/list?id=" + this.props.id)
         .then(res => res.json())
@@ -31,7 +34,7 @@ class AddMembersGroup extends Component {
               return {
                 ...users,
                 highlighted: false,
-                backgrnd: "white"
+                background: "#fdfdfd"
               };
             })
           });
@@ -71,12 +74,12 @@ class AddMembersGroup extends Component {
   }
   toggleHighlight = (name, event) => {
     if (this.state.posts[event].highlighted === true) {
-      this.state.posts[event].backgrnd = "white";
+      this.state.posts[event].background = "#fdfdfd";
       this.state.posts[event].highlighted = false;
       this.setState({ count: this.state.count - 1 });
     } else {
       this.setState({ selected: name });
-      this.state.posts[event].backgrnd = "#F3F4F9";
+      this.state.posts[event].background = "#F3F4F9";
       this.state.posts[event].highlighted = true;
       this.setState({ count: this.state.count + 1 });
     }
@@ -104,7 +107,7 @@ class AddMembersGroup extends Component {
               <li
                 class="list-group-item list-group-item-light"
                 key={post.id}
-                style={{ background: post.backgrnd }}
+                style={{ background: post.background }}
               >
                 <img
                   className="checkbox-delete"
@@ -122,14 +125,14 @@ class AddMembersGroup extends Component {
       </div>
     );
     return (
-      <main className="TheMain">
-        <div className="TheNavBar">
-          <img className="backImage" onClick={this.onBack} src={back} alt="" />
-          <label className="center_labels">{this.props.name}</label>
+      <main className="The-Main">
+        <div className="the-nav-bar">
+          <img className="back-image" onClick={this.onBack} src={back} alt="" />
+          <label className="center-labels">{this.props.name}</label>
         </div>
         <div className="BNavBar">
           <input
-            className="theText"
+            className="the-Text"
             id="username"
             type="text"
             onChange={this.onChange}
@@ -137,7 +140,6 @@ class AddMembersGroup extends Component {
           />
         </div>
 
-        <div className="OnToTheNextOne" />
         <div
           className="scrollbar"
           data-simplebar
@@ -147,12 +149,12 @@ class AddMembersGroup extends Component {
         </div>
 
         {this.state.count==0  ? null : (
-          <div className="bpanel">
+          <div className="bottom-panel">
             <table className="group-delete-table">
               <tbody>
                 <tr>
                   <td>
-                    <div className="thetextname">Delete</div>
+                    <div className="the-textname">Delete</div>
                   </td>
                   <td>
                     <span className="name-of-group">

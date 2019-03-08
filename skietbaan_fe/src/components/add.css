@@ -6,7 +6,7 @@
   border-bottom-right-radius: 20px;
 }
 
-.center_labels {
+.center-labels {
   display: flex;
   margin-left: 56px;
   margin-right: 56px;
@@ -20,40 +20,38 @@
   font-size: 25px;
 }
 
-.middle_bar {
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+.middle-bar {
   width: 100%;
-  margin-bottom: 2px;
-  font-size: 20px;
-  margin-top: 10px;
+  display: grid;
+  text-align: -webkit-center;
 }
 
 .texts-active {
   border-radius: 8px;
+  width: 218px;
   height: 39px;
-  padding-left: 5px;
   margin-bottom: 8px;
+  font-size: 18px;
   font-weight: lighter;
-  border: solid 1px;
-  margin-left: 71px;
-  margin-right: 71px;
+  border: 1px solid #6f839e;
+  padding-left: 20px;
+  font-weight: lighter;
   background: #f3f4f9;
   font: #6f839e;
-  border: 1px solid #6f839e;
 }
 
 .texts {
   border-radius: 8px;
+  width: 218px;
+  font-size: 18px;
   height: 39px;
-  padding-left: 5px;
   margin-bottom: 8px;
   font-weight: lighter;
-  border: solid 1px;
-  margin-left: 71px;
-  margin-right: 71px;
   border: 1px solid #6f839e;
+  padding-left: 20px;
+  font-weight: lighter;
+  background: #f3f4f9;
+  font: #6f839e;
 }
 
 .page {
@@ -87,7 +85,7 @@
 .add2 {
   border-radius: 22px;
   height: 42px;
-  width: 150px;
+  width: 146px;
   font-weight: lighter;
   background: #6f839e;
   font-size: 18px;
@@ -100,24 +98,8 @@
   margin-left: 22px;
 }
 
-.nextpage {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  position: fixed;
-  margin: 2%;
-}
-
-.theList {
+.the-List {
   background: #cccfd3;
-}
-
-.circles {
-  border-radius: 50%;
-}
-
-.bpanel {
-  padding-top: 15px;
 }
 
 .group-error {
@@ -135,3 +117,11 @@
 .addgroup-main {
   text-align: center;
 }
+.back-container{
+  width: 0px;
+}
+.add2:focus { outline: none; }
+.texts-active{outline: none;}
+.texts{outline: none;}
+
+

@@ -6,6 +6,7 @@ import "./add.css";
 import { BASE_URL } from "../actions/types";
 import error from "./GroupImages/error.png";
 import back from "./GroupImages/back.png";
+import { getCookie } from '../components/cookie.js';
 
 class AddGroup extends Component {
   constructor(props) {
@@ -20,16 +21,16 @@ class AddGroup extends Component {
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
   }
+
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
   onClick() {
     if (this.state.groups.indexOf(this.state.name) == -1) {
-    
       if (this.state.name.length != 0) {
         this.props.getName(this.state.name);
         history.push("/Groups");
-      
       } else {
         this.setState({ txt: "group name can't be empty" });
       }
@@ -47,25 +48,25 @@ class AddGroup extends Component {
         })
       );
   }
-
-
-
   render() {
+    if(!getCookie("token")){
+      window.location = "/registerPage";
+  }
     return (
-      <div className="addgroup-main">
+      <div className="add-group-main">
         <div className="page">
-          <div className="TheNavBar">
-           <div>
+          <div className="the-nav-bar">
+          <a href="/create" className="back-container">
             <img
-              className="backImage"
+              className="back-image"
               onClick={this.onBack}
               src={back}
               alt=""
-            /></div>
-              <label className="center_label">Create Groups</label>
+            /></a>
+              <label className="center-label">Create Groups</label>
             </div>
         
-          <div className="middle_bar">
+          <div className="middle-bar">
             <label className="name">
               Enter Group Name{" "}
               {this.state.exist ? null : <img src={error} alt="" />}

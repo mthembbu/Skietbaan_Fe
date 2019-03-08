@@ -4,7 +4,7 @@ import { getCookie } from './cookie.js';
 import { Collapse } from 'react-collapse';
 import { BASE_URL } from "../actions/types.js";
 import { availableIcon } from "../resources/sendDoc.png";
-import { notAvailableIcon } from "../resources/sendDoc.png";
+import { notAvailableIcon } from "../resources/gidx.png";
 
 class Documents extends Component {
     constructor(props) {
@@ -21,6 +21,9 @@ class Documents extends Component {
     }
 
     componentWillMount(){
+        if(!getCookie("token")){
+            window.location = "/registerPage";
+        }
         let token = getCookie("token");
         fetch(BASE_URL+"/api/Documents/UserLOGS/" + token)
         .then(res=>res.json())
@@ -62,12 +65,16 @@ class Documents extends Component {
     }
    
     render() {
+
+        if(!getCookie("token")){
+            window.location = "/registerPage";
+        }
         return (
             <div className="documents_background ">
                     <div className="docuements-heading">
                         <div className="documents-text">Documents</div>
                     </div>
-                <div className="center" >
+                <div className="documents-center" >
                         <div className="label-select-document">                        
                                 Documents have requirements                            
                         </div>
@@ -76,8 +83,8 @@ class Documents extends Component {
                             <button className={this.state.value=="Document"? "btn-active send-email btn-bottom-3":"btn-default send-email btn-bottom-3"} 
                                 onClick={this.state.value=="Document"? this.SendLOGS: null}> 
                                 Letter of Good Standing {this.state.value=="Document"? 
-                                <img className="document-image-icon" src={availableIcon}/>:
-                                <img className="document-image-icon" src={notAvailableIcon}/>}
+                                <img className="document-image-icon" src={require("../resources/sendDoc.png")}/>:
+                                <img className="document-image-icon" src={require("../resources/gidx.png")}/>}
                             </button>
                             <Collapse isOpened={this.state.collapseFilterLOGS}>
                                 <div className="documents-collapse">
@@ -90,8 +97,8 @@ class Documents extends Component {
                                     "btn-default send-email btn-bottom-2"} 
                                     onClick={this.state.value2=="Document"? this.SendLOS: null}>
                                     Letter of Status {this.state.value2=="Document"? 
-                                    <img className="document-image-icon" src={availableIcon}/>:
-                                    <img className="document-image-icon" src={notAvailableIcon}/>}
+                                    <img className="document-image-icon" src={require("../resources/sendDoc.png")}/>:
+                                    <img className="document-image-icon" src={require("../resources/gidx.png")}/>}
                                 </button>                       
 
                                 <Collapse isOpened={this.state.collapseFilterLOS}>

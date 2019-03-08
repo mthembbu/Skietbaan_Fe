@@ -19,16 +19,15 @@ class Login extends Component {
       usernameValue: "",
       passwordValue: "",
       validForm: false,
-      tokenValue: "",
-      users: [],
-      passwordFound: true
+      tokenValue : "",
+      user: []
     }
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.validate = this.validate.bind(this);
     this.togglePassword = this.togglePassword.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.goToRegister = this.goToRegister.bind(this);    
+    this.goToRegister = this.goToRegister.bind(this);
     this.disableButton = this.disableButton.bind(this);
   }
 
@@ -67,19 +66,22 @@ class Login extends Component {
       usernameFound: true,
       passwordFound: true
     }
-    if (target.name === "passwordValue" && target.value.length > 0) {
-      stateUpdate.invalidPassword = false;
+
+    if (target.name === "passwordValue") {
+      if (target.value.length > 0)
+        stateUpdate.invalidPassword = false;
+        else {
+          stateUpdate.invalidPassword = true;
+        }
     }
-    else if(target.name === "passwordValue"){
-      stateUpdate.invalidPassword = true;
+    if (target.name === "usernameValue") {
+      if (target.value.length > 0)
+        stateUpdate.invalidUsername = false;
+        else {
+          stateUpdate.invalidUsername = true;
+        }
     }
-    if (target.name === "usernameValue" && target.value.length > 0) {
-      stateUpdate.invalidUsername = false;
-    }
-    else if(target.name === "usernameValue")
-    {
-      stateUpdate.invalidUsername = true;
-    }
+    
     if (this.state.usernameValue
       && this.state.passwordValue
       && !stateUpdate.invalidUsername
@@ -134,14 +136,15 @@ class Login extends Component {
         if (typeof data === "object") {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
           window.location = "/home";
+
         }
-        else if (typeof data === "string" 
-        && data.indexOf("Invalid Password") > -1 
-        || data.indexOf("not found")) {
+        else if (typeof data === "string"
+          && data.indexOf("Invalid Password") > -1
+          || data.indexOf("not found")) {
           this.setState({
             invalidPassword: true,
-            passwordFound:false,
-            invalidUsername:true
+            passwordFound: false,
+            invalidUsername: true
           });
         }
 
@@ -175,7 +178,7 @@ class Login extends Component {
       <div className="page-content-login">
         <div className="red-background">
           <div className="welcome-header">
-          <label className="welcome-label">Welcome to
+            <label className="welcome-label">Welcome to
           <label className="skietbaan-label">Skietbaan</label>
             </label>
           </div>
@@ -193,9 +196,9 @@ class Login extends Component {
 
             <div className="spacing-login">
               <FormGroup>
-                <label className="front-white input-label">Enter Username <div
-                  className={this.state.invalidUsername ? "invalid-icon" : "hidden"}></div></label>
-
+                <label className="front-white input-label">Enter Username <div 
+                className={this.state.invalidUsername ? "invalid-icon" :"hidden"}></div></label>
+                
                 <div className="input-container">
                   <input
                     type="text"
@@ -227,13 +230,13 @@ class Login extends Component {
                     </div>
                   </div>
                 </div>
-                <div className={this.state.passwordFound 
-                  && this.passwordValue !=="" ? "hidden":"error-message"}>Invalid credentials</div>
+                <div className={this.state.passwordFound
+                  && this.passwordValue !== "" ? "hidden" : "error-message"}>Invalid credentials</div>
               </FormGroup>
             </div>
             <div className="button-container">
               <Button onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
-                : "buttons-invalid round-button"} >Join</Button>
+                : "buttons-invalid round-button"} >Login</Button>
             </div>
           </Form>
         </div >

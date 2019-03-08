@@ -79,7 +79,8 @@
 
 .td-col{
 	padding-top: 11px;
-    padding-bottom: 11px;
+	padding-bottom: 11px;
+	text-align: left;
 }
 
 .page-contents {

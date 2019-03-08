@@ -41,6 +41,9 @@ class LeaderboardPage extends Component {
     }
     //executed when leaderboard in mounted on main app
     componentWillMount() {
+        if(!getCookie("token")){
+            window.location = "/registerPage";
+        }
         //get function to get filter data from api
         this.props.fetchleaderboadfilterdata();
         this.getLeaderboardData(this.state.selectedCompetition,this.state.selectedGroup);
