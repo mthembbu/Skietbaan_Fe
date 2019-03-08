@@ -46,7 +46,6 @@ class AddGroup extends Component {
         })
       );
   }
-
   render() {
     return (
       <div className="add-group-main">
