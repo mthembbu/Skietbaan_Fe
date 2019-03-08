@@ -19,8 +19,9 @@ class Login extends Component {
       usernameValue: "",
       passwordValue: "",
       validForm: false,
-      tokenValue : "",
-      user: []
+      tokenValue: "",
+      users: [],
+      passwordFound: true
     }
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -135,7 +136,6 @@ class Login extends Component {
         if (typeof data === "object") {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
           window.location = "/home";
-
         }
         else if (typeof data === "string"
           && data.indexOf("Invalid Password") > -1
@@ -195,9 +195,9 @@ class Login extends Component {
 
             <div className="spacing-login">
               <FormGroup>
-                <label className="front-white input-label">Enter Username <div 
-                className={this.state.invalidUsername ? "invalid-icon" :"hidden"}></div></label>
-                
+                <label className="front-white input-label">Enter Username <div
+                  className={this.state.invalidUsername ? "invalid-icon" : "hidden"}></div></label>
+
                 <div className="input-container">
                   <input
                     type="text"
