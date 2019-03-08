@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 import marked from "./GroupImages/marked.png";
 import unmarked from "./GroupImages/unmarked.png";
 import back from "./GroupImages/back.png";
-
+import { getCookie } from '../components/cookie.js';
 class AddMembersGroup extends Component {
   constructor(props) {
     super(props);
@@ -22,6 +22,9 @@ class AddMembersGroup extends Component {
     this.onChange = this.onChange.bind(this);
   }
   UNSAFE_componentWillMount() {
+    if(!getCookie("token")){
+      window.location = "/registerPage";
+  }
     if (this.props.id != 0) {
       fetch(BASE_URL + "/api/Groups/list?id=" + this.props.id)
         .then(res => res.json())
