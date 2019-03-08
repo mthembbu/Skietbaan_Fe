@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
 import { BASE_URL } from "../actions/types";
-import history from "./history";
+import { withRouter } from "react-router-dom";
+import marked from "./GroupImages/marked.png";
+import unmarked from "./GroupImages/unmarked.png";
+import back from "./GroupImages/back.png";
+import { getCookie } from '../components/cookie.js';
 class AddMembersGroup extends Component {
   constructor(props) {
     super(props);
@@ -10,33 +14,40 @@ class AddMembersGroup extends Component {
       posts: [],
       newArray: [],
       filterText: "",
-      selected: ""
+      selected: "",
+      count: 0
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
-    this.handleOnClick = this.handleOnClick.bind(this);
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
   }
- UNSAFE_componentWillMount() {
-    fetch( BASE_URL+"/api/Groups/list?id=" + this.props.id)
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          posts: data.map(users => {
-            users.highlighted = false;
-            return {
-              ...users,
-              highlighted: false
-            };
-          })
+  UNSAFE_componentWillMount() {
+    if(!getCookie("token")){
+      window.location = "/registerPage";
+  }
+    if (this.props.id != 0) {
+      fetch(BASE_URL + "/api/Groups/list?id=" + this.props.id)
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            posts: data.map(users => {
+              return {
+                ...users,
+                highlighted: false,
+                background: "#fdfdfd"
+              };
+            })
+          });
         });
-      });
+    } else {
+      this.props.history.push("/ViewGroups");
+    }
   }
   onChange(event) {
     this.setState({ filterText: event.target.value });
   }
 
-  handleOnClick() {
+  addUsers=()=> {
     const { newArray } = this.state;
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === true) {
@@ -49,7 +60,7 @@ class AddMembersGroup extends Component {
       users: this.state.newArray,
       GroupIds: this.props.id
     };
-    fetch(BASE_URL+"/api/groups/postMember/", {
+    fetch(BASE_URL + "/api/groups/postMember/", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -63,16 +74,18 @@ class AddMembersGroup extends Component {
   }
   toggleHighlight = (name, event) => {
     if (this.state.posts[event].highlighted === true) {
+      this.state.posts[event].background = "#fdfdfd";
       this.state.posts[event].highlighted = false;
       this.setState({ count: this.state.count - 1 });
     } else {
       this.setState({ selected: name });
+      this.state.posts[event].background = "#F3F4F9";
       this.state.posts[event].highlighted = true;
       this.setState({ count: this.state.count + 1 });
     }
   };
   onBack() {
-    history.push("/EditGroup");
+    this.props.history.push("/EditGroup");
   }
   render() {
     const postitems = (
@@ -91,11 +104,16 @@ class AddMembersGroup extends Component {
               );
             })
             .map((post, index) => (
-              <li class="list-group-item list-group-item-light" key={post.id}>
-                <input
-                  type="checkbox"
-                  className="boxs"
+              <li
+                class="list-group-item list-group-item-light"
+                key={post.id}
+                style={{ background: post.background }}
+              >
+                <img
+                  className="checkbox-delete"
                   onClick={() => this.toggleHighlight(post.username, index)}
+                  src={post.highlighted ? marked : unmarked}
+                  alt=""
                 />
                 <label className="blabe">
                   <div className="userName"> {post.username}</div>
@@ -107,28 +125,21 @@ class AddMembersGroup extends Component {
       </div>
     );
     return (
-      <main className="TheMain">
-        <div className="TheNavBar">
-          <a href="#" class="fa fa-angle-left" onClick={this.onBack} />
-          <div className="center_label">
-            <b>{this.props.name}</b>
-          </div>
+      <main className="The-Main">
+        <div className="the-nav-bar">
+          <img className="back-image" onClick={this.onBack} src={back} alt="" />
+          <label className="center-labels">{this.props.name}</label>
         </div>
         <div className="BNavBar">
           <input
-            className="theText"
+            className="the-Text"
             id="username"
             type="text"
-            placeholder="Search.."
             onChange={this.onChange}
             autoComplete="off"
           />
-          <button className="select" onClick={this.handleOnClick}>
-            Add new
-          </button>
         </div>
 
-        <div className="OnToTheNextOne" />
         <div
           className="scrollbar"
           data-simplebar
@@ -137,15 +148,42 @@ class AddMembersGroup extends Component {
           {postitems}
         </div>
 
-        <div className="bpanel">
-          <div className="thetextname">
-            <div className="thes">Adding</div>
-            <div className="usersname">{this.state.selected}</div>
+        {this.state.count==0  ? null : (
+          <div className="bottom-panel">
+            <table className="group-delete-table">
+              <tbody>
+                <tr>
+                  <td>
+                    <div className="the-textname">Delete</div>
+                  </td>
+                  <td>
+                    <span className="name-of-group">
+                      {this.state.selected}{" "}
+                    </span>
+                  </td>
+                  <div className="confrim-cancel">
+                    <td>
+                      <button
+                        className="group-confirm-add"
+                        onClick={() => this.addUsers()}
+                      >
+                        Confirm
+                      </button>
+                    </td>
+                    <td className="group-undo">
+                      <button
+                        className="updatess"
+                        onClick={() => this.cancel()}
+                      >
+                        Cancel
+                      </button>
+                    </td>
+                  </div>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div className="botname">
-            <button className="updates">Update Group</button>
-          </div>
-        </div>
+        )}
       </main>
     );
   }
@@ -154,4 +192,4 @@ const mapStateToProps = state => ({
   id: state.posts.groupId,
   name: state.posts.groupName
 });
-export default connect(mapStateToProps)(AddMembersGroup);
+export default withRouter(connect(mapStateToProps)(AddMembersGroup));

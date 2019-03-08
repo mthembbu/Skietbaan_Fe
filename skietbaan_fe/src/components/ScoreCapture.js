@@ -31,7 +31,6 @@ export default class search extends Component {
       validScore: true,
       validCompetition: true,
       scoreEntered:false,
-      iconhouseUrl : '../components/assets/grayFlashOff.png'
     }
 
     this.CompetitionClicked = this.CompetitionClicked.bind(this);
@@ -76,7 +75,6 @@ export default class search extends Component {
   }
 
   componentDidMount() {
-    console.log(cameraGray)
     fetch(URL + "/api/Competition", {
       method: 'GET',
       headers: {
@@ -87,7 +85,6 @@ export default class search extends Component {
       .then(response => response.json())
       .then(data => this.setState({ competitionsList: data }))
       .catch(function (data) {
-        console.log("error")
       });
 
     let token = getCookie("token");
@@ -343,7 +340,7 @@ export default class search extends Component {
       }
     }
     if(!getCookie("token")){
-      window.location = "/register-page";
+      window.location = "/registerPage";
     }
     return (
       <div className="position-relative">

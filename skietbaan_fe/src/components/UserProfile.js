@@ -257,7 +257,7 @@ class UserProfile extends Component {
                 <Row className="top-bar-rectangle">
                     <Col className="lay-horizontal">
                         <div className="center-block-content">
-                            <label className="username">
+                            <label className="username-bar">
                                 {this.state.awardCompetitions.length > 0 ? this.state.awardCompetitions[0].username : null}    
                             </label>
                         </div>

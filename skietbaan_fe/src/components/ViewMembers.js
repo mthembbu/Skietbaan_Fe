@@ -3,7 +3,8 @@ import '../components/ViewMembers.css';
 import { Table } from 'react-bootstrap';
 import Collapsible from 'react-collapsible';
 import { BASE_URL } from '../actions/types.js';
-
+import memberIcon from '../components/assets/membership-icon.png';
+import { getCookie } from '../components/cookie.js';
 class ViewMembers extends Component {
     constructor(props) {
         super(props);
@@ -94,6 +95,9 @@ class ViewMembers extends Component {
     }
 
     render() {
+        if(!getCookie("token")){
+            window.location = "/registerPage";
+        }
         this.GetAllMembers();
         this.GetTimeLeft();
         const postItems = (
@@ -109,6 +113,8 @@ class ViewMembers extends Component {
                             <td className="first-column">
                                 <Collapsible trigger={<div className="username-and-email">
                                     <b>{post.username}</b>
+                                    <img src={memberIcon}
+                                        className="membership-icon" alt='Is a Member'></img>
                                     <div>{post.email}</div>
                                 </div>}>
                                     <div className="membership-details">Membership No: <b>{post.memberID}</b>
@@ -136,7 +142,7 @@ class ViewMembers extends Component {
                 <div className="page-name-view">
                     <div className="image-comtainer">
                         <img src={require('../components/assets/back-button-white.png')} onClick={this.BackToCreate}
-                            className="go-back-to-create-page" alt=''></img>
+                            className="go-back-to-create-page-from-view-members" alt=''></img>
                     </div>
                     <div className="view-members-container">
                         <label className="view-members">
@@ -151,7 +157,6 @@ class ViewMembers extends Component {
                             type="text"
                             className="userValue"
                             id="usernameValue"
-                            placeholder="Username or Email"
                             value={this.state.filterText}
                             onChange={this.onChangeText}
                         />

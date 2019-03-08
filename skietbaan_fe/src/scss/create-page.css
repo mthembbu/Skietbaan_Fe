@@ -1,101 +1,136 @@
-.create-page-centre {
-    width:64%;
-    margin:0 auto;
+.page-name-create-page{
     position: center;
-    left: 3%;
-    top: 15%;
-    padding: 20px;
-    background-color: #bbbcbd;
+    text-align: center;
+    text-size-adjust: 25px;
+    background-size: 15px;
+    height: 56px;
+    background-color: #DC0600;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+
 }
 
-.create-menu {
-    background-color: #0c0c0c;
-    text-align: center;
-    padding-top: 15px;
-    height: 49px;
-    width: 100%;
-    
-}
-/**the create header for the Create-Page*/
 .create-menu-header {
     color: #fdfdfd;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bolder;
-    font: helvetica;
-}
-/**This is to be removed as it collides with the rest of everyone's component*/
-body{background-color: #fdfdfd;}
-
-.create-page-header{
-    
-    min-width: 95%;
-}
-/** The button to create [Competition, Groups, Member]*/
-.btn-create{
-    font-weight: lighter;
+    padding-top: 10px;
     text-align: center;
-    font: helvetica;
-    text-align: center;
-    border-radius: 50px;
-    width: 127px;
-    height: 42px;
-    font-size: 16px;
-    color: #0c0c0c;
-    background: #FDFDFD;
-    
+}
+.create-page-container{
+    background-image: url('../components/assets/gun-image.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
-.btn-create-m{
-    font-weight: lighter;
-    text-align: center;
-    font: helvetica;
-    text-align: center;
-    border-radius: 50px;
-    width: 110px;
-    height: 42px;
-    font-size: 16px;
-    color: #0c0c0c;
-    background: #FDFDFD;
-    
+.centre{
+    height: 100vh;
 }
 
-.btn-create-gr{
-    font-weight: lighter;
-    text-align: center;
-    font: helvetica;
-    text-align: center;
-    border-radius: 50px;
-    width: 90px;
+.button-create-competitions{
     height: 42px;
+    width: 150px;
+    border-radius: 42px;
+    background-color: #fdfdfd;
+    border: none;
     font-size: 16px;
-    color: #0c0c0c;
-    background: #FDFDFD;
+    font-family: helvetica;
+    font-weight: 300;
+    color: #6F839E;
+    margin-top: 12px;
+}
 
-}
-/** The button to view [Competition, Groups, Member]*/
-.btn-view{
-    border-radius: 20px;
-    width: 90px;
+.button-create-members{
     height: 42px;
-    border-color: #e11e2b;
-    font-size:16px;
-    font-weight: normal;
-    text-align: center;
-    font: helvetica;
-}
-/** THe text for the Create [Competition, Groups, Member] button*/
-.btn-create-tex{
-    font-weight: lighter;
-    text-align: center;
+    width: 150px;
+    border-radius: 42px;
+    background-color: #fdfdfd;
+    border: none;
     font-size: 16px;
-    font: helvetica;
-    color:#0c0c0c;
+    font-family: helvetica;
+    font-weight: 300;
+    color: #6F839E;
+    margin-top: 12px;
 }
-/** THe text for the view [Competition, Groups, Member] button*/
-.create-view-text{
-    color:#FFFFFF;
-    font: helvetica;
+
+.button-create-groups{
+    height: 42px;
+    width: 150px;
+    border-radius: 42px;
+    background-color: #fdfdfd;
+    border: none;
     font-size: 16px;
-    font-weight: lighter;
+    font-family: helvetica;
+    font-weight: 300;
+    color: #6F839E;
+    margin-top: 12px;
+}
+
+.button-view-competitions{
+    height: 42px;
+    width: 81px;
+    border-radius: 21px;
+    border: 1px #fdfdfd solid;
+    opacity: unset;
+    color: #fdfdfd;
+    background-color: transparent;
+    font-size: 16px;
+    font-family: helvetica;
+    font-weight: 300;
+    margin-top: 12px;
+}
+
+.button-view-members{
+    height: 42px;
+    width: 81px;
+    border-radius: 21px;
+    border: 1px #fdfdfd solid;
+    opacity: unset;
+    color: #fdfdfd;
+    background-color: transparent;
+    font-size: 16px;
+    font-family: helvetica;
+    font-weight: 300;
+    margin-top: 12px;
+}
+
+.button-view-groups{
+    height: 42px;
+    width: 81px;
+    border-radius: 21px;
+    border: 1px #fdfdfd solid;
+    opacity: unset;
+    color: #fdfdfd;
+    background-color: transparent;
+    font-size: 16px;
+    font-family: helvetica;
+    font-weight: 300;
+    margin-top: 12px;
+}
+
+.buttons-create{
+    width: 50%;
+    float: left;
+    padding-top: 67px;
+}
+
+.buttons-view{
+    width: 50%;
+    float: right;
+    padding-top: 67px;
+}
+
+.container-of-buttons{
     text-align: center;
+}
+
+.view-spacing{
+    text-align: left;
+    margin-left: 34px;
+}
+
+.create-spacing{
+    text-align: right;
+    margin-right: -15px;
 }
