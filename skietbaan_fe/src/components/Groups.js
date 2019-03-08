@@ -46,7 +46,10 @@ class Groups extends Component {
               };
             })
           });
-        });
+        }).catch{
+
+        }
+      
     } else {
       this.props.history.push("/AddGroup");
     }
