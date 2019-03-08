@@ -6,6 +6,8 @@ import "./add.css";
 import { BASE_URL } from "../actions/types";
 import error from "./GroupImages/error.png";
 import back from "./GroupImages/back.png";
+import { getCookie } from '../components/cookie.js';
+
 class AddGroup extends Component {
   constructor(props) {
     super(props);
@@ -48,6 +50,9 @@ class AddGroup extends Component {
   }
 
   render() {
+    if(!getCookie("token")){
+      window.location = "/registerPage";
+  }
     return (
       <div className="add-group-main">
         <div className="page">

@@ -21,6 +21,9 @@ class Documents extends Component {
     }
 
     componentWillMount(){
+        if(!getCookie("token")){
+            window.location = "/registerPage";
+        }
         let token = getCookie("token");
         fetch(BASE_URL+"/api/Documents/UserLOGS/" + token)
         .then(res=>res.json())

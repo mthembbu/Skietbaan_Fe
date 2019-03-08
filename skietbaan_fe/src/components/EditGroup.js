@@ -6,6 +6,7 @@ import { BASE_URL } from "../actions/types";
 import marked from "./GroupImages/marked.png";
 import redbox from "./GroupImages/Rectangle.png";
 import back from "./GroupImages/back.png";
+import { getCookie } from '../components/cookie.js';
 class EditGroup extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +22,9 @@ class EditGroup extends Component {
     this.onChange = this.onChange.bind(this);
   }
   UNSAFE_componentWillMount() {
+    if(!getCookie("token")){
+      window.location = "/registerPage";
+  }
     if (this.props.id != 0) {
       fetch(BASE_URL + "/api/Groups/edit?id=" + this.props.id)
         .then(res => res.json())
