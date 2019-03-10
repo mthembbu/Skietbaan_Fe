@@ -65,7 +65,6 @@ class EditGroup extends Component {
         delete this.state.posts[i].id;
       }
     }
-    console.log(updateArray)
     this.setState({ posts: updateArray });
     
     let request = {
