@@ -132,7 +132,7 @@
   height: 73px;
   background: white;
 }
-.create-group{
+.create-group:focus{
   outline: none;
 }
 

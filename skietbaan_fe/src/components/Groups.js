@@ -58,7 +58,7 @@ class Groups extends Component {
     this.setState({ filterText: event.target.value });
   }
 
-  handleOnClick() {
+ async handleOnClick() {
     const requestedObj = {
       name: this.props.name.toLowerCase()
     };
@@ -72,7 +72,7 @@ class Groups extends Component {
       delete this.state.posts[i].id;
     }
 
-    fetch(BASE_URL + "/api/groups/add", {
+   await fetch(BASE_URL + "/api/groups/add", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -82,7 +82,7 @@ class Groups extends Component {
     })
       .then(function(response) {})
       .catch(function(data) {});
-      setTimeout(function () { window.location = "/ViewGroups"; }, 2000);
+      window.location = "/ViewGroups";
     
   }
 
