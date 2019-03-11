@@ -27,7 +27,7 @@ class ViewGroups extends Component {
     this.editGroup = this.editGroup.bind(this);
   }
 
- async componentDidMount() {
+ async componentWillMount() {
    await fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
       .then(data =>
@@ -132,7 +132,7 @@ class ViewGroups extends Component {
                   <td
                     className="first-row"
                     onClick={() => this.editGroup(post)}
-                    style={{ color: post.colors }}
+                    style={{ color: post.colors ,textAlign:"left" }}
                   >
                     {post.name}
                   </td>
