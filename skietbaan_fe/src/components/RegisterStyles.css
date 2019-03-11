@@ -61,9 +61,9 @@
 .round-button{
   width: 100px;
   height: 42px;
-  color: white;
+  color: #6F839E;
   border-radius: 25px;
-  background-color: #6F839E;
+  background-color: #fdfdfd;
   font-size: 16px;
   margin-top: -22px;
 }
@@ -149,6 +149,16 @@
 
 .password-view-icon{
   background: url("../components/assets/graypassword.png") no-repeat right center;
+  height:30px;
+  background-size: 30px;
+  width: 30px;
+  position: absolute;
+  top: 5px;
+  right: 18px;
+}
+
+.password-icon{
+  background: url("../components/assets/greyEye.png") no-repeat right center;
   height:30px;
   background-size: 30px;
   width: 30px;
@@ -261,7 +271,7 @@
 }
 
 .error-message{
-  color: #EA241A;
+  color: #fdfdfd;
   font-size: 12px;
   padding-top: 3px;
 }
