@@ -268,7 +268,7 @@ class Register extends Component {
                       onChange={this.handleChange}
                       className="input-password"
                     />
-                    <div className={this.state.passwordValue !== "" ? "password-view-icon" : "hidden"}
+                    <div className={this.state.passwordValue !== "" ? "password-view-icon" : "password-icon"}
                       onClick={this.togglePassword}>
                     </div>
 
