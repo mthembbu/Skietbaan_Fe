@@ -22,7 +22,7 @@ class EditGroup extends Component {
     this.onChange = this.onChange.bind(this);
     this.delete = this.delete.bind(this);
   }
- async UNSAFE_componentWillMount() {
+ async componentDidMount() {
     if(!getCookie("token")){
       window.location = "/registerPage";
   }
