@@ -9,7 +9,6 @@ import '../components/RegisterStyles.css';
 import { validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
 import {URL} from '../actions/types.js';
-import header from'../components/assets/header.png';
 import back from '../components/assets/Back.png';
 
 class Login extends Component {
@@ -21,7 +20,8 @@ class Login extends Component {
       validForm: false,
       tokenValue: "",
       users: [],
-      passwordFound: true
+      passwordFound: true,
+      usernameFound: true
     }
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -137,16 +137,21 @@ class Login extends Component {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
           window.location = "/home";
         }
-        else if (typeof data === "string"
-          && data.indexOf("Invalid Password") > -1
-          || data.indexOf("not found")) {
+        else if (typeof data === "string"){
+          if(data.indexOf("Invalid Password") > -1) {
           this.setState({
             invalidPassword: true,
             passwordFound: false,
-            invalidUsername: true
+            
           });
         }
-
+        if(data.indexOf("not found") > -1){
+          this.setState({
+            invalidUsername: true,
+            usernameFound: false
+          })
+        }
+      }
       }).catch(function (data) {
       });
     }
@@ -208,6 +213,8 @@ class Login extends Component {
                     className="input-user"
                   />
                 </div>
+                <div className={this.state.usernameFound
+                  && this.usernameValue !== "" ? "hidden" : "error-message"}>Invalid Username</div>
               </FormGroup>
             </div>
             <div className="spacing-login">
@@ -224,13 +231,13 @@ class Login extends Component {
                       onChange={this.handleChange}
                       className="input-password"
                     />
-                    <div className={this.state.passwordValue !== "" ? "password-view-icon" : "hidden"}
+                    <div className={this.state.passwordValue !== "" ? "password-view-icon" : "password-icon"}
                       onClick={this.togglePassword}>
                     </div>
                   </div>
                 </div>
                 <div className={this.state.passwordFound
-                  && this.passwordValue !== "" ? "hidden" : "error-message"}>Invalid credentials</div>
+                  && this.passwordValue !== "" ? "hidden" : "error-message"}>Invalid Password</div>
               </FormGroup>
             </div>
             <div className="button-container">

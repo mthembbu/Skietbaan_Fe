@@ -32,38 +32,39 @@ class App extends Component {
 		this.state = {
 		  nav: null
 		}
-		this.TypeUser = this.TypeUser.bind(this);
+		//this.TypeUser = this.TypeUser.bind(this);
 	}
 
-	TypeUser(){
-		let token = getCookie("token");
-		fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
-			method: 'Get',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			}
-		})
-			.then(response => response.json())
-			.then(data => this.setState({
-				nav:data.admin
-			}))
-			.then(function (data) {})
-			.catch(function (data) {
-				console.log("error")
-			});
-			if(this.state.nav === true){
-				return <NavbarMenu/>
-			}else{
-				return <NavbarMenuUser/>
-			}
-	}
+	// TypeUser(){
+	// 	let token = getCookie("token");
+	// 	fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
+	// 		method: 'Get',
+	// 		headers: {
+	// 			'Accept': 'application/json',
+	// 			'Content-Type': 'application/json'
+	// 		}
+	// 	})
+	// 		.then(response => response.json())
+	// 		.then(data => this.setState({
+	// 			nav:data.admin
+	// 		}))
+	// 		.then(function (data) {})
+	// 		.catch(function (data) {
+	// 			console.log("error")
+	// 		});
+	// 		if(this.state.nav === true){
+	// 			return <NavbarMenu/>
+	// 		}else{
+	// 			return <NavbarMenuUser/>
+	// 		}
+	// }
 
 	render() {
 		return (
 			<Provider store={store}>
 				<div className="App">
-				{this.TypeUser()}
+				{/* {this.TypeUser()} */}
+				<NavbarMenu />
 					<Router history={history}>
 						<Switch>
 							<Route path="/home" component={LeaderboardPage} exact />
