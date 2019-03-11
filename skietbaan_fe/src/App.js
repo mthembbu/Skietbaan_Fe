@@ -32,7 +32,7 @@ class App extends Component {
 		this.state = {
 		  nav: null
 		}
-		this.TypeUser = this.TypeUser.bind(this);
+		//this.TypeUser = this.TypeUser.bind(this);
 	}
 
 	// TypeUser(){
