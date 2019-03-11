@@ -447,3 +447,10 @@ outline: none;
   margin-top: 15px;
   z-index: 5px;
 }
+.list-group-item-light{
+  text-align: left;
+}
+
+.list-group-item{
+  text-align: left;
+}
