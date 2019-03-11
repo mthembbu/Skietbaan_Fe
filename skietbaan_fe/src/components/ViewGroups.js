@@ -17,7 +17,7 @@ class ViewGroups extends Component {
       count: 0,
       ShowMe: true,
       ids: 0,
-      index: 0,
+      indexs:"",
       selected: "",
       deleteState: false
     };
@@ -28,11 +28,7 @@ class ViewGroups extends Component {
   }
 
   UNSAFE_componentWillMount() {
-    if(!getCookie("token")){
-      window.location = "/registerPage";
-  }
     fetch(BASE_URL + "/api/Groups")
-
       .then(res => res.json())
       .then(data =>
         this.setState({
@@ -45,7 +41,6 @@ class ViewGroups extends Component {
           })
         })
       )
-      .catch(console.log("there is an error when fetching"));
   }
 
   onChange(event) {
@@ -55,20 +50,20 @@ class ViewGroups extends Component {
   onBack() {
     this.props.history.push("/create");
   }
-  editGroup(event, name) {
-    this.props.getName(name);
-    this.props.passId(event);
+  editGroup(obj) {
+    this.props.getName(obj.name);
+    this.props.passId(obj.id);
     this.props.history.push("/EditGroup");
   }
 
-  update = (id, indexs, name) => {
+  update = (obj,index) => {
     const newarry = [...this.state.posts];
-    newarry[indexs].colors = "red";
-    newarry[indexs].image = deleteState;
+    newarry[index].colors = "red";
+    newarry[index].image = deleteState;
+    this.setState({indexs:index})
     this.setState({
-      ids: id,
-      index: indexs,
-      selected: name,
+      ids: obj.id,
+      selected: obj.name,
       ShowMe: false,
       posts: newarry,
       ShowMe: false,
@@ -79,7 +74,7 @@ class ViewGroups extends Component {
   delete() {
     this.setState({ ShowMe: false });
     const newarry = [...this.state.posts];
-    newarry.splice(this.state.index, 1);
+    newarry.splice(this.state.indexs, 1);
     this.setState({ posts: newarry });
 
     fetch(BASE_URL + "/api/Groups/" + this.state.ids, {
@@ -100,15 +95,17 @@ class ViewGroups extends Component {
   };
 
   do = () => {
+
     if (this.state.ShowMe == false) {
       this.setState({ ShowMe: true });
     }
+
   };
 
   cancel = () => {
     const newarry = [...this.state.posts];
-    newarry[this.state.index].colors = "black";
-    newarry[this.state.index].image = normalstate;
+    newarry[this.state.indexs].colors = "black";
+    newarry[this.state.indexs].image = normalstate;
     this.setState({ selected: "", posts: newarry });
   };
 
@@ -134,7 +131,7 @@ class ViewGroups extends Component {
                 <tr className="view-group" key={post.id}>
                   <td
                     className="first-row"
-                    onClick={() => this.editGroup(post.id, post.name)}
+                    onClick={() => this.editGroup(post)}
                     style={{ color: post.colors }}
                   >
                     {post.name}
@@ -142,7 +139,7 @@ class ViewGroups extends Component {
                   <td>
                     <div
                       className="group-view"
-                      onClick={() => this.update(post.id, index, post.name)}
+                      onClick={() => this.update(post,index)}
                     >
                       <img src={post.image} alt="" />
                     </div>
@@ -155,7 +152,7 @@ class ViewGroups extends Component {
     );
 
     return (
-      <main className="The-Main" onClick={() => this.do()}>
+      <main className="The-Main" onClick={()=>this.do()}>
         <div className="the-nav-bar">
         <a href="" className="back-container">
           <img className="back-image" onClick={this.onBack} src={back} alt="" /></a>
@@ -178,7 +175,7 @@ class ViewGroups extends Component {
                   </td>
                   <td>
                     <span className="name-of-group">
-                      {this.state.selected}{" "}
+                      {this.state.selected}
                     </span>
                   </td>
                   <div className="confrim-cancel">

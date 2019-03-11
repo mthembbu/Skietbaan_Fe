@@ -82,11 +82,11 @@ class Groups extends Component {
     })
       .then(function(response) {})
       .catch(function(data) {});
-      this.props.history.push("/ViewGroups");
+      setTimeout(function () { window.location = "/ViewGroups"; }, 2000);
+    
   }
 
   selectall() {
-
     const newarry = [...this.state.posts];
     if (this.state.check == "Select all") {
       this.setState({count:newarry.length})
@@ -160,7 +160,7 @@ class Groups extends Component {
                   <div className="userName" style={{ color: post.colors }}>
                     {post.username}
                   </div>
-                  <div className="emails" style={{ color: post.colors }}>
+                  <div className="email" style={{ color: post.colors }}>
                     {post.email}
                   </div>
                 </label>
@@ -202,7 +202,7 @@ class Groups extends Component {
         </div>
         {this.state.count == 0 ? null : (
           <label className="bottom-label">
-            <button className="delete-User" onClick={this.handleOnClick}>
+            <button className="create-group" onClick={this.handleOnClick}>
               Create Group
             </button>
           </label>

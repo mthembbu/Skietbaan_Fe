@@ -71,8 +71,10 @@ class AddMembersGroup extends Component {
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
+      setTimeout(function () { window.location = "/EditGroup"; }, 2000);
   }
   toggleHighlight = (name, event) => {
+    this.setState
     if (this.state.posts[event].highlighted === true) {
       this.state.posts[event].background = "#fdfdfd";
       this.state.posts[event].highlighted = false;
@@ -117,7 +119,7 @@ class AddMembersGroup extends Component {
                 />
                 <label className="blabe">
                   <div className="userName"> {post.username}</div>
-                  <div className="emails">{post.email}</div>
+                  <div className="email">{post.email}</div>
                 </label>
               </li>
             ))}
@@ -171,9 +173,7 @@ class AddMembersGroup extends Component {
                       </button>
                     </td>
                     <td className="group-undo">
-                      <button
-                        className="updatess"
-                        onClick={() => this.cancel()}
+                      <button className="updatess" onClick={() => this.cancel()}
                       >
                         Cancel
                       </button>
