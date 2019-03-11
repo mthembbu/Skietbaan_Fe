@@ -137,6 +137,7 @@ class Login extends Component {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
           window.location = "/home";
         }
+
         else if (typeof data === "string"){
           if(data.indexOf("Invalid Password") > -1) {
           this.setState({
