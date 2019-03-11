@@ -148,7 +148,7 @@ class Groups extends Component {
                 class="list-group-item list-group-item-light"
                 key={post.id}
                 style={{
-                  background: post.background
+                  background: post.background ,textAlign:"left"
                 }}
               >
                 <img

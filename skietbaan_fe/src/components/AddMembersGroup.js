@@ -110,7 +110,7 @@ async addUsers() {
               <li
                 class="list-group-item list-group-item-light"
                 key={post.id}
-                style={{ background: post.background }}
+                style={{ background: post.background ,textAlign:"left"}}
               >
                 <img
                   className="checkbox-delete"
