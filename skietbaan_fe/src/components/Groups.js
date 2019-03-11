@@ -202,7 +202,7 @@ class Groups extends Component {
         </div>
         {this.state.count == 0 ? null : (
           <label className="bottom-label">
-            <button className="delete-User" onClick={this.handleOnClick}>
+            <button className="create-group" onClick={this.handleOnClick}>
               Create Group
             </button>
           </label>

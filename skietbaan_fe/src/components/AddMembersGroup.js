@@ -71,7 +71,7 @@ class AddMembersGroup extends Component {
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
-      this.props.history.push("/EditGroup");
+      setTimeout(function () { window.location = "/EditGroup"; }, 2000);
   }
   toggleHighlight = (name, event) => {
     this.setState

@@ -65,7 +65,6 @@ class EditGroup extends Component {
         delete this.state.posts[i].id;
       }
     }
-    console.log(updateArray)
     this.setState({ posts: updateArray });
     
     let request = {
@@ -139,7 +138,7 @@ class EditGroup extends Component {
                   <div className="userName" className={post.image==marked?"userName":"userName-active"}>
                     {post.username}
                   </div>
-                  <div className="email">
+                  <div className={post.image==marked?"email":"emails-active"}>
                     {post.email}
                   </div>
                 </label>
@@ -148,6 +147,7 @@ class EditGroup extends Component {
         </ul>
       </div>
     );
+    
     return (
       <main className="The-Main">
         <div className="the-nav-bar">
