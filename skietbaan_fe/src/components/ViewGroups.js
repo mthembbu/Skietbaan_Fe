@@ -27,7 +27,7 @@ class ViewGroups extends Component {
     this.editGroup = this.editGroup.bind(this);
   }
 
- async UNSAFE_componentWillMount() {
+ async componentDidMount() {
    await fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
       .then(data =>
