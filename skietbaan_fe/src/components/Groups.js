@@ -59,10 +59,6 @@ class Groups extends Component {
   }
 
  async handleOnClick() {
-    const requestedObj = {
-      name: this.props.name.toLowerCase()
-    };
-    this.props.createGroups(requestedObj);
     const { newArray } = this.state;
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === true) {
@@ -72,13 +68,18 @@ class Groups extends Component {
       delete this.state.posts[i].id;
     }
 
-   await fetch(BASE_URL + "/api/groups/add", {
+    const requestedObj = {
+      name: this.props.name.toLowerCase(),
+      users:this.state.newArray
+    };
+
+    fetch(BASE_URL + "/api/groups/add", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(newArray)
+      body: JSON.stringify(requestedObj)
     })
       .then(function(response) {})
       .catch(function(data) {});
