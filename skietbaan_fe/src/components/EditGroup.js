@@ -20,13 +20,14 @@ class EditGroup extends Component {
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.delete = this.delete.bind(this);
   }
-  UNSAFE_componentWillMount() {
+ async UNSAFE_componentWillMount() {
     if(!getCookie("token")){
       window.location = "/registerPage";
   }
     if (this.props.id != 0) {
-      fetch(BASE_URL + "/api/Groups/edit?id=" + this.props.id)
+    await fetch(BASE_URL + "/api/Groups/edit?id=" + this.props.id)
         .then(res => res.json())
         .then(data => {
           this.setState({
@@ -41,14 +42,14 @@ class EditGroup extends Component {
           });
         });
     } else {
-      // this.props.history.push("/ViewGroups");
+       this.props.history.push("/ViewGroups");
     }
   }
   onChange(event) {
     this.setState({ filterText: event.target.value });
   }
 
-  delete = () => {
+ async delete  () {
     this.setState({ count: 0 });
     const { newArray } = this.state;
     const updateArray = [...this.state.posts];
@@ -65,14 +66,13 @@ class EditGroup extends Component {
         delete this.state.posts[i].id;
       }
     }
-    console.log(updateArray)
     this.setState({ posts: updateArray });
     
     let request = {
       GroupIds: this.props.id,
       users: this.state.newArray
     };
-    fetch(BASE_URL + "/api/groups/deleteMember/", {
+  await fetch(BASE_URL + "/api/groups/deleteMember/", {
       method: "Post",
       headers: {
         Accept: "application/json",
@@ -139,7 +139,7 @@ class EditGroup extends Component {
                   <div className="userName" className={post.image==marked?"userName":"userName-active"}>
                     {post.username}
                   </div>
-                  <div className="email">
+                  <div className={post.image==marked?"email":"emails-active"}>
                     {post.email}
                   </div>
                 </label>
@@ -148,6 +148,7 @@ class EditGroup extends Component {
         </ul>
       </div>
     );
+    
     return (
       <main className="The-Main">
         <div className="the-nav-bar">
