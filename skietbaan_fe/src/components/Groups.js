@@ -130,7 +130,7 @@ class Groups extends Component {
   render() {
     const postitems = (
       <div className="check">
-        <ul class="list-group">
+        <ul class="list-group" style={{textAlign:"left"}}>
           {this.state.posts
             .filter(post => {
               return (
