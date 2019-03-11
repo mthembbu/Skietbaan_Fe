@@ -27,8 +27,8 @@ class ViewGroups extends Component {
     this.editGroup = this.editGroup.bind(this);
   }
 
-  UNSAFE_componentWillMount() {
-    fetch(BASE_URL + "/api/Groups")
+ async UNSAFE_componentWillMount() {
+   await fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
       .then(data =>
         this.setState({
@@ -71,13 +71,13 @@ class ViewGroups extends Component {
     });
   };
 
-  delete() {
+ async delete() {
     this.setState({ ShowMe: false });
     const newarry = [...this.state.posts];
     newarry.splice(this.state.indexs, 1);
     this.setState({ posts: newarry });
 
-    fetch(BASE_URL + "/api/Groups/" + this.state.ids, {
+   await fetch(BASE_URL + "/api/Groups/" + this.state.ids, {
       method: "POST",
       headers: {
         Accept: "application/json",
