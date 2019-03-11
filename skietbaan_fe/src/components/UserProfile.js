@@ -53,7 +53,7 @@ class UserProfile extends Component {
             counter++;
             setTimeout(() => {
                 this.AnimateAccuracyCircle(counter, element, index)
-            }, 0)
+            }, 80)
         }
     }
 
@@ -208,7 +208,7 @@ class UserProfile extends Component {
                             </Col>
                         </Row>
                     </Col>
-                    <div>{this.AnimateAccuracyCircle(element.accuracy, element, index)}</div>
+                    <div>{this.AnimateAccuracyCircle(1, element, index)}</div>
                 </Row>
             </div>
         )
@@ -232,9 +232,6 @@ class UserProfile extends Component {
         this.state.awardCompetitions.forEach((element, index) => {
             renderArray.push(this.CompetitionsStat(element, index))
         })
-       /* for(var i = 0; i < 1; i++){
-            renderArray.push(this.CompetitionsStat(this.state.awardCompetitions[i], i))
-        }*/
         
         return renderArray;
     }

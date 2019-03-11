@@ -20,13 +20,14 @@ class AddMembersGroup extends Component {
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.addUsers = this.addUsers.bind(this);
   }
-  UNSAFE_componentWillMount() {
+ async componentDidMount() {
     if(!getCookie("token")){
       window.location = "/registerPage";
   }
     if (this.props.id != 0) {
-      fetch(BASE_URL + "/api/Groups/list?id=" + this.props.id)
+     await fetch(BASE_URL + "/api/Groups/list?id=" + this.props.id)
         .then(res => res.json())
         .then(data => {
           this.setState({
@@ -47,7 +48,7 @@ class AddMembersGroup extends Component {
     this.setState({ filterText: event.target.value });
   }
 
-  addUsers=()=> {
+async addUsers() {
     const { newArray } = this.state;
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === true) {
@@ -60,7 +61,7 @@ class AddMembersGroup extends Component {
       users: this.state.newArray,
       GroupIds: this.props.id
     };
-    fetch(BASE_URL + "/api/groups/postMember/", {
+   await fetch(BASE_URL + "/api/groups/postMember/", {
       method: "post",
       headers: {
         Accept: "application/json",
