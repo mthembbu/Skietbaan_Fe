@@ -52,18 +52,13 @@ class App extends Component {
 			.catch(function (data) {
 				console.log("error")
 			});
-			if(this.state.nav === true){
-				return <NavbarMenu/>
-			}else{
-				return <NavbarMenuUser/>
-			}
 	}
 
 	render() {
 		return (
 			<Provider store={store}>
 				<div>
-				{this.TypeUser()}
+				{this.state.nav ? <NavbarMenu/>:<NavbarMenuUser/>}
 					<Router history={history}>
 						<Switch>
 							<Route path="/home" component={LeaderboardPage} exact />
