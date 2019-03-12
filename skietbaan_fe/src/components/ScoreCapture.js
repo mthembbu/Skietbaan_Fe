@@ -325,6 +325,25 @@ export default class search extends Component {
 
 
   render() {
+    document.addEventListener('DOMContentLoaded', () => {
+      var HideWhenAddingScore = document.querySelector("#HideWhenAddingScore");
+     var last_size = document.body.clientHeight;
+     window.addEventListener("resize",function(){
+      if(last_size == document.body.clientHeight){
+        return;
+            }
+       if(HideWhenAddingScore.classList.contains("hidden-small"))
+       {
+        HideWhenAddingScore.classList.remove("hidden-small");
+       }
+       else{
+        HideWhenAddingScore.classList.add("hidden-small");
+       }
+       last_size = document.body.clientHeight;
+     })
+    }, false);
+
+
     const stateOne = this.state.showCamera || this.state.ImageTaken
     let competitionItem = [];
     if (this.state.competitionsList && this.state.competitionsList.length > 0) {
@@ -367,7 +386,7 @@ export default class search extends Component {
               <div className="success"> Score Saved successfully </div>
             </div>
           </div>
-          <div className="submit-container">
+          <div className="submit-container" id="HideWhenAddingScore">
             <div className={this.state.ImageTaken || this.state.showCamera 
               ? "hidden" : "submit-button-elements"}>
               <div className="button-hover">
