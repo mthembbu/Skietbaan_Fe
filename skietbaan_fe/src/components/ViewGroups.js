@@ -29,9 +29,6 @@ class ViewGroups extends Component {
 
   componentDidMount() {
     fetch(BASE_URL + "/api/Groups")
-      .then(
-         fetch(BASE_URL + "/api/Groups")
-      )
       .then(res => res.json())
       .then(data =>
         this.setState({

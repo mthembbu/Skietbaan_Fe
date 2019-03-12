@@ -72,7 +72,7 @@ class AddMembersGroup extends Component {
       },
       body: JSON.stringify(request)
     })
-    .then( fetch({}))
+    .then(fetch(BASE_URL + "/api/Groups/edit?id=" + this.props.id) )
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
