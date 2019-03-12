@@ -90,8 +90,6 @@ class Groups extends Component {
       .catch(function(data) {});
       
       this.props.history.push("/ViewGroups");
-
-    
   }
 
   selectall() {
