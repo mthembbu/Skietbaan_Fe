@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
 import { withRouter } from "react-router-dom";
-import { createGroups } from "../actions/postActions";
+import { createGroups ,FetchGroups} from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
 import back from "./GroupImages/back.png";
 import unmarked from "./GroupImages/unmarked.png";
@@ -68,6 +68,8 @@ class Groups extends Component {
       delete this.state.posts[i].id;
     }
 
+    await this.props.FetchGroups();
+
     const requestedObj = {
       name: this.props.name.toLowerCase(),
       users:this.state.newArray
@@ -86,9 +88,8 @@ class Groups extends Component {
     )
       .then(function(response) {})
       .catch(function(data) {});
+      
       this.props.history.push("/ViewGroups");
-
-    
   }
 
   selectall() {
@@ -224,6 +225,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { createGroups }
+    { createGroups ,FetchGroups }
   )(Groups)
 );
