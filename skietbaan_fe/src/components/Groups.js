@@ -58,11 +58,7 @@ class Groups extends Component {
     this.setState({ filterText: event.target.value });
   }
 
-  handleOnClick() {
-    const requestedObj = {
-      name: this.props.name.toLowerCase()
-    };
-    this.props.createGroups(requestedObj);
+ async handleOnClick() {
     const { newArray } = this.state;
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === true) {
@@ -72,17 +68,22 @@ class Groups extends Component {
       delete this.state.posts[i].id;
     }
 
+    const requestedObj = {
+      name: this.props.name.toLowerCase(),
+      users:this.state.newArray
+    };
+
     fetch(BASE_URL + "/api/groups/add", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(newArray)
+      body: JSON.stringify(requestedObj)
     })
       .then(function(response) {})
       .catch(function(data) {});
-      setTimeout(function () { window.location = "/ViewGroups"; }, 2000);
+      window.location = "/ViewGroups";
     
   }
 
@@ -202,7 +203,7 @@ class Groups extends Component {
         </div>
         {this.state.count == 0 ? null : (
           <label className="bottom-label">
-            <button className="delete-User" onClick={this.handleOnClick}>
+            <button className="create-group" onClick={this.handleOnClick}>
               Create Group
             </button>
           </label>

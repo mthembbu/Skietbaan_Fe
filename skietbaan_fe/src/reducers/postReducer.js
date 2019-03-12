@@ -47,7 +47,6 @@ export default function(state = initialState, action) {
       };
 
     case CREATEGROUP:
-    console.log("bathande tuman")
       return {
         ...state,
         selectedItem: action.payload
