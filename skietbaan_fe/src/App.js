@@ -31,12 +31,20 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-		  nav: null
+			nav: false
 		}
 		this.TypeUser = this.TypeUser.bind(this);
 	}
 
 	TypeUser(){
+		if(this.state.nav){
+			return <NavbarMenu />
+		}else{
+			return <NavbarMenuUser />
+		}
+	}
+
+	componentDidMount(){
 		let token = getCookie("token");
 		fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
 			method: 'Get',
@@ -46,20 +54,22 @@ class App extends Component {
 			}
 		})
 			.then(response => response.json())
-			.then(data => this.setState({
-				nav:data.admin
-			}))
-			.then(function (data) {})
-			.catch(function (data) {
-				console.log("error")
+			.then(data => {
+				this.setState({
+					nav:data.admin
 			});
+			}).catch(function (data) {});
 	}
+
+
 
 	render() {
 		return (
 			<Provider store={store}>
 				<div>
-				{this.state.nav ? <NavbarMenu/>:<NavbarMenuUser/>}
+				{this.state.nav ? <NavbarMenu /> : <NavbarMenuUser />}
+				{/* TODO: Make the Navbar work more efficiently with this 
+				 {this.TypeUser()} */}
 					<Router history={history}>
 						<Switch>
 							<Route path="/home" component={LeaderboardPage} exact />
