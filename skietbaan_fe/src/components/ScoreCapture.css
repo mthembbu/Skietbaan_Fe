@@ -193,6 +193,7 @@
 
 .submit-button-elements{
     float: left;
+    height: 20px;
     width: 50%;
     position: relative;
 }
