@@ -356,7 +356,7 @@ export default class search extends Component {
       }
     }
     if(!getCookie("token")){
-    //  window.location = "/registerPage";
+      window.location = "/registerPage";
     }
     return (
       <div className="position-relative">
