@@ -154,7 +154,7 @@ export default class search extends Component {
 
   CameraClicked() {
     let Valid = this.Validate();
-
+    this.state.Flashon = false;
     if (Valid) {
       this.setState({
         currState: 3,

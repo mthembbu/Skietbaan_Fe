@@ -20,6 +20,7 @@ import ScoreCapture from './components/ScoreCapture';
 import CreatePage from './components/CreatePage';
 import UserProfile from './components/UserProfile';
 import './App.css';
+import ForgotPassword from './components/ForgotPassword';
 import AddMembersGroup from './components/AddMembersGroup';
 import EditGroup from './components/EditGroup';
 import ViewComp from './components/ViewComp';
@@ -32,45 +33,40 @@ class App extends Component {
 		this.state = {
 		  nav: null
 		}
-		//this.TypeUser = this.TypeUser.bind(this);
+		this.TypeUser = this.TypeUser.bind(this);
 	}
 
-	// TypeUser(){
-	// 	let token = getCookie("token");
-	// 	fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
-	// 		method: 'Get',
-	// 		headers: {
-	// 			'Accept': 'application/json',
-	// 			'Content-Type': 'application/json'
-	// 		}
-	// 	})
-	// 		.then(response => response.json())
-	// 		.then(data => this.setState({
-	// 			nav:data.admin
-	// 		}))
-	// 		.then(function (data) {})
-	// 		.catch(function (data) {
-	// 			console.log("error")
-	// 		});
-	// 		if(this.state.nav === true){
-	// 			return <NavbarMenu/>
-	// 		}else{
-	// 			return <NavbarMenuUser/>
-	// 		}
-	// }
+	TypeUser(){
+		let token = getCookie("token");
+		fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
+			method: 'Get',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			}
+		})
+			.then(response => response.json())
+			.then(data => this.setState({
+				nav:data.admin
+			}))
+			.then(function (data) {})
+			.catch(function (data) {
+				console.log("error")
+			});
+	}
 
 	render() {
 		return (
 			<Provider store={store}>
-				<div className="App">
-				{/* {this.TypeUser()} */}
-				<NavbarMenu />
+				<div>
+				{this.state.nav ? <NavbarMenu/>:<NavbarMenuUser/>}
 					<Router history={history}>
 						<Switch>
 							<Route path="/home" component={LeaderboardPage} exact />
 							<Route path="/login" component={Login} exact />
 							<Route path="/registerPage" component={Register} exact />
 							<Route path="/" component={Register} exact />
+							<Route path="/forgotPassword" component={ForgotPassword} />
 							<Route path="/registerMember" component={RegisterMember} exact />
 							<Route path="/new-competition" component={CreateComp} exact />
 							<Route path="/AddGroup" component={AddGroup} exact />

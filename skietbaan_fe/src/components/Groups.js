@@ -59,10 +59,6 @@ class Groups extends Component {
   }
 
  async handleOnClick() {
-    const requestedObj = {
-      name: this.props.name.toLowerCase()
-    };
-    this.props.createGroups(requestedObj);
     const { newArray } = this.state;
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === true) {
@@ -72,17 +68,26 @@ class Groups extends Component {
       delete this.state.posts[i].id;
     }
 
-   await fetch(BASE_URL + "/api/groups/add", {
+    const requestedObj = {
+      name: this.props.name.toLowerCase(),
+      users:this.state.newArray
+    };
+
+    fetch(BASE_URL + "/api/groups/add", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(newArray)
+      body: JSON.stringify(requestedObj)
     })
+    .then(
+      fetch(BASE_URL + "/api/Groups")
+    )
       .then(function(response) {})
       .catch(function(data) {});
-      window.location = "/ViewGroups";
+      this.props.history.push("/ViewGroups");
+
     
   }
 
@@ -129,7 +134,7 @@ class Groups extends Component {
   render() {
     const postitems = (
       <div className="check">
-        <ul class="list-group">
+        <ul class="list-group" style={{textAlign:"left"}}>
           {this.state.posts
             .filter(post => {
               return (
@@ -147,7 +152,7 @@ class Groups extends Component {
                 class="list-group-item list-group-item-light"
                 key={post.id}
                 style={{
-                  background: post.background
+                  background: post.background ,textAlign:"left"
                 }}
               >
                 <img

@@ -22,12 +22,15 @@ class EditGroup extends Component {
     this.onChange = this.onChange.bind(this);
     this.delete = this.delete.bind(this);
   }
- async UNSAFE_componentWillMount() {
+  componentDidMount() {
     if(!getCookie("token")){
       window.location = "/registerPage";
   }
     if (this.props.id != 0) {
-    await fetch(BASE_URL + "/api/Groups/edit?id=" + this.props.id)
+     fetch(BASE_URL + "/api/Groups/edit?id=" + this.props.id)
+    .then(
+       fetch({})
+    )
         .then(res => res.json())
         .then(data => {
           this.setState({
@@ -49,7 +52,7 @@ class EditGroup extends Component {
     this.setState({ filterText: event.target.value });
   }
 
- async delete  () {
+  delete  () {
     this.setState({ count: 0 });
     const { newArray } = this.state;
     const updateArray = [...this.state.posts];
@@ -72,7 +75,7 @@ class EditGroup extends Component {
       GroupIds: this.props.id,
       users: this.state.newArray
     };
-  await fetch(BASE_URL + "/api/groups/deleteMember/", {
+   fetch(BASE_URL + "/api/groups/deleteMember/", {
       method: "Post",
       headers: {
         Accept: "application/json",
@@ -108,7 +111,7 @@ class EditGroup extends Component {
   render() {
     const postitems = (
       <div className="check">
-        <ul class="list-group">
+        <ul class="list-group" style={{textAlign:"left"}}>
           {this.state.posts
             .filter(post => {
               return (
@@ -126,7 +129,7 @@ class EditGroup extends Component {
                 class="list-group-item list-group-item-light"
                 key={post.id}
                 style={{
-                  background: post.background
+                  background: post.background ,textAlign:"left"
                 }}
               >
                 <img

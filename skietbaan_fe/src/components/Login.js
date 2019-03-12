@@ -8,7 +8,7 @@ import {
 import '../components/RegisterStyles.css';
 import { validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
-import {URL} from '../actions/types.js';
+import { URL } from '../actions/types.js';
 import back from '../components/assets/Back.png';
 
 class Login extends Component {
@@ -70,18 +70,18 @@ class Login extends Component {
     if (target.name === "passwordValue") {
       if (target.value.length > 0)
         stateUpdate.invalidPassword = false;
-        else {
-          stateUpdate.invalidPassword = true;
-        }
+      else {
+        stateUpdate.invalidPassword = true;
+      }
     }
     if (target.name === "usernameValue") {
       if (target.value.length > 0)
         stateUpdate.invalidUsername = false;
-        else {
-          stateUpdate.invalidUsername = true;
-        }
+      else {
+        stateUpdate.invalidUsername = true;
+      }
     }
-    
+
     if (this.state.usernameValue
       && this.state.passwordValue
       && !stateUpdate.invalidUsername
@@ -137,21 +137,22 @@ class Login extends Component {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
           window.location = "/home";
         }
-        else if (typeof data === "string"){
-          if(data.indexOf("Invalid Password") > -1) {
-          this.setState({
-            invalidPassword: true,
-            passwordFound: false,
-            
-          });
+
+        else if (typeof data === "string") {
+          if (data.indexOf("Invalid Password") > -1) {
+            this.setState({
+              invalidPassword: true,
+              passwordFound: false,
+
+            });
+          }
+          if (data.indexOf("not found") > -1) {
+            this.setState({
+              invalidUsername: true,
+              usernameFound: false
+            })
+          }
         }
-        if(data.indexOf("not found") > -1){
-          this.setState({
-            invalidUsername: true,
-            usernameFound: false
-          })
-        }
-      }
       }).catch(function (data) {
       });
     }
@@ -243,6 +244,9 @@ class Login extends Component {
             <div className="button-container">
               <Button onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
                 : "buttons-invalid round-button"} >Login</Button>
+            </div>
+            <div className="login-href">
+              <a href="/forgotPassword" >Forgot Password?</a>
             </div>
           </Form>
         </div >
