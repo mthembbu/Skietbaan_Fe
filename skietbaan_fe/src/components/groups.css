@@ -67,7 +67,7 @@
 .NavBar {
   height: 0px;
 }
-.the-Text{
+.the-Text {
   outline: none;
 }
 
@@ -75,9 +75,11 @@
   margin-left: 19px;
   margin-top: 17px;
   width: 208px;
+  float: left;
   height: 39px;
   font-weight: lighter;
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR…mlZQgCULZkxRlmKjdBURWh0mv/W3EGVn62pWM9B/29Mj3wFyteMR+aPMWlAAAAAElFTkSuQmCC) no-repeat;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR…mlZQgCULZkxRlmKjdBURWh0mv/W3EGVn62pWM9B/29Mj3wFyteMR+aPMWlAAAAAElFTkSuQmCC)
+    no-repeat;
   background-position: right;
   background-position-x: 175px;
   font-size: 18px;
@@ -90,24 +92,23 @@
 
 .select {
   margin-top: 17px;
-margin-right: 18px;
-float: right;
-height: 38px;
-border-radius: 30px;
-width: 102px;
-color: #6f839e;
-font-weight: lighter;
-font-size: 16px;
-background: white;
-border: 1px lightgrey solid;
-outline: none;
-
+  margin-right: 18px;
+  float: right;
+  height: 38px;
+  border-radius: 30px;
+  width: 102px;
+  color: #6f839e;
+  font-weight: lighter;
+  font-size: 16px;
+  background: white;
+  border: 1px lightgrey solid;
+  outline: none;
 }
-.select:focus{
+.select:focus {
   outline: none;
 }
 
-.select2:focus{
+.select2:focus {
   outline: none;
 }
 
@@ -131,7 +132,7 @@ outline: none;
   height: 73px;
   background: white;
 }
-.create-group:focus{
+.create-group:focus {
   outline: none;
 }
 
@@ -189,7 +190,7 @@ outline: none;
   font-size: 14px;
   font-weight: lighter;
   font-size: 16px;
-  color:#6f839e;
+  color: #6f839e;
 }
 
 .emails-active {
@@ -288,7 +289,7 @@ outline: none;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
-.updatess:focus{
+.updatess:focus {
   outline: none;
 }
 
@@ -300,7 +301,6 @@ outline: none;
   background: transparent;
   border: 1px solid white;
   color: white;
-  
 }
 
 .botname {
@@ -313,8 +313,6 @@ outline: none;
   font-weight: lighter;
   font-size: 16px;
 }
-
-
 
 .usersname {
   font-weight: bold;
@@ -334,7 +332,7 @@ outline: none;
   text-overflow: ellipsis;
   padding-left: 20px;
 }
-.group-confirm:focus{
+.group-confirm:focus {
   outline: none;
 }
 
@@ -348,7 +346,6 @@ outline: none;
   background: red;
   color: white;
   border: 1px solid red;
-  
 }
 .group-confirm-add {
   border-radius: 24.5px;
@@ -357,12 +354,11 @@ outline: none;
   background: white;
   border: 1px solid;
   padding-left: 5px;
-  background:white;
+  background: white;
   color: black;
   border: 1px solid black;
-  
 }
-.group-confirm-add:focus{
+.group-confirm-add:focus {
   outline: none;
 }
 
@@ -427,7 +423,7 @@ outline: none;
 .confrim-cancel {
   padding-left: 7%;
   position: fixed;
-  right:1%;
+  right: 1%;
   outline: none;
 }
 
@@ -435,7 +431,6 @@ outline: none;
   padding-left: 30px;
   margin-top: 11px;
   height: 30px;
-
 }
 
 .checkbox-delete {
@@ -447,13 +442,13 @@ outline: none;
   margin-top: 15px;
   z-index: 5px;
 }
-.list-group-item-light{
+.list-group-item-light {
   text-align: left;
 }
 
-.list-group-item{
+.list-group-item {
   text-align: left;
 }
-.list-group{
+.list-group {
   text-align: left;
 }

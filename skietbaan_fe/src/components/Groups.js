@@ -83,7 +83,8 @@ class Groups extends Component {
     })
       .then(function(response) {})
       .catch(function(data) {});
-      window.location = "/ViewGroups";
+      this.props.history.push("/ViewGroups");
+
     
   }
 
