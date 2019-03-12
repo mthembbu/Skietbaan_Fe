@@ -22,12 +22,15 @@ class AddMembersGroup extends Component {
     this.onChange = this.onChange.bind(this);
     this.addUsers = this.addUsers.bind(this);
   }
- async componentDidMount() {
+  componentDidMount() {
     if(!getCookie("token")){
       window.location = "/registerPage";
   }
     if (this.props.id != 0) {
-     await fetch(BASE_URL + "/api/Groups/list?id=" + this.props.id)
+      fetch(BASE_URL + "/api/Groups/list?id=" + this.props.id)
+     .then(
+       fetch({})
+     )
         .then(res => res.json())
         .then(data => {
           this.setState({
@@ -48,7 +51,7 @@ class AddMembersGroup extends Component {
     this.setState({ filterText: event.target.value });
   }
 
-async addUsers() {
+ addUsers() {
     const { newArray } = this.state;
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === true) {
@@ -61,7 +64,7 @@ async addUsers() {
       users: this.state.newArray,
       GroupIds: this.props.id
     };
-   await fetch(BASE_URL + "/api/groups/postMember/", {
+    fetch(BASE_URL + "/api/groups/postMember/", {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -69,6 +72,7 @@ async addUsers() {
       },
       body: JSON.stringify(request)
     })
+    .then(fetch(BASE_URL + "/api/Groups/edit?id=" + this.props.id) )
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
@@ -93,7 +97,7 @@ async addUsers() {
   render() {
     const postitems = (
       <div className="check">
-        <ul class="list-group">
+        <ul class="list-group" style={{textAlign:"left"}}>
           {this.state.posts
             .filter(post => {
               return (
@@ -110,7 +114,7 @@ async addUsers() {
               <li
                 class="list-group-item list-group-item-light"
                 key={post.id}
-                style={{ background: post.background }}
+                style={{ background: post.background ,textAlign:"left"}}
               >
                 <img
                   className="checkbox-delete"

@@ -81,9 +81,13 @@ class Groups extends Component {
       },
       body: JSON.stringify(requestedObj)
     })
+    .then(
+      fetch(BASE_URL + "/api/Groups")
+    )
       .then(function(response) {})
       .catch(function(data) {});
-      window.location = "/ViewGroups";
+      this.props.history.push("/ViewGroups");
+
     
   }
 
@@ -130,7 +134,7 @@ class Groups extends Component {
   render() {
     const postitems = (
       <div className="check">
-        <ul class="list-group">
+        <ul class="list-group" style={{textAlign:"left"}}>
           {this.state.posts
             .filter(post => {
               return (
@@ -148,7 +152,7 @@ class Groups extends Component {
                 class="list-group-item list-group-item-light"
                 key={post.id}
                 style={{
-                  background: post.background
+                  background: post.background ,textAlign:"left"
                 }}
               >
                 <img
