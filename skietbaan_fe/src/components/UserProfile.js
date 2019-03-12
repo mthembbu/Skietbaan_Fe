@@ -155,7 +155,7 @@ class UserProfile extends Component {
                                 <div className="rectangle lay-horizontal">
                                     <Row className="inherit-width">
                                         <Col>
-                                            <div><label className="accuracy-label">Accuracy</label></div>
+                                            <div className="accuracy-text-align"><label className="accuracy-label">Accuracy</label></div>
                                             <div className="circle-bigger">
                                                {!element.isCompetitionLocked ? this.RenderActiveCircle(index) : this.RenderRedLockIcon()}
                                             </div>
@@ -232,7 +232,7 @@ class UserProfile extends Component {
         this.state.awardCompetitions.forEach((element, index) => {
             renderArray.push(this.CompetitionsStat(element, index))
         })
-        
+
         return renderArray;
     }
 
@@ -249,7 +249,7 @@ class UserProfile extends Component {
 
     render() {
         return (
-            <div>
+            <div className="my-container">
                 <Row className="top-bar-rectangle">
                     <Col className="lay-horizontal">
                         <div className="center-block-content">
