@@ -247,9 +247,11 @@ class Login extends Component {
               <Button onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
                 : "buttons-invalid round-button"} >Login</Button>
             </div>
+            
+            {/* TODO : forgot password page under construction
             <div className="login-href">
               <a href="/forgotPassword" >Forgot Password?</a>
-            </div>
+            </div> */}
           </Form>
         </div >
       </div>
