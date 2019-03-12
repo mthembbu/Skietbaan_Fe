@@ -4,7 +4,9 @@ import {
   FETCH_LEADERBOARDFILTER_DATA,
   FETCH_LEADERBOARDTABLE_DATA,
   PASS_ID,
-  CREATEGROUP
+  CREATEGROUP,
+  EDITGROUPUSERS,
+  FETCH_GROUPS
 } from "../actions/types";
 
 const initialState = {
@@ -12,6 +14,8 @@ const initialState = {
   allItems: [],
   selectedItem: {},
   groupName: "",
+  editGroup:[],
+  groupsList:[],
   leaderboardGroups: [],
   leaderboardCompetitions: [],
   groupId: "",
@@ -45,6 +49,12 @@ export default function(state = initialState, action) {
         ...state,
         groupName: action.payload
       };
+    case EDITGROUPUSERS:
+    console.log(action.payload)
+      return {
+        ...state,
+        editGroup: action.payload
+      };
 
     case CREATEGROUP:
       return {
@@ -56,11 +66,15 @@ export default function(state = initialState, action) {
         ...state,
         groupId: action.payload
       };
-
     case FETCH_POSTS:
       return {
         ...state,
         groupId: action.payload
+      };
+    case FETCH_GROUPS:
+      return {
+        ...state,
+        groupsList: action.payload
       };
 
     case FETCH_LEADERBOARDFILTER_DATA:

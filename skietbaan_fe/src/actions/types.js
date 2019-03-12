@@ -52,5 +52,7 @@ export const CREATEGROUP = 'CREATEGROUP';
 export const GETGROUP = 'GETGROUP';
 export const PASS_ID = 'PASS_ID';
 export const GETNAME = 'GETNAME';
+export const EDITGROUPUSERS = 'EDITGROUPUSERS';
+export const FETCH_GROUPS = 'FETCH_GROUPS';
 
 

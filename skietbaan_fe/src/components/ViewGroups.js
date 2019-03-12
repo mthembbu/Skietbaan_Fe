@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
 import { withRouter } from "react-router-dom";
-import { passId, getName } from "../actions/postActions";
+import { passId, getName,FetchGroups } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
 import deleteState from "./GroupImages/deleteState.png";
 import normalstate from "./GroupImages/submit-plus.png";
@@ -27,20 +27,8 @@ class ViewGroups extends Component {
     this.editGroup = this.editGroup.bind(this);
   }
 
-  componentDidMount() {
-    fetch(BASE_URL + "/api/Groups")
-      .then(res => res.json())
-      .then(data =>
-        this.setState({
-          posts: data.map(users => {
-            return {
-              ...users,
-              colors: "black",
-              image: normalstate
-            };
-          })
-        })
-      )
+ async componentDidMount() {
+    await this.props.FetchGroups();
   }
 
   onChange(event) {
@@ -103,10 +91,11 @@ class ViewGroups extends Component {
   };
 
   cancel = () => {
-    const newarry = [...this.state.posts];
+    const newarry = [...this.props.groupsList];
     newarry[this.state.indexs].colors = "black";
     newarry[this.state.indexs].image = normalstate;
-    this.setState({ selected: "", posts: newarry });
+    
+    this.setState({ selected: ""});
   };
 
   render() {
@@ -114,7 +103,7 @@ class ViewGroups extends Component {
       <div className="the-main">
         <table className="table-member">
           <tbody>
-            {this.state.posts
+            {this.props.groupsList
               .filter(post => {
                 return (
                   !this.state.filterText ||
@@ -207,12 +196,13 @@ class ViewGroups extends Component {
 }
 const mapStateToProps = state => ({
   name: state.posts.groupName,
-  id: state.posts.groupId
+  id: state.posts.groupId,
+  groupsList:state.posts.groupsList
 });
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { passId, getName }
+    { passId, getName,FetchGroups }
   )(ViewGroups)
 );

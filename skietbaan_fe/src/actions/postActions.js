@@ -9,7 +9,8 @@ import {
   BASE_URL,
   URLADD,
   URLUSER,
-  URLGROUP,
+  FETCH_GROUPS,
+  EDITGROUPUSERS,
   FETCH_LEADERBOARDFILTER_DATA,
   FETCH_LEADERBOARDTABLE_DATA
 } from "./types";
@@ -29,6 +30,40 @@ export const fetchPosts = () => dispatch => {
       });
     });
 };
+
+export const FetchGroups = () => dispatch => {
+  fetch(BASE_URL+"/api/Groups")
+    .then(res => res.json())
+    .then(group => {
+      const newdata=group.map(item=>{
+        item.colors="black",
+        item.image="normalstate";
+        return item
+      })
+      dispatch({
+        type: FETCH_GROUPS,
+        payload: group
+      });
+    });
+};
+
+export const EditGroupAction = (id) => dispatch => {
+  fetch(BASE_URL + "/api/Groups/edit?id="+id)
+    .then(res => res.json())
+    .then(posts => {
+      const newdata = posts.map(users => {
+        users.highlighted = true;
+        users.background= "#F3F4F9",
+        users.image= "marked"
+        return users;
+      });
+      dispatch({
+        type: EDITGROUPUSERS,
+        payload: newdata
+      });
+    });
+};
+
 export const createGroups = usersadded => dispatch => {
   fetch(BASE_URL + "/api/groups", {
     method: "POST",
