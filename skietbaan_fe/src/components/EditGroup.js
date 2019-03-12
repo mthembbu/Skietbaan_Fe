@@ -22,12 +22,15 @@ class EditGroup extends Component {
     this.onChange = this.onChange.bind(this);
     this.delete = this.delete.bind(this);
   }
- async componentDidMount() {
+  componentDidMount() {
     if(!getCookie("token")){
       window.location = "/registerPage";
   }
     if (this.props.id != 0) {
-    await fetch(BASE_URL + "/api/Groups/edit?id=" + this.props.id)
+     fetch(BASE_URL + "/api/Groups/edit?id=" + this.props.id)
+    .then(
+       fetch({})
+    )
         .then(res => res.json())
         .then(data => {
           this.setState({
@@ -49,7 +52,7 @@ class EditGroup extends Component {
     this.setState({ filterText: event.target.value });
   }
 
- async delete  () {
+  delete  () {
     this.setState({ count: 0 });
     const { newArray } = this.state;
     const updateArray = [...this.state.posts];
@@ -72,7 +75,7 @@ class EditGroup extends Component {
       GroupIds: this.props.id,
       users: this.state.newArray
     };
-  await fetch(BASE_URL + "/api/groups/deleteMember/", {
+   fetch(BASE_URL + "/api/groups/deleteMember/", {
       method: "Post",
       headers: {
         Accept: "application/json",
