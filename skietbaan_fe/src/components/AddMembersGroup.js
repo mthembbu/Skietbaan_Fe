@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
 import { BASE_URL } from "../actions/types";
+import { EditGroupAction } from "../actions/postActions";
 import { withRouter } from "react-router-dom";
 import marked from "./GroupImages/marked.png";
 import unmarked from "./GroupImages/unmarked.png";
@@ -27,22 +28,7 @@ class AddMembersGroup extends Component {
       window.location = "/registerPage";
   }
     if (this.props.id != 0) {
-      fetch(BASE_URL + "/api/Groups/list?id=" + this.props.id)
-     .then(
-       fetch({})
-     )
-        .then(res => res.json())
-        .then(data => {
-          this.setState({
-            posts: data.map(users => {
-              return {
-                ...users,
-                highlighted: false,
-                background: "#fdfdfd"
-              };
-            })
-          });
-        });
+ 
     } else {
       this.props.history.push("/ViewGroups");
     }
@@ -76,6 +62,7 @@ class AddMembersGroup extends Component {
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
+      this.props.EditGroupAction(this.props.id)
       this.props.history.push("/EditGroup");
   }
   toggleHighlight = (name, event) => {
@@ -197,4 +184,4 @@ const mapStateToProps = state => ({
   id: state.posts.groupId,
   name: state.posts.groupName
 });
-export default withRouter(connect(mapStateToProps)(AddMembersGroup));
+export default withRouter(connect(mapStateToProps,{EditGroupAction})(AddMembersGroup));
