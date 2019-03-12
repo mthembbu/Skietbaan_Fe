@@ -36,20 +36,11 @@ class App extends Component {
 	}
 
 	TypeUser(){
-		let token = getCookie("token");
-		fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
-			method: 'Get',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			}
-		})
-			.then(response => response.json())
-			.then(data => this.setState({
-				nav:data.admin
-			}))
-			.then(function (data) {})
-			.catch(function (data) {});
+		if(this.state.nav){
+			return <NavbarMenu />
+		}else{
+			return <NavbarMenuUser />
+		}
 	}
 
 	componentDidMount(){
@@ -69,11 +60,15 @@ class App extends Component {
 			}).catch(function (data) {});
 	}
 
+
+
 	render() {
 		return (
 			<Provider store={store}>
 				<div>
 				{this.state.nav ? <NavbarMenu /> : <NavbarMenuUser />}
+				{/* TODO: Make the Navbar work more efficiently with this 
+				 {this.TypeUser()} */}
 					<Router history={history}>
 						<Switch>
 							<Route path="/home" component={LeaderboardPage} exact />
