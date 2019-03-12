@@ -40,6 +40,7 @@
     display:none !important ;
 }
 
+
 .video{
     border-radius: 50%;
     object-fit: cover;
@@ -175,10 +176,11 @@
 
 .submit-container{
     position: absolute;
-    bottom: 70px;
+    bottom: 122px;
     margin: 0 auto;
     text-align: center;
     width: 80%;
+    display: flex;
     margin-left: 10%;
 }
 
@@ -366,4 +368,9 @@ input[type=number] {
 .back-spacing{
     width: 100%;
     height: 30px;
+}
+@media screen and (max-width:425px)  {
+    .hidden-small{
+        display:none;
+    }
 }
