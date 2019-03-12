@@ -247,7 +247,7 @@ class LeaderboardPage extends Component {
             </Table>
         )
         const tablebody = this.props.tableData.map((post, index) => (
-            <tr className="rankRow" key={post.rank.toString()} value={post.rank} onChange={() => this.onChange(post.id)}>
+            <tr className="rankRow" key={index.toString()} value={index} onChange={() => this.onChange(post.id)}>
                 <td className="RankIconCol">
                     {this.top3Display(post)}
                 </td>
