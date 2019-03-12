@@ -81,9 +81,9 @@ class Register extends Component {
     if (target.name === "passwordValue") {
       if (target.value.length > 0)
         stateUpdate.invalidPassword = false;
-        else {
-          stateUpdate.invalidPassword = true;
-        }
+      else {
+        stateUpdate.invalidPassword = true;
+      }
     }
     if (target.name === "emailValue") {
       stateUpdate.invalidEmail = false;
@@ -107,7 +107,7 @@ class Register extends Component {
 
       };
     }
-    else if(target.name === "usernameValue"){
+    else if (target.name === "usernameValue") {
       stateUpdate.invalidUsername = true;
     }
     if (this.state.usernameValue
@@ -231,6 +231,7 @@ class Register extends Component {
                     id="us"
                     value={this.state.usernameValue}
                     onChange={this.handleChange}
+                    autoComplete="off"
                     className="input-user"
                   />
                 </div>
@@ -246,6 +247,7 @@ class Register extends Component {
                     type="text"
                     name="emailValue"
                     id="email"
+                    autoComplete="off"
                     value={this.state.emailValue}
                     onChange={this.handleChange}
                     className="input-user"
@@ -264,6 +266,7 @@ class Register extends Component {
                       type="password"
                       name="passwordValue"
                       id="passwordValue"
+                      autoComplete="off"
                       value={this.state.passwordValue}
                       onChange={this.handleChange}
                       className="input-password"
