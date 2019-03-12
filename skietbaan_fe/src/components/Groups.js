@@ -81,9 +81,13 @@ class Groups extends Component {
       },
       body: JSON.stringify(requestedObj)
     })
+    .then(
+      fetch(BASE_URL + "/api/Groups")
+    )
       .then(function(response) {})
       .catch(function(data) {});
-      window.location = "/ViewGroups";
+      this.props.history.push("/ViewGroups");
+
     
   }
 
