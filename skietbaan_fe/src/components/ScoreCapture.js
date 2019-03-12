@@ -348,14 +348,13 @@ export default class search extends Component {
               <div className="centre-label">
                 <label className="scorelabel">Type in score</label>
               </div>
-              <div className={this.state.validScore ? "hidden" : "invalidScore"}></div>
               <div className="input-container">
                 <input type="number" id="scoreInput" min="0" step="1" name="score" className="score"
                   onChange={this.handleScore}></input>
+                  <div className={this.state.validScore ? "hidden" : "invalidScore"}>Enter Score</div>
               </div>
 
             </div>
-            <div className={this.state.scoreEntered ? "":"hidden"}>
             <div className="centre-label">
               <label className="label-competition">Select Competition</label>
             </div>
@@ -364,14 +363,13 @@ export default class search extends Component {
             <div className="competition-container">
               {competitionItem}
             </div>
-            </div>
             <div className={this.state.scoreSaved ? "sucess-container" : "hidden"}>
               <div className="success"> Score Saved successfully </div>
             </div>
           </div>
           <div className="submit-container">
             <div className={this.state.ImageTaken || this.state.showCamera 
-              || !this.state.scoreEntered ? "hidden" : "submit-button-elements"}>
+              ? "hidden" : "submit-button-elements"}>
               <div className="button-hover">
                 <img src={cameraGray}
                   id="btnScoreCapture" className="btnScoreCapture"
@@ -380,7 +378,7 @@ export default class search extends Component {
               <label className="labelIcon">Capture score</label>
             </div>
             <div className={(this.state.showCamera && !this.state.ImageTaken) 
-              || this.state.ImageTaken || !this.state.scoreEntered ? "hidden" : "submit-button-elements"}>
+              || this.state.ImageTaken ? "hidden" : "submit-button-elements"}>
               <div className="button-hover ">
                 <img src={graySubmit} onClick={() => this.GetLocation()}
                   className="button-that-submits" alt=''></img>

@@ -209,6 +209,7 @@ class Login extends Component {
                     type="text"
                     name="usernameValue"
                     id="us"
+                    autoComplete = "off"
                     value={this.state.usernameValue}
                     onChange={this.handleChange}
                     className="input-user"
@@ -228,6 +229,7 @@ class Login extends Component {
                       type="password"
                       name="passwordValue"
                       id="passwordValue"
+                      autoComplete = "off"
                       value={this.state.passwordValue}
                       onChange={this.handleChange}
                       className="input-password"
