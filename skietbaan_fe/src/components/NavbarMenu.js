@@ -89,7 +89,7 @@ class NavbarMenu extends Component {
 	}
 
 	isNotifications() {
-		if (window.location.pathname.endsWith("/notifications")) {
+		if (window.location.pathname.endsWith("/notify")) {
 			return <img src={NAV_BAR_ICONS.NOTIFICATIONS_RED}
 				className="notifications-icon-grey" alt='Notification tab Selected'></img>
 		}
@@ -122,7 +122,7 @@ class NavbarMenu extends Component {
 	}
 
 	isNotificationsv2() {
-		if (window.location.pathname.endsWith("/notifications")) {
+		if (window.location.pathname.endsWith("/notify")) {
 			return <img src={NAV_BAR_ICONS.NOTIFICATIONS_RED}
 				className="notifications-icon-grey-v2" alt='Notification tab Selected'></img>
 		}
@@ -159,7 +159,7 @@ class NavbarMenu extends Component {
 						<td className="columns-more" onClick={this.expand}>
 							{this.isMore()}
 						</td>
-						<td className="columns-v2">
+						<td className="columns-v2" onClick={() => this.GoTo("/profile")}>
 							{this.isProfilev2()}
 						</td>
 						<td className="columns-v2" onClick={() => this.GoTo("/documents")}>
@@ -170,7 +170,7 @@ class NavbarMenu extends Component {
 						</td>
 					</tr>
 					<tr className={this.state.expanded ? "second-row-navbar expand":"second-row-navbar"}>
-						<td className="columns">
+						<td className="columns" onClick={() => this.GoTo("/profile")}>
 							{this.isProfile()}
 						</td>
 						<td className="columns" onClick={() => this.GoTo("/documents")}>

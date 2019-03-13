@@ -8,8 +8,7 @@ import {
 import '../components/RegisterStyles.css';
 import { validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
-import {URL} from '../actions/types.js';
-import header from'../components/assets/header.png';
+import { URL } from '../actions/types.js';
 import back from '../components/assets/Back.png';
 
 class Login extends Component {
@@ -21,14 +20,15 @@ class Login extends Component {
       validForm: false,
       tokenValue: "",
       users: [],
-      passwordFound: true
+      passwordFound: true,
+      usernameFound: true
     }
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.validate = this.validate.bind(this);
     this.togglePassword = this.togglePassword.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.goToRegister = this.goToRegister.bind(this);    
+    this.goToRegister = this.goToRegister.bind(this);
     this.disableButton = this.disableButton.bind(this);
   }
 
@@ -43,20 +43,6 @@ class Login extends Component {
 
   componentDidMount() {
     this.disableButton();
-    fetch(URL + "/api/User", {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(data => this.setState({
-        users: data,
-      })).then(function (data) {
-      })
-      .catch(function (data) {
-      });
   }
 
   toggleNavbar() {
@@ -81,29 +67,32 @@ class Login extends Component {
       usernameFound: true,
       passwordFound: true
     }
-    if (target.name === "passwordValue" && target.value.length > 0) {
-      stateUpdate.invalidPassword = false;
-    };
-    if (target.name === "usernameValue") {
-      stateUpdate.invalidUsername = true;
-      for (var i = 0; i < this.state.users.length; i++) {
-        if (this.state.users[i].username == target.value) {
-          stateUpdate.usernameFound = true;
-          stateUpdate.invalidUsername = false;
-          break;
-        }
-        stateUpdate.usernameFound = false;
+    if (target.name === "passwordValue") {
+      if (target.value.length > 0)
+        stateUpdate.invalidPassword = false;
+      else {
+        stateUpdate.invalidPassword = true;
       }
-
     }
+    if (target.name === "usernameValue") {
+      if (target.value.length > 0)
+        stateUpdate.invalidUsername = false;
+      else {
+        stateUpdate.invalidUsername = true;
+      }
+    }
+
     if (this.state.usernameValue
       && this.state.passwordValue
-      && !stateUpdate.invalidUsername) {
+      && !stateUpdate.invalidUsername
+      && !stateUpdate.invalidPassword) {
       isValid = true;
     }
     this.setState({
       ...stateUpdate,
       validForm: isValid
+    }, () => {
+      this.disableButton();
     });
   };
 
@@ -148,11 +137,21 @@ class Login extends Component {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
           window.location = "/home";
         }
-        else if (typeof data === "string" && data.indexOf("Invalid Password") > -1) {
-          this.setState({
-            invalidPassword: true,
-            passwordFound:false
-          });
+
+        else if (typeof data === "string") {
+          if (data.indexOf("Invalid Password") > -1) {
+            this.setState({
+              invalidPassword: true,
+              passwordFound: false,
+
+            });
+          }
+          if (data.indexOf("not found") > -1) {
+            this.setState({
+              invalidUsername: true,
+              usernameFound: false
+            })
+          }
         }
       }).catch(function (data) {
       });
@@ -184,7 +183,7 @@ class Login extends Component {
       <div className="page-content-login">
         <div className="red-background">
           <div className="welcome-header">
-          <label className="welcome-label">Welcome to
+            <label className="welcome-label">Welcome to
           <label className="skietbaan-label">Skietbaan</label>
             </label>
           </div>
@@ -210,13 +209,14 @@ class Login extends Component {
                     type="text"
                     name="usernameValue"
                     id="us"
+                    autoComplete = "off"
                     value={this.state.usernameValue}
                     onChange={this.handleChange}
                     className="input-user"
                   />
                 </div>
-                <div className={typeof this.state.usernameFound !== "undefined" 
-                && !this.state.usernameFound ? "error-message" : "hidden"} > Username not found</div>
+                <div className={this.state.usernameFound
+                  && this.usernameValue !== "" ? "hidden" : "error-message"}>Invalid Username</div>
               </FormGroup>
             </div>
             <div className="spacing-login">
@@ -229,23 +229,29 @@ class Login extends Component {
                       type="password"
                       name="passwordValue"
                       id="passwordValue"
+                      autoComplete = "off"
                       value={this.state.passwordValue}
                       onChange={this.handleChange}
                       className="input-password"
                     />
-                    <div className={this.state.passwordValue !== "" ? "password-view-icon" : "hidden"}
+                    <div className={this.state.passwordValue !== "" ? "password-view-icon" : "password-icon"}
                       onClick={this.togglePassword}>
                     </div>
                   </div>
                 </div>
-                <div className={this.state.passwordFound 
-                  && this.passwordValue !=="" ? "hidden":"error-message"}>Invalid Password</div>
+                <div className={this.state.passwordFound
+                  && this.passwordValue !== "" ? "hidden" : "error-message"}>Invalid Password</div>
               </FormGroup>
             </div>
             <div className="button-container">
               <Button onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
-                : "buttons-invalid round-button"} >Join</Button>
+                : "buttons-invalid round-button"} >Login</Button>
             </div>
+            
+            {/* TODO : forgot password page under construction
+            <div className="login-href">
+              <a href="/forgotPassword" >Forgot Password?</a>
+            </div> */}
           </Form>
         </div >
       </div>

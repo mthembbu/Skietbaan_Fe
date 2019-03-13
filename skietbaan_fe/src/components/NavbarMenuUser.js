@@ -71,7 +71,7 @@ class NavbarMenuUser extends Component {
 	}
 
 	isNotifications() {
-		if (window.location.pathname.endsWith("/notifications")) {
+		if (window.location.pathname.endsWith("/notify")) {
 			return <img src={NAV_BAR_ICONS.NOTIFICATIONS_RED}
 				className="notifications-icon-grey" alt='Notification tab Selected'></img>
 		}
@@ -93,7 +93,7 @@ class NavbarMenuUser extends Component {
 	}
 
 	isNotificationsv2() {
-		if (window.location.pathname.endsWith("/notifications")) {
+		if (window.location.pathname.endsWith("/notify")) {
 			return <img src={NAV_BAR_ICONS.NOTIFICATIONS_RED}
 				className="notifications-icon-grey-v2" alt='Notification tab Selected'></img>
 		}
@@ -124,7 +124,7 @@ class NavbarMenuUser extends Component {
 						<td className="columns" onClick={() => this.GoTo("/scorecapture")} >
 							{this.isScoreCapture()}
 						</td>
-						<td className="columns" onClick={() => this.GoTo("#")}>
+						<td className="columns" onClick={() => this.GoTo("/profile")}>
 							{this.isProfile()}
 						</td>
 						<td className="columns-more" onClick={this.expand}>

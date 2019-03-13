@@ -154,7 +154,7 @@ export default class search extends Component {
 
   CameraClicked() {
     let Valid = this.Validate();
-
+    this.state.Flashon = false;
     if (Valid) {
       this.setState({
         currState: 3,
@@ -265,10 +265,7 @@ export default class search extends Component {
 
   Flash() {
     this.ToggleIcon()
-    this.setState({
-      Flashon : !this.Flashon
-    })
-    
+    this.state.Flashon = !this.state.Flashon
     var IsFlashOn = this.state.Flashon;
     navigator.mediaDevices.getUserMedia({
       video: {
@@ -328,6 +325,25 @@ export default class search extends Component {
 
 
   render() {
+    document.addEventListener('DOMContentLoaded', () => {
+      var HideWhenAddingScore = document.querySelector("#HideWhenAddingScore");
+     var last_size = document.body.clientHeight;
+     window.addEventListener("resize",function(){
+      if(last_size == document.body.clientHeight){
+        return;
+            }
+       if(HideWhenAddingScore.classList.contains("hidden-small"))
+       {
+        HideWhenAddingScore.classList.remove("hidden-small");
+       }
+       else{
+        HideWhenAddingScore.classList.add("hidden-small");
+       }
+       last_size = document.body.clientHeight;
+     })
+    }, false);
+
+
     const stateOne = this.state.showCamera || this.state.ImageTaken
     let competitionItem = [];
     if (this.state.competitionsList && this.state.competitionsList.length > 0) {
@@ -351,30 +367,28 @@ export default class search extends Component {
               <div className="centre-label">
                 <label className="scorelabel">Type in score</label>
               </div>
-              <div className={this.state.validScore ? "hidden" : "invalidScore"}></div>
               <div className="input-container">
                 <input type="number" id="scoreInput" min="0" step="1" name="score" className="score"
                   onChange={this.handleScore}></input>
+                  <div className={this.state.validScore ? "hidden" : "invalidScore"}>Enter Score</div>
               </div>
 
             </div>
-            <div className={this.state.scoreEntered ? "":"hidden"}>
             <div className="centre-label">
               <label className="label-competition">Select Competition</label>
-            </div>
-
-            <div className={this.state.validCompetition ? "hidden" : "invalidComp"}>.</div>
+            </div>         
             <div className="competition-container">
               {competitionItem}
+
             </div>
-            </div>
+            <div className={this.state.validCompetition ? "hidden" : "invalidComp"}>Select Competition</div>
             <div className={this.state.scoreSaved ? "sucess-container" : "hidden"}>
               <div className="success"> Score Saved successfully </div>
             </div>
           </div>
-          <div className="submit-container">
+          <div className="submit-container" id="HideWhenAddingScore">
             <div className={this.state.ImageTaken || this.state.showCamera 
-              || !this.state.scoreEntered ? "hidden" : "submit-button-elements"}>
+              ? "hidden" : "submit-button-elements"}>
               <div className="button-hover">
                 <img src={cameraGray}
                   id="btnScoreCapture" className="btnScoreCapture"
@@ -383,7 +397,7 @@ export default class search extends Component {
               <label className="labelIcon">Capture score</label>
             </div>
             <div className={(this.state.showCamera && !this.state.ImageTaken) 
-              || this.state.ImageTaken || !this.state.scoreEntered ? "hidden" : "submit-button-elements"}>
+              || this.state.ImageTaken ? "hidden" : "submit-button-elements"}>
               <div className="button-hover ">
                 <img src={graySubmit} onClick={() => this.GetLocation()}
                   className="button-that-submits" alt=''></img>

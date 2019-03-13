@@ -10,7 +10,6 @@
 }
 
 .page-content-login{
-  background: url('../components/assets/backgroundBullets.png');
   background-color: #fdfdfd;
   width: 100%;
   z-index: 50;
@@ -47,7 +46,7 @@
 }
 
 .front-white{
-  color: #fdfdfd;
+  color: #6F839E;
   font-size: 18px;
 }
 
@@ -61,7 +60,7 @@
 .round-button{
   width: 100px;
   height: 42px;
-  color: white;
+  color: #fdfdfd;
   border-radius: 25px;
   background-color: #6F839E;
   font-size: 16px;
@@ -69,10 +68,20 @@
 }
 
 .round-button:disabled{
-  color: #fdfdfd;
+  color: #6F839E;
   background-color: transparent;
-  border-color: #fdfdfd;
+  border-color: #6F839E;
   opacity: 80;
+}
+.round-button:focus{
+  background-color:#fdfdfd;
+  color: #ebebeb;
+  border:1px lightgray solid;
+}
+.round-button:active{
+  background-color:#fdfdfd;
+  color: #ebebeb;
+  border:1px lightgray solid;
 }
 
 .buttons-invalid{
@@ -147,6 +156,16 @@
   right: 18px;
 }
 
+.password-icon{
+  background: url("../components/assets/greyEye.png") no-repeat right center;
+  height:30px;
+  background-size: 30px;
+  width: 30px;
+  position: absolute;
+  top: 5px;
+  right: 18px;
+}
+
 .password-view-icon:hover{
   cursor: pointer;
 }
@@ -180,7 +199,7 @@
   float: right;
   position: absolute;
   top: 1px;
-  right: 38px;
+  right: 42px;
 }
 
 .input-label{
@@ -196,7 +215,6 @@
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
   box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);
-  padding-right: 20px;
 }
 
 .welcome-label{
@@ -205,7 +223,6 @@
   font-size: 18px;
   color: white;
   font-weight: 100;
-  float: right;
   width: 100px;
 }
 
@@ -256,4 +273,8 @@
   color: #EA241A;
   font-size: 12px;
   padding-top: 3px;
+}
+
+.login-href{
+  padding-top: 20px;
 }

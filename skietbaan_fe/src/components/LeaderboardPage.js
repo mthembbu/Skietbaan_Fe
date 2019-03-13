@@ -41,9 +41,7 @@ class LeaderboardPage extends Component {
     }
     //executed when leaderboard in mounted on main app
     componentWillMount() {
-        if(!getCookie("token")){
-            window.location = "/registerPage";
-        }
+        
         //get function to get filter data from api
         this.props.fetchleaderboadfilterdata();
         this.getLeaderboardData(this.state.selectedCompetition,this.state.selectedGroup);
@@ -221,6 +219,9 @@ class LeaderboardPage extends Component {
         }
     }
     render() {
+        if(!getCookie("token")){
+            window.location = "/registerPage";
+        }
         const groupsList = (
             <Table className="SelectionTable">
                 <tbody>
@@ -246,7 +247,7 @@ class LeaderboardPage extends Component {
             </Table>
         )
         const tablebody = this.props.tableData.map((post, index) => (
-            <tr className="rankRow" key={post.rank.toString()} value={post.rank} onChange={() => this.onChange(post.id)}>
+            <tr className="rankRow" key={index.toString()} value={index} onChange={() => this.onChange(post.id)}>
                 <td className="RankIconCol">
                     {this.top3Display(post)}
                 </td>

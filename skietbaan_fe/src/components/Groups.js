@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
 import { withRouter } from "react-router-dom";
-import { createGroups } from "../actions/postActions";
+import { createGroups ,FetchGroups} from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
 import back from "./GroupImages/back.png";
 import unmarked from "./GroupImages/unmarked.png";
@@ -20,6 +20,7 @@ class Groups extends Component {
       count: 0,
       filterText: "",
       check: "Select all",
+      pageState:false
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -59,6 +60,7 @@ class Groups extends Component {
   }
 
  async handleOnClick() {
+  if(this.state.pageState==false){
     const { newArray } = this.state;
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === true) {
@@ -67,7 +69,7 @@ class Groups extends Component {
       delete this.state.posts[i].highlighted;
       delete this.state.posts[i].id;
     }
-
+    
     const requestedObj = {
       name: this.props.name.toLowerCase(),
       users:this.state.newArray
@@ -81,9 +83,10 @@ class Groups extends Component {
       },
       body: JSON.stringify(requestedObj)
     })
-      .then(function(response) {})
-      .catch(function(data) {});
-      window.location = "/ViewGroups";
+      await this.props.FetchGroups();
+      this.props.history.push("/ViewGroups");
+      this.setState({pageState:true})
+  }
     
   }
 
@@ -220,6 +223,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { createGroups }
+    { createGroups ,FetchGroups }
   )(Groups)
 );
