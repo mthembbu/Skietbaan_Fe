@@ -63,7 +63,7 @@ class AddMembersGroup extends Component {
         },
         body: JSON.stringify(request)
       })
-      // this.props.EditGroupAction(this.props.id)
+       this.props.EditGroupAction(this.props.id)
         this.props.history.push("/EditGroup");
         this.setState({pageState:true})
     }

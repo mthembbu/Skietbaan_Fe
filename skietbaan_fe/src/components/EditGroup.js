@@ -46,8 +46,6 @@ class EditGroup extends Component {
 
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === false) {
-        let indexofs=newArray.indexOf(this.state.posts[i])
-        updateArray.splice(indexofs, 1);
         delete this.state.posts[i].colors;
         delete this.state.posts[i].background;
         delete this.state.posts[i].image;
@@ -55,9 +53,9 @@ class EditGroup extends Component {
         delete this.state.posts[i].id;
         delete this.props.editGroup[i];
         newArray.push(this.state.posts[i]);
+        delete this.state.posts[i]
       }
     }
-    this.setState({posts:updateArray})
 
     let request = {
       GroupIds: this.props.id,
