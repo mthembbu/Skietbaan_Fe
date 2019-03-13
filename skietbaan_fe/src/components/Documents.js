@@ -80,7 +80,9 @@ class Documents extends Component {
                         </div>
                                 
                         <div className="button-upload-document-3">
-                            <button className={this.state.value=="Document"? "btn-active send-email btn-bottom-3":"documents-btn-default send-email btn-bottom-3"} 
+                            <button className={this.state.value=="Document"? 
+                            "btn-active send-email btn-bottom-3":
+                            "documents-btn-default send-email btn-bottom-3"} 
                                 onClick={this.state.value=="Document"? this.SendLOGS: null}> 
                                 Letter of Good Standing {this.state.value=="Document"? 
                                 <img className="document-image-icon" src={require("../resources/sendDoc.png")}/>:
@@ -93,8 +95,9 @@ class Documents extends Component {
                             </Collapse>                                
                         </div>
                             <div className="button-upload-document-2">
-                                <button className={this.state.value2=="Document"? "btn-active send-email btn-bottom-2":
-                                    "documents-btn-default send-email btn-bottom-2"} 
+                                <button className={this.state.value2=="Document"? 
+                                "btn-active send-email btn-bottom-2":
+                                "documents-btn-default send-email btn-bottom-2"} 
                                     onClick={this.state.value2=="Document"? this.SendLOS: null}>
                                     Letter of Status {this.state.value2=="Document"? 
                                     <img className="document-image-icon" src={require("../resources/sendDoc.png")}/>:
