@@ -64,9 +64,10 @@ class EditGroup extends Component {
         delete this.state.posts[i].image;
         delete this.state.posts[i].highlighted;
         delete this.state.posts[i].id;
+        delete this.state.posts[i]
       }
     }
-    this.setState({ posts: updateArray });
+
     
     let request = {
       GroupIds: this.props.id,
