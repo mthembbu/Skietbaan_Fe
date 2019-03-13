@@ -10,7 +10,6 @@
 }
 
 .page-content-login{
-  background: url('../components/assets/backgroundBullets.png');
   background-color: #fdfdfd;
   width: 100%;
   z-index: 50;
@@ -47,7 +46,7 @@
 }
 
 .front-white{
-  color: #fdfdfd;
+  color: #6F839E;
   font-size: 18px;
 }
 
@@ -61,17 +60,17 @@
 .round-button{
   width: 100px;
   height: 42px;
-  color: #6F839E;
+  color: #fdfdfd;
   border-radius: 25px;
-  background-color: #fdfdfd;
+  background-color: #6F839E;
   font-size: 16px;
   margin-top: -22px;
 }
 
 .round-button:disabled{
-  color: #fdfdfd;
+  color: #6F839E;
   background-color: transparent;
-  border-color: #fdfdfd;
+  border-color: #6F839E;
   opacity: 80;
 }
 .round-button:focus{
@@ -271,7 +270,7 @@
 }
 
 .error-message{
-  color: #fdfdfd;
+  color: #EA241A;
   font-size: 12px;
   padding-top: 3px;
 }

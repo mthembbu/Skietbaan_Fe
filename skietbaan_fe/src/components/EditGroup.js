@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
 import { withRouter } from "react-router-dom";
-import { BASE_URL } from "../actions/types";
+import { BASE_URL,UPDATEARRAY } from "../actions/types";
+import { EditGroupAction ,AddMemberAction } from "../actions/postActions";
 import marked from "./GroupImages/marked.png";
 import redbox from "./GroupImages/Rectangle.png";
 import back from "./GroupImages/back.png";
@@ -27,23 +28,9 @@ class EditGroup extends Component {
       window.location = "/registerPage";
   }
     if (this.props.id != 0) {
-     fetch(BASE_URL + "/api/Groups/edit?id=" + this.props.id)
-    .then(
-       fetch({})
-    )
-        .then(res => res.json())
-        .then(data => {
-          this.setState({
-            posts: data.map(users => {
-              return {
-                ...users,
-                highlighted: true,
-                background: "#F3F4F9",
-                image: marked
-              };
-            })
-          });
-        });
+       this.props.EditGroupAction(this.props.id)
+       this.setState({posts:this.props.editGroup})
+      
     } else {
        this.props.history.push("/ViewGroups");
     }
@@ -52,7 +39,7 @@ class EditGroup extends Component {
     this.setState({ filterText: event.target.value });
   }
 
-  delete  () {
+  delete () {
     this.setState({ count: 0 });
     const { newArray } = this.state;
     const updateArray = [...this.state.posts];
@@ -60,17 +47,18 @@ class EditGroup extends Component {
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === false) {
         let indexofs=newArray.indexOf(this.state.posts[i])
-        newArray.push(this.state.posts[i]);
         updateArray.splice(indexofs, 1);
         delete this.state.posts[i].colors;
         delete this.state.posts[i].background;
         delete this.state.posts[i].image;
         delete this.state.posts[i].highlighted;
         delete this.state.posts[i].id;
+        delete this.props.editGroup[i];
+        newArray.push(this.state.posts[i]);
       }
     }
-    this.setState({ posts: updateArray });
-    
+    this.setState({posts:updateArray})
+
     let request = {
       GroupIds: this.props.id,
       users: this.state.newArray
@@ -86,17 +74,17 @@ class EditGroup extends Component {
       .then(res => res.json())
       .catch(function(data) {});
   };
+
   toggleHighlight = (user, event) => {
     this.setState({ selected: user });
     if (this.state.posts[event].highlighted === true) {
       this.state.posts[event].highlighted = false;
-      this.state.posts[event].image = redbox;
+      this.state.posts[event].image = "redbox";
       this.state.posts[event].background = "white";
-
       this.setState({ count: this.state.count - 1 });
     } else {
       this.state.posts[event].highlighted = true;
-      this.state.posts[event].image = marked;
+      this.state.posts[event].image = "marked";
       this.state.posts[event].background = "#F3F4F9";
       this.setState({ count: this.state.count + 1 });
     }
@@ -106,6 +94,7 @@ class EditGroup extends Component {
   }
 
   goToNext = () => {
+    this.props.AddMemberAction(this.props.id)  
     this.props.history.push("/AddMembersGroup");
   };
   render() {
@@ -127,7 +116,7 @@ class EditGroup extends Component {
             .map((post, index) => (
               <li
                 class="list-group-item list-group-item-light"
-                key={post.id}
+                key={index}
                 style={{
                   background: post.background ,textAlign:"left"
                 }}
@@ -135,14 +124,14 @@ class EditGroup extends Component {
                 <img
                   className="checkbox-delete"
                   onClick={() => this.toggleHighlight(post.username, index)}
-                  src={post.image}
+                  src={post.image=="marked"?marked:redbox}
                   alt=""
                 />
                 <label className="blabe">
-                  <div className="userName" className={post.image==marked?"userName":"userName-active"}>
+                  <div className="userName" className={post.image=="marked"?"userName":"userName-active"}>
                     {post.username}
                   </div>
-                  <div className={post.image==marked?"email":"emails-active"}>
+                  <div className={post.image=="marked"?"email":"emails-active"}>
                     {post.email}
                   </div>
                 </label>
@@ -221,7 +210,9 @@ class EditGroup extends Component {
 }
 const mapStateToProps = state => ({
   id: state.posts.groupId,
-  name: state.posts.groupName
+  name: state.posts.groupName,
+  editGroup: state.posts.editGroup
 });
 
-export default withRouter(connect(mapStateToProps)(EditGroup));
+
+export default withRouter(connect(mapStateToProps,{EditGroupAction , AddMemberAction})(EditGroup));

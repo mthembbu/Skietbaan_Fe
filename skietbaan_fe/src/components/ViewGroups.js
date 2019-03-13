@@ -2,12 +2,17 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
 import { withRouter } from "react-router-dom";
-import { passId, getName } from "../actions/postActions";
+import {
+  passId,
+  getName,
+  FetchGroups,
+  EditGroupAction
+} from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
 import deleteState from "./GroupImages/deleteState.png";
 import normalstate from "./GroupImages/submit-plus.png";
 import back from "./GroupImages/back.png";
-import { getCookie } from '../components/cookie.js';
+import { getCookie } from "../components/cookie.js";
 class ViewGroups extends Component {
   constructor(props) {
     super(props);
@@ -17,30 +22,19 @@ class ViewGroups extends Component {
       count: 0,
       ShowMe: true,
       ids: 0,
-      indexs:"",
+      indexs: "",
       selected: "",
-      deleteState: false
+      deleteState: false,
+      pageState:false
     };
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
     this.delete = this.delete.bind(this);
-    this.editGroup = this.editGroup.bind(this);
+    this.editGroups = this.editGroups.bind(this);
   }
 
-  componentDidMount() {
-    fetch(BASE_URL + "/api/Groups")
-      .then(res => res.json())
-      .then(data =>
-        this.setState({
-          posts: data.map(users => {
-            return {
-              ...users,
-              colors: "black",
-              image: normalstate
-            };
-          })
-        })
-      )
+  async componentDidMount() {
+    await this.props.FetchGroups();
   }
 
   onChange(event) {
@@ -50,22 +44,23 @@ class ViewGroups extends Component {
   onBack() {
     this.props.history.push("/create");
   }
-  editGroup(obj) {
-    this.props.getName(obj.name);
-    this.props.passId(obj.id);
-    this.props.history.push("/EditGroup");
+  async editGroups(obj) {
+    if(this.state.pageState==false){
+      await this.props.EditGroupAction(obj.id);
+      this.props.getName(obj.name);
+      this.props.passId(obj.id);
+      this.props.history.push("/EditGroup");
+    }
   }
 
-  update = (obj,index) => {
-    const newarry = [...this.state.posts];
-    newarry[index].colors = "red";
-    newarry[index].image = deleteState;
-    this.setState({indexs:index})
+  update = (obj, index) => {
+    this.props.groupsList[index].color = "red";
+    this.props.groupsList[index].image = "deletestate";
+
+    this.setState({ indexs: index });
     this.setState({
       ids: obj.id,
       selected: obj.name,
-      ShowMe: false,
-      posts: newarry,
       ShowMe: false,
       deleteState: true
     });
@@ -73,10 +68,7 @@ class ViewGroups extends Component {
 
   delete() {
     this.setState({ ShowMe: false });
-    const newarry = [...this.state.posts];
-    newarry.splice(this.state.indexs, 1);
-    this.setState({ posts: newarry });
-
+    delete this.props.groupsList[this.state.indexs];
     fetch(BASE_URL + "/api/Groups/" + this.state.ids, {
       method: "POST",
       headers: {
@@ -84,7 +76,8 @@ class ViewGroups extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(this.state.ids)
-    }).then(fetch({}))
+    })
+      .then(fetch({}))
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
@@ -95,18 +88,15 @@ class ViewGroups extends Component {
   };
 
   do = () => {
-
     if (this.state.ShowMe == false) {
       this.setState({ ShowMe: true });
     }
-
   };
 
   cancel = () => {
-    const newarry = [...this.state.posts];
-    newarry[this.state.indexs].colors = "black";
-    newarry[this.state.indexs].image = normalstate;
-    this.setState({ selected: "", posts: newarry });
+    this.props.groupsList[this.state.indexs].color = "black";
+    this.props.groupsList[this.state.indexs].image = "normalstate";
+    this.setState({ selected: "" });
   };
 
   render() {
@@ -114,7 +104,7 @@ class ViewGroups extends Component {
       <div className="the-main">
         <table className="table-member">
           <tbody>
-            {this.state.posts
+            {this.props.groupsList
               .filter(post => {
                 return (
                   !this.state.filterText ||
@@ -131,17 +121,24 @@ class ViewGroups extends Component {
                 <tr className="view-group" key={post.id}>
                   <td
                     className="first-row"
-                    onClick={() => this.editGroup(post)}
-                    style={{ color: post.colors ,textAlign:"left" }}
+                    onClick={() => this.editGroups(post)}
+                    style={{ color: post.color, textAlign: "left" }}
                   >
                     {post.name}
                   </td>
                   <td>
                     <div
                       className="group-view"
-                      onClick={() => this.update(post,index)}
+                      onClick={() => this.update(post, index)}
                     >
-                      <img src={post.image} alt="" />
+                      <img
+                        src={
+                          post.image == "normalstate"
+                            ? normalstate
+                            : deleteState
+                        }
+                        alt=""
+                      />
                     </div>
                   </td>
                 </tr>
@@ -152,10 +149,16 @@ class ViewGroups extends Component {
     );
 
     return (
-      <main className="The-Main" onClick={()=>this.do()}>
+      <main className="The-Main" onClick={() => this.do()}>
         <div className="the-nav-bar">
-        <a href="" className="back-container">
-          <img className="back-image" onClick={this.onBack} src={back} alt="" /></a>
+          <a href="" className="back-container">
+            <img
+              className="back-image"
+              onClick={this.onBack}
+              src={back}
+              alt=""
+            />
+          </a>
           <label className="center-label">View Groups</label>
         </div>
         <div
@@ -174,9 +177,7 @@ class ViewGroups extends Component {
                     <div className="the-textname">Delete</div>
                   </td>
                   <td>
-                    <span className="name-of-group">
-                      {this.state.selected}
-                    </span>
+                    <span className="name-of-group">{this.state.selected}</span>
                   </td>
                   <div className="confrim-cancel">
                     <td>
@@ -207,12 +208,13 @@ class ViewGroups extends Component {
 }
 const mapStateToProps = state => ({
   name: state.posts.groupName,
-  id: state.posts.groupId
+  id: state.posts.groupId,
+  groupsList: state.posts.groupsList
 });
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { passId, getName }
+    { passId, getName, FetchGroups, EditGroupAction }
   )(ViewGroups)
 );

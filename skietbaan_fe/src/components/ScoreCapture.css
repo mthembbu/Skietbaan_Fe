@@ -40,6 +40,7 @@
     display:none !important ;
 }
 
+
 .video{
     border-radius: 50%;
     object-fit: cover;
@@ -81,24 +82,19 @@
 }
 
 .invalidScore{
-    background-image: url("../components/assets/redError.png");
-    background-size: 22px;
-    height: 22px;
-    width: 22px;
-    color: #0e0942;
-    float: right;
-    margin-top: -30px;
-    margin-right: 36px;
+    color:#e11e2b;
+    float: left;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
 }
 
 .invalidComp{
-    background-image: url("../components/assets/redError.png");
-    background-size: 22px;
-    height: 22px;
-    width: 22px;
-    float: right;
-    margin-top: -30px;
-    margin-right: 36px;
+    color:#e11e2b;
+    float: left;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
 
 }
 
@@ -180,10 +176,11 @@
 
 .submit-container{
     position: absolute;
-    bottom: 125px;
+    bottom: 122px;
     margin: 0 auto;
     text-align: center;
     width: 80%;
+    display: flex;
     margin-left: 10%;
 }
 
@@ -193,6 +190,7 @@
 
 .submit-button-elements{
     float: left;
+    height: 20px;
     width: 50%;
     position: relative;
 }
@@ -370,4 +368,10 @@ input[type=number] {
 .back-spacing{
     width: 100%;
     height: 30px;
+}
+
+@media screen and (max-width:425px)  {
+    .hidden-small{
+        display:none;
+    }
 }

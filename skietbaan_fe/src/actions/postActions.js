@@ -8,8 +8,11 @@ import {
   GETNAME,
   BASE_URL,
   URLADD,
+  UPDATEARRAY,
   URLUSER,
-  URLGROUP,
+  FETCH_GROUPS,
+  EDITGROUPUSERS,
+  ADDMEMBERS,
   FETCH_LEADERBOARDFILTER_DATA,
   FETCH_LEADERBOARDTABLE_DATA
 } from "./types";
@@ -29,6 +32,56 @@ export const fetchPosts = () => dispatch => {
       });
     });
 };
+
+export const FetchGroups = () => dispatch => {
+  fetch(BASE_URL+"/api/Groups")
+    .then(res => res.json())
+    .then(group => {
+      const newdata=group.map(item=>{
+        item.colors="black",
+        item.image="normalstate";
+        return item
+      })
+      dispatch({
+        type: FETCH_GROUPS,
+        payload: group
+      });
+    });
+};
+
+export  const EditGroupAction = (id) => dispatch => {
+  fetch(BASE_URL + "/api/Groups/edit?id="+id)
+    .then(res => res.json())
+    .then(posts => {
+      const newdata = posts.map(users => {
+        users.highlighted = true;
+        users.background= "#F3F4F9",
+        users.image= "marked"
+        return users;
+      });
+      dispatch({
+        type: EDITGROUPUSERS,
+        payload: newdata
+      });
+    });
+};
+export const AddMemberAction = (id) => dispatch => {
+   fetch(BASE_URL + "/api/Groups/list?id="+id)
+    .then(res => res.json())
+    .then(posts => {
+      const newdata = posts.map(users => {
+        users.highlighted = false;
+        users.background= "#fdfdfd",
+        users.image= "marked"
+        return users;
+      });
+      dispatch({
+        type: ADDMEMBERS,
+        payload: newdata
+      });
+    });
+};
+
 export const createGroups = usersadded => dispatch => {
   fetch(BASE_URL + "/api/groups", {
     method: "POST",
@@ -69,6 +122,15 @@ export const getName = name => {
   return dispatch => {
     dispatch({
       type: UPDATE_GROUPNAME,
+      payload: name
+    });
+  };
+};
+export const Changedata = name => {
+  //Return an action
+  return dispatch => {
+    dispatch({
+      type: UPDATEARRAY,
       payload: name
     });
   };
