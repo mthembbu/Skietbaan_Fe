@@ -10,7 +10,6 @@ class UserProfile extends Component {
         super(props);
         this.state = {
             awardCompetitions : [],
-            userToken: ""
         }
 
         this.Logout = this.Logout.bind(this);
@@ -31,7 +30,12 @@ class UserProfile extends Component {
             }
         })
         .then(res => res.json())
-        .then(data => this.setState({awardCompetitions : data, userToken: token}));
+        .then(data => this.setState({awardCompetitions : data}));
+ 
+        if(this.state.awardCompetitions.length == 0){
+            this.Logout();
+            this.props.history.push('/register-page');
+        }
     }
 
     AnimateAccuracyCircle(counter, element, index){
@@ -243,7 +247,7 @@ class UserProfile extends Component {
             var key = multiple[i].split("=");
             document.cookie = key[0]+" =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
         }
-        window.location = "/login"
+        
         return false;
     }
 
