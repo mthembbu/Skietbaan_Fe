@@ -8,9 +8,11 @@ import {
   GETNAME,
   BASE_URL,
   URLADD,
+  UPDATEARRAY,
   URLUSER,
   FETCH_GROUPS,
   EDITGROUPUSERS,
+  ADDMEMBERS,
   FETCH_LEADERBOARDFILTER_DATA,
   FETCH_LEADERBOARDTABLE_DATA
 } from "./types";
@@ -47,7 +49,7 @@ export const FetchGroups = () => dispatch => {
     });
 };
 
-export const EditGroupAction = (id) => dispatch => {
+export  const EditGroupAction = (id) => dispatch => {
   fetch(BASE_URL + "/api/Groups/edit?id="+id)
     .then(res => res.json())
     .then(posts => {
@@ -59,6 +61,22 @@ export const EditGroupAction = (id) => dispatch => {
       });
       dispatch({
         type: EDITGROUPUSERS,
+        payload: newdata
+      });
+    });
+};
+export const AddMemberAction = (id) => dispatch => {
+   fetch(BASE_URL + "/api/Groups/list?id="+id)
+    .then(res => res.json())
+    .then(posts => {
+      const newdata = posts.map(users => {
+        users.highlighted = false;
+        users.background= "#fdfdfd",
+        users.image= "marked"
+        return users;
+      });
+      dispatch({
+        type: ADDMEMBERS,
         payload: newdata
       });
     });
@@ -104,6 +122,15 @@ export const getName = name => {
   return dispatch => {
     dispatch({
       type: UPDATE_GROUPNAME,
+      payload: name
+    });
+  };
+};
+export const Changedata = name => {
+  //Return an action
+  return dispatch => {
+    dispatch({
+      type: UPDATEARRAY,
       payload: name
     });
   };

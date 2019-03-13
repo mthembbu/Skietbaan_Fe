@@ -16,7 +16,8 @@ class AddGroup extends Component {
       colors: true,
       txt: "",
       groups: [],
-      exist: true
+      exist: true,
+      pageState:false
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
@@ -27,27 +28,22 @@ class AddGroup extends Component {
   }
 
   onClick() {
-    if (this.state.groups.indexOf(this.state.name) == -1) {
-      if (this.state.name.length != 0) {
-        this.props.getName(this.state.name);
-        history.push("/Groups");
+    if(this.state.pageState==false){
+      if (this.state.groups.indexOf(this.state.name) == -1) {
+        if (this.state.name.length != 0) {
+          this.props.getName(this.state.name);
+          history.push("/Groups");
+        } else {
+          this.setState({ txt: "group name can't be empty" });
+        }
       } else {
-        this.setState({ txt: "group name can't be empty" });
+        this.setState({ exist: false });
       }
-    } else {
-      this.setState({ exist: false });
+      this.setState({pageState:true})
     }
+  
   }
 
-  UNSAFE_componentWillMount() {
-    fetch(BASE_URL + "/api/Groups")
-      .then(res => res.json())
-      .then(data =>
-        this.setState({
-          groups: data.map(group => group.name)
-        })
-      );
-  }
   render() {
     if(!getCookie("token")){
       window.location = "/registerPage";

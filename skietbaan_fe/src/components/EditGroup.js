@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
 import { withRouter } from "react-router-dom";
-import { BASE_URL } from "../actions/types";
-import { EditGroupAction } from "../actions/postActions";
+import { BASE_URL,UPDATEARRAY } from "../actions/types";
+import { EditGroupAction ,AddMemberAction } from "../actions/postActions";
 import marked from "./GroupImages/marked.png";
 import redbox from "./GroupImages/Rectangle.png";
 import back from "./GroupImages/back.png";
@@ -28,7 +28,8 @@ class EditGroup extends Component {
       window.location = "/registerPage";
   }
     if (this.props.id != 0) {
-      this.props.EditGroupAction(this.props.id)
+       this.props.EditGroupAction(this.props.id)
+      
     } else {
        this.props.history.push("/ViewGroups");
     }
@@ -37,7 +38,7 @@ class EditGroup extends Component {
     this.setState({ filterText: event.target.value });
   }
 
-  delete  () {
+  delete () {
     this.setState({ count: 0 });
     const { newArray } = this.state;
     const updateArray = [...this.state.posts];
@@ -54,8 +55,10 @@ class EditGroup extends Component {
         delete this.state.posts[i].id;
       }
     }
-    this.setState({ posts: updateArray });
-    
+
+    for(var j=0;j<newArray.length;j++){
+        delete this.props.editGroup[updateArray[j]];
+    }
     let request = {
       GroupIds: this.props.id,
       users: this.state.newArray
@@ -74,11 +77,12 @@ class EditGroup extends Component {
 
   toggleHighlight = (user, event) => {
     this.setState({ selected: user });
+    console.log(event)
+    console.log("this is the print ",this.props.editGroup[event])
     if (this.props.editGroup[event].highlighted === true) {
       this.props.editGroup[event].highlighted = false;
       this.props.editGroup[event].image = "redbox";
       this.props.editGroup[event].background = "white";
-
       this.setState({ count: this.state.count - 1 });
     } else {
       this.props.editGroup[event].highlighted = true;
@@ -92,10 +96,11 @@ class EditGroup extends Component {
   }
 
   goToNext = () => {
+    this.props.AddMemberAction(this.props.id)  
     this.props.history.push("/AddMembersGroup");
   };
   render() {
-    console.log(this.props.EditGroup)
+    console.log(this.state.posts)
     const postitems = (
       <div className="check">
         <ul class="list-group" style={{textAlign:"left"}}>
@@ -114,7 +119,7 @@ class EditGroup extends Component {
             .map((post, index) => (
               <li
                 class="list-group-item list-group-item-light"
-                key={post.id}
+                key={index}
                 style={{
                   background: post.background ,textAlign:"left"
                 }}
@@ -212,4 +217,5 @@ const mapStateToProps = state => ({
   editGroup: state.posts.editGroup
 });
 
-export default withRouter(connect(mapStateToProps,{EditGroupAction})(EditGroup));
+
+export default withRouter(connect(mapStateToProps,{EditGroupAction , AddMemberAction})(EditGroup));
