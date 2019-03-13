@@ -20,6 +20,7 @@ class Groups extends Component {
       count: 0,
       filterText: "",
       check: "Select all",
+      pageState:false
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -59,6 +60,7 @@ class Groups extends Component {
   }
 
  async handleOnClick() {
+  if(this.state.pageState==false){
     const { newArray } = this.state;
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === true) {
@@ -67,9 +69,7 @@ class Groups extends Component {
       delete this.state.posts[i].highlighted;
       delete this.state.posts[i].id;
     }
-
-    await this.props.FetchGroups();
-
+    
     const requestedObj = {
       name: this.props.name.toLowerCase(),
       users:this.state.newArray
@@ -83,13 +83,11 @@ class Groups extends Component {
       },
       body: JSON.stringify(requestedObj)
     })
-    .then(
-      fetch(BASE_URL + "/api/Groups")
-    )
-      .then(function(response) {})
-      .catch(function(data) {});
-      
+      await this.props.FetchGroups();
       this.props.history.push("/ViewGroups");
+      this.setState({pageState:true})
+  }
+    
   }
 
   selectall() {

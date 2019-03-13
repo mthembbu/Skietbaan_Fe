@@ -6,7 +6,8 @@ import {
   PASS_ID,
   CREATEGROUP,
   EDITGROUPUSERS,
-  FETCH_GROUPS
+  ADDMEMBERS,
+  FETCH_GROUPS,UPDATEARRAY
 } from "../actions/types";
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
   groupName: "",
   editGroup:[],
   groupsList:[],
+  existing:[],
   leaderboardGroups: [],
   leaderboardCompetitions: [],
   groupId: "",
@@ -49,8 +51,17 @@ export default function(state = initialState, action) {
         ...state,
         groupName: action.payload
       };
+    case ADDMEMBERS:
+      return {
+        ...state,
+        existing: action.payload
+      };
     case EDITGROUPUSERS:
-    console.log(action.payload)
+      return {
+        ...state,
+        editGroup: action.payload
+      };
+    case UPDATEARRAY:
       return {
         ...state,
         editGroup: action.payload
