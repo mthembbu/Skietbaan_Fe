@@ -376,12 +376,12 @@ export default class search extends Component {
             </div>
             <div className="centre-label">
               <label className="label-competition">Select Competition</label>
-            </div>
-
-            <div className={this.state.validCompetition ? "hidden" : "invalidComp"}>.</div>
+            </div>         
             <div className="competition-container">
               {competitionItem}
+
             </div>
+            <div className={this.state.validCompetition ? "hidden" : "invalidComp"}>Select Competition</div>
             <div className={this.state.scoreSaved ? "sucess-container" : "hidden"}>
               <div className="success"> Score Saved successfully </div>
             </div>

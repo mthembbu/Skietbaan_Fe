@@ -82,7 +82,7 @@
 }
 
 .invalidScore{
-    color:#FF611D;
+    color:#e11e2b;
     float: left;
     width: 100%;
     text-align: center;
@@ -90,11 +90,11 @@
 }
 
 .invalidComp{
-    height: 22px;
-    width: 22px;
-    float: right;
-    margin-top: -30px;
-    margin-right: 36px;
+    color:#e11e2b;
+    float: left;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
 
 }
 
