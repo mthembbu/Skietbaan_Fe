@@ -23,14 +23,30 @@ class AddGroup extends Component {
     this.onClick = this.onClick.bind(this);
   }
 
+
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+    
   }
 
   onClick() {
     if(this.state.pageState==false){
       if (this.state.groups.indexOf(this.state.name) == -1) {
         if (this.state.name.length != 0) {
+
+          fetch(BASE_URL+"/api/Groups?groupName="+ this.state.name, {
+            method: "post",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(this.state.name)
+          })
+            .then(function(response) {})
+            .then(function(data) {})
+            .catch(function(data) {});
+
+         
           this.props.getName(this.state.name);
           history.push("/Groups");
         } else {

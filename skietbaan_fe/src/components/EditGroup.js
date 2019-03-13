@@ -44,7 +44,6 @@ class EditGroup extends Component {
     } else {
        this.props.history.push("/ViewGroups");
     }
-    window.location = "/ViewGroups";
   }
   onChange(event) {
     this.setState({ filterText: event.target.value });
