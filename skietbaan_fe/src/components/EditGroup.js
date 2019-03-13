@@ -29,6 +29,7 @@ class EditGroup extends Component {
   }
     if (this.props.id != 0) {
        this.props.EditGroupAction(this.props.id)
+       this.setState({posts:this.props.editGroup})
       
     } else {
        this.props.history.push("/ViewGroups");
@@ -43,22 +44,22 @@ class EditGroup extends Component {
     const { newArray } = this.state;
     const updateArray = [...this.state.posts];
 
-    for (var i = 0; i < this.state.posts.length; i++) {
-      if (this.state.posts[i].highlighted === false) {
+    for (var i = 0; i < this.props.editGroup.length; i++) {
+      if (this.props.editGroup[i].highlighted === false) {
         let indexofs=newArray.indexOf(this.state.posts[i])
         newArray.push(this.state.posts[i]);
         updateArray.splice(indexofs, 1);
-        delete this.state.posts[i].colors;
-        delete this.state.posts[i].background;
-        delete this.state.posts[i].image;
-        delete this.state.posts[i].highlighted;
-        delete this.state.posts[i].id;
+        delete this.props.editGroup[i].colors;
+        delete this.props.editGroup[i].background;
+        delete this.props.editGroup[i].image;
+        delete this.props.editGroup[i].highlighted;
+        delete this.props.editGroup[i].id;
+        this.props.editGroup.splice(indexofs, 1)
+
       }
     }
 
-    for(var j=0;j<newArray.length;j++){
-        delete this.props.editGroup[updateArray[j]];
-    }
+
     let request = {
       GroupIds: this.props.id,
       users: this.state.newArray

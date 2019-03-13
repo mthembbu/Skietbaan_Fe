@@ -44,6 +44,7 @@ class AddMembersGroup extends Component {
       const { newArray } = this.state;
       for (var i = 0; i < this.props.existing.length; i++) {
         if (this.props.existing[i].highlighted === true) {
+          console.log(123)
           delete this.props.existing[i].highlighted;
           delete this.props.existing[i].image;
           delete this.props.existing[i].background;
