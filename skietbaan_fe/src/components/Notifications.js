@@ -22,16 +22,18 @@ class notification extends Component {
   onDelete = async () => {
     const deleteNotification = async id => {
       try {
-        await fetch(BASE_URL + `/api/Notification/${id}`, {
-          method: 'post',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(id)
-        });
-      } catch (err) {
-      }
+        await fetch(
+          BASE_URL + "/api/Notification/DeleteNotificationById/" + id,
+          {
+            method: "post",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(id)
+          }
+        );
+      } catch (err) {}
     };
 
     const deletedIds = this.state.array
@@ -79,7 +81,7 @@ class notification extends Component {
   componentDidMount() {
     if (getCookie("token")) {
       const token = document.cookie;
-      fetch(BASE_URL + "/api/Notification?" + token)
+      fetch(BASE_URL + "/api/Notification/GetNotificationsByUser?" + token)
         .then(response => response.json())
         .then(data => {
           const newArray = data.map(notification => {
@@ -94,9 +96,9 @@ class notification extends Component {
   }
 
   render() {
-    if(!getCookie("token")){
+    if (!getCookie("token")) {
       window.location = "/registerPage";
-  }
+    }
     const headingItems = (
       <div>
         <div className="page-heading">
@@ -111,7 +113,11 @@ class notification extends Component {
     const postItems = (
       <table className="post-items">
         <tbody className="">
-          {this.state.array.length <= 0 ? <p className="empty-screen">No Notifications Available</p> : ""}
+          {this.state.array.length <= 0 ? (
+            <p className="empty-screen">No Notifications Available</p>
+          ) : (
+            ""
+          )}
           {this.state.array.map((post, i) => (
             <tr className="tr-class" key={i}>
               <td className="td-notification">
