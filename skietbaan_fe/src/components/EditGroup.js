@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
 import { withRouter } from "react-router-dom";
-import { BASE_URL } from "../actions/types";
-import { EditGroupAction } from "../actions/postActions";
+import { BASE_URL,UPDATEARRAY } from "../actions/types";
+import { EditGroupAction ,AddMemberAction } from "../actions/postActions";
 import marked from "./GroupImages/marked.png";
 import redbox from "./GroupImages/Rectangle.png";
 import back from "./GroupImages/back.png";
@@ -28,7 +28,9 @@ class EditGroup extends Component {
       window.location = "/registerPage";
   }
     if (this.props.id != 0) {
-      this.props.EditGroupAction(this.props.id)
+       this.props.EditGroupAction(this.props.id)
+       this.setState({posts:this.props.editGroup})
+      
     } else {
        this.props.history.push("/ViewGroups");
     }
@@ -37,7 +39,7 @@ class EditGroup extends Component {
     this.setState({ filterText: event.target.value });
   }
 
-  delete  () {
+  delete () {
     this.setState({ count: 0 });
     const { newArray } = this.state;
     const updateArray = [...this.state.posts];
@@ -45,17 +47,18 @@ class EditGroup extends Component {
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === false) {
         let indexofs=newArray.indexOf(this.state.posts[i])
-        newArray.push(this.state.posts[i]);
         updateArray.splice(indexofs, 1);
         delete this.state.posts[i].colors;
         delete this.state.posts[i].background;
         delete this.state.posts[i].image;
         delete this.state.posts[i].highlighted;
         delete this.state.posts[i].id;
+        delete this.props.editGroup[i];
+        newArray.push(this.state.posts[i]);
       }
     }
-    this.setState({ posts: updateArray });
-    
+    this.setState({posts:updateArray})
+
     let request = {
       GroupIds: this.props.id,
       users: this.state.newArray
@@ -74,16 +77,15 @@ class EditGroup extends Component {
 
   toggleHighlight = (user, event) => {
     this.setState({ selected: user });
-    if (this.props.editGroup[event].highlighted === true) {
-      this.props.editGroup[event].highlighted = false;
-      this.props.editGroup[event].image = "redbox";
-      this.props.editGroup[event].background = "white";
-
+    if (this.state.posts[event].highlighted === true) {
+      this.state.posts[event].highlighted = false;
+      this.state.posts[event].image = "redbox";
+      this.state.posts[event].background = "white";
       this.setState({ count: this.state.count - 1 });
     } else {
-      this.props.editGroup[event].highlighted = true;
-      this.props.editGroup[event].image = "marked";
-      this.props.editGroup[event].background = "#F3F4F9";
+      this.state.posts[event].highlighted = true;
+      this.state.posts[event].image = "marked";
+      this.state.posts[event].background = "#F3F4F9";
       this.setState({ count: this.state.count + 1 });
     }
   };
@@ -92,14 +94,14 @@ class EditGroup extends Component {
   }
 
   goToNext = () => {
+    this.props.AddMemberAction(this.props.id)  
     this.props.history.push("/AddMembersGroup");
   };
   render() {
-    console.log(this.props.EditGroup)
     const postitems = (
       <div className="check">
         <ul class="list-group" style={{textAlign:"left"}}>
-          {this.props.editGroup
+          {this.state.posts
             .filter(post => {
               return (
                 !this.state.filterText ||
@@ -114,7 +116,7 @@ class EditGroup extends Component {
             .map((post, index) => (
               <li
                 class="list-group-item list-group-item-light"
-                key={post.id}
+                key={index}
                 style={{
                   background: post.background ,textAlign:"left"
                 }}
@@ -212,4 +214,5 @@ const mapStateToProps = state => ({
   editGroup: state.posts.editGroup
 });
 
-export default withRouter(connect(mapStateToProps,{EditGroupAction})(EditGroup));
+
+export default withRouter(connect(mapStateToProps,{EditGroupAction , AddMemberAction})(EditGroup));
