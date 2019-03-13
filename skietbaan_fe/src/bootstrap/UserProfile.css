@@ -1,6 +1,21 @@
+@media (max-width: 1200px){
+    .accuracy-text-align{
+        padding-right: 20px;
+    }
 
-.font{
-    font-size: 2.7rem;
+    .inherit-width .col{
+        width: 10%;
+    }
+}
+
+@media (min-width: 1200px){
+    .accuracy-label{
+        padding-right: 77% !important;
+    }
+}
+
+.my-container{
+    text-align: center;
 }
 
 .username-bar{
@@ -59,7 +74,7 @@
 .right{
     justify-content: flex-end;
 }
-.center{
+.justify-center{
     justify-content: center;
 }
 
@@ -118,6 +133,7 @@
     border-radius: 100%;
     font-size: 28px;
     font-weight: bold;
+    padding-top: 18px;
     padding-left: 5px;
     background-color: #F3F4F9;
     color: #EA241A;
@@ -208,13 +224,7 @@
     height: 25px;
 }
 
-.my-container{
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
+
 
 .inherit-height{
     height: inherit;

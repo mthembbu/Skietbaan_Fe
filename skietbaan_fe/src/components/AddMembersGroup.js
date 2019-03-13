@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
 import { BASE_URL } from "../actions/types";
+import { EditGroupAction ,AddMemberAction } from "../actions/postActions";
 import { withRouter } from "react-router-dom";
 import marked from "./GroupImages/marked.png";
 import unmarked from "./GroupImages/unmarked.png";
@@ -15,30 +16,21 @@ class AddMembersGroup extends Component {
       newArray: [],
       filterText: "",
       selected: "",
-      count: 0
+      count: 0,
+      pageState:false
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.addUsers = this.addUsers.bind(this);
   }
-  UNSAFE_componentWillMount() {
+
+  componentDidMount() {
     if(!getCookie("token")){
       window.location = "/registerPage";
   }
     if (this.props.id != 0) {
-      fetch(BASE_URL + "/api/Groups/list?id=" + this.props.id)
-        .then(res => res.json())
-        .then(data => {
-          this.setState({
-            posts: data.map(users => {
-              return {
-                ...users,
-                highlighted: false,
-                background: "#fdfdfd"
-              };
-            })
-          });
-        });
+        this.props.AddMemberAction(this.props.id)  
     } else {
       this.props.history.push("/ViewGroups");
     }
@@ -47,51 +39,69 @@ class AddMembersGroup extends Component {
     this.setState({ filterText: event.target.value });
   }
 
-  addUsers=()=> {
-    const { newArray } = this.state;
-    for (var i = 0; i < this.state.posts.length; i++) {
-      if (this.state.posts[i].highlighted === true) {
-        newArray.push(this.state.posts[i]);
+ addUsers() {
+    if(this.state.pageState==false){
+      const { newArray } = this.state;
+      for (var i = 0; i < this.props.existing.length; i++) {
+        if (this.props.existing[i].highlighted === true) {
+          delete this.props.existing[i].highlighted;
+          delete this.props.existing[i].image;
+          delete this.props.existing[i].background;
+          newArray.push(this.props.existing[i]);
+        }
       }
-      delete this.state.posts[i].highlighted;
-      delete this.state.posts[i].id;
+      let request = {
+        users: this.state.newArray,
+        GroupIds: this.props.id
+      };
+  
+      fetch(BASE_URL + "/api/groups/postMember/", {
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(request)
+      })
+      // this.props.EditGroupAction(this.props.id)
+        this.props.history.push("/EditGroup");
+        this.setState({pageState:true})
     }
-    let request = {
-      users: this.state.newArray,
-      GroupIds: this.props.id
-    };
-    fetch(BASE_URL + "/api/groups/postMember/", {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(request)
-    })
-      .then(function(response) {})
-      .then(function(data) {})
-      .catch(function(data) {});
   }
+
   toggleHighlight = (name, event) => {
-    if (this.state.posts[event].highlighted === true) {
-      this.state.posts[event].background = "#fdfdfd";
-      this.state.posts[event].highlighted = false;
+    if (this.props.existing[event].highlighted === true) {
+      this.props.existing[event].background = "#fdfdfd";
+      this.props.existing[event].highlighted = false;
       this.setState({ count: this.state.count - 1 });
     } else {
       this.setState({ selected: name });
-      this.state.posts[event].background = "#F3F4F9";
-      this.state.posts[event].highlighted = true;
+      this.props.existing[event].background = "#F3F4F9";
+      this.props.existing[event].highlighted = true;
       this.setState({ count: this.state.count + 1 });
     }
   };
+
   onBack() {
     this.props.history.push("/EditGroup");
   }
+
+  cancel = () => {
+    for (var i = 0; i < this.props.existing.length; i++) {
+      if (this.props.existing[i].highlighted === true){
+        this.props.existing[i].highlighted=false;
+        this.props.existing[i].background = "#fdfdfd";
+      }
+      
+    }
+    this.setState({count:0})
+  }
+  
   render() {
     const postitems = (
       <div className="check">
-        <ul class="list-group">
-          {this.state.posts
+        <ul class="list-group" style={{textAlign:"left"}}>
+          {this.props.existing
             .filter(post => {
               return (
                 !this.state.filterText ||
@@ -107,7 +117,7 @@ class AddMembersGroup extends Component {
               <li
                 class="list-group-item list-group-item-light"
                 key={post.id}
-                style={{ background: post.background }}
+                style={{ background: post.background ,textAlign:"left"}}
               >
                 <img
                   className="checkbox-delete"
@@ -117,7 +127,7 @@ class AddMembersGroup extends Component {
                 />
                 <label className="blabe">
                   <div className="userName"> {post.username}</div>
-                  <div className="emails">{post.email}</div>
+                  <div className="email">{post.email}</div>
                 </label>
               </li>
             ))}
@@ -171,9 +181,7 @@ class AddMembersGroup extends Component {
                       </button>
                     </td>
                     <td className="group-undo">
-                      <button
-                        className="updatess"
-                        onClick={() => this.cancel()}
+                      <button className="updatess" onClick={() => this.cancel()}
                       >
                         Cancel
                       </button>
@@ -190,6 +198,7 @@ class AddMembersGroup extends Component {
 }
 const mapStateToProps = state => ({
   id: state.posts.groupId,
-  name: state.posts.groupName
+  name: state.posts.groupName,
+  existing: state.posts.existing
 });
-export default withRouter(connect(mapStateToProps)(AddMembersGroup));
+export default withRouter(connect(mapStateToProps,{EditGroupAction ,AddMemberAction})(AddMembersGroup));

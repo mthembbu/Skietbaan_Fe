@@ -69,8 +69,13 @@ class App extends Component {
         return data;
       }).then(data => this.setState({
         arrayUsers: data.filter(function (datas) {
-          return (datas.username.toLowerCase().startsWith(document.getElementById("usernameValue").value.toLocaleLowerCase())
-            || datas.email.toLowerCase().startsWith(document.getElementById("usernameValue").value.toLocaleLowerCase()))
+          if(document.getElementById("usernameValue").value === null 
+            || document.getElementById("usernameValue").value === ""){
+              return "";
+            }else{
+              return (datas.username.toLowerCase().startsWith(document.getElementById("usernameValue").value.toLocaleLowerCase())
+                || datas.email.toLowerCase().startsWith(document.getElementById("usernameValue").value.toLocaleLowerCase()))
+          }
         })
       }))
       .catch(function () { });
@@ -78,7 +83,6 @@ class App extends Component {
 
   SearchMember(user) {
     this.setState({
-      usernameValue: user,
       clicked: true,
       hideButton: false
     });
@@ -183,7 +187,7 @@ class App extends Component {
             </div>
           </div>
           <div className="div-label-enter-user-name">
-            <label className="label-enter-user-name">Enter User Name</label>
+            <label className="label-enter-user-name">Enter Username</label>
           </div>
           <div className="input-container">
             <div className="search-name">
@@ -220,7 +224,7 @@ class App extends Component {
                   <div className="input-spacing">
                     <label className="membership-expiry-date">Membership Expiry Date</label><br />
                     <input type="date" className="expdate" id="expdate"
-                      value={this.GetDate()} onChange={this.handleChangeChange} />
+                      value={this.GetDate()} onChange={this.handleChange} />
                   </div>
                 </div>
               </div>

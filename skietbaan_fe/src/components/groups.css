@@ -6,6 +6,7 @@
   margin-bottom: 37px;
   margin-right: 42px;
   margin-top: 15px;
+  outline: none;
 }
 
 .the-nav-bar {
@@ -39,7 +40,7 @@
 .center-labels {
   margin-top: 10px;
   margin-left: auto;
-  margin-right: 90px;
+  margin-right: auto;
   width: 7em;
   display: flex;
   color: white;
@@ -60,19 +61,25 @@
   color: black;
   font-size: 48px;
   color: white;
+  outline: none;
 }
 
 .NavBar {
   height: 0px;
+}
+.the-Text {
+  outline: none;
 }
 
 .the-Text {
   margin-left: 19px;
   margin-top: 17px;
   width: 208px;
+  float: left;
   height: 39px;
   font-weight: lighter;
-  background: url("../components/GroupImages/search.png") no-repeat;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR…mlZQgCULZkxRlmKjdBURWh0mv/W3EGVn62pWM9B/29Mj3wFyteMR+aPMWlAAAAAElFTkSuQmCC)
+    no-repeat;
   background-position: right;
   background-position-x: 175px;
   font-size: 18px;
@@ -97,11 +104,11 @@
   border: 1px lightgrey solid;
   outline: none;
 }
-.select:focus{
+.select:focus {
   outline: none;
 }
 
-.select2:focus{
+.select2:focus {
   outline: none;
 }
 
@@ -109,6 +116,7 @@
   margin-top: 17px;
   margin-right: 18px;
   float: right;
+  outline: none;
   height: 38px;
   border-radius: 30px;
   width: 102px;
@@ -124,8 +132,11 @@
   height: 73px;
   background: white;
 }
+.create-group:focus {
+  outline: none;
+}
 
-.delete-User {
+.create-group {
   margin-right: 30px;
   margin-left: 30px;
   width: 136px;
@@ -139,7 +150,7 @@
 }
 
 .bottom-label {
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
   background-image: linear-gradient(to right, #282829, #6d6d6d);
@@ -163,6 +174,7 @@
   font-size: 16px;
   font-weight: bold;
   font-size: 16px;
+  outline: none;
   color: #6f839e;
 }
 
@@ -171,9 +183,10 @@
   font-weight: bold;
   font-size: 16px;
   color: red;
+  outline: none;
 }
 
-.emails {
+.email {
   font-size: 14px;
   font-weight: lighter;
   font-size: 16px;
@@ -207,6 +220,7 @@
 .group-delete {
   float: right;
   padding-left: 20px;
+  outline: none;
 }
 
 .nn {
@@ -215,10 +229,11 @@
   color: white;
   width: 60%;
   margin-left: 32px;
+  outline: none;
 }
 
 .bottom-panel {
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
   background-image: linear-gradient(to right, #282829, #6d6d6d);
@@ -239,6 +254,7 @@
   border-radius: 39px;
   font-weight: lighter;
   font-size: 16px;
+  outline: none;
 }
 
 .undo {
@@ -252,7 +268,7 @@
   height: 42px;
   margin-left: 40px;
   border: 1px solid;
-
+  outline: none;
   margin-top: 1px;
 }
 
@@ -272,6 +288,9 @@
   height: 66px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+}
+.updatess:focus {
+  outline: none;
 }
 
 .updatess {
@@ -295,11 +314,6 @@
   font-size: 16px;
 }
 
-.thes {
-  font-weight: lighter;
-  padding-left: 15px;
-}
-
 .usersname {
   font-weight: bold;
   padding-left: 15px;
@@ -317,6 +331,9 @@
   display: flex;
   text-overflow: ellipsis;
   padding-left: 20px;
+}
+.group-confirm:focus {
+  outline: none;
 }
 
 .group-confirm {
@@ -337,9 +354,12 @@
   background: white;
   border: 1px solid;
   padding-left: 5px;
-  background:white;
+  background: white;
   color: black;
   border: 1px solid black;
+}
+.group-confirm-add:focus {
+  outline: none;
 }
 
 .updates {
@@ -348,6 +368,7 @@
   border-radius: 40px;
   font-weight: lighter;
   font-size: 16px;
+  outline: none;
 }
 
 .the-main {
@@ -365,6 +386,7 @@
 .group-delete {
   margin-right: 32px;
   float: right;
+  outline: none;
 }
 
 .group-view {
@@ -401,14 +423,14 @@
 .confrim-cancel {
   padding-left: 7%;
   position: fixed;
-  right:1%;
+  right: 1%;
+  outline: none;
 }
 
 .back-image {
   padding-left: 30px;
   margin-top: 11px;
   height: 30px;
-
 }
 
 .checkbox-delete {
@@ -419,4 +441,14 @@
   background-color: #f3f4f9;
   margin-top: 15px;
   z-index: 5px;
+}
+.list-group-item-light {
+  text-align: left;
+}
+
+.list-group-item {
+  text-align: left;
+}
+.list-group {
+  text-align: left;
 }

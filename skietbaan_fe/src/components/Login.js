@@ -8,8 +8,7 @@ import {
 import '../components/RegisterStyles.css';
 import { validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
-import {URL} from '../actions/types.js';
-import header from'../components/assets/header.png';
+import { URL } from '../actions/types.js';
 import back from '../components/assets/Back.png';
 
 class Login extends Component {
@@ -19,8 +18,10 @@ class Login extends Component {
       usernameValue: "",
       passwordValue: "",
       validForm: false,
-      tokenValue : "",
-      user: []
+      tokenValue: "",
+      users: [],
+      passwordFound: true,
+      usernameFound: true
     }
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -70,18 +71,18 @@ class Login extends Component {
     if (target.name === "passwordValue") {
       if (target.value.length > 0)
         stateUpdate.invalidPassword = false;
-        else {
-          stateUpdate.invalidPassword = true;
-        }
+      else {
+        stateUpdate.invalidPassword = true;
+      }
     }
     if (target.name === "usernameValue") {
       if (target.value.length > 0)
         stateUpdate.invalidUsername = false;
-        else {
-          stateUpdate.invalidUsername = true;
-        }
+      else {
+        stateUpdate.invalidUsername = true;
+      }
     }
-    
+
     if (this.state.usernameValue
       && this.state.passwordValue
       && !stateUpdate.invalidUsername
@@ -136,18 +137,23 @@ class Login extends Component {
         if (typeof data === "object") {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
           window.location = "/home";
-
-        }
-        else if (typeof data === "string"
-          && data.indexOf("Invalid Password") > -1
-          || data.indexOf("not found")) {
-          this.setState({
-            invalidPassword: true,
-            passwordFound: false,
-            invalidUsername: true
-          });
         }
 
+        else if (typeof data === "string") {
+          if (data.indexOf("Invalid Password") > -1) {
+            this.setState({
+              invalidPassword: true,
+              passwordFound: false,
+
+            });
+          }
+          if (data.indexOf("not found") > -1) {
+            this.setState({
+              invalidUsername: true,
+              usernameFound: false
+            })
+          }
+        }
       }).catch(function (data) {
       });
     }
@@ -196,19 +202,22 @@ class Login extends Component {
 
             <div className="spacing-login">
               <FormGroup>
-                <label className="front-white input-label">Enter Username <div 
-                className={this.state.invalidUsername ? "invalid-icon" :"hidden"}></div></label>
-                
+                <label className="front-white input-label">Enter Username <div
+                  className={this.state.invalidUsername ? "invalid-icon" : "hidden"}></div></label>
+
                 <div className="input-container">
                   <input
                     type="text"
                     name="usernameValue"
                     id="us"
+                    autoComplete = "off"
                     value={this.state.usernameValue}
                     onChange={this.handleChange}
                     className="input-user"
                   />
                 </div>
+                <div className={this.state.usernameFound
+                  && this.usernameValue !== "" ? "hidden" : "error-message"}>Invalid Username</div>
               </FormGroup>
             </div>
             <div className="spacing-login">
@@ -221,23 +230,29 @@ class Login extends Component {
                       type="password"
                       name="passwordValue"
                       id="passwordValue"
+                      autoComplete = "off"
                       value={this.state.passwordValue}
                       onChange={this.handleChange}
                       className="input-password"
                     />
-                    <div className={this.state.passwordValue !== "" ? "password-view-icon" : "hidden"}
+                    <div className={this.state.passwordValue !== "" ? "password-view-icon" : "password-icon"}
                       onClick={this.togglePassword}>
                     </div>
                   </div>
                 </div>
                 <div className={this.state.passwordFound
-                  && this.passwordValue !== "" ? "hidden" : "error-message"}>Invalid credentials</div>
+                  && this.passwordValue !== "" ? "hidden" : "error-message"}>Invalid Password</div>
               </FormGroup>
             </div>
             <div className="button-container">
               <Button onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
                 : "buttons-invalid round-button"} >Login</Button>
             </div>
+            
+            {/* TODO : forgot password page under construction
+            <div className="login-href">
+              <a href="/forgotPassword" >Forgot Password?</a>
+            </div> */}
           </Form>
         </div >
       </div>

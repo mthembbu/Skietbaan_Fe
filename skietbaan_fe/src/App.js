@@ -20,6 +20,7 @@ import ScoreCapture from './components/ScoreCapture';
 import CreatePage from './components/CreatePage';
 import UserProfile from './components/UserProfile';
 import './App.css';
+import ForgotPassword from './components/ForgotPassword';
 import AddMembersGroup from './components/AddMembersGroup';
 import EditGroup from './components/EditGroup';
 import ViewComp from './components/ViewComp';
@@ -30,12 +31,20 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-		  nav: null
+			nav: false
 		}
 		this.TypeUser = this.TypeUser.bind(this);
 	}
 
 	TypeUser(){
+		if(this.state.nav){
+			return <NavbarMenu />
+		}else{
+			return <NavbarMenuUser />
+		}
+	}
+
+	componentDidMount(){
 		let token = getCookie("token");
 		fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
 			method: 'Get',
@@ -45,31 +54,29 @@ class App extends Component {
 			}
 		})
 			.then(response => response.json())
-			.then(data => this.setState({
-				nav:data.admin
-			}))
-			.then(function (data) {})
-			.catch(function (data) {
-				console.log("error")
+			.then(data => {
+				this.setState({
+					nav:data.admin
 			});
-			if(this.state.nav === true){
-				return <NavbarMenu/>
-			}else{
-				return <NavbarMenuUser/>
-			}
+			}).catch(function (data) {});
 	}
+
+
 
 	render() {
 		return (
 			<Provider store={store}>
-				<div className="App">
-				{this.TypeUser()}
+				<div>
+				{this.state.nav ? <NavbarMenu /> : <NavbarMenuUser />}
+				{/* TODO: Make the Navbar work more efficiently with this 
+				 {this.TypeUser()} */}
 					<Router history={history}>
 						<Switch>
 							<Route path="/home" component={LeaderboardPage} exact />
 							<Route path="/login" component={Login} exact />
 							<Route path="/registerPage" component={Register} exact />
 							<Route path="/" component={Register} exact />
+							<Route path="/forgotPassword" component={ForgotPassword} />
 							<Route path="/registerMember" component={RegisterMember} exact />
 							<Route path="/new-competition" component={CreateComp} exact />
 							<Route path="/AddGroup" component={AddGroup} exact />

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./groups.css";
 import { withRouter } from "react-router-dom";
-import { createGroups } from "../actions/postActions";
+import { createGroups ,FetchGroups} from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
 import back from "./GroupImages/back.png";
 import unmarked from "./GroupImages/unmarked.png";
@@ -20,6 +20,7 @@ class Groups extends Component {
       count: 0,
       filterText: "",
       check: "Select all",
+      pageState:false
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -58,11 +59,8 @@ class Groups extends Component {
     this.setState({ filterText: event.target.value });
   }
 
-  handleOnClick() {
-    const requestedObj = {
-      name: this.props.name.toLowerCase()
-    };
-    this.props.createGroups(requestedObj);
+ async handleOnClick() {
+  if(this.state.pageState==false){
     const { newArray } = this.state;
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === true) {
@@ -71,6 +69,11 @@ class Groups extends Component {
       delete this.state.posts[i].highlighted;
       delete this.state.posts[i].id;
     }
+    
+    const requestedObj = {
+      name: this.props.name.toLowerCase(),
+      users:this.state.newArray
+    };
 
     fetch(BASE_URL + "/api/groups/add", {
       method: "POST",
@@ -78,15 +81,16 @@ class Groups extends Component {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(newArray)
+      body: JSON.stringify(requestedObj)
     })
-      .then(function(response) {})
-      .catch(function(data) {});
+      await this.props.FetchGroups();
       this.props.history.push("/ViewGroups");
+      this.setState({pageState:true})
+  }
+    
   }
 
   selectall() {
-
     const newarry = [...this.state.posts];
     if (this.state.check == "Select all") {
       this.setState({count:newarry.length})
@@ -129,7 +133,7 @@ class Groups extends Component {
   render() {
     const postitems = (
       <div className="check">
-        <ul class="list-group">
+        <ul class="list-group" style={{textAlign:"left"}}>
           {this.state.posts
             .filter(post => {
               return (
@@ -147,7 +151,7 @@ class Groups extends Component {
                 class="list-group-item list-group-item-light"
                 key={post.id}
                 style={{
-                  background: post.background
+                  background: post.background ,textAlign:"left"
                 }}
               >
                 <img
@@ -160,7 +164,7 @@ class Groups extends Component {
                   <div className="userName" style={{ color: post.colors }}>
                     {post.username}
                   </div>
-                  <div className="emails" style={{ color: post.colors }}>
+                  <div className="email" style={{ color: post.colors }}>
                     {post.email}
                   </div>
                 </label>
@@ -202,7 +206,7 @@ class Groups extends Component {
         </div>
         {this.state.count == 0 ? null : (
           <label className="bottom-label">
-            <button className="delete-User" onClick={this.handleOnClick}>
+            <button className="create-group" onClick={this.handleOnClick}>
               Create Group
             </button>
           </label>
@@ -219,6 +223,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { createGroups }
+    { createGroups ,FetchGroups }
   )(Groups)
 );
