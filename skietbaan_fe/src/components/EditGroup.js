@@ -47,16 +47,14 @@ class EditGroup extends Component {
     for (var i = 0; i < this.state.posts.length; i++) {
       if (this.state.posts[i].highlighted === false) {
         let indexofs=newArray.indexOf(this.state.posts[i])
-        
         updateArray.splice(indexofs, 1);
         delete this.state.posts[i].colors;
         delete this.state.posts[i].background;
         delete this.state.posts[i].image;
         delete this.state.posts[i].highlighted;
         delete this.state.posts[i].id;
+        delete this.props.editGroup[i];
         newArray.push(this.state.posts[i]);
-
-
       }
     }
     this.setState({posts:updateArray})
@@ -79,8 +77,6 @@ class EditGroup extends Component {
 
   toggleHighlight = (user, event) => {
     this.setState({ selected: user });
-    console.log(event)
-    console.log("this is the print ",this.props.editGroup[event])
     if (this.state.posts[event].highlighted === true) {
       this.state.posts[event].highlighted = false;
       this.state.posts[event].image = "redbox";
@@ -102,7 +98,6 @@ class EditGroup extends Component {
     this.props.history.push("/AddMembersGroup");
   };
   render() {
-    console.log(this.state.posts)
     const postitems = (
       <div className="check">
         <ul class="list-group" style={{textAlign:"left"}}>

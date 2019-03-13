@@ -30,7 +30,7 @@ class AddMembersGroup extends Component {
       window.location = "/registerPage";
   }
     if (this.props.id != 0) {
-       this.props.AddMemberAction(this.props.id) 
+        this.props.AddMemberAction(this.props.id)  
     } else {
       this.props.history.push("/ViewGroups");
     }
@@ -44,7 +44,6 @@ class AddMembersGroup extends Component {
       const { newArray } = this.state;
       for (var i = 0; i < this.props.existing.length; i++) {
         if (this.props.existing[i].highlighted === true) {
-          console.log(123)
           delete this.props.existing[i].highlighted;
           delete this.props.existing[i].image;
           delete this.props.existing[i].background;
@@ -64,6 +63,7 @@ class AddMembersGroup extends Component {
         },
         body: JSON.stringify(request)
       })
+      // this.props.EditGroupAction(this.props.id)
         this.props.history.push("/EditGroup");
         this.setState({pageState:true})
     }
