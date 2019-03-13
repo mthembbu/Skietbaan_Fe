@@ -44,21 +44,22 @@ class EditGroup extends Component {
     const { newArray } = this.state;
     const updateArray = [...this.state.posts];
 
-    for (var i = 0; i < this.props.editGroup.length; i++) {
-      if (this.props.editGroup[i].highlighted === false) {
+    for (var i = 0; i < this.state.posts.length; i++) {
+      if (this.state.posts[i].highlighted === false) {
         let indexofs=newArray.indexOf(this.state.posts[i])
-        newArray.push(this.state.posts[i]);
+        
         updateArray.splice(indexofs, 1);
-        delete this.props.editGroup[i].colors;
-        delete this.props.editGroup[i].background;
-        delete this.props.editGroup[i].image;
-        delete this.props.editGroup[i].highlighted;
-        delete this.props.editGroup[i].id;
-        this.props.editGroup.splice(indexofs, 1)
+        delete this.state.posts[i].colors;
+        delete this.state.posts[i].background;
+        delete this.state.posts[i].image;
+        delete this.state.posts[i].highlighted;
+        delete this.state.posts[i].id;
+        newArray.push(this.state.posts[i]);
+
 
       }
     }
-
+    this.setState({posts:updateArray})
 
     let request = {
       GroupIds: this.props.id,
@@ -80,15 +81,15 @@ class EditGroup extends Component {
     this.setState({ selected: user });
     console.log(event)
     console.log("this is the print ",this.props.editGroup[event])
-    if (this.props.editGroup[event].highlighted === true) {
-      this.props.editGroup[event].highlighted = false;
-      this.props.editGroup[event].image = "redbox";
-      this.props.editGroup[event].background = "white";
+    if (this.state.posts[event].highlighted === true) {
+      this.state.posts[event].highlighted = false;
+      this.state.posts[event].image = "redbox";
+      this.state.posts[event].background = "white";
       this.setState({ count: this.state.count - 1 });
     } else {
-      this.props.editGroup[event].highlighted = true;
-      this.props.editGroup[event].image = "marked";
-      this.props.editGroup[event].background = "#F3F4F9";
+      this.state.posts[event].highlighted = true;
+      this.state.posts[event].image = "marked";
+      this.state.posts[event].background = "#F3F4F9";
       this.setState({ count: this.state.count + 1 });
     }
   };
@@ -105,7 +106,7 @@ class EditGroup extends Component {
     const postitems = (
       <div className="check">
         <ul class="list-group" style={{textAlign:"left"}}>
-          {this.props.editGroup
+          {this.state.posts
             .filter(post => {
               return (
                 !this.state.filterText ||
