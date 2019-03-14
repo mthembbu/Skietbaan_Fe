@@ -10,7 +10,9 @@ class NavbarMenuUser extends Component {
 
     this.state = {
       expanded: false,
-      numberOfNotifications: 0
+      numberOfNotifications: 0,
+      isRead: false,
+      isClicked: false
     };
 
     this.isHome = this.isHome.bind(this);
@@ -21,10 +23,13 @@ class NavbarMenuUser extends Component {
     this.expand = this.expand.bind(this);
     this.isMore = this.isMore.bind(this);
     this.GoTo = this.GoTo.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   expand() {
-    this.setState({ expanded: !this.state.expanded });
+    this.setState({
+      expanded: !this.state.expanded
+    });
   }
 
   componentWillMount() {
@@ -122,7 +127,11 @@ class NavbarMenuUser extends Component {
     if (window.location.pathname.endsWith("/notify")) {
       return (
         <img
-          src={NAV_BAR_ICONS.NOTIFICATIONS_RED}
+          src={
+            this.state.numberOfNotifications === 0
+              ? NAV_BAR_ICONS.NOTIFICATIONS_GRAY
+              : NAV_BAR_ICONS.NOTIFY_GREY
+          }
           className="notifications-icon-grey"
           alt="Notification tab Selected"
         />
@@ -130,7 +139,11 @@ class NavbarMenuUser extends Component {
     } else {
       return (
         <img
-          src={NAV_BAR_ICONS.NOTIFICATIONS_GRAY}
+          src={
+            this.state.numberOfNotifications === 0
+              ? NAV_BAR_ICONS.NOTIFICATIONS_GRAY
+              : NAV_BAR_ICONS.NOTIFY_GREY
+          }
           className="notifications-icon-grey"
           alt="Notification tab not Selected"
         />
@@ -162,7 +175,11 @@ class NavbarMenuUser extends Component {
     if (window.location.pathname.endsWith("/notify")) {
       return (
         <img
-          src={NAV_BAR_ICONS.NOTIFICATIONS_RED}
+          src={
+            this.state.numberOfNotifications === 0
+              ? NAV_BAR_ICONS.NOTIFICATIONS_GRAY
+              : NAV_BAR_ICONS.NOTIFY_GREY
+          }
           className="notifications-icon-grey-v2"
           alt="Notification tab Selected"
         />
@@ -170,7 +187,11 @@ class NavbarMenuUser extends Component {
     } else {
       return (
         <img
-          src={NAV_BAR_ICONS.NOTIFICATIONS_GRAY}
+          src={
+            this.state.numberOfNotifications === 0
+              ? NAV_BAR_ICONS.NOTIFICATIONS_GRAY
+              : NAV_BAR_ICONS.NOTIFY_GREY
+          }
           className="notifications-icon-grey-v2"
           alt="Notification tab not Selected"
         />
@@ -178,11 +199,21 @@ class NavbarMenuUser extends Component {
     }
   }
 
+  handleClick() {
+    this.setState({
+      isClicked: !this.isClicked
+    });
+  }
+
   isMore() {
     return (
       <img
-        src={NAV_BAR_ICONS.MORE_GRAY}
-        className="more-icon-grey"
+        src={
+          this.state.numberOfNotifications === 0
+            ? NAV_BAR_ICONS.MORE_GRAY
+            : NAV_BAR_ICONS.MORE_NOTIFY
+        }
+        className={"more-icon-grey"}
         alt="More icon to expand tray"
       />
     );
