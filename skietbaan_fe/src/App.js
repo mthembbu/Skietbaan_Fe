@@ -27,47 +27,18 @@ import ViewComp from './components/ViewComp';
 import CreateComp from './components/CreateComp';
 import NavbarMenuUser from './components/NavbarMenuUser';
 import {BASE_URL, URL} from './actions/types.js';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as LoginActions from './actions/loginActions';
 class App extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			nav: false
-		}
-		this.TypeUser = this.TypeUser.bind(this);
 	}
-
-	TypeUser(){
-		if(this.state.nav){
-			return <NavbarMenu />
-		}else{
-			return <NavbarMenuUser />
-		}
-	}
-
-	componentDidMount(){
-		let token = getCookie("token");
-		fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
-			method: 'Get',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			}
-		})
-			.then(response => response.json())
-			.then(data => {
-				this.setState({
-					nav:data.admin
-			});
-			}).catch(function (data) {});
-	}
-
-
-
 	render() {
-		return (
-			<Provider store={store}>
+		return (	
+  			<Provider store={store}>	
 				<div>
-				{this.state.nav ? <NavbarMenu /> : <NavbarMenuUser />}
+				{this.props.type ? <NavbarMenu />: <NavbarMenu />}
 				{/* TODO: Make the Navbar work more efficiently with this 
 				 {this.TypeUser()} */}
 					<Router history={history}>
@@ -100,4 +71,13 @@ class App extends Component {
 		);
 	}
 }
-export default App;
+const mapStateToProps = (state) => ({
+    type: state.loginState.type
+});
+
+const mapActionsToProps = (dispatch) => ({
+	//this.props.loginActions.logUser/logAdmin();
+    loginActions: bindActionCreators(LoginActions, dispatch)
+});
+
+export default connect(mapStateToProps, mapActionsToProps)(App);

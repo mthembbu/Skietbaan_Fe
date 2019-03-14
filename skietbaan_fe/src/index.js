@@ -12,8 +12,9 @@ import { store } from "./store";
  * JS objects from the rootReducer through the store from the './store file'
  */
 ReactDOM.render(
-  
+  <Provider store={store}>
     <App />
+    </Provider>
  ,
   document.getElementById("root")
 );

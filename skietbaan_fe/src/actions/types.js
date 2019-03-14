@@ -60,3 +60,5 @@ export const EDITGROUPUSERS = "EDITGROUPUSERS";
 export const FETCH_GROUPS = "FETCH_GROUPS";
 export const ADDMEMBERS = "ADDMEMBERS";
 export const UPDATEARRAY = "UPDATEARRAY";
+
+export const LOGINTYPE = "LOGINTYPE";
