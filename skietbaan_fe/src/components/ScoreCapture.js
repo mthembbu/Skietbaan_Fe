@@ -219,8 +219,8 @@ export default class search extends Component {
 
   SubmitScore() {
     let Valid = this.Validate();
-    if (Valid && !this.state.scoreSaved) {
-      this.GetLocation();
+    if (Valid && !this.state.scoreSaved && this.state.longitude !== null && this.state.latitude !==null) {
+      
       let RequestObject = {
         "UserScore": this.state.score / 1,
         "PictureURL": this.state.imageContent,
@@ -242,6 +242,26 @@ export default class search extends Component {
         }));
       setTimeout(function () { window.location = "/scorecapture"; }, 2000);
 
+    }
+    else if (Valid && !this.state.scoreSaved){
+      let RequestObject = {
+        "UserScore": this.state.score / 1,
+        "PictureURL": this.state.imageContent,
+        "CompetitionName": this.state.competitionName,
+        "Token": getCookie("token"),
+      }
+      fetch(URL + "/api/Scores", {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(RequestObject)
+      }).then(response => response.json())
+        .then(data => this.setState({
+          scoreSaved: true, currState: 5
+        }));
+        setTimeout(function () { window.location = "/scorecapture"; }, 2000);
     }
   }
 
