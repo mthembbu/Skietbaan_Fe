@@ -30,7 +30,7 @@ export default class search extends Component {
       Flashon: false,
       validScore: true,
       validCompetition: true,
-      scoreEntered:false,
+      scoreEntered: false,
     }
 
     this.CompetitionClicked = this.CompetitionClicked.bind(this);
@@ -53,13 +53,13 @@ export default class search extends Component {
       if (validateScore(this.state.score)) {
         this.setState({
           validScore: true,
-          scoreEntered:true
+          scoreEntered: true
         });
       }
       else {
         this.setState({
           validScore: false,
-          scoreEntered:false
+          scoreEntered: false
         });
       }
     });
@@ -108,9 +108,9 @@ export default class search extends Component {
 
   Validate() {
     let Valid = false;
-    if (parseInt(this.state.score,0) < 1 
-    || this.state.score === null 
-    || (this.state.score % 1) !== 0) {
+    if (parseInt(this.state.score, 0) < 1
+      || this.state.score === null
+      || (this.state.score % 1) !== 0) {
       this.setState({
         validForm: false,
         validScore: false
@@ -219,8 +219,9 @@ export default class search extends Component {
 
   SubmitScore() {
     let Valid = this.Validate();
-    if (Valid && !this.state.scoreSaved && this.state.longitude !== null && this.state.latitude !==null) {
-      
+    if (Valid && !this.state.scoreSaved
+      && this.state.longitude !== null
+      && this.state.latitude !== null) {
       let RequestObject = {
         "UserScore": this.state.score / 1,
         "PictureURL": this.state.imageContent,
@@ -243,7 +244,7 @@ export default class search extends Component {
       setTimeout(function () { window.location = "/scorecapture"; }, 2000);
 
     }
-    else if (Valid && !this.state.scoreSaved){
+    else if (Valid && !this.state.scoreSaved) {
       let RequestObject = {
         "UserScore": this.state.score / 1,
         "PictureURL": this.state.imageContent,
@@ -261,7 +262,7 @@ export default class search extends Component {
         .then(data => this.setState({
           scoreSaved: true, currState: 5
         }));
-        setTimeout(function () { window.location = "/scorecapture"; }, 2000);
+      setTimeout(function () { window.location = "/scorecapture"; }, 2000);
     }
   }
 
@@ -319,19 +320,18 @@ export default class search extends Component {
 
   }
 
-  ToggleIcon(){
+  ToggleIcon() {
     var flash = document.getElementById("FlashImage");
-    if(flash.classList.contains("flash"))
-    {
+    if (flash.classList.contains("flash")) {
       flash.classList.remove("flash");
       flash.classList.add("flashOff");
     }
-    else{
+    else {
       flash.classList.add("flash");
       flash.classList.remove("flashOff");
     }
-      
- }
+
+  }
 
   goBack() {
     this.setState({
@@ -343,26 +343,23 @@ export default class search extends Component {
     this.ToggleNavbar();
   }
 
-
   render() {
     document.addEventListener('DOMContentLoaded', () => {
       var HideWhenAddingScore = document.querySelector("#HideWhenAddingScore");
-     var last_size = document.body.clientHeight;
-     window.addEventListener("resize",function(){
-      if(last_size == document.body.clientHeight){
-        return;
-            }
-       if(HideWhenAddingScore.classList.contains("hidden-small"))
-       {
-        HideWhenAddingScore.classList.remove("hidden-small");
-       }
-       else{
-        HideWhenAddingScore.classList.add("hidden-small");
-       }
-       last_size = document.body.clientHeight;
-     })
+      var last_size = document.body.clientHeight;
+      window.addEventListener("resize", function () {
+        if (last_size == document.body.clientHeight) {
+          return;
+        }
+        if (HideWhenAddingScore.classList.contains("hidden-small")) {
+          HideWhenAddingScore.classList.remove("hidden-small");
+        }
+        else {
+          HideWhenAddingScore.classList.add("hidden-small");
+        }
+        last_size = document.body.clientHeight;
+      })
     }, false);
-
 
     const stateOne = this.state.showCamera || this.state.ImageTaken
     let competitionItem = [];
@@ -375,7 +372,7 @@ export default class search extends Component {
 
       }
     }
-    if(!getCookie("token")){
+    if (!getCookie("token")) {
       window.location = "/registerPage";
     }
     return (
@@ -390,13 +387,13 @@ export default class search extends Component {
               <div className="input-container">
                 <input type="number" id="scoreInput" min="0" step="1" name="score" className="score"
                   onChange={this.handleScore}></input>
-                  <div className={this.state.validScore ? "hidden" : "invalidScore"}>Enter Score</div>
+                <div className={this.state.validScore ? "hidden" : "invalidScore"}>Enter Score</div>
               </div>
 
             </div>
             <div className="centre-label">
               <label className="label-competition">Select Competition</label>
-            </div>         
+            </div>
             <div className="competition-container">
               {competitionItem}
 
@@ -407,7 +404,7 @@ export default class search extends Component {
             </div>
           </div>
           <div className="submit-container" id="HideWhenAddingScore">
-            <div className={this.state.ImageTaken || this.state.showCamera 
+            <div className={this.state.ImageTaken || this.state.showCamera
               ? "hidden" : "submit-button-elements"}>
               <div className="button-hover">
                 <img src={cameraGray}
@@ -416,7 +413,7 @@ export default class search extends Component {
               </div>
               <label className="labelIcon">Capture score</label>
             </div>
-            <div className={(this.state.showCamera && !this.state.ImageTaken) 
+            <div className={(this.state.showCamera && !this.state.ImageTaken)
               || this.state.ImageTaken ? "hidden" : "submit-button-elements"}>
               <div className="button-hover ">
                 <img src={graySubmit} onClick={() => this.GetLocation()}
@@ -425,7 +422,7 @@ export default class search extends Component {
               <label className="labelIcon">Submit</label>
             </div>
             <div className="icon-pushdown no-margin">
-            <div className={!this.state.ImageTaken ? "hidden" : "submit-button-elements third float-right"}>
+              <div className={!this.state.ImageTaken ? "hidden" : "submit-button-elements third float-right"}>
                 <div className="button-hover ">
                   <img src={graySubmit} onClick={() => this.GetLocation()}
                     className="button-that-submits" alt=''></img>
@@ -449,9 +446,9 @@ export default class search extends Component {
               Capture Score
               <img src={lightgrayback} onClick={() => this.goBack()} id="back"
                 className="btnBack" alt=''></img>
-              </div>
+            </div>
             <div className="back-spacing">
-              
+
             </div>
             <div className={this.state.ImageTaken ? "hidden" : "video-container"}>
               <video id="video" width="310" height="310" className="video" autoPlay></video>
@@ -460,7 +457,8 @@ export default class search extends Component {
               <div className={this.state.currState !== 3 ? "hidden" : "submit-button-elements third"} >
                 <div className="button-hover">
                   <div className={this.state.currState !== 3 ? "hidden" : ""}>
-                  <div id="FlashImage"alt="" className="img-responsive flash" onClick={() => this.Flash()}></div>
+                    <div id="FlashImage" alt="" className="img-responsive flash" 
+                    onClick={() => this.Flash()}></div>
                   </div>
                 </div>
               </div>
