@@ -67,6 +67,7 @@ class Login extends Component {
       usernameFound: true,
       passwordFound: true
     }
+
     if (target.name === "passwordValue") {
       if (target.value.length > 0)
         stateUpdate.invalidPassword = false;

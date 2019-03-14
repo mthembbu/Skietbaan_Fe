@@ -13,20 +13,31 @@ class notification extends Component {
       tokenValue: "",
       deleteClicked: false,
       deleted: true,
-      cancelClicked: false
+      cancelClicked: false,
+      isRead: false
     };
     this.onDelete = this.onDelete.bind(this);
     this.markForDeletion = this.markForDeletion.bind(this);
   }
 
   onDelete = async () => {
+    setTimeout(function() {
+      window.location = "/notify";
+    }, 2000);
     const deleteNotification = async id => {
       try {
-        await fetch(BASE_URL + `/api/Notification/${id}`, {
-          method: "Delete"
-        });
-      } catch (err) {
-      }
+        await fetch(
+          BASE_URL + "/api/Notification/DeleteNotificationById/" + id,
+          {
+            method: "post",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(id)
+          }
+        );
+      } catch (err) {}
     };
 
     const deletedIds = this.state.array
@@ -50,11 +61,18 @@ class notification extends Component {
     } else if (Notification === "Confirmation") {
     } else if (Notification === "Renewal") {
     } else if (Notification === "Competition") {
-      history.push("/home");
+      setTimeout(function() {
+        window.location = "/home";
+      }, 2000);
     } else if (Notification === "Document") {
     } else if (Notification === "Group") {
     } else {
-      history.push("/notify");
+      setTimeout(function() {
+        window.location = "/notify";
+      }, 2000);
+      this.setState({
+        isRead: true
+      });
     }
   };
 
@@ -68,13 +86,15 @@ class notification extends Component {
   }
 
   onClick_cancel() {
-    window.location = "/notify";
+    setTimeout(function() {
+      window.location = "/notify";
+    }, 2000);
   }
 
   componentDidMount() {
     if (getCookie("token")) {
       const token = document.cookie;
-      fetch(BASE_URL + "/api/Notification?" + token)
+      fetch(BASE_URL + "/api/Notification/GetNotificationsByUser?" + token)
         .then(response => response.json())
         .then(data => {
           const newArray = data.map(notification => {
@@ -89,9 +109,11 @@ class notification extends Component {
   }
 
   render() {
-    if(!getCookie("token")){
-      window.location = "/registerPage";
-  }
+    if (!getCookie("token")) {
+      setTimeout(function() {
+        window.location = "/registerPage";
+      }, 2000);
+    }
     const headingItems = (
       <div>
         <div className="page-heading">
@@ -106,7 +128,11 @@ class notification extends Component {
     const postItems = (
       <table className="post-items">
         <tbody className="">
-          {this.state.array.length <= 0 ? <p className="empty-screen">No Notifications Available</p> : ""}
+          {this.state.array.length <= 0 ? (
+            <p className="empty-screen">No Notifications Available</p>
+          ) : (
+            ""
+          )}
           {this.state.array.map((post, i) => (
             <tr className="tr-class" key={i}>
               <td className="td-notification">
