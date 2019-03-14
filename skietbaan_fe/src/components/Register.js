@@ -31,7 +31,10 @@ class Register extends Component {
   }
 
   disableButton() {
-    if (this.state.validForm === true) {
+    if (this.state.validForm === true
+      && this.state.passwordValue !== "" 
+      && this.state.usernameValue !== ""
+      && this.state.emailValue !== "" ) {
       document.getElementById("roundButton").disabled = false;
     }
     else
