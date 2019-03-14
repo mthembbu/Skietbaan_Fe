@@ -33,7 +33,9 @@ class Login extends Component {
   }
 
   disableButton() {
-    if (this.state.validForm === true) {
+    if (this.state.validForm === true 
+      || this.state.passwordValue !== "" 
+      || this.state.usernameValue !== "" ) {
       document.getElementById("roundButton").disabled = false;
     }
     else
@@ -252,8 +254,10 @@ class Login extends Component {
             {/* TODO : forgot password page under construction
             <div className="login-href">
               <a href="/forgotPassword" >Forgot Password?</a>
-            </div> */}
+            </div>
+             */}
           </Form>
+          
         </div >
       </div>
 
