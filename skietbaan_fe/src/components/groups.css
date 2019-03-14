@@ -412,6 +412,13 @@
   width: 10%;
   white-space: pre;
 }
+.name-of-groups {
+  display: inline-block;
+  color: white;
+  margin-left: -55px;
+  width: 10%;
+  white-space: pre;
+}
 
 .list-group-item-light {
   height: 65px;

@@ -161,7 +161,7 @@ class Groups extends Component {
                   <div className="userName" style={{ color: post.colors }}>
                     {post.username}
                   </div>
-                  <div className="email" style={{ color: post.colors }}>
+                  <div className="email" style={{ color: post.highlighted?"white":"" }}>
                     {post.email}
                   </div>
                 </label>

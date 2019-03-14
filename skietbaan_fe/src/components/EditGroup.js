@@ -44,7 +44,6 @@ class EditGroup extends Component {
     } else {
        this.props.history.push("/ViewGroups");
     }
-    window.location = "/ViewGroups";
   }
   onChange(event) {
     this.setState({ filterText: event.target.value });
@@ -68,8 +67,6 @@ class EditGroup extends Component {
         delete this.state.posts[i]
       }
     }
-
-    
     let request = {
       GroupIds: this.props.id,
       users: this.state.newArray

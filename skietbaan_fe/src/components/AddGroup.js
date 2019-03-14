@@ -23,12 +23,22 @@ class AddGroup extends Component {
     this.onClick = this.onClick.bind(this);
   }
 
+  componentWillMount(){
+    fetch(BASE_URL + "/api/groups")
+    .then(res=>res.json())
+    .then(data=>this.setState({
+      groups:data.map(names=>
+        names.name
+        )
+    }))
+  }
+
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   onClick() {
-    if(this.state.pageState==false){
+    
       if (this.state.groups.indexOf(this.state.name) == -1) {
         if (this.state.name.length != 0) {
           this.props.getName(this.state.name);
@@ -39,9 +49,6 @@ class AddGroup extends Component {
       } else {
         this.setState({ exist: false });
       }
-      this.setState({pageState:true})
-    }
-  
   }
 
   render() {

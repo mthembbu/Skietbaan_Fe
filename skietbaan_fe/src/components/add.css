@@ -39,6 +39,12 @@
   background: #f3f4f9;
   font: #6f839e;
 }
+.texts-active:focus{
+  outline: none;
+}
+.texts:focus{
+  outline: none;
+}
 
 .texts {
   border-radius: 8px;
@@ -70,7 +76,9 @@
   width: 285px;
   height: 34px;
 }
-
+.add:focus{
+  outline: none;
+}
 .add {
   height: 42px;
   width: 146px;
@@ -121,7 +129,5 @@
   width: 0px;
 }
 .add2:focus { outline: none; }
-.texts-active{outline: none;}
-.texts{outline: none;}
 
 

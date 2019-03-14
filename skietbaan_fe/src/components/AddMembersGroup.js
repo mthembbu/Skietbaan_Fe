@@ -34,8 +34,7 @@ class AddMembersGroup extends Component {
             posts: data.map(users => {
               return {
                 ...users,
-                highlighted: false,
-                background: "#fdfdfd"
+                highlighted: false
               };
             })
           });
@@ -57,6 +56,7 @@ async addUsers() {
       delete this.state.posts[i].highlighted;
       delete this.state.posts[i].id;
     }
+
     let request = {
       users: this.state.newArray,
       GroupIds: this.props.id
@@ -77,12 +77,10 @@ async addUsers() {
   toggleHighlight = (name, event) => {
     this.setState
     if (this.state.posts[event].highlighted === true) {
-      this.state.posts[event].background = "#fdfdfd";
       this.state.posts[event].highlighted = false;
       this.setState({ count: this.state.count - 1 });
     } else {
       this.setState({ selected: name });
-      this.state.posts[event].background = "#F3F4F9";
       this.state.posts[event].highlighted = true;
       this.setState({ count: this.state.count + 1 });
     }
@@ -110,7 +108,7 @@ async addUsers() {
               <li
                 class="list-group-item list-group-item-light"
                 key={post.id}
-                style={{ background: post.background ,textAlign:"left"}}
+                style={{ background: post.highlighted==true?"#F3F4F9": "#fdfdfd",textAlign:"left"}}
               >
                 <img
                   className="checkbox-delete"
@@ -157,10 +155,10 @@ async addUsers() {
               <tbody>
                 <tr>
                   <td>
-                    <div className="the-textname">Delete</div>
+                    <div className="the-textname">Add</div>
                   </td>
                   <td>
-                    <span className="name-of-group">
+                    <span className="name-of-groups">
                       {this.state.selected}{" "}
                     </span>
                   </td>
