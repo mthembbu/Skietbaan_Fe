@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../scss/create-page.css";
 import { getCookie } from "../components/cookie.js";
 import { URL } from "../actions/types.js";
+import history from "./history";
 class CreatePage extends Component {
   constructor(props) {
     super(props);
@@ -18,27 +19,27 @@ class CreatePage extends Component {
   }
 
   GoComps() {
-    window.location = "/create-comp";
+    history.push("/createComp");
   }
 
   GoMembers() {
-    window.location = "/registerMember";
+    history.push("/registerMember");
   }
 
   GoGroups() {
-    window.location = "/AddGroup";
+    history.push("/AddGroup");
   }
 
   ViewComps() {
-    window.location = "/view-comp";
+    history.push("/viewComp");
   }
 
   ViewMembers() {
-    window.location = "/viewMembers";
+    history.push("/viewMembers");
   }
 
   ViewGroups() {
-    window.location = "/ViewGroups";
+    history.push("/ViewGroups");
   }
 
   componentDidMount() {
