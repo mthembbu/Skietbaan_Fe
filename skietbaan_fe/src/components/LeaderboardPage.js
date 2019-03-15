@@ -50,8 +50,8 @@ class LeaderboardPage extends Component {
         let token = getCookie("token");
         var CompNum = competition +1;
         var GroupNum = group;
-        if(this.state.selectedGroup != -1){
-            GroupNum = this.state.selectedGroup +1;
+        if(group != -1){
+            GroupNum = group +1;
         }
         const filterSelection = {
             selectedCompetition: CompNum,
