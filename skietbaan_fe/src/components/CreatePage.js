@@ -42,6 +42,7 @@ class CreatePage extends Component {
   }
 
   componentDidMount() {
+    let found = false;
     if (getCookie("token")) {
       let token = getCookie("token");
       fetch(URL + "/api/features/getuserbytoken/" + token, {
@@ -57,6 +58,7 @@ class CreatePage extends Component {
             this.setState({
               isToken: true
             });
+            found = true;
           }
         })
         .then(data => {
@@ -64,28 +66,21 @@ class CreatePage extends Component {
             this.setState({
               isToken: true
             });
+            found = true;
           }
         })
         .catch(function(data) {
-          var res = document.cookie;
-          var multiple = res.split(";");
-          for (var i = 0; i < multiple.length; i++) {
-            var key = multiple[i].split("=");
-            document.cookie =
-              key[0] + " =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
+          if (!getCookie("token") || found === false) {
+            var res = document.cookie;
+            var multiple = res.split(";");
+            for (var i = 0; i < multiple.length; i++) {
+              var key = multiple[i].split("=");
+              document.cookie =
+                key[0] + " =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
+            }
+            window.location = "/registerPage";
           }
-          window.location = "/registerPage";
         });
-      if (!this.state.isToken) {
-        var res = document.cookie;
-        var multiple = res.split(";");
-        for (var i = 0; i < multiple.length; i++) {
-          var key = multiple[i].split("=");
-          document.cookie =
-            key[0] + " =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
-        }
-        window.location = "/registerPage";
-      }
     } else {
       window.location = "/registerPage";
     }
