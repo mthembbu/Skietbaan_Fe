@@ -33,9 +33,9 @@ class Login extends Component {
   }
 
   disableButton() {
-    if (this.state.validForm === true 
-      || this.state.passwordValue !== "" 
-      || this.state.usernameValue !== "" ) {
+    if (this.state.validForm === true
+      || this.state.passwordValue !== ""
+      || this.state.usernameValue !== "") {
       document.getElementById("roundButton").disabled = false;
     }
     else
@@ -44,7 +44,24 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    this.disableButton();
+
+    var intervalid = setInterval(() => {
+      let password = document.getElementById("passwordValue");
+      let username = document.getElementById("usernameValue");
+        this.setState({
+          usernameValue: username.value,
+          passwordValue: password.value
+        }, () => {
+          this.disableButton();
+        });
+        
+    if(this.state.usernameValue != "")
+    clearInterval(intervalid);
+    }, 100);
+
+
+
+
   }
 
   toggleNavbar() {
@@ -125,7 +142,7 @@ class Login extends Component {
       let sha1 = require('sha1');
       let hash = sha1(this.state.passwordValue);
       let RequestObject = {
-        "Username": this.state.usernameValue,
+        "Username": this.state.usernameValue.toLowerCase(),
         "Password": hash,
       }
       fetch(URL + "/api/features/login", {
@@ -157,6 +174,7 @@ class Login extends Component {
           }
         }
       }).catch(function (data) {
+        console.log("error")
       });
     }
   }
@@ -211,8 +229,8 @@ class Login extends Component {
                   <input
                     type="text"
                     name="usernameValue"
-                    id="us"
-                    autoComplete = "off"
+                    id="usernameValue"
+                    autoComplete="off"
                     value={this.state.usernameValue}
                     onChange={this.handleChange}
                     className="input-user"
@@ -232,7 +250,7 @@ class Login extends Component {
                       type="password"
                       name="passwordValue"
                       id="passwordValue"
-                      autoComplete = "off"
+                      autoComplete="off"
                       value={this.state.passwordValue}
                       onChange={this.handleChange}
                       className="input-password"
@@ -250,14 +268,14 @@ class Login extends Component {
               <Button onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
                 : "buttons-invalid round-button"} >Login</Button>
             </div>
-            
+
             {/* TODO : forgot password page under construction
             <div className="login-href">
               <a href="/forgotPassword" >Forgot Password?</a>
             </div>
              */}
           </Form>
-          
+
         </div >
       </div>
 
