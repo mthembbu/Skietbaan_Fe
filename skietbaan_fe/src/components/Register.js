@@ -97,7 +97,7 @@ class Register extends Component {
     if (target.name === "emailValue") {
       stateUpdate.invalidEmail = false;
       for (var i = 0; i < this.state.users.length; i++) {
-        if (this.state.users[i].email == target.value) {
+        if (this.state.users[i].email.toLowerCase() == target.value) {
           stateUpdate.emailTaken = true;
           stateUpdate.invalidEmail = true;
           break;
@@ -108,7 +108,7 @@ class Register extends Component {
     if (target.name === "usernameValue" && target.value.length > 0) {
       stateUpdate.invalidUsername = false;
       for (var i = 0; i < this.state.users.length; i++) {
-        if (this.state.users[i].username == target.value) {
+        if (this.state.users[i].username.toLowerCase() == target.value) {
           stateUpdate.usernameTaken = true;
           stateUpdate.invalidUsername = true;
           break;
@@ -167,8 +167,8 @@ class Register extends Component {
       let sha1 = require('sha1');
       let hash = sha1(this.state.passwordValue);
       let RequestObject = {
-        "Username": this.state.usernameValue,
-        "Email": this.state.emailValue,
+        "Username": this.state.usernameValue.toLowerCase(),
+        "Email": this.state.emailValue.toLowerCase(),
         "Password": hash,
       }
       fetch(URL + "/api/user", {
@@ -204,9 +204,9 @@ class Register extends Component {
   }
 
   render() {
-    if (getCookie("token")) {
-      window.location = "/home";
-    }
+     if (getCookie("token")) {
+       window.location = "/home";
+     }
     document.addEventListener('DOMContentLoaded', () => {
       this.toggleNavbar();
     }, false);
