@@ -19,7 +19,7 @@ class CreatePage extends Component {
   }
 
   GoComps() {
-    history.push("/create-comp");
+    history.push("/createComp");
   }
 
   GoMembers() {
@@ -31,7 +31,7 @@ class CreatePage extends Component {
   }
 
   ViewComps() {
-    history.push("/view-comp");
+    history.push("/viewComp");
   }
 
   ViewMembers() {
