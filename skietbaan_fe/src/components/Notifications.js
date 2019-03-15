@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import "../components/NotificationsStyle.css";
 import { getCookie } from "./cookie";
 import history from "./history";
+import { connect } from "react-redux";
 import { BASE_URL } from "../actions/types.js";
+import { getName } from "../actions/postActions";
 
 class notification extends Component {
   constructor(props) {
@@ -12,7 +14,6 @@ class notification extends Component {
       typeOfNotification: "",
       tokenValue: "",
       deleteClicked: false,
-      deleted: true,
       cancelClicked: false,
       isRead: false
     };
@@ -56,19 +57,25 @@ class notification extends Component {
     });
   };
 
-  onClick_View = Notification => {
+  onClick_View = (Notification, Message) => {
     if (Notification === "Award") {
     } else if (Notification === "Confirmation") {
     } else if (Notification === "Renewal") {
     } else if (Notification === "Competition") {
+      var parts = Message.split(",")[0];
       setTimeout(function() {
-        window.location = "/home";
+        history.push("/home");
       }, 2000);
     } else if (Notification === "Document") {
     } else if (Notification === "Group") {
+      var parts = Message.split(",")[0];
+      this.props.getName(parts);
+      setTimeout(function() {
+        history.push("/notify");
+      }, 2000);
     } else {
       setTimeout(function() {
-        window.location = "/notify";
+        history.push("/notify");
       }, 2000);
       this.setState({
         isRead: true
@@ -139,7 +146,12 @@ class notification extends Component {
                 <a
                   className={post.markedForDeletion ? "selected-text" : "text"}
                   href=""
-                  onClick={() => this.onClick_View(post.typeOfNotification)}
+                  onClick={() =>
+                    this.onClick_View(
+                      post.typeOfNotification,
+                      post.notificationMessage
+                    )
+                  }
                 >
                   {post.notificationMessage}
                 </a>
@@ -215,4 +227,5 @@ class notification extends Component {
     );
   }
 }
-export default notification;
+
+export default connect(getName)(notification);
