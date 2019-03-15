@@ -186,7 +186,6 @@ class Register extends Component {
           window.location = "/home";
         }
       }).catch(function (data) {
-        console.log("error")
       });
     }
   }

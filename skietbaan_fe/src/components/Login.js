@@ -174,7 +174,6 @@ class Login extends Component {
           }
         }
       }).catch(function (data) {
-        console.log("error")
       });
     }
   }
