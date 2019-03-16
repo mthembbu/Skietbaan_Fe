@@ -45,6 +45,12 @@ export default function(state = initialState, action) {
         ...state,
         allItems: action.payload
       };
+    case FETCH_GROUPS:
+    console.log("backend data ",action.payload)
+      return {
+        ...state,
+        groupsList: action.payload
+      };
 
     case UPDATE_GROUPNAME:
       return {

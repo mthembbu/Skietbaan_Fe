@@ -136,6 +136,22 @@ export const Changedata = name => {
   };
 };
 
+export const fetchGroups = groupid =>dispatch=>{
+  fetch(BASE_URL + '/api/Groups/edit?id=' +groupid )
+  .then(res=>res.json())
+  .then(data=>{
+    const newdata=data.map(user=>{
+      user.highlighted=true;
+      return user;
+    })
+    dispatch({
+      type:FETCH_GROUPS,
+      payload:newdata
+    })
+
+  })
+}
+
 export const getGroup = () => dispatch => {
   fetch(BASE_URL + "/api/user")
     .then(res => res.json())
