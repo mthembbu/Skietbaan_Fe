@@ -38,8 +38,7 @@ export const FetchGroups = () => dispatch => {
     .then(res => res.json())
     .then(group => {
       const newdata=group.map(item=>{
-        item.colors="black",
-        item.image="normalstate";
+        item.highlighted=false;
         return item
       })
       dispatch({
@@ -49,30 +48,13 @@ export const FetchGroups = () => dispatch => {
     });
 };
 
-export  const EditGroupAction = (id) => dispatch => {
-  fetch(BASE_URL + "/api/Groups/edit?id="+id)
-    .then(res => res.json())
-    .then(posts => {
-      const newdata = posts.map(users => {
-        users.highlighted = true;
-        users.background= "#F3F4F9",
-        users.image= "marked"
-        return users;
-      });
-      dispatch({
-        type: EDITGROUPUSERS,
-        payload: newdata
-      });
-    });
-};
 export const AddMemberAction = (id) => dispatch => {
+  console.log("we are in the action ",id)
    fetch(BASE_URL + "/api/Groups/list?id="+id)
     .then(res => res.json())
     .then(posts => {
       const newdata = posts.map(users => {
         users.highlighted = false;
-        users.background= "#fdfdfd",
-        users.image= "marked"
         return users;
       });
       dispatch({
@@ -81,6 +63,7 @@ export const AddMemberAction = (id) => dispatch => {
       });
     });
 };
+
 
 export const createGroups = usersadded => dispatch => {
   fetch(BASE_URL + "/api/groups", {
@@ -136,7 +119,8 @@ export const Changedata = name => {
   };
 };
 
-export const fetchGroups = groupid =>dispatch=>{
+export const fetchEditUser = groupid =>dispatch=>{
+  console.log("fetch id ",groupid)
   fetch(BASE_URL + '/api/Groups/edit?id=' +groupid )
   .then(res=>res.json())
   .then(data=>{
@@ -145,7 +129,7 @@ export const fetchGroups = groupid =>dispatch=>{
       return user;
     })
     dispatch({
-      type:FETCH_GROUPS,
+      type:EDITGROUPUSERS,
       payload:newdata
     })
 

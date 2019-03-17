@@ -12,7 +12,7 @@ import notifyGrey from "../components/navbar-icons/notify-gray.png";
 import scorecaptureRed from "../components/navbar-icons/add-score-red.png";
 import scorecaptureGray from "../components/navbar-icons/add-score-grey.png";
 import moreGray from "../components/navbar-icons/more.png";
-import moreNotify from "../components/navbar-icons/more-new.png";
+ import moreNotify from "../components/navbar-icons/more-new.png";
 
 export const NAV_BAR_ICONS = {
   PROFILE_RED: profileRed,

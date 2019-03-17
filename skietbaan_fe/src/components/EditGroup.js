@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { BASE_URL } from '../actions/types';
 import marked from './GroupImages/marked.png';
 import redbox from './GroupImages/Rectangle.png';
-import { fetchGroups } from "../actions/postActions";
+import { fetchEditUser,AddMemberAction } from "../actions/postActions";
 import back from './GroupImages/back.png';
 import { getCookie } from '../components/cookie.js';
 class EditGroup extends Component {
@@ -23,16 +23,13 @@ class EditGroup extends Component {
 		this.onChange = this.onChange.bind(this);
 		this.delete = this.delete.bind(this);
 	}
-	async componentDidMount() {
+	async componentWillMount() {
 		if (!getCookie('token')) {
 			window.location = '/registerPage';
 		}
-		if (this.props.id != 0) {
-      this.props.fetchGroups(this.props.id)
-		} else {
-			this.props.history.push('/ViewGroups');
-		}
+			this.props.fetchEditUser(this.props.id);   
 	}
+
 	onChange(event) {
 		this.setState({ filterText: event.target.value });
 	}
@@ -40,9 +37,9 @@ class EditGroup extends Component {
 	async delete() {
 		this.setState({ count: 0 });
 		const newArray = [];
-		for (var i = 0; i < this.props.groupsList.length; i++) {
-			if (this.props.groupsList[i].highlighted === false) {
-        newArray.push(this.props.groupsList[i]);
+		for (var i = 0; i < this.props.editGroup.length; i++) {
+			if (this.props.editGroup[i].highlighted === false) {
+        newArray.push(this.props.editGroup[i]);
 			}
 		}
 		let request = {
@@ -59,15 +56,15 @@ class EditGroup extends Component {
 		})
 			.then((res) => res.json())
       .catch(function(data) {});
-    this.props.fetchGroups(this.props.id)
+    this.props.fetchEditUser(this.props.id)
 	}
   toggleHighlight = (user, event) => {
     this.setState({ selected: user });
-    if (this.props.groupsList[event].highlighted === true) {
-      this.props.groupsList[event].highlighted = false;
+    if (this.props.editGroup[event].highlighted === true) {
+      this.props.editGroup[event].highlighted = false;
       this.setState({ count: this.state.count - 1 });
     } else {
-      this.props.groupsList[event].highlighted = true;
+      this.props.editGroup[event].highlighted = true;
       this.setState({ count: this.state.count + 1 });
     }
   };
@@ -88,11 +85,10 @@ class EditGroup extends Component {
 		this.props.history.push('/AddMembersGroup');
 	};
 	render() {
-    console.log(this.props.groupsList)
 		const postitems = (
 			<div className="check">
 				<ul class="list-group" style={{ textAlign: 'left' }}>
-					{this.props.groupsList
+					{this.props.editGroup
 						.filter((post) => {
 							return (
 								!this.state.filterText ||
@@ -182,7 +178,7 @@ class EditGroup extends Component {
 const mapStateToProps = (state) => ({
 	id: state.posts.groupId,
   name: state.posts.groupName,
-  groupsList:state.posts.groupsList
+  editGroup:state.posts.editGroup
 });
 
-export default withRouter(connect(mapStateToProps,{fetchGroups})(EditGroup));
+export default withRouter(connect(mapStateToProps,{fetchEditUser,AddMemberAction})(EditGroup));
