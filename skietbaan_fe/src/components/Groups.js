@@ -30,7 +30,7 @@ class Groups extends Component {
     if(!getCookie("token")){
       window.location = "/registerPage";
   }
-    if (this.props.name.length != 0) {
+    
       fetch(BASE_URL + "/api/user")
         .then(res => res.json())
         .then(data => {
@@ -46,9 +46,7 @@ class Groups extends Component {
             })
           });
         });
-    } else {
-      this.props.history.push("/AddGroup");
-    }
+    
     fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
       .then(data => this.setState({ groups: data.name }));
@@ -93,7 +91,7 @@ class Groups extends Component {
       for (var i = 0; i < this.state.posts.length; i++) {
         newarry[i].highlighted = true;
         this.state.posts[i].image = marked;
-        this.state.posts[i].background = "#F3F4F9";
+        this.state.posts[i].background = "#FFEAEC";
       }
       this.setState({ check: "Unselect all" });
       this.setState({ posts: newarry });
@@ -118,7 +116,7 @@ class Groups extends Component {
       this.setState({ count: this.state.count + 1 });
     } else {
       this.state.posts[event].highlighted = true;
-      this.state.posts[event].background = "#F3F4F9";
+      this.state.posts[event].background = "#FFEAEC";
       this.state.posts[event].image = marked;
       this.setState({ count: this.state.count - 1 });
     }
@@ -144,23 +142,21 @@ class Groups extends Component {
             })
             .map((post, index) => (
               <li
-                class="list-group-item list-group-item-light"
+                className="listItem"
                 key={post.id}
-                style={{
-                  background: post.background ,textAlign:"left"
-                }}
               >
                 <img
                   className="checkbox-delete"
                   onClick={() => this.toggleHighlight(index)}
                   src={post.image}
+                  style={{background: post.background ,border:"1px solid white"}}
                   alt=""
                 />
-                <label className="blabe">
+                <label className="blabe" style={{background: post.background}}>
                   <div className="userName" style={{ color: post.colors }}>
                     {post.username}
                   </div>
-                  <div className="email" style={{ color: post.highlighted?"white":"" }}>
+                  <div className="email">
                     {post.email}
                   </div>
                 </label>
@@ -173,7 +169,7 @@ class Groups extends Component {
       <main className="The-Main">
         <div className="the-nav-bar">
           <img className="back-image" onClick={this.onBack} src={back} alt="" />
-          <label className="center-label">{this.props.name}</label>
+          <label className="center-label">ADD USERS</label>
         </div>
         <div className="BNavBar">
           <input

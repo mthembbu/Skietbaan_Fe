@@ -7,7 +7,7 @@ import {
   CREATEGROUP,
   EDITGROUPUSERS,
   ADDMEMBERS,
-  FETCH_GROUPS,UPDATEARRAY
+  FETCH_GROUPS
 } from "../actions/types";
 
 const initialState = {
@@ -40,11 +40,13 @@ const initialState = {
 //the function to detect the state change
 export default function(state = initialState, action) {
   switch (action.type) {
+    
     case FETCH_POSTS:
       return {
         ...state,
         allItems: action.payload
       };
+
     case FETCH_GROUPS:
       return {
         ...state,
@@ -56,17 +58,14 @@ export default function(state = initialState, action) {
         ...state,
         groupName: action.payload
       };
+
     case ADDMEMBERS:
       return {
         ...state,
         existing: action.payload
       };
+
     case EDITGROUPUSERS:
-      return {
-        ...state,
-        editGroup: action.payload
-      };
-    case UPDATEARRAY:
       return {
         ...state,
         editGroup: action.payload
@@ -77,16 +76,13 @@ export default function(state = initialState, action) {
         ...state,
         selectedItem: action.payload
       };
+
     case PASS_ID:
       return {
         ...state,
         groupId: action.payload
       };
-    case FETCH_POSTS:
-      return {
-        ...state,
-        groupId: action.payload
-      };
+
     case FETCH_GROUPS:
       return {
         ...state,

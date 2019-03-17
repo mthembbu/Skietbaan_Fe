@@ -98,12 +98,8 @@ class EditGroup extends Component {
 						})
 						.map((post, index) => (
 							<li
-								class="list-group-item list-group-item-light"
+								class="listItem"
 								key={post.id}
-								style={{
-									background: post.background,
-									textAlign: 'left'
-								}}
 							>
 								<img
 									className="checkbox-delete"

@@ -1,15 +1,9 @@
 import {
   PASS_ID,
-  FETCH_POSTS,
   UPDATE_GROUPNAME,
-  UPDATENAME,
   CREATEGROUP,
   GETGROUP,
-  GETNAME,
   BASE_URL,
-  URLADD,
-  UPDATEARRAY,
-  URLUSER,
   FETCH_GROUPS,
   EDITGROUPUSERS,
   ADDMEMBERS,
@@ -18,21 +12,6 @@ import {
 } from "./types";
 
 /** The method to feth the already available data for posts*/
-export const fetchPosts = () => dispatch => {
-  fetch(URLUSER)
-    .then(res => res.json())
-    .then(posts => {
-      const newdata = posts.map(users => {
-        users.highlighted = false;
-        return users;
-      });
-      dispatch({
-        type: FETCH_POSTS,
-        payload: newdata
-      });
-    });
-};
-
 export const FetchGroups = () => dispatch => {
   fetch(BASE_URL+"/api/Groups")
     .then(res => res.json())
@@ -49,7 +28,6 @@ export const FetchGroups = () => dispatch => {
 };
 
 export const AddMemberAction = (id) => dispatch => {
-  console.log("we are in the action ",id)
    fetch(BASE_URL + "/api/Groups/list?id="+id)
     .then(res => res.json())
     .then(posts => {
@@ -85,21 +63,6 @@ export const createGroups = usersadded => dispatch => {
 {
   /** the method to post new data from the PostForm */
 }
-export const createPost = users => dispatch => {
-  fetch(BASE_URL + "/api/groups", {
-    method: "Post",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(users)
-  })
-    .then(res => res.json())
-    .then(function(response) {})
-    .then(function(data) {})
-    .catch(function(data) {});
-};
-
 export const getName = name => {
   //Return an action
   return dispatch => {
@@ -109,18 +72,8 @@ export const getName = name => {
     });
   };
 };
-export const Changedata = name => {
-  //Return an action
-  return dispatch => {
-    dispatch({
-      type: UPDATEARRAY,
-      payload: name
-    });
-  };
-};
 
 export const fetchEditUser = groupid =>dispatch=>{
-  console.log("fetch id ",groupid)
   fetch(BASE_URL + '/api/Groups/edit?id=' +groupid )
   .then(res=>res.json())
   .then(data=>{

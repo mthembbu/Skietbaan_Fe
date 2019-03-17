@@ -93,7 +93,7 @@ async addUsers() {
             })
             .map((post, index) => (
               <li
-                class="list-group-item list-group-item-light"
+                class="listItem"
                 key={post.id}
                 style={{ background: post.highlighted==true?"#F3F4F9": "#fdfdfd",textAlign:"left"}}
               >
