@@ -1,4 +1,4 @@
-@media only screen and (min-width: 656px){
+@media only screen and (min-width: 576px){
   .dropdown-menu.show{
     background-color: #F3F4F9;
     border: none;
@@ -96,10 +96,11 @@
 
   .nav-content{
     text-align: center;
+    background-color: #000000;
   }
 }
 
-@media only screen and (max-width:655px){
+@media only screen and (max-width:575px){
   .dropdown-menu.show{
     background-color: #F3F4F9;
     border: none;
