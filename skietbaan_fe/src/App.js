@@ -19,6 +19,7 @@ import { getCookie } from './components/cookie.js';
 import ScoreCapture from './components/ScoreCapture';
 import CreatePage from './components/CreatePage';
 import UserProfile from './components/UserProfile';
+import requirements from './components/requirements.js';
 import './App.css';
 import ForgotPassword from './components/ForgotPassword';
 import AddMembersGroup from './components/AddMembersGroup';
@@ -91,6 +92,7 @@ class App extends Component {
 							<Route path="/viewmembers" component={ViewMembers} exact />
 							<Route path="/profile" component={UserProfile} exact />
 							<Route path="/AddMembersGroup" component={AddMembersGroup} exact />
+							<Route path="/requirements" component={requirements} exact />
 							<Route path="/EditGroup" component={EditGroup} exact />
 							<Redirect from="/" to="/home" />
 						</Switch>

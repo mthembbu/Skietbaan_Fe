@@ -6,7 +6,6 @@ import './add.css';
 import { BASE_URL } from '../actions/types';
 import error from './GroupImages/error.png';
 import back from './GroupImages/back.png';
-import Toolbar from '@material-ui/core/Toolbar';
 import { getCookie } from '../components/cookie.js';
 
 class AddGroup extends Component {
