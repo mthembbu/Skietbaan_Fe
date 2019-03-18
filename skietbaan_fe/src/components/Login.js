@@ -10,6 +10,8 @@ import { validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
 import { URL } from '../actions/types.js';
 import back from '../components/assets/Back.png';
+import skietbaan from '../components/assets/skietbaan.png';
+import history from "./history";
 
 class Login extends Component {
   constructor(props) {
@@ -33,9 +35,7 @@ class Login extends Component {
   }
 
   disableButton() {
-    if (this.state.validForm === true
-      || this.state.passwordValue !== ""
-      || this.state.usernameValue !== "") {
+    if (this.state.validForm === true) {
       document.getElementById("roundButton").disabled = false;
     }
     else
@@ -44,24 +44,8 @@ class Login extends Component {
   }
 
   componentDidMount() {
-
-    var intervalid = setInterval(() => {
-      let password = document.getElementById("passwordValue");
-      let username = document.getElementById("usernameValue");
-        this.setState({
-          usernameValue: username.value,
-          passwordValue: password.value
-        }, () => {
-          this.disableButton();
-        });
-        
-    if(this.state.usernameValue != "")
-    clearInterval(intervalid);
-    }, 100);
-
-
-
-
+    let password = document.getElementById("passwordValue");
+    password.type = "password";
   }
 
   toggleNavbar() {
@@ -155,7 +139,7 @@ class Login extends Component {
       }).then(response => response.json()).then(data => {
         if (typeof data === "object") {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
-          window.location = "/home";
+          history.push("/home");;
         }
 
         else if (typeof data === "string") {
@@ -188,7 +172,7 @@ class Login extends Component {
   }
 
   goToRegister() {
-    window.location = "/registerPage"
+    history.push("/registerPage");
   }
 
   render() {
@@ -196,20 +180,18 @@ class Login extends Component {
       this.toggleNavbar();
     }, false);
     if (getCookie("token")) {
-      window.location = "/home";
+      history.push("/home");
     }
 
     return (
       <div className="page-content-login">
         <div className="red-background">
           <div className="welcome-header">
-            <label className="welcome-label">Welcome to
-          <label className="skietbaan-label">Skietbaan</label>
-            </label>
+          <img src={skietbaan} className="header-image" alt=''></img>
           </div>
           <div className="header-container">
             <div className="centre-label">
-              <label className="header-label">Login</label>
+              <label className="header-label">LOGIN</label>
             </div>
             <img src={back}
               className="back-btn"
@@ -221,10 +203,6 @@ class Login extends Component {
 
             <div className="spacing-login">
               <FormGroup>
-                <label className="front-white input-label">Enter Username <div
-                  className={this.state.invalidUsername ? "invalid-icon" : "hidden"}></div></label>
-
-                <div className="input-container">
                   <input
                     type="text"
                     name="usernameValue"
@@ -233,32 +211,29 @@ class Login extends Component {
                     value={this.state.usernameValue}
                     onChange={this.handleChange}
                     className="input-user"
+                    placeholder="Username"
                   />
-                </div>
                 <div className={this.state.usernameFound
                   && this.usernameValue !== "" ? "hidden" : "error-message"}>Invalid Username</div>
               </FormGroup>
             </div>
             <div className="spacing-login">
               <FormGroup>
-                <label className="front-white input-label" for="examplePassword">
-                  Password <div className={this.state.invalidPassword ? "invalid-icon" : "hidden"}></div></label>
-                <div className="input-container">
                   <div className="input-label centre-div">
                     <input
-                      type="password"
+                      type="text"
                       name="passwordValue"
                       id="passwordValue"
                       autoComplete="off"
                       value={this.state.passwordValue}
                       onChange={this.handleChange}
                       className="input-password"
+                      placeholder="Password"
                     />
                     <div className={this.state.passwordValue !== "" ? "password-view-icon" : "password-icon"}
                       onClick={this.togglePassword}>
                     </div>
                   </div>
-                </div>
                 <div className={this.state.passwordFound
                   && this.passwordValue !== "" ? "hidden" : "error-message"}>Invalid Password</div>
               </FormGroup>
