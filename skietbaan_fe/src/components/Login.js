@@ -42,7 +42,7 @@ class Login extends Component {
       document.getElementById("roundButton").disabled = true;
 
   }
-  
+
   componentDidMount() {
     let password = document.getElementById("passwordValue");
     password.type = "password";
@@ -172,7 +172,6 @@ class Login extends Component {
   }
 
   goToRegister() {
-   //window.location =;
     history.push("/registerPage");
   }
 
