@@ -9,6 +9,7 @@ import { validateEmail, validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
 import { URL } from '../actions/types.js';
 import skietbaan from '../components/assets/skietbaan.png';
+import history from "./history";
 
 class Register extends Component {
   constructor(props) {
@@ -40,6 +41,8 @@ class Register extends Component {
   }
 
   componentDidMount() {
+    let password = document.getElementById("passwordValue");
+    password.type = "password";
     this.disableButton();
     fetch(URL + "/api/User", {
       method: 'GET',
@@ -180,7 +183,7 @@ class Register extends Component {
       }).then(function (data) {
         if (typeof data === "object") {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
-          window.location = "/home";
+          history.push("/home");
         }
       }).catch(function (data) {
       });
@@ -197,12 +200,12 @@ class Register extends Component {
   }
 
   goToLogin() {
-    window.location = "/Login"
+    window.location = '/login';
   }
 
   render() {
      if (getCookie("token")) {
-       window.location = "/home";
+      history.push("/home");
      }
     document.addEventListener('DOMContentLoaded', () => {
       this.toggleNavbar();
@@ -234,7 +237,10 @@ class Register extends Component {
                     className="input-user"
                     placeholder="Username"
                   />
-                <div className={this.state.usernameTaken ? "error-message" : "hidden"} > Username already exists</div>
+                  <div className="error-message-container">
+                    <div className={this.state.usernameTaken ? "error-message" : "hidden"} > Username already exists</div>
+                    </div>
+                
               </FormGroup>
             </div>
             <div className="spacing-login">
@@ -249,14 +255,16 @@ class Register extends Component {
                     className="input-user"
                     placeholder="Email"
                   />
+                  <div className="error-message-container">
                 <div className={this.state.emailTaken ? "error-message" : "hidden"} > Email address already in use</div>
+                </div>
               </FormGroup>
             </div>
             <div className="spacing-login">
               <FormGroup>
                   <div className="input-label centre-div">
                     <input
-                      type="password"
+                      type="text"
                       name="passwordValue"
                       id="passwordValue"
                       autoComplete="off"

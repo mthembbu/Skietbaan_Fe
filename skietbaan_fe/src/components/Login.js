@@ -11,6 +11,7 @@ import { getCookie } from './cookie.js';
 import { URL } from '../actions/types.js';
 import back from '../components/assets/Back.png';
 import skietbaan from '../components/assets/skietbaan.png';
+import history from "./history";
 
 class Login extends Component {
   constructor(props) {
@@ -41,22 +42,10 @@ class Login extends Component {
       document.getElementById("roundButton").disabled = true;
 
   }
-
+  
   componentDidMount() {
-
-    var intervalid = setInterval(() => {
-      let password = document.getElementById("passwordValue");
-      let username = document.getElementById("usernameValue");
-        this.setState({
-          usernameValue: username.value,
-          passwordValue: password.value
-        }, () => {
-          this.disableButton();
-        });
-        
-    if(this.state.usernameValue != "")
-    clearInterval(intervalid);
-    }, 1000);
+    let password = document.getElementById("passwordValue");
+    password.type = "password";
   }
 
   toggleNavbar() {
@@ -150,7 +139,7 @@ class Login extends Component {
       }).then(response => response.json()).then(data => {
         if (typeof data === "object") {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
-          window.location = "/home";
+          history.push("/home");;
         }
 
         else if (typeof data === "string") {
@@ -183,7 +172,8 @@ class Login extends Component {
   }
 
   goToRegister() {
-    window.location = "/registerPage"
+   //window.location =;
+    history.push("/registerPage");
   }
 
   render() {
@@ -191,7 +181,7 @@ class Login extends Component {
       this.toggleNavbar();
     }, false);
     if (getCookie("token")) {
-      window.location = "/home";
+      history.push("/home");
     }
 
     return (
@@ -232,7 +222,7 @@ class Login extends Component {
               <FormGroup>
                   <div className="input-label centre-div">
                     <input
-                      type="password"
+                      type="text"
                       name="passwordValue"
                       id="passwordValue"
                       autoComplete="off"
