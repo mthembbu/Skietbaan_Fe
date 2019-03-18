@@ -3,12 +3,21 @@ html, body{
    width: 100% !important; 
    height: 100% !important;
 }
+#root div div .navbar-admin{
+    bottom: 0 !important;
+    position: absolute;
+    width: 100%;
+}
 /* Leaderboard Page Main Container */
 .leaderboardContainer{
-   background-color: #fdfdfd;
-   position: fixed;
-   width: 100%;
-   height: 100%;
+    background-color: #fdfdfd;
+    position: fixed;
+    width: 100%;
+    height: 90%;
+    top: 0;
+}
+.leaderboardContainer .row{
+    height: 100%;
 }
  /* FilterSection*/ 
     /*open filter selection*/
@@ -98,6 +107,7 @@ html, body{
         border-color: #6F839E;
         border-top-right-radius: 18px;
         border-bottom-right-radius: 18px;
+        cursor: pointer;
     }
     .FilterSelections .CategorySelection .chooseGroups-active a{
         width: 100%;
@@ -157,6 +167,7 @@ html, body{
          margin-right: auto;
          margin-top: 2%;
          color: #6F839E;
+         cursor: pointer;
     }
     .FilterSelections .individual-Inactive a{
         color: #6F839E;
@@ -207,6 +218,7 @@ html, body{
          font-family: Helvetica;
          font-size: 15px;
          vertical-align: inherit;
+         cursor: pointer;
      }
     .FilterSelections .SelectionsContainer .row .Choose .SelectionTable tr .td-Active{
         border: solid;
@@ -220,6 +232,7 @@ html, body{
         font-family: Helvetica;
         font-size: 15px;
         vertical-align: inherit;
+        cursor: pointer;
     }
     /*closed filter section*/
     .ClosedFilterSection{
@@ -311,7 +324,7 @@ html, body{
 /* end of filter section*/
 /* Ranking table section */
     .RankingTableSection{
-        height: 470px;
+        height: 510px;
         width: 100%;
         color: #6F839E;
         background-color: #fdfdfd;
@@ -489,9 +502,10 @@ html, body{
     position: fixed;
     width: 100%;
     bottom: 0;
+    display: none;
  }
 
- @media only screen and (min-width: 600px) {
+ @media only screen and (min-width: 701px) {
     /* tablets and desktop */
     .FilterSelections .SelectionsContainer .row div{
         height: 290px;
@@ -507,8 +521,9 @@ html, body{
         display: inline-block;
         width: 150px;
         height: 290px;
-        margin-left: 10px;
-        margin-right: 168px;
+        margin-left: 15%;
+        margin-right: 5%;
+        margin-top: 10%;
     }
     .FilterSelections .SelectionsContainer .row div .LeftCompetitions .competitionsL{
         width: 150px;
@@ -529,6 +544,122 @@ html, body{
         width: 150px;
         height: 290px;
         margin-left: 10px;
+        margin-top: 30%;
+    }
+    .FilterSelections .SelectionsContainer .row div .rightGroups .rankinL{
+        width: 150px;
+        height: 30px;
+        text-align: center;
+        color: #6F839E;
+        font-weight: bold;
+        font-family: Helvetica;
+        font-size: 16px;	
+        padding-left: 12%;
+    }
+    .FilterSelections .SelectionsContainer .row div .rightGroups .individual-Active{
+        border: solid;
+         border-width:thin;
+         border-color: #6F839E;
+         border-radius: 18px;
+         width: 144px;
+         height: 36px;
+         padding: 0%;
+         padding: 1%;
+         text-align: center;
+         margin-left: auto;
+         margin-right: auto;
+         margin-top: 2%;
+         color: #fdfdfd;
+         background-image: linear-gradient(to right, #ef3024  , #Dc0600);
+    }
+    .FilterSelections .SelectionsContainer .row div .rightGroups .individual-Inactive{
+        border: solid;
+         border-width:thin;
+         border-color: #6F839E;
+         border-radius: 18px;
+         width: 144px;
+         height: 36px;
+         padding: 0%;
+         padding: 1%;
+         text-align: center;
+         margin-left: auto;
+         margin-right: auto;
+         margin-top: 2%;
+         color: #6F839E;
+    }
+    .FilterSelections .SelectionsContainer .row div .rightGroups .individual-Inactive a{
+        color: #6F839E;
+         font-family: Helvetica;
+         font-size: 16px;
+         vertical-align: inherit;
+         width: 100%;
+    }
+    .FilterSelections .SelectionsContainer .row div .rightGroups .individual-Active a{
+        color: #fdfdfd;
+         font-family: Helvetica;
+         font-size: 16px;
+         vertical-align: inherit;
+         width: 100%;
+    }
+    .FilterSelections .SelectionsContainer .row div .rightGroups .groupL{
+        width: 150px;
+        height: 30px;
+        text-align: center;
+        color: #6F839E;
+        font-family: Helvetica;
+        font-size: 16px;	
+        font-weight:lighter;
+        padding-top: 3%;
+        margin-bottom: 3%;
+    }
+    .FilterSelections .SelectionsContainer .row div .rightGroups{
+        margin-right:0px;
+     }
+}
+@media only screen and (max-width: 700px) {
+    /* phones */
+    .FilterSelections .SelectionsContainer .row div{
+        height: 100%;
+        width: 144px;
+        display: inline-block;
+    }
+    /* .FilterSelections .SelectionsContainer .row {
+        display: inline-grid;
+        padding-left: 60%;
+    } */
+    
+    .FilterSelections .SelectionsContainer .row div .LeftCompetitions .Choose{
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+    }
+    .FilterSelections .SelectionsContainer .row .col-sm-4 div .LeftCompetitions{
+        display: inline-block;
+        width: 150px;
+        height: 290px;
+        margin-left: 10px;
+        margin-right: 168px;
+        margin: auto;
+    }
+    .FilterSelections .SelectionsContainer .row div .LeftCompetitions .competitionsL{
+        width: 150px;
+        height: 30px;
+        text-align: center;
+        color: #6F839E;
+        font-weight: bold;
+        font-family: Helvetica;
+        font-size: 16px;	
+        font-weight: bold;
+        margin: auto;
+    }
+    .FilterSelections .SelectionsContainer .row div .rightGroups .Choose{
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+    }
+    .FilterSelections .SelectionsContainer .row .col-sm-4 div .rightGroups{
+        display: inline-block;
+        width: 150px;
+        height: 290px;
+        margin: auto;
     }
     .FilterSelections .SelectionsContainer .row div .rightGroups .rankinL{
         width: 150px;
@@ -602,12 +733,4 @@ html, body{
     .FilterSelections .SelectionsContainer .row div .rightGroups{
         margin-right:0px;
      }
-}
-@media only screen and (max-width: 599px) {
-    /* phones */
-    .FilterSelections .SelectionsContainer .row div{
-        height: 100%;
-        width: 144px;
-        display: inline-flex;
-    }
 }

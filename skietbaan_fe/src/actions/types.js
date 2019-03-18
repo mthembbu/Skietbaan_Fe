@@ -32,6 +32,7 @@ export const NAV_BAR_ICONS = {
   MORE_NOTIFY: moreNotify
 };
 
+
 export const ADD_BOOKMARK = "ADD_BOOKMARK";
 export const DELETE_BOOKMARK = "DELETE_BOOKMARK";
 export const FETCH_POSTS = "FETCH_POSTS";
@@ -44,6 +45,8 @@ export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
 //leaderboard types
 export const FETCH_LEADERBOARDFILTER_DATA = "FETCH_LEADERBOARDFILTER_DATA";
 export const FETCH_LEADERBOARDTABLE_DATA = "FETCH_LEADERBOARDTABLE_DATA";
+export const UPDATE_SELECTED_COMPETITION = "UPDATE_SELECTED_COMPETITION"
+export const UPDATE_SELECTED_GROUP = "UPDATE_SELECTED_GROUP"
 
 //groups types and constants
 export const URL = "https://api.skietbaan.retrotest.co.za";
