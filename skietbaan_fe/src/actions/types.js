@@ -39,7 +39,7 @@ export const NEW_POST = "NEW_POST";
 export const NEW_COMP = "NEW_COMP";
 export const FETCH_COMP = "FETCH_COMP";
 export const UPDATE_COMP_STATUS = "UPDATE_COMP_STATUS";
-export const BASE_URL = "http://localhost:50859";
+export const BASE_URL = "http://api.skietbaan.retrotest.co.za";
 export const URL = "http://localhost:50859";
 
 //leaderboard types

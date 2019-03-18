@@ -13,9 +13,13 @@
   color: white;
   height: 67px;
   display: flex;
+  top: 0;
+  z-index: 1;
   background: #dc0600;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  position: fixed;
+  width: 100%;
 }
 
 .center-label {
@@ -126,6 +130,9 @@
   background: white;
   display: flex;
   margin-bottom: 20px;
+  position: fixed;
+  top: 67px;
+  z-index: 1;
 }
 .create-group:focus {
   outline: none;
@@ -453,4 +460,7 @@
 }
 .list-group {
   text-align: left;
+}
+.navBar-container{
+  height: 100px;
 }

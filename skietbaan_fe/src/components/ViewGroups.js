@@ -96,11 +96,13 @@ class ViewGroups extends Component {
 
 		return (
 			<main className="The-Main">
+			<div className="navBar-container">			
 				<div className="the-nav-bar">
 					<a href="" className="back-container">
 						<img className="back-image" onClick={this.onBack} src={back} alt="" />
 					</a>
 					<label className="center-label">View Groups</label>
+				</div>
 				</div>
 				<div className="scrollbar" data-simplebar data-simplebar-auto-hide="false">
 					{postitems}
