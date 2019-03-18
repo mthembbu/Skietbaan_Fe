@@ -85,8 +85,8 @@ class App extends Component {
 							<Route path="/groups" component={Groups} exact />
 							<Route path="/create" component={CreatePage} exact />
 							<Route path="/ViewGroups" component={ViewGroups} exact />
-							<Route path="/view-comp" component={ViewComp} exact />
-							<Route path="/create-comp" component={CreateComp} exact />
+							<Route path="/viewComp" component={ViewComp} exact />
+							<Route path="/createComp" component={CreateComp} exact />
 							<Route path="/notify" component={notification} exact />
 							<Route path="/documents" component={Documents} exact />
 							<Route path="/viewmembers" component={ViewMembers} exact />
