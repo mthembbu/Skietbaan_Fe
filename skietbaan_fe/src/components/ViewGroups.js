@@ -4,9 +4,10 @@ import './groups.css';
 import { withRouter } from 'react-router-dom';
 import { passId, getName ,FetchGroups} from '../actions/postActions';
 import { BASE_URL } from '../actions/types';
-import deleteState from './GroupImages/deleteState.png';
-import normalstate from './GroupImages/submit-plus.png';
+import Switch from '@material-ui/core/Switch';
 import back from './GroupImages/back.png';
+import group from './GroupImages/group.png';
+
 import { getCookie } from '../components/cookie.js';
 class ViewGroups extends Component {
 	constructor(props) {
@@ -18,7 +19,7 @@ class ViewGroups extends Component {
 			ids: 0,
 			indexs: '',
 			selected: '',
-			deleteState: false
+			deleteState: false 
 		};
 		this.onBack = this.onBack.bind(this);
 		this.onChange = this.onChange.bind(this);
@@ -44,7 +45,6 @@ class ViewGroups extends Component {
 	}
 
 	async delete(groupId) {
-		this.setState({ ShowMe: false });
 		await fetch(BASE_URL + '/api/Groups/' + groupId, {
 			method: 'POST',
 			headers: {
@@ -82,9 +82,17 @@ class ViewGroups extends Component {
 									>
 										{post.name}
 									</td>
+									<td className="group-container">
+									<img src={group}
+									className="groupIcon"
+									alt=""
+								/>
+								<label>20</label>
+									</td>
 									<td>
 										<div className="group-view">
-											<button className="Active" onClick={() => this.delete(post.id)}>{post.isActive==true?"Active":"InActive"}</button>
+										<Switch className="Active" checked={post.isActive} onClick={() => this.delete(post.id)}/>
+											{/* <button  >{post.isActive==true?"Active":"InActive"}</button> */}
 										</div>
 									</td>
 								</tr>

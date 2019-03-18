@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { BASE_URL } from '../actions/types';
 import marked from './GroupImages/marked.png';
 import redbox from './GroupImages/Rectangle.png';
-import { fetchEditUser,AddMemberAction } from "../actions/postActions";
+import { fetchEditUser, AddMemberAction } from '../actions/postActions';
 import back from './GroupImages/back.png';
 import { getCookie } from '../components/cookie.js';
 class EditGroup extends Component {
@@ -27,7 +27,7 @@ class EditGroup extends Component {
 		if (!getCookie('token')) {
 			window.location = '/registerPage';
 		}
-			this.props.fetchEditUser(this.props.id);   
+		this.props.fetchEditUser(this.props.id);
 	}
 
 	onChange(event) {
@@ -39,12 +39,12 @@ class EditGroup extends Component {
 		const newArray = [];
 		for (var i = 0; i < this.props.editGroup.length; i++) {
 			if (this.props.editGroup[i].highlighted === false) {
-        newArray.push(this.props.editGroup[i]);
+				newArray.push(this.props.editGroup[i]);
 			}
 		}
 		let request = {
 			GroupIds: this.props.id,
-			users:newArray
+			users: newArray
 		};
 		await fetch(BASE_URL + '/api/groups/deleteMember/', {
 			method: 'Post',
@@ -55,19 +55,20 @@ class EditGroup extends Component {
 			body: JSON.stringify(request)
 		})
 			.then((res) => res.json())
-      .catch(function(data) {});
-    this.props.fetchEditUser(this.props.id)
+			.catch(function(data) {});
+		this.props.fetchEditUser(this.props.id);
 	}
-  toggleHighlight = (user, event) => {
-    this.setState({ selected: user });
-    if (this.props.editGroup[event].highlighted === true) {
-      this.props.editGroup[event].highlighted = false;
-      this.setState({ count: this.state.count - 1 });
-    } else {
-      this.props.editGroup[event].highlighted = true;
-      this.setState({ count: this.state.count + 1 });
-    }
-  };
+	toggleHighlight = (event) => {
+		console.log(event)
+		if (this.props.editGroup[event].highlighted === true) {
+			this.props.editGroup[event].highlighted = false;
+			 this.setState({ count: this.state.count - 1 });
+		} else {
+			this.props.editGroup[event].highlighted = true;
+			 this.setState({ count: this.state.count + 1 });
+		}
+	};
+
 	onBack() {
 		this.props.history.push('/ViewGroups');
 	}
@@ -75,8 +76,7 @@ class EditGroup extends Component {
 	cancel = () => {
 		for (var i = 0; i < this.state.posts.length; i++) {
 			this.props.groupsList[i].highlighted = true;
-      this.props.groupsList[i].background = '#F3F4F9';
-      this.props.groupsList[i].image = marked;
+			this.props.groupsList[i].background = '#F3F4F9';
 		}
 		this.setState({ count: 0 });
 	};
@@ -84,10 +84,12 @@ class EditGroup extends Component {
 	goToNext = () => {
 		this.props.history.push('/AddMembersGroup');
 	};
+
 	render() {
+		console.log("we are here ",this.props.editGroup)
 		const postitems = (
 			<div className="check">
-				<ul class="list-group" style={{ textAlign: 'left' }}>
+				<ul class="list-group" >
 					{this.props.editGroup
 						.filter((post) => {
 							return (
@@ -97,48 +99,47 @@ class EditGroup extends Component {
 							);
 						})
 						.map((post, index) => (
-							<li
-								class="listItem"
-								key={post.id}
-							>
+							<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(index)}>
 								<img
-									className="checkbox-delete"
-									onClick={() => this.toggleHighlight(post.username, index)}
-									src={post.highlighted?marked:redbox}
+									className="checkbox-delete"	
+									src={post.highlighted==true?marked:redbox}
 									alt=""
+							
 								/>
-								<label className="blabe">
-									<div
-										className="userName"
-										className={post.highlighted ? 'userName' : 'userName-active'}
-									>
+								<label className={post.highlighted?"blabe":"blabe2"} >
+									<div className={post.highlighted?"userName":"userName-active"}>
 										{post.username}
 									</div>
-									<div className={post.highlighted ? 'email' : 'emails-active'}>{post.email}</div>
+									<div className={post.highlighted?"email":"emails-active"}>{post.email}</div>
 								</label>
 							</li>
 						))}
 				</ul>
 			</div>
 		);
-
 		return (
 			<main className="The-Main">
-				<div className="the-nav-bar">
-					<img className="back-image" onClick={this.onBack} src={back} alt="" />
-					<label className="center-labels">{this.props.name}</label>
+				<div className="navBar-container">
+					<div className="the-nav-bar">
+						<img className="back-image" onClick={this.onBack} src={back} alt="" />
+						<label className="center-labels">{this.props.name}</label>
+					</div>
+					<div className="BNavBar">
+						<input
+							className="the-Text"
+							id="username"
+							type="text"
+							onChange={this.onChange}
+							autoComplete="off"
+						/>
+						<button className="select2" onClick={this.goToNext}>
+							Add new
+						</button>
+					</div>
 				</div>
-				<div className="BNavBar">
-					<input className="the-Text" id="username" type="text" onChange={this.onChange} autoComplete="off" />
-					<button className="select2" onClick={this.goToNext}>
-						Add new
-					</button>
-				</div>
-
-				<div className="OnToTheNextOne" />
-				<div className="scrollbar" data-simplebar data-simplebar-auto-hide="false">
+			
 					{postitems}
-				</div>
+			
 				{this.state.count == 0 ? null : (
 					<div className="bpanel">
 						<table className="group-delete-table">
@@ -173,8 +174,8 @@ class EditGroup extends Component {
 }
 const mapStateToProps = (state) => ({
 	id: state.posts.groupId,
-  name: state.posts.groupName,
-  editGroup:state.posts.editGroup
+	name: state.posts.groupName,
+	editGroup: state.posts.editGroup
 });
 
-export default withRouter(connect(mapStateToProps,{fetchEditUser,AddMemberAction})(EditGroup));
+export default withRouter(connect(mapStateToProps, { fetchEditUser, AddMemberAction })(EditGroup));

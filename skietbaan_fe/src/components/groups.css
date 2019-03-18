@@ -186,7 +186,6 @@
   font-size: 16px;
   font-weight: bold;
   font-size: 16px;
-  color: red;
   outline: none;
 }
 
@@ -201,13 +200,22 @@
   font-size: 14px;
   font-weight: lighter;
   font-size: 16px;
-  color: red;
+  color: #6f839e;
 }
 
 .blabe {
   margin-left: 19px;
   width: 278px;
   background: #FFEAEC;
+  color: #6f839e;
+  border-radius: 8px;
+  height: 48px;
+  padding-left: 10px;
+}
+.blabe2 {
+  margin-left: 19px;
+  width: 278px;
+  background: white;
   color: #6f839e;
   border-radius: 8px;
   height: 48px;
@@ -462,12 +470,4 @@
 }
 .navBar-container{
   height: 100px;
-}
-.Active{
-  width: 116px;
-  height: 42px;
-  border-radius: 22px;
-}
-.Active:focus{
-  outline: none;
 }
