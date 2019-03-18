@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../scss/create-page.css";
 import { getCookie } from "../components/cookie.js";
 import { URL } from "../actions/types.js";
+import history from "./history";
 class CreatePage extends Component {
   constructor(props) {
     super(props);
@@ -18,30 +19,31 @@ class CreatePage extends Component {
   }
 
   GoComps() {
-    window.location = "/create-comp";
+    history.push("/createComp");
   }
 
   GoMembers() {
-    window.location = "/registerMember";
+    history.push("/registerMember");
   }
 
   GoGroups() {
-    window.location = "/AddGroup";
+    history.push("/AddGroup");
   }
 
   ViewComps() {
-    window.location = "/view-comp";
+    history.push("/viewComp");
   }
 
   ViewMembers() {
-    window.location = "/viewMembers";
+    history.push("/viewMembers");
   }
 
   ViewGroups() {
-    window.location = "/ViewGroups";
+    history.push("/ViewGroups");
   }
 
   componentDidMount() {
+    let found = false;
     if (getCookie("token")) {
       let token = getCookie("token");
       fetch(URL + "/api/features/getuserbytoken/" + token, {
@@ -57,6 +59,7 @@ class CreatePage extends Component {
             this.setState({
               isToken: true
             });
+            found = true;
           }
         })
         .then(data => {
@@ -64,28 +67,21 @@ class CreatePage extends Component {
             this.setState({
               isToken: true
             });
+            found = true;
           }
         })
         .catch(function(data) {
-          var res = document.cookie;
-          var multiple = res.split(";");
-          for (var i = 0; i < multiple.length; i++) {
-            var key = multiple[i].split("=");
-            document.cookie =
-              key[0] + " =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
+          if (!getCookie("token") || found === false) {
+            var res = document.cookie;
+            var multiple = res.split(";");
+            for (var i = 0; i < multiple.length; i++) {
+              var key = multiple[i].split("=");
+              document.cookie =
+                key[0] + " =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
+            }
+            window.location = "/registerPage";
           }
-          window.location = "/registerPage";
         });
-      if (!this.state.isToken) {
-        var res = document.cookie;
-        var multiple = res.split(";");
-        for (var i = 0; i < multiple.length; i++) {
-          var key = multiple[i].split("=");
-          document.cookie =
-            key[0] + " =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
-        }
-        window.location = "/registerPage";
-      }
     } else {
       window.location = "/registerPage";
     }
