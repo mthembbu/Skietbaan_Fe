@@ -20,7 +20,8 @@ class Register extends Component {
       passwordValue: "",
       validForm: false,
       tokenValue: "",
-      users: []
+      users: [],
+      toggle: false
     }
     this.register = this.register.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -41,8 +42,6 @@ class Register extends Component {
   }
 
   componentDidMount() {
-    let password = document.getElementById("passwordValue");
-    password.type = "password";
     this.disableButton();
     fetch(URL + "/api/User", {
       method: 'GET',
@@ -191,12 +190,9 @@ class Register extends Component {
   }
 
   togglePassword() {
-    let password = document.getElementById("passwordValue");
-    if (password.type === "password") {
-      password.type = "text";
-    } else {
-      password.type = "password";
-    }
+    this.setState({
+      toggle: !this.state.toggle
+    })
   }
 
   goToLogin() {
@@ -270,7 +266,7 @@ class Register extends Component {
                       autoComplete="off"
                       value={this.state.passwordValue}
                       onChange={this.handleChange}
-                      className="input-password"
+                      className={this.state.toggle ? "input-password-show": "input-password"}
                       placeholder="Password"
                     />
                     <div className={this.state.passwordValue !== "" ? "password-view-icon" : "password-icon"}
