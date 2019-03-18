@@ -10,6 +10,8 @@ import { validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
 import { URL } from '../actions/types.js';
 import back from '../components/assets/Back.png';
+import skietbaan from '../components/assets/skietbaan.png';
+import history from "./history";
 
 class Login extends Component {
   constructor(props) {
@@ -21,7 +23,8 @@ class Login extends Component {
       tokenValue: "",
       users: [],
       passwordFound: true,
-      usernameFound: true
+      usernameFound: true,
+      toggle: false
     }
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -39,10 +42,6 @@ class Login extends Component {
     else
       document.getElementById("roundButton").disabled = true;
 
-  }
-
-  componentDidMount() {
-    this.disableButton();
   }
 
   toggleNavbar() {
@@ -67,6 +66,7 @@ class Login extends Component {
       usernameFound: true,
       passwordFound: true
     }
+
     if (target.name === "passwordValue") {
       if (target.value.length > 0)
         stateUpdate.invalidPassword = false;
@@ -122,7 +122,7 @@ class Login extends Component {
       let sha1 = require('sha1');
       let hash = sha1(this.state.passwordValue);
       let RequestObject = {
-        "Username": this.state.usernameValue,
+        "Username": this.state.usernameValue.toLowerCase(),
         "Password": hash,
       }
       fetch(URL + "/api/features/login", {
@@ -135,7 +135,7 @@ class Login extends Component {
       }).then(response => response.json()).then(data => {
         if (typeof data === "object") {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
-          window.location = "/home";
+          history.push("/home");
         }
 
         else if (typeof data === "string") {
@@ -159,37 +159,33 @@ class Login extends Component {
   }
 
   togglePassword() {
-    let password = document.getElementById("passwordValue");
-    if (password.type === "password") {
-      password.type = "text";
-    } else {
-      password.type = "password";
-    }
+    this.setState({
+      toggle: !this.state.toggle
+    })
   }
 
   goToRegister() {
-    window.location = "/registerPage"
+    history.push("/registerPage");
   }
 
   render() {
     document.addEventListener('DOMContentLoaded', () => {
       this.toggleNavbar();
+      
     }, false);
     if (getCookie("token")) {
-      window.location = "/home";
+      history.push("/home");
     }
 
     return (
       <div className="page-content-login">
         <div className="red-background">
           <div className="welcome-header">
-            <label className="welcome-label">Welcome to
-          <label className="skietbaan-label">Skietbaan</label>
-            </label>
+          <img src={skietbaan} className="header-image" alt=''></img>
           </div>
           <div className="header-container">
             <div className="centre-label">
-              <label className="header-label">Login</label>
+              <label className="header-label">LOGIN</label>
             </div>
             <img src={back}
               className="back-btn"
@@ -201,44 +197,37 @@ class Login extends Component {
 
             <div className="spacing-login">
               <FormGroup>
-                <label className="front-white input-label">Enter Username <div
-                  className={this.state.invalidUsername ? "invalid-icon" : "hidden"}></div></label>
-
-                <div className="input-container">
                   <input
                     type="text"
                     name="usernameValue"
-                    id="us"
-                    autoComplete = "off"
+                    id="usernameValue"
+                    autoComplete="off"
                     value={this.state.usernameValue}
                     onChange={this.handleChange}
                     className="input-user"
+                    placeholder="Username"
                   />
-                </div>
                 <div className={this.state.usernameFound
                   && this.usernameValue !== "" ? "hidden" : "error-message"}>Invalid Username</div>
               </FormGroup>
             </div>
             <div className="spacing-login">
               <FormGroup>
-                <label className="front-white input-label" for="examplePassword">
-                  Password <div className={this.state.invalidPassword ? "invalid-icon" : "hidden"}></div></label>
-                <div className="input-container">
                   <div className="input-label centre-div">
                     <input
-                      type="password"
+                      type="text"
                       name="passwordValue"
                       id="passwordValue"
-                      autoComplete = "off"
+                      autoComplete="off"
                       value={this.state.passwordValue}
                       onChange={this.handleChange}
-                      className="input-password"
+                      className={this.state.toggle ? "input-password-show": "input-password"}
+                      placeholder="Password"
                     />
                     <div className={this.state.passwordValue !== "" ? "password-view-icon" : "password-icon"}
-                      onClick={this.togglePassword}>
+                      onClick={this.togglePassword} name="eye">
                     </div>
                   </div>
-                </div>
                 <div className={this.state.passwordFound
                   && this.passwordValue !== "" ? "hidden" : "error-message"}>Invalid Password</div>
               </FormGroup>
@@ -247,12 +236,14 @@ class Login extends Component {
               <Button onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
                 : "buttons-invalid round-button"} >Login</Button>
             </div>
-            
+
             {/* TODO : forgot password page under construction
             <div className="login-href">
               <a href="/forgotPassword" >Forgot Password?</a>
-            </div> */}
+            </div>
+             */}
           </Form>
+
         </div >
       </div>
 
