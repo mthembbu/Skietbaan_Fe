@@ -84,7 +84,7 @@ class ViewGroups extends Component {
 									</td>
 									<td>
 										<div className="group-view">
-											<button className="Active-group" onClick={() => this.delete(post.id)}>{post.isActive==true?"Active":"InActive"}</button>
+											<button className="Active" onClick={() => this.delete(post.id)}>{post.isActive==true?"Active":"InActive"}</button>
 										</div>
 									</td>
 								</tr>
@@ -96,7 +96,7 @@ class ViewGroups extends Component {
 
 		return (
 			<main className="The-Main">
-			<div className="navBar-container">			
+			<div className="navBar-contain">			
 				<div className="the-nav-bar">
 					<a href="" className="back-container">
 						<img className="back-image" onClick={this.onBack} src={back} alt="" />

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Col,
   FormGroup,
   Button,
   Form
@@ -9,6 +8,8 @@ import '../components/RegisterStyles.css';
 import { validateEmail, validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
 import { URL } from '../actions/types.js';
+import skietbaan from '../components/assets/skietbaan.png';
+import history from "./history";
 
 class Register extends Component {
   constructor(props) {
@@ -40,6 +41,8 @@ class Register extends Component {
   }
 
   componentDidMount() {
+    let password = document.getElementById("passwordValue");
+    password.type = "password";
     this.disableButton();
     fetch(URL + "/api/User", {
       method: 'GET',
@@ -174,7 +177,7 @@ class Register extends Component {
       }).then(function (data) {
         if (typeof data === "object") {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
-          window.location = "/home";
+          history.push("/home");
         }
       }).catch(function (data) {
       });
@@ -191,13 +194,13 @@ class Register extends Component {
   }
 
   goToLogin() {
-    window.location = "/Login"
+    window.location = '/login';
   }
 
   render() {
-    if (getCookie("token")) {
-      window.location = "/home";
-    }
+     if (getCookie("token")) {
+      history.push("/home");
+     }
     document.addEventListener('DOMContentLoaded', () => {
       this.toggleNavbar();
     }, false);
@@ -206,13 +209,10 @@ class Register extends Component {
       <div className="page-content-login">
         <div className="red-background">
           <div className="welcome-header">
-            <label className="welcome-label">Welcome to
-          <label className="skietbaan-label">Skietbaan</label>
-            </label>
+          <img src={skietbaan} className="header-image" alt=''></img>
           </div>
-
           <div className="header-container">
-            <label className="header-label">Register</label>
+            <label className="header-label">REGISTER</label>
             <button className="button-login" onClick={() => this.goToLogin()}>Login</button>
           </div>
         </div>
@@ -221,10 +221,6 @@ class Register extends Component {
 
             <div className="spacing-login">
               <FormGroup>
-                <label className="front-white input-label">Enter Username <div
-                  className={this.state.invalidUsername ? "invalid-icon" : "hidden"}></div></label>
-
-                <div className="input-container">
                   <input
                     type="text"
                     name="usernameValue"
@@ -233,16 +229,16 @@ class Register extends Component {
                     onChange={this.handleChange}
                     autoComplete="off"
                     className="input-user"
+                    placeholder="Username"
                   />
-                </div>
-                <div className={this.state.usernameTaken ? "error-message" : "hidden"} > Username Taken</div>
+                  <div className="error-message-container">
+                    <div className={this.state.usernameTaken ? "error-message" : "hidden"} > Username already exists</div>
+                    </div>
+                
               </FormGroup>
             </div>
             <div className="spacing-login">
               <FormGroup>
-                <label className="front-white input-label">Email Address <div
-                  className={this.state.invalidEmail ? "invalid-icon" : "hidden"}></div></label>
-                <div className="input-container">
                   <input
                     type="text"
                     name="emailValue"
@@ -251,32 +247,31 @@ class Register extends Component {
                     value={this.state.emailValue}
                     onChange={this.handleChange}
                     className="input-user"
+                    placeholder="Email"
                   />
+                  <div className="error-message-container">
+                <div className={this.state.emailTaken ? "error-message" : "hidden"} > Email address already in use</div>
                 </div>
-                <div className={this.state.emailTaken ? "error-message" : "hidden"} > Email Taken</div>
               </FormGroup>
             </div>
             <div className="spacing-login">
               <FormGroup>
-                <label className="front-white input-label" for="examplePassword">
-                  Password <div className={this.state.invalidPassword ? "invalid-icon" : "hidden"}></div></label>
-                <div className="input-container">
                   <div className="input-label centre-div">
                     <input
-                      type="password"
+                      type="text"
                       name="passwordValue"
                       id="passwordValue"
                       autoComplete="off"
                       value={this.state.passwordValue}
                       onChange={this.handleChange}
                       className="input-password"
+                      placeholder="Password"
                     />
                     <div className={this.state.passwordValue !== "" ? "password-view-icon" : "password-icon"}
                       onClick={this.togglePassword}>
                     </div>
 
                   </div>
-                </div>
               </FormGroup>
             </div>
             <div className="button-container">
