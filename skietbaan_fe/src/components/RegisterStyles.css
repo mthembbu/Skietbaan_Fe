@@ -138,8 +138,25 @@
   height: 39px;
   text-align: center;
   font-size: 18px;
-  background-color: #F3F4F9;
-  border: 1px #6F839E solid;
+  background-color: #fdfdfd;
+  border: 1px #000000 solid;
+  padding-left: 16px;
+  color: #000000;
+  font-weight: bolder;
+  -webkit-text-security: disc;
+}
+
+.input-password-show{
+  border-radius: 4px;
+  width: 312px;
+  height: 56px;
+  font-size: 18px;
+  background-color: #fdfdfd;
+  border: 1px #000000 solid;
+  padding-left: 16px;
+  color: #000000;
+  font-weight: bolder;
+  -webkit-text-security: none;
 }
 
 .centre-div{
@@ -164,6 +181,7 @@
   position: absolute;
   top: 5px;
   right: 18px;
+  -webkit-text-security: none;
 }
 
 .password-view-icon:hover{

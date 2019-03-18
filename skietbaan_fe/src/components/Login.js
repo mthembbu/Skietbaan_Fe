@@ -23,7 +23,8 @@ class Login extends Component {
       tokenValue: "",
       users: [],
       passwordFound: true,
-      usernameFound: true
+      usernameFound: true,
+      toggle: false
     }
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -41,11 +42,6 @@ class Login extends Component {
     else
       document.getElementById("roundButton").disabled = true;
 
-  }
-
-  componentDidMount() {
-    let password = document.getElementById("passwordValue");
-    password.type = "password";
   }
 
   toggleNavbar() {
@@ -138,7 +134,7 @@ class Login extends Component {
       }).then(response => response.json()).then(data => {
         if (typeof data === "object") {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
-          history.push("/home");;
+          history.push("/home");
         }
 
         else if (typeof data === "string") {
@@ -162,12 +158,9 @@ class Login extends Component {
   }
 
   togglePassword() {
-    let password = document.getElementById("passwordValue");
-    if (password.type === "password") {
-      password.type = "text";
-    } else {
-      password.type = "password";
-    }
+    this.setState({
+      toggle: !this.state.toggle
+    })
   }
 
   goToRegister() {
@@ -177,6 +170,7 @@ class Login extends Component {
   render() {
     document.addEventListener('DOMContentLoaded', () => {
       this.toggleNavbar();
+      
     }, false);
     if (getCookie("token")) {
       history.push("/home");
@@ -226,11 +220,11 @@ class Login extends Component {
                       autoComplete = "off"
                       value={this.state.passwordValue}
                       onChange={this.handleChange}
-                      className="input-password"
+                      className={this.state.toggle ? "input-password-show": "input-password"}
                       placeholder="Password"
                     />
                     <div className={this.state.passwordValue !== "" ? "password-view-icon" : "password-icon"}
-                      onClick={this.togglePassword}>
+                      onClick={this.togglePassword} name="eye">
                     </div>
                   </div>
                 <div className={this.state.passwordFound
