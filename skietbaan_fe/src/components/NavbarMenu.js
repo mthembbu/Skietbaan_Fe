@@ -19,7 +19,6 @@ class NavbarMenu extends Component {
     this.isCreate = this.isCreate.bind(this);
     this.isScoreCapture = this.isScoreCapture.bind(this);
     this.isProfile = this.isProfile.bind(this);
-    this.isDocuments = this.isDocuments.bind(this);
     this.isNotifications = this.isNotifications.bind(this);
     this.GoTo = this.GoTo.bind(this);
     this.checkUserType = this.checkUserType.bind(this);
