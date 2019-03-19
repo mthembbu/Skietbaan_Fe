@@ -23,7 +23,8 @@ class Login extends Component {
       tokenValue: "",
       users: [],
       passwordFound: true,
-      usernameFound: true
+      usernameFound: true,
+      toggle: false
     }
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -41,11 +42,6 @@ class Login extends Component {
     else
       document.getElementById("roundButton").disabled = true;
 
-  }
-
-  componentDidMount() {
-    let password = document.getElementById("passwordValue");
-    password.type = "password";
   }
 
   toggleNavbar() {
@@ -138,7 +134,7 @@ class Login extends Component {
       }).then(response => response.json()).then(data => {
         if (typeof data === "object") {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
-          history.push("/home");;
+          window.location ="/home"
         }
 
         else if (typeof data === "string") {
@@ -162,12 +158,9 @@ class Login extends Component {
   }
 
   togglePassword() {
-    let password = document.getElementById("passwordValue");
-    if (password.type === "password") {
-      password.type = "text";
-    } else {
-      password.type = "password";
-    }
+    this.setState({
+      toggle: !this.state.toggle
+    })
   }
 
   goToRegister() {
@@ -177,6 +170,7 @@ class Login extends Component {
   render() {
     document.addEventListener('DOMContentLoaded', () => {
       this.toggleNavbar();
+
     }, false);
     if (getCookie("token")) {
       history.push("/home");
@@ -186,7 +180,7 @@ class Login extends Component {
       <div className="page-content-login">
         <div className="red-background">
           <div className="welcome-header">
-          <img src={skietbaan} className="header-image" alt=''></img>
+            <img src={skietbaan} className="header-image" alt=''></img>
           </div>
           <div className="header-container">
             <div className="centre-label">
@@ -202,51 +196,57 @@ class Login extends Component {
 
             <div className="spacing-login">
               <FormGroup>
-                  <input
-                    type="text"
-                    name="usernameValue"
-                    id="us"
-                    autoComplete = "off"
-                    value={this.state.usernameValue}
-                    onChange={this.handleChange}
-                    className="input-user"
-                    placeholder="Username"
-                  />
-                <div className={this.state.usernameFound
-                  && this.usernameValue !== "" ? "hidden" : "error-message"}>Invalid Username</div>
+                <input
+                  type="text"
+                  name="usernameValue"
+                  id="usernameValue"
+                  autoComplete="off"
+                  value={this.state.usernameValue}
+                  onChange={this.handleChange}
+                  className="input-user"
+                  placeholder="Username"
+                />
+                <div className="error-message-container">
+                  <div className={this.state.usernameFound
+                    && this.usernameValue !== "" ? "hidden" : "error-message"}>Invalid Username</div>
+                </div>
               </FormGroup>
             </div>
             <div className="spacing-login">
               <FormGroup>
-                  <div className="input-label centre-div">
-                    <input
-                      type="text"
-                      name="passwordValue"
-                      id="passwordValue"
-                      autoComplete = "off"
-                      value={this.state.passwordValue}
-                      onChange={this.handleChange}
-                      className="input-password"
-                      placeholder="Password"
-                    />
-                    <div className={this.state.passwordValue !== "" ? "password-view-icon" : "password-icon"}
-                      onClick={this.togglePassword}>
-                    </div>
+                <div className="input-label centre-div">
+                  <input
+                    type="text"
+                    name="passwordValue"
+                    id="passwordValue"
+                    autoComplete="off"
+                    value={this.state.passwordValue}
+                    onChange={this.handleChange}
+                    className={this.state.toggle ? "input-password-show" : "input-password"}
+                    placeholder="Password"
+                  />
+                  <div className={this.state.passwordValue !== "" ? "password-view-icon" : "password-icon"}
+                    onClick={this.togglePassword} name="eye">
                   </div>
-                <div className={this.state.passwordFound
-                  && this.passwordValue !== "" ? "hidden" : "error-message"}>Invalid Password</div>
+                </div>
+                <div className="error-message-container">
+                  <div className={this.state.passwordFound
+                    && this.passwordValue !== "" ? "hidden" : "error-message"}>Invalid Password</div>
+                </div>
               </FormGroup>
             </div>
             <div className="button-container">
               <Button onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
                 : "buttons-invalid round-button"} >Login</Button>
             </div>
-            
+
             {/* TODO : forgot password page under construction
             <div className="login-href">
               <a href="/forgotPassword" >Forgot Password?</a>
-            </div> */}
+            </div>
+             */}
           </Form>
+
         </div >
       </div>
 
