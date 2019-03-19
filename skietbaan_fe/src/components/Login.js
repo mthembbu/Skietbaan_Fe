@@ -211,10 +211,6 @@ class Login extends Component {
                   className="input-user"
                   placeholder="Username"
                 />
-                <div className="error-message-container">
-                  <div className={this.state.usernameFound
-                    && this.usernameValue !== "" ? "hidden" : "error-message"}>Invalid Username</div>
-                </div>
               </FormGroup>
             </div>
             <div className="spacing-login">
@@ -236,7 +232,10 @@ class Login extends Component {
                 </div>
                 <div className="error-message-container">
                   <div className={this.state.passwordFound
-                    && this.passwordValue !== "" ? "hidden" : "error-message"}>Invalid Password</div>
+                    && this.passwordValue !== "" 
+                    && this.state.usernameFound
+                    && this.usernameValue !== ""      
+                    ? "hidden" : "error-message"}>Invalid Username or Password</div>
                 </div>
               </FormGroup>
             </div>
