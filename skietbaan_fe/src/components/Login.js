@@ -10,7 +10,7 @@ import { validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
 import { URL } from '../actions/types.js';
 import back from '../components/assets/Back.png';
-import skietbaan from '../components/assets/skietbaan.png';
+import skietbaan from '../components/assets/skietbaanLogo.png';
 import history from "./history";
 
 class Login extends Component {
@@ -44,6 +44,10 @@ class Login extends Component {
 
   }
 
+  componentDidMount() {
+    this.disableButton()
+  }
+
   toggleNavbar() {
     let Navbar = document.querySelector(".navbar-admin");
     if (Navbar.classList.contains("hidden")) {
@@ -66,7 +70,6 @@ class Login extends Component {
       usernameFound: true,
       passwordFound: true
     }
-
     if (target.name === "passwordValue") {
       if (target.value.length > 0)
         stateUpdate.invalidPassword = false;
@@ -122,7 +125,7 @@ class Login extends Component {
       let sha1 = require('sha1');
       let hash = sha1(this.state.passwordValue);
       let RequestObject = {
-        "Username": this.state.usernameValue.toLowerCase(),
+        "Username": this.state.usernameValue,
         "Password": hash,
       }
       fetch(URL + "/api/features/login", {
@@ -207,10 +210,6 @@ class Login extends Component {
                   className="input-user"
                   placeholder="Username"
                 />
-                <div className="error-message-container">
-                  <div className={this.state.usernameFound
-                    && this.usernameValue !== "" ? "hidden" : "error-message"}>Invalid Username</div>
-                </div>
               </FormGroup>
             </div>
             <div className="spacing-login">
@@ -232,7 +231,10 @@ class Login extends Component {
                 </div>
                 <div className="error-message-container">
                   <div className={this.state.passwordFound
-                    && this.passwordValue !== "" ? "hidden" : "error-message"}>Invalid Password</div>
+                    && this.passwordValue !== "" 
+                    && this.state.usernameFound
+                    && this.usernameValue !== ""      
+                    ? "hidden" : "error-message"}>Invalid Username or Password</div>
                 </div>
               </FormGroup>
             </div>
