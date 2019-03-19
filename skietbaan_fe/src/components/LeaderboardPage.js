@@ -55,8 +55,8 @@ class LeaderboardPage extends Component {
         let token = getCookie("token");
         var CompNum = competition +1;
         var GroupNum = group;
-        if(group != -1){
-            GroupNum = group +1;
+        if(this.state.selectedGroup != -1){
+            GroupNum = this.state.selectedGroup +1;
         }
         const filterSelection = {
             selectedCompetition: CompNum,
@@ -67,7 +67,6 @@ class LeaderboardPage extends Component {
         this.props.fetchleaderboadtabledata(filterSelection);
     }
     ValidatedInitialLeaderboardFilterSelection(){
-
         if(this.props.selectedCompetitionName != undefined){
             if(this.props.selectedCompetitionName.length > 0){
                 for(var i = 0;i<this.props.competitions.length;i++){
@@ -89,7 +88,6 @@ class LeaderboardPage extends Component {
                 }
             } 
         }
-        
     }
 
     setCompetitionValue = (value) => {

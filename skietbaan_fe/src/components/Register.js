@@ -87,16 +87,10 @@ class Register extends Component {
         stateUpdate.invalidPassword = true;
       }
     }
-    if (target.name === "passwordValue" && target.value.length > 0) {
-      stateUpdate.invalidPassword = false;
-    }
-    else if(target.name === "passwordValue"){
-      stateUpdate.invalidPassword = true;
-    }
     if (target.name === "emailValue") {
       stateUpdate.invalidEmail = false;
       for (var i = 0; i < this.state.users.length; i++) {
-        if (this.state.users[i].email.toLowerCase() == target.value) {
+        if (this.state.users[i].email.toLowerCase() == target.value.toLowerCase()) {
           stateUpdate.emailTaken = true;
           stateUpdate.invalidEmail = true;
           break;
@@ -107,7 +101,7 @@ class Register extends Component {
     if (target.name === "usernameValue" && target.value.length > 0) {
       stateUpdate.invalidUsername = false;
       for (var i = 0; i < this.state.users.length; i++) {
-        if (this.state.users[i].username.toLowerCase() == target.value) {
+        if (this.state.users[i].username.toLowerCase() == target.value.toLowerCase()) {
           stateUpdate.usernameTaken = true;
           stateUpdate.invalidUsername = true;
           break;
