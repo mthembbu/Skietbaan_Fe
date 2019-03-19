@@ -397,9 +397,6 @@ export default class search extends Component {
                 {competitionItem}
 
               </div>
-              {/* <div className={this.state.validCompetition === true 
-                && !this.state.scoreEntered 
-                && this.state.validScore ? "hidden" : "invalidComp"}>Select Competition</div> */}
               <div className={this.state.scoreSaved ? "sucess-container" : "hidden"}>
                 <div className="success"> Score Saved successfully </div>
               </div>
