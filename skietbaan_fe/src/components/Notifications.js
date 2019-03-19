@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import "../components/NotificationsStyle.css";
 import { getCookie } from "./cookie";
 import history from "./history";
+import { connect } from "react-redux";
 import { BASE_URL } from "../actions/types.js";
+import { getName } from "../actions/postActions";
 
 class notification extends Component {
   constructor(props) {
@@ -12,21 +14,31 @@ class notification extends Component {
       typeOfNotification: "",
       tokenValue: "",
       deleteClicked: false,
-      deleted: true,
-      cancelClicked: false
+      cancelClicked: false,
+      isRead: false
     };
     this.onDelete = this.onDelete.bind(this);
     this.markForDeletion = this.markForDeletion.bind(this);
   }
 
   onDelete = async () => {
+    setTimeout(function() {
+      window.location = "/notify";
+    }, 2000);
     const deleteNotification = async id => {
       try {
-        await fetch(BASE_URL + `/api/Notification/${id}`, {
-          method: "Delete"
-        });
-      } catch (err) {
-      }
+        await fetch(
+          BASE_URL + "/api/Notification/DeleteNotificationById/" + id,
+          {
+            method: "post",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(id)
+          }
+        );
+      } catch (err) {}
     };
 
     const deletedIds = this.state.array
@@ -45,7 +57,7 @@ class notification extends Component {
     });
   };
 
-  onClick_View = Notification => {
+  onClick_View = (Notification, Message) => {
     if (Notification === "Award") {
     } else if (Notification === "Confirmation") {
     } else if (Notification === "Renewal") {
@@ -89,7 +101,7 @@ class notification extends Component {
   componentDidMount() {
     if (getCookie("token")) {
       const token = document.cookie;
-      fetch(BASE_URL + "/api/Notification?" + token)
+      fetch(BASE_URL + "/api/Notification/GetNotificationsByUser?" + token)
         .then(response => response.json())
         .then(data => {
           const newArray = data.map(notification => {
