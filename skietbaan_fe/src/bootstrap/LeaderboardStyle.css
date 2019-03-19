@@ -496,11 +496,22 @@ html, body{
      position: fixed;
      width: 100%;
      bottom: 0;
-     display: none;
   }
  
   @media only screen and (min-width: 701px) {
      /* tablets and desktop */
+     .navbar-admin {
+        background-color: #000;
+        width: 66%;
+        margin-left: 17%;
+        top: 0;
+        z-index: 100;
+        position: unset !important;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+     }
      .FilterSelections .SelectionsContainer .row div{
          height: 290px;
          width: 476px;
@@ -612,7 +623,19 @@ html, body{
       }
  }
  @media only screen and (max-width: 700px) {
-     /* phones */
+     /* phones size */
+     .navbar-admin {
+        background-color: #000;
+        width: 66%;
+        margin-left: 17%;
+        top: 0;
+        z-index: 100;
+        position: unset !important;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+     }
      .FilterSelections .SelectionsContainer .row div{
          height: 100%;
          width: 144px;
@@ -724,5 +747,8 @@ html, body{
          margin-right:0px;
          margin-top: 30%;
       }
- }
+      .RankingTableSection{
+        height: 720px;
+      }
+}
  
