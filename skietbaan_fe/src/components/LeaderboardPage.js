@@ -17,6 +17,7 @@ import {
     isBrowser,
     isMobile
 } from "react-device-detect";
+import { isNullOrUndefined } from 'util';
 
 class LeaderboardPage extends Component {
     constructor(props) {
@@ -54,8 +55,8 @@ class LeaderboardPage extends Component {
         let token = getCookie("token");
         var CompNum = competition +1;
         var GroupNum = group;
-        if(group != -1){
-            GroupNum = group +1;
+        if(this.state.selectedGroup != -1){
+            GroupNum = this.state.selectedGroup +1;
         }
         const filterSelection = {
             selectedCompetition: CompNum,
@@ -66,25 +67,27 @@ class LeaderboardPage extends Component {
         this.props.fetchleaderboadtabledata(filterSelection);
     }
     ValidatedInitialLeaderboardFilterSelection(){
-        if(this.props.selectedCompetitionName.length > 0){
-            for(var i = 0;i<this.props.competitions.length;i++){
-                if(this.props.competitions[i] == this.props.selectedCompetitionName){
-                    this.setState({
-                        selectedCompetition: i
-                    });
+        if(this.props.selectedCompetitionName != undefined){
+            if(this.props.selectedCompetitionName.length > 0){
+                for(var i = 0;i<this.props.competitions.length;i++){
+                    if(this.props.competitions[i] == this.props.selectedCompetitionName){
+                        this.setState({
+                            selectedCompetition: i
+                        });
+                    }
                 }
             }
+            
+            if(this.props.selectedGroupName.length > 0){
+                for(var i = 0;i<this.props.groups.length;i++){
+                    if(this.props.groups[i] == this.props.selectedGroupName){
+                        this.setState({
+                            selectedGroup: i
+                        });
+                    }
+                }
+            } 
         }
-        
-        if(this.props.selectedGroupName.length > 0){
-            for(var i = 0;i<this.props.groups.length;i++){
-                if(this.props.groups[i] == this.props.selectedGroupName){
-                    this.setState({
-                        selectedGroup: i
-                    });
-                }
-            }
-        } 
     }
 
     setCompetitionValue = (value) => {

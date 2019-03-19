@@ -6,15 +6,19 @@ import {
   PASS_ID,
   CREATEGROUP,
   EDITGROUPUSERS,
+  UPDATE_SELECTED_COMPETITION,
+  UPDATE_SELECTED_GROUP,
+  GROUPDICT,
   ADDMEMBERS,
-  FETCH_GROUPS,UPDATEARRAY, UPDATE_SELECTED_COMPETITION, UPDATE_SELECTED_GROUP
+  FETCH_GROUPS
 } from "../actions/types";
 
 const initialState = {
   selectedItem: {},
   leaderboardSelectedCompetitionName: [],
   selectedItem: {},
-  groupName: "",
+  groupDict:{},
+ upName: "",
   editGroup:[],
   groupsList:[],
   existing:[],
@@ -37,10 +41,23 @@ const initialState = {
 //the function to detect the state change
 export default function(state = initialState, action) {
   switch (action.type) {
+    
     case FETCH_POSTS:
       return {
         ...state,
         allItems: action.payload
+      };
+
+    case FETCH_GROUPS:
+      return {
+        ...state,
+        groupsList: action.payload
+      };
+  
+    case GROUPDICT:
+      return {
+        ...state,
+        groupDict: action.payload
       };
 
     case UPDATE_GROUPNAME:
@@ -48,17 +65,14 @@ export default function(state = initialState, action) {
         ...state,
         groupName: action.payload
       };
+
     case ADDMEMBERS:
       return {
         ...state,
         existing: action.payload
       };
+
     case EDITGROUPUSERS:
-      return {
-        ...state,
-        editGroup: action.payload
-      };
-    case UPDATEARRAY:
       return {
         ...state,
         editGroup: action.payload
@@ -69,16 +83,13 @@ export default function(state = initialState, action) {
         ...state,
         selectedItem: action.payload
       };
+
     case PASS_ID:
       return {
         ...state,
         groupId: action.payload
       };
-    case FETCH_POSTS:
-      return {
-        ...state,
-        groupId: action.payload
-      };
+
     case FETCH_GROUPS:
       return {
         ...state,

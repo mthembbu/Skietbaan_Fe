@@ -87,12 +87,6 @@ class Register extends Component {
         stateUpdate.invalidPassword = true;
       }
     }
-    if (target.name === "passwordValue" && target.value.length > 0) {
-      stateUpdate.invalidPassword = false;
-    }
-    else if(target.name === "passwordValue"){
-      stateUpdate.invalidPassword = true;
-    }
     if (target.name === "emailValue") {
       stateUpdate.invalidEmail = false;
       for (var i = 0; i < this.state.users.length; i++) {

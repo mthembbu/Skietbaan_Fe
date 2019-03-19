@@ -70,7 +70,6 @@ class Login extends Component {
       usernameFound: true,
       passwordFound: true
     }
-
     if (target.name === "passwordValue") {
       if (target.value.length > 0)
         stateUpdate.invalidPassword = false;
@@ -126,7 +125,7 @@ class Login extends Component {
       let sha1 = require('sha1');
       let hash = sha1(this.state.passwordValue);
       let RequestObject = {
-        "Username": this.state.usernameValue.toLowerCase(),
+        "Username": this.state.usernameValue,
         "Password": hash,
       }
       fetch(URL + "/api/features/login", {
