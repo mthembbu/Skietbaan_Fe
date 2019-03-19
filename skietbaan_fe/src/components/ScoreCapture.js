@@ -240,7 +240,7 @@ export default class search extends Component {
           .then(data => this.setState({
             scoreSaved: true, currState: 5
           }));
-        setTimeout(function () { window.location = "/scorecapture"; }, 2000);
+        setTimeout(function () { window.location = "/scoreCapture"; }, 2000);
 
       }
       else if (Valid && !this.state.scoreSaved) {
