@@ -36,7 +36,7 @@
     color: #fdfdfd;
 }
 
-.btn-default {
+.documents-btn-default {
     font-weight: lighter;
     font-size: 16px;
     color: #ffffff;
@@ -48,13 +48,26 @@
     transition: all 0.3s ease 0s;
   }
 
-  .btn-default:focus {
+  .documents-btn-default:focus {
     font-weight: lighter;
+    outline: none;
     font-size: 16px;
-    color: #838383;
+    color: #ffffff;
     letter-spacing: 1px;
     line-height: 15px;
-    border: 1px solid #c0c1c2;
+    border: 1px solid #ffffff;
+    border-radius: 40px;
+    background: transparent;
+    transition: all 0.3s ease 0s;
+  }
+  
+  .documents-btn-default:hover {
+    font-weight: lighter;
+    font-size: 16px;
+    color: #ffffff;
+    letter-spacing: 1px;
+    line-height: 15px;
+    border: 1px solid #ffffff;
     border-radius: 40px;
     background: transparent;
     transition: all 0.3s ease 0s;
@@ -70,7 +83,6 @@
     height: 100%;
     position: fixed;
     overflow: auto;
-
 }
 
 .documents-center{
@@ -87,6 +99,18 @@
     border: 1px solid #ffffff;
     border-radius: 40px;
     background: transparent;
+    transition: all 0.3s ease 0s;
+  }
+
+  .btn-active:hover {
+    font-weight: lighter;
+    font-size: 16px;
+    color: #ffffff;
+    letter-spacing: 1px;
+    line-height: 15px;
+    border: 1px solid #ffffff;
+    border-radius: 40px;
+    background: #Dc0600;
     transition: all 0.3s ease 0s;
   }
 
