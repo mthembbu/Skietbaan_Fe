@@ -57,7 +57,6 @@ class notification extends Component {
     });
   };
 
-  onClick_View = Notification => {
   onClick_View = (Notification, Message) => {
     if (Notification === "Award") {
     } else if (Notification === "Confirmation") {
