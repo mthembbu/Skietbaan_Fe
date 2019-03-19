@@ -59,7 +59,6 @@ class EditGroup extends Component {
 		this.props.fetchEditUser(this.props.id);
 	}
 	toggleHighlight = (event) => {
-		console.log(event)
 		if (this.props.editGroup[event].highlighted === true) {
 			this.props.editGroup[event].highlighted = false;
 			 this.setState({ count: this.state.count - 1 });
@@ -86,7 +85,6 @@ class EditGroup extends Component {
 	};
 
 	render() {
-		console.log("we are here ",this.props.editGroup)
 		const postitems = (
 			<div className="check">
 				<ul class="list-group" >
