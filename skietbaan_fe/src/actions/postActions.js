@@ -14,7 +14,9 @@ import {
   EDITGROUPUSERS,
   ADDMEMBERS,
   FETCH_LEADERBOARDFILTER_DATA,
-  FETCH_LEADERBOARDTABLE_DATA
+  FETCH_LEADERBOARDTABLE_DATA,
+  UPDATE_SELECTED_COMPETITION,
+  UPDATE_SELECTED_GROUP
 } from "./types";
 
 /** The method to feth the already available data for posts*/
@@ -175,6 +177,28 @@ export const fetchleaderboadtabledata = filterSelection => dispatch => {
         payload: data
       })
     );
+};
+/** The method to update selected competition state*/
+export const updateSelectedCompetition = competitionName => {
+  return dispatch =>{
+      dispatch(
+        {
+          type: UPDATE_SELECTED_COMPETITION,
+          payload: competitionName
+        }
+      );
+  };
+};
+/** The method to update selected competition state*/
+export const updateSelectedGroup = groupName => {
+  return dispatch =>{
+      dispatch(
+        {
+          type: UPDATE_SELECTED_GROUP,
+          payload: groupName
+        }
+      );
+  };
 };
 
 export const passId = id => {
