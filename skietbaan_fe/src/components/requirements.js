@@ -1,7 +1,6 @@
-
-
 import React, { Component } from "react";
 import "./groups.css";
+import { Container,Row,Col } from "react-bootstrap";
 import { createGroups } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
 import back from "./GroupImages/back.png";
@@ -131,8 +130,7 @@ handleChange(event) {
           <img className="back-image" onClick={this.onBack} src={back} alt="" />
           <label className="center-label">Requirements</label>
         </div>
-
-       
+        
         <div
           className="scrollbar"
           data-simplebar

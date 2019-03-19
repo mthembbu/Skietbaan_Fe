@@ -15,7 +15,6 @@ import history from './components/history';
 import notification from './components/Notifications';
 import ViewMembers from './components/ViewMembers';
 import Documents from './components/Documents';
-import { getCookie } from './components/cookie.js';
 import ScoreCapture from './components/ScoreCapture';
 import CreatePage from './components/CreatePage';
 import UserProfile from './components/UserProfile';
@@ -26,51 +25,14 @@ import AddMembersGroup from './components/AddMembersGroup';
 import EditGroup from './components/EditGroup';
 import ViewComp from './components/ViewComp';
 import CreateComp from './components/CreateComp';
-import NavbarMenuUser from './components/NavbarMenuUser';
-import {BASE_URL, URL} from './actions/types.js';
+import Create from './components/Create';
 class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			nav: false
-		}
-		this.TypeUser = this.TypeUser.bind(this);
-	}
-
-	TypeUser(){
-		if(this.state.nav){
-			return <NavbarMenu />
-		}else{
-			return <NavbarMenuUser />
-		}
-	}
-
-	componentDidMount(){
-		let token = getCookie("token");
-		fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
-			method: 'Get',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			}
-		})
-			.then(response => response.json())
-			.then(data => {
-				this.setState({
-					nav:data.admin
-			});
-			}).catch(function (data) {});
-	}
-
-
 
 	render() {
 		return (
 			<Provider store={store}>
 				<div>
-				{this.state.nav ? <NavbarMenu /> : <NavbarMenuUser />}
-				{/* TODO: Make the Navbar work more efficiently with this 
-				 {this.TypeUser()} */}
+					<NavbarMenu />
 					<Router history={history}>
 						<Switch>
 							<Route path="/home" component={LeaderboardPage} exact />
@@ -81,7 +43,7 @@ class App extends Component {
 							<Route path="/registerMember" component={RegisterMember} exact />
 							<Route path="/new-competition" component={CreateComp} exact />
 							<Route path="/AddGroup" component={AddGroup} exact />
-							<Route path="/scorecapture" component={ScoreCapture} exact />
+							<Route path="/scoreCapture" component={ScoreCapture} exact />
 							<Route path="/groups" component={Groups} exact />
 							<Route path="/create" component={CreatePage} exact />
 							<Route path="/ViewGroups" component={ViewGroups} exact />
@@ -94,6 +56,7 @@ class App extends Component {
 							<Route path="/AddMembersGroup" component={AddMembersGroup} exact />
 							<Route path="/requirements" component={requirements} exact />
 							<Route path="/EditGroup" component={EditGroup} exact />
+							<Route path="/createAll" component={Create} exact />
 							<Redirect from="/" to="/home" />
 						</Switch>
 					</Router>

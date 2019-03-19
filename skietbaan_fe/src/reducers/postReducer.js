@@ -7,12 +7,12 @@ import {
   CREATEGROUP,
   EDITGROUPUSERS,
   ADDMEMBERS,
-  FETCH_GROUPS
+  FETCH_GROUPS,UPDATEARRAY, UPDATE_SELECTED_COMPETITION, UPDATE_SELECTED_GROUP
 } from "../actions/types";
 
 const initialState = {
   selectedItem: {},
-  allItems: [],
+  leaderboardSelectedCompetitionName: [],
   selectedItem: {},
   groupName: "",
   editGroup:[],
@@ -20,13 +20,8 @@ const initialState = {
   existing:[],
   leaderboardGroups: [],
   leaderboardCompetitions: [],
-  groupId: "",
-  groupName: "",
-  leaderboardScoreTypes: [
-    { label: "Average", value: 1 },
-    { label: "Total", value: 2 },
-    { label: "Best", value: 3 }
-  ],
+  leaderboardSelectedCompetitionName:"",
+  leaderboardSelectedGroupName:"",
   leaderboardTableData: [],
   leaderboardUserData: {
     rank: 0,
@@ -34,7 +29,9 @@ const initialState = {
     bestScore: 0,
     total: 0,
     average: 0
-  }
+  },
+  groupId: "",
+  groupName: "",
 };
 
 //the function to detect the state change
@@ -101,6 +98,17 @@ export default function(state = initialState, action) {
         ...state,
         leaderboardTableData: action.payload.rankResults,
         leaderboardUserData: action.payload.userResults
+      };
+    case UPDATE_SELECTED_COMPETITION:
+      return {
+        ...state,
+        leaderboardSelectedCompetitionName: action.payload
+      };
+    case UPDATE_SELECTED_GROUP:
+    console.log(action.payload)
+      return {
+        ...state,
+        leaderboardSelectedGroupName: action.payload
       };
       
     default:
