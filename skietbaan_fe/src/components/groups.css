@@ -471,3 +471,6 @@
 .navBar-container{
   height: 100px;
 }
+.groupIcon{
+  padding-right: 5px;
+}

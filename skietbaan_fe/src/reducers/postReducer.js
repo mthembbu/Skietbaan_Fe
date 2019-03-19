@@ -6,6 +6,7 @@ import {
   PASS_ID,
   CREATEGROUP,
   EDITGROUPUSERS,
+  GROUPDICT,
   ADDMEMBERS,
   FETCH_GROUPS
 } from "../actions/types";
@@ -14,7 +15,8 @@ const initialState = {
   selectedItem: {},
   allItems: [],
   selectedItem: {},
-  groupName: "",
+  groupDict:{},
+ upName: "",
   editGroup:[],
   groupsList:[],
   existing:[],
@@ -51,6 +53,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         groupsList: action.payload
+      };
+  
+    case GROUPDICT:
+      return {
+        ...state,
+        groupDict: action.payload
       };
 
     case UPDATE_GROUPNAME:

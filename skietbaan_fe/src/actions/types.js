@@ -55,4 +55,5 @@ export const GETNAME = "GETNAME";
 export const EDITGROUPUSERS = "EDITGROUPUSERS";
 export const FETCH_GROUPS = "FETCH_GROUPS";
 export const ADDMEMBERS = "ADDMEMBERS";
+export const GROUPDICT = "GROUPDICT";
 

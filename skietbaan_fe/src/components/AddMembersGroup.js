@@ -131,7 +131,6 @@ class AddMembersGroup extends Component {
 				<div className="scrollbar" data-simplebar data-simplebar-auto-hide="false">
 					{postitems}
 				</div>
-
 				{this.state.count == 0 ? null : (
 					<div className="bottom-panel">
 						<table className="group-delete-table">
