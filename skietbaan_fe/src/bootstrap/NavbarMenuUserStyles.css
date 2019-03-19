@@ -36,10 +36,6 @@
     margin-left: 17%;
     top: 0;
     z-index: 100;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
   }
 
   .nav-content{
