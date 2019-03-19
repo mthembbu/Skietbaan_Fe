@@ -6,7 +6,7 @@ import { passId, getName ,FetchGroups,groupDic} from '../actions/postActions';
 import { BASE_URL } from '../actions/types';
 import Switch from '@material-ui/core/Switch';
 import back from './GroupImages/back.png';
-import group from './GroupImages/group.png';
+import group from './GroupImages/groupIcon.png';
 import PropTypes from 'prop-types';
 
 import { getCookie } from '../components/cookie.js';
