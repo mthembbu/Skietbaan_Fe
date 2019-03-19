@@ -416,7 +416,7 @@ export default class search extends Component {
                 </div>
                 <label className="labelIcon">Submit</label>
               </div>
-              <div className="icon-pushdown no-margin">
+              <div className="icon-push-down no-margin">
                 <div className={!this.state.imageTaken ? "hidden" : "submit-button-elements third float-right"}>
                   <div className="button-hover ">
                     <img src={graySubmit} onClick={() => this.GetLocation()}
@@ -448,7 +448,7 @@ export default class search extends Component {
               <div className={this.state.imageTaken ? "hidden" : "video-container"}>
                 <video id="video" width="310" height="310" className="video" autoPlay></video>
               </div>
-              <div className="submit-container icon-pushdown no-margin">
+              <div className="submit-container icon-push-down no-margin">
                 <div className={this.state.currState !== 3 ? "hidden" : "submit-button-elements third"} >
                   <div className="button-hover">
                     <div className={this.state.currState !== 3 ? "hidden" : ""}>
