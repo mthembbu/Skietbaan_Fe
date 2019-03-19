@@ -6,57 +6,6 @@
     
   }
 
-  .profile-icon-grey{
-    height: 27px;
-    width: 28px;
-  }
-
-  .leaderboard-icon-grey{
-    height: 26px;
-    width: 26px;
-  }
-
-  .add-score-icon-grey{
-    height: 26px;
-    width: 26px;
-  }
-
-  .create-icon-grey{
-    height: 26px;
-    width: 26px;
-  }
-
-  .columns-more{
-    display:none;
-  }
-
-  .more-icon-grey{
-    height: 38px;
-    width: 28px;
-    display: none;
-    width: 0%;
-  }
-
-  .profile-icon-grey-v2{
-    height: 27px;
-    width: 28px;
-  }
-
-  .notifications-icon-grey{
-    height: 26px;
-    width: 23px;
-  }
-  
-  .docs-icon-grey-v2{
-    height: 40px;
-    width: 54px;
-  }
-
-  .notifications-icon-grey-v2{
-    height: 26px;
-    width: 23px;
-  }
-
   .second-row-navbar{
     height: 68px;
     padding-top: 15px;
@@ -106,58 +55,6 @@
     border: 1px solid  #F3F4F9;
   }
 
-  .leaderboard-icon-grey{
-    height: 26px;
-    width: 26px;
-  }
-
-  .add-score-icon-grey{
-    height: 26px;
-    width: 26px;
-  }
-
-  .create-icon-grey{
-    height: 26px;
-    width: 26px;
-  }
-
-  .docs-icon-grey{
-    height: 40px;
-    width: 54px;
-  }
-
-  .notifications-icon-grey{
-    height: 26px;
-    width: 23px;
-  }
-
-  .profile-icon-grey{
-    height: 27px;
-    width: 28px;
-  }
-
-  .more-icon-grey{
-    height: 38px;
-    width: 28px;
-  }
-
-  .profile-icon-grey-v2{
-    height: 27px;
-    width: 28px;
-    display: none;
-  }
-
-  .docs-icon-grey-v2{
-    height: 40px;
-    width: 54px;
-    display:none;
-  }
-
-  .notifications-icon-grey-v2{
-    height: 26px;
-    width: 23px;
-  }
-
   .second-row-navbar{
     height: 68px;
     padding-top: 15px;
@@ -200,4 +97,19 @@
   .columns-v2{
     width: 25%;
   }
+}
+
+.icon-same-dimensions{
+  height: 26px;
+  width: 26px;
+}
+
+.profile-icon-grey{
+  height: 27px;
+  width: 28px;
+}
+
+.notifications-icon-grey{
+  height: 26px;
+  width: 23px;
 }

@@ -24,6 +24,7 @@ import AddMembersGroup from './components/AddMembersGroup';
 import EditGroup from './components/EditGroup';
 import ViewComp from './components/ViewComp';
 import CreateComp from './components/CreateComp';
+import Create from './components/Create';
 class App extends Component {
 
 	render() {
@@ -41,7 +42,7 @@ class App extends Component {
 							<Route path="/registerMember" component={RegisterMember} exact />
 							<Route path="/new-competition" component={CreateComp} exact />
 							<Route path="/AddGroup" component={AddGroup} exact />
-							<Route path="/scorecapture" component={ScoreCapture} exact />
+							<Route path="/scoreCapture" component={ScoreCapture} exact />
 							<Route path="/groups" component={Groups} exact />
 							<Route path="/create" component={CreatePage} exact />
 							<Route path="/ViewGroups" component={ViewGroups} exact />
@@ -53,6 +54,7 @@ class App extends Component {
 							<Route path="/profile" component={UserProfile} exact />
 							<Route path="/AddMembersGroup" component={AddMembersGroup} exact />
 							<Route path="/EditGroup" component={EditGroup} exact />
+							<Route path="/createAll" component={Create} exact />
 							<Redirect from="/" to="/home" />
 						</Switch>
 					</Router>

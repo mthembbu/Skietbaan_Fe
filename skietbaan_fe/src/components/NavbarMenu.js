@@ -101,7 +101,7 @@ class NavbarMenu extends Component {
       return (
         <img
           src={NAV_BAR_ICONS.LEADERBOARD_RED}
-          className="leaderboard-icon-grey"
+          className="icon-same-dimensions"
           alt="Leaderboard tab Selected"
         />
       );
@@ -109,7 +109,7 @@ class NavbarMenu extends Component {
       return (
         <img
           src={NAV_BAR_ICONS.LEADERBOARD_GRAY}
-          className="leaderboard-icon-grey"
+          className="icon-same-dimensions"
 		  alt="Leaderboard tab not Selected"
 		  onClick={() => this.GoTo("/home")}
         />
@@ -122,13 +122,13 @@ class NavbarMenu extends Component {
       window.location.pathname.endsWith("/create") ||
       window.location.pathname.endsWith("/registerMember") ||
       window.location.pathname.endsWith("/viewMembers") ||
-      window.location.pathname.endsWith("/create-comp") ||
-      window.location.pathname.endsWith("/view-comp")
+      window.location.pathname.endsWith("/createComp") ||
+      window.location.pathname.endsWith("/viewComp")
     ) {
       return (
         <img
           src={NAV_BAR_ICONS.CREATE_RED}
-          className="create-icon-grey"
+          className="icon-same-dimensions"
           alt="Create tab Selected"
         />
       );
@@ -136,7 +136,7 @@ class NavbarMenu extends Component {
       return (
         <img
           src={NAV_BAR_ICONS.CREATE_GRAY}
-          className="create-icon-grey"
+          className="icon-same-dimensions"
 		  alt="Create tab not Selected"
 		  onClick={() => this.GoTo("/create")}
         />
@@ -145,11 +145,11 @@ class NavbarMenu extends Component {
   }
 
   isScoreCapture() {
-    if (window.location.pathname.endsWith("/scorecapture")) {
+    if (window.location.pathname.endsWith("/scoreCapture")) {
       return (
         <img
           src={NAV_BAR_ICONS.SCORE_CAPTURE_RED}
-          className="add-score-icon-grey"
+          className="icon-same-dimensions"
           alt="ScoreCapture tab Selected"
         />
       );
@@ -157,9 +157,9 @@ class NavbarMenu extends Component {
       return (
         <img
           src={NAV_BAR_ICONS.SCORE_CAPTURE_GRAY}
-          className="add-score-icon-grey"
+          className="icon-same-dimensions"
 		  alt="ScoreCapture tab not Selected"
-		  onClick={() => this.GoTo("/scorecapture")}
+		  onClick={() => this.GoTo("/scoreCapture")}
         />
       );
     }
@@ -181,26 +181,6 @@ class NavbarMenu extends Component {
           className="profile-icon-grey"
 		  alt="Profile tab not Selected"
 		  onClick={() => this.GoTo("/profile")}
-        />
-      );
-    }
-  }
-
-  isDocuments() {
-    if (window.location.pathname.endsWith("/documents")) {
-      return (
-        <img
-          src={NAV_BAR_ICONS.DOCS_RED}
-          className="docs-icon-grey"
-          alt="Document tab Selected"
-        />
-      );
-    } else {
-      return (
-        <img
-          src={NAV_BAR_ICONS.DOCS_GRAY}
-          className="docs-icon-grey"
-          alt="Document tab not Selected"
         />
       );
     }
