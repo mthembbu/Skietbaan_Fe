@@ -30,7 +30,7 @@ export default class search extends Component {
       Flashon: false,
       validScore: true,
       validCompetition: true,
-      scoreEntered: false,
+      scoreEntered:false,
     }
 
     this.CompetitionClicked = this.CompetitionClicked.bind(this);
@@ -54,13 +54,13 @@ export default class search extends Component {
       if (validateScore(this.state.score)) {
         this.setState({
           validScore: true,
-          scoreEntered: true
+          scoreEntered:true
         });
       }
       else {
         this.setState({
           validScore: false,
-          scoreEntered: false
+          scoreEntered:false
         });
       }
     });

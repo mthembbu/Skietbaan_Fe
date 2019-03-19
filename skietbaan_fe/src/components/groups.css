@@ -10,31 +10,29 @@
 }
 
 .the-nav-bar {
-  background: #cccfd3;
   color: white;
-  height: 56px;
+  height: 67px;
   display: flex;
+  top: 0;
+  z-index: 1;
   background: #dc0600;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  position: unset;
+  width: 100%;
 }
 
 .center-label {
-  margin-top: 10px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 18px;
   width: 7em;
   display: flex;
   color: white;
   font-weight: bold;
-  font-size: 18px;
   font-size: 20px;
-  display: flex;
-  text-align: center;
+  justify-content: flex-start;
   white-space: nowrap;
   overflow: hidden !important;
-  text-overflow: ellipsis;
-  padding-right: 21px;
+  margin-left: 55px;
 }
 
 .center-labels {
@@ -64,9 +62,7 @@
   outline: none;
 }
 
-.NavBar {
-  height: 0px;
-}
+
 .the-Text {
   outline: none;
 }
@@ -74,14 +70,14 @@
 .the-Text {
   margin-left: 19px;
   margin-top: 17px;
-  width: 208px;
+  width: 242px;
   float: left;
-  height: 39px;
-  font-weight: lighter;
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR…mlZQgCULZkxRlmKjdBURWh0mv/W3EGVn62pWM9B/29Mj3wFyteMR+aPMWlAAAAAElFTkSuQmCC)
+  height: 56px;
+  font-weight: bold;
+  background: url("./GroupImages/search.png")
     no-repeat;
   background-position: right;
-  background-position-x: 175px;
+  background-position-x: 205px;
   font-size: 18px;
   padding-left: 5px;
   font-size: 18px;
@@ -131,35 +127,43 @@
 .BNavBar {
   height: 73px;
   background: white;
+  display: flex;
+  margin-bottom: 20px;
+  position: fixed;
+  top: 67px;
+  z-index: 1;
 }
 .create-group:focus {
   outline: none;
 }
 
 .create-group {
-  margin-right: 30px;
-  margin-left: 30px;
-  width: 136px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 312px;
   height: 42px;
-  border: 2px solid white;
+  border: 2px solid black;
   border-radius: 20px;
-  font-weight: no;
-  background: white;
+  font-weight: normal;
+  background: black;
   font-size: 16px;
-  color: black;
+  color: white;
+}
+
+.listItem{
+  text-align: left;
+  margin-bottom: -11px;
 }
 
 .bottom-label {
   position: fixed;
   right: 0;
   bottom: 0;
-  background-image: linear-gradient(to right, #282829, #6d6d6d);
+  background: #D9D9D9;
   width: 100%;
   height: 35px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  margin-right: auto;
-  margin-left: auto;
   text-align: center;
   z-index: 1px;
   margin: 0px;
@@ -167,7 +171,7 @@
   font-size: 16px;
   font-weight: lighter;
   padding-top: 10px;
-  position: fixed;
+
 }
 
 .userName {
@@ -182,7 +186,6 @@
   font-size: 16px;
   font-weight: bold;
   font-size: 16px;
-  color: red;
   outline: none;
 }
 
@@ -197,12 +200,26 @@
   font-size: 14px;
   font-weight: lighter;
   font-size: 16px;
-  color: red;
+  color: #6f839e;
 }
 
 .blabe {
   margin-left: 19px;
+  width: 278px;
+  background: #FFEAEC;
   color: #6f839e;
+  border-radius: 8px;
+  height: 48px;
+  padding-left: 10px;
+}
+.blabe2 {
+  margin-left: 19px;
+  width: 278px;
+  background: white;
+  color: #6f839e;
+  border-radius: 8px;
+  height: 48px;
+  padding-left: 10px;
 }
 
 .the-boxes {
@@ -412,12 +429,12 @@
   width: 10%;
   white-space: pre;
 }
-
-.list-group-item-light {
-  height: 65px;
-  color: #f3f4f9;
-  border-left-style: none;
-  border-right: none;
+.name-of-groups {
+  display: inline-block;
+  color: white;
+  margin-left: -55px;
+  width: 10%;
+  white-space: pre;
 }
 
 .confrim-cancel {
@@ -437,8 +454,7 @@
   float: right;
   margin-top: 37px;
   margin-bottom: 37px;
-  margin-right: 42px;
-  background-color: #f3f4f9;
+  margin-right: 15px;
   margin-top: 15px;
   z-index: 5px;
 }
@@ -451,4 +467,10 @@
 }
 .list-group {
   text-align: left;
+}
+.navBar-container{
+  height: 155px;
+}
+.groupIcon{
+  padding-right: 5px;
 }
