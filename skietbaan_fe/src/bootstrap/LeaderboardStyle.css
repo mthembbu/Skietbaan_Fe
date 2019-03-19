@@ -1,613 +1,731 @@
 html, body{
-   position: absolute; 
-   width: 100% !important; 
-   height: 100% !important;
-}
-/* Leaderboard Page Main Container */
-.leaderboardContainer{
-   background-color: #fdfdfd;
-   position: fixed;
-   width: 100%;
-   height: 100%;
-}
- /* FilterSection*/ 
-    /*open filter selection*/
-    .FilterSelections{
-        width:100%;
-        background-color:#fdfdfd;
-        height:380px;
-        display: inline-block;
-        padding-top: 4%;
-    }
-    .FilterSelections .CategorySelection{
-        height: 37px;
-        width: 262px;
-        margin: auto;
-        display: flex;
-    }
-    .FilterSelections .CategorySelection .chooseComps{
-        color: #6F839E;
-        width: 131px;
-        height: 100%;
-        text-align: center;
-        border: solid;
-        border-width:thin;
-        border-color: #6F839E;
-        border-top-left-radius: 18px;
-        border-bottom-left-radius: 18px;
-    }
-    .FilterSelections .CategorySelection .chooseComps-active{
-        background-color: #6F839E;
-        color: #fdfdfd;
-        width: 131px;
-        height: 100%;
-        font-size: 16px;
-        border: solid;
-        border-width:thin;
-        border-color: #6F839E;
-        border-top-left-radius: 18px;
-        border-bottom-left-radius: 18px;
-    }
-    .FilterSelections .CategorySelection .chooseComps a{
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        vertical-align: inherit;
-        font-size: 16px;
-        font-family: Helvetica;
-        padding-top: 3%;
-    }
-    .FilterSelections .CategorySelection .chooseComps-active a{
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        vertical-align: inherit;
-        font-size: 16px;
-        font-family: Helvetica;
-        padding-top: 3%;
-    }
-    .FilterSelections .CategorySelection .chooseGroups{
-        background-color: white;
-        color: #6F839E;
-        width: 131px;
-       height: 100%;
-       text-align: center;
-       border: solid;
-       border-width:thin;
-       border-color: #6F839E;
-       border-top-right-radius: 18px;
-       border-bottom-right-radius: 18px;
-    }
-    .FilterSelections .CategorySelection .chooseGroups a{
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        vertical-align: inherit;
-        font-size: 16px;
-        font-family: Helvetica;
-        padding-top: 3%;
-    }
-    .FilterSelections .CategorySelection .chooseGroups-active{
+    /* position: absolute;  */
+    width: 100% !important; 
+    height: 100% !important;
+ }
+ #root div div .navbar-admin{
+     width: 100%;
+ }
+ /* Leaderboard Page Main Container */
+ .leaderboardContainer{
+     background-color: #fdfdfd;
+     position: fixed;
+     width: 100%;
+     height: 100%;
+ }
+ .leaderboardContainer .row{
+     height: 100%;
+ }
+  /* FilterSection*/ 
+     /*open filter selection*/
+     .FilterSelections{
+         width:100%;
+         background-color:#fdfdfd;
+         height:380px;
+         display: inline-block;
+         padding-top: 4%;
+     }
+     .FilterSelections .CategorySelection{
+         height: 37px;
+         width: 262px;
+         margin: auto;
+         display: flex;
+     }
+     .FilterSelections .CategorySelection .chooseComps{
+         color: #6F839E;
+         width: 131px;
+         height: 100%;
+         text-align: center;
+         border: solid;
+         border-width:thin;
+         border-color: #6F839E;
+         border-top-left-radius: 18px;
+         border-bottom-left-radius: 18px;
+     }
+     .FilterSelections .CategorySelection .chooseComps-active{
          background-color: #6F839E;
          color: #fdfdfd;
          width: 131px;
+         height: 100%;
+         font-size: 16px;
+         border: solid;
+         border-width:thin;
+         border-color: #6F839E;
+         border-top-left-radius: 18px;
+         border-bottom-left-radius: 18px;
+     }
+     .FilterSelections .CategorySelection .chooseComps a{
+         width: 100%;
+         height: 100%;
+         text-align: center;
+         vertical-align: inherit;
+         font-size: 16px;
+         font-family: Helvetica;
+         padding-top: 3%;
+     }
+     .FilterSelections .CategorySelection .chooseComps-active a{
+         width: 100%;
+         height: 100%;
+         text-align: center;
+         vertical-align: inherit;
+         font-size: 16px;
+         font-family: Helvetica;
+         padding-top: 3%;
+     }
+     .FilterSelections .CategorySelection .chooseGroups{
+         background-color: white;
+         color: #6F839E;
+         width: 131px;
         height: 100%;
-        font-size: 16px;
+        text-align: center;
         border: solid;
         border-width:thin;
         border-color: #6F839E;
         border-top-right-radius: 18px;
         border-bottom-right-radius: 18px;
-    }
-    .FilterSelections .CategorySelection .chooseGroups-active a{
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        vertical-align: inherit;
-        font-size: 16px;
-        font-family: Helvetica;
-        padding-top: 3%;
-    }
-    .FilterSelections .catVisibleLabel{
-        color: #6F839E;
-        text-align: center;
-        font-family: Helvetica;
-        font-size: 16px;
-        font-weight: bold;
-        background: transparent;
-        margin-top: 4%;
-        margin-bottom: 0%;
-    }
-    .FilterSelections .catVisibleGroupsLabel{
-        color: #6F839E;
-        text-align: center;
-        font-family: Helvetica;
-        font-size: 18px;
-        background: transport;
-        margin-top: 2%;
-        margin-bottom: 0%;
-    }
-    .FilterSelections .individual-Active{
-        border: solid;
+     }
+     .FilterSelections .CategorySelection .chooseGroups a{
+         width: 100%;
+         height: 100%;
+         text-align: center;
+         vertical-align: inherit;
+         font-size: 16px;
+         font-family: Helvetica;
+         padding-top: 3%;
+     }
+     .FilterSelections .CategorySelection .chooseGroups-active{
+          background-color: #6F839E;
+          color: #fdfdfd;
+          width: 131px;
+         height: 100%;
+         font-size: 16px;
+         border: solid;
          border-width:thin;
          border-color: #6F839E;
-         border-radius: 18px;
-         width: 144px;
-         height: 36px;
-         padding: 0%;
-         padding: 1%;
+         border-top-right-radius: 18px;
+         border-bottom-right-radius: 18px;
+         cursor: pointer;
+     }
+     .FilterSelections .CategorySelection .chooseGroups-active a{
+         width: 100%;
+         height: 100%;
          text-align: center;
-         margin-left: auto;
-         margin-right: auto;
-         margin-top: 2%;
-         color: #fdfdfd;
-         background-image: linear-gradient(to right, #ef3024  , #Dc0600);
-    }
-    .FilterSelections .individual-Inactive{
-        border: solid;
-         border-width:thin;
-         border-color: #6F839E;
-         border-radius: 18px;
-         width: 144px;
-         height: 36px;
-         padding: 0%;
-         padding: 1%;
-         text-align: center;
-         margin-left: auto;
-         margin-right: auto;
-         margin-top: 2%;
+         vertical-align: inherit;
+         font-size: 16px;
+         font-family: Helvetica;
+         padding-top: 3%;
+     }
+     .FilterSelections .catVisibleLabel{
          color: #6F839E;
-    }
-    .FilterSelections .individual-Inactive a{
-        color: #6F839E;
+         text-align: center;
          font-family: Helvetica;
          font-size: 16px;
-         vertical-align: inherit;
-    }
-    .FilterSelections .individual-Active a{
-        color: #fdfdfd;
+         font-weight: bold;
+         background: transparent;
+         margin-top: 4%;
+         margin-bottom: 0%;
+     }
+     .FilterSelections .catVisibleGroupsLabel{
+         color: #6F839E;
+         text-align: center;
          font-family: Helvetica;
-         font-size: 16px;
-         vertical-align: inherit;
-    }
-    .hideMyDiv{
-        display: none;
-    }
-    .FilterSelections .SelectionsContainer {
-        width: 100%;
-        height: 45%;
-        
-    }
-    .FilterSelections .SelectionsContainer .row{
-        width: 100%;
-        height: 100%; 
-        margin: auto;
-        
-    }
-    
-    .FilterSelections .SelectionsContainer .row .Choose{
-        height: 100%;
-        width: 144px;
-        text-align: center;
-        overflow: auto;
-        margin: auto;
-    }
-    .FilterSelections .SelectionsContainer .row .Choose .SelectionTable{
-        border-collapse: separate;
-        border-spacing: 0 5px;
-    }
-    .FilterSelections .SelectionsContainer .row .Choose .SelectionTable tr .td-Inactive{
+         font-size: 18px;
+         background: transport;
+         margin-top: 2%;
+         margin-bottom: 0%;
+     }
+     .FilterSelections .individual-Active{
+         border: solid;
+          border-width:thin;
+          border-color: #6F839E;
+          border-radius: 18px;
+          width: 144px;
+          height: 36px;
+          padding: 0%;
+          padding: 1%;
+          text-align: center;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 2%;
+          color: #fdfdfd;
+          background-image: linear-gradient(to right, #ef3024  , #Dc0600);
+     }
+     .FilterSelections .individual-Inactive{
+         border: solid;
+          border-width:thin;
+          border-color: #6F839E;
+          border-radius: 18px;
+          width: 144px;
+          height: 36px;
+          padding: 0%;
+          padding: 1%;
+          text-align: center;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 2%;
+          color: #6F839E;
+          cursor: pointer;
+     }
+     .FilterSelections .individual-Inactive a{
+         color: #6F839E;
+          font-family: Helvetica;
+          font-size: 16px;
+          vertical-align: inherit;
+     }
+     .FilterSelections .individual-Active a{
+         color: #fdfdfd;
+          font-family: Helvetica;
+          font-size: 16px;
+          vertical-align: inherit;
+     }
+     .hideMyDiv{
+         display: none;
+     }
+     .FilterSelections .SelectionsContainer {
+         width: 100%;
+         height: 45%;
+         
+     }
+     .FilterSelections .SelectionsContainer .row{
+         width: 100%;
+         height: 100%; 
+         margin: auto;
+         
+     }
+     
+     .FilterSelections .SelectionsContainer .row .Choose{
+         height: 100%;
+         width: 144px;
+         text-align: center;
+         overflow: auto;
+         margin: auto;
+     }
+     .FilterSelections .SelectionsContainer .row .Choose .SelectionTable{
+         border-collapse: separate;
+         border-spacing: 0 5px;
+     }
+     .FilterSelections .SelectionsContainer .row .Choose .SelectionTable tr .td-Inactive{
+          border: solid;
+          border-width:thin;
+          border-color: #6F839E;
+          border-radius: 18px;
+          height: 36px;
+          padding: 0%;
+          color: #6F839E;
+          font-family: Helvetica;
+          font-size: 15px;
+          vertical-align: inherit;
+          cursor: pointer;
+      }
+     .FilterSelections .SelectionsContainer .row .Choose .SelectionTable tr .td-Active{
          border: solid;
          border-width:thin;
          border-color: #6F839E;
          border-radius: 18px;
-         height: 36px;
-         padding: 0%;
-         color: #6F839E;
+          height: 36px;
+          padding: 0%;
+         background-image: linear-gradient(to right, #ef3024  , #Dc0600);
+         color: #fdfdfd;
          font-family: Helvetica;
          font-size: 15px;
          vertical-align: inherit;
+         cursor: pointer;
      }
-    .FilterSelections .SelectionsContainer .row .Choose .SelectionTable tr .td-Active{
-        border: solid;
-        border-width:thin;
-        border-color: #6F839E;
-        border-radius: 18px;
-         height: 36px;
-         padding: 0%;
-        background-image: linear-gradient(to right, #ef3024  , #Dc0600);
-        color: #fdfdfd;
-        font-family: Helvetica;
-        font-size: 15px;
-        vertical-align: inherit;
-    }
-    /*closed filter section*/
-    .ClosedFilterSection{
-        height: 80px;
-        width: 100%;
-        color: #fdfdfd;
-        background-image: linear-gradient(to right, #ef3024  , #Dc0600);
-        border-bottom-right-radius: 20px;
-        border-bottom-left-radius: 20px;
-    }
-    .ClosedFilterSection .FilterTable1{
-        width: 100%;
-        height: 50px;
-    }
-    .ClosedFilterSection .FilterTable2{
-        width: 100%;
-        height: 30px;
-    }
-    .ClosedFilterSection .FilterTable1 .HeaderRow1{
-        width: 100%;
-        height: 50px;
-    }
-    .ClosedFilterSection .FilterTable2 .HeaderRow2{
-        width: 100%;
-        height: 30px;
-    }
-    .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterIconCol{
-        width:25%;
-        height: 100%;
-    }
-    .ClosedFilterSection .FilterTable1 .HeaderRow1 .CompetitionNameCol{
-        width: 75%;
-        height: 100%;
-        font-family: helvetica;
-        text-align: left;
-        padding-left: 10%;
-        font-size: 20px;
-        font-weight: bold;
-    } 
-    .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterLabelsCol .HeadTableLabels{
-        width: 100%;
-        height: 100%;
-    }
-
-    .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterIconCol .FilterIcon{
-        width:100%;
-        height: 100%;
-        text-align: center;
-        padding-top: 6%;
-    } 
-    .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterIconCol .FilterIcon *{
-        width:100%;
-        height: 100%;
-    }
-    .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterIconCol .FilterIcon a{
-        width: fit-content;
-        height: auto;
-    }
-    .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterIconCol .FilterIcon a img{
-        width: 37px;
-        height: 34px;
-    }
-    .ClosedFilterSection .FilterTable2 .HeaderRow2 .GroupingLabelCOl{
-        height: 100%;
-        width: 40%;
-        font-size: 14px;
-        text-align: center;
-    }
-    .ClosedFilterSection .FilterTable2 .HeaderRow2 .totalLabelCOl{
-        height: 100%;
-        width: 20%;
-        font-size: 14px;
-        text-align: center;
-    }
-    .ClosedFilterSection .FilterTable2 .HeaderRow2 .AverageLabelCOl{
-        height: 100%;
-        width: 20%;
-        font-size: 14px;
-        text-align: center;
-    }
-    .ClosedFilterSection .FilterTable2 .HeaderRow2 .BestLabelCOl{
-        height: 100%;
-        width: 20%;
-        font-size: 20px;
-        text-align: center;
-        font-weight: bold;
-        font-family: helvetica;
-    }
-/* end of filter section*/
-/* Ranking table section */
-    .RankingTableSection{
-        height: 470px;
-        width: 100%;
-        color: #6F839E;
-        background-color: #fdfdfd;
-        overflow-y: auto;
-    }
-    .RankingTableSection .RankingTable{
-        width: 100%;
-        overflow-y: scroll;
-    }
-    .RankingTableSection .RankingTable .rankRow{
-        height: 66px;
-        width: 100%;
-        border-bottom: solid;
-        border-bottom-width: thin;
-        border-bottom-style: outset;
-    }
-    .RankingTableSection .RankingTable .rankRow .RankIconCol{
-        height: 100%;
-        width: 10%;
-        text-align: center;
-    }
-    .rankNumberContainer{
-        text-align: -webkit-center;
-    }
-    .rankNumberContainer .rankNumTable .tr{
-        width: 15px;
-     }
-    .rankNumberContainer .rankNumTable .upArrow{
-        height: 5px
-    }
-    .rankNumberContainer .rankNumTable .Icon{
-       width: 15px;
-       height: 15px;
-    }
-    .rankNumberContainer .rankNumTable .Icon img{
-        width: 25px;
-        height: 25px
-     }
-    .rankNumberContainer .rankNumTable .downArrow{
-        height: 5px
-    }
-    .RankingTableSection .RankingTable .rankRow .RankIconCol .RankContainer{
-        height: 100%;
-        width: 100%;
-    }
-    .RankingTableSection .RankingTable .rankRow .RankLabelsCol{
-        height: 100%;
-        width: 80%;
-        text-align: center
-    }
-    .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels{
-        height: 66px;
-        width: 100%;
-    }
-    .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr{
-        height: 100%;
-        width: 100%;
-    }
-    .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .UsernameCol{
-        width: 100%;
-        height: 100%;
-        font-family: Helvetica;	
-        font-size: 16px;	
-        font-weight: bold;
-        text-align: left;
-    }
-    .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColTotal{        
-        width: 20%;
-        height:100%;
-        font-size: 14px;
-        font-family: Helvetica;	
-        text-align: center;
-    }
-    .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColAverage{        
-        height:100%;
-        font-size: 14px;
-        text-align: center;
-        font-family: Helvetica;	
-        width: 20%;
-    } 
-    .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColBest{        
-        height:100%;
-        font-weight: bold;
-        font-family: Helvetica;	
-        font-size: 20px;
-        text-align: center;
-        width: 20%;
-    }    
-    .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ExtraNameCOl{        
-        height:100%;
-        font-family: Helvetica;	
-        font-size: 14px;
-        text-align: center;
-        width: 30%;
-    }
-/* Cunrent User table section*/
-    .CurrentUserTableSection{
-        height: 66px;
-        width: 100%;
-        background-image: linear-gradient(to right, #282829 , #6D6D6D);
-        color: #fdfdfd;
-        border-top-right-radius: 20px;
-        border-top-left-radius: 20px;
-        padding-top: 2%;
-    }
-    .CurrentUserTableSection .RankingTable{
-        width: 100%;
-        width: 100%;
-    }
-    .CurrentUserTableSection .RankingTable .rankRow{
-        width: 100%;
-        height: 100%;
-    }
-    .CurrentUserTableSection .RankingTable .rankRow .RankIconCol{
-        width: 10%;
-        height: 100%;
-    }
-    .CurrentUserTableSection .RankingTable .rankRow .RankIconCol .RankContainer{
-        height: 100%;
-        width: 100%;
-    }
-    .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol{
-        height: 100%;
-        width: 90%;
-        text-align: center;
-    }
-    .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels{
-        height: 100%;
-        width: 100%;
-    }
-    .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr{
-        height: 100%;
-        width: 100%;
-    }
-    .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .UsernameCol{
-        width: 100%;
-        height: 100%;
-        font-family: Helvetica;	
-        font-size: 16px;	
-        font-weight: bold;
-        text-align: left;
-    }
-    .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColTotal{        
-        width: 20%;
-        height:100%;
-        font-size: 14px;
-        font-family: Helvetica;	
-        text-align: center;
-    }
-    .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColAverage{        
-        height:100%;
-        font-size: 14px;
-        text-align: center;
-        font-family: Helvetica;	
-        width: 20%;
-    } 
-    .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColBest{        
-        height:100%;
-        font-weight: bold;
-        font-family: Helvetica;	
-        font-size: 20px;
-        text-align: center;
-        width: 20%;
-    }    
-    .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ExtraNameCOl{        
-        height:100%;
-        font-family: Helvetica;	
-        font-size: 14px;
-        text-align: center;
-        width: 30%;
-    }
- /* end of filter section*/
-
- .userWrapper{
-    position: fixed;
-    width: 100%;
-    bottom: 0;
- }
-
- @media only screen and (min-width: 600px) {
-    /* tablets and desktop */
-    .FilterSelections .SelectionsContainer .row div{
-        height: 290px;
-        width: 476px;
-        display: inline-flex;
-    }
-    
-    .FilterSelections .SelectionsContainer .row div .LeftCompetitions .Choose{
-        margin-left: 2.5%;
-        margin-right: 2.5%;
-    }
-    .FilterSelections .SelectionsContainer .row div .LeftCompetitions{
-        display: inline-block;
-        width: 150px;
-        height: 290px;
-        margin-left: 10px;
-        margin-right: 168px;
-    }
-    .FilterSelections .SelectionsContainer .row div .LeftCompetitions .competitionsL{
-        width: 150px;
-        height: 30px;
-        text-align: center;
-        color: #6F839E;
-        font-weight: bold;
-        font-family: Helvetica;
-        font-size: 16px;	
-        font-weight: bold;
-    }
-    .FilterSelections .SelectionsContainer .row div .rightGroups .Choose{
-        margin-left: 2.5%;
-        margin-right: 2.5%;
-    }
-    .FilterSelections .SelectionsContainer .row div .rightGroups{
-        display: inline-block;
-        width: 150px;
-        height: 290px;
-        margin-left: 10px;
-    }
-    .FilterSelections .SelectionsContainer .row div .rightGroups .rankinL{
-        width: 150px;
-        height: 30px;
-        text-align: center;
-        color: #6F839E;
-        font-weight: bold;
-        font-family: Helvetica;
-        font-size: 16px;	
-        padding-left: 12%;
-    }
-    .FilterSelections .SelectionsContainer .row div .rightGroups .individual-Active{
-        border: solid;
-         border-width:thin;
-         border-color: #6F839E;
-         border-radius: 18px;
-         width: 144px;
-         height: 36px;
-         padding: 0%;
-         padding: 1%;
-         text-align: center;
-         margin-left: auto;
-         margin-right: auto;
-         margin-top: 2%;
+     /*closed filter section*/
+     .ClosedFilterSection{
+         height: 80px;
+         width: 100%;
          color: #fdfdfd;
          background-image: linear-gradient(to right, #ef3024  , #Dc0600);
-    }
-    .FilterSelections .SelectionsContainer .row div .rightGroups .individual-Inactive{
-        border: solid;
-         border-width:thin;
-         border-color: #6F839E;
-         border-radius: 18px;
-         width: 144px;
-         height: 36px;
-         padding: 0%;
-         padding: 1%;
-         text-align: center;
-         margin-left: auto;
-         margin-right: auto;
-         margin-top: 2%;
-         color: #6F839E;
-    }
-    .FilterSelections .SelectionsContainer .row div .rightGroups .individual-Inactive a{
-        color: #6F839E;
-         font-family: Helvetica;
-         font-size: 16px;
-         vertical-align: inherit;
-         width: 100%;
-    }
-    .FilterSelections .SelectionsContainer .row div .rightGroups .individual-Active a{
-        color: #fdfdfd;
-         font-family: Helvetica;
-         font-size: 16px;
-         vertical-align: inherit;
-         width: 100%;
-    }
-    .FilterSelections .SelectionsContainer .row div .rightGroups .groupL{
-        width: 150px;
-        height: 30px;
-        text-align: center;
-        color: #6F839E;
-        font-family: Helvetica;
-        font-size: 16px;	
-        font-weight:lighter;
-         padding-left: 30%;
-         padding-top: 3%;
-    }
-    .FilterSelections .SelectionsContainer .row div .LeftCompetitions{
-        margin-left: 0px;
-    }
-    .FilterSelections .SelectionsContainer .row div .rightGroups{
-        margin-right:0px;
+         border-bottom-right-radius: 20px;
+         border-bottom-left-radius: 20px;
      }
-}
-@media only screen and (max-width: 599px) {
-    /* phones */
-    .FilterSelections .SelectionsContainer .row div{
-        height: 100%;
-        width: 144px;
-        display: inline-flex;
-    }
-}
+     .ClosedFilterSection .FilterTable1{
+         width: 100%;
+         height: 50px;
+     }
+     .ClosedFilterSection .FilterTable2{
+         width: 100%;
+         height: 30px;
+     }
+     .ClosedFilterSection .FilterTable1 .HeaderRow1{
+         width: 100%;
+         height: 50px;
+     }
+     .ClosedFilterSection .FilterTable2 .HeaderRow2{
+         width: 100%;
+         height: 30px;
+     }
+     .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterIconCol{
+         width:25%;
+         height: 100%;
+     }
+     .ClosedFilterSection .FilterTable1 .HeaderRow1 .CompetitionNameCol{
+         width: 75%;
+         height: 100%;
+         font-family: helvetica;
+         text-align: left;
+         padding-left: 10%;
+         font-size: 20px;
+         font-weight: bold;
+     } 
+     .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterLabelsCol .HeadTableLabels{
+         width: 100%;
+         height: 100%;
+     }
+ 
+     .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterIconCol .FilterIcon{
+         width:100%;
+         height: 100%;
+         text-align: center;
+         padding-top: 6%;
+     } 
+     .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterIconCol .FilterIcon *{
+         width:100%;
+         height: 100%;
+     }
+     .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterIconCol .FilterIcon a{
+         width: fit-content;
+         height: auto;
+     }
+     .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterIconCol .FilterIcon a img{
+         width: 37px;
+         height: 34px;
+     }
+     .ClosedFilterSection .FilterTable2 .HeaderRow2 .GroupingLabelCOl{
+         height: 100%;
+         width: 40%;
+         font-size: 14px;
+         text-align: center;
+     }
+     .ClosedFilterSection .FilterTable2 .HeaderRow2 .totalLabelCOl{
+         height: 100%;
+         width: 20%;
+         font-size: 14px;
+         text-align: center;
+     }
+     .ClosedFilterSection .FilterTable2 .HeaderRow2 .AverageLabelCOl{
+         height: 100%;
+         width: 20%;
+         font-size: 14px;
+         text-align: center;
+     }
+     .ClosedFilterSection .FilterTable2 .HeaderRow2 .BestLabelCOl{
+         height: 100%;
+         width: 20%;
+         font-size: 20px;
+         text-align: center;
+         font-weight: bold;
+         font-family: helvetica;
+     }
+ /* end of filter section*/
+ /* Ranking table section */
+     .RankingTableSection{
+         height: 510px;
+         width: 100%;
+         color: #6F839E;
+         background-color: #fdfdfd;
+         overflow-y: auto;
+     }
+     .RankingTableSection .RankingTable{
+         width: 100%;
+         overflow-y: scroll;
+     }
+     .RankingTableSection .RankingTable .rankRow{
+         height: 66px;
+         width: 100%;
+         border-bottom: solid;
+         border-bottom-width: thin;
+         border-bottom-style: outset;
+     }
+     .RankingTableSection .RankingTable .rankRow .RankIconCol{
+         height: 100%;
+         width: 10%;
+         text-align: center;
+     }
+     .rankNumberContainer{
+         text-align: -webkit-center;
+     }
+     .rankNumberContainer .rankNumTable .tr{
+         width: 15px;
+      }
+     .rankNumberContainer .rankNumTable .upArrow{
+         height: 5px
+     }
+     .rankNumberContainer .rankNumTable .Icon{
+        width: 15px;
+        height: 15px;
+     }
+     .rankNumberContainer .rankNumTable .Icon img{
+         width: 25px;
+         height: 25px
+      }
+     .rankNumberContainer .rankNumTable .downArrow{
+         height: 5px
+     }
+     .RankingTableSection .RankingTable .rankRow .RankIconCol .RankContainer{
+         height: 100%;
+         width: 100%;
+     }
+     .RankingTableSection .RankingTable .rankRow .RankLabelsCol{
+         height: 100%;
+         width: 80%;
+         text-align: center
+     }
+     .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels{
+         height: 66px;
+         width: 100%;
+     }
+     .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr{
+         height: 100%;
+         width: 100%;
+     }
+     .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .UsernameCol{
+         width: 100%;
+         height: 100%;
+         font-family: Helvetica;	
+         font-size: 16px;	
+         font-weight: bold;
+         text-align: left;
+     }
+     .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColTotal{        
+         width: 20%;
+         height:100%;
+         font-size: 14px;
+         font-family: Helvetica;	
+         text-align: center;
+     }
+     .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColAverage{        
+         height:100%;
+         font-size: 14px;
+         text-align: center;
+         font-family: Helvetica;	
+         width: 20%;
+     } 
+     .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColBest{        
+         height:100%;
+         font-weight: bold;
+         font-family: Helvetica;	
+         font-size: 20px;
+         text-align: center;
+         width: 20%;
+     }    
+     .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ExtraNameCOl{        
+         height:100%;
+         font-family: Helvetica;	
+         font-size: 14px;
+         text-align: center;
+         width: 30%;
+     }
+ /* Cunrent User table section*/
+     .CurrentUserTableSection{
+         height: 66px;
+         width: 100%;
+         background-image: linear-gradient(to right, #282829 , #6D6D6D);
+         color: #fdfdfd;
+         border-top-right-radius: 20px;
+         border-top-left-radius: 20px;
+         padding-top: 2%;
+     }
+     .CurrentUserTableSection .RankingTable{
+         width: 100%;
+         width: 100%;
+     }
+     .CurrentUserTableSection .RankingTable .rankRow{
+         width: 100%;
+         height: 100%;
+     }
+     .CurrentUserTableSection .RankingTable .rankRow .RankIconCol{
+         width: 10%;
+         height: 100%;
+     }
+     .CurrentUserTableSection .RankingTable .rankRow .RankIconCol .RankContainer{
+         height: 100%;
+         width: 100%;
+     }
+     .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol{
+         height: 100%;
+         width: 90%;
+         text-align: center;
+     }
+     .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels{
+         height: 100%;
+         width: 100%;
+     }
+     .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr{
+         height: 100%;
+         width: 100%;
+     }
+     .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .UsernameCol{
+         width: 100%;
+         height: 100%;
+         font-family: Helvetica;	
+         font-size: 16px;	
+         font-weight: bold;
+         text-align: left;
+     }
+     .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColTotal{        
+         width: 20%;
+         height:100%;
+         font-size: 14px;
+         font-family: Helvetica;	
+         text-align: center;
+     }
+     .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColAverage{        
+         height:100%;
+         font-size: 14px;
+         text-align: center;
+         font-family: Helvetica;	
+         width: 20%;
+     } 
+     .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColBest{        
+         height:100%;
+         font-weight: bold;
+         font-family: Helvetica;	
+         font-size: 20px;
+         text-align: center;
+         width: 20%;
+     }    
+     .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ExtraNameCOl{        
+         height:100%;
+         font-family: Helvetica;	
+         font-size: 14px;
+         text-align: center;
+         width: 30%;
+     }
+  /* end of filter section*/
+ 
+  .userWrapper{
+     position: fixed;
+     width: 100%;
+     bottom: 0;
+     display: none;
+  }
+ 
+  @media only screen and (min-width: 701px) {
+     /* tablets and desktop */
+     .FilterSelections .SelectionsContainer .row div{
+         height: 290px;
+         width: 476px;
+         display: inline-flex;
+     }
+     
+     .FilterSelections .SelectionsContainer .row div .LeftCompetitions .Choose{
+         margin-left: 2.5%;
+         margin-right: 2.5%;
+     }
+     .FilterSelections .SelectionsContainer .row div .LeftCompetitions{
+         display: inline-block;
+         width: 150px;
+         height: 290px;
+         margin-left: 15%;
+         margin-right: 5%;
+         margin-top: 10%;
+     }
+     .FilterSelections .SelectionsContainer .row div .LeftCompetitions .competitionsL{
+         width: 150px;
+         height: 30px;
+         text-align: center;
+         color: #6F839E;
+         font-weight: bold;
+         font-family: Helvetica;
+         font-size: 16px;	
+         font-weight: bold;
+     }
+     .FilterSelections .SelectionsContainer .row div .rightGroups .Choose{
+         margin-left: 2.5%;
+         margin-right: 2.5%;
+     }
+     .FilterSelections .SelectionsContainer .row div .rightGroups{
+         display: inline-block;
+         width: 150px;
+         height: 290px;
+         margin-left: 10px;
+         margin-top: 10%;
+     }
+     .FilterSelections .SelectionsContainer .row div .rightGroups .rankinL{
+         width: 150px;
+         height: 30px;
+         text-align: center;
+         color: #6F839E;
+         font-weight: bold;
+         font-family: Helvetica;
+         font-size: 16px;	
+         padding-left: 12%;
+     }
+     .FilterSelections .SelectionsContainer .row div .rightGroups .individual-Active{
+         border: solid;
+          border-width:thin;
+          border-color: #6F839E;
+          border-radius: 18px;
+          width: 144px;
+          height: 36px;
+          padding: 0%;
+          padding: 1%;
+          text-align: center;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 2%;
+          color: #fdfdfd;
+          background-image: linear-gradient(to right, #ef3024  , #Dc0600);
+     }
+     .FilterSelections .SelectionsContainer .row div .rightGroups .individual-Inactive{
+         border: solid;
+          border-width:thin;
+          border-color: #6F839E;
+          border-radius: 18px;
+          width: 144px;
+          height: 36px;
+          padding: 0%;
+          padding: 1%;
+          text-align: center;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 2%;
+          color: #6F839E;
+     }
+     .FilterSelections .SelectionsContainer .row div .rightGroups .individual-Inactive a{
+         color: #6F839E;
+          font-family: Helvetica;
+          font-size: 16px;
+          vertical-align: inherit;
+          width: 100%;
+     }
+     .FilterSelections .SelectionsContainer .row div .rightGroups .individual-Active a{
+         color: #fdfdfd;
+          font-family: Helvetica;
+          font-size: 16px;
+          vertical-align: inherit;
+          width: 100%;
+     }
+     .FilterSelections .SelectionsContainer .row div .rightGroups .groupL{
+         width: 150px;
+         height: 30px;
+         text-align: center;
+         color: #6F839E;
+         font-family: Helvetica;
+         font-size: 16px;	
+         font-weight:lighter;
+         padding-top: 3%;
+         padding-left:30%;
+         margin-bottom: 3%;
+     }
+     .FilterSelections .SelectionsContainer .row div .rightGroups{
+         margin-right:0px;
+      }
+ }
+ @media only screen and (max-width: 700px) {
+     /* phones */
+     .FilterSelections .SelectionsContainer .row div{
+         height: 100%;
+         width: 144px;
+         display: inline-block;
+     }
+     .FilterSelections .SelectionsContainer .row div .LeftCompetitions .Choose{
+         margin-left: 2.5%;
+         margin-right: 2.5%;
+     }
+     .FilterSelections .SelectionsContainer .row .col-sm-4 div .LeftCompetitions{
+         display: inline-block;
+         width: 150px;
+         height: 290px;
+         margin-left: 10px;
+         margin-right: 168px;
+         margin: auto;
+     }
+     .FilterSelections .SelectionsContainer .row div .LeftCompetitions .competitionsL{
+         width: 150px;
+         height: 30px;
+         text-align: center;
+         color: #6F839E;
+         font-weight: bold;
+         font-family: Helvetica;
+         font-size: 16px;	
+         font-weight: bold;
+         margin: auto;
+     }
+     .FilterSelections .SelectionsContainer .row div .rightGroups .Choose{
+         margin-left: 2.5%;
+         margin-right: 2.5%;
+     }
+     .FilterSelections .SelectionsContainer .row .col-sm-4 div .rightGroups{
+         display: inline-block;
+         width: 150px;
+         height: 290px;
+         margin: auto;
+     }
+     .FilterSelections .SelectionsContainer .row div .rightGroups .rankinL{
+         width: 150px;
+         height: 30px;
+         text-align: center;
+         color: #6F839E;
+         font-weight: bold;
+         font-family: Helvetica;
+         font-size: 16px;	
+         padding-left: 12%;
+     }
+     .FilterSelections .SelectionsContainer .row div .rightGroups .individual-Active{
+         border: solid;
+          border-width:thin;
+          border-color: #6F839E;
+          border-radius: 18px;
+          width: 144px;
+          height: 36px;
+          padding: 0%;
+          padding: 1%;
+          text-align: center;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 2%;
+          color: #fdfdfd;
+          background-image: linear-gradient(to right, #ef3024  , #Dc0600);
+     }
+     .FilterSelections .SelectionsContainer .row div .rightGroups .individual-Inactive{
+         border: solid;
+          border-width:thin;
+          border-color: #6F839E;
+          border-radius: 18px;
+          width: 144px;
+          height: 36px;
+          padding: 0%;
+          padding: 1%;
+          text-align: center;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 2%;
+          color: #6F839E;
+     }
+     .FilterSelections .SelectionsContainer .row div .rightGroups .individual-Inactive a{
+         color: #6F839E;
+          font-family: Helvetica;
+          font-size: 16px;
+          vertical-align: inherit;
+          width: 100%;
+     }
+     .FilterSelections .SelectionsContainer .row div .rightGroups .individual-Active a{
+         color: #fdfdfd;
+          font-family: Helvetica;
+          font-size: 16px;
+          vertical-align: inherit;
+          width: 100%;
+     }
+     .FilterSelections .SelectionsContainer .row div .rightGroups .groupL{
+         width: 150px;
+         height: 30px;
+         text-align: center;
+         color: #6F839E;
+         font-family: Helvetica;
+         font-size: 16px;	
+         font-weight:lighter;
+          padding-left: 0%;
+          padding-top: 3%;
+     }
+     .FilterSelections .SelectionsContainer .row div .LeftCompetitions{
+         margin-left: 0px;
+     }
+     .FilterSelections .SelectionsContainer .row div .rightGroups{
+         margin-right:0px;
+         margin-top: 30%;
+      }
+ }
+ 
