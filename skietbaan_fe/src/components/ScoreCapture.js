@@ -3,8 +3,8 @@ import '../components/ScoreCapture.css';
 import { validateScore } from './Validators.js';
 import { getCookie } from './cookie.js';
 import { URL } from '../actions/types.js';
-import cameraGray from '../components/assets/cameraGray.png';
-import graySubmit from '../components/assets/graySubmit.png';
+import cameraGray from '../components/assets/redSubmitButton.png';
+import graySubmit from '../components/assets/btnThatSubmitsRed.png';
 import grayRetry from '../components/assets/grayRetry.png';
 import lightgrayback from '../components/assets/lightgrayback.png'
 
@@ -376,7 +376,7 @@ export default class search extends Component {
       }
       return (
         <div className="position-relative">
-        <div className="score-capture-header"></div>
+        <div className="score-capture-header"><label className="label-for-score">ADD SCORE</label></div>
           <div className={stateOne ? "page-content-video" : "page-content"}>
             <div className={stateOne ? "hidden" : ""}>
 
@@ -403,10 +403,9 @@ export default class search extends Component {
                 ? "hidden" : "submit-button-elements"}>
                 <div className="button-hover">
                   <img src={cameraGray}
-                    id="btnScoreCapture" className="btnScoreCapture"
+                    id="btnScoreCapture" className="btn-score-capture"
                     onClick={() => this.CameraClicked()} alt=''></img>
                 </div>
-                <label className="labelIcon">Capture score</label>
               </div>
               <div className={(this.state.showCamera && !this.state.imageTaken)
                 || this.state.imageTaken ? "hidden" : "submit-button-elements"}>
@@ -414,7 +413,6 @@ export default class search extends Component {
                   <img src={graySubmit} onClick={() => this.GetLocation()}
                     className="button-that-submits" alt=''></img>
                 </div>
-                <label className="labelIcon">Submit</label>
               </div>
               <div className="icon-push-down no-margin">
                 <div className={!this.state.imageTaken ? "hidden" : "submit-button-elements third float-right"}>
@@ -422,7 +420,6 @@ export default class search extends Component {
                     <img src={graySubmit} onClick={() => this.GetLocation()}
                       className="button-that-submits" alt=''></img>
                   </div>
-                  <label className="labelIcon">Submit</label>
                 </div>
                 <div className={this.state.imageTaken ? "submit-button-elements third float-right" : "hidden"} >
                   <div className="button-hover">

@@ -35,8 +35,9 @@
     }
 }
 
-.btnScoreCapture{
-    height: 30px;
+.btn-score-capture{
+    height: 42px;
+    width: 72px;
 }
 
 .competition-item:hover{
@@ -251,6 +252,7 @@ hr{
 .score-capture-black{
     height: 30px;
     margin-top: 0px;
+    box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
 }
 
 .position-relative{
@@ -286,7 +288,8 @@ hr{
 }
 
 .button-that-submits{
-    height: 30px;
+    height: 42px;
+    width: 72px;
 }
 
 .button-that-submits2{
@@ -322,10 +325,6 @@ hr{
 .label-container{
     text-align: center;
     padding-bottom: 10px;
-}
-
-.button-that-submits{
-    height: 30px;
 }
 
 input::-webkit-outer-spin-button,
@@ -380,4 +379,12 @@ input[type=number] {
     background-color: #EA251A;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
+}
+
+.label-for-score{
+    font-size: 22px;
+    color: #fdfdfd;
+    font-weight: 600;
+    padding-top: 14px;
+    padding-left: 40px;
 }
