@@ -30,7 +30,7 @@ export default class search extends Component {
       Flashon: false,
       validScore: true,
       validCompetition: true,
-      scoreEntered:false,
+      scoreEntered: false,
     }
 
     this.CompetitionClicked = this.CompetitionClicked.bind(this);
@@ -54,13 +54,13 @@ export default class search extends Component {
       if (validateScore(this.state.score)) {
         this.setState({
           validScore: true,
-          scoreEntered:true
+          scoreEntered: true
         });
       }
       else {
         this.setState({
           validScore: false,
-          scoreEntered:false
+          scoreEntered: false
         });
       }
     });
@@ -261,7 +261,7 @@ export default class search extends Component {
           .then(data => this.setState({
             scoreSaved: true, currState: 5
           }));
-        setTimeout(function () { window.location = "/scorecapture"; }, 2000);
+        setTimeout(function () { window.location = "/scoreCapture"; }, 2000);
       }
     }
 
@@ -375,8 +375,10 @@ export default class search extends Component {
         window.location = "/registerPage";
       }
       return (
-        <div className="position-relative">
-        <div className="score-capture-header"><label className="label-for-score">ADD SCORE</label></div>
+        <div className="position-relative" autoComplete="off">
+        <div className={stateOne? "hidden" : "score-capture-header"}>
+        <label className="label-for-score">ADD SCORE</label>
+        </div>
           <div className={stateOne ? "page-content-video" : "page-content"}>
             <div className={stateOne ? "hidden" : ""}>
 
@@ -384,9 +386,10 @@ export default class search extends Component {
                   <input type="number" id="scoreInput" min="0" step="1" name="score" className="score"
                     onChange={this.handleScore}
                     placeholder="Enter Score"></input>
-                  <div className={this.state.validScore ? "hidden" : "invalidScore"}>Enter Valid Score</div>
+                 
 
               </div>
+              <div className={this.state.validScore ? "hidden" : "invalidScore"}>Enter Valid Score</div>
               <div className="centre-label">
                 <label className="label-competition">Select Competition</label>
               </div>
@@ -394,9 +397,9 @@ export default class search extends Component {
                 {competitionItem}
 
               </div>
-              <div className={this.state.scoreSaved ? "sucess-container" : "hidden"}>
+              {/* TODO saving page in progress <div className={this.state.scoreSaved ? "sucess-container" : "hidden"}>
                 <div className="success"> Score Saved successfully </div>
-              </div>
+              </div> */}
             </div>
             <div className="submit-container" id="HideWhenAddingScore">
               <div className={this.state.imageTaken || this.state.showCamera
