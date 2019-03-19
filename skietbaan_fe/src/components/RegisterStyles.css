@@ -283,6 +283,10 @@
   height: 34px;
 }
 
+.back-btn:hover{
+  cursor: pointer;
+}
+
 .centre-label{
   text-align: center;
 }
