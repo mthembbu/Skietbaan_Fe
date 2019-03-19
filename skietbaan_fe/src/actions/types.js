@@ -1,24 +1,18 @@
-import profileRed from "../components/navbar-icons/profile-red.png";
-import profileGray from "../components/navbar-icons/profile-grey.png";
-import docsRed from "../components/navbar-icons/docs-red.png";
-import docsGray from "../components/navbar-icons/docs-grey.png";
-import createRed from "../components/navbar-icons/create-red.png";
-import createGray from "../components/navbar-icons/create-grey.png";
-import leaderboardRed from "../components/navbar-icons/leaderboard-red.png";
-import leaderboardGray from "../components/navbar-icons/leaderboard-grey.png";
-import notificationsRed from "../components/navbar-icons/notifications-red.png";
-import notificationsGray from "../components/navbar-icons/notifications-grey.png";
+import profileRed from "../components/navbar-icons/new-nav-icons/new-profile-red.png";
+import profileGray from "../components/navbar-icons/new-nav-icons/new-profile-grey.png";
+import createRed from "../components/navbar-icons/new-nav-icons/new-create-red.png";
+import createGray from "../components/navbar-icons/new-nav-icons/new-create-grey.png";
+import leaderboardRed from "../components/navbar-icons/new-nav-icons/new-leaderboard-red.png";
+import leaderboardGray from "../components/navbar-icons/new-nav-icons/new-leaderboard-grey.png";
+import notificationsRed from "../components/navbar-icons/new-nav-icons/new-notification-red.png";
+import notificationsGray from "../components/navbar-icons/new-nav-icons/new-notification-grey.png";
 import notifyGrey from "../components/navbar-icons/notify-gray.png";
-import scorecaptureRed from "../components/navbar-icons/add-score-red.png";
-import scorecaptureGray from "../components/navbar-icons/add-score-grey.png";
-import moreGray from "../components/navbar-icons/more.png";
-import moreNotify from "../components/navbar-icons/more-new.png";
+import scorecaptureRed from "../components/navbar-icons/new-nav-icons/new-add-score-red.png";
+import scorecaptureGray from "../components/navbar-icons/new-nav-icons/new-add-score-grey.png";
 
 export const NAV_BAR_ICONS = {
   PROFILE_RED: profileRed,
   PROFILE_GRAY: profileGray,
-  DOCS_RED: docsRed,
-  DOCS_GRAY: docsGray,
   CREATE_RED: createRed,
   CREATE_GRAY: createGray,
   LEADERBOARD_RED: leaderboardRed,
@@ -27,10 +21,9 @@ export const NAV_BAR_ICONS = {
   NOTIFICATIONS_GRAY: notificationsGray,
   NOTIFY_GREY: notifyGrey,
   SCORE_CAPTURE_RED: scorecaptureRed,
-  SCORE_CAPTURE_GRAY: scorecaptureGray,
-  MORE_GRAY: moreGray,
-  MORE_NOTIFY: moreNotify
+  SCORE_CAPTURE_GRAY: scorecaptureGray
 };
+
 
 export const ADD_BOOKMARK = "ADD_BOOKMARK";
 export const DELETE_BOOKMARK = "DELETE_BOOKMARK";
@@ -44,6 +37,8 @@ export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
 //leaderboard types
 export const FETCH_LEADERBOARDFILTER_DATA = "FETCH_LEADERBOARDFILTER_DATA";
 export const FETCH_LEADERBOARDTABLE_DATA = "FETCH_LEADERBOARDTABLE_DATA";
+export const UPDATE_SELECTED_COMPETITION = "UPDATE_SELECTED_COMPETITION"
+export const UPDATE_SELECTED_GROUP = "UPDATE_SELECTED_GROUP"
 
 //groups types and constants
 export const URL = "https://api.skietbaan.retrotest.co.za";
