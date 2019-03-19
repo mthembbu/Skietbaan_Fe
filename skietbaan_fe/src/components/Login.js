@@ -10,7 +10,7 @@ import { validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
 import { URL } from '../actions/types.js';
 import back from '../components/assets/Back.png';
-import skietbaan from '../components/assets/skietbaan.png';
+import skietbaan from '../components/assets/biggerskietbaan.png';
 import history from "./history";
 
 class Login extends Component {
@@ -42,6 +42,10 @@ class Login extends Component {
     else
       document.getElementById("roundButton").disabled = true;
 
+  }
+
+  componentDidMount() {
+    this.disableButton()
   }
 
   toggleNavbar() {
