@@ -206,7 +206,7 @@
   width: 100px;
   font-weight: lighter;
   position: absolute;
-  right: 31px;
+  right: 21px;
   top: 90px;
   font-size: 16px;
 }
@@ -283,6 +283,10 @@
   margin-top: -38px;
   margin-left: 30px;
   height: 34px;
+}
+
+.back-btn:hover{
+  cursor: pointer;
 }
 
 .centre-label{

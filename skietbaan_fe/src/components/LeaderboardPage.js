@@ -17,6 +17,7 @@ import {
     isBrowser,
     isMobile
 } from "react-device-detect";
+import { isNullOrUndefined } from 'util';
 
 class LeaderboardPage extends Component {
     constructor(props) {
