@@ -1,0 +1,157 @@
+@media only screen and (min-width: 576px) {
+  .page-name-create-all {
+    position: center;
+    text-align: center;
+    text-size-adjust: 25px;
+    background-size: 15px;
+    height: 56px;
+    background-color: #dc0600;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-top: 56px;
+    top: 0;
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+  }
+
+  .create-all-menu-header {
+    color: #fdfdfd;
+    font-size: 20px;
+    font-weight: bolder;
+    padding-top: 10px;
+    text-align: center;
+  }
+
+  .create-feature-buttons {
+    position: center;
+    text-align: center;
+    width: 66%;
+    text-align: center;
+    margin-left: 17%;
+    margin-top: 133px;
+  }
+
+  .create-all-groups-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
+
+  .create-all-competitions-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
+
+  .create-all-members-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
+
+  .create-all-btn1 {
+    position: center;
+    text-align: center;
+    width: 33%;
+    float: left;
+  }
+
+  .create-all-btn2 {
+    position: center;
+    text-align: center;
+    width: 33%;
+    float: left;
+  }
+
+  .create-all-btn3 {
+    position: center;
+    text-align: center;
+    width: 33%;
+    float: left;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .page-name-create-all {
+    position: center;
+    text-align: center;
+    text-size-adjust: 25px;
+    background-size: 15px;
+    height: 56px;
+    background-color: #dc0600;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    top: 0;
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+  }
+
+  .create-all-menu-header {
+    color: #fdfdfd;
+    font-size: 20px;
+    font-weight: bolder;
+    padding-top: 10px;
+    text-align: center;
+  }
+
+  .create-feature-buttons {
+    position: center;
+    text-align: center;
+    width: 100%;
+    text-align: center;
+    margin-top: 77px;
+  }
+
+  .create-all-groups-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
+
+  .create-all-competitions-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
+
+  .create-all-members-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
+
+  .create-all-btn1 {
+    position: center;
+    text-align: center;
+    width: 33%;
+    float: left;
+  }
+
+  .create-all-btn2 {
+    position: center;
+    text-align: center;
+    width: 33%;
+    float: left;
+  }
+
+  .create-all-btn3 {
+    position: center;
+    text-align: center;
+    width: 33%;
+    float: left;
+  }
+}
