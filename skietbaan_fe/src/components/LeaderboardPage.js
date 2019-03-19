@@ -422,7 +422,7 @@ class LeaderboardPage extends Component {
                     </div>
                 </div>
                 {/* Current User Section*/}
-                {/* <div className="userWrapper">
+                 <div className="userWrapper">
                     <div className="row justify-content-center">
                         <div className="col-sm-8 text-left">
                             <div className="CurrentUserTableSection">
@@ -450,7 +450,7 @@ class LeaderboardPage extends Component {
                             </div>
                         </div>
                     </div>
-                </div> */}
+                </div> 
 
             </div>
         );
