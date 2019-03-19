@@ -103,6 +103,12 @@
   width: 26px;
 }
 
+.icon-same-dimensions,
+.profile-icon-grey,
+.notifications-icon-grey:hover{
+  cursor: pointer;
+}
+
 .profile-icon-grey{
   height: 27px;
   width: 28px;

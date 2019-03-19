@@ -10,7 +10,9 @@ class UserProfile extends Component {
         super(props);
         this.state = {
             awardCompetitions : [],
-            userToken: ""
+            hoursAward : {
+                hours: -1
+            }
         }
 
         this.Logout = this.Logout.bind(this);
@@ -31,7 +33,24 @@ class UserProfile extends Component {
             }
         })
         .then(res => res.json())
-        .then(data => this.setState({awardCompetitions : data, userToken: token}));
+        .then(data => {
+            this.setState({awardCompetitions : data})
+            if(this.state.awardCompetitions.length == 0){
+                this.Logout();
+                this.props.history.push('/register-page');
+            }
+        });
+
+        fetch(BASE_URL + "/api/awards/hours/" + token, {
+            method : 'GET',
+            headers: {
+                'content-type' : 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            this.setState({hoursAward : data})
+        });
     }
 
     AnimateAccuracyCircle(counter, element, index){
@@ -125,7 +144,7 @@ class UserProfile extends Component {
     RenderBulletIcons(){
         return(
             <div className="bullet-img-scale bullet-padding-right">
-                <img src={require("../resources/awardIcons/bullet.png")}></img>
+                <img src={require("../resources/awardIcons/bullet.png")} alt="bullet image"></img>
             </div>
         )
     }
@@ -133,7 +152,7 @@ class UserProfile extends Component {
     RenderRedLockIcon(){
         return(
             <div className="lock-img-scale">
-                <img src={require("../resources/awardIcons/red-locked-icon.png")}></img>
+                <img src={require("../resources/awardIcons/red-locked-icon.png")} alt="lock image"></img>
             </div>
         )
     }
@@ -217,11 +236,11 @@ class UserProfile extends Component {
     RenderHoursIcons(){
         return(
             <div className="lay-horizontal scale-img center-block-content">
-                <img src={this.state.awardCompetitions[0].hoursAward.gold ?
+                <img src={this.state.hoursAward.gold ?
                     require('../resources/awardIcons/gold-icon.png') : require('../resources/awardIcons/locked-icon.png')} alt="gold award" />
-                <img src={this.state.awardCompetitions[0].hoursAward.silver ?
+                <img src={this.state.hoursAward.silver ?
                     require('../resources/awardIcons/silver-icon.png') : require('../resources/awardIcons/locked-icon.png')} alt="silver award" />
-                <img src={this.state.awardCompetitions[0].hoursAward.bronze ?
+                <img src={this.state.hoursAward.bronze ?
                     require('../resources/awardIcons/bronze-icon.png') : require('../resources/awardIcons/locked-icon.png')} alt="bronze award" />
             </div>
         )
@@ -237,13 +256,14 @@ class UserProfile extends Component {
     }
 
     Logout(){
+        console.log("here");
         var res = document.cookie;
         var multiple = res.split(";");
         for(var i = 0; i < multiple.length; i++) {
             var key = multiple[i].split("=");
             document.cookie = key[0]+" =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
         }
-        window.location = "/login"
+        this.props.history.push('/login');
         return false;
     }
 
@@ -254,7 +274,8 @@ class UserProfile extends Component {
                     <Col className="lay-horizontal">
                         <div className="center-block-content">
                             <label className="username-bar">
-                                {this.state.awardCompetitions.length > 0 ? this.state.awardCompetitions[0].username : null}    
+                                {this.state.hoursAward.username !== undefined ? 
+                                    this.state.hoursAward.username : null}    
                             </label>
                         </div>
                         <a href="#" onClick={this.Logout}>
@@ -267,8 +288,9 @@ class UserProfile extends Component {
                 <Container>
                     <div>
                         <div className="member-number text-color">
-                            <label className="light-weight">Membership No:<span id="member-number-span">{this.state.awardCompetitions.length > 0 ?
-                                this.state.awardCompetitions[0].membershipNumber : null}</span>
+                            <label className="light-weight">Membership No:
+                                <span id="member-number-span">{this.state.hoursAward.membershipNumber !== undefined ?
+                                    this.state.hoursAward.membershipNumber : null}</span>
                             </label>
                         </div>
                         <div className="page-title text-color"><label>Awards & Statistics</label></div>
@@ -286,14 +308,14 @@ class UserProfile extends Component {
                                     <Col className="push-bottom-12px">
                                         <div className="lay-horizontal justify-center">
                                             {/*make hours dynamic*/}
-                                            {this.state.awardCompetitions.length > 0 ?
-                                                this.SetDigits("0000") : this.SetDigits(null)}
+                                            {this.state.hoursAward.hours !== -1 ?
+                                                this.SetDigits(this.state.hoursAward.hours.toString()) : this.SetDigits(null)}
                                         </div>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col>
-                                        {this.state.awardCompetitions.length > 0 && this.state.awardCompetitions[0].hoursAward != null ? this.RenderHoursIcons() : null} 
+                                        {this.state.hoursAward != null ? this.RenderHoursIcons() : null} 
                                     </Col>
                                 </Row>
                             </Col>
