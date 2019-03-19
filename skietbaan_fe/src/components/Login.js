@@ -135,7 +135,7 @@ class Login extends Component {
       }).then(response => response.json()).then(data => {
         if (typeof data === "object") {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
-          history.push("/home");
+          window.location ="/home"
         }
 
         else if (typeof data === "string") {
@@ -171,7 +171,7 @@ class Login extends Component {
   render() {
     document.addEventListener('DOMContentLoaded', () => {
       this.toggleNavbar();
-      
+
     }, false);
     if (getCookie("token")) {
       history.push("/home");
@@ -181,7 +181,7 @@ class Login extends Component {
       <div className="page-content-login">
         <div className="red-background">
           <div className="welcome-header">
-          <img src={skietbaan} className="header-image" alt=''></img>
+            <img src={skietbaan} className="header-image" alt=''></img>
           </div>
           <div className="header-container">
             <div className="centre-label">
@@ -197,39 +197,43 @@ class Login extends Component {
 
             <div className="spacing-login">
               <FormGroup>
-                  <input
-                    type="text"
-                    name="usernameValue"
-                    id="usernameValue"
-                    autoComplete="off"
-                    value={this.state.usernameValue}
-                    onChange={this.handleChange}
-                    className="input-user"
-                    placeholder="Username"
-                  />
-                <div className={this.state.usernameFound
-                  && this.usernameValue !== "" ? "hidden" : "error-message"}>Invalid Username</div>
+                <input
+                  type="text"
+                  name="usernameValue"
+                  id="usernameValue"
+                  autoComplete="off"
+                  value={this.state.usernameValue}
+                  onChange={this.handleChange}
+                  className="input-user"
+                  placeholder="Username"
+                />
+                <div className="error-message-container">
+                  <div className={this.state.usernameFound
+                    && this.usernameValue !== "" ? "hidden" : "error-message"}>Invalid Username</div>
+                </div>
               </FormGroup>
             </div>
             <div className="spacing-login">
               <FormGroup>
-                  <div className="input-label centre-div">
-                    <input
-                      type="text"
-                      name="passwordValue"
-                      id="passwordValue"
-                      autoComplete="off"
-                      value={this.state.passwordValue}
-                      onChange={this.handleChange}
-                      className={this.state.toggle ? "input-password-show": "input-password"}
-                      placeholder="Password"
-                    />
-                    <div className={this.state.passwordValue !== "" ? "password-view-icon" : "password-icon"}
-                      onClick={this.togglePassword} name="eye">
-                    </div>
+                <div className="input-label centre-div">
+                  <input
+                    type="text"
+                    name="passwordValue"
+                    id="passwordValue"
+                    autoComplete="off"
+                    value={this.state.passwordValue}
+                    onChange={this.handleChange}
+                    className={this.state.toggle ? "input-password-show" : "input-password"}
+                    placeholder="Password"
+                  />
+                  <div className={this.state.passwordValue !== "" ? "password-view-icon" : "password-icon"}
+                    onClick={this.togglePassword} name="eye">
                   </div>
-                <div className={this.state.passwordFound
-                  && this.passwordValue !== "" ? "hidden" : "error-message"}>Invalid Password</div>
+                </div>
+                <div className="error-message-container">
+                  <div className={this.state.passwordFound
+                    && this.passwordValue !== "" ? "hidden" : "error-message"}>Invalid Password</div>
+                </div>
               </FormGroup>
             </div>
             <div className="button-container">
