@@ -36,7 +36,6 @@
     margin-left: 17%;
     top: 0;
     z-index: 100;
-    position: fixed;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     border-top-left-radius: 0px;
@@ -104,12 +103,24 @@
   width: 26px;
 }
 
+.icon-same-dimensions:hover{
+  cursor: pointer;
+}
+
 .profile-icon-grey{
   height: 27px;
   width: 28px;
 }
 
+.profile-icon-grey:hover{
+  cursor: pointer;
+}
+
 .notifications-icon-grey{
   height: 26px;
   width: 23px;
+}
+
+.notifications-icon-grey:hover{
+  cursor: pointer;
 }
