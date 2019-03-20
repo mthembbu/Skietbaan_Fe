@@ -17,7 +17,6 @@ import {
     isBrowser,
     isMobile
 } from "react-device-detect";
-import { isNullOrUndefined } from 'util';
 
 class LeaderboardPage extends Component {
     constructor(props) {
@@ -29,7 +28,10 @@ class LeaderboardPage extends Component {
             selectedScoreType: 1,
             selectedRank: null,
             collapseFilter: false,
-            listType: 'competitions'
+            listType: 'competitions',
+            height: window.innerHeight, 
+            width: window.innerWidth,
+            ranktableHeight: 500
         }
         this.setCompetitionValue = this.setCompetitionValue.bind(this);
         this.setGroupValue = this.setGroupValue.bind(this);
@@ -42,21 +44,35 @@ class LeaderboardPage extends Component {
         this.setListType = this.setListType.bind(this);
         this.displayList = this.displayList.bind(this);
         this.ValidatedInitialLeaderboardFilterSelection = this.ValidatedInitialLeaderboardFilterSelection.bind(this);
+        this.updateDimensions = this.updateDimensions.bind(this);
     }
+    componentDidMount() {
+        console.log(this.state.height);
+        // Additionally I could have just used an arrow function for the binding `this` to the component...
+        window.addEventListener("resize", this.updateDimensions);
+      }
     //executed when leaderboard in mounted on main app
     componentWillMount() {
-        
+        this.updateDimensions();
         //get function to get filter data from api
         this.props.fetchleaderboadfilterdata();
         this.ValidatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(this.state.selectedCompetition,this.state.selectedGroup);
+        this.getLeaderboardData(this.state.selectedCompetition, this.state.selectedGroup);
     }
-    getLeaderboardData = (competition,group) => {
+    updateDimensions() {
+        this.setState({
+          height: window.innerHeight, 
+          width: window.innerWidth,
+          ranktableHeightMobile: (this.state.height - 236),
+          ranktableHeightDesktop: (this.state.height - (193 + 0))
+        });
+      }
+    getLeaderboardData = (competition, group) => {
         let token = getCookie("token");
-        var CompNum = competition +1;
+        var CompNum = competition + 1;
         var GroupNum = group;
-        if(this.state.selectedGroup != -1){
-            GroupNum = this.state.selectedGroup +1;
+        if (group != -1) {
+            GroupNum = group + 1;
         }
         const filterSelection = {
             selectedCompetition: CompNum,
@@ -66,27 +82,27 @@ class LeaderboardPage extends Component {
         }
         this.props.fetchleaderboadtabledata(filterSelection);
     }
-    ValidatedInitialLeaderboardFilterSelection(){
-        if(this.props.selectedCompetitionName != undefined){
-            if(this.props.selectedCompetitionName.length > 0){
-                for(var i = 0;i<this.props.competitions.length;i++){
-                    if(this.props.competitions[i] == this.props.selectedCompetitionName){
+    ValidatedInitialLeaderboardFilterSelection() {
+        if (this.props.selectedCompetitionName != undefined) {
+            if (this.props.selectedCompetitionName.length > 0) {
+                for (var i = 0; i < this.props.competitions.length; i++) {
+                    if (this.props.competitions[i] == this.props.selectedCompetitionName) {
                         this.setState({
                             selectedCompetition: i
                         });
                     }
                 }
             }
-            
-            if(this.props.selectedGroupName.length > 0){
-                for(var i = 0;i<this.props.groups.length;i++){
-                    if(this.props.groups[i] == this.props.selectedGroupName){
+
+            if (this.props.selectedGroupName.length > 0) {
+                for (var i = 0; i < this.props.groups.length; i++) {
+                    if (this.props.groups[i] == this.props.selectedGroupName) {
                         this.setState({
                             selectedGroup: i
                         });
                     }
                 }
-            } 
+            }
         }
     }
 
@@ -96,19 +112,19 @@ class LeaderboardPage extends Component {
         });
         this.props.updateSelectedCompetition(this.props.competitions[value].label)
         this.ValidatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(value,this.state.selectedGroup);
+        this.getLeaderboardData(value, this.state.selectedGroup);
     }
     setGroupValue = (value) => {
         this.setState({
             selectedGroup: value
         });
-        if(value == -1){
+        if (value == -1) {
             this.props.updateSelectedGroup(this.state.individual);
-        }else{
+        } else {
             this.props.updateSelectedGroup(this.props.groups[value].label);
         }
         this.ValidatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(this.state.selectedCompetition,value);
+        this.getLeaderboardData(this.state.selectedCompetition, value);
     }
     setScoreTypeValue = (value) => {
         this.setState({
@@ -255,11 +271,12 @@ class LeaderboardPage extends Component {
         }
     }
     render() {
-        if(!getCookie("token")){
+        
+        if (!getCookie("token")) {
             window.location = "/registerPage";
         }
         const groupsList = (
-            <Table className="SelectionTable">
+            <Table className="SelectionTable" /* style={{height:"1002px"}} */>
                 <tbody>
                     {this.props.groups.map((group, index) => (
                         <tr key={group.value.toString()} onClick={() => this.setGroupValue(index)}
@@ -311,6 +328,9 @@ class LeaderboardPage extends Component {
                             <table className="FilterTable1">
                                 <tbody>
                                     <tr className="HeaderRow1">
+                                        <td className="CompetitionNameCol">
+                                            {this.props.competitions.length != 0 ? this.props.competitions[this.state.selectedCompetition].label : "-------"}
+                                        </td>
                                         <td className="FilterIconCol">
                                             <div className="FilterIcon">
                                                 <MDBBtn tag="a" size="lg" floating gradient="purple"
@@ -319,109 +339,97 @@ class LeaderboardPage extends Component {
                                                 </MDBBtn>
                                             </div>
                                         </td>
-                                        <td className="CompetitionNameCol">
-                                            {this.props.competitions.length != 0 ? this.props.competitions[this.state.selectedCompetition].label : "-------"}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table className="FilterTable2">
-                                <tbody>
-                                    <tr className="HeaderRow2">
-                                        <td colSpan="2" className="GroupingLabelCOl">
-                                            {this.state.selectedGroup == -1 ? "Overal rank" : (this.props.groups.length != 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
-                                        </td>
-                                        <td colSpan="1" className="totalLabelCOl">
-                                            Total
-                                        </td>
-                                        <td colSpan="1" className="AverageLabelCOl">
-                                            Average
-                                        </td>
-                                        <td colSpan="1" className="BestLabelCOl">
-                                            Best
-                                       </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <Collapse isOpened={this.state.collapseFilter}>
                             <div className="FilterSelections">
-                                <MobileView>
-                                    <div className="CategorySelection">
-                                        <div className={this.state.listType == "competitions" ? "chooseComps-active" : "chooseComps"}  >
-                                            <MDBBtn tag="a" size="lg" floating gradient="purple"
-                                                onClick={() => this.setListType("competitions")} >
-                                                Competitions
-                                            </MDBBtn>
-                                        </div>
-                                        <div className={this.state.listType == "groups" ? "chooseGroups-active" : "chooseGroups"}>
-                                            <MDBBtn tag="a" size="lg" floating gradient="purple"
-                                                onClick={() => this.setListType("groups")} >
-                                                Rankings by
-                                            </MDBBtn>
-                                        </div>
-                                    </div>
-                                    <div className="catVisibleLabel">
-                                        {this.state.listType == "competitions" ? "Select Competition" : "Select Ranking"}
-                                    </div>
-                                    <div className={this.state.listType == "competitions" ? "hideMyDiv" : (this.state.selectedGroup == -1 ? "individual-Active" : "individual-Inactive")}>
+                                <div className="CategorySelection">
+                                    <div className={this.state.listType == "competitions" ? "chooseComps-active" : "chooseComps"}  >
                                         <MDBBtn tag="a" size="lg" floating gradient="purple"
-                                            onClick={() => this.setGroupValue(-1)} >
-                                            Overall ranking
-                                        </MDBBtn>
+                                            onClick={() => this.setListType("competitions")} >
+                                            Competitions
+                                            </MDBBtn>
                                     </div>
-                                    <div className={this.state.listType == "groups" ? "catVisibleGroupsLabel" : "hideMyDiv"}>
-                                        Groups
+                                    <div className={this.state.listType == "groups" ? "chooseGroups-active" : "chooseGroups"}>
+                                        <MDBBtn tag="a" size="lg" floating gradient="purple"
+                                            onClick={() => this.setListType("groups")} >
+                                            Rankings by
+                                            </MDBBtn>
+                                    </div>
+                                </div>
+                                <div className="catVisibleLabel">
+                                    {this.state.listType == "competitions" ? "Select Competition" : "Select Ranking"}
+                                </div>
+                                <div className={this.state.listType == "competitions" ? "hideMyDiv" : (this.state.selectedGroup == -1 ? "individual-Active" : "individual-Inactive")}>
+                                    <MDBBtn tag="a" size="lg" floating gradient="purple"
+                                        onClick={() => this.setGroupValue(-1)} >
+                                        Overall ranking
+                                        </MDBBtn>
+                                </div>
+                                <div className={this.state.listType == "groups" ? "catVisibleGroupsLabel" : "hideMyDiv"}>
+                                    Groups
                                    </div>
-                                </MobileView>
                                 <div className="SelectionsContainer">
                                     <div className="row justify-content-center">
-                                        <BrowserView>
-                                            <div className="LeftCompetitions">
-                                                <div className="competitionsL">
-                                                    Select Competition
-                                               </div>
-                                                <div className="Choose">
-                                                    {competitionsList}
-                                                </div>
-                                            </div>
-                                            <div className="rightGroups">
-                                                 <div className="rankinL">
-                                                     Select ranking
-                                                 </div>
-                                                <div className={this.state.selectedGroup == -1 ? "individual-Active" : "individual-Inactive"}>
-                                                    <MDBBtn tag="a" size="lg" floating gradient="purple"
-                                                        onClick={() => this.setGroupValue(-1)} >
-                                                        Individual rank
-                                                    </MDBBtn>
-                                                </div>
-                                                <div className="groupL">
-                                                    Groups
-                                               </div>
-                                                <div className="Choose">
-                                                    {groupsList}
-                                                </div>
-                                            </div>
-
-                                        </BrowserView>
-                                        <MobileView>
-                                            <div className="Choose">
-                                                {this.state.listType == "competitions" ? competitionsList : groupsList}
-                                            </div>
-                                        </MobileView>
+                                        <div className="Choose">
+                                            {this.state.listType == "competitions" ? competitionsList : groupsList}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </Collapse>
-                        <Collapse isOpened={!this.state.collapseFilter}>
-                        <div className="RankingTableSection">
-                            <table className="RankingTable">
+                        {/* <Collapse isOpened={!this.state.collapseFilter}> */}
+                        
+                        <table className="RankingTableHead">
+                                <tr className="HeaderRow2">
+                                    <td className="colEmpty"></td>
+                                    <td colSpan="2" className="GroupingLabelCOl">
+                                        {this.state.selectedGroup == -1 ? "Overal rank" : (this.props.groups.length != 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
+                                    </td>
+                                    <td colSpan="1" className="totalLabelCOl">
+                                        Total
+                                        </td>
+                                    <td colSpan="1" className="AverageLabelCOl">
+                                        Average
+                                        </td>
+                                    <td colSpan="1" className="BestLabelCOl">
+                                        Best
+                                       </td>
+                                </tr>
+                        </table>
+                        <div className="RankingTableSection" style={{height: this.state.ranktableHeightMobile+"px"}}>
+                            <table className="RankingTable" >
                                 <tbody>
                                     {tablebody}
                                 </tbody>
                             </table>
                         </div>
-                        </Collapse>
+                        {/* <div className="CurrentUserTableSection">
+                                <table className="RankingTable">
+                                    <tbody>
+                                        <tr className="rankRow">
+                                            <td className="RankIconCol">
+                                                {this.top3Display(this.props.userResults)}
+                                            </td>
+                                            <td className="RankLabelsCol">
+                                                <table className="HeadTableLabels">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td className="ExtraNameCOl">{this.props.userResults == null ? 'Something went wrong' : (this.props.userResults != null ? this.props.userResults.username : '--')}</td>
+                                                            <td className="ScoreColTotal">{this.props.userResults == null ? '--' : (this.props.userResults.total != 0 ? this.props.userResults.total : '--')}</td>
+                                                            <td className="ScoreColAverage">{this.props.userResults == null ? '--' : (this.props.userResults.average != 0 ? this.props.userResults.average : '--')}</td>
+                                                            <td className="ScoreColBest">{this.props.userResults == null ? '--' : (this.props.userResults.best != 0 ? this.props.userResults.best : '--')}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div> */}
+                        {/* </Collapse> */}
                     </div>
                 </div>
                 {/* Current User Section*/}
@@ -469,5 +477,5 @@ const mapStateToProps = state => ({
     selectedCompetitionName: state.posts.leaderboardSelectedCompetitionName,
     selectedScoreType: state.posts.leaderboardSelectedScoreType
 });
-export default connect(mapStateToProps, { fetchleaderboadfilterdata, fetchleaderboadtabledata, updateSelectedCompetition ,updateSelectedGroup })(LeaderboardPage);
+export default connect(mapStateToProps, { fetchleaderboadfilterdata, fetchleaderboadtabledata, updateSelectedCompetition, updateSelectedGroup })(LeaderboardPage);
 
