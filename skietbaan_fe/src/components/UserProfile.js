@@ -262,7 +262,7 @@ class UserProfile extends Component {
             var key = multiple[i].split("=");
             document.cookie = key[0]+" =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
         }
-        this.props.history.push('/login');
+        window.location= '/login';
         return false;
     }
 

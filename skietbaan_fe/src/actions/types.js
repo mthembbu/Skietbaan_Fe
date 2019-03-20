@@ -9,6 +9,7 @@ import notificationsGray from "../components/navbar-icons/new-nav-icons/new-noti
 import notifyGrey from "../components/navbar-icons/notify-gray.png";
 import scorecaptureRed from "../components/navbar-icons/new-nav-icons/new-add-score-red.png";
 import scorecaptureGray from "../components/navbar-icons/new-nav-icons/new-add-score-grey.png";
+ import moreNotify from "../components/navbar-icons/more-new.png";
 
 export const NAV_BAR_ICONS = {
   PROFILE_RED: profileRed,
@@ -33,6 +34,7 @@ export const NEW_COMP = "NEW_COMP";
 export const FETCH_COMP = "FETCH_COMP";
 export const UPDATE_COMP_STATUS = "UPDATE_COMP_STATUS";
 export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
+export const URL = "https://api.skietbaan.retrotest.co.za";
 
 //leaderboard types
 export const FETCH_LEADERBOARDFILTER_DATA = "FETCH_LEADERBOARDFILTER_DATA";
@@ -41,11 +43,6 @@ export const UPDATE_SELECTED_COMPETITION = "UPDATE_SELECTED_COMPETITION"
 export const UPDATE_SELECTED_GROUP = "UPDATE_SELECTED_GROUP"
 
 //groups types and constants
-export const URL = "https://api.skietbaan.retrotest.co.za";
-export const URLADD = "https://api.skietbaan.retrotest.co.za/api/groups/add";
-export const URLUSER = "https://api.skietbaan.retrotest.co.za/api/user";
-export const URLGROUP = "https://api.skietbaan.retrotest.co.za/api/groups";
-export const UPDATENAME = "UPDATENAME";
 export const UPDATE_GROUPNAME = "UPDATE_GROUPNAME";
 export const CREATEGROUP = "CREATEGROUP";
 export const GETGROUP = "GETGROUP";
@@ -54,4 +51,5 @@ export const GETNAME = "GETNAME";
 export const EDITGROUPUSERS = "EDITGROUPUSERS";
 export const FETCH_GROUPS = "FETCH_GROUPS";
 export const ADDMEMBERS = "ADDMEMBERS";
-export const UPDATEARRAY = "UPDATEARRAY";
+export const GROUPDICT = "GROUPDICT";
+

@@ -4,6 +4,7 @@
     border: none;
     border: 1px solid  #F3F4F9;
     
+    
   }
 
   .second-row-navbar{
@@ -36,15 +37,14 @@
     margin-left: 17%;
     top: 0;
     z-index: 100;
-    position: fixed;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
   }
 
   .nav-content{
     text-align: center;
+    background-image: radial-gradient(circle, #ffffff, #000000);
+    box-shadow: 0px 11px 13px -8px #888888;
   }
 }
 
@@ -102,6 +102,12 @@
 .icon-same-dimensions{
   height: 26px;
   width: 26px;
+}
+
+.icon-same-dimensions,
+.profile-icon-grey,
+.notifications-icon-grey:hover{
+  cursor: pointer;
 }
 
 .profile-icon-grey{

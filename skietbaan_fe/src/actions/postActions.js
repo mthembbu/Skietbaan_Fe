@@ -1,18 +1,13 @@
 import {
   PASS_ID,
-  FETCH_POSTS,
   UPDATE_GROUPNAME,
-  UPDATENAME,
   CREATEGROUP,
   GETGROUP,
-  GETNAME,
   BASE_URL,
-  URLADD,
-  UPDATEARRAY,
-  URLUSER,
   FETCH_GROUPS,
   EDITGROUPUSERS,
   ADDMEMBERS,
+  GROUPDICT,
   FETCH_LEADERBOARDFILTER_DATA,
   FETCH_LEADERBOARDTABLE_DATA,
   UPDATE_SELECTED_COMPETITION,
@@ -20,28 +15,12 @@ import {
 } from "./types";
 
 /** The method to feth the already available data for posts*/
-export const fetchPosts = () => dispatch => {
-  fetch(URLUSER)
-    .then(res => res.json())
-    .then(posts => {
-      const newdata = posts.map(users => {
-        users.highlighted = false;
-        return users;
-      });
-      dispatch({
-        type: FETCH_POSTS,
-        payload: newdata
-      });
-    });
-};
-
 export const FetchGroups = () => dispatch => {
   fetch(BASE_URL+"/api/Groups")
     .then(res => res.json())
     .then(group => {
       const newdata=group.map(item=>{
-        item.colors="black",
-        item.image="normalstate";
+        item.highlighted=false;
         return item
       })
       dispatch({
@@ -51,30 +30,12 @@ export const FetchGroups = () => dispatch => {
     });
 };
 
-export  const EditGroupAction = (id) => dispatch => {
-  fetch(BASE_URL + "/api/Groups/edit?id="+id)
-    .then(res => res.json())
-    .then(posts => {
-      const newdata = posts.map(users => {
-        users.highlighted = true;
-        users.background= "#F3F4F9",
-        users.image= "marked"
-        return users;
-      });
-      dispatch({
-        type: EDITGROUPUSERS,
-        payload: newdata
-      });
-    });
-};
 export const AddMemberAction = (id) => dispatch => {
    fetch(BASE_URL + "/api/Groups/list?id="+id)
     .then(res => res.json())
     .then(posts => {
       const newdata = posts.map(users => {
         users.highlighted = false;
-        users.background= "#fdfdfd",
-        users.image= "marked"
         return users;
       });
       dispatch({
@@ -83,6 +44,7 @@ export const AddMemberAction = (id) => dispatch => {
       });
     });
 };
+
 
 export const createGroups = usersadded => dispatch => {
   fetch(BASE_URL + "/api/groups", {
@@ -104,21 +66,6 @@ export const createGroups = usersadded => dispatch => {
 {
   /** the method to post new data from the PostForm */
 }
-export const createPost = users => dispatch => {
-  fetch(BASE_URL + "/api/groups", {
-    method: "Post",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(users)
-  })
-    .then(res => res.json())
-    .then(function(response) {})
-    .then(function(data) {})
-    .catch(function(data) {});
-};
-
 export const getName = name => {
   //Return an action
   return dispatch => {
@@ -128,15 +75,22 @@ export const getName = name => {
     });
   };
 };
-export const Changedata = name => {
-  //Return an action
-  return dispatch => {
+
+export const fetchEditUser = groupid =>dispatch=>{
+  fetch(BASE_URL + '/api/Groups/edit?id=' +groupid )
+  .then(res=>res.json())
+  .then(data=>{
+    const newdata=data.map(user=>{
+      user.highlighted=true;
+      return user;
+    })
     dispatch({
-      type: UPDATEARRAY,
-      payload: name
-    });
-  };
-};
+      type:EDITGROUPUSERS,
+      payload:newdata
+    })
+
+  })
+}
 
 export const getGroup = () => dispatch => {
   fetch(BASE_URL + "/api/user")
@@ -144,6 +98,17 @@ export const getGroup = () => dispatch => {
     .then(posts =>
       dispatch({
         type: GETGROUP,
+        payload: posts
+      })
+    );
+};
+
+export const groupDic = () => dispatch => {
+  fetch(BASE_URL + "/api/Groups/participants")
+    .then(res => res.json())
+    .then(posts =>
+      dispatch({
+        type: GROUPDICT,
         payload: posts
       })
     );

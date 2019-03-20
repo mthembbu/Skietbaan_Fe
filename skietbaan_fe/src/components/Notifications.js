@@ -64,18 +64,18 @@ class notification extends Component {
     } else if (Notification === "Competition") {
       var parts = Message.split(",")[0];
       setTimeout(function() {
-        history.push("/home");
+        this.props.history.push("/home");
       }, 2000);
     } else if (Notification === "Document") {
     } else if (Notification === "Group") {
       var parts = Message.split(",")[0];
       this.props.getName(parts);
       setTimeout(function() {
-        history.push("/notify");
+        this.props.history.push("/notify");
       }, 2000);
     } else {
       setTimeout(function() {
-        history.push("/notify");
+        this.props.history.push("/notify");
       }, 2000);
       this.setState({
         isRead: true
@@ -94,7 +94,7 @@ class notification extends Component {
 
   onClick_cancel() {
     setTimeout(function() {
-      window.location = "/notify";
+      history.push("/notify");
     }, 2000);
   }
 
@@ -118,7 +118,7 @@ class notification extends Component {
   render() {
     if (!getCookie("token")) {
       setTimeout(function() {
-        window.location = "/registerPage";
+        history.push("/registerPage");
       }, 2000);
     }
     const headingItems = (
@@ -134,42 +134,40 @@ class notification extends Component {
 
     const postItems = (
       <table className="post-items">
-        <tbody className="">
-          {this.state.array.length <= 0 ? (
-            <p className="empty-screen">No Notifications Available</p>
-          ) : (
-            ""
-          )}
-          {this.state.array.map((post, i) => (
-            <tr className="tr-class" key={i}>
-              <td className="td-notification">
-                <a
-                  className={post.markedForDeletion ? "selected-text" : "text"}
-                  href=""
-                  onClick={() =>
-                    this.onClick_View(
-                      post.typeOfNotification,
-                      post.notificationMessage
-                    )
-                  }
-                >
-                  {post.notificationMessage}
-                </a>
-              </td>
-              <td className="td-Delete">
-                <div
-                  onClick={() => this.markForDeletion(post.id)}
-                  className={
-                    post.markedForDeletion
-                      ? "selected notifications-slider"
-                      : "notifications-images"
-                  }
-                  alt="redirect"
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
+        {this.state.array.length <= 0 ? (
+          <text className="empty-screen">No Notifications Available</text>
+        ) : (
+          ""
+        )}
+        {this.state.array.map((post, i) => (
+          <tr className="tr-class" key={i}>
+            <td className="td-notification">
+              <a
+                className={post.markedForDeletion ? "selected-text" : "text"}
+                href=""
+                onClick={() =>
+                  this.onClick_View(
+                    post.typeOfNotification,
+                    post.notificationMessage
+                  )
+                }
+              >
+                {post.notificationMessage}
+              </a>
+            </td>
+            <td className="td-Delete">
+              <div
+                onClick={() => this.markForDeletion(post.id)}
+                className={
+                  post.markedForDeletion
+                    ? "selected notifications-slider"
+                    : "notifications-images"
+                }
+                alt="redirect"
+              />
+            </td>
+          </tr>
+        ))}
       </table>
     );
 
@@ -228,4 +226,7 @@ class notification extends Component {
   }
 }
 
-export default connect(getName)(notification);
+export default connect(
+  null,
+  { getName }
+)(notification);
