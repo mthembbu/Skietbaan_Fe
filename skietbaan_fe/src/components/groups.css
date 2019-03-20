@@ -18,7 +18,7 @@
   background: #dc0600;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  position: unset;
+  position: fixed;
   width: 100%;
 }
 
@@ -205,7 +205,7 @@
 
 .blabe {
   margin-left: 19px;
-  width: 278px;
+  width: 80%;
   background: #FFEAEC;
   color: #6f839e;
   border-radius: 8px;
@@ -473,4 +473,10 @@
 }
 .groupIcon{
   padding-right: 5px;
+}
+
+@media screen and (min-width: 992px) {
+  .the-nav-bar{
+    position: unset;
+  }
 }
