@@ -3,9 +3,6 @@ html, body{
     width: 100% !important; 
     height: 100% !important;
  }
- #root div div .navbar-admin{
-     width: 100%;
- }
  /* Leaderboard Page Main Container */
  .leaderboardContainer{
      background-color: #FFFFFF;
