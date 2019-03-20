@@ -8,9 +8,8 @@ import Switch from '@material-ui/core/Switch';
 import back from './GroupImages/back.png';
 import group from './GroupImages/groupIcon.png';
 import PropTypes from 'prop-types';
-
 import { getCookie } from '../components/cookie.js';
-import { prototype } from 'react-transition-group/TransitionGroup';
+
 class ViewGroups extends Component {
 	constructor(props) {
 		super(props);
@@ -59,7 +58,7 @@ class ViewGroups extends Component {
 			.then(function(response) {})
 			.then(function(data) {})
       .catch(function(data) {});
-      this.props.FetchGroups();
+       this.props.FetchGroups();
 	}
 
 	render() {
@@ -95,7 +94,7 @@ class ViewGroups extends Component {
 									</td>
 									<td>
 										<div className="group-view">
-										<Switch className="Active" checked={post.isActive} onClick={() => this.delete(post.id)}/>
+										<Switch className="Active" focus={true} checked={post.isActive} onClick={() => this.delete(post.id)}/>
 											{/* <button  >{post.isActive==true?"Active":"InActive"}</button> */}
 										</div>
 									</td>
