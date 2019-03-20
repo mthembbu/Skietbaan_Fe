@@ -5,6 +5,9 @@ import history from "./history";
 import { connect } from "react-redux";
 import { BASE_URL } from "../actions/types.js";
 import { getName } from "../actions/postActions";
+import deleteIcon from "../components/Notification-Img/trashcan.png";
+import deleteIconChange from "../components/Notification-Img/blacktrashcan.png";
+import createNotificationClicked from "../components/Notification-Img/notifySpeakerWhite.png";
 
 class notification extends Component {
   constructor(props) {
@@ -15,10 +18,12 @@ class notification extends Component {
       tokenValue: "",
       deleteClicked: false,
       cancelClicked: false,
-      isRead: false
+      isRead: false,
+      toggle: false
     };
     this.onDelete = this.onDelete.bind(this);
     this.markForDeletion = this.markForDeletion.bind(this);
+    this.changeIcon = this.changeIcon.bind(this);
   }
 
   onDelete = async () => {
@@ -115,20 +120,43 @@ class notification extends Component {
     }
   }
 
+  changeIcon() {
+    this.setState({
+      toggle: !this.state.toggle
+    });
+  }
+
   render() {
     if (!getCookie("token")) {
       setTimeout(function() {
         history.push("/registerPage");
       }, 2000);
     }
-    const headingItems = (
-      <div>
-        <div className="page-heading">
-          <div>
-            <a className="notifications-a-class" href="" />
-          </div>
-          <b>Notifications</b>
+
+    let headingItems = (
+      <div className="page-heading">
+        <div className="outer-header-div">
+          <b className="notification-heading">Notifications</b>
         </div>
+        <div className="trash-spacing">
+          <img
+            src={this.state.toggle ? deleteIconChange : deleteIcon}
+            onClick={() => this.changeIcon()}
+            className={this.state.toggle ? "black-delete-icon" : "delete-icon"}
+          />
+        </div>
+      </div>
+    );
+
+    const adminHeadingItems = (
+      <div className="page-heading">
+        <b className="notification-heading">Notifications</b>
+        <img src={createNotificationClicked} />
+        <img
+          src={deleteIcon}
+          className="delete-icon"
+          onClick={() => this.changeIcon()}
+        />
       </div>
     );
 
@@ -159,9 +187,11 @@ class notification extends Component {
               <div
                 onClick={() => this.markForDeletion(post.id)}
                 className={
-                  post.markedForDeletion
-                    ? "selected notifications-slider"
-                    : "notifications-images"
+                  this.state.toggle
+                    ? post.markedForDeletion
+                      ? "selected notifications-slider"
+                      : "notifications-images"
+                    : "hide"
                 }
                 alt="redirect"
               />

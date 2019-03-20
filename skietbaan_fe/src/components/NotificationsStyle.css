@@ -34,7 +34,7 @@
     height: 24px;
   }
 
-  .notifications-selected{
+  .notifications-selected {
     background: url("./Notification-Img/submit plus add score.png");
     padding-bottom: 6px;
     padding-right: 30px;
@@ -43,7 +43,7 @@
     height: 24px;
   }
 
-  .notifications-page-heading{
+  /* .notifications-page-heading {
     text-align: center;
     align-content: center;
     background-image: linear-gradient(to right, #dc0600, #ef3024);
@@ -59,7 +59,7 @@
     border-bottom-right-radius: 20px;
     box-shadow: 0px 10px 16px -6px rgba(0, 0, 0, 0.33);
     margin-top: -8px;
-  }
+  } */
 
   .notifications-td-delete {
     padding-left: 31px;
@@ -118,7 +118,7 @@
   }
 
   .notifications-text {
-    color: #6f839e;
+    color: #000000;
     font-family: helvetica;
     text-decoration-line: none;
     text-align: center;
@@ -127,7 +127,7 @@
     font-size: 14px;
     padding-top: 9px;
   }
-  
+
   .notifications-selected-text {
     color: red;
     font-family: helvetica;
@@ -147,21 +147,15 @@
     border: none;
   }
 
-  .notifications-modal-confirm-button {
-    font-weight: lighter;
-    font-size: 16px;
-    background-color: #dc0600;
-    border-radius: 25px;
-    width: 96px;
-    height: 42px;
-    border-color: #dc0600;
-    border-width: 1.5px;
-    border: none;
-  }
-
   .notifications-format-content {
     padding-left: 25px;
     padding-right: 25px;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .notifications-modal {
+    margin-bottom: 56px;
   }
 }
 
@@ -203,21 +197,45 @@
 }
 
 .page-heading {
-  text-align: center;
-  align-content: center;
   background-image: linear-gradient(to right, #dc0600, #ef3024);
   color: #fdfdfd;
-  height: 56px;
+  height: 65px;
   width: 100%;
-  padding-top: 9px;
-  padding-right: 90px;
+  padding-top: 15px;
   font-size: 25px;
   font-family: helvetica;
-  padding-left: 100px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   box-shadow: 0px 10px 16px -6px rgba(0, 0, 0, 0.33);
   margin-top: -8px;
+}
+
+/* .notification-heading {
+  padding-right: 130px;
+} */
+
+.icon {
+  margin-left: 305px;
+  margin-top: 5px;
+}
+
+.black-delete-icon {
+  height: 26px;
+  width: 20px;
+  float: right;
+  margin-right: 33px;
+}
+
+.delete-icon {
+  height: 26px;
+  width: 20px;
+  float: right;
+  margin-right: 33px;
+}
+
+.trash-spacing {
+  margin-left: 305px;
+  margin-top: 5px;
 }
 
 .td-delete {
@@ -334,8 +352,10 @@ a:active {
   width: 100%;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
-  background-image: linear-gradient(to right, #282829, #6d6d6d);
+  background: #fdfdfd;
+  /* background-image: linear-gradient(to right, #282829, #6d6d6d); */
   height: 56px;
+  margin-bottom: 56px;
 }
 
 .notifications-modal-confirm {
@@ -358,9 +378,10 @@ a:active {
   border-radius: 25px;
   width: 96px;
   height: 42px;
-  border-color: #fdfdfd;
+  border-color: #000000;
   border-width: 1.5px;
-  border: 1px #fdfdfd solid;
+  color: #000000;
+  border: 1px #000000 solid;
 }
 
 .empty-screen {
@@ -372,7 +393,7 @@ a:active {
 }
 
 .notifications-text {
-  color: #fdfdfd;
+  color: #000000;
 }
 
 .notifications-a-class {
@@ -386,4 +407,9 @@ a:active {
 .format-content {
   padding-left: 25px;
   padding-right: 25px;
+}
+
+.outer-header-div {
+  float: left;
+  padding-left: 40px;
 }
