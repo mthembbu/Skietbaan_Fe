@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
 import { withRouter } from 'react-router-dom';
-import { passId, getName ,FetchGroups} from '../actions/postActions';
+import { passId, getName ,FetchGroups,groupDic} from '../actions/postActions';
 import { BASE_URL } from '../actions/types';
-import deleteState from './GroupImages/deleteState.png';
-import normalstate from './GroupImages/submit-plus.png';
+import Switch from '@material-ui/core/Switch';
 import back from './GroupImages/back.png';
+import group from './GroupImages/groupIcon.png';
+import PropTypes from 'prop-types';
+
 import { getCookie } from '../components/cookie.js';
+import { prototype } from 'react-transition-group/TransitionGroup';
 class ViewGroups extends Component {
 	constructor(props) {
 		super(props);
@@ -27,7 +30,8 @@ class ViewGroups extends Component {
 	}
 
 	async componentWillMount() {
-    this.props.FetchGroups()
+		this.props.FetchGroups();
+		this.props.groupDic();
 	}
 
 	onChange(event) {
@@ -44,7 +48,6 @@ class ViewGroups extends Component {
 	}
 
 	async delete(groupId) {
-		this.setState({ ShowMe: false });
 		await fetch(BASE_URL + '/api/Groups/' + groupId, {
 			method: 'POST',
 			headers: {
@@ -82,9 +85,18 @@ class ViewGroups extends Component {
 									>
 										{post.name}
 									</td>
+									<td className="group-container">
+									<img src={group}
+									className="groupIcon"
+									alt=""
+								/>
+								{post.isActive==true?
+								<label>{ this.props.groupDict[post.id]}</label>:null}
+									</td>
 									<td>
 										<div className="group-view">
-											<button className="Active" onClick={() => this.delete(post.id)}>{post.isActive==true?"Active":"InActive"}</button>
+										<Switch className="Active" checked={post.isActive} onClick={() => this.delete(post.id)}/>
+											{/* <button  >{post.isActive==true?"Active":"InActive"}</button> */}
 										</div>
 									</td>
 								</tr>
@@ -111,10 +123,19 @@ class ViewGroups extends Component {
 		);
 	}
 }
+
+ViewGroups.propTypes={
+	groupDict:PropTypes.shape({
+		Id:PropTypes.arrayOf(PropTypes.number),
+		count:PropTypes.arrayOf(PropTypes.number)
+	}) 
+}
+
 const mapStateToProps = (state) => ({
 	name: state.posts.groupName,
   id: state.posts.groupId,
-  groupsList:state.posts.groupsList
+	groupsList:state.posts.groupsList,
+	groupDict:state.posts.groupDict
 });
 
-export default withRouter(connect(mapStateToProps, { passId, getName ,FetchGroups})(ViewGroups));
+export default withRouter(connect(mapStateToProps, { passId, getName,groupDic ,FetchGroups})(ViewGroups));

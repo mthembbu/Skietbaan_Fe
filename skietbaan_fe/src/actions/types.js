@@ -9,6 +9,7 @@ import notificationsGray from "../components/navbar-icons/new-nav-icons/new-noti
 import notifyGrey from "../components/navbar-icons/notify-gray.png";
 import scorecaptureRed from "../components/navbar-icons/new-nav-icons/new-add-score-red.png";
 import scorecaptureGray from "../components/navbar-icons/new-nav-icons/new-add-score-grey.png";
+ import moreNotify from "../components/navbar-icons/more-new.png";
 
 export const NAV_BAR_ICONS = {
   PROFILE_RED: profileRed,
@@ -32,8 +33,8 @@ export const NEW_POST = "NEW_POST";
 export const NEW_COMP = "NEW_COMP";
 export const FETCH_COMP = "FETCH_COMP";
 export const UPDATE_COMP_STATUS = "UPDATE_COMP_STATUS";
-export const BASE_URL = "http://api.skietbaan.retrotest.co.za";
-export const URL = "http://api.skietbaan.retrotest.co.za";
+export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
+export const URL = "https://api.skietbaan.retrotest.co.za";
 
 //leaderboard types
 export const FETCH_LEADERBOARDFILTER_DATA = "FETCH_LEADERBOARDFILTER_DATA";
@@ -50,4 +51,4 @@ export const GETNAME = "GETNAME";
 export const EDITGROUPUSERS = "EDITGROUPUSERS";
 export const FETCH_GROUPS = "FETCH_GROUPS";
 export const ADDMEMBERS = "ADDMEMBERS";
-
+export const GROUPDICT = "GROUPDICT";

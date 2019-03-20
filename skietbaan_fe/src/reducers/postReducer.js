@@ -6,15 +6,19 @@ import {
   PASS_ID,
   CREATEGROUP,
   EDITGROUPUSERS,
+  UPDATE_SELECTED_COMPETITION,
+  UPDATE_SELECTED_GROUP,
+  GROUPDICT,
   ADDMEMBERS,
-  FETCH_GROUPS,UPDATEARRAY, UPDATE_SELECTED_COMPETITION, UPDATE_SELECTED_GROUP
+  FETCH_GROUPS
 } from "../actions/types";
 
 const initialState = {
   selectedItem: {},
   leaderboardSelectedCompetitionName: [],
   selectedItem: {},
-  groupName: "",
+  groupDict:{},
+ upName: "",
   editGroup:[],
   groupsList:[],
   existing:[],
@@ -48,6 +52,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         groupsList: action.payload
+      };
+  
+    case GROUPDICT:
+      return {
+        ...state,
+        groupDict: action.payload
       };
 
     case UPDATE_GROUPNAME:

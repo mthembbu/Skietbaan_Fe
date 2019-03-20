@@ -7,6 +7,7 @@ import {
   FETCH_GROUPS,
   EDITGROUPUSERS,
   ADDMEMBERS,
+  GROUPDICT,
   FETCH_LEADERBOARDFILTER_DATA,
   FETCH_LEADERBOARDTABLE_DATA,
   UPDATE_SELECTED_COMPETITION,
@@ -97,6 +98,17 @@ export const getGroup = () => dispatch => {
     .then(posts =>
       dispatch({
         type: GETGROUP,
+        payload: posts
+      })
+    );
+};
+
+export const groupDic = () => dispatch => {
+  fetch(BASE_URL + "/api/Groups/participants")
+    .then(res => res.json())
+    .then(posts =>
+      dispatch({
+        type: GROUPDICT,
         payload: posts
       })
     );

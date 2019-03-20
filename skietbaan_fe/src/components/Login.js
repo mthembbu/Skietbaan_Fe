@@ -210,10 +210,6 @@ class Login extends Component {
                   className="input-user"
                   placeholder="Username"
                 />
-                <div className="error-message-container">
-                  <div className={this.state.usernameFound
-                    && this.usernameValue !== "" ? "hidden" : "error-message"}>Invalid Username</div>
-                </div>
               </FormGroup>
             </div>
             <div className="spacing-login">
@@ -235,7 +231,10 @@ class Login extends Component {
                 </div>
                 <div className="error-message-container">
                   <div className={this.state.passwordFound
-                    && this.passwordValue !== "" ? "hidden" : "error-message"}>Invalid Password</div>
+                    && this.passwordValue !== "" 
+                    && this.state.usernameFound
+                    && this.usernameValue !== ""      
+                    ? "hidden" : "error-message"}>Invalid Username or Password</div>
                 </div>
               </FormGroup>
             </div>
@@ -243,12 +242,14 @@ class Login extends Component {
               <Button onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
                 : "buttons-invalid round-button"} >Login</Button>
             </div>
-            
+
             {/* TODO : forgot password page under construction
             <div className="login-href">
               <a href="/forgotPassword" >Forgot Password?</a>
-            </div> */}
+            </div>
+             */}
           </Form>
+
         </div >
       </div>
 
