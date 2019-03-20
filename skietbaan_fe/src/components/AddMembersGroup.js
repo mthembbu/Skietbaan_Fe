@@ -34,7 +34,7 @@ class AddMembersGroup extends Component {
 		this.setState({ filterText: event.target.value });
 	}
 
-	async addUsers() {
+async addUsers () {
 		const { newArray } = this.state;
 		for (var i = 0; i < this.props.existing.length; i++) {
 			if (this.props.existing[i].highlighted === true) {
