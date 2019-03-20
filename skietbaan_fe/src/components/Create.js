@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import "./Create.css";
 import { getCookie } from "../components/cookie.js";
 import { URL } from "../actions/types.js";
-import history from "./history";
-import RegisterMember from '../components/RegisterMember';
-import ViewMembers from '../components/ViewMembers';
 
 class Create extends Component {
   constructor(props) {
@@ -78,7 +75,6 @@ class Create extends Component {
             <button className="create-all-members-btn">MEMBERS</button>
           </div>
         </div>
-        
       </div>
     );
   }

@@ -1,16 +1,11 @@
-import React, { Component } from 'react';
-import {
-  Col,
-  FormGroup,
-  Button,
-  Form
-} from 'reactstrap';
-import '../components/RegisterStyles.css';
-import { validateUsername } from './Validators.js';
-import { getCookie } from './cookie.js';
-import { URL } from '../actions/types.js';
-import back from '../components/assets/Back.png';
-import skietbaan from '../components/assets/skietbaanLogo.png';
+import React, { Component } from "react";
+import { FormGroup, Button, Form } from "reactstrap";
+import "../components/RegisterStyles.css";
+import { validateUsername } from "./Validators.js";
+import { getCookie } from "./cookie.js";
+import { URL } from "../actions/types.js";
+import back from "../components/assets/Back.png";
+import skietbaan from "../components/assets/skietbaanLogo.png";
 import history from "./history";
 
 class Login extends Component {
@@ -25,7 +20,7 @@ class Login extends Component {
       passwordFound: true,
       usernameFound: true,
       toggle: false
-    }
+    };
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.validate = this.validate.bind(this);
@@ -38,29 +33,25 @@ class Login extends Component {
   disableButton() {
     if (this.state.validForm === true) {
       document.getElementById("roundButton").disabled = false;
-    }
-    else
-      document.getElementById("roundButton").disabled = true;
-
+    } else document.getElementById("roundButton").disabled = true;
   }
 
   componentDidMount() {
-    this.disableButton()
+    this.disableButton();
   }
 
   toggleNavbar() {
     let Navbar = document.querySelector(".navbar-admin");
     if (Navbar.classList.contains("hidden")) {
       Navbar.classList.remove("hidden");
-    }
-    else {
+    } else {
       Navbar.classList.add("hidden");
     }
   }
 
   handleChange({ target }) {
     this.setState({
-      [target.name]: target.value,
+      [target.name]: target.value
     });
     this.disableButton();
     let isValid = false;
@@ -69,50 +60,53 @@ class Login extends Component {
       invalidUsername: this.state.invalidUsername,
       usernameFound: true,
       passwordFound: true
-    }
+    };
     if (target.name === "passwordValue") {
-      if (target.value.length > 0)
-        stateUpdate.invalidPassword = false;
+      if (target.value.length > 0) stateUpdate.invalidPassword = false;
       else {
         stateUpdate.invalidPassword = true;
       }
     }
     if (target.name === "usernameValue") {
-      if (target.value.length > 0)
-        stateUpdate.invalidUsername = false;
+      if (target.value.length > 0) stateUpdate.invalidUsername = false;
       else {
         stateUpdate.invalidUsername = true;
       }
     }
 
-    if (this.state.usernameValue
-      && this.state.passwordValue
-      && !stateUpdate.invalidUsername
-      && !stateUpdate.invalidPassword) {
+    if (
+      this.state.usernameValue &&
+      this.state.passwordValue &&
+      !stateUpdate.invalidUsername &&
+      !stateUpdate.invalidPassword
+    ) {
       isValid = true;
     }
-    this.setState({
-      ...stateUpdate,
-      validForm: isValid
-    }, () => {
-      this.disableButton();
-    });
-  };
+    this.setState(
+      {
+        ...stateUpdate,
+        validForm: isValid
+      },
+      () => {
+        this.disableButton();
+      }
+    );
+  }
 
   validate() {
     let isValid = true;
     let stateUpdate = {
       invalidPassword: false,
       invalidUsername: false
-    }
+    };
     if (this.state.passwordValue.length === 0) {
       stateUpdate.invalidPassword = true;
       isValid = false;
-    };
+    }
     if (validateUsername(this.state.usernameValue)) {
       stateUpdate.invalidUsername = true;
       isValid = false;
-    };
+    }
     this.setState({
       ...stateUpdate,
       validForm: isValid
@@ -122,49 +116,51 @@ class Login extends Component {
   login() {
     this.validate();
     if (this.state.validForm) {
-      let sha1 = require('sha1');
+      let sha1 = require("sha1");
       let hash = sha1(this.state.passwordValue);
       let RequestObject = {
-        "Username": this.state.usernameValue,
-        "Password": hash,
-      }
+        Username: this.state.usernameValue,
+        Password: hash
+      };
       fetch(URL + "/api/features/login", {
-        method: 'post',
+        method: "post",
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          Accept: "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(RequestObject)
-      }).then(response => response.json()).then(data => {
-        if (typeof data === "object") {
-          document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
-          window.location ="/home"
-        }
-
-        else if (typeof data === "string") {
-          if (data.indexOf("Invalid Password") > -1) {
-            this.setState({
-              invalidPassword: true,
-              passwordFound: false,
-
-            });
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (typeof data === "object") {
+            document.cookie =
+              "token =" +
+              data.token +
+              "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
+            window.location = "/home";
+          } else if (typeof data === "string") {
+            if (data.indexOf("Invalid Password") > -1) {
+              this.setState({
+                invalidPassword: true,
+                passwordFound: false
+              });
+            }
+            if (data.indexOf("not found") > -1) {
+              this.setState({
+                invalidUsername: true,
+                usernameFound: false
+              });
+            }
           }
-          if (data.indexOf("not found") > -1) {
-            this.setState({
-              invalidUsername: true,
-              usernameFound: false
-            })
-          }
-        }
-      }).catch(function (data) {
-      });
+        })
+        .catch(function(data) {});
     }
   }
 
   togglePassword() {
     this.setState({
       toggle: !this.state.toggle
-    })
+    });
   }
 
   goToRegister() {
@@ -172,10 +168,13 @@ class Login extends Component {
   }
 
   render() {
-    document.addEventListener('DOMContentLoaded', () => {
-      this.toggleNavbar();
-
-    }, false);
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+        this.toggleNavbar();
+      },
+      false
+    );
     if (getCookie("token")) {
       history.push("/home");
     }
@@ -184,20 +183,21 @@ class Login extends Component {
       <div className="page-content-login">
         <div className="red-background">
           <div className="welcome-header">
-            <img src={skietbaan} className="header-image" alt=''></img>
+            <img src={skietbaan} className="header-image" alt="" />
           </div>
           <div className="header-container">
             <div className="centre-label">
               <label className="header-label">LOGIN</label>
             </div>
-            <img src={back}
+            <img
+              src={back}
               className="back-btn"
-              onClick={() => this.goToRegister()}></img>
+              onClick={() => this.goToRegister()}
+            />
           </div>
         </div>
         <div className="centre-login">
           <Form className="form" autoComplete="off">
-
             <div className="spacing-login">
               <FormGroup>
                 <input
@@ -222,25 +222,51 @@ class Login extends Component {
                     autoComplete="off"
                     value={this.state.passwordValue}
                     onChange={this.handleChange}
-                    className={this.state.toggle ? "input-password-show" : "input-password"}
+                    className={
+                      this.state.toggle
+                        ? "input-password-show"
+                        : "input-password"
+                    }
                     placeholder="Password"
                   />
-                  <div className={this.state.passwordValue !== "" ? "password-view-icon" : "password-icon"}
-                    onClick={this.togglePassword} name="eye">
-                  </div>
+                  <div
+                    className={
+                      this.state.passwordValue !== ""
+                        ? "password-view-icon"
+                        : "password-icon"
+                    }
+                    onClick={this.togglePassword}
+                    name="eye"
+                  />
                 </div>
                 <div className="error-message-container">
-                  <div className={this.state.passwordFound
-                    && this.passwordValue !== "" 
-                    && this.state.usernameFound
-                    && this.usernameValue !== ""      
-                    ? "hidden" : "error-message"}>Invalid Username or Password</div>
+                  <div
+                    className={
+                      this.state.passwordFound &&
+                      this.passwordValue !== "" &&
+                      this.state.usernameFound &&
+                      this.usernameValue !== ""
+                        ? "hidden"
+                        : "error-message"
+                    }
+                  >
+                    Invalid Username or Password
+                  </div>
                 </div>
               </FormGroup>
             </div>
             <div className="button-container">
-              <Button onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
-                : "buttons-invalid round-button"} >Login</Button>
+              <Button
+                onClick={this.login}
+                id="roundButton"
+                className={
+                  this.state.validForm
+                    ? "round-button"
+                    : "buttons-invalid round-button"
+                }
+              >
+                Login
+              </Button>
             </div>
 
             {/* TODO : forgot password page under construction
@@ -249,10 +275,8 @@ class Login extends Component {
             </div>
              */}
           </Form>
-
-        </div >
+        </div>
       </div>
-
     );
   }
 }

@@ -17,15 +17,15 @@ const initialState = {
   selectedItem: {},
   leaderboardSelectedCompetitionName: [],
   selectedItem: {},
-  groupDict:{},
- upName: "",
-  editGroup:[],
-  groupsList:[],
-  existing:[],
+  groupDict: {},
+  upName: "",
+  editGroup: [],
+  groupsList: [],
+  existing: [],
   leaderboardGroups: [],
   leaderboardCompetitions: [],
-  leaderboardSelectedCompetitionName:"",
-  leaderboardSelectedGroupName:"",
+  leaderboardSelectedCompetitionName: "",
+  leaderboardSelectedGroupName: "",
   leaderboardTableData: [],
   leaderboardUserData: {
     rank: 0,
@@ -35,13 +35,12 @@ const initialState = {
     average: 0
   },
   groupId: "",
-  groupName: "",
+  groupName: ""
 };
 
 //the function to detect the state change
 export default function(state = initialState, action) {
   switch (action.type) {
-    
     case FETCH_POSTS:
       return {
         ...state,
@@ -53,7 +52,7 @@ export default function(state = initialState, action) {
         ...state,
         groupsList: action.payload
       };
-  
+
     case GROUPDICT:
       return {
         ...state,
@@ -115,12 +114,11 @@ export default function(state = initialState, action) {
         leaderboardSelectedCompetitionName: action.payload
       };
     case UPDATE_SELECTED_GROUP:
-    console.log(action.payload)
       return {
         ...state,
         leaderboardSelectedGroupName: action.payload
       };
-      
+
     default:
       return state;
   }

@@ -1,5 +1,3 @@
-
-
 import React, { Component } from "react";
 import "./groups.css";
 import { createGroups } from "../actions/postActions";
@@ -7,8 +5,6 @@ import { BASE_URL } from "../actions/types";
 import back from "./GroupImages/back.png";
 import unmarked from "./GroupImages/unmarked.png";
 import marked from "./GroupImages/marked.png";
-
-import { getCookie } from '../components/cookie.js';
 
 class requirements extends Component {
   constructor(props) {
@@ -20,53 +16,53 @@ class requirements extends Component {
       count: 0,
       filterText: "",
       check: "Select all",
-      numberofshots:0,
+      numberofshots: 0
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.onBack = this.onBack.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.updateNumberOfShots = this.updateNumberOfShots.bind(this)
+    this.updateNumberOfShots = this.updateNumberOfShots.bind(this);
   }
   UNSAFE_componentWillMount() {
-      fetch(BASE_URL + "/api/Competition/all")
-        .then(res => res.json())
-        .then(data => {
-          this.setState({
-            posts: data.map(users => {
-              users.highlighted = false;
-              return {
-                ...users,
-                highlighted: false,
-                background: "white",
-                image: unmarked
-              };
-            })
-          });
+    fetch(BASE_URL + "/api/Competition/all")
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          posts: data.map(users => {
+            users.highlighted = false;
+            return {
+              ...users,
+              highlighted: false,
+              background: "white",
+              image: unmarked
+            };
+          })
         });
+      });
   }
 
   updateNumberOfShots() {
-    fetch(BASE_URL + "/api/Documents/changeShots?num=" + this.state.numberofshots,{
+    fetch(
+      BASE_URL + "/api/Documents/changeShots?num=" + this.state.numberofshots,
+      {
         method: "post",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
         body: JSON.stringify(this.state.numberofshots)
-      })
-        .then(function(response) {})
-        .then(function(data) {})
-        .catch(function(data) {});
-        this.props.history.push("/requirements");
-    }
-  
-handleChange(event) {   
+      }
+    )
+      .then(function(response) {})
+      .then(function(data) {})
+      .catch(function(data) {});
+    this.props.history.push("/requirements");
+  }
 
+  handleChange(event) {
     this.setState({ numberofshots: event.target.value });
-    console.log(this.state.numberofshots)
-}   
-
-
+    console.log(this.state.numberofshots);
+  }
 
   toggleHighlight = event => {
     if (this.state.posts[event].highlighted == true) {
@@ -88,7 +84,7 @@ handleChange(event) {
   render() {
     const postitems = (
       <div className="check documents-center">
-        <ul class="list-group" style={{textAlign:"left"}}>
+        <ul class="list-group" style={{ textAlign: "left" }}>
           {this.state.posts
             .filter(post => {
               return (
@@ -106,7 +102,8 @@ handleChange(event) {
                 class="list-group-item list-group-item-light"
                 key={post.id}
                 style={{
-                  background: post.background ,textAlign:"left"
+                  background: post.background,
+                  textAlign: "left"
                 }}
               >
                 <img
@@ -117,7 +114,7 @@ handleChange(event) {
                 />
                 <label className="blabe">
                   <div className="userName" style={{ color: post.colors }}>
-                  {post.name}
+                    {post.name}
                   </div>
                 </label>
               </li>
@@ -132,41 +129,44 @@ handleChange(event) {
           <label className="center-label">Requirements</label>
         </div>
 
-       
         <div
           className="scrollbar"
           data-simplebar
           data-simplebar-auto-hide="false"
         >
-
-        <div className="label-score">
-              <div className="centre-label">
-                <label className="scorelabel">Enter Number of SHots</label>
-              </div>
-              <div className="input-container">
-                <input type="number" id="scoreInput" value={this.state.numberofshots} onChange={this.handleChange} min="0" step="1" name="score" className="score"
-                ></input>
-              </div>
-
-        </div>
-        <br/>
-        <div className="centre-label">
-                <label className="scorelabel">Select Competitions</label>
-              </div>
-        <br/>
+          <div className="label-score">
+            <div className="centre-label">
+              <label className="scorelabel">Enter Number of SHots</label>
+            </div>
+            <div className="input-container">
+              <input
+                type="number"
+                id="scoreInput"
+                value={this.state.numberofshots}
+                onChange={this.handleChange}
+                min="0"
+                step="1"
+                name="score"
+                className="score"
+              />
+            </div>
+          </div>
+          <br />
+          <div className="centre-label">
+            <label className="scorelabel">Select Competitions</label>
+          </div>
+          <br />
           {postitems}
         </div>
-       
-          <label className="bottom-label">
-            <button className="create-group" onClick={this.updateNumberOfShots}>
-              Create Group
-            </button>
-          </label>
-    
+
+        <label className="bottom-label">
+          <button className="create-group" onClick={this.updateNumberOfShots}>
+            Create Group
+          </button>
+        </label>
       </main>
     );
   }
 }
 
-export default (requirements)
-
+export default requirements;
