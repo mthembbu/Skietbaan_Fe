@@ -18,6 +18,7 @@ class Groups extends Component {
 			groups: [],
 			newArray: [],
 			count: 0,
+			st:true,
 			filterText: '',
 			check: 'Select all'
 		};
@@ -79,7 +80,7 @@ class Groups extends Component {
 
 	selectall() {
 		if (this.state.check == 'Select all') {
-			this.setState({ count: this.state.posts.length });
+			this.setState({ count: this.state.posts.length});
 			for (var i = 0; i < this.state.posts.length; i++) {
 				this.state.posts[i].highlighted = true;
 			}
@@ -94,12 +95,13 @@ class Groups extends Component {
 	}
 
 	toggleHighlight = (event) => {
+		console.log(this.state.count)
 		if (this.state.posts[event].highlighted == true) {
 			this.state.posts[event].highlighted = false;
-			this.setState({ count: this.state.count + 1 });
+			this.setState({ count: this.state.count - 1 });
 		} else {
 			this.state.posts[event].highlighted = true;
-			this.setState({ count: this.state.count - 1 });
+			this.setState({ count: this.state.count + 1 });
 		}
 	};
 	onBack() {
@@ -155,8 +157,8 @@ class Groups extends Component {
 								placeholder="Search"
 							/>
 						</div>
-						<div className="switchAll" checked="true" onClick={this.selectall}>All
-							<Switch />
+						<div className="switchAll" onClick={this.selectall}>All
+							<Switch  checked={this.state.count==0?false:null || this.state.count==this.state.posts.length?true:null} />
 						</div>
 					</div>
 				</div>

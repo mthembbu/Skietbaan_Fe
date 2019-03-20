@@ -409,14 +409,16 @@
 
 .view-group {
 	border-bottom: solid 2px #bbbcbd;
-	height: 55px;
+	height: 62px;
 	font-size: 18px;
 	font-weight: lighter;
 	color: #6f839e;
 }
 
 .first-row {
-	height: 63px;
+  height: 63px;
+  color: black;
+  text-align: left;
 }
 
 .name-of-group {
@@ -484,6 +486,10 @@
 	margin-left: 12px;
 	font-size: 16px;
 	font-weight: lighter;
+}
+.numberOfUser{
+  color: #555555;
+  vertical-align: middle;
 }
 
 @media only screen and (max-width: 575px) {

@@ -6,7 +6,7 @@ import { passId, getName ,FetchGroups,groupDic} from '../actions/postActions';
 import { BASE_URL } from '../actions/types';
 import Switch from '@material-ui/core/Switch';
 import back from './GroupImages/back.png';
-import group from './GroupImages/groupIcon.png';
+import group from './GroupImages/Group.png';
 import PropTypes from 'prop-types';
 import { getCookie } from '../components/cookie.js';
 
@@ -28,7 +28,7 @@ class ViewGroups extends Component {
 		this.editGroup = this.editGroup.bind(this);
 	}
 
-	async componentWillMount() {
+	async componentDidMount() {
 		this.props.FetchGroups();
 		this.props.groupDic();
 	}
@@ -80,17 +80,17 @@ class ViewGroups extends Component {
 									<td
 										className="first-row"
 										onClick={() => this.editGroup(post)}
-										style={{ color: post.colors, textAlign: 'left' }}
 									>
 										{post.name}
 									</td>
+									
 									<td className="group-container">
-									<img src={group}
+									{post.isActive===true?
+									<div><img src={group}
 									className="groupIcon"
 									alt=""
 								/>
-								{post.isActive==true?
-								<label>{ this.props.groupDict[post.id]}</label>:null}
+								<label className="numberOfUser">{ this.props.groupDict[post.id]}</label></div>:null}
 									</td>
 									<td>
 										<div className="group-view">
