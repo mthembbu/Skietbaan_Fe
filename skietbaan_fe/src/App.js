@@ -25,12 +25,16 @@ import EditGroup from './components/EditGroup';
 import ViewComp from './components/ViewComp';
 import CreateComp from './components/CreateComp';
 import Create from './components/Create';
+import MetaTags from 'react-meta-tags';
 class App extends Component {
 
 	render() {
 		return (
 			<Provider store={store}>
 				<div>
+					<MetaTags>
+						<meta name="google" content="notranslate"></meta>
+					</MetaTags>
 					<NavbarMenu />
 					<Router history={history}>
 						<Switch>
