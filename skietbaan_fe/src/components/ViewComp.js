@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../scss/view-comp.css';
 import { getCookie } from '../components/cookie.js';
+import history from "./history";
 class ViewComp extends Component {
 	constructor(props) {
 		super(props);
@@ -20,7 +21,7 @@ class ViewComp extends Component {
 	}
 
 	onClick() {
-		window.location = '/create';
+		history.push("/create")
 	}
 	// The method that mounts everytime there is an action detected
 	componentWillMount() {

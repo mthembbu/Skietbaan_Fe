@@ -67,7 +67,6 @@ class LeaderboardPage extends Component {
         this.props.fetchleaderboadtabledata(filterSelection);
     }
     ValidatedInitialLeaderboardFilterSelection(){
-
         if(this.props.selectedCompetitionName != undefined){
             if(this.props.selectedCompetitionName.length > 0){
                 for(var i = 0;i<this.props.competitions.length;i++){
@@ -89,7 +88,6 @@ class LeaderboardPage extends Component {
                 }
             } 
         }
-        
     }
 
     setCompetitionValue = (value) => {

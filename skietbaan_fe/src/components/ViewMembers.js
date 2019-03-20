@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import '../components/ViewMembers.css';
-import { Table } from 'react-bootstrap';
 import Collapsible from 'react-collapsible';
 import { BASE_URL } from '../actions/types.js';
 import memberIcon from '../components/assets/membership-icon.png';
 import { getCookie } from '../components/cookie.js';
+import history from "./history";
 class ViewMembers extends Component {
     constructor(props) {
         super(props);
@@ -82,7 +82,7 @@ class ViewMembers extends Component {
     }
 
     BackToCreate() {
-        window.location = "/create";
+        history.push("/create")
     }
 
     Status(timeLeft) {
