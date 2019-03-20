@@ -5,8 +5,10 @@ import { getCookie } from './cookie.js';
 import { URL } from '../actions/types.js';
 import cameraGray from '../components/assets/redSubmitButton.png';
 import graySubmit from '../components/assets/btnThatSubmitsRed.png';
-import grayRetry from '../components/assets/grayRetry.png';
-import lightgrayback from '../components/assets/lightgrayback.png'
+import grayRetry from '../components/assets/retryBlack.png';
+import lightgrayback from '../components/assets/blackBackBtn.png';
+import cameraBlack from '../components/assets/cameraBlack.png';
+import submit from '../components/assets/blackSumbit.png';
 
 export default class search extends Component {
   constructor(props) {
@@ -240,7 +242,7 @@ export default class search extends Component {
           .then(data => this.setState({
             scoreSaved: true, currState: 5
           }));
-        setTimeout(function () { window.location = "/scoreCapture"; }, 2000);
+        //setTimeout(function () { window.location = "/scoreCapture"; }, 2000);
 
       }
       else if (Valid && !this.state.scoreSaved) {
@@ -379,15 +381,16 @@ export default class search extends Component {
         <div className={stateOne? "hidden" : "score-capture-header"}>
         <label className="label-for-score">ADD SCORE</label>
         </div>
-          <div className={stateOne ? "page-content-video" : "page-content"}>
+          <div className={(stateOne ? "page-content-video" : "page-content")}>
+          <div className ="">
+
+          </div>
             <div className={stateOne ? "hidden" : ""}>
 
               <div className="label-score">
                   <input type="number" id="scoreInput" min="0" step="1" name="score" className="score"
                     onChange={this.handleScore}
-                    placeholder="Enter Score"></input>
-                 
-
+                    placeholder="Enter Score"></input>               
               </div>
               <div className={this.state.validScore ? "hidden" : "invalidScore"}>Enter Valid Score</div>
               <div className="centre-label">
@@ -397,9 +400,11 @@ export default class search extends Component {
                 {competitionItem}
 
               </div>
-              {/* TODO saving page in progress <div className={this.state.scoreSaved ? "sucess-container" : "hidden"}>
+              <div className={this.state.scoreSaved ? "sucess-container" : "hidden"}>
+              <div className="success-container">
                 <div className="success"> Score Saved successfully </div>
-              </div> */}
+                </div>
+              </div>
             </div>
             <div className="submit-container" id="HideWhenAddingScore">
               <div className={this.state.imageTaken || this.state.showCamera
@@ -420,8 +425,8 @@ export default class search extends Component {
               <div className="icon-push-down no-margin">
                 <div className={!this.state.imageTaken ? "hidden" : "submit-button-elements third float-right"}>
                   <div className="button-hover ">
-                    <img src={graySubmit} onClick={() => this.GetLocation()}
-                      className="button-that-submits" alt=''></img>
+                    <img src={submit} onClick={() => this.GetLocation()}
+                      className="button-that-submits2" alt=''></img>
                   </div>
                 </div>
                 <div className={this.state.imageTaken ? "submit-button-elements third float-right" : "hidden"} >
@@ -431,19 +436,14 @@ export default class search extends Component {
                       alt=''>
                     </img>
                   </div>
-                  <label className="labelIcon">Re-Capture Score</label>
                 </div>
               </div>
-
             </div>
             <div className={this.state.showCamera ? "" : "hidden"}>
               <div className={this.state.imageTaken ? "hidden" : "label-score photo-top-label"}>
                 Capture Score
               <img src={lightgrayback} onClick={() => this.goBack()} id="back"
                   className="btnBack" alt=''></img>
-              </div>
-              <div className="back-spacing">
-
               </div>
               <div className={this.state.imageTaken ? "hidden" : "video-container"}>
                 <video id="video" width="310" height="310" className="video" autoPlay></video>
@@ -460,8 +460,8 @@ export default class search extends Component {
                 <div className={this.state.currState !== 3 ? "hidden" : "submit-button-elements third"}>
                   <div className="button-hover">
                     <div className={this.state.currState !== 3 ? "hidden" : ""}>
-                      <img src={cameraGray} onClick={() => this.TakePhoto()} id="snap"
-                        className="score-capture-black" alt=''></img>
+                      <img src={cameraBlack} onClick={() => this.TakePhoto()} id="snap"
+                        className="score-capture" alt=''></img>
                     </div>
                   </div>
                 </div>

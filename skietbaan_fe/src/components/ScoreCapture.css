@@ -38,6 +38,8 @@
 .btn-score-capture{
     height: 42px;
     width: 72px;
+    border-radius: 22px;
+    box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
 }
 
 .competition-item:hover{
@@ -68,7 +70,7 @@
 .page-content-video{
     width: auto;
     height: stretch;
-    background-color: #F3F4F9;
+    background-color: #D9D9D9;
     width:100%;
     z-index: 50;
     position: relative;
@@ -117,14 +119,18 @@
     font-size: 14px;
 }
 
-.success{
-    color:#e11e2b;
+.success-container{
+    background: url('../components/assets/success.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .sucess-container{
     float: left;
     width: 100%;
     text-align: center;
+    height: 100%;
 }
 
 .label-score{
@@ -157,11 +163,12 @@
 }
 
 .photo-top-label{
-    padding-top:20px;
-    margin-bottom:20px;
-    background-color:#F3F4F9;
-    color:#6F839E;
-    font-weight: 600;
+    padding-top: 62px;
+    margin-bottom: 20px;
+    background-color: #D9D9D9;
+    color: #000000;
+    font-weight: bold;
+    font-size: 24px;
 }
 
 .no-padding{
@@ -290,36 +297,28 @@ hr{
 .button-that-submits{
     height: 42px;
     width: 72px;
+    border-radius: 22px;
+    box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
 }
 
 .button-that-submits2{
     height: 30px;
-    float: right;
-    margin-top: 28%;
-    margin-right: 26%;
-}
-
-@media screen and (min-height:600px)  {
-    .button-that-submits2{
-        margin-top: 35%;
-        margin-right: 26%;
-    }
 }
 
 .flash{
-    height: 30px;
+    height: 32px;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    background-image: url("../components/assets/grayFlashOn.png");
+    background-image: url("../components/assets/blackFlashOn.png");
 }
 
 .flashOff{
-    height: 30px;
+    height: 32px;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    background-image: url("../components/assets/grayFlashOff.png");
+    background-image: url("../components/assets/blackFlashOff.png");
 }
 
 .label-container{
@@ -387,4 +386,9 @@ input[type=number] {
     font-weight: 600;
     padding-top: 14px;
     padding-left: 40px;
+}
+
+.score-capture{
+    width: 43px;
+    height: 34px;
 }
