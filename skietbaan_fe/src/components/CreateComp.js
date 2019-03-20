@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import '../scss/createcomp.css';
 import { createcomp } from '../actions/competition.action';
 import { getCookie } from '../components/cookie.js';
+import history from "./history";
 class CreateComp extends Component {
 	constructor(props) {
 		super(props);
@@ -21,7 +22,7 @@ class CreateComp extends Component {
 		this.validate = this.validate.bind(this);
 	}
 	onClick() {
-		window.location = '/create';
+		history.push("/create")
 	}
 	/** A method that detects the change in the change in thw textfield */
 	onChange(e) {
