@@ -6,18 +6,12 @@ import { updateSelectedCompetition } from '../actions/postActions';
 import { updateSelectedGroup } from '../actions/postActions';
 import { Collapse } from 'react-collapse';
 import { Table } from "react-bootstrap";
-import { Img } from 'react-image'
 import { getCookie } from './cookie.js'
-import { MDBBtn, MDBIcon } from "mdbreact";
+import { MDBBtn } from "mdbreact";
 import '../bootstrap/LeaderboardStyle.css';
-import { runInThisContext } from 'vm';
 import {
-    BrowserView,
-    MobileView,
-    isBrowser,
-    isMobile
+    BrowserView
 } from "react-device-detect";
-import { isNullOrUndefined } from 'util';
 
 class LeaderboardPage extends Component {
     constructor(props) {
@@ -45,18 +39,18 @@ class LeaderboardPage extends Component {
     }
     //executed when leaderboard in mounted on main app
     componentWillMount() {
-        
+
         //get function to get filter data from api
         this.props.fetchleaderboadfilterdata();
         this.ValidatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(this.state.selectedCompetition,this.state.selectedGroup);
+        this.getLeaderboardData(this.state.selectedCompetition, this.state.selectedGroup);
     }
-    getLeaderboardData = (competition,group) => {
+    getLeaderboardData = (competition, group) => {
         let token = getCookie("token");
-        var CompNum = competition +1;
+        var CompNum = competition + 1;
         var GroupNum = group;
-        if(this.state.selectedGroup != -1){
-            GroupNum = this.state.selectedGroup +1;
+        if (this.state.selectedGroup != -1) {
+            GroupNum = this.state.selectedGroup + 1;
         }
         const filterSelection = {
             selectedCompetition: CompNum,
@@ -66,27 +60,27 @@ class LeaderboardPage extends Component {
         }
         this.props.fetchleaderboadtabledata(filterSelection);
     }
-    ValidatedInitialLeaderboardFilterSelection(){
-        if(this.props.selectedCompetitionName != undefined){
-            if(this.props.selectedCompetitionName.length > 0){
-                for(var i = 0;i<this.props.competitions.length;i++){
-                    if(this.props.competitions[i] == this.props.selectedCompetitionName){
+    ValidatedInitialLeaderboardFilterSelection() {
+        if (this.props.selectedCompetitionName != undefined) {
+            if (this.props.selectedCompetitionName.length > 0) {
+                for (var i = 0; i < this.props.competitions.length; i++) {
+                    if (this.props.competitions[i] == this.props.selectedCompetitionName) {
                         this.setState({
                             selectedCompetition: i
                         });
                     }
                 }
             }
-            
-            if(this.props.selectedGroupName.length > 0){
-                for(var i = 0;i<this.props.groups.length;i++){
-                    if(this.props.groups[i] == this.props.selectedGroupName){
+
+            if (this.props.selectedGroupName.length > 0) {
+                for (var i = 0; i < this.props.groups.length; i++) {
+                    if (this.props.groups[i] == this.props.selectedGroupName) {
                         this.setState({
                             selectedGroup: i
                         });
                     }
                 }
-            } 
+            }
         }
     }
 
@@ -96,19 +90,19 @@ class LeaderboardPage extends Component {
         });
         this.props.updateSelectedCompetition(this.props.competitions[value].label)
         this.ValidatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(value,this.state.selectedGroup);
+        this.getLeaderboardData(value, this.state.selectedGroup);
     }
     setGroupValue = (value) => {
         this.setState({
             selectedGroup: value
         });
-        if(value == -1){
+        if (value == -1) {
             this.props.updateSelectedGroup(this.state.individual);
-        }else{
+        } else {
             this.props.updateSelectedGroup(this.props.groups[value].label);
         }
         this.ValidatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(this.state.selectedCompetition,value);
+        this.getLeaderboardData(this.state.selectedCompetition, value);
     }
     setScoreTypeValue = (value) => {
         this.setState({
@@ -255,7 +249,7 @@ class LeaderboardPage extends Component {
         }
     }
     render() {
-        if(!getCookie("token")){
+        if (!getCookie("token")) {
             window.location = "/registerPage";
         }
         const groupsList = (
@@ -386,8 +380,8 @@ class LeaderboardPage extends Component {
                                                 </div>
                                             </div>
                                             <div className="rightGroups">
-                                                 <div className="rankinL">
-                                                     Select ranking
+                                                <div className="rankinL">
+                                                    Select ranking
                                                  </div>
                                                 <div className={this.state.selectedGroup == -1 ? "individual-Active" : "individual-Inactive"}>
                                                     <MDBBtn tag="a" size="lg" floating gradient="purple"
@@ -414,18 +408,18 @@ class LeaderboardPage extends Component {
                             </div>
                         </Collapse>
                         <Collapse isOpened={!this.state.collapseFilter}>
-                        <div className="RankingTableSection">
-                            <table className="RankingTable">
-                                <tbody>
-                                    {tablebody}
-                                </tbody>
-                            </table>
-                        </div>
+                            <div className="RankingTableSection">
+                                <table className="RankingTable">
+                                    <tbody>
+                                        {tablebody}
+                                    </tbody>
+                                </table>
+                            </div>
                         </Collapse>
                     </div>
                 </div>
                 {/* Current User Section*/}
-                 <div className="userWrapper">
+                <div className="userWrapper">
                     <div className="row justify-content-center">
                         <div className="col-sm-8 text-left">
                             <div className="CurrentUserTableSection">
@@ -453,7 +447,7 @@ class LeaderboardPage extends Component {
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
 
             </div>
         );
@@ -469,5 +463,5 @@ const mapStateToProps = state => ({
     selectedCompetitionName: state.posts.leaderboardSelectedCompetitionName,
     selectedScoreType: state.posts.leaderboardSelectedScoreType
 });
-export default connect(mapStateToProps, { fetchleaderboadfilterdata, fetchleaderboadtabledata, updateSelectedCompetition ,updateSelectedGroup })(LeaderboardPage);
+export default connect(mapStateToProps, { fetchleaderboadfilterdata, fetchleaderboadtabledata, updateSelectedCompetition, updateSelectedGroup })(LeaderboardPage);
 
