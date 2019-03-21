@@ -9,7 +9,8 @@ import unmarked from './GroupImages/Oval.png';
 import marked from './GroupImages/MarkedBox.png';
 import { getCookie } from '../components/cookie.js';
 import Switch from '@material-ui/core/Switch';
-
+// import { createMuiTheme } from '@material-ui/core/styles';
+// import purple from '@material-ui/core/colors/purple';
 class Groups extends Component {
 	constructor(props) {
 		super(props);
@@ -158,7 +159,7 @@ class Groups extends Component {
 							/>
 						</div>
 						<div className="switchAll" onClick={this.selectall}>All
-							<Switch  checked={this.state.count==0?false:null || this.state.count==this.state.posts.length?true:null} />
+							<Switch checked={this.state.count== 0?false:null || this.state.count==this.state.posts.length?true:null} />
 						</div>
 					</div>
 				</div>

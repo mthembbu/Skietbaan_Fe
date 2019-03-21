@@ -8,7 +8,9 @@ import Switch from '@material-ui/core/Switch';
 import back from './GroupImages/back.png';
 import group from './GroupImages/Group.png';
 import PropTypes from 'prop-types';
+
 import { getCookie } from '../components/cookie.js';
+
 
 class ViewGroups extends Component {
 	constructor(props) {
@@ -78,7 +80,7 @@ class ViewGroups extends Component {
 							.map((post, index) => (
 								<tr className="view-group" key={post.id}>
 									<td
-										className="first-row"
+										className={post.isActive==true?"first-row":"first-row-active"}
 										onClick={() => this.editGroup(post)}
 									>
 										{post.name}
@@ -94,8 +96,7 @@ class ViewGroups extends Component {
 									</td>
 									<td>
 										<div className="group-view">
-										<Switch className="Active" focus={true} checked={post.isActive} onClick={() => this.delete(post.id)}/>
-											{/* <button  >{post.isActive==true?"Active":"InActive"}</button> */}
+										<Switch color={"primary"} className="Active" focus={true} checked={post.isActive} onClick={() => this.delete(post.id)}/>
 										</div>
 									</td>
 								</tr>

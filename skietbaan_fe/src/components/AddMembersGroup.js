@@ -24,7 +24,7 @@ class AddMembersGroup extends Component {
 		this.onChange = this.onChange.bind(this);
 		this.addUsers = this.addUsers.bind(this);
 	}
-	async componentDidMount() {
+	async UNSAFE_componentWillMount() {
 		if (!getCookie('token')) {
 			window.location = '/registerPage';
 		}

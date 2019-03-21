@@ -3,10 +3,13 @@ import { connect } from 'react-redux';
 import './groups.css';
 import { withRouter } from 'react-router-dom';
 import { BASE_URL } from '../actions/types';
-import marked from './GroupImages/marked.png';
-import redbox from './GroupImages/Rectangle.png';
+import unmarked from './GroupImages/Oval.png';
+import marked from './GroupImages/MarkedBox.png';
 import { fetchEditUser, AddMemberAction } from '../actions/postActions';
 import back from './GroupImages/back.png';
+import Switch from '@material-ui/core/Switch';
+import Close from '@material-ui/icons/Close';
+import Delete from '@material-ui/icons/Delete';
 import { getCookie } from '../components/cookie.js';
 class EditGroup extends Component {
 	constructor(props) {
@@ -23,7 +26,7 @@ class EditGroup extends Component {
 		this.onChange = this.onChange.bind(this);
 		this.delete = this.delete.bind(this);
 	}
-	async componentWillMount() {
+	async UNSAFE_componentWillMount() {
 		if (!getCookie('token')) {
 			window.location = '/registerPage';
 		}
@@ -61,10 +64,10 @@ class EditGroup extends Component {
 	toggleHighlight = (event) => {
 		if (this.props.editGroup[event].highlighted === true) {
 			this.props.editGroup[event].highlighted = false;
-			 this.setState({ count: this.state.count - 1 });
+			this.setState({ count: this.state.count - 1 });
 		} else {
 			this.props.editGroup[event].highlighted = true;
-			 this.setState({ count: this.state.count + 1 });
+			this.setState({ count: this.state.count + 1 });
 		}
 	};
 
@@ -87,7 +90,7 @@ class EditGroup extends Component {
 	render() {
 		const postitems = (
 			<div className="check">
-				<ul class="list-group" >
+				<ul class="list-group">
 					{this.props.editGroup
 						.filter((post) => {
 							return (
@@ -99,16 +102,15 @@ class EditGroup extends Component {
 						.map((post, index) => (
 							<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(index)}>
 								<img
-									className="checkbox-delete"	
-									src={post.highlighted==true?marked:redbox}
+									className="checkbox-delete"
+									src={post.highlighted == true ? marked : unmarked}
 									alt=""
-							
 								/>
-								<label className={post.highlighted?"blabe":"blabe2"} >
-									<div className={post.highlighted?"userName":"userName-active"}>
+								<label className={post.highlighted ? 'blabe2' : 'blabe'}>
+									<div className={post.highlighted ? 'userName-active' : 'userName'}>
 										{post.username}
 									</div>
-									<div className={post.highlighted?"email":"emails-active"}>{post.email}</div>
+									<div className={post.highlighted ? 'emails-active' : 'email'}>{post.email}</div>
 								</label>
 							</li>
 						))}
@@ -121,49 +123,50 @@ class EditGroup extends Component {
 					<div className="the-nav-bar">
 						<img className="back-image" onClick={this.onBack} src={back} alt="" />
 						<label className="center-labels">{this.props.name}</label>
+						<div className="plus-next">
+							<Close />
+						</div>
+						<div className="delete-icon">
+							<Delete />
+						</div>
 					</div>
-					<div className="BNavBar">
-						<input
-							className="the-Text"
-							id="username"
-							type="text"
-							onChange={this.onChange}
-							autoComplete="off"
-						/>
-						<button className="select2" onClick={this.goToNext}>
-							Add new
-						</button>
+					<div class="BNavBar">
+						<div className="inputBox">
+							<input
+								className="the-Text"
+								id="username"
+								type="text"
+								onChange={this.onChange}
+								autoComplete="off"
+								placeholder="Search"
+							/>
+						</div>
+						<div className="switchAll" onClick={this.selectall}>
+							All
+							<Switch
+								checked={
+									this.state.count == 0 ? (
+										false
+									) : null || this.state.count == this.state.posts.length ? (
+										true
+									) : null
+								}
+							/>
+						</div>
 					</div>
 				</div>
-			
-					{postitems}
-			
+
+				{postitems}
+
 				{this.state.count == 0 ? null : (
 					<div className="bpanel">
-						<table className="group-delete-table">
-							<tbody>
-								<tr>
-									<td>
-										<div className="the-textname">Delete</div>
-									</td>
-									<td>
-										<span className="name-of-group">{this.state.selected} </span>
-									</td>
-									<div className="confrim-cancel">
-										<td>
-											<button className="group-confirm" onClick={() => this.delete()}>
-												Confirm
-											</button>
-										</td>
-										<td className="group-undo">
-											<button className="updatess" onClick={() => this.cancel()}>
-												Cancel
-											</button>
-										</td>
-									</div>
-								</tr>
-							</tbody>
-						</table>
+						<button className="confirm-group" onClick={() => this.delete()}>
+							DELETE USER
+						</button>
+
+						<button className="cancel-delete" onClick={() => this.cancel()}>
+							CANCEL
+						</button>
 					</div>
 				)}
 			</main>

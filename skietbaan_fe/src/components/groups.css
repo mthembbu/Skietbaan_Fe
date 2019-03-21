@@ -36,21 +36,13 @@
 }
 
 .center-labels {
-	margin-top: 10px;
-	margin-left: auto;
-	margin-right: auto;
-	width: 7em;
+	display: flex;
+	text-align: center;
+	margin-top: 14px;
 	display: flex;
 	color: white;
 	font-weight: bold;
-	font-size: 18px;
-	font-size: 20px;
-	display: flex;
-	text-align: center;
-	white-space: nowrap;
-	overflow: hidden !important;
-	text-overflow: ellipsis;
-	padding-right: 21px;
+	font-size: 25px;
 }
 
 .fa-angle-left {
@@ -80,7 +72,7 @@
 	padding-left: 15px;
 	font-size: 18px;
 	border-radius: 5px;
-	border: 1px solid #6f839e;
+	border: 1px solid #7b7b7b;
 }
 
 .select {
@@ -176,7 +168,7 @@
 	font-weight: bold;
 	font-size: 16px;
 	outline: none;
-	color: #6f839e;
+	color: #7b7b7b;
 }
 
 .userName-active {
@@ -190,7 +182,7 @@
 	font-size: 14px;
 	font-weight: lighter;
 	font-size: 16px;
-	color: #6f839e;
+	color: #7b7b7b;
 }
 
 .emails-active {
@@ -212,7 +204,7 @@
 	margin-left: 19px;
 	width: 278px;
 	background: white;
-	color: #6f839e;
+	color: #7b7b7b;
 	border-radius: 8px;
 	height: 48px;
 	padding-left: 10px;
@@ -289,14 +281,12 @@
 	position: fixed;
 	right: 0;
 	bottom: 0;
-	background-image: linear-gradient(to right, #282829, #6d6d6d);
+	background: #f8f8f8;
 	width: 100%;
-	margin: 0px;
 	z-index: 5px;
 	font-size: 16px;
 	font-weight: lighter;
 	padding-top: 10px;
-	display: flex;
 	float: bottom;
 	height: 66px;
 	border-top-left-radius: 20px;
@@ -309,11 +299,12 @@
 .updatess {
 	height: 42px;
 	border-radius: 40px;
-	width: 96px;
+	width: 156px;
 	margin-left: 8px;
-	background: transparent;
-	border: 1px solid white;
-	color: white;
+	background: white;
+	font: lighter;
+	border: 1px solid black;
+	color: black;
 }
 
 .botname {
@@ -345,21 +336,11 @@
 	text-overflow: ellipsis;
 	padding-left: 20px;
 }
-.group-confirm:focus {
+.confirm-group:focus {
 	outline: none;
 }
 
-.group-confirm {
-	border-radius: 24.5px;
-	width: 96px;
-	height: 42px;
-	background: white;
-	border: 1px solid;
-	padding-left: 5px;
-	background: red;
-	color: white;
-	border: 1px solid red;
-}
+
 .group-confirm-add {
 	border-radius: 24.5px;
 	width: 96px;
@@ -416,37 +397,20 @@
 }
 
 .first-row {
-  height: 63px;
-  color: black;
-  text-align: left;
+	height: 63px;
+	color: black;
+	text-align: left;
 }
-
-.name-of-group {
-	display: inline-block;
-	color: white;
-	margin-left: -40px;
-	width: 10%;
-	white-space: pre;
+.first-row-active {
+	height: 63px;
+	color: #c6c6c6;
+	text-align: left;
 }
-.name-of-groups {
-	display: inline-block;
-	color: white;
-	margin-left: -55px;
-	width: 10%;
-	white-space: pre;
-}
-
-.confrim-cancel {
-	padding-left: 7%;
-	position: fixed;
-	right: 1%;
-	outline: none;
-}
-
 .back-image {
 	padding-left: 30px;
 	margin-top: 19px;
 	height: 30px;
+	padding-right: 10px;
 }
 
 .checkbox-delete {
@@ -473,6 +437,14 @@
 .groupIcon {
 	padding-right: 5px;
 }
+.confirm-container {
+	justify-content: flex-start;
+	width: 156px;
+}
+.cancel-container {
+	justify-content: flex-end;
+	width: 156px;
+}
 
 @media screen and (min-width: 992px) {
 	.the-nav-bar {
@@ -485,15 +457,44 @@
 	margin-top: 20px;
 	margin-left: 12px;
 	font-size: 16px;
+	color: #666666;
 	font-weight: lighter;
 }
-.numberOfUser{
-  color: #555555;
-  vertical-align: middle;
+.numberOfUser {
+	color: #555555;
+	vertical-align: middle;
 }
 
 @media only screen and (max-width: 575px) {
 	.bottom-label {
 		margin-bottom: 56px;
 	}
+	.bpanel {
+		margin-bottom: 56px;
+	}
+}
+
+.confirm-group {
+	border-radius: 24.5px;
+	width: 156px;
+	height: 42px;
+	background: red;
+	color: white;
+	margin-left: 16px;
+	justify-content: flex-start;
+	border: 1px solid red;
+}
+
+.cancel-delete {
+	border-radius: 24.5px;
+	width: 156px;
+	margin-right: 16px;
+	height: 42px;
+	background: transparent;
+	color: #6a6a6a;
+	float: right;
+	border: 1px solid black;
+}
+.cancel-delete:focus{
+	outline: none;
 }
