@@ -45,6 +45,7 @@ class LeaderboardPage extends Component {
         this.displayList = this.displayList.bind(this);
         this.ValidatedInitialLeaderboardFilterSelection = this.ValidatedInitialLeaderboardFilterSelection.bind(this);
         this.updateDimensions = this.updateDimensions.bind(this);
+        this.checkFilterMobile = this.checkFilterMobile.bind(this);
     }
     componentDidMount() {
         console.log(this.state.height);
@@ -81,6 +82,15 @@ class LeaderboardPage extends Component {
             userToken: token
         }
         this.props.fetchleaderboadtabledata(filterSelection);
+    }
+    checkFilterMobile(){
+        if(this.state.width<575 && this.state.collapseFilter == false){
+            return true;
+        }else if(this.state.width>575){
+            return true;
+        }else{
+            return false;
+        }
     }
     ValidatedInitialLeaderboardFilterSelection() {
         if (this.props.selectedCompetitionName != undefined) {
@@ -377,11 +387,19 @@ class LeaderboardPage extends Component {
                                             {this.state.listType == "competitions" ? competitionsList : groupsList}
                                         </div>
                                     </div>
+                                    <div className="row justify-content-center">
+                                        <div className="closefilter">
+                                               <MDBBtn tag="a" size="lg" floating gradient="purple"
+                                                    onClick={this.onMouseClickFilter} >
+                                                    <img src={require('../resources/closefilter.png')} />
+                                                </MDBBtn>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </Collapse>
                         {/* <Collapse isOpened={!this.state.collapseFilter}> */}
-                        
+                        <Collapse isOpened={this.checkFilterMobile()}>
                         <table className="RankingTableHead">
                                 <tr className="HeaderRow2">
                                     <td className="colEmpty"></td>
@@ -406,6 +424,7 @@ class LeaderboardPage extends Component {
                                 </tbody>
                             </table>
                         </div>
+                        </Collapse>
                         {/* <div className="CurrentUserTableSection">
                                 <table className="RankingTable">
                                     <tbody>
@@ -433,7 +452,9 @@ class LeaderboardPage extends Component {
                     </div>
                 </div>
                 {/* Current User Section*/}
-                 <div className="userWrapper">
+                
+                 <div className="userWrapper" >
+                 <Collapse isOpened={this.checkFilterMobile()}>
                     <div className="row justify-content-center">
                         <div className="col-sm-8 text-left">
                             <div className="CurrentUserTableSection">
@@ -461,6 +482,7 @@ class LeaderboardPage extends Component {
                             </div>
                         </div>
                     </div>
+                    </Collapse>
                 </div> 
 
             </div>
