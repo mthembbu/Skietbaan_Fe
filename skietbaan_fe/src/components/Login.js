@@ -177,7 +177,7 @@ class Login extends Component {
 
     }, false);
     if (getCookie("token")) {
-      history.push("/home");
+      window.loction ="/home";
     }
 
     return (
