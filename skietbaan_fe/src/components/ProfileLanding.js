@@ -20,14 +20,10 @@ export default class ProfileLanding extends Component {
     
     AwardPage(){
         this.setState({selectedButton: 1});
-        $(".fix-top").css("padding-bottom","55px");
-        $(".content-container").css("padding-top", "150px");
     }
 
     DocumentsPage(){
-        this.setState({selectedButton : 2});
-        $(".fix-top").css("padding-bottom","0px");
-        $(".content-container").css("padding-top", "50px");
+        this.setState({selectedButton : 2}); 
     }
 
     Details(){
@@ -48,7 +44,8 @@ export default class ProfileLanding extends Component {
     render() {
         return (
             <div>
-                <div className="fix-top">
+                <div className={this.state.selectedButton == 1 ? "fix-top pad-bottom-55px"
+                    : this.state.selectedButton == 2 ? "fix-top pad-bottom-0px" : "fix-top"}>
                 <Row className="top-bar-rectangle">
                     <Col className="lay-horizontal">
                         <div className="center-block-content">
@@ -95,7 +92,8 @@ export default class ProfileLanding extends Component {
                     </Row>
                 </div>
                 </div>
-                <div className="content-container">
+                <div className={this.state.selectedButton == 1 ? "content-container pad-top-150px" :
+                    this.state.selectedButton == 2 ? "content-container pad-top-50px" : "content-container"}>
                     {this.state.selectedButton == 1 ? <UserProfile/> : 
                         this.state.selectedButton == 2 ? <Documents/> : 
                             null}
