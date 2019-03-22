@@ -71,9 +71,6 @@ class Documents extends Component {
         }
         return (
             <div className="documents_background ">
-                    <div className="docuements-heading">
-                        <div className="documents-text">Documents</div>
-                    </div>
                 <div className="documents-center" >
                         <div className="label-select-document">                        
                                 Documents have requirements                            

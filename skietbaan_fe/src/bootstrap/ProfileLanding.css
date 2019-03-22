@@ -1,0 +1,123 @@
+.buttons-container {
+    width: 97%;
+}
+
+.content-container{
+    overflow-y: scroll;
+    overflow: hidden;
+}
+
+.fix-top{
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+    background: white;
+}
+
+.pad-top-150px{
+    padding-top: 150px;
+}
+
+.pad-top-50px{
+    padding-top: 50px;
+}
+
+.pad-bottom-55px{
+    padding-bottom: 55px;
+}
+
+.pad-bottom-0px{
+    padding-bottom: 0px;
+}
+
+.lay-horizontal{
+    display: flex;
+}
+
+.top-bar-rectangle{
+    height: 60px;
+    width: 100%;
+    margin-left: 0px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    background: linear-gradient(270deg, #EF3024 0%, #DC0600 100%);
+    box-shadow: -2px 0 14px -1px #674D4D;
+}
+
+.center-block-content{
+    display: block;
+    margin: auto;
+}
+
+.logout-button {	
+    height: 38px;	
+    width: 88px;
+    padding-top: 5px;
+    margin-top: 11px;
+    padding-left: 20px;
+    border: 1px solid #FFFFFF;	
+    border-radius: 21px;	
+}
+
+.logout-text {	
+    color: #FAFAFA;	
+    font-size: 16px;	
+    font-weight: 300;	
+    text-align: center;
+}
+
+.buttons-rectangle{
+    height: 32px;	
+    width: 100%;	
+    border: 1px solid #BE0000;	
+    border-radius: 18px;	
+    box-shadow: 0 3px 8px -3px #674D4D;
+}
+
+.buttons-row{
+    margin-left: 3%;
+    margin-top: 22px;
+    width: inherit;
+}
+
+.button-text{
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.button-fill{
+    padding-top: 5px;
+    margin-top: -5px;
+}
+
+.pad-button-text-top{
+    padding-top: 4px;
+}
+
+#remove-right-button-padding{
+    padding-right: 0px;
+}
+
+#remove-left-button-padding{
+    padding-left: 0px;
+}
+
+#pad-middle-button{
+    padding-right: 3px;
+    text-align: center;
+}
+
+.unstyle-button{
+    border: none;
+    padding: 0;
+    background: none;
+    margin-top: 0px;
+}
+
+.unstyle-button-active{
+    background-color: red;
+    color: white;
+    border-radius: 18px;
+    border: none;
+}
+
