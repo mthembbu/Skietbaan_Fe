@@ -159,7 +159,9 @@ export default class search extends Component {
 
   CameraClicked() {
     let Valid = this.Validate();
-    this.state.Flashon = false;
+    this.setState({
+      Flashon: false
+    })
     if (Valid) {
       this.setState({
         currState: 3,
@@ -358,7 +360,7 @@ export default class search extends Component {
       var HideWhenAddingScore = document.querySelector("#HideWhenAddingScore");
       var last_size = document.body.clientHeight;
       window.addEventListener("resize", function () {
-        if (last_size == document.body.clientHeight) {
+        if (last_size === document.body.clientHeight) {
           return;
         }
         if (HideWhenAddingScore.classList.contains("hidden-small")) {
