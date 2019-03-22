@@ -189,7 +189,7 @@ class Login extends Component {
             <div className="centre-label">
               <label className="header-label">LOGIN</label>
             </div>
-            <img src={back}
+            <img src={back} alt=""
               className="back-btn"
               onClick={() => this.goToRegister()}></img>
           </div>
