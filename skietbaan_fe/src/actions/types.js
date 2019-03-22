@@ -7,9 +7,10 @@ import leaderboardGray from "../components/navbar-icons/new-nav-icons/new-leader
 import notificationsRed from "../components/navbar-icons/new-nav-icons/new-notification-red.png";
 import notificationsGray from "../components/navbar-icons/new-nav-icons/new-notification-grey.png";
 import notifyGrey from "../components/navbar-icons/notify-gray.png";
+import notifyRed from "../components/navbar-icons/notify-red.png";
 import scorecaptureRed from "../components/navbar-icons/new-nav-icons/new-add-score-red.png";
 import scorecaptureGray from "../components/navbar-icons/new-nav-icons/new-add-score-grey.png";
- import moreNotify from "../components/navbar-icons/more-new.png";
+import moreNotify from "../components/navbar-icons/more-new.png";
 
 export const NAV_BAR_ICONS = {
   PROFILE_RED: profileRed,
@@ -21,10 +22,10 @@ export const NAV_BAR_ICONS = {
   NOTIFICATIONS_RED: notificationsRed,
   NOTIFICATIONS_GRAY: notificationsGray,
   NOTIFY_GREY: notifyGrey,
+  NOTIFY_RED: notifyRed,
   SCORE_CAPTURE_RED: scorecaptureRed,
   SCORE_CAPTURE_GRAY: scorecaptureGray
 };
-
 
 export const ADD_BOOKMARK = "ADD_BOOKMARK";
 export const DELETE_BOOKMARK = "DELETE_BOOKMARK";
@@ -34,15 +35,19 @@ export const NEW_COMP = "NEW_COMP";
 export const FETCH_COMP = "FETCH_COMP";
 export const UPDATE_COMP_STATUS = "UPDATE_COMP_STATUS";
 export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
-export const URL = "https://api.skietbaan.retrotest.co.za";
 
 //leaderboard types
 export const FETCH_LEADERBOARDFILTER_DATA = "FETCH_LEADERBOARDFILTER_DATA";
 export const FETCH_LEADERBOARDTABLE_DATA = "FETCH_LEADERBOARDTABLE_DATA";
-export const UPDATE_SELECTED_COMPETITION = "UPDATE_SELECTED_COMPETITION"
-export const UPDATE_SELECTED_GROUP = "UPDATE_SELECTED_GROUP"
+export const UPDATE_SELECTED_COMPETITION = "UPDATE_SELECTED_COMPETITION";
+export const UPDATE_SELECTED_GROUP = "UPDATE_SELECTED_GROUP";
 
 //groups types and constants
+export const URL = "https://api.skietbaan.retrotest.co.za";
+export const URLADD = "https://api.skietbaan.retrotest.co.za/api/groups/add";
+export const URLUSER = "https://api.skietbaan.retrotest.co.za/api/user";
+export const URLGROUP = "https://api.skietbaan.retrotest.co.za/api/groups";
+export const UPDATENAME = "UPDATENAME";
 export const UPDATE_GROUPNAME = "UPDATE_GROUPNAME";
 export const CREATEGROUP = "CREATEGROUP";
 export const GETGROUP = "GETGROUP";
@@ -53,3 +58,5 @@ export const FETCH_GROUPS = "FETCH_GROUPS";
 export const ADDMEMBERS = "ADDMEMBERS";
 export const GROUPDICT = "GROUPDICT";
 
+//notification types
+export const FETCH_NOTIFICATION = "FETCH_NOTIFICATION";

@@ -17,7 +17,7 @@ import ViewMembers from './components/ViewMembers';
 import Documents from './components/Documents';
 import ScoreCapture from './components/ScoreCapture';
 import CreatePage from './components/CreatePage';
-import UserProfile from './components/UserProfile';
+import ProfileLanding from './components/ProfileLanding';
 import requirements from './components/requirements.js';
 import './App.css';
 import ForgotPassword from './components/ForgotPassword';
@@ -26,12 +26,17 @@ import EditGroup from './components/EditGroup';
 import ViewComp from './components/ViewComp';
 import CreateComp from './components/CreateComp';
 import Create from './components/Create';
+import resetPassword from './components/resetPassword';
+import MetaTags from 'react-meta-tags';
 class App extends Component {
 
 	render() {
 		return (
 			<Provider store={store}>
 				<div>
+					<MetaTags>
+						<meta name="google" content="notranslate"></meta>
+					</MetaTags>
 					<NavbarMenu />
 					<Router history={history}>
 						<Switch>
@@ -40,6 +45,7 @@ class App extends Component {
 							<Route path="/registerPage" component={Register} exact />
 							<Route path="/" component={Register} exact />
 							<Route path="/forgotPassword" component={ForgotPassword} />
+							<Route path="/resetPassword" component={resetPassword} />
 							<Route path="/registerMember" component={RegisterMember} exact />
 							<Route path="/new-competition" component={CreateComp} exact />
 							<Route path="/AddGroup" component={AddGroup} exact />
@@ -52,7 +58,7 @@ class App extends Component {
 							<Route path="/notify" component={notification} exact />
 							<Route path="/documents" component={Documents} exact />
 							<Route path="/viewmembers" component={ViewMembers} exact />
-							<Route path="/profile" component={UserProfile} exact />
+							<Route path="/profile" component={ProfileLanding} exact />
 							<Route path="/AddMembersGroup" component={AddMembersGroup} exact />
 							<Route path="/requirements" component={requirements} exact />
 							<Route path="/EditGroup" component={EditGroup} exact />

@@ -8,24 +8,11 @@
     max-width: 100%;
   }
 
-  .notifications-body-class {
-    background-color: #fdfdfd;
-    color: white;
-    border-style: none;
-    border: none;
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-bottom: 100%;
-    padding-top: 5px;
+  .body-class {
     text-align: center;
-    position: static;
-    right: -25px;
-    left: 25px;
   }
 
-  .notifications-desktop-images {
+  .notifications-images {
     background-image: url("./Notification-Img/delete3.png");
     padding-bottom: 6px;
     padding-right: 30px;
@@ -34,7 +21,7 @@
     height: 24px;
   }
 
-  .notifications-selected{
+  .selected {
     background: url("./Notification-Img/submit plus add score.png");
     padding-bottom: 6px;
     padding-right: 30px;
@@ -43,25 +30,7 @@
     height: 24px;
   }
 
-  .notifications-page-heading{
-    text-align: center;
-    align-content: center;
-    background-image: linear-gradient(to right, #dc0600, #ef3024);
-    color: #fdfdfd;
-    height: 56px;
-    width: 100%;
-    padding-top: 9px;
-    padding-right: 90px;
-    font-size: 25px;
-    font-family: helvetica;
-    padding-left: 100px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    box-shadow: 0px 10px 16px -6px rgba(0, 0, 0, 0.33);
-    margin-top: -8px;
-  }
-
-  .notifications-td-delete {
+  .td-delete {
     padding-left: 31px;
     color: white;
     font-size: 13px;
@@ -70,55 +39,24 @@
     text-align: right;
   }
 
-  .notifications-td-notification {
-    color: #6f839e;
-    font-size: 14px;
-    font-family: helvetica;
-    text-align: left;
-    vertical-align: middle;
-    padding-left: 12px;
-    width: 80%;
-  }
-
-  .notifications-tr-class {
-    border-bottom: solid 1px #bbbcbb;
-    height: 64px;
-    margin: 1em auto;
-  }
-
-  .notifications-t-body {
-    border-bottom: none;
-    font-family: helvetica;
-    background-color: #fdfdfd;
-    color: #6f839e;
-    border-style: none;
-    border: none;
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-bottom: 640px;
-    text-align: justify;
-  }
-
-  .notifications-post-items {
+  .td-notification {
     text-align: center;
-    background-color: #fdfdfd;
-    color: #6f839e;
-    border-style: none;
-    border: none;
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-bottom: 640px;
-    width: 100%;
-    padding-top: 50px;
-    margin-top: 23px;
   }
 
-  .notifications-text {
-    color: #6f839e;
+  .tr-class {
+    text-align: center;
+  }
+
+  .t-body {
+    text-align: center;
+  }
+
+  .post-items {
+    text-align: center;
+  }
+
+  .text {
+    color: #000000;
     font-family: helvetica;
     text-decoration-line: none;
     text-align: center;
@@ -127,8 +65,8 @@
     font-size: 14px;
     padding-top: 9px;
   }
-  
-  .notifications-selected-text {
+
+  .selected-text {
     color: red;
     font-family: helvetica;
     text-decoration-line: none;
@@ -147,21 +85,34 @@
     border: none;
   }
 
-  .notifications-modal-confirm-button {
-    font-weight: lighter;
-    font-size: 16px;
-    background-color: #dc0600;
-    border-radius: 25px;
-    width: 96px;
-    height: 42px;
-    border-color: #dc0600;
-    border-width: 1.5px;
-    border: none;
+  .outer-header-div {
+    text-align: center;
   }
 
-  .notifications-format-content {
-    padding-left: 25px;
-    padding-right: 25px;
+  .page-heading {
+    text-align: center;
+  }
+
+  .body-class {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .notifications-modal {
+    margin-bottom: 56px;
+  }
+
+  .outer-header-div {
+    text-align: center;
+  }
+
+  .page-heading {
+    text-align: center;
+  }
+
+  .body-class {
+    text-align: center;
   }
 }
 
@@ -203,21 +154,41 @@
 }
 
 .page-heading {
-  text-align: center;
-  align-content: center;
   background-image: linear-gradient(to right, #dc0600, #ef3024);
   color: #fdfdfd;
-  height: 56px;
+  height: 65px;
   width: 100%;
-  padding-top: 9px;
-  padding-right: 90px;
+  padding-top: 15px;
   font-size: 25px;
   font-family: helvetica;
-  padding-left: 100px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   box-shadow: 0px 10px 16px -6px rgba(0, 0, 0, 0.33);
   margin-top: -8px;
+}
+
+.icon {
+  margin-left: 305px;
+  margin-top: 5px;
+}
+
+.black-delete-icon {
+  height: 26px;
+  width: 20px;
+  float: right;
+  margin-right: 33px;
+}
+
+.delete-icon {
+  height: 26px;
+  width: 20px;
+  float: right;
+  margin-right: 33px;
+}
+
+.trash-spacing {
+  margin-left: 305px;
+  margin-top: 5px;
 }
 
 .td-delete {
@@ -275,13 +246,8 @@
   margin-top: 23px;
 }
 
-.navbar-custom.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top {
-  padding-left: inherit;
-}
-
 .text {
   color: #6f839e;
-  font-family: helvetica;
   text-decoration-line: none;
   text-align: center;
   font-weight: lighter;
@@ -334,8 +300,9 @@ a:active {
   width: 100%;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
-  background-image: linear-gradient(to right, #282829, #6d6d6d);
+  background: #fdfdfd;
   height: 56px;
+  margin-bottom: 56px;
 }
 
 .notifications-modal-confirm {
@@ -358,9 +325,10 @@ a:active {
   border-radius: 25px;
   width: 96px;
   height: 42px;
-  border-color: #fdfdfd;
+  border-color: #000000;
   border-width: 1.5px;
-  border: 1px #fdfdfd solid;
+  color: #000000;
+  border: 1px #000000 solid;
 }
 
 .empty-screen {
@@ -372,7 +340,7 @@ a:active {
 }
 
 .notifications-text {
-  color: #fdfdfd;
+  color: #000000;
 }
 
 .notifications-a-class {
@@ -386,4 +354,9 @@ a:active {
 .format-content {
   padding-left: 25px;
   padding-right: 25px;
+}
+
+.outer-header-div {
+  float: left;
+  padding-left: 40px;
 }

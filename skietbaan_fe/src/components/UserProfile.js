@@ -14,8 +14,6 @@ class UserProfile extends Component {
                 hours: -1
             }
         }
-
-        this.Logout = this.Logout.bind(this);
     }
 
     UNSAFE_componentWillMount(){
@@ -56,7 +54,6 @@ class UserProfile extends Component {
     AnimateAccuracyCircle(counter, element, index){
         if(counter > element.accuracy) return;
         if(counter <= element.accuracy){
-            
             var degreees = (360 * counter) / 100;
             var activeBorder = $(`#${index}`);
             $(`#circle${index}`).html(Math.round(counter)+"%");
@@ -255,36 +252,9 @@ class UserProfile extends Component {
         return renderArray;
     }
 
-    Logout(){
-        console.log("here");
-        var res = document.cookie;
-        var multiple = res.split(";");
-        for(var i = 0; i < multiple.length; i++) {
-            var key = multiple[i].split("=");
-            document.cookie = key[0]+" =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
-        }
-        window.location= '/login';
-        return false;
-    }
-
     render() {
         return (
             <div className="my-container">
-                <Row className="top-bar-rectangle">
-                    <Col className="lay-horizontal">
-                        <div className="center-block-content">
-                            <label className="username-bar">
-                                {this.state.hoursAward.username !== undefined ? 
-                                    this.state.hoursAward.username : null}    
-                            </label>
-                        </div>
-                        <a href="#" onClick={this.Logout}>
-                            <div className="logout-button">
-                                <label className="logout-text">Logout</label>
-                            </div>
-                        </a>
-                    </Col>
-                </Row>
                 <Container>
                     <div>
                         <div className="member-number text-color">
