@@ -12,25 +12,25 @@ export default class ProfileLanding extends Component {
             selectedButton : 1
         }
 
-        this.AwardPage = this.AwardPage.bind(this);
-        this.DocumentsPage = this.DocumentsPage.bind(this);
-        this.Details = this.Details.bind(this);
-        this.Logout = this.Logout.bind(this);
+        this.awardPage = this.awardPage.bind(this);
+        this.documentsPage = this.documentsPage.bind(this);
+        this.details = this.details.bind(this);
+        this.logout = this.logout.bind(this);
     }
     
-    AwardPage(){
+    awardPage(){
         this.setState({selectedButton: 1});
     }
 
-    DocumentsPage(){
+    documentsPage(){
         this.setState({selectedButton : 2}); 
     }
 
-    Details(){
+    details(){
         this.setState({selectedButton: 3});
     }
 
-    Logout(){
+    logout(){
         var res = document.cookie;
         var multiple = res.split(";");
         for(var i = 0; i < multiple.length; i++) {
@@ -51,7 +51,7 @@ export default class ProfileLanding extends Component {
                         <div className="center-block-content">
 
                         </div>
-                        <a href="#" onClick={this.Logout}>
+                        <a href="#" onClick={this.logout}>
                             <div className="logout-button">
                                 <label className="logout-text">Logout</label>
                             </div>
@@ -65,7 +65,7 @@ export default class ProfileLanding extends Component {
                             <div>
                                 <button className={this.state.selectedButton == 1 ? 
                                         "unstyle-button-active btn-block button-fill" : 
-                                        "unstyle-button btn-block button-fill"} onClick={this.AwardPage}>
+                                        "unstyle-button btn-block button-fill"} onClick={this.awardPage}>
                                     <label className="button-text">AWARDS</label>
                                 </button>
                             </div>
@@ -74,7 +74,7 @@ export default class ProfileLanding extends Component {
                             <div>
                                 <button className={this.state.selectedButton == 2 ? 
                                         "unstyle-button-active btn-block button-fill" : 
-                                        "unstyle-button btn-block button-fill"} onClick={this.DocumentsPage}>
+                                        "unstyle-button btn-block button-fill"} onClick={this.documentsPage}>
                                     <label className="button-text">DOCUMENTS</label>
                                 </button>
                             </div>
@@ -83,7 +83,7 @@ export default class ProfileLanding extends Component {
                             <div>
                                 <button className={this.state.selectedButton == 3 ?  
                                         "unstyle-button-active btn-block button-fill" : 
-                                        "unstyle-button btn-block button-fill"} onClick={this.Details}>
+                                        "unstyle-button btn-block button-fill"} onClick={this.details}>
                                     <label className="button-text">DETAILS</label>
                                 </button> 
                             </div>
