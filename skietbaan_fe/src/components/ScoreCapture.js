@@ -321,12 +321,12 @@ export default class search extends Component {
             track.applyConstraints({
               advanced: [{ torch: IsFlashOn }]
             })
-              .catch(e => console.log(e));
+              .catch();
           }
         }
 
       })
-      .catch(err => console.error('getUserMedia() failed: ', err));
+      .catch();
 
   }
 
@@ -399,19 +399,19 @@ export default class search extends Component {
             </div>
           </div>
           <div className={stateOne || this.state.scoreSaved ? "hidden" : ""}>
-
             <div className="label-score">
               <input type="number" id="scoreInput" min="0" step="1" autoComplete="off" name="score" className="score"
                 onChange={this.handleScore}
                 placeholder="Enter Score"></input>
             </div>
-            <div className={this.state.validScore ? "hidden" : "invalidScore"}>Enter Valid Score</div>
+            <div className={this.state.validScore ? "hidden" : "invalid-score"}>Enter Valid Score</div>
             <div className="centre-label">
               <label className="label-competition">Select Competition</label>
             </div>
             <div className="competition-container">
               {competitionItem}
-
+              <div className={this.state.validCompetition === false && this.state.validScore=== true
+                 ? "invalid-comp" : "hidden" }>Select Competition</div>
             </div>
           </div>
           <div className="submit-container" id="HideWhenAddingScore">
