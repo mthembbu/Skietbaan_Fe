@@ -78,7 +78,7 @@ export const getName = name => {
 
 export const fetchEditUser = groupid =>dispatch=>{
   
-  fetch(BASE_URL + '/api/Groups/edit?id=4032')
+  fetch(BASE_URL + '/api/Groups/edit?id='+groupid)
   .then(res=>res.json())
   .then(data=>{
     const newdata=data.map(user=>{
