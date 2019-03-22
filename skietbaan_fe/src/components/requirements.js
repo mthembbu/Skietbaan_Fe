@@ -62,7 +62,6 @@ class requirements extends Component {
 
   handleChange(event) {
     this.setState({ numberofshots: event.target.value });
-    console.log(this.state.numberofshots);
   }
   toggleHighlight = event => {
     if (this.state.posts[event].highlighted == true) {
