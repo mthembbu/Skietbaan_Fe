@@ -180,32 +180,10 @@ class NavbarMenu extends Component {
     }
   }
 
-  // isNotifications() {
-  //   if (window.location.pathname.endsWith("/notify")) {
-  //     return (
-  //       <img
-  //         src={NAV_BAR_ICONS.NOTIFICATIONS_RED}
-  //         className="notifications-icon-grey"
-  //         alt="Notification tab Selected"
-  //       />
-  //     );
-  //   } else {
-  //     return (
-  //       <img
-  //         src={NAV_BAR_ICONS.NOTIFICATIONS_GRAY}
-  //         className="notifications-icon-grey"
-  // 	  alt="Notification tab not Selected"
-  // 	  onClick={() => this.GoTo("/notify")}
-  //       />
-  //     );
-  //   }
-  // }
-
   GoTo(page) {
     this.setState({
       pageType: page
     });
-    // window.location = page;
     history.push(page);
   }
 
@@ -230,20 +208,6 @@ class NavbarMenu extends Component {
               </tbody>
             </table>
           </div>
-        {/* ) : (
-          <div className="nav-content">
-            <table className="navbar-admin">
-              <tbody>
-                <tr className="first-row-navbar">
-                  <td className="columns-v2">{this.isHome()}</td>
-                  <td className="columns-v2">{this.isScoreCapture()}</td>
-                  <td className="columns-v2">{this.isProfile()}</td>
-                  <td className="columns-v2">{this.isNotifications()}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        )} */}
       </div>
     );
   }
