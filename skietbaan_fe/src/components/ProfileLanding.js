@@ -15,6 +15,7 @@ export default class ProfileLanding extends Component {
         this.AwardPage = this.AwardPage.bind(this);
         this.DocumentsPage = this.DocumentsPage.bind(this);
         this.Details = this.Details.bind(this);
+        this.Logout = this.Logout.bind(this);
     }
     
     AwardPage(){
@@ -33,6 +34,17 @@ export default class ProfileLanding extends Component {
         this.setState({selectedButton: 3});
     }
 
+    Logout(){
+        var res = document.cookie;
+        var multiple = res.split(";");
+        for(var i = 0; i < multiple.length; i++) {
+            var key = multiple[i].split("=");
+            document.cookie = key[0]+" =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
+        }
+        window.location= '/login';
+        return false;
+    }
+
     render() {
         return (
             <div>
@@ -42,7 +54,7 @@ export default class ProfileLanding extends Component {
                         <div className="center-block-content">
 
                         </div>
-                        <a href="#">
+                        <a href="#" onClick={this.Logout}>
                             <div className="logout-button">
                                 <label className="logout-text">Logout</label>
                             </div>
