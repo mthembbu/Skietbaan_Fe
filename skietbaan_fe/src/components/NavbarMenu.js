@@ -13,7 +13,13 @@ class NavbarMenu extends Component {
 
     this.state = {
       nav: null,
-      numberOfNotifications: 0
+      numberOfNotifications: 0,
+      isHome: true,
+      isCreate: false,
+      isAddScore: false,
+      isnotify: false,
+      isProfile: false,
+      pageType: ""
     };
 
     this.isHome = this.isHome.bind(this);
@@ -23,6 +29,7 @@ class NavbarMenu extends Component {
     this.isNotifications = this.isNotifications.bind(this);
     this.GoTo = this.GoTo.bind(this);
     this.checkUserType = this.checkUserType.bind(this);
+    this.fetchNumberOfNotification = this.fetchNumberOfNotification.bind(this);
   }
 
   checkUserType() {
@@ -41,39 +48,6 @@ class NavbarMenu extends Component {
         });
       })
       .catch(function(data) {});
-
-    if (this.state.nav) {
-      return (
-        <div className="nav-content">
-          <table className="navbar-admin">
-            <tbody>
-              <tr className="first-row-navbar">
-                <td className="columns">{this.isHome()}</td>
-                <td className="columns">{this.isCreate()}</td>
-                <td className="columns">{this.isScoreCapture()}</td>
-                <td className="columns">{this.isProfile()}</td>
-                <td className="columns">{this.isNotifications()}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      );
-    } else {
-      return (
-        <div className="nav-content">
-          <table className="navbar-admin">
-            <tbody>
-              <tr className="first-row-navbar">
-                <td className="columns-v2">{this.isHome()}</td>
-                <td className="columns-v2">{this.isScoreCapture()}</td>
-                <td className="columns-v2">{this.isProfile()}</td>
-                <td className="columns-v2">{this.isNotifications()}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      );
-    }
   }
 
   isHome() {
@@ -178,7 +152,7 @@ class NavbarMenu extends Component {
   }
 
   isNotifications() {
-    if (window.location.pathname.endsWith("/notify")) {
+    if (this.state.pageType.endsWith("/notify")) {
       return (
         <img
           src={
@@ -228,14 +202,48 @@ class NavbarMenu extends Component {
   // }
 
   GoTo(page) {
+    this.setState({
+      pageType: page
+    });
+    // window.location = page;
     history.push(page);
+  }
+
+  componentDidMount() {
+    this.fetchNumberOfNotification();
+    this.checkUserType();
   }
 
   render() {
     return (
       <div>
-        {this.checkUserType()}
-        {this.fetchNumberOfNotification()}
+          <div className="nav-content">
+            <table className="navbar-admin">
+              <tbody>
+                <tr className="first-row-navbar">
+                  <td className="columns">{this.isHome()}</td>
+                  <td className={this.state.nav  ? "columns" : "hideAdmin"}>{this.isCreate()}</td>
+                  <td className="columns">{this.isScoreCapture()}</td>
+                  <td className="columns">{this.isProfile()}</td>
+                  <td className="columns">{this.isNotifications()}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        {/* ) : (
+          <div className="nav-content">
+            <table className="navbar-admin">
+              <tbody>
+                <tr className="first-row-navbar">
+                  <td className="columns-v2">{this.isHome()}</td>
+                  <td className="columns-v2">{this.isScoreCapture()}</td>
+                  <td className="columns-v2">{this.isProfile()}</td>
+                  <td className="columns-v2">{this.isNotifications()}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )} */}
       </div>
     );
   }
