@@ -8,6 +8,7 @@ import Switch from '@material-ui/core/Switch';
 import back from './GroupImages/back.png';
 import group from './GroupImages/Group.png';
 import PropTypes from 'prop-types';
+import { getCookie } from '../components/cookie.js';
 
 class ViewGroups extends Component {
 	constructor(props) {
