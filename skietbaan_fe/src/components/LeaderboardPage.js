@@ -286,7 +286,7 @@ class LeaderboardPage extends Component {
             window.location = "/registerPage";
         }
         const groupsList = (
-            <Table className="SelectionTable" /* style={{height:"1002px"}} */>
+            <Table className="SelectionTable" >
                 <tbody>
                     {this.props.groups.map((group, index) => (
                         <tr key={group.value.toString()} onClick={() => this.setGroupValue(index)}
@@ -425,34 +425,9 @@ class LeaderboardPage extends Component {
                             </table>
                         </div>
                         </Collapse>
-                        {/* <div className="CurrentUserTableSection">
-                                <table className="RankingTable">
-                                    <tbody>
-                                        <tr className="rankRow">
-                                            <td className="RankIconCol">
-                                                {this.top3Display(this.props.userResults)}
-                                            </td>
-                                            <td className="RankLabelsCol">
-                                                <table className="HeadTableLabels">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td className="ExtraNameCOl">{this.props.userResults == null ? 'Something went wrong' : (this.props.userResults != null ? this.props.userResults.username : '--')}</td>
-                                                            <td className="ScoreColTotal">{this.props.userResults == null ? '--' : (this.props.userResults.total != 0 ? this.props.userResults.total : '--')}</td>
-                                                            <td className="ScoreColAverage">{this.props.userResults == null ? '--' : (this.props.userResults.average != 0 ? this.props.userResults.average : '--')}</td>
-                                                            <td className="ScoreColBest">{this.props.userResults == null ? '--' : (this.props.userResults.best != 0 ? this.props.userResults.best : '--')}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div> */}
-                        {/* </Collapse> */}
                     </div>
                 </div>
                 {/* Current User Section*/}
-                
                  <div className="userWrapper" >
                  <Collapse isOpened={this.checkFilterMobile()}>
                     <div className="row justify-content-center">
