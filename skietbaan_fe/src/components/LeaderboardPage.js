@@ -93,7 +93,7 @@ class LeaderboardPage extends Component {
         }
     }
     ValidatedInitialLeaderboardFilterSelection() {
-        if (this.props.selectedCompetitionName != undefined) {
+        if (this.props.selectedCompetitionName != undefined && this.props.selectedGroupName != undefined) {
             if (this.props.selectedCompetitionName.length > 0) {
                 for (var i = 0; i < this.props.competitions.length; i++) {
                     if (this.props.competitions[i] == this.props.selectedCompetitionName) {
