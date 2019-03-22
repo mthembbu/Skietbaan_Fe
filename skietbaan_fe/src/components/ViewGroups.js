@@ -28,6 +28,9 @@ class ViewGroups extends Component {
 	}
 
 	async componentDidMount() {
+		if (!getCookie("token")) {
+			window.location = "/registerPage";
+			}
 		this.props.FetchGroups();
 		this.props.groupDic();
 	}

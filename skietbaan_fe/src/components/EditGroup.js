@@ -34,6 +34,9 @@ class EditGroup extends Component {
 	}
 
 	componentDidMount(){
+		if (!getCookie("token")) {
+			window.location = "/registerPage";
+			}
 		this.props.fetchEditUser(this.props.id);
 	}
 

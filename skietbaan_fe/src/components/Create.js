@@ -59,19 +59,8 @@ class Create extends Component {
       window.location = "/registerPage";
     }
   }
-
   
-
   render() {
-    // const theme = createMuiTheme({
-    //   palette: {
-    //     primary: purple,
-    //     secondary: {
-    //       main: '#f44336',
-    //     },
-    //   },
-    // });
-
     return (
       <div className="create-container">
         <div class="page-name-create-all">
