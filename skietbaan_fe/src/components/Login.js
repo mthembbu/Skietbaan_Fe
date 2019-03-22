@@ -189,7 +189,7 @@ class Login extends Component {
             <div className="centre-label">
               <label className="header-label">LOGIN</label>
             </div>
-            <img src={back} alt=""
+            <img src={back}
               className="back-btn"
               onClick={() => this.goToRegister()}></img>
           </div>
@@ -241,12 +241,9 @@ class Login extends Component {
               <Button onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
                 : "buttons-invalid round-button"} >Login</Button>
             </div>
-
-            {/* TODO : forgot password page under construction
             <div className="login-href">
               <a href="/forgotPassword" >Forgot Password?</a>
             </div>
-             */}
           </Form>
 
         </div >
