@@ -33,7 +33,14 @@ class Documents extends Component {
 
   SendLOGS() {
     let token = getCookie("token");
-    fetch(BASE_URL + "/api/Documents/SendLOGS/" + token);
+    fetch(BASE_URL + "/api/Documents/SendLOGS/" + token, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(token)
+    });
 
     if (this.state.collapseFilterLOGS) {
       this.setState({
@@ -48,7 +55,14 @@ class Documents extends Component {
 
   SendLOS() {
     let token = getCookie("token");
-    fetch(BASE_URL + "/api/Documents/SendLOS/" + token);
+    fetch(BASE_URL + "/api/Documents/SendLOS/" + token, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(token)
+    });
 
     if (this.state.collapseFilterLOS) {
       this.setState({
