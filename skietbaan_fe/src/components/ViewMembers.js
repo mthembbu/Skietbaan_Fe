@@ -15,20 +15,20 @@ class ViewMembers extends Component {
             timeLeftOnMembership: [],
             filterText: ""
         }
-        this.GetFilteredMembers = this.GetFilteredMembers.bind(this);
-        this.GetAllMembers = this.GetAllMembers.bind(this);
-        this.GetTimeLeft = this.GetTimeLeft.bind(this);
+        this.getFilteredMembers = this.getFilteredMembers.bind(this);
+        this.getAllMembers = this.getAllMembers.bind(this);
+        this.getTimeLeft = this.getTimeLeft.bind(this);
         this.onChangeText = this.onChangeText.bind(this);
-        this.BackToCreate = this.BackToCreate.bind(this);
-        this.Status = this.Status.bind(this);
+        this.BbackToCreate = this.backToCreate.bind(this);
+        this.status = this.status.bind(this);
     }
 
     componentDidMount(){
-        this.GetAllMembers();
-        this.GetTimeLeft()
+        this.getAllMembers();
+        this.getTimeLeft()
     }
 
-    GetAllMembers() {
+    getAllMembers() {
         fetch(BASE_URL + "/api/Features/SearchMember", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -44,7 +44,7 @@ class ViewMembers extends Component {
     }
 
 
-    GetFilteredMembers() {
+    getFilteredMembers() {
         fetch(BASE_URL + "/api/Features/SearchMember", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -59,7 +59,7 @@ class ViewMembers extends Component {
             }))
     }
 
-    GetTimeLeft() {
+    getTimeLeft() {
         fetch(BASE_URL + "/api/Features/TimeLeft", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -76,14 +76,13 @@ class ViewMembers extends Component {
 
     onChangeText(event) {
         this.setState({ filterText: event.target.value });
-        console.log(this.state.filterText);
     }
 
-    BackToCreate() {
+    backToCreate() {
         history.push("/create")
     }
 
-    Status(timeLeft) {
+    status(timeLeft) {
         if (timeLeft < 2 || timeLeft === 2) {
             return true;
         }
@@ -137,7 +136,7 @@ class ViewMembers extends Component {
             <div className="centre-view-member">
                 <div className="page-name-view">
                     <div className="image-comtainer">
-                        <img src={require('../components/assets/back-button-white.png')} onClick={this.BackToCreate}
+                        <img src={require('../components/assets/back-button-white.png')} onClick={this.backToCreate}
                             className="go-back-to-create-page-from-view-members" alt=''></img>
                     </div>
                     <div className="view-members-container">
@@ -151,7 +150,7 @@ class ViewMembers extends Component {
                         <input
                             autoComplete="off"
                             type="text"
-                            className="userValue"
+                            className="user-value"
                             id="usernameValue"
                             value={this.state.filterText}
                             onChange={this.onChangeText}

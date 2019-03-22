@@ -52,7 +52,7 @@
     text-align: center;
   }
 
-  .userValue {
+  .user-value {
     background-color: #F3F4F9;
     border-radius: 4px;
     line-height: 22px;
@@ -70,7 +70,7 @@
     height: 74px;
   }
 
-  .userValue{
+  .user-value{
     background: url('../components/assets/search-red.png') no-repeat right center;
     background-color: #F3F4F9;
     background-size: 22px;
