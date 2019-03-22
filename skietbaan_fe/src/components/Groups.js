@@ -96,7 +96,6 @@ class Groups extends Component {
 	}
 
 	toggleHighlight = (event) => {
-		console.log(this.state.count)
 		if (this.state.posts[event].highlighted == true) {
 			this.state.posts[event].highlighted = false;
 			this.setState({ count: this.state.count - 1 });

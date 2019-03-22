@@ -5,11 +5,11 @@ import { withRouter } from 'react-router-dom';
 import { BASE_URL } from '../actions/types';
 import unmarked from './GroupImages/Oval.png';
 import marked from './GroupImages/MarkedBox.png';
+import whiteBin from './GroupImages/whiteBin.png';
+import whitePlus from './GroupImages/whitePlus.png';
 import { fetchEditUser, AddMemberAction } from '../actions/postActions';
 import back from './GroupImages/back.png';
 import Switch from '@material-ui/core/Switch';
-import Close from '@material-ui/icons/Close';
-import Delete from '@material-ui/icons/Delete';
 import { getCookie } from '../components/cookie.js';
 class EditGroup extends Component {
 	constructor(props) {
@@ -19,18 +19,21 @@ class EditGroup extends Component {
 			newArray: [],
 			filterText: '',
 			count: 0,
-			selected: 0
+			selected: 0,
+			check: 'slect all'
 		};
 		this.toggleHighlight = this.toggleHighlight.bind(this);
 		this.onBack = this.onBack.bind(this);
 		this.onChange = this.onChange.bind(this);
 		this.delete = this.delete.bind(this);
+		this.selectall = this.selectall.bind(this);
 	}
 	async UNSAFE_componentWillMount() {
 		if (!getCookie('token')) {
 			window.location = '/registerPage';
 		}
 		this.props.fetchEditUser(this.props.id);
+		console.log(this.props.fetchEditUser, "hallo");
 	}
 
 	onChange(event) {
@@ -78,10 +81,25 @@ class EditGroup extends Component {
 	cancel = () => {
 		for (var i = 0; i < this.state.posts.length; i++) {
 			this.props.groupsList[i].highlighted = true;
-			this.props.groupsList[i].background = '#F3F4F9';
 		}
 		this.setState({ count: 0 });
 	};
+
+	selectall() {
+		if (this.state.check == 'Select all') {
+			this.setState({ count: this.props.editGroup.length });
+			for (var i = 0; i < this.props.editGroup.length; i++) {
+				this.props.editGroup[i].highlighted = true;
+			}
+			this.setState({ check: 'Unselect all' });
+		} else {
+			this.setState({ count: 0 });
+			for (var i = 0; i < this.state.editGroup.length; i++) {
+				this.props.editGroup[i].highlighted = false;
+			}
+			this.setState({ check: 'Select all' });
+		}
+	}
 
 	goToNext = () => {
 		this.props.history.push('/AddMembersGroup');
@@ -121,13 +139,18 @@ class EditGroup extends Component {
 			<main className="The-Main">
 				<div className="navBar-container">
 					<div className="the-nav-bar">
+					<div className="leftContainer">
 						<img className="back-image" onClick={this.onBack} src={back} alt="" />
 						<label className="center-labels">{this.props.name}</label>
-						<div className="plus-next">
-							<Close />
 						</div>
-						<div className="delete-icon">
-							<Delete />
+						<div className="group-icon-spacing">
+						<div className="plus-next">
+							<img className="checkbox-delete" src={whiteBin} alt="" />
+							{/* <Close onClick={()=>this.goToNext()} /> */}
+						</div>
+						<div className="delete-icons">
+							<img className="checkbox-delete" src={whitePlus} alt="" />
+						</div>
 						</div>
 					</div>
 					<div class="BNavBar">

@@ -9,9 +9,6 @@ import back from './GroupImages/back.png';
 import group from './GroupImages/Group.png';
 import PropTypes from 'prop-types';
 
-import { getCookie } from '../components/cookie.js';
-
-
 class ViewGroups extends Component {
 	constructor(props) {
 		super(props);
@@ -45,7 +42,7 @@ class ViewGroups extends Component {
 	editGroup(obj) {
 		this.props.getName(obj.name);
 		this.props.passId(obj.id);
-		this.props.history.push('/EditGroup');
+	this.props.history.push('/EditGroup');
 	}
 
 	async delete(groupId) {
@@ -60,7 +57,7 @@ class ViewGroups extends Component {
 			.then(function(response) {})
 			.then(function(data) {})
       .catch(function(data) {});
-       this.props.FetchGroups();
+      this.props.FetchGroups();
 	}
 
 	render() {
