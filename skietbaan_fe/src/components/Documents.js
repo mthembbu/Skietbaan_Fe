@@ -3,8 +3,6 @@ import "../components/Documents.css";
 import { getCookie } from "./cookie.js";
 import { Collapse } from "react-collapse";
 import { BASE_URL } from "../actions/types.js";
-import { availableIcon } from "../resources/sendDoc.png";
-import { notAvailableIcon } from "../resources/gidx.png";
 
 class Documents extends Component {
   constructor(props) {
@@ -73,7 +71,7 @@ class Documents extends Component {
           <div className="documents-text">Documents</div>
         </div>
         <div className="documents-center">
-          <div className="label-select-document">Select Documents</div>
+          <div className="label-select-document">Select Document</div>
 
           <div className="button-upload-document-3">
             <button
@@ -84,21 +82,31 @@ class Documents extends Component {
               }
               onClick={this.state.value == "Document" ? this.SendLOGS : null}
             >
-              Letter of Good Standing{" "}
-              {this.state.value == "Document" ? (
+              Letter of Good Standing
+              {this.state.value !== "Document" ? (
+                <img
+                  className="document-image-icon"
+                  src={require("../resources/noDoc.png")}
+                />
+              ) : null}
+            </button>
+
+            <div className="document-requirements3">
+              {this.state.value !== "Document" ? (
+                <div>
+                  <b>Letter of Good Standing:</b>
+                  <p>requires 5 more shoots.</p>
+                </div>
+              ) : null}
+            </div>
+            <Collapse isOpened={this.state.collapseFilterLOGS}>
+              <div className="documents-collapse">
+                Document Sent via email
                 <img
                   className="document-image-icon"
                   src={require("../resources/sendDoc.png")}
                 />
-              ) : (
-                <img
-                  className="document-image-icon"
-                  src={require("../resources/gidx.png")}
-                />
-              )}
-            </button>
-            <Collapse isOpened={this.state.collapseFilterLOGS}>
-              <div className="documents-collapse">Document Sent</div>
+              </div>
             </Collapse>
           </div>
           <div className="button-upload-document-2">
@@ -111,38 +119,14 @@ class Documents extends Component {
               onClick={this.state.value2 == "Document" ? this.SendLOS : null}
             >
               Letter of Status{" "}
-              {this.state.value2 == "Document" ? (
+              {this.state.value2 !== "Document" ? (
                 <img
                   className="document-image-icon"
-                  src={require("../resources/sendDoc.png")}
+                  src={require("../resources/noDoc.png")}
                 />
-              ) : (
-                <img
-                  className="document-image-icon"
-                  src={require("../resources/gidx.png")}
-                />
-              )}
+              ) : null}
             </button>
 
-            <Collapse isOpened={this.state.collapseFilterLOS}>
-              <div className="documents-collapse">Document Sent</div>
-            </Collapse>
-          </div>
-          <div className="documents-rectangle">
-            <div className="label-select-document2">
-              {this.state.value == "Document" && this.state.value2 == "Document"
-                ? null
-                : "What is needed"}
-            </div>
-
-            <div className="document-requirements3">
-              {this.state.value !== "Document" ? (
-                <div>
-                  <b>Letter of Good Standing:</b>
-                  <p>requires 5 more shoots.</p>
-                </div>
-              ) : null}
-            </div>
             <div className="document-requirements3">
               {this.state.value2 !== "Document" ? (
                 <div>
@@ -151,6 +135,16 @@ class Documents extends Component {
                 </div>
               ) : null}
             </div>
+
+            <Collapse isOpened={this.state.collapseFilterLOS}>
+              <div className="documents-collapse">
+                Document Sent via email
+                <img
+                  className="document-image-icon"
+                  src={require("../resources/sendDoc.png")}
+                />
+              </div>
+            </Collapse>
           </div>
         </div>
       </div>
