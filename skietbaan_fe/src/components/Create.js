@@ -5,6 +5,7 @@ import { URL } from "../actions/types.js";
 import history from "./history";
 import RegisterMember from '../components/RegisterMember';
 import ViewMembers from '../components/ViewMembers';
+import Button from '@material-ui/core/Button';
 
 class Create extends Component {
   constructor(props) {
@@ -58,7 +59,7 @@ class Create extends Component {
       window.location = "/registerPage";
     }
   }
-
+  
   render() {
     return (
       <div className="create-container">
@@ -67,15 +68,15 @@ class Create extends Component {
         </div>
         <div className="create-feature-buttons">
           <div className="create-all-btn1">
-            <button className="create-all-groups-btn">GROUPS</button>
+            <Button className="create-all-groups-btn">GROUPS</Button>
           </div>
           <div className="create-all-btn2">
-            <button className="create-all-competitions-btn">
+            <Button className="create-all-competitions-btn">
               COMPETITIONS
-            </button>
+            </Button>
           </div>
           <div className="create-all-btn3">
-            <button className="create-all-members-btn">MEMBERS</button>
+            <Button className="create-all-members-btn">MEMBERS</Button>
           </div>
         </div>
         
