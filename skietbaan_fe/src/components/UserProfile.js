@@ -255,7 +255,6 @@ class UserProfile extends Component {
     }
 
     Logout(){
-        console.log("here");
         var res = document.cookie;
         var multiple = res.split(";");
         for(var i = 0; i < multiple.length; i++) {
@@ -269,7 +268,7 @@ class UserProfile extends Component {
     render() {
         return (
             <div className="my-container">
-                <Row className="top-bar-rectangle">
+                {/*<Row className="top-bar-rectangle">
                     <Col className="lay-horizontal">
                         <div className="center-block-content">
                             <label className="username-bar">
@@ -283,7 +282,7 @@ class UserProfile extends Component {
                             </div>
                         </a>
                     </Col>
-                </Row>
+                                </Row>*/}
                 <Container>
                     <div>
                         <div className="member-number text-color">
