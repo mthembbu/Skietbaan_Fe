@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
+import { Container, Row, Col} from 'react-bootstrap';
 import '../bootstrap/UserProfile.css';
 import $ from "jquery";
 import { getCookie } from './cookie.js';
 import {BASE_URL} from '../actions/types.js'
+import {Collapse} from 'react-collapse'
 
 class UserProfile extends Component {
     constructor(props){
@@ -11,9 +12,12 @@ class UserProfile extends Component {
         this.state = {
             awardCompetitions : [],
             hoursAward : {
-                hours: -1
+                hours: -1,
+                collapse: false
             }
         }
+
+        this.toggle = this.toggle.bind(this);
     }
 
     UNSAFE_componentWillMount(){
@@ -49,6 +53,10 @@ class UserProfile extends Component {
         .then(data => {
             this.setState({hoursAward : data})
         });
+    }
+
+    toggle() {
+        this.setState(state => ({ collapse: !state.collapse }));
     }
 
     AnimateAccuracyCircle(counter, element, index){
@@ -256,42 +264,24 @@ class UserProfile extends Component {
         return (
             <div className="my-container">
                 <Container>
-                    <div>
-                        <div className="member-number text-color">
-                            <label className="light-weight">Membership No:
-                                <span id="member-number-span">{this.state.hoursAward.membershipNumber !== undefined ?
-                                    this.state.hoursAward.membershipNumber : null}</span>
-                            </label>
-                        </div>
-                        <div className="page-title text-color"><label>Awards & Statistics</label></div>
-                        <Row className="push-shooting-award-bottom">
-                            <Col>
-                                <Row>
-                                    <Col>
-                                        <div className="hours-heading text-color">
-                                            <label>Hours Shooting</label>
-                                        </div>
-                                    </Col>
-                                </Row>
-                            
-                                <Row>
-                                    <Col className="push-bottom-12px">
-                                        <div className="lay-horizontal justify-center">
-                                            {/*make hours dynamic*/}
-                                            {this.state.hoursAward.hours !== -1 ?
-                                                this.SetDigits(this.state.hoursAward.hours.toString()) : this.SetDigits(null)}
-                                        </div>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col>
-                                        {this.state.hoursAward != null ? this.RenderHoursIcons() : null} 
-                                    </Col>
-                                </Row>
-                            </Col>
-                        </Row>
-                        {this.state.awardCompetitions.length > 0 ? this.RenderAllCompetitionsStats() : null}
-                    </div>
+                    <Row>
+                        <Col></Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <div className="compName-text">
+                            <a onClick={this.toggle}>
+                                {this.state.awardCompetitions.length > 0 ? 
+                                    this.state.awardCompetitions[0].competitionName.toUpperCase() : null}
+                            </a>
+                            {this.state.awardCompetitions.length > 0 ?
+                                <Collapse isOpened={true}>
+                                    <p className="compName-text">asfpwawfpasfqpf</p>
+                                </Collapse> : null
+                            }
+                            </div>
+                        </Col>
+                    </Row>
                 </Container>
             </div>
         )

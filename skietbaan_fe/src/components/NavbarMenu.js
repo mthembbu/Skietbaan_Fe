@@ -234,8 +234,8 @@ class NavbarMenu extends Component {
   render() {
     return (
       <div>
-        {this.checkUserType()}
-        {this.fetchNumberOfNotification()}
+        {/*{this.checkUserType()}
+        {this.fetchNumberOfNotification()}*/}
       </div>
     );
   }
