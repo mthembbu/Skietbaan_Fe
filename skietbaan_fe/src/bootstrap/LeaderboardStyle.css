@@ -9,7 +9,7 @@ html, body{
      position: fixed;
      width: 100%;
      height: 100%;
-     padding-bottom: 58px;
+     padding-bottom: 56px;
  }
  .leaderboardContainer .row{
      height: 100%;
@@ -537,6 +537,10 @@ html, body{
         bottom: 0;
         margin-bottom: 0px !important;
      }
+     .leaderboardContainer{
+        margin-top: 56px;
+     }
+
   }
   @media only screen and (min-width: 701px) {
      /* tablets and desktop */
