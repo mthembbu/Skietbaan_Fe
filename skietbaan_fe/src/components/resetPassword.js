@@ -40,31 +40,41 @@ class ForgotPassword extends Component {
         return (
             <div className="forgot-password-page-content">
 
+                <div className="container-of-elements">
+                
                     <div className="docuements-heading">
                         <div className="documents-text"></div>
                     </div>
-                <div className="container-of-elements">
-                <label className="password-reset-label">Enter new Password</label>
-                    <br/>
-                    <input
-                         type="text"
-                         name="emailValue"
-                         id="email"
-                         autoComplete = "off"
-                         className="forgot-password-email"
-                            value={this.state.passwordValue} 
-                            onChange={this.handleChange}
-                    />
-                    <br/>
-                <label className="password-reset-label">Confirm Password</label>
-                    <input
-                        type="text"
-                        name="emailValue"
-                        id="email"
-                        autoComplete = "off"
-                        className="forgot-password-email"
-                    />
-                    <button className="button-email" onClick={this.resetPassword}>Send Email</button>
+                    <div>
+                        <label className="password-reset-label-2 container-reset">Enter new Password</label>
+                    </div>
+
+                    <div>
+                        <input
+                            type="text"
+                            name="emailValue"
+                            id="email"
+                            autoComplete = "off"
+                            className="forgot-password-email"
+                                value={this.state.passwordValue} 
+                                onChange={this.handleChange}
+                        />
+                    </div>
+
+                    <div>                
+                        <label className="password-reset-label-2">Confirm Password</label>
+                    </div>
+
+                    <div>
+                        <input
+                            type="text"
+                            name="emailValue"
+                            id="email"
+                            autoComplete = "off"
+                            className="forgot-password-email"
+                        />
+                    </div>
+                        <button className="button-email" onClick={this.resetPassword}>Send Email</button>
                 </div>
             </div>
         )

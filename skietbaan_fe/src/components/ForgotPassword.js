@@ -40,7 +40,7 @@ class ForgotPassword extends Component {
                     <div className="docuements-heading">
                         <div className="documents-text">Forgot Password</div>
                     </div>
-                    <label className="password-reset-label-2">Enter Email Or Username</label>
+                    <label className="password-reset-label-2 container-reset">Enter Email Or Username</label>
 
                     <div>
                         <input
@@ -55,7 +55,7 @@ class ForgotPassword extends Component {
                     </div>
 
                     <div>
-                        <label className="password-reset-label">{this.state.isSent == "user not registered"? "user not registered":null}</label>
+                        <label className="password-reset-label">{this.state.isSent}</label>
                     </div>
                     <button className="button-email" onClick={this.sendEmail}>Send Email</button>
                     <br/>
