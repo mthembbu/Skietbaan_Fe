@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
-import { withRouter } from 'react-router-dom';
-import { passId, getName ,FetchGroups,groupDic} from '../actions/postActions';
+import history from "./history";
+import { passId, getName ,fetchEditUser,FetchGroups,groupDic} from '../actions/postActions';
 import { BASE_URL } from '../actions/types';
 import Switch from '@material-ui/core/Switch';
 import back from './GroupImages/back.png';
@@ -42,7 +42,7 @@ class ViewGroups extends Component {
 	editGroup(obj) {
 		this.props.getName(obj.name);
 		this.props.passId(obj.id);
-	this.props.history.push('/EditGroup');
+	history.push('/EditGroup');
 	}
 
 	async delete(groupId) {
@@ -135,4 +135,4 @@ const mapStateToProps = (state) => ({
 	groupDict:state.posts.groupDict
 });
 
-export default withRouter(connect(mapStateToProps, { passId, getName,groupDic ,FetchGroups})(ViewGroups));
+export default connect(mapStateToProps, { passId, getName,groupDic,fetchEditUser ,FetchGroups})(ViewGroups);

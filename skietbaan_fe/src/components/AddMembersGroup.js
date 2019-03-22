@@ -67,8 +67,6 @@ class AddMembersGroup extends Component {
 
 
 	toggleHighlight = (event) => {
-		console.log(this.state.count)
-		console.log(this.props.existing.length)
 		if (this.props.existing[event].highlighted == true) {
 			this.props.existing[event].highlighted = false;
 			this.setState({ count: this.state.count - 1 });
@@ -145,12 +143,12 @@ class AddMembersGroup extends Component {
 					<div className="the-nav-bar">
 						<img className="back-image" onClick={this.onBack} src={back} alt="" />
 						<table className="names-table">
-							<tbody>
+							<tbody className="nameTbody">
 								<tr>
-									<td className="center-labelss">{this.props.name}</td>
+									<td className="center-labelss">ADD USERS</td>
 								</tr>
 								<tr>
-									<td className="nameOfGroup">Retro Rabbit </td>
+									<td className="nameOfGroup">{this.props.name.toUpperCase()}</td>
 								</tr>
 							</tbody>
 						</table>

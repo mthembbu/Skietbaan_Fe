@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
 import { withRouter } from 'react-router-dom';
+import history from "./history";
 import { BASE_URL } from '../actions/types';
 import unmarked from './GroupImages/Oval.png';
 import marked from './GroupImages/MarkedBox.png';
+import deleteS from './GroupImages/deleteS.png';
 import whiteBin from './GroupImages/whiteBin.png';
+import blackBin from './GroupImages/blackBin.png';
 import whitePlus from './GroupImages/whitePlus.png';
 import { fetchEditUser, AddMemberAction } from '../actions/postActions';
 import back from './GroupImages/back.png';
@@ -20,7 +23,8 @@ class EditGroup extends Component {
 			filterText: '',
 			count: 0,
 			selected: 0,
-			check: 'slect all'
+			check: 'select all',
+			binState:false
 		};
 		this.toggleHighlight = this.toggleHighlight.bind(this);
 		this.onBack = this.onBack.bind(this);
@@ -28,12 +32,9 @@ class EditGroup extends Component {
 		this.delete = this.delete.bind(this);
 		this.selectall = this.selectall.bind(this);
 	}
-	async UNSAFE_componentWillMount() {
-		if (!getCookie('token')) {
-			window.location = '/registerPage';
-		}
+
+	componentDidMount(){
 		this.props.fetchEditUser(this.props.id);
-		console.log(this.props.fetchEditUser, "hallo");
 	}
 
 	onChange(event) {
@@ -62,17 +63,29 @@ class EditGroup extends Component {
 		})
 			.then((res) => res.json())
 			.catch(function(data) {});
+
 		this.props.fetchEditUser(this.props.id);
 	}
 	toggleHighlight = (event) => {
-		if (this.props.editGroup[event].highlighted === true) {
-			this.props.editGroup[event].highlighted = false;
-			this.setState({ count: this.state.count - 1 });
-		} else {
-			this.props.editGroup[event].highlighted = true;
-			this.setState({ count: this.state.count + 1 });
-		}
+		if(this.state.binState===true){
+			if (this.props.editGroup[event].highlighted === true) {
+				this.props.editGroup[event].highlighted = false;
+				this.setState({ count: this.state.count - 1 });
+			} else {
+				this.props.editGroup[event].highlighted = true;
+				this.setState({ count: this.state.count + 1 });
+			}
+		}	
 	};
+
+	changeBinState=()=>{
+		if(this.state.binState===false){
+			this.setState({binState:true});
+		}
+		else{
+			this.setState({binState:false});
+		}
+	}
 
 	onBack() {
 		this.props.history.push('/ViewGroups');
@@ -86,19 +99,22 @@ class EditGroup extends Component {
 	};
 
 	selectall() {
-		if (this.state.check == 'Select all') {
-			this.setState({ count: this.props.editGroup.length });
-			for (var i = 0; i < this.props.editGroup.length; i++) {
-				this.props.editGroup[i].highlighted = true;
+		if(this.state.binState===true){
+			if (this.state.check == 'Select all') {
+				this.setState({ count: this.props.editGroup.length });
+				for (var i = 0; i < this.props.editGroup.length; i++) {
+					this.props.editGroup[i].highlighted = true;
+				}
+				this.setState({ check: 'Unselect all' });
+			} else {
+				this.setState({ count: 0 });
+				for (var i = 0; i < this.props.editGroup.length; i++) {
+					this.props.editGroup[i].highlighted = false;
+				}
+				this.setState({ check: 'Select all' });
 			}
-			this.setState({ check: 'Unselect all' });
-		} else {
-			this.setState({ count: 0 });
-			for (var i = 0; i < this.state.editGroup.length; i++) {
-				this.props.editGroup[i].highlighted = false;
-			}
-			this.setState({ check: 'Select all' });
 		}
+		
 	}
 
 	goToNext = () => {
@@ -121,7 +137,7 @@ class EditGroup extends Component {
 							<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(index)}>
 								<img
 									className="checkbox-delete"
-									src={post.highlighted == true ? marked : unmarked}
+									src={post.highlighted == true ? deleteS : unmarked}
 									alt=""
 								/>
 								<label className={post.highlighted ? 'blabe2' : 'blabe'}>
@@ -144,11 +160,10 @@ class EditGroup extends Component {
 						<label className="center-labels">{this.props.name}</label>
 						</div>
 						<div className="group-icon-spacing">
-						<div className="plus-next">
-							<img className="checkbox-delete" src={whiteBin} alt="" />
-							{/* <Close onClick={()=>this.goToNext()} /> */}
+						<div className="plus-next" onClick={()=>this.changeBinState()}>
+							<img className="checkbox-delete" src={this.state.binState?blackBin:whiteBin} alt="" />
 						</div>
-						<div className="delete-icons">
+						<div className="delete-icons" onClick={()=>this.goToNext()}>
 							<img className="checkbox-delete" src={whitePlus} alt="" />
 						</div>
 						</div>
@@ -167,13 +182,9 @@ class EditGroup extends Component {
 						<div className="switchAll" onClick={this.selectall}>
 							All
 							<Switch
-								checked={
-									this.state.count == 0 ? (
-										false
-									) : null || this.state.count == this.state.posts.length ? (
-										true
-									) : null
-								}
+							checked={
+								this.state.count === 0 ? false : null|| this.state.count == this.props.editGroup.length ? true: null
+							}
 							/>
 						</div>
 					</div>
@@ -202,4 +213,4 @@ const mapStateToProps = (state) => ({
 	editGroup: state.posts.editGroup
 });
 
-export default withRouter(connect(mapStateToProps, { fetchEditUser, AddMemberAction })(EditGroup));
+export default connect(mapStateToProps, { fetchEditUser, AddMemberAction })(EditGroup);
