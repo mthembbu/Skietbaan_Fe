@@ -48,7 +48,6 @@ class LeaderboardPage extends Component {
         this.checkFilterMobile = this.checkFilterMobile.bind(this);
     }
     componentDidMount() {
-        console.log(this.state.height);
         // Additionally I could have just used an arrow function for the binding `this` to the component...
         window.addEventListener("resize", this.updateDimensions);
       }
@@ -404,7 +403,7 @@ class LeaderboardPage extends Component {
                                 <tr className="HeaderRow2">
                                     <td className="colEmpty"></td>
                                     <td colSpan="2" className="GroupingLabelCOl">
-                                        {this.state.selectedGroup == -1 ? "Overal rank" : (this.props.groups.length != 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
+                                        {this.state.selectedGroup == -1 ? "Overall rank" : (this.props.groups.length != 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
                                     </td>
                                     <td colSpan="1" className="totalLabelCOl">
                                         Total
