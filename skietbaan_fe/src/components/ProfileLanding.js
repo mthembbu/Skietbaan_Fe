@@ -3,7 +3,6 @@ import {Row, Col} from 'react-bootstrap';
 import '../bootstrap/ProfileLanding.css';
 import UserProfile from './UserProfile';
 import Documents from './Documents';
-import $ from "jquery";
 
 export default class ProfileLanding extends Component {
     constructor(props){
