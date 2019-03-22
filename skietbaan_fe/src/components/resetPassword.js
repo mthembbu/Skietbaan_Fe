@@ -41,10 +41,10 @@ class ForgotPassword extends Component {
             <div className="forgot-password-page-content">
 
                     <div className="docuements-heading">
-                        <div className="documents-text">Documents</div>
+                        <div className="documents-text"></div>
                     </div>
                 <div className="container-of-elements">
-                    <label className="forgot-password-label">Enter Email</label>
+                <label className="password-reset-label">Enter new Password</label>
                     <br/>
                     <input
                          type="text"
@@ -56,6 +56,7 @@ class ForgotPassword extends Component {
                             onChange={this.handleChange}
                     />
                     <br/>
+                <label className="password-reset-label">Confirm Password</label>
                     <input
                         type="text"
                         name="emailValue"

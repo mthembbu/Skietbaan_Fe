@@ -37,24 +37,28 @@ class ForgotPassword extends Component {
             <div className="forgot-password-page-content">
                    
                 <div className="container-of-elements">
-                <div className="docuements-heading">
-                        <div className="documents-text">Documents</div>
+                    <div className="docuements-heading">
+                        <div className="documents-text">Forgot Password</div>
                     </div>
-                    <label className="forgot-password-label">Enter Email</label>
-                    <br/>
-                    <label className="password-reset-label">Enter Password</label>
-                    <input
-                        type="text"
-                        name="emailValue"
-                        id="email"
-                        autoComplete = "off"
-                        value={this.state.emailValue} 
-                        onChange={this.handleChange}
-                        className="forgot-password-email"
-                    />
+                    <label className="password-reset-label-2">Enter Email Or Username</label>
+
+                    <div>
+                        <input
+                            type="text"
+                            name="emailValue"
+                            id="email"
+                            autoComplete = "off"
+                            value={this.state.emailValue} 
+                            onChange={this.handleChange}
+                            className="forgot-password-email"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="password-reset-label">{this.state.isSent == "user not registered"? "user not registered":null}</label>
+                    </div>
                     <button className="button-email" onClick={this.sendEmail}>Send Email</button>
                     <br/>
-                    <label className="forgot-password-label">{this.state.isSent == "user not registered"? "user not registered":null}</label>
                 </div>
             </div>
         )

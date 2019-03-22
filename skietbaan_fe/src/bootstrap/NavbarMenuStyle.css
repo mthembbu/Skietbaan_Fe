@@ -1,12 +1,11 @@
-@media only screen and (min-width: 576px){
-  .dropdown-menu.show{
-    background-color: #F3F4F9;
+@media only screen and (min-width: 576px) {
+  .dropdown-menu.show {
+    background-color: #f3f4f9;
     border: none;
-    border: 1px solid  #F3F4F9;
-    
+    border: 1px solid #f3f4f9;
   }
 
-  .second-row-navbar{
+  .second-row-navbar {
     height: 68px;
     padding-top: 15px;
     padding-bottom: 15px;
@@ -14,43 +13,47 @@
     display: none;
   }
 
-  .columns-v2{
+  .columns-v2 {
     width: 25%;
   }
 
-  .columns{
+  .columns {
     width: 20%;
   }
 
-  .first-row-navbar{
+  .first-row-navbar {
     height: 56px;
     padding-top: 15px;
     padding-bottom: 15px;
     width: 100%;
   }
-  
-  .navbar-admin{
+
+  .navbar-admin {
     background-color: #000000;
     width: 66%;
     text-align: center;
     margin-left: 17%;
     top: 0;
     z-index: 100;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
   }
 
-  .nav-content{
+  .nav-content {
     text-align: center;
+    background-image: radial-gradient(circle, #ffffff, #000000);
+    box-shadow: 0px 11px 13px -8px #888888;
   }
 }
 
-@media only screen and (max-width:575px){
-  .dropdown-menu.show{
-    background-color: #F3F4F9;
+@media only screen and (max-width: 575px) {
+  .dropdown-menu.show {
+    background-color: #f3f4f9;
     border: none;
-    border: 1px solid  #F3F4F9;
+    border: 1px solid #f3f4f9;
   }
 
-  .second-row-navbar{
+  .second-row-navbar {
     height: 68px;
     padding-top: 15px;
     padding-bottom: 15px;
@@ -58,14 +61,14 @@
     display: none;
   }
 
-  .first-row-navbar{
+  .first-row-navbar {
     height: 56px;
     padding-top: 15px;
     padding-bottom: 15px;
     width: 100%;
   }
 
-  .navbar-admin{
+  .navbar-admin {
     background-color: #000000;
     width: 100%;
     text-align: center;
@@ -77,7 +80,7 @@
     border-top-right-radius: 20px;
   }
 
-  .second-row-navbar.expand{
+  .second-row-navbar.expand {
     display: table-row;
     height: 68px;
     padding-top: 15px;
@@ -85,16 +88,16 @@
     width: 100%;
   }
 
-  .columns{
+  .columns {
     width: 20%;
   }
 
-  .columns-v2{
+  .columns-v2 {
     width: 25%;
   }
 }
 
-.icon-same-dimensions{
+.icon-same-dimensions {
   height: 26px;
   width: 26px;
 }
@@ -105,12 +108,18 @@
   cursor: pointer;
 }
 
-.profile-icon-grey{
+.profile-icon-grey {
   height: 27px;
   width: 28px;
 }
+/* 
+.notify {
+  background: url("../components/navbar-icons/notify-red.png");
+  height: 40px;
+  width: 57px;
+} */
 
-.notifications-icon-grey{
+.notifications-icon-grey {
   height: 26px;
   width: 23px;
 }

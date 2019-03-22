@@ -56,7 +56,6 @@ class UserProfile extends Component {
     AnimateAccuracyCircle(counter, element, index){
         if(counter > element.accuracy) return;
         if(counter <= element.accuracy){
-            
             var degreees = (360 * counter) / 100;
             var activeBorder = $(`#${index}`);
             $(`#circle${index}`).html(Math.round(counter)+"%");

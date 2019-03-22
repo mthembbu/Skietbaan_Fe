@@ -12,7 +12,8 @@ class NavbarMenu extends Component {
     super(props);
 
     this.state = {
-      nav: null
+      nav: null,
+      numberOfNotifications: 0
     };
 
     this.isHome = this.isHome.bind(this);
@@ -47,22 +48,11 @@ class NavbarMenu extends Component {
           <table className="navbar-admin">
             <tbody>
               <tr className="first-row-navbar">
-                <td className="columns">
-                  {this.isHome()}
-                </td>
-                <td className="columns">
-                  {this.isCreate()}
-                </td>
-                <td
-                  className="columns">
-                  {this.isScoreCapture()}
-                </td>
-                <td className="columns">
-                  {this.isProfile()}
-                </td>
-                <td className="columns">
-                  {this.isNotifications()}
-                </td>
+                <td className="columns">{this.isHome()}</td>
+                <td className="columns">{this.isCreate()}</td>
+                <td className="columns">{this.isScoreCapture()}</td>
+                <td className="columns">{this.isProfile()}</td>
+                <td className="columns">{this.isNotifications()}</td>
               </tr>
             </tbody>
           </table>
@@ -74,19 +64,10 @@ class NavbarMenu extends Component {
           <table className="navbar-admin">
             <tbody>
               <tr className="first-row-navbar">
-                <td className="columns-v2">
-                  {this.isHome()}
-                </td>
-                <td
-                  className="columns-v2">
-                  {this.isScoreCapture()}
-                </td>
-                <td className="columns-v2">
-                  {this.isProfile()}
-                </td>
-                <td className="columns-v2">
-                  {this.isNotifications()}
-                </td>
+                <td className="columns-v2">{this.isHome()}</td>
+                <td className="columns-v2">{this.isScoreCapture()}</td>
+                <td className="columns-v2">{this.isProfile()}</td>
+                <td className="columns-v2">{this.isNotifications()}</td>
               </tr>
             </tbody>
           </table>
@@ -109,8 +90,8 @@ class NavbarMenu extends Component {
         <img
           src={NAV_BAR_ICONS.LEADERBOARD_GRAY}
           className="icon-same-dimensions"
-		  alt="Leaderboard tab not Selected"
-		  onClick={() => this.GoTo("/home")}
+          alt="Leaderboard tab not Selected"
+          onClick={() => this.GoTo("/home")}
         />
       );
     }
@@ -136,8 +117,8 @@ class NavbarMenu extends Component {
         <img
           src={NAV_BAR_ICONS.CREATE_GRAY}
           className="icon-same-dimensions"
-		  alt="Create tab not Selected"
-		  onClick={() => this.GoTo("/create")}
+          alt="Create tab not Selected"
+          onClick={() => this.GoTo("/create")}
         />
       );
     }
@@ -157,8 +138,8 @@ class NavbarMenu extends Component {
         <img
           src={NAV_BAR_ICONS.SCORE_CAPTURE_GRAY}
           className="icon-same-dimensions"
-		  alt="ScoreCapture tab not Selected"
-		  onClick={() => this.GoTo("/scoreCapture")}
+          alt="ScoreCapture tab not Selected"
+          onClick={() => this.GoTo("/scoreCapture")}
         />
       );
     }
@@ -178,18 +159,33 @@ class NavbarMenu extends Component {
         <img
           src={NAV_BAR_ICONS.PROFILE_GRAY}
           className="profile-icon-grey"
-		  alt="Profile tab not Selected"
-		  onClick={() => this.GoTo("/profile")}
+          alt="Profile tab not Selected"
+          onClick={() => this.GoTo("/profile")}
         />
       );
     }
+  }
+
+  fetchNumberOfNotification() {
+    const token = document.cookie;
+    fetch(BASE_URL + "/api/Notification/GetNumberOfNotifications?" + token)
+      .then(response => response.json())
+      .then(data =>
+        this.setState({
+          numberOfNotifications: data
+        })
+      );
   }
 
   isNotifications() {
     if (window.location.pathname.endsWith("/notify")) {
       return (
         <img
-          src={NAV_BAR_ICONS.NOTIFICATIONS_RED}
+          src={
+            this.state.numberOfNotifications === 0
+              ? NAV_BAR_ICONS.NOTIFICATIONS_RED
+              : NAV_BAR_ICONS.NOTIFY_RED
+          }
           className="notifications-icon-grey"
           alt="Notification tab Selected"
         />
@@ -197,21 +193,51 @@ class NavbarMenu extends Component {
     } else {
       return (
         <img
-          src={NAV_BAR_ICONS.NOTIFICATIONS_GRAY}
+          src={
+            this.state.numberOfNotifications === 0
+              ? NAV_BAR_ICONS.NOTIFICATIONS_GRAY
+              : NAV_BAR_ICONS.NOTIFY_GREY
+          }
           className="notifications-icon-grey"
-		  alt="Notification tab not Selected"
-		  onClick={() => this.GoTo("/notify")}
+          alt="Notification tab not Selected"
+          onClick={() => this.GoTo("/notify")}
         />
       );
     }
   }
+
+  // isNotifications() {
+  //   if (window.location.pathname.endsWith("/notify")) {
+  //     return (
+  //       <img
+  //         src={NAV_BAR_ICONS.NOTIFICATIONS_RED}
+  //         className="notifications-icon-grey"
+  //         alt="Notification tab Selected"
+  //       />
+  //     );
+  //   } else {
+  //     return (
+  //       <img
+  //         src={NAV_BAR_ICONS.NOTIFICATIONS_GRAY}
+  //         className="notifications-icon-grey"
+  // 	  alt="Notification tab not Selected"
+  // 	  onClick={() => this.GoTo("/notify")}
+  //       />
+  //     );
+  //   }
+  // }
 
   GoTo(page) {
     history.push(page);
   }
 
   render() {
-    return <div>{this.checkUserType()}</div>;
+    return (
+      <div>
+        {this.checkUserType()}
+        {this.fetchNumberOfNotification()}
+      </div>
+    );
   }
 }
 

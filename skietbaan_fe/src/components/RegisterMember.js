@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../components/RegisterMemberStyles.css';
 import { BASE_URL } from '../actions/types.js';
 import { getCookie } from '../components/cookie.js';
+import history from "./history";
 
 function validateUsername(username) {
   const re = /[a-zA-Z]/;
@@ -150,7 +151,7 @@ class App extends Component {
   }
 
   BackToCreate() {
-    window.location = "/create";
+    history.push("/create")
   }
 
   render() {
