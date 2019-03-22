@@ -194,7 +194,6 @@ class NavbarMenu extends Component {
 
   render() {
     return (
-      <div>
           <div className="nav-content">
             <table className="navbar-admin">
               <tbody>
@@ -208,7 +207,6 @@ class NavbarMenu extends Component {
               </tbody>
             </table>
           </div>
-      </div>
     );
   }
 }
