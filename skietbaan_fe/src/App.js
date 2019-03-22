@@ -17,7 +17,7 @@ import ViewMembers from './components/ViewMembers';
 import Documents from './components/Documents';
 import ScoreCapture from './components/ScoreCapture';
 import CreatePage from './components/CreatePage';
-import UserProfile from './components/UserProfile';
+import ProfileLanding from './components/ProfileLanding';
 import requirements from './components/requirements.js';
 import './App.css';
 import ForgotPassword from './components/ForgotPassword';
@@ -56,7 +56,7 @@ class App extends Component {
 							<Route path="/notify" component={notification} exact />
 							<Route path="/documents" component={Documents} exact />
 							<Route path="/viewmembers" component={ViewMembers} exact />
-							<Route path="/profile" component={UserProfile} exact />
+							<Route path="/profile" component={ProfileLanding} exact />
 							<Route path="/AddMembersGroup" component={AddMembersGroup} exact />
 							<Route path="/requirements" component={requirements} exact />
 							<Route path="/EditGroup" component={EditGroup} exact />
