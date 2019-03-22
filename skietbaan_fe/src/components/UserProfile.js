@@ -277,7 +277,7 @@ class UserProfile extends Component {
                             </a>
                             {this.state.awardCompetitions.length > 0 ?
                                 <Collapse isOpened={true}>
-                                    <p className="compName-text">asfpwawfpasfqpf</p>
+                                    <p className="competition-name-text">asfpwawfpasfqpf</p>
                                 </Collapse> : null
                             }
                             </div>
