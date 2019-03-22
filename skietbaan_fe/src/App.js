@@ -26,6 +26,7 @@ import EditGroup from './components/EditGroup';
 import ViewComp from './components/ViewComp';
 import CreateComp from './components/CreateComp';
 import Create from './components/Create';
+import resetPassword from './components/resetPassword';
 class App extends Component {
 
 	render() {
@@ -40,6 +41,7 @@ class App extends Component {
 							<Route path="/registerPage" component={Register} exact />
 							<Route path="/" component={Register} exact />
 							<Route path="/forgotPassword" component={ForgotPassword} />
+							<Route path="/resetPassword" component={resetPassword} />
 							<Route path="/registerMember" component={RegisterMember} exact />
 							<Route path="/new-competition" component={CreateComp} exact />
 							<Route path="/AddGroup" component={AddGroup} exact />

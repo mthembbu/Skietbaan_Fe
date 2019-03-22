@@ -59,14 +59,11 @@ class requirements extends Component {
         this.props.history.push("/requirements");
     }
   
-handleChange(event) {   
+    handleChange(event) {   
 
-    this.setState({ numberofshots: event.target.value });
-    console.log(this.state.numberofshots)
-}   
-
-
-
+        this.setState({ numberofshots: event.target.value });
+        console.log(this.state.numberofshots)
+    }   
   toggleHighlight = event => {
     if (this.state.posts[event].highlighted == true) {
       this.state.posts[event].highlighted = false;
