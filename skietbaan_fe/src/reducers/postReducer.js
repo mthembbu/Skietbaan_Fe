@@ -115,7 +115,6 @@ export default function(state = initialState, action) {
         leaderboardSelectedCompetitionName: action.payload
       };
     case UPDATE_SELECTED_GROUP:
-    console.log(action.payload)
       return {
         ...state,
         leaderboardSelectedGroupName: action.payload

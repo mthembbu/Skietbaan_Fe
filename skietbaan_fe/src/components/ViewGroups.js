@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
-import { withRouter } from 'react-router-dom';
-import { passId, getName ,FetchGroups,groupDic} from '../actions/postActions';
+import history from "./history";
+import { passId, getName ,fetchEditUser,FetchGroups,groupDic} from '../actions/postActions';
 import { BASE_URL } from '../actions/types';
 import Switch from '@material-ui/core/Switch';
 import back from './GroupImages/back.png';
-import group from './GroupImages/groupIcon.png';
+import group from './GroupImages/Group.png';
 import PropTypes from 'prop-types';
-
 import { getCookie } from '../components/cookie.js';
-import { prototype } from 'react-transition-group/TransitionGroup';
+
 class ViewGroups extends Component {
 	constructor(props) {
 		super(props);
@@ -29,7 +28,10 @@ class ViewGroups extends Component {
 		this.editGroup = this.editGroup.bind(this);
 	}
 
-	async componentWillMount() {
+	async componentDidMount() {
+		if (!getCookie("token")) {
+			window.location = "/registerPage";
+			}
 		this.props.FetchGroups();
 		this.props.groupDic();
 	}
@@ -44,7 +46,7 @@ class ViewGroups extends Component {
 	editGroup(obj) {
 		this.props.getName(obj.name);
 		this.props.passId(obj.id);
-		this.props.history.push('/EditGroup');
+	history.push('/EditGroup');
 	}
 
 	async delete(groupId) {
@@ -79,24 +81,23 @@ class ViewGroups extends Component {
 							.map((post, index) => (
 								<tr className="view-group" key={post.id}>
 									<td
-										className="first-row"
+										className={post.isActive==true?"first-row":"first-row-active"}
 										onClick={() => this.editGroup(post)}
-										style={{ color: post.colors, textAlign: 'left' }}
 									>
 										{post.name}
 									</td>
+									
 									<td className="group-container">
-									<img src={group}
+									{post.isActive===true?
+									<div><img src={group}
 									className="groupIcon"
 									alt=""
 								/>
-								{post.isActive==true?
-								<label>{ this.props.groupDict[post.id]}</label>:null}
+								<label className="numberOfUser">{ this.props.groupDict[post.id]}</label></div>:null}
 									</td>
 									<td>
 										<div className="group-view">
-										<Switch className="Active" checked={post.isActive} onClick={() => this.delete(post.id)}/>
-											{/* <button  >{post.isActive==true?"Active":"InActive"}</button> */}
+										<Switch color={"primary"} className="Active" focus={true} checked={post.isActive} onClick={() => this.delete(post.id)}/>
 										</div>
 									</td>
 								</tr>
@@ -138,4 +139,4 @@ const mapStateToProps = (state) => ({
 	groupDict:state.posts.groupDict
 });
 
-export default withRouter(connect(mapStateToProps, { passId, getName,groupDic ,FetchGroups})(ViewGroups));
+export default connect(mapStateToProps, { passId, getName,groupDic,fetchEditUser ,FetchGroups})(ViewGroups);

@@ -22,7 +22,10 @@ class AddGroup extends Component {
 		this.onClick = this.onClick.bind(this);
 	}
 
-	componentWillMount() {
+	UNSAFE_componentWillMount() {
+		if (!getCookie("token")) {
+			window.location = "/registerPage";
+			}
 		fetch(BASE_URL + '/api/groups').then((res) => res.json()).then((data) =>
 			this.setState({
 				groups: data.map((names) => names.name)

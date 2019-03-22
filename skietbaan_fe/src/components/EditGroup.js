@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
 import { withRouter } from 'react-router-dom';
+import history from "./history";
 import { BASE_URL } from '../actions/types';
-import marked from './GroupImages/marked.png';
-import redbox from './GroupImages/Rectangle.png';
+import unmarked from './GroupImages/Oval.png';
+import marked from './GroupImages/MarkedBox.png';
+import deleteS from './GroupImages/deleteS.png';
+import whiteBin from './GroupImages/whiteBin.png';
+import blackBin from './GroupImages/blackBin.png';
+import whitePlus from './GroupImages/whitePlus.png';
 import { fetchEditUser, AddMemberAction } from '../actions/postActions';
 import back from './GroupImages/back.png';
+import Switch from '@material-ui/core/Switch';
 import { getCookie } from '../components/cookie.js';
 class EditGroup extends Component {
 	constructor(props) {
@@ -16,17 +22,21 @@ class EditGroup extends Component {
 			newArray: [],
 			filterText: '',
 			count: 0,
-			selected: 0
+			selected: 0,
+			check: 'select all',
+			binState:false
 		};
 		this.toggleHighlight = this.toggleHighlight.bind(this);
 		this.onBack = this.onBack.bind(this);
 		this.onChange = this.onChange.bind(this);
 		this.delete = this.delete.bind(this);
+		this.selectall = this.selectall.bind(this);
 	}
-	async componentWillMount() {
-		if (!getCookie('token')) {
-			window.location = '/registerPage';
-		}
+
+	componentDidMount(){
+		if (!getCookie("token")) {
+			window.location = "/registerPage";
+			}
 		this.props.fetchEditUser(this.props.id);
 	}
 
@@ -56,17 +66,29 @@ class EditGroup extends Component {
 		})
 			.then((res) => res.json())
 			.catch(function(data) {});
+
 		this.props.fetchEditUser(this.props.id);
 	}
 	toggleHighlight = (event) => {
-		if (this.props.editGroup[event].highlighted === true) {
-			this.props.editGroup[event].highlighted = false;
-			 this.setState({ count: this.state.count - 1 });
-		} else {
-			this.props.editGroup[event].highlighted = true;
-			 this.setState({ count: this.state.count + 1 });
-		}
+		if(this.state.binState===true){
+			if (this.props.editGroup[event].highlighted === true) {
+				this.props.editGroup[event].highlighted = false;
+				this.setState({ count: this.state.count - 1 });
+			} else {
+				this.props.editGroup[event].highlighted = true;
+				this.setState({ count: this.state.count + 1 });
+			}
+		}	
 	};
+
+	changeBinState=()=>{
+		if(this.state.binState===false){
+			this.setState({binState:true});
+		}
+		else{
+			this.setState({binState:false});
+		}
+	}
 
 	onBack() {
 		this.props.history.push('/ViewGroups');
@@ -75,10 +97,28 @@ class EditGroup extends Component {
 	cancel = () => {
 		for (var i = 0; i < this.state.posts.length; i++) {
 			this.props.groupsList[i].highlighted = true;
-			this.props.groupsList[i].background = '#F3F4F9';
 		}
 		this.setState({ count: 0 });
 	};
+
+	selectall() {
+		if(this.state.binState===true){
+			if (this.state.check == 'Select all') {
+				this.setState({ count: this.props.editGroup.length });
+				for (var i = 0; i < this.props.editGroup.length; i++) {
+					this.props.editGroup[i].highlighted = true;
+				}
+				this.setState({ check: 'Unselect all' });
+			} else {
+				this.setState({ count: 0 });
+				for (var i = 0; i < this.props.editGroup.length; i++) {
+					this.props.editGroup[i].highlighted = false;
+				}
+				this.setState({ check: 'Select all' });
+			}
+		}
+		
+	}
 
 	goToNext = () => {
 		this.props.history.push('/AddMembersGroup');
@@ -87,7 +127,7 @@ class EditGroup extends Component {
 	render() {
 		const postitems = (
 			<div className="check">
-				<ul class="list-group" >
+				<ul class="list-group">
 					{this.props.editGroup
 						.filter((post) => {
 							return (
@@ -99,16 +139,15 @@ class EditGroup extends Component {
 						.map((post, index) => (
 							<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(index)}>
 								<img
-									className="checkbox-delete"	
-									src={post.highlighted==true?marked:redbox}
+									className="checkbox-delete"
+									src={post.highlighted == true ? deleteS : unmarked}
 									alt=""
-							
 								/>
-								<label className={post.highlighted?"blabe":"blabe2"} >
-									<div className={post.highlighted?"userName":"userName-active"}>
+								<label className={post.highlighted ? 'blabe2' : 'blabe'}>
+									<div className={post.highlighted ? 'userName-active' : 'userName'}>
 										{post.username}
 									</div>
-									<div className={post.highlighted?"email":"emails-active"}>{post.email}</div>
+									<div className={post.highlighted ? 'emails-active' : 'email'}>{post.email}</div>
 								</label>
 							</li>
 						))}
@@ -119,51 +158,52 @@ class EditGroup extends Component {
 			<main className="The-Main">
 				<div className="navBar-container">
 					<div className="the-nav-bar">
+					<div className="leftContainer">
 						<img className="back-image" onClick={this.onBack} src={back} alt="" />
 						<label className="center-labels">{this.props.name}</label>
+						</div>
+						<div className="group-icon-spacing">
+						<div className="plus-next" onClick={()=>this.changeBinState()}>
+							<img className="checkbox-delete" src={this.state.binState?blackBin:whiteBin} alt="" />
+						</div>
+						<div className="delete-icons" onClick={()=>this.goToNext()}>
+							<img className="checkbox-delete" src={whitePlus} alt="" />
+						</div>
+						</div>
 					</div>
-					<div className="BNavBar">
-						<input
-							className="the-Text"
-							id="username"
-							type="text"
-							onChange={this.onChange}
-							autoComplete="off"
-						/>
-						<button className="select2" onClick={this.goToNext}>
-							Add new
-						</button>
+					<div class="BNavBar">
+						<div className="inputBox">
+							<input
+								className="the-Text"
+								id="username"
+								type="text"
+								onChange={this.onChange}
+								autoComplete="off"
+								placeholder="Search"
+							/>
+						</div>
+						<div className="switchAll" onClick={this.selectall}>
+							All
+							<Switch
+							checked={
+								this.state.count === 0 ? false : null|| this.state.count == this.props.editGroup.length ? true: null
+							}
+							/>
+						</div>
 					</div>
 				</div>
-			
-					{postitems}
-			
+
+				{postitems}
+
 				{this.state.count == 0 ? null : (
 					<div className="bpanel">
-						<table className="group-delete-table">
-							<tbody>
-								<tr>
-									<td>
-										<div className="the-textname">Delete</div>
-									</td>
-									<td>
-										<span className="name-of-group">{this.state.selected} </span>
-									</td>
-									<div className="confrim-cancel">
-										<td>
-											<button className="group-confirm" onClick={() => this.delete()}>
-												Confirm
-											</button>
-										</td>
-										<td className="group-undo">
-											<button className="updatess" onClick={() => this.cancel()}>
-												Cancel
-											</button>
-										</td>
-									</div>
-								</tr>
-							</tbody>
-						</table>
+						<button className="confirm-group" onClick={() => this.delete()}>
+							DELETE USER
+						</button>
+
+						<button className="cancel-delete" onClick={() => this.cancel()}>
+							CANCEL
+						</button>
 					</div>
 				)}
 			</main>
@@ -176,4 +216,4 @@ const mapStateToProps = (state) => ({
 	editGroup: state.posts.editGroup
 });
 
-export default withRouter(connect(mapStateToProps, { fetchEditUser, AddMemberAction })(EditGroup));
+export default connect(mapStateToProps, { fetchEditUser, AddMemberAction })(EditGroup);

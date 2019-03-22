@@ -77,11 +77,12 @@ export const getName = name => {
 };
 
 export const fetchEditUser = groupid =>dispatch=>{
-  fetch(BASE_URL + '/api/Groups/edit?id=' +groupid )
+  
+  fetch(BASE_URL + '/api/Groups/edit?id=4032')
   .then(res=>res.json())
   .then(data=>{
     const newdata=data.map(user=>{
-      user.highlighted=true;
+      user.highlighted=false;
       return user;
     })
     dispatch({
