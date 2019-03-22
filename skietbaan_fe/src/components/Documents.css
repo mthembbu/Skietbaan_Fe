@@ -1,230 +1,224 @@
-
-.page-name{
-    align-content: center;
-    text-align: center;
-    height: 49px;
-    width: 123px;
+.page-name {
+  align-content: center;
+  text-align: center;
+  height: 49px;
+  width: 123px;
 }
 
-.docuements-heading{
-    text-align: center;
-    align-content: center;
-    background-image: linear-gradient(to right, #ef3024  , #Dc0600);
-    height: 57px;
-    width: 100%;
-    padding-left: 100px;
-    padding-bottom: 30px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    position: fixed;
+.docuements-heading {
+  text-align: center;
+  align-content: center;
+  background-image: linear-gradient(to right, #ef3024, #dc0600);
+  height: 57px;
+  width: 100%;
+  padding-left: 100px;
+  padding-bottom: 30px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  position: fixed;
 }
 
-.documents-text{
-
-    color: #fdfdfd;
-    padding-top: 15px;
-    padding-right: 90px;
-    font-size: 20px;
-    font-family: helvetica;
-    font-weight: bolder;
+.documents-text {
+  color: #fdfdfd;
+  padding-top: 15px;
+  padding-right: 90px;
+  font-size: 20px;
+  font-family: helvetica;
+  font-weight: bolder;
 }
 
-.page-name2{
-    font-family: Helvetica;
-    font-weight: bolder;
-    font-size: 25px;
-    color: #fdfdfd;
+.page-name2 {
+  font-family: Helvetica;
+  font-weight: bolder;
+  font-size: 25px;
+  color: #fdfdfd;
 }
 
 .documents-btn-default {
-    font-weight: lighter;
-    font-size: 16px;
-    color: #ffffff;
-    letter-spacing: 1px;
-    line-height: 15px;
-    border: 1px solid #ffffff;
-    border-radius: 40px;
-    background: transparent;
-    transition: all 0.3s ease 0s;
-  }
-
-  .documents-btn-default:focus {
-    font-weight: lighter;
-    outline: none;
-    font-size: 16px;
-    color: #ffffff;
-    letter-spacing: 1px;
-    line-height: 15px;
-    border: 1px solid #ffffff;
-    border-radius: 40px;
-    background: transparent;
-    transition: all 0.3s ease 0s;
-  }
-  
-  .documents-btn-default:hover {
-    font-weight: lighter;
-    font-size: 16px;
-    color: #ffffff;
-    letter-spacing: 1px;
-    line-height: 15px;
-    border: 1px solid #ffffff;
-    border-radius: 40px;
-    background: transparent;
-    transition: all 0.3s ease 0s;
-  }
-  
-.documents_background{
-    background-image: url('../resources/Documents_Back.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;    
-
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    overflow: auto;
+  font-weight: lighter;
+  font-size: 16px;
+  color: #ffffff;
+  letter-spacing: 1px;
+  line-height: 15px;
+  border: 1px solid #ffffff;
+  border-radius: 40px;
+  background: transparent;
+  transition: all 0.3s ease 0s;
 }
 
-.documents-center{
-    height: 600px;
-    overflow: auto;
+.documents-btn-default:focus {
+  font-weight: lighter;
+  outline: none;
+  font-size: 16px;
+  color: #ffffff;
+  letter-spacing: 1px;
+  line-height: 15px;
+  border: 1px solid #ffffff;
+  border-radius: 40px;
+  background: transparent;
+  transition: all 0.3s ease 0s;
 }
 
-  .btn-active {
-    font-weight: lighter;
-    font-size: 16px;
-    color: #ffffff;
-    letter-spacing: 1px;
-    line-height: 15px;
-    border: 1px solid #ffffff;
-    border-radius: 40px;
-    background: transparent;
-    transition: all 0.3s ease 0s;
-  }
-
-  .btn-active:hover {
-    font-weight: lighter;
-    font-size: 16px;
-    color: #ffffff;
-    letter-spacing: 1px;
-    line-height: 15px;
-    border: 1px solid #ffffff;
-    border-radius: 40px;
-    background: #Dc0600;
-    transition: all 0.3s ease 0s;
-  }
-
-  .document-image-icon{
-      margin-right: 20px;
-      float: right;
-  }
-
-  .documents-collapse{
-    padding-top: 8px;
-    font-family: Helvetica;
-    font-weight: bolder;
-    font-size: 18px;
-    color: #ffffff;
-    text-align: center;
-    align-content:center;
-  }
-
-  .send-button {
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 100px;
-  }
-
-  .btn-bottom-1{
-    width: 180px;
-    height: 42px;
-  }
-
-.btn-bottom-2{
-    width: 250px;
-    height: 42px;
-    
+.documents-btn-default:hover {
+  font-weight: lighter;
+  font-size: 16px;
+  color: #ffffff;
+  letter-spacing: 1px;
+  line-height: 15px;
+  border: 1px solid #ffffff;
+  border-radius: 40px;
+  background: transparent;
+  transition: all 0.3s ease 0s;
 }
 
-.btn-bottom-3{    
-    width: 300px;
-    height: 42px;
-}  
+.documents_background {
+  background-image: url("../resources/Documents_Back.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 
-.button-upload-document-3{
-    font-weight: lighter;
-    text-align: center;
-    align-content:center;
-    padding-top: 8px;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  overflow: auto;
 }
 
-.button-upload-document-2{
-    font-weight: lighter;
-    font-size: 20px;
-    text-align: center;
-    align-content:center;
-    padding-top: 22px;
+.documents-center {
+  height: 600px;
+  overflow: auto;
 }
 
-.label-select-document{
-    padding-top: 100px;
-    font-family: Helvetica;
-    font-weight: bolder;
-    font-size: 18px;
-    color: #ffffff;
-    text-align: center;
-    align-content:center;
+.btn-active {
+  font-weight: lighter;
+  font-size: 16px;
+  color: #ffffff;
+  letter-spacing: 1px;
+  line-height: 15px;
+  border: 1px solid #ffffff;
+  border-radius: 40px;
+  background: transparent;
+  transition: all 0.3s ease 0s;
 }
 
-.label-select-document2{
-    font-family: Helvetica;
-    font-weight: bolder;
-    font-size: 18px;
-    color: #ffffff;
-    text-align: center;
-    align-content:center;
+.btn-active:hover {
+  font-weight: lighter;
+  font-size: 16px;
+  color: #ffffff;
+  letter-spacing: 1px;
+  line-height: 15px;
+  border: 1px solid #ffffff;
+  border-radius: 40px;
+  background: #dc0600;
+  transition: all 0.3s ease 0s;
 }
 
-.document-requirements{ 
-    padding-top: 100%;
-    text-align: center;
-    align-content:center;
+.document-image-icon {
+  margin-right: 20px;
+  float: right;
 }
 
-
-.document-requirements3{ 
-    padding-top: 15px;
-    font-weight: lighter;
-    text-align: center;
-    font-size: 16px;
-    color: #ffffff;
-    padding-left: 42px;
-    padding-right: 42px;    
+.documents-collapse {
+  padding-top: 8px;
+  font-family: Helvetica;
+  font-weight: bolder;
+  font-size: 18px;
+  color: #ffffff;
+  text-align: center;
+  align-content: center;
 }
 
-.document-requirements4{ 
-    text-align: center;
-    padding-top: 22px;
-    font-weight: lighter;
-    font-size: 16px;
-    color: #ffffff;
-    padding-left: 42px;
-    padding-right: 42px;    
+.send-button {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 100px;
+}
+
+.btn-bottom-1 {
+  width: 180px;
+  height: 42px;
+}
+
+.btn-bottom-2 {
+  width: 250px;
+  height: 42px;
+}
+
+.btn-bottom-3 {
+  width: 300px;
+  height: 42px;
+}
+
+.button-upload-document-3 {
+  font-weight: lighter;
+  text-align: center;
+  align-content: center;
+  padding-top: 8px;
+}
+
+.button-upload-document-2 {
+  font-weight: lighter;
+  font-size: 20px;
+  text-align: center;
+  align-content: center;
+  padding-top: 22px;
+}
+
+.label-select-document {
+  padding-top: 100px;
+  font-family: Helvetica;
+  font-weight: bolder;
+  font-size: 18px;
+  color: #666666;
+  text-align: center;
+  align-content: center;
+}
+
+.label-select-document2 {
+  font-family: Helvetica;
+  font-weight: bolder;
+  font-size: 18px;
+  color: #ffffff;
+  text-align: center;
+  align-content: center;
+}
+
+.document-requirements {
+  padding-top: 100%;
+  text-align: center;
+  align-content: center;
+}
+
+.document-requirements3 {
+  padding-top: 15px;
+  font-weight: lighter;
+  text-align: center;
+  font-size: 16px;
+  color: #ffffff;
+  padding-left: 42px;
+  padding-right: 42px;
+}
+
+.document-requirements4 {
+  text-align: center;
+  padding-top: 22px;
+  font-weight: lighter;
+  font-size: 16px;
+  color: #ffffff;
+  padding-left: 42px;
+  padding-right: 42px;
 }
 
 .documents-rectangle {
-    	padding-top: 15px;
-    	margin-top: 62px;
-    	margin-left: auto;
-    	margin-right: auto;
-        height: 205px;
-        width: 300px;
-        border-radius: 10px;
-        background-color: #00000099;
+  padding-top: 15px;
+  margin-top: 62px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 205px;
+  width: 300px;
+  border-radius: 10px;
+  background-color: #00000099;
 }
 
-.testing-align{
-    text-align: center;
+.testing-align {
+  text-align: center;
 }
-
-
