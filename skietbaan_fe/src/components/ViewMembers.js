@@ -18,10 +18,14 @@ class ViewMembers extends Component {
         this.GetFilteredMembers = this.GetFilteredMembers.bind(this);
         this.GetAllMembers = this.GetAllMembers.bind(this);
         this.GetTimeLeft = this.GetTimeLeft.bind(this);
-        this.DoAllThese = this.DoAllThese.bind(this);
         this.onChangeText = this.onChangeText.bind(this);
         this.BackToCreate = this.BackToCreate.bind(this);
         this.Status = this.Status.bind(this);
+    }
+
+    componentDidMount(){
+        this.GetAllMembers();
+        this.GetTimeLeft()
     }
 
     GetAllMembers() {
@@ -70,15 +74,9 @@ class ViewMembers extends Component {
             }))
     }
 
-    DoAllThese() {
-        this.GetFilteredMembers();
-        this.GetTimeLeft();
-    }
-
     onChangeText(event) {
-        this.GetFilteredMembers();
         this.setState({ filterText: event.target.value });
-        this.GetTimeLeft();
+        console.log(this.state.filterText);
     }
 
     BackToCreate() {
@@ -98,8 +96,6 @@ class ViewMembers extends Component {
         if(!getCookie("token")){
             window.location = "/registerPage";
         }
-        this.GetAllMembers();
-        this.GetTimeLeft();
         const postItems = (
             <table striped hover condensed className="table-member">
                 <tbody >
@@ -163,7 +159,6 @@ class ViewMembers extends Component {
                     </div>
                 </div>
                 <div className="table-search-members" >
-                    {this.DoAllThese}
                     {postItems}
                 </div>
             </div>
