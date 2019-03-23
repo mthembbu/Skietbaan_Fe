@@ -7,6 +7,7 @@ import {
   FETCH_GROUPS,
   EDITGROUPUSERS,
   ADDMEMBERS,
+  PAGE,
   GROUPDICT,
   FETCH_LEADERBOARDFILTER_DATA,
   FETCH_LEADERBOARDTABLE_DATA,
@@ -77,7 +78,6 @@ export const getName = name => {
 };
 
 export const fetchEditUser = groupid =>dispatch=>{
-  
   fetch(BASE_URL + '/api/Groups/edit?id='+groupid)
   .then(res=>res.json())
   .then(data=>{
@@ -171,6 +171,14 @@ export const passId = id => {
   return dispatch => {
     dispatch({
       type: PASS_ID,
+      payload: id
+    });
+  };
+};
+export const pageState = id => {
+  return dispatch => {
+    dispatch({
+      type: PAGE,
       payload: id
     });
   };

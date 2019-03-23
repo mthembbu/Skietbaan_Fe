@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
 import history from "./history";
-import { passId, getName ,fetchEditUser,FetchGroups,groupDic} from '../actions/postActions';
+import { passId, getName ,fetchEditUser,FetchGroups,groupDic,pageState} from '../actions/postActions';
 import { BASE_URL } from '../actions/types';
 import Switch from '@material-ui/core/Switch';
 import back from './GroupImages/back.png';
@@ -47,6 +47,7 @@ class ViewGroups extends Component {
 	editGroup(obj) {
 		this.props.getName(obj.name);
 		this.props.passId(obj.id);
+		 this.props.pageState(1);
 	//  history.push('/EditGroup');
 	}
 
@@ -80,7 +81,7 @@ class ViewGroups extends Component {
 								);
 							})
 							.map((post, index) => (
-								<NavLink to='/EditGroup'>
+							
 								<tr className="view-group" key={post.id}>
 									<td
 										className={post.isActive==true?"first-row":"first-row-active"}
@@ -103,7 +104,6 @@ class ViewGroups extends Component {
 										</div>
 									</td>
 								</tr>
-								</NavLink>
 							))}
 					</tbody>
 				</table>
@@ -143,4 +143,4 @@ const mapStateToProps = (state) => ({
 	groupDict:state.posts.groupDict
 });
 
-export default connect(mapStateToProps, { passId, getName,groupDic,fetchEditUser ,FetchGroups})(ViewGroups);
+export default connect(mapStateToProps, { passId, getName,groupDic,fetchEditUser,pageState ,FetchGroups})(ViewGroups);
