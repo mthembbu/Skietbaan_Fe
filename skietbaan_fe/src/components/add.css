@@ -6,20 +6,6 @@
 	border-bottom-right-radius: 20px;
 }
 
-.center-labels {
-	display: flex;
-	margin-left: 56px;
-	margin-right: 56px;
-	text-align: center;
-	margin-top: 10px;
-	width: 7em;
-	display: flex;
-	color: white;
-	font-weight: bold;
-	font-size: 18px;
-	font-size: 25px;
-}
-
 .middle-bar {
 	width: 100%;
 	display: grid;
@@ -82,7 +68,7 @@
 }
 .back-container {
 	width: 0px;
-	margin-top: 10px;
+	margin-top: 5px;
 }
 
 .navsbar {
@@ -109,7 +95,7 @@
 }
 
 .group-label {
-	margin-top: 20px;
+	margin-top: 22px;
 	width: 7em;
 	color: white;
 	font-weight: bold;

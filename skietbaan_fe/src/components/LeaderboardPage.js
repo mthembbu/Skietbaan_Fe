@@ -48,7 +48,6 @@ class LeaderboardPage extends Component {
         this.checkFilterMobile = this.checkFilterMobile.bind(this);
     }
     componentDidMount() {
-        console.log(this.state.height);
         // Additionally I could have just used an arrow function for the binding `this` to the component...
         window.addEventListener("resize", this.updateDimensions);
       }
@@ -286,7 +285,7 @@ class LeaderboardPage extends Component {
             window.location = "/registerPage";
         }
         const groupsList = (
-            <Table className="SelectionTable" /* style={{height:"1002px"}} */>
+            <Table className="SelectionTable" >
                 <tbody>
                     {this.props.groups.map((group, index) => (
                         <tr key={group.value.toString()} onClick={() => this.setGroupValue(index)}
@@ -404,7 +403,7 @@ class LeaderboardPage extends Component {
                                 <tr className="HeaderRow2">
                                     <td className="colEmpty"></td>
                                     <td colSpan="2" className="GroupingLabelCOl">
-                                        {this.state.selectedGroup == -1 ? "Overal rank" : (this.props.groups.length != 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
+                                        {this.state.selectedGroup == -1 ? "Overall rank" : (this.props.groups.length != 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
                                     </td>
                                     <td colSpan="1" className="totalLabelCOl">
                                         Total
@@ -425,34 +424,9 @@ class LeaderboardPage extends Component {
                             </table>
                         </div>
                         </Collapse>
-                        {/* <div className="CurrentUserTableSection">
-                                <table className="RankingTable">
-                                    <tbody>
-                                        <tr className="rankRow">
-                                            <td className="RankIconCol">
-                                                {this.top3Display(this.props.userResults)}
-                                            </td>
-                                            <td className="RankLabelsCol">
-                                                <table className="HeadTableLabels">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td className="ExtraNameCOl">{this.props.userResults == null ? 'Something went wrong' : (this.props.userResults != null ? this.props.userResults.username : '--')}</td>
-                                                            <td className="ScoreColTotal">{this.props.userResults == null ? '--' : (this.props.userResults.total != 0 ? this.props.userResults.total : '--')}</td>
-                                                            <td className="ScoreColAverage">{this.props.userResults == null ? '--' : (this.props.userResults.average != 0 ? this.props.userResults.average : '--')}</td>
-                                                            <td className="ScoreColBest">{this.props.userResults == null ? '--' : (this.props.userResults.best != 0 ? this.props.userResults.best : '--')}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div> */}
-                        {/* </Collapse> */}
                     </div>
                 </div>
                 {/* Current User Section*/}
-                
                  <div className="userWrapper" >
                  <Collapse isOpened={this.checkFilterMobile()}>
                     <div className="row justify-content-center">

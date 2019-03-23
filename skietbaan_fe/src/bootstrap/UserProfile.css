@@ -18,23 +18,11 @@
     text-align: center;
 }
 
-.username-bar{
-    padding-top: 5px;
-    padding-left: 45px;
+.competition-name-text {	
+    color:#555555;	
     font-size: 20px;
-    font-family: helvetica;
     font-weight: bold;
-    color: white;
-}
-
-.page-title{
-    font-size: 27px;
-    padding-top: 6px;
-    margin-bottom: 10px;
-}
-
-.page-title label{
-    font-weight: normal;
+    line-height: 19px;
 }
 
 .box {
@@ -161,15 +149,6 @@
     background-color: #F3F4F9; 
 }
 
-.member-number{
-    padding-top: 15px;
-    font-size:  14px;
-}
-
-#member-number-span{
-    font-weight: bold;
-}
-
 .light-weight{
     font-weight: lighter;
 }
@@ -178,10 +157,6 @@
     width: 22px; 
     height: 22px;
     margin-right: 3px;
-}
-
-.restrict-row-height .row{
-    height: 100px;
 }
 
 .float-left{
@@ -305,12 +280,6 @@
     border-radius: 21px;	
 }
 
-.logout-text {	
-    color: #FAFAFA;	
-    font-size: 16px;	
-    font-weight: 300;	
-    text-align: center;
-}
 
 .log button {
     background: none;

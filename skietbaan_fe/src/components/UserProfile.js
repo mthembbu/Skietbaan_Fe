@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
+import { Container, Row, Col} from 'react-bootstrap';
 import '../bootstrap/UserProfile.css';
 import $ from "jquery";
 import { getCookie } from './cookie.js';
 import {BASE_URL} from '../actions/types.js'
+import {Collapse} from 'react-collapse'
+import history from "./history";
 
 class UserProfile extends Component {
     constructor(props){
@@ -11,17 +13,18 @@ class UserProfile extends Component {
         this.state = {
             awardCompetitions : [],
             hoursAward : {
-                hours: -1
+                hours: -1,
+                collapse: false
             }
         }
 
-        this.Logout = this.Logout.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
 
     UNSAFE_componentWillMount(){
         var token = getCookie("token");
         if(token === undefined){
-            this.props.history.push('/register-page');
+            history.push('/registerPage');
             return;
         }
         
@@ -37,7 +40,7 @@ class UserProfile extends Component {
             this.setState({awardCompetitions : data})
             if(this.state.awardCompetitions.length == 0){
                 this.Logout();
-                this.props.history.push('/register-page');
+                history.push('/registerPage');
             }
         });
 
@@ -53,7 +56,11 @@ class UserProfile extends Component {
         });
     }
 
-    AnimateAccuracyCircle(counter, element, index){
+    toggle() {
+        this.setState(state => ({ collapse: !state.collapse }));
+    }
+
+    animateAccuracyCircle(counter, element, index){
         if(counter > element.accuracy) return;
         if(counter <= element.accuracy){
             var degreees = (360 * counter) / 100;
@@ -70,7 +77,7 @@ class UserProfile extends Component {
             }
             counter++;
             setTimeout(() => {
-                this.AnimateAccuracyCircle(counter, element, index)
+                this.animateAccuracyCircle(counter, element, index)
             }, 80)
         }
     }
@@ -79,7 +86,7 @@ class UserProfile extends Component {
         This function takes the total score as string and append zeros
         at the front if the total score has less than four digits
     */
-    Tokenize(str){
+    tokenize(str){
         var _array = []
         if(str == null){
             _array = ["0", "0", "0", "0"]
@@ -98,8 +105,8 @@ class UserProfile extends Component {
         return _array
     }
 
-    SetDigits(str, isCompetitionLocked){
-        var _array = this.Tokenize(str)
+    setDigits(str, isCompetitionLocked){
+        var _array = this.tokenize(str)
         return(
             <div className="lay-horizontal">
                 <div className={isCompetitionLocked ? "box box-grey-background" : "box box-white-background"}>
@@ -122,7 +129,7 @@ class UserProfile extends Component {
         )
     }    
     
-    RenderLockedIcon(){
+    renderLockedIcon(){
         return(
             <div className="locked-icon" style={{display: "inline"}}>
                 <img src={require("../resources/awardIcons/locked-icon.png")} alt="lock-icon" />
@@ -130,7 +137,7 @@ class UserProfile extends Component {
         )
     }
 
-    RenderActiveCircle(index){
+    renderActiveCircle(index){
         return(
             <div id={index} className="active-border">
                 <div id={`circle${index}`} className="circle">
@@ -140,7 +147,7 @@ class UserProfile extends Component {
         )
     }
 
-    RenderBulletIcons(){
+    renderBulletIcons(){
         return(
             <div className="bullet-img-scale bullet-padding-right">
                 <img src={require("../resources/awardIcons/bullet.png")} alt="bullet image"></img>
@@ -148,7 +155,7 @@ class UserProfile extends Component {
         )
     }
 
-    RenderRedLockIcon(){
+    renderRedLockIcon(){
         return(
             <div className="lock-img-scale">
                 <img src={require("../resources/awardIcons/red-locked-icon.png")} alt="lock image"></img>
@@ -156,7 +163,7 @@ class UserProfile extends Component {
         )
     }
 
-    CompetitionsStat(element, index){
+    competitionsStat(element, index){
         return(
             <div className="shooting-award push-shooting-award-bottom text-color" key={index}>
                 <Row>
@@ -175,7 +182,7 @@ class UserProfile extends Component {
                                         <Col>
                                             <div className="accuracy-text-align"><label className="accuracy-label">Accuracy</label></div>
                                             <div className="circle-bigger">
-                                               {!element.isCompetitionLocked ? this.RenderActiveCircle(index) : this.RenderRedLockIcon()}
+                                               {!element.isCompetitionLocked ? this.renderActiveCircle(index) : this.renderRedLockIcon()}
                                             </div>
                                             <Row className="center-block-content">
                                                 <Col className="center-icons-col">
@@ -197,12 +204,12 @@ class UserProfile extends Component {
                                             <div className="float-right">
                                                 <div><label className="total-label">Total</label></div>
                                                 <div className="circle-bigger">
-                                                    {!element.isCompetitionLocked ? this.RenderBulletIcons() : null}
+                                                    {!element.isCompetitionLocked ? this.renderBulletIcons() : null}
                                                     <div>
                                                         {!element.isCompetitionLocked ? 
-                                                            <label className="total-text">{element.total}</label> : this.RenderRedLockIcon()}
+                                                            <label className="total-text">{element.total}</label> : this.renderRedLockIcon()}
                                                     </div>
-                                                    {!element.isCompetitionLocked ? this.RenderBulletIcons() : null}
+                                                    {!element.isCompetitionLocked ? this.renderBulletIcons() : null}
                                                 </div>
                                                 <Row className="center-block-content">
                                                 <Col className="center-icons-col">
@@ -226,13 +233,13 @@ class UserProfile extends Component {
                             </Col>
                         </Row>
                     </Col>
-                    <div>{this.AnimateAccuracyCircle(1, element, index)}</div>
+                    <div>{this.animateAccuracyCircle(1, element, index)}</div>
                 </Row>
             </div>
         )
     }
 
-    RenderHoursIcons(){
+    renderHoursIcons(){
         return(
             <div className="lay-horizontal scale-img center-block-content">
                 <img src={this.state.hoursAward.gold ?
@@ -245,82 +252,37 @@ class UserProfile extends Component {
         )
     }
 
-    RenderAllCompetitionsStats(){
+    renderAllCompetitionsStats(){
         let renderArray = []
         this.state.awardCompetitions.forEach((element, index) => {
-            renderArray.push(this.CompetitionsStat(element, index))
+            renderArray.push(this.competitionsStat(element, index))
         })
 
         return renderArray;
     }
 
-    Logout(){
-        console.log("here");
-        var res = document.cookie;
-        var multiple = res.split(";");
-        for(var i = 0; i < multiple.length; i++) {
-            var key = multiple[i].split("=");
-            document.cookie = key[0]+" =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
-        }
-        window.location= '/login';
-        return false;
-    }
-
     render() {
         return (
             <div className="my-container">
-                <Row className="top-bar-rectangle">
-                    <Col className="lay-horizontal">
-                        <div className="center-block-content">
-                            <label className="username-bar">
-                                {this.state.hoursAward.username !== undefined ? 
-                                    this.state.hoursAward.username : null}    
-                            </label>
-                        </div>
-                        <a href="#" onClick={this.Logout}>
-                            <div className="logout-button">
-                                <label className="logout-text">Logout</label>
-                            </div>
-                        </a>
-                    </Col>
-                </Row>
                 <Container>
-                    <div>
-                        <div className="member-number text-color">
-                            <label className="light-weight">Membership No:
-                                <span id="member-number-span">{this.state.hoursAward.membershipNumber !== undefined ?
-                                    this.state.hoursAward.membershipNumber : null}</span>
-                            </label>
-                        </div>
-                        <div className="page-title text-color"><label>Awards & Statistics</label></div>
-                        <Row className="push-shooting-award-bottom">
-                            <Col>
-                                <Row>
-                                    <Col>
-                                        <div className="hours-heading text-color">
-                                            <label>Hours Shooting</label>
-                                        </div>
-                                    </Col>
-                                </Row>
-                            
-                                <Row>
-                                    <Col className="push-bottom-12px">
-                                        <div className="lay-horizontal justify-center">
-                                            {/*make hours dynamic*/}
-                                            {this.state.hoursAward.hours !== -1 ?
-                                                this.SetDigits(this.state.hoursAward.hours.toString()) : this.SetDigits(null)}
-                                        </div>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col>
-                                        {this.state.hoursAward != null ? this.RenderHoursIcons() : null} 
-                                    </Col>
-                                </Row>
-                            </Col>
-                        </Row>
-                        {this.state.awardCompetitions.length > 0 ? this.RenderAllCompetitionsStats() : null}
-                    </div>
+                    <Row>
+                        <Col></Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <div className="compName-text">
+                            <a onClick={this.toggle}>
+                                {this.state.awardCompetitions.length > 0 ? 
+                                    this.state.awardCompetitions[0].competitionName.toUpperCase() : null}
+                            </a>
+                            {this.state.awardCompetitions.length > 0 ?
+                                <Collapse isOpened={true}>
+                                    <p className="competition-name-text">asfpwawfpasfqpf</p>
+                                </Collapse> : null
+                            }
+                            </div>
+                        </Col>
+                    </Row>
                 </Container>
             </div>
         )
