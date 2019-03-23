@@ -8,6 +8,7 @@ import Switch from '@material-ui/core/Switch';
 import back from './GroupImages/back.png';
 import group from './GroupImages/Group.png';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom'
 import { getCookie } from '../components/cookie.js';
 
 class ViewGroups extends Component {
@@ -46,7 +47,7 @@ class ViewGroups extends Component {
 	editGroup(obj) {
 		this.props.getName(obj.name);
 		this.props.passId(obj.id);
-	history.push('/EditGroup');
+	//  history.push('/EditGroup');
 	}
 
 	async delete(groupId) {
@@ -79,6 +80,7 @@ class ViewGroups extends Component {
 								);
 							})
 							.map((post, index) => (
+								<NavLink to='/EditGroup'>
 								<tr className="view-group" key={post.id}>
 									<td
 										className={post.isActive==true?"first-row":"first-row-active"}
@@ -101,6 +103,7 @@ class ViewGroups extends Component {
 										</div>
 									</td>
 								</tr>
+								</NavLink>
 							))}
 					</tbody>
 				</table>
@@ -114,6 +117,7 @@ class ViewGroups extends Component {
 					<a href="" className="back-container">
 						<img className="back-image" onClick={this.onBack} src={back} alt="" />
 					</a>
+		
 					<label className="center-label">View Groups</label>
 				</div>
 				</div>

@@ -30,7 +30,7 @@ class EditGroup extends Component {
 		this.onBack = this.onBack.bind(this);
 		this.onChange = this.onChange.bind(this);
 		this.delete = this.delete.bind(this);
-		this.selectall = this.selectall.bind(this);
+		this.selectAll = this.selectAll.bind(this);
 	}
 
 	componentDidMount(){
@@ -101,7 +101,7 @@ class EditGroup extends Component {
 		this.setState({ count: 0 });
 	};
 
-	selectall() {
+	selectAll() {
 		if(this.state.binState===true){
 			if (this.state.check == 'Select all') {
 				this.setState({ count: this.props.editGroup.length });
@@ -182,7 +182,7 @@ class EditGroup extends Component {
 								placeholder="Search"
 							/>
 						</div>
-						<div className="switchAll" onClick={this.selectall}>
+						<div className="switchAll" onClick={this.selectAll}>
 							All
 							<Switch
 							checked={
