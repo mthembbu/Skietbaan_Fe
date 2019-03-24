@@ -5,7 +5,7 @@ import {
   Form
 } from 'reactstrap';
 import '../components/RegisterStyles.css';
-import { validateUsername } from './Validators.js';
+import { validateUsername, validateEmail } from './Validators.js';
 import { getCookie } from './cookie.js';
 import { URL } from '../actions/types.js';
 import back from '../components/assets/Back.png';
@@ -123,9 +123,17 @@ class Login extends Component {
     if (this.state.validForm) {
       let sha1 = require('sha1');
       let hash = sha1(this.state.passwordValue);
-      let RequestObject = {
-        "Username": this.state.usernameValue,
-        "Password": hash,
+      let RequestObject = "";
+      if (validateEmail(this.state.usernameValue) === true) {
+        RequestObject = {
+          "Email": this.state.usernameValue,
+          "Password": hash,
+        }
+      } else {
+        RequestObject = {
+          "Username": this.state.usernameValue,
+          "Password": hash,
+        }
       }
       fetch(URL + "/api/features/login", {
         method: 'post',
@@ -137,7 +145,7 @@ class Login extends Component {
       }).then(response => response.json()).then(data => {
         if (typeof data === "object") {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
-          window.location ="/home"
+          window.location = "/home"
         }
 
         else if (typeof data === "string") {
@@ -176,7 +184,7 @@ class Login extends Component {
 
     }, false);
     if (getCookie("token")) {
-      window.loction ="/home";
+      window.loction = "/home";
     }
 
     return (
@@ -231,9 +239,9 @@ class Login extends Component {
                 </div>
                 <div className="error-message-container">
                   <div className={this.state.passwordFound
-                    && this.passwordValue !== "" 
+                    && this.passwordValue !== ""
                     && this.state.usernameFound
-                    && this.usernameValue !== ""      
+                    && this.usernameValue !== ""
                     ? "hidden" : "error-message"}>Invalid Username or Password</div>
                 </div>
               </FormGroup>
