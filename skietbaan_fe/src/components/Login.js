@@ -216,7 +216,7 @@ class Login extends Component {
                   value={this.state.usernameValue}
                   onChange={this.handleChange}
                   className="input-user"
-                  placeholder="Username"
+                  placeholder="Username or Email"
                 />
               </FormGroup>
             </div>
