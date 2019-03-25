@@ -120,7 +120,7 @@ class ViewMembers extends Component {
                             </td>
                             <td className="second-column">
                                 <div className="expiry-time-column">
-                                    <div className={(this.Status(this.state.timeLeftOnMembership[index])) ? "bad" : "okay"}>
+                                    <div className={(this.status(this.state.timeLeftOnMembership[index])) ? "bad" : "okay"}>
                                         {post.memberExpiryDate.substring(0, 10)}
                                     </div>
                                     <div>{this.state.timeLeftOnMembership[index]} Months
