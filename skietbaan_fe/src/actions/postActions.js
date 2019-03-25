@@ -8,6 +8,7 @@ import {
   EDITGROUPUSERS,
   ADDMEMBERS,
   PAGE,
+  NEWGROUPSTATE,
   GROUPDICT,
   EMPTY,
   FETCH_LEADERBOARDFILTER_DATA,
@@ -189,6 +190,14 @@ export const emptyState = () => {
     dispatch({
       type: EMPTY,
       payload: []
+    });
+  };
+};
+export const newGroupArrayState = (newArray) => {
+  return dispatch => {
+    dispatch({
+      type: NEWGROUPSTATE,
+      payload: newArray
     });
   };
 };

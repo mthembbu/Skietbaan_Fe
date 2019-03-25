@@ -27,11 +27,8 @@ class AddMembersGroup extends Component {
 		this.addUsers = this.addUsers.bind(this);
 		this.selectall = this.selectall.bind(this);
 	}
-	async UNSAFE_componentWillMount() {
-		if (!getCookie('token')) {
-			window.location = '/registerPage';
-		}
-		this.props.AddMemberAction(this.props.id);
+	async componentDidMount() {
+		await this.props.AddMemberAction(this.props.id);
 	}
 	onChange(event) {
 		this.setState({ filterText: event.target.value });
@@ -45,7 +42,7 @@ class AddMembersGroup extends Component {
 			}
 			delete this.props.existing[i].highlighted;
 			delete this.props.existing[i].id;
-		 }
+		}
 
 		let request = {
 			users: this.state.newArray,
@@ -62,7 +59,7 @@ class AddMembersGroup extends Component {
 			.then(function(response) {})
 			.then(function(data) {})
 			.catch(function(data) {});
-			this.props.pageState(1);
+		this.props.pageState(1);
 	}
 
 	toggleHighlight = (event) => {

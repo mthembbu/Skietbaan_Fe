@@ -29,10 +29,6 @@ class Groups extends Component {
 		this.selectall = this.selectall.bind(this);
 	}
 	UNSAFE_componentWillMount() {
-		if (!getCookie('token')) {
-			window.location = '/registerPage';
-		}
-
 		fetch(BASE_URL + '/api/user').then((res) => res.json()).then((data) => {
 			this.setState({
 				posts: data.map((users) => {

@@ -31,10 +31,7 @@ class EditGroup extends Component {
 	}
 
 	async componentDidMount() {
-		if (!getCookie('token')) {
-			window.location = '/registerPage';
-		}
-		await this.props.fetchEditUser(this.props.id);
+		this.props.fetchEditUser(this.props.id);
 	}
 
 	onChange(event) {
