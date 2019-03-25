@@ -82,17 +82,17 @@ class notification extends Component {
       var competitionName = Message.split(",")[0];
       this.props.updateSelectedCompetition(competitionName);
       setTimeout(function() {
-        window.location = "./home";
+        window.location = "/home";
       }, 2000);
     } else if (Notification === "Group") {
       var groupName = Message.split(",")[0];
-      this.props.getName(groupName);
+      this.props.updateSelectedGroup(groupName);
       setTimeout(function() {
-        window.location = "/ViewGroups";
+        window.location = "/home";
       }, 2000);
     } else {
       setTimeout(function() {
-        this.props.history.push("/notify");
+        window.location = "/notify";
       }, 2000);
     }
   };
