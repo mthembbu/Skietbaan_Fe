@@ -176,7 +176,7 @@ class Register extends Component {
       }).then(function (data) {
         if (typeof data === "object") {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
-          history.push("/home");
+          window.location = "/home";
         }
       }).catch(function (data) {
       });
@@ -195,7 +195,7 @@ class Register extends Component {
 
   render() {
      if (getCookie("token")) {
-      history.push("/home");
+      window.location = "/home";
      }
     document.addEventListener('DOMContentLoaded', () => {
       this.toggleNavbar();
