@@ -525,6 +525,10 @@ html, body{
      width: 100%;
      bottom: 0;
      margin-bottom: 58px;
+     background-color: transparent;
+  }
+  .userWrapper .ReactCollapse--collapse .ReactCollapse--content .row{
+      background-color: transparent;
   }
   @media only screen and (min-width: 575px) {
     .userWrapper{
