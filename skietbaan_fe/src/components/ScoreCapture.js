@@ -356,6 +356,22 @@ export default class search extends Component {
   }
 
   render() {
+    document.addEventListener('DOMContentLoaded', () => {
+      var hideWhenAddingScore = document.querySelector(".navbar-admin");
+      var last_size = document.body.clientHeight;
+      window.addEventListener("resize", function () {
+        if (last_size === document.body.clientHeight) {
+          return;
+        }
+        if (hideWhenAddingScore.classList.contains("hidden-small")) {
+          hideWhenAddingScore.classList.remove("hidden-small");
+        }
+        else {
+          hideWhenAddingScore.classList.add("hidden-small");
+        }
+        last_size = document.body.clientHeight;
+      })
+    }, false);
 
     const stateOne = this.state.showCamera || this.state.imageTaken
     let competitionItem = [];
@@ -400,7 +416,7 @@ export default class search extends Component {
                 ? "invalid-comp" : "hidden"}>Select Competition</div>
 
             </div>
-            <div className="submit-container" id="hideWhenAddingScore">
+            <div className="submit-container">
               <div className={this.state.imageTaken || this.state.showCamera
                 ? "hidden" : "submit-button-elements"}>
                 <div className="button-hover">

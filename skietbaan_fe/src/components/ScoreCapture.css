@@ -237,6 +237,7 @@
 @media screen and (min-width: 480px){
     .competition-container{
         height: 100%;
+        overflow-y: hidden;
     }
 }
 
