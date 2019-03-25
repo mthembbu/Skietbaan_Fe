@@ -15,7 +15,7 @@ class ForgotPassword extends Component {
     this.resetPassword = this.resetPassword.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.togglePassword = this.togglePassword.bind(this);
-    this.hanldereseting = this.hanldereseting.bind(this);
+    this.hanldeReseting = this.hanldeReseting.bind(this);
   }
 
   handleChange({ target }) {
@@ -63,7 +63,7 @@ class ForgotPassword extends Component {
       .catch(function(data) {});
   }
 
-  hanldereseting() {
+  hanldeReseting() {
     this.state.confirmPasswordValue.length >= this.state.passwordValue.length &&
     this.state.confirmPasswordValue.length !== 0 &&
     this.state.passwordValue.length !== 0
@@ -160,7 +160,7 @@ class ForgotPassword extends Component {
 
           <div className="button-container forgot-password-button">
             <button
-              onClick={this.hanldereseting}
+              onClick={this.hanldeReseting}
               id="roundButton"
               className={
                 this.state.confirmPasswordValue.length >=
