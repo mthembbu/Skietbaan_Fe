@@ -136,7 +136,9 @@ export const fetchleaderboadtabledata = filterSelection => dispatch => {
       "&groupID=" +
       filterSelection.selectedGroup +
       "&userToken=" +
-      filterSelection.userToken
+      filterSelection.userToken +
+      "&selectedRank=" +
+      filterSelection.selectedRank
   )
     .then(res => res.json())
     .then(data =>
