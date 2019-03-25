@@ -104,7 +104,7 @@ export const getGroup = () => dispatch => {
     );
 };
 
-export const groupDic = () => dispatch => {
+export const groupDictinary = () => dispatch => {
   fetch(BASE_URL + "/api/Groups/participants")
     .then(res => res.json())
     .then(posts =>
