@@ -19,7 +19,6 @@ class ViewMembers extends Component {
         this.getAllMembers = this.getAllMembers.bind(this);
         this.getTimeLeft = this.getTimeLeft.bind(this);
         this.onChangeText = this.onChangeText.bind(this);
-        this.BbackToCreate = this.backToCreate.bind(this);
         this.status = this.status.bind(this);
     }
 
@@ -78,10 +77,6 @@ class ViewMembers extends Component {
         this.setState({ filterText: event.target.value });
     }
 
-    backToCreate() {
-        history.push("/create")
-    }
-
     status(timeLeft) {
         if (timeLeft < 2 || timeLeft === 2) {
             return true;
@@ -120,7 +115,7 @@ class ViewMembers extends Component {
                             </td>
                             <td className="second-column">
                                 <div className="expiry-time-column">
-                                    <div className={(this.Status(this.state.timeLeftOnMembership[index])) ? "bad" : "okay"}>
+                                    <div className={(this.status(this.state.timeLeftOnMembership[index])) ? "bad" : "okay"}>
                                         {post.memberExpiryDate.substring(0, 10)}
                                     </div>
                                     <div>{this.state.timeLeftOnMembership[index]} Months
@@ -134,17 +129,6 @@ class ViewMembers extends Component {
         );
         return (
             <div className="centre-view-member">
-                <div className="page-name-view">
-                    <div className="image-comtainer">
-                        <img src={require('../components/assets/back-button-white.png')} onClick={this.backToCreate}
-                            className="go-back-to-create-page-from-view-members" alt=''></img>
-                    </div>
-                    <div className="view-members-container">
-                        <label className="view-members">
-                            View Members
-                    </label>
-                    </div>
-                </div>
                 <div className="username-search">
                     <div className="search">
                         <input
