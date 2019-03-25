@@ -58,13 +58,12 @@
 }
 
 .page-content{
-    width: auto;
-    height: stretch;
     background-color: #fdfdfd;
-    width:100%;
+    width: 100%;
     z-index: 50;
     position: relative;
     height: 100vh;
+    margin-bottom: 56px;
 }
 
 .page-content-video{
@@ -155,7 +154,7 @@
     font-size: 25px;
     text-align: center;
     width: 100%;
-    padding-top: 19px;
+    padding-top: 90px;
 }
 
 .label-competition{
@@ -395,6 +394,10 @@ input[type=number] {
     background-color: #EA251A;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
+    box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);
+    position: fixed;
+    top: 0px;
+    z-index: 100;
 }
 
 .label-for-score{
