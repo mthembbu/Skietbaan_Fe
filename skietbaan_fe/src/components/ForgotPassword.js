@@ -79,51 +79,53 @@ class ForgotPassword extends Component {
             </div>
           </div>
 
-          <div className="spacing-login forgot-password-textbox">
-            <input
-              type="text"
-              name="usernameValue"
-              id="usernameValue"
-              autoComplete="off"
-              value={this.state.usernameValue}
-              onChange={this.handleChange}
-              className="input-user"
-              placeholder="Username or Email"
-            />
-          </div>
+          <div className="center-login reset-password-center">
+            <div className="spacing-login  forgot-password-textbox">
+              <input
+                type="text"
+                name="usernameValue"
+                id="usernameValue"
+                autoComplete="off"
+                value={this.state.usernameValue}
+                onChange={this.handleChange}
+                className="input-user"
+                placeholder="Username or Email"
+              />
+            </div>
 
-          <div>
-            <label className="forgot-password-error">
-              {this.state.emailValue.length !== 0
-                ? this.state.isSent
-                : this.state.isSent === "user not registered"
-                ? this.setState({ isSent: "" })
-                : this.state.isSent}
-            </label>
-          </div>
+            <div>
+              <label className="forgot-password-error">
+                {this.state.emailValue.length !== 0
+                  ? this.state.isSent
+                  : this.state.isSent === "user not registered"
+                  ? this.setState({ isSent: "" })
+                  : this.state.isSent}
+              </label>
+            </div>
 
-          <div className="forgot-password-text">
-            <p className="forgot-password-paragragh">
-              Forgot your password? No problem!
-            </p>
-            Provide your username or email and we’ll send you a link in your
-            email so you can reset your password.
-          </div>
+            <div className="forgot-password-text">
+              <p className="forgot-password-paragragh">
+                Forgot your password? No problem!
+              </p>
+              Provide your username or email and we’ll send you a link in your
+              email so you can reset your password.
+            </div>
 
-          <div className="button-container forgot-password-button">
-            <button
-              onClick={
-                this.state.emailValue.length !== 0 ? this.sendEmail : null
-              }
-              id="roundButton"
-              className={
-                this.state.emailValue.length !== 0
-                  ? "round-button"
-                  : "buttons-invalid round-button"
-              }
-            >
-              Send Link To Email
-            </button>
+            <div className="button-container forgot-password-button">
+              <button
+                onClick={
+                  this.state.emailValue.length !== 0 ? this.sendEmail : null
+                }
+                id="roundButton"
+                className={
+                  this.state.emailValue.length !== 0
+                    ? "round-button"
+                    : "buttons-invalid round-button"
+                }
+              >
+                Send Link To Email
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../components/ForgotPassword.css";
-import { BASE_URL } from "../actions/types";
+import { URL } from "../actions/types";
 import skietbaan from "../components/assets/skietbaanLogo.png";
 import history from "./history";
 
@@ -9,8 +9,7 @@ class ForgotPassword extends Component {
     super(props);
     this.state = {
       passwordValue: "",
-      confirmPasswordValue: "",
-      hash: ""
+      confirmPasswordValue: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.resetPassword = this.resetPassword.bind(this);
@@ -51,17 +50,14 @@ class ForgotPassword extends Component {
     console.log(token);
     console.log(sha1);
     console.log(hash);
-    fetch(
-      `http://localhost:50860/api/Features/Resetpassword?token=${token}&password=${hash}`,
-      {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(this.state.confirmPasswordValue)
-      }
-    )
+    fetch(URL + `/api/Features/Resetpassword?token=${token}&password=${hash}`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state.confirmPasswordValue)
+    })
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
@@ -72,9 +68,9 @@ class ForgotPassword extends Component {
     this.state.confirmPasswordValue.length !== 0 &&
     this.state.passwordValue.length !== 0
       ? this.state.confirmPasswordValue === this.state.passwordValue
-        ? this.resetPassword() && console.log("work")
-        : console.log("not working here 2")
-      : console.log("not working here");
+        ? this.resetPassword() || this.goToLogin()
+        : null
+      : null;
   }
 
   render() {
@@ -100,8 +96,8 @@ class ForgotPassword extends Component {
             </div>
           </div>
 
-          <div className="spacing-login">
-            <div className="input-label centre-div reset-password-textbox">
+          <div className="center-login">
+            <div className="input-label  reset-password-textbox">
               <input
                 type="text"
                 name="passwordValue"
