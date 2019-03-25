@@ -274,7 +274,7 @@ export default class search extends Component {
         .then(data => this.setState({
           scoreSaved: true, currState: 5
         }));
-      setTimeout(function () { window.location = "/scoreCapture"; }, 2000);
+      setTimeout(function () { window.location = "/scoreCapture"; }, 4000);
     }
   }
 
@@ -463,7 +463,7 @@ export default class search extends Component {
               </div>
             </div>
           </div>
-          
+
           <div className={this.state.imageTaken && !this.state.scoreSaved ? "image-container" : "hidden"}>
             <div className="centre-label">
               <div className={!this.state.imageTaken ? "hidden" : "label-score photo-top-label"}>
