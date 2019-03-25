@@ -6,17 +6,9 @@ import { updateSelectedCompetition } from '../actions/postActions';
 import { updateSelectedGroup } from '../actions/postActions';
 import { Collapse } from 'react-collapse';
 import { Table } from "react-bootstrap";
-import { Img } from 'react-image'
 import { getCookie } from './cookie.js'
-import { MDBBtn, MDBIcon } from "mdbreact";
+import { MDBBtn} from "mdbreact";
 import '../bootstrap/LeaderboardStyle.css';
-import { runInThisContext } from 'vm';
-import {
-    BrowserView,
-    MobileView,
-    isBrowser,
-    isMobile
-} from "react-device-detect";
 
 class LeaderboardPage extends Component {
     constructor(props) {
@@ -43,7 +35,7 @@ class LeaderboardPage extends Component {
         this.displaySelectedGroup = this.displaySelectedGroup.bind(this);
         this.setListType = this.setListType.bind(this);
         this.displayList = this.displayList.bind(this);
-        this.ValidatedInitialLeaderboardFilterSelection = this.ValidatedInitialLeaderboardFilterSelection.bind(this);
+        this.validatedInitialLeaderboardFilterSelection = this.validatedInitialLeaderboardFilterSelection.bind(this);
         this.updateDimensions = this.updateDimensions.bind(this);
         this.checkFilterMobile = this.checkFilterMobile.bind(this);
     }
@@ -56,7 +48,7 @@ class LeaderboardPage extends Component {
         this.updateDimensions();
         //get function to get filter data from api
         this.props.fetchleaderboadfilterdata();
-        this.ValidatedInitialLeaderboardFilterSelection();
+        this.validatedInitialLeaderboardFilterSelection();
         this.getLeaderboardData(this.state.selectedCompetition, this.state.selectedGroup);
     }
     updateDimensions() {
@@ -91,7 +83,7 @@ class LeaderboardPage extends Component {
             return false;
         }
     }
-    ValidatedInitialLeaderboardFilterSelection() {
+    validatedInitialLeaderboardFilterSelection() {
         if (this.props.selectedCompetitionName != undefined && this.props.selectedGroupName != undefined) {
             if (this.props.selectedCompetitionName.length > 0) {
                 for (var i = 0; i < this.props.competitions.length; i++) {
@@ -120,7 +112,7 @@ class LeaderboardPage extends Component {
             selectedCompetition: value
         });
         this.props.updateSelectedCompetition(this.props.competitions[value].label)
-        this.ValidatedInitialLeaderboardFilterSelection();
+        this.validatedInitialLeaderboardFilterSelection();
         this.getLeaderboardData(value, this.state.selectedGroup);
     }
     setGroupValue = (value) => {
@@ -132,7 +124,7 @@ class LeaderboardPage extends Component {
         } else {
             this.props.updateSelectedGroup(this.props.groups[value].label);
         }
-        this.ValidatedInitialLeaderboardFilterSelection();
+        this.validatedInitialLeaderboardFilterSelection();
         this.getLeaderboardData(this.state.selectedCompetition, value);
     }
     setScoreTypeValue = (value) => {
@@ -202,72 +194,72 @@ class LeaderboardPage extends Component {
     top3Display(object) {
         if (object != null) {
             if (object.rank == 1) {
-                return <div className="rankNumberContainer">
-                    <table className="rankNumTable">
+                return <div className="rank-number-container">
+                    <table className="rank-num-table">
                         <tbody>
-                            <tr className="upArrow">
+                            <tr className="up-arrow">
 
                             </tr>
-                            <tr className="Icon">
+                            <tr className="icon">
                                 <td className="firstCol">
                                     <img src={require('../resources/rank1.png')} />
                                 </td>
                             </tr>
-                            <tr className="downArrow">
+                            <tr className="down-arrow">
 
                             </tr>
                         </tbody>
                     </table>
                 </div>;
             } else if (object.rank == 2) {
-                return <div className="rankNumberContainer">
-                    <table className="rankNumTable">
+                return <div className="rank-number-container">
+                    <table className="rank-num-table">
                         <tbody>
-                            <tr className="upArrow">
+                            <tr className="up-arrow">
 
                             </tr>
-                            <tr className="Icon">
+                            <tr className="icon">
                                 <td className="firstCol">
                                     <img src={require('../resources/rank2.png')} />
                                 </td>
                             </tr>
-                            <tr className="downArrow">
+                            <tr className="down-arrow">
 
                             </tr>
                         </tbody>
                     </table>
                 </div>;
             } else if (object.rank == 3) {
-                return <div className="rankNumberContainer">
-                    <table className="rankNumTable">
+                return <div className="rank-number-container">
+                    <table className="rank-num-table">
                         <tbody>
-                            <tr className="upArrow">
+                            <tr className="up-arrow">
 
                             </tr>
-                            <tr className="Icon">
+                            <tr className="icon">
                                 <td className="firstCol">
                                     <img src={require('../resources/rank3.png')} />
                                 </td>
                             </tr>
-                            <tr className="downArrow">
+                            <tr className="down-arrow">
 
                             </tr>
                         </tbody>
                     </table>
                 </div>;
             } else {
-                return <div className="rankNumberContainer">
-                    <table className="rankNumTable">
+                return <div className="rank-number-container">
+                    <table className="rank-num-table">
                         <tbody>
-                            <tr className="upArrow">
+                            <tr className="up-arrow">
                                 <td></td>
                             </tr>
-                            <tr className="Icon">
+                            <tr className="icon">
                                 <td className="firstCol">
                                     {object.rank != 0 ? object.rank : '--'}
                                 </td>
                             </tr>
-                            <tr className="downArrow">
+                            <tr className="down-arrow">
                                 <td></td>
                             </tr>
                         </tbody>
@@ -285,42 +277,42 @@ class LeaderboardPage extends Component {
             window.location = "/registerPage";
         }
         const groupsList = (
-            <Table className="SelectionTable" >
+            <Table className="selection-table" >
                 <tbody>
                     {this.props.groups.map((group, index) => (
                         <tr key={group.value.toString()} onClick={() => this.setGroupValue(index)}
                             value={group.value}>
-                            <td className={this.state.selectedGroup == index ? "td-Active" : "td-Inactive"}>{group.label}</td>
+                            <td className={this.state.selectedGroup == index ? "td-active" : "td-inactive"}>{group.label}</td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
         )
         const competitionsList = (
-            <Table className="SelectionTable" >
+            <Table className="selection-table" >
                 <tbody>
                     {this.props.competitions.map((competition, index) => (
                         <tr key={competition.value.toString()} onClick={() => this.setCompetitionValue(index)}
                             value={competition.value}>
-                            <td className={this.state.selectedCompetition == (competition.value - 1) ? "td-Active" : "td-Inactive"}>{competition.label}</td>
+                            <td className={this.state.selectedCompetition == (competition.value - 1) ? "td-active" : "td-inactive"}>{competition.label}</td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
         )
         const tablebody = this.props.tableData.map((post, index) => (
-            <tr className="rankRow" key={index.toString()} value={index} onChange={() => this.onChange(post.id)}>
-                <td className="RankIconCol">
+            <tr className="rank-row" key={index.toString()} value={index} onChange={() => this.onChange(post.id)}>
+                <td className="rank-icon-col">
                     {this.top3Display(post)}
                 </td>
-                <td className="RankLabelsCol">
-                    <table className="HeadTableLabels">
+                <td className="rank-labels-col">
+                    <table className="head-table-labels">
                         <tbody>
                             <tr>
-                                <td className="ExtraNameCOl">{post.username}</td>
-                                <td className="ScoreColTotal">{post.total != 0 ? post.total : '--'}</td>
-                                <td className="ScoreColAverage">{post.average != 0 ? post.average : '--'}</td>
-                                <td className="ScoreColBest">{post.best != 0 ? post.best : '--'}</td>
+                                <td className="extra-name-col">{post.username}</td>
+                                <td className="score-col-total">{post.total != 0 ? post.total : '--'}</td>
+                                <td className="score-col-average">{post.average != 0 ? post.average : '--'}</td>
+                                <td className="score-col-best">{post.best != 0 ? post.best : '--'}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -330,18 +322,18 @@ class LeaderboardPage extends Component {
         ));
         return (
             /* Leaderboard Page Main Container */
-            <div className="leaderboardContainer">
+            <div className="leaderboard-container">
                 <div className="row justify-content-center">
                     <div className="col-sm-8 text-left">
-                        <div className="ClosedFilterSection">
-                            <table className="FilterTable1">
+                        <div className="closed-filter-section">
+                            <table className="filter-table1">
                                 <tbody>
-                                    <tr className="HeaderRow1">
-                                        <td className="CompetitionNameCol">
+                                    <tr className="header-row1">
+                                        <td className="competition-name-col">
                                             {this.props.competitions.length != 0 ? this.props.competitions[this.state.selectedCompetition].label : "-------"}
                                         </td>
-                                        <td className="FilterIconCol">
-                                            <div className="FilterIcon">
+                                        <td className="filter-icon-col">
+                                            <div className="filter-icon">
                                                 <MDBBtn tag="a" size="lg" floating gradient="purple"
                                                     onClick={this.onMouseClickFilter} >
                                                     <img src={require('../resources/filter.png')} />
@@ -353,36 +345,36 @@ class LeaderboardPage extends Component {
                             </table>
                         </div>
                         <Collapse isOpened={this.state.collapseFilter}>
-                            <div className="FilterSelections">
-                                <div className="CategorySelection">
-                                    <div className={this.state.listType == "competitions" ? "chooseComps-active" : "chooseComps"}  >
+                            <div className="filter-selections">
+                                <div className="category-selection">
+                                    <div className={this.state.listType == "competitions" ? "choose-comps-active" : "choose-comps"}  >
                                         <MDBBtn tag="a" size="lg" floating gradient="purple"
                                             onClick={() => this.setListType("competitions")} >
                                             Competitions
                                             </MDBBtn>
                                     </div>
-                                    <div className={this.state.listType == "groups" ? "chooseGroups-active" : "chooseGroups"}>
+                                    <div className={this.state.listType == "groups" ? "choose-groups-active" : "choose-groups"}>
                                         <MDBBtn tag="a" size="lg" floating gradient="purple"
                                             onClick={() => this.setListType("groups")} >
                                             Rankings by
                                             </MDBBtn>
                                     </div>
                                 </div>
-                                <div className="catVisibleLabel">
+                                <div className="cat-visible-label">
                                     {this.state.listType == "competitions" ? "Select Competition" : "Select Ranking"}
                                 </div>
-                                <div className={this.state.listType == "competitions" ? "hideMyDiv" : (this.state.selectedGroup == -1 ? "individual-Active" : "individual-Inactive")}>
+                                <div className={this.state.listType == "competitions" ? "hide-my-div" : (this.state.selectedGroup == -1 ? "individual-active" : "individual-inactive")}>
                                     <MDBBtn tag="a" size="lg" floating gradient="purple"
                                         onClick={() => this.setGroupValue(-1)} >
                                         Overall ranking
                                         </MDBBtn>
                                 </div>
-                                <div className={this.state.listType == "groups" ? "catVisibleGroupsLabel" : "hideMyDiv"}>
+                                <div className={this.state.listType == "groups" ? "cat-visible-groups-label" : "hide-my-div"}>
                                     Groups
                                    </div>
-                                <div className="SelectionsContainer">
+                                <div className="selections-container">
                                     <div className="row justify-content-center">
-                                        <div className="Choose">
+                                        <div className="choose">
                                             {this.state.listType == "competitions" ? competitionsList : groupsList}
                                         </div>
                                     </div>
@@ -397,27 +389,26 @@ class LeaderboardPage extends Component {
                                 </div>
                             </div>
                         </Collapse>
-                        {/* <Collapse isOpened={!this.state.collapseFilter}> */}
                         <Collapse isOpened={this.checkFilterMobile()}>
-                        <table className="RankingTableHead">
-                                <tr className="HeaderRow2">
-                                    <td className="colEmpty"></td>
-                                    <td colSpan="2" className="GroupingLabelCOl">
+                        <table className="ranking-table-head">
+                                <tr className="header-row2">
+                                    <td className="col-empty"></td>
+                                    <td colSpan="2" className="grouping-label-col">
                                         {this.state.selectedGroup == -1 ? "Overall rank" : (this.props.groups.length != 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
                                     </td>
-                                    <td colSpan="1" className="totalLabelCOl">
+                                    <td colSpan="1" className="total-label-col">
                                         Total
                                         </td>
-                                    <td colSpan="1" className="AverageLabelCOl">
+                                    <td colSpan="1" className="average-label-col">
                                         Average
                                         </td>
-                                    <td colSpan="1" className="BestLabelCOl">
+                                    <td colSpan="1" className="best-label-col">
                                         Best
                                        </td>
                                 </tr>
                         </table>
-                        <div className="RankingTableSection" style={{height: this.state.ranktableHeightMobile+"px"}}>
-                            <table className="RankingTable" >
+                        <div className="ranking-table-section" style={{height: this.state.ranktableHeightMobile+"px"}}>
+                            <table className="ranking-table" >
                                 <tbody>
                                     {tablebody}
                                 </tbody>
@@ -431,21 +422,21 @@ class LeaderboardPage extends Component {
                  <Collapse isOpened={this.checkFilterMobile()}>
                     <div className="row justify-content-center">
                         <div className="col-sm-8 text-left">
-                            <div className="CurrentUserTableSection">
-                                <table className="RankingTable">
+                            <div className="current-user-table-section">
+                                <table className="ranking-table">
                                     <tbody>
-                                        <tr className="rankRow">
-                                            <td className="RankIconCol">
+                                        <tr className="rank-row">
+                                            <td className="rank-icon-col">
                                                 {this.top3Display(this.props.userResults)}
                                             </td>
-                                            <td className="RankLabelsCol">
-                                                <table className="HeadTableLabels">
+                                            <td className="rank-labels-col">
+                                                <table className="head-table-labels">
                                                     <tbody>
                                                         <tr>
-                                                            <td className="ExtraNameCOl">{this.props.userResults == null ? 'Something went wrong' : (this.props.userResults != null ? this.props.userResults.username : '--')}</td>
-                                                            <td className="ScoreColTotal">{this.props.userResults == null ? '--' : (this.props.userResults.total != 0 ? this.props.userResults.total : '--')}</td>
-                                                            <td className="ScoreColAverage">{this.props.userResults == null ? '--' : (this.props.userResults.average != 0 ? this.props.userResults.average : '--')}</td>
-                                                            <td className="ScoreColBest">{this.props.userResults == null ? '--' : (this.props.userResults.best != 0 ? this.props.userResults.best : '--')}</td>
+                                                            <td className="extra-name-col">{this.props.userResults == null ? 'Something went wrong' : (this.props.userResults != null ? this.props.userResults.username : '--')}</td>
+                                                            <td className="score-col-total">{this.props.userResults == null ? '--' : (this.props.userResults.total != 0 ? this.props.userResults.total : '--')}</td>
+                                                            <td className="score-col-average">{this.props.userResults == null ? '--' : (this.props.userResults.average != 0 ? this.props.userResults.average : '--')}</td>
+                                                            <td className="score-col-best">{this.props.userResults == null ? '--' : (this.props.userResults.best != 0 ? this.props.userResults.best : '--')}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
