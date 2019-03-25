@@ -7,7 +7,7 @@ import marked from './GroupImages/MarkedBox.png';
 import unmarked from './GroupImages/Oval.png';
 import back from './GroupImages/back.png';
 import { getCookie } from '../components/cookie.js';
-import { AddMemberAction } from '../actions/postActions';
+import { AddMemberAction, pageState } from '../actions/postActions';
 import Switch from '@material-ui/core/Switch';
 
 class AddMembersGroup extends Component {
@@ -19,7 +19,7 @@ class AddMembersGroup extends Component {
 			filterText: '',
 			selected: '',
 			count: 0,
-			check:"Select all"
+			check: 'Select all'
 		};
 		this.toggleHighlight = this.toggleHighlight.bind(this);
 		this.onBack = this.onBack.bind(this);
@@ -45,7 +45,7 @@ class AddMembersGroup extends Component {
 			}
 			delete this.props.existing[i].highlighted;
 			delete this.props.existing[i].id;
-		}
+		 }
 
 		let request = {
 			users: this.state.newArray,
@@ -62,9 +62,8 @@ class AddMembersGroup extends Component {
 			.then(function(response) {})
 			.then(function(data) {})
 			.catch(function(data) {});
-		this.props.history.push('/EditGroup');
+			this.props.pageState(1);
 	}
-
 
 	toggleHighlight = (event) => {
 		if (this.props.existing[event].highlighted == true) {
@@ -77,7 +76,7 @@ class AddMembersGroup extends Component {
 	};
 
 	onBack() {
-		this.props.history.push('/EditGroup');
+		this.props.pageState(1);
 	}
 
 	cancel = () => {
@@ -89,7 +88,7 @@ class AddMembersGroup extends Component {
 
 	selectall() {
 		if (this.state.check == 'Select all') {
-			this.setState({ count: this.props.existing.length});
+			this.setState({ count: this.props.existing.length });
 			for (var i = 0; i < this.props.existing.length; i++) {
 				this.props.existing[i].highlighted = true;
 			}
@@ -168,7 +167,11 @@ class AddMembersGroup extends Component {
 							All
 							<Switch
 								checked={
-									this.state.count === 0 ? false : null|| this.state.count == this.props.existing.length ? true: null
+									this.state.count === 0 ? (
+										false
+									) : null || this.state.count == this.props.existing.length ? (
+										true
+									) : null
 								}
 							/>
 						</div>
@@ -199,4 +202,4 @@ const mapStateToProps = (state) => ({
 	name: state.posts.groupName,
 	existing: state.posts.existing
 });
-export default withRouter(connect(mapStateToProps, { AddMemberAction })(AddMembersGroup));
+export default withRouter(connect(mapStateToProps, { AddMemberAction, pageState })(AddMembersGroup));
