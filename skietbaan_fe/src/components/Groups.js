@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
 import { withRouter } from 'react-router-dom';
-import { createGroups,FetchGroups,groupDic } from '../actions/postActions';
+import { createGroups } from '../actions/postActions';
 import { BASE_URL } from '../actions/types';
 import back from './GroupImages/back.png';
 import unmarked from './GroupImages/Oval.png';
@@ -180,4 +180,4 @@ const mapStateToProps = (state) => ({
 	thegroup: state.posts.selectedItem
 });
 
-export default withRouter(connect(mapStateToProps, { createGroups,groupDic,FetchGroups })(Groups));
+export default withRouter(connect(mapStateToProps, { createGroups})(Groups));

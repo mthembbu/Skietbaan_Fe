@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
 import history from './history';
-import { passId, getName, fetchEditUser, FetchGroups, groupDic, pageState } from '../actions/postActions';
+import { passId, getName, fetchEditUser, fetchGroups, groupDic, pageState } from '../actions/postActions';
 import { BASE_URL } from '../actions/types';
 import Switch from '@material-ui/core/Switch';
 import back from './GroupImages/back.png';
@@ -33,11 +33,9 @@ class ViewGroups extends Component {
 		if (!getCookie('token')) {
 			window.location = '/registerPage';
 		}
-		await this.props.FetchGroups();
+		await this.props.fetchGroups();
 		await this.props.groupDic();
-		// this.setState({ posts: this.props.groupsList });
-		// await this.props.FetchGroups();
-		// this.setState({ posts: this.props.groupsList });
+
 	}
 
 	onChange(event) {
@@ -65,7 +63,7 @@ class ViewGroups extends Component {
 			.then(function(response) {})
 			.then(function(data) {})
 			.catch(function(data) {});
-		this.props.FetchGroups();
+		this.props.fetchGroups();
 	}
 
 	render() {
@@ -85,7 +83,7 @@ class ViewGroups extends Component {
 							.map((post, index) => (
 								<tr className="view-group" key={post.id}>
 									<td
-										className={post.isActive == true ? 'first-row' : 'first-row-active'}
+										className={post.isActive === true ? 'first-row' : 'first-row-active'}
 										onClick={() => this.editGroup(post)}
 									>
 										{post.name}
@@ -150,6 +148,6 @@ const mapStateToProps = (state) => ({
 	groupDict: state.posts.groupDict
 });
 
-export default connect(mapStateToProps, { passId, getName, groupDic, fetchEditUser, pageState, FetchGroups })(
+export default connect(mapStateToProps, { passId, getName, groupDic, fetchEditUser, pageState, fetchGroups })(
 	ViewGroups
 );

@@ -16,7 +16,7 @@ import {
 } from "./types";
 
 /** The method to feth the already available data for posts*/
-export const FetchGroups = () => dispatch => {
+export const fetchGroups = () => dispatch => {
   fetch(BASE_URL+"/api/Groups")
     .then(res => res.json())
     .then(group => {
