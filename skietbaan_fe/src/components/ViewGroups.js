@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
 import history from './history';
-import { passId, getName, fetchEditUser, fetchGroups, groupDictionary, pageState } from '../actions/postActions';
+import {
+	passId,
+	getName,
+	fetchEditUser,
+	fetchGroups,
+	groupDictionary,
+	pageState,
+	emptyState
+} from '../actions/postActions';
 import { BASE_URL } from '../actions/types';
 import Switch from '@material-ui/core/Switch';
 import back from './GroupImages/back.png';
@@ -35,7 +43,6 @@ class ViewGroups extends Component {
 		}
 		await this.props.fetchGroups();
 		await this.props.groupDictionary();
-
 	}
 
 	onChange(event) {
@@ -46,8 +53,10 @@ class ViewGroups extends Component {
 		this.props.history.push('/create');
 	}
 	editGroup(obj) {
+		this.props.emptyState();
 		this.props.getName(obj.name);
 		this.props.passId(obj.id);
+
 		this.props.pageState(1);
 	}
 
@@ -148,6 +157,12 @@ const mapStateToProps = (state) => ({
 	groupDict: state.posts.groupDict
 });
 
-export default connect(mapStateToProps, { passId, getName, groupDictionary, fetchEditUser, pageState, fetchGroups })(
-	ViewGroups
-);
+export default connect(mapStateToProps, {
+	passId,
+	getName,
+	groupDictionary,
+	fetchEditUser,
+	pageState,
+	fetchGroups,
+	emptyState
+})(ViewGroups);

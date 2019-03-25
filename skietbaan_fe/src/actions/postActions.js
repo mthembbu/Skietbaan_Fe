@@ -9,6 +9,7 @@ import {
   ADDMEMBERS,
   PAGE,
   GROUPDICT,
+  EMPTY,
   FETCH_LEADERBOARDFILTER_DATA,
   FETCH_LEADERBOARDTABLE_DATA,
   UPDATE_SELECTED_COMPETITION,
@@ -134,7 +135,9 @@ export const fetchleaderboadtabledata = filterSelection => dispatch => {
       "&groupID=" +
       filterSelection.selectedGroup +
       "&userToken=" +
-      filterSelection.userToken
+      filterSelection.userToken +
+      "&selectedRank=" +
+      filterSelection.selectedRank
   )
     .then(res => res.json())
     .then(data =>
@@ -180,6 +183,14 @@ export const pageState = id => {
     dispatch({
       type: PAGE,
       payload: id
+    });
+  };
+};
+export const emptyState = () => {
+  return dispatch => {
+    dispatch({
+      type: EMPTY,
+      payload: []
     });
   };
 };
