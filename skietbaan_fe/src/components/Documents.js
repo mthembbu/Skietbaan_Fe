@@ -8,8 +8,8 @@ class Documents extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "",
-      value2: "",
+      sendLogsReturn: "",
+      sendLosReturn: "",
       collapseFilterLOGS: false,
       collapseFilterLOS: false
     };
@@ -24,11 +24,11 @@ class Documents extends Component {
     let token = getCookie("token");
     fetch(BASE_URL + "/api/Documents/UserLOGS/" + token)
       .then(res => res.json())
-      .then(data => this.setState({ value: data }));
+      .then(data => this.setState({ sendLogsReturn: data }));
 
     fetch(BASE_URL + "/api/Documents/UserLOS/" + token)
       .then(res => res.json())
-      .then(data => this.setState({ value2: data }));
+      .then(data => this.setState({ sendLosReturn: data }));
   }
 
   sendLOGS() {
@@ -90,14 +90,16 @@ class Documents extends Component {
           <div className="button-upload-document-3">
             <button
               className={
-                this.state.value == "Document"
+                this.state.sendLogsReturn == "Document"
                   ? "Documents-btn-active document-btn-bottom-3"
                   : "documents-btn-default document-btn-bottom-3"
               }
-              onClick={this.state.value == "Document" ? this.sendLOGS : null}
+              onClick={
+                this.state.sendLogsReturn == "Document" ? this.sendLOGS : null
+              }
             >
               Letter of Good Standing
-              {this.state.value !== "Document" ? (
+              {this.state.sendLogsReturn !== "Document" ? (
                 <img
                   className="document-image-icon"
                   src={require("../resources/noDoc.png")}
@@ -106,7 +108,7 @@ class Documents extends Component {
             </button>
 
             <div className="document-requirements3">
-              {this.state.value !== "Document" ? (
+              {this.state.sendLogsReturn !== "Document" ? (
                 <div>
                   <b>Letter of Good Standing:</b>
                   <p>requires 5 more shoots.</p>
@@ -126,14 +128,16 @@ class Documents extends Component {
           <div className="button-upload-document-2">
             <button
               className={
-                this.state.value2 == "Document"
+                this.state.sendLosReturn == "Document"
                   ? "Documents-btn-active document-btn-bottom-2"
                   : "documents-btn-default document-btn-bottom-2"
               }
-              onClick={this.state.value2 == "Document" ? this.sendLOS : null}
+              onClick={
+                this.state.sendLosReturn == "Document" ? this.sendLOS : null
+              }
             >
               Letter of Status{" "}
-              {this.state.value2 !== "Document" ? (
+              {this.state.sendLosReturn !== "Document" ? (
                 <img
                   className="document-image-icon"
                   src={require("../resources/noDoc.png")}
@@ -142,7 +146,7 @@ class Documents extends Component {
             </button>
 
             <div className="document-requirements3">
-              {this.state.value2 !== "Document" ? (
+              {this.state.sendLosReturn !== "Document" ? (
                 <div>
                   <b>Letter of Status:</b>
                   <p>requires further shooting documentation.</p>
