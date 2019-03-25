@@ -1,4 +1,4 @@
-.page-name {
+.document-page-name {
   align-content: center;
   text-align: center;
   height: 49px;
@@ -27,7 +27,7 @@
   font-weight: bolder;
 }
 
-.page-name2 {
+.document-page-name2 {
   font-family: Helvetica;
   font-weight: bolder;
   font-size: 25px;
@@ -84,7 +84,7 @@
   overflow: auto;
 }
 
-.btn-active {
+.Documents-btn-active {
   font-weight: lighter;
   font-size: 16px;
   color: #ffffff;
@@ -110,23 +110,23 @@
   align-content: center;
 }
 
-.send-button {
+.document-send-button {
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 100px;
 }
 
-.btn-bottom-1 {
+.document-btn-bottom-1 {
   width: 180px;
   height: 42px;
 }
 
-.btn-bottom-2 {
+.document-btn-bottom-2 {
   width: 250px;
   height: 42px;
 }
 
-.btn-bottom-3 {
+.document-btn-bottom-3 {
   width: 300px;
   height: 42px;
 }
@@ -202,6 +202,6 @@
   background-color: #00000099;
 }
 
-.testing-align {
+.document-testing-align {
   text-align: center;
 }

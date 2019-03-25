@@ -13,11 +13,11 @@ class Documents extends Component {
       collapseFilterLOGS: false,
       collapseFilterLOS: false
     };
-    this.SendLOGS = this.SendLOGS.bind(this);
-    this.SendLOS = this.SendLOS.bind(this);
+    this.sendLOGS = this.sendLOGS.bind(this);
+    this.sendLOS = this.sendLOS.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
@@ -31,7 +31,7 @@ class Documents extends Component {
       .then(data => this.setState({ value2: data }));
   }
 
-  SendLOGS() {
+  sendLOGS() {
     let token = getCookie("token");
     fetch(BASE_URL + "/api/Documents/SendLOGS/" + token, {
       method: "post",
@@ -53,7 +53,7 @@ class Documents extends Component {
     }
   }
 
-  SendLOS() {
+  sendLOS() {
     let token = getCookie("token");
     fetch(BASE_URL + "/api/Documents/SendLOS/" + token, {
       method: "post",
@@ -91,10 +91,10 @@ class Documents extends Component {
             <button
               className={
                 this.state.value == "Document"
-                  ? "btn-active send-email btn-bottom-3"
-                  : "documents-btn-default send-email btn-bottom-3"
+                  ? "Documents-btn-active document-btn-bottom-3"
+                  : "documents-btn-default document-btn-bottom-3"
               }
-              onClick={this.state.value == "Document" ? this.SendLOGS : null}
+              onClick={this.state.value == "Document" ? this.sendLOGS : null}
             >
               Letter of Good Standing
               {this.state.value !== "Document" ? (
@@ -127,10 +127,10 @@ class Documents extends Component {
             <button
               className={
                 this.state.value2 == "Document"
-                  ? "btn-active send-email btn-bottom-2"
-                  : "documents-btn-default send-email btn-bottom-2"
+                  ? "Documents-btn-active document-btn-bottom-2"
+                  : "documents-btn-default document-btn-bottom-2"
               }
-              onClick={this.state.value2 == "Document" ? this.SendLOS : null}
+              onClick={this.state.value2 == "Document" ? this.sendLOS : null}
             >
               Letter of Status{" "}
               {this.state.value2 !== "Document" ? (
