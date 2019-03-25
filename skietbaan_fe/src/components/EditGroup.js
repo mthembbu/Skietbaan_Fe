@@ -30,11 +30,11 @@ class EditGroup extends Component {
 		this.selectAll = this.selectAll.bind(this);
 	}
 
-	componentDidMount() {
+	async componentDidMount() {
 		if (!getCookie('token')) {
 			window.location = '/registerPage';
 		}
-		this.props.fetchEditUser(this.props.id);
+		await this.props.fetchEditUser(this.props.id);
 	}
 
 	onChange(event) {
