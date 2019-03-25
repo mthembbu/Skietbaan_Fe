@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
 import { withRouter } from 'react-router-dom';
-import { createGroups } from '../actions/postActions';
+import { createGroups,FetchGroups,groupDic } from '../actions/postActions';
 import { BASE_URL } from '../actions/types';
 import back from './GroupImages/back.png';
 import unmarked from './GroupImages/Oval.png';
 import marked from './GroupImages/MarkedBox.png';
 import { getCookie } from '../components/cookie.js';
 import Switch from '@material-ui/core/Switch';
-// import { createMuiTheme } from '@material-ui/core/styles';
-// import purple from '@material-ui/core/colors/purple';
+
 class Groups extends Component {
 	constructor(props) {
 		super(props);
@@ -66,7 +65,7 @@ class Groups extends Component {
 			users: this.state.newArray
 		};
 
-		fetch(BASE_URL + '/api/groups/add', {
+	await fetch(BASE_URL + '/api/groups/add', {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',
@@ -76,7 +75,7 @@ class Groups extends Component {
 		})
 			.then(function(response) {})
 			.catch(function(data) {});
-		window.location = '/ViewGroups';
+		window.location = '/GroupComponent';
 	}
 
 	selectall() {
@@ -181,4 +180,4 @@ const mapStateToProps = (state) => ({
 	thegroup: state.posts.selectedItem
 });
 
-export default withRouter(connect(mapStateToProps, { createGroups })(Groups));
+export default withRouter(connect(mapStateToProps, { createGroups,groupDic,FetchGroups })(Groups));
