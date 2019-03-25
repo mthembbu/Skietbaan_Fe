@@ -5,6 +5,7 @@ import {
   FETCH_LEADERBOARDTABLE_DATA,
   PASS_ID,
   CREATEGROUP,
+  PAGE,
   EDITGROUPUSERS,
   UPDATE_SELECTED_COMPETITION,
   UPDATE_SELECTED_GROUP,
@@ -21,6 +22,7 @@ const initialState = {
  upName: "",
   editGroup:[],
   groupsList:[],
+  page:"",
   existing:[],
   leaderboardGroups: [],
   leaderboardCompetitions: [],
@@ -89,6 +91,11 @@ export default function(state = initialState, action) {
         ...state,
         groupId: action.payload
       };
+    case PAGE:
+      return {
+        ...state,
+        page: action.payload
+      };
 
     case FETCH_GROUPS:
       return {
@@ -115,7 +122,6 @@ export default function(state = initialState, action) {
         leaderboardSelectedCompetitionName: action.payload
       };
     case UPDATE_SELECTED_GROUP:
-    console.log(action.payload)
       return {
         ...state,
         leaderboardSelectedGroupName: action.payload

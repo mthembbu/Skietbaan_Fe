@@ -4,10 +4,14 @@ import { getCookie } from "./cookie";
 import history from "./history";
 import { connect } from "react-redux";
 import { BASE_URL } from "../actions/types.js";
-import { getName } from "../actions/postActions";
+import PropTypes from "prop-types";
 import deleteIcon from "../components/Notification-Img/trashcan.png";
 import deleteIconChange from "../components/Notification-Img/blacktrashcan.png";
-import createNotificationClicked from "../components/Notification-Img/notifySpeakerWhite.png";
+import {
+  updateSelectedCompetition,
+  updateSelectedGroup
+} from "../actions/postActions";
+import { updateIsReadProperty } from "../actions/notificationAction";
 
 class notification extends Component {
   constructor(props) {
@@ -19,7 +23,9 @@ class notification extends Component {
       deleteClicked: false,
       cancelClicked: false,
       isRead: false,
-      toggle: false
+      toggle: false,
+      markedForDeletion: false,
+      updatedNotification: {}
     };
     this.onDelete = this.onDelete.bind(this);
     this.markForDeletion = this.markForDeletion.bind(this);
@@ -62,29 +68,31 @@ class notification extends Component {
     });
   };
 
-  onClick_View = (Notification, Message) => {
-    if (Notification === "Award") {
+  onClick_View = (Notification, Message, Id) => {
+    this.setState({
+      isRead: true
+    });
+    this.props.updateIsReadProperty(Id);
+    if (Notification === "Award" || Notification === "Document") {
+      this.props.history.push("/profile");
     } else if (Notification === "Confirmation") {
     } else if (Notification === "Renewal") {
     } else if (Notification === "Competition") {
-      var parts = Message.split(",")[0];
+      var competitionName = Message.split(",")[0];
+      this.props.updateSelectedCompetition(competitionName);
       setTimeout(function() {
-        this.props.history.push("/home");
+        window.location = "./home";
       }, 2000);
-    } else if (Notification === "Document") {
     } else if (Notification === "Group") {
-      var parts = Message.split(",")[0];
-      this.props.getName(parts);
+      var groupName = Message.split(",")[0];
+      this.props.updateSelectedGroup(groupName);
       setTimeout(function() {
-        this.props.history.push("/notify");
+        window.location = "/ViewGroups";
       }, 2000);
     } else {
       setTimeout(function() {
         this.props.history.push("/notify");
       }, 2000);
-      this.setState({
-        isRead: true
-      });
     }
   };
 
@@ -98,9 +106,10 @@ class notification extends Component {
   }
 
   onClick_cancel() {
-    setTimeout(function() {
-      history.push("/notify");
-    }, 2000);
+    this.setState({
+      toggle: false
+    });
+    history.go(0);
   }
 
   componentDidMount() {
@@ -111,6 +120,7 @@ class notification extends Component {
         .then(data => {
           const newArray = data.map(notification => {
             notification.markedForDeletion = false;
+            this.state.isRead = notification.isRead;
             return notification;
           });
           this.setState({
@@ -143,6 +153,7 @@ class notification extends Component {
             src={this.state.toggle ? deleteIconChange : deleteIcon}
             onClick={() => this.changeIcon()}
             className={this.state.toggle ? "black-delete-icon" : "delete-icon"}
+            alt=""
           />
         </div>
       </div>
@@ -151,11 +162,11 @@ class notification extends Component {
     const adminHeadingItems = (
       <div className="page-heading">
         <b className="notification-heading">Notifications</b>
-        <img src={createNotificationClicked} />
         <img
           src={deleteIcon}
           className="delete-icon"
           onClick={() => this.changeIcon()}
+          alt=""
         />
       </div>
     );
@@ -170,18 +181,24 @@ class notification extends Component {
         {this.state.array.map((post, i) => (
           <tr className="tr-class" key={i}>
             <td className="td-notification">
-              <a
-                className={post.markedForDeletion ? "selected-text" : "text"}
-                href=""
+              <label
+                className={
+                  post.markedForDeletion
+                    ? "notifications-selected-text"
+                    : this.state.isRead === true
+                    ? "notifications-text"
+                    : "notifications-unread"
+                }
                 onClick={() =>
                   this.onClick_View(
                     post.typeOfNotification,
-                    post.notificationMessage
+                    post.notificationMessage,
+                    post.id
                   )
                 }
               >
                 {post.notificationMessage}
-              </a>
+              </label>
             </td>
             <td className="td-Delete">
               <div
@@ -189,7 +206,7 @@ class notification extends Component {
                 className={
                   this.state.toggle
                     ? post.markedForDeletion
-                      ? "selected notifications-slider"
+                      ? "notifications-selected notifications-slider"
                       : "notifications-images"
                     : "hide"
                 }
@@ -210,26 +227,23 @@ class notification extends Component {
     });
     let markedItemsCount = markedItems.length;
 
-    const modalText = "Delete " + markedItemsCount + " Notifications?";
+    const modalText = "DELETE " + markedItemsCount + " NOTIFICATION(S)";
 
     const deleteModal = (
       <table
         className={
           this.state.array.some(post => post.markedForDeletion)
-            ? "notifications-modal notifications-slider"
+            ? "notifications-modal"
             : "hidden"
         }
       >
         <tr className="tr-Class">
           <td>
-            <p className="text notifications-text">{modalText}</p>
-          </td>
-          <td>
             <button
               className="notifications-modal-confirm"
               onClick={this.onDelete}
             >
-              Confirm
+              {modalText}
             </button>
           </td>
           <td>
@@ -237,7 +251,7 @@ class notification extends Component {
               onClick={() => this.onClick_cancel()}
               className="notifications-modal-cancel"
             >
-              Cancel
+              CANCEL
             </button>
           </td>
         </tr>
@@ -245,18 +259,26 @@ class notification extends Component {
     );
 
     return (
-      <div className="body-class">
+      <div className="notifications-body-class">
         <div>{headingItems}</div>
-        <div>
-          <div className="format-content">{postItems}</div>
-        </div>
+        <div className="format-content">{postItems}</div>
         <div>{deleteModal}</div>
       </div>
     );
   }
 }
+notification.propTypes = {
+  notificationOBJ: PropTypes.array.isRequired,
+  updateIsReadProperty: PropTypes.func.isRequired,
+  updateSelectedCompetition: PropTypes.func.isRequired,
+  updateSelectedGroup: PropTypes.func.isRequired
+};
+const mapStateToProps = state => ({
+  notificationOBJ: state.compOBJ.notificationsArray,
+  updatedNotification: state.compOBJ.updatedNotification
+});
 
 export default connect(
-  null,
-  { getName }
+  mapStateToProps,
+  { updateSelectedCompetition, updateSelectedGroup, updateIsReadProperty }
 )(notification);
