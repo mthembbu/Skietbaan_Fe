@@ -28,37 +28,30 @@ class Create extends Component {
 
   groupsPage() {
     this.setState({ selectedButton: 1 });
-    console.log(this.state.selectedButton);
   }
 
   comptetitionsPage() {
     this.setState({ selectedButton: 2 });
-    console.log(this.state.selectedButton);
   }
 
   membersPage() {
     this.setState({ selectedButton: 3 });
-    console.log(this.state.selectedButton);
   }
 
   createGroups() {
     this.setState({ selectedButtonCreateViewGroups: 1 });
-    console.log(this.state.selectedButtonCreateViewGroups);
   }
 
   viewGroups() {
     this.setState({ selectedButtonCreateViewGroups: 2 });
-    console.log(this.state.selectedButtonCreateViewGroups);
   }
 
   createCompetitions() {
     this.setState({ selectedButtonCreateViewCompetitions: 1 });
-    console.log(this.state.selectedButtonCreateViewCompetitions);
   }
 
   viewCompetitions() {
     this.setState({ selectedButtonCreateViewCompetitions: 2 });
-    console.log(this.state.selectedButtonCreateViewCompetitions);
   }
 
   componentDidMount() {
