@@ -43,9 +43,6 @@ export const UPDATE_SELECTED_GROUP = "UPDATE_SELECTED_GROUP";
 
 //groups types and constants
 export const URL = "https://api.skietbaan.retrotest.co.za";
-export const URLADD = "https://api.skietbaan.retrotest.co.za/api/groups/add";
-export const URLUSER = "https://api.skietbaan.retrotest.co.za/api/user";
-export const URLGROUP = "https://api.skietbaan.retrotest.co.za/api/groups";
 export const UPDATENAME = "UPDATENAME";
 export const UPDATE_GROUPNAME = "UPDATE_GROUPNAME";
 export const CREATEGROUP = "CREATEGROUP";
