@@ -18,7 +18,7 @@ class LeaderboardPage extends Component {
             selectedGroup: -1,
             selectedCompetition: 1,
             selectedScoreType: 1,
-            selectedRank: null,
+            selectedRank: "best",
             collapseFilter: false,
             listType: 'competitions',
             height: window.innerHeight, 
@@ -27,6 +27,7 @@ class LeaderboardPage extends Component {
         }
         this.setCompetitionValue = this.setCompetitionValue.bind(this);
         this.setGroupValue = this.setGroupValue.bind(this);
+        this.setSelectedRank = this.setSelectedRank.bind(this);
         this.setScoreTypeValue = this.setScoreTypeValue.bind(this);
         this.onMouseClickFilter = this.onMouseClickFilter.bind(this);
         this.getCurentUserRankNumber = this.getCurentUserRankNumber.bind(this);
@@ -49,7 +50,7 @@ class LeaderboardPage extends Component {
         //get function to get filter data from api
         this.props.fetchleaderboadfilterdata();
         this.validatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(this.state.selectedCompetition, this.state.selectedGroup);
+        this.getLeaderboardData(this.state.selectedCompetition, this.state.selectedGroup,this.state.selectedRank);
     }
     updateDimensions() {
         this.setState({
@@ -59,7 +60,7 @@ class LeaderboardPage extends Component {
           ranktableHeightDesktop: (this.state.height - (193 + 0))
         });
       }
-    getLeaderboardData = (competition, group) => {
+    getLeaderboardData = (competition, group,rank) => {
         let token = getCookie("token");
         var CompNum = competition + 1;
         var GroupNum = group;
@@ -69,7 +70,7 @@ class LeaderboardPage extends Component {
         const filterSelection = {
             selectedCompetition: CompNum,
             selectedGroup: GroupNum,
-            selectedScoreType: this.state.selectedScoreType,
+            selectedRank: rank,
             userToken: token
         }
         this.props.fetchleaderboadtabledata(filterSelection);
@@ -113,7 +114,7 @@ class LeaderboardPage extends Component {
         });
         this.props.updateSelectedCompetition(this.props.competitions[value].label)
         this.validatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(value, this.state.selectedGroup);
+        this.getLeaderboardData(value, this.state.selectedGroup,this.state.selectedRank);
     }
     setGroupValue = (value) => {
         this.setState({
@@ -125,7 +126,13 @@ class LeaderboardPage extends Component {
             this.props.updateSelectedGroup(this.props.groups[value].label);
         }
         this.validatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(this.state.selectedCompetition, value);
+        this.getLeaderboardData(this.state.selectedCompetition, value,this.state.selectedRank);
+    }
+    setSelectedRank = (value) => {
+        this.setState({
+            selectedRank: value
+        });
+        this.getLeaderboardData(this.state.selectedCompetition, this.state.selectedGroup,value);
     }
     setScoreTypeValue = (value) => {
         this.setState({
@@ -310,9 +317,9 @@ class LeaderboardPage extends Component {
                         <tbody>
                             <tr>
                                 <td className="extra-name-col">{post.username}</td>
-                                <td className="score-col-total">{post.total != 0 ? post.total : '--'}</td>
-                                <td className="score-col-average">{post.average != 0 ? post.average : '--'}</td>
-                                <td className="score-col-best">{post.best != 0 ? post.best : '--'}</td>
+                                <td className={this.state.selectedRank == "total" ? "score-col-active" : "score-col"}>{post.total != 0 ? post.total : '--'}</td>
+                                <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>{post.average != 0 ? post.average : '--'}</td>
+                                <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{post.best != 0 ? post.best : '--'}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -350,13 +357,13 @@ class LeaderboardPage extends Component {
                                     <div className={this.state.listType == "competitions" ? "choose-comps-active" : "choose-comps"}  >
                                         <MDBBtn tag="a" size="lg" floating gradient="purple"
                                             onClick={() => this.setListType("competitions")} >
-                                            Competitions
+                                            COMPETITIONS
                                             </MDBBtn>
                                     </div>
                                     <div className={this.state.listType == "groups" ? "choose-groups-active" : "choose-groups"}>
                                         <MDBBtn tag="a" size="lg" floating gradient="purple"
                                             onClick={() => this.setListType("groups")} >
-                                            Rankings by
+                                            RANKINGS BY
                                             </MDBBtn>
                                     </div>
                                 </div>
@@ -396,13 +403,13 @@ class LeaderboardPage extends Component {
                                     <td colSpan="2" className="grouping-label-col">
                                         {this.state.selectedGroup == -1 ? "Overall rank" : (this.props.groups.length != 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
                                     </td>
-                                    <td colSpan="1" className="total-label-col">
+                                    <td colSpan="1" className={this.state.selectedRank == "total" ? "active-label-col" : "inactive-label-col"} onClick={()=>this.setSelectedRank("total")}>
                                         Total
                                         </td>
-                                    <td colSpan="1" className="average-label-col">
+                                    <td colSpan="1" className={this.state.selectedRank == "average" ? "active-label-col" : "inactive-label-col"} onClick={()=>this.setSelectedRank("average")}>
                                         Average
                                         </td>
-                                    <td colSpan="1" className="best-label-col">
+                                    <td colSpan="1" className={this.state.selectedRank == "best" ? "active-label-col" : "inactive-label-col"} onClick={()=>this.setSelectedRank("best")}>
                                         Best
                                        </td>
                                 </tr>
@@ -434,9 +441,9 @@ class LeaderboardPage extends Component {
                                                     <tbody>
                                                         <tr>
                                                             <td className="extra-name-col">{this.props.userResults == null ? 'Something went wrong' : (this.props.userResults != null ? this.props.userResults.username : '--')}</td>
-                                                            <td className="score-col-total">{this.props.userResults == null ? '--' : (this.props.userResults.total != 0 ? this.props.userResults.total : '--')}</td>
-                                                            <td className="score-col-average">{this.props.userResults == null ? '--' : (this.props.userResults.average != 0 ? this.props.userResults.average : '--')}</td>
-                                                            <td className="score-col-best">{this.props.userResults == null ? '--' : (this.props.userResults.best != 0 ? this.props.userResults.best : '--')}</td>
+                                                            <td className={this.state.selectedRank == "total" ? "score-col-active" : "score-col"}>{this.props.userResults == null ? '--' : (this.props.userResults.total != 0 ? this.props.userResults.total : '--')}</td>
+                                                            <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>{this.props.userResults == null ? '--' : (this.props.userResults.average != 0 ? this.props.userResults.average : '--')}</td>
+                                                            <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{this.props.userResults == null ? '--' : (this.props.userResults.best != 0 ? this.props.userResults.best : '--')}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
