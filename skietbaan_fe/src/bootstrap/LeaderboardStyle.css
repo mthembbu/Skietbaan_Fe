@@ -1,9 +1,4 @@
-html, body{
-    /* position: absolute;  */
-    width: 100% !important; 
-    height: 100% !important;
- }
- /* Leaderboard Page Main Container */
+/* Leaderboard Page Main Container */
  .leaderboard-container{
      background-color: #FFFFFF;
      position: fixed;
