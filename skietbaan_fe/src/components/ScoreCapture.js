@@ -412,29 +412,29 @@ export default class search extends Component {
             </div>
             <div className="competition-container">
               {competitionItem}
-              <div className={this.state.validCompetition === false && this.state.validScore=== true
-                 ? "invalid-comp" : "hidden" }>Select Competition</div>
-                 
+              <div className={this.state.validCompetition === false && this.state.validScore === true
+                ? "invalid-comp" : "hidden"}>Select Competition</div>
+
             </div>
             <div className="submit-container" id="hideWhenAddingScore">
-            <div className={this.state.imageTaken || this.state.showCamera
-              ? "hidden" : "submit-button-elements"}>
-              <div className="button-hover">
-                <img src={cameraGray}
-                  id="btnScoreCapture" className="btn-score-capture"
-                  onClick={() => this.CameraClicked()} alt=''></img>
+              <div className={this.state.imageTaken || this.state.showCamera
+                ? "hidden" : "submit-button-elements"}>
+                <div className="button-hover">
+                  <img src={cameraGray}
+                    id="btnScoreCapture" className="btn-score-capture"
+                    onClick={() => this.CameraClicked()} alt=''></img>
+                </div>
               </div>
-            </div>
-            <div className={(this.state.showCamera && !this.state.imageTaken)
-              || this.state.imageTaken ? "hidden" : "submit-button-elements"}>
-              <div className="button-hover ">
-                <img src={graySubmit} onClick={() => this.GetLocation()}
-                  className="button-that-submits" alt=''></img>
+              <div className={(this.state.showCamera && !this.state.imageTaken)
+                || this.state.imageTaken ? "hidden" : "submit-button-elements"}>
+                <div className="button-hover ">
+                  <img src={graySubmit} onClick={() => this.GetLocation()}
+                    className="button-that-submits" alt=''></img>
+                </div>
               </div>
             </div>
           </div>
-          </div>
-          
+
           <div className={this.state.showCamera ? "" : "hidden"}>
             <div className={this.state.imageTaken ? "hidden" : "label-score photo-top-label"}>
               Capture Score
@@ -463,7 +463,7 @@ export default class search extends Component {
               </div>
             </div>
           </div>
-
+          
           <div className={this.state.imageTaken && !this.state.scoreSaved ? "image-container" : "hidden"}>
             <div className="centre-label">
               <div className={!this.state.imageTaken ? "hidden" : "label-score photo-top-label"}>
@@ -472,7 +472,14 @@ export default class search extends Component {
             </div>
             <canvas id="canvas" width="310" height="310" className="image-view background" ></canvas>
             <div className="icon-push-down">
-            <div className={this.state.imageTaken && !this.state.scoreSaved
+              <div className={!this.state.imageTaken || this.state.scoreSaved
+                ? "hidden" : "submit-button-elements third float-right"}>
+                <div className="button-hover ">
+                  <img src={submit} onClick={() => this.GetLocation()}
+                    className="button-that-submits2" alt=''></img>
+                </div>
+              </div>
+              <div className={this.state.imageTaken && !this.state.scoreSaved
                 ? "submit-button-elements third float-right" : "hidden"} >
                 <div className="button-hover">
                   <img src={grayRetry}
@@ -481,15 +488,7 @@ export default class search extends Component {
                   </img>
                 </div>
               </div>
-              
-              <div className={!this.state.imageTaken || this.state.scoreSaved
-                ? "hidden" : "submit-button-elements third float-right"}>
-                <div className="button-hover ">
-                  <img src={submit} onClick={() => this.GetLocation()}
-                    className="button-that-submits2" alt=''></img>
-                </div>
-              </div>
-              </div>
+            </div>
           </div>
         </div>
 
