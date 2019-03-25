@@ -44,6 +44,7 @@ class ViewGroups extends Component {
 	}
 
 	editGroup(obj) {
+		this.props.emptyState();
 		this.props.getName(obj.name);
 		this.props.passId(obj.id);
 		this.props.pageState(1);
