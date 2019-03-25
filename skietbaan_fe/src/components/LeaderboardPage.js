@@ -18,7 +18,7 @@ class LeaderboardPage extends Component {
             selectedGroup: -1,
             selectedCompetition: 1,
             selectedScoreType: 1,
-            selectedRank: "best",
+            selectedRank: "total",
             collapseFilter: false,
             listType: 'competitions',
             height: window.innerHeight, 
