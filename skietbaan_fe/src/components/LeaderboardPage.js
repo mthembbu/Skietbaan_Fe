@@ -317,9 +317,9 @@ class LeaderboardPage extends Component {
                         <tbody>
                             <tr>
                                 <td className="extra-name-col">{post.username}</td>
-                                <td className={this.state.selectedRank == "total" ? "score-col-active" : "score-col"}>{post.total != 0 ? post.total : '--'}</td>
-                                <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>{post.average != 0 ? post.average : '--'}</td>
                                 <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{post.best != 0 ? post.best : '--'}</td>
+                                <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>{post.average != 0 ? post.average : '--'}</td>
+                                <td className={this.state.selectedRank == "total" ? "score-col-active" : "score-col"}>{post.total != 0 ? post.total : '--'}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -403,15 +403,15 @@ class LeaderboardPage extends Component {
                                     <td colSpan="2" className="grouping-label-col">
                                         {this.state.selectedGroup == -1 ? "Overall rank" : (this.props.groups.length != 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
                                     </td>
-                                    <td colSpan="1" className={this.state.selectedRank == "total" ? "active-label-col" : "inactive-label-col"} onClick={()=>this.setSelectedRank("total")}>
-                                        Total
-                                        </td>
-                                    <td colSpan="1" className={this.state.selectedRank == "average" ? "active-label-col" : "inactive-label-col"} onClick={()=>this.setSelectedRank("average")}>
-                                        Average
-                                        </td>
                                     <td colSpan="1" className={this.state.selectedRank == "best" ? "active-label-col" : "inactive-label-col"} onClick={()=>this.setSelectedRank("best")}>
                                         Best
                                        </td>
+                                    <td colSpan="1" className={this.state.selectedRank == "average" ? "active-label-col" : "inactive-label-col"} onClick={()=>this.setSelectedRank("average")}>
+                                        Average
+                                        </td>
+                                        <td colSpan="1" className={this.state.selectedRank == "total" ? "active-label-col" : "inactive-label-col"} onClick={()=>this.setSelectedRank("total")}>
+                                        Total
+                                        </td>
                                 </tr>
                         </table>
                         <div className="ranking-table-section" style={{height: this.state.ranktableHeightMobile+"px"}}>
