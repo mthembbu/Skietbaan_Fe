@@ -90,16 +90,16 @@ class ForgotPassword extends Component {
               className="input-user"
               placeholder="Username or Email"
             />
+          </div>
 
-            <div>
-              <label className="forgot-password-error">
-                {this.state.emailValue.length !== 0
-                  ? this.state.isSent
-                  : this.state.isSent === "user not registered"
-                  ? this.setState({ isSent: "" })
-                  : this.state.isSent}
-              </label>
-            </div>
+          <div>
+            <label className="forgot-password-error">
+              {this.state.emailValue.length !== 0
+                ? this.state.isSent
+                : this.state.isSent === "user not registered"
+                ? this.setState({ isSent: "" })
+                : this.state.isSent}
+            </label>
           </div>
 
           <div className="forgot-password-text">
@@ -122,7 +122,7 @@ class ForgotPassword extends Component {
                   : "buttons-invalid round-button"
               }
             >
-              Login
+              Send Link To Email
             </button>
           </div>
         </div>
