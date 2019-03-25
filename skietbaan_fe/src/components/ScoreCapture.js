@@ -356,22 +356,6 @@ export default class search extends Component {
   }
 
   render() {
-    document.addEventListener('DOMContentLoaded', () => {
-      var hideWhenAddingScore = document.querySelector("#hideWhenAddingScore");
-      var last_size = document.body.clientHeight;
-      window.addEventListener("resize", function () {
-        if (last_size === document.body.clientHeight) {
-          return;
-        }
-        if (hideWhenAddingScore.classList.contains("hidden-small")) {
-          hideWhenAddingScore.classList.remove("hidden-small");
-        }
-        else {
-          hideWhenAddingScore.classList.add("hidden-small");
-        }
-        last_size = document.body.clientHeight;
-      })
-    }, false);
 
     const stateOne = this.state.showCamera || this.state.imageTaken
     let competitionItem = [];
