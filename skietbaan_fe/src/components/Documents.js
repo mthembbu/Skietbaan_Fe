@@ -81,21 +81,23 @@ class Documents extends Component {
     }
     return (
       <div className="documents_background ">
-        <div className="docuements-heading">
-          <div className="documents-text">Documents</div>
-        </div>
         <div className="documents-center">
-          <div className="label-select-document">Select Document</div>
+          <div className="label-select-document">
+            {this.state.sendLogsReturn === "Document" &&
+            this.state.sendLosReturn === "Document"
+              ? "Select Document"
+              : "You've got some shooting to do!"}
+          </div>
 
           <div className="button-upload-document-3">
             <button
               className={
-                this.state.sendLogsReturn == "Document"
+                this.state.sendLogsReturn === "Document"
                   ? "Documents-btn-active document-btn-bottom-3"
                   : "documents-btn-default document-btn-bottom-3"
               }
               onClick={
-                this.state.sendLogsReturn == "Document" ? this.sendLOGS : null
+                this.state.sendLogsReturn === "Document" ? this.sendLOGS : null
               }
             >
               Letter of Good Standing
@@ -103,6 +105,7 @@ class Documents extends Component {
                 <img
                   className="document-image-icon"
                   src={require("../resources/noDoc.png")}
+                  alt=""
                 />
               ) : null}
             </button>
@@ -121,6 +124,7 @@ class Documents extends Component {
                 <img
                   className="document-image-icon"
                   src={require("../resources/sendDoc.png")}
+                  alt=""
                 />
               </div>
             </Collapse>
@@ -128,12 +132,12 @@ class Documents extends Component {
           <div className="button-upload-document-2">
             <button
               className={
-                this.state.sendLosReturn == "Document"
+                this.state.sendLosReturn === "Document"
                   ? "Documents-btn-active document-btn-bottom-2"
                   : "documents-btn-default document-btn-bottom-2"
               }
               onClick={
-                this.state.sendLosReturn == "Document" ? this.sendLOS : null
+                this.state.sendLosReturn === "Document" ? this.sendLOS : null
               }
             >
               Letter of Status{" "}
@@ -141,6 +145,7 @@ class Documents extends Component {
                 <img
                   className="document-image-icon"
                   src={require("../resources/noDoc.png")}
+                  alt=""
                 />
               ) : null}
             </button>
@@ -160,6 +165,7 @@ class Documents extends Component {
                 <img
                   className="document-image-icon"
                   src={require("../resources/sendDoc.png")}
+                  alt=""
                 />
               </div>
             </Collapse>
