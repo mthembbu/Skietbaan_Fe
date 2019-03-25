@@ -134,17 +134,6 @@ class ViewMembers extends Component {
         );
         return (
             <div className="centre-view-member">
-                <div className="page-name-view">
-                    <div className="image-comtainer">
-                        <img src={require('../components/assets/back-button-white.png')} onClick={this.backToCreate}
-                            className="go-back-to-create-page-from-view-members" alt=''></img>
-                    </div>
-                    <div className="view-members-container">
-                        <label className="view-members">
-                            View Members
-                    </label>
-                    </div>
-                </div>
                 <div className="username-search">
                     <div className="search">
                         <input

@@ -101,6 +101,14 @@
     padding-top: 10px;
     text-align: center;
   }
+/* new stuff */
+  .create-all-page-content {
+    margin-top: 77px;
+  }
+
+  .create-all-buttons-container {
+    width: 97%;
+  }
 
   .create-feature-buttons {
     position: center;
