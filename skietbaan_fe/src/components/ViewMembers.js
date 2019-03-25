@@ -19,7 +19,6 @@ class ViewMembers extends Component {
         this.getAllMembers = this.getAllMembers.bind(this);
         this.getTimeLeft = this.getTimeLeft.bind(this);
         this.onChangeText = this.onChangeText.bind(this);
-        this.BbackToCreate = this.backToCreate.bind(this);
         this.status = this.status.bind(this);
     }
 
@@ -76,10 +75,6 @@ class ViewMembers extends Component {
 
     onChangeText(event) {
         this.setState({ filterText: event.target.value });
-    }
-
-    backToCreate() {
-        history.push("/create")
     }
 
     status(timeLeft) {
