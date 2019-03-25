@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../components/ForgotPassword.css";
 import { BASE_URL } from "../actions/types";
+
 class ForgotPassword extends Component {
   constructor(props) {
     super(props);
