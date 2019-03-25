@@ -36,7 +36,7 @@ class CreatePage extends Component {
 	}
 
 	ViewGroups() {
-    history.push("/ViewGroups");
+    history.push("/GroupComponent");
 	}
 
 	render() {

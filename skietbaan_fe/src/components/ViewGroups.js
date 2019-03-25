@@ -35,6 +35,7 @@ class ViewGroups extends Component {
 			}
 		this.props.FetchGroups();
 		this.props.groupDic();
+		this.setState({posts:this.props.groupsList})
 	}
 
 	onChange(event) {
@@ -48,10 +49,17 @@ class ViewGroups extends Component {
 		this.props.getName(obj.name);
 		this.props.passId(obj.id);
 		 this.props.pageState(1);
-	//  history.push('/EditGroup');
 	}
 
-	async delete(groupId) {
+	async delete(groupId,index) {
+
+		if(this.state.posts[index].isActive===true){
+			this.state.posts[index].isActive=false;
+		}
+		else{
+			this.state.posts[index].isActive=true;
+		}
+		
 		await fetch(BASE_URL + '/api/Groups/' + groupId, {
 			method: 'POST',
 			headers: {
@@ -71,7 +79,7 @@ class ViewGroups extends Component {
 			<div className="the-main">
 				<table className="table-member">
 					<tbody>
-						{this.props.groupsList
+						{this.state.posts
 							.filter((post) => {
 								return (
 									!this.state.filterText ||
@@ -100,7 +108,7 @@ class ViewGroups extends Component {
 									</td>
 									<td>
 										<div className="group-view">
-										<Switch color={"primary"} className="Active" focus={true} checked={post.isActive} onClick={() => this.delete(post.id)}/>
+										<Switch color={"primary"} className="Active" focus={true} checked={post.isActive} onClick={() => this.delete(post.id,index)}/>
 										</div>
 									</td>
 								</tr>
