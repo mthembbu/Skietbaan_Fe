@@ -184,7 +184,7 @@ class Login extends Component {
 
     }, false);
     if (getCookie("token")) {
-      window.loction = "/home";
+      window.location = "/home";
     }
 
     return (
