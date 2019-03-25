@@ -110,7 +110,7 @@ class Create extends Component {
             <Row className="buttons-row">
               <div className="buttons-rectangle lay-horizontal">
                 <Col
-                  id="remove-left-button-padding"
+                  id="removeLeftButtonPadding"
                   className="pad-button-text-top"
                 >
                   <div>
@@ -126,7 +126,7 @@ class Create extends Component {
                     </button>
                   </div>
                 </Col>
-                <Col id="pad-middle-button" className="pad-button-text-top">
+                <Col id="padMiddleButton" className="pad-button-text-top">
                   <div>
                     <button
                       className={
@@ -141,7 +141,7 @@ class Create extends Component {
                   </div>
                 </Col>
                 <Col
-                  id="remove-right-button-padding"
+                  id="removeRightButtonPadding"
                   className="pad-button-text-top"
                 >
                   <div>
@@ -175,7 +175,7 @@ class Create extends Component {
                 <Row className="buttons-row">
                   <div className="buttons-rectangle lay-horizontal">
                     <Col
-                      id="remove-left-button-padding"
+                      id="removeLeftButtonPadding"
                       className="pad-button-text-top"
                     >
                       <div>
@@ -191,7 +191,7 @@ class Create extends Component {
                         </button>
                       </div>
                     </Col>
-                    <Col id="pad-middle-button" className="pad-button-text-top">
+                    <Col id="padMiddleButton" className="pad-button-text-top">
                       <div>
                         <button
                           className={
@@ -213,7 +213,7 @@ class Create extends Component {
                 <Row className="buttons-row">
                   <div className="buttons-rectangle lay-horizontal">
                     <Col
-                      id="remove-left-button-padding"
+                      id="removeLeftButtonPadding"
                       className="pad-button-text-top"
                     >
                       <div>
@@ -229,7 +229,7 @@ class Create extends Component {
                         </button>
                       </div>
                     </Col>
-                    <Col id="pad-middle-button" className="pad-button-text-top">
+                    <Col id="padMiddleButton" className="pad-button-text-top">
                       <div>
                         <button
                           className={
