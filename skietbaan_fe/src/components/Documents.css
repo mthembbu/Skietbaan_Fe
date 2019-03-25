@@ -191,17 +191,6 @@
   padding-right: 42px;
 }
 
-.documents-rectangle {
-  padding-top: 15px;
-  margin-top: 62px;
-  margin-left: auto;
-  margin-right: auto;
-  height: 205px;
-  width: 300px;
-  border-radius: 10px;
-  background-color: #00000099;
-}
-
 .document-testing-align {
   text-align: center;
 }
