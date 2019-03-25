@@ -18,6 +18,7 @@ import Documents from './components/Documents';
 import ScoreCapture from './components/ScoreCapture';
 import CreatePage from './components/CreatePage';
 import ProfileLanding from './components/ProfileLanding';
+import GroupComponent from './components/GroupComponent';
 import requirements from './components/requirements.js';
 import './App.css';
 import ForgotPassword from './components/ForgotPassword';
@@ -28,8 +29,8 @@ import CreateComp from './components/CreateComp';
 import Create from './components/Create';
 import resetPassword from './components/resetPassword';
 import MetaTags from 'react-meta-tags';
-class App extends Component {
 
+class App extends Component {
 	render() {
 		return (
 			<Provider store={store}>
@@ -62,6 +63,7 @@ class App extends Component {
 							<Route path="/AddMembersGroup" component={AddMembersGroup} exact />
 							<Route path="/requirements" component={requirements} exact />
 							<Route path="/EditGroup" component={EditGroup} exact />
+							<Route path={"/GroupComponent"} component={GroupComponent} exact />
 							<Route path="/createAll" component={Create} exact />
 							<Redirect from="/" to="/home" />
 						</Switch>
@@ -71,4 +73,6 @@ class App extends Component {
 		);
 	}
 }
+
+
 export default App;

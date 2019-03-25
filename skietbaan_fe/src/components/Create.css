@@ -23,6 +23,10 @@
     text-align: center;
   }
 
+  .create-all-page-content {
+    margin-top: 133px;
+  }
+
   .create-feature-buttons {
     position: center;
     text-align: center;
@@ -101,6 +105,10 @@
     padding-top: 10px;
     text-align: center;
   }
+  /* new stuff */
+  .create-all-page-content {
+    margin-top: 77px;
+  }
 
   .create-feature-buttons {
     position: center;
@@ -154,4 +162,21 @@
     width: 33%;
     float: left;
   }
+}
+
+.create-all-buttons-container {
+  width: 97%;
+}
+
+#removeRightButtonPadding {
+  padding-right: 0px;
+}
+
+#removeLeftButtonPadding {
+  padding-left: 0px;
+}
+
+#padMiddleButton {
+  padding-right: 3px;
+  text-align: center;
 }

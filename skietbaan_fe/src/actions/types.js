@@ -10,7 +10,6 @@ import notifyGrey from "../components/navbar-icons/notify-gray.png";
 import notifyRed from "../components/navbar-icons/notify-red.png";
 import scorecaptureRed from "../components/navbar-icons/new-nav-icons/new-add-score-red.png";
 import scorecaptureGray from "../components/navbar-icons/new-nav-icons/new-add-score-grey.png";
-import moreNotify from "../components/navbar-icons/more-new.png";
 
 export const NAV_BAR_ICONS = {
   PROFILE_RED: profileRed,
@@ -52,11 +51,14 @@ export const UPDATE_GROUPNAME = "UPDATE_GROUPNAME";
 export const CREATEGROUP = "CREATEGROUP";
 export const GETGROUP = "GETGROUP";
 export const PASS_ID = "PASS_ID";
+export const PAGE = "PAGE";
 export const GETNAME = "GETNAME";
 export const EDITGROUPUSERS = "EDITGROUPUSERS";
 export const FETCH_GROUPS = "FETCH_GROUPS";
 export const ADDMEMBERS = "ADDMEMBERS";
 export const GROUPDICT = "GROUPDICT";
+export const EMPTY = "EMPTY";
 
 //notification types
 export const FETCH_NOTIFICATION = "FETCH_NOTIFICATION";
+export const UPDATE_IS_READ = "UPDATE_IS_READ";

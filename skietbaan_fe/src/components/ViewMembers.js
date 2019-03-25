@@ -4,7 +4,6 @@ import Collapsible from 'react-collapsible';
 import { BASE_URL } from '../actions/types.js';
 import memberIcon from '../components/assets/membership-icon.png';
 import { getCookie } from '../components/cookie.js';
-import history from "./history";
 class ViewMembers extends Component {
     constructor(props) {
         super(props);
@@ -15,16 +14,19 @@ class ViewMembers extends Component {
             timeLeftOnMembership: [],
             filterText: ""
         }
-        this.GetFilteredMembers = this.GetFilteredMembers.bind(this);
-        this.GetAllMembers = this.GetAllMembers.bind(this);
-        this.GetTimeLeft = this.GetTimeLeft.bind(this);
-        this.DoAllThese = this.DoAllThese.bind(this);
+        this.getFilteredMembers = this.getFilteredMembers.bind(this);
+        this.getAllMembers = this.getAllMembers.bind(this);
+        this.getTimeLeft = this.getTimeLeft.bind(this);
         this.onChangeText = this.onChangeText.bind(this);
-        this.BackToCreate = this.BackToCreate.bind(this);
-        this.Status = this.Status.bind(this);
+        this.status = this.status.bind(this);
     }
 
-    GetAllMembers() {
+    componentDidMount(){
+        this.getAllMembers();
+        this.getTimeLeft()
+    }
+
+    getAllMembers() {
         fetch(BASE_URL + "/api/Features/SearchMember", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -40,7 +42,7 @@ class ViewMembers extends Component {
     }
 
 
-    GetFilteredMembers() {
+    getFilteredMembers() {
         fetch(BASE_URL + "/api/Features/SearchMember", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -55,7 +57,7 @@ class ViewMembers extends Component {
             }))
     }
 
-    GetTimeLeft() {
+    getTimeLeft() {
         fetch(BASE_URL + "/api/Features/TimeLeft", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -70,22 +72,11 @@ class ViewMembers extends Component {
             }))
     }
 
-    DoAllThese() {
-        this.GetFilteredMembers();
-        this.GetTimeLeft();
-    }
-
     onChangeText(event) {
-        this.GetFilteredMembers();
         this.setState({ filterText: event.target.value });
-        this.GetTimeLeft();
     }
 
-    BackToCreate() {
-        history.push("/create")
-    }
-
-    Status(timeLeft) {
+    status(timeLeft) {
         if (timeLeft < 2 || timeLeft === 2) {
             return true;
         }
@@ -98,8 +89,6 @@ class ViewMembers extends Component {
         if(!getCookie("token")){
             window.location = "/registerPage";
         }
-        this.GetAllMembers();
-        this.GetTimeLeft();
         const postItems = (
             <table striped hover condensed className="table-member">
                 <tbody >
@@ -125,7 +114,7 @@ class ViewMembers extends Component {
                             </td>
                             <td className="second-column">
                                 <div className="expiry-time-column">
-                                    <div className={(this.Status(this.state.timeLeftOnMembership[index])) ? "bad" : "okay"}>
+                                    <div className={(this.status(this.state.timeLeftOnMembership[index])) ? "bad" : "okay"}>
                                         {post.memberExpiryDate.substring(0, 10)}
                                     </div>
                                     <div>{this.state.timeLeftOnMembership[index]} Months
@@ -139,23 +128,12 @@ class ViewMembers extends Component {
         );
         return (
             <div className="centre-view-member">
-                <div className="page-name-view">
-                    <div className="image-comtainer">
-                        <img src={require('../components/assets/back-button-white.png')} onClick={this.BackToCreate}
-                            className="go-back-to-create-page-from-view-members" alt=''></img>
-                    </div>
-                    <div className="view-members-container">
-                        <label className="view-members">
-                            View Members
-                    </label>
-                    </div>
-                </div>
                 <div className="username-search">
                     <div className="search">
                         <input
                             autoComplete="off"
                             type="text"
-                            className="userValue"
+                            className="user-value"
                             id="usernameValue"
                             value={this.state.filterText}
                             onChange={this.onChangeText}
@@ -163,7 +141,6 @@ class ViewMembers extends Component {
                     </div>
                 </div>
                 <div className="table-search-members" >
-                    {this.DoAllThese}
                     {postItems}
                 </div>
             </div>

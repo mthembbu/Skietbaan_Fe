@@ -1,65 +1,111 @@
-import React, { Component } from 'react'
-import { Container, Row, Col} from 'react-bootstrap';
-import '../bootstrap/UserProfile.css';
+import React, { Component } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import "../bootstrap/UserProfile.css";
 import $ from "jquery";
-import { getCookie } from './cookie.js';
-import {BASE_URL} from '../actions/types.js'
-import {Collapse} from 'react-collapse'
+import { getCookie } from "./cookie.js";
+import { BASE_URL } from "../actions/types.js";
+import { Collapse } from "react-collapse";
 import history from "./history";
 
 class UserProfile extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            awardCompetitions : [],
-            hoursAward : {
-                hours: -1,
-            },
-            collapse: false,
-            selectedCompetition : 0,
-        }
+        constructor(props){
+            super(props);
+            this.state = {
+                awardCompetitions : [],
+                hoursAward : {
+                    hours: -1,
+                },
+                collapse: false,
+                selectedCompetition : 0,
+            }
 
         this.toggle = this.toggle.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
-    UNSAFE_componentWillMount(){
+    UNSAFE_componentWillMount() {
         var token = getCookie("token");
-        if(token === undefined){
-            history.push('/registerPage');
+        if (token === undefined) {
+            history.push("/registerPage");
             return;
         }
-        
+
         /*use the remote URL*/
-        fetch(BASE_URL + "/api/awards/" + "2a92bf4e28b2",{
-            method : 'GET',
-            headers: {
-                'content-type' : 'application/json'
-            }
+        fetch(BASE_URL + "/api/awards/" + token, {
+        method: "GET",
+        headers: {
+            "content-type": "application/json"
+        }
         })
         .then(res => res.json())
         .then(data => {
-            this.setState({awardCompetitions : data})
-            if(this.state.awardCompetitions.length == 0){
-                this.Logout();
-                history.push('/registerPage');
+            this.setState({ awardCompetitions: data });
+            if (this.state.awardCompetitions.length == 0) {
+            this.logout();
+            history.push("/registerPage");
             }
         });
 
-        fetch(BASE_URL + "/api/awards/hours/" + "2a92bf4e28b2", {
-            method : 'GET',
-            headers: {
-                'content-type' : 'application/json'
-            }
+        fetch(BASE_URL + "/api/awards/hours/" + token, {
+        method: "GET",
+        headers: {
+            "content-type": "application/json"
+        }
         })
         .then(res => res.json())
         .then(data => {
-            this.setState({hoursAward : data})
+            this.setState({ hoursAward: data });
         });
+    }
+
+    logout(){
+        var res = document.cookie;
+        var multiple = res.split(";");
+        for(var i = 0; i < multiple.length; i++) {
+            var key = multiple[i].split("=");
+            document.cookie = key[0]+" =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
+        }
+        window.location= '/login';
+        return false;
     }
 
     toggle() {
         this.setState(state => ({ collapse: !state.collapse }));
     }
+
+    animateAccuracyCircle(counter, element, index) {
+        if (counter > element.accuracy) return;
+        if (counter <= element.accuracy) {
+        var degreees = (360 * counter) / 100;
+        var activeBorder = $(`#${index}`);
+        $(`#circle${index}`).html(Math.round(counter) + "%");
+
+        if (degreees <= 180) {
+            activeBorder.css(
+            "background-image",
+            "linear-gradient(" +
+                (90 + degreees) +
+                "deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)"
+            );
+        } else {
+            activeBorder.css(
+            "background-image",
+            "linear-gradient(" +
+                (degreees - 90) +
+                "deg, transparent 50%, #EA241A 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)"
+            );
+        }
+        counter++;
+        setTimeout(() => {
+            this.animateAccuracyCircle(counter, element, index);
+        }, 80);
+        }
+    }
+
+    /*
+        This function takes the total score as string and append zeros
+        at the front if the total score has less than four digits
+    */
 
     animateAccuracyCircle(counter, element, index){
         if(this.state.collapse) return;
@@ -83,6 +129,7 @@ class UserProfile extends Component {
             }, 80)
         }
     }
+    
 
     renderLockedIcon(){
         return(
@@ -158,8 +205,8 @@ class UserProfile extends Component {
             renderArray.push(this.selectCompetition(element, index))
         })
 
-        return renderArray;
-    }
+    return renderArray;
+  }
 
     renderAccuracyCircle(element, index){
         return(
@@ -225,8 +272,8 @@ class UserProfile extends Component {
                     </Row>
                     <Row>
                         <Col>
-                            {this.state.awardCompetitions[this.state.selectedCompetition].bestInMonth.startsWith("Best") ?
-                                this.renderBestInMonth() : null}
+                            {/* {this.state.awardCompetitions[this.state.selectedCompetition].bestInMonth.startsWith("Best") ?
+                                this.renderBestInMonth() : null} */}
                         </Col>
                     </Row>
                     <Row className="center-content competition-buttons-container">

@@ -7,7 +7,9 @@ import {
   FETCH_GROUPS,
   EDITGROUPUSERS,
   ADDMEMBERS,
+  PAGE,
   GROUPDICT,
+  EMPTY,
   FETCH_LEADERBOARDFILTER_DATA,
   FETCH_LEADERBOARDTABLE_DATA,
   UPDATE_SELECTED_COMPETITION,
@@ -15,7 +17,7 @@ import {
 } from "./types";
 
 /** The method to feth the already available data for posts*/
-export const FetchGroups = () => dispatch => {
+export const fetchGroups = () => dispatch => {
   fetch(BASE_URL+"/api/Groups")
     .then(res => res.json())
     .then(group => {
@@ -77,11 +79,11 @@ export const getName = name => {
 };
 
 export const fetchEditUser = groupid =>dispatch=>{
-  fetch(BASE_URL + '/api/Groups/edit?id=' +groupid )
+  fetch(BASE_URL + '/api/Groups/edit?id='+groupid)
   .then(res=>res.json())
   .then(data=>{
     const newdata=data.map(user=>{
-      user.highlighted=true;
+      user.highlighted=false;
       return user;
     })
     dispatch({
@@ -103,7 +105,7 @@ export const getGroup = () => dispatch => {
     );
 };
 
-export const groupDic = () => dispatch => {
+export const groupDictionary = () => dispatch => {
   fetch(BASE_URL + "/api/Groups/participants")
     .then(res => res.json())
     .then(posts =>
@@ -133,7 +135,9 @@ export const fetchleaderboadtabledata = filterSelection => dispatch => {
       "&groupID=" +
       filterSelection.selectedGroup +
       "&userToken=" +
-      filterSelection.userToken
+      filterSelection.userToken +
+      "&selectedRank=" +
+      filterSelection.selectedRank
   )
     .then(res => res.json())
     .then(data =>
@@ -171,6 +175,22 @@ export const passId = id => {
     dispatch({
       type: PASS_ID,
       payload: id
+    });
+  };
+};
+export const pageState = id => {
+  return dispatch => {
+    dispatch({
+      type: PAGE,
+      payload: id
+    });
+  };
+};
+export const emptyState = () => {
+  return dispatch => {
+    dispatch({
+      type: EMPTY,
+      payload: []
     });
   };
 };
