@@ -274,7 +274,7 @@ export default class search extends Component {
         .then(data => this.setState({
           scoreSaved: true, currState: 5
         }));
-      setTimeout(function () { window.location = "/scoreCapture"; }, 2000);
+      setTimeout(function () { window.location = "/scoreCapture"; }, 4000);
     }
   }
 
@@ -357,17 +357,17 @@ export default class search extends Component {
 
   render() {
     document.addEventListener('DOMContentLoaded', () => {
-      var HideWhenAddingScore = document.querySelector("#HideWhenAddingScore");
+      var hideWhenAddingScore = document.querySelector("#hideWhenAddingScore");
       var last_size = document.body.clientHeight;
       window.addEventListener("resize", function () {
         if (last_size === document.body.clientHeight) {
           return;
         }
-        if (HideWhenAddingScore.classList.contains("hidden-small")) {
-          HideWhenAddingScore.classList.remove("hidden-small");
+        if (hideWhenAddingScore.classList.contains("hidden-small")) {
+          hideWhenAddingScore.classList.remove("hidden-small");
         }
         else {
-          HideWhenAddingScore.classList.add("hidden-small");
+          hideWhenAddingScore.classList.add("hidden-small");
         }
         last_size = document.body.clientHeight;
       })
@@ -412,45 +412,29 @@ export default class search extends Component {
             </div>
             <div className="competition-container">
               {competitionItem}
-              <div className={this.state.validCompetition === false && this.state.validScore=== true
-                 ? "invalid-comp" : "hidden" }>Select Competition</div>
+              <div className={this.state.validCompetition === false && this.state.validScore === true
+                ? "invalid-comp" : "hidden"}>Select Competition</div>
+
             </div>
-          </div>
-          <div className="submit-container" id="HideWhenAddingScore">
-            <div className={this.state.imageTaken || this.state.showCamera
-              ? "hidden" : "submit-button-elements"}>
-              <div className="button-hover">
-                <img src={cameraGray}
-                  id="btnScoreCapture" className="btn-score-capture"
-                  onClick={() => this.CameraClicked()} alt=''></img>
-              </div>
-            </div>
-            <div className={(this.state.showCamera && !this.state.imageTaken)
-              || this.state.imageTaken ? "hidden" : "submit-button-elements"}>
-              <div className="button-hover ">
-                <img src={graySubmit} onClick={() => this.GetLocation()}
-                  className="button-that-submits" alt=''></img>
-              </div>
-            </div>
-            <div className="icon-push-down no-margin">
-              <div className={!this.state.imageTaken || this.state.scoreSaved
-                ? "hidden" : "submit-button-elements third float-right"}>
-                <div className="button-hover ">
-                  <img src={submit} onClick={() => this.GetLocation()}
-                    className="button-that-submits2" alt=''></img>
-                </div>
-              </div>
-              <div className={this.state.imageTaken && !this.state.scoreSaved
-                ? "submit-button-elements third float-right" : "hidden"} >
+            <div className="submit-container" id="hideWhenAddingScore">
+              <div className={this.state.imageTaken || this.state.showCamera
+                ? "hidden" : "submit-button-elements"}>
                 <div className="button-hover">
-                  <img src={grayRetry}
-                    id="btnScoreCapture" className="retake" onClick={() => this.RetakePhoto()}
-                    alt=''>
-                  </img>
+                  <img src={cameraGray}
+                    id="btnScoreCapture" className="btn-score-capture"
+                    onClick={() => this.CameraClicked()} alt=''></img>
+                </div>
+              </div>
+              <div className={(this.state.showCamera && !this.state.imageTaken)
+                || this.state.imageTaken ? "hidden" : "submit-button-elements"}>
+                <div className="button-hover ">
+                  <img src={graySubmit} onClick={() => this.GetLocation()}
+                    className="button-that-submits" alt=''></img>
                 </div>
               </div>
             </div>
           </div>
+
           <div className={this.state.showCamera ? "" : "hidden"}>
             <div className={this.state.imageTaken ? "hidden" : "label-score photo-top-label"}>
               Capture Score
@@ -485,10 +469,26 @@ export default class search extends Component {
               <div className={!this.state.imageTaken ? "hidden" : "label-score photo-top-label"}>
                 Score Captured
               </div>
-              <div className="back-spacing">
-              </div>
             </div>
             <canvas id="canvas" width="310" height="310" className="image-view background" ></canvas>
+            <div className="icon-push-down">
+              <div className={!this.state.imageTaken || this.state.scoreSaved
+                ? "hidden" : "submit-button-elements third float-right"}>
+                <div className="button-hover ">
+                  <img src={submit} onClick={() => this.GetLocation()}
+                    className="button-that-submits2" alt=''></img>
+                </div>
+              </div>
+              <div className={this.state.imageTaken && !this.state.scoreSaved
+                ? "submit-button-elements third float-right" : "hidden"} >
+                <div className="button-hover">
+                  <img src={grayRetry}
+                    id="btnScoreCapture" className="retake" onClick={() => this.RetakePhoto()}
+                    alt=''>
+                  </img>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

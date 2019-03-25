@@ -13,7 +13,7 @@ class ForgotPassword extends Component {
     }
     sendEmail() {
 
-            fetch(BASE_URL + "/api/Features/forgotPassword?user=" + this.state.emailValue,{
+            fetch(BASE_URL + "/api/Features/ForgotPassword?user=" + this.state.emailValue,{
                 method: "post",
                 headers: {
                   Accept: "application/json",
