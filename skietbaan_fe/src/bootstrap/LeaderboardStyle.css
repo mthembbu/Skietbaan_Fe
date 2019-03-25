@@ -1,35 +1,30 @@
-html, body{
-    /* position: absolute;  */
-    width: 100% !important; 
-    height: 100% !important;
- }
- /* Leaderboard Page Main Container */
- .leaderboardContainer{
+/* Leaderboard Page Main Container */
+ .leaderboard-container{
      background-color: #FFFFFF;
      position: fixed;
      width: 100%;
      height: 100%;
      padding-bottom: 56px;
  }
- .leaderboardContainer .row{
+ .leaderboard-container .row{
      height: 100%;
      background-color: #FFFFFF;
  }
   /* FilterSection*/ 
      /*open filter selection*/
-     .FilterSelections{
+     .filter-selections{
          width:100%;
          background-color:#fdfdfd;
          display: inline-block;
          padding-top: 31px;
      }
-     .FilterSelections .CategorySelection{
+     .filter-selections .category-selection{
          height: 37px;
          width: 262px;
          margin: auto;
          display: flex;
      }
-     .FilterSelections .CategorySelection .chooseComps{
+     .filter-selections .category-selection .choose-comps{
          color: #6F839E;
          width: 131px;
          height: 100%;
@@ -40,7 +35,7 @@ html, body{
          border-top-left-radius: 18px;
          border-bottom-left-radius: 18px;
      }
-     .FilterSelections .CategorySelection .chooseComps-active{
+     .filter-selections .category-selection .choose-comps-active{
          background-color: #000000;
          color: #fdfdfd;
          width: 131px;
@@ -52,7 +47,7 @@ html, body{
          border-top-left-radius: 18px;
          border-bottom-left-radius: 18px;
      }
-     .FilterSelections .CategorySelection .chooseComps a{
+     .filter-selections .category-selection .choose-comps a{
          width: 100%;
          height: 100%;
          text-align: center;
@@ -61,7 +56,7 @@ html, body{
          font-family: Helvetica;
          padding-top: 3%;
      }
-     .FilterSelections .CategorySelection .chooseComps-active a{
+     .filter-selections .category-selection .choose-comps-active a{
          width: 100%;
          height: 100%;
          text-align: center;
@@ -70,7 +65,7 @@ html, body{
          font-family: Helvetica;
          padding-top: 3%;
      }
-     .FilterSelections .CategorySelection .chooseGroups{
+     .filter-selections .category-selection .choose-groups{
          background-color: white;
          color: #6F839E;
          width: 131px;
@@ -82,7 +77,7 @@ html, body{
         border-top-right-radius: 18px;
         border-bottom-right-radius: 18px;
      }
-     .FilterSelections .CategorySelection .chooseGroups a{
+     .filter-selections .category-selection .choose-groups a{
          width: 100%;
          height: 100%;
          text-align: center;
@@ -91,7 +86,7 @@ html, body{
          font-family: Helvetica;
          padding-top: 3%;
      }
-     .FilterSelections .CategorySelection .chooseGroups-active{
+     .filter-selections .category-selection .choose-groups-active{
           background-color: #000000;
           color: #fdfdfd;
           width: 131px;
@@ -104,7 +99,7 @@ html, body{
          border-bottom-right-radius: 18px;
          cursor: pointer;
      }
-     .FilterSelections .CategorySelection .chooseGroups-active a{
+     .filter-selections .category-selection .choose-groups-active a{
          width: 100%;
          height: 100%;
          text-align: center;
@@ -113,7 +108,7 @@ html, body{
          font-family: Helvetica;
          padding-top: 3%;
      }
-     .FilterSelections .catVisibleLabel{
+     .filter-selections .cat-visible-label{
          color: #6F839E;
          text-align: center;
          font-family: Helvetica;
@@ -123,7 +118,7 @@ html, body{
          margin-top: 38px;
          margin-bottom: 0%;
      }
-     .FilterSelections .catVisibleGroupsLabel{
+     .filter-selections .cat-visible-groups-label{
          color: #6F839E;
          text-align: center;
          font-family: Helvetica;
@@ -132,7 +127,7 @@ html, body{
          margin-top: 2%;
          margin-bottom: 0%;
      }
-     .FilterSelections .individual-Active{
+     .filter-selections .individual-active{
          border: solid;
           border-width:thin;
           border-color: #6F839E;
@@ -147,7 +142,7 @@ html, body{
           color: #fdfdfd;
           background-image: linear-gradient(to right, #ef3024  , #Dc0600);
      }
-     .FilterSelections .individual-Inactive{
+     .filter-selections .individual-inactive{
          border: solid;
           border-width:thin;
           border-color: #6F839E;
@@ -162,34 +157,34 @@ html, body{
           color: #6F839E;
           cursor: pointer;
      }
-     .FilterSelections .individual-Inactive a{
+     .filter-selections .individual-inactive a{
          color: #6F839E;
           font-family: Helvetica;
           font-size: 16px;
           vertical-align: inherit;
      }
-     .FilterSelections .individual-Active a{
+     .filter-selections .individual-active a{
          color: #fdfdfd;
           font-family: Helvetica;
           font-size: 16px;
           vertical-align: inherit;
      }
-     .hideMyDiv{
+     .hide-my-div{
          display: none;
      }
-     .FilterSelections .SelectionsContainer {
+     .filter-selections .selections-container {
          width: 100%;
          height: fit-content;
          padding-bottom: 26px;
      }
-     .FilterSelections .SelectionsContainer .row{
+     .filter-selections .selections-container .row{
          width: 100%;
          height: 100%; 
          margin: auto;
          
      }
      
-     .FilterSelections .SelectionsContainer .row .Choose{
+     .filter-selections .selections-container .row .choose{
          height: fit-content;
          max-height: 315px;
          width: 240px;
@@ -199,12 +194,12 @@ html, body{
          overflow: overlay;
          margin: auto;
      }
-     .FilterSelections .SelectionsContainer .row .Choose .SelectionTable{
+     .filter-selections .selections-container .row .choose .selection-table{
          border-collapse: separate;
          border-spacing: 0 10px;
          width: 180px;
      }
-     .FilterSelections .SelectionsContainer .row .Choose .SelectionTable tr .td-Inactive{
+     .filter-selections .selections-container .row .choose .selection-table tr .td-inactive{
           border: solid;
           border-width:thin;
           border-color: #6F839E;
@@ -217,7 +212,7 @@ html, body{
           vertical-align: inherit;
           cursor: pointer;
       }
-     .FilterSelections .SelectionsContainer .row .Choose .SelectionTable tr .td-Active{
+     .filter-selections .selections-container .row .choose .selection-table tr .td-active{
          border: solid;
          border-width:thin;
          border-color: #6F839E;
@@ -232,7 +227,7 @@ html, body{
          cursor: pointer;
      }
      /*closed filter section*/
-     .ClosedFilterSection{
+     .closed-filter-section{
          height: fit-content;
          width: 100%;
          color: #fdfdfd;
@@ -240,27 +235,27 @@ html, body{
          border-bottom-right-radius: 20px;
          border-bottom-left-radius: 20px;
      }
-     .ClosedFilterSection .FilterTable1{
+     .closed-filter-section .filter-table1{
          width: 100%;
          height: 68px !important;
      }
-     .ClosedFilterSection .FilterTable2{
+     .closed-filter-section .FilterTable2{
          width: 100%;
          height: 30px;
      }
-     .ClosedFilterSection .FilterTable1 .HeaderRow1{
+     .closed-filter-section .filter-table1 .header-row1{
          width: 100%;
          height: 50px;
      }
-     .ClosedFilterSection .FilterTable2 .HeaderRow2{
+     .closed-filter-section .FilterTable2 .header-row2{
          width: 100%;
          height: 30px;
      }
-     .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterIconCol{
+     .closed-filter-section .filter-table1 .header-row1 .filter-icon-col{
          width:25%;
          height: 100%;
      }
-     .ClosedFilterSection .FilterTable1 .HeaderRow1 .CompetitionNameCol{
+     .closed-filter-section .filter-table1 .header-row1 .competition-name-col{
          width: 75%;
          height: 100%;
          font-family: helvetica;
@@ -269,30 +264,30 @@ html, body{
          font-size: 20px;
          font-weight: bold;
      } 
-     .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterLabelsCol .HeadTableLabels{
+     .closed-filter-section .filter-table1 .header-row1 .filter-labels-col .head-table-labels{
          width: 100%;
          height: 100%;
      }
  
-     .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterIconCol .FilterIcon{
+     .closed-filter-section .filter-table1 .header-row1 .filter-icon-col .filter-icon{
          width:100%;
          height: 100%;
          text-align: center;
-         padding-top: 20%;
+         padding-top: 22px;
      } 
-     .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterIconCol .FilterIcon *{
+     .closed-filter-section .filter-table1 .header-row1 .filter-icon-col .filter-icon *{
          width:100%;
          height: 100%;
      }
-     .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterIconCol .FilterIcon a{
+     .closed-filter-section .filter-table1 .header-row1 .filter-icon-col .filter-icon a{
          width: fit-content;
          height: auto;
      }
-     .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterIconCol .FilterIcon a img{
+     .closed-filter-section .filter-table1 .header-row1 .filter-icon-col .filter-icon a img{
         width: 28px;
         height: 22px;
      }
-     .FilterSelections .SelectionsContainer .row .closefilter{
+     .filter-selections .selections-container .row .closefilter{
          margin-top: 26px;
          width: 34px;
          height: 17px;
@@ -301,26 +296,26 @@ html, body{
      
  /* end of filter section*/
  /* Ranking table section */
-     .RankingTableSection{
+     .ranking-table-section{
          height: 510px;
          width: 100%;
          color: #6F839E;
          background-color: #fdfdfd;
          overflow-y:overlay;
      }
-     .RankingTableHead{
+     .ranking-table-head{
         width: 100%;
         height: 36px;
      }
-    .RankingTableHead .HeaderRow2{
+    .ranking-table-head .header-row2{
         background-color: #F5F5F5;
         width: 100%;
     }
-    .RankingTableHead .HeaderRow2 .colEmpty{
+    .ranking-table-head .header-row2 .col-empty{
         height: 100%;
         width: 5%;
     }
-    .RankingTableHead .HeaderRow2 .GroupingLabelCOl{
+    .ranking-table-head .header-row2 .grouping-label-col{
         height: 100%;
         width: 35% ;
         font-weight: bold;
@@ -328,21 +323,21 @@ html, body{
         text-align: left;
         font-family: helvetica;
     }
-    .RankingTableHead .HeaderRow2 .totalLabelCOl{
+    .ranking-table-head .header-row2 .total-label-col{
         height: 100%;
         width: 20%;
         font-size: 14px;
         text-align: center;
         font-family: helvetica;
     }
-    .RankingTableHead .HeaderRow2 .AverageLabelCOl{
+    .ranking-table-head .header-row2 .average-label-col{
         height: 100%;
         width: 20%;
         font-size: 14px;
         text-align: center;
         font-family: helvetica;
     }
-    .RankingTableHead .HeaderRow2 .BestLabelCOl{
+    .ranking-table-head .header-row2 .best-label-col{
         height: 100%;
         width: 20%;
         font-size: 20px;
@@ -354,59 +349,59 @@ html, body{
 
 
 
-     .RankingTableSection .RankingTable{
+     .ranking-table-section .ranking-table{
          width: 100%;
      }
-     .RankingTableSection .RankingTable .rankRow{
+     .ranking-table-section .ranking-table .rank-row{
          height: 66px;
          width: 100%;
          border-bottom: solid;
          border-bottom-width: thin;
          border-bottom-style: outset;
      }
-     .RankingTableSection .RankingTable .rankRow .RankIconCol{
+     .ranking-table-section .ranking-table .rank-row .rank-icon-col{
          height: 100%;
          width: 10%;
          text-align: center;
      }
-     .rankNumberContainer{
+     .rank-number-container{
          text-align: -webkit-center;
      }
-     .rankNumberContainer .rankNumTable .tr{
+     .rank-number-container .rank-num-table .tr{
          width: 15px;
       }
-     .rankNumberContainer .rankNumTable .upArrow{
+     .rank-number-container .rank-num-table .up-arrow{
          height: 5px
      }
-     .rankNumberContainer .rankNumTable .Icon{
+     .rank-number-container .rank-num-table .icon{
         width: 15px;
         height: 15px;
      }
-     .rankNumberContainer .rankNumTable .Icon img{
+     .rank-number-container .rank-num-table .icon img{
          width: 25px;
          height: 25px
       }
-     .rankNumberContainer .rankNumTable .downArrow{
+     .rank-number-container .rank-num-table .down-arrow{
          height: 5px
      }
-     .RankingTableSection .RankingTable .rankRow .RankIconCol .RankContainer{
+     .ranking-table-section .ranking-table .rank-row .rank-icon-col .rank-container{
          height: 100%;
          width: 100%;
      }
-     .RankingTableSection .RankingTable .rankRow .RankLabelsCol{
+     .ranking-table-section .ranking-table .rank-row .rank-labels-col{
          height: 100%;
          width: 80%;
          text-align: center
      }
-     .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels{
+     .ranking-table-section .ranking-table .rank-row .rank-labels-col .head-table-labels{
          height: 66px;
          width: 100%;
      }
-     .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr{
+     .ranking-table-section .ranking-table .rank-row .rank-labels-col .head-table-labels tr{
          height: 100%;
          width: 100%;
      }
-     .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .UsernameCol{
+     .ranking-table-section .ranking-table .rank-row .rank-labels-col .head-table-labels tr .username-col{
          width: 100%;
          height: 100%;
          font-family: Helvetica;	
@@ -414,21 +409,21 @@ html, body{
          font-weight: bold;
          text-align: left;
      }
-     .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColTotal{        
+     .ranking-table-section .ranking-table .rank-row .rank-labels-col .head-table-labels tr .score-col-total{        
          width: 20%;
          height:100%;
          font-size: 14px;
          font-family: Helvetica;	
          text-align: center;
      }
-     .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColAverage{        
+     .ranking-table-section .ranking-table .rank-row .rank-labels-col .head-table-labels tr .score-col-average{        
          height:100%;
          font-size: 14px;
          text-align: center;
          font-family: Helvetica;	
          width: 20%;
      } 
-     .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColBest{        
+     .ranking-table-section .ranking-table .rank-row .rank-labels-col .head-table-labels tr .score-col-best{        
          height:100%;
          font-weight: bold;
          font-family: Helvetica;	
@@ -436,19 +431,19 @@ html, body{
          text-align: center;
          width: 20%;
      }    
-     .RankingTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ExtraNameCOl{        
+     .ranking-table-section .ranking-table .rank-row .rank-labels-col .head-table-labels tr .extra-name-col{        
          height:100%;
          font-family: Helvetica;	
          font-size: 14px;
          text-align: center;
          width: 30%;
      }
-     .RankingTableSection .RankingTable tfoot{
+     .ranking-table-section .ranking-table tfoot{
        width: 100%;
        height: 104px;    
      }
  /* Cunrent User table section*/
-     .CurrentUserTableSection{
+     .current-user-table-section{
          height: 48px;
          width: 100%;
          background-image: linear-gradient(to right, #000000, #FF0000);
@@ -456,36 +451,36 @@ html, body{
          border-radius: 8px;
          margin-bottom: 5%;
      }
-     .CurrentUserTableSection .RankingTable{
+     .current-user-table-section .ranking-table{
          width: 100%;
          height: 48px;
      }
-     .CurrentUserTableSection .RankingTable .rankRow{
+     .current-user-table-section .ranking-table .rank-row{
          width: 100%;
          height: 100%;
      }
-     .CurrentUserTableSection .RankingTable .rankRow .RankIconCol{
+     .current-user-table-section .ranking-table .rank-row .rank-icon-col{
          width: 10%;
          height: 100%;
      }
-     .CurrentUserTableSection .RankingTable .rankRow .RankIconCol .RankContainer{
+     .current-user-table-section .ranking-table .rank-row .rank-icon-col .rank-container{
          height: 100%;
          width: 100%;
      }
-     .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol{
+     .current-user-table-section .ranking-table .rank-row .rank-labels-col{
          height: 100%;
          width: 90%;
          text-align: center;
      }
-     .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels{
+     .current-user-table-section .ranking-table .rank-row .rank-labels-col .head-table-labels{
          height: 100%;
          width: 100%;
      }
-     .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr{
+     .current-user-table-section .ranking-table .rank-row .rank-labels-col .head-table-labels tr{
          height: 100%;
          width: 100%;
      }
-     .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .UsernameCol{
+     .current-user-table-section .ranking-table .rank-row .rank-labels-col .head-table-labels tr .username-col{
          width: 100%;
          height: 100%;
          font-family: Helvetica;	
@@ -493,21 +488,21 @@ html, body{
          font-weight: bold;
          text-align: left;
      }
-     .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColTotal{        
+     .current-user-table-section .ranking-table .rank-row .rank-labels-col .head-table-labels tr .score-col-total{        
          width: 20%;
          height:100%;
          font-size: 14px;
          font-family: Helvetica;	
          text-align: center;
      }
-     .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColAverage{        
+     .current-user-table-section .ranking-table .rank-row .rank-labels-col .head-table-labels tr .score-col-average{        
          height:100%;
          font-size: 14px;
          text-align: center;
          font-family: Helvetica;	
          width: 20%;
      } 
-     .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ScoreColBest{        
+     .current-user-table-section .ranking-table .rank-row .rank-labels-col .head-table-labels tr .score-col-best{        
          height:100%;
          font-weight: bold;
          font-family: Helvetica;	
@@ -515,7 +510,7 @@ html, body{
          text-align: center;
          width: 20%;
      }    
-     .CurrentUserTableSection .RankingTable .rankRow .RankLabelsCol .HeadTableLabels tr .ExtraNameCOl{        
+     .current-user-table-section .ranking-table .rank-row .rank-labels-col .head-table-labels tr .extra-name-col{        
          height:100%;
          font-family: Helvetica;	
          font-size: 14px;
@@ -537,28 +532,22 @@ html, body{
         bottom: 0;
         margin-bottom: 0px !important;
      }
-     .leaderboardContainer{
+     .leaderboard-container{
         margin-top: 56px;
      }
 
   }
   @media only screen and (min-width: 701px) {
      /* tablets and desktop */
-     .FilterSelections .SelectionsContainer .row div{
+     .filter-selections .selections-container .row div{
          height: 290px;
          width: 476px;
          display: inline-flex;
      }
-      .ClosedFilterSection .FilterTable1 .HeaderRow1 .FilterIconCol .FilterIcon {
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        padding-top: 10%;
-    }
  }
  @media only screen and (max-width: 700px) {
      /* phones size */
-     .FilterSelections .SelectionsContainer .row div{
+     .filter-selections .selections-container .row div{
          height: 100%;
          width: 144px;
          display: inline-block;

@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import './groups.css';
 import { BASE_URL } from '../actions/types';
 import unmarked from './GroupImages/Oval.png';
-import marked from './GroupImages/MarkedBox.png';
 import deleteS from './GroupImages/deleteS.png';
 import whiteBin from './GroupImages/whiteBin.png';
 import blackBin from './GroupImages/blackBin.png';
 import whitePlus from './GroupImages/whitePlus.png';
-import { fetchEditUser, AddMemberAction, pageState } from '../actions/postActions';
+import { fetchEditUser, pageState } from '../actions/postActions';
 import back from './GroupImages/back.png';
 import Switch from '@material-ui/core/Switch';
 import { getCookie } from '../components/cookie.js';
@@ -31,11 +30,11 @@ class EditGroup extends Component {
 		this.selectAll = this.selectAll.bind(this);
 	}
 
-	componentDidMount() {
+	async componentDidMount() {
 		if (!getCookie('token')) {
 			window.location = '/registerPage';
 		}
-		this.props.fetchEditUser(this.props.id);
+		await this.props.fetchEditUser(this.props.id);
 	}
 
 	onChange(event) {
@@ -221,4 +220,4 @@ const mapStateToProps = (state) => ({
 	page: state.posts.page
 });
 
-export default connect(mapStateToProps, { fetchEditUser, AddMemberAction, pageState })(EditGroup);
+export default connect(mapStateToProps, { fetchEditUser, pageState })(EditGroup);

@@ -9,6 +9,7 @@ import {
   ADDMEMBERS,
   PAGE,
   GROUPDICT,
+  EMPTY,
   FETCH_LEADERBOARDFILTER_DATA,
   FETCH_LEADERBOARDTABLE_DATA,
   UPDATE_SELECTED_COMPETITION,
@@ -16,7 +17,7 @@ import {
 } from "./types";
 
 /** The method to feth the already available data for posts*/
-export const FetchGroups = () => dispatch => {
+export const fetchGroups = () => dispatch => {
   fetch(BASE_URL+"/api/Groups")
     .then(res => res.json())
     .then(group => {
@@ -104,7 +105,7 @@ export const getGroup = () => dispatch => {
     );
 };
 
-export const groupDic = () => dispatch => {
+export const groupDictionary = () => dispatch => {
   fetch(BASE_URL + "/api/Groups/participants")
     .then(res => res.json())
     .then(posts =>
@@ -180,6 +181,14 @@ export const pageState = id => {
     dispatch({
       type: PAGE,
       payload: id
+    });
+  };
+};
+export const emptyState = () => {
+  return dispatch => {
+    dispatch({
+      type: EMPTY,
+      payload: []
     });
   };
 };

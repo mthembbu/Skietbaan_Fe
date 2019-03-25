@@ -246,18 +246,16 @@ class Login extends Component {
                 </div>
               </FormGroup>
             </div>
+            <div className="login-href">
+              <a className="forgot-password-link" href="/forgotPassword" >FORGOT PASSWORD?</a>
+            </div>
             <div className="button-container">
               <Button onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
-                : "buttons-invalid round-button"} >Login</Button>
-            </div>
-            <div className="login-href">
-              <a href="/forgotPassword" >Forgot Password?</a>
-            </div>
+                : "buttons-invalid round-button"} >LOGIN</Button>
+            </div>  
           </Form>
-
         </div >
       </div>
-
     );
   }
 }

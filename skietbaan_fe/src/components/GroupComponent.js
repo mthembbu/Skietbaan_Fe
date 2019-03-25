@@ -11,7 +11,7 @@ export class GroupComponent extends Component {
 	};
 
 	render() {
-		console.log(this.props.page);
+
 		return (
 			<div>
 				{this.props.page === 0 ? <ViewGroups /> : this.props.page === 1 ? <EditGroup /> : <AddMembersGroup />}

@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
-import history from "./history";
-import { passId, getName ,fetchEditUser,FetchGroups,groupDic,pageState} from '../actions/postActions';
+import history from './history';
+import {
+	passId,
+	getName,
+	fetchEditUser,
+	fetchGroups,
+	groupDictionary,
+	pageState,
+	emptyState
+} from '../actions/postActions';
 import { BASE_URL } from '../actions/types';
 import Switch from '@material-ui/core/Switch';
 import back from './GroupImages/back.png';
 import group from './GroupImages/Group.png';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 import { getCookie } from '../components/cookie.js';
 
 class ViewGroups extends Component {
@@ -29,13 +37,12 @@ class ViewGroups extends Component {
 		this.editGroup = this.editGroup.bind(this);
 	}
 
-	async componentDidMount() {
-		if (!getCookie("token")) {
-			window.location = "/registerPage";
-			}
-		this.props.FetchGroups();
-		this.props.groupDic();
-		this.setState({posts:this.props.groupsList})
+	async componentWillMount() {
+		if (!getCookie('token')) {
+			window.location = '/registerPage';
+		}
+		await this.props.fetchGroups();
+		await this.props.groupDictionary();
 	}
 
 	onChange(event) {
@@ -46,20 +53,14 @@ class ViewGroups extends Component {
 		this.props.history.push('/create');
 	}
 	editGroup(obj) {
+		this.props.emptyState();
 		this.props.getName(obj.name);
 		this.props.passId(obj.id);
-		 this.props.pageState(1);
+
+		this.props.pageState(1);
 	}
 
-	async delete(groupId,index) {
-
-		if(this.state.posts[index].isActive===true){
-			this.state.posts[index].isActive=false;
-		}
-		else{
-			this.state.posts[index].isActive=true;
-		}
-		
+	async delete(groupId, index) {
 		await fetch(BASE_URL + '/api/Groups/' + groupId, {
 			method: 'POST',
 			headers: {
@@ -70,8 +71,8 @@ class ViewGroups extends Component {
 		})
 			.then(function(response) {})
 			.then(function(data) {})
-      .catch(function(data) {});
-      this.props.FetchGroups();
+			.catch(function(data) {});
+		this.props.fetchGroups();
 	}
 
 	render() {
@@ -79,7 +80,7 @@ class ViewGroups extends Component {
 			<div className="the-main">
 				<table className="table-member">
 					<tbody>
-						{this.state.posts
+						{this.props.groupsList
 							.filter((post) => {
 								return (
 									!this.state.filterText ||
@@ -89,26 +90,31 @@ class ViewGroups extends Component {
 								);
 							})
 							.map((post, index) => (
-							
 								<tr className="view-group" key={post.id}>
 									<td
-										className={post.isActive==true?"first-row":"first-row-active"}
+										className={post.isActive === true ? 'first-row' : 'first-row-active'}
 										onClick={() => this.editGroup(post)}
 									>
 										{post.name}
 									</td>
-									
+
 									<td className="group-container">
-									{post.isActive===true?
-									<div><img src={group}
-									className="groupIcon"
-									alt=""
-								/>
-								<label className="numberOfUser">{ this.props.groupDict[post.id]}</label></div>:null}
+										{post.isActive === true ? (
+											<div>
+												<img src={group} className="groupIcon" alt="" />
+												<label className="numberOfUser">{this.props.groupDict[post.id]}</label>
+											</div>
+										) : null}
 									</td>
 									<td>
 										<div className="group-view">
-										<Switch color={"primary"} className="Active" focus={true} checked={post.isActive} onClick={() => this.delete(post.id,index)}/>
+											<Switch
+												color={'primary'}
+												className="Active"
+												focus={true}
+												checked={post.isActive}
+												onClick={() => this.delete(post.id, index)}
+											/>
 										</div>
 									</td>
 								</tr>
@@ -120,14 +126,14 @@ class ViewGroups extends Component {
 
 		return (
 			<main className="The-Main">
-			<div className="navBar-contain">			
-				<div className="the-nav-bar">
-					<a href="" className="back-container">
-						<img className="back-image" onClick={this.onBack} src={back} alt="" />
-					</a>
-		
-					<label className="center-label">View Groups</label>
-				</div>
+				<div className="navBar-contain">
+					<div className="the-nav-bar">
+						<a href="" className="back-container">
+							<img className="back-image" onClick={this.onBack} src={back} alt="" />
+						</a>
+
+						<label className="center-label">View Groups</label>
+					</div>
 				</div>
 				<div className="scrollbar" data-simplebar data-simplebar-auto-hide="false">
 					{postitems}
@@ -137,18 +143,26 @@ class ViewGroups extends Component {
 	}
 }
 
-ViewGroups.propTypes={
-	groupDict:PropTypes.shape({
-		Id:PropTypes.arrayOf(PropTypes.number),
-		count:PropTypes.arrayOf(PropTypes.number)
-	}) 
-}
+ViewGroups.propTypes = {
+	groupDict: PropTypes.shape({
+		Id: PropTypes.arrayOf(PropTypes.number),
+		count: PropTypes.arrayOf(PropTypes.number)
+	})
+};
 
 const mapStateToProps = (state) => ({
 	name: state.posts.groupName,
-  id: state.posts.groupId,
-	groupsList:state.posts.groupsList,
-	groupDict:state.posts.groupDict
+	id: state.posts.groupId,
+	groupsList: state.posts.groupsList,
+	groupDict: state.posts.groupDict
 });
 
-export default connect(mapStateToProps, { passId, getName,groupDic,fetchEditUser,pageState ,FetchGroups})(ViewGroups);
+export default connect(mapStateToProps, {
+	passId,
+	getName,
+	groupDictionary,
+	fetchEditUser,
+	pageState,
+	fetchGroups,
+	emptyState
+})(ViewGroups);
