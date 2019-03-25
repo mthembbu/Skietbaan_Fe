@@ -9,6 +9,7 @@
     padding-right: 10px;
     font-size: 16px;
     font-weight: bold;
+    height: 100%;
 }
 
 .competition-item{
@@ -197,13 +198,13 @@
 }
 
 .submit-container{
-    position: absolute;
     bottom: 177px;
     margin: 0 auto;
     text-align: center;
     width: 80%;
     display: flex;
     margin-left: 10%;
+    padding-top: 26px;
 }
 
 .retake{
@@ -220,15 +221,14 @@
 .icon-push-down{
     position: fixed;
     bottom: 70px;
-    width: 80%;
     left: 0;
     margin-left:10%;
     margin-right:10%;
+    width: 100%;
 }
 
 .icon-push-down.no-margin{
     margin:0;
-    width:100%;
 }
 
 .submit-button-elements.third{
@@ -375,11 +375,6 @@ input[type=number] {
     height: 5px;
     width: 100%;
     background-color: white;
-}
-
-.back-spacing{
-    width: 100%;
-    height: 30px;
 }
 
 @media screen and (max-width:425px)  {
