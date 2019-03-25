@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../components/ForgotPassword.css";
 import { BASE_URL } from "../actions/types";
+
 class ForgotPassword extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +18,7 @@ class ForgotPassword extends Component {
     let hash = sha1(this.state.passwordValue);
 
     fetch(
-      BASE_URL + `/api/Features/resetpassword?token=${token}&password=${hash}`,
+      BASE_URL + `/api/Features/ResetPassword?token=${token}&password=${hash}`,
       {
         method: "post",
         headers: {

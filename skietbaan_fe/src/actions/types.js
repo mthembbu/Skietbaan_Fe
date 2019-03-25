@@ -51,11 +51,13 @@ export const UPDATE_GROUPNAME = "UPDATE_GROUPNAME";
 export const CREATEGROUP = "CREATEGROUP";
 export const GETGROUP = "GETGROUP";
 export const PASS_ID = "PASS_ID";
+export const PAGE = "PAGE";
 export const GETNAME = "GETNAME";
 export const EDITGROUPUSERS = "EDITGROUPUSERS";
 export const FETCH_GROUPS = "FETCH_GROUPS";
 export const ADDMEMBERS = "ADDMEMBERS";
 export const GROUPDICT = "GROUPDICT";
+export const EMPTY = "EMPTY";
 
 //notification types
 export const FETCH_NOTIFICATION = "FETCH_NOTIFICATION";
