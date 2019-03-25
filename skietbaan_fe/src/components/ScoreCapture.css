@@ -220,10 +220,15 @@
     bottom: 177px;
     margin: 0 auto;
     text-align: center;
-    width: 80%;
+    width: 312px;
     display: flex;
-    margin-left: 10%;
-    padding-top: 35px;
+    padding-top: 13%;
+}
+
+@media screen and (min-width:576px){
+    .submit-container{
+        padding-top: 50px;
+    }
 }
 
 .retake{
