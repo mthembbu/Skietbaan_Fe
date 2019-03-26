@@ -43,6 +43,7 @@ class LeaderboardPage extends Component {
         this.displayMember = this.displayMember.bind(this);
         this.displayCompetitive = this.displayCompetitive.bind(this);
         this.getRankTableHeight = this.getRankTableHeight.bind(this);
+        this.getFilterTableHeight = this.getFilterTableHeight.bind(this);
     }
     componentDidMount() {
         // Additionally I could have just used an arrow function for the binding `this` to the component...
@@ -175,6 +176,13 @@ class LeaderboardPage extends Component {
         }else{
             return this.state.ranktableHeightMobile;
         }
+    }
+    getFilterTableHeight(){
+        if(this.state.width <575){
+            return ((this.state.height /2) + -78);
+         }else{
+             return 315;
+         }
     }
     getCurentUserRankNumber(rankingList) {
         if (rankingList != undefined) {
@@ -434,7 +442,7 @@ class LeaderboardPage extends Component {
                                    </div>
                                 <div className="selections-container">
                                     <div className="row justify-content-center">
-                                        <div className="choose">
+                                        <div className="choose" style={{ height:"fit-content", maxHeight: this.getFilterTableHeight() + "px" }}>
                                             {this.state.listType == "competitions" ? competitionsList : groupsList}
                                         </div>
                                     </div>
@@ -469,8 +477,8 @@ class LeaderboardPage extends Component {
                             </table>
                             <div className="ranking-table-section"  style={{ height: this.getRankTableHeight() + "px" }}>
                                 <table className="ranking-table" >
-                                    <tbody>
-                                        {tablebody}
+                                    <tbody> 
+                                        {tablebody}   
                                     </tbody>
                                 </table>
                             </div>
