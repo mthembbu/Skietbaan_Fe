@@ -40,7 +40,7 @@ class UserProfile extends Component {
         .then(res => res.json())
         .then(data => {
             this.setState({ awardCompetitions: data });
-            if (this.state.awardCompetitions.length == 0) {
+            if (this.state.awardCompetitions.length === 0) {
             this.logout();
             history.push("/registerPage");
             }
@@ -187,7 +187,7 @@ class UserProfile extends Component {
             <div key={index}>
                 <Row>
                     <Col>
-                        <button className={this.state.selectedCompetition == index ?
+                        <button className={this.state.selectedCompetition === index ?
                              "button-style competition-button-text button-style-active" : 
                              "button-style competition-button-text button-style-inactive"}
                              onClick={() => this.setSelectedCompetition(index)}>
