@@ -57,7 +57,6 @@ export const ADDMEMBERS = "ADDMEMBERS";
 export const GROUPDICT = "GROUPDICT";
 export const EMPTY = "EMPTY";
 export const NEWGROUPSTATE = "NEWGROUPSTATE";
-
 //notification types
 export const FETCH_NOTIFICATION = "FETCH_NOTIFICATION";
 export const UPDATE_IS_READ = "UPDATE_IS_READ";
