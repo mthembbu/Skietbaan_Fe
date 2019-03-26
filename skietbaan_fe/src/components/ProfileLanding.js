@@ -43,7 +43,7 @@ export default class ProfileLanding extends Component {
     render() {
         return (
             <div>
-                <div className={this.state.selectedButton == 1 ? "fix-top pad-bottom-55px"
+                <div className={this.state.selectedButton == 1 ? "fix-top pad-bottom-20px"
                     : this.state.selectedButton == 2 ? "fix-top pad-bottom-0px" : "fix-top"}>
                 <Row className="top-bar-rectangle">
                     <Col className="lay-horizontal">
@@ -63,7 +63,7 @@ export default class ProfileLanding extends Component {
                         <Col id="remove-left-button-padding" className="pad-button-text-top">
                             <div>
                                 <button className={this.state.selectedButton == 1 ? 
-                                        "unstyle-button-active btn-block button-fill" : 
+                                        "unstyle-button-active btn-block button-fill" :
                                         "unstyle-button btn-block button-fill"} onClick={this.awardPage}>
                                     <label className="button-text">AWARDS</label>
                                 </button>
