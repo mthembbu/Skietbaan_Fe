@@ -105,7 +105,6 @@ class Create extends Component {
   }
 
   render() {
-    console.log(this.state.selectedButtonCreateViewGroups);
     return (
       <div className="create-container">
       {this.props.page===0?

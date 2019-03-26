@@ -58,7 +58,6 @@ export class createPages extends Component {
 	}
 
 	render() {
-        console.log()
 		return (
 			<div className="create-main-container">
             {this.props.page===0?
