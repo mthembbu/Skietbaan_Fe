@@ -33,7 +33,10 @@ export default class search extends Component {
       validScore: true,
       validCompetition: true,
       scoreEntered: false,
-      navbarState: false
+      navbarState: false,
+      eventsAdded: false,
+      lastSize : 0
+
     }
 
     this.competitionClicked = this.competitionClicked.bind(this);
@@ -45,8 +48,9 @@ export default class search extends Component {
     this.validate = this.validate.bind(this);
     this.getLocation = this.getLocation.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.toggleNavbar2 = this.toggleNavbar2.bind(this);
     this.toggleIcon = this.toggleIcon.bind(this);
-
+    this.toggleNavbarKeyboard = this.toggleNavbarKeyboard.bind(this);
   }
 
   handleScore({ target }) {
@@ -148,12 +152,23 @@ export default class search extends Component {
     this.setState({
       navbarState: !this.state.navbarState,
     })
-    var Navbar = document.querySelector(".navbar-admin");
-    if (Navbar.classList.contains("hidden")) {
-      Navbar.classList.remove("hidden");
+    var navbar = document.querySelector(".navbar-admin");
+    if (navbar.classList.contains("hidden")) {
+      navbar.classList.remove("hidden");
     }
     else {
-      Navbar.classList.add("hidden");
+      navbar.classList.add("hidden");
+    }
+  }
+
+  toggleNavbar2() {
+    var navbar = document.querySelector(".navbar-admin");
+    if (this.state.lastSize > document.body.clientHeight) {
+      navbar.setAttribute('hidden', 'true');
+    }
+    else {
+
+      navbar.removeAttribute('hidden');
     }
   }
 
@@ -355,26 +370,34 @@ export default class search extends Component {
     this.toggleNavbar();
   }
 
-  render() {
-    document.addEventListener('DOMContentLoaded', () => {
-      var hideWhenAddingScore = document.querySelector(".navbar-admin");
-      var last_size = document.body.clientHeight;
-      window.addEventListener("resize", () => {
-        if (last_size === document.body.clientHeight) {
-          return;
-        }
-        if (hideWhenAddingScore.classList.contains("hidden-small")) {
-          hideWhenAddingScore.classList.remove("hidden-small");
-          this.toggleNavbar();
-        }
-        else {
-          hideWhenAddingScore.classList.add("hidden-small");
-          this.toggleNavbar();
-        }
-        last_size = document.body.clientHeight;
-      })
-    }, false);
+  toggleNavbarKeyboard() {
+    
+    if (document.window === undefined) {
+      document.addEventListener('DOMContentLoaded', () => {        
+        window.addEventListener("resize", () => {
+            this.toggleNavbar2();
+        })
+      });
+    }else{
+      document.addEventListener('DOMContentLoaded', () => {        
+        window.addEventListener("resize", () => {
+            this.toggleNavbar2();
+        })
+      });
+    }
+  }
 
+  render() {
+
+    if (this.state.lastSize === 0) {
+      this.state.lastSize = document.body.clientHeight; 
+      document.addEventListener('DOMContentLoaded', () => {        
+        window.addEventListener("resize", () => {
+            this.toggleNavbar2();
+        })
+      });
+    }
+    this.toggleNavbarKeyboard();
     const stateOne = this.state.showCamera || this.state.imageTaken
     let competitionItem = [];
     if (this.state.competitionsList && this.state.competitionsList.length > 0) {
