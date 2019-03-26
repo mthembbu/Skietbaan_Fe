@@ -6,6 +6,8 @@ import {
   PASS_ID,
   CREATEGROUP,
   PAGE,
+  EMPTY,
+  NEWGROUPSTATE,
   EDITGROUPUSERS,
   UPDATE_SELECTED_COMPETITION,
   UPDATE_SELECTED_GROUP,
@@ -73,11 +75,21 @@ export default function(state = initialState, action) {
         ...state,
         existing: action.payload
       };
+    case NEWGROUPSTATE:
+      return {
+        ...state,
+        groupsList: action.payload
+      };
 
     case EDITGROUPUSERS:
       return {
         ...state,
         editGroup: action.payload
+      };
+    case EMPTY:
+      return {
+        ...state,
+        editGroup:action.payload
       };
 
     case CREATEGROUP:

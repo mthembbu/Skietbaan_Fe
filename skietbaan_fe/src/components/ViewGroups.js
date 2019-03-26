@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
 import history from './history';
-import { passId, getName, fetchEditUser, fetchGroups, groupDictionary, pageState } from '../actions/postActions';
+import {
+	passId,
+	getName,
+	newGroupArrayState,
+	fetchGroups,
+	groupDictionary,
+	pageState,
+	emptyState
+} from '../actions/postActions';
 import { BASE_URL } from '../actions/types';
 import Switch from '@material-ui/core/Switch';
-import back from './GroupImages/back.png';
 import group from './GroupImages/Group.png';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
 import { getCookie } from '../components/cookie.js';
 
 class ViewGroups extends Component {
@@ -23,35 +29,35 @@ class ViewGroups extends Component {
 			selected: '',
 			deleteState: false
 		};
-		this.onBack = this.onBack.bind(this);
 		this.onChange = this.onChange.bind(this);
 		this.delete = this.delete.bind(this);
 		this.editGroup = this.editGroup.bind(this);
 	}
 
 	async componentWillMount() {
-		if (!getCookie('token')) {
-			window.location = '/registerPage';
-		}
 		await this.props.fetchGroups();
 		await this.props.groupDictionary();
-
 	}
 
 	onChange(event) {
 		this.setState({ filterText: event.target.value });
 	}
 
-	onBack() {
-		this.props.history.push('/create');
-	}
 	editGroup(obj) {
+		this.props.emptyState();
 		this.props.getName(obj.name);
 		this.props.passId(obj.id);
 		this.props.pageState(1);
 	}
 
 	async delete(groupId, index) {
+		 if(this.props.groupsList[index].isActive===false){
+		 	this.props.groupsList[index].isActive=true;
+		 }
+		 else{
+		 	this.props.groupsList[index].isActive=false;	
+		 }
+		 this.props.newGroupArrayState([...this.props.groupsList]); 
 		await fetch(BASE_URL + '/api/Groups/' + groupId, {
 			method: 'POST',
 			headers: {
@@ -62,8 +68,7 @@ class ViewGroups extends Component {
 		})
 			.then(function(response) {})
 			.then(function(data) {})
-			.catch(function(data) {});
-		this.props.fetchGroups();
+			.catch(function(data) {});	
 	}
 
 	render() {
@@ -117,15 +122,6 @@ class ViewGroups extends Component {
 
 		return (
 			<main className="The-Main">
-				<div className="navBar-contain">
-					<div className="the-nav-bar">
-						<a href="" className="back-container">
-							<img className="back-image" onClick={this.onBack} src={back} alt="" />
-						</a>
-
-						<label className="center-label">View Groups</label>
-					</div>
-				</div>
 				<div className="scrollbar" data-simplebar data-simplebar-auto-hide="false">
 					{postitems}
 				</div>
@@ -148,6 +144,12 @@ const mapStateToProps = (state) => ({
 	groupDict: state.posts.groupDict
 });
 
-export default connect(mapStateToProps, { passId, getName, groupDictionary, fetchEditUser, pageState, fetchGroups })(
-	ViewGroups
-);
+export default connect(mapStateToProps, {
+	passId,
+	getName,
+	groupDictionary,
+	newGroupArrayState,
+	pageState,
+	fetchGroups,
+	emptyState
+})(ViewGroups);

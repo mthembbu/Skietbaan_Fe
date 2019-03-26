@@ -76,22 +76,23 @@ class notification extends Component {
     if (Notification === "Award" || Notification === "Document") {
       this.props.history.push("/profile");
     } else if (Notification === "Confirmation") {
+      this.props.history.push("/notify");
     } else if (Notification === "Renewal") {
     } else if (Notification === "Competition") {
       var competitionName = Message.split(",")[0];
       this.props.updateSelectedCompetition(competitionName);
       setTimeout(function() {
-        window.location = "./home";
+        window.location = "/home";
       }, 2000);
     } else if (Notification === "Group") {
       var groupName = Message.split(",")[0];
       this.props.updateSelectedGroup(groupName);
       setTimeout(function() {
-        window.location = "/ViewGroups";
+        window.location = "/home";
       }, 2000);
     } else {
       setTimeout(function() {
-        this.props.history.push("/notify");
+        window.location = "/notify";
       }, 2000);
     }
   };
@@ -185,7 +186,7 @@ class notification extends Component {
                 className={
                   post.markedForDeletion
                     ? "notifications-selected-text"
-                    : this.state.isRead === true
+                    : post.isRead === true
                     ? "notifications-text"
                     : "notifications-unread"
                 }
@@ -280,5 +281,9 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { updateSelectedCompetition, updateSelectedGroup, updateIsReadProperty }
+  {
+    updateSelectedCompetition,
+    updateSelectedGroup,
+    updateIsReadProperty
+  }
 )(notification);
