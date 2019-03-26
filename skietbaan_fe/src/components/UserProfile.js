@@ -272,8 +272,8 @@ class UserProfile extends Component {
                     </Row>
                     <Row>
                         <Col>
-                            {/* {this.state.awardCompetitions[this.state.selectedCompetition].bestInMonth.startsWith("Best") ?
-                                this.renderBestInMonth() : null} */}
+                            {this.state.awardCompetitions[this.state.selectedCompetition].bestInMonth.startsWith("Best") ?
+                                this.renderBestInMonth() : null}
                         </Col>
                     </Row>
                     <Row className="center-content competition-buttons-container">
