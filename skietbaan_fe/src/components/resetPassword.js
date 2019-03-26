@@ -39,10 +39,6 @@ class ForgotPassword extends Component {
     }
   }
 
-  goToLogin() {
-    window.location = "/Login";
-  }
-
   toggleNavbar() {
     let Navbar = document.querySelector(".navbar-admin");
     if (Navbar.classList.contains("hidden")) {
@@ -75,7 +71,7 @@ class ForgotPassword extends Component {
     this.state.confirmPasswordValue.length !== 0 &&
     this.state.passwordValue.length !== 0
       ? this.state.confirmPasswordValue === this.state.passwordValue
-        ? this.resetPassword() || this.goToLogin()
+        ? this.resetPassword()
         : null
       : null;
   }
