@@ -9,7 +9,6 @@ import grayRetry from '../components/assets/retryBlack.png';
 import lightgrayback from '../components/assets/blackBackBtn.png';
 import cameraBlack from '../components/assets/cameraBlack.png';
 import submit from '../components/assets/blackSumbit.png';
-import { timingSafeEqual } from 'crypto';
 
 export default class search extends Component {
   constructor(props) {
