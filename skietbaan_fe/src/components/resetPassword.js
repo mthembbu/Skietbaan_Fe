@@ -44,13 +44,11 @@ class ForgotPassword extends Component {
   }
 
   resetPassword() {
-    let token = window.location.pathname.split("/")[2];
+    let user = window.location.pathname.split("/")[2];
     let sha1 = require("sha1");
     let hash = sha1(this.state.confirmPasswordValue);
-    console.log(token);
-    console.log(sha1);
-    console.log(hash);
-    fetch(URL + `/api/Features/Resetpassword?token=${token}&password=${hash}`, {
+
+    fetch(URL + `/api/Features/Resetpassword?token=${user}&password=${hash}`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -96,7 +94,7 @@ class ForgotPassword extends Component {
             </div>
           </div>
 
-          <div className="center-login">
+          <div className="centre-div input-label">
             <div className="input-label  reset-password-textbox">
               <input
                 type="text"

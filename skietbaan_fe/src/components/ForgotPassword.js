@@ -79,8 +79,8 @@ class ForgotPassword extends Component {
             </div>
           </div>
 
-          <div className="center-login reset-password-center">
-            <div className="spacing-login  forgot-password-textbox">
+          <div className="centre-div input-label">
+            <div className="forgot-password-textbox">
               <input
                 type="text"
                 name="usernameValue"
@@ -97,7 +97,8 @@ class ForgotPassword extends Component {
               <label className="forgot-password-error">
                 {this.state.emailValue.length !== 0
                   ? this.state.isSent
-                  : this.state.isSent === "user not registered"
+                  : this.state.isSent === "user not registered" ||
+                    this.state.isSent.startsWith("Email Sent To:")
                   ? this.setState({ isSent: "" })
                   : this.state.isSent}
               </label>
@@ -111,7 +112,7 @@ class ForgotPassword extends Component {
               email so you can reset your password.
             </div>
 
-            <div className="button-container forgot-password-button">
+            <div className="forgot-password-button">
               <button
                 onClick={
                   this.state.emailValue.length !== 0 ? this.sendEmail : null
