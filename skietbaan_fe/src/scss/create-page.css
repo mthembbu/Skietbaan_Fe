@@ -1,136 +1,153 @@
-.page-name-create-page{
-    position: center;
-    text-align: center;
-    text-size-adjust: 25px;
-    background-size: 15px;
-    height: 56px;
-    background-color: #DC0600;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-
+.page-name-create-page {
+  position: center;
+  text-align: center;
+  text-size-adjust: 25px;
+  background-size: 15px;
+  height: 56px;
+  background-color: #dc0600;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  width: 100%;
 }
 
 .create-menu-header {
-    color: #fdfdfd;
-    font-size: 20px;
-    font-weight: bolder;
-    padding-top: 10px;
-    text-align: center;
+  color: #fdfdfd;
+  font-size: 20px;
+  font-weight: bolder;
+  padding-top: 10px;
+  text-align: center;
 }
-.create-page-container{
-    background-image: url('../components/assets/gun-image.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-
-.centre{
-    height: 100vh;
+.create-page-container {
+  background-image: url("../components/assets/gun-image.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
-.button-create-competitions{
-    height: 42px;
-    width: 150px;
-    border-radius: 42px;
-    background-color: #fdfdfd;
-    border: none;
-    font-size: 16px;
-    font-family: helvetica;
-    font-weight: 300;
-    color: #6F839E;
-    margin-top: 12px;
+.centre {
+  height: 100vh;
 }
 
-.button-create-members{
-    height: 42px;
-    width: 150px;
-    border-radius: 42px;
-    background-color: #fdfdfd;
-    border: none;
-    font-size: 16px;
-    font-family: helvetica;
-    font-weight: 300;
-    color: #6F839E;
-    margin-top: 12px;
+.button-create-competitions {
+  height: 42px;
+  width: 150px;
+  border-radius: 42px;
+  background-color: #fdfdfd;
+  border: none;
+  font-size: 16px;
+  font-family: helvetica;
+  font-weight: 300;
+  color: #6f839e;
+  margin-top: 12px;
 }
 
-.button-create-groups{
-    height: 42px;
-    width: 150px;
-    border-radius: 42px;
-    background-color: #fdfdfd;
-    border: none;
-    font-size: 16px;
-    font-family: helvetica;
-    font-weight: 300;
-    color: #6F839E;
-    margin-top: 12px;
+.button-create-members {
+  height: 42px;
+  width: 150px;
+  border-radius: 42px;
+  background-color: #fdfdfd;
+  border: none;
+  font-size: 16px;
+  font-family: helvetica;
+  font-weight: 300;
+  color: #6f839e;
+  margin-top: 12px;
 }
 
-.button-view-competitions{
-    height: 42px;
-    width: 81px;
-    border-radius: 21px;
-    border: 1px #fdfdfd solid;
-    opacity: unset;
-    color: #fdfdfd;
-    background-color: transparent;
-    font-size: 16px;
-    font-family: helvetica;
-    font-weight: 300;
-    margin-top: 12px;
+.button-create-groups {
+  height: 42px;
+  width: 150px;
+  border-radius: 42px;
+  background-color: #fdfdfd;
+  border: none;
+  font-size: 16px;
+  font-family: helvetica;
+  font-weight: 300;
+  color: #6f839e;
+  margin-top: 12px;
 }
 
-.button-view-members{
-    height: 42px;
-    width: 81px;
-    border-radius: 21px;
-    border: 1px #fdfdfd solid;
-    opacity: unset;
-    color: #fdfdfd;
-    background-color: transparent;
-    font-size: 16px;
-    font-family: helvetica;
-    font-weight: 300;
-    margin-top: 12px;
+.button-view-competitions {
+  height: 42px;
+  width: 81px;
+  border-radius: 21px;
+  border: 1px #fdfdfd solid;
+  opacity: unset;
+  color: #fdfdfd;
+  background-color: transparent;
+  font-size: 16px;
+  font-family: helvetica;
+  font-weight: 300;
+  margin-top: 12px;
 }
 
-.button-view-groups{
-    height: 42px;
-    width: 81px;
-    border-radius: 21px;
-    border: 1px #fdfdfd solid;
-    opacity: unset;
-    color: #fdfdfd;
-    background-color: transparent;
-    font-size: 16px;
-    font-family: helvetica;
-    font-weight: 300;
-    margin-top: 12px;
+.button-view-members {
+  height: 42px;
+  width: 81px;
+  border-radius: 21px;
+  border: 1px #fdfdfd solid;
+  opacity: unset;
+  color: #fdfdfd;
+  background-color: transparent;
+  font-size: 16px;
+  font-family: helvetica;
+  font-weight: 300;
+  margin-top: 12px;
 }
 
-.buttons-create{
-    width: 50%;
-    float: left;
-    padding-top: 67px;
+.button-view-groups {
+  height: 42px;
+  width: 81px;
+  border-radius: 21px;
+  border: 1px #fdfdfd solid;
+  opacity: unset;
+  color: #fdfdfd;
+  background-color: transparent;
+  font-size: 16px;
+  font-family: helvetica;
+  font-weight: 300;
+  margin-top: 12px;
 }
 
-.buttons-view{
-    width: 50%;
-    float: right;
-    padding-top: 67px;
+.buttons-create {
+  width: 50%;
+  float: left;
+  padding-top: 67px;
 }
 
-.container-of-buttons{
-    text-align: center;
+.buttons-view {
+  width: 50%;
+  float: right;
+  padding-top: 67px;
 }
 
-.view-spacing{
-    text-align: left;
-    margin-left: 34px;
+.container-of-buttons {
+  text-align: center;
 }
 
-.create-spacing{
-    text-align: right;
-    margin-right: -15px;
+.view-spacing {
+  text-align: left;
+  margin-left: 34px;
+}
+
+.create-spacing {
+  text-align: right;
+  margin-right: -15px;
+}
+
+@media only screen and (min-width: 576px) {
+  .page-name-create-page {
+    margin-top: 56px;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+  }
+
+  .container-of-buttons {
+    margin-top: 56px;
+  }
 }

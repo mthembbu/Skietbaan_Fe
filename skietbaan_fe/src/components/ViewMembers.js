@@ -4,7 +4,6 @@ import Collapsible from 'react-collapsible';
 import { BASE_URL } from '../actions/types.js';
 import memberIcon from '../components/assets/membership-icon.png';
 import { getCookie } from '../components/cookie.js';
-import history from "./history";
 class ViewMembers extends Component {
     constructor(props) {
         super(props);
