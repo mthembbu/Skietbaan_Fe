@@ -29,10 +29,6 @@ class Groups extends Component {
 		this.selectall = this.selectall.bind(this);
 	}
 	UNSAFE_componentWillMount() {
-		if (!getCookie('token')) {
-			window.location = '/registerPage';
-		}
-
 		fetch(BASE_URL + '/api/user').then((res) => res.json()).then((data) => {
 			this.setState({
 				posts: data.map((users) => {
@@ -79,7 +75,7 @@ class Groups extends Component {
 	}
 
 	selectall() {
-		if (this.state.check == 'Select all') {
+		if (this.state.check === 'Select all') {
 			this.setState({ count: this.state.posts.length});
 			for (var i = 0; i < this.state.posts.length; i++) {
 				this.state.posts[i].highlighted = true;
@@ -95,7 +91,7 @@ class Groups extends Component {
 	}
 
 	toggleHighlight = (event) => {
-		if (this.state.posts[event].highlighted == true) {
+		if (this.state.posts[event].highlighted === true) {
 			this.state.posts[event].highlighted = false;
 			this.setState({ count: this.state.count - 1 });
 		} else {
@@ -125,11 +121,11 @@ class Groups extends Component {
 									src={post.highlighted == true ? marked : unmarked}
 									alt=""
 								/>
-								<label className={post.highlighted == true ? 'blabe' : 'blabe2'}>
-									<div className={post.highlighted == true ? 'userName-active' : 'userName'}>
+								<label className={post.highlighted === true ? 'blabe' : 'blabe2'}>
+									<div className={post.highlighted === true ? 'userName-active' : 'userName'}>
 										{post.username}
 									</div>
-									<div className={post.highlighted == true ? 'emails-active' : 'email'}>
+									<div className={post.highlighted === true ? 'emails-active' : 'email'}>
 										{post.email}
 									</div>
 								</label>
@@ -157,14 +153,14 @@ class Groups extends Component {
 							/>
 						</div>
 						<div className="switchAll" onClick={this.selectall}>All
-							<Switch checked={this.state.count== 0?false:null || this.state.count==this.state.posts.length?true:null} />
+							<Switch checked={this.state.count=== 0?false:null || this.state.count==this.state.posts.length?true:null} />
 						</div>
 					</div>
 				</div>
 				<div className="scrollbar" data-simplebar data-simplebar-auto-hide="false">
 					{postitems}
 				</div>
-				{this.state.count == 0 ? null : (
+				{this.state.count === 0 ? null : (
 					<label className="bottom-label">
 						<button className="create-group" onClick={this.handleOnClick}>
 							Create Group

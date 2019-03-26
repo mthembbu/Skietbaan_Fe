@@ -30,8 +30,13 @@ class ForgotPassword extends Component {
     });
   }
 
-  goToLogin() {
-    history.push("/Login");
+  componentDidMount() {
+    var res = document.cookie;
+    var multiple = res.split(";");
+    for (var i = 0; i < multiple.length; i++) {
+      var key = multiple[i].split("=");
+      document.cookie = key[0] + " =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
+    }
   }
 
   toggleNavbar() {
@@ -59,6 +64,7 @@ class ForgotPassword extends Component {
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
+    window.location = "/Login";
   }
 
   hanldeReseting() {
@@ -66,7 +72,7 @@ class ForgotPassword extends Component {
     this.state.confirmPasswordValue.length !== 0 &&
     this.state.passwordValue.length !== 0
       ? this.state.confirmPasswordValue === this.state.passwordValue
-        ? this.resetPassword() || this.goToLogin()
+        ? this.resetPassword()
         : null
       : null;
   }
