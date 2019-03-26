@@ -362,12 +362,6 @@ class LeaderboardPage extends Component {
                                     </tr>
                                 </tbody>
                             </table>
-                            {/* <Collapsible trigger={<div > div 1</div>}>
-                       <div >
-                           div 2
-                       </div>
-                    </Collapsible> */}
-
                         </td>
                     </tr>
                 </table>}>
@@ -383,27 +377,6 @@ class LeaderboardPage extends Component {
                     </Table>
                 </Collapsible>
                 <div className="underline"></div>
-                {/* <td className="rank-icon-col">
-                    {this.top3Display(post)}
-                </td>
-                <td className="rank-labels-col">
-                    <table className="head-table-labels">
-                        <tbody>
-                            <tr>
-                                <td className="extra-name-col">{post.username}</td>
-                                <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{post.best != 0 ? post.best : '--'}</td>
-                                <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>{post.average != 0 ? post.average : '--'}</td>
-                                <td className={this.state.selectedRank == "total" ? "score-col-active" : "score-col"}>{post.total != 0 ? post.total : '--'}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                     <Collapsible trigger={<div > div 1</div>}>
-                       <div >
-                           div 2
-                       </div>
-                    </Collapsible>
-                    
-                </td> */}
             </tr>
 
         ));
