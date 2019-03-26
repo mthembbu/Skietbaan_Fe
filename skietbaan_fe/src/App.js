@@ -58,7 +58,6 @@ class App extends Component {
 							<Route path="/createComp" component={CreateComp} exact />
 							<Route path="/notify" component={notification} exact />
 							<Route path="/documents" component={Documents} exact />
-							<Route path="/viewmembers" component={ViewMembers} exact />
 							<Route path="/profile" component={ProfileLanding} exact />
 							<Route path="/AddMembersGroup" component={AddMembersGroup} exact />
 							<Route path="/requirements" component={requirements} exact />
