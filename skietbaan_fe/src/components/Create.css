@@ -1,189 +1,251 @@
 @media only screen and (min-width: 576px) {
-  .page-name-create-all {
-    position: center;
-    text-align: center;
-    text-size-adjust: 25px;
-    background-size: 15px;
-    height: 56px;
-    background-color: #dc0600;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    margin-top: 56px;
-    top: 0;
-    z-index: 100;
-    position: fixed;
-    width: 100%;
-  }
+	.page-name-create-all {
+		position: center;
+		text-align: center;
+		text-size-adjust: 25px;
+		background-size: 15px;
+		height: 56px;
+		background-color: #dc0600;
+		border-bottom-left-radius: 20px;
+		border-bottom-right-radius: 20px;
+		margin-top: 56px;
+		top: 0;
+		z-index: 100;
+		position: fixed;
+		width: 100%;
+	}
 
-  .create-all-menu-header {
-    color: #fdfdfd;
-    font-size: 20px;
-    font-weight: bolder;
-    padding-top: 10px;
-    text-align: center;
-  }
+	.create-all-page-content {
+		margin-top: 133px;
+		height: 994px;
+	}
 
-  .create-all-page-content {
-    margin-top: 133px;
-    height: 994px;
-  }
+	.create-feature-buttons {
+		position: center;
+		text-align: center;
+		width: 66%;
+		text-align: center;
+		margin-left: 17%;
+		margin-top: 133px;
+	}
 
-  .create-feature-buttons {
-    position: center;
-    text-align: center;
-    width: 66%;
-    text-align: center;
-    margin-left: 17%;
-    margin-top: 133px;
-  }
+	.create-all-groups-btn {
+		background-color: transparent;
+		color: #555555;
+		font-size: 14px;
+		font-weight: 300;
+		border: none;
+	}
 
-  .create-all-groups-btn {
-    background-color: transparent;
-    color: #555555;
-    font-size: 14px;
-    font-weight: 300;
-    border: none;
-  }
+	.create-all-competitions-btn {
+		background-color: transparent;
+		color: #555555;
+		font-size: 14px;
+		font-weight: 300;
+		border: none;
+	}
 
-  .create-all-competitions-btn {
-    background-color: transparent;
-    color: #555555;
-    font-size: 14px;
-    font-weight: 300;
-    border: none;
-  }
+	.create-all-members-btn {
+		background-color: transparent;
+		color: #555555;
+		font-size: 14px;
+		font-weight: 300;
+		border: none;
+	}
 
-  .create-all-members-btn {
-    background-color: transparent;
-    color: #555555;
-    font-size: 14px;
-    font-weight: 300;
-    border: none;
-  }
+	.create-all-btn1 {
+		position: center;
+		text-align: center;
+		width: 33%;
+		float: left;
+	}
 
-  .create-all-btn1 {
-    position: center;
-    text-align: center;
-    width: 33%;
-    float: left;
-  }
+	.create-all-btn2 {
+		position: center;
+		text-align: center;
+		width: 33%;
+		float: left;
+	}
 
-  .create-all-btn2 {
-    position: center;
-    text-align: center;
-    width: 33%;
-    float: left;
-  }
-
-  .create-all-btn3 {
-    position: center;
-    text-align: center;
-    width: 33%;
-    float: left;
-  }
+	.create-all-btn3 {
+		position: center;
+		text-align: center;
+		width: 33%;
+		float: left;
+	}
+}
+.div-container {
+	width: 100%;
+	height: 67px;
 }
 
 @media only screen and (max-width: 575px) {
-  .page-name-create-all {
-    position: center;
-    text-align: center;
-    text-size-adjust: 25px;
-    background-size: 15px;
-    height: 56px;
-    background-color: #dc0600;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    top: 0;
-    z-index: 100;
-    position: fixed;
-    width: 100%;
-  }
-  /*tu css*/
-.button-text:focus{
-  outline: none;
-}
-.button-fill:focus{
-  outline: none;
-}
-  .create-all-menu-header {
-    color: #fdfdfd;
-    font-size: 20px;
-    font-weight: bolder;
-    padding-top: 10px;
-    text-align: center;
-  }
-  /* new stuff */
-  .create-all-page-content {
-    margin-top: 77px;
-  }
+	.page-name-create-all {
+		position: center;
+		text-align: center;
+		text-size-adjust: 25px;
+		background-size: 15px;
+		height: 56px;
+		background-color: #dc0600;
+		border-bottom-left-radius: 20px;
+		border-bottom-right-radius: 20px;
+		top: 0;
+		z-index: 100;
+		position: fixed;
+		width: 100%;
+	}
+	/*tu css*/
+	.button-text:focus {
+		outline: none;
+	}
+	.button-fill:focus {
+		outline: none;
+	}
+	/* .create-all-top-nav-bar{
+  height: 184px;
+} */
+	.create-all-menu-header {
+		color: #fdfdfd;
+		font-size: 20px;
+		font-weight: bolder;
+		padding-top: 10px;
+		text-align: center;
+	}
+	/* new stuff */
+	.create-all-page-content {
+		margin-top: 77px;
+	}
 
-  .create-feature-buttons {
-    position: center;
-    text-align: center;
-    width: 100%;
-    text-align: center;
-    margin-top: 77px;
-  }
+	.create-feature-buttons {
+		position: center;
+		text-align: center;
+		width: 100%;
+		text-align: center;
+		margin-top: 77px;
+	}
 
-  .create-all-groups-btn {
-    background-color: transparent;
-    color: #555555;
-    font-size: 14px;
-    font-weight: 300;
-    border: none;
-  }
+	.create-all-groups-btn {
+		background-color: transparent;
+		color: #555555;
+		font-size: 14px;
+		font-weight: 300;
+		border: none;
+	}
 
-  .create-all-competitions-btn {
-    background-color: transparent;
-    color: #555555;
-    font-size: 14px;
-    font-weight: 300;
-    border: none;
-  }
+	.create-all-competitions-btn {
+		background-color: transparent;
+		color: #555555;
+		font-size: 14px;
+		font-weight: 300;
+		border: none;
+	}
 
-  .create-all-members-btn {
-    background-color: transparent;
-    color: #555555;
-    font-size: 14px;
-    font-weight: 300;
-    border: none;
-  }
+	.create-all-members-btn {
+		background-color: transparent;
+		color: #555555;
+		font-size: 14px;
+		font-weight: 300;
+		border: none;
+	}
 
-  .create-all-btn1 {
-    position: center;
-    text-align: center;
-    width: 33%;
-    float: left;
-  }
+	.create-all-btn1 {
+		position: center;
+		text-align: center;
+		width: 33%;
+		float: left;
+	}
 
-  .create-all-btn2 {
-    position: center;
-    text-align: center;
-    width: 33%;
-    float: left;
-  }
+	.create-all-btn2 {
+		position: center;
+		text-align: center;
+		width: 33%;
+		float: left;
+	}
 
-  .create-all-btn3 {
-    position: center;
-    text-align: center;
-    width: 33%;
-    float: left;
-  }
-}
-
-.create-all-buttons-container {
-  width: 97%;
+	.create-all-btn3 {
+		position: center;
+		text-align: center;
+		width: 33%;
+		float: left;
+	}
 }
 
 #removeRightButtonPadding {
-  padding-right: 0px;
+	padding-right: 0px;
 }
 
 #removeLeftButtonPadding {
-  padding-left: 0px;
+	padding-left: 0px;
 }
 
 #padMiddleButton {
-
-  text-align: center;
+	text-align: center;
 }
+
+/*the new css of the file*/
+.create-main-container {
+	width: 100%;
+}
+.page-name-bar {
+	height: 67px;
+	background: #be0000;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	display: flex;
+}
+
+.first-buttons-container {
+	width: 97%;
+}
+.create-top-nav {
+  height: 184px;
+}
+.create-all-menu {
+	color: #fdfdfd;
+	font-size: 20px;
+	font-weight: bolder;
+	margin-left: 42px;
+	margin-top: 19px;
+}
+
+.buttons-squire-rectangle {
+	height: 32px;
+	width: 100%;
+	border: 1px solid #be0000;
+  border-radius: 18px;
+}
+
+.buttons-row .col {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.unstyle-create-active{
+  background-color: #be0000;
+	color: white;
+	border-bottom-left-radius: 18px;
+	border-top-left-radius: 18px;
+	border: none;
+}
+.unstyle-create{
+  background-color: transparent;
+  color: black;
+	border-bottom-left-radius: 18px;
+	border-top-left-radius: 18px;
+	border: none;
+}
+.unstyle-view-active{
+  background-color: #be0000;
+	color: white;
+	border-bottom-right-radius: 18px;
+	border-top-right-radius: 18px;
+	border: none;
+}
+.unstyle-view{
+  background-color: transparent;
+  color: black;
+	border-bottom-right-radius: 18px;
+	border-top-right-radius: 18px;
+	border: none;
+}
+
