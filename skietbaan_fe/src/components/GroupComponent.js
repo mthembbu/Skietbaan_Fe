@@ -24,6 +24,4 @@ const mapStateToProps = (state) => ({
 	page: state.posts.page
 });
 
-// const mapDispatchToProps = {};
-
 export default connect(mapStateToProps,{pageState})(GroupComponent);
