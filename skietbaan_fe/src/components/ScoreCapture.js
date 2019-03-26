@@ -152,23 +152,23 @@ export default class search extends Component {
     this.setState({
       navbarState: !this.state.navbarState,
     })
-    var Navbar = document.querySelector(".navbar-admin");
-    if (Navbar.classList.contains("hidden")) {
-      Navbar.classList.remove("hidden");
+    var navbar = document.querySelector(".navbar-admin");
+    if (navbar.classList.contains("hidden")) {
+      navbar.classList.remove("hidden");
     }
     else {
-      Navbar.classList.add("hidden");
+      navbar.classList.add("hidden");
     }
   }
 
   toggleNavbar2() {
-    var Navbar = document.querySelector(".navbar-admin");
+    var navbar = document.querySelector(".navbar-admin");
     if (this.state.last_size > document.body.clientHeight) {
-      Navbar.setAttribute('hidden', 'true');
+      navbar.setAttribute('hidden', 'true');
     }
     else {
 
-      Navbar.removeAttribute('hidden');
+      navbar.removeAttribute('hidden');
     }
   }
 
