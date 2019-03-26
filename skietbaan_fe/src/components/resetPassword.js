@@ -9,7 +9,8 @@ class ForgotPassword extends Component {
     super(props);
     this.state = {
       passwordValue: "",
-      confirmPasswordValue: ""
+      confirmPasswordValue: "",
+      returnValue: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.resetPassword = this.resetPassword.bind(this);
@@ -59,12 +60,13 @@ class ForgotPassword extends Component {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(this.state.confirmPasswordValue)
+      body: JSON.stringify(user)
     })
-      .then(function(response) {})
-      .then(function(data) {})
-      .catch(function(data) {});
-    window.location = "/Login";
+      .then(res => res.json())
+      .then(data => this.setState({ returnValue: data }));
+
+    history.push("/login");
+    window.location.reload();
   }
 
   hanldeReseting() {
