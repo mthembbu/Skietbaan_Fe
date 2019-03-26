@@ -8,404 +8,407 @@ import { Collapse } from "react-collapse";
 import history from "./history";
 
 class UserProfile extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      awardCompetitions: [],
-      hoursAward: {
-        hours: -1,
-        collapse: false
-      }
-    };
+        constructor(props){
+            super(props);
+            this.state = {
+                awardCompetitions : [],
+                hoursAward : {
+                    hours: -1,
+                },
+                collapse: false,
+                selectedCompetition : 0,
+            }
 
-    this.toggle = this.toggle.bind(this);
-  }
-
-  UNSAFE_componentWillMount() {
-    var token = getCookie("token");
-    if (token === undefined) {
-      history.push("/registerPage");
-      return;
+        this.toggle = this.toggle.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
-    /*use the remote URL*/
-    fetch(BASE_URL + "/api/awards/" + token, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json"
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        this.setState({ awardCompetitions: data });
-        if (this.state.awardCompetitions.length == 0) {
-          this.Logout();
-          history.push("/registerPage");
+    UNSAFE_componentWillMount() {
+        var token = getCookie("token");
+        if (token === undefined) {
+            history.push("/registerPage");
+            return;
         }
-      });
 
-    fetch(BASE_URL + "/api/awards/hours/" + token, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json"
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        this.setState({ hoursAward: data });
-      });
-  }
-
-  toggle() {
-    this.setState(state => ({ collapse: !state.collapse }));
-  }
-
-  animateAccuracyCircle(counter, element, index) {
-    if (counter > element.accuracy) return;
-    if (counter <= element.accuracy) {
-      var degreees = (360 * counter) / 100;
-      var activeBorder = $(`#${index}`);
-      $(`#circle${index}`).html(Math.round(counter) + "%");
-
-      if (degreees <= 180) {
-        activeBorder.css(
-          "background-image",
-          "linear-gradient(" +
-            (90 + degreees) +
-            "deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)"
-        );
-      } else {
-        activeBorder.css(
-          "background-image",
-          "linear-gradient(" +
-            (degreees - 90) +
-            "deg, transparent 50%, #EA241A 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)"
-        );
-      }
-      counter++;
-      setTimeout(() => {
-        this.animateAccuracyCircle(counter, element, index);
-      }, 80);
-    }
-  }
-
-  /*
-      This function takes the total score as string and append zeros
-      at the front if the total score has less than four digits
-  */
-  tokenize(str) {
-    var _array = [];
-    if (str == null) {
-      _array = ["0", "0", "0", "0"];
-      return _array;
-    } else {
-      var loopCount = 4 - str.length;
-      _array = str.split("");
-
-      if (loopCount > 0) {
-        for (var i = 0; i < loopCount; i++) {
-          _array.unshift("0"); //append zeros at start of array
+        /*use the remote URL*/
+        fetch(BASE_URL + "/api/awards/" + token, {
+        method: "GET",
+        headers: {
+            "content-type": "application/json"
         }
-      }
+        })
+        .then(res => res.json())
+        .then(data => {
+            this.setState({ awardCompetitions: data });
+            if (this.state.awardCompetitions.length === 0) {
+            this.logout();
+            history.push("/registerPage");
+            }
+        });
+
+        fetch(BASE_URL + "/api/awards/hours/" + token, {
+        method: "GET",
+        headers: {
+            "content-type": "application/json"
+        }
+        })
+        .then(res => res.json())
+        .then(data => {
+            this.setState({ hoursAward: data });
+        });
     }
 
-    return _array;
-  }
+    logout(){
+        var res = document.cookie;
+        var multiple = res.split(";");
+        for(var i = 0; i < multiple.length; i++) {
+            var key = multiple[i].split("=");
+            document.cookie = key[0]+" =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
+        }
+        window.location= '/login';
+        return false;
+    }
 
-  setDigits(str, isCompetitionLocked) {
-    var _array = this.tokenize(str);
-    return (
-      <div className="lay-horizontal">
-        <div
-          className={
-            isCompetitionLocked
-              ? "box box-grey-background"
-              : "box box-white-background"
-          }
-        >
-          <div className={isCompetitionLocked ? "grey-text" : "black-text"}>
-            <label className="box-label-text">{_array[0]}</label>
-          </div>
-        </div>
-        <div
-          className={
-            isCompetitionLocked
-              ? "box box-grey-background"
-              : "box box-white-background"
-          }
-        >
-          <div className={isCompetitionLocked ? "grey-text" : "black-text"}>
-            <label className="box-label-text">{_array[1]}</label>
-          </div>
-        </div>
-        <div
-          className={
-            isCompetitionLocked
-              ? "box box-grey-background"
-              : "box box-white-background"
-          }
-        >
-          <div className={isCompetitionLocked ? "grey-text" : "black-text"}>
-            <label className="box-label-text">{_array[2]}</label>
-          </div>
-        </div>
-        <div
-          className={
-            isCompetitionLocked
-              ? "box box-grey-background"
-              : "box box-white-background"
-          }
-        >
-          <div className={isCompetitionLocked ? "grey-text" : "black-text"}>
-            <label className="box-label-text">{_array[3]}</label>
-          </div>
-        </div>
-      </div>
-    );
-  }
+    toggle() {
+        this.setState(state => ({ collapse: !state.collapse }));
+    }
 
-  renderLockedIcon() {
-    return (
-      <div className="locked-icon" style={{ display: "inline" }}>
-        <img
-          src={require("../resources/awardIcons/locked-icon.png")}
-          alt="lock-icon"
-        />
-      </div>
-    );
-  }
+    animateAccuracyCircle(counter, element, index) {
+        if (counter > element.accuracy) return;
+        if (counter <= element.accuracy) {
+        var degreees = (360 * counter) / 100;
+        var activeBorder = $(`#${index}`);
+        $(`#circle${index}`).html(Math.round(counter) + "%");
 
-  renderActiveCircle(index) {
-    return (
-      <div id={index} className="active-border">
-        <div id={`circle${index}`} className="circle">
-          <label className="accuracy-text">0%</label>
-        </div>
-      </div>
-    );
-  }
+        if (degreees <= 180) {
+            activeBorder.css(
+            "background-image",
+            "linear-gradient(" +
+                (90 + degreees) +
+                "deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)"
+            );
+        } else {
+            activeBorder.css(
+            "background-image",
+            "linear-gradient(" +
+                (degreees - 90) +
+                "deg, transparent 50%, #EA241A 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)"
+            );
+        }
+        counter++;
+        setTimeout(() => {
+            this.animateAccuracyCircle(counter, element, index);
+        }, 80);
+        }
+    }
 
-  renderBulletIcons() {
-    return (
-      <div className="bullet-img-scale bullet-padding-right">
-        <img
-          src={require("../resources/awardIcons/bullet.png")}
-          alt="bullet image"
-        />
-      </div>
-    );
-  }
+    /*
+        This function takes the total score as string and append zeros
+        at the front if the total score has less than four digits
+    */
 
-  renderRedLockIcon() {
-    return (
-      <div className="lock-img-scale">
-        <img
-          src={require("../resources/awardIcons/red-locked-icon.png")}
-          alt="lock image"
-        />
-      </div>
-    );
-  }
+    animateAccuracyCircle(counter, element, index){
+        if(this.state.collapse) return;
+        if(counter > element.accuracy) return;
+        if(counter <= element.accuracy){
+            var degreees = (360 * counter) / 100;
+            var activeBorder = $(`#${index}`);
+            $(`#circle${index}`).html(Math.round(counter)+"%");
+            
+            if (degreees<=180){
+                activeBorder.css('background-image','linear-gradient(' + (90 + degreees) + 
+                                    'deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');
+            }
+            else{
+                activeBorder.css('background-image','linear-gradient(' + (degreees - 90) + 
+                                'deg, transparent 50%, #EA241A 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');
+            }
+            counter++;
+            setTimeout(() => {
+                this.animateAccuracyCircle(counter, element, index)
+            }, 80)
+        }
+    }
+    
 
-  competitionsStat(element, index) {
-    return (
-      <div
-        className="shooting-award push-shooting-award-bottom text-color"
-        key={index}
-      >
-        <Row>
-          <Col>
-            <Row className="center-block-content">
-              <Col>
-                <div>
-                  <label className="competition-name-size">
-                    {element.competitionName}
-                  </label>
+    renderLockedIcon(){
+        return(
+            <div className="locked-icon">
+                <img src={require("../resources/awardIcons/grey-locked-icon.png")} alt="lock-icon" />
+            </div>
+        )
+    }
+
+    renderActiveCircle(element,index){
+        return(
+            <div id={index} className="active-border">
+                <div id={`circle${index}`} className="circle">
+                    <label className="accuracy-text">0%</label>
                 </div>
-              </Col>
-            </Row>
-            <Row className="push-bottom-67px">
-              <Col>
-                <div className="rectangle lay-horizontal">
-                  <Row className="inherit-width">
-                    <Col>
-                      <div className="accuracy-text-align">
-                        <label className="accuracy-label">Accuracy</label>
-                      </div>
-                      <div className="circle-bigger">
-                        {!element.isCompetitionLocked
-                          ? this.renderActiveCircle(index)
-                          : this.renderRedLockIcon()}
-                      </div>
-                      <Row className="center-block-content">
-                        <Col className="center-icons-col">
-                          <div className="lay-horizontal scale-img">
-                            <img
-                              src={
-                                !element.isCompetitionLocked &&
-                                element.accuracyAward.gold
-                                  ? require("../resources/awardIcons/gold-icon.png")
-                                  : require("../resources/awardIcons/locked-icon.png")
-                              }
-                              alt="gold award"
-                            />
-                            <img
-                              src={
-                                !element.isCompetitionLocked &&
-                                element.accuracyAward.silver
-                                  ? require("../resources/awardIcons/silver-icon.png")
-                                  : require("../resources/awardIcons/locked-icon.png")
-                              }
-                              alt="silver award"
-                            />
-                            <img
-                              src={
-                                !element.isCompetitionLocked &&
-                                element.accuracyAward.bronze
-                                  ? require("../resources/awardIcons/bronze-icon.png")
-                                  : require("../resources/awardIcons/locked-icon.png")
-                              }
-                              alt="bronze award"
-                            />
-                          </div>
-                        </Col>
-                      </Row>
-                    </Col>
-                    <Col>
-                      <div className="float-right">
-                        <div>
-                          <label className="total-label">Total</label>
-                        </div>
-                        <div className="circle-bigger">
-                          {!element.isCompetitionLocked
-                            ? this.renderBulletIcons()
-                            : null}
-                          <div>
-                            {!element.isCompetitionLocked ? (
-                              <label className="total-text">
-                                {element.total}
-                              </label>
-                            ) : (
-                              this.renderRedLockIcon()
-                            )}
-                          </div>
-                          {!element.isCompetitionLocked
-                            ? this.renderBulletIcons()
-                            : null}
-                        </div>
-                        <Row className="center-block-content">
-                          <Col className="center-icons-col">
-                            <div className="lay-horizontal scale-img">
-                              <img
-                                src={
-                                  !element.isCompetitionLocked &&
-                                  element.totalAward.gold
-                                    ? require("../resources/awardIcons/gold-icon.png")
-                                    : require("../resources/awardIcons/locked-icon.png")
-                                }
-                                alt="locked award"
-                              />
-                              <img
-                                src={
-                                  !element.isCompetitionLocked &&
-                                  element.totalAward.silver
-                                    ? require("../resources/awardIcons/silver-icon.png")
-                                    : require("../resources/awardIcons/locked-icon.png")
-                                }
-                                alt="silver award"
-                              />
-                              <img
-                                src={
-                                  !element.isCompetitionLocked &&
-                                  element.totalAward.bronze
-                                    ? require("../resources/awardIcons/bronze-icon.png")
-                                    : require("../resources/awardIcons/locked-icon.png")
-                                }
-                                alt="bronze award"
-                              />
-                            </div>
-                          </Col>
-                        </Row>
-                      </div>
-                    </Col>
-                  </Row>
-                </div>
-              </Col>
-            </Row>
-          </Col>
-          <div>{this.animateAccuracyCircle(1, element, index)}</div>
-        </Row>
-      </div>
-    );
-  }
+                <div>{this.animateAccuracyCircle(1, element, index)}</div>
+            </div>
+        )
+    }
 
-  renderHoursIcons() {
-    return (
-      <div className="lay-horizontal scale-img center-block-content">
-        <img
-          src={
-            this.state.hoursAward.gold
-              ? require("../resources/awardIcons/gold-icon.png")
-              : require("../resources/awardIcons/locked-icon.png")
-          }
-          alt="gold award"
-        />
-        <img
-          src={
-            this.state.hoursAward.silver
-              ? require("../resources/awardIcons/silver-icon.png")
-              : require("../resources/awardIcons/locked-icon.png")
-          }
-          alt="silver award"
-        />
-        <img
-          src={
-            this.state.hoursAward.bronze
-              ? require("../resources/awardIcons/bronze-icon.png")
-              : require("../resources/awardIcons/locked-icon.png")
-          }
-          alt="bronze award"
-        />
-      </div>
-    );
-  }
+    renderRedLockIcon(){
+        return(
+            //TODO: find a better solution for removing background image after the animateAccuracyCircle
+            //function is called (remove inline styling)
+            <div className="lock-img-scale" style={{backgroundImage : "none"}}>
+                <img src={require("../resources/awardIcons/red-locked-icon.png")} alt="lock image"></img>
+            </div>
+        )
+    }
 
-  renderAllCompetitionsStats() {
-    let renderArray = [];
-    this.state.awardCompetitions.forEach((element, index) => {
-      renderArray.push(this.competitionsStat(element, index));
-    });
+    renderMedalIcon(){
+        return(
+            <div className="medal-img">
+                <img src={require("../resources/awardIcons/medal.png")}></img>
+            </div>
+        )
+    }
+
+    renderAllCompetitionsStats(){
+        let renderArray = []
+        this.state.awardCompetitions.forEach((element, index) => {
+            renderArray.push(this.competitionsStat(element, index))
+        })
+
+        return renderArray;
+    }
+
+    setSelectedCompetition(index){
+        this.setState({selectedCompetition : index})
+        this.toggle();
+    }
+
+    selectCompetition(element, index){
+        return(  
+            <div key={index}>
+                <Row>
+                    <Col>
+                        <button className={this.state.selectedCompetition === index ?
+                             "button-style competition-button-text button-style-active" : 
+                             "button-style competition-button-text button-style-inactive"}
+                             onClick={() => this.setSelectedCompetition(index)}>
+                            {element.competitionName}
+                        </button>
+                    </Col>
+                </Row>
+            </div>
+        )
+    }
+
+    renderCompetitionList(){
+        let renderArray = []
+        this.state.awardCompetitions.forEach((element, index) => {
+            renderArray.push(this.selectCompetition(element, index))
+        })
 
     return renderArray;
   }
 
-  render() {
-    return (
-      <div className="my-container">
-        <Container>
-          <Row>
-            <Col />
-          </Row>
-          <Row>
-            <Col>
-              <div className="compName-text">
-                <a onClick={this.toggle}>
-                  {this.state.awardCompetitions.length > 0
-                    ? this.state.awardCompetitions[0].competitionName.toUpperCase()
-                    : null}
-                </a>
-                {this.state.awardCompetitions.length > 0 ? (
-                  <Collapse isOpened={true}>
-                    <p className="competition-name-text">asfpwawfpasfqpf</p>
-                  </Collapse>
-                ) : null}
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    );
-  }
+    renderAccuracyCircle(element, index){
+        return(
+            <div>
+                <div className="pad-right-25px">
+                    <label className="font-size-14px red-text award-type-label">ACCURACY</label>
+                </div>
+                <div className="circle-bigger">
+                    {!element.isCompetitionLocked ?
+                        this.renderActiveCircle(element,index) : this.renderRedLockIcon(index)}
+                </div>
+            </div>
+        );
+    }
+
+    renderTotalCircle(element, index){
+        return(
+            <div>
+                <div className="width-98px">
+                    <label className="font-size-14px red-text award-type-label">TOTAL SCORE</label>
+                </div>
+                <div className="circle-bigger">
+                    <div>
+                        {!element.isCompetitionLocked ? 
+                            <label className="total-text">{element.total}</label> : this.renderRedLockIcon(index)}
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    renderBestInMonth(){
+        return(
+            <div className="grey-text pad-bottom-16px font-size-14px">
+                {this.state.awardCompetitions[this.state.selectedCompetition].bestInMonth.toUpperCase()}
+            </div>
+        )
+    }
+
+    render() {
+        return (
+            <div className="award-container">
+                {this.state.awardCompetitions.length > 0 ? //only render when the data has arrived from backend
+                <Container className="remove-right-padding">
+                    <Row>
+                        <Col></Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <div className="competition-name-text pad-bottom-16px">
+                                <a onClick={this.toggle} className="lay-horizontal center-content">
+                                    <div className="push-right-5px">
+                                        {this.state.awardCompetitions[this.state.selectedCompetition]
+                                        .competitionName.toUpperCase()}
+                                    </div>
+                                    <div className="down-triangle-img-scale">
+                                        <img src={require("../resources/awardIcons/down-triangle.png")} alt="down-triangle">
+                                        </img>
+                                    </div>
+                                </a>
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            {this.state.awardCompetitions[this.state.selectedCompetition].bestInMonth.startsWith("Best") ?
+                                this.renderBestInMonth() : null}
+                        </Col>
+                    </Row>
+                    <Row className="center-content competition-buttons-container">
+                        <Collapse isOpened={this.state.collapse}>
+                            <div className="grey-text select-competition-font">Select Competition</div>
+                            {this.renderCompetitionList()}
+                            <a className="scale-arrowupicon-img" onClick={() => this.toggle()}>
+                                <img src={require("../resources/awardIcons/arrowUpIcon.png")} alt="lock-icon"></img>
+                            </a>
+                        </Collapse>
+                    </Row>
+                    <Row className="awards-container">
+                        <Col xs={4}sm={4}md={4} className="push-bottom-41px">
+                            {this.renderAccuracyCircle(this.state.awardCompetitions[this.state.selectedCompetition],
+                                this.state.selectedCompetition)}
+                        </Col>
+                        <Col xs={8}sm={8}md={8}>
+                            <Row className="push-bottom-13px">
+                                <Col xs={4}sm={4}md={4}>
+                                    <label className="grey-text font-size-14px">
+                                        BRONZE</label>
+                                </Col>
+                                <Col xs={2}sm={2}md={2}>
+                                    {this.state.awardCompetitions[this.state.selectedCompetition].accuracyAward.bronze 
+                                    ? this.renderMedalIcon() : 
+                                    this.renderLockedIcon()}
+                                </Col>
+                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
+                                    <label className="red-text reached-award">
+                                        {this.state.awardCompetitions[this.state.selectedCompetition]
+                                            .accuracyAward.bronzeRequirementStatus}
+                                    </label>
+                                </Col>
+                            </Row>
+                            <Row className="push-bottom-13px">
+                                <Col xs={4}sm={4}md={4}>
+                                    <label className="grey-text font-size-14px">
+                                        SILVER</label>
+                                </Col>
+                                <Col xs={2}sm={2}md={2}>
+                                    {this.state.awardCompetitions[this.state.selectedCompetition].accuracyAward.silver 
+                                    ? this.renderMedalIcon() : 
+                                    this.renderLockedIcon()}
+                                </Col>
+                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
+                                    <label className="red-text reached-award ">
+                                        {this.state.awardCompetitions[this.state.selectedCompetition]
+                                            .accuracyAward.silverRequirementStatus}
+                                    </label>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col xs={4}sm={4}md={4}>
+                                    <label className="grey-text font-size-14px">
+                                        GOLD</label>
+                                </Col>
+                                <Col xs={2}sm={2}md={2}>
+                                    {this.state.awardCompetitions[this.state.selectedCompetition].accuracyAward.gold 
+                                    ? this.renderMedalIcon() : 
+                                    this.renderLockedIcon()}
+                                </Col>
+                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
+                                    <label className="red-text reached-award line-height-15px">
+                                        {this.state.awardCompetitions[this.state.selectedCompetition]
+                                            .accuracyAward.goldRequirementStatus}
+                                    </label>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                    <Row className="awards-container">
+                        <Col xs={4}sm={4}md={4} className="push-bottom-41px">
+                            {this.renderTotalCircle(this.state.awardCompetitions[this.state.selectedCompetition],
+                            this.state.selectedCompetition)}
+                        </Col>
+                        <Col xs={8}sm={8}md={8}>
+                            <Row className="push-bottom-13px">
+                                <Col xs={4}sm={4}md={4}>
+                                    <label className="grey-text font-size-14px">
+                                        BRONZE</label>
+                                </Col>
+                                <Col xs={2}sm={2}md={2}>
+                                    {this.state.awardCompetitions[this.state.selectedCompetition].totalAward.bronze 
+                                    ? this.renderMedalIcon() : 
+                                    this.renderLockedIcon()}
+                                </Col>
+                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
+                                    <label className="red-text reached-award">
+                                        {this.state.awardCompetitions[this.state.selectedCompetition]
+                                            .totalAward.bronzeRequirementStatus}
+                                    </label>
+                                </Col>
+                            </Row>
+                            <Row className="push-bottom-13px">
+                                <Col xs={4}sm={4}md={4}>
+                                    <label className="grey-text font-size-14px">
+                                        SILVER</label>
+                                </Col>
+                                <Col xs={2}sm={2}md={2}>
+                                    {this.state.awardCompetitions[this.state.selectedCompetition].totalAward.silver 
+                                    ? this.renderMedalIcon() : 
+                                    this.renderLockedIcon()}
+                                </Col>
+                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
+                                    <label className="red-text reached-award">
+                                        {this.state.awardCompetitions[this.state.selectedCompetition]
+                                            .totalAward.silverRequirementStatus}
+                                    </label>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col xs={4}sm={4}md={4}>
+                                    <label className="grey-text font-size-14px">
+                                        GOLD</label>
+                                </Col>
+                                <Col xs={2}sm={2}md={2}>
+                                    {this.state.awardCompetitions[this.state.selectedCompetition].totalAward.gold 
+                                    ? this.renderMedalIcon() : 
+                                    this.renderLockedIcon()}
+                                </Col>
+                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
+                                    <label className="red-text reached-award line-height-15px">
+                                        {this.state.awardCompetitions[this.state.selectedCompetition]
+                                            .totalAward.goldRequirementStatus}
+                                    </label>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </Container>
+                //only render when the data has arrived from backend
+                : null} 
+            </div>
+        )
+    }
 }
 
 export default UserProfile;

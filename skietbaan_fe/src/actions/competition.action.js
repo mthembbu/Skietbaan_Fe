@@ -1,56 +1,74 @@
-import { 
-		NEW_COMP,
-	 	FETCH_COMP,
-	  	UPDATE_COMP_STATUS,
-		URL
-	}from './types';
+import { NEW_COMP, FETCH_COMP, UPDATE_COMP_STATUS, PARTICIPANTS_PER_COMP, URL } from './types';
+import history from '../components/history';
 export const fetchcomp = () => (dispatch) => {
-	fetch(URL+ '/api/Competition/all')
-		.then((res) => res.json())
-			.then((compData) => {
-				dispatch({
-					type: FETCH_COMP,
-					payload: compData
+	fetch(URL + '/api/Competition/all').then((res) => res.json()).then((compData) => {
+		dispatch({
+			type: FETCH_COMP,
+			payload: compData
 		});
 	});
 };
-/** A method to create a new competition and posts comps data to the designated url
- */
+//fetch participants
+export const fetchParticipants = () => (dispatch) => {
+	fetch(URL + '/api/Competition/participants').then((res) => res.json()).then((participantsData) => {
+		dispatch({
+			type: PARTICIPANTS_PER_COMP,
+			payload: participantsData
+		});
+	});
+};
+
 export const createcomp = (compData) => (dispatch) => {
 	fetch(URL + '/api/Competition', {
 		method: 'POST',
 		headers: {
-			'Accept': 'application/json',
+			Accept: 'application/json',
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(compData)
-	}).then((res) =>  {if(res.ok) {return res.json();}
-						else {
-							return res.json().then(()=>{
-								throw new Error("Backend error! Status code: " +res.status);
-							});
-						}} )
-			.then((comp) =>
-				dispatch({
-					type: NEW_COMP,
-					payload: comp
-			}));
-	setTimeout(function () { window.location = "/view-comp"; }, 3000);
+	})
+		.then((res) => {
+			if (res.ok) {
+				console.log('Response status in an If(): ', res.statusText);
+				 res.json().then(() =>
+					dispatch({
+						type: NEW_COMP,
+						payload: false
+					})
+				)
+			} else {
+				res.json().then(() => {
+					dispatch({
+						type: NEW_COMP,
+						payload: true
+					})
+				});
+				
+			}
+			console.log('Final returned, Response Status: ', res.ok);
+		})
+		.catch((error) => {
+			console.log('request error => ', error);
+		});
 };
+
 /** A method to update an existing competition and posts comps data to the designated url /api/competition/{Id}*/
 export const updateByIdComp = (compData, Id) => (dispatch) => {
 	fetch(URL + '/api/Competition/' + Id, {
 		method: 'POST',
 		headers: {
-			'Accept': 'application/json',
+			Accept: 'application/json',
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(compData)
-	}).then((res) => {res.json();
-			}).then((comp) => {
-				dispatch({
-					type: UPDATE_COMP_STATUS,
-					payload: comp
+	})
+		.then((res) => {
+			res.json();
+		})
+		.then((comp) => {
+			dispatch({
+				type: UPDATE_COMP_STATUS,
+				payload: comp
 			});
 		});
 };
