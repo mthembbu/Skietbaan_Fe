@@ -35,7 +35,7 @@ export default class search extends Component {
       scoreEntered: false,
       navbarState: false,
       eventsAdded: false,
-      last_size : 0
+      lastSize : 0
 
     }
 
@@ -163,7 +163,7 @@ export default class search extends Component {
 
   toggleNavbar2() {
     var navbar = document.querySelector(".navbar-admin");
-    if (this.state.last_size > document.body.clientHeight) {
+    if (this.state.lastSize > document.body.clientHeight) {
       navbar.setAttribute('hidden', 'true');
     }
     else {
@@ -389,8 +389,8 @@ export default class search extends Component {
 
   render() {
 
-    if (this.state.last_size === 0) {
-      this.state.last_size = document.body.clientHeight; 
+    if (this.state.lastSize === 0) {
+      this.state.lastSize = document.body.clientHeight; 
       document.addEventListener('DOMContentLoaded', () => {        
         window.addEventListener("resize", () => {
             this.toggleNavbar2();
