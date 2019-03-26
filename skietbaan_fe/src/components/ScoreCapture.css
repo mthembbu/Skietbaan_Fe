@@ -225,9 +225,19 @@
     padding-top: 13%;
 }
 
-@media screen and (min-width:576px){
+@media screen and (min-height:600px){
     .submit-container{
         padding-top: 50px;
+    }
+    .competition-container{
+        height: 250px;
+    }
+}
+
+@media screen and (min-width: 480px){
+    .competition-container{
+        height: 100%;
+        overflow-y: hidden;
     }
 }
 
