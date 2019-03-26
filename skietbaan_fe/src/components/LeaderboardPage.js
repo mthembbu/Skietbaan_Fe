@@ -4,10 +4,11 @@ import { fetchleaderboadfilterdata } from '../actions/postActions';
 import { fetchleaderboadtabledata } from '../actions/postActions';
 import { updateSelectedCompetition } from '../actions/postActions';
 import { updateSelectedGroup } from '../actions/postActions';
+import Collapsible from 'react-collapsible';
 import { Collapse } from 'react-collapse';
 import { Table } from "react-bootstrap";
 import { getCookie } from './cookie.js'
-import { MDBBtn} from "mdbreact";
+import { MDBBtn } from "mdbreact";
 import '../bootstrap/LeaderboardStyle.css';
 
 class LeaderboardPage extends Component {
@@ -21,7 +22,7 @@ class LeaderboardPage extends Component {
             selectedRank: "total",
             collapseFilter: false,
             listType: 'competitions',
-            height: window.innerHeight, 
+            height: window.innerHeight,
             width: window.innerWidth,
             ranktableHeight: 500
         }
@@ -39,28 +40,31 @@ class LeaderboardPage extends Component {
         this.validatedInitialLeaderboardFilterSelection = this.validatedInitialLeaderboardFilterSelection.bind(this);
         this.updateDimensions = this.updateDimensions.bind(this);
         this.checkFilterMobile = this.checkFilterMobile.bind(this);
+        this.displayMember = this.displayMember.bind(this);
+        this.displayCompetitive = this.displayCompetitive.bind(this);
+        this.getRanktablehight = this.getRanktablehight.bind(this);
     }
     componentDidMount() {
         // Additionally I could have just used an arrow function for the binding `this` to the component...
         window.addEventListener("resize", this.updateDimensions);
-      }
+    }
     //executed when leaderboard in mounted on main app
     componentWillMount() {
         this.updateDimensions();
         //get function to get filter data from api
         this.props.fetchleaderboadfilterdata();
         this.validatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(this.state.selectedCompetition, this.state.selectedGroup,this.state.selectedRank);
+        this.getLeaderboardData(this.state.selectedCompetition, this.state.selectedGroup, this.state.selectedRank);
     }
     updateDimensions() {
         this.setState({
-          height: window.innerHeight, 
-          width: window.innerWidth,
-          ranktableHeightMobile: (this.state.height - 236),
-          ranktableHeightDesktop: (this.state.height - (193 + 0))
+            height: window.innerHeight,
+            width: window.innerWidth,
+            ranktableHeightMobile: (this.state.height - 236),
+            ranktableHeightDesktop: (this.state.height - (193 + 0))
         });
-      }
-    getLeaderboardData = (competition, group,rank) => {
+    }
+    getLeaderboardData = (competition, group, rank) => {
         let token = getCookie("token");
         var CompNum = competition + 1;
         var GroupNum = group;
@@ -75,12 +79,12 @@ class LeaderboardPage extends Component {
         }
         this.props.fetchleaderboadtabledata(filterSelection);
     }
-    checkFilterMobile(){
-        if(this.state.width<575 && this.state.collapseFilter == false){
+    checkFilterMobile() {
+        if (this.state.width < 575 && this.state.collapseFilter == false) {
             return true;
-        }else if(this.state.width>575){
+        } else if (this.state.width > 575) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -114,7 +118,7 @@ class LeaderboardPage extends Component {
         });
         this.props.updateSelectedCompetition(this.props.competitions[value].label)
         this.validatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(value, this.state.selectedGroup,this.state.selectedRank);
+        this.getLeaderboardData(value, this.state.selectedGroup, this.state.selectedRank);
     }
     setGroupValue = (value) => {
         this.setState({
@@ -126,18 +130,51 @@ class LeaderboardPage extends Component {
             this.props.updateSelectedGroup(this.props.groups[value].label);
         }
         this.validatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(this.state.selectedCompetition, value,this.state.selectedRank);
+        this.getLeaderboardData(this.state.selectedCompetition, value, this.state.selectedRank);
     }
     setSelectedRank = (value) => {
         this.setState({
             selectedRank: value
         });
-        this.getLeaderboardData(this.state.selectedCompetition, this.state.selectedGroup,value);
+        this.getLeaderboardData(this.state.selectedCompetition, this.state.selectedGroup, value);
     }
     setScoreTypeValue = (value) => {
         this.setState({
             selectedScoreType: value
         });
+    }
+    displayMember = (isMember) => {
+        if (isMember) {
+           return <div className="member-container">
+                <div className="status-icon"><img src={require('../resources/member.png')} /></div>
+                <div className="label">Member</div>
+            </div>
+        } else {
+            return  <div className="member-container">
+                <div className="status-icon"><img src={require('../resources/guest.png')} /></div>
+                <div className="label">User</div>
+            </div>
+        }
+    }
+    displayCompetitive = (isCompetitive) => {
+        if (isCompetitive) {
+            return <div className="competitive-shooter-conatiner">
+               <div className="status-icon"> <img src={require('../resources/competitive.png')} /></div>
+               <div className="label">Competition Shooter</div>
+           </div>
+        } else {
+            return <div className="competitive-shooter-conatiner">
+            <div className="status-icon"><img src={require('../resources/standard.png')} /></div>
+            <div className="label">Standard Shooter</div>
+            </div>
+        }
+    }
+    getRanktablehight(){
+        if(this.state.width <575){
+           return (this.state.ranktableHeightMobile + 80);
+        }else{
+            return this.state.ranktableHeightMobile;
+        }
     }
     getCurentUserRankNumber(rankingList) {
         if (rankingList != undefined) {
@@ -279,7 +316,7 @@ class LeaderboardPage extends Component {
         }
     }
     render() {
-        
+
         if (!getCookie("token")) {
             window.location = "/registerPage";
         }
@@ -309,7 +346,44 @@ class LeaderboardPage extends Component {
         )
         const tablebody = this.props.tableData.map((post, index) => (
             <tr className="rank-row" key={index.toString()} value={index} onChange={() => this.onChange(post.id)}>
-                <td className="rank-icon-col">
+                <Collapsible trigger={<table className="user-details-table">
+                    <tr className="user-details-row">
+                        <td className="rank-icon-col">
+                            {this.top3Display(post)}
+                        </td>
+                        <td className="rank-labels-col">
+                            <table className="head-table-labels">
+                                <tbody>
+                                    <tr>
+                                        <td className="extra-name-col">{post.username}</td>
+                                        <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{post.best != 0 ? post.best : '--'}</td>
+                                        <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>{post.average != 0 ? post.average : '--'}</td>
+                                        <td className={this.state.selectedRank == "total" ? "score-col-active" : "score-col"}>{post.total != 0 ? post.total : '--'}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            {/* <Collapsible trigger={<div > div 1</div>}>
+                       <div >
+                           div 2
+                       </div>
+                    </Collapsible> */}
+
+                        </td>
+                    </tr>
+                </table>}>
+                    <Table className="user-more-details-table">
+                        <tr className="user-more-details-row">
+                            <td className="member" >
+                            {this.displayMember(post.isMember)}
+                            </td>
+                            <td className="competitive-shooter">
+                                {this.displayCompetitive(post.isCompetitiveShooter)}
+                            </td>
+                        </tr>
+                    </Table>
+                </Collapsible>
+                <div className="underline"></div>
+                {/* <td className="rank-icon-col">
                     {this.top3Display(post)}
                 </td>
                 <td className="rank-labels-col">
@@ -323,7 +397,13 @@ class LeaderboardPage extends Component {
                             </tr>
                         </tbody>
                     </table>
-                </td>
+                     <Collapsible trigger={<div > div 1</div>}>
+                       <div >
+                           div 2
+                       </div>
+                    </Collapsible>
+                    
+                </td> */}
             </tr>
 
         ));
@@ -387,75 +467,79 @@ class LeaderboardPage extends Component {
                                     </div>
                                     <div className="row justify-content-center">
                                         <div className="closefilter">
-                                               <MDBBtn tag="a" size="lg" floating gradient="purple"
-                                                    onClick={this.onMouseClickFilter} >
-                                                    <img src={require('../resources/closefilter.png')} />
-                                                </MDBBtn>
+                                            <MDBBtn tag="a" size="lg" floating gradient="purple"
+                                                onClick={this.onMouseClickFilter} >
+                                                <img src={require('../resources/closefilter.png')} />
+                                            </MDBBtn>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </Collapse>
                         <Collapse isOpened={this.checkFilterMobile()}>
-                        <table className="ranking-table-head">
+                            <table className="ranking-table-head">
                                 <tr className="header-row2">
                                     <td className="col-empty"></td>
                                     <td colSpan="2" className="grouping-label-col">
                                         {this.state.selectedGroup == -1 ? "Overall rank" : (this.props.groups.length != 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
                                     </td>
-                                    <td colSpan="1" className={this.state.selectedRank == "best" ? "active-label-col" : "inactive-label-col"} onClick={()=>this.setSelectedRank("best")}>
+                                    <td colSpan="1" className={this.state.selectedRank == "best" ? "active-label-col" : "inactive-label-col"} onClick={() => this.setSelectedRank("best")}>
                                         Best
                                        </td>
-                                    <td colSpan="1" className={this.state.selectedRank == "average" ? "active-label-col" : "inactive-label-col"} onClick={()=>this.setSelectedRank("average")}>
+                                    <td colSpan="1" className={this.state.selectedRank == "average" ? "active-label-col" : "inactive-label-col"} onClick={() => this.setSelectedRank("average")}>
                                         Average
                                         </td>
-                                        <td colSpan="1" className={this.state.selectedRank == "total" ? "active-label-col" : "inactive-label-col"} onClick={()=>this.setSelectedRank("total")}>
+                                    <td colSpan="1" className={this.state.selectedRank == "total" ? "active-label-col" : "inactive-label-col"} onClick={() => this.setSelectedRank("total")}>
                                         Total
                                         </td>
                                 </tr>
-                        </table>
-                        <div className="ranking-table-section" style={{height: this.state.ranktableHeightMobile+"px"}}>
-                            <table className="ranking-table" >
-                                <tbody>
-                                    {tablebody}
-                                </tbody>
                             </table>
-                        </div>
+                            <div className="ranking-table-section"  style={{ height: this.getRanktablehight() + "px" }}>
+                                <table className="ranking-table" >
+                                    <tbody>
+                                        {tablebody}
+                                    </tbody>
+                                </table>
+                            </div>
                         </Collapse>
                     </div>
                 </div>
                 {/* Current User Section*/}
-                 <div className="userWrapper" >
-                 <Collapse isOpened={this.checkFilterMobile()}>
-                    <div className="row justify-content-center">
-                        <div className="col-sm-8 text-left">
-                            <div className="current-user-table-section">
-                                <table className="ranking-table">
-                                    <tbody>
-                                        <tr className="rank-row">
-                                            <td className="rank-icon-col">
-                                                {this.top3Display(this.props.userResults)}
-                                            </td>
-                                            <td className="rank-labels-col">
-                                                <table className="head-table-labels">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td className="extra-name-col">{this.props.userResults == null ? 'Something went wrong' : (this.props.userResults != null ? this.props.userResults.username : '--')}</td>
-                                                            <td className={this.state.selectedRank == "total" ? "score-col-active" : "score-col"}>{this.props.userResults == null ? '--' : (this.props.userResults.total != 0 ? this.props.userResults.total : '--')}</td>
-                                                            <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>{this.props.userResults == null ? '--' : (this.props.userResults.average != 0 ? this.props.userResults.average : '--')}</td>
-                                                            <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{this.props.userResults == null ? '--' : (this.props.userResults.best != 0 ? this.props.userResults.best : '--')}</td>
-                                                        </tr>
-                                                    </tbody>
+                <div className="userWrapper" >
+                    <Collapse isOpened={this.checkFilterMobile()}>
+                        <div className="row justify-content-center">
+                            <div className="col-sm-8 text-left">
+                                <div className="current-user-table-section">
+                                    <table className="ranking-table">
+                                        <tbody>
+                                            <tr className="rank-row">
+                                                <table className="user-details-table">
+                                                    <tr className="user-details-row">
+                                                        <td className="rank-icon-col">
+                                                            {this.top3Display(this.props.userResults)}
+                                                        </td>
+                                                        <td className="rank-labels-col">
+                                                            <table className="head-table-labels">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td className="extra-name-col">{this.props.userResults == null ? 'Something went wrong' : (this.props.userResults != null ? this.props.userResults.username : '--')}</td>
+                                                                        <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{this.props.userResults == null ? '--' : (this.props.userResults.best != 0 ? this.props.userResults.best : '--')}</td>
+                                                                        <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>{this.props.userResults == null ? '--' : (this.props.userResults.average != 0 ? this.props.userResults.average : '--')}</td>
+                                                                        <td className={this.state.selectedRank == "total" ? "score-col-active" : "score-col"}>{this.props.userResults == null ? '--' : (this.props.userResults.total != 0 ? this.props.userResults.total : '--')}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
                                                 </table>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </Collapse>
-                </div> 
+                </div>
 
             </div>
         );
