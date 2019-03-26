@@ -120,9 +120,3 @@
     border-radius: 18px;
     border: none;
 }
-
-@media only screen and (min-width: 576px) {
-    .pad-top-150px{
-        margin-top: 56px;
-    }
-  }

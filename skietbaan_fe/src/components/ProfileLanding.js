@@ -91,7 +91,7 @@ export default class ProfileLanding extends Component {
                     </Row>
                 </div>
                 </div>
-                <div className={this.state.selectedButton == 1 ? "content-container pad-top-150px" :
+                <div className={this.state.selectedButton == 1 ? "content-container" :
                     this.state.selectedButton == 2 ? "content-container pad-top-50px" : "content-container"}>
                     {this.state.selectedButton == 1 ? <UserProfile/> : 
                         this.state.selectedButton == 2 ? <Documents/> : 

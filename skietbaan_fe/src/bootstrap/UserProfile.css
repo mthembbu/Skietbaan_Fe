@@ -18,6 +18,20 @@
     justify-content: center;
 }
 
+.make-cursor-point{
+    cursor: pointer;
+}
+
+.scale-medal-img img{
+    width: 31px;
+    height: 52px;  
+}
+
+.scale-medal-img{
+    padding-top: 6px;
+    padding-left: 1px;
+}
+
 .button-style{
     height: 36px;	
     width: 180px;	
@@ -78,8 +92,8 @@
     font-weight: 300;
 }
 
-.pad-top-150px{
-    padding-top: 150px;
+.pad-top-135px{
+    padding-top: 135px;
 }
 
 .pad-right-25px{
@@ -171,8 +185,8 @@
     margin-bottom: 5px;
 }
 
-.push-bottom-13px{
-    margin-bottom: 13px;
+.push-bottom-21px{
+    margin-bottom: 21px;
 }
 
 .push-bottom-27px{
@@ -219,6 +233,18 @@
     box-shadow: 0 6px 10px -6px rgba(0,0,0,0.5);
 }
 
+.circle-smaller{
+    position: relative;
+    top: 5px;
+    left: 5px;
+    width: 64px;
+    height: 64px;
+    border-radius: 100%;
+    background-color: #F3F4F9;
+    -webkit-box-shadow: 0 6px 10px -6px rgba(0,0,0,0.5);
+    box-shadow: 0 6px 10px -6px rgba(0,0,0,0.5);
+}
+
 .active-border{
     position: relative;
     text-align: center;
@@ -230,12 +256,6 @@
 
 .light-weight{
     font-weight: lighter;
-}
-
-.lay-horizontal img{
-    width: 22px; 
-    height: 22px;
-    margin-right: 3px;
 }
 
 .float-left{
@@ -372,7 +392,11 @@
 }
 
 .accuracy-text{
-    font-size: 20px;
+    font-size: 19px;
+    font-weight: bold;
+    padding-top: 24px;
+    padding-left: 6px;
+    color: #EA241A;
 }
 
 .accuracy-label{
