@@ -64,7 +64,6 @@ class ForgotPassword extends Component {
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
-    window.location = "/Login";
   }
 
   hanldeReseting() {
