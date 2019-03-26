@@ -68,7 +68,7 @@ class ForgotPassword extends Component {
     /*ToDo remove the reload and find better way for naving after reseting password */
     setTimeout(function() {
       window.location = "/login";
-    }, 5000);
+    }, 2000);
   }
 
   hanldeReseting() {
