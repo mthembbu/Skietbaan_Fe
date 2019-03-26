@@ -42,7 +42,7 @@ class LeaderboardPage extends Component {
         this.checkFilterMobile = this.checkFilterMobile.bind(this);
         this.displayMember = this.displayMember.bind(this);
         this.displayCompetitive = this.displayCompetitive.bind(this);
-        this.getRankTableheight = this.getRankTableHeight.bind(this);
+        this.getRankTableHeight = this.getRankTableHeight.bind(this);
     }
     componentDidMount() {
         // Additionally I could have just used an arrow function for the binding `this` to the component...
