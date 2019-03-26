@@ -17,7 +17,7 @@ export const fetchParticipants = () => (dispatch) => {
 		});
 	});
 };
-
+//create comp function
 export const createcomp = (compData) => (dispatch) => {
 	fetch(URL + '/api/Competition', {
 		method: 'POST',
