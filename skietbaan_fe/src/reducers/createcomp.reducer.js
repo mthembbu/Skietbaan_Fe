@@ -1,10 +1,17 @@
 import {NEW_COMP, 
 		FETCH_COMP,
-		UPDATE_COMP_STATUS } from '../actions/types';
+		UPDATE_COMP_STATUS,
+		PARTICIPANTS_PER_COMP 
+	} 
+	from '../actions/types';
 const initialState = {
 	allComps: [],
 	selectedComp: {},
-	updatedComp:{}
+	updatedComp:{},
+	participants:[],
+	dict : {},
+	isExist: false,
+	
 };
 /** A function to detect the state change*/
 export default function(state = initialState, action){
@@ -13,7 +20,7 @@ export default function(state = initialState, action){
 		case NEW_COMP:
 			return {
 				...state,
-				selectedComp: action.payload
+				isExist: action.payload
 			};
 		case FETCH_COMP:
 			return {
@@ -24,7 +31,12 @@ export default function(state = initialState, action){
 			return{
 				...state,
 				updatedComp: action.payload
-			}	
+			}
+		case PARTICIPANTS_PER_COMP:
+		return{
+				...state,
+				dict : action.payload	
+		}		
 		default :
 			return state;	
 	}
