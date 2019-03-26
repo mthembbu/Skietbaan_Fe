@@ -7,6 +7,7 @@ import {
   CREATEGROUP,
   PAGE,
   EMPTY,
+  NEWGROUPSTATE,
   EDITGROUPUSERS,
   UPDATE_SELECTED_COMPETITION,
   UPDATE_SELECTED_GROUP,
@@ -73,6 +74,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         existing: action.payload
+      };
+    case NEWGROUPSTATE:
+      return {
+        ...state,
+        groupsList: action.payload
       };
 
     case EDITGROUPUSERS:

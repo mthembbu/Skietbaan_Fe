@@ -4,7 +4,7 @@ export function validatePassword(str) {
 }
     
 export function validateEmail(email) {
-    const re = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{1,3}(.[a-zA-Z]{1,3})?$/;
+    const re = /^\w+@[a-zA-Z_A-Za-z0-9]+?\.[A-Za-z0-9]{1,3}(.[a-zA-Z]{1,3})?$/;
     return re.test(String(email));
 }
     
