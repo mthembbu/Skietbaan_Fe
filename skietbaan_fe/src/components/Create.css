@@ -25,6 +25,7 @@
 
   .create-all-page-content {
     margin-top: 133px;
+    height: 994px;
   }
 
   .create-feature-buttons {
@@ -97,7 +98,13 @@
     position: fixed;
     width: 100%;
   }
-
+  /*tu css*/
+.button-text:focus{
+  outline: none;
+}
+.button-fill:focus{
+  outline: none;
+}
   .create-all-menu-header {
     color: #fdfdfd;
     font-size: 20px;
@@ -177,6 +184,6 @@
 }
 
 #padMiddleButton {
-  padding-right: 3px;
+
   text-align: center;
 }

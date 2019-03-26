@@ -5,6 +5,11 @@ import { URL } from "../actions/types.js";
 import { Row, Col } from "react-bootstrap";
 import RegisterMember from "../components/RegisterMember";
 import ViewMembers from "../components/ViewMembers";
+import CreateComp from "../components/CreateComp";
+// import ViewMembers from "../components/ViewMembers";
+import AddGroup from "../components/AddGroup";
+import ViewComp from "../components/ViewComp";
+import GroupComponent from "../components/GroupComponent";
 import { timingSafeEqual } from "crypto";
 
 class Create extends Component {
@@ -102,6 +107,7 @@ class Create extends Component {
   render() {
     return (
       <div className="create-container">
+
         <div class="page-name-create-all">
           <label className="create-all-menu-header">Create</label>
         </div>
@@ -251,6 +257,8 @@ class Create extends Component {
             ) : null}
           </div>
         </div>
+        {(this.state.selectedButton===1 && this.state.selectedButtonCreateViewGroups===1)?<AddGroup />:(this.state.selectedButton===1 && this.state.selectedButtonCreateViewGroups===2)?<GroupComponent />:null}
+        {(this.state.selectedButton===2 && this.state.selectedButtonCreateViewCompetitions===1)?<CreateComp/>:(this.state.selectedButton===2 && this.state.selectedButtonCreateViewCompetitions===2)?<ViewComp />:null}
       </div>
     );
   }
