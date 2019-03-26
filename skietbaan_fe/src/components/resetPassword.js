@@ -64,9 +64,12 @@ class ForgotPassword extends Component {
     })
       .then(res => res.json())
       .then(data => this.setState({ returnValue: data }));
-    history.push("/login");
+
     /*ToDo remove the reload and find better way for naving after reseting password */
-    window.location.reload();
+    setTimeout(function() {
+      window.location = "/login";
+      window.location.reload();
+    }, 5000);
   }
 
   hanldeReseting() {
