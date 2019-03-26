@@ -13,7 +13,7 @@ class CreateComp extends Component {
 			Name: '',
 			BestScoresNumber: '',
 			Status: true,
-			isEmpty: false,
+			isExist: false
 		};
 		//binding the onChange method to this commponents
 		this.onChange = this.onChange.bind(this);
@@ -27,15 +27,12 @@ class CreateComp extends Component {
 	/** A method that detects the change in the change in thw textfield */
 	onChange(e) {
 		this.setState({ [e.target.name]: e.target.value });
-		if (this.state.Name === '' && (this.state.BestScoresNumber === '')) {
+		this.setState({ isExist: false });
+		if (this.state.Name === null && this.state.BestScoresNumber === null) {
 			document.getElementById('submit-btn').disabled = true;
 		} else {
 			document.getElementById('submit-btn').disabled = false;
 		}
-	}
-
-	onChangeInt(e) {
-		this.setState({ [e.target.name]: e.target.value });
 	}
 	/** A method that validates the numbers only type of input*/
 	validate(evt) {
@@ -47,11 +44,12 @@ class CreateComp extends Component {
 		e.preventDefault();
 		//calling the method to create a post => compData for the create competition
 		const compData = {
-			Name: this.state.Name,
+			Name: this.state.Name /** Don't forget to change to lowercase to avoid case sensitivity conflicts*/,
 			BestScoresNumber: this.state.BestScoresNumber,
 			Status: true
 		};
 		this.props.createcomp(compData);
+		this.setState({ isExist: this.props.isExist });
 	}
 	render() {
 		if(!getCookie("token")){
@@ -59,21 +57,7 @@ class CreateComp extends Component {
         }
 		return (
 			<div>
-				<div className="view-page">
-					<div className="view-header">
-						<div className="image-comtainer">
-							<img
-								src={require('../components/assets/back-button-white.png')}
-								onClick={this.onClick}
-								className="go-back-to-create-page"
-								alt=""
-							/>
-						</div>
-						<div>
-							<label className="label-create-competitions">Create Competition</label>
-						</div>
-					</div>
-				</div>
+				
 				<div class="create-comp-container">
 					<Form onSubmit={this.onSubmit}>
 						<div className="containers-input">
@@ -88,8 +72,10 @@ class CreateComp extends Component {
 									autoComplete="off"
 									autoCorrect="off"
 									value={this.state.Name}
-									onChange={this.onChange}/>
+									onChange={this.onChange}
+								/>
 							</div>
+							<div className = {this.props.isExist ? "error-comp-message": "hidden"}>Competition Already Exists</div>
 						</div>
 						<div className="comp-input-control">
 							<div>
@@ -108,22 +94,23 @@ class CreateComp extends Component {
 								autoComplete="off"
 								autoCorrect="off"
 								value={this.state.BestScoresNumber}
-								onChange={this.onChange}/>
-						</div>
+								onChange={this.onChange}
+							/>
+						</div> 
 						<div className="comp-submit-btn-container">
 							<button
 								variant="secondary"
 								type="submit"
 								id="submit-btn"
-								className={
-									this.state.Name === '' && this.state.BestScoresNumber === '' ?
-									 ('inactive-comp-submit-btn comp-submit-btn ') : ('comp-submit-btn')}>
-								Create Competition
+								className={this.props.isExist && this.props.Name === null ? 
+									(' comp-success-submit-btn') : ('comp-submit-btn')}>
+								{this.props.isExist? 'Competition Created' : 'Create Competition'}
 							</button>
 						</div>
 					</Form>
 				</div>
 			</div>
+			
 		);
 	}
 }
@@ -131,6 +118,7 @@ CreateComp.propTypes = {
 	createcomp: propTypes.func.isRequired
 };
 const mapStatesToprops = (state) => ({
-	newComp: state.compOBJ.selectedComp
+	newComp: state.compOBJ.selectedComp,
+	isExist: state.compOBJ.isExist
 });
-export default connect(null, { createcomp })(CreateComp);
+export default connect(mapStatesToprops, { createcomp })(CreateComp);
