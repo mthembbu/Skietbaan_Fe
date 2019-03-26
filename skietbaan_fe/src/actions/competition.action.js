@@ -8,7 +8,7 @@ export const fetchcomp = () => (dispatch) => {
 		});
 	});
 };
-
+//fetch participants
 export const fetchParticipants = () => (dispatch) => {
 	fetch(URL + '/api/Competition/participants').then((res) => res.json()).then((participantsData) => {
 		dispatch({
@@ -17,7 +17,7 @@ export const fetchParticipants = () => (dispatch) => {
 		});
 	});
 };
-//create comp function
+
 export const createcomp = (compData) => (dispatch) => {
 	fetch(URL + '/api/Competition', {
 		method: 'POST',
