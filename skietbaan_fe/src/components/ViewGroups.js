@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
-import history from './history';
 import {
 	passId,
 	getName,
@@ -15,7 +14,7 @@ import { BASE_URL } from '../actions/types';
 import Switch from '@material-ui/core/Switch';
 import group from './GroupImages/Group.png';
 import PropTypes from 'prop-types';
-import { getCookie } from '../components/cookie.js';
+
 
 class ViewGroups extends Component {
 	constructor(props) {
