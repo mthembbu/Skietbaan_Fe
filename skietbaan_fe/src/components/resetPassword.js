@@ -40,7 +40,7 @@ class ForgotPassword extends Component {
   }
 
   goToLogin() {
-    history.push("/Login");
+    window.location = "/Login";
   }
 
   toggleNavbar() {

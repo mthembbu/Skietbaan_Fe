@@ -23,9 +23,6 @@ class AddGroup extends Component {
 	}
 
 	UNSAFE_componentWillMount() {
-		if (!getCookie("token")) {
-			window.location = "/registerPage";
-			}
 		fetch(BASE_URL + '/api/groups').then((res) => res.json()).then((data) =>
 			this.setState({
 				groups: data.map((names) => names.name)
@@ -38,7 +35,7 @@ class AddGroup extends Component {
 	}
 
 	onClick() {
-		if (this.state.groups.indexOf((this.state.name).toLowerCase()) == -1) {
+		if (this.state.groups.indexOf(this.state.name.toLowerCase()) === -1) {
 			if (this.state.name.length != 0) {
 				this.props.getName(this.state.name);
 				history.push('/Groups');
@@ -75,12 +72,14 @@ class AddGroup extends Component {
 							autoCorrect="off"
 							placeholder="Group Name"
 						/>
-						{this.state.exist == true ? null : (
+						{this.state.exist === true ? null : (
 							<label className="errorMsg">Group Name Already Exists</label>
 						)}
 					</div>
 					<div className="add-container">
-						<button className="add" onClick={this.onClick}>ADD USERS</button>
+						<button className="add" onClick={this.onClick}>
+							ADD USERS
+						</button>
 					</div>
 				</div>
 			</div>
