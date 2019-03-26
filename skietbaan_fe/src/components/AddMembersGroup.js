@@ -63,7 +63,7 @@ class AddMembersGroup extends Component {
 	}
 
 	toggleHighlight = (event) => {
-		if (this.props.existing[event].highlighted == true) {
+		if (this.props.existing[event].highlighted === true) {
 			this.props.existing[event].highlighted = false;
 			this.setState({ count: this.state.count - 1 });
 		} else {
@@ -84,7 +84,7 @@ class AddMembersGroup extends Component {
 	};
 
 	selectall() {
-		if (this.state.check == 'Select all') {
+		if (this.state.check === 'Select all') {
 			this.setState({ count: this.props.existing.length });
 			for (var i = 0; i < this.props.existing.length; i++) {
 				this.props.existing[i].highlighted = true;
@@ -119,11 +119,11 @@ class AddMembersGroup extends Component {
 									src={post.highlighted ? marked : unmarked}
 									alt=""
 								/>
-								<label className={post.highlighted == true ? 'blabe' : 'blabe2'}>
-									<div className={post.highlighted == true ? 'userName-active' : 'userName'}>
+								<label className={post.highlighted === true ? 'blabe' : 'blabe2'}>
+									<div className={post.highlighted === true ? 'userName-active' : 'userName'}>
 										{post.username}
 									</div>
-									<div className={post.highlighted == true ? 'emails-active' : 'email'}>
+									<div className={post.highlighted === true ? 'emails-active' : 'email'}>
 										{post.email}
 									</div>
 								</label>
@@ -166,7 +166,7 @@ class AddMembersGroup extends Component {
 								checked={
 									this.state.count === 0 ? (
 										false
-									) : null || this.state.count == this.props.existing.length ? (
+									) : null || this.state.count === this.props.existing.length ? (
 										true
 									) : null
 								}

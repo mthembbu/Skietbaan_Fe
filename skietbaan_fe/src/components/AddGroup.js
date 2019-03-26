@@ -35,7 +35,7 @@ class AddGroup extends Component {
 	}
 
 	onClick() {
-		if (this.state.groups.indexOf(this.state.name.toLowerCase()) == -1) {
+		if (this.state.groups.indexOf(this.state.name.toLowerCase()) === -1) {
 			if (this.state.name.length != 0) {
 				this.props.getName(this.state.name);
 				history.push('/Groups');
@@ -72,7 +72,7 @@ class AddGroup extends Component {
 							autoCorrect="off"
 							placeholder="Group Name"
 						/>
-						{this.state.exist == true ? null : (
+						{this.state.exist === true ? null : (
 							<label className="errorMsg">Group Name Already Exists</label>
 						)}
 					</div>
