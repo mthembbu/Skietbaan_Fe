@@ -42,7 +42,7 @@ class LeaderboardPage extends Component {
         this.checkFilterMobile = this.checkFilterMobile.bind(this);
         this.displayMember = this.displayMember.bind(this);
         this.displayCompetitive = this.displayCompetitive.bind(this);
-        this.getRanktablehight = this.getRanktablehight.bind(this);
+        this.getRankTableheight = this.getRankTableHeight.bind(this);
     }
     componentDidMount() {
         // Additionally I could have just used an arrow function for the binding `this` to the component...
@@ -169,7 +169,7 @@ class LeaderboardPage extends Component {
             </div>
         }
     }
-    getRanktablehight(){
+    getRankTableHeight(){
         if(this.state.width <575){
            return (this.state.ranktableHeightMobile + 80);
         }else{
@@ -467,7 +467,7 @@ class LeaderboardPage extends Component {
                                         </td>
                                 </tr>
                             </table>
-                            <div className="ranking-table-section"  style={{ height: this.getRanktablehight() + "px" }}>
+                            <div className="ranking-table-section"  style={{ height: this.getRankTableHeight() + "px" }}>
                                 <table className="ranking-table" >
                                     <tbody>
                                         {tablebody}
