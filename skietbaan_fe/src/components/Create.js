@@ -23,7 +23,7 @@ class Create extends Component {
     };
 
     this.groupsPage = this.groupsPage.bind(this);
-    this.comptetitionsPage = this.comptetitionsPage.bind(this);
+    this.comptetitionsPage = this.competetitionsPage.bind(this);
     this.membersPage = this.membersPage.bind(this);
     this.createGroups = this.createGroups.bind(this);
     this.viewGroups = this.viewGroups.bind(this);
@@ -35,7 +35,7 @@ class Create extends Component {
     this.setState({ selectedButton: 1 });
   }
 
-  comptetitionsPage() {
+  competetitionsPage() {
     this.setState({ selectedButton: 2 });
   }
 
@@ -141,7 +141,7 @@ class Create extends Component {
                           ? "unstyle-button-active btn-block button-fill"
                           : "unstyle-button btn-block button-fill"
                       }
-                      onClick={this.comptetitionsPage}
+                      onClick={this.competetitionsPage}
                     >
                       <label className="button-text">COMPETITIONS</label>
                     </button>
