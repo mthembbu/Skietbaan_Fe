@@ -248,7 +248,7 @@ class UserProfile extends Component {
 
     render() {
         return (
-            <div className="my-container">
+            <div className="award-container">
                 {this.state.awardCompetitions.length > 0 ? //only render when the data has arrived from backend
                 <Container className="remove-right-padding">
                     <Row>
