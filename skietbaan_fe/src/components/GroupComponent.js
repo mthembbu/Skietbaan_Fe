@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import ViewGroups from './ViewGroups';
 import EditGroup from './EditGroup';
 import AddMembersGroup from './AddMembersGroup';
+import { pageState } from '../actions/postActions';
 
 export class GroupComponent extends Component {
-	static propTypes = {
-		prop: PropTypes
-	};
-
+	
+componentDidMount(){
+	this.props.pageState(0);
+}
 	render() {
-
 		return (
 			<div>
 				{this.props.page === 0 ? <ViewGroups /> : this.props.page === 1 ? <EditGroup /> : <AddMembersGroup />}
@@ -24,6 +24,4 @@ const mapStateToProps = (state) => ({
 	page: state.posts.page
 });
 
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(GroupComponent);
+export default connect(mapStateToProps,{pageState})(GroupComponent);

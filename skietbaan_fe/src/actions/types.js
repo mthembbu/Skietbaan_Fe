@@ -33,6 +33,7 @@ export const NEW_POST = "NEW_POST";
 export const NEW_COMP = "NEW_COMP";
 export const FETCH_COMP = "FETCH_COMP";
 export const UPDATE_COMP_STATUS = "UPDATE_COMP_STATUS";
+export const PARTICIPANTS_PER_COMP = 'PARTICIPANTS_PER_COMP';
 export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
 
 //leaderboard types
@@ -43,9 +44,6 @@ export const UPDATE_SELECTED_GROUP = "UPDATE_SELECTED_GROUP";
 
 //groups types and constants
 export const URL = "https://api.skietbaan.retrotest.co.za";
-export const URLADD = "https://api.skietbaan.retrotest.co.za/api/groups/add";
-export const URLUSER = "https://api.skietbaan.retrotest.co.za/api/user";
-export const URLGROUP = "https://api.skietbaan.retrotest.co.za/api/groups";
 export const UPDATENAME = "UPDATENAME";
 export const UPDATE_GROUPNAME = "UPDATE_GROUPNAME";
 export const CREATEGROUP = "CREATEGROUP";
@@ -58,7 +56,7 @@ export const FETCH_GROUPS = "FETCH_GROUPS";
 export const ADDMEMBERS = "ADDMEMBERS";
 export const GROUPDICT = "GROUPDICT";
 export const EMPTY = "EMPTY";
-
+export const NEWGROUPSTATE = "NEWGROUPSTATE";
 //notification types
 export const FETCH_NOTIFICATION = "FETCH_NOTIFICATION";
 export const UPDATE_IS_READ = "UPDATE_IS_READ";

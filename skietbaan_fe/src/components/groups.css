@@ -521,6 +521,12 @@
 	width: 75%;
 }
 
+@media screen and (max-height: 26px){
+	.center-labels{
+		margin-top: 0px;
+	}
+}
+
 .plus-next{
 	float: right;
 	margin-top: 5px;
