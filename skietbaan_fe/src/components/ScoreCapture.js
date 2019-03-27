@@ -50,7 +50,6 @@ export default class search extends Component {
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.toggleNavbar2 = this.toggleNavbar2.bind(this);
     this.toggleIcon = this.toggleIcon.bind(this);
-    this.toggleNavbarKeyboard = this.toggleNavbarKeyboard.bind(this);
   }
 
   handleScore({ target }) {
@@ -165,10 +164,11 @@ export default class search extends Component {
     var navbar = document.querySelector(".navbar-admin");
     if (this.state.lastSize > document.body.clientHeight) {
       navbar.setAttribute('hidden', 'true');
+      this.toggleNavbar();
     }
     else {
-
       navbar.removeAttribute('hidden');
+      this.toggleNavbar();
     }
   }
 
@@ -370,23 +370,6 @@ export default class search extends Component {
     this.toggleNavbar();
   }
 
-  toggleNavbarKeyboard() {
-    
-    if (document.window === undefined) {
-      document.addEventListener('DOMContentLoaded', () => {        
-        window.addEventListener("resize", () => {
-            this.toggleNavbar2();
-        })
-      });
-    }else{
-      document.addEventListener('DOMContentLoaded', () => {        
-        window.addEventListener("resize", () => {
-            this.toggleNavbar2();
-        })
-      });
-    }
-  }
-
   render() {
 
     if (this.state.lastSize === 0) {
@@ -397,7 +380,6 @@ export default class search extends Component {
         })
       });
     }
-    this.toggleNavbarKeyboard();
     const stateOne = this.state.showCamera || this.state.imageTaken
     let competitionItem = [];
     if (this.state.competitionsList && this.state.competitionsList.length > 0) {
@@ -435,16 +417,17 @@ export default class search extends Component {
                 </div>
             </div>
             
-            <div className="centre-label">
+            <div className="centre-labels">
               <label className="label-competition">Select Competition</label>
             </div>
             <div className="competition-container">
               {competitionItem}
-              <div className="error-message-container">
+             
+            </div>
+            <div className="error-message-container">
               <div className={this.state.validCompetition === false && this.state.validScore === true
                 ? "invalid-comp" : "hidden"}>Select Competition</div>
               </div>
-            </div>
             <div className="submit-container">
               <div className={this.state.imageTaken || this.state.showCamera
                 ? "hidden" : "submit-button-elements"}>

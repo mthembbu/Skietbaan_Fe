@@ -127,6 +127,7 @@
     text-align: center;
     font-size: 16px;
     font-weight: 100;
+    position: absolute;
 }
 
 .invalid{
@@ -188,7 +189,7 @@
     font-weight: bold;
 }
 
-.centre-label{
+.centre-labels{
     width:100%;
     font-size: 25px;
     text-align: center;

@@ -18,14 +18,15 @@ class UserProfile extends Component {
                 collapse: false,
                 selectedCompetition : 0,
             }
-
+        
         this.toggle = this.toggle.bind(this);
         this.logout = this.logout.bind(this);
+        this.timeouts = [];
     }
 
     UNSAFE_componentWillMount() {
         var token = getCookie("token");
-        if (token === undefined) {
+        if (token == undefined) {
             history.push("/registerPage");
             return;
         }
@@ -40,10 +41,6 @@ class UserProfile extends Component {
         .then(res => res.json())
         .then(data => {
             this.setState({ awardCompetitions: data });
-            if (this.state.awardCompetitions.length === 0) {
-            this.logout();
-            history.push("/registerPage");
-            }
         });
 
         fetch(BASE_URL + "/api/awards/hours/" + token, {
@@ -73,43 +70,12 @@ class UserProfile extends Component {
         this.setState(state => ({ collapse: !state.collapse }));
     }
 
-    animateAccuracyCircle(counter, element, index) {
-        if (counter > element.accuracy) return;
-        if (counter <= element.accuracy) {
-        var degreees = (360 * counter) / 100;
-        var activeBorder = $(`#${index}`);
-        $(`#circle${index}`).html(Math.round(counter) + "%");
-
-        if (degreees <= 180) {
-            activeBorder.css(
-            "background-image",
-            "linear-gradient(" +
-                (90 + degreees) +
-                "deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)"
-            );
-        } else {
-            activeBorder.css(
-            "background-image",
-            "linear-gradient(" +
-                (degreees - 90) +
-                "deg, transparent 50%, #EA241A 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)"
-            );
-        }
-        counter++;
-        setTimeout(() => {
-            this.animateAccuracyCircle(counter, element, index);
-        }, 80);
-        }
-    }
-
     /*
         This function takes the total score as string and append zeros
         at the front if the total score has less than four digits
     */
-
     animateAccuracyCircle(counter, element, index){
         if(this.state.collapse) return;
-        if(counter > element.accuracy) return;
         if(counter <= element.accuracy){
             var degreees = (360 * counter) / 100;
             var activeBorder = $(`#${index}`);
@@ -117,19 +83,20 @@ class UserProfile extends Component {
             
             if (degreees<=180){
                 activeBorder.css('background-image','linear-gradient(' + (90 + degreees) + 
-                                    'deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');
+                                'deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');    
             }
             else{
+                
                 activeBorder.css('background-image','linear-gradient(' + (degreees - 90) + 
                                 'deg, transparent 50%, #EA241A 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');
             }
             counter++;
-            setTimeout(() => {
+            const timeout = setTimeout(() => {
                 this.animateAccuracyCircle(counter, element, index)
             }, 80)
+            this.timeouts.push(timeout);
         }
     }
-    
 
     renderLockedIcon(){
         return(
@@ -145,7 +112,7 @@ class UserProfile extends Component {
                 <div id={`circle${index}`} className="circle">
                     <label className="accuracy-text">0%</label>
                 </div>
-                <div>{this.animateAccuracyCircle(1, element, index)}</div>
+                {this.animateAccuracyCircle(1, element, index)}
             </div>
         )
     }
@@ -205,8 +172,11 @@ class UserProfile extends Component {
             renderArray.push(this.selectCompetition(element, index))
         })
 
-    return renderArray;
-  }
+        return renderArray;
+    }
+
+    //TODO: CHANGE THE PADDING-TOP WHEN ACCURACY IS ZERO.
+    //DOESNT SHOW THE CORRECT ACCURACY FOR THE LAST COMPETITION IN THE LIST
 
     renderAccuracyCircle(element, index){
         return(
@@ -216,7 +186,8 @@ class UserProfile extends Component {
                 </div>
                 <div className="circle-bigger">
                     {!element.isCompetitionLocked ?
-                        this.renderActiveCircle(element,index) : this.renderRedLockIcon(index)}
+                        (element.accuracy === 0 ? <label className="accuracy-text">0%</label> : this.renderActiveCircle(element,index))
+                        : this.renderRedLockIcon(index)}
                 </div>
             </div>
         );
@@ -246,18 +217,28 @@ class UserProfile extends Component {
         )
     }
 
+    componentWillUnmount() {
+        this.timeouts.forEach(timeout => clearTimeout(timeout));
+    }
+
     render() {
         return (
-            <div className="award-container">
+            <div className="award-container pad-top-128px">
                 {this.state.awardCompetitions.length > 0 ? //only render when the data has arrived from backend
                 <Container className="remove-right-padding">
-                    <Row>
-                        <Col></Col>
+                    <Row className="push-bottom-21px">
+                        <Col className="lay-horizontal center-content">
+                            <div className="circle-smaller">
+                                <div className="scale-medal-img">
+                                    <img src={require("../resources/awardIcons/medal.png")}></img>
+                                </div>
+                            </div>
+                        </Col>
                     </Row>
                     <Row>
                         <Col>
                             <div className="competition-name-text pad-bottom-16px">
-                                <a onClick={this.toggle} className="lay-horizontal center-content">
+                                <a onClick={this.toggle} className="lay-horizontal center-content make-cursor-point">
                                     <div className="push-right-5px">
                                         {this.state.awardCompetitions[this.state.selectedCompetition]
                                         .competitionName.toUpperCase()}
@@ -280,7 +261,7 @@ class UserProfile extends Component {
                         <Collapse isOpened={this.state.collapse}>
                             <div className="grey-text select-competition-font">Select Competition</div>
                             {this.renderCompetitionList()}
-                            <a className="scale-arrowupicon-img" onClick={() => this.toggle()}>
+                            <a className="scale-arrowupicon-img" onClick={this.toggle}>
                                 <img src={require("../resources/awardIcons/arrowUpIcon.png")} alt="lock-icon"></img>
                             </a>
                         </Collapse>
