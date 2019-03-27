@@ -21,8 +21,6 @@ class UserProfile extends Component {
         
         this.toggle = this.toggle.bind(this);
         this.logout = this.logout.bind(this);
-        this.add = this.add.bind(this);
-
         this.timeouts = [];
     }
 
@@ -72,10 +70,6 @@ class UserProfile extends Component {
         this.setState(state => ({ collapse: !state.collapse }));
     }
 
-    add(id){
-        this.timerIds.push(id);
-    }
-
     /*
         This function takes the total score as string and append zeros
         at the front if the total score has less than four digits
@@ -86,11 +80,13 @@ class UserProfile extends Component {
             var degreees = (360 * counter) / 100;
             var activeBorder = $(`#${index}`);
             $(`#circle${index}`).html(Math.round(counter)+"%");
+            
             if (degreees<=180){
                 activeBorder.css('background-image','linear-gradient(' + (90 + degreees) + 
-                                    'deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');
+                                'deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');    
             }
             else{
+                
                 activeBorder.css('background-image','linear-gradient(' + (degreees - 90) + 
                                 'deg, transparent 50%, #EA241A 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');
             }
@@ -98,8 +94,10 @@ class UserProfile extends Component {
             const timeout = setTimeout(() => {
                 this.animateAccuracyCircle(counter, element, index)
             }, 80)
-
             this.timeouts.push(timeout);
+            if(element.accuracy <= 1){
+                this.setState({state : this.state});
+            }
         }
     }
 
@@ -177,8 +175,11 @@ class UserProfile extends Component {
             renderArray.push(this.selectCompetition(element, index))
         })
 
-    return renderArray;
-  }
+        return renderArray;
+    }
+
+    //TODO: CHANGE THE PADDING-TOP WHEN ACCURACY IS ZERO.
+    //DOESNT SHOW THE CORRECT ACCURACY FOR THE LAST COMPETITION IN THE LIST
 
     renderAccuracyCircle(element, index){
         return(
@@ -188,7 +189,7 @@ class UserProfile extends Component {
                 </div>
                 <div className="circle-bigger">
                     {!element.isCompetitionLocked ?
-                        element.accuracy == 0 ? <label className="accuracy-text">0%</label> : this.renderActiveCircle(element,index)
+                        (element.accuracy === 0 ? <label className="accuracy-text">0%</label> : this.renderActiveCircle(element,index))
                         : this.renderRedLockIcon(index)}
                 </div>
             </div>
@@ -225,7 +226,7 @@ class UserProfile extends Component {
 
     render() {
         return (
-            <div className="award-container pad-top-135px">
+            <div className="award-container pad-top-128px">
                 {this.state.awardCompetitions.length > 0 ? //only render when the data has arrived from backend
                 <Container className="remove-right-padding">
                     <Row className="push-bottom-21px">

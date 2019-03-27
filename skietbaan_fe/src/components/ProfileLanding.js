@@ -43,7 +43,7 @@ export default class ProfileLanding extends Component {
     render() {
         return (
             <div>
-                <div className={this.state.selectedButton == 1 ? "fix-top pad-bottom-20px"
+                <div className={this.state.selectedButton == 1 ? "fix-top pad-bottom-13px"
                     : this.state.selectedButton == 2 ? "fix-top pad-bottom-0px" : "fix-top"}>
                 <Row className="top-bar-rectangle">
                     <Col className="lay-horizontal">

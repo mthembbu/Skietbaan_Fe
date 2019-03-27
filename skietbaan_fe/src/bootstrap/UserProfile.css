@@ -92,8 +92,8 @@
     font-weight: 300;
 }
 
-.pad-top-135px{
-    padding-top: 135px;
+.pad-top-128px{
+    padding-top: 128px;
 }
 
 .pad-right-25px{
@@ -360,6 +360,7 @@
     margin-top: 16px;
 }
 
+
 .resize-back-icon{
     padding-top: 10px;
     padding-left: 10px;
@@ -394,7 +395,6 @@
 .accuracy-text{
     font-size: 19px;
     font-weight: bold;
-    padding-top: 24px;
     padding-left: 6px;
     color: #EA241A;
 }
