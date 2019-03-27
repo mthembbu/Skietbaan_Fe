@@ -5,12 +5,12 @@ import { BASE_URL } from '../actions/types';
 import unmarked from './GroupImages/Oval.png';
 import deleteS from './GroupImages/deleteS.png';
 import whiteBin from './GroupImages/whiteBin.png';
+import seleteAll from './GroupImages/seleteAll.png';
 import blackBin from './GroupImages/blackBin.png';
 import whitePlus from './GroupImages/whitePlus.png';
 import { fetchEditUser, pageState } from '../actions/postActions';
 import back from './GroupImages/back.png';
-import Switch from '@material-ui/core/Switch';
-import { getCookie } from '../components/cookie.js';
+
 class EditGroup extends Component {
 	constructor(props) {
 		super(props);
@@ -97,6 +97,7 @@ class EditGroup extends Component {
 	selectAll() {
 		if (this.state.binState === true) {
 			if (this.state.check == 'Select all') {
+				console.log("we are here to do this")
 				this.setState({ count: this.props.editGroup.length });
 				for (var i = 0; i < this.props.editGroup.length; i++) {
 					this.props.editGroup[i].highlighted = true;
@@ -130,11 +131,12 @@ class EditGroup extends Component {
 						})
 						.map((post, index) => (
 							<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(index)}>
+							{this.state.binState===true?
 								<img
 									className="checkbox-delete"
 									src={post.highlighted == true ? deleteS : unmarked}
 									alt=""
-								/>
+								/>:null}
 								<label className={post.highlighted ? 'blabe2' : 'blabe'}>
 									<div className={post.highlighted ? 'userName-active' : 'userName'}>
 										{post.username}
@@ -162,6 +164,7 @@ class EditGroup extends Component {
 									alt=""
 								/>
 							</div>
+							
 							<div className="delete-icons" onClick={() => this.goToNext()}>
 								<img className="checkbox-delete" src={whitePlus} alt="" />
 							</div>
@@ -178,18 +181,10 @@ class EditGroup extends Component {
 								placeholder="Search"
 							/>
 						</div>
+						{this.state.binState===true?
 						<div className="switchAll" onClick={this.selectAll}>
-							All
-							<Switch
-								checked={
-									this.state.count === 0 ? (
-										false
-									) : null || this.state.count == this.props.editGroup.length ? (
-										true
-									) : null
-								}
-							/>
-						</div>
+							<img className="checkbox-delete" src={seleteAll} alt="" />
+						</div>:null}
 					</div>
 				</div>
 
