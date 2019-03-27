@@ -97,7 +97,6 @@ class EditGroup extends Component {
 	selectAll() {
 		if (this.state.binState === true) {
 			if (this.state.check == 'Select all') {
-				console.log("we are here to do this")
 				this.setState({ count: this.props.editGroup.length });
 				for (var i = 0; i < this.props.editGroup.length; i++) {
 					this.props.editGroup[i].highlighted = true;
