@@ -95,9 +95,6 @@ class UserProfile extends Component {
                 this.animateAccuracyCircle(counter, element, index)
             }, 80)
             this.timeouts.push(timeout);
-            if(element.accuracy <= 1){
-                this.setState({state : this.state});
-            }
         }
     }
 
