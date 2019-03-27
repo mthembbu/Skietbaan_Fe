@@ -85,7 +85,8 @@
     height: 26px;
     width: 20px;
     float: right;
-    margin-right: 120px;
+    margin-right: 8%;
+    margin-top: 18px;
   }
 
   .delete-icon {
