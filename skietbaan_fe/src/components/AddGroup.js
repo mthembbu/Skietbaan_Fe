@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createGroups, getName, pageState } from "../actions/postActions";
+import { getName, pageState } from "../actions/postActions";
 import history from "./history";
 import "./add.css";
 import { BASE_URL } from "../actions/types";
@@ -86,5 +86,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createGroups, getName, pageState }
+  { getName, pageState }
 )(AddGroup);

@@ -6,26 +6,18 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import NavbarMenu from './components/NavbarMenu';
-import RegisterMember from './components/RegisterMember';
 import LeaderboardPage from './components/LeaderboardPage';
 import AddGroup from './components/AddGroup';
 import Groups from './components/Groups';
-import ViewGroups from './components/ViewGroups';
 import history from './components/history';
 import notification from './components/Notifications';
-import ViewMembers from './components/ViewMembers';
-import ViewNonMembers from './components/ViewNonMembers';
-import ViewMembersExpiring from './components/ViewMembersExpiring';
 import Documents from './components/Documents';
 import ScoreCapture from './components/ScoreCapture';
-import CreatePage from './components/CreatePage';
 import ProfileLanding from './components/ProfileLanding';
 import GroupComponent from './components/GroupComponent';
 import requirements from './components/requirements.js';
 import './App.css';
 import ForgotPassword from './components/ForgotPassword';
-import AddMembersGroup from './components/AddMembersGroup';
-import EditGroup from './components/EditGroup';
 import ViewComp from './components/ViewComp';
 import CreateComp from './components/CreateComp';
 import createPages from './components/createPages';
@@ -59,8 +51,6 @@ class App extends Component {
 								<Route path="/createComp" component={CreateComp} exact />
 								<Route path="/notify" component={notification} exact />
 								<Route path="/documents" component={Documents} exact />
-								<Route path="/viewNonMembers" component={ViewNonMembers} exact />
-								<Route path="/viewExpiringMembers" component={ViewMembersExpiring} exact />
 								<Route path="/profile" component={ProfileLanding} exact />
 								<Route path="/requirements" component={requirements} exact />
 								<Route path={'/ViewGroups'} component={GroupComponent} exact />
