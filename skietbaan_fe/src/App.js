@@ -14,6 +14,8 @@ import ViewGroups from './components/ViewGroups';
 import history from './components/history';
 import notification from './components/Notifications';
 import ViewMembers from './components/ViewMembers';
+import ViewNonMembers from './components/ViewNonMembers';
+import ViewMembersExpiring from './components/ViewMembersExpiring';
 import Documents from './components/Documents';
 import ScoreCapture from './components/ScoreCapture';
 import CreatePage from './components/CreatePage';
@@ -57,6 +59,8 @@ class App extends Component {
 								<Route path="/createComp" component={CreateComp} exact />
 								<Route path="/notify" component={notification} exact />
 								<Route path="/documents" component={Documents} exact />
+								<Route path="/viewNonMembers" component={ViewNonMembers} exact />
+								<Route path="/viewExpiringMembers" component={ViewMembersExpiring} exact />
 								<Route path="/profile" component={ProfileLanding} exact />
 								<Route path="/requirements" component={requirements} exact />
 								<Route path={'/ViewGroups'} component={GroupComponent} exact />

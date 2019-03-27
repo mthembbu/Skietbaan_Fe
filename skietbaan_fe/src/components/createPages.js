@@ -8,6 +8,8 @@ import ViewMembers from '../components/ViewMembers';
 import Radio from '@material-ui/core/Radio';
 import CreateComp from '../components/CreateComp';
 import AddGroup from '../components/AddGroup';
+import ViewNonMembers from '../components/ViewNonMembers';
+import ViewMembersExpiring from '../components/ViewMembersExpiring';
 import ViewComp from '../components/ViewComp';
 import GroupComponent from '../components/GroupComponent';
 
@@ -270,7 +272,7 @@ export class createPages extends Component {
 					) : this.state.selectedButton === 2 && this.state.selectedButtonCreateViewCompetitions === 2 ? (
 						<ViewComp />
 					) : null}
-					{this.state.selectedButton === 3 && this.state.selectedValue === 'B' ? <ViewMembers /> : null}
+					{(this.state.selectedButton === 3 && this.state.selectedValue === 'A') ?<ViewNonMembers />  :(this.state.selectedButton===3 && this.state.selectedValue==="B")?<ViewMembers />:(this.state.selectedButton===3 && this.state.selectedValue==="C")?<ViewMembersExpiring/>:null }
 				</div>
 			</div>
 		);
