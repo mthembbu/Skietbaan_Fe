@@ -268,7 +268,7 @@ export default class search extends Component {
             this.toggleNavbar();
           }
         });
-      setTimeout(function () { window.location = "/scoreCapture"; }, 2000);
+      setTimeout(function () { window.location = "/scoreCapture"; }, 4000);
 
     }
     else if (Valid && !this.state.scoreSaved) {
@@ -289,7 +289,7 @@ export default class search extends Component {
         .then(data => this.setState({
           scoreSaved: true, currState: 5
         }));
-      setTimeout(function () { window.location = "/scoreCapture"; }, 4000);
+      setTimeout(function () { window.location = "/scoreCapture"; }, 5000);
     }
   }
 
@@ -430,16 +430,20 @@ export default class search extends Component {
               <input type="number" id="scoreInput" min="0" step="1" autoComplete="off" name="score" className="score"
                 onChange={this.handleScore}
                 placeholder="Enter Score"></input>
+                <div className="error-message-container">
+                <div className={this.state.validScore ? "hidden" : "invalid-score"}>Enter Valid Score</div>
+                </div>
             </div>
-            <div className={this.state.validScore ? "hidden" : "invalid-score"}>Enter Valid Score</div>
+            
             <div className="centre-label">
               <label className="label-competition">Select Competition</label>
             </div>
             <div className="competition-container">
               {competitionItem}
+              <div className="error-message-container">
               <div className={this.state.validCompetition === false && this.state.validScore === true
                 ? "invalid-comp" : "hidden"}>Select Competition</div>
-
+              </div>
             </div>
             <div className="submit-container">
               <div className={this.state.imageTaken || this.state.showCamera
@@ -461,11 +465,12 @@ export default class search extends Component {
           </div>
 
           <div className={this.state.showCamera ? "" : "hidden"}>
-            <div className={this.state.imageTaken ? "hidden" : "label-score photo-top-label"}>
-              Capture Score
+          
+            <div className={this.state.imageTaken ? "hidden" : "photo-top-label"}>Capture Score
               <img src={lightgrayback} onClick={() => this.goBack()} id="back"
-                className="btnBack" alt=''></img>
+                className="btn-back" alt='backBtn'></img>
             </div>
+            
             <div className={this.state.imageTaken ? "hidden" : "video-container"}>
               <video id="video" width="310" height="310" className="video" autoPlay></video>
             </div>
@@ -490,12 +495,12 @@ export default class search extends Component {
           </div>
 
           <div className={this.state.imageTaken && !this.state.scoreSaved ? "image-container" : "hidden"}>
-            <div className="centre-label">
-              <div className={!this.state.imageTaken ? "hidden" : "label-score photo-top-label"}>
+              <div className={!this.state.imageTaken ? "hidden" : "photo-top-label"}>
                 Score Captured
               </div>
-            </div>
+            <div className={this.state.imageTaken ? "video-container" : "hidden"}>
             <canvas id="canvas" width="310" height="310" className="image-view background" ></canvas>
+            </div>
             <div className="icon-push-down">
               <div className={!this.state.imageTaken || this.state.scoreSaved
                 ? "hidden" : "submit-button-elements third float-right"}>
