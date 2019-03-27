@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Toolbar from '@material-ui/core/Toolbar';
 import { Row, Col } from 'react-bootstrap';
 import './Create.css';
 import ViewMembers from '../components/ViewMembers';
