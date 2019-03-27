@@ -197,6 +197,12 @@
   font-weight: 400;
 }
 
+@media screen and (max-width:500px){
+  .header-label{
+    padding-right: 33px;
+  }
+}
+
 .button-login{
   background-color: #EA241A;
   color: #fdfdfd;
@@ -206,7 +212,7 @@
   width: 100px;
   font-weight: lighter;
   position: absolute;
-  right: 21px;
+  right: 15px;
   top: 90px;
   font-size: 16px;
 }

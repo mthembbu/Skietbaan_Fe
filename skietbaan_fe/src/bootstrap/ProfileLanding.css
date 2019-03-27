@@ -1,3 +1,9 @@
+@media only screen and (min-width: 576px){
+    .content-container{
+        margin-top: 56px;
+    }
+}
+
 .buttons-container {
     width: 97%;
 }
@@ -22,8 +28,8 @@
     padding-top: 50px;
 }
 
-.pad-bottom-20px{
-    padding-bottom: 20px;
+.pad-bottom-13px{
+    padding-bottom: 13px;
 }
 
 .pad-bottom-0px{
@@ -120,9 +126,3 @@
     border-radius: 18px;
     border: none;
 }
-
-@media only screen and (min-width: 576px) {
-    .pad-top-150px{
-        margin-top: 56px;
-    }
-  }

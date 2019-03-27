@@ -3,12 +3,13 @@ import "../components/userDetails.css";
 import { getCookie } from "./cookie.js";
 import { BASE_URL } from "../actions/types";
 
-class userDetails extends Component {
+export default class userDetails extends Component {
   constructor(props) {
     super(props);
     this.state = { array: [], usernameValue: "", emailValue: "" };
 
     this.handleChange = this.handleChange.bind(this);
+    this.updateUser = this.updateUser.bind(this);
   }
 
   componentDidMount() {
@@ -24,6 +25,22 @@ class userDetails extends Component {
       );
   }
 
+  updateUser() {
+    this.state.array.email = this.state.emailValue;
+    this.state.array.username = this.state.usernameValue;
+    fetch(BASE_URL + "/api/Features/UpdateDetails/", {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state.array)
+    })
+      .then(function(response) {})
+      .then(function(data) {})
+      .catch(function(data) {});
+  }
+
   handleChange({ target }) {
     this.setState({
       [target.name]: target.value
@@ -33,7 +50,7 @@ class userDetails extends Component {
   render() {
     return (
       <div className="userDetails-main-container">
-        <div className="userDetails-main-container">
+        <div className="userDetails-main-container userDetails-container">
           <div className="userDetails-heading-container">
             {this.state.array.username}
           </div>
@@ -80,15 +97,16 @@ class userDetails extends Component {
               placeholder="Email"
             />
           </div>
-        </div>
-        <div className="userDetails-button-contain">
-          <button className={"userDetails-button-container"}>
-            Letter of Status
-          </button>
+          <div className="userDetails-button-contain ">
+            <button
+              className={"userDetails-button-container"}
+              onClick={this.updateUser}
+            >
+              Update Details
+            </button>
+          </div>
         </div>
       </div>
     );
   }
 }
-
-export default userDetails;

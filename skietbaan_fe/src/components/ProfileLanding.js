@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import "../bootstrap/ProfileLanding.css";
 import UserProfile from "./UserProfile";
 import Documents from "./Documents";
-import userDetails from "./userDetails";
+import UserDetails from "./userDetails";
 
 export default class ProfileLanding extends Component {
   constructor(props) {
@@ -19,15 +19,15 @@ export default class ProfileLanding extends Component {
   }
 
   awardPage() {
-    this.setState({ selectedButton: 1 });
+    if (this.state.selectedButton != 1) this.setState({ selectedButton: 1 });
   }
 
   documentsPage() {
-    this.setState({ selectedButton: 2 });
+    if (this.state.selectedButton != 2) this.setState({ selectedButton: 2 });
   }
 
   details() {
-    this.setState({ selectedButton: 3 });
+    if (this.state.selectedButton != 3) this.setState({ selectedButton: 3 });
   }
 
   logout() {
@@ -47,7 +47,7 @@ export default class ProfileLanding extends Component {
         <div
           className={
             this.state.selectedButton == 1
-              ? "fix-top pad-bottom-20px"
+              ? "fix-top pad-bottom-13px"
               : this.state.selectedButton == 2
               ? "fix-top pad-bottom-0px"
               : "fix-top"
@@ -121,20 +121,19 @@ export default class ProfileLanding extends Component {
         <div
           className={
             this.state.selectedButton == 1
-              ? "content-container pad-top-150px"
-              : this.state.selectedButton === 2 ||
-                this.state.selectedButton === 3
+              ? "content-container"
+              : this.state.selectedButton == 2 || this.state.selectedButton == 3
               ? "content-container pad-top-50px"
               : "content-container"
           }
         >
-          {this.state.selectedButton === 1 ? (
+          {this.state.selectedButton == 1 ? (
             <UserProfile />
-          ) : this.state.selectedButton === 2 ? (
+          ) : this.state.selectedButton == 3 ? (
+            <UserDetails />
+          ) : this.state.selectedButton == 2 ? (
             <Documents />
-          ) : (
-            <userDetails />
-          )}
+          ) : null}
         </div>
       </div>
     );

@@ -1,9 +1,18 @@
+.userDetails-container {
+  padding-top: 60px;
+}
 .userDetails-heading-container {
   text-align: center;
   font-family: Helvetica;
   padding-top: 24px;
   font-size: 14px;
   color: #666666;
+}
+
+userplaceholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #979799;
+  opacity: 1; /* Firefox */
 }
 
 .userDetails-member-label {
@@ -21,6 +30,7 @@
   height: 100%;
   position: fixed;
   overflow: auto;
+  justify-content: center;
   align-content: center;
 }
 
@@ -31,9 +41,9 @@
   height: 56px;
   font-size: 18px;
   background-color: #ffffff;
-  border: 1px #979797 solid;
+  border: 1px #666666 solid;
   padding-left: 16px;
-  color: #979797;
+  color: #666666;
   font-weight: bolder;
 }
 
@@ -43,9 +53,9 @@
   color: #ffffff;
   letter-spacing: 1px;
   line-height: 15px;
-  border: 1px solid #dc0600;
+  border: 1px solid #be0000;
   border-radius: 40px;
-  background: #dc0600;
+  background: #be0000;
   -webkit-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
@@ -55,6 +65,8 @@
 
 .userDetails-button-contain {
   text-align: center;
+  width: 100%;
+  justify-content: center;
   position: fixed;
   bottom: 70px;
 }

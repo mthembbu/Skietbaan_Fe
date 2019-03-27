@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 import marked from "./GroupImages/MarkedBox.png";
 import unmarked from "./GroupImages/Oval.png";
 import back from "./GroupImages/back.png";
+import seleteAll from "./GroupImages/seleteAll.png";
 import { AddMemberAction, pageState } from "../actions/postActions";
 import Switch from "@material-ui/core/Switch";
 
@@ -181,16 +182,7 @@ class AddMembersGroup extends Component {
               />
             </div>
             <div className="switchAll" onClick={this.selectall}>
-              All
-              <Switch
-                checked={
-                  this.state.count === 0
-                    ? false
-                    : null || this.state.count === this.props.existing.length
-                    ? true
-                    : null
-                }
-              />
+              <img className="checkbox-delete" src={seleteAll} alt="" />
             </div>
           </div>
         </div>
