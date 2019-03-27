@@ -1,36 +1,111 @@
-@media (max-width: 1200px){
-    .accuracy-text-align{
-        padding-right: 20px;
-    }
-
-    .inherit-width .col{
-        width: 10%;
-    }
-}
-
-@media (min-width: 1200px){
-    .accuracy-label{
-        padding-right: 77% !important;
-    }
-}
-
-.my-container{
+.award-container{
     text-align: center;
+    font-family: helvetica;
+}
+
+.competition-buttons-container{
+    margin-left: -8px;
+    margin-right: -8px;
+    margin-bottom: 18px;
+    background-color: #F9F9F9;
+}
+
+.competition-buttons-container button{
+    outline: none;
+}
+
+.center-content{
+    justify-content: center;
+}
+
+.button-style{
+    height: 36px;	
+    width: 180px;	
+    border: 0.8px solid #555555;	
+    border-radius: 18px;	
+    box-shadow: 0 3px 8px -3px #674D4D;
+    margin-bottom:  10px;
+}
+
+.button-style-active{
+    background-color: #BE0000;
+    color: white;
+}
+
+.button-style-inactive{
+    background-color: transparent;
+}
+
+.scale-arrowupicon-img img{
+    width: 34px; 
+    height: 17px;
+}
+
+.medal-img img{
+    width: 14px; 
+    height: 25px;
 }
 
 .competition-name-text {	
-    color:#555555;	
+    color:#C21616;	
     font-size: 20px;
     font-weight: bold;
     line-height: 19px;
 }
 
-.box {
-    width: 27px;
-    height: 28px;
-    border-radius: 9px;
-    margin-right: 5px;
-    box-shadow: 0 4px 8px -6px rgba(0,0,0,0.5);
+.red-text{
+    color:#C21616;
+}
+
+.award-type-label{
+    font-family: Helvetica;
+    font-weight: 500;
+}
+
+.awards-container{
+    width: 100%;
+    padding-right: 8px;
+    padding-left: 8px;
+}
+
+.align-text-right{
+    text-align: right;
+}
+
+.competition-button-text{
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.pad-top-150px{
+    padding-top: 150px;
+}
+
+.pad-right-25px{
+    padding-right: 25px;
+}
+
+.select-competition-font{
+    font-size: 16px;
+    padding-bottom: 5px;
+}
+
+.font-size-14px{
+    font-size: 14px;
+}
+
+.reached-award{
+    font-size: 12px;
+    font-weight: unset;
+}
+
+.line-height-24px{
+    line-height: 24px;
+}
+
+.pad-bottom-16px{
+    padding-bottom: 16px;
 }
 
 .box-grey-background{
@@ -96,6 +171,10 @@
     margin-bottom: 5px;
 }
 
+.push-bottom-13px{
+    margin-bottom: 13px;
+}
+
 .push-bottom-27px{
     margin-bottom: 27px;
 }
@@ -116,13 +195,13 @@
     position: relative;
     top: 5px;
     left: 5px;
-    width: 80px;
-    height: 80px;
+    width: 65px;
+    height: 65px;
     border-radius: 100%;
-    font-size: 28px;
+    font-size: 19px;
     font-weight: bold;
     padding-top: 18px;
-    padding-left: 5px;
+    padding-left: 6px;
     background-color: #F3F4F9;
     color: #EA241A;
 }
@@ -131,11 +210,11 @@
     position: relative;
     top: 5px;
     left: 5px;
-    width: 110px;
-    height: 110px;
+    width: 90px;
+    height: 90px;
     border-radius: 100%;
-    padding-top: 10px;
-    padding-left: 10px;
+    padding-top: 7px;
+    padding-left: 7px;
     background-color: #F3F4F9;
     box-shadow: 0 6px 10px -6px rgba(0,0,0,0.5);
 }
@@ -143,10 +222,10 @@
 .active-border{
     position: relative;
     text-align: center;
-    width: 90px;
-    height: 90px;
+    width: 75px;
+    height: 75px;
     border-radius: 100%;
-    background-color: #F3F4F9; 
+    background-color: #F3F4F9;
 }
 
 .light-weight{
@@ -176,16 +255,12 @@
     padding-right: 0px;
 }
 
-.push-bottom-12px{
-    margin-bottom: 12px;
+.push-bottom-41px{
+    margin-bottom: 41px
 }
 
 .grey-text{
-    color: grey;
-}
-
-.black-text{
-    color: #0c0c0e;
+    color: #555555;
 }
 
 .box-label-text{
@@ -195,8 +270,8 @@
 }
 
 .locked-icon img{
-    width: 20px; 
-    height: 25px;
+    width: 22px; 
+    height: 22px;
 }
 
 
@@ -209,8 +284,8 @@
     width: inherit;
 }
 
-.remove-padding-right{
-    padding-right: -10px;
+.remove-right-padding{
+    padding-right: 0px;
 }
 
 .competition-name-size{
@@ -246,9 +321,14 @@
 }
 
 .total-text{
-    font-size: 28px;
-    color:  #EA241A;
-    padding-top: 8px;
+    font-size: 24px;
+    color: #EA241A;
+    padding-top: 20px;
+    padding-right: 7px;
+}
+
+.width-98px{
+    width: 98px;
 }
 
 .bullet-padding-right{
@@ -292,13 +372,17 @@
 }
 
 .accuracy-text{
-    font-size: 28px;
+    font-size: 20px;
 }
 
 .accuracy-label{
     color: #FFFFFFFF;
     padding-right: 44px;
     font-size: 16px;
+}
+
+.no-background-img{
+    background-image: none;
 }
 
 .total-label{
@@ -308,8 +392,23 @@
 }
 
 .lock-img-scale img{
-    width: 29px;
-    height: 40px;
-    margin-top: 20px;
-    margin-right: 10px;
+    width: 21px;
+    height: 29px;
+    margin-top: 21px;
+    margin-right: 7px;
+}
+
+.down-triangle-img-scale{
+    max-width: 15px;
+    max-height: 15px;
+}
+
+.down-triangle-img-scale img{
+    width: 14px;
+    height: 14px;
+    margin-top: -1px;
+}
+
+.push-right-5px{
+    margin-right: 5px;
 }

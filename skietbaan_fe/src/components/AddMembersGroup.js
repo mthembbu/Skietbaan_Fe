@@ -27,11 +27,8 @@ class AddMembersGroup extends Component {
 		this.addUsers = this.addUsers.bind(this);
 		this.selectall = this.selectall.bind(this);
 	}
-	async UNSAFE_componentWillMount() {
-		if (!getCookie('token')) {
-			window.location = '/registerPage';
-		}
-		this.props.AddMemberAction(this.props.id);
+	async componentDidMount() {
+		await this.props.AddMemberAction(this.props.id);
 	}
 	onChange(event) {
 		this.setState({ filterText: event.target.value });
@@ -45,7 +42,7 @@ class AddMembersGroup extends Component {
 			}
 			delete this.props.existing[i].highlighted;
 			delete this.props.existing[i].id;
-		 }
+		}
 
 		let request = {
 			users: this.state.newArray,
@@ -62,11 +59,11 @@ class AddMembersGroup extends Component {
 			.then(function(response) {})
 			.then(function(data) {})
 			.catch(function(data) {});
-			this.props.pageState(1);
+		this.props.pageState(1);
 	}
 
 	toggleHighlight = (event) => {
-		if (this.props.existing[event].highlighted == true) {
+		if (this.props.existing[event].highlighted === true) {
 			this.props.existing[event].highlighted = false;
 			this.setState({ count: this.state.count - 1 });
 		} else {
@@ -87,7 +84,7 @@ class AddMembersGroup extends Component {
 	};
 
 	selectall() {
-		if (this.state.check == 'Select all') {
+		if (this.state.check === 'Select all') {
 			this.setState({ count: this.props.existing.length });
 			for (var i = 0; i < this.props.existing.length; i++) {
 				this.props.existing[i].highlighted = true;
@@ -122,11 +119,11 @@ class AddMembersGroup extends Component {
 									src={post.highlighted ? marked : unmarked}
 									alt=""
 								/>
-								<label className={post.highlighted == true ? 'blabe' : 'blabe2'}>
-									<div className={post.highlighted == true ? 'userName-active' : 'userName'}>
+								<label className={post.highlighted === true ? 'blabe' : 'blabe2'}>
+									<div className={post.highlighted === true ? 'userName-active' : 'userName'}>
 										{post.username}
 									</div>
-									<div className={post.highlighted == true ? 'emails-active' : 'email'}>
+									<div className={post.highlighted === true ? 'emails-active' : 'email'}>
 										{post.email}
 									</div>
 								</label>
@@ -169,7 +166,7 @@ class AddMembersGroup extends Component {
 								checked={
 									this.state.count === 0 ? (
 										false
-									) : null || this.state.count == this.props.existing.length ? (
+									) : null || this.state.count === this.props.existing.length ? (
 										true
 									) : null
 								}

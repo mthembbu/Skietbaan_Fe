@@ -29,28 +29,32 @@ export default class search extends Component {
       latitude: null,
       longitude: null,
       error: null,
-      Flashon: false,
+      flashOn: false,
       validScore: true,
       validCompetition: true,
       scoreEntered: false,
-      navbarState: false
+      navbarState: false,
+      eventsAdded: false,
+      lastSize : 0
+
     }
 
-    this.CompetitionClicked = this.CompetitionClicked.bind(this);
+    this.competitionClicked = this.competitionClicked.bind(this);
     this.handleScore = this.handleScore.bind(this);
-    this.TakePhoto = this.TakePhoto.bind(this);
-    this.SubmitScore = this.SubmitScore.bind(this);
-    this.Flash = this.Flash.bind(this);
-    this.RetakePhoto = this.RetakePhoto.bind(this);
-    this.Validate = this.Validate.bind(this);
-    this.GetLocation = this.GetLocation.bind(this);
-    this.ToggleNavbar = this.ToggleNavbar.bind(this);
-    this.ToggleIcon = this.ToggleIcon.bind(this);
-
+    this.takePhoto = this.takePhoto.bind(this);
+    this.submitScore = this.submitScore.bind(this);
+    this.flash = this.flash.bind(this);
+    this.retakePhoto = this.retakePhoto.bind(this);
+    this.validate = this.validate.bind(this);
+    this.getLocation = this.getLocation.bind(this);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.toggleNavbar2 = this.toggleNavbar2.bind(this);
+    this.toggleIcon = this.toggleIcon.bind(this);
+    this.toggleNavbarKeyboard = this.toggleNavbarKeyboard.bind(this);
   }
 
   handleScore({ target }) {
-    this.Validate();
+    this.validate();
     this.setState({
       [target.name]: target.value,
     }, () => {
@@ -69,7 +73,7 @@ export default class search extends Component {
     });
   }
 
-  CompetitionClicked(item, compname) {
+  competitionClicked(item, compname) {
     this.setState({
       currState: 2,
       clicked: item,
@@ -110,7 +114,7 @@ export default class search extends Component {
 
   }
 
-  Validate() {
+  validate() {
     let Valid = false;
     if (!validateScore(this.state.score)) {
       this.setState({
@@ -144,30 +148,41 @@ export default class search extends Component {
     return Valid;
   }
 
-  ToggleNavbar() {
+  toggleNavbar() {
     this.setState({
       navbarState: !this.state.navbarState,
     })
-    var Navbar = document.querySelector(".navbar-admin");
-    if (Navbar.classList.contains("hidden")) {
-      Navbar.classList.remove("hidden");
+    var navbar = document.querySelector(".navbar-admin");
+    if (navbar.classList.contains("hidden")) {
+      navbar.classList.remove("hidden");
     }
     else {
-      Navbar.classList.add("hidden");
+      navbar.classList.add("hidden");
+    }
+  }
+
+  toggleNavbar2() {
+    var navbar = document.querySelector(".navbar-admin");
+    if (this.state.lastSize > document.body.clientHeight) {
+      navbar.setAttribute('hidden', 'true');
+    }
+    else {
+
+      navbar.removeAttribute('hidden');
     }
   }
 
   CameraClicked() {
-    let Valid = this.Validate();
+    let Valid = this.validate();
     this.setState({
-      Flashon: false
+      flashOn: false
     })
     if (Valid) {
       this.setState({
         currState: 3,
         showCamera: true
       });
-      this.ToggleNavbar();
+      this.toggleNavbar();
       const video = document.getElementById("video");
       const constraints = {
         advanced: [{
@@ -186,7 +201,7 @@ export default class search extends Component {
 
   }
 
-  RetakePhoto() {
+  retakePhoto() {
     this.setState({
       currState: 3,
       showCamera: true,
@@ -210,22 +225,22 @@ export default class search extends Component {
 
   }
 
-  GetLocation() {
+  getLocation() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
           longitude: position.coords.longitude,
           latitude: position.coords.latitude
         });
-        this.SubmitScore();
+        this.submitScore();
       },
-      (error) => { this.SubmitScore(); },
+      (error) => { this.submitScore(); },
       { enableHighAccuracy: true, timeout: 30000 }
     );
   }
 
-  SubmitScore() {
-    let Valid = this.Validate();
+  submitScore() {
+    let Valid = this.validate();
     if (Valid && !this.state.scoreSaved
       && this.state.longitude !== null
       && this.state.latitude !== null) {
@@ -250,7 +265,7 @@ export default class search extends Component {
             scoreSaved: true, currState: 5
           })
           if (this.state.navbarState === false) {
-            this.ToggleNavbar();
+            this.toggleNavbar();
           }
         });
       setTimeout(function () { window.location = "/scoreCapture"; }, 2000);
@@ -278,7 +293,7 @@ export default class search extends Component {
     }
   }
 
-  TakePhoto() {
+  takePhoto() {
 
     let canvas = document.getElementById('canvas');
     let context = canvas.getContext('2d');
@@ -296,10 +311,10 @@ export default class search extends Component {
 
   }
 
-  Flash() {
-    this.ToggleIcon()
-    this.state.Flashon = !this.state.Flashon
-    var IsFlashOn = this.state.Flashon;
+  flash() {
+    this.toggleIcon()
+    this.state.flashOn = !this.state.flashOn
+    var isFlashOn = this.state.flashOn;
     navigator.mediaDevices.getUserMedia({
       video: {
         facingMode: 'environment',
@@ -321,7 +336,7 @@ export default class search extends Component {
         function onCapabilitiesReady(capabilities) {
           if (capabilities.torch) {
             track.applyConstraints({
-              advanced: [{ torch: IsFlashOn }]
+              advanced: [{ torch: isFlashOn }]
             })
               .catch();
           }
@@ -332,7 +347,7 @@ export default class search extends Component {
 
   }
 
-  ToggleIcon() {
+  toggleIcon() {
     var flash = document.getElementById("FlashImage");
     if (flash.classList.contains("flash")) {
       flash.classList.remove("flash");
@@ -352,34 +367,44 @@ export default class search extends Component {
     });
     let video = document.getElementById('video');
     video.pause();
-    this.ToggleNavbar();
+    this.toggleNavbar();
+  }
+
+  toggleNavbarKeyboard() {
+    
+    if (document.window === undefined) {
+      document.addEventListener('DOMContentLoaded', () => {        
+        window.addEventListener("resize", () => {
+            this.toggleNavbar2();
+        })
+      });
+    }else{
+      document.addEventListener('DOMContentLoaded', () => {        
+        window.addEventListener("resize", () => {
+            this.toggleNavbar2();
+        })
+      });
+    }
   }
 
   render() {
-    document.addEventListener('DOMContentLoaded', () => {
-      var hideWhenAddingScore = document.querySelector(".navbar-admin");
-      var last_size = document.body.clientHeight;
-      window.addEventListener("resize", function () {
-        if (last_size === document.body.clientHeight) {
-          return;
-        }
-        if (hideWhenAddingScore.classList.contains("hidden-small")) {
-          hideWhenAddingScore.classList.remove("hidden-small");
-        }
-        else {
-          hideWhenAddingScore.classList.add("hidden-small");
-        }
-        last_size = document.body.clientHeight;
-      })
-    }, false);
 
+    if (this.state.lastSize === 0) {
+      this.state.lastSize = document.body.clientHeight; 
+      document.addEventListener('DOMContentLoaded', () => {        
+        window.addEventListener("resize", () => {
+            this.toggleNavbar2();
+        })
+      });
+    }
+    this.toggleNavbarKeyboard();
     const stateOne = this.state.showCamera || this.state.imageTaken
     let competitionItem = [];
     if (this.state.competitionsList && this.state.competitionsList.length > 0) {
       for (let i = 0; i < this.state.competitionsList.length; i++) {
         competitionItem.push(<div className="competition-item-container" key={'mykey' + i}> <div key={'mykey' + i}
           className={this.state.clicked != null && this.state.clicked === i ? "active competition-item" : "competition-item"}>
-          <li onClick={() => this.CompetitionClicked(i, this.state.competitionsList[i].name)}>
+          <li onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name)}>
             {this.state.competitionsList[i].name} </li></div></div>);
 
       }
@@ -428,7 +453,7 @@ export default class search extends Component {
               <div className={(this.state.showCamera && !this.state.imageTaken)
                 || this.state.imageTaken ? "hidden" : "submit-button-elements"}>
                 <div className="button-hover ">
-                  <img src={graySubmit} onClick={() => this.GetLocation()}
+                  <img src={graySubmit} onClick={() => this.getLocation()}
                     className="button-that-submits" alt=''></img>
                 </div>
               </div>
@@ -449,14 +474,14 @@ export default class search extends Component {
                 <div className="button-hover">
                   <div className={this.state.currState !== 3 ? "hidden" : ""}>
                     <div id="FlashImage" alt="" className="img-responsive flash"
-                      onClick={() => this.Flash()}></div>
+                      onClick={() => this.flash()}></div>
                   </div>
                 </div>
               </div>
               <div className={this.state.currState !== 3 && this.state.scoreSaved ? "hidden" : "submit-button-elements third"}>
                 <div className="button-hover">
                   <div className={this.state.currState !== 3 ? "hidden" : ""}>
-                    <img src={cameraBlack} onClick={() => this.TakePhoto()} id="snap"
+                    <img src={cameraBlack} onClick={() => this.takePhoto()} id="snap"
                       className="score-capture" alt=''></img>
                   </div>
                 </div>
@@ -475,7 +500,7 @@ export default class search extends Component {
               <div className={!this.state.imageTaken || this.state.scoreSaved
                 ? "hidden" : "submit-button-elements third float-right"}>
                 <div className="button-hover ">
-                  <img src={submit} onClick={() => this.GetLocation()}
+                  <img src={submit} onClick={() => this.getLocation()}
                     className="button-that-submits2" alt=''></img>
                 </div>
               </div>
@@ -483,7 +508,7 @@ export default class search extends Component {
                 ? "submit-button-elements third float-right" : "hidden"} >
                 <div className="button-hover">
                   <img src={grayRetry}
-                    id="btnScoreCapture" className="retake" onClick={() => this.RetakePhoto()}
+                    id="btnScoreCapture" className="retake" onClick={() => this.retakePhoto()}
                     alt=''>
                   </img>
                 </div>
