@@ -379,7 +379,9 @@ export default class search extends Component {
       track.stop();
     }
     video.srcObject = null;
-    this.toggleNavbar();
+    if(this.state.navbarState === true){
+      this.toggleNavbar();
+    }
   }
 
   render() {
