@@ -22,6 +22,7 @@ class UserProfile extends Component {
         this.toggle = this.toggle.bind(this);
         this.logout = this.logout.bind(this);
         this.timeouts = [];
+        this._isMounted = false;
     }
 
     UNSAFE_componentWillMount() {
@@ -40,7 +41,8 @@ class UserProfile extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            this.setState({ awardCompetitions: data });
+            if(this._isMounted)
+                this.setState({ awardCompetitions: data });
         });
 
         fetch(BASE_URL + "/api/awards/hours/" + token, {
@@ -51,8 +53,14 @@ class UserProfile extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            this.setState({ hoursAward: data });
+            if(this._isMounted)
+                this.setState({ hoursAward: data });
         });
+    }
+
+    
+    componentDidMount(){
+        this._isMounted = true;
     }
 
     logout(){
@@ -219,6 +227,7 @@ class UserProfile extends Component {
 
     componentWillUnmount() {
         this.timeouts.forEach(timeout => clearTimeout(timeout));
+        this._isMounted = false;
     }
 
     render() {

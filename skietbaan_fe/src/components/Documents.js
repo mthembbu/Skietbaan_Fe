@@ -15,20 +15,28 @@ class Documents extends Component {
     };
     this.sendLOGS = this.sendLOGS.bind(this);
     this.sendLOS = this.sendLOS.bind(this);
+    this._isMounted = false;
   }
 
   componentDidMount() {
+    this._isMounted = true;
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
     let token = getCookie("token");
     fetch(BASE_URL + "/api/Documents/UserLOGS/" + token)
       .then(res => res.json())
-      .then(data => this.setState({ sendLogsReturn: data }));
+      .then(data => {
+        if(this._isMounted)
+          this.setState({ sendLogsReturn: data });
+      });
 
     fetch(BASE_URL + "/api/Documents/UserLOS/" + token)
       .then(res => res.json())
-      .then(data => this.setState({ sendLosReturn: data }));
+      .then(data => {
+        if(this._isMounted)
+          this.setState({ sendLosReturn: data })
+      });
   }
 
   sendLOGS() {
@@ -73,6 +81,10 @@ class Documents extends Component {
         collapseFilterLOS: true
       });
     }
+  }
+
+  componentWillUnmount(){
+    this._isMounted = false;
   }
 
   render() {
