@@ -7,7 +7,6 @@ import { BASE_URL } from '../actions/types';
 import back from './GroupImages/back.png';
 import unmarked from './GroupImages/Oval.png';
 import marked from './GroupImages/MarkedBox.png';
-import { getCookie } from '../components/cookie.js';
 import Switch from '@material-ui/core/Switch';
 
 class Groups extends Component {

@@ -3,11 +3,7 @@ import '../components/RegisterMemberStyles.css';
 import { BASE_URL } from '../actions/types.js';
 import { getCookie } from '../components/cookie.js';
 import history from "./history";
-
-function validateUsername(username) {
-  const re = /[a-zA-Z]/;
-  return !re.test(String(username));
-}
+import { validateUsername} from './Validators.js';
 
 class App extends Component {
   constructor(props) {
