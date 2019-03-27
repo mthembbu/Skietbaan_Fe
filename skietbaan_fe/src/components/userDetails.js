@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../components/userDetails.css";
 import { getCookie } from "./cookie.js";
 import { BASE_URL } from "../actions/types";
+import { validateEmail, validateNumber } from "./Validators.js";
 
 export default class userDetails extends Component {
   constructor(props) {
@@ -98,6 +99,14 @@ export default class userDetails extends Component {
             />
           </div>
 
+          {this.state.cellphoneValue.length === 0 ? null : validateNumber(
+              this.state.cellphoneValue
+            ) ? null : (
+            <label className="userDetails-member-label">
+              invalid Cellphone Number
+            </label>
+          )}
+
           <div>
             <input
               type="text"
@@ -111,6 +120,10 @@ export default class userDetails extends Component {
             />
           </div>
 
+          {validateEmail(this.state.emailValue) ? null : (
+            <label className="userDetails-member-label">invalid email</label>
+          )}
+
           {this.state.returnValue === "updated" ? (
             <label className="userDetails-member-label">
               User Details Updated
@@ -119,7 +132,13 @@ export default class userDetails extends Component {
           <div className="userDetails-button-contain ">
             <button
               className={"userDetails-button-container"}
-              onClick={this.updateUser}
+              onClick={
+                (validateEmail(this.state.emailValue) &&
+                  validateNumber(this.state.cellphoneValue)) ||
+                this.state.cellphoneValue.length === 0
+                  ? this.updateUser
+                  : null
+              }
             >
               Update Details
             </button>
