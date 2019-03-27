@@ -33,7 +33,10 @@ export default class search extends Component {
       validScore: true,
       validCompetition: true,
       scoreEntered: false,
-      navbarState: false
+      navbarState: false,
+      eventsAdded: false,
+      lastSize : 0
+
     }
 
     this.competitionClicked = this.competitionClicked.bind(this);
@@ -45,8 +48,8 @@ export default class search extends Component {
     this.validate = this.validate.bind(this);
     this.getLocation = this.getLocation.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.toggleNavbar2 = this.toggleNavbar2.bind(this);
     this.toggleIcon = this.toggleIcon.bind(this);
-
   }
 
   handleScore({ target }) {
@@ -148,12 +151,24 @@ export default class search extends Component {
     this.setState({
       navbarState: !this.state.navbarState,
     })
-    var Navbar = document.querySelector(".navbar-admin");
-    if (Navbar.classList.contains("hidden")) {
-      Navbar.classList.remove("hidden");
+    var navbar = document.querySelector(".navbar-admin");
+    if (navbar.classList.contains("hidden")) {
+      navbar.classList.remove("hidden");
     }
     else {
-      Navbar.classList.add("hidden");
+      navbar.classList.add("hidden");
+    }
+  }
+
+  toggleNavbar2() {
+    var navbar = document.querySelector(".navbar-admin");
+    if (this.state.lastSize > document.body.clientHeight) {
+      navbar.setAttribute('hidden', 'true');
+      this.toggleNavbar();
+    }
+    else {
+      navbar.removeAttribute('hidden');
+      this.toggleNavbar();
     }
   }
 
@@ -253,7 +268,7 @@ export default class search extends Component {
             this.toggleNavbar();
           }
         });
-      setTimeout(function () { window.location = "/scoreCapture"; }, 2000);
+      setTimeout(function () { window.location = "/scoreCapture"; }, 4000);
 
     }
     else if (Valid && !this.state.scoreSaved) {
@@ -274,7 +289,7 @@ export default class search extends Component {
         .then(data => this.setState({
           scoreSaved: true, currState: 5
         }));
-      setTimeout(function () { window.location = "/scoreCapture"; }, 4000);
+      setTimeout(function () { window.location = "/scoreCapture"; }, 5000);
     }
   }
 
@@ -356,25 +371,15 @@ export default class search extends Component {
   }
 
   render() {
-    document.addEventListener('DOMContentLoaded', () => {
-      var hideWhenAddingScore = document.querySelector(".navbar-admin");
-      var last_size = document.body.clientHeight;
-      window.addEventListener("resize", () => {
-        if (last_size === document.body.clientHeight) {
-          return;
-        }
-        if (hideWhenAddingScore.classList.contains("hidden-small")) {
-          hideWhenAddingScore.classList.remove("hidden-small");
-          this.toggleNavbar();
-        }
-        else {
-          hideWhenAddingScore.classList.add("hidden-small");
-          this.toggleNavbar();
-        }
-        last_size = document.body.clientHeight;
-      })
-    }, false);
 
+    if (this.state.lastSize === 0) {
+      this.state.lastSize = document.body.clientHeight; 
+      document.addEventListener('DOMContentLoaded', () => {        
+        window.addEventListener("resize", () => {
+            this.toggleNavbar2();
+        })
+      });
+    }
     const stateOne = this.state.showCamera || this.state.imageTaken
     let competitionItem = [];
     if (this.state.competitionsList && this.state.competitionsList.length > 0) {
@@ -407,17 +412,22 @@ export default class search extends Component {
               <input type="number" id="scoreInput" min="0" step="1" autoComplete="off" name="score" className="score"
                 onChange={this.handleScore}
                 placeholder="Enter Score"></input>
+                <div className="error-message-container">
+                <div className={this.state.validScore ? "hidden" : "invalid-score"}>Enter Valid Score</div>
+                </div>
             </div>
-            <div className={this.state.validScore ? "hidden" : "invalid-score"}>Enter Valid Score</div>
-            <div className="centre-label">
+            
+            <div className="centre-labels">
               <label className="label-competition">Select Competition</label>
             </div>
             <div className="competition-container">
               {competitionItem}
+             
+            </div>
+            <div className="error-message-container">
               <div className={this.state.validCompetition === false && this.state.validScore === true
                 ? "invalid-comp" : "hidden"}>Select Competition</div>
-
-            </div>
+              </div>
             <div className="submit-container">
               <div className={this.state.imageTaken || this.state.showCamera
                 ? "hidden" : "submit-button-elements"}>
@@ -438,11 +448,12 @@ export default class search extends Component {
           </div>
 
           <div className={this.state.showCamera ? "" : "hidden"}>
-            <div className={this.state.imageTaken ? "hidden" : "label-score photo-top-label"}>
-              Capture Score
+          
+            <div className={this.state.imageTaken ? "hidden" : "photo-top-label"}>Capture Score
               <img src={lightgrayback} onClick={() => this.goBack()} id="back"
-                className="btnBack" alt=''></img>
+                className="btn-back" alt='backBtn'></img>
             </div>
+            
             <div className={this.state.imageTaken ? "hidden" : "video-container"}>
               <video id="video" width="310" height="310" className="video" autoPlay></video>
             </div>
@@ -467,12 +478,12 @@ export default class search extends Component {
           </div>
 
           <div className={this.state.imageTaken && !this.state.scoreSaved ? "image-container" : "hidden"}>
-            <div className="centre-label">
-              <div className={!this.state.imageTaken ? "hidden" : "label-score photo-top-label"}>
+              <div className={!this.state.imageTaken ? "hidden" : "photo-top-label"}>
                 Score Captured
               </div>
-            </div>
+            <div className={this.state.imageTaken ? "video-container" : "hidden"}>
             <canvas id="canvas" width="310" height="310" className="image-view background" ></canvas>
+            </div>
             <div className="icon-push-down">
               <div className={!this.state.imageTaken || this.state.scoreSaved
                 ? "hidden" : "submit-button-elements third float-right"}>

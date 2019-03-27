@@ -5,6 +5,11 @@ import { URL } from "../actions/types.js";
 import { Row, Col } from "react-bootstrap";
 import RegisterMember from "../components/RegisterMember";
 import ViewMembers from "../components/ViewMembers";
+import CreateComp from "../components/CreateComp";
+import AddGroup from "../components/AddGroup";
+import ViewComp from "../components/ViewComp";
+import { connect } from 'react-redux';
+import GroupComponent from "../components/GroupComponent";
 import { timingSafeEqual } from "crypto";
 
 class Create extends Component {
@@ -18,7 +23,7 @@ class Create extends Component {
     };
 
     this.groupsPage = this.groupsPage.bind(this);
-    this.comptetitionsPage = this.comptetitionsPage.bind(this);
+    this.comptetitionsPage = this.competetitionsPage.bind(this);
     this.membersPage = this.membersPage.bind(this);
     this.createGroups = this.createGroups.bind(this);
     this.viewGroups = this.viewGroups.bind(this);
@@ -30,7 +35,7 @@ class Create extends Component {
     this.setState({ selectedButton: 1 });
   }
 
-  comptetitionsPage() {
+  competetitionsPage() {
     this.setState({ selectedButton: 2 });
   }
 
@@ -102,10 +107,12 @@ class Create extends Component {
   render() {
     return (
       <div className="create-container">
+      {this.props.page===0?
+        <div className="create-all-page-content">
+        
         <div class="page-name-create-all">
           <label className="create-all-menu-header">Create</label>
         </div>
-        <div className="create-all-page-content">
           <div className="buttons-container">
             <Row className="buttons-row">
               <div className="buttons-rectangle lay-horizontal">
@@ -134,7 +141,7 @@ class Create extends Component {
                           ? "unstyle-button-active btn-block button-fill"
                           : "unstyle-button btn-block button-fill"
                       }
-                      onClick={this.comptetitionsPage}
+                      onClick={this.competetitionsPage}
                     >
                       <label className="button-text">COMPETITIONS</label>
                     </button>
@@ -182,8 +189,8 @@ class Create extends Component {
                         <button
                           className={
                             this.state.selectedButtonCreateViewGroups === 1
-                              ? "unstyle-button-active btn-block button-fill"
-                              : "unstyle-button btn-block button-fill"
+                              ? "unstyle-create-active btn-block button-fill"
+                              : "unstyle-create btn-block button-fill"
                           }
                           onClick={this.createGroups}
                         >
@@ -251,8 +258,18 @@ class Create extends Component {
             ) : null}
           </div>
         </div>
+      :null}
+        <div>
+        {(this.state.selectedButton===1 && this.state.selectedButtonCreateViewGroups===1)?<AddGroup />:(this.state.selectedButton===1 && this.state.selectedButtonCreateViewGroups===2)?<GroupComponent />:null}
+        {(this.state.selectedButton===2 && this.state.selectedButtonCreateViewCompetitions===1)?<CreateComp/>:(this.state.selectedButton===2 && this.state.selectedButtonCreateViewCompetitions===2)?<ViewComp />:null}
+      </div>
       </div>
     );
   }
 }
-export default Create;
+
+const mapStateToProps = (state) => ({
+	page: state.posts.page
+});
+
+export default connect(mapStateToProps)(Create);

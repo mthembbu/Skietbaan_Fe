@@ -9,7 +9,8 @@ class ForgotPassword extends Component {
     super(props);
     this.state = {
       passwordValue: "",
-      confirmPasswordValue: ""
+      confirmPasswordValue: "",
+      returnValue: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.resetPassword = this.resetPassword.bind(this);
@@ -39,10 +40,6 @@ class ForgotPassword extends Component {
     }
   }
 
-  goToLogin() {
-    window.location = "/Login";
-  }
-
   toggleNavbar() {
     let Navbar = document.querySelector(".navbar-admin");
     if (Navbar.classList.contains("hidden")) {
@@ -63,11 +60,15 @@ class ForgotPassword extends Component {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(this.state.confirmPasswordValue)
+      body: JSON.stringify(user)
     })
-      .then(function(response) {})
-      .then(function(data) {})
-      .catch(function(data) {});
+      .then(res => res.json())
+      .then(data => this.setState({ returnValue: data }));
+
+    /*ToDo remove the reload and find better way for naving after reseting password */
+    setTimeout(function() {
+      window.location = "/login";
+    }, 2000);
   }
 
   hanldeReseting() {
@@ -75,7 +76,7 @@ class ForgotPassword extends Component {
     this.state.confirmPasswordValue.length !== 0 &&
     this.state.passwordValue.length !== 0
       ? this.state.confirmPasswordValue === this.state.passwordValue
-        ? this.resetPassword() || this.goToLogin()
+        ? this.resetPassword()
         : null
       : null;
   }

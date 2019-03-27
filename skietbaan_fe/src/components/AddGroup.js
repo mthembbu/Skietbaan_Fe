@@ -54,13 +54,6 @@ class AddGroup extends Component {
 		return (
 			<div className="add-group-main">
 				<div className="page">
-					<div className="the-nav-bar">
-						<a href="/create" className="back-container">
-							<img className="back-image" onClick={this.onBack} src={back} alt="" />
-						</a>
-						<label className="group-label">Create Groups</label>
-					</div>
-
 					<div className="middle-bar">
 						<input
 							className="texts"
