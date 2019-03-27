@@ -8,7 +8,7 @@ import unmarked from './GroupImages/Oval.png';
 import back from './GroupImages/back.png';
 import seleteAll from './GroupImages/seleteAll.png';
 import { AddMemberAction, pageState } from '../actions/postActions';
-import Switch from '@material-ui/core/Switch';
+import unSelectAll from './GroupImages/unSelectAll.png';
 
 class AddMembersGroup extends Component {
 	constructor(props) {
@@ -161,7 +161,7 @@ class AddMembersGroup extends Component {
 							/>
 						</div>
 						<div className="switchAll" onClick={this.selectall}>
-							<img className="checkbox-delete" src={seleteAll} alt="" />
+							<img className="checkbox-delete" src={this.state.count===this.props.existing.length? seleteAll:unSelectAll} alt="" />
 						</div>
 					</div>
 				</div>

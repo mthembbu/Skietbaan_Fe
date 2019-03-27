@@ -371,9 +371,10 @@
 }
 
 .the-main {
-	margin-left: 26px;
-	margin-right: 26px;
+	margin-left: 28px;
+	margin-right: 40px;
 	margin-bottom: 56px;
+	margin-top: 20px;
 }
 
 .group-name {
@@ -399,6 +400,7 @@
 	font-size: 18px;
 	font-weight: lighter;
 	color: #6f839e;
+	background: white;
 }
 
 .first-row {
