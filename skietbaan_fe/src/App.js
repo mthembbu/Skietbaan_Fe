@@ -51,26 +51,20 @@ class App extends Component {
 								<Route path="/" component={Register} exact />
 								<Route path="/forgotPassword" component={ForgotPassword} />
 								<Route path="/resetPassword" component={resetPassword} />
-								<Route path="/registerMember" component={RegisterMember} exact />
 								<Route path="/new-competition" component={CreateComp} exact />
 								<Route path="/AddGroup" component={AddGroup} exact />
 								<Route path="/scoreCapture" component={ScoreCapture} exact />
 								<Route path="/groups" component={Groups} exact />
-								<Route path="/create" component={CreatePage} exact />
-								<Route path="/ViewGroups" component={ViewGroups} exact />
 								<Route path="/viewComp" component={ViewComp} exact />
 								<Route path="/createComp" component={CreateComp} exact />
 								<Route path="/notify" component={notification} exact />
 								<Route path="/documents" component={Documents} exact />
-								<Route path="/viewmembers" component={ViewMembers} exact />
 								<Route path="/viewNonMembers" component={ViewNonMembers} exact />
 								<Route path="/viewExpiringMembers" component={ViewMembersExpiring} exact />
 								<Route path="/profile" component={ProfileLanding} exact />
-								<Route path="/AddMembersGroup" component={AddMembersGroup} exact />
 								<Route path="/requirements" component={requirements} exact />
-								<Route path={'/EditGroup'} component={EditGroup} exact />
-								<Route path={'/GroupComponent'} component={GroupComponent} exact />
-								<Route path="/createAll" component={createPages} exact />
+								<Route path={'/ViewGroups'} component={GroupComponent} exact />
+								<Route path="/create" component={createPages} exact />
 								<Redirect from="/" to="/home" />
 							</Switch>
 						</Router>
