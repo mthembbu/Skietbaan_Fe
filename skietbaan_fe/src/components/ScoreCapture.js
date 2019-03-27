@@ -366,8 +366,14 @@ export default class search extends Component {
       showCamera: false
     });
     let video = document.getElementById('video');
-    video.pause();
-    this.toggleNavbar();
+    let stream = video.srcObject;
+    let tracks = stream.getTracks();
+    for (let i = 0; i < tracks.length; i++) {
+      let track = tracks[i];
+      track.stop();
+    }
+    video.srcObject = null;
+      this.toggleNavbar();
   }
 
   render() {
