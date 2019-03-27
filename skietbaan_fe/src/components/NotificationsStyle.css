@@ -219,6 +219,11 @@
     align-content: center;
   }
 
+  .time-div {
+    margin-inline-end: 10px;
+    margin-left: 15px;
+  }
+
   .notifications-a-class {
     text-align: left;
   }
@@ -269,7 +274,7 @@
   }
 
   .notifications-body-class {
-    background-color: #fdfdfd;
+    background-color: #ffffff;
     color: white;
     border-style: none;
     border: none;
@@ -315,6 +320,7 @@
     width: 20px;
     float: right;
     margin-right: 33px;
+    margin-top: 5px;
   }
 
   .delete-icon {
@@ -322,11 +328,16 @@
     width: 20px;
     float: right;
     margin-right: 33px;
+    margin-top: 5px;
   }
 
   .trash-spacing {
     margin-left: 305px;
     margin-top: 5px;
+  }
+
+  .notification-icon-spacing {
+    align-content: center;
   }
 
   .td-delete {
@@ -471,6 +482,23 @@
 
   .hidden {
     display: none;
+  }
+
+  .select-all {
+    height: 24px;
+    width: 24px;
+  }
+
+  .black-select-all {
+    background: url("Notification-Img/black-select-all.png");
+    height: 24px;
+    width: 24px;
+  }
+
+  .white-select-all {
+    background: url("Notification-Img/white-select-all.png");
+    height: 24px;
+    width: 24px;
   }
 
   .format-content {
