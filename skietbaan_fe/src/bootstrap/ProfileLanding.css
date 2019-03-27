@@ -51,8 +51,9 @@
 }
 
 .center-block-content{
-    display: block;
-    margin: auto;
+    position:absolute;
+    right:20px;
+    top:0;
 }
 
 .logout-button {	

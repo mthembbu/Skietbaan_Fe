@@ -51,13 +51,12 @@ export default class ProfileLanding extends Component {
                 <Row className="top-bar-rectangle">
                     <Col className="lay-horizontal">
                         <div className="center-block-content">
-
-                        </div>
                         <a href="#" onClick={this.logout}>
                             <div className="logout-button">
                                 <label className="logout-text">Logout</label>
                             </div>
                         </a>
+                        </div>
                     </Col>
                 </Row>
                 <div className="buttons-container">
