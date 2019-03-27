@@ -435,7 +435,7 @@ export default class search extends Component {
                 </div>
             </div>
             
-            <div className="centre-label">
+            <div className="centre-labels">
               <label className="label-competition">Select Competition</label>
             </div>
             <div className="competition-container">
