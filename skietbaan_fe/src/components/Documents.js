@@ -27,15 +27,17 @@ class Documents extends Component {
     fetch(BASE_URL + "/api/Documents/UserLOGS/" + token)
       .then(res => res.json())
       .then(data => {
-        if(this._isMounted)
+        if(this._isMounted){
           this.setState({ sendLogsReturn: data });
+        }
       });
 
     fetch(BASE_URL + "/api/Documents/UserLOS/" + token)
       .then(res => res.json())
       .then(data => {
-        if(this._isMounted)
+        if(this._isMounted){
           this.setState({ sendLosReturn: data })
+        }
       });
   }
 

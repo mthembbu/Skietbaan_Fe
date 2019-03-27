@@ -41,8 +41,9 @@ class UserProfile extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            if(this._isMounted)
+            if(this._isMounted){
                 this.setState({ awardCompetitions: data });
+            }
         });
 
         fetch(BASE_URL + "/api/awards/hours/" + token, {
@@ -53,8 +54,9 @@ class UserProfile extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            if(this._isMounted)
+            if(this._isMounted){
                 this.setState({ hoursAward: data });
+            }
         });
     }
 
