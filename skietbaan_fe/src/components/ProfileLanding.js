@@ -18,15 +18,18 @@ export default class ProfileLanding extends Component {
     }
     
     awardPage(){
-        this.setState({selectedButton: 1});
+        if(this.state.selectedButton != 1)
+            this.setState({selectedButton: 1});
     }
 
     documentsPage(){
-        this.setState({selectedButton : 2}); 
+        if(this.state.selectedButton != 2)
+            this.setState({selectedButton : 2}); 
     }
 
     details(){
-        this.setState({selectedButton: 3});
+        if(this.state.selectedButton != 3)
+            this.setState({selectedButton: 3});
     }
 
     logout(){
