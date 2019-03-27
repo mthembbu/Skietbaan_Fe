@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createGroups, getName } from '../actions/postActions';
+import { createGroups, getName,pageState } from '../actions/postActions';
 import history from './history';
 import './add.css';
 import { BASE_URL } from '../actions/types';
@@ -23,6 +23,7 @@ class AddGroup extends Component {
 	}
 
 	UNSAFE_componentWillMount() {
+		this.props.pageState(0);
 		fetch(BASE_URL + '/api/groups').then((res) => res.json()).then((data) =>
 			this.setState({
 				groups: data.map((names) => names.name)
@@ -83,4 +84,4 @@ const mapStateToProps = (state) => ({
 	name: state.posts.groupName
 });
 
-export default connect(mapStateToProps, { createGroups, getName })(AddGroup);
+export default connect(mapStateToProps, { createGroups, getName,pageState })(AddGroup);
