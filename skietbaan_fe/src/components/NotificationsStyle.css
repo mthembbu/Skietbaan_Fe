@@ -8,7 +8,7 @@
     margin-left: 17%;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
-    background: #fdfdfd;
+    background: #ffffff;
     height: 56px;
     margin-bottom: 56px;
   }
@@ -21,7 +21,7 @@
 
   .page-heading {
     background-image: linear-gradient(to right, #dc0600, #ef3024);
-    color: #fdfdfd;
+    color: #ffffff;
     height: 65px;
     margin-top: 56px;
     font-size: 25px;
@@ -35,7 +35,7 @@
   }
 
   .notifications-body-class {
-    background-color: #fdfdfd;
+    background-color: #ffffff;
     color: white;
     border-style: none;
     border: none;
@@ -43,7 +43,6 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    padding-bottom: 100%;
     text-align: center;
     left: 25px;
     margin-bottom: 56px;
@@ -129,7 +128,7 @@
   .t-body {
     border-bottom: none;
     font-family: helvetica;
-    background-color: #fdfdfd;
+    background-color: #ffffff;
     color: #6f839e;
     border-style: none;
     border: none;
@@ -143,7 +142,7 @@
 
   .post-items {
     text-align: center;
-    background-color: #fdfdfd;
+    background-color: #ffffff;
     color: #6f839e;
     border-style: none;
     border: none;
@@ -258,7 +257,7 @@
     width: 100%;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
-    background: #fdfdfd;
+    background: #ffffff;
     height: 56px;
     margin-bottom: 56px;
   }
@@ -270,7 +269,7 @@
 
   .page-heading {
     background-image: linear-gradient(to right, #dc0600, #ef3024);
-    color: #fdfdfd;
+    color: #ffffff;
     height: 65px;
     width: 100%;
     padding-top: 15px;
@@ -292,7 +291,6 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    padding-bottom: 100%;
     text-align: center;
     left: 25px;
   }
@@ -376,7 +374,7 @@
   .t-body {
     border-bottom: none;
     font-family: helvetica;
-    background-color: #fdfdfd;
+    background-color: #ffffff;
     color: #6f839e;
     border-style: none;
     border: none;
@@ -389,7 +387,7 @@
   }
 
   .post-items {
-    background-color: #fdfdfd;
+    background-color: #ffffff;
     color: #6f839e;
     border-style: none;
     border: none;
