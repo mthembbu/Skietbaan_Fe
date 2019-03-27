@@ -87,13 +87,11 @@
 }
 
 .page-content-video{
-    width: auto;
-    height: stretch;
     background-color: #D9D9D9;
     width:100%;
     z-index: 50;
-    position: relative;
     height: 100vh;
+    position: absolute;
 }
 
 .opacity-85{
@@ -180,7 +178,6 @@
 .label-competition{
     color: #666666;
     font-size: 24px;
-    padding-top: 34px;
     font-weight: bold;
 }
 
@@ -196,6 +193,7 @@
     font-size: 25px;
     text-align: center;
     font-weight: lighter;
+    padding-top: 34px;
 }
 
 .photo-top-label{
@@ -205,6 +203,7 @@
     color: #000000;
     font-weight: bold;
     font-size: 24px;
+    text-align: center;
 }
 
 .no-padding{
@@ -273,6 +272,7 @@
     width:310px;
     height:310px;
     margin:0 auto;
+    padding-top: 24px;
 }
 
 .image-view{
@@ -393,10 +393,12 @@ input[type=number] {
     box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
 }
 
-.btnBack{
+.btn-back{
     float: left;
-    padding-left: 15px;
     height: 30px;
+    left: 30px;
+    position: absolute;
+    top: 64px;
 }
 
 .spacing{
@@ -433,7 +435,7 @@ input[type=number] {
     font-size: 22px;
     color: #fdfdfd;
     font-weight: 600;
-    padding-top: 14px;
+    padding-top: 16px;
     padding-left: 40px;
 }
 

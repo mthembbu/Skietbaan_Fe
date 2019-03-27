@@ -9,7 +9,6 @@ import { validateEmail, validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
 import { URL } from '../actions/types.js';
 import skietbaan from '../components/assets/skietbaanLogo.png';
-import history from "./history";
 
 class Register extends Component {
   constructor(props) {
