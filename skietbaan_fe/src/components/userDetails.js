@@ -113,7 +113,7 @@ export default class userDetails extends Component {
 
           {this.state.returnValue === "updated" ? (
             <label className="userDetails-member-label">
-              user details updated
+              User Details Updated
             </label>
           ) : null}
           <div className="userDetails-button-contain ">
