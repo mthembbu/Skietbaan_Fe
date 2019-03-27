@@ -32,7 +32,7 @@ import createPages from './components/createPages';
 import resetPassword from './components/resetPassword';
 import MetaTags from 'react-meta-tags';
 import { PersistGate } from 'redux-persist/integration/react';
-
+//app.js
 class App extends Component {
 	render() {
 		return (
