@@ -191,6 +191,13 @@
   cursor: pointer;
 }
 
+.header-label-login{
+  font-size: 25px;
+  color: white;
+  font-weight: 400;
+  font-family: helvetica;
+}
+
 .header-label{
   font-size: 25px;
   color: white;

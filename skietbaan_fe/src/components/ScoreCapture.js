@@ -7,7 +7,6 @@ import cameraGray from '../components/assets/redSubmitButton.png';
 import graySubmit from '../components/assets/btnThatSubmitsRed.png';
 import grayRetry from '../components/assets/redRetry.png';
 import lightgrayback from '../components/assets/Back.png';
-import submit from '../components/assets/blackSumbit.png';
 
 export default class search extends Component {
   constructor(props) {
