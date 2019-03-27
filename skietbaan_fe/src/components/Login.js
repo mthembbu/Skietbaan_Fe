@@ -195,7 +195,7 @@ class Login extends Component {
           </div>
           <div className="header-container">
             <div className="centre-label">
-              <label className="header-label">LOGIN</label>
+              <label className="header-label-login">LOGIN</label>
             </div>
             <img src={back}
               alt="back button"

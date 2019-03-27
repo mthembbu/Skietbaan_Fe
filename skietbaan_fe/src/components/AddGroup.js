@@ -4,8 +4,6 @@ import { createGroups, getName, pageState } from "../actions/postActions";
 import history from "./history";
 import "./add.css";
 import { BASE_URL } from "../actions/types";
-import error from "./GroupImages/error.png";
-import back from "./GroupImages/back.png";
 import { getCookie } from "../components/cookie.js";
 
 class AddGroup extends Component {

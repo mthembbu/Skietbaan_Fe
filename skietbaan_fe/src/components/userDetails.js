@@ -6,7 +6,13 @@ import { BASE_URL } from "../actions/types";
 export default class userDetails extends Component {
   constructor(props) {
     super(props);
-    this.state = { array: [], usernameValue: "", emailValue: "" };
+    this.state = {
+      array: [],
+      nameValue: "",
+      emailValue: "",
+      cellphoneValue: "",
+      returnValue: ""
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.updateUser = this.updateUser.bind(this);
@@ -19,15 +25,17 @@ export default class userDetails extends Component {
       .then(data =>
         this.setState({
           array: data,
-          usernameValue: data.username,
-          emailValue: data.email
+          nameValue: data.name,
+          emailValue: data.email,
+          cellphoneValue: data.phoneNumber
         })
       );
   }
 
   updateUser() {
+    this.state.array.name = this.state.nameValue;
+    this.state.array.phoneNumber = this.state.cellphoneValue;
     this.state.array.email = this.state.emailValue;
-    this.state.array.username = this.state.usernameValue;
     fetch(BASE_URL + "/api/Features/UpdateDetails/", {
       method: "post",
       headers: {
@@ -36,9 +44,8 @@ export default class userDetails extends Component {
       },
       body: JSON.stringify(this.state.array)
     })
-      .then(function(response) {})
-      .then(function(data) {})
-      .catch(function(data) {});
+      .then(res => res.json())
+      .then(data => this.setState({ returnValue: data }));
   }
 
   handleChange({ target }) {
@@ -68,19 +75,25 @@ export default class userDetails extends Component {
           <div>
             <input
               type="text"
-              name="usernameValue"
-              id="usernameValue"
+              name="nameValue"
+              id="nameValue"
               autoComplete="off"
               className={"userDetails-input-container"}
-              value={this.state.usernameValue}
+              value={this.state.nameValue}
               onChange={this.handleChange}
-              placeholder="Username"
+              placeholder="Name And Surname"
             />
           </div>
 
           <div>
             <input
+              type="number"
+              name="cellphoneValue"
+              id="cellphoneValue"
+              autoComplete="off"
               className={"userDetails-input-container"}
+              value={this.state.cellphoneValue}
+              onChange={this.handleChange}
               placeholder="Cell Number"
             />
           </div>
@@ -97,6 +110,12 @@ export default class userDetails extends Component {
               placeholder="Email"
             />
           </div>
+
+          {this.state.returnValue === "updated" ? (
+            <label className="userDetails-member-label">
+              user details updated
+            </label>
+          ) : null}
           <div className="userDetails-button-contain ">
             <button
               className={"userDetails-button-container"}

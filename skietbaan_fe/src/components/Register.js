@@ -208,7 +208,7 @@ class Register extends Component {
           </div>
           <div className="header-container">
             <label className="header-label">REGISTER</label>
-            <button className="button-login" onClick={() => this.goToLogin()}>Login</button>
+            <button className="button-login" onClick={() => this.goToLogin()}>LOGIN</button>
           </div>
         </div>
         <div className="centre-login">

@@ -9,12 +9,6 @@
   color: #666666;
 }
 
-userplaceholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #979799;
-  opacity: 1; /* Firefox */
-}
-
 .userDetails-member-label {
   text-align: center;
   padding-top: 26px;
