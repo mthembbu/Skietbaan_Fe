@@ -26,7 +26,7 @@ import AddMembersGroup from "./components/AddMembersGroup";
 import EditGroup from "./components/EditGroup";
 import ViewComp from "./components/ViewComp";
 import CreateComp from "./components/CreateComp";
-import Create from "./components/Create";
+import createPages from "./components/createPages";
 import resetPassword from "./components/resetPassword";
 import MetaTags from "react-meta-tags";
 import { PersistGate } from "redux-persist/integration/react";
@@ -78,7 +78,7 @@ class App extends Component {
                   component={GroupComponent}
                   exact
                 />
-                <Route path="/createAll" component={Create} exact />
+                <Route path="/createAll" component={createPages} exact />
                 <Redirect from="/" to="/home" />
               </Switch>
             </Router>
