@@ -268,7 +268,7 @@ export default class search extends Component {
             this.toggleNavbar();
           }
         });
-      setTimeout(function () { window.location = "/scoreCapture"; }, 2000);
+      setTimeout(function () { window.location = "/scoreCapture"; }, 4000);
 
     }
     else if (Valid && !this.state.scoreSaved) {
@@ -289,7 +289,7 @@ export default class search extends Component {
         .then(data => this.setState({
           scoreSaved: true, currState: 5
         }));
-      setTimeout(function () { window.location = "/scoreCapture"; }, 4000);
+      setTimeout(function () { window.location = "/scoreCapture"; }, 5000);
     }
   }
 
