@@ -227,7 +227,9 @@ class Register extends Component {
                     placeholder="Username"
                   />
                   <div className="error-message-container">
-                    <div className={this.state.usernameTaken ? "error-message" : "hidden"} > Username already exists</div>
+                    <div className={this.state.usernameTaken 
+                      ? "error-message" 
+                      : "hidden"} > Username already exists</div>
                     </div>
                 
               </FormGroup>
@@ -245,7 +247,9 @@ class Register extends Component {
                     placeholder="Email"
                   />
                   <div className="error-message-container">
-                <div className={this.state.emailTaken ? "error-message" : "hidden"} > Email address already in use</div>
+                <div className={this.state.emailTaken 
+                  ? "error-message" 
+                  : "hidden"} > Email address already in use</div>
                 </div>
               </FormGroup>
             </div>
@@ -259,10 +263,14 @@ class Register extends Component {
                       autoComplete="off"
                       value={this.state.passwordValue}
                       onChange={this.handleChange}
-                      className={this.state.toggle ? "input-password-show": "input-password"}
+                      className={this.state.toggle 
+                        ? "input-password-show"
+                        : "input-password"}
                       placeholder="Password"
                     />
-                    <div className={this.state.passwordValue !== "" ? "password-view-icon" : "password-icon"}
+                    <div className={this.state.passwordValue !== "" 
+                    ? "password-view-icon" 
+                    : "password-icon"}
                       onClick={this.togglePassword}>
                     </div>
 
@@ -270,8 +278,11 @@ class Register extends Component {
               </FormGroup>
             </div>
             <div className="button-container">
-              <Button onClick={this.register} id="roundButton" className={this.state.validForm ? "round-button" :
-                "buttons-invalid round-button"} >Join</Button>
+              <Button onClick={this.register} id="roundButton" 
+              className={this.state.validForm 
+                ? "round-button" 
+                : "buttons-invalid round-button"} 
+              >Join</Button>
             </div>
           </Form>
         </div>
