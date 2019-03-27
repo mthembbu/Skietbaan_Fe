@@ -5,7 +5,7 @@ import { BASE_URL } from '../actions/types.js';
 import memberIcon from '../components/assets/membership-icon.png';
 import { getCookie } from '../components/cookie.js';
 
-class ViewMembers extends Component {
+class ViewNonMembers extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,19 +15,19 @@ class ViewMembers extends Component {
             timeLeftOnMembership: [],
             filterText: ""
         }
-        this.getAllMembers = this.getAllMembers.bind(this);
+        this.getNonMembers = this.getNonMembers.bind(this);
         this.getTimeLeft = this.getTimeLeft.bind(this);
         this.onChangeText = this.onChangeText.bind(this);
         this.status = this.status.bind(this);
     }
 
     componentDidMount(){
-        this.getAllMembers();
+        this.getNonMembers();
         this.getTimeLeft()
     }
 
-    getAllMembers() {
-        fetch(BASE_URL + "/api/Features/SearchMember", {
+    getNonMembers() {
+        fetch(BASE_URL + "/api/Features/SearchNonMember", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         })
@@ -91,7 +91,7 @@ class ViewMembers extends Component {
                                     <div>{post.email}</div>
                                 </div>}>
                                     <div className="membership-details">Membership No: <b>{post.memberID}</b>
-                                        <div>Start of Membership: <b>{post.memberStartDate.substring(0, 10)}</b>
+                                        <div>Start of Membership: <b>{post.memberStartDate}</b>
                                         </div>
                                     </div>
                                 </Collapsible>
@@ -99,7 +99,7 @@ class ViewMembers extends Component {
                             <td className="second-column">
                                 <div className="expiry-time-column">
                                     <div className={(this.status(this.state.timeLeftOnMembership[index])) ? "bad" : "okay"}>
-                                        {post.memberExpiryDate.substring(0, 10)}
+                                        {post.memberExpiryDate}
                                     </div>
                                     <div>{this.state.timeLeftOnMembership[index]} Months
                                     </div>
@@ -132,4 +132,4 @@ class ViewMembers extends Component {
     }
 }
 
-export default ViewMembers;
+export default ViewNonMembers;

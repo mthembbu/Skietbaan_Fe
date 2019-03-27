@@ -5,7 +5,7 @@ import { BASE_URL } from '../actions/types.js';
 import memberIcon from '../components/assets/membership-icon.png';
 import { getCookie } from '../components/cookie.js';
 
-class ViewMembers extends Component {
+class ViewMembersExpiring extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,19 +15,19 @@ class ViewMembers extends Component {
             timeLeftOnMembership: [],
             filterText: ""
         }
-        this.getAllMembers = this.getAllMembers.bind(this);
+        this.getExpiringMembers = this.getExpiringMembers.bind(this);
         this.getTimeLeft = this.getTimeLeft.bind(this);
         this.onChangeText = this.onChangeText.bind(this);
         this.status = this.status.bind(this);
     }
 
     componentDidMount(){
-        this.getAllMembers();
+        this.getExpiringMembers();
         this.getTimeLeft()
     }
 
-    getAllMembers() {
-        fetch(BASE_URL + "/api/Features/SearchMember", {
+    getExpiringMembers() {
+        fetch(BASE_URL + "/api/Features/SearchExpiringMember", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         })
@@ -42,7 +42,7 @@ class ViewMembers extends Component {
     }
 
     getTimeLeft() {
-        fetch(BASE_URL + "/api/Features/TimeLeft", {
+        fetch(BASE_URL + "/api/Features/SearchExpiringMemberTimeLeft", {
             method: 'Get',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         })
@@ -132,4 +132,4 @@ class ViewMembers extends Component {
     }
 }
 
-export default ViewMembers;
+export default ViewMembersExpiring;
