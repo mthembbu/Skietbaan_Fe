@@ -5,6 +5,8 @@ import history from "./history";
 import { connect } from "react-redux";
 import { BASE_URL } from "../actions/types.js";
 import PropTypes from "prop-types";
+import Moment from "react-moment";
+import "moment-timezone";
 import deleteIcon from "../components/Notification-Img/trashcan.png";
 import deleteIconChange from "../components/Notification-Img/blacktrashcan.png";
 import {
@@ -24,6 +26,7 @@ class notification extends Component {
       cancelClicked: false,
       isRead: false,
       toggle: false,
+      secondToggle: false,
       markedForDeletion: false,
       updatedNotification: {}
     };
@@ -149,7 +152,7 @@ class notification extends Component {
         <div className="outer-header-div">
           <b className="notification-heading">Notifications</b>
         </div>
-        <div className="trash-spacing">
+        <div className="notification-icon-spacing">
           <img
             src={this.state.toggle ? deleteIconChange : deleteIcon}
             onClick={() => this.changeIcon()}
@@ -200,6 +203,9 @@ class notification extends Component {
               >
                 {post.notificationMessage}
               </label>
+              <Moment fromNow ago className="time-div">
+                {post.timeOfArrival}
+              </Moment>
             </td>
             <td className="td-Delete">
               <div
@@ -207,7 +213,7 @@ class notification extends Component {
                 className={
                   this.state.toggle
                     ? post.markedForDeletion
-                      ? "notifications-selected notifications-slider"
+                      ? "notifications-selected"
                       : "notifications-images"
                     : "hide"
                 }
@@ -275,8 +281,8 @@ notification.propTypes = {
   updateSelectedGroup: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
-  notificationOBJ: state.compOBJ.notificationsArray,
-  updatedNotification: state.compOBJ.updatedNotification
+  notificationOBJ: state.notificationOBJ.notificationsArray,
+  updatedNotification: state.notificationOBJ.updatedNotification
 });
 
 export default connect(
