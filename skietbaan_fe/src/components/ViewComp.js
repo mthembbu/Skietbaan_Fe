@@ -6,7 +6,6 @@ import { fetchcomp,
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../scss/view-comp.css';
-import { getCookie } from '../components/cookie.js';
 import history from "./history";
 class ViewComp extends Component {
 	constructor(props) {
