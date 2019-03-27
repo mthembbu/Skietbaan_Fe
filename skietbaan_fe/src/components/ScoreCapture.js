@@ -417,7 +417,7 @@ export default class search extends Component {
             <div className="success-container">
               <div className="success">
               </div>
-              <label className="label-success-container">Score Captured </label>
+              <label className="label-success-container">SCORE CAPTURED</label>
             </div>
           </div>
           <div className={stateOne || this.state.scoreSaved ? "hidden" : ""}>
