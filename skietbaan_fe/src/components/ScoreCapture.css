@@ -271,6 +271,11 @@
     width:33%;
 }
 
+.submit-button-elements.second{
+    width: 33%;
+    text-align: -webkit-center;
+}
+
 .video-container{
     width:310px;
     height:310px;
@@ -363,6 +368,7 @@ hr{
 
 .flash{
     height: 42px;
+    width: 72px;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -373,6 +379,7 @@ hr{
 
 .flashOff{
     height: 42px;
+    width: 72px;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -429,6 +436,18 @@ input[type=number] {
     }
 }
 
+.score-capture-header2{
+    height: 67px;
+    width: 100%;
+    background-color: #EA251A;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);
+    position: fixed;
+    top: 0px;
+    z-index: 100;
+}
+
 .score-capture-header{
     height: 67px;
     width: 100%;
@@ -447,6 +466,10 @@ input[type=number] {
     font-weight: 600;
     padding-top: 16px;
     padding-left: 40px;
+}
+
+.float-left{
+    float: left;
 }
 
 .score-capture{
