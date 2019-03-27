@@ -248,4 +248,20 @@
 	border-top-right-radius: 18px;
 	border: none;
 }
-
+.member-user-label{
+  font-weight: lighter;
+  font-size: 16px;
+}
+.member-radio{
+  display: flex;
+  margin-top: 8px;
+}
+.radio-A{
+  justify-content: flex-start;
+}
+.radio-B{
+  justify-content: center;
+}
+.radio-C{
+  justify-content: flex-end;
+}
