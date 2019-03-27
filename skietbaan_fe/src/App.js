@@ -19,7 +19,7 @@ import ScoreCapture from "./components/ScoreCapture";
 import CreatePage from "./components/CreatePage";
 import ProfileLanding from "./components/ProfileLanding";
 import GroupComponent from "./components/GroupComponent";
-import requirements from "./components/requirements.js";
+import requirements from "./components/userDetails";
 import "./App.css";
 import ForgotPassword from "./components/ForgotPassword";
 import AddMembersGroup from "./components/AddMembersGroup";

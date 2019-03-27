@@ -132,9 +132,9 @@ export default class ProfileLanding extends Component {
             <UserProfile />
           ) : this.state.selectedButton === 2 ? (
             <Documents />
-          ) : this.state.selectedButton == 3 ? (
+          ) : (
             <userDetails />
-          ) : null}
+          )}
         </div>
       </div>
     );
