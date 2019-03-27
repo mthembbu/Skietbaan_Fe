@@ -5,8 +5,6 @@ import back from "./GroupImages/back.png";
 import unmarked from "./GroupImages/unmarked.png";
 import marked from "./GroupImages/marked.png";
 
-import { getCookie } from "../components/cookie.js";
-
 class requirements extends Component {
   constructor(props) {
     super(props);

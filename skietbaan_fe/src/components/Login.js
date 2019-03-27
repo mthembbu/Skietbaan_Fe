@@ -195,7 +195,7 @@ class Login extends Component {
           </div>
           <div className="header-container">
             <div className="centre-label">
-              <label className="header-label">LOGIN</label>
+              <label className="header-label-login">LOGIN</label>
             </div>
             <img src={back}
               alt="back button"
@@ -230,10 +230,14 @@ class Login extends Component {
                     autoComplete="off"
                     value={this.state.passwordValue}
                     onChange={this.handleChange}
-                    className={this.state.toggle ? "input-password-show" : "input-password"}
+                    className={this.state.toggle 
+                      ? "input-password-show" 
+                      : "input-password"}
                     placeholder="Password"
                   />
-                  <div className={this.state.passwordValue !== "" ? "password-view-icon" : "password-icon"}
+                  <div className={this.state.passwordValue !== "" 
+                  ? "password-view-icon" 
+                  : "password-icon"}
                     onClick={this.togglePassword} name="eye">
                   </div>
                 </div>

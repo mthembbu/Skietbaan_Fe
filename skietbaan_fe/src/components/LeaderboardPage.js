@@ -114,6 +114,7 @@ class LeaderboardPage extends Component {
     }
 
     setCompetitionValue = (value) => {
+        this.onMouseClickFilter();
         this.setState({
             selectedCompetition: value
         });
@@ -122,6 +123,7 @@ class LeaderboardPage extends Component {
         this.getLeaderboardData(value, this.state.selectedGroup, this.state.selectedRank);
     }
     setGroupValue = (value) => {
+        this.onMouseClickFilter();
         this.setState({
             selectedGroup: value
         });
@@ -179,7 +181,7 @@ class LeaderboardPage extends Component {
     }
     getFilterTableHeight(){
         if(this.state.width <575){
-            return ((this.state.height /2) + -78);
+            return ((this.state.height /2) + -100 ); //78
          }else{
              return 315;
          }
@@ -413,7 +415,7 @@ class LeaderboardPage extends Component {
                             </table>
                         </div>
                         <Collapse isOpened={this.state.collapseFilter}>
-                            <div className="filter-selections">
+                            <div className="filter-selections" >
                                 <div className="category-selection">
                                     <div className={this.state.listType == "competitions" ? "choose-comps-active" : "choose-comps"}  >
                                         <MDBBtn tag="a" size="lg" floating gradient="purple"
@@ -440,7 +442,7 @@ class LeaderboardPage extends Component {
                                 <div className={this.state.listType == "groups" ? "cat-visible-groups-label" : "hide-my-div"}>
                                     Groups
                                    </div>
-                                <div className="selections-container">
+                                <div className="selections-container" onClick={this.onMouseClickFilter}>
                                     <div className="row justify-content-center">
                                         <div className="choose" style={{ height:"fit-content", maxHeight: this.getFilterTableHeight() + "px" }}>
                                             {this.state.listType == "competitions" ? competitionsList : groupsList}
@@ -452,6 +454,10 @@ class LeaderboardPage extends Component {
                                                 onClick={this.onMouseClickFilter} >
                                                 <img src={require('../resources/closefilter.png')} />
                                             </MDBBtn>
+                                        </div>
+                                    </div>
+                                    <div className="row justify-content-center">
+                                        <div className="empty-div">
                                         </div>
                                     </div>
                                 </div>
