@@ -22,7 +22,7 @@ class ViewNonMembers extends Component {
     this.getTimeLeft = this.getTimeLeft.bind(this);
     this.onChangeText = this.onChangeText.bind(this);
     this.status = this.status.bind(this);
-    this.GetDate = this.GetDate.bind(this);
+    this.getCurrentDate = this.getCurrentDate.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateMember = this.updateMember.bind(this);
   }
@@ -78,7 +78,7 @@ class ViewNonMembers extends Component {
     let RequestObject = {
       "username": this.state.array[index].username,
       "memberID": this.state.membershipsID,
-      "memberExpiryDate": this.GetDate() + "T00:00:00"
+      "memberExpiryDate": this.getCurrentDate() + "T00:00:00"
     }
     fetch(BASE_URL + "/api/Features/Update", {
       method: 'Post',
@@ -105,7 +105,7 @@ class ViewNonMembers extends Component {
     }
   }
 
-  GetDate() {
+  getCurrentDate() {
     let curr = new Date();
     curr.setDate(curr.getDate() + 365);
     let date = curr.toISOString().substr(0, 10);
@@ -163,7 +163,7 @@ class ViewNonMembers extends Component {
                           type="date"
                           className="view-non-members-text-boxes"
                           id="expdate"
-                          value={this.GetDate()}
+                          value={this.getCurrentDate()}
                           onChange={this.handleChange}
                         />
                       </div>
