@@ -74,10 +74,13 @@ export default class search extends Component {
   }
 
   cancelClicked() {
-    this.setState({
-      somethingClicked: !this.state.somethingClicked,
-      clicked: null,
-    })
+    if(this.state.somethingClicked)
+    {
+      this.setState({
+        somethingClicked: !this.state.somethingClicked,
+        clicked: null,
+      })
+    }
   }
 
   competitionClicked(item, compname) {
