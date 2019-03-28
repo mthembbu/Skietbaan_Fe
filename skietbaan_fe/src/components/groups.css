@@ -546,3 +546,12 @@
 .nameTbody{
 	line-height: 22px;
 }
+
+@media only screen and (max-width:576px){
+	.check{
+		margin-bottom: 56px;
+	}
+	.the-main{
+		margin-bottom: 56px;
+	}
+}
