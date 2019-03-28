@@ -99,7 +99,7 @@ export default class userDetails extends Component {
             />
           </div>
 
-          {this.state.cellphoneValue.length === 0 ? null : validateNumber(
+          {this.state.cellphoneValue === null ? null : validateNumber(
               this.state.cellphoneValue
             ) ? null : (
             <label className="userDetails-member-label">
@@ -135,7 +135,7 @@ export default class userDetails extends Component {
               onClick={
                 (validateEmail(this.state.emailValue) &&
                   validateNumber(this.state.cellphoneValue)) ||
-                this.state.cellphoneValue.length === 0
+                this.state.cellphoneValue === null
                   ? this.updateUser
                   : null
               }
