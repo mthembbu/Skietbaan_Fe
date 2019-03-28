@@ -8,19 +8,10 @@
     padding-right: 10px;
     font-size: 16px;
     font-weight: bold;
-    overflow-y: scroll;
-    height: 185px;
-}
-
-@media screen and (min-width:580px)  {
-    .competition-container{
-        overflow-y: hidden;
-        height: 100%;
-    }
 }
 
 .competition-item{
-    width: 100%;
+    width: 312px;
     height: 42px;
     color: #666666;
     text-align: center;
@@ -29,6 +20,7 @@
     font-size: 17px;
     border: 1px #666666 solid;
     font-weight: 300;
+    margin-bottom: 15px;
 }
 
 .float-right{
@@ -37,7 +29,6 @@
 
 @media screen and (min-width:580px)  {
     .competition-item{
-        width:100%;
         text-align: center;
 
     }
@@ -48,6 +39,17 @@
     width: 72px;
     border-radius: 22px;
     box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
+}
+
+.btn-score-capture2{
+    height:42px;
+    width: 142px;
+    border-radius: 22px;
+    box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
+}
+
+.submit-container-comp{
+    margin-top: 35px;
 }
 
 .competition-item:hover{
@@ -67,6 +69,7 @@
 }
 
 .page-content{
+    margin-top: 56px;
     background-color: #ffffff;
     width: 100%;
     z-index: 50;
@@ -80,9 +83,6 @@
         margin-bottom: 0px;
     }
     .score-capture-header{
-        margin-top: 56px;
-    }
-    .label-score{
         margin-top: 56px;
     }
 }
@@ -173,13 +173,14 @@
     font-size: 25px;
     text-align: center;
     width: 100%;
-    padding-top: 90px;
+    margin-top: 5px;
 }
 
 .label-competition{
     color: #666666;
     font-size: 24px;
     font-weight: bold;
+    font-family: helvetica;
 }
 
 .scorelabel{
@@ -190,11 +191,17 @@
 }
 
 .centre-labels{
-    width:100%;
+    width: 100%;
     font-size: 25px;
     text-align: center;
     font-weight: lighter;
-    padding-top: 34px;
+    padding-top: 64px;
+}
+
+@media screen and (min-width: 633px){
+    .centre-labels{
+        padding-top: 128px;
+    }
 }
 
 .photo-top-label{
@@ -212,7 +219,6 @@
 
 .competition-item-container{
     text-align: center;
-    padding:8px;
 }
 
 .submit-container{
@@ -221,23 +227,7 @@
     text-align: center;
     width: 312px;
     display: flex;
-    padding-top: 13%;
-}
-
-@media screen and (min-height:600px){
-    .submit-container{
-        padding-top: 50px;
-    }
-    .competition-container{
-        height: 250px;
-    }
-}
-
-@media screen and (min-width: 480px){
-    .competition-container{
-        height: 100%;
-        overflow-y: hidden;
-    }
+    padding-top: 35px;
 }
 
 .retake{
@@ -251,6 +241,10 @@
     height: 20px;
     width: 50%;
     position: relative;
+}
+
+.submit-button-elements2{
+    width: 312px;
 }
 
 .icon-push-down{
@@ -353,9 +347,10 @@ hr{
 
 .button-that-submits{
     height: 42px;
-    width: 72px;
+    width: 140px;
     border-radius: 22px;
     box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
+    float: right;
 }
 
 .button-that-submits2{
@@ -406,7 +401,15 @@ input[type=number] {
     background-color: #e11e2b;
     color: white;
     border: none;
-    box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
+}
+
+.competiton-cancel-button{
+    background: url('../components/assets/whiteCancel.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 28px;
+    width: 28px;
+    margin-top: -25px;
 }
 
 .btn-back{
