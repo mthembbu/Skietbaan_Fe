@@ -439,7 +439,7 @@ export default class search extends Component {
         <div className={stateOne || this.state.scoreSaved
           ? "hidden"
           : "score-capture-header"}>
-          <div className="gun-overlay-image" id="test">
+          <div className="gun-overlay-image">
             <label className="label-for-score">ADD SCORE</label>
           </div>
         </div>
@@ -526,9 +526,11 @@ export default class search extends Component {
               <div className={this.state.imageTaken || this.state.scoreSaved
                 ? "hidden"
                 : "score-capture-header2"}>
-                <label className="label-for-capture-score">CAPTURE SCORE</label>
-                <img src={lightgrayback} onClick={() => this.goBack()} id="back"
-                  className="btn-back" alt='backBtn'></img>
+                <div className="gun-overlay-image">
+                  <label className="label-for-capture-score">CAPTURE SCORE</label>
+                  <img src={lightgrayback} onClick={() => this.goBack()} id="back"
+                    className="btn-back" alt='backBtn'></img>
+                </div>
               </div>
             </div>
             <div className={this.state.imageTaken
@@ -575,7 +577,10 @@ export default class search extends Component {
               <div className={!this.state.imageTaken
                 ? "hidden"
                 : "score-capture-header2"}>
-                <label className="label-for-capture-score">Score Captured</label>
+                <div className="gun-overlay-image">
+
+                  <label className="label-for-capture-score">Score Captured</label>
+                </div>
               </div>
             </div>
             <div className={this.state.imageTaken
