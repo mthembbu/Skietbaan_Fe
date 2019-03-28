@@ -67,7 +67,7 @@
 }
 
 .red-text{
-    color:#C21616;
+    color:#BE0000;
 }
 
 .award-type-label{
@@ -91,8 +91,8 @@
     padding-top: 128px;
 }
 
-.pad-right-25px{
-    padding-right: 25px;
+.align-accuracy-text{
+    text-align: initial;
 }
 
 .select-competition-font{
@@ -133,7 +133,7 @@
     padding-top: 18px;
     padding-left: 6px;
     background-color: #F3F4F9;
-    color: #EA241A;
+    color: #BE0000;
 }
 
 .circle-bigger{
@@ -201,7 +201,7 @@
 
 .total-text{
     font-size: 24px;
-    color: #EA241A;
+    color: #BE0000;
     padding-top: 20px;
     padding-right: 7px;
 }
@@ -213,7 +213,7 @@
 .accuracy-text{
     font-size: 19px;
     font-weight: bold;
-    color: #EA241A;
+    color: #BE0000;
     padding-top: 24px;
 }
 
