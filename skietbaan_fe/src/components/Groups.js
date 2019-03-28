@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
 import { withRouter } from 'react-router-dom';
-import { createGroups } from '../actions/postActions';
+import { createGroups,pageState } from '../actions/postActions';
 import { BASE_URL } from '../actions/types';
 import back from './GroupImages/back.png';
 import unmarked from './GroupImages/Oval.png';
 import marked from './GroupImages/MarkedBox.png';
 import Switch from '@material-ui/core/Switch';
+import seleteAll from './GroupImages/seleteAll.png';
+import unSelectAll from './GroupImages/unSelectAll.png';
 
 class Groups extends Component {
 	constructor(props) {
@@ -99,7 +101,7 @@ class Groups extends Component {
 		}
 	};
 	onBack() {
-		this.props.history.push('/addGroup');
+		this.props.history.push('/create');
 	}
 	render() {
 		const postitems = (
@@ -151,8 +153,9 @@ class Groups extends Component {
 								placeholder="Search"
 							/>
 						</div>
-						<div className="switchAll" onClick={this.selectall}>All
-							<Switch checked={this.state.count=== 0?false:null || this.state.count==this.state.posts.length?true:null} />
+						<div className="switchAll" onClick={this.selectall}>
+						<img className="checkbox-delete" src={this.state.count===this.state.posts.length? seleteAll:unSelectAll} alt="" />
+							{/* <Switch checked={this.state.count=== 0?false:null || this.state.count==?true:null} /> */}
 						</div>
 					</div>
 				</div>
@@ -175,4 +178,4 @@ const mapStateToProps = (state) => ({
 	thegroup: state.posts.selectedItem
 });
 
-export default withRouter(connect(mapStateToProps, { createGroups})(Groups));
+export default withRouter(connect(mapStateToProps, {pageState, createGroups})(Groups));
