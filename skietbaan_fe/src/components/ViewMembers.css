@@ -67,9 +67,41 @@
   border: 1px #979797 solid;
 }
 
-.search {
-  padding: 18px 30px 10px 30px;
+.view-non-members-text-boxes {
   background-color: #fdfdfd;
+  border-radius: 4px;
+  line-height: 22px;
+  text-align: left;
+  padding-left: 19px;
+  width: 100%;
+  border: none;
+  font-family: helvetica;
+  font-size: 16px;
+  font-weight: bold;
+  color: #666666;
+  border: 1px #979797 solid;
+  height: 44px;
+  width: 312px;
+  border-radius: 7px;
+  margin-bottom: 42px;
+}
+
+.view-non-members-confirm {
+  font-weight: lighter;
+  font-size: 16px;
+  background-color: #BE0000;
+  border-radius: 25px;
+  width: 95%;
+  height: 42px;
+  border-color: #BE0000;
+  border-width: 1.5px;
+  border: none;
+  color: #ffffff;
+}
+
+.search {
+  padding: 18px 30px 10px 25px;
+  background-color: #ffffff;
   height: 74px;
 }
 
@@ -120,7 +152,7 @@
 }
 
 .first-column {
-  padding-left: 30px;
+  padding-left: 25px;
   width: 65%;
   height: 55px;
   text-align: left;
@@ -132,7 +164,7 @@
 }
 
 .bad {
-  color: #BE0000;
+  color: #be0000;
   font-weight: bold;
 }
 
@@ -149,7 +181,8 @@
 
 .membership-details {
   font-size: 13px;
-  height: 55px;
+  margin-top: 48px;
+  margin-bottom: 20px;
 }
 
 .membership-icon {
