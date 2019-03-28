@@ -51,7 +51,7 @@ class notification extends Component {
       }
     }
     try {
-      fetch(BASE_URL + "/api/Notification/DeleteNotifications?", {
+      fetch(BASE_URL + "/api/Notification/DeleteNotificationById", {
         method: "post",
         headers: {
           Accept: "application/json",
@@ -61,6 +61,7 @@ class notification extends Component {
       });
     } catch (err) {}
     this.props.getNotifications(this.state.token);
+    window.location = "/notify";
   };
 
   onClick_View = (Notification, Message, Id) => {
@@ -76,13 +77,13 @@ class notification extends Component {
     } else if (Notification === "Competition") {
       var competitionName = Message.split(",")[0];
       this.props.updateSelectedCompetition(competitionName);
-      window.location = "/home";);
+      window.location = "/home";
     } else if (Notification === "Group") {
       var groupName = Message.split(",")[0];
       this.props.updateSelectedGroup(groupName);
-        window.location = "/home";
+      window.location = "/home";
     } else {
-        window.location = "/notify";
+      window.location = "/notify";
     }
   };
 
@@ -95,7 +96,7 @@ class notification extends Component {
   }
 
   selectAll = () => {
-    if (this.state.check == "Select all") {
+    if (this.state.check === "Select all") {
       this.setState({ count: this.props.notificationsArray.length });
       for (var i = 0; i < this.props.notificationsArray.length; i++) {
         this.props.notificationsArray[i].markedForDeletion = true;
@@ -145,7 +146,7 @@ class notification extends Component {
     let headingItems = (
       <div className="page-heading">
         <div className="outer-header-div">
-          <b className="notification-heading">Notifications</b>
+          <b>Notifications</b>
         </div>
         <div className="notification-icon-spacing">
           <img
@@ -172,7 +173,7 @@ class notification extends Component {
 
     const adminHeadingItems = (
       <div className="page-heading">
-        <b className="notification-heading">Notifications</b>
+        <b>Notifications</b>
         <img
           src={deleteIcon}
           className="delete-icon"
