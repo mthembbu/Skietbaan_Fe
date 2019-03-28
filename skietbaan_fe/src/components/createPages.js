@@ -67,6 +67,7 @@ export class createPages extends Component {
 		return (
 			<div className="create-main-container">
 				{this.props.page === 0 ? (
+                    <div className="create-nav-container">
 					<div className="create-top-nav">
 						<div class="page-name-bar">
 							<label className="create-all-menu">CREATE</label>
@@ -129,6 +130,7 @@ export class createPages extends Component {
 							<div className="member-radio">
 								<div className="radio-A">
 									<Radio
+										className="a-radio"
 										aria-label="A"
 										checked={this.state.selectedValue === 'A'}
 										onChange={() => this.handleChange('A')}
@@ -137,14 +139,15 @@ export class createPages extends Component {
 										name="radio-button-demo"
 										aria-label="B"
 									/>
+
 									<label className="member-user-label">USERS</label>
 								</div>
 								<div className="radio-B">
 									<Radio
+										className="b-radio"
 										aria-label="A"
 										checked={this.state.selectedValue === 'B'}
 										value="b"
-										name="radio-button-demo"
 										aria-label="B"
 										color={'primary'}
 										onChange={() => this.handleChange('B')}
@@ -153,10 +156,10 @@ export class createPages extends Component {
 								</div>
 								<div className="radio-C">
 									<Radio
+										className="c-radio"
 										aria-label="A"
 										checked={this.state.selectedValue === 'C'}
 										value="b"
-										name="radio-button-demo"
 										aria-label="B"
 										color={'primary'}
 										onChange={() => this.handleChange('C')}
@@ -258,7 +261,9 @@ export class createPages extends Component {
 							) : null}
 						</div>
 					</div>
+                    </div>
 				) : null}
+            
 				<div>
 					{this.state.selectedButton === 1 && this.state.selectedButtonCreateViewGroups === 1 ? (
 						<AddGroup />
@@ -270,7 +275,13 @@ export class createPages extends Component {
 					) : this.state.selectedButton === 2 && this.state.selectedButtonCreateViewCompetitions === 2 ? (
 						<ViewComp />
 					) : null}
-					{(this.state.selectedButton === 3 && this.state.selectedValue === 'A') ?<ViewNonMembers />  :(this.state.selectedButton===3 && this.state.selectedValue==="B")?<ViewMembers />:(this.state.selectedButton===3 && this.state.selectedValue==="C")?<ViewMembersExpiring/>:null }
+					{this.state.selectedButton === 3 && this.state.selectedValue === 'A' ? (
+						<ViewNonMembers />
+					) : this.state.selectedButton === 3 && this.state.selectedValue === 'B' ? (
+						<ViewMembers />
+					) : this.state.selectedButton === 3 && this.state.selectedValue === 'C' ? (
+						<ViewMembersExpiring />
+					) : null}
 				</div>
 			</div>
 		);
