@@ -116,7 +116,7 @@ class ViewMembers extends Component {
                       </div>
                     }
                   >
-                    <div className="membership-details">
+                    <div className="view-members-membership-details">
                       Membership No: <b>{post.memberID}</b>
                       <div>
                         Start of Membership:{" "}
