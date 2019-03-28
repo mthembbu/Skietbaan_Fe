@@ -4,6 +4,7 @@ const initialState = {
   notificationsArray: [],
   updatedNotification: {}
 };
+
 export default function(state = initialState, action) {
   switch (action.type) {
     case FETCH_NOTIFICATION:
@@ -11,6 +12,7 @@ export default function(state = initialState, action) {
         ...state,
         notificationsArray: action.payload
       };
+
     case UPDATE_IS_READ:
       return {
         ...state,
