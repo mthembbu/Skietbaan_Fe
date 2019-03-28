@@ -59,7 +59,6 @@ class UserProfile extends Component {
         });
     }
 
-    
     componentDidMount(){
         this._isMounted = true;
     }
