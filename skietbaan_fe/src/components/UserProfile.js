@@ -182,7 +182,7 @@ class UserProfile extends Component {
     renderAccuracyCircle(element, index){
         return(
             <div>
-                <div className="pad-right-25px">
+                <div className="align-accuracy-text">
                     <label className="font-size-14px red-text award-type-label">ACCURACY</label>
                 </div>
                 <div className="circle-bigger">
