@@ -16,7 +16,7 @@ export default class search extends Component {
     this.state = {
       currState: 1,
       clicked: null,
-      score: 0,
+      score: null,
       hideCamera: false,
       imageContent: "",
       competitionName: "",
@@ -58,7 +58,7 @@ export default class search extends Component {
     this.setState({
       [target.name]: target.value,
     }, () => {
-      if (validateScore(this.state.score)) {
+      if (validateScore(this.state.score) && target.value !== undefined) {
         this.setState({
           validScore: true,
           scoreEntered: true
@@ -124,7 +124,7 @@ export default class search extends Component {
 
   validate() {
     let Valid = false;
-    if (!validateScore(this.state.score)) {
+    if (!validateScore(this.state.score) && this.value === undefined) {
       this.setState({
         validForm: false,
         validScore: false
@@ -270,6 +270,7 @@ export default class search extends Component {
         body: JSON.stringify(RequestObject)
       }).then(response => response.json())
         .then(data => {
+          if(data.indexOf("Score Added Successfully") > -1)
           this.setState({
             scoreSaved: true, currState: 5
           })
@@ -419,7 +420,7 @@ export default class search extends Component {
                   :
                   (this.state.clicked != null && this.state.clicked === i
                     ? "competition-item active"
-                    : "hidden")}>
+                    : "competition-item fade-out")}>
               <li className="li-container"
                 onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name)}>
                 {this.state.competitionsList[i].name}
@@ -473,6 +474,7 @@ export default class search extends Component {
                 step="1"
                 autoComplete="off"
                 name="score"
+                pattern="\d*"
                 className="score"
                 onChange={this.handleScore}
                 placeholder="Enter Score"></input>
