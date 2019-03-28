@@ -32,7 +32,6 @@ class UserProfile extends Component {
             return;
         }
 
-        /*use the remote URL*/
         fetch(BASE_URL + "/api/awards/" + token, {
         method: "GET",
         headers: {
@@ -80,10 +79,6 @@ class UserProfile extends Component {
         this.setState(state => ({ collapse: !state.collapse }));
     }
 
-    /*
-        This function takes the total score as string and append zeros
-        at the front if the total score has less than four digits
-    */
     animateAccuracyCircle(counter, element, index){
         if(this.state.collapse) return;
         if(counter <= element.accuracy){
@@ -96,7 +91,6 @@ class UserProfile extends Component {
                                 'deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');    
             }
             else{
-                
                 activeBorder.css('background-image','linear-gradient(' + (degreees - 90) + 
                                 'deg, transparent 50%, #EA241A 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');
             }
@@ -122,7 +116,7 @@ class UserProfile extends Component {
                 <div id={`circle${index}`} className="circle">
                     <label className="accuracy-text">0%</label>
                 </div>
-                {this.animateAccuracyCircle(1, element, index)}
+                {this.animateAccuracyCircle(0, element, index)}
             </div>
         )
     }
@@ -185,9 +179,6 @@ class UserProfile extends Component {
         return renderArray;
     }
 
-    //TODO: CHANGE THE PADDING-TOP WHEN ACCURACY IS ZERO.
-    //DOESNT SHOW THE CORRECT ACCURACY FOR THE LAST COMPETITION IN THE LIST
-
     renderAccuracyCircle(element, index){
         return(
             <div>
@@ -248,7 +239,7 @@ class UserProfile extends Component {
                     </Row>
                     <Row>
                         <Col>
-                            <div className="competition-name-text pad-bottom-16px">
+                            <div className="competition-name-text red-text pad-bottom-16px">
                                 <a onClick={this.toggle} className="lay-horizontal center-content make-cursor-point">
                                     <div className="push-right-5px">
                                         {this.state.awardCompetitions[this.state.selectedCompetition]
