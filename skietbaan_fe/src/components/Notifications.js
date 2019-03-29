@@ -91,7 +91,6 @@ class notification extends Component {
   };
 
   markForDeletion = index => {
-    console.log("we are in", this.props.notificationsArray);
     if (this.props.notificationsArray[index].markedForDeletion === true) {
       this.setState({ marked: false });
       this.props.notificationsArray[index].markedForDeletion = false;
@@ -101,7 +100,6 @@ class notification extends Component {
       this.setState({ marked: true });
       this.props.notificationsArray[index].markedForDeletion = true;
     }
-    console.log(this.props.notificationsArray);
   };
 
   selectAll = () => {
@@ -142,7 +140,6 @@ class notification extends Component {
   }
 
   render() {
-    console.log(this.props.notificationsArray);
     if (!getCookie("token")) {
       setTimeout(function() {
         history.push("/registerPage");
