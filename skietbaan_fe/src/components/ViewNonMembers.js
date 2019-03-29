@@ -192,6 +192,7 @@ class ViewNonMembers extends Component {
               type="text"
               className="user-value"
               id="usernameValue"
+              placeholder="Enter Username"
               value={this.state.filterText}
               onChange={this.onChangeText}
             />

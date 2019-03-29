@@ -204,6 +204,7 @@ class ViewMembersExpiring extends Component {
               autoComplete="off"
               type="text"
               className="user-value"
+              placeholder="Enter Username"
               id="usernameValue"
               value={this.state.filterText}
               onChange={this.onChangeText}

@@ -1,4 +1,24 @@
 @media only screen and (min-width: 576px) {
+
+	.create-top-nav {
+		height: 184px;
+		position: fixed;
+		top: 0;
+		width: 100%;
+		z-index: 1;
+		background: #fdfdfd;
+		margin-top: 56px;
+	}
+
+	.components-create{
+		padding-top: 25px;
+		background-color: white;
+	}
+
+	.content-container{
+		margin-top: 0px;
+	}
+
 	.page-name-create-all {
 		position: center;
 		text-align: center;

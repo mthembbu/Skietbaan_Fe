@@ -264,7 +264,7 @@ export class createPages extends Component {
                     </div>
 				) : null}
             
-				<div>
+				<div className="components-create">
 					{this.state.selectedButton === 1 && this.state.selectedButtonCreateViewGroups === 1 ? (
 						<AddGroup />
 					) : this.state.selectedButton === 1 && this.state.selectedButtonCreateViewGroups === 2 ? (

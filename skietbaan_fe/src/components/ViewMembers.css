@@ -1,5 +1,6 @@
 .centre-view-member {
   margin: 0 auto;
+  margin-top: 30px;
   position: center;
   background: #fdfdfd;
 }
@@ -9,15 +10,23 @@
 }
 
 .table-search-members {
+  padding-top: 55px;
   background-color: #fdfdfd;
 }
 
 @media only screen and (max-width: 575px) {
   .table-search-members {
+    padding-top: 55px;
     background-color: #fdfdfd;
     overflow-y: scroll;
     height: 100%;
     margin-bottom: 57px;
+  }
+
+  .centre-view-member {
+    margin: 0 auto;
+    position: center;
+    background: #fdfdfd;
   }
 }
 
@@ -48,8 +57,9 @@
 }
 
 .username-search {
-  position: center;
+  position: fixed;
   text-align: center;
+  width: 100%;
 }
 
 .user-value {
@@ -115,9 +125,9 @@
 }
 
 .search {
-  padding: 18px 30px 10px 25px;
+  padding: 1px 30px 10px 25px;
   background-color: #ffffff;
-  height: 74px;
+  height: 55px;
 }
 
 .user-value {
