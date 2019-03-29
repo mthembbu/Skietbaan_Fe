@@ -10,7 +10,7 @@
 	width: 100%;
 	display: grid;
 	text-align: -webkit-center;
-	margin-top: 23px;
+	margin-top: 10%;
 }
 
 .texts:focus {
@@ -101,4 +101,8 @@
 	white-space: nowrap;
 	overflow: hidden !important;
 	padding-right: 21px;
+}
+.add-group-main{
+	width: 100%;
+	position: fixed;
 }

@@ -7,8 +7,8 @@ import { withRouter } from 'react-router-dom';
 import marked from './GroupImages/MarkedBox.png';
 import unmarked from './GroupImages/Oval.png';
 import back from './GroupImages/back.png';
-import seleteAll from './GroupImages/seleteAll.png';
 import { AddMemberAction, pageState } from '../actions/postActions';
+import seleteAll from './GroupImages/seleteAll.png';
 import unSelectAll from './GroupImages/unSelectAll.png';
 
 
