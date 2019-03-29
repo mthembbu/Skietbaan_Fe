@@ -36,11 +36,12 @@ class notification extends Component {
       check: "Select all",
       markedForDeletion: false,
       updatedNotification: {},
-      token: getCookie("token")
+      token: getCookie("token"),
+      marked: null
     };
     this.onDelete = this.onDelete.bind(this);
-    this.markForDeletion = this.markForDeletion.bind(this);
     this.changeIcon = this.changeIcon.bind(this);
+    this.markForDeletion = this.markForDeletion.bind(this);
   }
 
   onDelete = async () => {
@@ -87,13 +88,19 @@ class notification extends Component {
     }
   };
 
-  markForDeletion(index) {
+  markForDeletion = index => {
+    console.log("we are in", this.props.notificationsArray);
     if (this.props.notificationsArray[index].markedForDeletion === true) {
+      this.setState({ marked: false });
       this.props.notificationsArray[index].markedForDeletion = false;
-    } else {
+    } else if (
+      this.props.notificationsArray[index].markedForDeletion === false
+    ) {
+      this.setState({ marked: true });
       this.props.notificationsArray[index].markedForDeletion = true;
     }
-  }
+    console.log(this.props.notificationsArray);
+  };
 
   selectAll = () => {
     if (this.state.check === "Select all") {
@@ -137,6 +144,7 @@ class notification extends Component {
   }
 
   render() {
+    console.log(this.props.notificationsArray);
     if (!getCookie("token")) {
       setTimeout(function() {
         history.push("/registerPage");
