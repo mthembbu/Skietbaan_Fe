@@ -120,7 +120,6 @@ class ViewNonMembers extends Component {
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
-    console.log(this.state.filterText)
     const postItems = (
       <table striped hover condensed className="table-member">
         <tbody>
