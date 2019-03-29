@@ -13,12 +13,41 @@ class ViewMembers extends Component {
       isOpened: false,
       height: 100,
       timeLeftOnMembership: [],
-      filterText: ""
+      filterText: "",
+      lastSize: 0,
+      navbarState: false,
     };
     this.getAllMembers = this.getAllMembers.bind(this);
     this.getTimeLeft = this.getTimeLeft.bind(this);
     this.onChangeText = this.onChangeText.bind(this);
     this.status = this.status.bind(this);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.toggleNavbar2 = this.toggleNavbar2.bind(this);
+  }
+
+  toggleNavbar() {
+    this.setState({
+      navbarState: !this.state.navbarState,
+    })
+    var navbar = document.querySelector(".navbar-admin");
+    if (navbar.classList.contains("hidden")) {
+      navbar.classList.remove("hidden");
+    }
+    else {
+      navbar.classList.add("hidden");
+    }
+  }
+
+  toggleNavbar2() {
+    var navbar = document.querySelector(".navbar-admin");
+    if (this.state.lastSize > document.body.clientHeight) {
+      navbar.setAttribute('hidden', 'true');
+      this.toggleNavbar();
+    }
+    else {
+      navbar.removeAttribute('hidden');
+      this.toggleNavbar();
+    }
   }
 
   componentDidMount() {
@@ -83,6 +112,14 @@ class ViewMembers extends Component {
   render() {
     if (!getCookie("token")) {
       window.location = "/registerPage";
+    }
+    if (this.state.lastSize === 0) {
+      this.state.lastSize = document.body.clientHeight;
+      document.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener("resize", () => {
+          this.toggleNavbar2();
+        })
+      });
     }
     const postItems = (
       <table striped hover condensed className="table-member">
