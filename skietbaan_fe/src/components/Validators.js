@@ -14,7 +14,7 @@ export function validateUsername(username) {
 }
 
 export function validateScore(score) {
-    const re = /^[0-9]+$/;
+    const re = /^([0-9]|[1-4]\d|50)$/;
   var result = re.test(score);
   return result;
 }
