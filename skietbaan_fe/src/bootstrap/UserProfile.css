@@ -191,14 +191,6 @@
     height: 22px;
 }
 
-.inherit-height{
-    height: inherit;
-}
-
-.inherit-width{
-    width: inherit;
-}
-
 .remove-right-padding{
     padding-right: 0px;
 }
