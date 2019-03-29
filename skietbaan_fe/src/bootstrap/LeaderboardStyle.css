@@ -148,7 +148,7 @@ html, body{
           margin-right: auto;
           margin-top: 2%;
           color: #fdfdfd;
-          background-image: linear-gradient(to right, #ef3024  , #Dc0600);
+          background-color: #BE0000;
           box-shadow: 0 10px 16px -6px rgba(0,0,0,.33);
      }
      .filter-selections .individual-inactive{
@@ -234,7 +234,7 @@ html, body{
          border-radius: 18px;
           height: 36px;
           padding: 0%;
-         background-image: linear-gradient(to right, #ef3024  , #Dc0600);
+         background-color: #BE0000;
          color: #fdfdfd;
          font-family: Helvetica;
          font-size: 15px;
@@ -252,6 +252,11 @@ html, body{
          border-bottom-left-radius: 20px;
          box-shadow: 0 16px 23px -5px rgba(0,0,0,.33);
      }
+
+     /* background-repeat: no-repeat;
+     background-size: contain;
+     background-image: url(../components/assets/gunOverlay.png);
+     width: 151px; */
      .closed-filter-section .filter-table1{
          width: 100%;
          height: 68px !important;
@@ -275,12 +280,29 @@ html, body{
      .closed-filter-section .filter-table1 .header-row1 .competition-name-col{
          width: 75%;
          height: 100%;
-         font-family: helvetica;
-         text-align: left;
-         padding-left: 5%;
-         font-size: 20px;
-         font-weight: bold;
      } 
+     .closed-filter-section .filter-table1 .header-row1 .competition-name-col .gun-icon{
+        height: 100%;
+        width: -moz-fit-content;
+        width: fit-content;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-image: url(/static/media/gunOverlay.dc42d30c.png);
+        width: 151px;
+        margin-left: 7px;
+        margin-top: 4px;
+     }
+     .closed-filter-section .filter-table1 .header-row1 .competition-name-col .gun-icon .competition-name{
+        font-family: helvetica;
+        text-align: left;
+        padding-top: 15px;
+        padding-left: 15px;
+        font-size: 20px;
+        font-weight: bold;
+        width: 100%;
+        height: 100%;
+        text-transform: uppercase;
+      }
      .closed-filter-section .filter-table1 .header-row1 .filter-labels-col .head-table-labels{
          width: 100%;
          height: 100%;
@@ -659,6 +681,7 @@ html, body{
     margin-bottom: 58px;
     background-color: transparent;
   }
+  
   .userWrapper .ReactCollapse--collapse .ReactCollapse--content .row{
       background-color: transparent;
   }
@@ -707,5 +730,19 @@ html, body{
          width: 144px;
          display: inline-block;
      }
+     .userWrapper .row{
+        background-color: transparent;
+    }
+    .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .extra-name-col div{
+        width: 90px;
+        height: fit-content;
+        margin: auto;
+        border: solid;
+        overflow: auto;
+        border-color: transparent;
+        text-align: left;
+        margin-left: 0px;
+        padding-left: 0px;
+    }
 }
  

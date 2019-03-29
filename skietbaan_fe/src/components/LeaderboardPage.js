@@ -364,7 +364,7 @@ class LeaderboardPage extends Component {
                             <table className="head-table-labels">
                                 <tbody>
                                     <tr>
-                                        <td className="extra-name-col">{post.username}</td>
+                                        <td className="extra-name-col"><div>{post.displayName == null ? post.username : post.displayName }</div></td>
                                         <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{post.best != 0 ? post.best : '--'}</td>
                                         <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>{post.average != 0 ? post.average : '--'}</td>
                                         <td className={this.state.selectedRank == "total" ? "score-col-active" : "score-col"}>{post.total != 0 ? post.total : '--'}</td>
@@ -397,22 +397,25 @@ class LeaderboardPage extends Component {
                             <table className="filter-table1">
                                 <tbody>
                                     <tr className="header-row1">
-
-                                        <Motion
+                                        <div className="competition-name-col">
+                                           <div className="gun-icon">
+                                           <Motion
                                             defaultStyle={{ x: -200, opacity: 0 }}
                                             style={{
                                                 x: spring(0),
                                                 opacity: spring(1)
                                             }}>
-                                            {style => (
-                                                <td className="competition-name-col" style={{
+                                                {style => (
+                                                <div className="competition-name" style={{
                                                     transform: `translateX(${style.x}px)`,
                                                     opacity: style.opacity
                                                 }} >
                                                     {this.props.competitions.length != 0 ? this.props.competitions[this.state.selectedCompetition].label : "-------"}
-                                                </td>
+                                                </div>
                                             )}
-                                        </Motion>
+                                                </Motion>
+                                           </div>
+                                        </div>
                                         <td className="filter-icon-col">
                                             <div className="filter-icon">
                                                 <MDBBtn tag="a" size="lg" floating gradient="purple"
