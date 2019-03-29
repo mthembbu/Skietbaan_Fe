@@ -9,6 +9,7 @@ import { Collapse } from 'react-collapse';
 import { Table } from "react-bootstrap";
 import { getCookie } from './cookie.js'
 import { MDBBtn } from "mdbreact";
+import { Motion, spring } from "react-motion";
 import '../bootstrap/LeaderboardStyle.css';
 
 class LeaderboardPage extends Component {
@@ -114,7 +115,6 @@ class LeaderboardPage extends Component {
     }
 
     setCompetitionValue = (value) => {
-        this.onMouseClickFilter();
         this.setState({
             selectedCompetition: value
         });
@@ -123,7 +123,6 @@ class LeaderboardPage extends Component {
         this.getLeaderboardData(value, this.state.selectedGroup, this.state.selectedRank);
     }
     setGroupValue = (value) => {
-        this.onMouseClickFilter();
         this.setState({
             selectedGroup: value
         });
@@ -148,12 +147,12 @@ class LeaderboardPage extends Component {
     }
     displayMember = (isMember) => {
         if (isMember) {
-           return <div className="member-container">
+            return <div className="member-container">
                 <div className="status-icon"><img src={require('../resources/member.png')} /></div>
                 <div className="label">Member</div>
             </div>
         } else {
-            return  <div className="member-container">
+            return <div className="member-container">
                 <div className="status-icon"><img src={require('../resources/guest.png')} /></div>
                 <div className="label">User</div>
             </div>
@@ -162,29 +161,29 @@ class LeaderboardPage extends Component {
     displayCompetitive = (isCompetitive) => {
         if (isCompetitive) {
             return <div className="competitive-shooter-conatiner">
-               <div className="status-icon"> <img src={require('../resources/competitive.png')} /></div>
-               <div className="label">Competition Shooter</div>
-           </div>
+                <div className="status-icon"> <img src={require('../resources/competitive.png')} /></div>
+                <div className="label">Competition Shooter</div>
+            </div>
         } else {
             return <div className="competitive-shooter-conatiner">
-            <div className="status-icon"><img src={require('../resources/standard.png')} /></div>
-            <div className="label">Standard Shooter</div>
+                <div className="status-icon"><img src={require('../resources/standard.png')} /></div>
+                <div className="label">Standard Shooter</div>
             </div>
         }
     }
-    getRankTableHeight(){
-        if(this.state.width <575){
-           return (this.state.ranktableHeightMobile + 80);
-        }else{
+    getRankTableHeight() {
+        if (this.state.width < 575) {
+            return (this.state.ranktableHeightMobile + 80);
+        } else {
             return this.state.ranktableHeightMobile;
         }
     }
-    getFilterTableHeight(){
-        if(this.state.width <575){
-            return ((this.state.height /2) + -100 ); //78
-         }else{
-             return 315;
-         }
+    getFilterTableHeight() {
+        if (this.state.width < 575) {
+            return ((this.state.height / 2) + -100);
+        } else {
+            return 315;
+        }
     }
     getCurentUserRankNumber(rankingList) {
         if (rankingList != undefined) {
@@ -348,7 +347,7 @@ class LeaderboardPage extends Component {
                     {this.props.competitions.map((competition, index) => (
                         <tr key={competition.value.toString()} onClick={() => this.setCompetitionValue(index)}
                             value={competition.value}>
-                            <td className={this.state.selectedCompetition == (competition.value - 1) ? "td-active" : "td-inactive"}>{competition.label}</td>
+                            <td className={this.state.selectedCompetition == index ? "td-active" : "td-inactive"}>{competition.label}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -378,7 +377,7 @@ class LeaderboardPage extends Component {
                     <Table className="user-more-details-table">
                         <tr className="user-more-details-row">
                             <td className="member" >
-                            {this.displayMember(post.isMember)}
+                                {this.displayMember(post.isMember)}
                             </td>
                             <td className="competitive-shooter">
                                 {this.displayCompetitive(post.isCompetitiveShooter)}
@@ -388,7 +387,6 @@ class LeaderboardPage extends Component {
                 </Collapsible>
                 <div className="underline"></div>
             </tr>
-
         ));
         return (
             /* Leaderboard Page Main Container */
@@ -399,9 +397,22 @@ class LeaderboardPage extends Component {
                             <table className="filter-table1">
                                 <tbody>
                                     <tr className="header-row1">
-                                        <td className="competition-name-col">
-                                            {this.props.competitions.length != 0 ? this.props.competitions[this.state.selectedCompetition].label : "-------"}
-                                        </td>
+
+                                        <Motion
+                                            defaultStyle={{ x: -200, opacity: 0 }}
+                                            style={{
+                                                x: spring(0),
+                                                opacity: spring(1)
+                                            }}>
+                                            {style => (
+                                                <td className="competition-name-col" style={{
+                                                    transform: `translateX(${style.x}px)`,
+                                                    opacity: style.opacity
+                                                }} >
+                                                    {this.props.competitions.length != 0 ? this.props.competitions[this.state.selectedCompetition].label : "-------"}
+                                                </td>
+                                            )}
+                                        </Motion>
                                         <td className="filter-icon-col">
                                             <div className="filter-icon">
                                                 <MDBBtn tag="a" size="lg" floating gradient="purple"
@@ -442,9 +453,9 @@ class LeaderboardPage extends Component {
                                 <div className={this.state.listType == "groups" ? "cat-visible-groups-label" : "hide-my-div"}>
                                     Groups
                                    </div>
-                                <div className="selections-container" onClick={this.onMouseClickFilter}>
+                                <div className="selections-container">
                                     <div className="row justify-content-center">
-                                        <div className="choose" style={{ height:"fit-content", maxHeight: this.getFilterTableHeight() + "px" }}>
+                                        <div className="choose" style={{ height: "fit-content", maxHeight: this.getFilterTableHeight() + "px" }}>
                                             {this.state.listType == "competitions" ? competitionsList : groupsList}
                                         </div>
                                     </div>
@@ -467,9 +478,20 @@ class LeaderboardPage extends Component {
                             <table className="ranking-table-head">
                                 <tr className="header-row2">
                                     <td className="col-empty"></td>
-                                    <td colSpan="2" className="grouping-label-col">
-                                        {this.state.selectedGroup == -1 ? "Overall rank" : (this.props.groups.length != 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
-                                    </td>
+                                    <Motion
+                                            defaultStyle={{ x: -200, opacity: 0 }}
+                                            style={{
+                                                x: spring(0),
+                                                opacity: spring(1) }}>
+                                            {style => (
+                                                <td colSpan="2" className="grouping-label-col" style={{
+                                                    transform: `translateX(${style.x}px)`,
+                                                    opacity: style.opacity
+                                                }} >
+                                                    {this.state.selectedGroup == -1 ? "Overall rank" : (this.props.groups.length != 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
+                                                   </td>
+                                            )}
+                                   </Motion>
                                     <td colSpan="1" className={this.state.selectedRank == "best" ? "active-label-col" : "inactive-label-col"} onClick={() => this.setSelectedRank("best")}>
                                         Best
                                        </td>
@@ -481,10 +503,10 @@ class LeaderboardPage extends Component {
                                         </td>
                                 </tr>
                             </table>
-                            <div className="ranking-table-section"  style={{ height: this.getRankTableHeight() + "px" }}>
+                            <div className="ranking-table-section" style={{ height: this.getRankTableHeight() + "px" }}>
                                 <table className="ranking-table" >
-                                    <tbody> 
-                                        {tablebody}   
+                                    <tbody>
+                                        {tablebody}
                                     </tbody>
                                 </table>
                             </div>
@@ -492,13 +514,20 @@ class LeaderboardPage extends Component {
                     </div>
                 </div>
                 {/* Current User Section*/}
-                <div className="userWrapper" >
-                    <Collapse isOpened={this.checkFilterMobile()}>
+                <Motion defaultStyle={{ x: -200, opacity: 0 }}
+                        style={{
+                            x: spring(this.state.collapseFilter ? -400 : 0),
+                            opacity: spring(this.state.collapseFilter ? 0 : 1,{stiffness:6,damping:6,precision:0.1})
+                        }}>
+                {style => ( <div className="userWrapper" style={{
+                                                    transform: `translateX(${style.x}px)`,
+                                                    opacity: style.opacity
+                                                }}>
                         <div className="row justify-content-center">
                             <div className="col-sm-8 text-left">
                                 <div className="current-user-table-section">
                                     <table className="ranking-table">
-                                        <tbody>
+                                        <thead>
                                             <tr className="rank-row">
                                                 <table className="user-details-table">
                                                     <tr className="user-details-row">
@@ -520,14 +549,14 @@ class LeaderboardPage extends Component {
                                                     </tr>
                                                 </table>
                                             </tr>
-                                        </tbody>
+                                        </thead>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                    </Collapse>
                 </div>
-
+                )}
+                </Motion>
             </div>
         );
     }

@@ -7,6 +7,8 @@ import cameraGray from '../components/assets/redSubmitButton.png';
 import graySubmit from '../components/assets/btnThatSubmitsRed.png';
 import grayRetry from '../components/assets/redRetry.png';
 import lightgrayback from '../components/assets/Back.png';
+import submit from '../components/assets/biggerRedSubmit.png';
+import camera from '../components/assets/biggerRedCamera.png';
 
 export default class search extends Component {
   constructor(props) {
@@ -14,7 +16,7 @@ export default class search extends Component {
     this.state = {
       currState: 1,
       clicked: null,
-      score: 0,
+      score: null,
       hideCamera: false,
       imageContent: "",
       competitionName: "",
@@ -33,7 +35,8 @@ export default class search extends Component {
       scoreEntered: false,
       navbarState: false,
       eventsAdded: false,
-      lastSize: 0
+      lastSize: 0,
+      somethingClicked: false
 
     }
 
@@ -55,7 +58,7 @@ export default class search extends Component {
     this.setState({
       [target.name]: target.value,
     }, () => {
-      if (validateScore(this.state.score)) {
+      if (validateScore(this.state.score) && target.value !== undefined) {
         this.setState({
           validScore: true,
           scoreEntered: true
@@ -70,8 +73,19 @@ export default class search extends Component {
     });
   }
 
+  cancelClicked() {
+    if(this.state.somethingClicked)
+    {
+      this.setState({
+        somethingClicked: !this.state.somethingClicked,
+        clicked: null,
+      })
+    }
+  }
+
   competitionClicked(item, compname) {
     this.setState({
+      somethingClicked: true,
       currState: 2,
       clicked: item,
       competitionName: compname,
@@ -113,7 +127,7 @@ export default class search extends Component {
 
   validate() {
     let Valid = false;
-    if (!validateScore(this.state.score)) {
+    if (!validateScore(this.state.score) && this.value === undefined) {
       this.setState({
         validForm: false,
         validScore: false
@@ -259,9 +273,10 @@ export default class search extends Component {
         body: JSON.stringify(RequestObject)
       }).then(response => response.json())
         .then(data => {
-          this.setState({
-            scoreSaved: true, currState: 5
-          })
+          if (data.indexOf("Score Added Successfully") > -1)
+            this.setState({
+              scoreSaved: true, currState: 5
+            })
           if (this.state.navbarState === false) {
             this.toggleNavbar();
           }
@@ -393,14 +408,29 @@ export default class search extends Component {
         })
       });
     }
+
     const stateOne = this.state.showCamera || this.state.imageTaken
+
     let competitionItem = [];
     if (this.state.competitionsList && this.state.competitionsList.length > 0) {
       for (let i = 0; i < this.state.competitionsList.length; i++) {
-        competitionItem.push(<div className="competition-item-container" key={'mykey' + i}> <div key={'mykey' + i}
-          className={this.state.clicked != null && this.state.clicked === i ? "active competition-item" : "competition-item"}>
-          <li onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name)}>
-            {this.state.competitionsList[i].name} </li></div></div>);
+        competitionItem.push(
+          <div className="competition-item-container" key={'mykey' + i}>
+            <div key={'mykey' + i}
+              className={
+                this.state.somethingClicked === false && this.state.clicked === null
+                  ? "competition-item"
+                  :
+                  (this.state.clicked != null && this.state.clicked === i
+                    ? "competition-item active"
+                    : "competition-item fade-out")}>
+              <li className="li-container"
+                onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name)}>
+                {this.state.competitionsList[i].name}
+              </li>
+              <div onClick={() => this.cancelClicked()} className="competiton-cancel-button"></div>
+            </div>
+          </div>);
 
       }
     }
@@ -412,7 +442,9 @@ export default class search extends Component {
         <div className={stateOne || this.state.scoreSaved
           ? "hidden"
           : "score-capture-header"}>
-          <label className="label-for-score">ADD SCORE</label>
+          <div className="gun-overlay-image">
+            <label className="label-for-score">ADD SCORE</label>
+          </div>
         </div>
         <div className={this.state.scoreSaved
           ? "sucess-container"
@@ -432,28 +464,31 @@ export default class search extends Component {
           <div className={stateOne || this.state.scoreSaved
             ? "hidden"
             : ""}>
-            <div className="label-score">
-              <input type="number"
-                id="scoreInput"
-                min="0"
-                step="1"
-                autoComplete="off"
-                name="score"
-                className="score"
-                onChange={this.handleScore}
-                placeholder="Enter Score"></input>
-              <div className="error-message-container">
-                <div className={this.state.validScore
-                  ? "hidden"
-                  : "invalid-score"}>Enter Valid Score</div>
-              </div>
-            </div>
-
             <div className="centre-labels">
               <label className="label-competition">Select Competition</label>
             </div>
             <div className="competition-container">
               {competitionItem}
+
+              <div className={this.state.somethingClicked === false
+                ? "hidden"
+                : "label-score"}>
+                <input type="number"
+                  id="scoreInput"
+                  min="0"
+                  step="1"
+                  autoComplete="off"
+                  name="score"
+                  pattern="\d*"
+                  className="score"
+                  onChange={this.handleScore}
+                  placeholder="Enter Score"></input>
+                <div className="error-message-container">
+                  <div className={this.state.validScore
+                    ? "hidden"
+                    : "invalid-score"}>Enter Valid Score</div>
+                </div>
+              </div>
             </div>
             <div className="error-message-container">
               <div className={this.state.validCompetition === false && this.state.validScore === true
@@ -461,22 +496,24 @@ export default class search extends Component {
                 : "hidden"}>
                 Select Competition</div>
             </div>
-            <div className="submit-container">
+            <div className={this.state.somethingClicked === true
+              ? "submit-container"
+              : "hidden"}>
               <div className={this.state.imageTaken || this.state.showCamera
                 ? "hidden"
-                : "submit-button-elements"}>
+                : "submit-button-elements2"}>
                 <div className="button-hover">
-                  <img src={cameraGray}
-                    id="btnScoreCapture" className="btn-score-capture"
+                  <img src={camera}
+                    id="btnScoreCapture" className="btn-score-capture2"
                     onClick={() => this.CameraClicked()} alt=''></img>
                 </div>
               </div>
               <div className={(this.state.showCamera && !this.state.imageTaken)
                 || this.state.imageTaken
                 ? "hidden"
-                : "submit-button-elements"}>
+                : "submit-button-elements2"}>
                 <div className="button-hover ">
-                  <img src={graySubmit} onClick={() => this.getLocation()}
+                  <img src={submit} onClick={() => this.getLocation()}
                     className="button-that-submits" alt=''></img>
                 </div>
               </div>
@@ -492,9 +529,11 @@ export default class search extends Component {
               <div className={this.state.imageTaken || this.state.scoreSaved
                 ? "hidden"
                 : "score-capture-header2"}>
-                <label className="label-for-capture-score">CAPTURE SCORE</label>
-                <img src={lightgrayback} onClick={() => this.goBack()} id="back"
-                  className="btn-back" alt='backBtn'></img>
+                <div className="gun-overlay-image">
+                  <label className="label-for-capture-score">CAPTURE SCORE</label>
+                  <img src={lightgrayback} onClick={() => this.goBack()} id="back"
+                    className="btn-back" alt='backBtn'></img>
+                </div>
               </div>
             </div>
             <div className={this.state.imageTaken
@@ -541,7 +580,10 @@ export default class search extends Component {
               <div className={!this.state.imageTaken
                 ? "hidden"
                 : "score-capture-header2"}>
-                <label className="label-for-capture-score">Score Captured</label>
+                <div className="gun-overlay-image">
+
+                  <label className="label-for-capture-score">Score Captured</label>
+                </div>
               </div>
             </div>
             <div className={this.state.imageTaken

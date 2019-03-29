@@ -1,5 +1,6 @@
 .centre-view-member {
   margin: 0 auto;
+  margin-top: 30px;
   position: center;
   background: #fdfdfd;
 }
@@ -9,15 +10,23 @@
 }
 
 .table-search-members {
+  padding-top: 55px;
   background-color: #fdfdfd;
 }
 
 @media only screen and (max-width: 575px) {
   .table-search-members {
+    padding-top: 55px;
     background-color: #fdfdfd;
     overflow-y: scroll;
     height: 100%;
     margin-bottom: 57px;
+  }
+
+  .centre-view-member {
+    margin: 0 auto;
+    position: center;
+    background: #fdfdfd;
   }
 }
 
@@ -48,8 +57,9 @@
 }
 
 .username-search {
-  position: center;
+  position: fixed;
   text-align: center;
+  width: 100%;
 }
 
 .user-value {
@@ -89,20 +99,35 @@
 .view-non-members-confirm {
   font-weight: lighter;
   font-size: 16px;
-  background-color: #BE0000;
+  background-color: #be0000;
   border-radius: 25px;
-  width: 95%;
+  width: 312px;
   height: 42px;
-  border-color: #BE0000;
+  border-color: #be0000;
   border-width: 1.5px;
   border: none;
   color: #ffffff;
 }
 
+.view-exp-members {
+  font-weight: lighter;
+  font-size: 16px;
+  background-color: #be0000;
+  border-radius: 25px;
+  width: 160px;
+  height: 42px;
+  border-color: #be0000;
+  border-width: 1.5px;
+  border: none;
+  color: #ffffff;
+  margin-top: 44px;
+  margin-bottom: 25px;
+}
+
 .search {
-  padding: 18px 30px 10px 25px;
+  padding: 1px 30px 10px 25px;
   background-color: #ffffff;
-  height: 74px;
+  height: 55px;
 }
 
 .user-value {
@@ -163,6 +188,12 @@
   height: 55px;
 }
 
+.view-members-exp-username-and-email {
+  font-size: 16px;
+  height: 55px;
+  float: left;
+}
+
 .bad {
   color: #be0000;
   font-weight: bold;
@@ -179,9 +210,41 @@
   padding-left: 10px;
 }
 
+.view-members-exp-expiry-time-column {
+  font-size: 15px;
+  height: 55px;
+  padding-right: 23px;
+  float: right;
+}
+
 .membership-details {
   font-size: 13px;
   margin-top: 48px;
+  margin-bottom: 20px;
+  text-align: center;
+  padding-right: 25px;
+}
+
+.view-members-exp-membership-details {
+  font-size: 13px;
+  margin-top: 48px;
+  margin-bottom: 20px;
+  text-align: center;
+  float: left;
+}
+
+.Collapsible__contentOuter {
+  float: left;
+  width: 100%;
+}
+
+.radio-Renew {
+  padding-right: 3px;
+  display: flex;
+}
+
+.view-members-membership-details {
+  font-size: 13px;
   margin-bottom: 20px;
 }
 
@@ -189,4 +252,10 @@
   height: 17px;
   width: 17px;
   margin-left: 4px;
+}
+
+.renew-container {
+  text-align: center;
+  width: 100%;
+  padding-right: 25px;
 }

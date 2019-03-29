@@ -317,8 +317,6 @@
         height: -webkit-fill-available;
         background-color: transparent;
      }
-
-     
  /* end of filter section*/
  /* Ranking table section */
      .ranking-table-section{
@@ -572,6 +570,9 @@
         width: 100%;
         height: 100%;
         box-shadow: 0 20px 24px -1px rgba(.33,.33,.33,.33);
+        background-color: transparent;
+        border-radius: 8px;
+        height: 48px;
     }
     .current-user-table-section .ranking-table .rank-row .user-more-details-table{
         width: 100%;
@@ -693,7 +694,6 @@
      .filter-selections .selections-container .row .empty-div{
         display: none;
     }
-     
  }
  @media only screen and (max-width: 575px) {
      /* phones size */

@@ -158,7 +158,7 @@ class ForgotPassword extends Component {
                 this.state.confirmPasswordValue ===
                 this.state.passwordValue ? null : (
                   <label className="forgot-password-error">
-                    password do not match
+                    PASSWORDS DO NOT MATCH
                   </label>
                 )
               ) : null}

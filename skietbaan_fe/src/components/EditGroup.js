@@ -32,7 +32,7 @@ class EditGroup extends Component {
 	}
 
 	async componentDidMount() {
-		this.props.fetchEditUser(this.props.id);
+	 this.props.fetchEditUser(this.props.id);
 	}
 
 	onChange(event) {
@@ -63,7 +63,7 @@ class EditGroup extends Component {
 			.catch(function(data) {});
 		this.props.fetchEditUser(this.props.id);
 	}
-
+//select user
 	toggleHighlight = (event) => {
 		if (this.state.binState === true) {
 			if (this.props.editGroup[event].highlighted === true) {
@@ -89,8 +89,8 @@ class EditGroup extends Component {
 	}
 
 	cancel = () => {
-		for (var i = 0; i < this.state.posts.length; i++) {
-			this.props.groupsList[i].highlighted = true;
+		for (var i = 0; i < this.props.editGroup.length; i++) {
+			this.props.editGroup[i].highlighted = false;
 		}
 		this.setState({ count: 0 });
 	};
