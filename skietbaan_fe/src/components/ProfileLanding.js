@@ -55,6 +55,9 @@ export default class ProfileLanding extends Component {
         >
           <Row className="top-bar-rectangle">
             <Col className="lay-horizontal">
+                <div className="gun-overlay-img-background">
+                  <label className="profile-title">PROFILE</label>
+                </div>
                 <div className="logout-button-right">
                     <a onClick={this.logout}>
                         <div className="logout-button">
@@ -122,10 +125,10 @@ export default class ProfileLanding extends Component {
         <div
           className={
             this.state.selectedButton == 1
-              ? "content-container"
+              ? "award-content-container"
               : this.state.selectedButton == 2 || this.state.selectedButton == 3
-              ? "content-container pad-top-50px"
-              : "content-container"
+              ? "award-content-container pad-top-50px"
+              : "award-content-container"
           }
         >
           {this.state.selectedButton == 1 ? (
