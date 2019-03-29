@@ -63,7 +63,7 @@ class EditGroup extends Component {
 			.catch(function(data) {});
 		this.props.fetchEditUser(this.props.id);
 	}
-
+//select user
 	toggleHighlight = (event) => {
 		if (this.state.binState === true) {
 			if (this.props.editGroup[event].highlighted === true) {
