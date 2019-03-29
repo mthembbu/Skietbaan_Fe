@@ -195,7 +195,7 @@ class notification extends Component {
         )}
         {this.props.notificationsArray.map((post, i) => (
           <tr className="tr-class" key={i}>
-            <td>
+            <td className="first-column-notify">
               <img
                 src={post.images}
                 className="notification-icon-on-the-side"
