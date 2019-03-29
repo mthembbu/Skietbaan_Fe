@@ -191,10 +191,24 @@
   cursor: pointer;
 }
 
+.header-label-login{
+  font-size: 25px;
+  color: white;
+  font-weight: 400;
+  font-family: helvetica;
+}
+
 .header-label{
   font-size: 25px;
   color: white;
   font-weight: 400;
+  font-family: helvetica;
+}
+
+@media screen and (max-width:500px){
+  .header-label{
+    padding-right: 33px;
+  }
 }
 
 .button-login{
@@ -206,7 +220,7 @@
   width: 100px;
   font-weight: lighter;
   position: absolute;
-  right: 21px;
+  right: 15px;
   top: 90px;
   font-size: 16px;
 }

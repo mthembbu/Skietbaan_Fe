@@ -3,14 +3,12 @@ import "./Create.css";
 import { getCookie } from "../components/cookie.js";
 import { URL } from "../actions/types.js";
 import { Row, Col } from "react-bootstrap";
-import RegisterMember from "../components/RegisterMember";
 import ViewMembers from "../components/ViewMembers";
 import CreateComp from "../components/CreateComp";
 import AddGroup from "../components/AddGroup";
 import ViewComp from "../components/ViewComp";
 import { connect } from 'react-redux';
 import GroupComponent from "../components/GroupComponent";
-import { timingSafeEqual } from "crypto";
 
 class Create extends Component {
   constructor(props) {

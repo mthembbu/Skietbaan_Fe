@@ -1,160 +1,261 @@
-@media all and (min-width: 480px) {
-    .viewmember {
-      margin: 0 auto;
-    }
-    .viewmember form {
-      margin: 0 auto;
-    }
+.centre-view-member {
+  margin: 0 auto;
+  margin-top: 30px;
+  position: center;
+  background: #fdfdfd;
+}
+
+.search-member-name {
+  background-color: #fdfdfd;
+}
+
+.table-search-members {
+  padding-top: 55px;
+  background-color: #fdfdfd;
+}
+
+@media only screen and (max-width: 575px) {
+  .table-search-members {
+    padding-top: 55px;
+    background-color: #fdfdfd;
+    overflow-y: scroll;
+    height: 100%;
+    margin-bottom: 57px;
   }
 
-  .centre-view-member{
-    margin:0 auto;
+  .centre-view-member {
+    margin: 0 auto;
     position: center;
     background: #fdfdfd;
   }
+}
 
-  .search-member-name{
-    background-color: #fdfdfd;
-  }
+.page-name-view {
+  position: center;
+  text-align: center;
+  text-size-adjust: 25px;
+  background-size: 15px;
+  height: 56px;
+  background-color: #dc0600;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
 
-  .table-search-members{
-    background-color: #fdfdfd;
-  }
+.go-back-to-create-page {
+  float: left;
+  padding-top: 10px;
+  padding-left: 40px;
+  background-size: 15px;
+  height: 40px;
+  margin-top: 3px;
+}
 
-  .page-name-view{
-    position: center;
-    text-align: center;
-    text-size-adjust: 25px;
-    background-size: 15px;
-    height: 56px;
-    background-color: #DC0600;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-  }
+.label-search {
+  position: center;
+  text-align: center;
+  color: #fdfdfd;
+}
 
-  .go-back-to-create-page{
-    float: left;
-    padding-top: 10px;
-    padding-left: 40px;
-    background-size: 15px;
-    height: 40px;
-    margin-top: 3px;
-  }
+.username-search {
+  position: fixed;
+  text-align: center;
+  width: 100%;
+}
 
-  .label-search{
-    position: center;
-    text-align: center;
-    color: #fdfdfd;
-  }
+.user-value {
+  background-color: #f3f4f9;
+  border-radius: 4px;
+  line-height: 22px;
+  text-align: left;
+  padding-left: 19px;
+  width: 100%;
+  border: none;
+  font-family: helvetica;
+  font-size: 16px;
+  font-weight: bold;
+  color: #666666;
+  border: 1px #979797 solid;
+}
 
-  .username-search{
-    position: center;
-    text-align: center;
-  }
+.view-non-members-text-boxes {
+  background-color: #fdfdfd;
+  border-radius: 4px;
+  line-height: 22px;
+  text-align: left;
+  padding-left: 19px;
+  width: 100%;
+  border: none;
+  font-family: helvetica;
+  font-size: 16px;
+  font-weight: bold;
+  color: #666666;
+  border: 1px #979797 solid;
+  height: 44px;
+  width: 312px;
+  border-radius: 7px;
+  margin-bottom: 42px;
+}
 
-  .user-value {
-    background-color: #F3F4F9;
-    border-radius: 4px;
-    line-height: 22px;
-    text-align: center;
-    width: 100%;
-    border: none;
-    font-size: 18px;
-    color: #798CA5;
-    border: 1.5px #798CA5 solid;
-  }
+.view-non-members-confirm {
+  font-weight: lighter;
+  font-size: 16px;
+  background-color: #be0000;
+  border-radius: 25px;
+  width: 312px;
+  height: 42px;
+  border-color: #be0000;
+  border-width: 1.5px;
+  border: none;
+  color: #ffffff;
+}
 
-  .search {
-    padding: 18px 30px 10px 30px;
-    background-color: #fdfdfd;
-    height: 74px;
-  }
+.view-exp-members {
+  font-weight: lighter;
+  font-size: 16px;
+  background-color: #be0000;
+  border-radius: 25px;
+  width: 160px;
+  height: 42px;
+  border-color: #be0000;
+  border-width: 1.5px;
+  border: none;
+  color: #ffffff;
+  margin-top: 44px;
+  margin-bottom: 25px;
+}
 
-  .user-value{
-    background: url('../components/assets/search-red.png') no-repeat right center;
-    background-color: #F3F4F9;
-    background-size: 22px;
-    height: 40px;
-    background-position-x: 95%;
-    border-radius: 7px;
-    width: 300px;
-  }
+.search {
+  padding: 1px 30px 10px 25px;
+  background-color: #ffffff;
+  height: 55px;
+}
 
-  .go-back-to-create-page-from-view-members{
-    float: left;
-    padding-top: 10px;
-    padding-left: 40px;
-    background-size: 15px;
-    height: 40px;
-  }
+.user-value {
+  background: url("../components/GroupImages/searchBox.png") no-repeat right
+    center;
+  background-color: #fdfdfd;
+  background-size: 22px;
+  height: 44px;
+  background-position-x: 95%;
+  border-radius: 7px;
+  width: 312px;
+}
 
-  .table-member{
-    background-color: #fdfdfd;
-    width: 100%;
-    font-size: 16px;
-    color: #798CA5;
-  }
+.go-back-to-create-page-from-view-members {
+  float: left;
+  padding-top: 10px;
+  padding-left: 40px;
+  background-size: 15px;
+  height: 40px;
+}
 
-  .view-members{
-    size: 49px;
-    padding-top: 11px;
-    font-weight: bold;
-    font-size: 20px;
-    color: #fdfdfd;
-    padding-right: 52px;
-  }
+.table-member {
+  background-color: #f6f6f6;
+  width: 100%;
+  color: #666666;
+}
 
-  .view-members-user{
-    border-bottom: solid 1.5px #bbbcbd;
-    border-top: solid 1.5px #bbbcbd;
-    height: 55px;
-  }
+.view-members {
+  size: 49px;
+  padding-top: 11px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #fdfdfd;
+  padding-right: 52px;
+}
 
-  .view-members-user::selection{
-    background-color: #6F839E;
-    color:#fdfdfd;
-  }
+.view-members-user {
+  height: 55px;
+}
 
-  .view-members-user:hover{
-    background-color: #6F839E;
-    color:#fdfdfd;
-  }
+.view-members-user::selection {
+  background-color: #fdfdfd;
+}
 
-  .first-column{
-    padding-left: 30px;
-    width: 65%;
-    height: 55px;
-    text-align: left;
-  }
+.view-members-user:hover {
+  background-color: #fdfdfd;
+}
 
-  .username-and-email{
-    font-size: 16px;
-    height: 55px;
-  }
+.first-column {
+  padding-left: 25px;
+  width: 65%;
+  height: 55px;
+  text-align: left;
+}
 
-  .bad{
-    color: red;
-    font-weight: bold;
-  }
+.username-and-email {
+  font-size: 16px;
+  height: 55px;
+}
 
-  .second-column{
-    vertical-align: top;
-    height: 55px;
-  }
-  
-  .expiry-time-column{
-    font-size: 15px;
-    height: 55px;
-    padding-left: 10px;
-  }
+.view-members-exp-username-and-email {
+  font-size: 16px;
+  height: 55px;
+  float: left;
+}
 
-  .membership-details{
-    font-size: 13px;
-    height: 55px;
-  }
+.bad {
+  color: #be0000;
+  font-weight: bold;
+}
 
-  .membership-icon{
-    height: 17px;
-    width: 17px;
-    margin-left: 4px;
-  }
+.second-column {
+  vertical-align: top;
+  height: 55px;
+}
+
+.expiry-time-column {
+  font-size: 15px;
+  height: 55px;
+  padding-left: 10px;
+}
+
+.view-members-exp-expiry-time-column {
+  font-size: 15px;
+  height: 55px;
+  padding-right: 23px;
+  float: right;
+}
+
+.membership-details {
+  font-size: 13px;
+  margin-top: 48px;
+  margin-bottom: 20px;
+  text-align: center;
+  padding-right: 25px;
+}
+
+.view-members-exp-membership-details {
+  font-size: 13px;
+  margin-top: 48px;
+  margin-bottom: 20px;
+  text-align: center;
+  float: left;
+}
+
+.Collapsible__contentOuter {
+  float: left;
+  width: 100%;
+}
+
+.radio-Renew {
+  padding-right: 3px;
+  display: flex;
+}
+
+.view-members-membership-details {
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.membership-icon {
+  height: 17px;
+  width: 17px;
+  margin-left: 4px;
+}
+
+.renew-container {
+  text-align: center;
+  width: 100%;
+  padding-right: 25px;
+}

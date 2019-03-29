@@ -18,19 +18,20 @@ class UserProfile extends Component {
                 collapse: false,
                 selectedCompetition : 0,
             }
-
+        
         this.toggle = this.toggle.bind(this);
         this.logout = this.logout.bind(this);
+        this.timeouts = [];
+        this._isMounted = false;
     }
 
     UNSAFE_componentWillMount() {
         var token = getCookie("token");
-        if (token === undefined) {
+        if (token == undefined) {
             history.push("/registerPage");
             return;
         }
 
-        /*use the remote URL*/
         fetch(BASE_URL + "/api/awards/" + token, {
         method: "GET",
         headers: {
@@ -39,10 +40,8 @@ class UserProfile extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            this.setState({ awardCompetitions: data });
-            if (this.state.awardCompetitions.length === 0) {
-            this.logout();
-            history.push("/registerPage");
+            if(this._isMounted){
+                this.setState({ awardCompetitions: data });
             }
         });
 
@@ -54,8 +53,14 @@ class UserProfile extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            this.setState({ hoursAward: data });
+            if(this._isMounted){
+                this.setState({ hoursAward: data });
+            }
         });
+    }
+
+    componentDidMount(){
+        this._isMounted = true;
     }
 
     logout(){
@@ -73,43 +78,8 @@ class UserProfile extends Component {
         this.setState(state => ({ collapse: !state.collapse }));
     }
 
-    animateAccuracyCircle(counter, element, index) {
-        if (counter > element.accuracy) return;
-        if (counter <= element.accuracy) {
-        var degreees = (360 * counter) / 100;
-        var activeBorder = $(`#${index}`);
-        $(`#circle${index}`).html(Math.round(counter) + "%");
-
-        if (degreees <= 180) {
-            activeBorder.css(
-            "background-image",
-            "linear-gradient(" +
-                (90 + degreees) +
-                "deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)"
-            );
-        } else {
-            activeBorder.css(
-            "background-image",
-            "linear-gradient(" +
-                (degreees - 90) +
-                "deg, transparent 50%, #EA241A 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)"
-            );
-        }
-        counter++;
-        setTimeout(() => {
-            this.animateAccuracyCircle(counter, element, index);
-        }, 80);
-        }
-    }
-
-    /*
-        This function takes the total score as string and append zeros
-        at the front if the total score has less than four digits
-    */
-
     animateAccuracyCircle(counter, element, index){
         if(this.state.collapse) return;
-        if(counter > element.accuracy) return;
         if(counter <= element.accuracy){
             var degreees = (360 * counter) / 100;
             var activeBorder = $(`#${index}`);
@@ -117,19 +87,19 @@ class UserProfile extends Component {
             
             if (degreees<=180){
                 activeBorder.css('background-image','linear-gradient(' + (90 + degreees) + 
-                                    'deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');
+                                'deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');    
             }
             else{
                 activeBorder.css('background-image','linear-gradient(' + (degreees - 90) + 
                                 'deg, transparent 50%, #EA241A 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');
             }
             counter++;
-            setTimeout(() => {
+            const timeout = setTimeout(() => {
                 this.animateAccuracyCircle(counter, element, index)
             }, 80)
+            this.timeouts.push(timeout);
         }
     }
-    
 
     renderLockedIcon(){
         return(
@@ -145,7 +115,7 @@ class UserProfile extends Component {
                 <div id={`circle${index}`} className="circle">
                     <label className="accuracy-text">0%</label>
                 </div>
-                <div>{this.animateAccuracyCircle(1, element, index)}</div>
+                {this.animateAccuracyCircle(0, element, index)}
             </div>
         )
     }
@@ -205,18 +175,19 @@ class UserProfile extends Component {
             renderArray.push(this.selectCompetition(element, index))
         })
 
-    return renderArray;
-  }
+        return renderArray;
+    }
 
     renderAccuracyCircle(element, index){
         return(
             <div>
-                <div className="pad-right-25px">
+                <div className="align-accuracy-text">
                     <label className="font-size-14px red-text award-type-label">ACCURACY</label>
                 </div>
                 <div className="circle-bigger">
                     {!element.isCompetitionLocked ?
-                        this.renderActiveCircle(element,index) : this.renderRedLockIcon(index)}
+                        (element.accuracy === 0 ? <label className="accuracy-text">0%</label> : this.renderActiveCircle(element,index))
+                        : this.renderRedLockIcon(index)}
                 </div>
             </div>
         );
@@ -246,18 +217,29 @@ class UserProfile extends Component {
         )
     }
 
+    componentWillUnmount() {
+        this.timeouts.forEach(timeout => clearTimeout(timeout));
+        this._isMounted = false;
+    }
+
     render() {
         return (
-            <div className="award-container">
+            <div className="award-container pad-top-128px">
                 {this.state.awardCompetitions.length > 0 ? //only render when the data has arrived from backend
                 <Container className="remove-right-padding">
-                    <Row>
-                        <Col></Col>
+                    <Row className="push-bottom-21px">
+                        <Col className="lay-horizontal center-content">
+                            <div className="circle-smaller">
+                                <div className="scale-medal-img">
+                                    <img src={require("../resources/awardIcons/medal.png")}></img>
+                                </div>
+                            </div>
+                        </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <div className="competition-name-text pad-bottom-16px">
-                                <a onClick={this.toggle} className="lay-horizontal center-content">
+                            <div className="competition-name-text red-text pad-bottom-16px">
+                                <a onClick={this.toggle} className="lay-horizontal center-content make-cursor-point">
                                     <div className="push-right-5px">
                                         {this.state.awardCompetitions[this.state.selectedCompetition]
                                         .competitionName.toUpperCase()}
@@ -280,7 +262,7 @@ class UserProfile extends Component {
                         <Collapse isOpened={this.state.collapse}>
                             <div className="grey-text select-competition-font">Select Competition</div>
                             {this.renderCompetitionList()}
-                            <a className="scale-arrowupicon-img" onClick={() => this.toggle()}>
+                            <a className="scale-arrowupicon-img" onClick={this.toggle}>
                                 <img src={require("../resources/awardIcons/arrowUpIcon.png")} alt="lock-icon"></img>
                             </a>
                         </Collapse>

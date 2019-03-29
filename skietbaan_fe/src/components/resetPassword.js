@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "../components/ForgotPassword.css";
 import { URL } from "../actions/types";
 import skietbaan from "../components/assets/skietbaanLogo.png";
-import history from "./history";
 
 class ForgotPassword extends Component {
   constructor(props) {
@@ -159,7 +158,7 @@ class ForgotPassword extends Component {
                 this.state.confirmPasswordValue ===
                 this.state.passwordValue ? null : (
                   <label className="forgot-password-error">
-                    password do not match
+                    PASSWORDS DO NOT MATCH
                   </label>
                 )
               ) : null}

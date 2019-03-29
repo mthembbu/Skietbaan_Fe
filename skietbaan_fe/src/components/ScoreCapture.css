@@ -8,19 +8,10 @@
     padding-right: 10px;
     font-size: 16px;
     font-weight: bold;
-    overflow-y: scroll;
-    height: 185px;
-}
-
-@media screen and (min-width:580px)  {
-    .competition-container{
-        overflow-y: hidden;
-        height: 100%;
-    }
 }
 
 .competition-item{
-    width: 100%;
+    width: 312px;
     height: 42px;
     color: #666666;
     text-align: center;
@@ -29,6 +20,11 @@
     font-size: 17px;
     border: 1px #666666 solid;
     font-weight: 300;
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    transition-property: all;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
 
 .float-right{
@@ -37,7 +33,6 @@
 
 @media screen and (min-width:580px)  {
     .competition-item{
-        width:100%;
         text-align: center;
 
     }
@@ -48,6 +43,17 @@
     width: 72px;
     border-radius: 22px;
     box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
+}
+
+.btn-score-capture2{
+    height:42px;
+    width: 142px;
+    border-radius: 22px;
+    box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
+}
+
+.submit-container-comp{
+    margin-top: 35px;
 }
 
 .competition-item:hover{
@@ -63,9 +69,11 @@
     border-radius: 50%;
     object-fit: cover;
     border: 5px solid #e11e2b;
+    box-shadow:0px 10px 16px -6px rgba(0,0,0,0.33);
 }
 
 .page-content{
+    margin-top: 56px;
     background-color: #ffffff;
     width: 100%;
     z-index: 50;
@@ -81,13 +89,10 @@
     .score-capture-header{
         margin-top: 56px;
     }
-    .label-score{
-        margin-top: 56px;
-    }
 }
 
 .page-content-video{
-    background-color: #D9D9D9;
+    background-color: #ffffff;
     width:100%;
     z-index: 50;
     height: 100vh;
@@ -149,7 +154,6 @@
     width: 100%;
     text-align: center;
     height: 100vh;
-    background-image: linear-gradient(150deg,#000000,#ffffff);
 }
 
 .success{
@@ -163,7 +167,7 @@
 
 .label-success-container{
     font-size: 24px;
-    color:  #ffffff;
+    color: #BE0000;
     padding-top: 53px;
     font-weight: 300;
 }
@@ -173,13 +177,16 @@
     font-size: 25px;
     text-align: center;
     width: 100%;
-    padding-top: 90px;
+    margin-top: 5px;
+    transition-duration: 500ms;
+    transition-property: margin-bottom;
 }
 
 .label-competition{
     color: #666666;
     font-size: 24px;
     font-weight: bold;
+    font-family: helvetica;
 }
 
 .scorelabel{
@@ -190,17 +197,22 @@
 }
 
 .centre-labels{
-    width:100%;
+    width: 100%;
     font-size: 25px;
     text-align: center;
     font-weight: lighter;
-    padding-top: 34px;
+    padding-top: 64px;
+}
+
+@media screen and (min-width: 633px){
+    .centre-labels{
+        padding-top: 128px;
+    }
 }
 
 .photo-top-label{
     padding-top: 62px;
     margin-bottom: 20px;
-    background-color: #D9D9D9;
     color: #000000;
     font-weight: bold;
     font-size: 24px;
@@ -213,7 +225,6 @@
 
 .competition-item-container{
     text-align: center;
-    padding:8px;
 }
 
 .submit-container{
@@ -222,27 +233,13 @@
     text-align: center;
     width: 312px;
     display: flex;
-    padding-top: 13%;
-}
-
-@media screen and (min-height:600px){
-    .submit-container{
-        padding-top: 50px;
-    }
-    .competition-container{
-        height: 250px;
-    }
-}
-
-@media screen and (min-width: 480px){
-    .competition-container{
-        height: 100%;
-        overflow-y: hidden;
-    }
+    padding-top: 35px;
 }
 
 .retake{
-    height: 30px;
+    height: 42px;
+    border-radius: 22px;
+    box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
 }
 
 .submit-button-elements{
@@ -250,6 +247,10 @@
     height: 20px;
     width: 50%;
     position: relative;
+}
+
+.submit-button-elements2{
+    width: 312px;
 }
 
 .icon-push-down{
@@ -269,11 +270,16 @@
     width:33%;
 }
 
+.submit-button-elements.second{
+    width: 33%;
+    text-align: -webkit-center;
+}
+
 .video-container{
     width:310px;
     height:310px;
     margin:0 auto;
-    padding-top: 24px;
+    padding-top: 53px;
 }
 
 .image-view{
@@ -347,29 +353,54 @@ hr{
 
 .button-that-submits{
     height: 42px;
+    width: 140px;
+    border-radius: 22px;
+    box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
+    float: right;
+    margin-right: 2%;
+}
+.fade-out{
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.button-that-submits2{
+    height: 42px;
     width: 72px;
     border-radius: 22px;
     box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
 }
 
-.button-that-submits2{
-    height: 30px;
-}
-
 .flash{
-    height: 32px;
+    height: 42px;
+    width: 72px;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    background-image: url("../components/assets/blackFlashOn.png");
+    background-image: url("../components/assets/redFlashOn.png");
+    border-radius: 22px;
+    box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
+}
+.gun-overlay-image{
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 25px 0px;
+    background-image: url("../components/assets/gunOverlay.png");
+    width: 100%;
 }
 
 .flashOff{
-    height: 32px;
+    height: 42px;
+    width: 72px;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    background-image: url("../components/assets/blackFlashOff.png");
+    background-image: url("../components/assets/redFlashOff.png");
+    border-radius: 22px;
+    box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
 }
 
 .label-container{
@@ -391,7 +422,15 @@ input[type=number] {
     background-color: #e11e2b;
     color: white;
     border: none;
-    box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
+}
+
+.competiton-cancel-button{
+    background: url('../components/assets/whiteCancel.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 28px;
+    width: 28px;
+    margin-top: -25px;
 }
 
 .btn-back{
@@ -399,7 +438,7 @@ input[type=number] {
     height: 30px;
     left: 30px;
     position: absolute;
-    top: 64px;
+    top: 18px;
 }
 
 .spacing{
@@ -418,6 +457,18 @@ input[type=number] {
     .hidden-small{
         display:none;
     }
+}
+
+.score-capture-header2{
+    height: 67px;
+    width: 100%;
+    background-color: #EA251A;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);
+    position: fixed;
+    top: 0px;
+    z-index: 100;
 }
 
 .score-capture-header{
@@ -440,7 +491,22 @@ input[type=number] {
     padding-left: 40px;
 }
 
+.float-left{
+    float: left;
+}
+
 .score-capture{
     width: 43px;
     height: 34px;
+}
+
+.label-for-capture-score{
+    color: #ffffff;
+    padding-top: 14px;
+    font-weight: 600;
+}
+
+.border-radius-button{
+    width: 72px;
+    margin-left: 22px;
 }

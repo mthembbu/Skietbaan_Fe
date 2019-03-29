@@ -1,4 +1,24 @@
 @media only screen and (min-width: 576px) {
+
+	.create-top-nav {
+		height: 184px;
+		position: fixed;
+		top: 0;
+		width: 100%;
+		z-index: 1;
+		background: #fdfdfd;
+		margin-top: 56px;
+	}
+
+	.components-create{
+		padding-top: 25px;
+		background-color: white;
+	}
+
+	.content-container{
+		margin-top: 0px;
+	}
+
 	.page-name-create-all {
 		position: center;
 		text-align: center;
@@ -198,7 +218,15 @@
 	width: 97%;
 }
 .create-top-nav {
-  height: 184px;
+	height: 184px;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+	background: #fdfdfd;
+}
+.create-nav-container {
+	height: 184px;
 }
 .create-all-menu {
 	color: #fdfdfd;
@@ -212,7 +240,7 @@
 	height: 32px;
 	width: 100%;
 	border: 1px solid #be0000;
-  border-radius: 18px;
+	border-radius: 18px;
 }
 
 .buttons-row .col {
@@ -220,32 +248,68 @@
 	padding-right: 0px;
 }
 
-.unstyle-create-active{
-  background-color: #be0000;
+.unstyle-create-active {
+	background-color: #be0000;
 	color: white;
 	border-bottom-left-radius: 18px;
 	border-top-left-radius: 18px;
 	border: none;
 }
-.unstyle-create{
-  background-color: transparent;
-  color: black;
+.unstyle-create {
+	background-color: transparent;
+	color: black;
 	border-bottom-left-radius: 18px;
 	border-top-left-radius: 18px;
 	border: none;
 }
-.unstyle-view-active{
-  background-color: #be0000;
+.unstyle-view-active {
+	background-color: #be0000;
 	color: white;
 	border-bottom-right-radius: 18px;
 	border-top-right-radius: 18px;
 	border: none;
 }
-.unstyle-view{
-  background-color: transparent;
-  color: black;
+.unstyle-view {
+	background-color: transparent;
+	color: black;
 	border-bottom-right-radius: 18px;
 	border-top-right-radius: 18px;
 	border: none;
 }
-
+.member-user-label {
+	font-weight: lighter;
+	font-size: 16px;
+	height: fit-content;
+	margin: auto;
+	width: 100%;
+	text-align: left;
+}
+.member-radio {
+	display: flex;
+	margin-top: 8px;
+}
+.radio-A {
+	padding-right: 3px;
+	display: flex;
+	width: 30%;
+}
+.radio-B {
+	padding-right: 3px;
+	display: flex;
+	width: 35%;
+}
+.radio-C {
+	display: flex;
+}
+.member-radio .radio-A .a-radio {
+	padding-right: 2px;
+}
+.member-radio .radio-B .b-radio {
+	padding-right: 2px;
+}
+.member-radio .radio-C .c-radio {
+	padding-right: 2px;
+}
+.create-main-container {
+	width: 100%;
+}
