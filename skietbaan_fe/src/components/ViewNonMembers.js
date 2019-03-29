@@ -132,8 +132,7 @@ class ViewNonMembers extends Component {
                   .startsWith(this.state.filterText.toLowerCase()) ||
                 post.email
                   .toLowerCase()
-                  .startsWith(this.state.filterText.toLowerCase()) ||
-                post.memberID.startsWith(this.state.filterText)
+                  .startsWith(this.state.filterText.toLowerCase())
               );
             })
             .map((post, index) => (
