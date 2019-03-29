@@ -123,7 +123,6 @@ class ViewMembersExpiring extends Component {
   }
 
   render() {
-    console.log(this.state.selectedValue);
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }

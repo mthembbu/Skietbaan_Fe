@@ -102,7 +102,7 @@ export default class userDetails extends Component {
           {this.state.cellphoneValue === null ? null : validateNumber(
               this.state.cellphoneValue
             ) ? null : (
-            <label className="userDetails-member-label">
+            <label className={validateNumber(this.state.cellphoneValue) === true ? "hidden" : "userDetails-member-label"}>
               invalid Cellphone Number
             </label>
           )}
