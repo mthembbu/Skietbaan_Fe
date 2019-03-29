@@ -322,8 +322,6 @@ html, body{
         height: -webkit-fill-available;
         background-color: transparent;
      }
-
-     
  /* end of filter section*/
  /* Ranking table section */
      .ranking-table-section{
@@ -701,7 +699,6 @@ html, body{
      .filter-selections .selections-container .row .empty-div{
         display: none;
     }
-     
  }
  @media only screen and (max-width: 575px) {
      /* phones size */
@@ -710,8 +707,5 @@ html, body{
          width: 144px;
          display: inline-block;
      }
-     /* .leaderboard-container .row .col-sm-8 .ReactCollapse--collapse{
-        transition: height 800ms 0ms, opacity 500ms 500ms; 
-     } */
 }
  

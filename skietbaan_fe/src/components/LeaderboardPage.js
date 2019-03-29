@@ -180,7 +180,7 @@ class LeaderboardPage extends Component {
     }
     getFilterTableHeight() {
         if (this.state.width < 575) {
-            return ((this.state.height / 2) + -100); //78
+            return ((this.state.height / 2) + -100);
         } else {
             return 315;
         }
@@ -387,7 +387,6 @@ class LeaderboardPage extends Component {
                 </Collapsible>
                 <div className="underline"></div>
             </tr>
-
         ));
         return (
             /* Leaderboard Page Main Container */
@@ -404,8 +403,7 @@ class LeaderboardPage extends Component {
                                             style={{
                                                 x: spring(0),
                                                 opacity: spring(1)
-                                            }}
-                                        >
+                                            }}>
                                             {style => (
                                                 <td className="competition-name-col" style={{
                                                     transform: `translateX(${style.x}px)`,
@@ -415,8 +413,6 @@ class LeaderboardPage extends Component {
                                                 </td>
                                             )}
                                         </Motion>
-
-
                                         <td className="filter-icon-col">
                                             <div className="filter-icon">
                                                 <MDBBtn tag="a" size="lg" floating gradient="purple"
@@ -486,9 +482,8 @@ class LeaderboardPage extends Component {
                                             defaultStyle={{ x: -200, opacity: 0 }}
                                             style={{
                                                 x: spring(0),
-                                                opacity: spring(1)
-                                            }}>
-                                        {style => (
+                                                opacity: spring(1) }}>
+                                            {style => (
                                                 <td colSpan="2" className="grouping-label-col" style={{
                                                     transform: `translateX(${style.x}px)`,
                                                     opacity: style.opacity
