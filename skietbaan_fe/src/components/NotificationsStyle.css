@@ -59,6 +59,10 @@
     padding-right: 27px;
   }
 
+  .notifications-images:hover {
+    cursor: pointer;
+  }
+
   .notifications-selected {
     background: url("./Notification-Img/submit_plus_add_score.png");
     padding-bottom: 6px;
@@ -68,6 +72,10 @@
     background-size: 24px;
     height: 24px;
     padding-right: 27px;
+  }
+
+  .notifications-selected{
+    cursor: pointer;
   }
 
   .notifications-icon {
@@ -83,12 +91,20 @@
     margin-top: 18px;
   }
 
+  .black-delete-icon:hover{
+    cursor: pointer;
+  }
+
   .delete-icon {
     height: 26px;
     width: 20px;
     float: right;
     margin-right: 5%;
     margin-top: 18px;
+  }
+
+  .delete-icon:hover{
+    cursor: pointer;
   }
 
   .trash-spacing {
@@ -247,6 +263,10 @@
   }
 }
 
+.notifications-unread:hover{
+  cursor: pointer;
+}
+
 .notifications-unread {
   color: #000000;
   text-decoration-line: none;
@@ -331,6 +351,10 @@
     padding-right: 27px;
   }
 
+  .notifications-images:hover {
+    cursor: pointer;
+  }
+
   .notifications-selected {
     background: url("./Notification-Img/submit_plus_add_score.png");
     padding-bottom: 6px;
@@ -340,6 +364,10 @@
     background-size: 24px;
     height: 24px;
     padding-right: 27px;
+  }
+
+  .notifications-selected{
+    cursor: pointer;
   }
 
   .notifications-icon {
@@ -355,12 +383,20 @@
     margin-top: 5px;
   }
 
+  .black-delete-icon:hover{
+    cursor: pointer;
+  }
+
   .delete-icon {
     height: 26px;
     width: 20px;
     float: right;
     margin-right: 33px;
     margin-top: 5px;
+  }
+
+  .delete-icon:hover{
+    cursor: pointer;
   }
 
   .trash-spacing {
@@ -438,6 +474,10 @@
     padding-top: 9px;
     padding-right: 45px;
     width: 100%;
+  }
+
+  .notifications-unread:hover{
+    cursor: pointer;
   }
 
   .notifications-text {
