@@ -37,11 +37,13 @@ class notification extends Component {
       markedForDeletion: false,
       updatedNotification: {},
       token: getCookie("token"),
-      marked: null
+      marked: null,
+      selected: null
     };
     this.onDelete = this.onDelete.bind(this);
     this.changeIcon = this.changeIcon.bind(this);
     this.markForDeletion = this.markForDeletion.bind(this);
+    this.selectAll = this.selectAll.bind(this);
   }
 
   onDelete = async () => {
@@ -103,18 +105,14 @@ class notification extends Component {
   };
 
   selectAll = () => {
-    if (this.state.check === "Select all") {
-      this.setState({ count: this.props.notificationsArray.length });
-      for (var i = 0; i < this.props.notificationsArray.length; i++) {
+    for (var i = 0; i < this.props.notificationsArray.length; i++) {
+      if (this.props.notificationsArray[i].markedForDeletion === true) {
+        this.setState({ marked: false });
+        this.props.notificationsArray[i].markedForDeletion = false;
+      } else if (this.props.notificationsArray[i].markedForDeletion === false) {
+        this.setState({ marked: true });
         this.props.notificationsArray[i].markedForDeletion = true;
       }
-      this.setState({ check: "Unselect All" });
-    } else {
-      this.setState({ count: 0 });
-      for (var i = 0; i < this.props.notificationsArray.length; i++) {
-        this.props.notificationsArray[i].markedForDeletion = false;
-      }
-      this.setState({ check: "Select All" });
     }
   };
 
