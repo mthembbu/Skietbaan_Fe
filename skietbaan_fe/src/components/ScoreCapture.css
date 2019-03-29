@@ -388,7 +388,7 @@ hr{
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 25px 0px;
-    background-image: url(/static/media/gunOverlay.dc42d30c.png);
+    background-image: url("../components/assets/gunOverlay.png");
     width: 100%;
 }
 
