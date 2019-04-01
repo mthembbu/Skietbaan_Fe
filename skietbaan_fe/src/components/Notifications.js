@@ -11,7 +11,8 @@ import deleteIcon from "../components/Notification-Img/trashcan.png";
 import deleteIconChange from "../components/Notification-Img/blacktrashcan.png";
 import whiteSelectAll from "../components/Notification-Img/white-select-all.png";
 import blackSelectAll from "../components/Notification-Img/black-select-all.png";
-
+import notifySpeakerBlack from "../components/Notification-Img/notifySpeaker.png";
+import notifySpeakerWhite from "../components/Notification-Img/notifySpeakerWhite.png";
 import {
   updateSelectedCompetition,
   updateSelectedGroup
@@ -38,7 +39,8 @@ class notification extends Component {
       updatedNotification: {},
       token: getCookie("token"),
       marked: null,
-      selected: null
+      selected: null,
+      adminToggle: false
     };
     this.onDelete = this.onDelete.bind(this);
     this.changeIcon = this.changeIcon.bind(this);
@@ -64,7 +66,6 @@ class notification extends Component {
         body: JSON.stringify(deletingarray)
       });
     } catch (err) {}
-    this.props.getNotifications(this.state.token);
     window.location = "/notify";
   };
 
@@ -75,7 +76,7 @@ class notification extends Component {
     this.props.updateIsReadProperty(Id);
     if (Notification === "Award" || Notification === "Document") {
       this.props.history.push("/profile");
-    } else if (Notification === "Confirmation") {
+    } else if (Notification === "Confirmation" || Notification === "Expiry") {
       this.props.history.push("/notify");
     } else if (Notification === "Renewal") {
     } else if (Notification === "Competition") {
@@ -116,10 +117,14 @@ class notification extends Component {
   };
 
   onClick_cancel() {
+    for (var i = 0; i < this.props.notificationsArray.length; i++) {
+      this.props.notificationsArray[i].markedForDeletion = false;
+    }
     this.setState({
-      toggle: false
+      count: 0,
+      toggle: false,
+      secondToggle: false
     });
-    history.go(0);
   }
 
   componentDidMount() {
@@ -137,6 +142,12 @@ class notification extends Component {
   secondIconChange() {
     this.setState({
       secondToggle: !this.state.secondToggle
+    });
+  }
+
+  adminToggle() {
+    this.setState({
+      adminToggle: !this.state.adminToggle
     });
   }
 
@@ -177,13 +188,37 @@ class notification extends Component {
 
     const adminHeadingItems = (
       <div className="page-heading">
-        <b>Notifications</b>
-        <img
-          src={deleteIcon}
-          className="delete-icon"
-          onClick={() => this.changeIcon()}
-          alt=""
-        />
+        <div className="outer-header-div">
+          <b>Notifications</b>
+        </div>
+        <div>
+          <img
+            src={
+              this.state.adminToggle ? notifySpeakerBlack : notifySpeakerWhite
+            }
+            onClick={() => this.adminToggle}
+          />
+        </div>
+        <div className="notification-icon-spacing">
+          <img
+            src={
+              this.state.toggle
+                ? whiteSelectAll
+                : this.state.secondToggle
+                ? blackSelectAll
+                : "hidden"
+            }
+            onClick={() => this.selectAll()}
+            className="select-all"
+            alt=""
+          />
+          <img
+            src={this.state.toggle ? deleteIconChange : deleteIcon}
+            onClick={() => this.changeIcon()}
+            className={this.state.toggle ? "black-delete-icon" : "delete-icon"}
+            alt=""
+          />
+        </div>
       </div>
     );
 

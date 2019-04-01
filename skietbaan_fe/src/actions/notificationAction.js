@@ -33,7 +33,7 @@ export const getNotifications = token => dispatch => {
         if (notification.typeOfNotification === "Confirmation") {
           notification.images = confirmation;
         } else if (notification.typeOfNotification === "Renewal") {
-          notification.images = renewal;
+          notification.images = confirmation;
         } else if (
           notification.typeOfNotification === "Competition" ||
           notification.typeOfNotification === "Group"
@@ -43,6 +43,10 @@ export const getNotifications = token => dispatch => {
           notification.images = award;
         } else if (notification.typeOfNotification === "Document") {
           notification.images = document;
+        } else if (notification.typeOfNotification === "Expiry") {
+          notification.images = renewal;
+        } else if (notification.typeOfNotification === "Announcement") {
+          notification.images = announcement;
         }
         return notification;
       });
