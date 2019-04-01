@@ -399,7 +399,6 @@ export default class search extends Component {
   }
 
   render() {
-
     if (this.state.lastSize === 0) {
       this.state.lastSize = document.body.clientHeight;
       document.addEventListener('DOMContentLoaded', () => {
