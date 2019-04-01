@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {
+import { fetchcomp, updateByIdComp, fetchRequirements, fetchParticipants,UpdateRequirements } from '../actions/competition.action';
 	fetchcomp,
 	updateByIdComp,
 	fetchParticipants,
