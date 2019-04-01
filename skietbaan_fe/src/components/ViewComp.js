@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchcomp, updateByIdComp, fetchRequirements, fetchParticipants,UpdateRequirements } from '../actions/competition.action';
+import {
 	fetchcomp,
 	updateByIdComp,
 	fetchParticipants,
@@ -82,7 +82,6 @@ class ViewComp extends Component {
 	//End-point: URL/R/{ID}
 	getRequirements(index) {
 		fetch(URL + '/R/' + index).then((response) => response.json()).then((requirementsData) =>{
-      console.log('getRequirements: ',requirementsData);
 			this.setState({
 				bronzeAccuracy: requirementsData[0].accuracy,
 				bronzeTotal: requirementsData[0].total,
