@@ -58,9 +58,6 @@ class CreateComp extends Component {
 		this.setState({ isExist: this.props.isExist });
 	}
 	render() {
-		if(!getCookie("token")){
-            window.location = "/registerPage";
-		}
 		return (
 			<div>
 				<div class="create-comp-container">

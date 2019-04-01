@@ -87,7 +87,7 @@ class ViewComp extends Component {
 				bronzeTotal: requirementsData[0].total,
 				silverAccuracy: requirementsData[1].accuracy,
 				silverTotal: requirementsData[1].total,
-				goldAccuracy: requirementsData[1].accuracy,
+				goldAccuracy: requirementsData[2].accuracy,
 				goldTotal: requirementsData[2].total
       });
     }
@@ -139,14 +139,14 @@ class ViewComp extends Component {
 																<label>TOTAL</label>
 															</Col>
 														</Row>
-														<Row>
+														<Row className="bronze-row">
 															<Col xs={4} md={4}>
 																<label>Bronze : </label>
 															</Col>
 															<Col xs={4} md={4}>
-																<div className="comp-input-control">
+																<div className="">
 																	<input
-																		className="req-input"
+																		className="bronze-accuracy-input-control"
 																		type="number"
 																		name="bronzeAccuracy"
 																		id="B_accuracy"
@@ -159,9 +159,9 @@ class ViewComp extends Component {
 																</div>
 															</Col>
 															<Col xs={4} md={4}>
-																<div className="comp-input-control">
+																<div className="">
 																	<input
-																		className="req-input"
+																		className="bronze-total-input-control"
 																		type="number"
 																		name="bronzeTotal"
 																		id="B_total"
@@ -175,14 +175,14 @@ class ViewComp extends Component {
 															</Col>
 														</Row>
 
-														<Row>
+														<Row className="silver-row">
 															<Col xs={4} md={4}>
 																<label>Silver : </label>
 															</Col>
 															<Col xs={4} md={4}>
-																<div className="comp-input-control">
+																<div className="">
 																	<input
-																		className="req-input"
+																		className="silver-accuracy-input-control"
 																		type="number"
 																		name="silverAccuracy"
 																		id="S_accuracy"
@@ -195,9 +195,9 @@ class ViewComp extends Component {
 																</div>
 															</Col>
 															<Col xs={4} md={4}>
-																<div className="comp-input-control">
+																<div className="">
 																	<input
-																		className="req-input"
+																		className="silver-total-input-control"
 																		type="number"
 																		name="silverTotal"
 																		id="S_total"
@@ -216,9 +216,9 @@ class ViewComp extends Component {
 																<label>Gold : </label>
 															</Col>
 															<Col xs={4} md={4}>
-																<div className="comp-input-control">
+																<div className="">
 																	<input
-																		className="req-input"
+																		className="gold-accuracy-input-control"
 																		type="number"
 																		name="goldAccuracy"
 																		id="G_accuracy"
@@ -231,9 +231,9 @@ class ViewComp extends Component {
 																</div>
 															</Col>
 															<Col xs={4} md={4}>
-																<div className="comp-input-control">
+																<div className="">
 																	<input
-																		className="req-input"
+																		className="gold-total-input-control"
 																		type="number"
 																		name="goldTotal"
 																		id="G_total"
@@ -287,12 +287,12 @@ class ViewComp extends Component {
 																</div>
 															</Col>
 															<Col xs={4} md={4}>
-																<div className="req-submit-btn-container">
+																<div className="requirement-success-submit-btn">
 																	<button
 																		variant="secondary"
 																		type="submit"
 																		id="submit-btn"
-																		className="comp-success-submit-btn"
+																		className="require-success-submit-btn"
 																		onClick={() => this.HandleOnSubmit(compVar.id)}
 																	>
 																		update

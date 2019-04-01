@@ -45,6 +45,7 @@ export const UPDATE_SELECTED_COMPETITION = "UPDATE_SELECTED_COMPETITION";
 export const UPDATE_SELECTED_GROUP = "UPDATE_SELECTED_GROUP";
 
 //groups types and constants
+//https://api.skietbaan.retrotest.co.za"
 export const URL = "https://api.skietbaan.retrotest.co.za";
 export const UPDATENAME = "UPDATENAME";
 export const UPDATE_GROUPNAME = "UPDATE_GROUPNAME";
