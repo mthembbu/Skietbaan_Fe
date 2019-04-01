@@ -36,17 +36,6 @@ export default class userDetails extends Component {
   }
 
   updateUser() {
-    {
-      this.state.nameValue = ""
-        ? (this.state.nameValue = null)
-        : (this.state.nameValue = this.state.nameValue);
-    }
-
-    {
-      this.state.surnameValue = ""
-        ? (this.state.surnameValue = null)
-        : (this.state.surnameValue = this.state.surnameValue);
-    }
     this.state.array.name = this.state.nameValue;
     this.state.array.phoneNumber = this.state.cellphoneValue;
     this.state.array.email = this.state.emailValue;
