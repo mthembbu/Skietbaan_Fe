@@ -10,7 +10,7 @@
     "collapse": "^1.0.1",
     "collapsible": "^1.0.1",
     "font-awesome": "^4.7.0",
-    "history": "^4.9.0",
+    "history": "^4.7.2",
     "jquery": "^3.3.1",
     "jspdf": "git://github.com/MrRio/jsPDF.git#76edb3387cda3d5292e212765134b06150030364",
     "local-storage": "^1.4.2",
