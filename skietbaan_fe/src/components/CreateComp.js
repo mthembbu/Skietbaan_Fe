@@ -67,7 +67,7 @@ class CreateComp extends Component {
 				<div class="create-comp-container">
 					<Form onSubmit={this.onSubmit}>
 						<div className="containers-input">
-							<label className="comp-label-container">{/** Competition Name*/}</label>
+							<label className="comp-label-container"></label>
 							<div className="comp-input-control">
 								<input
 									className="comp-input"

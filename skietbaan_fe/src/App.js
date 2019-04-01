@@ -17,10 +17,11 @@ import ProfileLanding from './components/ProfileLanding';
 import GroupComponent from './components/GroupComponent';
 import requirements from './components/requirements.js';
 import ForgotPassword from './components/ForgotPassword';
-import ViewComp from './components/ViewComp';
 import CreateComp from './components/CreateComp';
 import createPages from './components/createPages';
+import MetaTags from 'react-meta-tags';
 import resetPassword from './components/resetPassword';
+import { PersistGate } from 'redux-persist/integration/react';
 class App extends Component {
 	render() {
 		return (
@@ -43,7 +44,6 @@ class App extends Component {
 								<Route path="/AddGroup" component={AddGroup} exact />
 								<Route path="/scoreCapture" component={ScoreCapture} exact />
 								<Route path="/groups" component={Groups} exact />
-
 								<Route path="/notify" component={notification} exact />
 								<Route path="/documents" component={Documents} exact />
 								<Route path="/profile" component={ProfileLanding} exact />
@@ -51,7 +51,6 @@ class App extends Component {
 								<Route path={'/ViewGroups'} component={GroupComponent} exact />
 								<Route path={'/GroupComponent'} component={GroupComponent} exact />
 								<Route path={'/create'} component={createPages} exact />
-
 								<Redirect from="/" to="/home" />
 							</Switch>
 						</Router>
