@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import "../components/NotificationsStyle.css";
-import { getCookie } from "./cookie";
-import history from "./history";
-import { connect } from "react-redux";
-import { BASE_URL } from "../actions/types.js";
-import PropTypes from "prop-types";
-import Moment from "react-moment";
-import "moment-timezone";
-import deleteIcon from "../components/Notification-Img/trashcan.png";
-import deleteIconChange from "../components/Notification-Img/blacktrashcan.png";
-import whiteSelectAll from "../components/Notification-Img/white-select-all.png";
-import blackSelectAll from "../components/Notification-Img/black-select-all.png";
+import React, { Component } from 'react';
+import '../components/NotificationsStyle.css';
+import { getCookie } from './cookie';
+import history from './history';
+import { connect } from 'react-redux';
+import { BASE_URL } from '../actions/types.js';
+import PropTypes from 'prop-types';
+import Moment from 'react-moment';
+import 'moment-timezone';
+import deleteIcon from '../components/Notification-Img/trashcan.png';
+import deleteIconChange from '../components/Notification-Img/blacktrashcan.png';
+import whiteSelectAll from '../components/Notification-Img/white-select-all.png';
+import blackSelectAll from '../components/Notification-Img/black-select-all.png';
 import notifySpeakerBlack from "../components/Notification-Img/notifySpeaker.png";
 import notifySpeakerWhite from "../components/Notification-Img/notifySpeakerWhite.png";
 import {setSelectedCompetition} from "../actions/userProfileActions"
@@ -24,52 +24,55 @@ import {
 } from "../actions/notificationAction";
 
 class notification extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      notificationsArray: [],
-      count: 0,
-      tokenValue: "",
-      deleteClicked: false,
-      cancelClicked: false,
-      isRead: false,
-      toggle: false,
-      secondToggle: false,
-      check: "Select all",
-      markedForDeletion: false,
-      updatedNotification: {},
-      token: getCookie("token"),
-      marked: null,
+	constructor(props) {
+		super(props);
+		this.state = {
+			notificationsArray: [],
+			count: 0,
+			tokenValue: '',
+			deleteClicked: false,
+			cancelClicked: false,
+			isRead: false,
+			toggle: false,
+			secondToggle: false,
+			check: 'Select all',
+			markedForDeletion: false,
+			updatedNotification: {},
+			token: getCookie('token'),
+			marked: null,
       selected: null,
-      adminToggle: false
-    };
-    this.onDelete = this.onDelete.bind(this);
-    this.changeIcon = this.changeIcon.bind(this);
-    this.markForDeletion = this.markForDeletion.bind(this);
-    this.selectAll = this.selectAll.bind(this);
-  }
+      adminToggle: false,
+			stateCheck: false
+		};
+		this.onDelete = this.onDelete.bind(this);
+		this.changeIcon = this.changeIcon.bind(this);
+		this.markForDeletion = this.markForDeletion.bind(this);
+		this.selectAll = this.selectAll.bind(this);
+		this.onChange = this.onChange.bind(this);
+	}
 
-  onDelete = async () => {
-    const deletingarray = [];
-    for (var i = 0; i < this.props.notificationsArray.length; i++) {
-      if (this.props.notificationsArray[i].markedForDeletion === true) {
-        deletingarray.push(this.props.notificationsArray[i]);
+	onDelete = async () => {
+		const deletingarray = [];
+		for (var i = 0; i < this.props.notificationsArray.length; i++) {
+			if (this.props.notificationsArray[i].markedForDeletion === true) {
+				deletingarray.push(this.props.notificationsArray[i]);
 
-        delete this.props.notificationsArray[i];
-      }
-    }
-    try {
-      fetch(BASE_URL + "/api/Notification/DeleteNotificationById", {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(deletingarray)
-      });
-    } catch (err) {}
-    window.location = "/notify";
-  };
+				delete this.props.notificationsArray[i];
+			}
+		}
+		try {
+			fetch(BASE_URL + '/api/Notification/DeleteNotificationById', {
+				method: 'post',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(deletingarray)
+			});
+		} catch (err) {}
+		this.props.getNotifications(this.state.token);
+		window.location = '/notify';
+	};
 
   onClick_View = (Notification, Message, Id) => {
     this.setState({
@@ -81,117 +84,119 @@ class notification extends Component {
       this.props.awardsSelectedCompetition("Rifle 100m")
       this.props.history.push("/profile");
     } else if (Notification === "Confirmation" || Notification === "Expiry") {
-      this.props.history.push("/notify");
-    } else if (Notification === "Renewal") {
-    } else if (Notification === "Competition") {
-      var competitionName = Message.split(",")[0];
-      this.props.updateSelectedCompetition(competitionName);
-      window.location = "/home";
-    } else if (Notification === "Group") {
-      var groupName = Message.split(",")[0];
-      this.props.updateSelectedGroup(groupName);
-      window.location = "/home";
-    } else {
-      window.location = "/notify";
-    }
-  };
+			this.props.history.push('/notify');
+		} else if (Notification === 'Renewal') {
+		} else if (Notification === 'Competition') {
+			var competitionName = Message.split(',')[0];
+			this.props.updateSelectedCompetition(competitionName);
+			window.location = '/home';
+		} else if (Notification === 'Group') {
+			var groupName = Message.split(',')[0];
+			this.props.updateSelectedGroup(groupName);
+			window.location = '/home';
+		} else {
+			window.location = '/notify';
+		}
+	};
 
-  markForDeletion = index => {
-    if (this.props.notificationsArray[index].markedForDeletion === true) {
-      this.setState({ marked: false });
-      this.props.notificationsArray[index].markedForDeletion = false;
-    } else if (
-      this.props.notificationsArray[index].markedForDeletion === false
-    ) {
-      this.setState({ marked: true });
-      this.props.notificationsArray[index].markedForDeletion = true;
-    }
-  };
+	sendAnnouncement = () => {};
 
-  selectAll = () => {
-    for (var i = 0; i < this.props.notificationsArray.length; i++) {
-      if (this.props.notificationsArray[i].markedForDeletion === true) {
-        this.setState({ marked: false });
-        this.props.notificationsArray[i].markedForDeletion = false;
-      } else if (this.props.notificationsArray[i].markedForDeletion === false) {
-        this.setState({ marked: true });
-        this.props.notificationsArray[i].markedForDeletion = true;
-      }
-    }
-  };
+	markForDeletion = (index) => {
+		if (this.props.notificationsArray[index].markedForDeletion === true) {
+			this.setState({ marked: false });
+			this.props.notificationsArray[index].markedForDeletion = false;
+		} else if (this.props.notificationsArray[index].markedForDeletion === false) {
+			this.setState({ marked: true });
+			this.props.notificationsArray[index].markedForDeletion = true;
+		}
+	};
 
-  onClick_cancel() {
+	selectAll = () => {
+		for (var i = 0; i < this.props.notificationsArray.length; i++) {
+			if (this.props.notificationsArray[i].markedForDeletion === true) {
+				this.setState({ marked: false });
+				this.props.notificationsArray[i].markedForDeletion = false;
+			} else if (this.props.notificationsArray[i].markedForDeletion === false) {
+				this.setState({ marked: true });
+				this.props.notificationsArray[i].markedForDeletion = true;
+			}
+		}
+	};
+
+	onClick_cancel() {
     for (var i = 0; i < this.props.notificationsArray.length; i++) {
       this.props.notificationsArray[i].markedForDeletion = false;
     }
-    this.setState({
+		this.setState({
       count: 0,
       toggle: false,
       secondToggle: false
-    });
-  }
+		});
+	}
 
-  componentDidMount() {
-    if (getCookie("token")) {
-      this.props.getNotifications(this.state.token);
-    }
-  }
+	componentDidMount() {
+		if (getCookie('token')) {
+			this.props.getNotifications(this.state.token);
+		}
+	}
 
-  changeIcon() {
-    this.setState({
-      toggle: !this.state.toggle
-    });
-  }
+	onChange(event) {
+		this.setState({ announceString: event.target.value });
+	}
+	changeIcon() {
+		this.setState({
+			toggle: !this.state.toggle
+		});
+	}
 
-  secondIconChange() {
-    this.setState({
-      secondToggle: !this.state.secondToggle
-    });
+	secondIconChange() {
+		this.setState({
+			secondToggle: !this.state.secondToggle
+		});
   }
-
-  adminToggle() {
-    this.setState({
-      adminToggle: !this.state.adminToggle
-    });
+  
+  submitAnnouncement=()=>{
+     fetch(BASE_URL+"/api/Notification/Announcements/"+this.state.announceString, {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(this.state.announceString)
+		})
+			.then(function(response) {})
+			.catch(function(data) {});
   }
 
   render() {
     if (!getCookie("token")) {
-      setTimeout(function() {
-        history.push("/registerPage");
-      }, 2000);
+      window.location = "/registerPage";
     }
 
-    let headingItems = (
-      <div className="page-heading">
-        <div className="outer-header-div">
-          <b>Notifications</b>
-        </div>
-        <div className="notification-icon-spacing">
-          <img
-            src={
-              this.state.toggle
-                ? whiteSelectAll
-                : this.state.secondToggle
-                ? blackSelectAll
-                : "hidden"
-            }
-            onClick={() => this.selectAll()}
-            className="select-all"
-            alt=""
-          />
-          <img
-            src={this.state.toggle ? deleteIconChange : deleteIcon}
-            onClick={() => this.changeIcon()}
-            className={this.state.toggle ? "black-delete-icon" : "delete-icon"}
-            alt=""
-          />
-        </div>
-      </div>
-    );
+		let headingItems = (
+			<div className="page-heading">
+				<div className="outer-header-div">
+					<b>Notifications</b>
+				</div>
+				<div className="notification-icon-spacing">
+					<img
+						src={this.state.toggle ? whiteSelectAll : this.state.secondToggle ? blackSelectAll : 'hidden'}
+						onClick={() => this.selectAll()}
+						className="select-all"
+						alt=""
+					/>
+					<img
+						src={this.state.toggle ? deleteIconChange : deleteIcon}
+						onClick={() => this.changeIcon()}
+						className={this.state.toggle ? 'black-delete-icon' : 'delete-icon'}
+						alt=""
+					/>
+				</div>
+			</div>
+		);
 
-    const adminHeadingItems = (
-      <div className="page-heading">
+		const adminHeadingItems = (
+			<div className="page-heading">
         <div className="outer-header-div">
           <b>Notifications</b>
         </div>
@@ -326,15 +331,38 @@ class notification extends Component {
         </tr>
       </table>
     );
-
-    return (
-      <div className="notifications-body-class">
-        <div>{headingItems}</div>
-        <div className="format-content">{postItems}</div>
-        <div>{deleteModal}</div>
-      </div>
-    );
-  }
+    
+		const writeAnnouncement = (
+			<div className="announcement-main">
+				<div>
+					<textarea
+            type="text"
+            name="name"
+						className="announcement-text"
+						value={this.state.announceString}
+            placeholder="Enter announcement"
+            onChange={this.onChange}
+					/>
+				</div>
+				<div>
+					<button className="announcement-send" onClick={()=>this.submitAnnouncement()}>
+          send announcement
+          </button>
+				</div>
+			</div>
+		);
+		return (
+			<div className="notifications-body-class">
+				<div>{headingItems}</div>
+				{this.state.stateCheck === true ? (
+					<div>{writeAnnouncement}</div>
+				) : (
+					<div className="format-content">{postItems}</div>
+				)}
+				<div>{deleteModal}</div>
+			</div>
+		);
+	}
 }
 notification.propTypes = {
   notificationsArray: PropTypes.array.isRequired,
