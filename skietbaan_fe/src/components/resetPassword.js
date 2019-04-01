@@ -37,12 +37,6 @@ class ForgotPassword extends Component {
       var key = multiple[i].split("=");
       document.cookie = key[0] + " =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
     }
-
-    {
-      this.state.returnValue !== "changed"
-        ? null
-        : (window.location = "/login");
-    }
   }
 
   toggleNavbar() {
@@ -54,12 +48,12 @@ class ForgotPassword extends Component {
     }
   }
 
-  resetPassword() {
+  async resetPassword() {
     let user = window.location.pathname.split("/")[2];
     let sha1 = require("sha1");
     let hash = sha1(this.state.confirmPasswordValue);
 
-    fetch(
+    await fetch(
       BASE_URL + `/api/Features/Resetpassword?token=${user}&password=${hash}`,
       {
         method: "post",
@@ -72,11 +66,12 @@ class ForgotPassword extends Component {
     )
       .then(res => res.json())
       .then(data => this.setState({ returnValue: data }));
+
     {
       setTimeout(() => {
-        this.state.returnValue !== "changed"
-          ? null
-          : (window.location = "/login");
+        this.state.returnValue === "changed"
+          ? (window.location = "/login")
+          : null;
       }, 2000);
     }
   }
