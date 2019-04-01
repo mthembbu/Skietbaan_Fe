@@ -87,7 +87,7 @@ class ViewComp extends Component {
 				bronzeTotal: requirementsData[0].total,
 				silverAccuracy: requirementsData[1].accuracy,
 				silverTotal: requirementsData[1].total,
-				goldAccuracy: requirementsData[1].total,
+				goldAccuracy: requirementsData[1].accuracy,
 				goldTotal: requirementsData[2].total
       });
     }
