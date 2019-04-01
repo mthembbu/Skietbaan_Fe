@@ -10,13 +10,13 @@
 }
 
 .table-search-members {
-  padding-top: 55px;
+  padding-top: 66px;
   background-color: #fdfdfd;
 }
 
 @media only screen and (max-width: 575px) {
   .table-search-members {
-    padding-top: 55px;
+    padding-top: 66px;
     background-color: #fdfdfd;
     overflow-y: scroll;
     height: 100%;
@@ -127,7 +127,10 @@
 .search {
   padding: 1px 30px 10px 25px;
   background-color: #ffffff;
-  height: 55px;
+  height: 60px;
+  box-shadow: 2px 1px 16px -3px #000000;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 .user-value {

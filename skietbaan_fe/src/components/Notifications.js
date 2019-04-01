@@ -11,8 +11,8 @@ import deleteIcon from '../components/Notification-Img/trashcan.png';
 import deleteIconChange from '../components/Notification-Img/blacktrashcan.png';
 import whiteSelectAll from '../components/Notification-Img/white-select-all.png';
 import blackSelectAll from '../components/Notification-Img/black-select-all.png';
-
-import { updateSelectedCompetition, updateSelectedGroup } from '../actions/postActions';
+import notifySpeakerBlack from "../components/Notification-Img/notifySpeaker.png";
+import notifySpeakerWhite from "../components/Notification-Img/notifySpeakerWhite.png";
 import { updateIsReadProperty, getNotifications } from '../actions/notificationAction';
 
 class notification extends Component {
@@ -32,8 +32,8 @@ class notification extends Component {
 			updatedNotification: {},
 			token: getCookie('token'),
 			marked: null,
-			selected: null,
-			announceString: "",
+      selected: null,
+      adminToggle: false
 			stateCheck: false
 		};
 		this.onDelete = this.onDelete.bind(this);
@@ -48,6 +48,7 @@ class notification extends Component {
 		for (var i = 0; i < this.props.notificationsArray.length; i++) {
 			if (this.props.notificationsArray[i].markedForDeletion === true) {
 				deletingarray.push(this.props.notificationsArray[i]);
+
 				delete this.props.notificationsArray[i];
 			}
 		}
@@ -72,7 +73,7 @@ class notification extends Component {
 		this.props.updateIsReadProperty(Id);
 		if (Notification === 'Award' || Notification === 'Document') {
 			this.props.history.push('/profile');
-		} else if (Notification === 'Confirmation') {
+    } else if (Notification === "Confirmation" || Notification === "Expiry") {
 			this.props.history.push('/notify');
 		} else if (Notification === 'Renewal') {
 		} else if (Notification === 'Competition') {
@@ -113,10 +114,14 @@ class notification extends Component {
 	};
 
 	onClick_cancel() {
+    for (var i = 0; i < this.props.notificationsArray.length; i++) {
+      this.props.notificationsArray[i].markedForDeletion = false;
+    }
 		this.setState({
-			toggle: false
+      count: 0,
+      toggle: false,
+      secondToggle: false
 		});
-		history.go(0);
 	}
 
 	componentDidMount() {
@@ -184,101 +189,139 @@ class notification extends Component {
 
 		const adminHeadingItems = (
 			<div className="page-heading">
-				<b>Notifications</b>
-				<img src={deleteIcon} className="delete-icon" onClick={() => this.changeIcon()} alt="" />
-			</div>
-		);
+        <div className="outer-header-div">
+          <b>Notifications</b>
+        </div>
+        <div>
+          <img
+            src={
+              this.state.adminToggle ? notifySpeakerBlack : notifySpeakerWhite
+            }
+            onClick={() => this.adminToggle}
+          />
+        </div>
+        <div className="notification-icon-spacing">
+          <img
+            src={
+              this.state.toggle
+                ? whiteSelectAll
+                : this.state.secondToggle
+                ? blackSelectAll
+                : "hidden"
+            }
+            onClick={() => this.selectAll()}
+            className="select-all"
+            alt=""
+          />
+          <img
+            src={this.state.toggle ? deleteIconChange : deleteIcon}
+            onClick={() => this.changeIcon()}
+            className={this.state.toggle ? "black-delete-icon" : "delete-icon"}
+            alt=""
+          />
+        </div>
+      </div>
+    );
 
-		const postItems = (
-			<table className="post-items">
-				{this.props.notificationsArray.length <= 0 ? (
-					<text className="empty-screen">No Notifications Available</text>
-				) : (
-					''
-				)}
-				{this.props.notificationsArray.map((post, i) => (
-					<tr className="tr-class" key={i}>
-						<td className="first-column-notify">
-							<img src={post.images} className="notification-icon-on-the-side" alt="" />
-						</td>
-						<td className="td-notification">
-							<label
-								className={
-									post.markedForDeletion ? (
-										'notifications-selected-text'
-									) : post.isRead === true ? (
-										'notifications-text'
-									) : (
-										'notifications-unread'
-									)
-								}
-								onClick={() =>
-									this.onClick_View(post.typeOfNotification, post.notificationMessage, post.id)}
-							>
-								{post.notificationMessage}
-							</label>
-							<Moment fromNow ago className="time-div">
-								{post.timeOfArrival}
-							</Moment>
-						</td>
-						<td className="td-Delete">
-							<div
-								onClick={() => this.markForDeletion(i)}
-								className={
-									this.state.toggle ? post.markedForDeletion ? (
-										'notifications-selected'
-									) : (
-										'notifications-images'
-									) : (
-										'hide'
-									)
-								}
-								alt="redirect"
-							/>
-						</td>
-					</tr>
-				))}
-			</table>
-		);
+    const postItems = (
+      <table className="post-items">
+        {this.props.notificationsArray.length <= 0 ? (
+          <text className="empty-screen">No Notifications Available</text>
+        ) : (
+          ""
+        )}
+        {this.props.notificationsArray.map((post, i) => (
+          <tr className="tr-class" key={i}>
+            <td className="first-column-notify">
+              <img
+                src={post.images}
+                className="notification-icon-on-the-side"
+                alt=""
+              />
+            </td>
+            <td className="td-notification">
+              <label
+                className={
+                  post.markedForDeletion
+                    ? "notifications-selected-text"
+                    : post.isRead === true
+                    ? "notifications-text"
+                    : "notifications-unread"
+                }
+                onClick={() =>
+                  this.onClick_View(
+                    post.typeOfNotification,
+                    post.notificationMessage,
+                    post.id
+                  )
+                }
+              >
+                {post.notificationMessage}
+              </label>
+              <Moment fromNow ago className="time-div">
+                {post.timeOfArrival}
+              </Moment>
+            </td>
+            <td className="td-Delete">
+              <div
+                onClick={() => this.markForDeletion(i)}
+                className={
+                  this.state.toggle
+                    ? post.markedForDeletion
+                      ? "notifications-selected"
+                      : "notifications-images"
+                    : "hide"
+                }
+                alt="redirect"
+              />
+            </td>
+          </tr>
+        ))}
+      </table>
+    );
 
-		let markedItems = [];
+    let markedItems = [];
 
-		this.props.notificationsArray.forEach(function(notifications) {
-			if (notifications.markedForDeletion) {
-				markedItems.push(notifications);
-			}
-		});
-		let markedItemsCount = markedItems.length;
-		let modalText;
-		if (markedItemsCount === this.props.notificationsArray.length) {
-			modalText = 'DELETE ALL NOTIFICATIONS';
-		} else {
-			modalText = 'DELETE ' + markedItemsCount + ' NOTIFICATION(S)';
-		}
+    this.props.notificationsArray.forEach(function(notifications) {
+      if (notifications.markedForDeletion) {
+        markedItems.push(notifications);
+      }
+    });
+    let markedItemsCount = markedItems.length;
+    let modalText;
+    if (markedItemsCount === this.props.notificationsArray.length) {
+      modalText = "DELETE ALL NOTIFICATIONS";
+    } else {
+      modalText = "DELETE " + markedItemsCount + " NOTIFICATION(S)";
+    }
 
-		const deleteModal = (
-			<table
-				className={
-					this.props.notificationsArray.some((post) => post.markedForDeletion) ? (
-						'notifications-modal'
-					) : (
-						'hidden'
-					)
-				}
-			>
-				<tr className="tr-Class">
-					<td>
-						<button className="notifications-modal-confirm" onClick={this.onDelete}>
-							{modalText}
-						</button>
-					</td>
-					<td>
-						<button onClick={() => this.onClick_cancel()} className="notifications-modal-cancel">
-							CANCEL
-						</button>
-					</td>
-				</tr>
-			</table>
+    const deleteModal = (
+      <table
+        className={
+          this.props.notificationsArray.some(post => post.markedForDeletion)
+            ? "notifications-modal"
+            : "hidden"
+        }
+      >
+        <tr className="tr-Class">
+          <td>
+            <button
+              className="notifications-modal-confirm"
+              onClick={this.onDelete}
+            >
+              {modalText}
+            </button>
+          </td>
+          <td>
+            <button
+              onClick={() => this.onClick_cancel()}
+              className="notifications-modal-cancel"
+            >
+              CANCEL
+            </button>
+          </td>
+        </tr>
+      </table>
     );
     
 		const writeAnnouncement = (
@@ -314,19 +357,22 @@ class notification extends Component {
 	}
 }
 notification.propTypes = {
-	notificationsArray: PropTypes.array.isRequired,
-	updateIsReadProperty: PropTypes.func.isRequired,
-	updateSelectedCompetition: PropTypes.func.isRequired,
-	updateSelectedGroup: PropTypes.func.isRequired
+  notificationsArray: PropTypes.array.isRequired,
+  updateIsReadProperty: PropTypes.func.isRequired,
+  updateSelectedCompetition: PropTypes.func.isRequired,
+  updateSelectedGroup: PropTypes.func.isRequired
 };
-const mapStateToProps = (state) => ({
-	notificationsArray: state.notificationOBJ.notificationsArray,
-	updatedNotification: state.notificationOBJ.updatedNotification
+const mapStateToProps = state => ({
+  notificationsArray: state.notificationOBJ.notificationsArray,
+  updatedNotification: state.notificationOBJ.updatedNotification
 });
 
-export default connect(mapStateToProps, {
-	updateSelectedCompetition,
-	updateSelectedGroup,
-	updateIsReadProperty,
-	getNotifications
-})(notification);
+export default connect(
+  mapStateToProps,
+  {
+    updateSelectedCompetition,
+    updateSelectedGroup,
+    updateIsReadProperty,
+    getNotifications
+  }
+)(notification);

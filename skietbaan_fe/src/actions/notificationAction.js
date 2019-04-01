@@ -30,10 +30,11 @@ export const getNotifications = token => dispatch => {
     .then(data => {
       const newArray = data.map(notification => {
         notification.markedForDeletion = false;
-        if (notification.typeOfNotification === "Confirmation") {
+        if (
+          notification.typeOfNotification === "Confirmation" ||
+          notification.typeOfNotification === "Renewal"
+        ) {
           notification.images = confirmation;
-        } else if (notification.typeOfNotification === "Renewal") {
-          notification.images = renewal;
         } else if (
           notification.typeOfNotification === "Competition" ||
           notification.typeOfNotification === "Group"
@@ -43,6 +44,10 @@ export const getNotifications = token => dispatch => {
           notification.images = award;
         } else if (notification.typeOfNotification === "Document") {
           notification.images = document;
+        } else if (notification.typeOfNotification === "Expiry") {
+          notification.images = renewal;
+        } else if (notification.typeOfNotification === "Announcement") {
+          notification.images = announcement;
         }
         return notification;
       });
