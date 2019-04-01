@@ -1,7 +1,13 @@
-.userDetails-container {
+.user-details-container {
   padding-top: 60px;
 }
-.userDetails-heading-container {
+
+.user-details-scrolls {
+  overflow: auto;
+  height: 100%;
+  padding-bottom: 150px;
+}
+.user-details-heading-container {
   text-align: center;
   font-family: Helvetica;
   padding-top: 24px;
@@ -9,7 +15,7 @@
   color: #666666;
 }
 
-.userDetails-member-label {
+.user-details-member-label {
   text-align: center;
   padding-top: 26px;
   color: #be0000;
@@ -17,7 +23,7 @@
   font-size: 14px;
 }
 
-.userDetails-main-container {
+.user-details-main-container {
   background-color: white;
   text-align: center;
   width: 100%;
@@ -28,7 +34,7 @@
   align-content: center;
 }
 
-.userDetails-input-container {
+.user-details-input-container {
   margin-top: 24px;
   border-radius: 4px;
   width: 312px;
@@ -41,7 +47,7 @@
   font-weight: bolder;
 }
 
-.userDetails-button-container {
+.user-details-button-container {
   font-weight: lighter;
   font-size: 16px;
   color: #ffffff;
@@ -57,10 +63,10 @@
   height: 42px;
 }
 
-.userDetails-button-contain {
+.user-details-button-contain {
   text-align: center;
   width: 100%;
+  margin-top: 24px;
   justify-content: center;
-  position: fixed;
   bottom: 70px;
 }
