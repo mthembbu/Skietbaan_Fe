@@ -56,7 +56,6 @@ class CreateComp extends Component {
 			history.push("/ViewComp");
 		}
 		this.setState({ isExist: this.props.isExist });
-		console.log('Inside the onSubmit isExist: ',this.props.isExist);
 	}
 	render() {
 		if(!getCookie("token")){
