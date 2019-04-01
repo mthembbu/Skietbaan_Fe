@@ -591,3 +591,34 @@
 .notification-icon-on-the-side {
   height: 22px;
 }
+.announcement-main{
+  display: grid;
+}
+.announcement-text{
+  width: 312px;
+  height: 123px;
+  margin-top: 150px;
+  padding-left: 19px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #000000;
+  padding-top: 20px;
+  border-radius: 5px;
+}
+.announcement-send{
+  width: 312px;
+  height: 42px;
+  margin-top: 20px;
+  background: #dc0600;
+  color:white;
+  font-size: 16px;
+  font-weight: lighter;
+  border: 1px solid #dc0600;
+  border-radius: 22px;
+}
+.announcement-text:focus{
+  outline: none;
+}
+.announcement-send:focus{
+  outline: none;
+}
