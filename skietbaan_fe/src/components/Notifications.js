@@ -154,9 +154,7 @@ class notification extends Component {
 
   render() {
     if (!getCookie("token")) {
-      setTimeout(function() {
-        history.push("/registerPage");
-      }, 2000);
+      window.location = "/registerPage";
     }
 
     let headingItems = (
