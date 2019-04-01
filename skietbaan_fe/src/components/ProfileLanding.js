@@ -34,8 +34,8 @@ export default class ProfileLanding extends Component {
     var res = document.cookie;
     var multiple = res.split(";");
     for (var i = 0; i < multiple.length; i++) {
-      var key = multiple[i].split("=");
-      document.cookie = key[0] + " =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
+    var key = multiple[i].split("=");
+    document.cookie = key[0] + " =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
     }
     window.location = "/login";
     return false;
@@ -55,12 +55,16 @@ export default class ProfileLanding extends Component {
         >
           <Row className="top-bar-rectangle">
             <Col className="lay-horizontal">
-              <div className="center-block-content" />
-              <a href="#" onClick={this.logout}>
-                <div className="logout-button">
-                  <label className="logout-text">Logout</label>
+                <div className="gun-overlay-img-background">
+                  <label className="profile-title">PROFILE</label>
                 </div>
-              </a>
+                <div className="logout-button-right">
+                    <a onClick={this.logout}>
+                        <div className="logout-button">
+                        <label className="logout-text">Logout</label>
+                        </div>
+                    </a>
+                </div>
             </Col>
           </Row>
           <div className="buttons-container">
@@ -121,10 +125,10 @@ export default class ProfileLanding extends Component {
         <div
           className={
             this.state.selectedButton == 1
-              ? "content-container"
+              ? "award-content-container"
               : this.state.selectedButton == 2 || this.state.selectedButton == 3
-              ? "content-container pad-top-50px"
-              : "content-container"
+              ? "award-content-container pad-top-50px"
+              : "award-content-container"
           }
         >
           {this.state.selectedButton == 1 ? (

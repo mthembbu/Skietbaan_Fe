@@ -1,5 +1,5 @@
 @media only screen and (min-width: 576px){
-    .content-container{
+    .award-content-container{
         margin-top: 56px;
     }
 }
@@ -12,7 +12,22 @@
     outline: none;
 }
 
-.content-container{
+.gun-overlay-img-background{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("../components/assets/gunOverlay.png");
+    width: 151px;
+}
+
+.profile-title{
+    font-size: 22px;
+    color: #fdfdfd;
+    font-weight: 600;
+    padding-top: 16px;
+    padding-left: 31px;
+}
+
+.award-content-container{
     overflow-y: scroll;
     overflow: hidden;
 }
@@ -41,18 +56,19 @@
 }
 
 .top-bar-rectangle{
-    height: 60px;
+    height: 67px;
     width: 100%;
     margin-left: 0px;
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
-    background: linear-gradient(270deg, #EF3024 0%, #DC0600 100%);
+    background-color: #EA251A;
     box-shadow: -2px 0 14px -1px #674D4D;
 }
 
-.center-block-content{
-    display: block;
-    margin: auto;
+.logout-button-right{
+    position:absolute;
+    right:20px;
+    top:0;
 }
 
 .logout-button {	

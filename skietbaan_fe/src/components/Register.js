@@ -159,8 +159,8 @@ class Register extends Component {
       let sha1 = require('sha1');
       let hash = sha1(this.state.passwordValue);
       let RequestObject = {
-        "Username": this.state.usernameValue.toLowerCase(),
-        "Email": this.state.emailValue.toLowerCase(),
+        "Username": this.state.usernameValue,
+        "Email": this.state.emailValue,
         "Password": hash,
       }
       fetch(URL + "/api/user", {

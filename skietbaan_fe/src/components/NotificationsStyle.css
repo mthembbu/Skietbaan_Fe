@@ -48,12 +48,6 @@
     margin-bottom: 56px;
   }
 
-  @media screen and (min-width:576px)  {
-    .notifications-body-class{
-        margin-bottom: 0px;
-    }
-  }
-
   .notifications-images {
     background-image: url("./Notification-Img/delete3.png");
     padding-bottom: 6px;
@@ -62,7 +56,11 @@
     background-repeat: no-repeat;
     background-size: 24px;
     height: 24px;
-    margin-left: 20px;
+    padding-right: 27px;
+  }
+
+  .notifications-images:hover {
+    cursor: pointer;
   }
 
   .notifications-selected {
@@ -73,7 +71,11 @@
     background-repeat: no-repeat;
     background-size: 24px;
     height: 24px;
-    margin-left: 20px;
+    padding-right: 27px;
+  }
+
+  .notifications-selected{
+    cursor: pointer;
   }
 
   .notifications-icon {
@@ -85,16 +87,24 @@
     height: 26px;
     width: 20px;
     float: right;
-    margin-right: 8%;
+    margin-right: 5%;
     margin-top: 18px;
+  }
+
+  .black-delete-icon:hover{
+    cursor: pointer;
   }
 
   .delete-icon {
     height: 26px;
     width: 20px;
     float: right;
-    margin-right: 8%;
+    margin-right: 5%;
     margin-top: 18px;
+  }
+
+  .delete-icon:hover{
+    cursor: pointer;
   }
 
   .trash-spacing {
@@ -108,6 +118,7 @@
     font-size: 13px;
     border-bottom-style: none;
     font-family: helvetica;
+    width: 30px;
   }
 
   .td-notification {
@@ -178,6 +189,7 @@
     font-family: helvetica;
     font-size: 14px;
     padding-top: 9px;
+    width: 100%;
   }
 
   .notifications-a {
@@ -230,7 +242,9 @@
   }
 
   .time-div {
+    -webkit-margin-end: 10px;
     margin-inline-end: 10px;
+    color: #d9d9d9;
   }
 
   .notifications-a-class {
@@ -249,6 +263,32 @@
   }
 }
 
+.notifications-unread:hover{
+  cursor: pointer;
+}
+
+.notifications-unread {
+  color: #000000;
+  text-decoration-line: none;
+  text-align: justify;
+  text-justify: newspaper;
+  font-weight: bold;
+  font-family: helvetica;
+  font-size: 14px;
+  padding-top: 9px;
+  width: 100%;
+}
+
+.time-div {
+  -webkit-margin-end: 10px;
+  margin-inline-end: 10px;
+  color: #d9d9d9;
+}
+
+.first-column-notify{
+  width: 30px;
+}
+
 @media only screen and (max-width: 575px) {
   .notifications-modal {
     font-family: helvetica;
@@ -261,6 +301,10 @@
     background: #ffffff;
     height: 56px;
     margin-bottom: 56px;
+  }
+
+  .first-column-notify{
+    width: 30px;
   }
 
   .outer-header-div {
@@ -304,7 +348,11 @@
     background-repeat: no-repeat;
     background-size: 24px;
     height: 24px;
-    margin-left: 20px;
+    padding-right: 27px;
+  }
+
+  .notifications-images:hover {
+    cursor: pointer;
   }
 
   .notifications-selected {
@@ -315,7 +363,11 @@
     background-repeat: no-repeat;
     background-size: 24px;
     height: 24px;
-    margin-left: 20px;
+    padding-right: 27px;
+  }
+
+  .notifications-selected{
+    cursor: pointer;
   }
 
   .notifications-icon {
@@ -331,12 +383,20 @@
     margin-top: 5px;
   }
 
+  .black-delete-icon:hover{
+    cursor: pointer;
+  }
+
   .delete-icon {
     height: 26px;
     width: 20px;
     float: right;
     margin-right: 33px;
     margin-top: 5px;
+  }
+
+  .delete-icon:hover{
+    cursor: pointer;
   }
 
   .trash-spacing {
@@ -354,6 +414,7 @@
     font-size: 13px;
     border-bottom-style: none;
     font-family: helvetica;
+    width: 30px;
   }
 
   .td-notification {
@@ -362,7 +423,7 @@
     font-family: helvetica;
     text-align: left;
     vertical-align: middle;
-    padding-left: 28px;
+    padding-left: 22px;
     width: 84%;
   }
 
@@ -411,6 +472,12 @@
     font-family: helvetica;
     font-size: 14px;
     padding-top: 9px;
+    padding-right: 45px;
+    width: 100%;
+  }
+
+  .notifications-unread:hover{
+    cursor: pointer;
   }
 
   .notifications-text {
@@ -434,6 +501,7 @@
     font-family: helvetica;
     font-size: 14px;
     padding-top: 9px;
+    width: 100%;
   }
 
   .notifications-a {
@@ -493,11 +561,6 @@
     display: none;
   }
 
-  .select-all {
-    height: 24px;
-    width: 24px;
-  }
-
   .black-select-all {
     background: url("Notification-Img/black-select-all.png");
     height: 24px;
@@ -516,4 +579,15 @@
     position: static;
     padding-top: 45px;
   }
+}
+
+.select-all {
+  height: 27px;
+  width: 30px;
+  margin-left: 45px;
+  margin-bottom: 2px;
+}
+
+.notification-icon-on-the-side {
+  height: 22px;
 }

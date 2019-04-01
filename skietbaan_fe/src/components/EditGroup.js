@@ -6,6 +6,7 @@ import unmarked from './GroupImages/Oval.png';
 import deleteS from './GroupImages/deleteS.png';
 import whiteBin from './GroupImages/whiteBin.png';
 import seleteAll from './GroupImages/seleteAll.png';
+import unSelectAll from './GroupImages/unSelectAll.png';
 import blackBin from './GroupImages/blackBin.png';
 import whitePlus from './GroupImages/whitePlus.png';
 import { fetchEditUser, pageState } from '../actions/postActions';
@@ -31,7 +32,7 @@ class EditGroup extends Component {
 	}
 
 	async componentDidMount() {
-		this.props.fetchEditUser(this.props.id);
+	 this.props.fetchEditUser(this.props.id);
 	}
 
 	onChange(event) {
@@ -62,7 +63,7 @@ class EditGroup extends Component {
 			.catch(function(data) {});
 		this.props.fetchEditUser(this.props.id);
 	}
-
+//select user
 	toggleHighlight = (event) => {
 		if (this.state.binState === true) {
 			if (this.props.editGroup[event].highlighted === true) {
@@ -88,15 +89,15 @@ class EditGroup extends Component {
 	}
 
 	cancel = () => {
-		for (var i = 0; i < this.state.posts.length; i++) {
-			this.props.groupsList[i].highlighted = true;
+		for (var i = 0; i < this.props.editGroup.length; i++) {
+			this.props.editGroup[i].highlighted = false;
 		}
 		this.setState({ count: 0 });
 	};
 
 	selectAll() {
 		if (this.state.binState === true) {
-			if (this.state.check == 'Select all') {
+			if (this.state.check == 'select all') {
 				this.setState({ count: this.props.editGroup.length });
 				for (var i = 0; i < this.props.editGroup.length; i++) {
 					this.props.editGroup[i].highlighted = true;
@@ -107,7 +108,7 @@ class EditGroup extends Component {
 				for (var i = 0; i < this.props.editGroup.length; i++) {
 					this.props.editGroup[i].highlighted = false;
 				}
-				this.setState({ check: 'Select all' });
+				this.setState({ check: 'select all' });
 			}
 		}
 	}
@@ -115,7 +116,6 @@ class EditGroup extends Component {
 	goToNext = () => {
 		this.props.pageState(2);
 	};
-
 	render() {
 		const postitems = (
 			<div className="check">
@@ -130,16 +130,18 @@ class EditGroup extends Component {
 						})
 						.map((post, index) => (
 							<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(index)}>
-							{this.state.binState===true?
-								<img
-									className="checkbox-delete"
-									src={post.highlighted == true ? deleteS : unmarked}
-									alt=""
-								/>:null}
+								{this.state.binState === true ? (
+									<img
+										className="checkbox-delete"
+										src={post.highlighted == true ? deleteS : unmarked}
+										alt=""
+									/>
+								) : null}
 								<label className={post.highlighted ? 'blabe2' : 'blabe'}>
 									<div className={post.highlighted ? 'userName-active' : 'userName'}>
 										{post.username}
 									</div>
+
 									<div className={post.highlighted ? 'emails-active' : 'email'}>{post.email}</div>
 								</label>
 							</li>
@@ -163,7 +165,6 @@ class EditGroup extends Component {
 									alt=""
 								/>
 							</div>
-							
 							<div className="delete-icons" onClick={() => this.goToNext()}>
 								<img className="checkbox-delete" src={whitePlus} alt="" />
 							</div>
@@ -180,10 +181,15 @@ class EditGroup extends Component {
 								placeholder="Search"
 							/>
 						</div>
-						{this.state.binState===true?
-						<div className="switchAll" onClick={this.selectAll}>
-							<img className="checkbox-delete" src={seleteAll} alt="" />
-						</div>:null}
+						{this.state.binState === true ? (
+							<div className="switchAll" onClick={this.selectAll}>
+								<img
+									className="checkbox-delete"
+									src={this.state.count === this.props.editGroup.length ? seleteAll : unSelectAll}
+									alt=""
+								/>
+							</div>
+						) : null}
 					</div>
 				</div>
 

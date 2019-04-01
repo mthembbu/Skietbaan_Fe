@@ -1,267 +1,305 @@
 @media only screen and (min-width: 576px) {
-	.page-name-create-all {
-		position: center;
-		text-align: center;
-		text-size-adjust: 25px;
-		background-size: 15px;
-		height: 56px;
-		background-color: #dc0600;
-		border-bottom-left-radius: 20px;
-		border-bottom-right-radius: 20px;
-		margin-top: 56px;
-		top: 0;
-		z-index: 100;
-		position: fixed;
-		width: 100%;
-	}
+  .create-top-nav {
+	height: 195px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    background: #fdfdfd;
+    box-shadow: 2px 1px 16px -3px #000000;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
 
-	.create-all-page-content {
-		margin-top: 133px;
-		height: 994px;
-	}
+  .components-create {
+    padding-top: 25px;
+    background-color: white;
+  }
 
-	.create-feature-buttons {
-		position: center;
-		text-align: center;
-		width: 66%;
-		text-align: center;
-		margin-left: 17%;
-		margin-top: 133px;
-	}
+  .content-container {
+    margin-top: 0px;
+  }
 
-	.create-all-groups-btn {
-		background-color: transparent;
-		color: #555555;
-		font-size: 14px;
-		font-weight: 300;
-		border: none;
-	}
+  .page-name-create-all {
+    position: center;
+    text-align: center;
+    text-size-adjust: 25px;
+    background-size: 15px;
+    height: 56px;
+    background-image: linear-gradient(to right, #ef3024, #dc0600);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-top: 56px;
+    top: 0;
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+  }
 
-	.create-all-competitions-btn {
-		background-color: transparent;
-		color: #555555;
-		font-size: 14px;
-		font-weight: 300;
-		border: none;
-	}
+  .create-all-page-content {
+    margin-top: 133px;
+    height: 994px;
+  }
 
-	.create-all-members-btn {
-		background-color: transparent;
-		color: #555555;
-		font-size: 14px;
-		font-weight: 300;
-		border: none;
-	}
+  .create-feature-buttons {
+    position: center;
+    text-align: center;
+    width: 66%;
+    text-align: center;
+    margin-left: 17%;
+    margin-top: 133px;
+  }
 
-	.create-all-btn1 {
-		position: center;
-		text-align: center;
-		width: 33%;
-		float: left;
-	}
+  .create-all-groups-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
 
-	.create-all-btn2 {
-		position: center;
-		text-align: center;
-		width: 33%;
-		float: left;
-	}
+  .create-all-competitions-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
 
-	.create-all-btn3 {
-		position: center;
-		text-align: center;
-		width: 33%;
-		float: left;
-	}
+  .create-all-members-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
 }
+
 .div-container {
-	width: 100%;
-	height: 67px;
+  width: 100%;
+  height: 67px;
 }
 
 @media only screen and (max-width: 575px) {
-	.page-name-create-all {
-		position: center;
-		text-align: center;
-		text-size-adjust: 25px;
-		background-size: 15px;
-		height: 56px;
-		background-color: #dc0600;
-		border-bottom-left-radius: 20px;
-		border-bottom-right-radius: 20px;
-		top: 0;
-		z-index: 100;
-		position: fixed;
-		width: 100%;
-	}
-	/*tu css*/
-	.button-text:focus {
-		outline: none;
-	}
-	.button-fill:focus {
-		outline: none;
-	}
-	/* .create-all-top-nav-bar{
-  height: 184px;
-} */
-	.create-all-menu-header {
-		color: #fdfdfd;
-		font-size: 20px;
-		font-weight: bolder;
-		padding-top: 10px;
-		text-align: center;
-	}
-	/* new stuff */
-	.create-all-page-content {
-		margin-top: 77px;
-	}
+  .page-name-create-all {
+    position: center;
+    text-align: center;
+    text-size-adjust: 25px;
+    background-size: 15px;
+    height: 56px;
+    background-image: linear-gradient(to right, #ef3024, #dc0600);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    top: 0;
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+  }
 
-	.create-feature-buttons {
-		position: center;
-		text-align: center;
-		width: 100%;
-		text-align: center;
-		margin-top: 77px;
-	}
+  .create-top-nav {
+	height: 195px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    background: #fdfdfd;
+    box-shadow: 2px 1px 16px -3px #000000;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
 
-	.create-all-groups-btn {
-		background-color: transparent;
-		color: #555555;
-		font-size: 14px;
-		font-weight: 300;
-		border: none;
-	}
+  .button-text:focus {
+    outline: none;
+  }
 
-	.create-all-competitions-btn {
-		background-color: transparent;
-		color: #555555;
-		font-size: 14px;
-		font-weight: 300;
-		border: none;
-	}
+  .button-fill:focus {
+    outline: none;
+  }
 
-	.create-all-members-btn {
-		background-color: transparent;
-		color: #555555;
-		font-size: 14px;
-		font-weight: 300;
-		border: none;
-	}
+  .create-all-menu-header {
+    color: #fdfdfd;
+    font-size: 20px;
+    font-weight: bolder;
+    padding-top: 10px;
+    text-align: center;
+  }
 
-	.create-all-btn1 {
-		position: center;
-		text-align: center;
-		width: 33%;
-		float: left;
-	}
+  .create-all-page-content {
+    margin-top: 77px;
+  }
 
-	.create-all-btn2 {
-		position: center;
-		text-align: center;
-		width: 33%;
-		float: left;
-	}
+  .create-feature-buttons {
+    position: center;
+    text-align: center;
+    width: 100%;
+    text-align: center;
+    margin-top: 77px;
+  }
 
-	.create-all-btn3 {
-		position: center;
-		text-align: center;
-		width: 33%;
-		float: left;
-	}
+  .create-all-groups-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
+
+  .create-all-competitions-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
+
+  .create-all-members-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
 }
 
 #removeRightButtonPadding {
-	padding-right: 0px;
+  padding-right: 0px;
 }
 
 #removeLeftButtonPadding {
-	padding-left: 0px;
+  padding-left: 0px;
 }
 
 #padMiddleButton {
-	text-align: center;
+  text-align: center;
 }
 
 /*the new css of the file*/
 .create-main-container {
-	width: 100%;
+  width: 100%;
 }
 .page-name-bar {
-	height: 67px;
-	background: #be0000;
-	border-bottom-left-radius: 20px;
-	border-bottom-right-radius: 20px;
-	display: flex;
+  height: 67px;
+  background-image: linear-gradient(to right, #ef3024, #dc0600);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: flex;
 }
 
 .first-buttons-container {
-	width: 97%;
+  width: 97%;
 }
-.create-top-nav {
+
+.create-nav-container {
   height: 184px;
 }
+
 .create-all-menu {
-	color: #fdfdfd;
-	font-size: 20px;
-	font-weight: bolder;
-	margin-left: 42px;
-	margin-top: 19px;
+  color: #fdfdfd;
+  font-size: 20px;
+  font-weight: bolder;
+  margin-left: 42px;
+  margin-top: 19px;
 }
 
 .buttons-squire-rectangle {
-	height: 32px;
-	width: 100%;
-	border: 1px solid #be0000;
+  height: 32px;
+  width: 100%;
+  border: 1px solid #be0000;
   border-radius: 18px;
 }
 
 .buttons-row .col {
-	padding-left: 0px;
-	padding-right: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
-.unstyle-create-active{
+.unstyle-create-active {
   background-color: #be0000;
-	color: white;
-	border-bottom-left-radius: 18px;
-	border-top-left-radius: 18px;
-	border: none;
+  color: white;
+  border-bottom-left-radius: 18px;
+  border-top-left-radius: 18px;
+  border: none;
+  box-shadow: 0px 3px 8px -3px #674d4d;
+  outline: none;
 }
-.unstyle-create{
+
+.unstyle-create {
   background-color: transparent;
   color: black;
-	border-bottom-left-radius: 18px;
-	border-top-left-radius: 18px;
-	border: none;
+  border-bottom-left-radius: 18px;
+  border-top-left-radius: 18px;
+  border: none;
 }
-.unstyle-view-active{
+
+.unstyle-view-active {
   background-color: #be0000;
-	color: white;
-	border-bottom-right-radius: 18px;
-	border-top-right-radius: 18px;
-	border: none;
+  color: white;
+  border-bottom-right-radius: 18px;
+  border-top-right-radius: 18px;
+  border: none;
+  box-shadow: 0px 3px 8px -3px #674d4d;
+  outline: none;
 }
-.unstyle-view{
+
+.unstyle-view {
   background-color: transparent;
   color: black;
-	border-bottom-right-radius: 18px;
-	border-top-right-radius: 18px;
-	border: none;
+  border-bottom-right-radius: 18px;
+  border-top-right-radius: 18px;
+  border: none;
 }
-.member-user-label{
+
+.member-user-label {
   font-weight: lighter;
   font-size: 16px;
+  height: fit-content;
+  margin: auto;
+  width: 100%;
+  text-align: left;
 }
-.member-radio{
+
+.member-radio {
   display: flex;
   margin-top: 8px;
 }
-.radio-A{
-  justify-content: flex-start;
+
+.radio-A {
+  padding-right: 3px;
+  display: flex;
+  width: 30%;
 }
-.radio-B{
-  justify-content: center;
+
+.radio-B {
+  padding-right: 3px;
+  display: flex;
+  width: 35%;
 }
-.radio-C{
-  justify-content: flex-end;
+
+.radio-C {
+  display: flex;
+}
+
+.member-radio .radio-A .a-radio {
+  padding-right: 2px;
+}
+
+.member-radio .radio-B .b-radio {
+  padding-right: 2px;
+}
+
+.member-radio .radio-C .c-radio {
+  padding-right: 2px;
+}
+
+.create-main-container {
+  width: 100%;
+}
+
+.create-top-nav-members {
+    height: 184px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    background: #fdfdfd;
 }

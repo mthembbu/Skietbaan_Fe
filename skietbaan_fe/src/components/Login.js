@@ -126,12 +126,12 @@ class Login extends Component {
       let RequestObject = "";
       if (validateEmail(this.state.usernameValue) === true) {
         RequestObject = {
-          "Email": this.state.usernameValue,
+          "Email": this.state.usernameValue.toLowerCase(),
           "Password": hash,
         }
       } else {
         RequestObject = {
-          "Username": this.state.usernameValue,
+          "Username": this.state.usernameValue.toLowerCase(),
           "Password": hash,
         }
       }

@@ -1,5 +1,6 @@
 .centre-view-member {
   margin: 0 auto;
+  margin-top: 30px;
   position: center;
   background: #fdfdfd;
 }
@@ -9,15 +10,23 @@
 }
 
 .table-search-members {
+  padding-top: 66px;
   background-color: #fdfdfd;
 }
 
 @media only screen and (max-width: 575px) {
   .table-search-members {
+    padding-top: 66px;
     background-color: #fdfdfd;
     overflow-y: scroll;
     height: 100%;
     margin-bottom: 57px;
+  }
+
+  .centre-view-member {
+    margin: 0 auto;
+    position: center;
+    background: #fdfdfd;
   }
 }
 
@@ -48,8 +57,9 @@
 }
 
 .username-search {
-  position: center;
+  position: fixed;
   text-align: center;
+  width: 100%;
 }
 
 .user-value {
@@ -67,10 +77,60 @@
   border: 1px #979797 solid;
 }
 
-.search {
-  padding: 18px 30px 10px 30px;
+.view-non-members-text-boxes {
   background-color: #fdfdfd;
-  height: 74px;
+  border-radius: 4px;
+  line-height: 22px;
+  text-align: left;
+  padding-left: 19px;
+  width: 100%;
+  border: none;
+  font-family: helvetica;
+  font-size: 16px;
+  font-weight: bold;
+  color: #666666;
+  border: 1px #979797 solid;
+  height: 44px;
+  width: 312px;
+  border-radius: 7px;
+  margin-bottom: 42px;
+}
+
+.view-non-members-confirm {
+  font-weight: lighter;
+  font-size: 16px;
+  background-color: #be0000;
+  border-radius: 25px;
+  width: 312px;
+  height: 42px;
+  border-color: #be0000;
+  border-width: 1.5px;
+  border: none;
+  color: #ffffff;
+}
+
+.view-exp-members {
+  font-weight: lighter;
+  font-size: 16px;
+  background-color: #be0000;
+  border-radius: 25px;
+  width: 160px;
+  height: 42px;
+  border-color: #be0000;
+  border-width: 1.5px;
+  border: none;
+  color: #ffffff;
+  margin-top: 44px;
+  margin-bottom: 25px;
+}
+
+.search {
+  padding: 1px 30px 10px 25px;
+  background-color: #ffffff;
+  height: 60px;
+  box-shadow: 2px 1px 16px -3px #000000;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 .user-value {
@@ -120,7 +180,7 @@
 }
 
 .first-column {
-  padding-left: 30px;
+  padding-left: 25px;
   width: 65%;
   height: 55px;
   text-align: left;
@@ -131,8 +191,14 @@
   height: 55px;
 }
 
+.view-members-exp-username-and-email {
+  font-size: 16px;
+  height: 55px;
+  float: left;
+}
+
 .bad {
-  color: #BE0000;
+  color: #be0000;
   font-weight: bold;
 }
 
@@ -147,13 +213,52 @@
   padding-left: 10px;
 }
 
+.view-members-exp-expiry-time-column {
+  font-size: 15px;
+  height: 55px;
+  padding-right: 23px;
+  float: right;
+}
+
 .membership-details {
   font-size: 13px;
-  height: 55px;
+  margin-top: 48px;
+  margin-bottom: 20px;
+  text-align: center;
+  padding-right: 25px;
+}
+
+.view-members-exp-membership-details {
+  font-size: 13px;
+  margin-top: 48px;
+  margin-bottom: 20px;
+  text-align: center;
+  float: left;
+}
+
+.Collapsible__contentOuter {
+  float: left;
+  width: 100%;
+}
+
+.radio-Renew {
+  padding-right: 3px;
+  display: flex;
+}
+
+.view-members-membership-details {
+  font-size: 13px;
+  margin-bottom: 20px;
 }
 
 .membership-icon {
   height: 17px;
   width: 17px;
   margin-left: 4px;
+}
+
+.renew-container {
+  text-align: center;
+  width: 100%;
+  padding-right: 25px;
 }
