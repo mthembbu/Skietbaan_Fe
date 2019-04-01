@@ -485,25 +485,91 @@
          text-align: center;
      }
      .rank-number-container{
-         text-align: -webkit-center;
+        width: 45px;
+        height: 35px;
+        margin-left: 5px;
+        display: inline-flex;
+         
      }
-     .rank-number-container .rank-num-table .tr{
-         width: 15px;
-      }
-     .rank-number-container .rank-num-table .up-arrow{
-         height: 5px
+     .rank-number-container .member-status-icons{
+       width: 16px;
+       height: 37px;
+       display: inline-block;
+       margin-right: 6px
      }
-     .rank-number-container .rank-num-table .icon{
-        width: 15px;
-        height: 15px;
+     .rank-number-container .member-status-icons .membership-icon{
+        width: 16px;
+        height: 16px;
+        margin: 0px;
+        margin-bottom: 5px;
      }
-     .rank-number-container .rank-num-table .icon img{
-         width: 25px;
-         height: 25px
-      }
-     .rank-number-container .rank-num-table .down-arrow{
-         height: 5px
+     .rank-number-container .member-status-icons .membership-icon img{
+        width: 16px;
+        height: 16px;
+    }
+     .rank-number-container .member-status-icons .dedication-icon{
+        width: 16px;
+        height: 16px;
+        margin: 0px;
      }
+     .rank-number-container .member-status-icons .dedication-icon img{
+         width: 16px;
+         height: 16px;
+     }
+     .rank-number-container .member-rank-icons{
+        width: 23px;
+        height: 37px;
+        display: inline-block;
+    }
+    .rank-number-container .member-rank-icons .up-arrow{
+        width: 23px;
+        height: 6px;
+        margin-bottom: 1px;
+    }
+    .rank-number-container .member-rank-icons .up-arrow .up-arrow-icon{
+        width: 6px;
+        height: 6px;
+        margin: auto;
+        display: flex;
+    }
+    .rank-number-container .member-rank-icons .up-arrow .up-arrow-icon img{
+        width:6px;
+        height:6px;
+    }
+    .rank-number-container .member-rank-icons .ranking{
+        width: 23px;
+        height: 23px;
+        margin-bottom: 1px;
+    }
+    .rank-number-container .member-rank-icons .ranking .number{
+        height: 100%;	
+        width: 10px;	
+        color: #6A6A6A;	
+        font-family: Helvetica;	
+        font-size: 15px;	
+        line-height: 16px;	
+        text-align: center;
+        margin: auto;
+        padding-top: 5px;
+    }
+    .rank-number-container .member-rank-icons .ranking img{
+        width: 23px;
+        height: 23px;
+    }
+    .rank-number-container .member-rank-icons .down-arrow{
+        width: 23px;
+        height: 6px;
+    }
+    .rank-number-container .member-rank-icons .down-arrow .down-arrow-icon{
+        width: 6px;
+        height: 6px;
+        margin: auto;
+        display: flex;
+    }
+    .rank-number-container .member-rank-icons .down-arrow .down-arrow-icon img{
+        width:6px;
+        height:6px;
+    }
      .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-icon-col .rank-container{
          height: 100%;
          width: 100%;
@@ -554,6 +620,126 @@
          width: 20%;
          color: #6A6A6A;
      }  
+     /*total inactive*/
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons{
+        width: 100%;
+        height: 37px;
+        display: inline-block;
+        margin-top: 2px;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .up-arrow{
+        width: 23px;
+        height: 6px;
+        margin: auto;
+        margin-bottom: 1px;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col  .member-rank-icons .up-arrow .up-arrow-icon{
+        width: 6px;
+        height: 6px;
+        margin: auto;
+        display: flex;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .up-arrow .up-arrow-icon img{
+        width:6px;
+        height:6px;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .ranking{
+        width: 100%;
+        padding-right: 13%;
+        text-align: center;
+        height: fit-content;
+        margin: auto;
+        margin-bottom: 1px;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .ranking .number{
+        height: 100%;	
+        width: 10px;	
+        font-size: 14px;
+        text-align: center;
+        font-family: Helvetica;
+        font-weight: lighter;
+        color: #A0A0A0;
+        margin: auto;
+        padding-top: 5px;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .ranking img{
+        width: 23px;
+        height: 23px;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .down-arrow{
+        width: 23px;
+        height: 6px;
+        margin: auto;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .down-arrow .down-arrow-icon{
+        width: 6px;
+        height: 6px;
+        margin: auto;
+        display: flex;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .down-arrow .down-arrow-icon img{
+        width:6px;
+        height:6px;
+    }
+    /*total active*/
+    .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons{
+        width: 100%;
+        height: 37px;
+        margin-top: 10px;
+        display: inline-block;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .up-arrow{
+        width: 23px;
+        height: 6px;
+        margin: auto;
+        margin-bottom: 1px;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .up-arrow .up-arrow-icon{
+        width: 6px;
+        height: 6px;
+        margin: auto;
+        display: flex;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .up-arrow .up-arrow-icon img{
+        width:6px;
+        height:6px;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .ranking{
+        width: 100%;
+        padding-right: 1%;
+        height: 23px;
+        margin: auto;
+        margin-bottom: 1px;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .ranking .number{
+        height: 100%;	
+        width: fit-content;	
+        color: #6A6A6A;	
+        font-family: Helvetica;	
+        font-size: 15px;	
+        font-size: 18px;
+        text-align: center;
+        margin: auto;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .ranking img{
+        width: 23px;
+        height: 23px;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .down-arrow{
+        width: 23px;
+        height: 6px;
+        margin: auto;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .down-arrow .down-arrow-icon{
+        width: 6px;
+        height: 6px;
+        margin: auto;
+        display: flex;
+    }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .down-arrow .down-arrow-icon img{
+        width:6px;
+        height:6px;
+    }
      .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .extra-name-col{        
          height:100%;
          font-family: Helvetica;	
@@ -644,6 +830,67 @@
          font-family: Helvetica;	
          text-align: center;
      }
+     .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons{
+        width: 100%;
+        height: 37px;
+        display: inline-block;
+        margin-top: 2px;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .up-arrow{
+        width: 23px;
+        height: 6px;
+        margin: auto;
+        margin-bottom: 1px;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col  .member-rank-icons .up-arrow .up-arrow-icon{
+        width: 6px;
+        height: 6px;
+        margin: auto;
+        display: flex;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .up-arrow .up-arrow-icon img{
+        width:6px;
+        height:6px;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .ranking{
+        width: 100%;
+        padding-right: 13%;
+        text-align: center;
+        height: fit-content;
+        margin: auto;
+        margin-bottom: 1px;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .ranking .number{
+        height: 100%;	
+        width: 10px;	
+        font-size: 14px;
+        text-align: center;
+        font-family: Helvetica;
+        font-weight: lighter;
+        color: white;	
+        margin: auto;
+        padding-top: 5px;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .ranking img{
+        width: 23px;
+        height: 23px;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .down-arrow{
+        width: 23px;
+        height: 6px;
+        margin: auto;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .down-arrow .down-arrow-icon{
+        width: 6px;
+        height: 6px;
+        margin: auto;
+        display: flex;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .down-arrow .down-arrow-icon img{
+        width:6px;
+        height:6px;
+    }
+
      .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active{        
          height:100%;
          font-weight: bold;
@@ -651,7 +898,66 @@
          font-size: 20px;
          text-align: center;
          width: 20%;
-     }    
+     }   
+     /*cunrent user membership status icons*/ 
+     .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons{
+        width: 100%;
+        height: 37px;
+        margin-top: 10px;
+        display: inline-block;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .up-arrow{
+        width: 23px;
+        height: 6px;
+        margin: auto;
+        margin-bottom: 1px;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .up-arrow .up-arrow-icon{
+        width: 6px;
+        height: 6px;
+        margin: auto;
+        display: flex;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .up-arrow .up-arrow-icon img{
+        width:6px;
+        height:6px;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .ranking{
+        width: 100%;
+        padding-right: 1%;
+        height: 23px;
+        margin: auto;
+        margin-bottom: 1px;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .ranking .number{
+        height: 100%;	
+        width: fit-content;	
+        color: white;	
+        font-family: Helvetica;	
+        font-size: 15px;	
+        font-size: 18px;
+        text-align: center;
+        margin: auto;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .ranking img{
+        width: 23px;
+        height: 23px;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .down-arrow{
+        width: 23px;
+        height: 6px;
+        margin: auto;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .down-arrow .down-arrow-icon{
+        width: 6px;
+        height: 6px;
+        margin: auto;
+        display: flex;
+    }
+    .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active .member-rank-icons .down-arrow .down-arrow-icon img{
+        width:6px;
+        height:6px;
+    }
      .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .extra-name-col{        
          height:100%;
          font-family: Helvetica;	
@@ -661,12 +967,9 @@
          font-weight: bold;
      }
   /* end of filter section*/
- 
   .userWrapper{
     position: fixed;
-    width: 96%;
-    margin-left: 2%;
-    margin-right: 2%;
+    width: 100%;
     bottom: 0;
     margin-bottom: 58px;
     background-color: transparent;
