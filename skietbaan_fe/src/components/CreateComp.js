@@ -12,6 +12,7 @@ class CreateComp extends Component {
 		this.state = {
 			Name: '',
 			BestScoresNumber: '',
+			Hours : '',
 			Status: true,
 			isExist: false
 		};
@@ -46,22 +47,27 @@ class CreateComp extends Component {
 		const compData = {
 			Name: this.state.Name /** Don't forget to change to lowercase to avoid case sensitivity conflicts*/,
 			BestScoresNumber: this.state.BestScoresNumber,
+			Hours: this.state.Hours,
 			Status: true
 		};
 		this.props.createcomp(compData);
+		if(this.props.isExist == false)
+		{
+			history.push("/ViewComp");
+		}
 		this.setState({ isExist: this.props.isExist });
+		console.log('Inside the onSubmit isExist: ',this.props.isExist);
 	}
 	render() {
 		if(!getCookie("token")){
             window.location = "/registerPage";
-        }
+		}
 		return (
 			<div>
-				
 				<div class="create-comp-container">
 					<Form onSubmit={this.onSubmit}>
 						<div className="containers-input">
-							<label className="comp-label-container">Competition Name</label>
+							<label className="comp-label-container">{/** Competition Name*/}</label>
 							<div className="comp-input-control">
 								<input
 									className="comp-input"
@@ -71,6 +77,7 @@ class CreateComp extends Component {
 									required
 									autoComplete="off"
 									autoCorrect="off"
+									placeholder="Competition Name"
 									value={this.state.Name}
 									onChange={this.onChange}
 								/>
@@ -78,9 +85,8 @@ class CreateComp extends Component {
 							<div className = {this.props.isExist ? "error-comp-message": "hidden"}>Competition Already Exists</div>
 						</div>
 						<div className="comp-input-control">
-							<div>
+						<div>
 								<label className="comp-label-container" onKeyPress={this.validate}>
-									Number of Scores
 								</label>
 							</div>
 							<input
@@ -93,7 +99,28 @@ class CreateComp extends Component {
 								required
 								autoComplete="off"
 								autoCorrect="off"
+								placeholder="Number Of Scores"
 								value={this.state.BestScoresNumber}
+								onChange={this.onChange}
+							/>
+						</div>
+						<div className="comp-input-control">
+							<div>
+								<label className="comp-label-container" onKeyPress={this.validate}>
+								</label>
+							</div>
+							<input
+								className="comp-input"
+								type="number"
+								name="Hours"
+								id="NumOfHours"
+								min="1"
+								max="360"
+								required
+								autoComplete="off"
+								autoCorrect="off"
+								placeholder="Hours Per Competition"
+								value={this.state.Hours}
 								onChange={this.onChange}
 							/>
 						</div> 
@@ -102,9 +129,8 @@ class CreateComp extends Component {
 								variant="secondary"
 								type="submit"
 								id="submit-btn"
-								className={this.props.isExist && this.props.Name === null ? 
-									(' comp-success-submit-btn') : ('comp-submit-btn')}>
-								{this.props.isExist? 'Competition Created' : 'Create Competition'}
+								className= "comp-success-submit-btn">
+								Create Competition
 							</button>
 						</div>
 					</Form>

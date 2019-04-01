@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { fetchcomp, updateByIdComp, fetchParticipants,fetchRequirements,UpdateRequirements } from '../actions/competition.action';
+import {
+	fetchcomp,
+	updateByIdComp,
+	fetchParticipants,
+	fetchRequirements,
+	UpdateRequirements
+} from '../actions/competition.action';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../scss/view-comp.css';
@@ -53,7 +59,7 @@ class ViewComp extends Component {
 		this.setState({ dict: newDict });
 	}
 	//the method that adds the update for the inputs
-	HandleOnSubmit=(index)=> {
+	HandleOnSubmit = (index) => {
 		const BronzeData = {
 			standard: 'Bronze',
 			accuracy: this.state.bronzeAccuracy,
@@ -63,26 +69,29 @@ class ViewComp extends Component {
 			standard: 'Silver',
 			accuracy: this.state.silverAccuracy,
 			total: this.state.silverTotal
-    };
-    const GoldData = {  standard: "Gold",
-                          accuracy: this.state.goldAccuracy,
-                          total: this.state.goldTotal
-                        };
-    const RData = [BronzeData,SilverData,GoldData];
-    this.props.UpdateRequirements(index,RData);
-	}
+		};
+		const GoldData = {
+			standard: 'Gold',
+			accuracy: this.state.goldAccuracy,
+			total: this.state.goldTotal
+		};
+		const RData = [ BronzeData, SilverData, GoldData ];
+		this.props.UpdateRequirements(index, RData);
+	};
 	//The method that fetches the requirements everytime the competition is clicked on
 	//End-point: URL/R/{ID}
 	getRequirements(index) {
-		fetch(URL + '/R/' + index).then((response) => response.json()).then((requirementsData) =>
+		fetch(URL + '/R/' + index).then((response) => response.json()).then((requirementsData) =>{
+      console.log('getRequirements: ',requirementsData);
 			this.setState({
 				bronzeAccuracy: requirementsData[0].accuracy,
 				bronzeTotal: requirementsData[0].total,
+				silverAccuracy: requirementsData[1].accuracy,
 				silverTotal: requirementsData[1].total,
-				silverAccuracy: requirementsData[1].total,
-				goldTotal: requirementsData[2].total,
-				goldAccuracy: requirementsData[1].total
-			})
+				goldAccuracy: requirementsData[1].total,
+				goldTotal: requirementsData[2].total
+      });
+    }
 		);
 	}
 	onChange({ target }) {
@@ -120,7 +129,7 @@ class ViewComp extends Component {
 									>
 										<div>
 											<div class="comp-req-container">
-												<Form >
+												<Form>
 													<Container>
 														<Row>
 															<Col xs={4} md={4} />
@@ -285,7 +294,7 @@ class ViewComp extends Component {
 																		type="submit"
 																		id="submit-btn"
 																		className="comp-success-submit-btn"
-                                    onClick={() => this.HandleOnSubmit(compVar.id)}
+																		onClick={() => this.HandleOnSubmit(compVar.id)}
 																	>
 																		update
 																	</button>
@@ -346,4 +355,10 @@ const mapStateToProps = (state) => ({
 	dict: state.compOBJ.dict,
 	requirements: state.compOBJ.requirements
 });
-export default connect(mapStateToProps, { fetchcomp, updateByIdComp, fetchParticipants, fetchRequirements,  UpdateRequirements})(ViewComp);
+export default connect(mapStateToProps, {
+	fetchcomp,
+	updateByIdComp,
+	fetchParticipants,
+	fetchRequirements,
+	UpdateRequirements
+})(ViewComp);
