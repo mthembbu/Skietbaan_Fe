@@ -387,7 +387,7 @@ hr{
     height: 100%;
     background-repeat: no-repeat;
     background-size: contain;
-    background-position: 25px 0px;
+    background-position: 8px 0px;
     background-image: url("../components/assets/gunOverlay.png");
     width: 100%;
 }
@@ -419,7 +419,7 @@ input[type=number] {
 }
 
 .active{
-    background-color: #e11e2b;
+    background-color: #BE0000;
     color: white;
     border: none;
 }
@@ -462,7 +462,7 @@ input[type=number] {
 .score-capture-header2{
     height: 67px;
     width: 100%;
-    background-color: #EA251A;
+    background-image: linear-gradient(to right, #ef3024 , #Dc0600);
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
     box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);
@@ -474,7 +474,7 @@ input[type=number] {
 .score-capture-header{
     height: 67px;
     width: 100%;
-    background-color: #EA251A;
+    background-image: linear-gradient(to right, #ef3024 , #Dc0600);
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
     box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);
