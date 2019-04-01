@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import "./Create.css";
-import { getCookie } from './cookie.js';
+import { getCookie } from "./cookie.js";
 import ViewMembers from "../components/ViewMembers";
 import Radio from "@material-ui/core/Radio";
 import CreateComp from "../components/CreateComp";
@@ -65,14 +65,20 @@ export class createPages extends Component {
   };
 
   render() {
-	if (!getCookie("token")) {
-		window.location = "/registerPage";
-	  }
+    if (!getCookie("token")) {
+      window.location = "/registerPage";
+    }
     return (
       <div className="create-main-container">
         {this.props.page === 0 ? (
           <div className="create-nav-container">
-            <div className={this.state.selectedButton === 3 ? "create-top-nav-members" :"create-top-nav"}>
+            <div
+              className={
+                this.state.selectedButton === 3
+                  ? "create-top-nav-members"
+                  : "create-top-nav"
+              }
+            >
               <div class="page-name-bar">
                 <div className="gun-overlay-image">
                   <label className="create-all-menu">CREATE</label>
