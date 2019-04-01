@@ -14,6 +14,7 @@ import blackSelectAll from '../components/Notification-Img/black-select-all.png'
 import notifySpeakerBlack from "../components/Notification-Img/notifySpeaker.png";
 import notifySpeakerWhite from "../components/Notification-Img/notifySpeakerWhite.png";
 import { updateIsReadProperty, getNotifications } from '../actions/notificationAction';
+import {updateSelectedCompetition, updateSelectedGroup} from '../actions/postActions';
 
 class notification extends Component {
 	constructor(props) {
@@ -33,7 +34,7 @@ class notification extends Component {
 			token: getCookie('token'),
 			marked: null,
       selected: null,
-      adminToggle: false
+      adminToggle: false,
 			stateCheck: false
 		};
 		this.onDelete = this.onDelete.bind(this);
