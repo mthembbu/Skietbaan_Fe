@@ -39,6 +39,7 @@ class ViewComp extends Component {
 		this.props.fetchcomp();
 		this.props.fetchParticipants();
 	}
+
 	componentWillReceiveProps(val) {
 		for (let i = 0; i < val.length; i++) {
 			this.state.status.push(val.compOBJ[i].status);
