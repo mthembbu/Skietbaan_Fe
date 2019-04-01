@@ -53,6 +53,7 @@ class notification extends Component {
     for (var i = 0; i < this.props.notificationsArray.length; i++) {
       if (this.props.notificationsArray[i].markedForDeletion === true) {
         deletingarray.push(this.props.notificationsArray[i]);
+
         delete this.props.notificationsArray[i];
       }
     }

@@ -30,9 +30,10 @@ export const getNotifications = token => dispatch => {
     .then(data => {
       const newArray = data.map(notification => {
         notification.markedForDeletion = false;
-        if (notification.typeOfNotification === "Confirmation") {
-          notification.images = confirmation;
-        } else if (notification.typeOfNotification === "Renewal") {
+        if (
+          notification.typeOfNotification === "Confirmation" ||
+          notification.typeOfNotification === "Renewal"
+        ) {
           notification.images = confirmation;
         } else if (
           notification.typeOfNotification === "Competition" ||
