@@ -16,7 +16,9 @@ class ViewNonMembers extends Component {
       filterText: "",
       membershipsID: "",
       updateName: "",
-      indexNumber: 0
+      indexNumber: 0,
+      lastSize: 0,
+      navbarState: false,
     };
     this.getNonMembers = this.getNonMembers.bind(this);
     this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -25,6 +27,33 @@ class ViewNonMembers extends Component {
     this.getCurrentDate = this.getCurrentDate.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateMember = this.updateMember.bind(this);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.toggleNavbar2 = this.toggleNavbar2.bind(this);
+  }
+
+  toggleNavbar() {
+    this.setState({
+      navbarState: !this.state.navbarState,
+    })
+    var navbar = document.querySelector(".navbar-admin");
+    if (navbar.classList.contains("hidden")) {
+      navbar.classList.remove("hidden");
+    }
+    else {
+      navbar.classList.add("hidden");
+    }
+  }
+
+  toggleNavbar2() {
+    var navbar = document.querySelector(".navbar-admin");
+    if (this.state.lastSize > document.body.clientHeight) {
+      navbar.setAttribute('hidden', 'true');
+      this.toggleNavbar();
+    }
+    else {
+      navbar.removeAttribute('hidden');
+      this.toggleNavbar();
+    }
   }
 
   componentDidMount() {
@@ -120,6 +149,14 @@ class ViewNonMembers extends Component {
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
+    if (this.state.lastSize === 0) {
+      this.state.lastSize = document.body.clientHeight;
+      document.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener("resize", () => {
+          this.toggleNavbar2();
+        })
+      });
+    }
     const postItems = (
       <table striped hover condensed className="table-member">
         <tbody>
@@ -132,8 +169,7 @@ class ViewNonMembers extends Component {
                   .startsWith(this.state.filterText.toLowerCase()) ||
                 post.email
                   .toLowerCase()
-                  .startsWith(this.state.filterText.toLowerCase()) ||
-                post.memberID.startsWith(this.state.filterText)
+                  .startsWith(this.state.filterText.toLowerCase())
               );
             })
             .map((post, index) => (
@@ -192,6 +228,7 @@ class ViewNonMembers extends Component {
               type="text"
               className="user-value"
               id="usernameValue"
+              placeholder="Enter Username"
               value={this.state.filterText}
               onChange={this.onChangeText}
             />

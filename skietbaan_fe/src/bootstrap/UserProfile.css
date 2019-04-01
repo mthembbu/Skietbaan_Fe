@@ -22,12 +22,12 @@
     cursor: pointer;
 }
 
-.scale-medal-img img{
-    width: 31px;
-    height: 52px;  
+.scale-gun-type-img img{
+    width: 52px;
+    height: 52px; 
 }
 
-.scale-medal-img{
+.scale-gun-type-img{
     padding-top: 6px;
     padding-left: 1px;
 }
@@ -55,6 +55,10 @@
     height: 17px;
 }
 
+.medal-img{
+    padding-left: 4px;
+}
+
 .medal-img img{
     width: 14px; 
     height: 25px;
@@ -67,7 +71,7 @@
 }
 
 .red-text{
-    color:#C21616;
+    color:#BE0000;
 }
 
 .award-type-label{
@@ -91,8 +95,8 @@
     padding-top: 128px;
 }
 
-.pad-right-25px{
-    padding-right: 25px;
+.align-accuracy-text{
+    text-align: initial;
 }
 
 .select-competition-font{
@@ -123,27 +127,27 @@
 
 .circle{
     position: relative;
-    top: 5px;
+    top: 4px;
     left: 5px;
-    width: 65px;
-    height: 65px;
+    width: 56px;
+    height: 56px;
     border-radius: 100%;
-    font-size: 19px;
+    font-size: 18px;
     font-weight: bold;
-    padding-top: 18px;
-    padding-left: 6px;
+    padding-top: 17px;
+    padding-left: 4px;
     background-color: #F3F4F9;
-    color: #EA241A;
+    color: #BE0000;
 }
 
 .circle-bigger{
     position: relative;
     top: 5px;
     left: 5px;
-    width: 90px;
-    height: 90px;
+    width: 80px;
+    height: 80px;
     border-radius: 100%;
-    padding-top: 7px;
+    padding-top: 8px;
     padding-left: 7px;
     background-color: #F3F4F9;
     box-shadow: 0 6px 10px -6px rgba(0,0,0,0.5);
@@ -164,14 +168,18 @@
 .active-border{
     position: relative;
     text-align: center;
-    width: 75px;
-    height: 75px;
+    width: 66px;
+    height: 64px;
     border-radius: 100%;
     background-color: #F3F4F9;
 }
 
-.push-bottom-41px{
-    margin-bottom: 41px
+.push-bottom-31px{
+    margin-bottom: 31px
+}
+
+.push-bottom-13px{
+    margin-bottom: 13px;
 }
 
 .grey-text{
@@ -181,14 +189,6 @@
 .locked-icon img{
     width: 22px; 
     height: 22px;
-}
-
-.inherit-height{
-    height: inherit;
-}
-
-.inherit-width{
-    width: inherit;
 }
 
 .remove-right-padding{
@@ -201,9 +201,10 @@
 
 .total-text{
     font-size: 24px;
-    color: #EA241A;
+    color: #BE0000;
     padding-top: 20px;
     padding-right: 7px;
+    line-height: 21px;
 }
 
 .width-98px{
@@ -213,8 +214,8 @@
 .accuracy-text{
     font-size: 19px;
     font-weight: bold;
-    color: #EA241A;
-    padding-top: 24px;
+    color: #BE0000;
+    padding-top: 20px;
 }
 
 .accuracy-label{
@@ -239,6 +240,12 @@
     width: 14px;
     height: 14px;
     margin-top: -1px;
+}
+
+.total-img-scale img{
+    width: 67px;
+    height: 20px;
+    padding-right: 6px;
 }
 
 .push-right-5px{

@@ -21,6 +21,10 @@
     border: 1px #666666 solid;
     font-weight: 300;
     margin-bottom: 15px;
+    overflow-y: hidden;
+    transition-property: all;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
 
 .float-right{
@@ -174,6 +178,8 @@
     text-align: center;
     width: 100%;
     margin-top: 5px;
+    transition-duration: 500ms;
+    transition-property: margin-bottom;
 }
 
 .label-competition{
@@ -351,6 +357,13 @@ hr{
     border-radius: 22px;
     box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
     float: right;
+    margin-right: 2%;
+}
+.fade-out{
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
 }
 
 .button-that-submits2{
@@ -369,6 +382,14 @@ hr{
     background-image: url("../components/assets/redFlashOn.png");
     border-radius: 22px;
     box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
+}
+.gun-overlay-image{
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 8px 0px;
+    background-image: url("../components/assets/gunOverlay.png");
+    width: 100%;
 }
 
 .flashOff{
@@ -398,7 +419,7 @@ input[type=number] {
 }
 
 .active{
-    background-color: #e11e2b;
+    background-color: #BE0000;
     color: white;
     border: none;
 }
@@ -441,7 +462,7 @@ input[type=number] {
 .score-capture-header2{
     height: 67px;
     width: 100%;
-    background-color: #EA251A;
+    background-image: linear-gradient(to right, #ef3024 , #Dc0600);
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
     box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);
@@ -453,7 +474,7 @@ input[type=number] {
 .score-capture-header{
     height: 67px;
     width: 100%;
-    background-color: #EA251A;
+    background-image: linear-gradient(to right, #ef3024 , #Dc0600);
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
     box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);

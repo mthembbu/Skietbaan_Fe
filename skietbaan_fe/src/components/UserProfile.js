@@ -6,22 +6,24 @@ import { getCookie } from "./cookie.js";
 import { BASE_URL } from "../actions/types.js";
 import { Collapse } from "react-collapse";
 import history from "./history";
+import { connect } from "react-redux";
+import { setSelectedCompetition } from "../actions/userProfileActions"
 
 class UserProfile extends Component {
-        constructor(props){
-            super(props);
-            this.state = {
-                awardCompetitions : [],
-                hoursAward : {
-                    hours: -1,
-                },
-                collapse: false,
-                selectedCompetition : 0,
-            }
+    constructor(props){
+        super(props);
+        this.state = {
+            awardCompetitions : [],
+            hoursAward : {
+                hours: -1,
+            },
+            collapse: false,
+        }
         
         this.toggle = this.toggle.bind(this);
         this.logout = this.logout.bind(this);
         this.timeouts = [];
+        this.mapCompetitionNameToIndex = {}
         this._isMounted = false;
     }
 
@@ -33,23 +35,26 @@ class UserProfile extends Component {
         }
 
         fetch(BASE_URL + "/api/awards/" + token, {
-        method: "GET",
-        headers: {
-            "content-type": "application/json"
-        }
+            method: "GET",
+            headers: {
+                "content-type": "application/json"
+            }
         })
         .then(res => res.json())
         .then(data => {
             if(this._isMounted){
+                data.forEach((element, index) => {
+                    this.mapCompetitionNameToIndex[element.competitionName] = index;
+                })
                 this.setState({ awardCompetitions: data });
             }
         });
 
         fetch(BASE_URL + "/api/awards/hours/" + token, {
-        method: "GET",
-        headers: {
-            "content-type": "application/json"
-        }
+            method: "GET",
+            headers: {
+                "content-type": "application/json"
+            }
         })
         .then(res => res.json())
         .then(data => {
@@ -59,7 +64,6 @@ class UserProfile extends Component {
         });
     }
 
-    
     componentDidMount(){
         this._isMounted = true;
     }
@@ -88,11 +92,11 @@ class UserProfile extends Component {
             
             if (degreees<=180){
                 activeBorder.css('background-image','linear-gradient(' + (90 + degreees) + 
-                                'deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');    
+                                'deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #BE0000 50%)');    
             }
             else{
                 activeBorder.css('background-image','linear-gradient(' + (degreees - 90) + 
-                                'deg, transparent 50%, #EA241A 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');
+                                'deg, transparent 50%, #BE0000 50%),linear-gradient(90deg, transparent 50%, #BE0000 50%)');
             }
             counter++;
             const timeout = setTimeout(() => {
@@ -139,17 +143,8 @@ class UserProfile extends Component {
         )
     }
 
-    renderAllCompetitionsStats(){
-        let renderArray = []
-        this.state.awardCompetitions.forEach((element, index) => {
-            renderArray.push(this.competitionsStat(element, index))
-        })
-
-        return renderArray;
-    }
-
-    setSelectedCompetition(index){
-        this.setState({selectedCompetition : index})
+    setSelectedCompetition(competitionName){
+        this.props.setSelectedCompetition(competitionName);
         this.toggle();
     }
 
@@ -158,10 +153,10 @@ class UserProfile extends Component {
             <div key={index}>
                 <Row>
                     <Col>
-                        <button className={this.state.selectedCompetition === index ?
+                        <button className={this.getIndexByCompetitionName(this.props.selectedCompetition) === index ?
                              "button-style competition-button-text button-style-active" : 
                              "button-style competition-button-text button-style-inactive"}
-                             onClick={() => this.setSelectedCompetition(index)}>
+                             onClick={() => this.setSelectedCompetition(element.competitionName)}>
                             {element.competitionName}
                         </button>
                     </Col>
@@ -182,7 +177,7 @@ class UserProfile extends Component {
     renderAccuracyCircle(element, index){
         return(
             <div>
-                <div className="pad-right-25px">
+                <div className="align-accuracy-text">
                     <label className="font-size-14px red-text award-type-label">ACCURACY</label>
                 </div>
                 <div className="circle-bigger">
@@ -204,7 +199,13 @@ class UserProfile extends Component {
                     <div>
                         {!element.isCompetitionLocked ? 
                             <label className="total-text">{element.total}</label> : this.renderRedLockIcon(index)}
+                        {!element.isCompetitionLocked ? 
+                            <div className="total-img-scale">
+                                <img src={require("../resources/awardIcons/total-icon.png")} alt="total-icon"></img>
+                            </div> : null
+                        }
                     </div>
+
                 </div>
             </div>
         );
@@ -213,9 +214,14 @@ class UserProfile extends Component {
     renderBestInMonth(){
         return(
             <div className="grey-text pad-bottom-16px font-size-14px">
-                {this.state.awardCompetitions[this.state.selectedCompetition].bestInMonth.toUpperCase()}
+                {this.state.awardCompetitions[
+                    this.this.getIndexByCompetitionName(this.props.selectedCompetition)].bestInMonth.toUpperCase()}
             </div>
         )
+    }
+
+    getIndexByCompetitionName(competitionName){
+        return this.mapCompetitionNameToIndex[competitionName];
     }
 
     componentWillUnmount() {
@@ -231,8 +237,12 @@ class UserProfile extends Component {
                     <Row className="push-bottom-21px">
                         <Col className="lay-horizontal center-content">
                             <div className="circle-smaller">
-                                <div className="scale-medal-img">
-                                    <img src={require("../resources/awardIcons/medal.png")}></img>
+                                <div className="scale-gun-type-img">
+                                    {this.props.selectedCompetition.includes("Rifle") || 
+                                        this.props.selectedCompetition.includes("rifle") ?
+                                        <img src={require("../resources/awardIcons/rifle-icon.png")}></img>:
+                                        <img src={require("../resources/awardIcons/pistol-icon.png")}></img>
+                                    }
                                 </div>
                             </div>
                         </Col>
@@ -242,7 +252,8 @@ class UserProfile extends Component {
                             <div className="competition-name-text red-text pad-bottom-16px">
                                 <a onClick={this.toggle} className="lay-horizontal center-content make-cursor-point">
                                     <div className="push-right-5px">
-                                        {this.state.awardCompetitions[this.state.selectedCompetition]
+                                        {this.state.awardCompetitions[
+                                            this.getIndexByCompetitionName(this.props.selectedCompetition)]
                                         .competitionName.toUpperCase()}
                                     </div>
                                     <div className="down-triangle-img-scale">
@@ -255,7 +266,8 @@ class UserProfile extends Component {
                     </Row>
                     <Row>
                         <Col>
-                            {this.state.awardCompetitions[this.state.selectedCompetition].bestInMonth.startsWith("Best") ?
+                            {this.state.awardCompetitions[this.getIndexByCompetitionName(this.props.selectedCompetition)]
+                            .bestInMonth.startsWith("Best") ?
                                 this.renderBestInMonth() : null}
                         </Col>
                     </Row>
@@ -269,9 +281,10 @@ class UserProfile extends Component {
                         </Collapse>
                     </Row>
                     <Row className="awards-container">
-                        <Col xs={4}sm={4}md={4} className="push-bottom-41px">
-                            {this.renderAccuracyCircle(this.state.awardCompetitions[this.state.selectedCompetition],
-                                this.state.selectedCompetition)}
+                        <Col xs={4}sm={4}md={4} className="push-bottom-31px">
+                            {this.renderAccuracyCircle(this.state.awardCompetitions[
+                                this.getIndexByCompetitionName(this.props.selectedCompetition)],
+                                this.getIndexByCompetitionName(this.props.selectedCompetition))}
                         </Col>
                         <Col xs={8}sm={8}md={8}>
                             <Row className="push-bottom-13px">
@@ -280,13 +293,15 @@ class UserProfile extends Component {
                                         BRONZE</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[this.state.selectedCompetition].accuracyAward.bronze 
+                                    {this.state.awardCompetitions[
+                                        this.getIndexByCompetitionName(this.props.selectedCompetition)].accuracyAward.bronze 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
                                     <label className="red-text reached-award">
-                                        {this.state.awardCompetitions[this.state.selectedCompetition]
+                                        {this.state.awardCompetitions[
+                                            this.getIndexByCompetitionName(this.props.selectedCompetition)]
                                             .accuracyAward.bronzeRequirementStatus}
                                     </label>
                                 </Col>
@@ -297,13 +312,15 @@ class UserProfile extends Component {
                                         SILVER</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[this.state.selectedCompetition].accuracyAward.silver 
+                                    {this.state.awardCompetitions[
+                                        this.getIndexByCompetitionName(this.props.selectedCompetition)].accuracyAward.silver 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
                                     <label className="red-text reached-award ">
-                                        {this.state.awardCompetitions[this.state.selectedCompetition]
+                                        {this.state.awardCompetitions[
+                                            this.getIndexByCompetitionName(this.props.selectedCompetition)]
                                             .accuracyAward.silverRequirementStatus}
                                     </label>
                                 </Col>
@@ -314,13 +331,15 @@ class UserProfile extends Component {
                                         GOLD</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[this.state.selectedCompetition].accuracyAward.gold 
+                                    {this.state.awardCompetitions[
+                                        this.getIndexByCompetitionName(this.props.selectedCompetition)].accuracyAward.gold 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
                                     <label className="red-text reached-award line-height-15px">
-                                        {this.state.awardCompetitions[this.state.selectedCompetition]
+                                        {this.state.awardCompetitions[
+                                            this.getIndexByCompetitionName(this.props.selectedCompetition)]
                                             .accuracyAward.goldRequirementStatus}
                                     </label>
                                 </Col>
@@ -328,9 +347,10 @@ class UserProfile extends Component {
                         </Col>
                     </Row>
                     <Row className="awards-container">
-                        <Col xs={4}sm={4}md={4} className="push-bottom-41px">
-                            {this.renderTotalCircle(this.state.awardCompetitions[this.state.selectedCompetition],
-                            this.state.selectedCompetition)}
+                        <Col xs={4}sm={4}md={4} className="push-bottom-31px">
+                            {this.renderTotalCircle(this.state.awardCompetitions[
+                                this.getIndexByCompetitionName(this.props.selectedCompetition)],
+                            this.getIndexByCompetitionName(this.props.selectedCompetition))}
                         </Col>
                         <Col xs={8}sm={8}md={8}>
                             <Row className="push-bottom-13px">
@@ -339,13 +359,15 @@ class UserProfile extends Component {
                                         BRONZE</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[this.state.selectedCompetition].totalAward.bronze 
+                                    {this.state.awardCompetitions[
+                                        this.getIndexByCompetitionName(this.props.selectedCompetition)].totalAward.bronze 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
                                     <label className="red-text reached-award">
-                                        {this.state.awardCompetitions[this.state.selectedCompetition]
+                                        {this.state.awardCompetitions[
+                                            this.getIndexByCompetitionName(this.props.selectedCompetition)]
                                             .totalAward.bronzeRequirementStatus}
                                     </label>
                                 </Col>
@@ -356,13 +378,15 @@ class UserProfile extends Component {
                                         SILVER</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[this.state.selectedCompetition].totalAward.silver 
+                                    {this.state.awardCompetitions[
+                                        this.getIndexByCompetitionName(this.props.selectedCompetition)].totalAward.silver 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
                                     <label className="red-text reached-award">
-                                        {this.state.awardCompetitions[this.state.selectedCompetition]
+                                        {this.state.awardCompetitions[
+                                            this.getIndexByCompetitionName(this.props.selectedCompetition)]
                                             .totalAward.silverRequirementStatus}
                                     </label>
                                 </Col>
@@ -373,13 +397,15 @@ class UserProfile extends Component {
                                         GOLD</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[this.state.selectedCompetition].totalAward.gold 
+                                    {this.state.awardCompetitions[
+                                        this.getIndexByCompetitionName(this.props.selectedCompetition)].totalAward.gold 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
                                     <label className="red-text reached-award line-height-15px">
-                                        {this.state.awardCompetitions[this.state.selectedCompetition]
+                                        {this.state.awardCompetitions[
+                                            this.getIndexByCompetitionName(this.props.selectedCompetition)]
                                             .totalAward.goldRequirementStatus}
                                     </label>
                                 </Col>
@@ -388,10 +414,15 @@ class UserProfile extends Component {
                     </Row>
                 </Container>
                 //only render when the data has arrived from backend
-                : null} 
+                : null}
             </div>
         )
     }
 }
 
-export default UserProfile;
+
+const mapStateToProps = (state) => ({
+	selectedCompetition: state.profile.selectedCompetition,
+});
+
+export default connect(mapStateToProps, {setSelectedCompetition})(UserProfile);
