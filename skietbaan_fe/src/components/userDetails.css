@@ -1,6 +1,12 @@
 .userDetails-container {
   padding-top: 60px;
 }
+
+.userDetails-scrolls {
+  overflow: auto;
+  height: 100%;
+  padding-bottom: 150px;
+}
 .userDetails-heading-container {
   text-align: center;
   font-family: Helvetica;
@@ -60,7 +66,7 @@
 .userDetails-button-contain {
   text-align: center;
   width: 100%;
+  margin-top: 24px;
   justify-content: center;
-  position: fixed;
   bottom: 70px;
 }
