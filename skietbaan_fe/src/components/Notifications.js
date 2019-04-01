@@ -147,7 +147,7 @@ class notification extends Component {
   }
   
   submitAnnouncement=()=>{
-     fetch("http://localhost:50859/api/Notification/Announcements/"+this.state.announceString, {
+     fetch(BASE_URL+"/api/Notification/Announcements/"+this.state.announceString, {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',
