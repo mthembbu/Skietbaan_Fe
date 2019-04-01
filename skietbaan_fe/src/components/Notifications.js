@@ -159,12 +159,10 @@ class notification extends Component {
 			.catch(function(data) {});
   }
 
-	render() {
-		if (!getCookie('token')) {
-			setTimeout(function() {
-				history.push('/registerPage');
-			}, 2000);
-		}
+  render() {
+    if (!getCookie("token")) {
+      window.location = "/registerPage";
+    }
 
 		let headingItems = (
 			<div className="page-heading">
