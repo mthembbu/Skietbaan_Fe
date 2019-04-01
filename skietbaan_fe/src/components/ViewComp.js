@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { fetchcomp, updateByIdComp, fetchRequirements, fetchParticipants } from '../actions/competition.action';
+import { fetchcomp, updateByIdComp, fetchParticipants,fetchRequirements,UpdateRequirements } from '../actions/competition.action';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../scss/view-comp.css';
+import { URL } from '../actions/types';
 import Collapsible from 'react-collapsible';
 import { Form, Container, Row, Col } from 'react-bootstrap';
 import Switch from '@material-ui/core/Switch';
@@ -14,22 +15,25 @@ class ViewComp extends Component {
 			status: [],
 			updatedComp: {},
 			participants: [],
-			requirements: [],
-			tempR: { id: '', competition: null, standard: '', accuracy: '', total: '' },
-			B: { id: '', competition: null, standard: 'Bronze', accuracy: '', total: '' },
-			S: { id: '', competition: null, standard: 'Silver', accuracy: '', total: '' },
-			G: { id: '', competition: null, standard: 'Gold', accuracy: '', total: '' },
+			bronzeAccuracy: '',
+			bronzeTotal: '',
+			silverAccuracy: '',
+			silverTotal: '',
+			goldAccuracy: '',
+			goldTotal: '',
 			dict: {}
 		};
+
 		this.changeStatus = this.changeStatus.bind(this);
 		this.getRequirements = this.getRequirements.bind(this);
-		this.clearDefault = this.clearDefault.bind(this);
+		this.onChange = this.onChange.bind(this);
 	}
 	// The method that mounts everytime there is an action detected
 	componentDidMount() {
 		this.props.fetchcomp();
 		this.props.fetchParticipants();
 	}
+
 	componentWillReceiveProps(val) {
 		for (let i = 0; i < val.length; i++) {
 			this.state.status.push(val.compOBJ[i].status);
@@ -49,29 +53,42 @@ class ViewComp extends Component {
 		this.setState({ dict: newDict });
 	}
 	//the method that adds the update for the inputs
-	onSubmit(e) {}
+	HandleOnSubmit=(index)=> {
+		const BronzeData = {
+			standard: 'Bronze',
+			accuracy: this.state.bronzeAccuracy,
+			total: this.state.bronzeTotal
+		};
+		const SilverData = {
+			standard: 'Silver',
+			accuracy: this.state.silverAccuracy,
+			total: this.state.silverTotal
+    };
+    const GoldData = {  standard: "Gold",
+                          accuracy: this.state.goldAccuracy,
+                          total: this.state.goldTotal
+                        };
+    const RData = [BronzeData,SilverData,GoldData];
+    this.props.UpdateRequirements(index,RData);
+	}
 	//The method that fetches the requirements everytime the competition is clicked on
 	//End-point: URL/R/{ID}
 	getRequirements(index) {
-		this.props.fetchRequirements(index);
-		console.log('Index: ', index);
-		this.setState({ tempR: this.props.requirements[0] });
-		console.log('Inside GetREquirements: ', document.getElementsByClassName('Accuracy').value);
-		console.log('Requirements Arr: ', this.props.requirements);
+		fetch(URL + '/R/' + index).then((response) => response.json()).then((requirementsData) =>
+			this.setState({
+				bronzeAccuracy: requirementsData[0].accuracy,
+				bronzeTotal: requirementsData[0].total,
+				silverTotal: requirementsData[1].total,
+				silverAccuracy: requirementsData[1].total,
+				goldTotal: requirementsData[2].total,
+				goldAccuracy: requirementsData[1].total
+			})
+		);
 	}
-	onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-		console.log(e.target.value);
+	onChange({ target }) {
+		this.setState({ [target.name]: target.value });
 	}
-	clearDefault(a) {
-		if (a.defaultValue == this.props.requirements[0].accuracy) {
-			this.props.requirements[0].accuracy = '';
-		}
-	}
-
 	render() {
-		console.log('Inside Render: ', this.state.tempR);
-		console.log('Render() Requirements Arr: ', this.props.requirements);
 		const displayCompetitions = (
 			<div className="page-contents">
 				<table class="table-view-competitions">
@@ -82,11 +99,8 @@ class ViewComp extends Component {
 									<Collapsible
 										trigger={
 											<div>
-												<div className="test1">
-													<label
-														class="competition-containers"
-														onClick={() => this.getRequirements(compVar.id)}
-													>
+												<div className="test1" onClick={() => this.getRequirements(compVar.id)}>
+													<label class="competition-containers">
 														{compVar.name} {compVar.requirements}
 													</label>
 												</div>
@@ -106,7 +120,7 @@ class ViewComp extends Component {
 									>
 										<div>
 											<div class="comp-req-container">
-												<Form onSubmit={this.onSubmit}>
+												<Form >
 													<Container>
 														<Row>
 															<Col xs={4} md={4} />
@@ -126,17 +140,13 @@ class ViewComp extends Component {
 																	<input
 																		className="req-input"
 																		type="number"
-																		name="B_accuracy"
+																		name="bronzeAccuracy"
 																		id="B_accuracy"
-																		min="0"
-																		max="360"
 																		required
 																		autoComplete="off"
 																		autoCorrect="off"
-																		value={this.props.requirements[0].accuracy}
+																		value={this.state.bronzeAccuracy}
 																		onChange={this.onChange}
-																		onClick={() => {}}
-																		onFocus={this.clearDefault(this)}
 																	/>
 																</div>
 															</Col>
@@ -145,14 +155,12 @@ class ViewComp extends Component {
 																	<input
 																		className="req-input"
 																		type="number"
-																		name="B_total"
+																		name="bronzeTotal"
 																		id="B_total"
-																		min="0"
-																		max="0"
 																		required
 																		autoComplete="off"
 																		autoCorrect="off"
-																		value={this.props.requirements[0].total}
+																		value={this.state.bronzeTotal}
 																		onChange={this.onChange}
 																	/>
 																</div>
@@ -168,17 +176,13 @@ class ViewComp extends Component {
 																	<input
 																		className="req-input"
 																		type="number"
-																		name="S_accuracy"
+																		name="silverAccuracy"
 																		id="S_accuracy"
-																		min="0"
-																		max="360"
 																		required
 																		autoComplete="off"
 																		autoCorrect="off"
-																		value={this.props.requirements[1].accuracy}
+																		value={this.state.silverAccuracy}
 																		onChange={this.onChange}
-																		onClick={() => {}}
-																		onFocus={this.clearDefault(this)}
 																	/>
 																</div>
 															</Col>
@@ -187,14 +191,12 @@ class ViewComp extends Component {
 																	<input
 																		className="req-input"
 																		type="number"
-																		name="S_total"
+																		name="silverTotal"
 																		id="S_total"
-																		min="0"
-																		max="0"
 																		required
 																		autoComplete="off"
 																		autoCorrect="off"
-																		value={this.props.requirements[1].total}
+																		value={this.state.silverTotal}
 																		onChange={this.onChange}
 																	/>
 																</div>
@@ -210,17 +212,13 @@ class ViewComp extends Component {
 																	<input
 																		className="req-input"
 																		type="number"
-																		name="G_accuracy"
+																		name="goldAccuracy"
 																		id="G_accuracy"
-																		min="0"
-																		max="360"
 																		required
 																		autoComplete="off"
 																		autoCorrect="off"
-																		value={this.props.requirements[2].accuracy}
+																		value={this.state.goldAccuracy}
 																		onChange={this.onChange}
-																		onClick={() => {}}
-																		onFocus={this.clearDefault(this)}
 																	/>
 																</div>
 															</Col>
@@ -229,14 +227,12 @@ class ViewComp extends Component {
 																	<input
 																		className="req-input"
 																		type="number"
-																		name="G_total"
+																		name="goldTotal"
 																		id="G_total"
-																		min="0"
-																		max="0"
 																		required
 																		autoComplete="off"
 																		autoCorrect="off"
-																		value={this.props.requirements[2].total}
+																		value={this.state.goldTotal}
 																		onChange={this.onChange}
 																	/>
 																</div>
@@ -260,7 +256,6 @@ class ViewComp extends Component {
 																		}
 																		focus={true}
 																		checked={false}
-																		onClick={() => {}}
 																	/>
 																</div>
 															</Col>
@@ -277,24 +272,23 @@ class ViewComp extends Component {
 																		type="number"
 																		name="shortsNeeded"
 																		id="shortsNeeded"
-																		min="0"
-																		max="360"
-																		required
 																		autoComplete="off"
 																		autoCorrect="off"
-																		value={() => {}}
 																		onChange={this.onChange}
-																		onClick={() => {}}
-																		onFocus={() => {}}
 																	/>
 																</div>
 															</Col>
 															<Col xs={4} md={4}>
 																<div className="req-submit-btn-container">
-																	<button variant="secondary"	type="submit"
-																		id="submit-btn"	className="comp-success-submit-btn">
+																	<button
+																		variant="secondary"
+																		type="submit"
+																		id="submit-btn"
+																		className="comp-success-submit-btn"
+                                    onClick={() => this.HandleOnSubmit(compVar.id)}
+																	>
 																		update
-                                    </button>
+																	</button>
 																</div>
 															</Col>
 														</Row>
@@ -339,14 +333,6 @@ ViewComp.propTypes = {
 	compOBJ: PropTypes.array.isRequired,
 	postOBJ: PropTypes.array.isRequired,
 	requirements: PropTypes.array.isRequired,
-	tempR: PropTypes.shape({
-		id: PropTypes.arrayOf(PropTypes.number),
-		competition: null,
-		standard: PropTypes.string,
-		accuracy: PropTypes.arrayOf(PropTypes.number),
-		total: PropTypes.arrayOf(PropTypes.number)
-	}),
-
 	updateByIdComp: PropTypes.func.isRequired,
 	dict: PropTypes.shape({
 		Id: PropTypes.arrayOf(PropTypes.number),
@@ -360,4 +346,4 @@ const mapStateToProps = (state) => ({
 	dict: state.compOBJ.dict,
 	requirements: state.compOBJ.requirements
 });
-export default connect(mapStateToProps, { fetchcomp, updateByIdComp, fetchParticipants, fetchRequirements })(ViewComp);
+export default connect(mapStateToProps, { fetchcomp, updateByIdComp, fetchParticipants, fetchRequirements,  UpdateRequirements})(ViewComp);
