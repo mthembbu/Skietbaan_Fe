@@ -426,16 +426,6 @@ class LeaderboardPage extends Component {
                         </td>
                     </tr>
                 </table>}>
-                    <Table className="user-more-details-table">
-                        <tr className="user-more-details-row">
-                            <td className="member" >
-                                {this.displayMember(post.isMember)}
-                            </td>
-                            <td className="competitive-shooter">
-                                {this.displayCompetitive(post.isCompetitiveShooter)}
-                            </td>
-                        </tr>
-                    </Table>
                 </Collapsible>
                 <div className="underline"></div>
             </tr>
