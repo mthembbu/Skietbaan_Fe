@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../components/ForgotPassword.css";
-import { URL } from "../actions/types";
+import { BASE_URL } from "../actions/types";
 import skietbaan from "../components/assets/skietbaanLogo.png";
 
 class ForgotPassword extends Component {
@@ -37,6 +37,12 @@ class ForgotPassword extends Component {
       var key = multiple[i].split("=");
       document.cookie = key[0] + " =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
     }
+
+    {
+      this.state.returnValue !== "changed"
+        ? null
+        : (window.location = "/login");
+    }
   }
 
   toggleNavbar() {
@@ -53,21 +59,26 @@ class ForgotPassword extends Component {
     let sha1 = require("sha1");
     let hash = sha1(this.state.confirmPasswordValue);
 
-    fetch(URL + `/api/Features/Resetpassword?token=${user}&password=${hash}`, {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(user)
-    })
+    fetch(
+      BASE_URL + `/api/Features/Resetpassword?token=${user}&password=${hash}`,
+      {
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(user)
+      }
+    )
       .then(res => res.json())
       .then(data => this.setState({ returnValue: data }));
-
-    /*ToDo remove the reload and find better way for naving after reseting password */
-    setTimeout(function() {
-      window.location = "/login";
-    }, 2000);
+    {
+      setTimeout(() => {
+        this.state.returnValue !== "changed"
+          ? null
+          : (window.location = "/login");
+      }, 2000);
+    }
   }
 
   hanldeReseting() {
@@ -165,6 +176,13 @@ class ForgotPassword extends Component {
             </div>
           </div>
 
+          <div className="input-label centre-div">
+            {this.state.returnValue === "changed" ? null : (
+              <label className="forgot-password-error">
+                {this.state.returnValue}
+              </label>
+            )}
+          </div>
           <div className="button-container forgot-password-button">
             <button
               onClick={this.hanldeReseting}
