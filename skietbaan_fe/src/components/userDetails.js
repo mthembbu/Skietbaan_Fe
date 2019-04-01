@@ -72,17 +72,17 @@ export default class userDetails extends Component {
   render() {
     return (
       <div className="document-center">
-        <div className="userDetails-main-container userDetails-container">
-          <div className="userDetails-scrolls">
-            <div className="userDetails-heading-container">
+        <div className="user-details-main-container user-details-container">
+          <div className="user-details-scrolls">
+            <div className="user-details-heading-container">
               {this.state.array.username}
             </div>
             <div>
-              <label className="userDetails-heading-container">
+              <label className="user-details-heading-container">
                 member number:
               </label>
 
-              <label className="userDetails-member-label">
+              <label className="user-details-member-label">
                 {this.state.array.memberID}
               </label>
             </div>
@@ -93,7 +93,7 @@ export default class userDetails extends Component {
                 name="nameValue"
                 id="nameValue"
                 autoComplete="off"
-                className={"userDetails-input-container"}
+                className={"user-details-input-container"}
                 value={this.state.nameValue}
                 onChange={this.handleChange}
                 placeholder="Name"
@@ -106,7 +106,7 @@ export default class userDetails extends Component {
                 name="surnameValue"
                 id="surnameValue"
                 autoComplete="off"
-                className={"userDetails-input-container"}
+                className={"user-details-input-container"}
                 value={this.state.surnameValue}
                 onChange={this.handleChange}
                 placeholder="Surname"
@@ -119,7 +119,7 @@ export default class userDetails extends Component {
                 name="cellphoneValue"
                 id="cellphoneValue"
                 autoComplete="off"
-                className={"userDetails-input-container"}
+                className={"user-details-input-container"}
                 value={this.state.cellphoneValue}
                 onChange={this.handleChange}
                 placeholder="Cell Number"
@@ -129,7 +129,7 @@ export default class userDetails extends Component {
             {this.state.cellphoneValue === null ? null : validateNumber(
                 this.state.cellphoneValue
               ) ? null : (
-              <label className="userDetails-member-label">
+              <label className="user-details-member-label">
                 invalid Cellphone Number
               </label>
             )}
@@ -140,7 +140,7 @@ export default class userDetails extends Component {
                 name="emailValue"
                 id="emailValue"
                 autoComplete="off"
-                className={"userDetails-input-container"}
+                className={"user-details-input-container"}
                 value={this.state.emailValue}
                 onChange={this.handleChange}
                 placeholder="Email"
@@ -148,18 +148,18 @@ export default class userDetails extends Component {
             </div>
 
             {validateEmail(this.state.emailValue) ? null : (
-              <label className="userDetails-member-label">invalid email</label>
+              <label className="user-details-member-label">invalid email</label>
             )}
 
             {this.state.returnValue === "updated" ? (
-              <label className="userDetails-member-label">
+              <label className="user-details-member-label">
                 User Details Updated
               </label>
             ) : null}
 
-            <div className="userDetails-button-contain ">
+            <div className="user-details-button-contain ">
               <button
-                className={"userDetails-button-container"}
+                className={"user-details-button-container"}
                 onClick={
                   (validateEmail(this.state.emailValue) &&
                     validateNumber(this.state.cellphoneValue)) ||
