@@ -45,7 +45,7 @@ class LeaderboardPage extends Component {
         this.displayCompetitive = this.displayCompetitive.bind(this);
         this.getRankTableHeight = this.getRankTableHeight.bind(this);
         this.getFilterTableHeight = this.getFilterTableHeight.bind(this);
-        this.getclickableSpaceSize = this.getclickableSpaceSize.bind(this);
+        this.getClickableSpaceSize = this.getClickableSpaceSize.bind(this);
     }
     componentDidMount() {
         // Additionally I could have just used an arrow function for the binding `this` to the component...
@@ -82,7 +82,7 @@ class LeaderboardPage extends Component {
         }
         this.props.fetchleaderboadtabledata(filterSelection);
     }
-    getclickableSpaceSize(){
+    getClickableSpaceSize(){
         if(this.state.listType == "competitions"){ //if currently showing competitions list on filter screen
           return (46 * this.props.competitions.length) +10;
         }else{
@@ -509,10 +509,10 @@ class LeaderboardPage extends Component {
                                 <div className="selections-container" >
                                     <div className="row justify-content-center">
                                         <div className="choose" style={{ height: "fit-content", maxHeight: this.getFilterTableHeight() + "px" }}>
-                                            <div className="left-choose" style={{ height: this.getclickableSpaceSize() + "px" }} onClick={this.onMouseClickFilter} >
+                                            <div className="left-choose" style={{ height: this.getClickableSpaceSize() + "px" }} onClick={this.onMouseClickFilter} >
                                             </div>
                                             {this.state.listType == "competitions" ? competitionsList : groupsList}
-                                            <div className="right-choose" style={{ height: this.getclickableSpaceSize() + "px" }} onClick={this.onMouseClickFilter} >
+                                            <div className="right-choose" style={{ height: this.getClickableSpaceSize() + "px" }} onClick={this.onMouseClickFilter} >
                                             </div>
                                         </div>
                                     </div>
