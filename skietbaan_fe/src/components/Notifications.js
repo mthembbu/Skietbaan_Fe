@@ -42,7 +42,9 @@ class notification extends Component {
       selected: null,
       adminToggle: false,
       stateCheck: false,
-      speakerClicked: null
+      speakerClicked: null,
+      submitAnnouncementClicked: null,
+      announceString: ""
     };
     this.onDelete = this.onDelete.bind(this);
     this.changeIcon = this.changeIcon.bind(this);
@@ -146,6 +148,7 @@ class notification extends Component {
   onChange(event) {
     this.setState({ announceString: event.target.value });
   }
+
   changeIcon() {
     this.setState({
       toggle: !this.state.toggle
@@ -300,7 +303,7 @@ class notification extends Component {
               >
                 {post.notificationMessage}
               </label>
-              <Moment fromNow ago className="time-div">
+              <Moment fromNow className="time-div">
                 {post.timeOfArrival}
               </Moment>
             </td>
@@ -380,7 +383,11 @@ class notification extends Component {
         </div>
         <div>
           <button
-            className="announcement-send"
+            className={
+              this.state.announceString !== "" && this.state.adminToggle
+                ? "announcement-send"
+                : "disabled-button"
+            }
             onClick={() => this.submitAnnouncement()}
           >
             SEND ANNOUNCEMENT

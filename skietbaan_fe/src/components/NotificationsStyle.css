@@ -630,3 +630,17 @@
   margin-left: 26px;
   margin-top: 5px;
 }
+
+.disabled-button {
+  color: #ebebeb;
+  font: helvetica;
+  font-weight: lighter;
+  background: #fdfdfd;
+  padding: 1px 6px;
+  width: 312px;
+  height: 42px;
+  margin-top: 20px;
+  font-size: 16px;
+  border: 1px solid #ebebeb;
+  border-radius: 22px;
+}
