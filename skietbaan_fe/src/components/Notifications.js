@@ -88,7 +88,7 @@ class notification extends Component {
     this.props.updateIsReadProperty(Id);
     if (Notification === "Award" || Notification === "Document") {
       //PUT IN THE CORRECT COMPETITION NAME FROM THE NOTIFICATION MESSAGE
-      this.props.awardsSelectedCompetition("Rifle 100m")
+      this.props.awardsSelectedCompetition("Rifle 100m");
       this.props.history.push("/profile");
     } else if (Notification === "Confirmation" || Notification === "Expiry") {
       this.props.history.push("/notify");
@@ -421,7 +421,7 @@ notification.propTypes = {
 const mapStateToProps = state => ({
   notificationsArray: state.notificationOBJ.notificationsArray,
   updatedNotification: state.notificationOBJ.updatedNotification,
-  awardSelectedCompetition: state.profile.selectedCompetititon
+  awardsSelectedCompetition: state.profile.selectedCompetititon
 });
 
 export default connect(
