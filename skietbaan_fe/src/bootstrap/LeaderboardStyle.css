@@ -190,18 +190,26 @@
          height: 100%; 
          margin: auto;
          background-color: #F9F9F9;
+         display: inline-flex;
          
      }
      
      .filter-selections .selections-container .row .choose{
          height: fit-content;
          max-height: 315px;
-         width: 240px;
-         padding-left: 30px;
-         padding-right: 30px;
+         display: flex;
+         width: 100%;
          text-align: center;
          overflow: overlay;
          margin: auto;
+     }
+     .filter-selections .selections-container .row .choose .left-choose{
+        height: 100%;
+        width: 26%;
+     }
+     .filter-selections .selections-container .row .choose .right-choose{
+        height: 100%;
+        width: 26%;
      }
      .filter-selections .selections-container .row .choose .selection-table{
          border-collapse: separate;
@@ -211,11 +219,11 @@
      .filter-selections .selections-container .row .choose .selection-table tr .td-inactive{
           border: solid;
           border-width:thin;
-          border-color: #6F839E;
+          border-color: #6A6A6A;
           border-radius: 18px;
           height: 36px;
           padding: 0%;
-          color: #6F839E;
+          color: #6A6A6A;
           font-family: Helvetica;
           font-size: 15px;
           vertical-align: inherit;
@@ -225,7 +233,7 @@
      .filter-selections .selections-container .row .choose .selection-table tr .td-active{
          border: solid;
          border-width:thin;
-         border-color: #6F839E;
+         border-color: #6A6A6A;
          border-radius: 18px;
           height: 36px;
           padding: 0%;
@@ -245,7 +253,6 @@
          background-image: linear-gradient(to right, #ef3024  , #Dc0600);
          border-bottom-right-radius: 20px;
          border-bottom-left-radius: 20px;
-         box-shadow: 0 16px 23px -5px rgba(0,0,0,.33);
      }
      .closed-filter-section .filter-table1{
          width: 100%;
@@ -262,17 +269,20 @@
      .closed-filter-section .FilterTable2 .header-row2{
          width: 100%;
          height: 30px;
+         background: transparent;
      }
      .closed-filter-section .filter-table1 .header-row1 .filter-icon-col{
          width:25%;
          height: 100%;
+         background: transparent;
      }
      .closed-filter-section .filter-table1 .header-row1 .competition-name-col{
          width: 75%;
          height: 100%;
+         background: transparent;
      } 
      .closed-filter-section .filter-table1 .header-row1 .competition-name-col .gun-icon{
-        height: 100%;
+        height: 92%;
         width: -moz-fit-content;
         width: fit-content;
         background-repeat: no-repeat;
@@ -346,10 +356,11 @@
      .ranking-table-head{
         width: 100%;
         height: 36px;
+        background: transparent;
      }
     .ranking-table-head .header-row2{
-        background-color: #F5F5F5;
         width: 100%;
+        background: transparent;
     }
     .ranking-table-head .header-row2 .col-empty{
         height: 100%;
@@ -550,7 +561,7 @@
         line-height: 16px;	
         text-align: center;
         margin: auto;
-        padding-top: 5px;
+        padding-top: 2px;
     }
     .rank-number-container .member-rank-icons .ranking img{
         width: 23px;
@@ -609,7 +620,7 @@
          font-family: Helvetica;	
          width: 20%;
          font-weight: lighter;
-         color: #A0A0A0;
+         color: #6A6A6A;
      } 
      .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col-active{        
          height:100%;
@@ -658,9 +669,9 @@
         text-align: center;
         font-family: Helvetica;
         font-weight: lighter;
-        color: #A0A0A0;
+        color: #6A6A6A;
         margin: auto;
-        padding-top: 5px;
+        padding-top: 2px;
     }
      .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .ranking img{
         width: 23px;
@@ -747,7 +758,19 @@
          text-align: left;
          width: 30%;
          color: #6A6A6A;
+         padding-left: 5px; 
+         font-weight: bold;
      }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .extra-name-col-top{        
+        height:100%;
+        font-family: Helvetica;	
+        font-size: 14px;
+        text-align: left;
+        width: 30%;
+        color: #BE0000;
+        font-weight: bold;
+        padding-left: 5px; 
+    }
      .ranking-table-section .ranking-table tfoot{
        width: 100%;
        height: 104px;    
@@ -834,7 +857,7 @@
         width: 100%;
         height: 37px;
         display: inline-block;
-        margin-top: 2px;
+        margin-top: 5px;
     }
     .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .up-arrow{
         width: 23px;
@@ -869,7 +892,7 @@
         font-weight: lighter;
         color: white;	
         margin: auto;
-        padding-top: 5px;
+        padding-top: 2px;
     }
     .current-user-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .ranking img{
         width: 23px;
@@ -965,6 +988,7 @@
          text-align: left;
          width: 30%;
          font-weight: bold;
+         padding-left: 5px;
      }
   /* end of filter section*/
   .userWrapper{
@@ -990,6 +1014,9 @@
      }
      .leaderboard-container{
         margin-top: 56px;
+     }
+     .leaderboard-container .row .col-sm-8 text-left{
+        background-color: #F5F5F5;
      }
      .filter-selections .cat-visible-label{
          background-color: transparent;
@@ -1026,8 +1053,8 @@
      .userWrapper .row{
         background-color: transparent;
     }
-    .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .extra-name-col div{
-        width: 90px;
+    .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .extra-name-col *{
+        width: 100%;
         height: fit-content;
         margin: auto;
         border: solid;
