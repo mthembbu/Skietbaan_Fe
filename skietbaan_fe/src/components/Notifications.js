@@ -352,7 +352,8 @@ class notification extends Component {
     const deleteModal = (
       <table
         className={
-          this.props.notificationsArray.some(post => post.markedForDeletion)
+          this.props.notificationsArray.some(post => post.markedForDeletion) &&
+          this.state.toggle
             ? "notifications-modal"
             : "hidden"
         }
