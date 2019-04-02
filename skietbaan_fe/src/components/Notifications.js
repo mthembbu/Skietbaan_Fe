@@ -80,7 +80,8 @@ class notification extends Component {
 
   onClick_View = (Notification, Message, Id) => {
     this.setState({
-      isRead: true
+      isRead: true,
+      toggle: !this.state.toggle
     });
     this.props.updateIsReadProperty(Id);
     if (Notification === "Award" || Notification === "Document") {
@@ -205,8 +206,10 @@ class notification extends Component {
 
     let headingItems = (
       <div className="page-heading">
-        <div className="outer-header-div">
-          <b>Notifications</b>
+        <div className="notification-gun-overlay-image">
+          <div className="outer-header-div">
+            <label>NOTIFICATIONS</label>
+          </div>
         </div>
         <div className="notification-icon-spacing">
           <img
@@ -233,8 +236,10 @@ class notification extends Component {
 
     const adminHeadingItems = (
       <div className="page-heading">
-        <div className="outer-header-div">
-          <b>Notifications</b>
+        <div className="notification-gun-overlay-image">
+          <div className="outer-header-div">
+            <label>NOTIFICATIONS</label>
+          </div>
         </div>
         <div>
           <img
@@ -242,10 +247,10 @@ class notification extends Component {
               this.state.adminToggle ? notifySpeakerBlack : notifySpeakerWhite
             }
             onClick={() => this.speakerClick()}
-            className="notification-images"
+            className="admin-notification-images"
           />
         </div>
-        <div className="notification-icon-spacing">
+        <div className="admin-notification-icon-spacing">
           <img
             src={
               this.state.toggle
@@ -255,13 +260,17 @@ class notification extends Component {
                 : "hidden"
             }
             onClick={() => this.selectAll()}
-            className="select-all"
+            className="admin-select-all"
             alt=""
           />
           <img
             src={this.state.toggle ? deleteIconChange : deleteIcon}
             onClick={() => this.changeIcon()}
-            className={this.state.toggle ? "black-delete-icon" : "delete-icon"}
+            className={
+              this.state.toggle
+                ? "admin-black-delete-icon"
+                : "admin-delete-icon"
+            }
             alt=""
           />
         </div>
@@ -287,7 +296,7 @@ class notification extends Component {
             <td className="td-notification">
               <label
                 className={
-                  post.markedForDeletion
+                  post.markedForDeletion && this.state.toggle
                     ? "notifications-selected-text"
                     : post.isRead === true
                     ? "notifications-text"
@@ -343,7 +352,8 @@ class notification extends Component {
     const deleteModal = (
       <table
         className={
-          this.props.notificationsArray.some(post => post.markedForDeletion)
+          this.props.notificationsArray.some(post => post.markedForDeletion) &&
+          this.state.toggle
             ? "notifications-modal"
             : "hidden"
         }
