@@ -74,7 +74,7 @@
     padding-right: 27px;
   }
 
-  .notifications-selected{
+  .notifications-selected {
     cursor: pointer;
   }
 
@@ -91,7 +91,7 @@
     margin-top: 18px;
   }
 
-  .black-delete-icon:hover{
+  .black-delete-icon:hover {
     cursor: pointer;
   }
 
@@ -103,7 +103,7 @@
     margin-top: 18px;
   }
 
-  .delete-icon:hover{
+  .delete-icon:hover {
     cursor: pointer;
   }
 
@@ -263,7 +263,7 @@
   }
 }
 
-.notifications-unread:hover{
+.notifications-unread:hover {
   cursor: pointer;
 }
 
@@ -285,7 +285,7 @@
   color: #d9d9d9;
 }
 
-.first-column-notify{
+.first-column-notify {
   width: 30px;
 }
 
@@ -303,7 +303,7 @@
     margin-bottom: 56px;
   }
 
-  .first-column-notify{
+  .first-column-notify {
     width: 30px;
   }
 
@@ -366,7 +366,7 @@
     padding-right: 27px;
   }
 
-  .notifications-selected{
+  .notifications-selected {
     cursor: pointer;
   }
 
@@ -383,7 +383,7 @@
     margin-top: 5px;
   }
 
-  .black-delete-icon:hover{
+  .black-delete-icon:hover {
     cursor: pointer;
   }
 
@@ -395,7 +395,7 @@
     margin-top: 5px;
   }
 
-  .delete-icon:hover{
+  .delete-icon:hover {
     cursor: pointer;
   }
 
@@ -476,7 +476,7 @@
     width: 100%;
   }
 
-  .notifications-unread:hover{
+  .notifications-unread:hover {
     cursor: pointer;
   }
 
@@ -584,17 +584,17 @@
 .select-all {
   height: 27px;
   width: 30px;
-  margin-left: 45px;
+  margin-left: 5px;
   margin-bottom: 2px;
 }
 
 .notification-icon-on-the-side {
   height: 22px;
 }
-.announcement-main{
+.announcement-main {
   display: grid;
 }
-.announcement-text{
+.announcement-text {
   width: 312px;
   height: 123px;
   margin-top: 150px;
@@ -605,20 +605,28 @@
   padding-top: 20px;
   border-radius: 5px;
 }
-.announcement-send{
+.announcement-send {
   width: 312px;
   height: 42px;
   margin-top: 20px;
   background: #dc0600;
-  color:white;
+  color: white;
   font-size: 16px;
   font-weight: lighter;
   border: 1px solid #dc0600;
   border-radius: 22px;
 }
-.announcement-text:focus{
+.announcement-text:focus {
   outline: none;
 }
-.announcement-send:focus{
+.announcement-send:focus {
   outline: none;
+}
+
+.notification-images {
+  height: 26px;
+  width: 24px;
+  float: left;
+  margin-left: 26px;
+  margin-top: 5px;
 }
