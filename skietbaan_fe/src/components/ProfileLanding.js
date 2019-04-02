@@ -4,6 +4,8 @@ import "../bootstrap/ProfileLanding.css";
 import UserProfile from "./UserProfile";
 import Documents from "./Documents";
 import UserDetails from "./userDetails";
+import { getCookie } from "./cookie.js";
+import history from "./history";
 
 export default class ProfileLanding extends Component {
   constructor(props) {
@@ -16,6 +18,14 @@ export default class ProfileLanding extends Component {
     this.documentsPage = this.documentsPage.bind(this);
     this.details = this.details.bind(this);
     this.logout = this.logout.bind(this);
+  }
+
+  componentDidMount(){
+    var token = getCookie("token");
+    if (token == undefined) {
+        history.push("/registerPage");
+        return;
+    }
   }
 
   awardPage() {
