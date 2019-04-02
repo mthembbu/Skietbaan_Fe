@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../components/NotificationsStyle.css";
 import { getCookie } from "./cookie";
-import history from "./history";
 import { connect } from "react-redux";
 import { BASE_URL } from "../actions/types.js";
 import PropTypes from "prop-types";
@@ -35,15 +34,14 @@ class notification extends Component {
       isRead: false,
       toggle: false,
       secondToggle: false,
-      announceString: "",
       check: "Select all",
       markedForDeletion: false,
       updatedNotification: {},
       token: getCookie("token"),
       marked: null,
       selected: null,
-      adminToggle: null,
-      stateCheck: null,
+      adminToggle: false,
+      stateCheck: false,
       speakerClicked: null
     };
     this.onDelete = this.onDelete.bind(this);
@@ -73,12 +71,9 @@ class notification extends Component {
       });
     } catch (err) {}
     this.props.getNotifications(this.state.token);
-
-    {
-      setTimeout(() => {
-        window.location = "/notify";
-      }, 2000);
-    }
+    setTimeout(() => {
+      window.location = "/notify";
+    }, 2000);
   };
 
   onClick_View = (Notification, Message, Id) => {
@@ -142,9 +137,7 @@ class notification extends Component {
   }
 
   componentDidMount() {
-    if (!getCookie("token")) {
-      window.location = "/registerPage";
-    } else if (getCookie("token")) {
+    if (getCookie("token")) {
       this.props.getNotifications(this.state.token);
     }
     this.checkUserType();
@@ -189,7 +182,7 @@ class notification extends Component {
     });
   }
 
-  submitAnnouncement = announcement => {
+  submitAnnouncement = () => {
     fetch(BASE_URL + "/api/Notification/Announcements/", {
       method: "POST",
       headers: {
@@ -388,7 +381,7 @@ class notification extends Component {
         <div>
           <button
             className="announcement-send"
-            onClick={() => this.submitAnnouncement(this.state.announceString)}
+            onClick={() => this.submitAnnouncement()}
           >
             SEND ANNOUNCEMENT
           </button>
@@ -421,14 +414,13 @@ notification.propTypes = {
 const mapStateToProps = state => ({
   notificationsArray: state.notificationOBJ.notificationsArray,
   updatedNotification: state.notificationOBJ.updatedNotification,
-  awardsSelectedCompetition: state.profile.selectedCompetititon
+  awardsSelectedCompetition: state.profile.selectedCompetition
 });
 
 export default connect(
   mapStateToProps,
   {
     updateSelectedCompetition,
-    setSelectedCompetition,
     updateSelectedGroup,
     updateIsReadProperty,
     getNotifications,
