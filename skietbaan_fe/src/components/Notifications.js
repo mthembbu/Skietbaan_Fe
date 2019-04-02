@@ -80,7 +80,8 @@ class notification extends Component {
 
   onClick_View = (Notification, Message, Id) => {
     this.setState({
-      isRead: true
+      isRead: true,
+      toggle: !this.state.toggle
     });
     this.props.updateIsReadProperty(Id);
     if (Notification === "Award" || Notification === "Document") {
@@ -295,7 +296,7 @@ class notification extends Component {
             <td className="td-notification">
               <label
                 className={
-                  post.markedForDeletion
+                  post.markedForDeletion && this.state.toggle
                     ? "notifications-selected-text"
                     : post.isRead === true
                     ? "notifications-text"
