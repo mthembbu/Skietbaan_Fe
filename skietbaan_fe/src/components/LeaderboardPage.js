@@ -6,7 +6,7 @@ import { updateSelectedCompetition } from '../actions/postActions';
 import { updateSelectedGroup } from '../actions/postActions';
 import Collapsible from 'react-collapsible';
 import { Collapse } from 'react-collapse';
-import { Table } from "react-bootstrap";
+import { Table, Col } from "react-bootstrap";
 import { getCookie } from './cookie.js'
 import { MDBBtn } from "mdbreact";
 import { Motion, spring } from "react-motion";
@@ -18,7 +18,7 @@ class LeaderboardPage extends Component {
         this.state = {
             individual: "Individual Ranking",
             selectedGroup: -1,
-            selectedCompetition: 1,
+            selectedCompetition: 0,
             selectedScoreType: 1,
             selectedRank: "total",
             collapseFilter: false,
@@ -33,7 +33,6 @@ class LeaderboardPage extends Component {
         this.setScoreTypeValue = this.setScoreTypeValue.bind(this);
         this.onMouseClickFilter = this.onMouseClickFilter.bind(this);
         this.getCurentUserRankNumber = this.getCurentUserRankNumber.bind(this);
-        this.top3Display = this.top3Display.bind(this);
         this.closeMain = this.closeMain.bind(this);
         this.displaySelectedGroup = this.displaySelectedGroup.bind(this);
         this.setListType = this.setListType.bind(this);
@@ -82,15 +81,15 @@ class LeaderboardPage extends Component {
         }
         this.props.fetchleaderboadtabledata(filterSelection);
     }
-    getClickableSpaceSize(){
-        if(this.state.listType == "competitions"){ //if currently showing competitions list on filter screen
-          return (46 * this.props.competitions.length) +10;
-        }else{
-          return (46 * this.props.groups.length) + 10;
+    getClickableSpaceSize() {
+        if (this.state.listType === "competitions") { //if currently showing competitions list on filter screen
+            return (46 * this.props.competitions.length) + 10;
+        } else {
+            return (46 * this.props.groups.length) + 10;
         }
     }
     checkFilterMobile() {
-        if (this.state.width < 575 && this.state.collapseFilter == false) {
+        if (this.state.width < 575 && this.state.collapseFilter === false) {
             return true;
         } else if (this.state.width > 575) {
             return true;
@@ -102,7 +101,7 @@ class LeaderboardPage extends Component {
         if (this.props.selectedCompetitionName != undefined && this.props.selectedGroupName != undefined) {
             if (this.props.selectedCompetitionName.length > 0) {
                 for (var i = 0; i < this.props.competitions.length; i++) {
-                    if (this.props.competitions[i] == this.props.selectedCompetitionName) {
+                    if (this.props.competitions[i] === this.props.selectedCompetitionName) {
                         this.setState({
                             selectedCompetition: i
                         });
@@ -112,7 +111,7 @@ class LeaderboardPage extends Component {
 
             if (this.props.selectedGroupName.length > 0) {
                 for (var i = 0; i < this.props.groups.length; i++) {
-                    if (this.props.groups[i] == this.props.selectedGroupName) {
+                    if (this.props.groups[i] === this.props.selectedGroupName) {
                         this.setState({
                             selectedGroup: i
                         });
@@ -134,7 +133,7 @@ class LeaderboardPage extends Component {
         this.setState({
             selectedGroup: value
         });
-        if (value == -1) {
+        if (value === -1) {
             this.props.updateSelectedGroup(this.state.individual);
         } else {
             this.props.updateSelectedGroup(this.props.groups[value].label);
@@ -224,7 +223,7 @@ class LeaderboardPage extends Component {
         }
     }
     displaySelectedGroup(value) {
-        if (value == -1) {
+        if (value === -1) {
             return this.state.individual;
         } else {
             if (this.props.competitions.length > 0) {
@@ -252,83 +251,7 @@ class LeaderboardPage extends Component {
             return groupsList;
         }
     }
-    top3Display(object) {
-        if (object != null) {
-            if (object.rank == 1) {
-                return <div className="rank-number-container">
-                    <table className="rank-num-table">
-                        <tbody>
-                            <tr className="up-arrow">
-
-                            </tr>
-                            <tr className="icon">
-                                <td className="firstCol">
-                                </td>
-                            </tr>
-                            <tr className="down-arrow">
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>;
-            } else if (object.rank == 2) {
-                return <div className="rank-number-container">
-                    <table className="rank-num-table">
-                        <tbody>
-                            <tr className="up-arrow">
-
-                            </tr>
-                            <tr className="icon">
-                                <td className="firstCol">
-                                </td>
-                            </tr>
-                            <tr className="down-arrow">
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>;
-            } else if (object.rank == 3) {
-                return <div className="rank-number-container">
-                    <table className="rank-num-table">
-                        <tbody>
-                            <tr className="up-arrow">
-
-                            </tr>
-                            <tr className="icon">
-                                <td className="firstCol">
-                                </td>
-                            </tr>
-                            <tr className="down-arrow">
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>;
-            } else {
-                return <div className="rank-number-container">
-                    <table className="rank-num-table">
-                        <tbody>
-                            <tr className="up-arrow">
-                                <td></td>
-                            </tr>
-                            <tr className="icon">
-                                <td className="firstCol">
-                                    {object.rank != 0 ? object.rank : '--'}
-                                </td>
-                            </tr>
-                            <tr className="down-arrow">
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>;
-            }
-        } else {
-            return null;
-        }
-    }
+    
     render() {
 
         if (!getCookie("token")) {
@@ -340,7 +263,7 @@ class LeaderboardPage extends Component {
                     {this.props.groups.map((group, index) => (
                         <tr key={group.value.toString()} onClick={() => this.setGroupValue(index)}
                             value={group.value}>
-                            <td className={this.state.selectedGroup == index ? "td-active" : "td-inactive"}>{group.label}</td>
+                            <td className={this.state.selectedGroup === index ? "td-active" : "td-inactive"}>{group.label}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -352,7 +275,7 @@ class LeaderboardPage extends Component {
                     {this.props.competitions.map((competition, index) => (
                         <tr key={competition.value.toString()} onClick={() => this.setCompetitionValue(index)}
                             value={competition.value}>
-                            <td className={this.state.selectedCompetition == index ? "td-active" : "td-inactive"}>{competition.label}</td>
+                            <td className={this.state.selectedCompetition === index ? "td-active" : "td-inactive"}>{competition.label}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -360,94 +283,97 @@ class LeaderboardPage extends Component {
         )
         const tablebody = this.props.tableData.map((post, index) => (
             <tr className="rank-row" key={index.toString()} value={index} onChange={() => this.onChange(post.id)}>
-                <Collapsible trigger={<table className="user-details-table">
-                    <tr className="user-details-row">
-                        <td className="rank-icon-col">
-                            <div className="rank-number-container">
-                                <div className="member-status-icons">
-                                    <div className="membership-icon">
-                                        {post.isMember
-                                            ? <img src={require('../resources/member.png')} />
-                                            : null}
-                                    </div>
-                                    <div className="dedication-icon">
-                                        {post.isCompetitiveShooter
-                                            ? <img src={require('../resources/dedicatedShooter.png')} />
-                                            : <img src={require('../resources/standardShooter.png')} />}
-                                    </div>
-                                </div>
-                                <div className="member-rank-icons">
-                                    <div className="up-arrow">
-                                        <div className="up-arrow-icon">
+                <td className="rank-col">
+                    <table className="user-details-table">
+                        <tbody>
+                            <tr className="user-details-row">
+                                <td className="rank-icon-col">
+                                    <div className="rank-number-container">
+                                        <div className="member-status-icons">
+                                            <div className="membership-icon">
+                                                {post.isMember
+                                                    ? <img src={require('../resources/member.png')} />
+                                                    : null}
+                                            </div>
+                                            <div className="dedication-icon">
+                                                {post.isCompetitiveShooter
+                                                    ? <img src={require('../resources/dedicatedShooter.png')} />
+                                                    : <img src={require('../resources/standardShooter.png')} />}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="ranking">
-                                        {post.rank > 3
-                                            ? <div className="number">{post.rank}</div>
-                                            : (post.rank === 1
-                                                ? <img src={require('../resources/rank1.png')} />
-                                                : (post.rank === 2
-                                                    ? <img src={require('../resources/rank2.png')} />
-                                                    : (post.rank === 3
-                                                        ? <img src={require('../resources/rank3.png')} />
-                                                        : null)))}
-                                    </div>
-                                    <div className="down-arrow">
-                                        <div className="down-arrow-icon">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td className="rank-labels-col">
-                            <table className="head-table-labels">
-                                <tbody>
-                                    <tr>
-                                        <td className={(post.rank > 0 && post.rank < 4) ? "extra-name-col-top" : "extra-name-col"}><div>{post.displayName == null ? post.username : post.displayName}</div></td>
-                                        <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{post.best != 0 ? post.best : '--'}</td>
-                                        <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>
-                                            <div className="member-rank-icons">
-                                                <div className="up-arrow">
-                                                    <div className="up-arrow-icon">
-                                                        {post.rankStatus === "up"
-                                                            ? <img src={require('../resources/upArrow.png')} />
-                                                            : null}
-                                                    </div>
-                                                </div>
-                                                <div className="ranking">
-                                                    <div className="number">{post.average != 0 ? post.average : '--'}</div>
-                                                </div>
-                                                <div className="down-arrow">
-                                                    <div className="down-arrow-icon">
-                                                        {post.rankStatus === "down"
-                                                            ? <img src={require('../resources/downArrow.png')} />
-                                                            : null}
-                                                    </div>
+                                        <div className="member-rank-icons">
+                                            <div className="up-arrow">
+                                                <div className="up-arrow-icon">
                                                 </div>
                                             </div>
+                                            <div className="ranking">
+                                                {post.rank > 3
+                                                    ? <div className="number">{post.rank}</div>
+                                                    : (post.rank === 1
+                                                        ? <img src={require('../resources/rank1.png')} />
+                                                        : (post.rank === 2
+                                                            ? <img src={require('../resources/rank2.png')} />
+                                                            : (post.rank === 3
+                                                                ? <img src={require('../resources/rank3.png')} />
+                                                                : null)))}
+                                            </div>
+                                            <div className="down-arrow">
+                                                <div className="down-arrow-icon">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td className="rank-labels-col">
+                                    <table className="head-table-labels">
+                                        <tbody>
+                                            <tr>
+                                                <td className={(post.rank > 0 && post.rank < 4) ? "extra-name-col-top" : "extra-name-col"}><div>{post.displayName == null ? post.username : post.displayName}</div></td>
+                                                <td className={this.state.selectedRank === "best" ? "score-col-active" : "score-col"}>{post.best != 0 ? post.best : '--'}</td>
+                                                <td className={this.state.selectedRank === "average" ? "score-col-active" : "score-col"}>
+                                                    <div className="member-rank-icons">
+                                                        <div className="up-arrow">
+                                                            <div className="up-arrow-icon">
+                                                                {post.rankStatus === "up"
+                                                                    ? <img src={require('../resources/upArrow.png')} />
+                                                                    : null}
+                                                            </div>
+                                                        </div>
+                                                        <div className="ranking">
+                                                            <div className="number">{post.average != 0 ? post.average : '--'}</div>
+                                                        </div>
+                                                        <div className="down-arrow">
+                                                            <div className="down-arrow-icon">
+                                                                {post.rankStatus === "down"
+                                                                    ? <img src={require('../resources/downArrow.png')} />
+                                                                    : null}
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                        </td>
-                                        <td className={this.state.selectedRank == "total" ? "score-col-active" : "score-col"}>{post.total != 0 ? post.total : '--'}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                </table>}>
-                </Collapsible>
-                <div className="underline"></div>
+                                                </td>
+                                                <td className={this.state.selectedRank === "total" ? "score-col-active" : "score-col"}>{post.total != 0 ? post.total : '--'}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div className="underline"></div>
+                </td>
             </tr>
         ));
         return (
             /* Leaderboard Page Main Container */
             <div className="leaderboard-container">
                 <div className="row justify-content-center">
-                    <div className="col-sm-8 text-left" style={{backgroundColor:"#F5F5F5"}}>
+                    <Col sm={8} className="boostrap-col-8">
                         <div className="closed-filter-section">
                             <table className="filter-table1">
                                 <tbody>
                                     <tr className="header-row1">
-                                        <div className="competition-name-col">
+                                        <td className="competition-name-col">
                                             <div className="gun-icon">
                                                 <Motion
                                                     defaultStyle={{ x: -200, opacity: 0 }}
@@ -465,7 +391,7 @@ class LeaderboardPage extends Component {
                                                     )}
                                                 </Motion>
                                             </div>
-                                        </div>
+                                        </td>
                                         <td className="filter-icon-col">
                                             <div className="filter-icon">
                                                 <MDBBtn tag="a" size="lg" floating gradient="purple"
@@ -532,33 +458,35 @@ class LeaderboardPage extends Component {
                         </Collapse>
                         <Collapse isOpened={this.checkFilterMobile()}>
                             <table className="ranking-table-head">
-                                <tr className="header-row2">
-                                    <td className="col-empty"></td>
-                                    <Motion
-                                        defaultStyle={{ x: -200, opacity: 0 }}
-                                        style={{
-                                            x: spring(0),
-                                            opacity: spring(1)
-                                        }}>
-                                        {style => (
-                                            <td colSpan="2" className="grouping-label-col" style={{
-                                                transform: `translateX(${style.x}px)`,
-                                                opacity: style.opacity
-                                            }} >
-                                                {this.state.selectedGroup == -1 ? "Overall rank" : (this.props.groups.length != 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
-                                            </td>
-                                        )}
-                                    </Motion>
-                                    <td colSpan="1" className={this.state.selectedRank == "best" ? "active-label-col" : "inactive-label-col"} onClick={() => this.setSelectedRank("best")}>
-                                        Best
+                                <tbody>
+                                    <tr className="header-row2">
+                                        <td className="col-empty"></td>
+                                        <Motion
+                                            defaultStyle={{ x: -200, opacity: 0 }}
+                                            style={{
+                                                x: spring(0),
+                                                opacity: spring(1)
+                                            }}>
+                                            {style => (
+                                                <td colSpan="2" className="grouping-label-col" style={{
+                                                    transform: `translateX(${style.x}px)`,
+                                                    opacity: style.opacity
+                                                }} >
+                                                    {this.state.selectedGroup == -1 ? "Overall rank" : (this.props.groups.length != 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
+                                                </td>
+                                            )}
+                                        </Motion>
+                                        <td colSpan="1" className={this.state.selectedRank == "best" ? "active-label-col" : "inactive-label-col"} onClick={() => this.setSelectedRank("best")}>
+                                            Best
                                        </td>
-                                    <td colSpan="1" className={this.state.selectedRank == "average" ? "active-label-col" : "inactive-label-col"} onClick={() => this.setSelectedRank("average")}>
-                                        Average
+                                        <td colSpan="1" className={this.state.selectedRank == "average" ? "active-label-col" : "inactive-label-col"} onClick={() => this.setSelectedRank("average")}>
+                                            Average
                                         </td>
-                                    <td colSpan="1" className={this.state.selectedRank == "total" ? "active-label-col" : "inactive-label-col"} onClick={() => this.setSelectedRank("total")}>
-                                        Total
+                                        <td colSpan="1" className={this.state.selectedRank == "total" ? "active-label-col" : "inactive-label-col"} onClick={() => this.setSelectedRank("total")}>
+                                            Total
                                         </td>
-                                </tr>
+                                    </tr>
+                                </tbody>
                             </table>
                             <div className="ranking-table-section" style={{ height: this.getRankTableHeight() + "px" }}>
                                 <table className="ranking-table" >
@@ -568,7 +496,7 @@ class LeaderboardPage extends Component {
                                 </table>
                             </div>
                         </Collapse>
-                    </div>
+                    </Col>
                 </div>
                 {/* Current User Section*/}
                 <Motion defaultStyle={{ x: -200, opacity: 0 }}
@@ -586,79 +514,83 @@ class LeaderboardPage extends Component {
                                     <table className="ranking-table">
                                         <thead>
                                             <tr className="rank-row">
-                                                <table className="user-details-table">
-                                                    <tr className="user-details-row">
-                                                        <td className="rank-icon-col">
-                                                            <div className="rank-number-container">
-                                                                <div className="member-status-icons">
-                                                                    <div className="membership-icon">
-                                                                        {this.props.userResults.isMember
-                                                                            ? <img src={require('../resources/memberW.png')} />
-                                                                            : null}
-                                                                    </div>
-                                                                    <div className="dedication-icon">
-                                                                        {this.props.userResults.isCompetitiveShooter
-                                                                            ? <img src={require('../resources/dedicatedShooterW.png')} />
-                                                                            : <img src={require('../resources/standardShooterW.png')} />}
-                                                                    </div>
-                                                                </div>
-                                                                <div className="member-rank-icons">
-                                                                    <div className="up-arrow">
-                                                                        <div className="up-arrow-icon">
+                                                <td className="rank-col">
+                                                    <table className="user-details-table">
+                                                        <tbody>
+                                                            <tr className="user-details-row">
+                                                                <td className="rank-icon-col">
+                                                                    <div className="rank-number-container">
+                                                                        <div className="member-status-icons">
+                                                                            <div className="membership-icon">
+                                                                                {this.props.userResults.isMember
+                                                                                    ? <img src={require('../resources/memberW.png')} />
+                                                                                    : null}
+                                                                            </div>
+                                                                            <div className="dedication-icon">
+                                                                                {this.props.userResults.isCompetitiveShooter
+                                                                                    ? <img src={require('../resources/dedicatedShooterW.png')} />
+                                                                                    : <img src={require('../resources/standardShooterW.png')} />}
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div className="ranking">
-                                                                        {this.props.userResults.rank > 3
-                                                                            ? <div className="number" style={{color:"white"}}>{this.props.userResults.rank} </div>
-                                                                            : (this.props.userResults.rank === 1
-                                                                                ? <img src={require('../resources/rank1.png')} />
-                                                                                : (this.props.userResults.rank === 2
-                                                                                    ? <img src={require('../resources/rank2.png')} />
-                                                                                    : (this.props.userResults.rank === 3
-                                                                                        ? <img src={require('../resources/rank3.png')} />
-                                                                                        : null)))}
-                                                                    </div>
-                                                                    <div className="down-arrow">
-                                                                        <div className="down-arrow-icon">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="rank-labels-col">
-                                                            <table className="head-table-labels">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td className="extra-name-col">{this.props.userResults == null ? 'Something went wrong' : (this.props.userResults != null ? this.props.userResults.username : '--')}</td>
-                                                                        <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{this.props.userResults == null ? '--' : (this.props.userResults.best != 0 ? this.props.userResults.best : '--')}</td>
-                                                                        <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>
-                                                                            <div className="member-rank-icons">
-                                                                                <div className="up-arrow">
-                                                                                    <div className="up-arrow-icon">
-                                                                                        {this.props.userResults.rankStatus === "up"
-                                                                                            ? <img src={require('../resources/accuracyUp.png')} />
-                                                                                            : null}
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div className="ranking">
-                                                                                    <div className="number">{this.props.userResults == null ? '--' : (this.props.userResults.average != 0 ? this.props.userResults.average : '--')}</div>
-                                                                                </div>
-                                                                                <div className="down-arrow">
-                                                                                    <div className="down-arrow-icon">
-                                                                                        {this.props.userResults.rankStatus === "down"
-                                                                                            ? <img src={require('../resources/accuracyDown.png')} />
-                                                                                            : null}
-                                                                                    </div>
+                                                                        <div className="member-rank-icons">
+                                                                            <div className="up-arrow">
+                                                                                <div className="up-arrow-icon">
                                                                                 </div>
                                                                             </div>
-                                                                        </td>
-                                                                        <td className={this.state.selectedRank === "total" ? "score-col-active" : "score-col"}>{this.props.userResults === null ? '--' : (this.props.userResults.total != 0 ? this.props.userResults.total : '--')}</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                </table>
+                                                                            <div className="ranking">
+                                                                                {this.props.userResults.rank > 3
+                                                                                    ? <div className="number" style={{ color: "white" }}>{this.props.userResults.rank} </div>
+                                                                                    : (this.props.userResults.rank === 1
+                                                                                        ? <img src={require('../resources/rank1.png')} />
+                                                                                        : (this.props.userResults.rank === 2
+                                                                                            ? <img src={require('../resources/rank2.png')} />
+                                                                                            : (this.props.userResults.rank === 3
+                                                                                                ? <img src={require('../resources/rank3.png')} />
+                                                                                                : null)))}
+                                                                            </div>
+                                                                            <div className="down-arrow">
+                                                                                <div className="down-arrow-icon">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td className="rank-labels-col">
+                                                                    <table className="head-table-labels">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td className="extra-name-col">{this.props.userResults == null ? 'Something went wrong' : (this.props.userResults != null ? this.props.userResults.username : '--')}</td>
+                                                                                <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{this.props.userResults == null ? '--' : (this.props.userResults.best != 0 ? this.props.userResults.best : '--')}</td>
+                                                                                <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>
+                                                                                    <div className="member-rank-icons">
+                                                                                        <div className="up-arrow">
+                                                                                            <div className="up-arrow-icon">
+                                                                                                {this.props.userResults.rankStatus === "up"
+                                                                                                    ? <img src={require('../resources/accuracyUp.png')} />
+                                                                                                    : null}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div className="ranking">
+                                                                                            <div className="number">{this.props.userResults == null ? '--' : (this.props.userResults.average != 0 ? this.props.userResults.average : '--')}</div>
+                                                                                        </div>
+                                                                                        <div className="down-arrow">
+                                                                                            <div className="down-arrow-icon">
+                                                                                                {this.props.userResults.rankStatus === "down"
+                                                                                                    ? <img src={require('../resources/accuracyDown.png')} />
+                                                                                                    : null}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td className={this.state.selectedRank === "total" ? "score-col-active" : "score-col"}>{this.props.userResults === null ? '--' : (this.props.userResults.total != 0 ? this.props.userResults.total : '--')}</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
                                             </tr>
                                         </thead>
                                     </table>
