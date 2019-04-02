@@ -13,8 +13,15 @@ import whiteSelectAll from '../components/Notification-Img/white-select-all.png'
 import blackSelectAll from '../components/Notification-Img/black-select-all.png';
 import notifySpeakerBlack from "../components/Notification-Img/notifySpeaker.png";
 import notifySpeakerWhite from "../components/Notification-Img/notifySpeakerWhite.png";
-import { updateIsReadProperty, getNotifications } from '../actions/notificationAction';
-import {updateSelectedCompetition, updateSelectedGroup} from '../actions/postActions';
+import {setSelectedCompetition} from "../actions/userProfileActions"
+import {
+  updateSelectedCompetition,
+  updateSelectedGroup
+} from "../actions/postActions";
+import {
+  updateIsReadProperty,
+  getNotifications
+} from "../actions/notificationAction";
 
 class notification extends Component {
 	constructor(props) {
@@ -67,13 +74,15 @@ class notification extends Component {
 		window.location = '/notify';
 	};
 
-	onClick_View = (Notification, Message, Id) => {
-		this.setState({
-			isRead: true
-		});
-		this.props.updateIsReadProperty(Id);
-		if (Notification === 'Award' || Notification === 'Document') {
-			this.props.history.push('/profile');
+  onClick_View = (Notification, Message, Id) => {
+    this.setState({
+      isRead: true
+    });
+    this.props.updateIsReadProperty(Id);
+    if (Notification === "Award" || Notification === "Document") {
+      //PUT IN THE CORRECT COMPETITION NAME FROM THE NOTIFICATION MESSAGE
+      this.props.awardsSelectedCompetition("Rifle 100m")
+      this.props.history.push("/profile");
     } else if (Notification === "Confirmation" || Notification === "Expiry") {
 			this.props.history.push('/notify');
 		} else if (Notification === 'Renewal') {
@@ -363,7 +372,8 @@ notification.propTypes = {
 };
 const mapStateToProps = state => ({
   notificationsArray: state.notificationOBJ.notificationsArray,
-  updatedNotification: state.notificationOBJ.updatedNotification
+  updatedNotification: state.notificationOBJ.updatedNotification,
+  awardsSelectedCompetition: state.profile.selectedCompetition
 });
 
 export default connect(
@@ -372,6 +382,7 @@ export default connect(
     updateSelectedCompetition,
     updateSelectedGroup,
     updateIsReadProperty,
-    getNotifications
+    getNotifications,
+    setSelectedCompetition
   }
 )(notification);

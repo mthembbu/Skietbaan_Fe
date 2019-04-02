@@ -5,7 +5,6 @@ import $ from "jquery";
 import { getCookie } from "./cookie.js";
 import { BASE_URL } from "../actions/types.js";
 import { Collapse } from "react-collapse";
-import history from "./history";
 import { connect } from "react-redux";
 import { setSelectedCompetition } from "../actions/userProfileActions"
 
@@ -29,11 +28,6 @@ class UserProfile extends Component {
 
     UNSAFE_componentWillMount() {
         var token = getCookie("token");
-        if (token == undefined) {
-            history.push("/registerPage");
-            return;
-        }
-
         fetch(BASE_URL + "/api/awards/" + token, {
             method: "GET",
             headers: {
@@ -182,7 +176,8 @@ class UserProfile extends Component {
                 </div>
                 <div className="circle-bigger">
                     {!element.isCompetitionLocked ?
-                        (element.accuracy === 0 ? <label className="accuracy-text">0%</label> : this.renderActiveCircle(element,index))
+                        (element.accuracy === 0 ? <label className="accuracy-text">0%</label> 
+                        : this.renderActiveCircle(element,index))
                         : this.renderRedLockIcon(index)}
                 </div>
             </div>
@@ -257,7 +252,8 @@ class UserProfile extends Component {
                                         .competitionName.toUpperCase()}
                                     </div>
                                     <div className="down-triangle-img-scale">
-                                        <img src={require("../resources/awardIcons/down-triangle.png")} alt="down-triangle">
+                                        <img src={require("../resources/awardIcons/down-triangle.png")}
+                                         alt="down-triangle">
                                         </img>
                                     </div>
                                 </a>
@@ -294,7 +290,8 @@ class UserProfile extends Component {
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
                                     {this.state.awardCompetitions[
-                                        this.getIndexByCompetitionName(this.props.selectedCompetition)].accuracyAward.bronze 
+                                        this.getIndexByCompetitionName(this.props.selectedCompetition)]
+                                        .accuracyAward.bronze 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
@@ -313,7 +310,8 @@ class UserProfile extends Component {
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
                                     {this.state.awardCompetitions[
-                                        this.getIndexByCompetitionName(this.props.selectedCompetition)].accuracyAward.silver 
+                                        this.getIndexByCompetitionName(this.props.selectedCompetition)]
+                                        .accuracyAward.silver 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
