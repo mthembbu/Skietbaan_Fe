@@ -205,8 +205,10 @@ class notification extends Component {
 
     let headingItems = (
       <div className="page-heading">
-        <div className="outer-header-div">
-          <b>Notifications</b>
+        <div className="notification-gun-overlay-image">
+          <div className="outer-header-div">
+            <label>NOTIFICATIONS</label>
+          </div>
         </div>
         <div className="notification-icon-spacing">
           <img
@@ -233,8 +235,10 @@ class notification extends Component {
 
     const adminHeadingItems = (
       <div className="page-heading">
-        <div className="outer-header-div">
-          <b>Notifications</b>
+        <div className="notification-gun-overlay-image">
+          <div className="outer-header-div">
+            <label>NOTIFICATIONS</label>
+          </div>
         </div>
         <div>
           <img
@@ -242,10 +246,10 @@ class notification extends Component {
               this.state.adminToggle ? notifySpeakerBlack : notifySpeakerWhite
             }
             onClick={() => this.speakerClick()}
-            className="notification-images"
+            className="admin-notification-images"
           />
         </div>
-        <div className="notification-icon-spacing">
+        <div className="admin-notification-icon-spacing">
           <img
             src={
               this.state.toggle
@@ -255,13 +259,17 @@ class notification extends Component {
                 : "hidden"
             }
             onClick={() => this.selectAll()}
-            className="select-all"
+            className="admin-select-all"
             alt=""
           />
           <img
             src={this.state.toggle ? deleteIconChange : deleteIcon}
             onClick={() => this.changeIcon()}
-            className={this.state.toggle ? "black-delete-icon" : "delete-icon"}
+            className={
+              this.state.toggle
+                ? "admin-black-delete-icon"
+                : "admin-delete-icon"
+            }
             alt=""
           />
         </div>
