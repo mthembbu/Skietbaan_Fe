@@ -52,10 +52,10 @@ class notification extends Component {
   }
 
   onDelete = async () => {
-    const deletingarray = [];
+    const deletingArray = [];
     for (var i = 0; i < this.props.notificationsArray.length; i++) {
       if (this.props.notificationsArray[i].markedForDeletion === true) {
-        deletingarray.push(this.props.notificationsArray[i]);
+        deletingArray.push(this.props.notificationsArray[i]);
 
         delete this.props.notificationsArray[i];
       }
@@ -67,7 +67,7 @@ class notification extends Component {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(deletingarray)
+        body: JSON.stringify(deletingArray)
       });
     } catch (err) {}
     this.props.getNotifications(this.state.token);
