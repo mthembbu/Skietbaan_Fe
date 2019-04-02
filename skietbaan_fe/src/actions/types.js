@@ -26,7 +26,7 @@ export const NAV_BAR_ICONS = {
   SCORE_CAPTURE_GRAY: scorecaptureGray
 };
 
-export const BASE_URL = "http://localhost:50859";
+export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
 export const ADD_BOOKMARK = "ADD_BOOKMARK";
 export const DELETE_BOOKMARK = "DELETE_BOOKMARK";
 export const FETCH_POSTS = "FETCH_POSTS";
@@ -43,7 +43,7 @@ export const UPDATE_SELECTED_COMPETITION = "UPDATE_SELECTED_COMPETITION";
 export const UPDATE_SELECTED_GROUP = "UPDATE_SELECTED_GROUP";
 
 //groups types and constants
-export const URL = "http://localhost:50859";
+export const URL = "https://api.skietbaan.retrotest.co.za";
 export const UPDATENAME = "UPDATENAME";
 export const UPDATE_GROUPNAME = "UPDATE_GROUPNAME";
 export const CREATEGROUP = "CREATEGROUP";
