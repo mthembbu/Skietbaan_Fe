@@ -45,6 +45,7 @@ class LeaderboardPage extends Component {
         this.displayCompetitive = this.displayCompetitive.bind(this);
         this.getRankTableHeight = this.getRankTableHeight.bind(this);
         this.getFilterTableHeight = this.getFilterTableHeight.bind(this);
+        this.getclickableSpaceSize = this.getclickableSpaceSize.bind(this);
     }
     componentDidMount() {
         // Additionally I could have just used an arrow function for the binding `this` to the component...
@@ -80,6 +81,13 @@ class LeaderboardPage extends Component {
             userToken: token
         }
         this.props.fetchleaderboadtabledata(filterSelection);
+    }
+    getclickableSpaceSize(){
+        if(this.state.listType == "competitions"){ //if currently showing competitions list on filter screen
+          return (46 * this.props.competitions.length) +10;
+        }else{
+          return (46 * this.props.groups.length) + 10;
+        }
     }
     checkFilterMobile() {
         if (this.state.width < 575 && this.state.collapseFilter == false) {
@@ -381,7 +389,7 @@ class LeaderboardPage extends Component {
                                                 : (post.rank === 2
                                                     ? <img src={require('../resources/rank2.png')} />
                                                     : (post.rank === 3
-                                                        ? <img src={require('../resources/rank2.png')} />
+                                                        ? <img src={require('../resources/rank3.png')} />
                                                         : null)))}
                                     </div>
                                     <div className="down-arrow">
@@ -395,7 +403,7 @@ class LeaderboardPage extends Component {
                             <table className="head-table-labels">
                                 <tbody>
                                     <tr>
-                                        <td className="extra-name-col"><div>{post.displayName == null ? post.username : post.displayName}</div></td>
+                                        <td className={(post.rank > 0 && post.rank < 4) ? "extra-name-col-top" : "extra-name-col"}><div>{post.displayName == null ? post.username : post.displayName}</div></td>
                                         <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{post.best != 0 ? post.best : '--'}</td>
                                         <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>
                                             <div className="member-rank-icons">
@@ -434,7 +442,7 @@ class LeaderboardPage extends Component {
             /* Leaderboard Page Main Container */
             <div className="leaderboard-container">
                 <div className="row justify-content-center">
-                    <div className="col-sm-8 text-left">
+                    <div className="col-sm-8 text-left" style={{backgroundColor:"#F5F5F5"}}>
                         <div className="closed-filter-section">
                             <table className="filter-table1">
                                 <tbody>
@@ -498,22 +506,25 @@ class LeaderboardPage extends Component {
                                 <div className={this.state.listType == "groups" ? "cat-visible-groups-label" : "hide-my-div"}>
                                     Groups
                                    </div>
-                                <div className="selections-container"  onClick={this.onMouseClickFilter}>
+                                <div className="selections-container" >
                                     <div className="row justify-content-center">
                                         <div className="choose" style={{ height: "fit-content", maxHeight: this.getFilterTableHeight() + "px" }}>
+                                            <div className="left-choose" style={{ height: this.getclickableSpaceSize() + "px" }} onClick={this.onMouseClickFilter} >
+                                            </div>
                                             {this.state.listType == "competitions" ? competitionsList : groupsList}
+                                            <div className="right-choose" style={{ height: this.getclickableSpaceSize() + "px" }} onClick={this.onMouseClickFilter} >
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="row justify-content-center">
-                                        <div className="closefilter">
-                                            <MDBBtn tag="a" size="lg" floating gradient="purple"
-                                                onClick={this.onMouseClickFilter} >
+                                        <div className="closefilter" onClick={this.onMouseClickFilter} >
+                                            <MDBBtn tag="a" size="lg" floating gradient="purple">
                                                 <img src={require('../resources/closefilter.png')} />
                                             </MDBBtn>
                                         </div>
                                     </div>
                                     <div className="row justify-content-center">
-                                        <div className="empty-div">
+                                        <div className="empty-div" onClick={this.onMouseClickFilter} >
                                         </div>
                                     </div>
                                 </div>
@@ -582,13 +593,13 @@ class LeaderboardPage extends Component {
                                                                 <div className="member-status-icons">
                                                                     <div className="membership-icon">
                                                                         {this.props.userResults.isMember
-                                                                            ? <img src={require('../resources/member.png')} />
+                                                                            ? <img src={require('../resources/memberW.png')} />
                                                                             : null}
                                                                     </div>
                                                                     <div className="dedication-icon">
                                                                         {this.props.userResults.isCompetitiveShooter
-                                                                            ? <img src={require('../resources/dedicatedShooter.png')} />
-                                                                            : <img src={require('../resources/standardShooter.png')} />}
+                                                                            ? <img src={require('../resources/dedicatedShooterW.png')} />
+                                                                            : <img src={require('../resources/standardShooterW.png')} />}
                                                                     </div>
                                                                 </div>
                                                                 <div className="member-rank-icons">
@@ -604,7 +615,7 @@ class LeaderboardPage extends Component {
                                                                                 : (this.props.userResults.rank === 2
                                                                                     ? <img src={require('../resources/rank2.png')} />
                                                                                     : (this.props.userResults.rank === 3
-                                                                                        ? <img src={require('../resources/rank2.png')} />
+                                                                                        ? <img src={require('../resources/rank3.png')} />
                                                                                         : null)))}
                                                                     </div>
                                                                     <div className="down-arrow">
