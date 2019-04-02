@@ -75,7 +75,7 @@
     height: 38px;	
     width: 88px;
     padding-top: 5px;
-    margin-top: 11px;
+    margin-top: 14px;
     padding-left: 20px;
     border: 1px solid #FFFFFF;	
     border-radius: 21px;	
@@ -92,8 +92,7 @@
     height: 32px;	
     width: 100%;	
     border: 1px solid #BE0000;	
-    border-radius: 18px;	
-    box-shadow: 0 3px 8px -3px #674D4D;
+    border-radius: 18px;
 }
 
 .buttons-row{
