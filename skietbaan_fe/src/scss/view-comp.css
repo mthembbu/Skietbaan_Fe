@@ -32,8 +32,8 @@
 	border-bottom-right-radius: 20px;
 }
 
-.view-page{
-    margin-bottom: 58px;
+.view-page {
+	margin-bottom: 58px;
 }
 
 .go-back-to-create-page {
@@ -137,8 +137,8 @@
 }
 
 .comp-req-container {
-    text-align: center;
-    padding-bottom: 16px;
+	text-align: center;
+	padding-bottom: 16px;
 }
 
 .requirement-success-submit-btn {
@@ -233,7 +233,6 @@
 	text-align: center;
 }
 
-
 .silver-label {
 	height: 100%;
 	color: rgba(0, 0, 0, 0.6);
@@ -258,8 +257,8 @@
 	font-size: 18px;
 	color: #666666;
 	font-family: helvetica;
-    font-style: normal;
-    text-align: center;
+	font-style: normal;
+	text-align: center;
 }
 
 .silver-total-input-control {
@@ -276,8 +275,8 @@
 	font-size: 18px;
 	color: #666666;
 	font-family: helvetica;
-    font-style: normal;
-    text-align: center;
+	font-style: normal;
+	text-align: center;
 }
 
 .gold-label {
@@ -299,8 +298,8 @@
 	font-weight: bold;
 	letter-spacing: 0.13px;
 	line-height: 16px;
-    padding: 0px;
-    padding-top: 12px;
+	padding: 0px;
+	padding-top: 12px;
 }
 .gold-accuracy-input-control {
 	width: 95px;
@@ -316,8 +315,8 @@
 	font-size: 18px;
 	color: #666666;
 	font-family: helvetica;
-    font-style: normal;
-    text-align: center;
+	font-style: normal;
+	text-align: center;
 }
 
 .gold-total-input-control {
@@ -334,8 +333,8 @@
 	font-size: 18px;
 	color: #666666;
 	font-family: helvetica;
-    font-style: normal;
-    text-align: center;
+	font-style: normal;
+	text-align: center;
 }
 
 .shorts-needed-input {

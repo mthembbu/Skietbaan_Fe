@@ -1,21 +1,21 @@
-.comp-input {	
-		width: 312px;
-    height: 56px;
-    border-radius: 5px;
-    border: 1px solid #6f839e;
-    padding: 10px;
-    text-decoration-color: #666666;
-    background-color: #FFFFFF;
-    font-weight: bold;
-    text-align: left;
-    font-size: 18px;
-    color: #666666;
-    font-family: helvetica;
-    font-style: normal
+.comp-input {
+	width: 312px;
+	height: 56px;
+	border-radius: 5px;
+	border: 1px solid #6f839e;
+	padding: 10px;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
+	font-style: normal;
 }
 
 .comp-submit-btn {
-	background: #DC0600;
+	background: #dc0600;
 	width: 218px;
 	height: 42px;
 	border-radius: 25px;
@@ -26,19 +26,19 @@
 	color: white;
 }
 
-.comp-success-submit-btn{
-font-weight: lighter;
-margin-top: 45px;
-font-size: 16px;
-background-color: #BE0000;
-border-radius: 25px;
-width: 312px;
-height: 42px;
-border-color: #BE0000;
-border-width: 1.5px;
-border: none;
-color: #ffffff;
-box-shadow: 0px 8px 19px 0px #888;
+.comp-success-submit-btn {
+	font-weight: lighter;
+	margin-top: 45px;
+	font-size: 16px;
+	background-color: #be0000;
+	border-radius: 25px;
+	width: 312px;
+	height: 42px;
+	border-color: #be0000;
+	border-width: 1.5px;
+	border: none;
+	color: #ffffff;
+	box-shadow: 0px 8px 19px 0px #888;
 }
 
 .inactive-comp-submit-btn {
@@ -69,13 +69,13 @@ box-shadow: 0px 8px 19px 0px #888;
 	font-family: helvetica;
 }
 
-.error-comp-message{
-	color: #DC0600;
-    font-size: 10px;
-    margin-bottom: 20px;
-    font-weight: bold;
-    align-content: center;
-    font-family: helvetica;
+.error-comp-message {
+	color: #dc0600;
+	font-size: 10px;
+	margin-bottom: 20px;
+	font-weight: bold;
+	align-content: center;
+	font-family: helvetica;
 }
 
 .create-comp-container {
@@ -122,10 +122,9 @@ input.invalid {
 	height: 35px;
 }
 
-button.button-invalid{
-  background-color: #e0e1e2;
-  border: none;
-
+button.button-invalid {
+	background-color: #e0e1e2;
+	border: none;
 }
 
 button.button-valid {
