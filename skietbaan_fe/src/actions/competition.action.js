@@ -20,7 +20,6 @@ export const fetchRequirements = (CompID) => (dispatch) => {
 			});
 		})
 		.catch((error) => {
-			console.log('Error Message: ', error);
 		});
 };
 export const UpdateRequirements = (CompID, RData) => (dispatch) => {
@@ -100,6 +99,6 @@ export const createcomp = (compData) => (dispatch) => {
 			}
 		})
 		.catch((error) => {
-			console.log('request error => ', error);
+		
 		});
 };
