@@ -35,6 +35,7 @@ class notification extends Component {
       isRead: false,
       toggle: false,
       secondToggle: false,
+      announceString: "",
       check: "Select all",
       markedForDeletion: false,
       updatedNotification: {},
@@ -72,7 +73,12 @@ class notification extends Component {
       });
     } catch (err) {}
     this.props.getNotifications(this.state.token);
-    window.location = "/notify";
+
+    {
+      setTimeout(() => {
+        window.location = "/notify";
+      }, 2000);
+    }
   };
 
   onClick_View = (Notification, Message, Id) => {
@@ -81,6 +87,8 @@ class notification extends Component {
     });
     this.props.updateIsReadProperty(Id);
     if (Notification === "Award" || Notification === "Document") {
+      //PUT IN THE CORRECT COMPETITION NAME FROM THE NOTIFICATION MESSAGE
+      this.props.awardsSelectedCompetition("Rifle 100m")
       this.props.history.push("/profile");
     } else if (Notification === "Confirmation" || Notification === "Expiry") {
       this.props.history.push("/notify");
@@ -181,33 +189,22 @@ class notification extends Component {
     });
   }
 
-  submitAnnouncement = () => {
-    console.log("dfghj");
-    fetch(
-      BASE_URL + "/api/Notification/Announcements/",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(this.state.announceString)
+  submitAnnouncement = announcement => {
+    fetch(BASE_URL + "/api/Notification/Announcements/", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
       },
-      console.log("here")
-    )
+      body: JSON.stringify(this.state.announceString)
+    })
       .then(function(response) {})
       .catch(function(data) {});
   };
 
   render() {
     if (!getCookie("token")) {
-<<<<<<< Updated upstream
       window.location = "/registerPage";
-=======
-      setTimeout(function() {
-        history.push("/registerPage");
-      }, 2000);
->>>>>>> Stashed changes
     }
 
     let headingItems = (
@@ -391,9 +388,9 @@ class notification extends Component {
         <div>
           <button
             className="announcement-send"
-            onClick={() => this.submitAnnouncement()}
+            onClick={() => this.submitAnnouncement(this.state.announceString)}
           >
-            send announcement
+            SEND ANNOUNCEMENT
           </button>
         </div>
       </div>
@@ -434,6 +431,7 @@ export default connect(
     setSelectedCompetition,
     updateSelectedGroup,
     updateIsReadProperty,
-    getNotifications
+    getNotifications,
+    setSelectedCompetition
   }
 )(notification);
