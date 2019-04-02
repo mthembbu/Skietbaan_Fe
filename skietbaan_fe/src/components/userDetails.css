@@ -3,21 +3,25 @@
 }
 
 .user-details-scrolls {
-  overflow: auto;
-  height: 100%;
   padding-bottom: 150px;
 }
 .user-details-heading-container {
   text-align: center;
   font-family: Helvetica;
-  padding-top: 24px;
   font-size: 14px;
   color: #666666;
+}
+.user-details-member-number {
+  padding-top: 10px;
+}
+
+.user-details-member-name {
+  padding-top: 24px;
 }
 
 .user-details-member-label {
   text-align: center;
-  padding-top: 26px;
+  padding-top: 10px;
   color: #be0000;
   font-family: Helvetica;
   font-size: 14px;
@@ -35,10 +39,11 @@
 }
 
 .user-details-input-container {
-  margin-top: 24px;
+  margin-top: 5px;
   border-radius: 4px;
-  width: 312px;
+  width: 85%;
   height: 56px;
+  max-width: 321px;
   font-size: 18px;
   background-color: #ffffff;
   border: 1px #666666 solid;
