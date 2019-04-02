@@ -4,7 +4,6 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../scss/createcomp.css';
 import { createcomp } from '../actions/competition.action';
-import { getCookie } from '../components/cookie.js';
 import history from "./history";
 class CreateComp extends Component {
 	constructor(props) {

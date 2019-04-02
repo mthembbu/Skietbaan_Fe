@@ -32,6 +32,10 @@
 	border-bottom-right-radius: 20px;
 }
 
+.view-page{
+    margin-bottom: 58px;
+}
+
 .go-back-to-create-page {
 	float: left;
 	padding-top: 10px;
@@ -92,7 +96,7 @@
 
 .table-view-competitions {
 	background-color: transparent;
-    width: 100%;
+	width: 100%;
 	font-size: 16px;
 }
 
@@ -105,38 +109,27 @@
 	border-bottom: solid 1px #bbbcbd;
 	padding-bottom: 1px;
 	padding: 11px;
-    height: 64px;
-    border-top: solid 1px #bbbcbd;
+	height: 64px;
+	border-top: solid 1px #bbbcbd;
 }
 
 .td-col {
 	vertical-align: top;
 	padding-top: 11px;
 	padding-bottom: 11px;
-	width: 90%;
+	width: 75%;
 }
 
 .page-contents {
 	background-color: transparent;
-    padding-top: 42px;
+	padding-top: 42px;
 }
 
-.test1 {
-	float: left;
-	width: 80%;
-	vertical-align: top;
-}
-
-.test2 {
-	float: left;
-	width: 20%;
-	vertical-align: top;
-}
-
-.test3 {
-	float: left;
-	width: 10%;
-	vertical-align: top;
+.letter-image {
+	vertical-align: middle;
+	border-style: none;
+	width: 18px;
+	height: 25px;
 }
 
 .Collapsible__contentOuter {
@@ -144,136 +137,304 @@
 }
 
 .comp-req-container {
+    text-align: center;
+    padding-bottom: 16px;
+}
+
+.requirement-success-submit-btn {
+	font-weight: lighter;
+	padding: 4px;
+	margin-top: 1px;
+	font-size: 16px;
+	background-color: #be0000;
+	border-radius: 25px;
+	width: 95px;
+	height: 42px;
+	border-color: #be0000;
+	border-width: 1.5px;
+	border: none;
+	color: #ffffff;
+	-webkit-box-shadow: 0px 8px 19px 0px #888;
+	box-shadow: 0px 8px 19px 0px #888;
+}
+
+.inactive-requirements-update-submit-btn {
+	font-weight: lighter;
+	font-size: 16px;
+
+	border-radius: 25px;
+	width: 95px;
+	height: 42px;
+	border-color: #be0000;
+	border-width: 1.5px;
+	border: none;
+	color: #ffffff;
+	-webkit-box-shadow: 0px 8px 19px 0px #888;
+	box-shadow: -9px 8px 19px 0px #888;
+}
+
+.bronze-row {
+	padding-bottom: 24px;
+}
+
+.silver-row {
+	padding-bottom: 24px;
+}
+
+.gold-row {
+	padding-bottom: 24px;
+}
+/* a Competition Accuracy-Total display*/
+.bronze-accuracy-input-control {
+	width: 95px;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #6f839e;
+	margin-right: 10px;
+	margin-left: 1px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: rgba(0, 0, 0, 0.6);
+	font-family: helvetica;
+	font-style: normal;
 	text-align: center;
 }
 
-.require-success-submit-btn {
-    font-weight: lighter;
-    font-size: 16px;
-
-    border-radius: 25px;
-    width: 95px;
-    height: 42px;
-    border-color: #BE0000;
-    border-width: 1.5px;
-    border: none;
-    color: #ffffff;
-    -webkit-box-shadow: 0px 8px 19px 0px #888;
-    box-shadow: -9px 8px 19px 0px #888;
+.accuracy-label {
+	height: 100%;
+	color: rgba(0, 0, 0, 0.6);
+	font-family: Helvetica;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 0.13px;
+	line-height: 16px;
+	padding: 0px;
 }
 
-.bronze-row{
-    padding-bottom: 24px;
+.bronze-total-input-control {
+	width: 95px;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #6f839e;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
+	font-style: normal;
+	text-align: center;
 }
 
-.silver-row{
-    padding-bottom: 24px;
-}
 
-.gold-row{
-    padding-bottom: 24px;
+.silver-label {
+	height: 100%;
+	color: rgba(0, 0, 0, 0.6);
+	font-family: Helvetica;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 0.13px;
+	line-height: 16px;
+	padding: 0px;
 }
-
-.bronze-accuracy-input-control{
-    width: 95px;
-    height: 44px;
-    border-radius: 5px;
-    border: 1px solid #6f839e;
-    margin-right: 10px;
-    margin-left: 1px;
-    -webkit-text-decoration-color: #666666;
-    text-decoration-color: #666666;
-    background-color: #ffffff;
-    font-weight: bold;
-    text-align: left;
-    font-size: 18px;
-    color: #666666;
-    font-family: helvetica;
+.silver-accuracy-input-control {
+	width: 95px;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #6f839e;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
     font-style: normal;
-
+    text-align: center;
 }
 
-.bronze-total-input-control{
-    width: 95px;
-    height: 44px;
-    border-radius: 5px;
-    border: 1px solid #6f839e;
-    padding: 10px;
-    -webkit-text-decoration-color: #666666;
-    text-decoration-color: #666666;
-    background-color: #ffffff;
-    font-weight: bold;
-    text-align: left;
-    font-size: 18px;
-    color: #666666;
-    font-family: helvetica;
+.silver-total-input-control {
+	width: 95px;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #6f839e;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
     font-style: normal;
+    text-align: center;
 }
 
-.silver-accuracy-input-control{
-    width: 95px;
-    height: 44px;
-    border-radius: 5px;
-    border: 1px solid #6f839e;
-    padding: 10px;
-    -webkit-text-decoration-color: #666666;
-    text-decoration-color: #666666;
-    background-color: #ffffff;
-    font-weight: bold;
-    text-align: left;
-    font-size: 18px;
-    color: #666666;
-    font-family: helvetica;
-    font-style: normal;
+.gold-label {
+	height: 100%;
+	color: rgba(0, 0, 0, 0.6);
+	font-family: Helvetica;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 0.13px;
+	line-height: 16px;
+	padding: 0px;
 }
 
-.silver-total-input-control{
-    width: 95px;
-    height: 44px;
-    border-radius: 5px;
-    border: 1px solid #6f839e;
-    padding: 10px;
-    -webkit-text-decoration-color: #666666;
-    text-decoration-color: #666666;
-    background-color: #ffffff;
-    font-weight: bold;
-    text-align: left;
-    font-size: 18px;
-    color: #666666;
-    font-family: helvetica;
+.shots-label {
+	height: 100%;
+	color: rgba(0, 0, 0, 0.6);
+	font-family: Helvetica;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 0.13px;
+	line-height: 16px;
+    padding: 0px;
+    padding-top: 12px;
+}
+.gold-accuracy-input-control {
+	width: 95px;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #6f839e;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
     font-style: normal;
+    text-align: center;
 }
 
-.gold-accuracy-input-control{
-    width: 95px;
-    height: 44px;
-    border-radius: 5px;
-    border: 1px solid #6f839e;
-    padding: 10px;
-    -webkit-text-decoration-color: #666666;
-    text-decoration-color: #666666;
-    background-color: #ffffff;
-    font-weight: bold;
-    text-align: left;
-    font-size: 18px;
-    color: #666666;
-    font-family: helvetica;
+.gold-total-input-control {
+	width: 95px;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #6f839e;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
     font-style: normal;
+    text-align: center;
 }
 
-.gold-total-input-control{
-    width: 95px;
-    height: 44px;
-    border-radius: 5px;
-    border: 1px solid #6f839e;
-    padding: 10px;
-    -webkit-text-decoration-color: #666666;
-    text-decoration-color: #666666;
-    background-color: #ffffff;
-    font-weight: bold;
-    text-align: left;
-    font-size: 18px;
-    color: #666666;
-    font-family: helvetica;
-    font-style: normal;
+.shorts-needed-input {
+	width: 95px;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #6f839e;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
+	font-style: normal;
+}
+
+.table-row-requiremets {
+	display: table-row;
+	width: 100%;
+}
+
+.table-row-requiremets-hide {
+	display: none;
+	width: 100%;
+}
+/*competitions list display css*/
+.table-competition-row table {
+	width: 100%;
+}
+.table-competition-row table tr .td-col div {
+	display: inline-flex;
+	width: 100%;
+}
+.table-competition-row table tr .td-col div .test1 {
+	width: 45%;
+}
+.table-competition-row table tr .td-col div .test2 {
+	width: 15%;
+}
+.table-competition-row table tr .td-col div .test2 .users-per-comp {
+	width: 100%;
+	margin-top: 10px;
+}
+.table-competition-row table tr .td-col div .test2 .fa {
+	width: 100%;
+}
+.table-competition-row table tr .td-col div .test4 {
+	width: 20%;
+}
+.table-competition-row table tr .td-col div .test4 .document-icon-container {
+	width: 18px;
+	height: 24px;
+	margin: auto;
+}
+.table-competition-row table tr .td-col div .test4 .letter-image {
+	width: 18px;
+	height: 24px;
+}
+.table-competition-row table tr .td-col div .test3 {
+	width: 20%;
+}
+
+/*letter of good standing csss*/
+.container .row .letter-good-standing-row {
+	height: 60px;
+	width: 100%;
+	display: inline-flex;
+}
+.container .row .letter-good-standing-row .letter-label {
+	width: 60%;
+	height: 100%;
+	color: rgba(0, 0, 0, 0.6);
+	font-family: Helvetica;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 0.13px;
+	line-height: 16px;
+	padding-top: 20px;
+}
+.container .row .letter-good-standing-row .letter-icon {
+	width: 20%;
+	height: 100%;
+}
+.container .row .letter-good-standing-row .letter-icon .letter-icon-container {
+	width: 18px;
+	height: 24px;
+	margin: auto;
+	margin-top: 15px;
+}
+.container .row .letter-good-standing-row .letter-icon .letter-icon-container .letter-image {
+	width: 18px;
+	height: 24px;
+}
+.container .row .letter-good-standing-row .letter-switch {
+	width: 20%;
+	height: 100%;
+	padding-right: 5%;
+	padding-top: 5px;
 }

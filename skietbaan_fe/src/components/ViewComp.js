@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../scss/view-comp.css';
 import { URL } from '../actions/types';
-import Collapsible from 'react-collapsible';
+import letterhead from './compassets/letterofgoodstanding.png';
 import { Form, Container, Row, Col } from 'react-bootstrap';
 import Switch from '@material-ui/core/Switch';
 class ViewComp extends Component {
@@ -27,12 +27,15 @@ class ViewComp extends Component {
 			silverTotal: '',
 			goldAccuracy: '',
 			goldTotal: '',
-			dict: {}
+			dict: {},
+			toggleRequirements: false,
+			idCompToggel: 0
 		};
 
 		this.changeStatus = this.changeStatus.bind(this);
 		this.getRequirements = this.getRequirements.bind(this);
 		this.onChange = this.onChange.bind(this);
+		this.changeToggle = this.changeToggle.bind(this);
 	}
 	// The method that mounts everytime there is an action detected
 	componentDidMount() {
@@ -62,7 +65,7 @@ class ViewComp extends Component {
 	HandleOnSubmit = (index) => {
 		const BronzeData = {
 			standard: 'Bronze',
-			accuracy: this.state.bronzeAccuracy,
+			accuracy: this.state.bronzeAccuracy.replace('%', '').to,
 			total: this.state.bronzeTotal
 		};
 		const SilverData = {
@@ -81,7 +84,9 @@ class ViewComp extends Component {
 	//The method that fetches the requirements everytime the competition is clicked on
 	//End-point: URL/R/{ID}
 	getRequirements(index) {
-		fetch(URL + '/R/' + index).then((response) => response.json()).then((requirementsData) =>{
+		this.setState({ idCompToggel: index });
+		this.changeToggle();
+		fetch(URL + '/R/' + index).then((response) => response.json()).then((requirementsData) => {
 			this.setState({
 				bronzeAccuracy: requirementsData[0].accuracy,
 				bronzeTotal: requirementsData[0].total,
@@ -89,13 +94,17 @@ class ViewComp extends Component {
 				silverTotal: requirementsData[1].total,
 				goldAccuracy: requirementsData[2].accuracy,
 				goldTotal: requirementsData[2].total
-      });
-    }
-		);
+			});
+		});
 	}
 	onChange({ target }) {
 		this.setState({ [target.name]: target.value });
 	}
+
+	changeToggle() {
+		this.setState({ toggleRequirements: !this.state.toggleRequirements });
+	}
+
 	render() {
 		const displayCompetitions = (
 			<div className="page-contents">
@@ -103,9 +112,9 @@ class ViewComp extends Component {
 					<tbody>
 						{this.props.compOBJ.map((compVar, i) => (
 							<tr key={compVar.id} className="table-competition-row">
-								<td className="td-col">
-									<Collapsible
-										trigger={
+								<table>
+									<tr>
+										<td className="td-col">
 											<div>
 												<div className="test1" onClick={() => this.getRequirements(compVar.id)}>
 													<label class="competition-containers">
@@ -123,17 +132,46 @@ class ViewComp extends Component {
 														) : null}
 													</label>
 												</div>
+
+												<div className="test4">
+													<div className="document-icon-container">
+														<img className="letter-image" src={letterhead} alt="golf" />
+													</div>
+												</div>
+
+												<div className="test3">
+													<div className={compVar.status ? 'activeButton' : 'inactiveButton'}>
+														<Switch
+															color={'primary'}
+															className={
+																compVar.status ? 'activeButton' : 'inactiveButton'
+															}
+															focus={true}
+															checked={compVar.status}
+															onClick={() => this.changeStatus(compVar.status, i)}
+														/>
+													</div>
+												</div>
 											</div>
+										</td>
+									</tr>
+									<tr
+										className={
+											this.state.toggleRequirements && this.state.idCompToggel === compVar.id ? (
+												'table-row-requiremets'
+											) : (
+												'table-row-requiremets-hide'
+											)
 										}
 									>
-										<div>
+										<td>
 											<div class="comp-req-container">
 												<Form>
 													<Container>
 														<Row>
 															<Col xs={4} md={4} />
 															<Col xs={4} md={4}>
-																<label>ACCURACY</label>
+																<label>ACCURACY %</label>
 															</Col>
 															<Col xs={4} md={4}>
 																<label>TOTAL</label>
@@ -141,7 +179,7 @@ class ViewComp extends Component {
 														</Row>
 														<Row className="bronze-row">
 															<Col xs={4} md={4}>
-																<label>Bronze : </label>
+																<div class="accuracy-label">Bronze Award: </div>
 															</Col>
 															<Col xs={4} md={4}>
 																<div className="">
@@ -153,6 +191,8 @@ class ViewComp extends Component {
 																		required
 																		autoComplete="off"
 																		autoCorrect="off"
+																		min="0"
+																		max="100"
 																		value={this.state.bronzeAccuracy}
 																		onChange={this.onChange}
 																	/>
@@ -166,6 +206,8 @@ class ViewComp extends Component {
 																		name="bronzeTotal"
 																		id="B_total"
 																		required
+																		min="0"
+																		max="600"
 																		autoComplete="off"
 																		autoCorrect="off"
 																		value={this.state.bronzeTotal}
@@ -177,7 +219,7 @@ class ViewComp extends Component {
 
 														<Row className="silver-row">
 															<Col xs={4} md={4}>
-																<label>Silver : </label>
+																<div class="silver-label">Silver Award: </div>
 															</Col>
 															<Col xs={4} md={4}>
 																<div className="">
@@ -187,6 +229,8 @@ class ViewComp extends Component {
 																		name="silverAccuracy"
 																		id="S_accuracy"
 																		required
+																		min="0"
+																		max="100"
 																		autoComplete="off"
 																		autoCorrect="off"
 																		value={this.state.silverAccuracy}
@@ -202,6 +246,8 @@ class ViewComp extends Component {
 																		name="silverTotal"
 																		id="S_total"
 																		required
+																		min="0"
+																		max="600"
 																		autoComplete="off"
 																		autoCorrect="off"
 																		value={this.state.silverTotal}
@@ -213,7 +259,7 @@ class ViewComp extends Component {
 
 														<Row>
 															<Col xs={4} md={4}>
-																<label>Gold : </label>
+																<div class="accuracy-label">Gold Award: </div>
 															</Col>
 															<Col xs={4} md={4}>
 																<div className="">
@@ -223,6 +269,8 @@ class ViewComp extends Component {
 																		name="goldAccuracy"
 																		id="G_accuracy"
 																		required
+																		min="0"
+																		max="100"
 																		autoComplete="off"
 																		autoCorrect="off"
 																		value={this.state.goldAccuracy}
@@ -238,6 +286,8 @@ class ViewComp extends Component {
 																		name="goldTotal"
 																		id="G_total"
 																		required
+																		min="0"
+																		max="600"
 																		autoComplete="off"
 																		autoCorrect="off"
 																		value={this.state.goldTotal}
@@ -248,11 +298,19 @@ class ViewComp extends Component {
 														</Row>
 
 														<Row>
-															<Col xs={8} md={8}>
-																<label>Selected for Letter of Good Standing </label>
-															</Col>
-															<Col xs={4} md={4}>
-																<div>
+															<div className="letter-good-standing-row">
+																<div className="letter-label">
+																Selected for Letter of Good Standing
+																</div>
+																<div className="letter-icon">
+																	<div className="letter-icon-container">
+																		<img
+																			className="letter-image"
+																			src={letterhead}
+																		/>
+																	</div>
+																</div>
+																<div className="letter-switch">
 																	<Switch
 																		color={'primary'}
 																		className={
@@ -266,17 +324,17 @@ class ViewComp extends Component {
 																		checked={false}
 																	/>
 																</div>
-															</Col>
+															</div>
 														</Row>
 
 														<Row>
 															<Col xs={4} md={4}>
-																<label>Shots Needed: </label>
+																<div class="shots-label">Shots Needed: </div>
 															</Col>
 															<Col xs={4} md={4}>
 																<div className="comp-input-control">
 																	<input
-																		className="req-input"
+																		className="shorts-needed-input"
 																		type="number"
 																		name="shortsNeeded"
 																		id="shortsNeeded"
@@ -287,15 +345,15 @@ class ViewComp extends Component {
 																</div>
 															</Col>
 															<Col xs={4} md={4}>
-																<div className="requirement-success-submit-btn">
+																<div className="">
 																	<button
+																		className="requirement-success-submit-btn"
 																		variant="secondary"
 																		type="submit"
 																		id="submit-btn"
-																		className="require-success-submit-btn"
 																		onClick={() => this.HandleOnSubmit(compVar.id)}
 																	>
-																		update
+																		UPDATE
 																	</button>
 																</div>
 															</Col>
@@ -303,22 +361,9 @@ class ViewComp extends Component {
 													</Container>
 												</Form>
 											</div>
-										</div>
-									</Collapsible>
-								</td>
-								<td className="test3">
-									<div className={compVar.status ? 'activeButton' : 'inactiveButton'}>
-										<Switch
-											color={'primary'}
-											className={
-												compVar.status ? 'activeButton' : 'inactiveButton'
-											} /** "Active"*/
-											focus={true}
-											checked={compVar.status}
-											onClick={() => this.changeStatus(compVar.status, i)}
-										/>
-									</div>
-								</td>
+										</td>
+									</tr>
+								</table>
 							</tr>
 						))}
 					</tbody>

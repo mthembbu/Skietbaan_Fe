@@ -84,7 +84,6 @@ export const createcomp = (compData) => (dispatch) => {
 	})
 		.then((res) => {
 			if (res.ok) {
-				console.log('Response status in an If(): ', res.statusText);
 				res.json().then(() =>
 					dispatch({
 						type: NEW_COMP,
@@ -99,7 +98,6 @@ export const createcomp = (compData) => (dispatch) => {
 					});
 				});
 			}
-			console.log('Final returned, Response Status: ', res.ok);
 		})
 		.catch((error) => {
 			console.log('request error => ', error);
