@@ -609,7 +609,7 @@ class LeaderboardPage extends Component {
                                                                     </div>
                                                                     <div className="ranking">
                                                                         {this.props.userResults.rank > 3
-                                                                            ? <div className="number">{this.props.userResults.rank}</div>
+                                                                            ? <div className="number" style={{color:"white"}}>{this.props.userResults.rank} </div>
                                                                             : (this.props.userResults.rank === 1
                                                                                 ? <img src={require('../resources/rank1.png')} />
                                                                                 : (this.props.userResults.rank === 2
