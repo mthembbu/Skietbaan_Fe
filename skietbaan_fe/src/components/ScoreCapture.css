@@ -383,11 +383,12 @@ hr{
     border-radius: 22px;
     box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
 }
+
 .gun-overlay-image{
     height: 100%;
     background-repeat: no-repeat;
     background-size: contain;
-    background-position: 8px 0px;
+    background-position: 11px 0px;
     background-image: url("../components/assets/gunOverlay.png");
     width: 100%;
 }
