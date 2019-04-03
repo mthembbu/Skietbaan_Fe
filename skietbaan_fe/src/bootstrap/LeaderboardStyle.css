@@ -296,7 +296,7 @@ html, body{
         width: 151px;
         margin-left: 7px;
         margin-top: 4px;
-        border-bottom-left-radius: 14px;
+        border-bottom-left-radius: 12px;
      }
      .closed-filter-section .filter-table1 .header-row1 .competition-name-col .gun-icon .competition-name{
         font-family: helvetica;
@@ -711,7 +711,7 @@ html, body{
          background-image: linear-gradient(to right, #000000, #FF0000);
          color: #fdfdfd;
          border-radius: 8px;
-         margin-bottom: 5%;
+         margin-bottom: 58px;
      }
      .current-user-table-section .ranking-table{
          width: 100%;
@@ -944,6 +944,10 @@ html, body{
         margin-right: 0%;
         bottom: 0;
         margin-bottom: 0px !important;
+        background: transparent;
+     }
+     .userWrapper .row{
+         background: transparent;
      }
      .leaderboard-container{
         margin-top: 56px;
@@ -990,6 +994,7 @@ html, body{
      }
      .userWrapper .row{
         background-color: transparent;
+        height: 75px;
     }
     .ranking-table-section .ranking-table .rank-row .user-details-table tbody .user-details-row .rank-labels-col .head-table-labels tr .extra-name-col *{
         width: 100%;
