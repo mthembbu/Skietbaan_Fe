@@ -29,7 +29,8 @@ class ViewComp extends Component {
 			goldTotal: '',
 			dict: {},
 			toggleRequirements: false,
-			idCompToggel: 0
+			idCompToggel: 0,
+			EnableCompName: false
 		};
 
 		this.changeStatus = this.changeStatus.bind(this);
@@ -58,6 +59,7 @@ class ViewComp extends Component {
 		newCompOBJArr[i].status = !status; //changing the status of a newly cloned array
 		this.props.updateByIdComp(newCompOBJArr[i], i + 1); //updating the competition status by ID in the back-end
 		const newDict = { ...this.props.dict };
+		this.setState({ EnableCompName: !status });
 		this.setState({ compOBJ: newCompOBJArr });
 		this.setState({ dict: newDict });
 	}
@@ -117,9 +119,9 @@ class ViewComp extends Component {
 										<td className="td-col">
 											<div>
 												<div className="test1" onClick={() => this.getRequirements(compVar.id)}>
-													<label class="competition-containers">
+													<div class={compVar.status == true ? "competition-container": "inactive-competition-container"} id="compName" onlick={() => {}}>
 														{compVar.name} {compVar.requirements}
-													</label>
+													</div>
 												</div>
 												<div className="test2">
 													<label class="users-per-comp">
@@ -135,7 +137,9 @@ class ViewComp extends Component {
 
 												<div className="test4">
 													<div className="document-icon-container">
-														<img className="letter-image" src={letterhead} alt="golf" />
+														{compVar.status == true ? (
+															<img className="letter-image" src={letterhead} alt="golf" />
+														) : null}
 													</div>
 												</div>
 
@@ -155,214 +159,220 @@ class ViewComp extends Component {
 											</div>
 										</td>
 									</tr>
-									<tr
-										className={
-											this.state.toggleRequirements && this.state.idCompToggel === compVar.id ? (
-												'table-row-requiremets'
-											) : (
-												'table-row-requiremets-hide'
-											)
-										}
-									>
-										<td>
-											<div class="comp-req-container">
-												<Form>
-													<Container>
-														<Row className="standard-header-label">
-															<Col xs={4} md={4} />
-															<Col xs={4} md={4}>
-																<div className="accuracy-header-label">ACCURACY %</div>
-															</Col>
-															<Col xs={4} md={4}>
-																<div className="total-header-label">TOTAL</div>
-															</Col>
-														</Row>
-														<Row className="bronze-row">
-															<Col xs={4} md={4}>
-																<div class="accuracy-label">Bronze Award: </div>
-															</Col>
-															<Col xs={4} md={4}>
-																<div className="">
-																	<input
-																		className="bronze-accuracy-input-control"
-																		type="number"
-																		name="bronzeAccuracy"
-																		id="B_accuracy"
-																		required
-																		autoComplete="off"
-																		autoCorrect="off"
-																		min="0"
-																		max="100"
-																		value={this.state.bronzeAccuracy}
-																		onChange={this.onChange}
-																	/>
-																</div>
-															</Col>
-															<Col xs={4} md={4}>
-																<div className="">
-																	<input
-																		className="bronze-total-input-control"
-																		type="number"
-																		name="bronzeTotal"
-																		id="B_total"
-																		required
-																		min="0"
-																		max="600"
-																		autoComplete="off"
-																		autoCorrect="off"
-																		value={this.state.bronzeTotal}
-																		onChange={this.onChange}
-																	/>
-																</div>
-															</Col>
-														</Row>
+									{compVar.status && (
+										<tr
+											className={
+												this.state.toggleRequirements &&
+												this.state.idCompToggel === compVar.id ? (
+													'table-row-requiremets'
+												) : (
+													'table-row-requiremets-hide'
+												)
+											}
+										>
+											<td>
+												<div class="comp-req-container">
+													<Form>
+														<Container>
+															<Row className="standard-header-label">
+																<Col xs={4} md={4} />
+																<Col xs={4} md={4}>
+																	<div className="accuracy-header-label">
+																		ACCURACY %
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="total-header-label">TOTAL</div>
+																</Col>
+															</Row>
+															<Row className="bronze-row">
+																<Col xs={4} md={4}>
+																	<div class="accuracy-label">Bronze Award: </div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="bronze-accuracy-input-control"
+																			type="number"
+																			name="bronzeAccuracy"
+																			id="B_accuracy"
+																			required
+																			autoComplete="off"
+																			autoCorrect="off"
+																			min="0"
+																			max="100"
+																			value={this.state.bronzeAccuracy}
+																			onChange={this.onChange}
+																		/>
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="bronze-total-input-control"
+																			type="number"
+																			name="bronzeTotal"
+																			id="B_total"
+																			required
+																			min="0"
+																			max="600"
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={this.state.bronzeTotal}
+																			onChange={this.onChange}
+																		/>
+																	</div>
+																</Col>
+															</Row>
 
-														<Row className="silver-row">
-															<Col xs={4} md={4}>
-																<div class="silver-label">Silver Award: </div>
-															</Col>
-															<Col xs={4} md={4}>
-																<div className="">
-																	<input
-																		className="silver-accuracy-input-control"
-																		type="number"
-																		name="silverAccuracy"
-																		id="S_accuracy"
-																		required
-																		min="0"
-																		max="100"
-																		autoComplete="off"
-																		autoCorrect="off"
-																		value={this.state.silverAccuracy}
-																		onChange={this.onChange}
-																	/>
-																</div>
-															</Col>
-															<Col xs={4} md={4}>
-																<div className="">
-																	<input
-																		className="silver-total-input-control"
-																		type="number"
-																		name="silverTotal"
-																		id="S_total"
-																		required
-																		min="0"
-																		max="600"
-																		autoComplete="off"
-																		autoCorrect="off"
-																		value={this.state.silverTotal}
-																		onChange={this.onChange}
-																	/>
-																</div>
-															</Col>
-														</Row>
+															<Row className="silver-row">
+																<Col xs={4} md={4}>
+																	<div class="silver-label">Silver Award: </div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="silver-accuracy-input-control"
+																			type="number"
+																			name="silverAccuracy"
+																			id="S_accuracy"
+																			required
+																			min="0"
+																			max="100"
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={this.state.silverAccuracy}
+																			onChange={this.onChange}
+																		/>
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="silver-total-input-control"
+																			type="number"
+																			name="silverTotal"
+																			id="S_total"
+																			required
+																			min="0"
+																			max="600"
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={this.state.silverTotal}
+																			onChange={this.onChange}
+																		/>
+																	</div>
+																</Col>
+															</Row>
 
-														<Row>
-															<Col xs={4} md={4}>
-																<div class="accuracy-label">Gold Award: </div>
-															</Col>
-															<Col xs={4} md={4}>
-																<div className="">
-																	<input
-																		className="gold-accuracy-input-control"
-																		type="number"
-																		name="goldAccuracy"
-																		id="G_accuracy"
-																		required
-																		min="0"
-																		max="100"
-																		autoComplete="off"
-																		autoCorrect="off"
-																		value={this.state.goldAccuracy}
-																		onChange={this.onChange}
-																	/>
-																</div>
-															</Col>
-															<Col xs={4} md={4}>
-																<div className="">
-																	<input
-																		className="gold-total-input-control"
-																		type="number"
-																		name="goldTotal"
-																		id="G_total"
-																		required
-																		min="0"
-																		max="600"
-																		autoComplete="off"
-																		autoCorrect="off"
-																		value={this.state.goldTotal}
-																		onChange={this.onChange}
-																	/>
-																</div>
-															</Col>
-														</Row>
+															<Row>
+																<Col xs={4} md={4}>
+																	<div class="accuracy-label">Gold Award: </div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="gold-accuracy-input-control"
+																			type="number"
+																			name="goldAccuracy"
+																			id="G_accuracy"
+																			required
+																			min="0"
+																			max="100"
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={this.state.goldAccuracy}
+																			onChange={this.onChange}
+																		/>
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="gold-total-input-control"
+																			type="number"
+																			name="goldTotal"
+																			id="G_total"
+																			required
+																			min="0"
+																			max="600"
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={this.state.goldTotal}
+																			onChange={this.onChange}
+																		/>
+																	</div>
+																</Col>
+															</Row>
 
-														<Row>
-															<div className="letter-good-standing-row">
-																<div className="letter-label">
-																Selected for Letter of Good Standing
-																</div>
-																<div className="letter-icon">
-																	<div className="letter-icon-container">
-																		<img
-																			className="letter-image"
-																			src={letterhead}
+															<Row>
+																<div className="letter-good-standing-row">
+																	<div className="letter-label">
+																		Selected for Letter of Good Standing
+																	</div>
+																	<div className="letter-icon">
+																		<div className="letter-icon-container">
+																			<img
+																				className="letter-image"
+																				src={letterhead}
+																			/>
+																		</div>
+																	</div>
+																	<div className="letter-switch">
+																		<Switch
+																			color={'primary'}
+																			className={
+																				compVar.status ? (
+																					'activeButton'
+																				) : (
+																					'inactiveButton'
+																				)
+																			}
+																			focus={true}
+																			checked={false}
 																		/>
 																	</div>
 																</div>
-																<div className="letter-switch">
-																	<Switch
-																		color={'primary'}
-																		className={
-																			compVar.status ? (
-																				'activeButton'
-																			) : (
-																				'inactiveButton'
-																			)
-																		}
-																		focus={true}
-																		checked={false}
-																	/>
-																</div>
-															</div>
-														</Row>
+															</Row>
 
-														<Row>
-															<Col xs={4} md={4}>
-																<div class="shots-label">Shots Needed: </div>
-															</Col>
-															<Col xs={4} md={4}>
-																<div className="comp-input-control">
-																	<input
-																		className="shorts-needed-input"
-																		type="number"
-																		name="shortsNeeded"
-																		id="shortsNeeded"
-																		autoComplete="off"
-																		autoCorrect="off"
-																		onChange={this.onChange}
-																	/>
-																</div>
-															</Col>
-															<Col xs={4} md={4}>
-																<div className="">
-																	<button
-																		className="requirement-success-submit-btn"
-																		variant="secondary"
-																		type="submit"
-																		id="submit-btn"
-																		onClick={() => this.HandleOnSubmit(compVar.id)}
-																	>
-																		UPDATE
-																	</button>
-																</div>
-															</Col>
-														</Row>
-													</Container>
-												</Form>
-											</div>
-										</td>
-									</tr>
+															<Row>
+																<Col xs={4} md={4}>
+																	<div class="shots-label">Shots Needed: </div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="comp-input-control">
+																		<input
+																			className="shorts-needed-input"
+																			type="number"
+																			name="shortsNeeded"
+																			id="shortsNeeded"
+																			autoComplete="off"
+																			autoCorrect="off"
+																			onChange={this.onChange}
+																		/>
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<button
+																			className="requirement-success-submit-btn"
+																			variant="secondary"
+																			type="submit"
+																			id="submit-btn"
+																			onClick={() =>
+																				this.HandleOnSubmit(compVar.id)}
+																		>
+																			UPDATE
+																		</button>
+																	</div>
+																</Col>
+															</Row>
+														</Container>
+													</Form>
+												</div>
+											</td>
+										</tr>
+									)}
 								</table>
 							</tr>
 						))}
@@ -384,7 +394,6 @@ ViewComp.propTypes = {
 	fetchParticipants: PropTypes.func.isRequired,
 	fetchRequirements: PropTypes.func.isRequired,
 	compOBJ: PropTypes.array.isRequired,
-	postOBJ: PropTypes.array.isRequired,
 	requirements: PropTypes.array.isRequired,
 	updateByIdComp: PropTypes.func.isRequired,
 	dict: PropTypes.shape({

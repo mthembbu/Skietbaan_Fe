@@ -60,7 +60,7 @@
 	font-family: helvetica;
 	font-weight: normal;
 	font-size: 18px;
-	color: #6f839e;
+	color: #555555;
 	width: 0px;
 	height: 30px;
 	padding: 5px;
@@ -69,7 +69,7 @@
 .fa-group:before,
 .fa-users:before {
 	font-size: 17px;
-	color: #6f839e;
+	color: #555555;
 	content: "\F0C0";
 }
 
@@ -81,14 +81,26 @@
 	color: #fdfdfd;
 	font-family: helvetica;
 }
-
-.competition-containers {
+/* the css for the competition name*/
+.competition-container {
 	margin: 5px;
 	font-family: helvetica;
 	font-weight: normal;
 	line-height: 1.2;
 	font-size: 18px;
-	color: #6f839e;
+	color: #555555;
+	width: 148px;
+	height: 30px;
+	padding: 5px;
+}
+
+.inactive-competition-container {
+	margin: 5px;
+	font-family: helvetica;
+	font-weight: normal;
+	line-height: 1.2;
+	font-size: 18px;
+	color: #C6C6C6;
 	width: 148px;
 	height: 30px;
 	padding: 5px;
@@ -189,7 +201,7 @@
 	width: 95px;
 	height: 44px;
 	border-radius: 5px;
-	border: 1px solid #6f839e;
+	border: 1px solid #979797;
 	margin-right: 10px;
 	margin-left: 1px;
 	-webkit-text-decoration-color: #666666;
@@ -219,7 +231,7 @@
 	width: 95px;
 	height: 44px;
 	border-radius: 5px;
-	border: 1px solid #6f839e;
+	border: 1px solid #979797;
 	padding: 10px;
 	-webkit-text-decoration-color: #666666;
 	text-decoration-color: #666666;
@@ -247,7 +259,7 @@
 	width: 95px;
 	height: 44px;
 	border-radius: 5px;
-	border: 1px solid #6f839e;
+	border: 1px solid #979797;
 	padding: 10px;
 	-webkit-text-decoration-color: #666666;
 	text-decoration-color: #666666;
@@ -265,7 +277,7 @@
 	width: 95px;
 	height: 44px;
 	border-radius: 5px;
-	border: 1px solid #6f839e;
+	border: 1px solid #979797;
 	padding: 10px;
 	-webkit-text-decoration-color: #666666;
 	text-decoration-color: #666666;
@@ -305,7 +317,7 @@
 	width: 95px;
 	height: 44px;
 	border-radius: 5px;
-	border: 1px solid #6f839e;
+	border: 1px solid #979797;
 	padding: 10px;
 	-webkit-text-decoration-color: #666666;
 	text-decoration-color: #666666;
@@ -323,7 +335,7 @@
 	width: 95px;
 	height: 44px;
 	border-radius: 5px;
-	border: 1px solid #6f839e;
+	border: 1px solid #979797;
 	padding: 10px;
 	-webkit-text-decoration-color: #666666;
 	text-decoration-color: #666666;
@@ -339,19 +351,19 @@
 
 .shorts-needed-input {
 	width: 95px;
-	height: 44px;
-	border-radius: 5px;
-	border: 1px solid #6f839e;
-	padding: 10px;
-	-webkit-text-decoration-color: #666666;
-	text-decoration-color: #666666;
-	background-color: #ffffff;
-	font-weight: bold;
-	text-align: left;
-	font-size: 18px;
-	color: #666666;
-	font-family: helvetica;
-	font-style: normal;
+    height: 44px;
+    border-radius: 5px;
+    border: 1px solid #979797;
+    padding: 10px;
+    -webkit-text-decoration-color: #666666;
+    text-decoration-color: #666666;
+    background-color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+    color: #666666;
+    font-family: helvetica;
+    font-style: normal;
 }
 
 .table-row-requiremets {
