@@ -182,22 +182,23 @@ class notification extends Component {
   }
 
   speakerClick() {
-    this.setState(
-      {
-        adminToggle: !this.state.adminToggle
-      },
-      () => {
-        this.disableButton();
-      }
-    );
+    this.setState({
+      adminToggle: !this.state.adminToggle
+    });
+    if (this.state.adminToggle === false) {
+      this.disableButton();
+    }
   }
 
   disableButton() {
-    document.addEventListener("DOMContentLoaded", function(event) {
-      if (this.state.announceString.length >= 1) {
+    setTimeout(() => {
+      if (
+        this.state.announceString.length > 0 &&
+        this.state.announceString !== undefined
+      ) {
         document.getElementById("announcementButton").disabled = false;
       } else document.getElementById("announcementButton").disabled = true;
-    });
+    }, 2000);
   }
 
   submitAnnouncement = () => {
