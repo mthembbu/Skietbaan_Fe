@@ -181,7 +181,20 @@ class Login extends Component {
   render() {
     document.addEventListener('DOMContentLoaded', () => {
       this.toggleNavbar();
-
+      let input = document.getElementById("passwordValue");
+      input.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          document.getElementById("roundButton").click();
+        }
+      });
+      let input2 = document.getElementById("usernameValue");
+      input2.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          document.getElementById("roundButton").click();
+        }
+      });
     }, false);
     if (getCookie("token")) {
       window.location = "/home";
@@ -230,14 +243,14 @@ class Login extends Component {
                     autoComplete="off"
                     value={this.state.passwordValue}
                     onChange={this.handleChange}
-                    className={this.state.toggle 
-                      ? "input-password-show" 
+                    className={this.state.toggle
+                      ? "input-password-show"
                       : "input-password"}
                     placeholder="Password"
                   />
-                  <div className={this.state.passwordValue !== "" 
-                  ? "password-view-icon" 
-                  : "password-icon"}
+                  <div className={this.state.passwordValue !== ""
+                    ? "password-view-icon"
+                    : "password-icon"}
                     onClick={this.togglePassword} name="eye">
                   </div>
                 </div>
@@ -254,9 +267,9 @@ class Login extends Component {
               <a className="forgot-password-link" href="/forgotPassword" >FORGOT PASSWORD?</a>
             </div>
             <div className="button-container">
-              <Button onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
-                : "buttons-invalid round-button"} >LOGIN</Button>
-            </div>  
+              <button type="button" onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
+                : "buttons-invalid round-button"}>LOGIN</button>
+            </div>
           </Form>
         </div >
       </div>
