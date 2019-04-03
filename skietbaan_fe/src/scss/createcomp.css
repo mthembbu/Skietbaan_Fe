@@ -1,28 +1,44 @@
 .comp-input {
-	width: 218px;
-    height: 39px;
-    border-radius: 10px;
-    border: 1px solid #6f839e;
-    padding: 20px;
-    -webkit-text-decoration-color: black;
-    text-decoration-color: #6B6B6C;
-    background-color: #f3f4f9;
-    font-weight: normal;
-    text-align: center;
-    font-size: 18px;
-    color: #6B6B6C;
+	width: 312px;
+	height: 56px;
+	border-radius: 5px;
+	border: 1px solid #979797;
+	padding: 10px;
+	text-decoration-color: #666666;
+	background-color: #FFFFFF;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
+	font-style: normal;
 }
 
 .comp-submit-btn {
-	background: #6f839e;
+	background: #dc0600;
 	width: 218px;
 	height: 42px;
 	border-radius: 25px;
 	font-size: 16px;
-	font-family: helvetica;
+	font-family: sans-serif, helvetica;
 	font-weight: lighter;
 	margin-top: 20px;
 	color: white;
+}
+
+.comp-success-submit-btn {
+	font-weight: lighter;
+	margin-top: 45px;
+	font-size: 16px;
+	background-color: #be0000;
+	border-radius: 25px;
+	width: 312px;
+	height: 42px;
+	border-color: #be0000;
+	border-width: 1.5px;
+	border: none;
+	color: #ffffff;
+	box-shadow: 0px 8px 19px 0px #888;
 }
 
 .inactive-comp-submit-btn {
@@ -53,9 +69,16 @@
 	font-family: helvetica;
 }
 
+.error-comp-message {
+	color: #dc0600;
+	font-size: 10px;
+	margin-bottom: 20px;
+	font-weight: bold;
+	align-content: center;
+	font-family: helvetica;
+}
+
 .create-comp-container {
-	margin: 20px;
-	padding: 20px;
 	text-align: center;
 }
 
@@ -99,10 +122,9 @@ input.invalid {
 	height: 35px;
 }
 
-button.button-invalid{
-  background-color: #e0e1e2;
-  border: none;
-
+button.button-invalid {
+	background-color: #e0e1e2;
+	border: none;
 }
 
 button.button-valid {

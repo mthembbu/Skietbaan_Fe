@@ -1,23 +1,23 @@
 .activeButton button {
-	background: #6F839E;
-    border-radius: 20px;
-    color: #fdfdfd;
-    width: 116px;
-    height: 35px;
-    font-weight: lighter;
-	font-family: helvetica;	
+	background: #6f839e;
+	border-radius: 20px;
+	color: #fdfdfd;
+	width: 116px;
+	height: 35px;
+	font-weight: lighter;
+	font-family: helvetica;
 }
 
 .inactiveButton button {
 	background-color: #fdfdfd;
-    border-radius: 20px;
-    border: 1px #6F839E solid;
-    color: #6F839E;
-    width: 116px;
-    height: 35px;
-    font-weight: lighter;
-    font-family: helvetica;
-    border-color: #6F839E;
+	border-radius: 20px;
+	border: 1px #6f839e solid;
+	color: #6f839e;
+	width: 116px;
+	height: 35px;
+	font-weight: lighter;
+	font-family: helvetica;
+	border-color: #6f839e;
 }
 
 .view-header {
@@ -26,7 +26,14 @@
 	text-size-adjust: 25px;
 	background-size: 15px;
 	height: 49px;
-	background-color:  #DC0600;
+	background-color: #dc0600;
+
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+.view-page {
+	margin-bottom: 58px;
 }
 
 .go-back-to-create-page {
@@ -35,6 +42,35 @@
 	padding-left: 10px;
 	background-size: 15px;
 	height: 40px;
+}
+
+.user-per-comp {
+	margin: 5px;
+	font-family: helvetica;
+	font-weight: normal;
+	font-size: 18px;
+	color: #6f839e;
+	width: 0px;
+	height: 30px;
+	padding: 5px;
+}
+
+.user-per-comp-num {
+	margin: 5px;
+	font-family: helvetica;
+	font-weight: normal;
+	font-size: 18px;
+	color: #6f839e;
+	width: 0px;
+	height: 30px;
+	padding: 5px;
+}
+
+.fa-group:before,
+.fa-users:before {
+	font-size: 17px;
+	color: #6f839e;
+	content: "\F0C0";
 }
 
 .label-create-competitions {
@@ -48,21 +84,20 @@
 
 .competition-containers {
 	margin: 5px;
-    font-family: helvetica;
-    font-weight: normal;
-    line-height: 1.2;
-    font-size: 18px;
-    color: #6F839E;
-    width: 174px;
-    height: 30px;
-    padding: 7px;
+	font-family: helvetica;
+	font-weight: normal;
+	line-height: 1.2;
+	font-size: 18px;
+	color: #6f839e;
+	width: 148px;
+	height: 30px;
+	padding: 5px;
 }
 
 .table-view-competitions {
 	background-color: transparent;
-	width: 80%;
+	width: 100%;
 	font-size: 16px;
-	margin-left: 10%;
 }
 
 .table-competition-container {
@@ -71,19 +106,360 @@
 }
 
 .table-competition-row {
-    border-bottom: solid 1px #bbbcbd;
-    padding-bottom: 1px;
-    padding: 11px;
-    height: 64px;
+	border-bottom: solid 1px #bbbcbd;
+	padding-bottom: 1px;
+	padding: 11px;
+	height: 64px;
+	border-top: solid 1px #bbbcbd;
 }
 
-.td-col{
+.td-col {
+	vertical-align: top;
 	padding-top: 11px;
 	padding-bottom: 11px;
-	text-align: left;
+	width: 75%;
 }
 
 .page-contents {
 	background-color: transparent;
-	padding-top: 60px;
+	padding-top: 42px;
+}
+
+.letter-image {
+	vertical-align: middle;
+	border-style: none;
+	width: 18px;
+	height: 25px;
+}
+
+.Collapsible__contentOuter {
+	float: left;
+}
+
+.comp-req-container {
+	text-align: center;
+	padding-bottom: 16px;
+}
+
+.requirement-success-submit-btn {
+	font-weight: lighter;
+	padding: 4px;
+	margin-top: 1px;
+	font-size: 16px;
+	background-color: #be0000;
+	border-radius: 25px;
+	width: 95px;
+	height: 42px;
+	border-color: #be0000;
+	border-width: 1.5px;
+	border: none;
+	color: #ffffff;
+	-webkit-box-shadow: 0px 8px 19px 0px #888;
+	box-shadow: 0px 8px 19px 0px #888;
+}
+
+.inactive-requirements-update-submit-btn {
+	font-weight: lighter;
+	font-size: 16px;
+
+	border-radius: 25px;
+	width: 95px;
+	height: 42px;
+	border-color: #be0000;
+	border-width: 1.5px;
+	border: none;
+	color: #ffffff;
+	-webkit-box-shadow: 0px 8px 19px 0px #888;
+	box-shadow: -9px 8px 19px 0px #888;
+}
+
+.bronze-row {
+	padding-bottom: 24px;
+}
+
+.silver-row {
+	padding-bottom: 24px;
+}
+
+.gold-row {
+	padding-bottom: 24px;
+}
+/* a Competition Accuracy-Total display*/
+.bronze-accuracy-input-control {
+	width: 95px;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #6f839e;
+	margin-right: 10px;
+	margin-left: 1px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: rgba(0, 0, 0, 0.6);
+	font-family: helvetica;
+	font-style: normal;
+	text-align: center;
+}
+
+.accuracy-label {
+	height: 100%;
+	color: rgba(0, 0, 0, 0.6);
+	font-family: Helvetica;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 0.13px;
+	line-height: 16px;
+	padding: 0px;
+}
+
+.bronze-total-input-control {
+	width: 95px;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #6f839e;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
+	font-style: normal;
+	text-align: center;
+}
+
+.silver-label {
+	height: 100%;
+	color: rgba(0, 0, 0, 0.6);
+	font-family: Helvetica;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 0.13px;
+	line-height: 16px;
+	padding: 0px;
+}
+.silver-accuracy-input-control {
+	width: 95px;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #6f839e;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
+	font-style: normal;
+	text-align: center;
+}
+
+.silver-total-input-control {
+	width: 95px;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #6f839e;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
+	font-style: normal;
+	text-align: center;
+}
+
+.gold-label {
+	height: 100%;
+	color: rgba(0, 0, 0, 0.6);
+	font-family: Helvetica;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 0.13px;
+	line-height: 16px;
+	padding: 0px;
+}
+
+.shots-label {
+	height: 100%;
+	color: rgba(0, 0, 0, 0.6);
+	font-family: Helvetica;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 0.13px;
+	line-height: 16px;
+	padding: 0px;
+	padding-top: 12px;
+}
+.gold-accuracy-input-control {
+	width: 95px;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #6f839e;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
+	font-style: normal;
+	text-align: center;
+}
+
+.gold-total-input-control {
+	width: 95px;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #6f839e;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
+	font-style: normal;
+	text-align: center;
+}
+
+.shorts-needed-input {
+	width: 95px;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #6f839e;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
+	font-style: normal;
+}
+
+.table-row-requiremets {
+	display: table-row;
+	width: 100%;
+}
+
+.table-row-requiremets-hide {
+	display: none;
+	width: 100%;
+}
+/*competitions list display css*/
+.standard-header-label {
+	padding-bottom: 24px;
+}
+.accuracy-header-label{
+	height: 100%;
+    color: rgba(0,0,0,.6);
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .13px;
+    line-height: 16px;
+    padding: 0;
+}
+
+.total-header-label {
+
+	height: 100%;
+    color: rgba(0,0,0,.6);
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .13px;
+    line-height: 16px;
+    padding: 0;
+}
+
+.table-competition-row table {
+	width: 100%;
+}
+.table-competition-row table tr .td-col div {
+	display: inline-flex;
+	width: 100%;
+}
+.table-competition-row table tr .td-col div .test1 {
+	width: 45%;
+}
+.table-competition-row table tr .td-col div .test2 {
+	width: 15%;
+}
+.table-competition-row table tr .td-col div .test2 .users-per-comp {
+	width: 100%;
+	margin-top: 10px;
+}
+.table-competition-row table tr .td-col div .test2 .fa {
+	width: 100%;
+}
+.table-competition-row table tr .td-col div .test4 {
+	width: 20%;
+}
+.table-competition-row table tr .td-col div .test4 .document-icon-container {
+	width: 18px;
+	height: 24px;
+	margin: auto;
+}
+.table-competition-row table tr .td-col div .test4 .letter-image {
+	width: 18px;
+	height: 24px;
+}
+.table-competition-row table tr .td-col div .test3 {
+	width: 20%;
+}
+
+/*letter of good standing csss*/
+.container .row .letter-good-standing-row {
+	height: 60px;
+	width: 100%;
+	display: inline-flex;
+}
+.container .row .letter-good-standing-row .letter-label {
+	width: 60%;
+	height: 100%;
+	color: rgba(0, 0, 0, 0.6);
+	font-family: Helvetica;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 0.13px;
+	line-height: 16px;
+	padding-top: 20px;
+}
+.container .row .letter-good-standing-row .letter-icon {
+	width: 20%;
+	height: 100%;
+}
+.container .row .letter-good-standing-row .letter-icon .letter-icon-container {
+	width: 18px;
+	height: 24px;
+	margin: auto;
+	margin-top: 15px;
+}
+.container .row .letter-good-standing-row .letter-icon .letter-icon-container .letter-image {
+	width: 18px;
+	height: 24px;
+}
+.container .row .letter-good-standing-row .letter-switch {
+	width: 20%;
+	height: 100%;
+	padding-right: 5%;
+	padding-top: 5px;
 }
