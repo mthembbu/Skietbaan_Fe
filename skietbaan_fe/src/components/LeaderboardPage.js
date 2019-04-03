@@ -186,8 +186,10 @@ class LeaderboardPage extends Component {
         }
     }
     getFilterTableHeight() {
-        if (this.state.width < 575) {
-            return ((this.state.height / 2) + -100);
+        if (this.state.width < 575 && this.state.listType === "competitions") {
+            return ((this.state.height) - 339);
+        }if (this.state.width < 575 && this.state.listType === "groups") {
+            return ((this.state.height) - 434);
         } else {
             return 315;
         }
