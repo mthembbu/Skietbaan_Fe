@@ -32,6 +32,7 @@ class ViewComp extends Component {
       dict: {},
       toggleRequirements: false,
       idCompToggel: 0,
+      EnableCompName: false,
       isLetterOfStatus: false,
       numberofshots: 0,
       activatedCompetition: null
@@ -225,11 +226,9 @@ class ViewComp extends Component {
 
                         <div className="test4">
                           <div className="document-icon-container">
-                            <img
-                              className="letter-image"
-                              src={letterhead}
-                              alt="golf"
-                            />
+                            {compVar.id === this.state.activatedCompetition ? (
+                              <img className="letter-image" src={letterhead} />
+                            ) : null}
                           </div>
                         </div>
 
@@ -405,10 +404,13 @@ class ViewComp extends Component {
                                 </div>
                                 <div className="letter-icon">
                                   <div className="letter-icon-container">
-                                    <img
-                                      className="letter-image"
-                                      src={letterhead}
-                                    />
+                                    {compVar.id ===
+                                    this.state.activatedCompetition ? (
+                                      <img
+                                        className="letter-image"
+                                        src={letterhead}
+                                      />
+                                    ) : null}
                                   </div>
                                 </div>
                                 <div className="letter-switch">
