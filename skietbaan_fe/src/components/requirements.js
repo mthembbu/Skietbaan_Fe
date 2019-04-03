@@ -4,6 +4,8 @@ import { BASE_URL } from "../actions/types";
 import back from "./GroupImages/back.png";
 import unmarked from "./GroupImages/unmarked.png";
 import marked from "./GroupImages/marked.png";
+import Switch from "@material-ui/core/Switch";
+import group from "./GroupImages/Group.png";
 
 class requirements extends Component {
   constructor(props) {
@@ -55,9 +57,23 @@ class requirements extends Component {
       .then(function(response) {})
       .then(function(data) {})
       .catch(function(data) {});
+
     this.props.history.push("/requirements");
   }
 
+  updateRequirementsCompetition(CompID) {
+    fetch(BASE_URL + "/api/Documents/getGroup", {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(CompID)
+    })
+      .then(function(response) {})
+      .then(function(data) {})
+      .catch(function(data) {});
+  }
   handleChange(event) {
     this.setState({ numberofshots: event.target.value });
   }
@@ -80,43 +96,60 @@ class requirements extends Component {
   }
   render() {
     const postitems = (
-      <div className="check documents-center">
-        <ul class="list-group" style={{ textAlign: "left" }}>
-          {this.state.posts
-            .filter(post => {
-              return (
-                !this.state.filterText ||
-                post.username
-                  .toLowerCase()
-                  .startsWith(this.state.filterText.toLowerCase()) ||
-                post.email
-                  .toLowerCase()
-                  .startsWith(this.state.filterText.toLowerCase())
-              );
-            })
-            .map((post, index) => (
-              <li
-                class="list-group-item list-group-item-light"
-                key={post.id}
-                style={{
-                  background: post.background,
-                  textAlign: "left"
-                }}
-              >
-                <img
-                  className="checkbox-delete"
-                  onClick={() => this.toggleHighlight(index)}
-                  src={post.image}
-                  alt=""
-                />
-                <label className="blabe">
-                  <div className="userName" style={{ color: post.colors }}>
+      <div className="the-main">
+        <table className="table-member">
+          <tbody>
+            {this.state.posts
+              .filter(post => {
+                return (
+                  !this.state.filterText ||
+                  post.username
+                    .toLowerCase()
+                    .startsWith(this.state.filterText.toLowerCase()) ||
+                  post.email
+                    .toLowerCase()
+                    .startsWith(this.state.filterText.toLowerCase()) ||
+                  post.memberID.startsWith(this.state.filterText)
+                );
+              })
+              .map((post, index) => (
+                <tr className="view-group" key={post.id}>
+                  <td
+                    className={
+                      post.isActive === true ? "first-row" : "first-row-active"
+                    }
+                  >
                     {post.name}
-                  </div>
-                </label>
-              </li>
-            ))}
-        </ul>
+                  </td>
+
+                  <td className="group-container">
+                    {post.isActive === true ? (
+                      <div>
+                        <img src={group} className="groupIcon" alt="" />
+                        <label className="numberOfUser">
+                          {this.props.groupDict[post.id]}
+                        </label>
+                      </div>
+                    ) : null}
+                  </td>
+                  <td>
+                    <div className="group-view">
+                      <Switch
+                        color={"primary"}
+                        className="Active"
+                        focus={true}
+                        checked={post.isActive}
+                        onClick={
+                          (this.state.posts[index].highlighted = true) &&
+                          console.log(this.state.posts[index])
+                        }
+                      />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </div>
     );
     return (
