@@ -65,7 +65,7 @@ class ViewComp extends Component {
 	HandleOnSubmit = (index) => {
 		const BronzeData = {
 			standard: 'Bronze',
-			accuracy: this.state.bronzeAccuracy.replace('%', '').to,
+			accuracy: this.state.bronzeAccuracy,
 			total: this.state.bronzeTotal
 		};
 		const SilverData = {
@@ -168,13 +168,13 @@ class ViewComp extends Component {
 											<div class="comp-req-container">
 												<Form>
 													<Container>
-														<Row>
+														<Row className="standard-header-label">
 															<Col xs={4} md={4} />
 															<Col xs={4} md={4}>
-																<label>ACCURACY %</label>
+																<div className="accuracy-header-label">ACCURACY %</div>
 															</Col>
 															<Col xs={4} md={4}>
-																<label>TOTAL</label>
+																<div className="total-header-label">TOTAL</div>
 															</Col>
 														</Row>
 														<Row className="bronze-row">
