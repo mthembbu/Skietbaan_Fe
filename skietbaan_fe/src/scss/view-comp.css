@@ -364,6 +364,32 @@
 	width: 100%;
 }
 /*competitions list display css*/
+.standard-header-label {
+	padding-bottom: 24px;
+}
+.accuracy-header-label{
+	height: 100%;
+    color: rgba(0,0,0,.6);
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .13px;
+    line-height: 16px;
+    padding: 0;
+}
+
+.total-header-label {
+
+	height: 100%;
+    color: rgba(0,0,0,.6);
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .13px;
+    line-height: 16px;
+    padding: 0;
+}
+
 .table-competition-row table {
 	width: 100%;
 }
