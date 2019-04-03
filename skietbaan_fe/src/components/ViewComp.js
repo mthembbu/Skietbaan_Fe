@@ -64,7 +64,7 @@ class ViewComp extends Component {
 		this.setState({ dict: newDict });
 	}
 	//the method that adds the update for the inputs
-	HandleOnSubmit = (index) => {
+	handleOnSubmit = (index) => {
 		const BronzeData = {
 			standard: 'Bronze',
 			accuracy: this.state.bronzeAccuracy,
@@ -360,7 +360,7 @@ class ViewComp extends Component {
 																			type="submit"
 																			id="submit-btn"
 																			onClick={() =>
-																				this.HandleOnSubmit(compVar.id)}
+																				this.handleOnSubmit(compVar.id)}
 																		>
 																			UPDATE
 																		</button>
