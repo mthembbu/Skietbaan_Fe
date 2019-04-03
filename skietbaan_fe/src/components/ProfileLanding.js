@@ -6,13 +6,12 @@ import Documents from "./Documents";
 import UserDetails from "./userDetails";
 import { getCookie } from "./cookie.js";
 import history from "./history";
+import { connect } from "react-redux";
+import {setSelectedLandingPage} from "../actions/profileLandingAction"
 
-export default class ProfileLanding extends Component {
+class ProfileLanding extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedButton: 1
-    };
 
     this.awardPage = this.awardPage.bind(this);
     this.documentsPage = this.documentsPage.bind(this);
@@ -29,15 +28,15 @@ export default class ProfileLanding extends Component {
   }
 
   awardPage() {
-    if (this.state.selectedButton != 1) this.setState({ selectedButton: 1 });
+    if (this.props.selectedButton != 1) this.props.setSelectedLandingPage(1);
   }
 
   documentsPage() {
-    if (this.state.selectedButton != 2) this.setState({ selectedButton: 2 });
+    if (this.props.selectedButton != 2) this.props.setSelectedLandingPage(2);
   }
 
   details() {
-    if (this.state.selectedButton != 3) this.setState({ selectedButton: 3 });
+    if (this.props.selectedButton != 3) this.props.setSelectedLandingPage(3);
   }
 
   logout() {
@@ -56,9 +55,9 @@ export default class ProfileLanding extends Component {
       <div>
         <div
           className={
-            this.state.selectedButton == 1
+            this.props.selectedButton == 1
               ? "fix-top pad-bottom-13px"
-              : this.state.selectedButton == 2
+              : this.props.selectedButton == 2
               ? "fix-top pad-bottom-0px"
               : "fix-top"
           }
@@ -87,7 +86,7 @@ export default class ProfileLanding extends Component {
                   <div>
                     <button
                       className={
-                        this.state.selectedButton == 1
+                        this.props.selectedButton == 1
                           ? "unstyle-button-active btn-block button-fill"
                           : "unstyle-button btn-block button-fill"
                       }
@@ -101,7 +100,7 @@ export default class ProfileLanding extends Component {
                   <div>
                     <button
                       className={
-                        this.state.selectedButton == 2
+                        this.props.selectedButton == 2
                           ? "unstyle-button-active btn-block button-fill"
                           : "unstyle-button btn-block button-fill"
                       }
@@ -118,7 +117,7 @@ export default class ProfileLanding extends Component {
                   <div>
                     <button
                       className={
-                        this.state.selectedButton == 3
+                        this.props.selectedButton == 3
                           ? "unstyle-button-active btn-block button-fill"
                           : "unstyle-button btn-block button-fill"
                       }
@@ -134,18 +133,18 @@ export default class ProfileLanding extends Component {
         </div>
         <div
           className={
-            this.state.selectedButton == 1
+            this.props.selectedButton == 1
               ? "award-content-container"
-              : this.state.selectedButton == 2 || this.state.selectedButton == 3
+              : this.props.selectedButton == 2 || this.props.selectedButton == 3
               ? "award-content-container pad-top-50px"
               : "award-content-container"
           }
         >
-          {this.state.selectedButton == 1 ? (
+          {this.props.selectedButton == 1 ? (
             <UserProfile />
-          ) : this.state.selectedButton == 3 ? (
+          ) : this.props.selectedButton == 3 ? (
             <UserDetails />
-          ) : this.state.selectedButton == 2 ? (
+          ) : this.props.selectedButton == 2 ? (
             <Documents />
           ) : null}
         </div>
@@ -153,3 +152,9 @@ export default class ProfileLanding extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) =>({
+  selectedButton : state.landingReducer.selectedLandingPage
+});
+
+export default connect(mapStateToProps, {setSelectedLandingPage})(ProfileLanding);

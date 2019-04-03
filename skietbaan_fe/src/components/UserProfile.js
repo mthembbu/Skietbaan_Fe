@@ -420,7 +420,7 @@ class UserProfile extends Component {
 
 
 const mapStateToProps = (state) => ({
-	selectedCompetition: state.profile.selectedCompetition,
+	selectedCompetition: state.awardsReducer.selectedCompetition,
 });
 
 export default connect(mapStateToProps, {setSelectedCompetition})(UserProfile);
