@@ -207,7 +207,7 @@ class ViewComp extends Component {
 																	</div>
 																</Col>
 																<Col xs={4} md={4}>
-																	<div className="">
+																	<div>
 																		<input
 																			className="bronze-total-input-control"
 																			type="number"
@@ -230,7 +230,7 @@ class ViewComp extends Component {
 																	<div class="silver-label">Silver Award: </div>
 																</Col>
 																<Col xs={4} md={4}>
-																	<div className="">
+																	<div>
 																		<input
 																			className="silver-accuracy-input-control"
 																			type="number"
@@ -247,7 +247,7 @@ class ViewComp extends Component {
 																	</div>
 																</Col>
 																<Col xs={4} md={4}>
-																	<div className="">
+																	<div>
 																		<input
 																			className="silver-total-input-control"
 																			type="number"
