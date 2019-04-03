@@ -220,6 +220,7 @@ html, body{
          border-collapse: separate;
          border-spacing: 0 10px;
          width: 180px;
+         margin: auto;
      }
      .filter-selections .selections-container .row .choose .selection-table tr .td-inactive{
           border: solid;
