@@ -90,9 +90,7 @@ class ViewGroups extends Component {
                 <tr className="view-group" key={post.id}>
                   <td
                     className={
-                      post.highlighted === true
-                        ? "first-row"
-                        : "first-row-active"
+                       post.isActive === true ? "first-row" : "first-row-active"
                     }
                     onClick={() => this.editGroup(post)}
                   >
