@@ -494,7 +494,6 @@
     font-family: helvetica;
     font-size: 14px;
     padding-top: 9px;
-    padding-right: 45px;
     width: 100%;
   }
 
@@ -618,8 +617,7 @@
 .admin-select-all {
   height: 28px;
   width: 30px;
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 .admin-delete-icon {
@@ -681,7 +679,7 @@
   height: 26px;
   width: 24px;
   float: left;
-  margin-left: 58px;
+  margin-left: 25px;
   margin-top: 20px;
 }
 
@@ -701,4 +699,8 @@
 
 .submit-announcement-clicked {
   color: red;
+}
+
+.notification-spacing {
+  margin-right: 18px;
 }

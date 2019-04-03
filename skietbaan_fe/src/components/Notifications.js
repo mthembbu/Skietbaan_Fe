@@ -261,7 +261,7 @@ class notification extends Component {
             <label>NOTIFICATIONS</label>
           </div>
         </div>
-        <div>
+        <div className="notification-spacing">
           <img
             src={
               this.state.adminToggle ? notifySpeakerBlack : notifySpeakerWhite
