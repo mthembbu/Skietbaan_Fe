@@ -109,6 +109,17 @@ class ViewComp extends Component {
           this.setState({ activatedCompetition: data });
         });
     }, 2000);
+    })
+      .then(function(response) {})
+      .then(function(data) {})
+      .catch(function(data) {});
+    setTimeout(() => {
+      fetch(BASE_URL + "/api/Documents/StatusCompetition")
+        .then(res => res.json())
+        .then(data => {
+          this.setState({ activatedCompetition: data });
+        });
+    }, 2000);
   }
 
   componentWillReceiveProps(val) {
@@ -171,6 +182,8 @@ class ViewComp extends Component {
   }
   onChange({ target }) {
     this.setState({ [target.name]: target.value });
+
+    console.log(this.state.numberofshots);
   }
 
   changeToggle() {
@@ -182,6 +195,7 @@ class ViewComp extends Component {
   }
 
   render() {
+    console.log(this.state.numberofshots);
     const displayCompetitions = (
       <div className="page-contents">
         <table class="table-view-competitions">
@@ -217,6 +231,8 @@ class ViewComp extends Component {
                             {compVar.id === this.state.activatedCompetition ? (
                               <img className="letter-image" src={letterhead} />
                             ) : null}
+                              alt="golf"
+                            />
                           </div>
                         </div>
 
