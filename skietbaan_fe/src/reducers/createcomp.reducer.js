@@ -1,7 +1,9 @@
 import {NEW_COMP, 
 		FETCH_COMP,
 		UPDATE_COMP_STATUS,
-		PARTICIPANTS_PER_COMP 
+		PARTICIPANTS_PER_COMP,
+		FETCH_REQ,
+		UPDATE_REQ 
 	} 
 	from '../actions/types';
 const initialState = {
@@ -36,7 +38,17 @@ export default function(state = initialState, action){
 		return{
 				...state,
 				dict : action.payload	
-		}		
+		}
+		case FETCH_REQ:
+		return{
+				...state,
+				requirements: action.payload	
+		}	
+		case UPDATE_REQ:
+		return{
+				...state,
+				updated: action.payload
+		}			
 		default :
 			return state;	
 	}

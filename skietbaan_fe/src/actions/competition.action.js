@@ -10,7 +10,6 @@ export const fetchcomp = () => (dispatch) => {
 };
 //fetch the competition requiremets as per Competition ID
 export const fetchRequirements = (CompID) => (dispatch) => {
-	let obj = { id: '', competition: null, standard: '', accuracy: '', total: '' };
 	fetch(URL + '/R/' + CompID)
 		.then((response) => response.json())
 		.then((requirementsData) => {
