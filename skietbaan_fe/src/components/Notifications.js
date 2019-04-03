@@ -43,7 +43,6 @@ class notification extends Component {
       adminToggle: false,
       stateCheck: false,
       speakerClicked: null,
-      submitAnnouncementClicked: null,
       announceString: ""
     };
     this.onDelete = this.onDelete.bind(this);
@@ -51,6 +50,7 @@ class notification extends Component {
     this.markForDeletion = this.markForDeletion.bind(this);
     this.selectAll = this.selectAll.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.disableButton = this.disableButton.bind(this);
   }
 
   onDelete = async () => {
@@ -86,7 +86,7 @@ class notification extends Component {
     this.props.updateIsReadProperty(Id);
     if (Notification === "Award" || Notification === "Document") {
       //PUT IN THE CORRECT COMPETITION NAME FROM THE NOTIFICATION MESSAGE
-      this.props.setSelectedCompetition("Pistol 100m")
+      this.props.setSelectedCompetition("Rifle 100m");
       this.props.history.push("/profile");
     } else if (Notification === "Confirmation" || Notification === "Expiry") {
       this.props.history.push("/notify");
@@ -148,6 +148,7 @@ class notification extends Component {
 
   onChange(event) {
     this.setState({ announceString: event.target.value });
+    this.disableButton();
   }
 
   changeIcon() {
@@ -181,8 +182,21 @@ class notification extends Component {
   }
 
   speakerClick() {
-    this.setState({
-      adminToggle: !this.state.adminToggle
+    this.setState(
+      {
+        adminToggle: !this.state.adminToggle
+      },
+      () => {
+        this.disableButton();
+      }
+    );
+  }
+
+  disableButton() {
+    document.addEventListener("DOMContentLoaded", function(event) {
+      if (this.state.announceString.length >= 1) {
+        document.getElementById("announcementButton").disabled = false;
+      } else document.getElementById("announcementButton").disabled = true;
     });
   }
 
@@ -197,6 +211,11 @@ class notification extends Component {
     })
       .then(function(response) {})
       .catch(function(data) {});
+    setTimeout(() => {
+      this.setState({
+        adminToggle: false
+      });
+    }, 3000);
   };
 
   render() {
@@ -393,6 +412,7 @@ class notification extends Component {
         </div>
         <div>
           <button
+            id="announcementButton"
             className={
               this.state.announceString !== "" && this.state.adminToggle
                 ? "announcement-send"
