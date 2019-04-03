@@ -43,7 +43,6 @@ class notification extends Component {
       adminToggle: false,
       stateCheck: false,
       speakerClicked: null,
-      submitAnnouncementClicked: null,
       announceString: ""
     };
     this.onDelete = this.onDelete.bind(this);
@@ -51,6 +50,7 @@ class notification extends Component {
     this.markForDeletion = this.markForDeletion.bind(this);
     this.selectAll = this.selectAll.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.disableButton = this.disableButton.bind(this);
   }
 
   onDelete = async () => {
@@ -80,12 +80,13 @@ class notification extends Component {
 
   onClick_View = (Notification, Message, Id) => {
     this.setState({
-      isRead: true
+      isRead: true,
+      toggle: !this.state.toggle
     });
     this.props.updateIsReadProperty(Id);
     if (Notification === "Award" || Notification === "Document") {
       //PUT IN THE CORRECT COMPETITION NAME FROM THE NOTIFICATION MESSAGE
-      this.props.awardsSelectedCompetition("Rifle 100m");
+      this.props.setSelectedCompetition("Rifle 100m");
       this.props.history.push("/profile");
     } else if (Notification === "Confirmation" || Notification === "Expiry") {
       this.props.history.push("/notify");
@@ -147,6 +148,7 @@ class notification extends Component {
 
   onChange(event) {
     this.setState({ announceString: event.target.value });
+    this.disableButton();
   }
 
   changeIcon() {
@@ -183,6 +185,20 @@ class notification extends Component {
     this.setState({
       adminToggle: !this.state.adminToggle
     });
+    if (this.state.adminToggle === false) {
+      this.disableButton();
+    }
+  }
+
+  disableButton() {
+    setTimeout(() => {
+      if (
+        this.state.announceString.length > 0 &&
+        this.state.announceString !== undefined
+      ) {
+        document.getElementById("announcementButton").disabled = false;
+      } else document.getElementById("announcementButton").disabled = true;
+    }, 2000);
   }
 
   submitAnnouncement = () => {
@@ -196,6 +212,11 @@ class notification extends Component {
     })
       .then(function(response) {})
       .catch(function(data) {});
+    setTimeout(() => {
+      this.setState({
+        adminToggle: false
+      });
+    }, 3000);
   };
 
   render() {
@@ -205,8 +226,10 @@ class notification extends Component {
 
     let headingItems = (
       <div className="page-heading">
-        <div className="outer-header-div">
-          <b>Notifications</b>
+        <div className="notification-gun-overlay-image">
+          <div className="outer-header-div">
+            <label>NOTIFICATIONS</label>
+          </div>
         </div>
         <div className="notification-icon-spacing">
           <img
@@ -233,19 +256,21 @@ class notification extends Component {
 
     const adminHeadingItems = (
       <div className="page-heading">
-        <div className="outer-header-div">
-          <b>Notifications</b>
+        <div className="notification-gun-overlay-image">
+          <div className="outer-header-div">
+            <label>NOTIFICATIONS</label>
+          </div>
         </div>
-        <div>
+        <div className="notification-spacing">
           <img
             src={
               this.state.adminToggle ? notifySpeakerBlack : notifySpeakerWhite
             }
             onClick={() => this.speakerClick()}
-            className="notification-images"
+            className="admin-notification-images"
           />
         </div>
-        <div className="notification-icon-spacing">
+        <div className="admin-notification-icon-spacing">
           <img
             src={
               this.state.toggle
@@ -255,13 +280,17 @@ class notification extends Component {
                 : "hidden"
             }
             onClick={() => this.selectAll()}
-            className="select-all"
+            className="admin-select-all"
             alt=""
           />
           <img
             src={this.state.toggle ? deleteIconChange : deleteIcon}
             onClick={() => this.changeIcon()}
-            className={this.state.toggle ? "black-delete-icon" : "delete-icon"}
+            className={
+              this.state.toggle
+                ? "admin-black-delete-icon"
+                : "admin-delete-icon"
+            }
             alt=""
           />
         </div>
@@ -287,7 +316,7 @@ class notification extends Component {
             <td className="td-notification">
               <label
                 className={
-                  post.markedForDeletion
+                  post.markedForDeletion && this.state.toggle
                     ? "notifications-selected-text"
                     : post.isRead === true
                     ? "notifications-text"
@@ -343,7 +372,8 @@ class notification extends Component {
     const deleteModal = (
       <table
         className={
-          this.props.notificationsArray.some(post => post.markedForDeletion)
+          this.props.notificationsArray.some(post => post.markedForDeletion) &&
+          this.state.toggle
             ? "notifications-modal"
             : "hidden"
         }
@@ -383,6 +413,7 @@ class notification extends Component {
         </div>
         <div>
           <button
+            id="announcementButton"
             className={
               this.state.announceString !== "" && this.state.adminToggle
                 ? "announcement-send"
@@ -421,7 +452,7 @@ notification.propTypes = {
 const mapStateToProps = state => ({
   notificationsArray: state.notificationOBJ.notificationsArray,
   updatedNotification: state.notificationOBJ.updatedNotification,
-  awardsSelectedCompetition: state.profile.selectedCompetition
+  awardsSelectedCompetition: state.awardsReducer.selectedCompetition
 });
 
 export default connect(

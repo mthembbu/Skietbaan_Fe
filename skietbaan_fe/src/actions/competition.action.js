@@ -18,18 +18,16 @@ export const fetchRequirements = (CompID) => (dispatch) => {
 				type: FETCH_REQ,
 				payload: requirementsData
 			});
-		})
-		.catch((error) => {
 		});
 };
-export const UpdateRequirements = (CompID, RData) => (dispatch) => {
-	fetch(URL + '/Requirements/' + CompID, {
+export const UpdateRequirements = (compID, rData) => (dispatch) => {
+	fetch(URL + '/Requirements/' + compID, {
 		method: 'POST',
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(RData)
+		body: JSON.stringify(rData)
 	})
 		.then((res) => {
 			res.json();
@@ -97,8 +95,5 @@ export const createcomp = (compData) => (dispatch) => {
 					});
 				});
 			}
-		})
-		.catch((error) => {
-		
 		});
 };

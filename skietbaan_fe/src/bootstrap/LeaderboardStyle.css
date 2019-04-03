@@ -28,7 +28,7 @@
          display: flex;
          border: solid;
          border-radius: 18px;
-         border-width:thin;
+         border-width:1px;
          border-color: #BE0000;
          box-shadow: 0 10px 16px -6px rgba(0,0,0,.33);
      }
@@ -215,6 +215,7 @@
          border-collapse: separate;
          border-spacing: 0 10px;
          width: 180px;
+         margin: auto;
      }
      .filter-selections .selections-container .row .choose .selection-table tr .td-inactive{
           border: solid;
@@ -291,7 +292,7 @@
         width: 151px;
         margin-left: 7px;
         margin-top: 4px;
-        border-bottom-left-radius: 14px;
+        border-bottom-left-radius: 12px;
      }
      .closed-filter-section .filter-table1 .header-row1 .competition-name-col .gun-icon .competition-name{
         font-family: helvetica;
@@ -560,7 +561,7 @@
         width: 100%;
         height: 37px;
         display: inline-block;
-        margin-top: 2px;
+        margin-top: 7px;
     }
      .ranking-table-section .ranking-table .rank-row .rank-col .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .up-arrow{
         width: 23px;
@@ -588,14 +589,14 @@
     }
      .ranking-table-section .ranking-table .rank-row .rank-col .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .ranking .number{
         height: 100%;	
-        width: 10px;	
+        width: 100%;
+        text-align: center;	
         font-size: 14px;
         text-align: center;
         font-family: Helvetica;
         font-weight: lighter;
         color: #6A6A6A;
         margin: auto;
-        padding-top: 2px;
     }
      .ranking-table-section .ranking-table .rank-row .rank-col .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .ranking img{
         width: 23px;
@@ -606,7 +607,7 @@
         height: 6px;
         margin: auto;
     }
-     .ranking-table-section .ranking-table .rank-row .rank-col .rank-col .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .down-arrow .down-arrow-icon{
+     .ranking-table-section .ranking-table .rank-row .rank-col .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .down-arrow .down-arrow-icon{
         width: 6px;
         height: 6px;
         margin: auto;
@@ -706,7 +707,7 @@
          background-image: linear-gradient(to right, #000000, #FF0000);
          color: #fdfdfd;
          border-radius: 8px;
-         margin-bottom: 5%;
+         margin-bottom: 58px;
      }
      .current-user-table-section .ranking-table{
          width: 100%;
@@ -939,6 +940,10 @@
         margin-right: 0%;
         bottom: 0;
         margin-bottom: 0px !important;
+        background: transparent;
+     }
+     .userWrapper .row{
+         background: transparent;
      }
      .leaderboard-container{
         margin-top: 56px;
@@ -985,6 +990,7 @@
      }
      .userWrapper .row{
         background-color: transparent;
+        height: 75px;
     }
     .ranking-table-section .ranking-table .rank-row .user-details-table tbody .user-details-row .rank-labels-col .head-table-labels tr .extra-name-col *{
         width: 100%;
