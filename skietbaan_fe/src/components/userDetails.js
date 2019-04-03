@@ -63,11 +63,11 @@ export default class userDetails extends Component {
       <div className="document-center">
         <div className="user-details-main-container user-details-container">
           <div className="user-details-scrolls">
-            <div className="user-details-heading-container">
+            <div className="user-details-heading-container user-details-member-name">
               {this.state.array.username}
             </div>
             <div>
-              <label className="user-details-heading-container">
+              <label className="user-details-heading-container user-details-member-number">
                 member number:
               </label>
 

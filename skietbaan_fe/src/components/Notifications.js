@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../components/NotificationsStyle.css";
 import { getCookie } from "./cookie";
-import history from "./history";
 import { connect } from "react-redux";
 import { BASE_URL } from "../actions/types.js";
 import PropTypes from "prop-types";
@@ -13,7 +12,7 @@ import whiteSelectAll from "../components/Notification-Img/white-select-all.png"
 import blackSelectAll from "../components/Notification-Img/black-select-all.png";
 import notifySpeakerBlack from "../components/Notification-Img/notifySpeaker.png";
 import notifySpeakerWhite from "../components/Notification-Img/notifySpeakerWhite.png";
-import {setSelectedCompetition} from "../actions/userProfileActions"
+import { setSelectedCompetition } from "../actions/userProfileActions";
 import {
   updateSelectedCompetition,
   updateSelectedGroup
@@ -41,19 +40,24 @@ class notification extends Component {
       token: getCookie("token"),
       marked: null,
       selected: null,
-      adminToggle: false
+      adminToggle: false,
+      stateCheck: false,
+      speakerClicked: null,
+      submitAnnouncementClicked: null,
+      announceString: ""
     };
     this.onDelete = this.onDelete.bind(this);
     this.changeIcon = this.changeIcon.bind(this);
     this.markForDeletion = this.markForDeletion.bind(this);
     this.selectAll = this.selectAll.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   onDelete = async () => {
-    const deletingarray = [];
+    const deletingArray = [];
     for (var i = 0; i < this.props.notificationsArray.length; i++) {
       if (this.props.notificationsArray[i].markedForDeletion === true) {
-        deletingarray.push(this.props.notificationsArray[i]);
+        deletingArray.push(this.props.notificationsArray[i]);
 
         delete this.props.notificationsArray[i];
       }
@@ -65,15 +69,19 @@ class notification extends Component {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(deletingarray)
+        body: JSON.stringify(deletingArray)
       });
     } catch (err) {}
-    window.location = "/notify";
+    this.props.getNotifications(this.state.token);
+    setTimeout(() => {
+      window.location = "/notify";
+    }, 2000);
   };
 
   onClick_View = (Notification, Message, Id) => {
     this.setState({
-      isRead: true
+      isRead: true,
+      toggle: !this.state.toggle
     });
     this.props.updateIsReadProperty(Id);
     if (Notification === "Award" || Notification === "Document") {
@@ -135,6 +143,11 @@ class notification extends Component {
     if (getCookie("token")) {
       this.props.getNotifications(this.state.token);
     }
+    this.checkUserType();
+  }
+
+  onChange(event) {
+    this.setState({ announceString: event.target.value });
   }
 
   changeIcon() {
@@ -149,23 +162,54 @@ class notification extends Component {
     });
   }
 
-  adminToggle() {
+  checkUserType() {
+    let token = getCookie("token");
+    fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
+      method: "Get",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          stateCheck: data.admin
+        });
+      })
+      .catch(function(data) {});
+  }
+
+  speakerClick() {
     this.setState({
       adminToggle: !this.state.adminToggle
     });
   }
 
+  submitAnnouncement = () => {
+    fetch(BASE_URL + "/api/Notification/Announcements/", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state.announceString)
+    })
+      .then(function(response) {})
+      .catch(function(data) {});
+  };
+
   render() {
     if (!getCookie("token")) {
-      setTimeout(function() {
-        history.push("/registerPage");
-      }, 2000);
+      window.location = "/registerPage";
     }
 
     let headingItems = (
       <div className="page-heading">
-        <div className="outer-header-div">
-          <b>Notifications</b>
+        <div className="notification-gun-overlay-image">
+          <div className="outer-header-div">
+            <label>NOTIFICATIONS</label>
+          </div>
         </div>
         <div className="notification-icon-spacing">
           <img
@@ -192,18 +236,21 @@ class notification extends Component {
 
     const adminHeadingItems = (
       <div className="page-heading">
-        <div className="outer-header-div">
-          <b>Notifications</b>
+        <div className="notification-gun-overlay-image">
+          <div className="outer-header-div">
+            <label>NOTIFICATIONS</label>
+          </div>
         </div>
         <div>
           <img
             src={
               this.state.adminToggle ? notifySpeakerBlack : notifySpeakerWhite
             }
-            onClick={() => this.adminToggle}
+            onClick={() => this.speakerClick()}
+            className="admin-notification-images"
           />
         </div>
-        <div className="notification-icon-spacing">
+        <div className="admin-notification-icon-spacing">
           <img
             src={
               this.state.toggle
@@ -213,13 +260,17 @@ class notification extends Component {
                 : "hidden"
             }
             onClick={() => this.selectAll()}
-            className="select-all"
+            className="admin-select-all"
             alt=""
           />
           <img
             src={this.state.toggle ? deleteIconChange : deleteIcon}
             onClick={() => this.changeIcon()}
-            className={this.state.toggle ? "black-delete-icon" : "delete-icon"}
+            className={
+              this.state.toggle
+                ? "admin-black-delete-icon"
+                : "admin-delete-icon"
+            }
             alt=""
           />
         </div>
@@ -245,7 +296,7 @@ class notification extends Component {
             <td className="td-notification">
               <label
                 className={
-                  post.markedForDeletion
+                  post.markedForDeletion && this.state.toggle
                     ? "notifications-selected-text"
                     : post.isRead === true
                     ? "notifications-text"
@@ -261,7 +312,7 @@ class notification extends Component {
               >
                 {post.notificationMessage}
               </label>
-              <Moment fromNow ago className="time-div">
+              <Moment fromNow className="time-div">
                 {post.timeOfArrival}
               </Moment>
             </td>
@@ -301,7 +352,8 @@ class notification extends Component {
     const deleteModal = (
       <table
         className={
-          this.props.notificationsArray.some(post => post.markedForDeletion)
+          this.props.notificationsArray.some(post => post.markedForDeletion) &&
+          this.state.toggle
             ? "notifications-modal"
             : "hidden"
         }
@@ -327,10 +379,44 @@ class notification extends Component {
       </table>
     );
 
+    const writeAnnouncement = (
+      <div className="announcement-main">
+        <div>
+          <textarea
+            type="text"
+            name="name"
+            className="announcement-text"
+            value={this.state.announceString}
+            placeholder="Enter announcement"
+            onChange={this.onChange}
+          />
+        </div>
+        <div>
+          <button
+            className={
+              this.state.announceString !== "" && this.state.adminToggle
+                ? "announcement-send"
+                : "disabled-button"
+            }
+            onClick={() => this.submitAnnouncement()}
+          >
+            SEND ANNOUNCEMENT
+          </button>
+        </div>
+      </div>
+    );
     return (
       <div className="notifications-body-class">
-        <div>{headingItems}</div>
-        <div className="format-content">{postItems}</div>
+        {this.state.stateCheck === false ? (
+          <div>{headingItems}</div>
+        ) : (
+          <div>{adminHeadingItems}</div>
+        )}
+        {this.state.adminToggle === true ? (
+          <div>{writeAnnouncement}</div>
+        ) : (
+          <div className="format-content">{postItems}</div>
+        )}
         <div>{deleteModal}</div>
       </div>
     );

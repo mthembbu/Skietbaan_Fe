@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import "./Create.css";
+import history from "./history";
 import { getCookie } from "./cookie.js";
+import { URL } from "../actions/types.js";
 import ViewMembers from "../components/ViewMembers";
 import Radio from "@material-ui/core/Radio";
 import CreateComp from "../components/CreateComp";
@@ -20,7 +22,8 @@ export class createPages extends Component {
       selectedButton: 1,
       selectedButtonCreateViewGroups: 1,
       selectedButtonCreateViewCompetitions: 1,
-      selectedValue: "A"
+      selectedValue: "A",
+      user: [],
     };
 
     this.groupsPage = this.groupsPage.bind(this);
@@ -63,6 +66,28 @@ export class createPages extends Component {
   handleChange = event => {
     this.setState({ selectedValue: event });
   };
+
+  componentDidMount(){
+    if (getCookie("token") !== null) {
+      let token = getCookie("token");
+      fetch(URL + "/api/features/getuserbytoken/" + token, {
+        method: "Get",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => response.json())
+        .then(function(data) {
+          if(data.admin === false){
+            history.push("/home");
+          }
+        })
+        .catch(function(data) {});
+    } else {
+      window.location = "/registerPage";
+    }
+  }
 
   render() {
     if (!getCookie("token")) {
