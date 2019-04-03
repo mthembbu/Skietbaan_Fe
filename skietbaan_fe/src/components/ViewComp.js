@@ -64,7 +64,6 @@ class ViewComp extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         this.setState({ activatedCompetition: data });
       });
     fetch(BASE_URL + "/api/Documents/NumberOFShots", {
@@ -180,8 +179,6 @@ class ViewComp extends Component {
   }
   onChange({ target }) {
     this.setState({ [target.name]: target.value });
-
-    console.log(this.state.numberofshots);
   }
 
   changeToggle() {
@@ -193,7 +190,6 @@ class ViewComp extends Component {
   }
 
   render() {
-    console.log(this.state.numberofshots);
     const displayCompetitions = (
       <div className="page-contents">
         <table class="table-view-competitions">
