@@ -4,6 +4,7 @@ import { getCookie } from "./cookie";
 import { connect } from "react-redux";
 import { BASE_URL } from "../actions/types.js";
 import PropTypes from "prop-types";
+import { Collapse } from "react-collapse";
 import Moment from "react-moment";
 import "moment-timezone";
 import deleteIcon from "../components/Notification-Img/trashcan.png";
@@ -198,7 +199,7 @@ class notification extends Component {
       ) {
         document.getElementById("announcementButton").disabled = false;
       } else document.getElementById("announcementButton").disabled = true;
-    }, 2000);
+    }, 500);
   }
 
   submitAnnouncement = () => {
@@ -426,6 +427,7 @@ class notification extends Component {
         </div>
       </div>
     );
+
     return (
       <div className="notifications-body-class">
         {this.state.stateCheck === false ? (
@@ -434,7 +436,9 @@ class notification extends Component {
           <div>{adminHeadingItems}</div>
         )}
         {this.state.adminToggle === true ? (
-          <div>{writeAnnouncement}</div>
+          <Collapse isOpened={this.state.adminToggle === true}>
+            <div>{writeAnnouncement}</div>
+          </Collapse>
         ) : (
           <div className="format-content">{postItems}</div>
         )}
