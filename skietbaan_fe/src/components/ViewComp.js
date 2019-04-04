@@ -182,8 +182,6 @@ class ViewComp extends Component {
   }
   onChange({ target }) {
     this.setState({ [target.name]: target.value });
-
-    console.log(this.state.numberofshots);
   }
 
   changeToggle() {
@@ -195,7 +193,6 @@ class ViewComp extends Component {
   }
 
   render() {
-    console.log(this.state.numberofshots);
     const displayCompetitions = (
       <div className="page-contents">
         <table class="table-view-competitions">
