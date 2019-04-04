@@ -106,7 +106,7 @@ export class createPages extends Component {
             >
               <div class="page-name-bar">
                 <div className="gun-overlay-image">
-                  <label className="create-all-menu">CREATE</label>
+                  <label className="label-for-score">CREATE</label>
                 </div>
               </div>
               <div className="first-buttons-container">

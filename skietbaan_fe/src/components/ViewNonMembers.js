@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "../components/ViewMembers.css";
 import Collapsible from "react-collapsible";
 import { BASE_URL } from "../actions/types.js";
-import memberIcon from "../components/assets/membership-icon.png";
+import arrowUp from "../components/assets/upArrow.png";
+import arrowDown from "../components/assets/downArrow.png";
 import { getCookie } from "../components/cookie.js";
 
 class ViewNonMembers extends Component {
@@ -19,6 +20,7 @@ class ViewNonMembers extends Component {
       indexNumber: 0,
       lastSize: 0,
       navbarState: false,
+      arrowChange: false
     };
     this.getNonMembers = this.getNonMembers.bind(this);
     this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -29,17 +31,17 @@ class ViewNonMembers extends Component {
     this.updateMember = this.updateMember.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.toggleNavbar2 = this.toggleNavbar2.bind(this);
+    this.onChangeArrow = this.onChangeArrow.bind(this);
   }
 
   toggleNavbar() {
     this.setState({
-      navbarState: !this.state.navbarState,
-    })
+      navbarState: !this.state.navbarState
+    });
     var navbar = document.querySelector(".navbar-admin");
     if (navbar.classList.contains("hidden")) {
       navbar.classList.remove("hidden");
-    }
-    else {
+    } else {
       navbar.classList.add("hidden");
     }
   }
@@ -47,11 +49,10 @@ class ViewNonMembers extends Component {
   toggleNavbar2() {
     var navbar = document.querySelector(".navbar-admin");
     if (this.state.lastSize > document.body.clientHeight) {
-      navbar.setAttribute('hidden', 'true');
+      navbar.setAttribute("hidden", "true");
       this.toggleNavbar();
-    }
-    else {
-      navbar.removeAttribute('hidden');
+    } else {
+      navbar.removeAttribute("hidden");
       this.toggleNavbar();
     }
   }
@@ -105,21 +106,26 @@ class ViewNonMembers extends Component {
 
   updateMember(index) {
     let RequestObject = {
-      "username": this.state.array[index].username,
-      "memberID": this.state.membershipsID,
-      "memberExpiryDate": this.getCurrentDate() + "T00:00:00"
-    }
+      username: this.state.array[index].username,
+      memberID: this.state.membershipsID,
+      memberExpiryDate: this.getCurrentDate() + "T00:00:00"
+    };
     fetch(BASE_URL + "/api/Features/Update", {
-      method: 'Post',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      method: "Post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(RequestObject)
     })
-      .then(function (response) {
+      .then(function(response) {
         return response.json();
       })
-      .then(function (data) { })
-      .catch(function (data) { });
-  
+      .then(data => {
+        this.getNonMembers();
+        this.setState({ filterText: "" });
+      })
+      .catch(function(data) {});
   }
 
   onChangeText(event) {
@@ -143,7 +149,11 @@ class ViewNonMembers extends Component {
 
   handleChange(event) {
     this.setState({ membershipsID: event.target.value });
-}
+  }
+
+  onChangeArrow(){
+    this.setState({arrowChange: !this.state.arrowChange});
+  }
 
   render() {
     if (!getCookie("token")) {
@@ -151,10 +161,10 @@ class ViewNonMembers extends Component {
     }
     if (this.state.lastSize === 0) {
       this.state.lastSize = document.body.clientHeight;
-      document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener("resize", () => {
           this.toggleNavbar2();
-        })
+        });
       });
     }
     const postItems = (
@@ -177,9 +187,18 @@ class ViewNonMembers extends Component {
                 <td className="first-column">
                   <Collapsible
                     trigger={
-                      <div className="username-and-email">
+                      <div
+                        className="username-and-email"
+                        onClick={this.onChangeArrow}
+                      >
+                      <div className="view-non-members-users-email">
                         <b>{post.username}</b>
-                        <div>{post.email}</div>
+                        <div className="view-non-members-email">
+                          {post.email}
+                        </div>
+                        </div>
+                        <div className="view-non-members-arrow">
+                        <img className="view-non-members-image" src={this.state.arrowChange ? arrowUp:arrowDown}></img></div>
                       </div>
                     }
                   >
@@ -190,6 +209,7 @@ class ViewNonMembers extends Component {
                           className="view-non-members-text-boxes"
                           id="membershipID"
                           placeholder="Membership Number"
+                          autoComplete="Off"
                           value={this.state.membershipsID}
                           onChange={this.handleChange}
                         />

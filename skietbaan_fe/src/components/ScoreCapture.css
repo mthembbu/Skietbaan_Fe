@@ -1,4 +1,4 @@
-.competition-container{
+.add-score-competition-container{
     padding-top: 0px;
     list-style-type: none;
     text-align: center;
@@ -385,12 +385,13 @@ hr{
 }
 
 .gun-overlay-image{
-    height: 100%;
+    margin-top: 4px;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 11px 0px;
     background-image: url("../components/assets/gunOverlay.png");
     width: 100%;
+    height: 63px;
 }
 
 .flashOff{
@@ -487,9 +488,9 @@ input[type=number] {
 .label-for-score{
     font-size: 22px;
     color: #fdfdfd;
-    font-weight: 600;
-    padding-top: 16px;
-    padding-left: 40px;
+    font-weight: bold;
+    padding-top: 13px;
+    padding-left: 24px;
 }
 
 .float-left{
