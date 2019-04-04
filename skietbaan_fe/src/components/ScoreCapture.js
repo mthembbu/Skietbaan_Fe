@@ -424,7 +424,7 @@ export default class search extends Component {
                     : "competition-item fade-out")}>
               <li className="li-container"
                 onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name)}>
-                {this.state.competitionsList[i].name}
+                {this.state.competitionsList[i].name.toUpperCase()}
               </li>
               <div onClick={() => this.cancelClicked()} className="competiton-cancel-button"></div>
             </div>
