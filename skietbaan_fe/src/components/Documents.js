@@ -90,7 +90,6 @@ class Documents extends Component {
   }
 
   render() {
-    console.log(this.state.sendLogsReturn && this.state.sendLosReturn);
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
