@@ -14,6 +14,7 @@ import blackSelectAll from "../components/Notification-Img/black-select-all.png"
 import notifySpeakerBlack from "../components/Notification-Img/notifySpeaker.png";
 import notifySpeakerWhite from "../components/Notification-Img/notifySpeakerWhite.png";
 import { setSelectedCompetition } from "../actions/userProfileActions";
+import { setSelectedLandingPage } from "../actions/profileLandingAction";
 import {
   updateSelectedCompetition,
   updateSelectedGroup
@@ -85,9 +86,13 @@ class notification extends Component {
       toggle: !this.state.toggle
     });
     this.props.updateIsReadProperty(Id);
-    if (Notification === "Award" || Notification === "Document") {
-      //PUT IN THE CORRECT COMPETITION NAME FROM THE NOTIFICATION MESSAGE
-      this.props.setSelectedCompetition("Rifle 100m");
+    if (Notification === "Award") {
+      var awardCompetitionName = Message.split(":")[1].trim();
+      this.props.setSelectedCompetition(awardCompetitionName);
+      this.props.setSelectedLandingPage(1);
+      this.props.history.push("/profile");
+    } else if (Notification === "Document") {
+      this.props.setSelectedLandingPage(2);
       this.props.history.push("/profile");
     } else if (Notification === "Confirmation" || Notification === "Expiry") {
       this.props.history.push("/notify");
@@ -453,19 +458,21 @@ notification.propTypes = {
   updateSelectedCompetition: PropTypes.func.isRequired,
   updateSelectedGroup: PropTypes.func.isRequired
 };
-const mapStateToProps = state => ({
+const mapDispatchToProps = state => ({
   notificationsArray: state.notificationOBJ.notificationsArray,
   updatedNotification: state.notificationOBJ.updatedNotification,
-  awardsSelectedCompetition: state.awardsReducer.selectedCompetition
+  awardsSelectedCompetition: state.awardsReducer.selectedCompetition,
+  selectedButton: state.landingReducer.selectedLandingPage
 });
 
 export default connect(
-  mapStateToProps,
+  mapDispatchToProps,
   {
     updateSelectedCompetition,
     updateSelectedGroup,
     updateIsReadProperty,
     getNotifications,
-    setSelectedCompetition
+    setSelectedCompetition,
+    setSelectedLandingPage
   }
 )(notification);
