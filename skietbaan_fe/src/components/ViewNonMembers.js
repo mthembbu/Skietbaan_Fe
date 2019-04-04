@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "../components/ViewMembers.css";
 import Collapsible from "react-collapsible";
 import { BASE_URL } from "../actions/types.js";
-import memberIcon from "../components/assets/membership-icon.png";
+import arrowUp from "../components/assets/upArrow.png";
+import arrowDown from "../components/assets/downArrow.png";
 import { getCookie } from "../components/cookie.js";
 
 class ViewNonMembers extends Component {
@@ -18,7 +19,8 @@ class ViewNonMembers extends Component {
       updateName: "",
       indexNumber: 0,
       lastSize: 0,
-      navbarState: false
+      navbarState: false,
+      arrowChange: false
     };
     this.getNonMembers = this.getNonMembers.bind(this);
     this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -29,6 +31,7 @@ class ViewNonMembers extends Component {
     this.updateMember = this.updateMember.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.toggleNavbar2 = this.toggleNavbar2.bind(this);
+    this.onChangeArrow = this.onChangeArrow.bind(this);
   }
 
   toggleNavbar() {
@@ -148,6 +151,10 @@ class ViewNonMembers extends Component {
     this.setState({ membershipsID: event.target.value });
   }
 
+  onChangeArrow(){
+    this.setState({arrowChange: !this.state.arrowChange});
+  }
+
   render() {
     if (!getCookie("token")) {
       window.location = "/registerPage";
@@ -180,9 +187,18 @@ class ViewNonMembers extends Component {
                 <td className="first-column">
                   <Collapsible
                     trigger={
-                      <div className="username-and-email">
+                      <div
+                        className="username-and-email"
+                        onClick={this.onChangeArrow}
+                      >
+                      <div className="view-non-members-users-email">
                         <b>{post.username}</b>
-                        <div>{post.email}</div>
+                        <div className="view-non-members-email">
+                          {post.email}
+                        </div>
+                        </div>
+                        <div className="view-non-members-arrow">
+                        <img className="view-non-members-image" src={this.state.arrowChange ? arrowUp:arrowDown}></img></div>
                       </div>
                     }
                   >
@@ -193,6 +209,7 @@ class ViewNonMembers extends Component {
                           className="view-non-members-text-boxes"
                           id="membershipID"
                           placeholder="Membership Number"
+                          autoComplete="Off"
                           value={this.state.membershipsID}
                           onChange={this.handleChange}
                         />

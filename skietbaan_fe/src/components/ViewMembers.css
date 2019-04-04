@@ -187,6 +187,7 @@
 }
 
 .username-and-email {
+  font-family: helvetica;
   font-size: 16px;
   height: 55px;
 }
@@ -261,4 +262,25 @@
   text-align: center;
   width: 100%;
   padding-right: 25px;
+}
+
+.view-non-members-email {
+  font-size: 14px;
+}
+
+.view-non-members-arrow {
+  width: 10%;
+  float: right;
+  padding-right: 43px;
+  padding-top: 5px;
+}
+
+.view-non-members-image {
+  width: 24px;
+  height: 12px;
+}
+
+.view-non-members-users-email {
+  width: 70%;
+  float: left;
 }
