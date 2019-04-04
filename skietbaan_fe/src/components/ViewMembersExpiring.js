@@ -203,7 +203,7 @@ class ViewMembersExpiring extends Component {
                               this.status(
                                 this.state.timeLeftOnMembership[index]
                               )
-                                ? "bad"
+                                ? "view-exp-bad "
                                 : "okay"
                             }
                           >
