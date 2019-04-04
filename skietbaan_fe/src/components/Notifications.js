@@ -458,7 +458,7 @@ notification.propTypes = {
   updateSelectedCompetition: PropTypes.func.isRequired,
   updateSelectedGroup: PropTypes.func.isRequired
 };
-const mapDispatchToProps = state => ({
+const mapStateToProps = state => ({
   notificationsArray: state.notificationOBJ.notificationsArray,
   updatedNotification: state.notificationOBJ.updatedNotification,
   awardsSelectedCompetition: state.awardsReducer.selectedCompetition,
@@ -466,7 +466,7 @@ const mapDispatchToProps = state => ({
 });
 
 export default connect(
-  mapDispatchToProps,
+  mapStateToProps,
   {
     updateSelectedCompetition,
     updateSelectedGroup,
