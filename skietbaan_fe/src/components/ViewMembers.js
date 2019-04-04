@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../components/ViewMembers.css";
 import Collapsible from "react-collapsible";
 import { BASE_URL } from "../actions/types.js";
-import memberIcon from "../components/assets/membership-icon.png";
+import memberIcon from "../components/assets/greyMembershipIcon.png";
 import { getCookie } from "../components/cookie.js";
 
 class ViewMembers extends Component {
@@ -15,7 +15,7 @@ class ViewMembers extends Component {
       timeLeftOnMembership: [],
       filterText: "",
       lastSize: 0,
-      navbarState: false,
+      navbarState: false
     };
     this.getAllMembers = this.getAllMembers.bind(this);
     this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -27,13 +27,12 @@ class ViewMembers extends Component {
 
   toggleNavbar() {
     this.setState({
-      navbarState: !this.state.navbarState,
-    })
+      navbarState: !this.state.navbarState
+    });
     var navbar = document.querySelector(".navbar-admin");
     if (navbar.classList.contains("hidden")) {
       navbar.classList.remove("hidden");
-    }
-    else {
+    } else {
       navbar.classList.add("hidden");
     }
   }
@@ -41,11 +40,10 @@ class ViewMembers extends Component {
   toggleNavbar2() {
     var navbar = document.querySelector(".navbar-admin");
     if (this.state.lastSize > document.body.clientHeight) {
-      navbar.setAttribute('hidden', 'true');
+      navbar.setAttribute("hidden", "true");
       this.toggleNavbar();
-    }
-    else {
-      navbar.removeAttribute('hidden');
+    } else {
+      navbar.removeAttribute("hidden");
       this.toggleNavbar();
     }
   }
@@ -115,10 +113,10 @@ class ViewMembers extends Component {
     }
     if (this.state.lastSize === 0) {
       this.state.lastSize = document.body.clientHeight;
-      document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener("resize", () => {
           this.toggleNavbar2();
-        })
+        });
       });
     }
     const postItems = (
@@ -143,13 +141,42 @@ class ViewMembers extends Component {
                   <Collapsible
                     trigger={
                       <div className="username-and-email">
-                        <b>{post.username}</b>
-                        <img
-                          src={memberIcon}
-                          className="membership-icon"
-                          alt="Is a Member"
-                        />
-                        <div>{post.email}</div>
+                        <div className="view-members-username-email">
+                          <b>{post.username}</b>
+                          <div className="view-non-members-email">
+                            {post.email}
+                          </div>
+                        </div>
+                        <div className="view-members-icon">
+                          <img
+                            src={memberIcon}
+                            className="membership-icon"
+                            alt="Is a Member"
+                          />
+                        </div>
+                        <div className="expiry-time-column">
+                          <div
+                            className={
+                              this.status(
+                                this.state.timeLeftOnMembership[index]
+                              )
+                                ? "bad"
+                                : "okay"
+                            }
+                          >
+                            <div>
+                              <b>
+                                {post.memberExpiryDate
+                                  .substring(0, 10)
+                                  .split("-")
+                                  .join("/")}
+                              </b>
+                              <div>
+                                {this.state.timeLeftOnMembership[index]} Months
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     }
                   >
@@ -161,21 +188,6 @@ class ViewMembers extends Component {
                       </div>
                     </div>
                   </Collapsible>
-                </td>
-                <td className="second-column">
-                  <div className="expiry-time-column">
-                    <div
-                      className={
-                        this.status(this.state.timeLeftOnMembership[index])
-                          ? "bad"
-                          : "okay"
-                      }
-                    >
-                      <div>{(post.memberExpiryDate.substring(0, 10)).split('-').join('/')}
-                    <div>{this.state.timeLeftOnMembership[index]} Months</div>
-                    </div>
-                  </div>
-                  </div>
                 </td>
               </tr>
             ))}

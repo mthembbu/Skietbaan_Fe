@@ -14,9 +14,9 @@
      /*open filter selection*/
      .filter-selections{
         width: 100%;
-        background-color: #F9F9F9;
+        background-color: #F5F5F5;
         display: inline-block;
-        margin-top: 30px;
+        padding-top: 30px;
         min-height: 200px;
         overflow-y: overlay;
         margin-bottom: 0px;
@@ -30,7 +30,6 @@
          border-radius: 18px;
          border-width:1px;
          border-color: #BE0000;
-         box-shadow: 0 10px 16px -6px rgba(0,0,0,.33);
      }
      .filter-selections .category-selection .choose-comps{
          color: #555555;
@@ -39,7 +38,6 @@
          text-align: center;
          border-top-left-radius: 18px;
          border-bottom-left-radius: 18px;
-         box-shadow: 0 10px 16px -6px rgba(0,0,0,.33);
      }
      .filter-selections .category-selection .choose-comps-active{
          background-color: #BE0000;
@@ -51,6 +49,7 @@
          border-width:thin;
          border-color: #BE0000;
          border-radius: 18px;
+         box-shadow: 0px 3px 8px -3px black;
      }
      .filter-selections .category-selection .choose-comps a{
         width: 100%;
@@ -100,7 +99,7 @@
          border-color: #BE0000;
          border-radius: 18px;
          cursor: pointer;
-         box-shadow: 0 10px 16px -6px rgba(0,0,0,.33);
+         box-shadow: 0px 3px 8px -3px black;
      }
      .filter-selections .category-selection .choose-groups-active a{
          width: 100%;
@@ -120,10 +119,10 @@
          background: transparent;
          margin-top: 38px;
          margin-bottom: 0%;
-         background-color: #F9F9F9;
+         background-color: #F5F5F5;
      }
      .filter-selections .cat-visible-groups-label{
-         color: #6F839E;
+         color: #7B7B7B;
          text-align: center;
          font-family: Helvetica;
          font-size: 18px;
@@ -144,7 +143,6 @@
           margin-top: 2%;
           color: #fdfdfd;
           background-color: #BE0000;
-          box-shadow: 0 10px 16px -6px rgba(0,0,0,.33);
      }
      .filter-selections .individual-inactive{
          border: solid;
@@ -159,7 +157,6 @@
           margin-top: 2%;
           color: #6F839E;
           cursor: pointer;
-          box-shadow: 0 10px 16px -6px rgba(0,0,0,.33);
      }
      .filter-selections .individual-inactive a{
          color: #6F839E;
@@ -189,7 +186,7 @@
          width: 100%;
          height: 100%; 
          margin: auto;
-         background-color: #F9F9F9;
+         background-color: #F5F5F5;
          display: inline-flex;
          
      }
@@ -229,7 +226,6 @@
           font-size: 15px;
           vertical-align: inherit;
           cursor: pointer;
-          box-shadow: 0 10px 16px -6px rgba(0,0,0,.33);
       }
      .filter-selections .selections-container .row .choose .selection-table tr .td-active{
          border: solid;
@@ -244,7 +240,6 @@
          font-size: 15px;
          vertical-align: inherit;
          cursor: pointer;
-         box-shadow: 0 10px 16px -6px rgba(0,0,0,.33);
      }
      /*closed filter section*/
      .closed-filter-section{
@@ -254,6 +249,7 @@
          background-image: linear-gradient(to right, #ef3024  , #Dc0600);
          border-bottom-right-radius: 20px;
          border-bottom-left-radius: 20px;
+         box-shadow: 0px 2px 19px 2px grey;
      }
      .closed-filter-section .filter-table1{
          width: 100%;
@@ -354,6 +350,14 @@
          color: #6F839E;
          background-color: #fdfdfd;
          overflow-y:overlay;
+     }
+     .ranking-table-section .ranking-table .rank-table-empty-footer tr td .empty-div{
+        width: 100%;
+        height: 85px;
+     }
+     .ranking-table .rank-table-empty-footer tr td .empty-div{
+        width: 100%;
+        height: 85px;
      }
      .ranking-table-head{
         width: 100%;
@@ -814,14 +818,14 @@
     }
     .current-user-table-section .ranking-table .rank-row .rank-col .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .ranking .number{
         height: 100%;	
-        width: 10px;	
+        width: 100%;	
         font-size: 14px;
         text-align: center;
         font-family: Helvetica;
         font-weight: lighter;
+        font-weight: 400;
         color: white;	
         margin: auto;
-        padding-top: 2px;
     }
     .current-user-table-section .ranking-table .rank-row .rank-col .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .ranking img{
         width: 23px;
@@ -924,7 +928,7 @@
     position: fixed;
     width: 100%;
     bottom: 0;
-    margin-bottom: 58px;
+    margin-bottom: 52px;
     background-color: transparent;
   }
   
@@ -933,6 +937,14 @@
   }
   @media only screen and (min-width: 576px) {
      /* tablets and desktop */
+     .closed-filter-section{
+         margin-bottom: 4px;
+     }
+     .ranking-table-head{
+        width: 100%;
+        height: 36px;
+        background-color: #F5F5F5;
+     }
      .userWrapper{
         position: fixed;
         width: 100%;
@@ -940,7 +952,9 @@
         margin-right: 0%;
         bottom: 0;
         margin-bottom: 0px !important;
-        background: transparent;
+        background: white;
+        transform: none !important;
+        opacity: unset !important;
      }
      .userWrapper .row{
          background: transparent;
@@ -967,7 +981,7 @@
         box-shadow: 0px 17px 67px -2px grey;
      }
      .ranking-table-section {
-        box-shadow: 0px 17px 18px -2px grey;
+        box-shadow: 0px 2px 4px 0px grey !important;
      }
      .filter-selections .selections-container .row .empty-div{
         display: none;
@@ -979,6 +993,63 @@
      .filter-selections .selections-container .row .choose .right-choose{
         height: 100%;
         width: 33%;
+     }
+     .current-user-table-section .ranking-table .rank-row .rank-col .user-details-table{
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 20px 24px -1px rgba(.33,.33,.33,.33);
+        background-color: transparent;
+        border-radius: 8px;
+        height: 48px;
+        box-shadow: 1px 10px 12px -3px grey;
+    }
+    .leaderboard-container .row .boostrap-col-8{
+        padding-left: 13px !important;
+        padding-right: 13px !important;
+     }
+     .ranking-table-section .ranking-table .rank-row .rank-col .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .ranking{
+         padding-right: 0%;
+     }
+     .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-icon-col{
+         width: 20%;
+     }
+     .ranking-table-section .ranking-table .rank-row .rank-col .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .extra-name-col-top{
+         width: 20%;
+         text-align: center;
+     }
+     .ranking-table-section .ranking-table .rank-row .rank-col .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .extra-name-col{
+        width: 20%;
+        text-align: center;
+     }
+     .current-user-table-section .ranking-table .rank-row .rank-col .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .extra-name-col{
+         width: 20%;
+         text-align: center;
+     }
+     .current-user-table-section .ranking-table .rank-row .rank-col .user-details-table .user-details-row .rank-icon-col{
+         width: 20%;
+     }
+     .rank-number-container{
+         width: 100%;
+     }
+     .rank-number-container .member-status-icons{
+         margin-left: 10%;
+     }
+     .rank-number-container .member-rank-icons{
+         margin: auto;
+     }
+     .ranking-table-head tbody .header-row2 .grouping-label-col{
+        width: 20%;
+        text-align: center;
+     }
+     .ranking-table-head tbody .header-row2 .col-empty{
+        width: 20%;
+     }
+     .closed-filter-section .filter-table1 .header-row1 .filter-icon-col{
+         padding-left: 40px;
+     }
+     .closed-filter-section .filter-table1 .header-row1 .filter-icon-col .filter-icon{
+        width: 28px;
+        margin: auto;
      }
  }
  @media only screen and (max-width: 575px) {
@@ -1006,5 +1077,6 @@
     .leaderboard-container .row .boostrap-col-8{
         background-color: #F5F5F5;
      }
+     
 }
  

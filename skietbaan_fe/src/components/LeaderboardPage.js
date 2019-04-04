@@ -45,6 +45,7 @@ class LeaderboardPage extends Component {
         this.getRankTableHeight = this.getRankTableHeight.bind(this);
         this.getFilterTableHeight = this.getFilterTableHeight.bind(this);
         this.getClickableSpaceSize = this.getClickableSpaceSize.bind(this);
+        this.roundOfScores = this.roundOfScores.bind(this);
     }
     componentDidMount() {
         // Additionally I could have just used an arrow function for the binding `this` to the component...
@@ -120,7 +121,14 @@ class LeaderboardPage extends Component {
             }
         }
     }
-
+    roundOfScores = (score) =>{
+        var roundedScore = score.toFixed(1);//round off to one decimal place
+        if(score+".0" === roundedScore){//avoid converting intergers to decimals (eg 20 to 20.0)
+            return score;
+        }else{
+            return roundedScore;
+        }
+    }
     setCompetitionValue = (value) => {
         this.setState({
             selectedCompetition: value
@@ -188,7 +196,7 @@ class LeaderboardPage extends Component {
     getFilterTableHeight() {
         if (this.state.width < 575 && this.state.listType === "competitions") {
             return ((this.state.height) - 339);
-        }if (this.state.width < 575 && this.state.listType === "groups") {
+        } if (this.state.width < 575 && this.state.listType === "groups") {
             return ((this.state.height) - 434);
         } else {
             return 315;
@@ -253,7 +261,7 @@ class LeaderboardPage extends Component {
             return groupsList;
         }
     }
-    
+
     render() {
 
         if (!getCookie("token")) {
@@ -331,7 +339,7 @@ class LeaderboardPage extends Component {
                                         <tbody>
                                             <tr>
                                                 <td className={(post.rank > 0 && post.rank < 4) ? "extra-name-col-top" : "extra-name-col"}><div>{post.displayName == null ? post.username : post.displayName}</div></td>
-                                                <td className={this.state.selectedRank === "best" ? "score-col-active" : "score-col"}>{post.best != 0 ? post.best : '--'}</td>
+                                                <td className={this.state.selectedRank === "best" ? "score-col-active" : "score-col"}>{post.best != 0 ? this.roundOfScores(post.best) : '--'}</td>
                                                 <td className={this.state.selectedRank === "average" ? "score-col-active" : "score-col"}>
                                                     <div className="member-rank-icons">
                                                         <div className="up-arrow">
@@ -342,7 +350,7 @@ class LeaderboardPage extends Component {
                                                             </div>
                                                         </div>
                                                         <div className="ranking">
-                                                            <div className="number">{post.average != 0 ? post.average : '--'}</div>
+                                                            <div className="number">{post.average != 0 ? this.roundOfScores(post.average) : '--'}</div>
                                                         </div>
                                                         <div className="down-arrow">
                                                             <div className="down-arrow-icon">
@@ -354,7 +362,7 @@ class LeaderboardPage extends Component {
                                                     </div>
 
                                                 </td>
-                                                <td className={this.state.selectedRank === "total" ? "score-col-active" : "score-col"}>{post.total != 0 ? post.total : '--'}</td>
+                                                <td className={this.state.selectedRank === "total" ? "score-col-active" : "score-col"}>{post.total != 0 ? this.roundOfScores(post.total) : '--'}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -495,6 +503,13 @@ class LeaderboardPage extends Component {
                                     <tbody>
                                         {tablebody}
                                     </tbody>
+                                    <tfoot className="rank-table-empty-footer">
+                                        <tr>
+                                            <td>
+                                                <div className="empty-div"></div>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </Collapse>
@@ -504,7 +519,7 @@ class LeaderboardPage extends Component {
                 <Motion defaultStyle={{ x: -200, opacity: 0 }}
                     style={{
                         x: spring(this.state.collapseFilter ? -400 : 0),
-                        opacity: spring(this.state.collapseFilter ? 0 : 1, { stiffness: 6, damping: 6, precision: 0.1 })
+                        opacity: spring(this.state.collapseFilter ? 0.5 : 1, { stiffness: 6, damping: 6, precision: 0.1 })
                     }}>
                     {style => (<div className="userWrapper" style={{
                         transform: `translateX(${style.x}px)`,
