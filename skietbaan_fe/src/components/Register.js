@@ -7,7 +7,7 @@ import {
 import '../components/RegisterStyles.css';
 import { validateEmail, validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
-import { URL } from '../actions/types.js';
+import { BASE_URL } from '../actions/types.js';
 import skietbaan from '../components/assets/skietbaanLogo.png';
 
 class Register extends Component {
@@ -42,7 +42,7 @@ class Register extends Component {
 
   componentDidMount() {
     this.disableButton();
-    fetch(URL + "/api/User", {
+    fetch(BASE_URL + "/api/User", {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -163,7 +163,7 @@ class Register extends Component {
         "Email": this.state.emailValue,
         "Password": hash,
       }
-      fetch(URL + "/api/user", {
+      fetch(BASE_URL + "/api/user", {
         method: 'post',
         headers: {
           'Accept': 'application/json',

@@ -7,7 +7,7 @@ import {
 import '../components/RegisterStyles.css';
 import { validateUsername, validateEmail } from './Validators.js';
 import { getCookie } from './cookie.js';
-import { URL } from '../actions/types.js';
+import { BASE_URL } from '../actions/types.js';
 import back from '../components/assets/Back.png';
 import skietbaan from '../components/assets/skietbaanLogo.png';
 import history from "./history";
@@ -135,7 +135,7 @@ class Login extends Component {
           "Password": hash,
         }
       }
-      fetch(URL + "/api/features/login", {
+      fetch(BASE_URL + "/api/features/login", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
