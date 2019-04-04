@@ -9,11 +9,10 @@ import {
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../scss/view-comp.css";
-import { URL, handleErrors } from "../actions/types";
+import { BASE_URL, handleErrors,URL } from "../actions/types";
 import letterhead from "./compassets/letterofgoodstanding.png";
 import { Form, Container, Row, Col } from "react-bootstrap";
 import Switch from "@material-ui/core/Switch";
-import { BASE_URL } from "../actions/types";
 
 class ViewComp extends Component {
   constructor(props) {
@@ -163,7 +162,7 @@ class ViewComp extends Component {
     this.props.updateRequirements(index, RData);
   };
   //The method that fetches the requirements everytime the competition is clicked on
-  //End-point: URL/R/{ID}
+  //End-point: BASE_URL/R/{ID}
   getRequirements(index) {
     this.setState({ idCompToggel: index });
     this.changeToggle();
@@ -203,11 +202,8 @@ class ViewComp extends Component {
                   <tr>
                     <td className="td-col">
                       <div>
-                        <div
-                          className="test1"
-                          onClick={() => this.getRequirements(compVar.id)}
-                        >
-                          <label class="competition-containers">
+                        <div className="test1" onClick={() => this.getRequirements(compVar.id)}>
+                        <label class="competition-containers">
                             {compVar.name} {compVar.requirements}
                           </label>
                         </div>
@@ -272,15 +268,15 @@ class ViewComp extends Component {
                             <Row>
                               <Col xs={4} md={4} />
                               <Col xs={4} md={4}>
-                                <label>ACCURACY %</label>
+                              <div className="accuracy-header-label">ACCURACY %</div>
                               </Col>
                               <Col xs={4} md={4}>
-                                <label>TOTAL</label>
+                                <div className="total-header-label">TOTAL</div>
                               </Col>
                             </Row>
                             <Row className="bronze-row">
                               <Col xs={4} md={4}>
-                                <div class="accuracy-label">Bronze Award: </div>
+                                <div class="accuracy-header-label">Bronze Award: </div>
                               </Col>
                               <Col xs={4} md={4}>
                                 <div className="">
