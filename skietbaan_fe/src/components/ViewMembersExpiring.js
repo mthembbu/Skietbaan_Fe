@@ -120,7 +120,10 @@ class ViewMembersExpiring extends Component {
       .then(function(response) {
         return response.json();
       })
-      .then(function(data) {})
+      .then(data => {
+        this.getExpiringMembers();
+        this.setState({ filterText: "" });
+      })
       .catch(function(data) {});
   }
 
@@ -200,7 +203,7 @@ class ViewMembersExpiring extends Component {
                               this.status(
                                 this.state.timeLeftOnMembership[index]
                               )
-                                ? "bad"
+                                ? "view-exp-bad "
                                 : "okay"
                             }
                           >

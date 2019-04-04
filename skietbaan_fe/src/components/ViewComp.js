@@ -130,12 +130,12 @@ class ViewComp extends Component {
     this.setState({ dict: newDict });
   }
   //the method that adds the update for the inputs
-  handleOnSubmit = index => {
+  handleOnSubmit = (e, index) => {
+    e.preventDefault();
     this.updateNumberOfShots();
-    //this.makeLetterOfStatus;
     const BronzeData = {
       standard: "Bronze",
-      accuracy: this.state.bronzeAccuracy.replace("%", "").to,
+      accuracy: this.state.bronzeAccuracy,
       total: this.state.bronzeTotal
     };
     const SilverData = {
@@ -454,8 +454,8 @@ class ViewComp extends Component {
                                     variant="secondary"
                                     type="submit"
                                     id="submit-btn"
-                                    onClick={() =>
-                                      this.handleOnSubmit(compVar.id)
+                                    onClick={e =>
+                                      this.handleOnSubmit(e, compVar.id)
                                     }
                                   >
                                     UPDATE
