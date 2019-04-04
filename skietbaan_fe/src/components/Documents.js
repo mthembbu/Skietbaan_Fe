@@ -27,7 +27,7 @@ class Documents extends Component {
     fetch(BASE_URL + "/api/Documents/UserLOGS/" + token)
       .then(res => res.json())
       .then(data => {
-        if(this._isMounted){
+        if (this._isMounted) {
           this.setState({ sendLogsReturn: data });
         }
       });
@@ -35,8 +35,8 @@ class Documents extends Component {
     fetch(BASE_URL + "/api/Documents/UserLOS/" + token)
       .then(res => res.json())
       .then(data => {
-        if(this._isMounted){
-          this.setState({ sendLosReturn: data })
+        if (this._isMounted) {
+          this.setState({ sendLosReturn: data });
         }
       });
   }
@@ -85,7 +85,7 @@ class Documents extends Component {
     }
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this._isMounted = false;
   }
 
@@ -128,7 +128,10 @@ class Documents extends Component {
               {this.state.sendLogsReturn !== "Document" ? (
                 <div>
                   <b>Letter of Good Standing:</b>
-                  <p>requires 5 more shoots.</p>
+                  <p>
+                    requires you to pay your membership and participate in
+                    atleast one competition
+                  </p>
                 </div>
               ) : null}
             </div>
@@ -168,7 +171,7 @@ class Documents extends Component {
               {this.state.sendLosReturn !== "Document" ? (
                 <div>
                   <b>Letter of Status:</b>
-                  <p>requires further shooting documentation.</p>
+                  <p>{this.state.sendLosReturn}</p>
                 </div>
               ) : null}
             </div>
