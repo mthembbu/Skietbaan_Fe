@@ -425,11 +425,6 @@ class notification extends Component {
             SEND ANNOUNCEMENT
           </button>
         </div>
-        <Collapse isOpened={this.state.adminToggle === true}>
-          <div>
-            <label>RANDOM</label>
-          </div>
-        </Collapse>
       </div>
     );
 
