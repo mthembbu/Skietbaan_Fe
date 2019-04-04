@@ -42,7 +42,7 @@ class ViewComp extends Component {
     this.getRequirements = this.getRequirements.bind(this);
     this.onChange = this.onChange.bind(this);
     this.changeToggle = this.changeToggle.bind(this);
-    this.changeStatusOfLOGS = this.changeStatusOfLOGS.bind(this);
+    this.changeStatusOfLogs = this.changeStatusOfLogs.bind(this);
     this.updateNumberOfShots = this.updateNumberOfShots.bind(this);
     this.getDefaultShots = this.getDefaultShots.bind(this);
     this.makeLetterOfStatus = this.makeLetterOfStatus.bind(this);
@@ -89,7 +89,7 @@ class ViewComp extends Component {
   }
 
   makeLetterOfStatus(CompID) {
-    this.changeStatusOfLOGS();
+    this.changeStatusOfLogs();
 
     fetch(BASE_URL + "/api/Documents/getGroup?ID=" + CompID, {
       method: "post",
@@ -177,7 +177,7 @@ class ViewComp extends Component {
     this.setState({ toggleRequirements: !this.state.toggleRequirements });
   }
 
-  changeStatusOfLOGS() {
+  changeStatusOfLogs() {
     this.setState({ isLetterOfStatus: !this.state.isLetterOfStatus });
   }
 
