@@ -8,7 +8,7 @@ import {
   UPDATE_REQ
 } from "./types";
 //fetch the array of competitions
-export const fetchcomp = () => dispatch => {
+export const fetchComp = () => dispatch => {
   fetch(URL + "/api/Competition/all")
     .then(res => res.json())
     .then(compData => {
@@ -88,7 +88,7 @@ export const fetchParticipants = () => dispatch => {
     });
 };
 //creating a single competition
-export const createcomp = compData => dispatch => {
+export const createComp = compData => dispatch => {
   fetch(URL + "/api/Competition", {
     method: "POST",
     headers: {

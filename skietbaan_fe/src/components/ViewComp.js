@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {
-  fetchcomp,
+  fetchComp,
   updateByIdComp,
   fetchParticipants,
   fetchRequirements,
@@ -50,7 +50,7 @@ class ViewComp extends Component {
   }
   // The method that mounts everytime there is an action detected
   componentDidMount() {
-    this.props.fetchcomp();
+    this.props.fetchComp();
     this.props.fetchParticipants();
 
     this.getDefaultShots();
@@ -485,7 +485,7 @@ class ViewComp extends Component {
   }
 }
 ViewComp.propTypes = {
-  fetchcomp: PropTypes.func.isRequired,
+  fetchComp: PropTypes.func.isRequired,
   fetchParticipants: PropTypes.func.isRequired,
   fetchRequirements: PropTypes.func.isRequired,
   compOBJ: PropTypes.array.isRequired,
@@ -507,7 +507,7 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
-    fetchcomp,
+    fetchComp,
     updateByIdComp,
     fetchParticipants,
     fetchRequirements,
