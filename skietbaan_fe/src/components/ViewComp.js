@@ -108,17 +108,6 @@ class ViewComp extends Component {
           this.setState({ activatedCompetition: data });
         });
     }, 2000);
-    })
-      .then(function(response) {})
-      .then(function(data) {})
-      .catch(function(data) {});
-    setTimeout(() => {
-      fetch(BASE_URL + "/api/Documents/StatusCompetition")
-        .then(res => res.json())
-        .then(data => {
-          this.setState({ activatedCompetition: data });
-        });
-    }, 2000);
   }
 
   componentWillReceiveProps(val) {
@@ -224,8 +213,6 @@ class ViewComp extends Component {
                             {compVar.id === this.state.activatedCompetition ? (
                               <img className="letter-image" src={letterhead} />
                             ) : null}
-                              alt="golf"
-                            />
                           </div>
                         </div>
 
