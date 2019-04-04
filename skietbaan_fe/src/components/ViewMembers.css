@@ -187,6 +187,7 @@
 }
 
 .username-and-email {
+  font-family: helvetica;
   font-size: 16px;
   height: 55px;
 }
@@ -199,6 +200,10 @@
 
 .bad {
   color: #be0000;
+}
+
+.view-exp-bad {
+  color: #be0000;
   font-weight: bold;
 }
 
@@ -208,12 +213,14 @@
 }
 
 .expiry-time-column {
-  font-size: 15px;
+  float: right;
+  font-size: 12px;
   height: 55px;
-  padding-left: 10px;
+  padding-right: 23px;
 }
 
 .view-members-exp-expiry-time-column {
+  font-family: helvetica;
   font-size: 15px;
   height: 55px;
   padding-right: 23px;
@@ -247,7 +254,8 @@
 }
 
 .view-members-membership-details {
-  font-size: 13px;
+  font-family: helvetica;
+  font-size: 14px;
   margin-bottom: 20px;
 }
 
@@ -261,4 +269,42 @@
   text-align: center;
   width: 100%;
   padding-right: 25px;
+}
+
+.view-non-members-email {
+  font-size: 14px;
+}
+
+.view-non-members-arrow {
+  width: 10%;
+  float: right;
+  padding-right: 43px;
+  padding-top: 5px;
+}
+
+.view-non-members-image {
+  width: 24px;
+  height: 12px;
+}
+
+.view-non-members-users-email {
+  width: 70%;
+  float: left;
+}
+
+.view-members-icon {
+  float: left;
+  width: 17px;
+  height: 17px;
+  padding-top: 10px;
+  padding-left: 35px;
+}
+
+.view-members-username {
+  float: left;
+}
+
+.view-members-username-email {
+  width: 45%;
+  float: left;
 }
