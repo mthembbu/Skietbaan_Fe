@@ -4,6 +4,7 @@
 	border-radius: 5px;
 	border: 1px solid #979797;
 	padding: 10px;
+	margin-top: 10px;
 	text-decoration-color: #666666;
 	background-color: #FFFFFF;
 	font-weight: bold;
@@ -80,6 +81,9 @@
 
 .create-comp-container {
 	text-align: center;
+}
+.containers-input{
+	padding-top: 17px;
 }
 
 @media all and (min-width: 480px) {
