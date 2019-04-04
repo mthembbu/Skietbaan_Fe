@@ -4,12 +4,12 @@ import {
   updateByIdComp,
   fetchParticipants,
   fetchRequirements,
-  UpdateRequirements
+  updateRequirements
 } from "../actions/competition.action";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../scss/view-comp.css";
-import { URL } from "../actions/types";
+import { URL, handleErrors } from "../actions/types";
 import letterhead from "./compassets/letterofgoodstanding.png";
 import { Form, Container, Row, Col } from "react-bootstrap";
 import Switch from "@material-ui/core/Switch";
@@ -45,6 +45,8 @@ class ViewComp extends Component {
     this.changeStatusOfLOGS = this.changeStatusOfLOGS.bind(this);
     this.updateNumberOfShots = this.updateNumberOfShots.bind(this);
     this.getDefaultShots = this.getDefaultShots.bind(this);
+    this.makeLetterOfStatus = this.makeLetterOfStatus.bind(this);
+    this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
   // The method that mounts everytime there is an action detected
   componentDidMount() {
@@ -55,25 +57,14 @@ class ViewComp extends Component {
   }
 
   getDefaultShots() {
-    fetch(BASE_URL + "/api/Documents/StatusCompetition", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
+    fetch(BASE_URL + "/api/Documents/StatusCompetition")
+      .then(handleErrors)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         this.setState({ activatedCompetition: data });
       });
-    fetch(BASE_URL + "/api/Documents/NumberOFShots", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
+    fetch(BASE_URL + "/api/Documents/NumberOFShots")
+      .then(handleErrors)
       .then(res => res.json())
       .then(data => {
         this.setState({ numberofshots: data });
@@ -97,7 +88,7 @@ class ViewComp extends Component {
       .catch(function(data) {});
   }
 
-  MakeLetterOfStatus(CompID) {
+  makeLetterOfStatus(CompID) {
     this.changeStatusOfLOGS();
 
     fetch(BASE_URL + "/api/Documents/getGroup?ID=" + CompID, {
@@ -139,9 +130,9 @@ class ViewComp extends Component {
     this.setState({ dict: newDict });
   }
   //the method that adds the update for the inputs
-  HandleOnSubmit = index => {
-    this.updateNumberOfShots;
-    this.MakeLetterOfStatus;
+  handleOnSubmit = index => {
+    this.updateNumberOfShots();
+    //this.makeLetterOfStatus;
     const BronzeData = {
       standard: "Bronze",
       accuracy: this.state.bronzeAccuracy.replace("%", "").to,
@@ -158,7 +149,7 @@ class ViewComp extends Component {
       total: this.state.goldTotal
     };
     const RData = [BronzeData, SilverData, GoldData];
-    this.props.UpdateRequirements(index, RData);
+    this.props.updateRequirements(index, RData);
   };
   //The method that fetches the requirements everytime the competition is clicked on
   //End-point: URL/R/{ID}
@@ -180,8 +171,6 @@ class ViewComp extends Component {
   }
   onChange({ target }) {
     this.setState({ [target.name]: target.value });
-
-    console.log(this.state.numberofshots);
   }
 
   changeToggle() {
@@ -193,7 +182,6 @@ class ViewComp extends Component {
   }
 
   render() {
-    console.log(this.state.numberofshots);
     const displayCompetitions = (
       <div className="page-contents">
         <table class="table-view-competitions">
@@ -429,7 +417,7 @@ class ViewComp extends Component {
                                         : false
                                     }
                                     onClick={() =>
-                                      this.MakeLetterOfStatus(compVar.id)
+                                      this.makeLetterOfStatus(compVar.id)
                                     }
                                   />
                                 </div>
@@ -466,7 +454,9 @@ class ViewComp extends Component {
                                     variant="secondary"
                                     type="submit"
                                     id="submit-btn"
-                                    onClick={this.updateNumberOfShots}
+                                    onClick={() =>
+                                      this.handleOnSubmit(compVar.id)
+                                    }
                                   >
                                     UPDATE
                                   </button>
@@ -521,6 +511,6 @@ export default connect(
     updateByIdComp,
     fetchParticipants,
     fetchRequirements,
-    UpdateRequirements
+    updateRequirements
   }
 )(ViewComp);

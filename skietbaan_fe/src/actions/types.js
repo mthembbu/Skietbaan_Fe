@@ -36,7 +36,7 @@ export const FETCH_REQ = "FETCH_REQUIREMENTS";
 export const UPDATE_REQ = "UPDATE_REQUIREMENTS";
 export const UPDATE_COMP_STATUS = "UPDATE_COMP_STATUS";
 export const PARTICIPANTS_PER_COMP = "PARTICIPANTS_PER_COMP";
-export const BASE_URL = "http://localhost:50860";
+export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
 
 //leaderboard types
 export const FETCH_LEADERBOARDFILTER_DATA = "FETCH_LEADERBOARDFILTER_DATA";
@@ -45,7 +45,7 @@ export const UPDATE_SELECTED_COMPETITION = "UPDATE_SELECTED_COMPETITION";
 export const UPDATE_SELECTED_GROUP = "UPDATE_SELECTED_GROUP";
 
 //groups types and constants
-export const URL = "http://localhost:50860";
+export const URL = "https://api.skietbaan.retrotest.co.za";
 export const UPDATENAME = "UPDATENAME";
 export const UPDATE_GROUPNAME = "UPDATE_GROUPNAME";
 export const CREATEGROUP = "CREATEGROUP";
@@ -66,3 +66,10 @@ export const UPDATE_IS_READ = "UPDATE_IS_READ";
 export const PROFILE_SET_SELECTED_COMPETITION =
   "PROFILE_SET_SELECTED_COMPETITION";
 export const LANDING_SET_SELECTED_PAGE = "LANDING_SET_SELECTED_PAGE";
+
+export const handleErrors = response => {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
+};
