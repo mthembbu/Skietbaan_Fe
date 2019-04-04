@@ -18,7 +18,7 @@ class ViewNonMembers extends Component {
       updateName: "",
       indexNumber: 0,
       lastSize: 0,
-      navbarState: false,
+      navbarState: false
     };
     this.getNonMembers = this.getNonMembers.bind(this);
     this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -33,13 +33,12 @@ class ViewNonMembers extends Component {
 
   toggleNavbar() {
     this.setState({
-      navbarState: !this.state.navbarState,
-    })
+      navbarState: !this.state.navbarState
+    });
     var navbar = document.querySelector(".navbar-admin");
     if (navbar.classList.contains("hidden")) {
       navbar.classList.remove("hidden");
-    }
-    else {
+    } else {
       navbar.classList.add("hidden");
     }
   }
@@ -47,11 +46,10 @@ class ViewNonMembers extends Component {
   toggleNavbar2() {
     var navbar = document.querySelector(".navbar-admin");
     if (this.state.lastSize > document.body.clientHeight) {
-      navbar.setAttribute('hidden', 'true');
+      navbar.setAttribute("hidden", "true");
       this.toggleNavbar();
-    }
-    else {
-      navbar.removeAttribute('hidden');
+    } else {
+      navbar.removeAttribute("hidden");
       this.toggleNavbar();
     }
   }
@@ -105,21 +103,26 @@ class ViewNonMembers extends Component {
 
   updateMember(index) {
     let RequestObject = {
-      "username": this.state.array[index].username,
-      "memberID": this.state.membershipsID,
-      "memberExpiryDate": this.getCurrentDate() + "T00:00:00"
-    }
+      username: this.state.array[index].username,
+      memberID: this.state.membershipsID,
+      memberExpiryDate: this.getCurrentDate() + "T00:00:00"
+    };
     fetch(BASE_URL + "/api/Features/Update", {
-      method: 'Post',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      method: "Post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(RequestObject)
     })
-      .then(function (response) {
+      .then(function(response) {
         return response.json();
       })
-      .then(function (data) { })
-      .catch(function (data) { });
-  
+      .then(data => {
+        this.getNonMembers();
+        this.setState({ filterText: "" });
+      })
+      .catch(function(data) {});
   }
 
   onChangeText(event) {
@@ -143,7 +146,7 @@ class ViewNonMembers extends Component {
 
   handleChange(event) {
     this.setState({ membershipsID: event.target.value });
-}
+  }
 
   render() {
     if (!getCookie("token")) {
@@ -151,10 +154,10 @@ class ViewNonMembers extends Component {
     }
     if (this.state.lastSize === 0) {
       this.state.lastSize = document.body.clientHeight;
-      document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener("resize", () => {
           this.toggleNavbar2();
-        })
+        });
       });
     }
     const postItems = (
