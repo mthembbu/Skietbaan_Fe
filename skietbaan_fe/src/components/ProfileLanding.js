@@ -4,6 +4,7 @@ import "../bootstrap/ProfileLanding.css";
 import UserProfile from "./UserProfile";
 import Documents from "./Documents";
 import UserDetails from "./userDetails";
+import StatisticsPage from "./StatisticsPage"
 import { getCookie } from "./cookie.js";
 import history from "./history";
 import { connect } from "react-redux";
@@ -52,7 +53,7 @@ class ProfileLanding extends Component {
 
   render() {
     return (
-      <div>
+      <div className="profile-landing-container">
         <div
           className={
             this.props.selectedButton == 1
@@ -143,7 +144,7 @@ class ProfileLanding extends Component {
           {this.props.selectedButton == 1 ? (
             <UserProfile />
           ) : this.props.selectedButton == 3 ? (
-            <UserDetails />
+            <StatisticsPage />
           ) : this.props.selectedButton == 2 ? (
             <Documents />
           ) : null}

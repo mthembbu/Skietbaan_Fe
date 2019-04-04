@@ -205,7 +205,6 @@ class UserProfile extends Component {
                             </div> : null
                         }
                     </div>
-
                 </div>
             </div>
         );
