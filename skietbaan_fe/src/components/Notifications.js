@@ -229,7 +229,7 @@ class notification extends Component {
       <div className="page-heading">
         <div className="notification-gun-overlay-image">
           <div className="outer-header-div">
-            <label>NOTIFICATIONS</label>
+            <label className="label-for-score">NOTIFICATIONS</label>
           </div>
         </div>
         <div className="notification-icon-spacing">
@@ -257,9 +257,9 @@ class notification extends Component {
 
     const adminHeadingItems = (
       <div className="page-heading">
-        <div className="notification-gun-overlay-image">
+        <div className="gun-overlay-image">
           <div className="outer-header-div">
-            <label>NOTIFICATIONS</label>
+            <label className="label-for-score">NOTIFICATIONS</label>
           </div>
         </div>
         <div className="notification-spacing">
