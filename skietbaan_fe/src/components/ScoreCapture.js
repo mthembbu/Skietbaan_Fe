@@ -397,7 +397,6 @@ export default class search extends Component {
       this.toggleNavbar();
     }
   }
-
   render() {
     if (this.state.lastSize === 0) {
       this.state.lastSize = document.body.clientHeight;
@@ -466,7 +465,7 @@ export default class search extends Component {
             <div className="centre-labels">
               <label className="label-competition">Select Competition</label>
             </div>
-            <div className="competition-container">
+            <div className="add-score-competition-container">
               {competitionItem}
 
               <div className={this.state.somethingClicked === false
