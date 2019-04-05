@@ -104,6 +104,8 @@ class UserProfile extends Component {
                 this.animateAccuracyCircle(counter, element, index)
             }, 80)
             this.timeouts.push(timeout);
+        }else{
+            $(`#circle${index}`).html(element.accuracy+"%");
         }
     }
 
