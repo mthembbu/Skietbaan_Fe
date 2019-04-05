@@ -1,6 +1,6 @@
 @media only screen and (min-width: 576px) {
   .create-top-nav {
-	height: 195px;
+    height: 254px;
     position: fixed;
     top: 0;
     width: 100%;
@@ -180,10 +180,16 @@
 .page-name-bar {
   height: 67px;
   background-image: linear-gradient(to right, #ef3024, #dc0600);
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   display: flex;
   box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);
+}
+
+@media screen and (min-width:576px)  {
+  .page-name-bar{
+    margin-top: 56px;
+  }
 }
 
 .first-buttons-container {
