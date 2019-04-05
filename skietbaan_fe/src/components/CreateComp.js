@@ -48,8 +48,8 @@ class CreateComp extends Component {
 			Name: this.state.Name /**TODO: Don't forget to change to lowercase to avoid case sensitivity conflicts*/,
 			BestScoresNumber: this.state.BestScoresNumber,
 			Hours: this.state.Hours,
-      Status: true,
-      MaximumScore: this.MaximumScore
+			Status: true,
+			MaximumScore: this.state.MaximumScore
 		};
 		this.props.createComp(compData);
 		if (this.props.isExist == false) {
@@ -131,6 +131,7 @@ class CreateComp extends Component {
 								onChange={this.onChange}
 							/>
 						</div>
+						<div className="requirements-toggle" />
 						<div className="comp-submit-btn-container">
 							<button
 								variant="secondary"
