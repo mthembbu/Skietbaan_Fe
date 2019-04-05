@@ -22,13 +22,13 @@
 }
 
 @media only screen and (min-width: 354px) and (max-width: 368px){
-    .buttons-container button{
+    .profile-buttons-container button{
         width: 83px !important;
     }
 }
 
 @media only screen and (max-width: 353px){
-    .buttons-container button{
+    .profile-buttons-container button{
         width: 70px !important;
     }
 }
@@ -42,13 +42,13 @@
     background-color: transparent;
 }
 
-.buttons-container {
+.profile-buttons-container {
     width: 97%;
     position: relative;
     bottom: 12px;
 }
 
-.buttons-container button{
+.profile-buttons-container button{
     outline: none;
     width: 86px;
     height: 32px;

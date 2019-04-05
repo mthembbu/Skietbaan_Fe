@@ -32,8 +32,8 @@
     border-bottom-right-radius: 15px;
     box-shadow: 0px 10px 16px -6px rgba(0, 0, 0, 0.33);
     position: fixed;
-    width: 51.5%;
-    margin-left: 24.5%;
+    width: 66%;
+    margin-left: 17%
   }
 
   .notifications-body-class {
@@ -86,11 +86,12 @@
   }
 
   .black-delete-icon {
+    margin-right: 5%;
+    margin-top: -37px;
     height: 26px;
     width: 20px;
-    float: right;
-    margin-right: 5%;
-    margin-top: 18px;
+    float: left;
+    margin-left: 85%;
   }
 
   .black-delete-icon:hover {
@@ -100,9 +101,9 @@
   .delete-icon {
     height: 26px;
     width: 20px;
-    float: right;
-    margin-right: 5%;
-    margin-top: 18px;
+    margin-top: -37px;
+    float: left;
+    margin-left: 85%;
   }
 
   .delete-icon:hover {
@@ -259,8 +260,8 @@
   }
 
   .format-content {
-    margin-left: 25%;
-    margin-right: 24%;
+    margin-left: 17%;
+    margin-right: 17%;
     position: static;
     padding-top: 100px;
   }
@@ -600,7 +601,7 @@
   height: 27px;
   width: 30px;
   margin-left: 22px;
-  margin-top: 5px;
+  margin-top: 10px;
   margin-right: 11px;
 }
 
@@ -608,16 +609,25 @@
   height: 28px;
   width: 30px;
   margin-right: 10px;
+  margin-top: -50px;
+    float: left;
+    margin-left: 70%;
 }
 
 .admin-delete-icon {
-  height: 26px;
-  width: 20px;
+  margin-top: -50px;
+    height: 26px;
+    width: 20px;
+    float: left;
+    margin-left: 88%;
 }
 
 .admin-black-delete-icon {
-  height: 26px;
-  width: 20px;
+  margin-top: -50px;
+    height: 26px;
+    width: 20px;
+    float: left;
+    margin-left: 88%;
 }
 
 .notification-icon-on-the-side {
@@ -668,9 +678,10 @@
 .admin-notification-images {
   height: 26px;
   width: 24px;
+  margin-right: 10px;
+  margin-top: -50px;
   float: left;
-  margin-left: 25px;
-  margin-top: 20px;
+  margin-left: 50%;
 }
 
 .disabled-button {
