@@ -53,7 +53,8 @@ class Register extends Component {
       .then(data => this.setState({
         users: data,
       }))
-      .catch(function (data) {
+      .catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
   }
 
@@ -177,7 +178,8 @@ class Register extends Component {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
           window.location = "/home";
         }
-      }).catch(function (data) {
+      }).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
     }
   }

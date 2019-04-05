@@ -163,7 +163,8 @@ class Login extends Component {
             })
           }
         }
-      }).catch(function (data) {
+      }).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
     }
   }

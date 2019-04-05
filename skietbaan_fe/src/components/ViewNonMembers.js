@@ -101,7 +101,9 @@ class ViewNonMembers extends Component {
         this.setState({
           timeLeftOnMembership: data
         })
-      );
+      ).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
   }
 
   updateMember(index) {
@@ -125,7 +127,9 @@ class ViewNonMembers extends Component {
         this.getNonMembers();
         this.setState({ filterText: "" });
       })
-      .catch(function(data) {});
+      .catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
   }
 
   onChangeText(event) {

@@ -30,6 +30,8 @@ export const fetchGroups = () => dispatch => {
         type: FETCH_GROUPS,
         payload: group
       });
+    }).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
 
@@ -45,6 +47,8 @@ export const AddMemberAction = (id) => dispatch => {
         type: ADDMEMBERS,
         payload: newdata
       });
+    }).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
 
@@ -63,7 +67,9 @@ export const createGroups = usersadded => dispatch => {
         type: CREATEGROUP,
         payload: post
       })
-    );
+    ).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+    });
 };
 
 {
@@ -92,7 +98,9 @@ export const fetchEditUser = groupid =>dispatch=>{
       payload:newdata
     })
 
-  })
+  }).catch(err =>  {
+    /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+  });
 }
 
 export const getGroup = () => dispatch => {
@@ -103,7 +111,9 @@ export const getGroup = () => dispatch => {
         type: GETGROUP,
         payload: posts
       })
-    );
+    ).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+    });
 };
 
 export const groupDictionary = () => dispatch => {
@@ -114,7 +124,9 @@ export const groupDictionary = () => dispatch => {
         type: GROUPDICT,
         payload: posts
       })
-    );
+    ).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+    });
 };
 /** The method to feth leaderboard filter data (groups array and competitions array*/
 export const fetchleaderboadfilterdata = () => dispatch => {
@@ -125,7 +137,9 @@ export const fetchleaderboadfilterdata = () => dispatch => {
         type: FETCH_LEADERBOARDFILTER_DATA,
         payload: data
       })
-    );
+    ).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+    });
 };
 /** The method to feth leaderboard rank table data ( arrayy of users scores)*/
 export const fetchleaderboadtabledata = filterSelection => dispatch => {
@@ -146,7 +160,9 @@ export const fetchleaderboadtabledata = filterSelection => dispatch => {
         type: FETCH_LEADERBOARDTABLE_DATA,
         payload: data
       })
-    );
+    ).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+    });
 };
 /** The method to update selected competition state*/
 export const updateSelectedCompetition = competitionName => {
