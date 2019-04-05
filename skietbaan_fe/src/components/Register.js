@@ -212,10 +212,9 @@ class Register extends Component {
           </div>
         </div>
         <div className="centre-login">
-          <Form className="form" autoComplete="off">
+          <form className="form" autoComplete="off">
 
             <div className="spacing-login">
-              <FormGroup>
                   <input
                     type="text"
                     name="usernameValue"
@@ -231,11 +230,8 @@ class Register extends Component {
                       ? "error-message" 
                       : "hidden"} > Username already exists</div>
                     </div>
-                
-              </FormGroup>
             </div>
             <div className="spacing-login">
-              <FormGroup>
                   <input
                     type="text"
                     name="emailValue"
@@ -251,10 +247,8 @@ class Register extends Component {
                   ? "error-message" 
                   : "hidden"} > Email address already in use</div>
                 </div>
-              </FormGroup>
             </div>
             <div className="spacing-login">
-              <FormGroup>
                   <div className="input-label centre-div">
                     <input
                       type="text"
@@ -275,7 +269,6 @@ class Register extends Component {
                     </div>
 
                   </div>
-              </FormGroup>
             </div>
             <div className="button-container">
               <Button onClick={this.register} id="roundButton" 
@@ -284,7 +277,7 @@ class Register extends Component {
                 : "buttons-invalid round-button"} 
               >Join</Button>
             </div>
-          </Form>
+          </form>
         </div>
       </div>
     );

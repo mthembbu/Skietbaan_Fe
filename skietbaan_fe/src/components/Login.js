@@ -217,10 +217,9 @@ class Login extends Component {
           </div>
         </div>
         <div className="centre-login">
-          <Form className="form" autoComplete="off">
+          <form className="form" autoComplete="off">
 
             <div className="spacing-login">
-              <FormGroup>
                 <input
                   type="text"
                   name="usernameValue"
@@ -231,10 +230,8 @@ class Login extends Component {
                   className="input-user"
                   placeholder="Username or Email"
                 />
-              </FormGroup>
             </div>
             <div className="spacing-login">
-              <FormGroup>
                 <div className="input-label centre-div">
                   <input
                     type="text"
@@ -261,7 +258,6 @@ class Login extends Component {
                     && this.usernameValue !== ""
                     ? "hidden" : "error-message"}>Invalid Username or Password</div>
                 </div>
-              </FormGroup>
             </div>
             <div className="login-href">
               <a className="forgot-password-link" href="/forgotPassword" >FORGOT PASSWORD?</a>
@@ -270,7 +266,7 @@ class Login extends Component {
               <button type="button" onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
                 : "buttons-invalid round-button"}>LOGIN</button>
             </div>
-          </Form>
+          </form>
         </div >
       </div>
     );

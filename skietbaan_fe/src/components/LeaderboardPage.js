@@ -378,6 +378,7 @@ class LeaderboardPage extends Component {
             /* Leaderboard Page Main Container */
             <div className="leaderboard-container">
                 <div className="row justify-content-center">
+                 {/* gun background left */}
                     <Col sm={8} className="boostrap-col-8">
                         <div className="closed-filter-section">
                             <table className="filter-table1">
@@ -386,7 +387,7 @@ class LeaderboardPage extends Component {
                                         <td className="competition-name-col">
                                             <div className="gun-icon">
                                                 <Motion
-                                                    defaultStyle={{ x: -200, opacity: 0 }}
+                                                    defaultStyle={{ x: -2000, opacity: 0 }}
                                                     style={{
                                                         x: spring(0),
                                                         opacity: spring(1)
@@ -526,7 +527,7 @@ class LeaderboardPage extends Component {
                         opacity: style.opacity
                     }}>
                         <div className="row justify-content-center">
-                            <div className="col-sm-8 text-left">
+                            <Col sm={8} className="current-user-col-8">
                                 <div className="current-user-table-section">
                                     <table className="ranking-table">
                                         <thead>
@@ -612,7 +613,7 @@ class LeaderboardPage extends Component {
                                         </thead>
                                     </table>
                                 </div>
-                            </div>
+                            </Col >
                         </div>
                     </div>
                     )}
