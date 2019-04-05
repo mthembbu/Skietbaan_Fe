@@ -111,7 +111,7 @@ export class createPages extends Component {
               </div>
               <div className="first-buttons-container">
                 <Row className="buttons-row">
-                  <div className="buttons-squire-rectangle lay-horizontal">
+                  <div className="buttons-squire-rectangle buttons-squire-rectangle-width lay-horizontal">
                     <Col
                       id="removeLeftButtonPadding"
                       className="pad-button-text-top"
@@ -259,7 +259,7 @@ export class createPages extends Component {
                 ) : this.state.selectedButton === 2 ? (
                   <div className="buttons-container">
                     <Row className="buttons-row">
-                      <div className="buttons-squire-rectangle lay-horizontal">
+                      <div className="buttons-squire-rectangle buttons-squire-rectangle-width lay-horizontal">
                         <Col
                           id="removeLeftButtonPadding"
                           className="pad-button-text-top"

@@ -3,8 +3,8 @@
     height: 254px;
     position: fixed;
     top: 0;
-    width: 51.5%;
-    margin-left: 24.5%;
+    width: 66%;
+    margin-left: 17%;
     z-index: 1;
     background: #fdfdfd;
     box-shadow: 2px 1px 16px -3px #000000;
@@ -217,9 +217,13 @@
 
 .buttons-squire-rectangle {
   height: 32px;
-  width: 100%;
+  width: 90%;
   border: 1px solid #be0000;
   border-radius: 18px;
+}
+
+.buttons-squire-rectangle-width{
+  width: 95%;
 }
 
 .buttons-row .col {
@@ -232,6 +236,8 @@
   color: white;
   border-bottom-left-radius: 18px;
   border-top-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  border-top-right-radius: 18px;
   border: none;
   box-shadow: 0px 3px 8px -3px #674d4d;
   outline: none;
