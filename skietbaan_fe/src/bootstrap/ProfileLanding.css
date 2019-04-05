@@ -2,14 +2,76 @@
     .award-content-container{
         margin-top: 56px;
     }
+
+    .user-details-main-container{
+        width: 66% !important;
+    }
+
+    .profile-landing-container{
+        margin-left: 17%;
+        margin-right: 17%;
+    }
+
+    .documents_background{
+        width: 66% !important;
+    }
+
+    .fix-top{
+        width: 65.95% !important;
+    }
+}
+
+@media only screen and (min-width: 354px) and (max-width: 368px){
+    .buttons-container button{
+        width: 83px !important;
+    }
+}
+
+@media only screen and (max-width: 353px){
+    .buttons-container button{
+        width: 70px !important;
+    }
+}
+
+.button-style-active{
+    background-color: #BE0000;
+    color: white;
+}
+
+.button-style-inactive{
+    background-color: transparent;
 }
 
 .buttons-container {
     width: 97%;
+    position: relative;
+    bottom: 12px;
 }
 
 .buttons-container button{
     outline: none;
+    width: 86px;
+    height: 32px;
+}
+
+.medal-img img{
+    width: 14px; 
+    height: 23px;
+}
+
+.docs-img-scale img{
+    width: 17px; 
+    height: 23px;
+}
+
+.details-img-scale img{
+    width: 22px; 
+    height: 24px;
+}
+
+.stats-img-scale img{
+    width: 22px; 
+    height: 22px;
 }
 
 .gun-overlay-img-background{
@@ -26,9 +88,23 @@
 .profile-title{
     font-size: 20px;
     color: #fdfdfd;
-    font-weight: bold;
+    font-weight: 600;
     padding-top: 14px;
     padding-left: 16px;
+}
+
+.profile-navigation-text{
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 14px;
+    font-family: Helvetica;
+    color: #BE0000;
+}
+
+.profile-navigation-text-align{
+    text-align: center;
+    margin-top: 1px;
+    font-weight: bold;
 }
 
 .award-content-container{
@@ -65,7 +141,7 @@
     margin-left: 0px;
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
-    background-color: #EA251A;
+    background-image: linear-gradient(to right, #ef3024 , #Dc0600);
     box-shadow: -2px 0 14px -1px #674D4D;
 }
 
@@ -92,13 +168,6 @@
     text-align: center;
 }
 
-.buttons-rectangle{
-    height: 32px;	
-    width: 100%;	
-    border: 1px solid #BE0000;	
-    border-radius: 18px;
-}
-
 .buttons-row{
     margin-left: 3%;
     margin-top: 22px;
@@ -110,21 +179,9 @@
     font-weight: 400;
 }
 
-.button-fill{
-    padding-top: 5px;
-    margin-top: -5px;
-}
-
-.pad-button-text-top{
-    padding-top: 4px;
-}
-
-#remove-right-button-padding{
-    padding-right: 0px;
-}
-
-#remove-left-button-padding{
-    padding-left: 0px;
+.profile-center-top-buttons{
+    display: inline-flex;
+    justify-content: center;
 }
 
 #pad-middle-button{
