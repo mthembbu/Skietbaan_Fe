@@ -6,7 +6,7 @@
 	padding: 10px;
 	margin-top: 10px;
 	text-decoration-color: #666666;
-	background-color: #FFFFFF;
+	background-color: #ffffff;
 	font-weight: bold;
 	text-align: left;
 	font-size: 18px;
@@ -82,7 +82,7 @@
 .create-comp-container {
 	text-align: center;
 }
-.containers-input{
+.containers-input {
 	padding-top: 17px;
 }
 
@@ -91,7 +91,12 @@
 		transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);
 		overflow: hidden;
 	}
-
+	/*Media query for the screens larger than 576*/
+	@media screen and (min-width: 576px) {
+		.containers-input {
+			margin-top: 35px;
+		}
+	}
 	.Login form {
 		margin: 0 auto;
 		max-width: 320px;
