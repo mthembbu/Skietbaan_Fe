@@ -14,7 +14,7 @@ class CreateComp extends Component {
 			Hours: '',
 			Status: true,
 			MaximumScore: '',
-			isExist: false
+			isExist: false 
 		};
 		//binding the onChange method to this commponents
 		this.onChange = this.onChange.bind(this);
