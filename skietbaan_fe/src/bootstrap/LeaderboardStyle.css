@@ -122,7 +122,7 @@
          background-color: #F5F5F5;
      }
      .filter-selections .cat-visible-groups-label{
-         color: #6F839E;
+         color: #7B7B7B;
          text-align: center;
          font-family: Helvetica;
          font-size: 18px;
@@ -818,14 +818,14 @@
     }
     .current-user-table-section .ranking-table .rank-row .rank-col .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .ranking .number{
         height: 100%;	
-        width: 10px;	
+        width: 100%;	
         font-size: 14px;
         text-align: center;
         font-family: Helvetica;
         font-weight: lighter;
+        font-weight: 400;
         color: white;	
         margin: auto;
-        padding-top: 2px;
     }
     .current-user-table-section .ranking-table .rank-row .rank-col .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .ranking img{
         width: 23px;
