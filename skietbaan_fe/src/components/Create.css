@@ -3,7 +3,8 @@
     height: 254px;
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 51.5%;
+    margin-left: 24.5%;
     z-index: 1;
     background: #fdfdfd;
     box-shadow: 2px 1px 16px -3px #000000;
