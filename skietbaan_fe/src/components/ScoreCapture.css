@@ -85,15 +85,15 @@
 @media screen and (min-width:576px)  {
     .page-content{
         margin-bottom: 0px;
-        width: 51.5% !important;
-        margin-left: 24.5%;
+        width: 66% !important;
+        margin-left: 17%;
         min-height: 92vh;
         box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
     }
     .score-capture-header{
         margin-top: 56px;
-        width: 51.5% !important;
-        margin-left: 24.5%;
+        width: 66% !important;
+        margin-left: 17%;
     }
 }
 

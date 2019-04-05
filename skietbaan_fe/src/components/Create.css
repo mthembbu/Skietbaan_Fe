@@ -113,6 +113,11 @@
     outline: none;
   }
 
+  .button-fill{
+    padding-top: 5px;
+    margin-top: -5px;
+  }
+
   .button-fill:focus {
     outline: none;
   }
@@ -230,6 +235,7 @@
   border: none;
   box-shadow: 0px 3px 8px -3px #674d4d;
   outline: none;
+  padding-top: 4px;
 }
 
 .unstyle-create {
@@ -248,6 +254,7 @@
   border: none;
   box-shadow: 0px 3px 8px -3px #674d4d;
   outline: none;
+  padding-top: 4px;
 }
 
 .unstyle-view {

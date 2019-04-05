@@ -120,8 +120,8 @@ export class createPages extends Component {
                         <button
                           className={
                             this.state.selectedButton === 1
-                              ? "unstyle-button-active btn-block button-fill"
-                              : "unstyle-button btn-block button-fill"
+                              ? "unstyle-create-active btn-block button-fill"
+                              : "unstyle-create btn-block button-fill"
                           }
                           onClick={this.groupsPage}
                         >
@@ -134,8 +134,8 @@ export class createPages extends Component {
                         <button
                           className={
                             this.state.selectedButton === 2
-                              ? "unstyle-button-active btn-block button-fill"
-                              : "unstyle-button btn-block button-fill"
+                              ? "unstyle-create-active btn-block button-fill"
+                              : "unstyle-create btn-block button-fill"
                           }
                           onClick={this.comptetitionsPage}
                         >
@@ -151,8 +151,8 @@ export class createPages extends Component {
                         <button
                           className={
                             this.state.selectedButton === 3
-                              ? "unstyle-button-active btn-block button-fill"
-                              : "unstyle-button btn-block button-fill"
+                              ? "unstyle-create-active btn-block button-fill"
+                              : "unstyle-create btn-block button-fill"
                           }
                           onClick={this.membersPage}
                         >

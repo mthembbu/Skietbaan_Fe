@@ -122,8 +122,8 @@ class Create extends Component {
                     <button
                       className={
                         this.state.selectedButton === 1
-                          ? "unstyle-button-active btn-block button-fill"
-                          : "unstyle-button btn-block button-fill"
+                          ? "unstyle-create-active btn-block"
+                          : "unstyle-create btn-block"
                       }
                       onClick={this.groupsPage}
                     >
@@ -136,8 +136,8 @@ class Create extends Component {
                     <button
                       className={
                         this.state.selectedButton === 2
-                          ? "unstyle-button-active btn-block button-fill"
-                          : "unstyle-button btn-block button-fill"
+                          ? "unstyle-create-active btn-block button-fill"
+                          : "unstyle-create btn-block button-fill"
                       }
                       onClick={this.competetitionsPage}
                     >
@@ -153,8 +153,8 @@ class Create extends Component {
                     <button
                       className={
                         this.state.selectedButton === 3
-                          ? "unstyle-button-active btn-block button-fill"
-                          : "unstyle-button btn-block button-fill"
+                          ? "unstyle-create-active btn-block button-fill"
+                          : "unstyle-create btn-block button-fill"
                       }
                       onClick={this.membersPage}
                     >
@@ -201,8 +201,8 @@ class Create extends Component {
                         <button
                           className={
                             this.state.selectedButtonCreateViewGroups === 2
-                              ? "unstyle-button-active btn-block button-fill"
-                              : "unstyle-button btn-block button-fill"
+                              ? "unstyle-create-active btn-block button-fill"
+                              : "unstyle-create btn-block button-fill"
                           }
                           onClick={this.viewGroups}
                         >
@@ -225,8 +225,8 @@ class Create extends Component {
                         <button
                           className={
                             this.state.selectedButtonCreateViewCompetitions === 1
-                              ? "unstyle-button-active btn-block button-fill"
-                              : "unstyle-button btn-block button-fill"
+                              ? "unstyle-create-active btn-block button-fill"
+                              : "unstyle-create btn-block button-fill"
                           }
                           onClick={this.createCompetitions}
                         >
@@ -239,8 +239,8 @@ class Create extends Component {
                         <button
                           className={
                             this.state.selectedButtonCreateViewCompetitions === 2
-                              ? "unstyle-button-active btn-block button-fill"
-                              : "unstyle-button btn-block button-fill"
+                              ? "unstyle-create-active btn-block button-fill"
+                              : "unstyle-create btn-block button-fill"
                           }
                           onClick={this.viewCompetitions}
                         >

@@ -82,7 +82,7 @@ class ProfileLanding extends Component {
                 </div>
             </Col>
           </Row>
-          <div className="buttons-container">
+          <div className="profile-buttons-container">
             <Row className="buttons-row lay-horizontal">
                 <Col className="pad-button-text-top profile-center-top-buttons">
                   <div>
