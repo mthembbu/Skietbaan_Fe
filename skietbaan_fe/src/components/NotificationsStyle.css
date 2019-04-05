@@ -28,8 +28,8 @@
     margin-top: 56px;
     font-size: 25px;
     font-family: helvetica;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     box-shadow: 0px 10px 16px -6px rgba(0, 0, 0, 0.33);
     position: fixed;
     width: 66%;
@@ -319,8 +319,8 @@
     width: 100%;
     font-size: 25px;
     font-family: helvetica;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     box-shadow: 0px 10px 16px -6px rgba(0, 0, 0, 0.33);
     position: fixed;
     display: flex;
