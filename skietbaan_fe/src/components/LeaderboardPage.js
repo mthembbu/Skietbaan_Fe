@@ -387,7 +387,7 @@ class LeaderboardPage extends Component {
                                         <td className="competition-name-col">
                                             <div className="gun-icon">
                                                 <Motion
-                                                    defaultStyle={{ x: -200, opacity: 0 }}
+                                                    defaultStyle={{ x: -2000, opacity: 0 }}
                                                     style={{
                                                         x: spring(0),
                                                         opacity: spring(1)
