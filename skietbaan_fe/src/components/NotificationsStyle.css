@@ -13,10 +13,12 @@
     margin-bottom: 56px;
   }
 
+  .announcement-text {
+    margin-top: 140px;
+  }
+
   .outer-header-div {
     float: left;
-    padding-left: 40px;
-    padding-top: 13px;
   }
 
   .page-heading {
@@ -271,8 +273,6 @@
 .notifications-unread {
   color: #000000;
   text-decoration-line: none;
-  text-align: justify;
-  text-justify: newspaper;
   font-weight: bold;
   font-family: helvetica;
   font-size: 14px;
@@ -310,8 +310,6 @@
 
   .outer-header-div {
     float: left;
-    padding-left: 30px;
-    padding-top: 15px;
   }
 
   .page-heading {
@@ -380,7 +378,6 @@
   .black-delete-icon {
     height: 26px;
     width: 20px;
-    margin-left: 40px;
     margin-top: 5px;
   }
 
@@ -391,7 +388,6 @@
   .delete-icon {
     height: 26px;
     width: 20px;
-    margin-left: 40px;
     margin-top: 5px;
   }
 
@@ -406,7 +402,8 @@
 
   .notification-icon-spacing {
     display: flex;
-    margin-right: 20px;
+    margin-right: 30px;
+    margin-top: 17px;
   }
 
   .admin-notification-icon-spacing {
@@ -483,13 +480,10 @@
   .notifications-unread {
     color: #000000;
     text-decoration-line: none;
-    text-align: justify;
-    text-justify: newspaper;
     font-weight: bold;
     font-family: helvetica;
     font-size: 14px;
     padding-top: 9px;
-    padding-right: 45px;
     width: 100%;
   }
 
@@ -596,22 +590,24 @@
     position: static;
     padding-top: 45px;
   }
+
+  .announcement-text {
+    margin-top: 85px;
+  }
 }
 
 .select-all {
   height: 27px;
   width: 30px;
-  margin-left: 82px;
+  margin-left: 22px;
   margin-top: 5px;
   margin-right: 11px;
 }
 
 .admin-select-all {
-  height: 27px;
+  height: 28px;
   width: 30px;
-  margin-left: 15px;
-  margin-top: 5px;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 .admin-delete-icon {
@@ -627,13 +623,14 @@
 .notification-icon-on-the-side {
   height: 22px;
 }
+
 .announcement-main {
   display: grid;
+  height: 100%;
 }
 .announcement-text {
   width: 312px;
   height: 123px;
-  margin-top: 150px;
   padding-left: 19px;
   font-weight: bold;
   font-size: 16px;
@@ -641,10 +638,11 @@
   padding-top: 20px;
   border-radius: 5px;
 }
+
 .announcement-send {
   width: 312px;
   height: 42px;
-  margin-top: 20px;
+  margin-top: 36px;
   background: #dc0600;
   color: white;
   font-size: 16px;
@@ -671,7 +669,7 @@
   height: 26px;
   width: 24px;
   float: left;
-  margin-left: 58px;
+  margin-left: 25px;
   margin-top: 20px;
 }
 
@@ -687,4 +685,12 @@
   font-size: 16px;
   border: 1px solid #ebebeb;
   border-radius: 22px;
+}
+
+.submit-announcement-clicked {
+  color: red;
+}
+
+.notification-spacing {
+  margin-right: 18px;
 }

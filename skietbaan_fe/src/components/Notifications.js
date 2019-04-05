@@ -4,6 +4,7 @@ import { getCookie } from "./cookie";
 import { connect } from "react-redux";
 import { BASE_URL } from "../actions/types.js";
 import PropTypes from "prop-types";
+import { Collapse } from "react-collapse";
 import Moment from "react-moment";
 import "moment-timezone";
 import deleteIcon from "../components/Notification-Img/trashcan.png";
@@ -13,6 +14,7 @@ import blackSelectAll from "../components/Notification-Img/black-select-all.png"
 import notifySpeakerBlack from "../components/Notification-Img/notifySpeaker.png";
 import notifySpeakerWhite from "../components/Notification-Img/notifySpeakerWhite.png";
 import { setSelectedCompetition } from "../actions/userProfileActions";
+import { setSelectedLandingPage } from "../actions/profileLandingAction";
 import {
   updateSelectedCompetition,
   updateSelectedGroup
@@ -43,7 +45,6 @@ class notification extends Component {
       adminToggle: false,
       stateCheck: false,
       speakerClicked: null,
-      submitAnnouncementClicked: null,
       announceString: ""
     };
     this.onDelete = this.onDelete.bind(this);
@@ -51,6 +52,7 @@ class notification extends Component {
     this.markForDeletion = this.markForDeletion.bind(this);
     this.selectAll = this.selectAll.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.disableButton = this.disableButton.bind(this);
   }
 
   onDelete = async () => {
@@ -84,9 +86,13 @@ class notification extends Component {
       toggle: !this.state.toggle
     });
     this.props.updateIsReadProperty(Id);
-    if (Notification === "Award" || Notification === "Document") {
-      //PUT IN THE CORRECT COMPETITION NAME FROM THE NOTIFICATION MESSAGE
-      this.props.setSelectedCompetition("Pistol 100m")
+    if (Notification === "Award") {
+      var awardCompetitionName = Message.split(":")[1].trim();
+      this.props.setSelectedCompetition(awardCompetitionName);
+      this.props.setSelectedLandingPage(1);
+      this.props.history.push("/profile");
+    } else if (Notification === "Document") {
+      this.props.setSelectedLandingPage(2);
       this.props.history.push("/profile");
     } else if (Notification === "Confirmation" || Notification === "Expiry") {
       this.props.history.push("/notify");
@@ -148,6 +154,7 @@ class notification extends Component {
 
   onChange(event) {
     this.setState({ announceString: event.target.value });
+    this.disableButton();
   }
 
   changeIcon() {
@@ -184,6 +191,20 @@ class notification extends Component {
     this.setState({
       adminToggle: !this.state.adminToggle
     });
+    if (this.state.adminToggle === false) {
+      this.disableButton();
+    }
+  }
+
+  disableButton() {
+    setTimeout(() => {
+      if (
+        this.state.announceString.length > 0 &&
+        this.state.announceString !== undefined
+      ) {
+        document.getElementById("announcementButton").disabled = false;
+      } else document.getElementById("announcementButton").disabled = true;
+    }, 500);
   }
 
   submitAnnouncement = () => {
@@ -197,6 +218,11 @@ class notification extends Component {
     })
       .then(function(response) {})
       .catch(function(data) {});
+    setTimeout(() => {
+      this.setState({
+        adminToggle: false
+      });
+    }, 3000);
   };
 
   render() {
@@ -208,7 +234,7 @@ class notification extends Component {
       <div className="page-heading">
         <div className="notification-gun-overlay-image">
           <div className="outer-header-div">
-            <label>NOTIFICATIONS</label>
+            <label className="label-for-score">NOTIFICATIONS</label>
           </div>
         </div>
         <div className="notification-icon-spacing">
@@ -236,12 +262,12 @@ class notification extends Component {
 
     const adminHeadingItems = (
       <div className="page-heading">
-        <div className="notification-gun-overlay-image">
+        <div className="gun-overlay-image">
           <div className="outer-header-div">
-            <label>NOTIFICATIONS</label>
+            <label className="label-for-score">NOTIFICATIONS</label>
           </div>
         </div>
-        <div>
+        <div className="notification-spacing">
           <img
             src={
               this.state.adminToggle ? notifySpeakerBlack : notifySpeakerWhite
@@ -393,6 +419,7 @@ class notification extends Component {
         </div>
         <div>
           <button
+            id="announcementButton"
             className={
               this.state.announceString !== "" && this.state.adminToggle
                 ? "announcement-send"
@@ -405,6 +432,7 @@ class notification extends Component {
         </div>
       </div>
     );
+
     return (
       <div className="notifications-body-class">
         {this.state.stateCheck === false ? (
@@ -413,7 +441,9 @@ class notification extends Component {
           <div>{adminHeadingItems}</div>
         )}
         {this.state.adminToggle === true ? (
-          <div>{writeAnnouncement}</div>
+          <Collapse isOpened={this.state.adminToggle === true}>
+            <div>{writeAnnouncement}</div>
+          </Collapse>
         ) : (
           <div className="format-content">{postItems}</div>
         )}
@@ -431,7 +461,8 @@ notification.propTypes = {
 const mapStateToProps = state => ({
   notificationsArray: state.notificationOBJ.notificationsArray,
   updatedNotification: state.notificationOBJ.updatedNotification,
-  awardsSelectedCompetition: state.awardsReducer.selectedCompetition
+  awardsSelectedCompetition: state.awardsReducer.selectedCompetition,
+  selectedButton: state.landingReducer.selectedLandingPage
 });
 
 export default connect(
@@ -441,6 +472,7 @@ export default connect(
     updateSelectedGroup,
     updateIsReadProperty,
     getNotifications,
-    setSelectedCompetition
+    setSelectedCompetition,
+    setSelectedLandingPage
   }
 )(notification);

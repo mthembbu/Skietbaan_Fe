@@ -65,6 +65,7 @@
   background-color: #000000;
   font-size: 16px;
   margin-top: -22px;
+  border: none;
 }
 
 .round-button:disabled{

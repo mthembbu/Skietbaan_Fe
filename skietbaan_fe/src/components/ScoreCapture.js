@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../components/ScoreCapture.css';
 import { validateScore } from './Validators.js';
 import { getCookie } from './cookie.js';
-import { URL } from '../actions/types.js';
+import { BASE_URL } from '../actions/types.js';
 import cameraGray from '../components/assets/redSubmitButton.png';
 import graySubmit from '../components/assets/btnThatSubmitsRed.png';
 import grayRetry from '../components/assets/redRetry.png';
@@ -94,7 +94,7 @@ export default class search extends Component {
   }
 
   componentDidMount() {
-    fetch(URL + "/api/Competition", {
+    fetch(BASE_URL + "/api/Competition", {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -107,7 +107,7 @@ export default class search extends Component {
       });
 
     let token = getCookie("token");
-    fetch(URL + "/api/features/getuserbytoken/" + token, {
+    fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
       method: 'Get',
       headers: {
         'Accept': 'application/json',
@@ -264,7 +264,7 @@ export default class search extends Component {
         "Longitude": this.state.longitude,
         "Latitude": this.state.latitude
       }
-      fetch(URL + "/api/Scores", {
+      fetch(BASE_URL + "/api/Scores", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -291,7 +291,7 @@ export default class search extends Component {
         "CompetitionName": this.state.competitionName,
         "Token": getCookie("token"),
       }
-      fetch(URL + "/api/Scores", {
+      fetch(BASE_URL + "/api/Scores", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -397,7 +397,6 @@ export default class search extends Component {
       this.toggleNavbar();
     }
   }
-
   render() {
     if (this.state.lastSize === 0) {
       this.state.lastSize = document.body.clientHeight;
@@ -425,7 +424,7 @@ export default class search extends Component {
                     : "competition-item fade-out")}>
               <li className="li-container"
                 onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name)}>
-                {this.state.competitionsList[i].name}
+                {this.state.competitionsList[i].name.toUpperCase()}
               </li>
               <div onClick={() => this.cancelClicked()} className="competiton-cancel-button"></div>
             </div>
@@ -466,7 +465,7 @@ export default class search extends Component {
             <div className="centre-labels">
               <label className="label-competition">Select Competition</label>
             </div>
-            <div className="competition-container">
+            <div className="add-score-competition-container">
               {competitionItem}
 
               <div className={this.state.somethingClicked === false

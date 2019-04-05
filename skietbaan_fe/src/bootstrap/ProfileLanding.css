@@ -79,9 +79,10 @@
     background-size: contain;
     background-image: url("../components/assets/gunOverlay.png");
     width: 151px;
-    margin-left: -10px;
-    margin-top: 2px;
+    margin-left: -4px;
+    margin-top: 4px;
     border-bottom-left-radius: 10px;
+    height: 63px;
 }
 
 .profile-title{
@@ -103,6 +104,7 @@
 .profile-navigation-text-align{
     text-align: center;
     margin-top: 1px;
+    font-weight: bold;
 }
 
 .award-content-container{
@@ -139,7 +141,7 @@
     margin-left: 0px;
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
-    background-color: #EA251A;
+    background-image: linear-gradient(to right, #ef3024 , #Dc0600);
     box-shadow: -2px 0 14px -1px #674D4D;
 }
 
