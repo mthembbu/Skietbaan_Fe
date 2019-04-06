@@ -41,7 +41,9 @@ class Groups extends Component {
 			});
 		});
 
-		fetch(BASE_URL + '/api/Groups').then((res) => res.json()).then((data) => this.setState({ groups: data.name }));
+		fetch(BASE_URL + '/api/Groups').then((res) => res.json()).then((data) => this.setState({ groups: data.name })).catch(err =>  {
+			/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+		  });
 	}
 	onChange(event) {
 		this.setState({ filterText: event.target.value });
@@ -71,7 +73,9 @@ class Groups extends Component {
 			body: JSON.stringify(requestedObj)
 		})
 			.then(function(response) {})
-			.catch(function(data) {});
+			.catch(function(data) {}).catch(err =>  {
+				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+			  });
 		window.location = '/GroupComponent';
 	}
 

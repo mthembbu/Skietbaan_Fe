@@ -184,7 +184,9 @@ class notification extends Component {
           stateCheck: data.admin
         });
       })
-      .catch(function(data) {});
+      .catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      });
   }
 
   speakerClick() {
@@ -217,7 +219,9 @@ class notification extends Component {
       body: JSON.stringify(this.state.announceString)
     })
       .then(function(response) {})
-      .catch(function(data) {});
+      .catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      });
     setTimeout(() => {
       this.setState({
         adminToggle: false

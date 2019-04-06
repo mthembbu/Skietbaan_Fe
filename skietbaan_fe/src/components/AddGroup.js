@@ -28,7 +28,9 @@ class AddGroup extends Component {
         this.setState({
           groups: data.map(names => names.name)
         })
-      );
+      ).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      });
   }
 
   onChange(e) {

@@ -49,7 +49,9 @@ class UserProfile extends Component {
                 })
                 this.setState({ awardCompetitions: data });
             }
-        });
+        }).catch(err =>  {
+            /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+          })
 
         fetch(BASE_URL + "/api/awards/hours/" + token, {
             method: "GET",
@@ -62,7 +64,9 @@ class UserProfile extends Component {
             if(this._isMounted){
                 this.setState({ hoursAward: data });
             }
-        });
+        }).catch(err =>  {
+            /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+          })
     }
 
     componentDidMount(){

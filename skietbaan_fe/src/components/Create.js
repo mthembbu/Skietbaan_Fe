@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Create.css";
 import { getCookie } from "../components/cookie.js";
-import { URL } from "../actions/types.js";
+import { BASE_URL } from "../actions/types.js";
 import { Row, Col } from "react-bootstrap";
 import ViewMembers from "../components/ViewMembers";
 import CreateComp from "../components/CreateComp";
@@ -61,7 +61,7 @@ class Create extends Component {
     let found = false;
     if (getCookie("token")) {
       let token = getCookie("token");
-      fetch(URL + "/api/features/getuserbytoken/" + token, {
+      fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
         method: "Get",
         headers: {
           Accept: "application/json",
@@ -96,6 +96,8 @@ class Create extends Component {
             }
             window.location = "/registerPage";
           }
+        }).catch(err =>  {
+          /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
         });
     } else {
       window.location = "/registerPage";

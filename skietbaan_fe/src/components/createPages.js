@@ -4,7 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import "./Create.css";
 import history from "./history";
 import { getCookie } from "./cookie.js";
-import { URL } from "../actions/types.js";
+import { BASE_URL } from "../actions/types.js";
 import ViewMembers from "../components/ViewMembers";
 import Radio from "@material-ui/core/Radio";
 import CreateComp from "../components/CreateComp";
@@ -70,7 +70,7 @@ export class createPages extends Component {
   componentDidMount(){
     if (getCookie("token") !== null) {
       let token = getCookie("token");
-      fetch(URL + "/api/features/getuserbytoken/" + token, {
+      fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
         method: "Get",
         headers: {
           Accept: "application/json",
@@ -83,7 +83,9 @@ export class createPages extends Component {
             history.push("/home");
           }
         })
-        .catch(function(data) {});
+        .catch(function(data) {}).catch(err =>  {
+          /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+        });
     } else {
       window.location = "/registerPage";
     }

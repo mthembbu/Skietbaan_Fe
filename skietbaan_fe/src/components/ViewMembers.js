@@ -71,7 +71,9 @@ class ViewMembers extends Component {
         this.setState({
           array: data
         })
-      );
+      ).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
   }
 
   getTimeLeft() {
@@ -92,7 +94,9 @@ class ViewMembers extends Component {
         this.setState({
           timeLeftOnMembership: data
         })
-      );
+      ).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
   }
 
   onChangeText(event) {

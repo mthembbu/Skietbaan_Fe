@@ -65,7 +65,9 @@ class ViewGroups extends Component {
     })
       .then(function(response) {})
       .then(function(data) {})
-      .catch(function(data) {});
+      .catch(function(data) {}).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
   }
 
   render() {
