@@ -103,8 +103,7 @@ export default class search extends Component {
     })
       .then(response => response.json())
       .then(data => this.setState({ competitionsList: data }))
-      .catch(function (data) {
-      }).catch(err =>  {
+      .catch(err =>  {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       })
 

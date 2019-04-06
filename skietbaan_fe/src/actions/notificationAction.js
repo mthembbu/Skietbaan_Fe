@@ -21,6 +21,8 @@ export const updateIsReadProperty = id => dispatch => {
         type: UPDATE_IS_READ,
         payload: data
       });
+    }).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
 
@@ -55,5 +57,7 @@ export const getNotifications = token => dispatch => {
         type: FETCH_NOTIFICATION,
         payload: newArray
       });
+    }).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };

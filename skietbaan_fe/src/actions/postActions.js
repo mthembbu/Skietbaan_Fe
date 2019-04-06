@@ -129,8 +129,8 @@ export const groupDictionary = () => dispatch => {
     });
 };
 /** The method to feth leaderboard filter data (groups array and competitions array*/
-export const fetchleaderboadfilterdata = () => dispatch => {
-  fetch(BASE_URL + "/api/Leaderboard/GetLeaderboardFilterData?UserID=" + 1)
+export const fetchleaderboadfilterdata = token => dispatch => {
+  fetch(BASE_URL + "/api/Leaderboard/GetLeaderboardFilterData?token=" + token)
     .then(res => res.json())
     .then(data =>
       dispatch({

@@ -55,7 +55,8 @@ class LeaderboardPage extends Component {
     componentWillMount() {
         this.updateDimensions();
         //get function to get filter data from api
-        this.props.fetchleaderboadfilterdata();
+        let token = getCookie("token");
+        this.props.fetchleaderboadfilterdata(token);
         this.validatedInitialLeaderboardFilterSelection();
         this.getLeaderboardData(this.state.selectedCompetition, this.state.selectedGroup, this.state.selectedRank);
     }
@@ -397,7 +398,7 @@ class LeaderboardPage extends Component {
                                                             transform: `translateX(${style.x}px)`,
                                                             opacity: style.opacity
                                                         }} >
-                                                            {this.props.competitions.length != 0 ? this.props.competitions[this.state.selectedCompetition].label : "-------"}
+                                                            {this.props.competitions.length != 0 ? this.props.competitions[this.state.selectedCompetition].label : "No Competitions"}
                                                         </div>
                                                     )}
                                                 </Motion>
@@ -540,14 +541,14 @@ class LeaderboardPage extends Component {
                                                                     <div className="rank-number-container">
                                                                         <div className="member-status-icons">
                                                                             <div className="membership-icon">
-                                                                                {this.props.userResults.isMember
+                                                                                {this.props.currentUser.isMember
                                                                                     ? <img src={require('../resources/memberW.png')} />
                                                                                     : null}
                                                                             </div>
                                                                             <div className="dedication-icon">
-                                                                                {this.props.userResults.isCompetitiveShooter
-                                                                                    ? <img src={require('../resources/dedicatedShooterW.png')} />
-                                                                                    : <img src={require('../resources/standardShooterW.png')} />}
+                                                                                {this.props.competitions.length === 0 ? null
+                                                                                                                      : this.props.currentUser.isCompetitiveShooter ? <img src={require('../resources/dedicatedShooterW.png')} />
+                                                                                                                                                                     : <img src={require('../resources/standardShooterW.png')} />}
                                                                             </div>
                                                                         </div>
                                                                         <div className="member-rank-icons">
@@ -577,8 +578,10 @@ class LeaderboardPage extends Component {
                                                                     <table className="head-table-labels">
                                                                         <tbody>
                                                                             <tr>
-                                                                                <td className="extra-name-col">{this.props.userResults == null ? 'Something went wrong' : (this.props.userResults != null ? this.props.userResults.username : '--')}</td>
-                                                                                <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{this.props.userResults == null ? '--' : (this.props.userResults.best != 0 ? this.props.userResults.best : '--')}</td>
+                                                                                <td className="extra-name-col">{this.props.competitions.length === 0 ? (this.props.currentUser.displayName === null ? this.props.currentUser.username : this.props.currentUser.username )
+                                                                                                                                                :(this.props.userResults === null ? 'Something went wrong' 
+                                                                                                                                                                                 : (this.props.userResults !== null ? this.props.userResults.username : '--'))}</td>
+                                                                                <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{this.props.userResults === null ? '--' : (this.props.userResults.best !== 0 ? this.props.userResults.best : '--')}</td>
                                                                                 <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>
                                                                                     <div className="member-rank-icons">
                                                                                         <div className="up-arrow">
@@ -625,6 +628,7 @@ class LeaderboardPage extends Component {
 const mapStateToProps = state => ({
     groups: state.posts.leaderboardGroups,
     competitions: state.posts.leaderboardCompetitions,
+    currentUser: state.posts.leaderboardUser,
     scoreTypes: state.posts.leaderboardScoreTypes,
     userResults: state.posts.leaderboardUserData,
     tableData: state.posts.leaderboardTableData,
