@@ -18,6 +18,7 @@ class UserProfile extends Component {
                 hours: -1,
             },
             collapse: false,
+            exceptionCaught: false
         }
         
         this.toggle = this.toggle.bind(this);
@@ -49,6 +50,8 @@ class UserProfile extends Component {
                 })
                 this.setState({ awardCompetitions: data });
             }
+        }).catch(() => {
+            this.setState({ exceptionCaught: true });
         });
 
         fetch(BASE_URL + "/api/awards/hours/" + token, {
@@ -62,6 +65,8 @@ class UserProfile extends Component {
             if(this._isMounted){
                 this.setState({ hoursAward: data });
             }
+        }).catch(() => {
+            this.setState({ exceptionCaught: true });
         });
     }
 
