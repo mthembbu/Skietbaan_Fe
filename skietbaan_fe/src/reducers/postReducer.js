@@ -28,6 +28,7 @@ const initialState = {
   existing:[],
   leaderboardGroups: [],
   leaderboardCompetitions: [],
+  leaderboardUser:{},
   leaderboardSelectedCompetitionName:"",
   leaderboardSelectedGroupName:"",
   leaderboardTableData: [],
@@ -119,7 +120,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         leaderboardGroups: action.payload.groups1,
-        leaderboardCompetitions: action.payload.competitions1
+        leaderboardCompetitions: action.payload.competitions1,
+        leaderboardUser: action.payload.user
       };
 
     case FETCH_LEADERBOARDTABLE_DATA:
