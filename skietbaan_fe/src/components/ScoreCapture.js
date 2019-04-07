@@ -36,7 +36,8 @@ export default class search extends Component {
       navbarState: false,
       eventsAdded: false,
       lastSize: 0,
-      somethingClicked: false
+      somethingClicked: false,
+      maximumScore:20
 
     }
 
@@ -58,7 +59,9 @@ export default class search extends Component {
     this.setState({
       [target.name]: target.value,
     }, () => {
-      if (validateScore(this.state.score) && target.value !== undefined) {
+      if (parseFloat(this.state.score) <= this.state.maximumScore 
+      && parseFloat(this.state.score) >= 0 
+      && target.value !== undefined) {
         this.setState({
           validScore: true,
           scoreEntered: true
@@ -83,13 +86,14 @@ export default class search extends Component {
     }
   }
 
-  competitionClicked(item, compname) {
+  competitionClicked(item, compname,maximumScore) {
     this.setState({
       somethingClicked: true,
       currState: 2,
       clicked: item,
       competitionName: compname,
-      validCompetition: true
+      validCompetition: true,
+      maximumScore : maximumScore
     });
   }
 
@@ -130,7 +134,9 @@ export default class search extends Component {
 
   validate() {
     let Valid = false;
-    if (!validateScore(this.state.score) && this.value === undefined) {
+    if (parseFloat(this.state.score) > this.state.maximumScore 
+    && parseFloat(this.state.score) >= 0  
+    && this.value === undefined) {
       this.setState({
         validForm: false,
         validScore: false
@@ -430,7 +436,7 @@ export default class search extends Component {
                     ? "competition-item active"
                     : "competition-item fade-out")}>
               <li className="li-container"
-                onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name)}>
+                onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name,this.state.competitionsList[i].maximumScore)}>
                 {this.state.competitionsList[i].name.toUpperCase()}
               </li>
               <div onClick={() => this.cancelClicked()} className="competiton-cancel-button"></div>
@@ -438,6 +444,11 @@ export default class search extends Component {
           </div>);
 
       }
+    }
+    else{
+      competitionItem.push(
+        <div className="not-active">No active competitions</div>
+      )
     }
     if (!getCookie("token")) {
       window.location = "/registerPage";

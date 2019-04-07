@@ -71,62 +71,66 @@ class Register extends Component {
   handleChange({ target }) {
     this.setState({
       [target.name]: target.value,
-    });
-    let isValid = false;
-    let stateUpdate = {
-      invalidPassword: this.state.invalidPassword,
-      invalidEmail: this.state.invalidEmail,
-      invalidUsername: this.state.invalidUsername,
-      usernameTaken: false,
-      emailTaken: false
-    }
-    if (target.name === "passwordValue") {
-      if (target.value.length > 0)
-        stateUpdate.invalidPassword = false;
-      else {
-        stateUpdate.invalidPassword = true;
-      }
-    }
-    if (target.name === "emailValue") {
-      stateUpdate.invalidEmail = false;
-      for (var i = 0; i < this.state.users.length; i++) {
-        if (this.state.users[i].email.toLowerCase() == target.value.toLowerCase()) {
-          stateUpdate.emailTaken = true;
-          stateUpdate.invalidEmail = true;
-          break;
-        }
-
-      };
-    };
-    if (target.name === "usernameValue" && target.value.length > 0) {
-      stateUpdate.invalidUsername = false;
-      for (var i = 0; i < this.state.users.length; i++) {
-        if (this.state.users[i].username.toLowerCase() == target.value.toLowerCase()) {
-          stateUpdate.usernameTaken = true;
-          stateUpdate.invalidUsername = true;
-          break;
-        }
-
-      };
-    }
-    else if (target.name === "usernameValue") {
-      stateUpdate.invalidUsername = true;
-    }
-    if (this.state.usernameValue
-      && this.state.passwordValue
-      && this.state.emailValue
-      && validateEmail(this.state.emailValue)
-      && !stateUpdate.invalidUsername
-      && !stateUpdate.invalidEmail
-      && !stateUpdate.invalidPassword) {
-      isValid = true;
-    }
-    this.setState({
-      ...stateUpdate,
-      validForm: isValid
     }, () => {
-      this.disableButton();
-    });
+      let isValid = false;
+      let stateUpdate = {
+        invalidPassword: this.state.invalidPassword,
+        invalidEmail: this.state.invalidEmail,
+        invalidUsername: this.state.invalidUsername,
+        usernameTaken: false,
+        emailTaken: false
+      }
+      if (target.name === "passwordValue") {
+        if (target.value.length > 0)
+          stateUpdate.invalidPassword = false;
+        else {
+          stateUpdate.invalidPassword = true;
+        }
+      }
+      if (target.name === "emailValue") {
+        stateUpdate.invalidEmail = false;
+        for (var i = 0; i < this.state.users.length; i++) {
+          if (this.state.users[i].email.toLowerCase() == target.value.toLowerCase()) {
+            stateUpdate.emailTaken = true;
+            stateUpdate.invalidEmail = true;
+            break;
+          }
+  
+        };
+      };
+      if (target.name === "usernameValue" && target.value.length > 0) {
+        stateUpdate.invalidUsername = false;
+        for (var i = 0; i < this.state.users.length; i++) {
+          if (this.state.users[i].username.toLowerCase() == target.value.toLowerCase()) {
+            stateUpdate.usernameTaken = true;
+            stateUpdate.invalidUsername = true;
+            break;
+          }
+  
+        };
+      }
+      else if (target.name === "usernameValue") {
+        stateUpdate.invalidUsername = true;
+      }
+      if (this.state.usernameValue
+        && this.state.passwordValue
+        && this.state.emailValue
+        && validateEmail(this.state.emailValue)
+        && !stateUpdate.invalidUsername
+        && !stateUpdate.invalidEmail
+        && !stateUpdate.invalidPassword) {
+        isValid = true;
+      }
+      this.setState({
+        ...stateUpdate,
+        validForm: isValid
+      }, () => {
+        this.disableButton();
+      });
+    }
+    
+    );
+
   };
 
   validate() {
