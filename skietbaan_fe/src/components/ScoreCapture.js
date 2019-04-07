@@ -441,6 +441,11 @@ export default class search extends Component {
 
       }
     }
+    else{
+      competitionItem.push(
+        <div className="not-active">No active competitions</div>
+      )
+    }
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }

@@ -525,3 +525,8 @@ input[type=number] {
     width: 72px;
     margin-left: 22px;
 }
+
+.not-active{
+    font-size: 13px;
+    font-weight: 100;
+}
