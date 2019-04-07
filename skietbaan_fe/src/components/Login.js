@@ -60,42 +60,45 @@ class Login extends Component {
   handleChange({ target }) {
     this.setState({
       [target.name]: target.value,
-    });
-    this.disableButton();
-    let isValid = false;
-    let stateUpdate = {
-      invalidPassword: this.state.invalidPassword,
-      invalidUsername: this.state.invalidUsername,
-      usernameFound: true,
-      passwordFound: true
-    }
-    if (target.name === "passwordValue") {
-      if (target.value.length > 0)
-        stateUpdate.invalidPassword = false;
-      else {
-        stateUpdate.invalidPassword = true;
-      }
-    }
-    if (target.name === "usernameValue") {
-      if (target.value.length > 0)
-        stateUpdate.invalidUsername = false;
-      else {
-        stateUpdate.invalidUsername = true;
-      }
-    }
-
-    if (this.state.usernameValue
-      && this.state.passwordValue
-      && !stateUpdate.invalidUsername
-      && !stateUpdate.invalidPassword) {
-      isValid = true;
-    }
-    this.setState({
-      ...stateUpdate,
-      validForm: isValid
-    }, () => {
+    }, () => { 
       this.disableButton();
-    });
+      let isValid = false;
+      let stateUpdate = {
+        invalidPassword: this.state.invalidPassword,
+        invalidUsername: this.state.invalidUsername,
+        usernameFound: true,
+        passwordFound: true
+      }
+      if (target.name === "passwordValue") {
+        if (target.value.length > 0)
+          stateUpdate.invalidPassword = false;
+        else {
+          stateUpdate.invalidPassword = true;
+        }
+      }
+      if (target.name === "usernameValue") {
+        if (target.value.length > 0)
+          stateUpdate.invalidUsername = false;
+        else {
+          stateUpdate.invalidUsername = true;
+        }
+      }
+  
+      if (this.state.usernameValue
+        && this.state.passwordValue
+        && !stateUpdate.invalidUsername
+        && !stateUpdate.invalidPassword) {
+        isValid = true;
+      }
+      this.setState({
+        ...stateUpdate,
+        validForm: isValid
+      }, () => {
+        this.disableButton();
+      });
+
+    } );
+
   };
 
   validate() {
