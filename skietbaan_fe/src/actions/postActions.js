@@ -24,7 +24,7 @@ export const fetchGroups = () => dispatch => {
     .then(group => {
       const newdata=group.map(item=>{
         item.highlighted=false;
-        return item
+        return newdata
       })
       dispatch({
         type: FETCH_GROUPS,

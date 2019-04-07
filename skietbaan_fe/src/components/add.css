@@ -41,9 +41,9 @@
 
 .page {
 	background: #ffffffff;
-	height: -webkit-fill-available;
+
 	text-align: center;
-	position: fixed;
+
     width: 100%;
 }
 

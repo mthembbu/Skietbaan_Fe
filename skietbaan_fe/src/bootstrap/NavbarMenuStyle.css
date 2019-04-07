@@ -34,9 +34,8 @@
 
   .navbar-admin {
     background-color: #000000;
-    width: 66%;
+    width: 100%;
     text-align: center;
-    margin-left: 17%;
     top: 0;
     z-index: 100;
     border-top-left-radius: 20px;
