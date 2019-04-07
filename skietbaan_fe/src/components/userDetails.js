@@ -32,7 +32,9 @@ export default class userDetails extends Component {
           emailValue: data.email,
           cellphoneValue: data.phoneNumber
         })
-      );
+      ).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
   }
 
   updateUser() {
@@ -49,7 +51,10 @@ export default class userDetails extends Component {
       body: JSON.stringify(this.state.array)
     })
       .then(res => res.json())
-      .then(data => this.setState({ returnValue: data }));
+      .then(data => this.setState({ returnValue: data }))
+      .catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
   }
 
   handleChange({ target }) {

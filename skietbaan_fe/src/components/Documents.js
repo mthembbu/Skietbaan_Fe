@@ -30,6 +30,8 @@ class Documents extends Component {
         if (this._isMounted) {
           this.setState({ sendLogsReturn: data });
         }
+      }).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
 
     fetch(BASE_URL + "/api/Documents/UserLOS/" + token)
@@ -38,6 +40,8 @@ class Documents extends Component {
         if (this._isMounted) {
           this.setState({ sendLosReturn: data });
         }
+      }).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
   }
 
@@ -50,6 +54,8 @@ class Documents extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(token)
+    }).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 
     if (this.state.collapseFilterLOGS) {
@@ -72,6 +78,8 @@ class Documents extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(token)
+    }).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 
     if (this.state.collapseFilterLOS) {

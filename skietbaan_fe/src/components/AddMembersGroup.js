@@ -60,7 +60,9 @@ class AddMembersGroup extends Component {
     })
       .then(function(response) {})
       .then(function(data) {})
-      .catch(function(data) {});
+      .catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      });
     this.props.pageState(1);
   }
 

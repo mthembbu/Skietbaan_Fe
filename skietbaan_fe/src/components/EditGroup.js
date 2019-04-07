@@ -60,7 +60,9 @@ class EditGroup extends Component {
 			body: JSON.stringify(request)
 		})
 			.then((res) => res.json())
-			.catch(function(data) {});
+			.catch(function(data) {}).catch(err =>  {
+				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+			  });
 		this.props.fetchEditUser(this.props.id);
 	}
 //select user

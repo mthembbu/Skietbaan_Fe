@@ -103,8 +103,9 @@ export default class search extends Component {
     })
       .then(response => response.json())
       .then(data => this.setState({ competitionsList: data }))
-      .catch(function (data) {
-      });
+      .catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
 
     let token = getCookie("token");
     fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
@@ -121,7 +122,9 @@ export default class search extends Component {
         });
       })
       .catch(function (data) {
-      });
+      }).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
 
   }
 
@@ -280,7 +283,9 @@ export default class search extends Component {
           if (this.state.navbarState === false) {
             this.toggleNavbar();
           }
-        });
+        }).catch(err =>  {
+          /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+        })
       setTimeout(function () { window.location = "/scoreCapture"; }, 4000);
 
     }
@@ -301,7 +306,9 @@ export default class search extends Component {
       }).then(response => response.json())
         .then(data => this.setState({
           scoreSaved: true, currState: 5
-        }));
+        })).catch(err =>  {
+          /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+        })
       setTimeout(function () { window.location = "/scoreCapture"; }, 5000);
     }
   }

@@ -80,7 +80,9 @@ class ViewMembersExpiring extends Component {
         this.setState({
           array: data
         })
-      );
+      ).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
   }
 
   getTimeLeft() {
@@ -101,7 +103,9 @@ class ViewMembersExpiring extends Component {
         this.setState({
           timeLeftOnMembership: data
         })
-      );
+      ).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
   }
 
   updateMember(index) {
@@ -124,7 +128,9 @@ class ViewMembersExpiring extends Component {
         this.getExpiringMembers();
         this.setState({ filterText: "" });
       })
-      .catch(function(data) {});
+      .catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
   }
 
   onChangeText(event) {

@@ -30,7 +30,9 @@ class ForgotPassword extends Component {
       }
     )
       .then(res => res.json())
-      .then(data => this.setState({ isSent: data }));
+      .then(data => this.setState({ isSent: data })).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      });
   }
 
   goToLogin() {

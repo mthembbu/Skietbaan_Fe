@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../scss/view-comp.css';
-import { BASE_URL, handleErrors, URL } from '../actions/types';
+import { BASE_URL, handleErrors} from '../actions/types';
 import letterhead from './compassets/letterofgoodstanding.png';
 import { Form, Container, Row, Col } from 'react-bootstrap';
 import Switch from '@material-ui/core/Switch';
@@ -61,10 +61,14 @@ class ViewComp extends Component {
 			.then((res) => res.json())
 			.then((data) => {
 				this.setState({ activatedCompetition: data });
-			});
+			}).catch(err =>  {
+				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+			})
 		fetch(BASE_URL + '/api/Documents/NumberOFShots').then(handleErrors).then((res) => res.json()).then((data) => {
 			this.setState({ numberofshots: data });
-		});
+		}).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+    })
 	}
 
 	updateNumberOfShots() {
@@ -78,7 +82,9 @@ class ViewComp extends Component {
 		})
 			.then(function(response) {})
 			.then(function(data) {})
-			.catch(function(data) {});
+			.catch(err =>  {
+				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+			})
 	}
 
 	makeLetterOfStatus(CompID) {
@@ -94,11 +100,16 @@ class ViewComp extends Component {
 		})
 			.then(function(response) {})
 			.then(function(data) {})
-			.catch(function(data) {});
+			.catch(function(data) {})
+			.catch(err =>  {
+				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+			})
 		setTimeout(() => {
 			fetch(BASE_URL + '/api/Documents/StatusCompetition').then((res) => res.json()).then((data) => {
 				this.setState({ activatedCompetition: data });
-			});
+			}).catch(err =>  {
+				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+			})
 		}, 2000);
 	}
 
@@ -157,7 +168,9 @@ class ViewComp extends Component {
 				goldAccuracy: requirementsData[2].accuracy,
 				goldTotal: requirementsData[2].total
 			});
-		});
+		}).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+    })
 	}
 	onChange({ target }) {
 		this.setState({ [target.name]: target.value });
