@@ -18,6 +18,7 @@ class UserProfile extends Component {
                 hours: -1,
             },
             collapse: false,
+            exceptionCaught: false
         }
         
         this.toggle = this.toggle.bind(this);
@@ -49,9 +50,9 @@ class UserProfile extends Component {
                 })
                 this.setState({ awardCompetitions: data });
             }
-        }).catch(err =>  {
-            /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-          })
+        }).catch(() => {
+            this.setState({ exceptionCaught: true });
+        });
 
         fetch(BASE_URL + "/api/awards/hours/" + token, {
             method: "GET",
@@ -64,9 +65,9 @@ class UserProfile extends Component {
             if(this._isMounted){
                 this.setState({ hoursAward: data });
             }
-        }).catch(err =>  {
-            /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-          })
+        }).catch(() => {
+            this.setState({ exceptionCaught: true });
+        });
     }
 
     componentDidMount(){
@@ -124,7 +125,8 @@ class UserProfile extends Component {
     renderActiveCircle(element,index){
         return(
             <div id={index} className="active-border">
-                <div id={`circle${index}`} className="circle">
+                <div id={`circle${index}`} className={element.accuracy.toString().split(".")[0].length > 2 ? 
+                    "circle font-size-15px" : "circle font-size-18px"}>
                     <label className="accuracy-text">0%</label>
                 </div>
                 {this.animateAccuracyCircle(0, element, index)}

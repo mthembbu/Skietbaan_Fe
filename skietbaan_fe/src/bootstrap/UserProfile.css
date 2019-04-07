@@ -184,12 +184,19 @@
     width: 56px;
     height: 56px;
     border-radius: 100%;
-    font-size: 18px;
     font-weight: bold;
     padding-top: 17px;
     padding-left: 4px;
     background-color: #F3F4F9;
     color: #BE0000;
+}
+
+.font-size-18px{
+    font-size: 18px;
+}
+
+.font-size-15px{
+    font-size: 15px;
 }
 
 .circle-bigger{
