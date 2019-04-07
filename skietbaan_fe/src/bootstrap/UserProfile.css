@@ -317,3 +317,11 @@
 .push-right-5px{
     margin-right: 5px;
 }
+
+.no-competition{
+    margin-top: 40px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 19px;
+    color: #BE0000;
+}
