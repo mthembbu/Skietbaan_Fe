@@ -241,7 +241,8 @@ class UserProfile extends Component {
     render() {
         return (
             <div className="award-container pad-top-120px">
-                {this.state.awardCompetitions.length > 0 ? //only render when the data has arrived from backend
+                {this.state.exceptionCaught ? <div className="no-competition">No Competitions Available</div> :
+                this.state.awardCompetitions.length > 0 ? //only render when the data has arrived from backend
                 <div className="remove-right-padding">
                     <Row>
                         <Col>
@@ -278,13 +279,15 @@ class UserProfile extends Component {
                         </Col>
                     </Row>
                     <Row className="center-content competition-buttons-container">
-                        <Collapse isOpened={this.state.collapse}>
-                            <div className="grey-text select-competition-font">Select Competition</div>
-                            {this.renderCompetitionList()}
-                            <a className="scale-arrowupicon-img" onClick={this.toggle}>
-                                <img src={require("../resources/awardIcons/arrowUpIcon.png")} alt="lock-icon"></img>
-                            </a>
-                        </Collapse>
+                        <Col>
+                            <Collapse isOpened={this.state.collapse}>
+                                <div className="grey-text select-competition-font">Select Competition</div>
+                                {this.renderCompetitionList()}
+                                <a className="scale-arrowupicon-img" onClick={this.toggle}>
+                                    <img src={require("../resources/awardIcons/arrowUpIcon.png")} alt="lock-icon"></img>
+                                </a>
+                            </Collapse>
+                        </Col>
                     </Row>
                     <div className={this.isBestInMonth ? "awards-container-background margin-top-43px" :
                     "awards-container-background margin-top-60px"}>
