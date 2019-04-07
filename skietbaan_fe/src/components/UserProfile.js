@@ -125,7 +125,8 @@ class UserProfile extends Component {
     renderActiveCircle(element,index){
         return(
             <div id={index} className="active-border">
-                <div id={`circle${index}`} className="circle">
+                <div id={`circle${index}`} className={element.accuracy.toString().split(".")[0].length > 2 ? 
+                    "circle font-size-15px" : "circle font-size-18px"}>
                     <label className="accuracy-text">0%</label>
                 </div>
                 {this.animateAccuracyCircle(0, element, index)}
