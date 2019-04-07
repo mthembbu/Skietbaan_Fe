@@ -506,12 +506,7 @@ export default class search extends Component {
                 </div>
               </div>
             </div>
-            <div className="error-message-container">
-              <div className={this.state.validCompetition === false && this.state.validScore === true
-                ? "invalid-comp"
-                : "hidden"}>
-                Select Competition</div>
-            </div>
+            <div className="stretched inline-block">
             <div className={this.state.somethingClicked === true
               ? "submit-container"
               : "hidden"}>
@@ -533,6 +528,7 @@ export default class search extends Component {
                     className="button-that-submits" alt=''></img>
                 </div>
               </div>
+            </div>
             </div>
           </div>
 
