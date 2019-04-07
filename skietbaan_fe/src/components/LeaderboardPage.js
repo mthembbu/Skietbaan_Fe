@@ -45,6 +45,7 @@ class LeaderboardPage extends Component {
         this.getRankTableHeight = this.getRankTableHeight.bind(this);
         this.getFilterTableHeight = this.getFilterTableHeight.bind(this);
         this.getClickableSpaceSize = this.getClickableSpaceSize.bind(this);
+        this.roundOfScores = this.roundOfScores.bind(this);
     }
     componentDidMount() {
         // Additionally I could have just used an arrow function for the binding `this` to the component...
@@ -54,7 +55,8 @@ class LeaderboardPage extends Component {
     componentWillMount() {
         this.updateDimensions();
         //get function to get filter data from api
-        this.props.fetchleaderboadfilterdata();
+        let token = getCookie("token");
+        this.props.fetchleaderboadfilterdata(token);
         this.validatedInitialLeaderboardFilterSelection();
         this.getLeaderboardData(this.state.selectedCompetition, this.state.selectedGroup, this.state.selectedRank);
     }
@@ -120,7 +122,14 @@ class LeaderboardPage extends Component {
             }
         }
     }
-
+    roundOfScores = (score) =>{
+        var roundedScore = score.toFixed(1);//round off to one decimal place
+        if(score+".0" === roundedScore){//avoid converting intergers to decimals (eg 20 to 20.0)
+            return score;
+        }else{
+            return roundedScore;
+        }
+    }
     setCompetitionValue = (value) => {
         this.setState({
             selectedCompetition: value
@@ -188,7 +197,7 @@ class LeaderboardPage extends Component {
     getFilterTableHeight() {
         if (this.state.width < 575 && this.state.listType === "competitions") {
             return ((this.state.height) - 339);
-        }if (this.state.width < 575 && this.state.listType === "groups") {
+        } if (this.state.width < 575 && this.state.listType === "groups") {
             return ((this.state.height) - 434);
         } else {
             return 315;
@@ -253,7 +262,7 @@ class LeaderboardPage extends Component {
             return groupsList;
         }
     }
-    
+
     render() {
 
         if (!getCookie("token")) {
@@ -331,7 +340,7 @@ class LeaderboardPage extends Component {
                                         <tbody>
                                             <tr>
                                                 <td className={(post.rank > 0 && post.rank < 4) ? "extra-name-col-top" : "extra-name-col"}><div>{post.displayName == null ? post.username : post.displayName}</div></td>
-                                                <td className={this.state.selectedRank === "best" ? "score-col-active" : "score-col"}>{post.best != 0 ? post.best : '--'}</td>
+                                                <td className={this.state.selectedRank === "best" ? "score-col-active" : "score-col"}>{post.best != 0 ? this.roundOfScores(post.best) : '--'}</td>
                                                 <td className={this.state.selectedRank === "average" ? "score-col-active" : "score-col"}>
                                                     <div className="member-rank-icons">
                                                         <div className="up-arrow">
@@ -342,7 +351,7 @@ class LeaderboardPage extends Component {
                                                             </div>
                                                         </div>
                                                         <div className="ranking">
-                                                            <div className="number">{post.average != 0 ? post.average : '--'}</div>
+                                                            <div className="number">{post.average != 0 ? this.roundOfScores(post.average) : '--'}</div>
                                                         </div>
                                                         <div className="down-arrow">
                                                             <div className="down-arrow-icon">
@@ -354,7 +363,7 @@ class LeaderboardPage extends Component {
                                                     </div>
 
                                                 </td>
-                                                <td className={this.state.selectedRank === "total" ? "score-col-active" : "score-col"}>{post.total != 0 ? post.total : '--'}</td>
+                                                <td className={this.state.selectedRank === "total" ? "score-col-active" : "score-col"}>{post.total != 0 ? this.roundOfScores(post.total) : '--'}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -370,6 +379,7 @@ class LeaderboardPage extends Component {
             /* Leaderboard Page Main Container */
             <div className="leaderboard-container">
                 <div className="row justify-content-center">
+                 {/* gun background left */}
                     <Col sm={8} className="boostrap-col-8">
                         <div className="closed-filter-section">
                             <table className="filter-table1">
@@ -378,7 +388,7 @@ class LeaderboardPage extends Component {
                                         <td className="competition-name-col">
                                             <div className="gun-icon">
                                                 <Motion
-                                                    defaultStyle={{ x: -200, opacity: 0 }}
+                                                    defaultStyle={{ x: -2000, opacity: 0 }}
                                                     style={{
                                                         x: spring(0),
                                                         opacity: spring(1)
@@ -388,7 +398,7 @@ class LeaderboardPage extends Component {
                                                             transform: `translateX(${style.x}px)`,
                                                             opacity: style.opacity
                                                         }} >
-                                                            {this.props.competitions.length != 0 ? this.props.competitions[this.state.selectedCompetition].label : "-------"}
+                                                            {this.props.competitions.length != 0 ? this.props.competitions[this.state.selectedCompetition].label : "No Competitions"}
                                                         </div>
                                                     )}
                                                 </Motion>
@@ -495,6 +505,13 @@ class LeaderboardPage extends Component {
                                     <tbody>
                                         {tablebody}
                                     </tbody>
+                                    <tfoot className="rank-table-empty-footer">
+                                        <tr>
+                                            <td>
+                                                <div className="empty-div"></div>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </Collapse>
@@ -504,14 +521,14 @@ class LeaderboardPage extends Component {
                 <Motion defaultStyle={{ x: -200, opacity: 0 }}
                     style={{
                         x: spring(this.state.collapseFilter ? -400 : 0),
-                        opacity: spring(this.state.collapseFilter ? 0 : 1, { stiffness: 6, damping: 6, precision: 0.1 })
+                        opacity: spring(this.state.collapseFilter ? 0.5 : 1, { stiffness: 6, damping: 6, precision: 0.1 })
                     }}>
                     {style => (<div className="userWrapper" style={{
                         transform: `translateX(${style.x}px)`,
                         opacity: style.opacity
                     }}>
                         <div className="row justify-content-center">
-                            <div className="col-sm-8 text-left">
+                            <Col sm={8} className="current-user-col-8">
                                 <div className="current-user-table-section">
                                     <table className="ranking-table">
                                         <thead>
@@ -524,14 +541,14 @@ class LeaderboardPage extends Component {
                                                                     <div className="rank-number-container">
                                                                         <div className="member-status-icons">
                                                                             <div className="membership-icon">
-                                                                                {this.props.userResults.isMember
+                                                                                {this.props.currentUser.isMember
                                                                                     ? <img src={require('../resources/memberW.png')} />
                                                                                     : null}
                                                                             </div>
                                                                             <div className="dedication-icon">
-                                                                                {this.props.userResults.isCompetitiveShooter
-                                                                                    ? <img src={require('../resources/dedicatedShooterW.png')} />
-                                                                                    : <img src={require('../resources/standardShooterW.png')} />}
+                                                                                {this.props.competitions.length === 0 ? null
+                                                                                                                      : this.props.currentUser.isCompetitiveShooter ? <img src={require('../resources/dedicatedShooterW.png')} />
+                                                                                                                                                                     : <img src={require('../resources/standardShooterW.png')} />}
                                                                             </div>
                                                                         </div>
                                                                         <div className="member-rank-icons">
@@ -561,8 +578,10 @@ class LeaderboardPage extends Component {
                                                                     <table className="head-table-labels">
                                                                         <tbody>
                                                                             <tr>
-                                                                                <td className="extra-name-col">{this.props.userResults == null ? 'Something went wrong' : (this.props.userResults != null ? this.props.userResults.username : '--')}</td>
-                                                                                <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{this.props.userResults == null ? '--' : (this.props.userResults.best != 0 ? this.props.userResults.best : '--')}</td>
+                                                                                <td className="extra-name-col">{this.props.competitions.length === 0 ? (this.props.currentUser.displayName === null ? this.props.currentUser.username : this.props.currentUser.username )
+                                                                                                                                                :(this.props.userResults === null ? 'Something went wrong' 
+                                                                                                                                                                                 : (this.props.userResults !== null ? this.props.userResults.username : '--'))}</td>
+                                                                                <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{this.props.userResults === null ? '--' : (this.props.userResults.best !== 0 ? this.props.userResults.best : '--')}</td>
                                                                                 <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>
                                                                                     <div className="member-rank-icons">
                                                                                         <div className="up-arrow">
@@ -597,7 +616,7 @@ class LeaderboardPage extends Component {
                                         </thead>
                                     </table>
                                 </div>
-                            </div>
+                            </Col >
                         </div>
                     </div>
                     )}
@@ -609,6 +628,7 @@ class LeaderboardPage extends Component {
 const mapStateToProps = state => ({
     groups: state.posts.leaderboardGroups,
     competitions: state.posts.leaderboardCompetitions,
+    currentUser: state.posts.leaderboardUser,
     scoreTypes: state.posts.leaderboardScoreTypes,
     userResults: state.posts.leaderboardUserData,
     tableData: state.posts.leaderboardTableData,

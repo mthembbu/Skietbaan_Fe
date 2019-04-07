@@ -20,6 +20,15 @@
 	border-color: #6f839e;
 }
 
+.competition-containers{
+	margin: auto;
+	color: #555555;
+    font-weight: 300;
+    font-style: normal;
+    font-family: helvetica;
+
+}
+
 .view-header {
 	position: center;
 	text-align: center;

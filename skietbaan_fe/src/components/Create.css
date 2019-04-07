@@ -1,9 +1,10 @@
 @media only screen and (min-width: 576px) {
   .create-top-nav {
-	height: 195px;
+    height: 254px;
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 66%;
+    margin-left: 17%;
     z-index: 1;
     background: #fdfdfd;
     box-shadow: 2px 1px 16px -3px #000000;
@@ -112,6 +113,11 @@
     outline: none;
   }
 
+  .button-fill{
+    padding-top: 5px;
+    margin-top: -5px;
+  }
+
   .button-fill:focus {
     outline: none;
   }
@@ -180,9 +186,16 @@
 .page-name-bar {
   height: 67px;
   background-image: linear-gradient(to right, #ef3024, #dc0600);
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   display: flex;
+  box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);
+}
+
+@media screen and (min-width:576px)  {
+  .page-name-bar{
+    margin-top: 56px;
+  }
 }
 
 .first-buttons-container {
@@ -204,9 +217,13 @@
 
 .buttons-squire-rectangle {
   height: 32px;
-  width: 100%;
+  width: 90%;
   border: 1px solid #be0000;
   border-radius: 18px;
+}
+
+.buttons-squire-rectangle-width{
+  width: 95%;
 }
 
 .buttons-row .col {
@@ -219,9 +236,12 @@
   color: white;
   border-bottom-left-radius: 18px;
   border-top-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  border-top-right-radius: 18px;
   border: none;
   box-shadow: 0px 3px 8px -3px #674d4d;
   outline: none;
+  padding-top: 4px;
 }
 
 .unstyle-create {
@@ -240,6 +260,7 @@
   border: none;
   box-shadow: 0px 3px 8px -3px #674d4d;
   outline: none;
+  padding-top: 4px;
 }
 
 .unstyle-view {

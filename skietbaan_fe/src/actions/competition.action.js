@@ -3,19 +3,21 @@ import {
   FETCH_COMP,
   UPDATE_COMP_STATUS,
   PARTICIPANTS_PER_COMP,
-  URL,
+  BASE_URL,
   FETCH_REQ,
   UPDATE_REQ
 } from "./types";
 //fetch the array of competitions
 export const fetchComp = () => dispatch => {
-  fetch(URL + "/api/Competition/all")
+  fetch(BASE_URL + "/api/Competition/all")
     .then(res => res.json())
     .then(compData => {
       dispatch({
         type: FETCH_COMP,
         payload: compData
       });
+    }).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
 //fetch the competition requiremets as per Competition ID
@@ -27,17 +29,19 @@ export const fetchRequirements = CompID => dispatch => {
     accuracy: "",
     total: ""
   };
-  fetch(URL + "/R/" + CompID)
+  fetch(BASE_URL + "/R/" + CompID)
     .then(response => response.json())
     .then(requirementsData => {
       dispatch({
         type: FETCH_REQ,
         payload: requirementsData
       });
+    }).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
 export const updateRequirements = (compID, rData) => dispatch => {
-  fetch(URL + "/Requirements/" + compID, {
+  fetch(BASE_URL + "/Requirements/" + compID, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -53,12 +57,14 @@ export const updateRequirements = (compID, rData) => dispatch => {
         type: UPDATE_REQ,
         payload: ReqData
       });
+    }).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
 
-/** A method to update an existing competition and posts comps data to the designated url /api/competition/{Id}*/
+/** A method to update an existing competition and posts comps data to the designated BASE_URL /api/competition/{Id}*/
 export const updateByIdComp = (compData, Id) => dispatch => {
-  fetch(URL + "/api/Competition/" + Id, {
+  fetch(BASE_URL + "/api/Competition/" + Id, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -74,22 +80,26 @@ export const updateByIdComp = (compData, Id) => dispatch => {
         type: UPDATE_COMP_STATUS,
         payload: comp
       });
+    }).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
 //fetch participants
 export const fetchParticipants = () => dispatch => {
-  fetch(URL + "/api/Competition/participants")
+  fetch(BASE_URL + "/api/Competition/participants")
     .then(res => res.json())
     .then(participantsData => {
       dispatch({
         type: PARTICIPANTS_PER_COMP,
         payload: participantsData
       });
+    }).catch(err =>  {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
 //creating a single competition
 export const createComp = compData => dispatch => {
-  fetch(URL + "/api/Competition", {
+  fetch(BASE_URL + "/api/Competition", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -112,5 +122,7 @@ export const createComp = compData => dispatch => {
         });
       });
     }
+  }).catch(err =>  {
+    /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
   });
 };

@@ -75,7 +75,9 @@ class App extends Component {
           }
         })
       }))
-      .catch(function () { });
+      .catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      });
   }
 
   SearchMember(user) {
@@ -97,7 +99,9 @@ class App extends Component {
           document.getElementById("expdate").value = data.memberExpiryDate.substring(0, 10);
         }
       })
-      .catch(function () { console.log("Failed") });
+      .catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      });
   }
 
   UpdateMember() {
@@ -115,8 +119,10 @@ class App extends Component {
         return response.json();
       })
       .then(function (data) { })
-      .catch(function (data) { });
-
+      .catch(function (data) { })
+      .catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      });
       setTimeout(function () { window.location = "/viewMembers"; }, 2000);
   }
 

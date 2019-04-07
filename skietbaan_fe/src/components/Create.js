@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Create.css";
 import { getCookie } from "../components/cookie.js";
-import { URL } from "../actions/types.js";
+import { BASE_URL } from "../actions/types.js";
 import { Row, Col } from "react-bootstrap";
 import ViewMembers from "../components/ViewMembers";
 import CreateComp from "../components/CreateComp";
@@ -61,7 +61,7 @@ class Create extends Component {
     let found = false;
     if (getCookie("token")) {
       let token = getCookie("token");
-      fetch(URL + "/api/features/getuserbytoken/" + token, {
+      fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
         method: "Get",
         headers: {
           Accept: "application/json",
@@ -96,6 +96,8 @@ class Create extends Component {
             }
             window.location = "/registerPage";
           }
+        }).catch(err =>  {
+          /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
         });
     } else {
       window.location = "/registerPage";
@@ -122,8 +124,8 @@ class Create extends Component {
                     <button
                       className={
                         this.state.selectedButton === 1
-                          ? "unstyle-button-active btn-block button-fill"
-                          : "unstyle-button btn-block button-fill"
+                          ? "unstyle-create-active btn-block"
+                          : "unstyle-create btn-block"
                       }
                       onClick={this.groupsPage}
                     >
@@ -136,8 +138,8 @@ class Create extends Component {
                     <button
                       className={
                         this.state.selectedButton === 2
-                          ? "unstyle-button-active btn-block button-fill"
-                          : "unstyle-button btn-block button-fill"
+                          ? "unstyle-create-active btn-block button-fill"
+                          : "unstyle-create btn-block button-fill"
                       }
                       onClick={this.competetitionsPage}
                     >
@@ -153,8 +155,8 @@ class Create extends Component {
                     <button
                       className={
                         this.state.selectedButton === 3
-                          ? "unstyle-button-active btn-block button-fill"
-                          : "unstyle-button btn-block button-fill"
+                          ? "unstyle-create-active btn-block button-fill"
+                          : "unstyle-create btn-block button-fill"
                       }
                       onClick={this.membersPage}
                     >
@@ -201,8 +203,8 @@ class Create extends Component {
                         <button
                           className={
                             this.state.selectedButtonCreateViewGroups === 2
-                              ? "unstyle-button-active btn-block button-fill"
-                              : "unstyle-button btn-block button-fill"
+                              ? "unstyle-create-active btn-block button-fill"
+                              : "unstyle-create btn-block button-fill"
                           }
                           onClick={this.viewGroups}
                         >
@@ -225,8 +227,8 @@ class Create extends Component {
                         <button
                           className={
                             this.state.selectedButtonCreateViewCompetitions === 1
-                              ? "unstyle-button-active btn-block button-fill"
-                              : "unstyle-button btn-block button-fill"
+                              ? "unstyle-create-active btn-block button-fill"
+                              : "unstyle-create btn-block button-fill"
                           }
                           onClick={this.createCompetitions}
                         >
@@ -239,8 +241,8 @@ class Create extends Component {
                         <button
                           className={
                             this.state.selectedButtonCreateViewCompetitions === 2
-                              ? "unstyle-button-active btn-block button-fill"
-                              : "unstyle-button btn-block button-fill"
+                              ? "unstyle-create-active btn-block button-fill"
+                              : "unstyle-create btn-block button-fill"
                           }
                           onClick={this.viewCompetitions}
                         >

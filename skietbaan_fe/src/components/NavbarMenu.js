@@ -47,7 +47,9 @@ class NavbarMenu extends Component {
           nav: data.admin
         });
       })
-      .catch(function(data) {});
+      .catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      });
   }
 
   isHome() {
@@ -148,7 +150,9 @@ class NavbarMenu extends Component {
         this.setState({
           numberOfNotifications: data
         })
-      );
+      ).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
   }
 
   isNotifications() {

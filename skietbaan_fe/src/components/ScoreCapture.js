@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../components/ScoreCapture.css';
 import { validateScore } from './Validators.js';
 import { getCookie } from './cookie.js';
-import { URL } from '../actions/types.js';
+import { BASE_URL } from '../actions/types.js';
 import cameraGray from '../components/assets/redSubmitButton.png';
 import graySubmit from '../components/assets/btnThatSubmitsRed.png';
 import grayRetry from '../components/assets/redRetry.png';
@@ -36,7 +36,8 @@ export default class search extends Component {
       navbarState: false,
       eventsAdded: false,
       lastSize: 0,
-      somethingClicked: false
+      somethingClicked: false,
+      maximumScore:20
 
     }
 
@@ -58,7 +59,9 @@ export default class search extends Component {
     this.setState({
       [target.name]: target.value,
     }, () => {
-      if (validateScore(this.state.score) && target.value !== undefined) {
+      if (parseFloat(this.state.score) <= this.state.maximumScore 
+      && parseFloat(this.state.score) >= 0 
+      && target.value !== undefined) {
         this.setState({
           validScore: true,
           scoreEntered: true
@@ -83,18 +86,19 @@ export default class search extends Component {
     }
   }
 
-  competitionClicked(item, compname) {
+  competitionClicked(item, compname,maximumScore) {
     this.setState({
       somethingClicked: true,
       currState: 2,
       clicked: item,
       competitionName: compname,
-      validCompetition: true
+      validCompetition: true,
+      maximumScore : maximumScore
     });
   }
 
   componentDidMount() {
-    fetch(URL + "/api/Competition", {
+    fetch(BASE_URL + "/api/Competition", {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -103,11 +107,12 @@ export default class search extends Component {
     })
       .then(response => response.json())
       .then(data => this.setState({ competitionsList: data }))
-      .catch(function (data) {
-      });
+      .catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
 
     let token = getCookie("token");
-    fetch(URL + "/api/features/getuserbytoken/" + token, {
+    fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
       method: 'Get',
       headers: {
         'Accept': 'application/json',
@@ -121,13 +126,17 @@ export default class search extends Component {
         });
       })
       .catch(function (data) {
-      });
+      }).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
 
   }
 
   validate() {
     let Valid = false;
-    if (!validateScore(this.state.score) && this.value === undefined) {
+    if (parseFloat(this.state.score) > this.state.maximumScore 
+    && parseFloat(this.state.score) >= 0  
+    && this.value === undefined) {
       this.setState({
         validForm: false,
         validScore: false
@@ -264,7 +273,7 @@ export default class search extends Component {
         "Longitude": this.state.longitude,
         "Latitude": this.state.latitude
       }
-      fetch(URL + "/api/Scores", {
+      fetch(BASE_URL + "/api/Scores", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -280,7 +289,9 @@ export default class search extends Component {
           if (this.state.navbarState === false) {
             this.toggleNavbar();
           }
-        });
+        }).catch(err =>  {
+          /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+        })
       setTimeout(function () { window.location = "/scoreCapture"; }, 4000);
 
     }
@@ -291,7 +302,7 @@ export default class search extends Component {
         "CompetitionName": this.state.competitionName,
         "Token": getCookie("token"),
       }
-      fetch(URL + "/api/Scores", {
+      fetch(BASE_URL + "/api/Scores", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -301,7 +312,9 @@ export default class search extends Component {
       }).then(response => response.json())
         .then(data => this.setState({
           scoreSaved: true, currState: 5
-        }));
+        })).catch(err =>  {
+          /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+        })
       setTimeout(function () { window.location = "/scoreCapture"; }, 5000);
     }
   }
@@ -423,14 +436,19 @@ export default class search extends Component {
                     ? "competition-item active"
                     : "competition-item fade-out")}>
               <li className="li-container"
-                onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name)}>
-                {this.state.competitionsList[i].name}
+                onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name,this.state.competitionsList[i].maximumScore)}>
+                {this.state.competitionsList[i].name.toUpperCase()}
               </li>
               <div onClick={() => this.cancelClicked()} className="competiton-cancel-button"></div>
             </div>
           </div>);
 
       }
+    }
+    else{
+      competitionItem.push(
+        <div className="not-active">No active competitions</div>
+      )
     }
     if (!getCookie("token")) {
       window.location = "/registerPage";

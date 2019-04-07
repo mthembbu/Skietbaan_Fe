@@ -4,7 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import "./Create.css";
 import history from "./history";
 import { getCookie } from "./cookie.js";
-import { URL } from "../actions/types.js";
+import { BASE_URL } from "../actions/types.js";
 import ViewMembers from "../components/ViewMembers";
 import Radio from "@material-ui/core/Radio";
 import CreateComp from "../components/CreateComp";
@@ -70,7 +70,7 @@ export class createPages extends Component {
   componentDidMount(){
     if (getCookie("token") !== null) {
       let token = getCookie("token");
-      fetch(URL + "/api/features/getuserbytoken/" + token, {
+      fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
         method: "Get",
         headers: {
           Accept: "application/json",
@@ -83,7 +83,9 @@ export class createPages extends Component {
             history.push("/home");
           }
         })
-        .catch(function(data) {});
+        .catch(function(data) {}).catch(err =>  {
+          /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+        });
     } else {
       window.location = "/registerPage";
     }
@@ -111,7 +113,7 @@ export class createPages extends Component {
               </div>
               <div className="first-buttons-container">
                 <Row className="buttons-row">
-                  <div className="buttons-squire-rectangle lay-horizontal">
+                  <div className="buttons-squire-rectangle buttons-squire-rectangle-width lay-horizontal">
                     <Col
                       id="removeLeftButtonPadding"
                       className="pad-button-text-top"
@@ -120,8 +122,8 @@ export class createPages extends Component {
                         <button
                           className={
                             this.state.selectedButton === 1
-                              ? "unstyle-button-active btn-block button-fill"
-                              : "unstyle-button btn-block button-fill"
+                              ? "unstyle-create-active btn-block button-fill"
+                              : "unstyle-create btn-block button-fill"
                           }
                           onClick={this.groupsPage}
                         >
@@ -134,8 +136,8 @@ export class createPages extends Component {
                         <button
                           className={
                             this.state.selectedButton === 2
-                              ? "unstyle-button-active btn-block button-fill"
-                              : "unstyle-button btn-block button-fill"
+                              ? "unstyle-create-active btn-block button-fill"
+                              : "unstyle-create btn-block button-fill"
                           }
                           onClick={this.comptetitionsPage}
                         >
@@ -151,8 +153,8 @@ export class createPages extends Component {
                         <button
                           className={
                             this.state.selectedButton === 3
-                              ? "unstyle-button-active btn-block button-fill"
-                              : "unstyle-button btn-block button-fill"
+                              ? "unstyle-create-active btn-block button-fill"
+                              : "unstyle-create btn-block button-fill"
                           }
                           onClick={this.membersPage}
                         >
@@ -259,7 +261,7 @@ export class createPages extends Component {
                 ) : this.state.selectedButton === 2 ? (
                   <div className="buttons-container">
                     <Row className="buttons-row">
-                      <div className="buttons-squire-rectangle lay-horizontal">
+                      <div className="buttons-squire-rectangle buttons-squire-rectangle-width lay-horizontal">
                         <Col
                           id="removeLeftButtonPadding"
                           className="pad-button-text-top"

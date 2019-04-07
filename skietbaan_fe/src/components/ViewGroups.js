@@ -65,7 +65,9 @@ class ViewGroups extends Component {
     })
       .then(function(response) {})
       .then(function(data) {})
-      .catch(function(data) {});
+      .catch(function(data) {}).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
   }
 
   render() {
@@ -90,7 +92,9 @@ class ViewGroups extends Component {
                 <tr className="view-group" key={post.id}>
                   <td
                     className={
-                      post.isActive === true ? "first-row" : "first-row-active"
+                      post.highlighted === true
+                        ? "first-row"
+                        : "first-row-active"
                     }
                     onClick={() => this.editGroup(post)}
                   >

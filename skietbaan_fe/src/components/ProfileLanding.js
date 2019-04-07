@@ -4,6 +4,7 @@ import "../bootstrap/ProfileLanding.css";
 import UserProfile from "./UserProfile";
 import Documents from "./Documents";
 import UserDetails from "./userDetails";
+import StatisticsPage from "./StatisticsPage"
 import { getCookie } from "./cookie.js";
 import history from "./history";
 import { connect } from "react-redux";
@@ -16,6 +17,7 @@ class ProfileLanding extends Component {
     this.awardPage = this.awardPage.bind(this);
     this.documentsPage = this.documentsPage.bind(this);
     this.details = this.details.bind(this);
+    this.stats = this.stats.bind(this);
     this.logout = this.logout.bind(this);
   }
 
@@ -35,8 +37,12 @@ class ProfileLanding extends Component {
     if (this.props.selectedButton != 2) this.props.setSelectedLandingPage(2);
   }
 
-  details() {
+  stats(){
     if (this.props.selectedButton != 3) this.props.setSelectedLandingPage(3);
+  }
+
+  details() {
+    if (this.props.selectedButton != 4) this.props.setSelectedLandingPage(4);
   }
 
   logout() {
@@ -52,11 +58,11 @@ class ProfileLanding extends Component {
 
   render() {
     return (
-      <div>
+      <div className="profile-landing-container">
         <div
           className={
             this.props.selectedButton == 1
-              ? "fix-top pad-bottom-13px"
+              ? "fix-top"
               : this.props.selectedButton == 2
               ? "fix-top pad-bottom-0px"
               : "fix-top"
@@ -76,58 +82,98 @@ class ProfileLanding extends Component {
                 </div>
             </Col>
           </Row>
-          <div className="buttons-container">
-            <Row className="buttons-row">
-              <div className="buttons-rectangle lay-horizontal">
-                <Col
-                  id="remove-left-button-padding"
-                  className="pad-button-text-top"
-                >
+          <div className="profile-buttons-container">
+            <Row className="buttons-row lay-horizontal">
+                <Col className="pad-button-text-top profile-center-top-buttons">
                   <div>
                     <button
                       className={
                         this.props.selectedButton == 1
-                          ? "unstyle-button-active btn-block button-fill"
-                          : "unstyle-button btn-block button-fill"
+                          ? "unstyle-button-active btn-block "
+                          : "unstyle-button btn-block "
                       }
                       onClick={this.awardPage}
                     >
-                      <label className="button-text">AWARDS</label>
+                      <div className="medal-img">
+                        {this.props.selectedButton == 1 ?
+                          <img src={require("../resources/awardIcons/medal-icon.png")}></img> :
+                          <img src={require("../resources/awardIcons/grey-medal-icon.png")}></img>
+                        }
+                      </div>
                     </button>
+                    <div className="profile-navigation-text-align">
+                      <label className="profile-navigation-text">AWARDS</label>
+                    </div>
                   </div>
                 </Col>
-                <Col id="pad-middle-button" className="pad-button-text-top">
+                <Col 
+                className="pad-button-text-top profile-center-top-buttons">
                   <div>
                     <button
                       className={
                         this.props.selectedButton == 2
-                          ? "unstyle-button-active btn-block button-fill"
-                          : "unstyle-button btn-block button-fill"
+                          ? "unstyle-button-active btn-block "
+                          : "unstyle-button btn-block "
                       }
                       onClick={this.documentsPage}
                     >
-                      <label className="button-text">DOCUMENTS</label>
+                      <div className="docs-img-scale">
+                        {this.props.selectedButton == 2 ?
+                          <img src={require("../resources/awardIcons/docs-icon.png")}></img> :
+                          <img src={require("../resources/awardIcons/grey-docs-icon.png")}></img>
+                        }
+                      </div>
                     </button>
+                    <div className="profile-navigation-text-align">
+                      <label className="profile-navigation-text">DOCS</label>
+                    </div>
                   </div>
                 </Col>
-                <Col
-                  id="remove-right-button-padding"
-                  className="pad-button-text-top"
-                >
+                <Col className="profile-center-top-buttons">
                   <div>
                     <button
                       className={
                         this.props.selectedButton == 3
-                          ? "unstyle-button-active btn-block button-fill"
-                          : "unstyle-button btn-block button-fill"
+                          ? "unstyle-button-active btn-block "
+                          : "unstyle-button btn-block "
+                      }
+                      onClick={this.stats}
+                    >
+                      <div className="stats-img-scale">
+                        {this.props.selectedButton == 3 ?
+                          <img src={require("../resources/awardIcons/stats-icon.png")}></img> :
+                          <img src={require("../resources/awardIcons/grey-stats-icon.png")}></img>
+                        }
+                      </div>
+                    </button>
+                    <div className="profile-navigation-text-align">
+                      <label className="profile-navigation-text">STATS</label>
+                    </div>
+                  </div>
+                </Col>
+                <Col className="pad-button-text-top profile-center-top-buttons"
+                >
+                  <div>
+                    <button
+                      className={
+                        this.props.selectedButton == 4
+                          ? "unstyle-button-active btn-block "
+                          : "unstyle-button btn-block "
                       }
                       onClick={this.details}
                     >
-                      <label className="button-text">DETAILS</label>
+                      <div className="details-img-scale">
+                        {this.props.selectedButton == 4 ? 
+                          <img src={require("../resources/awardIcons/details-icon.png")}></img> : 
+                          <img src={require("../resources/awardIcons/grey-details-icon.png")}></img>
+                        }
+                      </div>
                     </button>
+                    <div className="profile-navigation-text-align">
+                      <label className="profile-navigation-text">DETAILS</label>
+                    </div>
                   </div>
                 </Col>
-              </div>
             </Row>
           </div>
         </div>
@@ -142,10 +188,12 @@ class ProfileLanding extends Component {
         >
           {this.props.selectedButton == 1 ? (
             <UserProfile />
-          ) : this.props.selectedButton == 3 ? (
-            <UserDetails />
           ) : this.props.selectedButton == 2 ? (
             <Documents />
+          ) : this.props.selectedButton == 3 ? (
+            <StatisticsPage />
+          ) : this.props.selectedButton == 4 ? (
+            <UserDetails />
           ) : null}
         </div>
       </div>
