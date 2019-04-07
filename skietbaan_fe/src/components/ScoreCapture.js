@@ -59,7 +59,9 @@ export default class search extends Component {
     this.setState({
       [target.name]: target.value,
     }, () => {
-      if (parseFloat(this.state.score) <= this.state.maximumScore && target.value !== undefined) {
+      if (parseFloat(this.state.score) <= this.state.maximumScore 
+      && parseFloat(this.state.score) >= 0 
+      && target.value !== undefined) {
         this.setState({
           validScore: true,
           scoreEntered: true
@@ -132,7 +134,9 @@ export default class search extends Component {
 
   validate() {
     let Valid = false;
-    if (parseFloat(this.state.score) > this.state.maximumScore && this.value === undefined) {
+    if (parseFloat(this.state.score) > this.state.maximumScore 
+    && parseFloat(this.state.score) >= 0  
+    && this.value === undefined) {
       this.setState({
         validForm: false,
         validScore: false
