@@ -538,6 +538,12 @@
 	.The-Main{
 		margin-top: 0px;
 	}
+	.temp-container{
+		width: 100%;
+		background-color: white;
+		z-index: 1;
+		position: absolute;
+	}
 }
 
 .confirm-group {

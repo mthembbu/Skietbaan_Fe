@@ -170,8 +170,9 @@ export class createPages extends Component {
 								</Col>
 							</Row>
 							<Row className="row justify-content-center">
-								<Col sm={8} className="createpage-bootstrap-col-center-container" style={{ boxShadow : this.noShadowOnMember() }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
-                  <div className={this.state.selectedButton === 3 ? "create-switch-bottom-hide"
+								<Col sm={8} className="createpage-bootstrap-col-center-container" style={{ boxShadow : this.noShadowOnMember() }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}                 
+								<div className="temp-container">
+									<div className={this.state.selectedButton === 3 ? "create-switch-bottom-hide"
                                                                   : "create-switch-bottom"} >  
 										<div
 											className={
@@ -197,6 +198,7 @@ export class createPages extends Component {
 										>
 											VIEW
 										</div>
+									</div>
 									</div>
 								</Col>
 							</Row><Row className="row justify-content-center">
