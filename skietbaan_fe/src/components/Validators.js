@@ -20,6 +20,6 @@ export function validateScore(score) {
 }
 
 export function validateNumber(number) {
-  const re = /[0](\d{ 9}) | ([0](\d{ 2})( | -)((\d{ 3}))( | -)(\d{ 4}))| [0](\d{ 2})( | -)(\d{ 7})/;
+  const re = /0((60[3-9]|64[0-5]|66[0-5])\d{6}|(7[1-4689]|6[1-3]|8[1-4])\d{7})/;
   return re.test(number);
 }

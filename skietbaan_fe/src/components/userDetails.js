@@ -32,9 +32,10 @@ export default class userDetails extends Component {
           emailValue: data.email,
           cellphoneValue: data.phoneNumber
         })
-      ).catch(err =>  {
+      )
+      .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      })
+      });
   }
 
   updateUser() {
@@ -52,9 +53,9 @@ export default class userDetails extends Component {
     })
       .then(res => res.json())
       .then(data => this.setState({ returnValue: data }))
-      .catch(err =>  {
+      .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      })
+      });
   }
 
   handleChange({ target }) {
@@ -120,7 +121,7 @@ export default class userDetails extends Component {
               />
             </div>
 
-            {this.state.cellphoneValue === null ? null : validateNumber(
+            {this.state.cellphoneValue.length === 0 ? null : validateNumber(
                 this.state.cellphoneValue
               ) ? null : (
               <label className="user-details-member-label">
