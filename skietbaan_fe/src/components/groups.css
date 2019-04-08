@@ -485,6 +485,39 @@
 		margin-left: 19%;
 		margin-top: 54px;
 	}
+	.BNavBar {
+		height: 73px;
+    background: white;
+    display: inline-block;
+    margin-bottom: 20px;
+    top: 67px;
+    z-index: 1;
+	width: 100%;
+	position: unset;
+	}
+	.BNavBars {
+		height: 73px;
+    background: white;
+    display: inline-block;
+    margin-bottom: 20px;
+    top: 67px;
+    z-index: 1;
+	width: 100%;
+	position: unset;
+	}
+	.navBar-container{
+        margin-top: 31px;
+	}
+	.navBar-containers{
+		margin-top: -48px;
+	}
+	.the-nav-bar {
+		position: unset;
+		margin-top: 30px;
+	}
+	.The-Main{
+		margin-top: 0px;
+	}
 }
 
 .confirm-group {
@@ -560,4 +593,8 @@
 	.the-main{
 		margin-bottom: 56px;
 	}
+}
+.check{
+	overflow-y: overlay;
+    z-index: 1;
 }

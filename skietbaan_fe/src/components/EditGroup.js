@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+	import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
 import { BASE_URL } from '../actions/types';
@@ -11,6 +11,7 @@ import blackBin from './GroupImages/blackBin.png';
 import whitePlus from './GroupImages/whitePlus.png';
 import { fetchEditUser, pageState } from '../actions/postActions';
 import back from './GroupImages/back.png';
+import { Row, Col } from "react-bootstrap";
 
 class EditGroup extends Component {
 	constructor(props) {
@@ -22,19 +23,35 @@ class EditGroup extends Component {
 			count: 0,
 			selected: 0,
 			check: 'select all',
-			binState: false
+			binState: false,
+			height: window.innerHeight,
+			width: window.innerWidth
 		};
 		this.toggleHighlight = this.toggleHighlight.bind(this);
 		this.onBack = this.onBack.bind(this);
 		this.onChange = this.onChange.bind(this);
 		this.delete = this.delete.bind(this);
 		this.selectAll = this.selectAll.bind(this);
+		this.updateDimensions = this.updateDimensions.bind(this);
+		this.getBodyHeight = this.getBodyHeight.bind(this);
 	}
 
 	async componentDidMount() {
+		this.updateDimensions();
 	 this.props.fetchEditUser(this.props.id);
 	}
-
+    componentWillMount() {
+		window.addEventListener('resize', this.updateDimensions);
+    }
+    getBodyHeight() {
+		return this.state.height - 240;
+	}
+	updateDimensions() {
+		this.setState({
+			height: window.innerHeight,
+			width: window.innerWidth
+		});
+	}
 	onChange(event) {
 		this.setState({ filterText: event.target.value });
 	}
@@ -120,7 +137,7 @@ class EditGroup extends Component {
 	};
 	render() {
 		const postitems = (
-			<div className="check">
+			<div className="check" style={{ height: this.getBodyHeight() + 'px' }}>
 				<ul class="list-group">
 					{this.props.editGroup
 						.filter((post) => {
@@ -152,7 +169,9 @@ class EditGroup extends Component {
 			</div>
 		);
 		return (
-			<main className="The-Main">
+			<Row className="row justify-content-center">
+				   <Col sm={8} className="createpage-bootstrap-col-center-container">
+				   <main className="The-Main">
 				<div className="navBar-container">
 					<div className="the-nav-bar">
 						<div className="leftContainer">
@@ -209,6 +228,8 @@ class EditGroup extends Component {
 					</div>
 				)}
 			</main>
+                   </Col>
+            </Row>
 		);
 	}
 }
