@@ -13,11 +13,13 @@ export default class userDetails extends Component {
       surnameValue: "",
       emailValue: "",
       cellphoneValue: "",
-      returnValue: ""
+      returnValue: "",
+      checkNumberValid: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.updateUser = this.updateUser.bind(this);
+    this.handErrorValue = this.handErrorValue.bind(this);
   }
 
   componentDidMount() {
@@ -32,9 +34,10 @@ export default class userDetails extends Component {
           emailValue: data.email,
           cellphoneValue: data.phoneNumber
         })
-      ).catch(err =>  {
+      )
+      .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      })
+      });
   }
 
   updateUser() {
@@ -52,15 +55,19 @@ export default class userDetails extends Component {
     })
       .then(res => res.json())
       .then(data => this.setState({ returnValue: data }))
-      .catch(err =>  {
+      .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      })
+      });
   }
 
   handleChange({ target }) {
     this.setState({
       [target.name]: target.value
     });
+  }
+
+  handErrorValue() {
+    this.setState({ checkNumberValid: true });
   }
 
   render() {
@@ -120,7 +127,9 @@ export default class userDetails extends Component {
               />
             </div>
 
-            {this.state.cellphoneValue === null ? null : validateNumber(
+            {this.state.checkNumberValid === false ? null : this.state
+                .cellphoneValue === null ? null : this.state.cellphoneValue
+                .length === 0 ? null : validateNumber(
                 this.state.cellphoneValue
               ) ? null : (
               <label className="user-details-member-label">
@@ -159,7 +168,7 @@ export default class userDetails extends Component {
                     validateNumber(this.state.cellphoneValue)) ||
                   this.state.cellphoneValue === null
                     ? this.updateUser
-                    : null
+                    : this.handErrorValue
                 }
               >
                 Update Details
