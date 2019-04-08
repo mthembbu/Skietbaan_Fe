@@ -171,9 +171,9 @@ class EditGroup extends Component {
 		return (
 			<Row className="row justify-content-center">
 				   <Col sm={8} className="createpage-bootstrap-col-center-container">
-				   <main className="The-Main">
+				   <div className="The-Main">
 				<div className="navBar-container">
-					<div className="the-nav-bar">
+					<div className="the-nav-bar-edit">
 						<div className="leftContainer">
 							<img className="back-image" onClick={this.onBack} src={back} alt="" />
 							<label className="center-labels">{this.props.name}</label>
@@ -227,7 +227,7 @@ class EditGroup extends Component {
 						</button>
 					</div>
 				)}
-			</main>
+			</div>
                    </Col>
             </Row>
 		);

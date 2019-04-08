@@ -144,6 +144,8 @@
 .page-contents {
 	background-color: transparent;
 	padding: 10%;
+	z-index: 1;
+    overflow-y: overlay;
 }
 
 .letter-image {
@@ -482,8 +484,4 @@
 	height: 100%;
 	padding-right: 5%;
 	padding-top: 5px;
-}
-.content-competitions{
-	z-index: 1;
-    overflow-y: overlay;
 }

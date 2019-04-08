@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import '../scss/createcomp.css';
 import { createComp } from '../actions/competition.action';
 import history from './history';
+import { Row, Col } from 'react-bootstrap';
 class CreateComp extends Component {
 	constructor(props) {
 		super(props);
@@ -14,7 +15,7 @@ class CreateComp extends Component {
 			Hours: '',
 			Status: true,
 			MaximumScore: '',
-			isExist: false 
+			isExist: false
 		};
 		//binding the onChange method to this commponents
 		this.onChange = this.onChange.bind(this);
@@ -59,92 +60,94 @@ class CreateComp extends Component {
 	}
 	render() {
 		return (
-			<div>
-				<div class="create-comp-container">
-					<Form onSubmit={this.onSubmit}>
-						<div className="containers-input">
+			<Row className="row justify-content-center">
+				<Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position : "inherit" }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
+					<div class="create-comp-container">
+						<Form onSubmit={this.onSubmit}>
+							<div className="containers-input">
+								<div className="comp-input-control">
+									<input
+										className="comp-input"
+										type="text"
+										name="Name"
+										id="titleInput"
+										required
+										autoComplete="off"
+										autoCorrect="off"
+										placeholder="Competition Name"
+										value={this.state.Name}
+										onChange={this.onChange}
+									/>
+								</div>
+								<div className={this.props.isExist ? 'error-comp-message' : 'hidden'}>
+									Competition Already Exists
+							</div>
+							</div>
 							<div className="comp-input-control">
 								<input
 									className="comp-input"
-									type="text"
-									name="Name"
-									id="titleInput"
+									type="number"
+									name="BestScoresNumber"
+									id="NumOfScores"
+									min="1"
+									max="12"
 									required
 									autoComplete="off"
 									autoCorrect="off"
-									placeholder="Competition Name"
-									value={this.state.Name}
+									placeholder="Number of Best Scores"
+									value={this.state.BestScoresNumber}
 									onChange={this.onChange}
 								/>
 							</div>
-							<div className={this.props.isExist ? 'error-comp-message' : 'hidden'}>
-								Competition Already Exists
+
+							<div className="comp-input-control">
+								<input
+									className="comp-input"
+									type="number"
+									name="MaximumScore"
+									id="MaxScore"
+									min="1"
+									max="300"
+									required
+									autoComplete="off"
+									autoCorrect="off"
+									placeholder="Maximum Score"
+									value={this.state.MaximumScore}
+									onChange={this.onChange}
+								/>
 							</div>
-						</div>
-						<div className="comp-input-control">
-							<input
-								className="comp-input"
-								type="number"
-								name="BestScoresNumber"
-								id="NumOfScores"
-								min="1"
-								max="12"
-								required
-								autoComplete="off"
-								autoCorrect="off"
-								placeholder="Number of Best Scores"
-								value={this.state.BestScoresNumber}
-								onChange={this.onChange}
-							/>
-						</div>
 
-						<div className="comp-input-control">
-							<input
-								className="comp-input"
-								type="number"
-								name="MaximumScore"
-								id="MaxScore"
-								min="1"
-								max="300"
-								required
-								autoComplete="off"
-								autoCorrect="off"
-								placeholder="Maximum Score"
-								value={this.state.MaximumScore}
-								onChange={this.onChange}
-							/>
-						</div>
-
-						<div className="comp-input-control">
-							<input
-								className="comp-input"
-								type="number"
-								name="Hours"
-								id="NumOfHours"
-								min="1"
-								max="360"
-								required
-								autoComplete="off"
-								autoCorrect="off"
-								placeholder="Hours Per Competition"
-								value={this.state.Hours}
-								onChange={this.onChange}
-							/>
-						</div>
-						<div className="requirements-toggle" />
-						<div className="comp-submit-btn-container">
-							<button
-								variant="secondary"
-								type="submit"
-								id="submit-btn"
-								className="comp-success-submit-btn"
-							>
-								Create Competition
+							<div className="comp-input-control">
+								<input
+									className="comp-input"
+									type="number"
+									name="Hours"
+									id="NumOfHours"
+									min="1"
+									max="360"
+									required
+									autoComplete="off"
+									autoCorrect="off"
+									placeholder="Hours Per Competition"
+									value={this.state.Hours}
+									onChange={this.onChange}
+								/>
+							</div>
+							<div className="requirements-toggle" />
+							<div className="comp-submit-btn-container">
+								<button
+									variant="secondary"
+									type="submit"
+									id="submit-btn"
+									className="comp-success-submit-btn"
+								>
+									Create Competition
 							</button>
-						</div>
-					</Form>
-				</div>
-			</div>
+							</div>
+						</Form>
+					</div>
+				</Col>
+			</Row>
 		);
 	}
 }

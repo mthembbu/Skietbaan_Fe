@@ -41,6 +41,11 @@
     }
 }
 
+.profile-landing-container{
+    height: 100vh;
+    background-color: white;
+}
+
 .button-style-active{
     background-color: #BE0000;
     color: white;
