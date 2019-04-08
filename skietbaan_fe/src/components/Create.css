@@ -3,6 +3,7 @@
   .components-create {
     padding-top: 25px;
     background-color: white;
+    margin-top: 15px;
   }
 
   .content-container {
@@ -489,8 +490,4 @@ body{
   text-align: center;
   padding-top: 6px;
   cursor: pointer;
-}
-.The-Main{
-  z-index: 1;
-  overflow: overlay;
 }

@@ -10,6 +10,7 @@ import back from './GroupImages/back.png';
 import { AddMemberAction, pageState } from '../actions/postActions';
 import seleteAll from './GroupImages/seleteAll.png';
 import unSelectAll from './GroupImages/unSelectAll.png';
+import { Row, Col } from "react-bootstrap";
 
 
 class AddMembersGroup extends Component {
@@ -21,17 +22,34 @@ class AddMembersGroup extends Component {
       filterText: "",
       selected: "",
       count: 0,
-      check: "Select all"
+      check: "Select all",
+			height: window.innerHeight,
+			width: window.innerWidth
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
     this.addUsers = this.addUsers.bind(this);
     this.selectall = this.selectall.bind(this);
+		this.updateDimensions = this.updateDimensions.bind(this);
+		this.getBodyHeight = this.getBodyHeight.bind(this);
   }
   async componentDidMount() {
+    this.updateDimensions();
     await this.props.AddMemberAction(this.props.id);
   }
+  componentWillMount() {
+		window.addEventListener('resize', this.updateDimensions);
+  }
+  getBodyHeight() {
+		return this.state.height - 240;
+  }
+  updateDimensions() {
+		this.setState({
+			height: window.innerHeight,
+			width: window.innerWidth
+		});
+	}
   onChange(event) {
     this.setState({ filterText: event.target.value });
   }
@@ -58,9 +76,9 @@ class AddMembersGroup extends Component {
       },
       body: JSON.stringify(request)
     })
-      .then(function(response) {})
-      .then(function(data) {})
-      .catch(err =>  {
+      .then(function (response) { })
+      .then(function (data) { })
+      .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
     this.props.pageState(1);
@@ -103,89 +121,94 @@ class AddMembersGroup extends Component {
     }
   }
 
-	render() {
-		const postitems = (
-			<div className="check">
-				<ul class="list-group" style={{ textAlign: 'left' }}>
-					{this.props.existing
-						.filter((post) => {
-							return (
-								!this.state.filterText ||
-								post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
-								post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
-							);
-						})
-						.map((post, index) => (
-							<li class="listItem" key={post.id}>
-								<img
-									className="checkbox-delete"
-									onClick={() => this.toggleHighlight(index)}
-									src={post.highlighted ? marked : unmarked}
-									alt=""
-								/>
-								<label className={post.highlighted === true ? 'blabe' : 'blabe2'}>
-									<div className={post.highlighted === true ? 'userName-active' : 'userName'}>
-										{post.username}
-									</div>
-									<div className={post.highlighted === true ? 'emails-active' : 'email'}>
-										{post.email}
-									</div>
-								</label>
-							</li>
-						))}
-				</ul>
-			</div>
-		);
-		return (
-			<main className="The-Main">
-				<div className="navBar-container">
-					<img className="back-image" onClick={this.onBack} src={back} alt="" />
-					<div className="the-nav-bar">
-						<img className="back-image" onClick={this.onBack} src={back} alt="" />
-						<table className="names-table">
-							<tbody className="nameTbody">
-								<tr>
-									<td className="center-labelss">ADD USERS</td>
-								</tr>
-								<tr>
-									<td className="nameOfGroup">{this.props.name.toUpperCase()}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="BNavBars">
-						<div className="inputBox">
-							<input
-								className="the-Text"
-								id="username"
-								type="text"
-								onChange={this.onChange}
-								autoComplete="off"
-								placeholder="Search"
-							/>
-						</div>
-						<div className="switchAll" onClick={this.selectall}>
-							<img className="checkbox-delete" src={this.state.count===this.props.existing.length? seleteAll:unSelectAll} alt="" />
-						</div>
-					</div>
-				</div>
-				<div className="scrollbar" data-simplebar data-simplebar-auto-hide="false">
-					{postitems}
-				</div>
-				{this.state.count == 0 ? null : (
-					<div className="bottom-panel">
-						<div className="bpanel">
-							<button className="confirm-group" onClick={this.addUsers}>
-								ADD USERS
+  render() {
+    const postitems = (
+      <div className="check" style={{ height: this.getBodyHeight() + 'px' }}>
+        <ul class="list-group" style={{ textAlign: 'left' }}>
+          {this.props.existing
+            .filter((post) => {
+              return (
+                !this.state.filterText ||
+                post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
+                post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
+              );
+            })
+            .map((post, index) => (
+              <li class="listItem" key={post.id}>
+                <img
+                  className="checkbox-delete"
+                  onClick={() => this.toggleHighlight(index)}
+                  src={post.highlighted ? marked : unmarked}
+                  alt=""
+                />
+                <label className={post.highlighted === true ? 'blabe' : 'blabe2'}>
+                  <div className={post.highlighted === true ? 'userName-active' : 'userName'}>
+                    {post.username}
+                  </div>
+                  <div className={post.highlighted === true ? 'emails-active' : 'email'}>
+                    {post.email}
+                  </div>
+                </label>
+              </li>
+            ))}
+        </ul>
+      </div>
+    );
+    return (
+      <Row className="row justify-content-center">
+        <Col sm={8} className="createpage-bootstrap-col-center-container">
+          <main className="The-Main">
+            <div className="navBar-containers">
+              <img className="back-image" onClick={this.onBack} src={back} alt="" />
+              <div className="the-nav-bar">
+                <img className="back-image" onClick={this.onBack} src={back} alt="" />
+                <table className="names-table">
+                  <tbody className="nameTbody">
+                    <tr>
+                      <td className="center-labelss">ADD USERS</td>
+                    </tr>
+                    <tr>
+                      <td className="nameOfGroup">{this.props.name.toUpperCase()}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="BNavBars">
+                <div className="inputBox">
+                  <input
+                    className="the-Text"
+                    id="username"
+                    type="text"
+                    onChange={this.onChange}
+                    autoComplete="off"
+                    placeholder="Search"
+                  />
+                </div>
+                <div className="switchAll" onClick={this.selectall}>
+                  <img className="checkbox-delete" src={this.state.count === this.props.existing.length ? seleteAll : unSelectAll} alt="" />
+                </div>
+              </div>
+            </div>
+            <div className="scrollbar" data-simplebar data-simplebar-auto-hide="false">
+              {postitems}
+            </div>
+            {this.state.count == 0 ? null : (
+              <div className="bottom-panel">
+                <div className="bpanel">
+                  <button className="confirm-group" onClick={this.addUsers}>
+                    ADD USERS
 							</button>
 
-              <button className="cancel-delete" onClick={() => this.cancel()}>
-                CANCEL
+                  <button className="cancel-delete" onClick={() => this.cancel()}>
+                    CANCEL
               </button>
-            </div>
-          </div>
-        )}
-      </main>
+                </div>
+              </div>
+            )}
+          </main>
+        </Col>
+      </Row>
+
     );
   }
 }

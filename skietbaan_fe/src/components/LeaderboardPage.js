@@ -530,93 +530,94 @@ class LeaderboardPage extends Component {
                         <div className="row justify-content-center">
                             <Col sm={8} className="current-user-col-8">
                                 <div className="current-user-table-section">
-                                    <table className="ranking-table">
-                                        <thead>
-                                            <tr className="rank-row">
-                                                <td className="rank-col">
-                                                    <table className="user-details-table">
-                                                        <tbody>
-                                                            <tr className="user-details-row">
-                                                                <td className="rank-icon-col">
-                                                                    <div className="rank-number-container">
-                                                                        <div className="member-status-icons">
-                                                                            <div className="membership-icon">
-                                                                                {this.props.currentUser.isMember
-                                                                                    ? <img src={require('../resources/memberW.png')} />
-                                                                                    : null}
-                                                                            </div>
-                                                                            <div className="dedication-icon">
-                                                                                {this.props.competitions.length === 0 ? null
-                                                                                                                      : this.props.currentUser.isCompetitiveShooter ? <img src={require('../resources/dedicatedShooterW.png')} />
-                                                                                                                                                                     : <img src={require('../resources/standardShooterW.png')} />}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="member-rank-icons">
-                                                                            <div className="up-arrow">
-                                                                                <div className="up-arrow-icon">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="ranking">
-                                                                                {this.props.userResults === null ? null 
-                                                                                                                      : (this.props.userResults.rank > 3
-                                                                                                                        ? <div className="number" style={{ color: "white" }}>{this.props.userResults.rank} </div>
-                                                                                                                        : (this.props.userResults.rank === 1
-                                                                                                                            ? <img src={require('../resources/rank1.png')} />
-                                                                                                                            : (this.props.userResults.rank === 2
-                                                                                                                                ? <img src={require('../resources/rank2.png')} />
-                                                                                                                                : (this.props.userResults.rank === 3
-                                                                                                                                    ? <img src={require('../resources/rank3.png')} />
-                                                                                                                                    : null))))}
-                                                                            </div>
-                                                                            <div className="down-arrow">
-                                                                                <div className="down-arrow-icon">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td className="rank-labels-col">
-                                                                    <table className="head-table-labels">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td className="extra-name-col">{this.props.competitions.length === 0 ? (this.props.currentUser.displayName === null ? this.props.currentUser.username : this.props.currentUser.username )
-                                                                                                                                                :(this.props.userResults === null ? 'Something went wrong' 
-                                                                                                                                                                                 : (this.props.userResults !== null ? this.props.userResults.username : '--'))}</td>
-                                                                                <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{this.props.userResults === null ? '--' : (this.props.userResults.best !== 0 ? this.props.userResults.best : '--')}</td>
-                                                                                <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>
-                                                                                    <div className="member-rank-icons">
-                                                                                        <div className="up-arrow">
-                                                                                            <div className="up-arrow-icon">
-                                                                                                {this.props.userResults === null ? null  
-                                                                                                                                            : (this.props.userResults.rankStatus === "up"
-                                                                                                                                            ? <img src={require('../resources/accuracyUp.png')} />
-                                                                                                                                            : null)}
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div className="ranking">
-                                                                                            <div className="number">{this.props.userResults == null ? '--' : (this.props.userResults.average != 0 ? this.props.userResults.average : '--')}</div>
-                                                                                        </div>
-                                                                                        <div className="down-arrow">
-                                                                                            <div className="down-arrow-icon">
-                                                                                                {this.props.userResults === null ? null 
-                                                                                                                                 : (this.props.userResults.rankStatus === "down" ? <img src={require('../resources/accuracyDown.png')} />
-                                                                                                                                                                                 : null)}
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td className={this.state.selectedRank === "total" ? "score-col-active" : "score-col"}>{this.props.userResults === null ? '--' : (this.props.userResults.total != 0 ? this.props.userResults.total : '--')}</td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </thead>
-                                    </table>
+                                    {this.props.currentUser === null ? null
+                                                                     : (<table className="ranking-table">
+                                                                     <thead>
+                                                                         <tr className="rank-row">
+                                                                             <td className="rank-col">
+                                                                                 <table className="user-details-table">
+                                                                                     <tbody>
+                                                                                         <tr className="user-details-row">
+                                                                                             <td className="rank-icon-col">
+                                                                                                 <div className="rank-number-container">
+                                                                                                     <div className="member-status-icons">
+                                                                                                         <div className="membership-icon">
+                                                                                                             {this.props.currentUser.isMember
+                                                                                                                 ? <img src={require('../resources/memberW.png')} />
+                                                                                                                 : null}
+                                                                                                         </div>
+                                                                                                         <div className="dedication-icon">
+                                                                                                             {this.props.competitions.length === 0 ? null
+                                                                                                                                                   : this.props.currentUser.isCompetitiveShooter ? <img src={require('../resources/dedicatedShooterW.png')} />
+                                                                                                                                                                                                  : <img src={require('../resources/standardShooterW.png')} />}
+                                                                                                         </div>
+                                                                                                     </div>
+                                                                                                     <div className="member-rank-icons">
+                                                                                                         <div className="up-arrow">
+                                                                                                             <div className="up-arrow-icon">
+                                                                                                             </div>
+                                                                                                         </div>
+                                                                                                         <div className="ranking">
+                                                                                                             {this.props.userResults === null ? null 
+                                                                                                                                                   : (this.props.userResults.rank > 3
+                                                                                                                                                     ? <div className="number" style={{ color: "white" }}>{this.props.userResults.rank} </div>
+                                                                                                                                                     : (this.props.userResults.rank === 1
+                                                                                                                                                         ? <img src={require('../resources/rank1.png')} />
+                                                                                                                                                         : (this.props.userResults.rank === 2
+                                                                                                                                                             ? <img src={require('../resources/rank2.png')} />
+                                                                                                                                                             : (this.props.userResults.rank === 3
+                                                                                                                                                                 ? <img src={require('../resources/rank3.png')} />
+                                                                                                                                                                 : null))))}
+                                                                                                         </div>
+                                                                                                         <div className="down-arrow">
+                                                                                                             <div className="down-arrow-icon">
+                                                                                                             </div>
+                                                                                                         </div>
+                                                                                                     </div>
+                                                                                                 </div>
+                                                                                             </td>
+                                                                                             <td className="rank-labels-col">
+                                                                                                 <table className="head-table-labels">
+                                                                                                     <tbody>
+                                                                                                         <tr>
+                                                                                                             <td className="extra-name-col">{this.props.competitions.length === 0 ? (this.props.currentUser.displayName === null ? this.props.currentUser.username : this.props.currentUser.username )
+                                                                                                                                                                             :(this.props.userResults === null ? 'Something went wrong' 
+                                                                                                                                                                                                              : (this.props.userResults !== null ? this.props.userResults.username : '--'))}</td>
+                                                                                                             <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{this.props.userResults === null ? '--' : (this.props.userResults.best !== 0 ? this.props.userResults.best : '--')}</td>
+                                                                                                             <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>
+                                                                                                                 <div className="member-rank-icons">
+                                                                                                                     <div className="up-arrow">
+                                                                                                                         <div className="up-arrow-icon">
+                                                                                                                             {this.props.userResults === null ? null  
+                                                                                                                                                                         : (this.props.userResults.rankStatus === "up"
+                                                                                                                                                                         ? <img src={require('../resources/accuracyUp.png')} />
+                                                                                                                                                                         : null)}
+                                                                                                                         </div>
+                                                                                                                     </div>
+                                                                                                                     <div className="ranking">
+                                                                                                                         <div className="number">{this.props.userResults == null ? '--' : (this.props.userResults.average != 0 ? this.props.userResults.average : '--')}</div>
+                                                                                                                     </div>
+                                                                                                                     <div className="down-arrow">
+                                                                                                                         <div className="down-arrow-icon">
+                                                                                                                             {this.props.userResults === null ? null 
+                                                                                                                                                              : (this.props.userResults.rankStatus === "down" ? <img src={require('../resources/accuracyDown.png')} />
+                                                                                                                                                                                                              : null)}
+                                                                                                                         </div>
+                                                                                                                     </div>
+                                                                                                                 </div>
+                                                                                                             </td>
+                                                                                                             <td className={this.state.selectedRank === "total" ? "score-col-active" : "score-col"}>{this.props.userResults === null ? '--' : (this.props.userResults.total != 0 ? this.props.userResults.total : '--')}</td>
+                                                                                                         </tr>
+                                                                                                     </tbody>
+                                                                                                 </table>
+                                                                                             </td>
+                                                                                         </tr>
+                                                                                     </tbody>
+                                                                                 </table>
+                                                                             </td>
+                                                                         </tr>
+                                                                     </thead>
+                                                                 </table>)}
                                 </div>
                             </Col >
                         </div>

@@ -1,7 +1,7 @@
 import {PROFILE_SET_SELECTED_COMPETITION} from "../actions/types"
 
 const initialState = {
-    selectedCompetition : "Pistol 100m"
+    selectedCompetition : ""
 }
 
 export default function(state = initialState, action) {
