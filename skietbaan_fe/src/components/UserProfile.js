@@ -304,7 +304,7 @@ class UserProfile extends Component {
                             {this.renderAccuracyCircle(this.getInitialAward(),
                                 this.getIndexByCompetitionName(this.getInitialAward().competitionName))}
                         </Col>
-                        <Col xs={8}sm={8}md={8}>
+                        <Col xs={7}sm={7}md={7}>
                             <Row className="push-bottom-13px">
                                 <Col xs={4}sm={4}md={4}>
                                     <label className={this.getInitialAward().accuracyAward.bronze ?
@@ -369,7 +369,7 @@ class UserProfile extends Component {
                             {this.renderTotalCircle(this.getInitialAward(),
                             this.getIndexByCompetitionName(this.getInitialAward().competitionName))}
                         </Col>
-                        <Col xs={8}sm={8}md={8}>
+                        <Col xs={7}sm={7}md={7}>
                             <Row className="push-bottom-13px">
                                 <Col xs={4}sm={4}md={4}>
                                 <label className={this.getInitialAward().totalAward.bronze ? 
