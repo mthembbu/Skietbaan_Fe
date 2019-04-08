@@ -245,20 +245,17 @@ class UserProfile extends Component {
         this.timeouts.forEach(timeout => clearTimeout(timeout));
         this._isMounted = false;
     }
-
-    /*
-        TODO: CHANGE THE DEFAULT SELECTED COMPETITION IN REDUCER INITIAL STATE TO THE NAME OF COMPETITION IN THE PROD DB
-    */
-
+    
     render() {
         return (
             <div className="award-container pad-top-120px">
                 {this.state.exceptionCaught ? <div className="no-competition">No Competitions Available</div> :
                 //only render when the data has arrived from backend
-                this.state.awardCompetitions.length > 0 && this.state.awardCompetitions !== null ?
+                this.state.awardCompetitions.length > 0 ?
                 <div className="remove-right-padding">
                     <Row>
                         <Col>
+                        <a onClick={this.toggle} className="make-cursor-point">
                         <div className="buttons-rectangle">
                             <div className="scale-gun-type-img">
                                 {this.getInitialAward().competitionName.includes("Rifle") || 
@@ -268,18 +265,18 @@ class UserProfile extends Component {
                                 }
                             </div>
                             <div className="competition-name-text red-text">
-                                <a onClick={this.toggle} className="center-content
-                                 make-cursor-point profile-landing-vertical-align">    
-                                        <div className="push-right-5px lighter-font">
-                                            {this.getInitialAward().competitionName.toUpperCase()}
-                                        </div>
+                                <div className="center-content profile-landing-vertical-align">    
+                                    <div className="push-right-5px lighter-font">
+                                        {this.getInitialAward().competitionName.toUpperCase()}
+                                    </div>
                                     <div className="down-triangle-img-scale">
                                         <img src={require("../resources/awardIcons/down-triangle.png")} alt="down-triangle">
                                         </img>
                                     </div>
-                                </a>
+                                </div>
                             </div>
                         </div>
+                        </a>
                         </Col>
                     </Row>
                     <Row>
