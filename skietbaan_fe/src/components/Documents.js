@@ -25,7 +25,7 @@ class Documents extends Component {
     }
     let token = getCookie("token");
     fetch(BASE_URL + "/api/Documents/UserLOGS/" + token)
-      .them(handleErrors)
+      .then(handleErrors)
       .then(res => res.json())
       .then(data => {
         if (this._isMounted) {
