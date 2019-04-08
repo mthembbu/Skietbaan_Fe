@@ -15,7 +15,8 @@ class CreateComp extends Component {
 			Hours: '',
 			Status: true,
 			MaximumScore: '',
-			isExist: false
+			isExist: false,
+		isCreated:false
 		};
 		//binding the onChange method to this commponents
 		this.onChange = this.onChange.bind(this);
@@ -54,9 +55,10 @@ class CreateComp extends Component {
 		};
 		this.props.createComp(compData);
 		if (this.props.isExist == false) {
-			history.push('/ViewComp');
+			this.setState({isCreated: true})
 		}
 		this.setState({ isExist: this.props.isExist });
+		
 	}
 	render() {
 		return (
@@ -133,6 +135,7 @@ class CreateComp extends Component {
 									onChange={this.onChange}
 								/>
 							</div>
+							{this.state.isCreated? <label>Competition created</label>:null}
 							<div className="requirements-toggle" />
 							<div className="comp-submit-btn-container">
 								<button

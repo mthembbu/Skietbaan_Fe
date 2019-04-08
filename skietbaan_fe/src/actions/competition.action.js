@@ -5,6 +5,7 @@ import {
   PARTICIPANTS_PER_COMP,
   BASE_URL,
   FETCH_REQ,
+  COMP_PAGE,
   UPDATE_REQ
 } from "./types";
 //fetch the array of competitions
@@ -125,4 +126,13 @@ export const createComp = compData => dispatch => {
   }).catch(err =>  {
     /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
   });
+};
+
+export const compSelectedPages = (page) => {
+  return dispatch => {
+    dispatch({
+      type: COMP_PAGE,
+      payload: page
+    });
+  };
 };
