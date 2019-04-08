@@ -67,7 +67,7 @@ class ForgotPassword extends Component {
       .then(res => res.json())
       .then(data => this.setState({ returnValue: data }))
       .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+        return Promise.reject();
       });
 
     {
