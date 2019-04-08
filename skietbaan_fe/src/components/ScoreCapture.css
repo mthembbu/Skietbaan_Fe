@@ -241,6 +241,13 @@
     display: flex;
     padding-top: 35px;
 }
+.stretched{
+    width:100%;
+}
+
+.inline-block{
+    display:inline-block;
+}
 
 .retake{
     height: 42px;

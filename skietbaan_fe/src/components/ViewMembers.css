@@ -10,17 +10,36 @@
 }
 
 .table-search-members {
-  padding-top: 66px;
   background-color: #fdfdfd;
+   z-index: 1;
+    overflow-y: overlay;
 }
-
-@media only screen and (max-width: 575px) {
+.username-search{
+  position: relative;
+  padding-bottom: 14px;
+}
+.search{
+  padding: 14px;
+  text-align: center;
+}
+@media only screen and (min-width: 575px){
+  .username-search {
+    text-align: center;
+    width: 100%;
+    box-shadow: 2px 8px 17px -7px rgba(0,0,0,0.5);
+  }
   .table-search-members {
-    padding-top: 66px;
+    padding-top: 0px;
     background-color: #fdfdfd;
     overflow-y: scroll;
     height: 100%;
-    margin-bottom: 57px;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .table-search-members {
+    background-color: #fdfdfd;
+    overflow-y: scroll;
+    height: 100%;
   }
 
   .centre-view-member {
@@ -55,13 +74,6 @@
   text-align: center;
   color: #fdfdfd;
 }
-
-.username-search {
-  position: fixed;
-  text-align: center;
-  width: 100%;
-}
-
 .user-value {
   background-color: #f3f4f9;
   border-radius: 4px;
@@ -125,10 +137,9 @@
 }
 
 .search {
-  padding: 1px 30px 10px 25px;
+  padding-bottom: 14px;
   background-color: #ffffff;
   height: 60px;
-  box-shadow: 2px 1px 16px -3px #000000;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
 }
