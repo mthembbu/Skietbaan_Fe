@@ -482,7 +482,7 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 6px 0px;
-    background-image: url("../components/assets/gunOverlay.png");
+    background-image: url("/static/media/gunOverlay.dc42d30c");
     width: 100%;
     margin-top: 4px;
   }
@@ -735,8 +735,4 @@
 
 .notification-spacing {
   margin-right: 18px;
-}
-
-.styling-for-gun-overlay {
-  height: 50px;
 }

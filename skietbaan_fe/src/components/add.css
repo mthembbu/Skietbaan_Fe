@@ -75,6 +75,7 @@
 .add-container {
 	display: flex;
 	justify-content: center;
+	height: -webkit-fill-available;;
 }
 .add:focus {
 	outline: none;
@@ -104,5 +105,4 @@
 }
 .add-group-main{
 	width: 100%;
-	position: fixed;
 }
