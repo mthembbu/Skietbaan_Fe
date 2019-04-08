@@ -71,15 +71,19 @@ class notification extends Component {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(deletingArray)
-      }).then(() => this.props.getNotifications(this.state.token));
-    } catch (err) { }
-    window.location = "/notify";
+      }).then(() => {
+        this.props.getNotifications(this.state.token);
+        this.setState({
+          toggle: false
+        });
+      });
+    } catch (err) {}
   };
 
   onClick_View = (Notification, Message, Id) => {
     this.setState({
       isRead: true,
-      toggle: !this.state.toggle
+      toggle: false
     });
     this.props.updateIsReadProperty(Id);
     if (Notification === "Award") {
@@ -434,26 +438,28 @@ class notification extends Component {
     );
 
     return (
+
       <Row className="row justify-content-center">
         <Col sm={8} className="createpage-bootstrap-col-center-container">
-          <div className="notifications-body-class">
-            {this.state.stateCheck === false ? (
-              <div>{headingItems}</div>
-            ) : (
-                <div>{adminHeadingItems}</div>
-              )}
-            {this.state.adminToggle === true ? (
-              <Collapse isOpened={this.state.adminToggle === true}>
-                <div>{writeAnnouncement}</div>
-              </Collapse>
-            ) : (
-                <div className="format-content">{postItems}</div>
-              )}
-            <div>{deleteModal}</div>
-          </div>
+           <div className="notifications-body-class">
+        <div className="styling-for-gun-overlay">
+          {this.state.stateCheck === false ? (
+            <div>{headingItems}</div>
+          ) : (
+            <div>{adminHeadingItems}</div>
+          )}
+          {this.state.adminToggle === true ? (
+            <Collapse isOpened={this.state.adminToggle === true}>
+              <div>{writeAnnouncement}</div>
+            </Collapse>
+          ) : (
+            <div className="format-content">{postItems}</div>
+          )}
+          <div>{deleteModal}</div>
+        </div>
+      </div>
         </Col>
       </Row>
-
     );
   }
 }
