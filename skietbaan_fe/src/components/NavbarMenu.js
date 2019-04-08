@@ -189,7 +189,7 @@ class NavbarMenu extends Component {
 		return (
 			<div className="nav-content">
 				<Row className="row justify-content-center">
-					<Col sm={8} className="createpage-bootstrap-col-center-container">
+					<Col sm={8} className="navbar-bootstrap-col-center-container">
 						<table className="navbar-admin">
 							<tbody>
 								<tr className="first-row-navbar">

@@ -52,6 +52,10 @@
     text-align: center;
     background-image: radial-gradient(circle, #ffffff, #000000);
   }
+  .navbar-bootstrap-col-center-container{
+    background: transparent;
+    padding: 0;
+  }
 }
 
 @media only screen and (max-width: 575px) {
@@ -111,6 +115,11 @@
 
   .columns-v2 {
     width: 25%;
+  }
+  .navbar-bootstrap-col-center-container{
+    padding-right: 15;
+    padding-left: 15;
+    background: transparent;
   }
 }
 
