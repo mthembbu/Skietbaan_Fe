@@ -189,7 +189,7 @@ class ViewComp extends Component {
 	getRequirements(index) {
 		this.setState({ idCompToggel: index });
 		this.changeToggle();
-		fetch(URL + '/R/' + index)
+		fetch(BASE_URL + '/R/' + index)
 			.then((response) => response.json())
 			.then((requirementsData) => {
 				this.setState({
