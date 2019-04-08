@@ -1,16 +1,4 @@
 @media only screen and (min-width: 576px) {
-  .create-top-nav {
-    /* height: 254px;
-    position: fixed;
-    top: 0;
-    width: 66%;
-    margin-left: 17%;
-    z-index: 1;
-    background: #fdfdfd;
-    box-shadow: 2px 1px 16px -3px #000000;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px; */
-  }
 
   .components-create {
     padding-top: 25px;
@@ -84,9 +72,6 @@
 }
 
 @media only screen and (max-width: 575px) {
-  .createpage-bootstrap-col-center-container{
-    padding: 0 !important;
-  }
   .create-top-nav .row .createpage-bootstrap-col-center-container{
     padding: 0;
   }
@@ -201,7 +186,7 @@
     padding-top: 0px;
   }
   body{
-    background-repeat: repeat;
+    background-repeat: round;
     background-size: 100%;
     background-position: 50%;
     background-image: url(/static/media/desktop-background.bed1bfc6.png);
