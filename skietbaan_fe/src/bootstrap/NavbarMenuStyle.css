@@ -58,6 +58,7 @@
   }
   .col-sm-8{
     max-width: 54%;
+    box-shadow: 13px 2px 18px -10px grey, -6px 1px 9px -6px grey;
   }
 }
 
