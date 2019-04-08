@@ -70,9 +70,13 @@ class notification extends Component {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(deletingArray)
-      }).then(() => this.props.getNotifications(this.state.token));
+      }).then(() => {
+        this.props.getNotifications(this.state.token);
+        this.setState({
+          toggle: false
+        });
+      });
     } catch (err) {}
-    window.location = "/notify";
   };
 
   onClick_View = (Notification, Message, Id) => {
