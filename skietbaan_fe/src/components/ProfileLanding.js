@@ -58,7 +58,9 @@ class ProfileLanding extends Component {
 
   render() {
     return (
-      <div className="profile-landing-container">
+      <Row className="row justify-content-center">
+				   <Col sm={8} className="profile-bootstrap-col-center-container">
+           <div className="profile-landing-container">
         <div
           className={
             this.props.selectedButton == 1
@@ -197,6 +199,9 @@ class ProfileLanding extends Component {
           ) : null}
         </div>
       </div>
+           </Col>
+        </Row>
+        
     );
   }
 }
