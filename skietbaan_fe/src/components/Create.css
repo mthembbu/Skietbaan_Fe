@@ -201,7 +201,7 @@
     padding-top: 0px;
   }
   body{
-    background-repeat: repeat;
+    background-repeat: round;
     background-size: 100%;
     background-position: 50%;
     background-image: url(/static/media/desktop-background.bed1bfc6.png);
