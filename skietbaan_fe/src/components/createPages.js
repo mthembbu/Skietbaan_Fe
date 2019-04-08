@@ -13,6 +13,7 @@ import ViewNonMembers from '../components/ViewNonMembers';
 import ViewMembersExpiring from '../components/ViewMembersExpiring';
 import ViewComp from '../components/ViewComp';
 import GroupComponent from '../components/GroupComponent';
+import { selectedPage } from '../actions/postActions';
 
 export class createPages extends Component {
 	constructor(props) {
@@ -88,6 +89,7 @@ export class createPages extends Component {
 		this.setState({ selectedValue: event });
 	};
 	componentDidMount() {
+		this.props.selectedPage(1);
 		if (getCookie('token') !== null) {
 			let token = getCookie('token');
 			fetch(BASE_URL + '/api/features/getuserbytoken/' + token, {
@@ -272,4 +274,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(createPages);
+export default connect(mapStateToProps, {selectedPage})(createPages);
