@@ -5,6 +5,7 @@ import history from "./history";
 import "./add.css";
 import { BASE_URL } from "../actions/types";
 import { getCookie } from "../components/cookie.js";
+import { Row, Col } from "react-bootstrap";
 
 class AddGroup extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class AddGroup extends Component {
         this.setState({
           groups: data.map(names => names.name)
         })
-      ).catch(err =>  {
+      ).catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
   }
@@ -55,30 +56,35 @@ class AddGroup extends Component {
       window.location = "/registerPage";
     }
     return (
-      <div className="add-group-main">
-        <div className="page">
-          <div className="middle-bar">
-            <input
-              className="texts"
-              type="text"
-              name="name"
-              onChange={this.onChange}
-              value={this.state.name}
-              autoComplete="off"
-              autoCorrect="off"
-              placeholder="Group Name"
-            />
-            {this.state.exist === true ? null : (
-              <label className="errorMsg">Group Name Already Exists</label>
-            )}
-          </div>
-          <div className="add-container">
-            <button className="add" onClick={this.onClick}>
-              ADD USERS
+      <Row className="row justify-content-center">
+        <Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position : "inherit"}}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
+          <div className="add-group-main">
+            <div className="page">
+              <div className="middle-bar">
+                <input
+                  className="texts"
+                  type="text"
+                  name="name"
+                  onChange={this.onChange}
+                  value={this.state.name}
+                  autoComplete="off"
+                  autoCorrect="off"
+                  placeholder="Group Name"
+                />
+                {this.state.exist === true ? null : (
+                  <label className="errorMsg">Group Name Already Exists</label>
+                )}
+              </div>
+              <div className="add-container">
+                <button className="add" onClick={this.onClick}>
+                  ADD USERS
             </button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </Col>
+      </Row>
+
     );
   }
 }

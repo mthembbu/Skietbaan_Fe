@@ -15,8 +15,6 @@ import notifySpeakerBlack from "../components/Notification-Img/notifySpeaker.png
 import notifySpeakerWhite from "../components/Notification-Img/notifySpeakerWhite.png";
 import { setSelectedCompetition } from "../actions/userProfileActions";
 import { setSelectedLandingPage } from "../actions/profileLandingAction";
-import { selectedPage } from '../actions/postActions';
-
 import {
   updateSelectedCompetition,
   updateSelectedGroup
@@ -73,19 +71,15 @@ class notification extends Component {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(deletingArray)
-      }).then(() => {
-        this.props.getNotifications(this.state.token);
-        this.setState({
-          toggle: false
-        });
-      });
-    } catch (err) {}
+      }).then(() => this.props.getNotifications(this.state.token));
+    } catch (err) { }
+    window.location = "/notify";
   };
 
   onClick_View = (Notification, Message, Id) => {
     this.setState({
       isRead: true,
-      toggle: false
+      toggle: !this.state.toggle
     });
     this.props.updateIsReadProperty(Id);
     if (Notification === "Award") {
@@ -148,7 +142,6 @@ class notification extends Component {
   }
 
   componentDidMount() {
-    this.props.selectedPage(4)
     if (getCookie("token")) {
       this.props.getNotifications(this.state.token);
     }
@@ -441,28 +434,26 @@ class notification extends Component {
     );
 
     return (
-
       <Row className="row justify-content-center">
         <Col sm={8} className="createpage-bootstrap-col-center-container">
-           <div className="notifications-body-class">
-        <div className="styling-for-gun-overlay">
-          {this.state.stateCheck === false ? (
-            <div>{headingItems}</div>
-          ) : (
-            <div>{adminHeadingItems}</div>
-          )}
-          {this.state.adminToggle === true ? (
-            <Collapse isOpened={this.state.adminToggle === true}>
-              <div>{writeAnnouncement}</div>
-            </Collapse>
-          ) : (
-            <div className="format-content">{postItems}</div>
-          )}
-          <div>{deleteModal}</div>
-        </div>
-      </div>
+          <div className="notifications-body-class">
+            {this.state.stateCheck === false ? (
+              <div>{headingItems}</div>
+            ) : (
+                <div>{adminHeadingItems}</div>
+              )}
+            {this.state.adminToggle === true ? (
+              <Collapse isOpened={this.state.adminToggle === true}>
+                <div>{writeAnnouncement}</div>
+              </Collapse>
+            ) : (
+                <div className="format-content">{postItems}</div>
+              )}
+            <div>{deleteModal}</div>
+          </div>
         </Col>
       </Row>
+
     );
   }
 }
@@ -487,7 +478,6 @@ export default connect(
     updateIsReadProperty,
     getNotifications,
     setSelectedCompetition,
-    setSelectedLandingPage,
-    selectedPage
+    setSelectedLandingPage
   }
 )(notification);

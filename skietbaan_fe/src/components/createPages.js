@@ -13,7 +13,6 @@ import ViewNonMembers from '../components/ViewNonMembers';
 import ViewMembersExpiring from '../components/ViewMembersExpiring';
 import ViewComp from '../components/ViewComp';
 import GroupComponent from '../components/GroupComponent';
-import { selectedPage } from '../actions/postActions';
 
 export class createPages extends Component {
 	constructor(props) {
@@ -35,7 +34,8 @@ export class createPages extends Component {
 		this.createCompetitions = this.createCompetitions.bind(this);
 		this.viewCompetitions = this.viewCompetitions.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-    this.updateCreateContainer = this.updateCreateContainer.bind(this);
+		this.updateCreateContainer = this.updateCreateContainer.bind(this);
+		this.noShadowOnMember =  this.noShadowOnMember.bind(this);
 	}
 	updateCreateContainer() {
 		switch (this.selectedButton) {
@@ -56,7 +56,14 @@ export class createPages extends Component {
 				}
 				break;
 		}
-  }
+	}
+	noShadowOnMember(){
+		if(this.state.selectedButton === 3){
+			return "";
+		}else{
+			return "0px 15px 15px -17px grey";
+		}
+	}
   
 	groupsPage() {
 		this.setState({ selectedButton: 1 });
@@ -89,7 +96,6 @@ export class createPages extends Component {
 		this.setState({ selectedValue: event });
 	};
 	componentDidMount() {
-		this.props.selectedPage(1);
 		if (getCookie('token') !== null) {
 			let token = getCookie('token');
 			fetch(BASE_URL + '/api/features/getuserbytoken/' + token, {
@@ -164,9 +170,9 @@ export class createPages extends Component {
 								</Col>
 							</Row>
 							<Row className="row justify-content-center">
-								<Col sm={8} className="createpage-bootstrap-col-center-container">
+								<Col sm={8} className="createpage-bootstrap-col-center-container" style={{ boxShadow : this.noShadowOnMember() }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
                   <div className={this.state.selectedButton === 3 ? "create-switch-bottom-hide"
-                                                                  : "create-switch-bottom"}>
+                                                                  : "create-switch-bottom"} >  
 										<div
 											className={
 												this.state.selectedButtonCreateViewGroups === 1 ? (
@@ -274,4 +280,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, {selectedPage})(createPages);
+export default connect(mapStateToProps, mapDispatchToProps)(createPages);
