@@ -126,6 +126,7 @@ class EditGroup extends Component {
 					{this.props.editGroup
 						.filter((post) => {
 							return (
+							
 								!this.state.filterText ||
 								post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
 								post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
