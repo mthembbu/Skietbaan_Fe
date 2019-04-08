@@ -19,10 +19,12 @@ export default class userDetails extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.updateUser = this.updateUser.bind(this);
+    this.mounted = false;
     this.handErrorValue = this.handErrorValue.bind(this);
   }
 
   componentDidMount() {
+    this.mounted = true;
     let token = getCookie("token");
     fetch(BASE_URL + "/api/Features/GetUserByToken/" + token)
       .then(res => res.json())
