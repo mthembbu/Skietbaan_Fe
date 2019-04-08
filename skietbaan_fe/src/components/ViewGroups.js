@@ -112,6 +112,7 @@ class ViewGroups extends Component {
   render() {
     const postitems = (
       <div className="the-main">
+      {this.props.groupsList.length===0?null:
         <table className="table-member">
           <tbody>
             {this.props.groupsList
@@ -164,7 +165,7 @@ class ViewGroups extends Component {
                 </tr>
               ))}
           </tbody>
-        </table>
+        </table>}
       </div>
     );
 

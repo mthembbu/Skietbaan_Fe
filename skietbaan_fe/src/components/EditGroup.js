@@ -138,6 +138,7 @@ class EditGroup extends Component {
 	render() {
 		const postitems = (
 			<div className="check" style={{ height: this.getBodyHeight() + 'px' }}>
+			{this.props.editGroup===0?null:
 				<ul class="list-group">
 					{this.props.editGroup
 						.filter((post) => {
@@ -165,7 +166,7 @@ class EditGroup extends Component {
 								</label>
 							</li>
 						))}
-				</ul>
+				</ul>}
 			</div>
 		);
 		return (
