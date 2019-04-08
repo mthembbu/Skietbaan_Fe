@@ -18,20 +18,24 @@ export default class userDetails extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.updateUser = this.updateUser.bind(this);
+    this.mounted = false;
   }
 
   componentDidMount() {
+    this.mounted = true;
     let token = getCookie("token");
     fetch(BASE_URL + "/api/Features/GetUserByToken/" + token)
       .then(res => res.json())
-      .then(data =>
-        this.setState({
-          array: data,
-          nameValue: data.name,
-          surnameValue: data.surname,
-          emailValue: data.email,
-          cellphoneValue: data.phoneNumber
-        })
+      .then(data =>{
+        if(this.mounted){
+          this.setState({
+            array: data,
+            nameValue: data.name,
+            surnameValue: data.surname,
+            emailValue: data.email,
+            cellphoneValue: data.phoneNumber
+          })
+        }}
       ).catch(err =>  {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       })
