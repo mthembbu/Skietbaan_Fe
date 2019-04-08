@@ -383,7 +383,7 @@ body{
   
   }
 .create-switch-top{
-  width: 345px;
+  width: 344px;
     height: 32px;
     margin: auto;
     box-shadow: 0 3px 8px -3px #674D4D;
@@ -430,7 +430,7 @@ body{
   margin: auto;
   box-shadow: 0 3px 8px -3px #674D4D;
   border: 1px solid #BE0000;
-  margin-top: 13px;
+  margin-top: 15px;
   border-radius: 18px;
   display: -webkit-box;
 }
