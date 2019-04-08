@@ -217,7 +217,7 @@ class Register extends Component {
             <button className="button-login" onClick={() => this.goToLogin()}>LOGIN</button>
           </div>
         </div>
-        <div className="centre-login">
+        <div className="centre-login-register">
           <form className="form" autoComplete="off">
 
             <div className="spacing-login">
