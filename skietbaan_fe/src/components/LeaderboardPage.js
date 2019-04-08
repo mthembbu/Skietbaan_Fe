@@ -557,15 +557,16 @@ class LeaderboardPage extends Component {
                                                                                 </div>
                                                                             </div>
                                                                             <div className="ranking">
-                                                                                {this.props.userResults.rank > 3
-                                                                                    ? <div className="number" style={{ color: "white" }}>{this.props.userResults.rank} </div>
-                                                                                    : (this.props.userResults.rank === 1
-                                                                                        ? <img src={require('../resources/rank1.png')} />
-                                                                                        : (this.props.userResults.rank === 2
-                                                                                            ? <img src={require('../resources/rank2.png')} />
-                                                                                            : (this.props.userResults.rank === 3
-                                                                                                ? <img src={require('../resources/rank3.png')} />
-                                                                                                : null)))}
+                                                                                {this.props.userResults === null ? null 
+                                                                                                                      : (this.props.userResults.rank > 3
+                                                                                                                        ? <div className="number" style={{ color: "white" }}>{this.props.userResults.rank} </div>
+                                                                                                                        : (this.props.userResults.rank === 1
+                                                                                                                            ? <img src={require('../resources/rank1.png')} />
+                                                                                                                            : (this.props.userResults.rank === 2
+                                                                                                                                ? <img src={require('../resources/rank2.png')} />
+                                                                                                                                : (this.props.userResults.rank === 3
+                                                                                                                                    ? <img src={require('../resources/rank3.png')} />
+                                                                                                                                    : null))))}
                                                                             </div>
                                                                             <div className="down-arrow">
                                                                                 <div className="down-arrow-icon">
@@ -586,9 +587,10 @@ class LeaderboardPage extends Component {
                                                                                     <div className="member-rank-icons">
                                                                                         <div className="up-arrow">
                                                                                             <div className="up-arrow-icon">
-                                                                                                {this.props.userResults.rankStatus === "up"
-                                                                                                    ? <img src={require('../resources/accuracyUp.png')} />
-                                                                                                    : null}
+                                                                                                {this.props.userResults === null ? null  
+                                                                                                                                            : (this.props.userResults.rankStatus === "up"
+                                                                                                                                            ? <img src={require('../resources/accuracyUp.png')} />
+                                                                                                                                            : null)}
                                                                                             </div>
                                                                                         </div>
                                                                                         <div className="ranking">
@@ -596,9 +598,9 @@ class LeaderboardPage extends Component {
                                                                                         </div>
                                                                                         <div className="down-arrow">
                                                                                             <div className="down-arrow-icon">
-                                                                                                {this.props.userResults.rankStatus === "down"
-                                                                                                    ? <img src={require('../resources/accuracyDown.png')} />
-                                                                                                    : null}
+                                                                                                {this.props.userResults === null ? null 
+                                                                                                                                 : (this.props.userResults.rankStatus === "down" ? <img src={require('../resources/accuracyDown.png')} />
+                                                                                                                                                                                 : null)}
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>

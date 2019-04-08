@@ -60,8 +60,6 @@ class notification extends Component {
     for (var i = 0; i < this.props.notificationsArray.length; i++) {
       if (this.props.notificationsArray[i].markedForDeletion === true) {
         deletingArray.push(this.props.notificationsArray[i]);
-
-        delete this.props.notificationsArray[i];
       }
     }
     try {
@@ -72,12 +70,9 @@ class notification extends Component {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(deletingArray)
-      });
+      }).then(() => this.props.getNotifications(this.state.token));
     } catch (err) {}
-    this.props.getNotifications(this.state.token);
-    setTimeout(() => {
-      window.location = "/notify";
-    }, 2000);
+    window.location = "/notify";
   };
 
   onClick_View = (Notification, Message, Id) => {
@@ -184,7 +179,7 @@ class notification extends Component {
           stateCheck: data.admin
         });
       })
-      .catch(err =>  {
+      .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
   }
@@ -219,7 +214,7 @@ class notification extends Component {
       body: JSON.stringify(this.state.announceString)
     })
       .then(function(response) {})
-      .catch(err =>  {
+      .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
     setTimeout(() => {

@@ -247,8 +247,8 @@
          width: 100%;
          color: #fdfdfd;
          background-image: linear-gradient(to right, #ef3024  , #Dc0600);
-         border-bottom-right-radius: 20px;
-         border-bottom-left-radius: 20px;
+         border-bottom-right-radius: 13px;
+         border-bottom-left-radius: 13px;
          box-shadow: -2px 1px 14px 2px grey;
      }
      .closed-filter-section .filter-table1{
@@ -970,9 +970,7 @@
      .userWrapper .row{
          background: transparent;
      }
-     .userWrapper .row .current-user-col-8{
-         background: transparent;
-     }
+     
      .leaderboard-container{
         margin-top: 56px;
      }
@@ -1019,10 +1017,7 @@
         height: 48px;
         box-shadow: 1px 10px 12px -3px grey;
     }
-    .leaderboard-container .row .boostrap-col-8{
-        padding-left: 16px !important;
-        padding-right: 16px !important;
-     }
+    
      .ranking-table-section .ranking-table .rank-row .rank-col .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .score-col .member-rank-icons .ranking{
          padding-right: 0%;
      }
@@ -1067,6 +1062,13 @@
         width: 28px;
         margin: auto;
      }
+    .leaderboard-container .row .boostrap-col-8{
+        padding: 0;
+     }
+     .userWrapper .row .current-user-col-8{
+        background: transparent;
+        padding: 0;
+    }
  }
  @media only screen and (max-width: 575px) {
      /* phones size */
@@ -1092,6 +1094,9 @@
     }
     .leaderboard-container .row .boostrap-col-8{
         background-color: #F5F5F5;
+        padding-right: 15;
+        padding-left: 15;
+        background: transparent;
      }
     .background-left{
         display: none;

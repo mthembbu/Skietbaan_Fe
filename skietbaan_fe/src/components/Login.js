@@ -220,7 +220,7 @@ class Login extends Component {
               onClick={() => this.goToRegister()}></img>
           </div>
         </div>
-        <div className="centre-login">
+        <div className="centre-login-register">
           <form className="form" autoComplete="off">
 
             <div className="spacing-login">
