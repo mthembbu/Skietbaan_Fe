@@ -12,6 +12,7 @@ import whitePlus from './GroupImages/whitePlus.png';
 import { fetchEditUser, pageState } from '../actions/postActions';
 import back from './GroupImages/back.png';
 import { Row, Col } from "react-bootstrap";
+
 class EditGroup extends Component {
 	constructor(props) {
 		super(props);
@@ -137,6 +138,7 @@ class EditGroup extends Component {
 	render() {
 		const postitems = (
 			<div className="check" style={{ height: this.getBodyHeight() + 'px' }}>
+			{this.props.editGroup===0?null:
 				<ul class="list-group">
 					{this.props.editGroup
 						.filter((post) => {
@@ -164,15 +166,15 @@ class EditGroup extends Component {
 								</label>
 							</li>
 						))}
-				</ul>
+				</ul>}
 			</div>
 		);
 		return (
 			<Row className="row justify-content-center">
 				   <Col sm={8} className="createpage-bootstrap-col-center-container">
-				   <main className="The-Main">
+				   <div className="The-Main">
 				<div className="navBar-container">
-					<div className="the-nav-bar">
+					<div className="the-nav-bar-edit">
 						<div className="leftContainer">
 							<img className="back-image" onClick={this.onBack} src={back} alt="" />
 							<label className="center-labels">{this.props.name}</label>
@@ -226,7 +228,7 @@ class EditGroup extends Component {
 						</button>
 					</div>
 				)}
-			</main>
+			</div>
                    </Col>
             </Row>
 		);

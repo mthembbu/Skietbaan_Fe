@@ -4,7 +4,8 @@ import {
 	updateByIdComp,
 	fetchParticipants,
 	fetchRequirements,
-	updateRequirements
+	updateRequirements,
+	compSelectedPages
 } from '../actions/competition.action';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -219,8 +220,8 @@ class ViewComp extends Component {
 	render() {
 		const displayCompetitions = (
 			<Row className="row justify-content-center">
-				<Col sm={8} className="createpage-bootstrap-col-center-container">
-					<div className="page-contents">
+				<Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position : "inherit" }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
+					<div className="page-contents" style={{ height: this.getBodyHeight() + 'px' }}>
 						<table class="table-view-competitions">
 							<tbody>
 								{this.props.compOBJ.map((compVar, i) => (
@@ -552,7 +553,7 @@ class ViewComp extends Component {
 		return (
 			<div className="view-page">
 				<div className="table-competition-container">
-					<div className="content-competitions" style={{ height: this.getBodyHeight() + 'px' }}>
+					<div className="content-competitions" >
 						{displayCompetitions}
 					</div>
 				</div>
@@ -585,5 +586,6 @@ export default connect(mapStateToProps, {
 	updateByIdComp,
 	fetchParticipants,
 	fetchRequirements,
-	updateRequirements
+	updateRequirements,
+	compSelectedPages
 })(ViewComp);

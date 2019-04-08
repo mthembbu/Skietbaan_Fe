@@ -3,7 +3,8 @@ import {NEW_COMP,
 		UPDATE_COMP_STATUS,
 		PARTICIPANTS_PER_COMP,
 		FETCH_REQ,
-		UPDATE_REQ 
+		UPDATE_REQ,
+		COMP_PAGE 
 	} 
 	from '../actions/types';
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
 	updatedComp:{},
 	participants:[],
 	dict : {},
+	compSelectedPage:1,
 	isExist: false,
 	
 };
@@ -48,7 +50,12 @@ export default function(state = initialState, action){
 		return{
 				...state,
 				updated: action.payload
-		}			
+		}
+		case COMP_PAGE:
+			return {
+				...state,
+				compSelectedPage: action.payload
+			};
 		default :
 			return state;	
 	}

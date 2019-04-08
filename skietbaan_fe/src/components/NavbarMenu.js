@@ -7,7 +7,6 @@ import { NAV_BAR_ICONS } from '../actions/types.js';
 import { BASE_URL } from '../actions/types.js';
 import { getCookie } from '../components/cookie.js';
 import { Row, Col } from 'react-bootstrap';
-import { connect } from 'react-redux';
 
 class NavbarMenu extends Component {
 	constructor(props) {
@@ -76,7 +75,13 @@ class NavbarMenu extends Component {
 	}
 
 	isCreate() {
-		if (this.props.navSelectedPage===1) {
+		if (
+			window.location.pathname.endsWith('/create') ||
+			window.location.pathname.endsWith('/registerMember') ||
+			window.location.pathname.endsWith('/viewMembers') ||
+			window.location.pathname.endsWith('/createComp') ||
+			window.location.pathname.endsWith('/viewComp')
+		) {
 			return <img src={NAV_BAR_ICONS.CREATE_RED} className="icon-same-dimensions" alt="Create tab Selected" />;
 		} else {
 			return (
@@ -91,7 +96,7 @@ class NavbarMenu extends Component {
 	}
 
 	isScoreCapture() {
-		if (this.props.navSelectedPage===2) {
+		if (window.location.pathname.endsWith('/scoreCapture')) {
 			return (
 				<img
 					src={NAV_BAR_ICONS.SCORE_CAPTURE_RED}
@@ -112,7 +117,7 @@ class NavbarMenu extends Component {
 	}
 
 	isProfile() {
-		if (this.props.navSelectedPage===3) {
+		if (window.location.pathname.endsWith('/profile')) {
 			return <img src={NAV_BAR_ICONS.PROFILE_RED} className="profile-icon-grey" alt="Profile tab Selected" />;
 		} else {
 			return (
@@ -141,7 +146,7 @@ class NavbarMenu extends Component {
 	}
 
 	isNotifications() {
-		if (this.props.navSelectedPage===4) {
+		if (this.state.pageType.endsWith('/notify')) {
 			return (
 				<img
 					src={
@@ -207,8 +212,5 @@ class NavbarMenu extends Component {
 		);
 	}
 }
-const mapStateToProps = (state) => ({
-	navSelectedPage: state.posts.navSelectedPage
-});
 
-export default connect(mapStateToProps, { })(NavbarMenu);
+export default NavbarMenu;

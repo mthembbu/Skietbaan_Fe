@@ -73,7 +73,7 @@
 
 .documents_background {
   background-color: white;
-  width: 100%;
+  max-width: 55%;
   height: 100%;
   position: fixed;
   overflow: auto;

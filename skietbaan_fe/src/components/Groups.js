@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
 import { withRouter } from 'react-router-dom';
-import { createGroups,pageState } from '../actions/postActions';
+import { createGroups, pageState } from '../actions/postActions';
 import { BASE_URL } from '../actions/types';
 import back from './GroupImages/back.png';
 import unmarked from './GroupImages/Oval.png';
@@ -10,6 +10,7 @@ import marked from './GroupImages/MarkedBox.png';
 import Switch from '@material-ui/core/Switch';
 import seleteAll from './GroupImages/seleteAll.png';
 import unSelectAll from './GroupImages/unSelectAll.png';
+import { Row, Col } from "react-bootstrap";
 
 class Groups extends Component {
 	constructor(props) {
@@ -19,15 +20,19 @@ class Groups extends Component {
 			groups: [],
 			newArray: [],
 			count: 0,
-			st:true,
+			st: true,
 			filterText: '',
-			check: 'Select all'
+			check: 'Select all',
+			height: window.innerHeight,
+            width: window.innerWidth
 		};
 		this.toggleHighlight = this.toggleHighlight.bind(this);
 		this.handleOnClick = this.handleOnClick.bind(this);
 		this.onBack = this.onBack.bind(this);
 		this.onChange = this.onChange.bind(this);
 		this.selectall = this.selectall.bind(this);
+		this.updateDimensions = this.updateDimensions.bind(this);
+		this.getBodyHeight = this.getBodyHeight.bind(this);
 	}
 	UNSAFE_componentWillMount() {
 		fetch(BASE_URL + '/api/user').then((res) => res.json()).then((data) => {
@@ -41,10 +46,29 @@ class Groups extends Component {
 			});
 		});
 
-		fetch(BASE_URL + '/api/Groups').then((res) => res.json()).then((data) => this.setState({ groups: data.name })).catch(err =>  {
+		fetch(BASE_URL + '/api/Groups').then((res) => res.json()).then((data) => this.setState({ groups: data.name })).catch(err => {
 			/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-		  });
+		});
 	}
+	componentWillMount(){
+		window.addEventListener("resize", this.updateDimensions);
+	}
+	componentDidMount(){
+		this.updateDimensions();
+	}
+	getBodyHeight() {
+		if (this.state.width < 575) {
+		  return (this.state.height - 240);
+		} else {
+		  return (this.state.height - 184);
+		}
+	  }
+	  updateDimensions() {
+		this.setState({
+		  height: window.innerHeight,
+		  width: window.innerWidth
+		});
+	  }
 	onChange(event) {
 		this.setState({ filterText: event.target.value });
 	}
@@ -64,7 +88,7 @@ class Groups extends Component {
 			users: this.state.newArray
 		};
 
-	await fetch(BASE_URL + '/api/groups/add', {
+		await fetch(BASE_URL + '/api/groups/add', {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',
@@ -72,16 +96,16 @@ class Groups extends Component {
 			},
 			body: JSON.stringify(requestedObj)
 		})
-			.then(function(response) {})
-			.catch(function(data) {}).catch(err =>  {
+			.then(function (response) { })
+			.catch(function (data) { }).catch(err => {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-			  });
-		window.location = '/GroupComponent';
+			});
+		window.location = '/create';
 	}
 
 	selectall() {
 		if (this.state.check === 'Select all') {
-			this.setState({ count: this.state.posts.length});
+			this.setState({ count: this.state.posts.length });
 			for (var i = 0; i < this.state.posts.length; i++) {
 				this.state.posts[i].highlighted = true;
 			}
@@ -109,7 +133,8 @@ class Groups extends Component {
 	}
 	render() {
 		const postitems = (
-			<div className="check">
+			<div className="check" style={{ height: this.getBodyHeight() + "px" }}>
+			{this.state.posts.length===0?null:
 				<ul class="list-group" style={{ textAlign: 'left' }}>
 					{this.state.posts
 						.filter((post) => {
@@ -136,44 +161,47 @@ class Groups extends Component {
 								</label>
 							</li>
 						))}
-				</ul>
+				</ul>}
 			</div>
 		);
 		return (
-			<main className="The-Main">
-				<div className="navBar-container">
-					<div className="the-nav-bar">
-						<img className="back-image" onClick={this.onBack} src={back} alt="" />
-						<label className="center-label">ADD USERS</label>
-					</div>
-					<div class="BNavBar">
-						<div className="inputBox">
-							<input
-								className="the-Text"
-								id="username"
-								type="text"
-								onChange={this.onChange}
-								autoComplete="off"
-								placeholder="Search"
-							/>
+			<Row className="row justify-content-center">
+				<Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position: "inherit" }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
+					<div className="The-Main">
+						<div className="navBar-container">
+							<div className="the-nav-bar">
+								<img className="back-image" onClick={this.onBack} src={back} alt="" />
+								<label className="center-label">ADD USERS</label>
+							</div>
+							<div class="BNavBar">
+								<div className="inputBox">
+									<input
+										className="the-Text"
+										id="username"
+										type="text"
+										onChange={this.onChange}
+										autoComplete="off"
+										placeholder="Search"
+									/>
+								</div>
+								<div className="switchAll" onClick={this.selectall}>
+									<img className="checkbox-delete" src={this.state.count === this.state.posts.length ? seleteAll : unSelectAll} alt="" />
+								</div>
+							</div>
 						</div>
-						<div className="switchAll" onClick={this.selectall}>
-						<img className="checkbox-delete" src={this.state.count===this.state.posts.length? seleteAll:unSelectAll} alt="" />
-							{/* <Switch checked={this.state.count=== 0?false:null || this.state.count==?true:null} /> */}
+						<div className="scrollbar" data-simplebar data-simplebar-auto-hide="false">
+							{postitems}
 						</div>
-					</div>
-				</div>
-				<div className="scrollbar" data-simplebar data-simplebar-auto-hide="false">
-					{postitems}
-				</div>
-				{this.state.count === 0 ? null : (
-					<label className="bottom-label">
-						<button className="create-group" onClick={this.handleOnClick}>
-							Create Group
+						{this.state.count === 0 ? null : (
+							<label className="bottom-label">
+								<button className="create-group" onClick={this.handleOnClick}>
+									Create Group
 						</button>
-					</label>
-				)}
-			</main>
+							</label>
+						)}
+					</div>
+				</Col>
+			</Row>
 		);
 	}
 }
@@ -182,4 +210,4 @@ const mapStateToProps = (state) => ({
 	thegroup: state.posts.selectedItem
 });
 
-export default withRouter(connect(mapStateToProps, {pageState, createGroups})(Groups));
+export default withRouter(connect(mapStateToProps, { pageState, createGroups })(Groups));

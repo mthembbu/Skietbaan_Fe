@@ -14,6 +14,7 @@ import { BASE_URL } from "../actions/types";
 import Switch from "@material-ui/core/Switch";
 import group from "./GroupImages/Group.png";
 import PropTypes from "prop-types";
+import { Row, Col } from "react-bootstrap";
 
 class ViewGroups extends Component {
   constructor(props) {
@@ -27,8 +28,7 @@ class ViewGroups extends Component {
       selected: "",
       deleteState: false,
       height: window.innerHeight,
-      width: window.innerWidth,
-      createPageBodyHeight: 500
+      width: window.innerWidth
     };
     this.onChange = this.onChange.bind(this);
     this.delete = this.delete.bind(this);
@@ -44,18 +44,18 @@ class ViewGroups extends Component {
   }
   getBodyHeight() {
     if (this.state.width < 575) {
-        return (this.state.height - 240);
+      return (this.state.height - 240);
     } else {
-        return (this.state.height - 184);
+      return (this.state.height - 184);
     }
-}
-  componentDidMount(){
+  }
+  componentDidMount() {
     this.updateDimensions();
   }
   updateDimensions() {
     this.setState({
-        height: window.innerHeight,
-        width: window.innerWidth
+      height: window.innerHeight,
+      width: window.innerWidth
     });
   }
   onChange(event) {
@@ -72,11 +72,11 @@ class ViewGroups extends Component {
   async delete(groupId, index) {
     if (this.props.groupsList[index].isActive === false) {
       this.props.groupsList[index].isActive = true;
-			this.props.groupsList[index].highlighted = true;
+      this.props.groupsList[index].highlighted = true;
 
     } else {
       this.props.groupsList[index].isActive = false;
-				this.props.groupsList[index].highlighted = false;
+      this.props.groupsList[index].highlighted = false;
 
     }
     this.props.newGroupArrayState([...this.props.groupsList]);
@@ -88,30 +88,31 @@ class ViewGroups extends Component {
       },
       body: JSON.stringify(groupId)
     })
-      .then(function(response) {})
-      .then(function(data) {})
-      .catch(function(data) {}).catch(err =>  {
+      .then(function (response) { })
+      .then(function (data) { })
+      .catch(function (data) { }).catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       })
   }
-	toggleHighlight = (event) => {
+  toggleHighlight = (event) => {
 
-			if (this.props.groupsList[event].highlighted === true) {
-				this.props.groupsList[event].highlighted = false;
-        // this.setState({ count: this.state.count - 1 });
-        console.log("true")
-			} else {
-				this.props.groupsList[event].highlighted = true;
-        // this.setState({ count: this.state.count + 1 });
-        console.log("false")
-        
-			}
-		
-	};
+    if (this.props.groupsList[event].highlighted === true) {
+      this.props.groupsList[event].highlighted = false;
+      // this.setState({ count: this.state.count - 1 });
+      console.log("true")
+    } else {
+      this.props.groupsList[event].highlighted = true;
+      // this.setState({ count: this.state.count + 1 });
+      console.log("false")
+
+    }
+
+  };
 
   render() {
     const postitems = (
       <div className="the-main">
+      {this.props.groupsList.length===0?null:
         <table className="table-member">
           <tbody>
             {this.props.groupsList
@@ -164,14 +165,19 @@ class ViewGroups extends Component {
                 </tr>
               ))}
           </tbody>
-        </table>
+        </table>}
       </div>
     );
 
     return (
-      <main className="The-Main" style={{ height: this.getBodyHeight() + "px" }}>
-          {postitems}
-      </main>
+      <Row className="row justify-content-center">
+        <Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position : "inherit"}}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
+          <div className="The-Main" style={{ height: this.getBodyHeight() + "px" }}>
+            {postitems}
+          </div>
+        </Col>
+      </Row>
+
     );
   }
 }

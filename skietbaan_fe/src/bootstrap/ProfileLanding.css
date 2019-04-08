@@ -4,7 +4,7 @@
     }
 
     .user-details-main-container{
-        width: 66% !important;
+        width: 55% !important;
     }
     .profile-bootstrap-col-center-container{
         background: white;
@@ -39,6 +39,11 @@
     .profile-buttons-container button{
         width: 70px !important;
     }
+}
+
+.profile-landing-container{
+    height: 100vh;
+    background-color: white;
 }
 
 .button-style-active{
