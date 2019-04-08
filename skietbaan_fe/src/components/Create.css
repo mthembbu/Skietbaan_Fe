@@ -3,6 +3,7 @@
   .components-create {
     padding-top: 25px;
     background-color: white;
+    margin-top: 15px;
   }
 
   .content-container {
@@ -72,8 +73,10 @@
 }
 
 @media only screen and (max-width: 575px) {
-  .create-top-nav .row .createpage-bootstrap-col-center-container{
-    padding: 0;
+  .createpage-bootstrap-col-center-container{
+    padding-right: 15px;
+    padding-left: 15px;
+    background: transparent;
   }
   .page-name-create-all {
     position: center;
@@ -200,9 +203,7 @@
   .create-nav-container .create-top-nav-members{
     background: transparent;
   }
-  .components-create .row .createpage-bootstrap-col-center-container{
-    background: white;
-  }
+  
   .create-top-nav{
     background: transparent;
   }
@@ -220,6 +221,10 @@
   }
   .page{
     background: transparent;
+  }
+  .createpage-bootstrap-col-center-container{
+    background: white;
+    padding: 0;
   }
 }
 
@@ -371,7 +376,7 @@ body{
   height: 100%;
   position: fixed;
 }
-.create-top-nav {
+  .create-top-nav {
 	  height: fit-content;
     padding-bottom: 19px;
     top: 0;
@@ -485,8 +490,4 @@ body{
   text-align: center;
   padding-top: 6px;
   cursor: pointer;
-}
-.The-Main{
-  z-index: 1;
-  overflow: overlay;
 }
