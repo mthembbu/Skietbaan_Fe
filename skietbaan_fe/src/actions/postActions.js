@@ -20,24 +20,25 @@ import {
 
 /** The method to feth the already available data for posts*/
 export const fetchGroups = () => dispatch => {
-  fetch(BASE_URL+"/api/Groups")
+  fetch(BASE_URL + "/api/Groups")
     .then(res => res.json())
     .then(group => {
-      const newdata=group.map(item=>{
-        item.highlighted=false;
-        return newdata
-      })
+      const newdata = group.map(item => {
+        item.highlighted = false;
+        return newdata;
+      });
       dispatch({
         type: FETCH_GROUPS,
         payload: group
       });
-    }).catch(err =>  {
+    })
+    .catch(err => {
       /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
 
-export const AddMemberAction = (id) => dispatch => {
-   fetch(BASE_URL + "/api/Groups/list?id="+id)
+export const AddMemberAction = id => dispatch => {
+  fetch(BASE_URL + "/api/Groups/list?id=" + id)
     .then(res => res.json())
     .then(posts => {
       const newdata = posts.map(users => {
@@ -48,11 +49,11 @@ export const AddMemberAction = (id) => dispatch => {
         type: ADDMEMBERS,
         payload: newdata
       });
-    }).catch(err =>  {
+    })
+    .catch(err => {
       /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
-
 
 export const createGroups = usersadded => dispatch => {
   fetch(BASE_URL + "/api/groups", {
@@ -68,7 +69,8 @@ export const createGroups = usersadded => dispatch => {
         type: CREATEGROUP,
         payload: post
       })
-    ).catch(err =>  {
+    )
+    .catch(err => {
       /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
@@ -86,23 +88,23 @@ export const getName = name => {
   };
 };
 
-export const fetchEditUser = groupid =>dispatch=>{
-  fetch(BASE_URL + '/api/Groups/edit?id='+groupid)
-  .then(res=>res.json())
-  .then(data=>{
-    const newdata=data.map(user=>{
-      user.highlighted=false;
-      return user;
+export const fetchEditUser = groupid => dispatch => {
+  fetch(BASE_URL + "/api/Groups/edit?id=" + groupid)
+    .then(res => res.json())
+    .then(data => {
+      const newdata = data.map(user => {
+        user.highlighted = false;
+        return user;
+      });
+      dispatch({
+        type: EDITGROUPUSERS,
+        payload: newdata
+      });
     })
-    dispatch({
-      type:EDITGROUPUSERS,
-      payload:newdata
-    })
-
-  }).catch(err =>  {
-    /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-  });
-}
+    .catch(err => {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+    });
+};
 
 export const getGroup = () => dispatch => {
   fetch(BASE_URL + "/api/user")
@@ -112,7 +114,8 @@ export const getGroup = () => dispatch => {
         type: GETGROUP,
         payload: posts
       })
-    ).catch(err =>  {
+    )
+    .catch(err => {
       /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
@@ -125,7 +128,8 @@ export const groupDictionary = () => dispatch => {
         type: GROUPDICT,
         payload: posts
       })
-    ).catch(err =>  {
+    )
+    .catch(err => {
       /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
@@ -138,7 +142,8 @@ export const fetchleaderboadfilterdata = token => dispatch => {
         type: FETCH_LEADERBOARDFILTER_DATA,
         payload: data
       })
-    ).catch(err =>  {
+    )
+    .catch(err => {
       /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
@@ -161,30 +166,27 @@ export const fetchleaderboadtabledata = filterSelection => dispatch => {
         type: FETCH_LEADERBOARDTABLE_DATA,
         payload: data
       })
-    ).catch(err =>  {
+    )
+    .catch(err => {
       /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
 /** The method to update selected competition state*/
 export const updateSelectedCompetition = competitionName => {
-  return dispatch =>{
-      dispatch(
-        {
-          type: UPDATE_SELECTED_COMPETITION,
-          payload: competitionName
-        }
-      );
+  return dispatch => {
+    dispatch({
+      type: UPDATE_SELECTED_COMPETITION,
+      payload: competitionName
+    });
   };
 };
 /** The method to update selected competition state*/
 export const updateSelectedGroup = groupName => {
-  return dispatch =>{
-      dispatch(
-        {
-          type: UPDATE_SELECTED_GROUP,
-          payload: groupName
-        }
-      );
+  return dispatch => {
+    dispatch({
+      type: UPDATE_SELECTED_GROUP,
+      payload: groupName
+    });
   };
 };
 
@@ -196,7 +198,6 @@ export const passId = id => {
     });
   };
 };
-
 export const pageState = id => {
   return dispatch => {
     dispatch({
@@ -213,7 +214,7 @@ export const emptyState = () => {
     });
   };
 };
-export const newGroupArrayState = (newArray) => {
+export const newGroupArrayState = newArray => {
   return dispatch => {
     dispatch({
       type: NEWGROUPSTATE,
