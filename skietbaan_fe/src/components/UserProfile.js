@@ -223,6 +223,14 @@ class UserProfile extends Component {
         return this.mapCompetitionNameToIndex[competitionName];
     }
 
+    getInitialAward(){
+        if(this.props.selectedCompetition.length === 0){
+            return this.state.awardCompetitions[0]
+        }else{
+            return this.state.awardCompetitions[this.getIndexByCompetitionName(this.props.selectedCompetition)]
+        }
+    }
+
     renderBestInMonth(){
         {this.isBestInMonth = true}
         return(
@@ -237,11 +245,11 @@ class UserProfile extends Component {
         this.timeouts.forEach(timeout => clearTimeout(timeout));
         this._isMounted = false;
     }
+    
     render() {
         return (
             <div className="award-container pad-top-120px">
                 {this.state.exceptionCaught ? <div className="no-competition">No Competitions Available</div> :
-
                 //only render when the data has arrived from backend
                 this.state.awardCompetitions.length > 0 ?
                 <div className="remove-right-padding">
@@ -250,8 +258,8 @@ class UserProfile extends Component {
                         <a onClick={this.toggle} className="make-cursor-point">
                         <div className="buttons-rectangle">
                             <div className="scale-gun-type-img">
-                                {this.props.selectedCompetition.includes("Rifle") || 
-                                    this.props.selectedCompetition.includes("rifle") ?
+                                {this.getInitialAward().competitionName.includes("Rifle") || 
+                                    this.getInitialAward().competitionName.includes("rifle") ?
                                     <img src={require("../resources/awardIcons/rifle-icon.png")}></img>:
                                     <img src={require("../resources/awardIcons/pistol-icon.png")}></img>
                                 }
@@ -273,8 +281,7 @@ class UserProfile extends Component {
                     </Row>
                     <Row>
                         <Col>
-                            {this.state.awardCompetitions[this.getIndexByCompetitionName(this.props.selectedCompetition)]
-                            .bestInMonth.startsWith("Best") ?
+                            {this.getInitialAward().bestInMonth.startsWith("Best") ?
                                 this.renderBestInMonth() : null}
                         </Col>
                     </Row>
@@ -282,7 +289,7 @@ class UserProfile extends Component {
                         <Col>
                             <Collapse isOpened={this.state.collapse}>
                                 <div className="grey-text select-competition-font">Select Competition</div>
-                                {this.renderCompetitionList()}
+                                <div className="award-buttons-container">{this.renderCompetitionList()}</div>
                                 <a className="scale-arrowupicon-img" onClick={this.toggle}>
                                     <img src={require("../resources/awardIcons/arrowUpIcon.png")} alt="lock-icon"></img>
                                 </a>
@@ -294,80 +301,63 @@ class UserProfile extends Component {
                     <div className="line adjust-top-line"></div>
                     <Row className="awards-container pad-top-30px">
                         <Col xs={4}sm={4}md={4} className="push-bottom-49px">
-                            {this.renderAccuracyCircle(this.state.awardCompetitions[
-                                this.getIndexByCompetitionName(this.props.selectedCompetition)],
-                                this.getIndexByCompetitionName(this.props.selectedCompetition))}
+                            {this.renderAccuracyCircle(this.getInitialAward(),
+                                this.getIndexByCompetitionName(this.getInitialAward().competitionName))}
                         </Col>
                         <Col xs={8}sm={8}md={8}>
                             <Row className="push-bottom-13px">
                                 <Col xs={4}sm={4}md={4}>
-                                    <label className={this.state.awardCompetitions[
-                                        this.getIndexByCompetitionName(this.props.selectedCompetition)
-                                        ].accuracyAward.bronze ? "unlocked-award-text font-size-14px" : 
+                                    <label className={this.getInitialAward().accuracyAward.bronze ?
+                                        "unlocked-award-text font-size-14px" : 
                                         "locked-award-text font-size-14px"}>BRONZE</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[
-                                        this.getIndexByCompetitionName(this.props.selectedCompetition)].accuracyAward.bronze 
+                                    {this.getInitialAward().accuracyAward.bronze 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
-                                    <label className={this.state.awardCompetitions[
-                                        this.getIndexByCompetitionName(this.props.selectedCompetition)]
-                                        .accuracyAward.bronze ? "reached-award unlocked-award-text":
+                                    <label className={this.getInitialAward().accuracyAward.bronze ? 
+                                        "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
-                                        {this.state.awardCompetitions[
-                                            this.getIndexByCompetitionName(this.props.selectedCompetition)]
-                                            .accuracyAward.bronzeRequirementStatus}
+                                        {this.getInitialAward().accuracyAward.bronzeRequirementStatus}
                                     </label>
                                 </Col>
                             </Row>
                             <Row className="push-bottom-13px">
                                 <Col xs={4}sm={4}md={4}>
-                                <label className={this.state.awardCompetitions[
-                                    this.getIndexByCompetitionName(this.props.selectedCompetition)
-                                    ].accuracyAward.silver ? "unlocked-award-text font-size-14px" : 
+                                <label className={this.getInitialAward().accuracyAward.silver ? 
+                                    "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>SILVER</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[
-                                        this.getIndexByCompetitionName(this.props.selectedCompetition)].accuracyAward.silver 
+                                    {this.getInitialAward().accuracyAward.silver 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
-                                    <label className={this.state.awardCompetitions[
-                                        this.getIndexByCompetitionName(this.props.selectedCompetition)]
-                                        .accuracyAward.silver ? "reached-award unlocked-award-text":
+                                    <label className={this.getInitialAward().accuracyAward.silver ? 
+                                        "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
-                                        {this.state.awardCompetitions[
-                                            this.getIndexByCompetitionName(this.props.selectedCompetition)]
-                                            .accuracyAward.silverRequirementStatus}
+                                        {this.getInitialAward().accuracyAward.silverRequirementStatus}
                                     </label>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col xs={4}sm={4}md={4}>
-                                <label className={this.state.awardCompetitions[
-                                    this.getIndexByCompetitionName(this.props.selectedCompetition)
-                                    ].accuracyAward.gold ? "unlocked-award-text font-size-14px" : 
+                                <label className={this.getInitialAward().accuracyAward.gold ? "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>GOLD</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[
-                                        this.getIndexByCompetitionName(this.props.selectedCompetition)].accuracyAward.gold 
+                                    {this.getInitialAward().accuracyAward.gold 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
-                                    <label className={this.state.awardCompetitions[
-                                        this.getIndexByCompetitionName(this.props.selectedCompetition)]
-                                        .accuracyAward.gold ? "reached-award unlocked-award-text":
+                                    <label className={this.getInitialAward().accuracyAward.gold ? 
+                                        "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
-                                        {this.state.awardCompetitions[
-                                            this.getIndexByCompetitionName(this.props.selectedCompetition)]
-                                            .accuracyAward.goldRequirementStatus}
+                                        {this.getInitialAward().accuracyAward.goldRequirementStatus}
                                     </label>
                                 </Col>
                             </Row>
@@ -376,80 +366,64 @@ class UserProfile extends Component {
                     <div className="line adjust-bottom-line"></div>
                     <Row className="awards-container">
                         <Col xs={4}sm={4}md={4} className="push-bottom-49px">
-                            {this.renderTotalCircle(this.state.awardCompetitions[
-                                this.getIndexByCompetitionName(this.props.selectedCompetition)],
-                            this.getIndexByCompetitionName(this.props.selectedCompetition))}
+                            {this.renderTotalCircle(this.getInitialAward(),
+                            this.getIndexByCompetitionName(this.getInitialAward().competitionName))}
                         </Col>
                         <Col xs={8}sm={8}md={8}>
                             <Row className="push-bottom-13px">
                                 <Col xs={4}sm={4}md={4}>
-                                <label className={this.state.awardCompetitions[
-                                    this.getIndexByCompetitionName(this.props.selectedCompetition)
-                                    ].totalAward.bronze ? "unlocked-award-text font-size-14px" : 
+                                <label className={this.getInitialAward().totalAward.bronze ? 
+                                    "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>BRONZE</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[
-                                        this.getIndexByCompetitionName(this.props.selectedCompetition)].totalAward.bronze 
+                                    {this.getInitialAward().totalAward.bronze 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
-                                    <label className={this.state.awardCompetitions[
-                                        this.getIndexByCompetitionName(this.props.selectedCompetition)]
-                                        .totalAward.bronze ? "reached-award unlocked-award-text":
+                                    <label className={this.getInitialAward().totalAward.bronze ? 
+                                        "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
-                                        {this.state.awardCompetitions[
-                                            this.getIndexByCompetitionName(this.props.selectedCompetition)]
-                                            .totalAward.bronzeRequirementStatus}
+                                        {this.getInitialAward().totalAward.bronzeRequirementStatus}
                                     </label>
                                 </Col>
                             </Row>
                             <Row className="push-bottom-13px">
                                 <Col xs={4}sm={4}md={4}>
-                                <label className={this.state.awardCompetitions[
-                                    this.getIndexByCompetitionName(this.props.selectedCompetition)
-                                    ].totalAward.silver ? "unlocked-award-text font-size-14px" : 
+                                <label className={this.getInitialAward().totalAward.silver ? 
+                                    "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>SILVER</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[
-                                        this.getIndexByCompetitionName(this.props.selectedCompetition)].totalAward.silver 
+                                    {this.getInitialAward().totalAward.silver 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
-                                <label className={this.state.awardCompetitions[
-                                        this.getIndexByCompetitionName(this.props.selectedCompetition)]
-                                        .totalAward.silver ? "reached-award unlocked-award-text":
+                                <label className={this.getInitialAward().totalAward.silver ? 
+                                        "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
-                                        {this.state.awardCompetitions[
-                                            this.getIndexByCompetitionName(this.props.selectedCompetition)]
-                                            .totalAward.silverRequirementStatus}
+                                        {this.getInitialAward().totalAward.silverRequirementStatus}
                                     </label>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col xs={4}sm={4}md={4}>
-                                <label className={this.state.awardCompetitions[
-                                    this.getIndexByCompetitionName(this.props.selectedCompetition)
-                                    ].totalAward.gold ? "unlocked-award-text font-size-14px" : 
+                                <label className={this.getInitialAward().totalAward.gold ?
+                                    "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>GOLD</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[
-                                        this.getIndexByCompetitionName(this.props.selectedCompetition)].totalAward.gold 
+                                    {this.getInitialAward().totalAward.gold 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
-                                    <label className={this.state.awardCompetitions[
-                                        this.getIndexByCompetitionName(this.props.selectedCompetition)]
-                                        .totalAward.gold ? "reached-award unlocked-award-text":
+                                    <label className={this.getInitialAward().totalAward.gold ? 
+                                        "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
-                                        {this.state.awardCompetitions[
-                                            this.getIndexByCompetitionName(this.props.selectedCompetition)]
-                                            .totalAward.goldRequirementStatus}
+                                        {this.getInitialAward().totalAward.goldRequirementStatus}
                                     </label>
                                 </Col>
                             </Row>
