@@ -10,8 +10,10 @@ import lightgrayback from '../components/assets/Back.png';
 import submit from '../components/assets/biggerRedSubmit.png';
 import camera from '../components/assets/biggerRedCamera.png';
 import { Row, Col } from "react-bootstrap";
+import { selectedPage } from '../actions/postActions';
+import { connect } from 'react-redux';
 
-export default class search extends Component {
+class search extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -98,6 +100,7 @@ export default class search extends Component {
   }
 
   componentDidMount() {
+    this.props.selectedPage(2);
     fetch(BASE_URL + "/api/Competition", {
       method: 'GET',
       headers: {
@@ -643,3 +646,9 @@ export default class search extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) =>({
+  selectedButton : state.landingReducer.selectedLandingPage
+});
+
+export default connect(mapStateToProps, {selectedPage})(search);

@@ -10,6 +10,7 @@ import {
   PAGE,
   NEWGROUPSTATE,
   GROUPDICT,
+  CHOOSEPAGE,
   EMPTY,
   FETCH_LEADERBOARDFILTER_DATA,
   FETCH_LEADERBOARDTABLE_DATA,
@@ -195,6 +196,7 @@ export const passId = id => {
     });
   };
 };
+
 export const pageState = id => {
   return dispatch => {
     dispatch({
@@ -216,6 +218,15 @@ export const newGroupArrayState = (newArray) => {
     dispatch({
       type: NEWGROUPSTATE,
       payload: newArray
+    });
+  };
+};
+
+export const selectedPage = num => {
+  return dispatch => {
+    dispatch({
+      type: CHOOSEPAGE,
+      payload: num
     });
   };
 };

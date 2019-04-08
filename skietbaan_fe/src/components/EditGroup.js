@@ -12,7 +12,6 @@ import whitePlus from './GroupImages/whitePlus.png';
 import { fetchEditUser, pageState } from '../actions/postActions';
 import back from './GroupImages/back.png';
 import { Row, Col } from "react-bootstrap";
-
 class EditGroup extends Component {
 	constructor(props) {
 		super(props);
