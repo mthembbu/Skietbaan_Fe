@@ -71,15 +71,19 @@ class notification extends Component {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(deletingArray)
-      }).then(() => this.props.getNotifications(this.state.token));
-    } catch (err) { }
-    window.location = "/notify";
+      }).then(() => {
+        this.props.getNotifications(this.state.token);
+        this.setState({
+          toggle: false
+        });
+      });
+    } catch (err) {}
   };
 
   onClick_View = (Notification, Message, Id) => {
     this.setState({
       isRead: true,
-      toggle: !this.state.toggle
+      toggle: false
     });
     this.props.updateIsReadProperty(Id);
     if (Notification === "Award") {
@@ -214,7 +218,7 @@ class notification extends Component {
       },
       body: JSON.stringify(this.state.announceString)
     })
-      .then(function (response) { })
+      .then(function(response) {})
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
@@ -222,7 +226,8 @@ class notification extends Component {
       this.setState({
         adminToggle: false
       });
-    }, 3000);
+      window.location = "/notify";
+    }, 1000);
   };
 
   render() {
@@ -243,8 +248,8 @@ class notification extends Component {
               this.state.toggle
                 ? whiteSelectAll
                 : this.state.secondToggle
-                  ? blackSelectAll
-                  : "hidden"
+                ? blackSelectAll
+                : "hidden"
             }
             onClick={() => this.selectAll()}
             className="select-all"
@@ -282,8 +287,8 @@ class notification extends Component {
               this.state.toggle
                 ? whiteSelectAll
                 : this.state.secondToggle
-                  ? blackSelectAll
-                  : "hidden"
+                ? blackSelectAll
+                : "hidden"
             }
             onClick={() => this.selectAll()}
             className="admin-select-all"
@@ -308,8 +313,8 @@ class notification extends Component {
         {this.props.notificationsArray.length <= 0 ? (
           <text className="empty-screen">No Notifications Available</text>
         ) : (
-            ""
-          )}
+          ""
+        )}
         {this.props.notificationsArray.map((post, i) => (
           <tr className="tr-class" key={i}>
             <td className="first-column-notify">
@@ -325,8 +330,8 @@ class notification extends Component {
                   post.markedForDeletion && this.state.toggle
                     ? "notifications-selected-text"
                     : post.isRead === true
-                      ? "notifications-text"
-                      : "notifications-unread"
+                    ? "notifications-text"
+                    : "notifications-unread"
                 }
                 onClick={() =>
                   this.onClick_View(
@@ -362,7 +367,7 @@ class notification extends Component {
 
     let markedItems = [];
 
-    this.props.notificationsArray.forEach(function (notifications) {
+    this.props.notificationsArray.forEach(function(notifications) {
       if (notifications.markedForDeletion) {
         markedItems.push(notifications);
       }
@@ -379,7 +384,7 @@ class notification extends Component {
       <table
         className={
           this.props.notificationsArray.some(post => post.markedForDeletion) &&
-            this.state.toggle
+          this.state.toggle
             ? "notifications-modal"
             : "hidden"
         }
@@ -407,7 +412,7 @@ class notification extends Component {
 
     const writeAnnouncement = (
       <div className="announcement-main">
-        <div>
+        <div className="announcement-spacing">
           <textarea
             type="text"
             name="name"
@@ -437,23 +442,24 @@ class notification extends Component {
       <Row className="row justify-content-center">
         <Col sm={8} className="createpage-bootstrap-col-center-container">
           <div className="notifications-body-class">
-            {this.state.stateCheck === false ? (
-              <div>{headingItems}</div>
-            ) : (
+            <div className="styling-for-gun-overlay">
+              {this.state.stateCheck === false ? (
+                <div>{headingItems}</div>
+              ) : (
                 <div>{adminHeadingItems}</div>
               )}
-            {this.state.adminToggle === true ? (
-              <Collapse isOpened={this.state.adminToggle === true}>
-                <div>{writeAnnouncement}</div>
-              </Collapse>
-            ) : (
+              {this.state.adminToggle === true ? (
+                <Collapse isOpened={this.state.adminToggle === true}>
+                  <div>{writeAnnouncement}</div>
+                </Collapse>
+              ) : (
                 <div className="format-content">{postItems}</div>
               )}
-            <div>{deleteModal}</div>
+              <div>{deleteModal}</div>
+            </div>
           </div>
         </Col>
       </Row>
-
     );
   }
 }

@@ -15,6 +15,7 @@ import Documents from "./components/Documents";
 import ScoreCapture from "./components/ScoreCapture";
 import ProfileLanding from "./components/ProfileLanding";
 import GroupComponent from "./components/GroupComponent";
+import CompComponent from "./components/CompComponent";
 import "./App.css";
 import ForgotPassword from "./components/ForgotPassword";
 import ViewComp from "./components/ViewComp";
@@ -52,6 +53,7 @@ class App extends Component {
                 <Route path="/documents" component={Documents} exact />
                 <Route path="/profile" component={ProfileLanding} exact />
                 <Route path={"/ViewGroups"} component={GroupComponent} exact />
+                <Route path={"/CompComponent"} component={CompComponent} exact />
                 <Route path="/create" component={createPages} exact />
                 <Redirect from="/" to="/home" />
               </Switch>

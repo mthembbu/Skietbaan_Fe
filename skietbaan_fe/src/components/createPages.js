@@ -13,7 +13,7 @@ import ViewNonMembers from '../components/ViewNonMembers';
 import ViewMembersExpiring from '../components/ViewMembersExpiring';
 import ViewComp from '../components/ViewComp';
 import GroupComponent from '../components/GroupComponent';
-
+import CompComponent from '../components/CompComponent';
 export class createPages extends Component {
 	constructor(props) {
 		super(props);
@@ -170,8 +170,9 @@ export class createPages extends Component {
 								</Col>
 							</Row>
 							<Row className="row justify-content-center">
-								<Col sm={8} className="createpage-bootstrap-col-center-container" style={{ boxShadow : this.noShadowOnMember() }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
-                  <div className={this.state.selectedButton === 3 ? "create-switch-bottom-hide"
+								<Col sm={8} className="createpage-bootstrap-col-center-container" style={{ boxShadow : this.noShadowOnMember() }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}                 
+								<div className="temp-container">
+									<div className={this.state.selectedButton === 3 ? "create-switch-bottom-hide"
                                                                   : "create-switch-bottom"} >  
 										<div
 											className={
@@ -197,6 +198,7 @@ export class createPages extends Component {
 										>
 											VIEW
 										</div>
+									</div>
 									</div>
 								</Col>
 							</Row><Row className="row justify-content-center">
@@ -256,6 +258,7 @@ export class createPages extends Component {
 					) : this.state.selectedButton === 1 && this.state.selectedButtonCreateViewGroups === 2 ? (
 						<GroupComponent />
 					) : null}
+		
 					{this.state.selectedButton === 2 && this.state.selectedButtonCreateViewGroups === 1 ? (
 						<CreateComp />
 					) : this.state.selectedButton === 2 && this.state.selectedButtonCreateViewGroups === 2 ? (

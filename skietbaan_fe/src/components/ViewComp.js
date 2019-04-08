@@ -4,7 +4,8 @@ import {
 	updateByIdComp,
 	fetchParticipants,
 	fetchRequirements,
-	updateRequirements
+	updateRequirements,
+	compSelectedPages
 } from '../actions/competition.action';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -585,5 +586,6 @@ export default connect(mapStateToProps, {
 	updateByIdComp,
 	fetchParticipants,
 	fetchRequirements,
-	updateRequirements
+	updateRequirements,
+	compSelectedPages
 })(ViewComp);
