@@ -13,7 +13,7 @@ import ViewNonMembers from '../components/ViewNonMembers';
 import ViewMembersExpiring from '../components/ViewMembersExpiring';
 import ViewComp from '../components/ViewComp';
 import GroupComponent from '../components/GroupComponent';
-
+import CompComponent from '../components/CompComponent';
 export class createPages extends Component {
 	constructor(props) {
 		super(props);
@@ -258,6 +258,7 @@ export class createPages extends Component {
 					) : this.state.selectedButton === 1 && this.state.selectedButtonCreateViewGroups === 2 ? (
 						<GroupComponent />
 					) : null}
+		
 					{this.state.selectedButton === 2 && this.state.selectedButtonCreateViewGroups === 1 ? (
 						<CreateComp />
 					) : this.state.selectedButton === 2 && this.state.selectedButtonCreateViewGroups === 2 ? (
