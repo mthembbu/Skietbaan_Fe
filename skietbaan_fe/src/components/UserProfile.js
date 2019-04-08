@@ -248,7 +248,7 @@ class UserProfile extends Component {
     
     render() {
         return (
-            <div className="award-container pad-top-120px">
+            <div className="award-container pad-award-container">
                 {this.state.exceptionCaught ? <div className="no-competition">No Competitions Available</div> :
                 //only render when the data has arrived from backend
                 this.state.awardCompetitions.length > 0 ?
