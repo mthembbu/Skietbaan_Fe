@@ -14,12 +14,12 @@ export function validateUsername(username) {
 }
 
 export function validateScore(score) {
-    const re = /^([0-9]|[1-4]\d|50)$/;
+  const re = /^([0-9]|[1-4]\d|50)$/;
   var result = re.test(score);
   return result;
 }
 
 export function validateNumber(number) {
-  const re = /(?<!\d)\d{10}(?!\d)/;
+  const re = /[0](\d{ 9}) | ([0](\d{ 2})( | -)((\d{ 3}))( | -)(\d{ 4}))| [0](\d{ 2})( | -)(\d{ 7})/;
   return re.test(number);
 }
