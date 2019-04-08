@@ -14,6 +14,14 @@
         width: 55% !important;
     }
 
+    .profile-landing-container{
+        margin-top: 56px;
+    }
+
+    .pad-award-container{
+        padding-top: 86px !important;
+    }
+
     .fix-top{
         z-index: 1;
         position: absolute !important;
@@ -42,6 +50,7 @@
 }
 
 .profile-landing-container{
+    overflow-y: auto;
     height: 100vh;
     background-color: white;
 }
