@@ -72,15 +72,19 @@ class notification extends Component {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(deletingArray)
-      }).then(() => this.props.getNotifications(this.state.token));
+      }).then(() => {
+        this.props.getNotifications(this.state.token);
+        this.setState({
+          toggle: false
+        });
+      });
     } catch (err) {}
-    window.location = "/notify";
   };
 
   onClick_View = (Notification, Message, Id) => {
     this.setState({
       isRead: true,
-      toggle: !this.state.toggle
+      toggle: false
     });
     this.props.updateIsReadProperty(Id);
     if (Notification === "Award") {
@@ -437,19 +441,21 @@ class notification extends Component {
 
     return (
       <div className="notifications-body-class">
-        {this.state.stateCheck === false ? (
-          <div>{headingItems}</div>
-        ) : (
-          <div>{adminHeadingItems}</div>
-        )}
-        {this.state.adminToggle === true ? (
-          <Collapse isOpened={this.state.adminToggle === true}>
-            <div>{writeAnnouncement}</div>
-          </Collapse>
-        ) : (
-          <div className="format-content">{postItems}</div>
-        )}
-        <div>{deleteModal}</div>
+        <div className="styling-for-gun-overlay">
+          {this.state.stateCheck === false ? (
+            <div>{headingItems}</div>
+          ) : (
+            <div>{adminHeadingItems}</div>
+          )}
+          {this.state.adminToggle === true ? (
+            <Collapse isOpened={this.state.adminToggle === true}>
+              <div>{writeAnnouncement}</div>
+            </Collapse>
+          ) : (
+            <div className="format-content">{postItems}</div>
+          )}
+          <div>{deleteModal}</div>
+        </div>
       </div>
     );
   }
