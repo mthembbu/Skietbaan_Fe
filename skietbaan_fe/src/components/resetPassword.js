@@ -66,27 +66,28 @@ class ForgotPassword extends Component {
     )
       .then(res => res.json())
       .then(data => this.setState({ returnValue: data }))
-      .catch(err =>  {
+      .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      })
+      });
 
     {
       setTimeout(() => {
-        this.state.returnValue === "changed"
-          ? (window.location = "/login")
-          : null;
+        window.location = "/login";
       }, 2000);
     }
   }
 
   hanldeReseting() {
-    this.state.confirmPasswordValue.length >= this.state.passwordValue.length &&
-    this.state.confirmPasswordValue.length !== 0 &&
-    this.state.passwordValue.length !== 0
-      ? this.state.confirmPasswordValue === this.state.passwordValue
-        ? this.resetPassword()
-        : null
-      : null;
+    if (
+      this.state.confirmPasswordValue.length >= this.state.passwordValue.length
+    ) {
+      if (this.state.confirmPasswordValue.length !== 0) {
+        if (this.state.passwordValue.length !== 0)
+          if (this.state.confirmPasswordValue === this.state.passwordValue) {
+            this.resetPassword();
+          }
+      }
+    }
   }
 
   render() {
