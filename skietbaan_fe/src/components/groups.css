@@ -529,10 +529,11 @@
 	.the-nav-bar-edit {
 		position: unset;
 		margin-top: 10px;
+		height: 70px;
 	}
 	.the-nav-bar{
 		position: unset;
-		margin-top: 56px;
+		margin-top: 10px;
 	}
 	.The-Main{
 		margin-top: 0px;
