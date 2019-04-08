@@ -458,13 +458,6 @@ class search extends Component {
     }
     return (
       <div className="position-relative" autoComplete="off">
-        {/* <Row className="row justify-content-center">
-				   <Col sm={8} className="createpage-bootstrap-col-center-container">
-           
-           </Col>
-        </Row> */}
-        <Row className="row justify-content-center">
-          <Col sm={8} className="createpage-bootstrap-col-center-container">
             <div className={stateOne || this.state.scoreSaved
               ? "hidden"
               : "score-capture-header"}>
@@ -472,10 +465,6 @@ class search extends Component {
                 <label className="label-for-score">ADD SCORE</label>
               </div>
             </div>
-          </Col>
-        </Row>
-        <Row className="row justify-content-center">
-          <Col sm={8} className="createpage-bootstrap-col-center-container">
           <div className={this.state.scoreSaved
           ? "sucess-container"
           : (stateOne
@@ -639,8 +628,6 @@ class search extends Component {
             </div>
           </div>
         </div>
-          </Col>
-        </Row>
         
       </div>
     )

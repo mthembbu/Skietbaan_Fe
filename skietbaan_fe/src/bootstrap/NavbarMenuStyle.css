@@ -38,6 +38,7 @@
     text-align: center;
     top: 0;
     z-index: 100;
+    position: fixed;
     border-top-left-radius: 13px;
     border-top-right-radius: 13px;
   }
@@ -86,9 +87,10 @@
     
   .navbar-admin {
     background-color: #000000;
-    width: 100%;
     text-align: center;
-    position: unset;
+    bottom:0;
+    z-index: 100;
+    position: fixed;
     width: 100%;
     border-top-left-radius: 13px;
     border-top-right-radius: 13px;

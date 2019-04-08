@@ -15,8 +15,10 @@
     overflow-y: overlay;
 }
 .username-search{
-  position: relative;
+  position: fixed;
   padding-bottom: 14px;
+  background-color: #ffffff;
+  width: 100%;
 }
 .search{
   padding: 14px;
@@ -39,6 +41,7 @@
   .table-search-members {
     background-color: #fdfdfd;
     overflow-y: scroll;
+    margin-bottom: 56px;
     height: 100%;
   }
 
@@ -167,6 +170,7 @@
   background-color: #f6f6f6;
   width: 100%;
   color: #666666;
+  margin-top: 75px;
 }
 
 .view-members {
