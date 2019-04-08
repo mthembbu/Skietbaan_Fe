@@ -22,6 +22,10 @@
     margin-left: 70%;
   }
 
+  .disabled-button {
+    width: 440px;
+  }
+
   .admin-delete-icon {
     margin-top: -50px;
     margin-bottom: 20px;
@@ -49,8 +53,17 @@
     margin-left: 50%;
   }
 
+  .announcement-spacing {
+    margin-top: 111px;
+  }
+
+  .announcement-send {
+    margin-top: 51px;
+  }
+
   .announcement-text {
     margin-top: 140px;
+    width: 578px;
   }
 
   .outer-header-div {
@@ -76,7 +89,7 @@
     color: white;
     border-style: none;
     border: none;
-    height: 100%;
+    height: -webkit-fill-available;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -94,6 +107,7 @@
     background-size: 24px;
     height: 24px;
     padding-right: 27px;
+    margin-left: 19px;
   }
 
   .notifications-images:hover {
@@ -109,6 +123,7 @@
     background-size: 24px;
     height: 24px;
     padding-right: 27px;
+    margin-left: 19px;
   }
 
   .notifications-selected {
@@ -202,9 +217,10 @@
     background-repeat: no-repeat;
     background-size: cover;
     padding-bottom: 640px;
-    width: 100%;
+    width: 93%;
     padding-top: 50px;
     margin-top: 23px;
+    margin-left: 22px;
   }
 
   .notifications-text {
@@ -295,8 +311,8 @@
   }
 
   .format-content {
-    margin-left: 17%;
-    margin-right: 17%;
+    margin-left: 0%;
+    margin-right: 0%;
     position: static;
     padding-top: 100px;
   }
@@ -352,14 +368,14 @@
     background-image: linear-gradient(to right, #ef3024, #dc0600);
     color: #ffffff;
     height: 67px;
+    width: 100%;
     font-size: 25px;
     font-family: helvetica;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     box-shadow: 0px 10px 16px -6px rgba(0, 0, 0, 0.33);
+    position: fixed;
     display: flex;
-    width: 100%;
-    margin: auto;
   }
 
   .notifications-body-class {
@@ -482,7 +498,7 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 6px 0px;
-    background-image: url("/static/media/gunOverlay.dc42d30c");
+    background-image: url("../components/assets/gunOverlay.png");
     width: 100%;
     margin-top: 4px;
   }
@@ -657,8 +673,13 @@
     padding-top: 45px;
   }
 
+  .disabled-button {
+    width: 312px;
+  }
+
   .announcement-text {
     margin-top: 85px;
+    width: 319px;
   }
 }
 
@@ -679,7 +700,6 @@
   height: 100%;
 }
 .announcement-text {
-  width: 312px;
   height: 123px;
   padding-left: 19px;
   font-weight: bold;
@@ -721,9 +741,8 @@
   font-weight: lighter;
   background: #fdfdfd;
   padding: 1px 6px;
-  width: 312px;
   height: 42px;
-  margin-top: 20px;
+  margin-top: 51px;
   font-size: 16px;
   border: 1px solid #ebebeb;
   border-radius: 22px;
@@ -735,4 +754,8 @@
 
 .notification-spacing {
   margin-right: 18px;
+}
+
+.styling-for-gun-overlay {
+  height: 50px;
 }
