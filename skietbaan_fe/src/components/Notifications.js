@@ -15,6 +15,8 @@ import notifySpeakerBlack from "../components/Notification-Img/notifySpeaker.png
 import notifySpeakerWhite from "../components/Notification-Img/notifySpeakerWhite.png";
 import { setSelectedCompetition } from "../actions/userProfileActions";
 import { setSelectedLandingPage } from "../actions/profileLandingAction";
+import { selectedPage } from '../actions/postActions';
+
 import {
   updateSelectedCompetition,
   updateSelectedGroup
@@ -146,6 +148,7 @@ class notification extends Component {
   }
 
   componentDidMount() {
+    this.props.selectedPage(4)
     if (getCookie("token")) {
       this.props.getNotifications(this.state.token);
     }
@@ -484,6 +487,7 @@ export default connect(
     updateIsReadProperty,
     getNotifications,
     setSelectedCompetition,
-    setSelectedLandingPage
+    setSelectedLandingPage,
+    selectedPage
   }
 )(notification);

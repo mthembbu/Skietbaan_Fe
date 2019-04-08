@@ -12,6 +12,7 @@ import {
   UPDATE_SELECTED_COMPETITION,
   UPDATE_SELECTED_GROUP,
   GROUPDICT,
+  CHOOSEPAGE,
   ADDMEMBERS,
   FETCH_GROUPS
 } from "../actions/types";
@@ -29,6 +30,7 @@ const initialState = {
   leaderboardGroups: [],
   leaderboardCompetitions: [],
   leaderboardUser:{},
+  navSelectedPage:0,
   leaderboardSelectedCompetitionName:"",
   leaderboardSelectedGroupName:"",
   leaderboardTableData: [],
@@ -104,10 +106,16 @@ export default function(state = initialState, action) {
         ...state,
         groupId: action.payload
       };
+
     case PAGE:
       return {
         ...state,
         page: action.payload
+      };
+    case CHOOSEPAGE:
+      return {
+        ...state,
+        navSelectedPage: action.payload
       };
 
     case FETCH_GROUPS:

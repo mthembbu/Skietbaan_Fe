@@ -8,7 +8,8 @@ import StatisticsPage from "./StatisticsPage"
 import { getCookie } from "./cookie.js";
 import history from "./history";
 import { connect } from "react-redux";
-import {setSelectedLandingPage} from "../actions/profileLandingAction"
+import {setSelectedLandingPage} from "../actions/profileLandingAction";
+import { selectedPage } from '../actions/postActions';
 
 class ProfileLanding extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class ProfileLanding extends Component {
   }
 
   componentDidMount(){
+    this.props.selectedPage(3);
     var token = getCookie("token");
     if (token == undefined) {
         history.push("/registerPage");
@@ -210,4 +212,4 @@ const mapStateToProps = (state) =>({
   selectedButton : state.landingReducer.selectedLandingPage
 });
 
-export default connect(mapStateToProps, {setSelectedLandingPage})(ProfileLanding);
+export default connect(mapStateToProps, {setSelectedLandingPage,selectedPage})(ProfileLanding);
