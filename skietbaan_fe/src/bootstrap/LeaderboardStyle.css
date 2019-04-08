@@ -943,10 +943,7 @@
          background: transparent;
      }
      .leaderboard-container{
-        background-repeat: repeat;
-        background-size: 100%;
-        background-position: 50%;
-        background-image: url('../resources/desktop-background.png');
+        background: transparent;
      }
      .closed-filter-section{
          margin-bottom: 4px;
