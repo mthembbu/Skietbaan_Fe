@@ -154,6 +154,7 @@ class AddMembersGroup extends Component {
 						</table>
 					</div>
 					<div class="BNavBars">
+          <label className="error-message"> INVALID USERNAME </label> 
 						<div className="inputBox">
 							<input
 								className="the-Text"

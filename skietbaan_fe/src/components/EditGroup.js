@@ -22,7 +22,8 @@ class EditGroup extends Component {
 			count: 0,
 			selected: 0,
 			check: 'select all',
-			binState: false
+			binState: false,
+			count2:0
 		};
 		this.toggleHighlight = this.toggleHighlight.bind(this);
 		this.onBack = this.onBack.bind(this);
@@ -130,7 +131,7 @@ class EditGroup extends Component {
 								post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
 							);
 						})
-						.map((post, index) => (
+						.map((post, index) => (						
 							<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(index)}>
 								{this.state.binState === true ? (
 									<img
@@ -152,7 +153,7 @@ class EditGroup extends Component {
 			</div>
 		);
 		return (
-			<main className="The-Main">
+			<div className="The-Main">
 				<div className="navBar-container">
 					<div className="the-nav-bar">
 						<div className="leftContainer">
@@ -162,17 +163,19 @@ class EditGroup extends Component {
 						<div className="group-icon-spacing">
 							<div className="plus-next" onClick={() => this.changeBinState()}>
 								<img
-									className="checkbox-delete"
+									className="bin-image"
 									src={this.state.binState ? blackBin : whiteBin}
 									alt=""
 								/>
 							</div>
 							<div className="delete-icons" onClick={() => this.goToNext()}>
-								<img className="checkbox-delete" src={whitePlus} alt="" />
+								<img className="white-plus" src={whitePlus} alt="" />
 							</div>
 						</div>
 					</div>
 					<div class="BNavBar">
+
+					 <label className="error-message"> INVALID USERNAME </label> 
 						<div className="inputBox">
 							<input
 								className="the-Text"
@@ -208,7 +211,7 @@ class EditGroup extends Component {
 						</button>
 					</div>
 				)}
-			</main>
+			</div>
 		);
 	}
 }

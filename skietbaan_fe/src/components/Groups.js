@@ -7,7 +7,6 @@ import { BASE_URL } from '../actions/types';
 import back from './GroupImages/back.png';
 import unmarked from './GroupImages/Oval.png';
 import marked from './GroupImages/MarkedBox.png';
-import Switch from '@material-ui/core/Switch';
 import seleteAll from './GroupImages/seleteAll.png';
 import unSelectAll from './GroupImages/unSelectAll.png';
 
@@ -147,6 +146,7 @@ class Groups extends Component {
 						<label className="center-label">ADD USERS</label>
 					</div>
 					<div class="BNavBar">
+					<label className="error-message"> INVALID USERNAME </label> 
 						<div className="inputBox">
 							<input
 								className="the-Text"
@@ -159,7 +159,7 @@ class Groups extends Component {
 						</div>
 						<div className="switchAll" onClick={this.selectall}>
 						<img className="checkbox-delete" src={this.state.count===this.state.posts.length? seleteAll:unSelectAll} alt="" />
-							{/* <Switch checked={this.state.count=== 0?false:null || this.state.count==?true:null} /> */}
+					
 						</div>
 					</div>
 				</div>

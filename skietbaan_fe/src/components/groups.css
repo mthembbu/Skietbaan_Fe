@@ -59,14 +59,13 @@
 
 .the-Text {
 	margin-left: 19px;
-	margin-top: 17px;
-	width: 242px;
+	width: 278px;
 	float: left;
 	height: 56px;
 	font-weight: bold;
 	background: url("./GroupImages/searchBox.png") no-repeat;
 	background-position: right;
-	background-position-x: 205px;
+	background-position-x: 240px;
 	font-size: 18px;
 	padding-left: 15px;
 	font-size: 18px;
@@ -166,7 +165,7 @@
 	text-align: center;
 	z-index: 1px;
 	margin: 0px;
-	padding-bottom: 50px;
+	padding-bottom: 112px;
 	font-size: 16px;
 	font-weight: lighter;
 	padding-top: 10px;
@@ -294,7 +293,7 @@
 	font-weight: lighter;
 	padding-top: 10px;
 	float: bottom;
-	height: 66px;
+	height: 125px;
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
 }
@@ -420,9 +419,8 @@
 
 .checkbox-delete {
 	margin-right: 24px;
-	margin-top: 15px;
 	float: right;
-	height: 26px;
+	height: 36px;
 }
 .list-group-item-light {
 	text-align: left;
@@ -435,8 +433,7 @@
 	text-align: left;
 }
 .navBar-container {
-	height: 155px;
-	box-shadow: 0px 10px 16px -6px rgba(0, 0, 0, 0.33);
+	height: 184px;
 }
 .groupIcon {
 	padding-right: 5px;
@@ -459,7 +456,7 @@
 
 .switchAll {
 	float: right;
-	margin-top: 20px;
+	margin-top: 15px;
 	margin-left: 12px;
 	font-size: 16px;
 	color: #666666;
@@ -485,6 +482,7 @@
 		margin-left: 19%;
 		margin-top: 54px;
 	}
+
 }
 
 .confirm-group {
@@ -560,4 +558,16 @@
 	.the-main{
 		margin-bottom: 56px;
 	}
+}
+.error-message{
+	margin-left: 66px;
+    font-size: 16px;
+    font-weight: lighter;
+    color: #BE0000;
+}
+.bin-image, .white-plus{
+	margin-right: 24px;
+     margin-top: 15px; 
+    float: right;
+    height: 26px;
 }
