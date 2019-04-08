@@ -11,7 +11,6 @@ import blackBin from './GroupImages/blackBin.png';
 import whitePlus from './GroupImages/whitePlus.png';
 import { fetchEditUser, pageState } from '../actions/postActions';
 import back from './GroupImages/back.png';
-
 class EditGroup extends Component {
 	constructor(props) {
 		super(props);
