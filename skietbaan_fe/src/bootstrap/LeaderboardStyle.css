@@ -247,8 +247,8 @@
          width: 100%;
          color: #fdfdfd;
          background-image: linear-gradient(to right, #ef3024  , #Dc0600);
-         border-bottom-right-radius: 20px;
-         border-bottom-left-radius: 20px;
+         border-bottom-right-radius: 13px;
+         border-bottom-left-radius: 13px;
          box-shadow: -2px 1px 14px 2px grey;
      }
      .closed-filter-section .filter-table1{
