@@ -6,18 +6,26 @@
     .user-details-main-container{
         width: 66% !important;
     }
-
-    .profile-landing-container{
-        margin-left: 17%;
-        margin-right: 17%;
+    .profile-bootstrap-col-center-container{
+        background: white;
+        padding: 0;
     }
-
     .documents_background{
         width: 66% !important;
     }
 
     .fix-top{
-        width: 65.95% !important;
+        z-index: 1;
+        position: absolute !important;
+        width: 100% !important;
+        background: white;
+    }
+}
+@media only screen and (max-width: 576px){
+    .profile-bootstrap-col-center-container{
+        background-color: #F5F5F5;
+        padding-right: 15px;
+        padding-left: 15px;
     }
 }
 

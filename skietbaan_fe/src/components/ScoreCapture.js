@@ -9,6 +9,7 @@ import grayRetry from '../components/assets/redRetry.png';
 import lightgrayback from '../components/assets/Back.png';
 import submit from '../components/assets/biggerRedSubmit.png';
 import camera from '../components/assets/biggerRedCamera.png';
+import { Row, Col } from "react-bootstrap";
 import { selectedPage } from '../actions/postActions';
 import { connect } from 'react-redux';
 
@@ -39,7 +40,7 @@ class search extends Component {
       eventsAdded: false,
       lastSize: 0,
       somethingClicked: false,
-      maximumScore:20
+      maximumScore: 20
 
     }
 
@@ -61,9 +62,9 @@ class search extends Component {
     this.setState({
       [target.name]: target.value,
     }, () => {
-      if (parseFloat(this.state.score) <= this.state.maximumScore 
-      && parseFloat(this.state.score) >= 0 
-      && target.value !== undefined) {
+      if (parseFloat(this.state.score) <= this.state.maximumScore
+        && parseFloat(this.state.score) >= 0
+        && target.value !== undefined) {
         this.setState({
           validScore: true,
           scoreEntered: true
@@ -79,8 +80,7 @@ class search extends Component {
   }
 
   cancelClicked() {
-    if(this.state.somethingClicked)
-    {
+    if (this.state.somethingClicked) {
       this.setState({
         somethingClicked: !this.state.somethingClicked,
         clicked: null,
@@ -88,14 +88,14 @@ class search extends Component {
     }
   }
 
-  competitionClicked(item, compname,maximumScore) {
+  competitionClicked(item, compname, maximumScore) {
     this.setState({
       somethingClicked: true,
       currState: 2,
       clicked: item,
       competitionName: compname,
       validCompetition: true,
-      maximumScore : maximumScore
+      maximumScore: maximumScore
     });
   }
 
@@ -110,7 +110,7 @@ class search extends Component {
     })
       .then(response => response.json())
       .then(data => this.setState({ competitionsList: data }))
-      .catch(err =>  {
+      .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       })
 
@@ -129,7 +129,7 @@ class search extends Component {
         });
       })
       .catch(function (data) {
-      }).catch(err =>  {
+      }).catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       })
 
@@ -137,9 +137,9 @@ class search extends Component {
 
   validate() {
     let Valid = false;
-    if (parseFloat(this.state.score) > this.state.maximumScore 
-    || parseFloat(this.state.score) < 0  
-    || this.state.score === "") {
+    if (parseFloat(this.state.score) > this.state.maximumScore
+      || parseFloat(this.state.score) < 0
+      || this.state.score === "") {
       this.setState({
         validForm: false,
         validScore: false
@@ -292,7 +292,7 @@ class search extends Component {
           if (this.state.navbarState === false) {
             this.toggleNavbar();
           }
-        }).catch(err =>  {
+        }).catch(err => {
           /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
         })
       setTimeout(function () { window.location = "/scoreCapture"; }, 4000);
@@ -315,7 +315,7 @@ class search extends Component {
       }).then(response => response.json())
         .then(data => this.setState({
           scoreSaved: true, currState: 5
-        })).catch(err =>  {
+        })).catch(err => {
           /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
         })
       setTimeout(function () { window.location = "/scoreCapture"; }, 5000);
@@ -439,7 +439,7 @@ class search extends Component {
                     ? "competition-item active"
                     : "competition-item fade-out")}>
               <li className="li-container"
-                onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name,this.state.competitionsList[i].maximumScore)}>
+                onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name, this.state.competitionsList[i].maximumScore)}>
                 {this.state.competitionsList[i].name.toUpperCase()}
               </li>
               <div onClick={() => this.cancelClicked()} className="competiton-cancel-button"></div>
@@ -448,7 +448,7 @@ class search extends Component {
 
       }
     }
-    else{
+    else {
       competitionItem.push(
         <div className="not-active">No active competitions</div>
       )
@@ -458,14 +458,25 @@ class search extends Component {
     }
     return (
       <div className="position-relative" autoComplete="off">
-        <div className={stateOne || this.state.scoreSaved
-          ? "hidden"
-          : "score-capture-header"}>
-          <div className="gun-overlay-image">
-            <label className="label-for-score">ADD SCORE</label>
-          </div>
-        </div>
-        <div className={this.state.scoreSaved
+        {/* <Row className="row justify-content-center">
+				   <Col sm={8} className="createpage-bootstrap-col-center-container">
+           
+           </Col>
+        </Row> */}
+        <Row className="row justify-content-center">
+          <Col sm={8} className="createpage-bootstrap-col-center-container">
+            <div className={stateOne || this.state.scoreSaved
+              ? "hidden"
+              : "score-capture-header"}>
+              <div className="gun-overlay-image">
+                <label className="label-for-score">ADD SCORE</label>
+              </div>
+            </div>
+          </Col>
+        </Row>
+        <Row className="row justify-content-center">
+          <Col sm={8} className="createpage-bootstrap-col-center-container">
+          <div className={this.state.scoreSaved
           ? "sucess-container"
           : (stateOne
             ? "page-content-video"
@@ -510,28 +521,28 @@ class search extends Component {
               </div>
             </div>
             <div className="stretched inline-block">
-            <div className={this.state.somethingClicked === true
-              ? "submit-container"
-              : "hidden"}>
-              <div className={this.state.imageTaken || this.state.showCamera
-                ? "hidden"
-                : "submit-button-elements2"}>
-                <div className="button-hover">
-                  <img src={camera}
-                    id="btnScoreCapture" className="btn-score-capture2"
-                    onClick={() => this.CameraClicked()} alt=''></img>
+              <div className={this.state.somethingClicked === true
+                ? "submit-container"
+                : "hidden"}>
+                <div className={this.state.imageTaken || this.state.showCamera
+                  ? "hidden"
+                  : "submit-button-elements2"}>
+                  <div className="button-hover">
+                    <img src={camera}
+                      id="btnScoreCapture" className="btn-score-capture2"
+                      onClick={() => this.CameraClicked()} alt=''></img>
+                  </div>
+                </div>
+                <div className={(this.state.showCamera && !this.state.imageTaken)
+                  || this.state.imageTaken
+                  ? "hidden"
+                  : "submit-button-elements2"}>
+                  <div className="button-hover ">
+                    <img src={submit} onClick={() => this.getLocation()}
+                      className="button-that-submits" alt=''></img>
+                  </div>
                 </div>
               </div>
-              <div className={(this.state.showCamera && !this.state.imageTaken)
-                || this.state.imageTaken
-                ? "hidden"
-                : "submit-button-elements2"}>
-                <div className="button-hover ">
-                  <img src={submit} onClick={() => this.getLocation()}
-                    className="button-that-submits" alt=''></img>
-                </div>
-              </div>
-            </div>
             </div>
           </div>
 
@@ -628,6 +639,9 @@ class search extends Component {
             </div>
           </div>
         </div>
+          </Col>
+        </Row>
+        
       </div>
     )
   }
