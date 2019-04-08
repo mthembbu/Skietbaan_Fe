@@ -100,7 +100,7 @@ class Groups extends Component {
 			.catch(function (data) { }).catch(err => {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
 			});
-		window.location = '/GroupComponent';
+		window.location = '/create';
 	}
 
 	selectall() {
@@ -134,6 +134,7 @@ class Groups extends Component {
 	render() {
 		const postitems = (
 			<div className="check" style={{ height: this.getBodyHeight() + "px" }}>
+			{this.state.posts.length===0?null:
 				<ul class="list-group" style={{ textAlign: 'left' }}>
 					{this.state.posts
 						.filter((post) => {
@@ -160,7 +161,7 @@ class Groups extends Component {
 								</label>
 							</li>
 						))}
-				</ul>
+				</ul>}
 			</div>
 		);
 		return (
