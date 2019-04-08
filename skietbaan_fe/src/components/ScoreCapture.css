@@ -332,17 +332,6 @@ hr{
     box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
 }
 
-@media screen and (min-width: 1000px){
-    .position-relative{
-        position: relative;
-        background: url("../components/assets/gunBackground.png");
-        background-repeat: no-repeat;
-        background-size: 100% auto;
-        background-position: center;
-    }
-}
-
-
 .labelIcon{
     color: #6F839E;
     width: 60%;
