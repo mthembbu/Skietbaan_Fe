@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../scss/createcomp.css';
-import { createComp } from '../actions/competition.action';
+import { createComp,compSelectedPages } from '../actions/competition.action';
 import history from './history';
 import { Row, Col } from 'react-bootstrap';
 class CreateComp extends Component {
@@ -58,7 +58,7 @@ class CreateComp extends Component {
 			this.setState({isCreated: true})
 		}
 		this.setState({ isExist: this.props.isExist });
-		
+		this.props.compSelectedPages(2);	
 	}
 	render() {
 		return (
@@ -161,4 +161,4 @@ const mapStatesToprops = (state) => ({
 	newComp: state.compOBJ.selectedComp,
 	isExist: state.compOBJ.isExist
 });
-export default connect(mapStatesToprops, { createComp })(CreateComp);
+export default connect(mapStatesToprops, { createComp,compSelectedPages })(CreateComp);
