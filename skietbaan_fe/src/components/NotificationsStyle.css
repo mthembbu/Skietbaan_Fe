@@ -759,3 +759,7 @@
 .styling-for-gun-overlay {
   height: 50px;
 }
+.format-content{
+  height: fit-content;
+  overflow-y: overlay;
+}
