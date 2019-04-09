@@ -266,13 +266,6 @@ export class createPages extends Component {
 					) : this.state.selectedButton === 1 && this.state.selectedButtonCreateViewGroups === 2 ? (
 						<GroupComponent />
 					) : null}
-						  
-					{/** *this.state.selectedButton === 2 && this.state.selectedButtonCreateViewGroups === 1 ? (
-						<CreateComp />
-					) : this.state.selectedButton === 2 && this.state.selectedButtonCreateViewGroups === 2 ? (
-						<ViewComp />
-					) : null*/}
-
 					{this.state.selectedButton===2?<CompComponent />:null}
 					{this.state.selectedButton === 3 && this.state.selectedValue === 'A' ? (
 						<ViewNonMembers />
