@@ -70,7 +70,7 @@ class ForgotPassword extends Component {
             </div>
             <div className="header-container">
               <div className="centre-label">
-                <label className="header-label">FORGOT PASSWORD</label>
+                <label className="header-label-forgot-password">FORGOT PASSWORD</label>
               </div>
               <img
                 src={back}
