@@ -227,7 +227,11 @@ class UserProfile extends Component {
         if(this.props.selectedCompetition.length === 0){
             return this.state.awardCompetitions[0]
         }else{
-            return this.state.awardCompetitions[this.getIndexByCompetitionName(this.props.selectedCompetition)]
+            var initAward = this.state.awardCompetitions[this.getIndexByCompetitionName(this.props.selectedCompetition)]
+            if(initAward === null || initAward === undefined){
+                return this.state.awardCompetitions[0]
+            }
+            return initAward;
         }
     }
 
