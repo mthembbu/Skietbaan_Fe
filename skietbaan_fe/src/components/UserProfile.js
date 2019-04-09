@@ -6,23 +6,27 @@ import { getCookie } from "./cookie.js";
 import { BASE_URL } from "../actions/types.js";
 import { Collapse } from "react-collapse";
 import history from "./history";
+import { connect } from "react-redux";
+import { setSelectedCompetition } from "../actions/userProfileActions"
 
 class UserProfile extends Component {
-        constructor(props){
-            super(props);
-            this.state = {
-                awardCompetitions : [],
-                hoursAward : {
-                    hours: -1,
-                },
-                collapse: false,
-                selectedCompetition : 0,
-            }
+    constructor(props){
+        super(props);
+        this.state = {
+            awardCompetitions : [],
+            hoursAward : {
+                hours: -1,
+            },
+            collapse: false,
+            exceptionCaught: false
+        }
         
         this.toggle = this.toggle.bind(this);
         this.logout = this.logout.bind(this);
         this.timeouts = [];
+        this.mapCompetitionNameToIndex = {}
         this._isMounted = false;
+        this.isBestInMonth = false;
     }
 
     UNSAFE_componentWillMount() {
@@ -33,29 +37,36 @@ class UserProfile extends Component {
         }
 
         fetch(BASE_URL + "/api/awards/" + token, {
-        method: "GET",
-        headers: {
-            "content-type": "application/json"
-        }
+            method: "GET",
+            headers: {
+                "content-type": "application/json"
+            }
         })
         .then(res => res.json())
         .then(data => {
             if(this._isMounted){
+                data.forEach((element, index) => {
+                    this.mapCompetitionNameToIndex[element.competitionName] = index;
+                })
                 this.setState({ awardCompetitions: data });
             }
+        }).catch(() => {
+            this.setState({ exceptionCaught: true });
         });
 
         fetch(BASE_URL + "/api/awards/hours/" + token, {
-        method: "GET",
-        headers: {
-            "content-type": "application/json"
-        }
+            method: "GET",
+            headers: {
+                "content-type": "application/json"
+            }
         })
         .then(res => res.json())
         .then(data => {
             if(this._isMounted){
                 this.setState({ hoursAward: data });
             }
+        }).catch(() => {
+            this.setState({ exceptionCaught: true });
         });
     }
 
@@ -87,24 +98,26 @@ class UserProfile extends Component {
             
             if (degreees<=180){
                 activeBorder.css('background-image','linear-gradient(' + (90 + degreees) + 
-                                'deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');    
+                                'deg, transparent 50%, #F3F4F9 50%),linear-gradient(90deg, transparent 50%, #BE0000 50%)');    
             }
             else{
                 activeBorder.css('background-image','linear-gradient(' + (degreees - 90) + 
-                                'deg, transparent 50%, #EA241A 50%),linear-gradient(90deg, transparent 50%, #EA241A 50%)');
+                                'deg, transparent 50%, #BE0000 50%),linear-gradient(90deg, transparent 50%, #BE0000 50%)');
             }
             counter++;
             const timeout = setTimeout(() => {
                 this.animateAccuracyCircle(counter, element, index)
             }, 80)
             this.timeouts.push(timeout);
+        }else{
+            $(`#circle${index}`).html(element.accuracy+"%");
         }
     }
 
     renderLockedIcon(){
         return(
             <div className="locked-icon">
-                <img src={require("../resources/awardIcons/grey-locked-icon.png")} alt="lock-icon" />
+                <img src={require("../resources/awardIcons/light-red-locked-icon.png")} alt="lock-icon" />
             </div>
         )
     }
@@ -112,7 +125,8 @@ class UserProfile extends Component {
     renderActiveCircle(element,index){
         return(
             <div id={index} className="active-border">
-                <div id={`circle${index}`} className="circle">
+                <div id={`circle${index}`} className={element.accuracy.toString().split(".")[0].length > 2 ? 
+                    "circle font-size-15px" : "circle font-size-18px"}>
                     <label className="accuracy-text">0%</label>
                 </div>
                 {this.animateAccuracyCircle(0, element, index)}
@@ -133,22 +147,13 @@ class UserProfile extends Component {
     renderMedalIcon(){
         return(
             <div className="medal-img">
-                <img src={require("../resources/awardIcons/medal.png")}></img>
+                <img src={require("../resources/awardIcons/medal-icon.png")}></img>
             </div>
         )
     }
 
-    renderAllCompetitionsStats(){
-        let renderArray = []
-        this.state.awardCompetitions.forEach((element, index) => {
-            renderArray.push(this.competitionsStat(element, index))
-        })
-
-        return renderArray;
-    }
-
-    setSelectedCompetition(index){
-        this.setState({selectedCompetition : index})
+    setSelectedCompetition(competitionName){
+        this.props.setSelectedCompetition(competitionName);
         this.toggle();
     }
 
@@ -157,10 +162,10 @@ class UserProfile extends Component {
             <div key={index}>
                 <Row>
                     <Col>
-                        <button className={this.state.selectedCompetition === index ?
+                        <button className={this.getIndexByCompetitionName(this.props.selectedCompetition) === index ?
                              "button-style competition-button-text button-style-active" : 
                              "button-style competition-button-text button-style-inactive"}
-                             onClick={() => this.setSelectedCompetition(index)}>
+                             onClick={() => this.setSelectedCompetition(element.competitionName)}>
                             {element.competitionName}
                         </button>
                     </Col>
@@ -182,7 +187,7 @@ class UserProfile extends Component {
         return(
             <div>
                 <div className="align-accuracy-text">
-                    <label className="font-size-14px red-text award-type-label">ACCURACY</label>
+                    <label className="font-size-14px unlocked-award-text award-type-label">ACCURACY</label>
                 </div>
                 <div className="circle-bigger">
                     {!element.isCompetitionLocked ?
@@ -196,23 +201,46 @@ class UserProfile extends Component {
     renderTotalCircle(element, index){
         return(
             <div>
-                <div className="width-98px">
-                    <label className="font-size-14px red-text award-type-label">TOTAL SCORE</label>
+                <div className="total-text-alignement">
+                    <label className="font-size-14px unlocked-award-text award-type-label">TOTAL SCORE</label>
                 </div>
                 <div className="circle-bigger">
                     <div>
                         {!element.isCompetitionLocked ? 
                             <label className="total-text">{element.total}</label> : this.renderRedLockIcon(index)}
+                        {!element.isCompetitionLocked ? 
+                            <div className="total-img-scale">
+                                <img src={require("../resources/awardIcons/total-icon.png")} alt="total-icon"></img>
+                            </div> : null
+                        }
                     </div>
                 </div>
             </div>
         );
     }
 
+    getIndexByCompetitionName(competitionName){
+        return this.mapCompetitionNameToIndex[competitionName];
+    }
+
+    getInitialAward(){
+        if(this.props.selectedCompetition.length === 0){
+            return this.state.awardCompetitions[0]
+        }else{
+            var initAward = this.state.awardCompetitions[this.getIndexByCompetitionName(this.props.selectedCompetition)]
+            if(initAward === null || initAward === undefined){
+                return this.state.awardCompetitions[0]
+            }
+            return initAward;
+        }
+    }
+
     renderBestInMonth(){
+        {this.isBestInMonth = true}
         return(
-            <div className="grey-text pad-bottom-16px font-size-14px">
-                {this.state.awardCompetitions[this.state.selectedCompetition].bestInMonth.toUpperCase()}
+            <div className="grey-text pad-bottom-16px font-size-14px best-month-text">
+                {this.state.awardCompetitions[
+                    this.getIndexByCompetitionName(this.props.selectedCompetition)].bestInMonth.toUpperCase()}
             </div>
         )
     }
@@ -221,176 +249,203 @@ class UserProfile extends Component {
         this.timeouts.forEach(timeout => clearTimeout(timeout));
         this._isMounted = false;
     }
-
+    
     render() {
         return (
-            <div className="award-container pad-top-128px">
-                {this.state.awardCompetitions.length > 0 ? //only render when the data has arrived from backend
-                <Container className="remove-right-padding">
-                    <Row className="push-bottom-21px">
-                        <Col className="lay-horizontal center-content">
-                            <div className="circle-smaller">
-                                <div className="scale-medal-img">
-                                    <img src={require("../resources/awardIcons/medal.png")}></img>
-                                </div>
-                            </div>
-                        </Col>
-                    </Row>
+            <div className="award-container pad-award-container">
+                {this.state.exceptionCaught ? <div className="no-competition">No Competitions Available</div> :
+                //only render when the data has arrived from backend
+                this.state.awardCompetitions.length > 0 ?
+                <div className="remove-right-padding">
                     <Row>
                         <Col>
-                            <div className="competition-name-text red-text pad-bottom-16px">
-                                <a onClick={this.toggle} className="lay-horizontal center-content make-cursor-point">
-                                    <div className="push-right-5px">
-                                        {this.state.awardCompetitions[this.state.selectedCompetition]
-                                        .competitionName.toUpperCase()}
+                        <a onClick={this.toggle} className="make-cursor-point">
+                        <div className="buttons-rectangle">
+                            <div className="scale-gun-type-img">
+                                {this.getInitialAward().competitionName.includes("Rifle") || 
+                                    this.getInitialAward().competitionName.includes("rifle") ?
+                                    <img src={require("../resources/awardIcons/rifle-icon.png")}></img>:
+                                    <img src={require("../resources/awardIcons/pistol-icon.png")}></img>
+                                }
+                            </div>
+                            <div className="competition-name-text red-text">
+                                <div className="center-content profile-landing-vertical-align">    
+                                    <div className="push-right-5px lighter-font">
+                                        {this.getInitialAward().competitionName.toUpperCase()}
                                     </div>
                                     <div className="down-triangle-img-scale">
                                         <img src={require("../resources/awardIcons/down-triangle.png")} alt="down-triangle">
                                         </img>
                                     </div>
-                                </a>
+                                </div>
                             </div>
+                        </div>
+                        </a>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            {this.state.awardCompetitions[this.state.selectedCompetition].bestInMonth.startsWith("Best") ?
+                            {this.getInitialAward().bestInMonth.startsWith("Best") ?
                                 this.renderBestInMonth() : null}
                         </Col>
                     </Row>
                     <Row className="center-content competition-buttons-container">
-                        <Collapse isOpened={this.state.collapse}>
-                            <div className="grey-text select-competition-font">Select Competition</div>
-                            {this.renderCompetitionList()}
-                            <a className="scale-arrowupicon-img" onClick={this.toggle}>
-                                <img src={require("../resources/awardIcons/arrowUpIcon.png")} alt="lock-icon"></img>
-                            </a>
-                        </Collapse>
-                    </Row>
-                    <Row className="awards-container">
-                        <Col xs={4}sm={4}md={4} className="push-bottom-41px">
-                            {this.renderAccuracyCircle(this.state.awardCompetitions[this.state.selectedCompetition],
-                                this.state.selectedCompetition)}
+                        <Col>
+                            <Collapse isOpened={this.state.collapse}>
+                                <div className="grey-text select-competition-font">Select Competition</div>
+                                <div className="award-buttons-container">{this.renderCompetitionList()}</div>
+                                <a className="scale-arrowupicon-img" onClick={this.toggle}>
+                                    <img src={require("../resources/awardIcons/arrowUpIcon.png")} alt="lock-icon"></img>
+                                </a>
+                            </Collapse>
                         </Col>
-                        <Col xs={8}sm={8}md={8}>
+                    </Row>
+                    <div className={this.isBestInMonth ? "awards-container-background margin-top-43px" :
+                    "awards-container-background margin-top-60px"}>
+                    <div className="line adjust-top-line"></div>
+                    <Row className="awards-container pad-top-30px">
+                        <Col xs={4}sm={4}md={4} className="push-bottom-49px">
+                            {this.renderAccuracyCircle(this.getInitialAward(),
+                                this.getIndexByCompetitionName(this.getInitialAward().competitionName))}
+                        </Col>
+                        <Col xs={7}sm={7}md={7}>
                             <Row className="push-bottom-13px">
                                 <Col xs={4}sm={4}md={4}>
-                                    <label className="grey-text font-size-14px">
-                                        BRONZE</label>
+                                    <label className={this.getInitialAward().accuracyAward.bronze ?
+                                        "unlocked-award-text font-size-14px" : 
+                                        "locked-award-text font-size-14px"}>BRONZE</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[this.state.selectedCompetition].accuracyAward.bronze 
+                                    {this.getInitialAward().accuracyAward.bronze 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
-                                    <label className="red-text reached-award">
-                                        {this.state.awardCompetitions[this.state.selectedCompetition]
-                                            .accuracyAward.bronzeRequirementStatus}
+                                    <label className={this.getInitialAward().accuracyAward.bronze ? 
+                                        "reached-award unlocked-award-text":
+                                        "reached-award locked-award-text"}>
+                                        {this.getInitialAward().accuracyAward.bronzeRequirementStatus}
                                     </label>
                                 </Col>
                             </Row>
                             <Row className="push-bottom-13px">
                                 <Col xs={4}sm={4}md={4}>
-                                    <label className="grey-text font-size-14px">
-                                        SILVER</label>
+                                <label className={this.getInitialAward().accuracyAward.silver ? 
+                                    "unlocked-award-text font-size-14px" : 
+                                    "locked-award-text font-size-14px"}>SILVER</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[this.state.selectedCompetition].accuracyAward.silver 
+                                    {this.getInitialAward().accuracyAward.silver 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
-                                    <label className="red-text reached-award ">
-                                        {this.state.awardCompetitions[this.state.selectedCompetition]
-                                            .accuracyAward.silverRequirementStatus}
+                                    <label className={this.getInitialAward().accuracyAward.silver ? 
+                                        "reached-award unlocked-award-text":
+                                        "reached-award locked-award-text"}>
+                                        {this.getInitialAward().accuracyAward.silverRequirementStatus}
                                     </label>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col xs={4}sm={4}md={4}>
-                                    <label className="grey-text font-size-14px">
-                                        GOLD</label>
+                                <label className={this.getInitialAward().accuracyAward.gold ? "unlocked-award-text font-size-14px" : 
+                                    "locked-award-text font-size-14px"}>GOLD</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[this.state.selectedCompetition].accuracyAward.gold 
+                                    {this.getInitialAward().accuracyAward.gold 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
-                                    <label className="red-text reached-award line-height-15px">
-                                        {this.state.awardCompetitions[this.state.selectedCompetition]
-                                            .accuracyAward.goldRequirementStatus}
+                                    <label className={this.getInitialAward().accuracyAward.gold ? 
+                                        "reached-award unlocked-award-text":
+                                        "reached-award locked-award-text"}>
+                                        {this.getInitialAward().accuracyAward.goldRequirementStatus}
                                     </label>
                                 </Col>
                             </Row>
                         </Col>
                     </Row>
+                    <div className="line adjust-bottom-line"></div>
                     <Row className="awards-container">
-                        <Col xs={4}sm={4}md={4} className="push-bottom-41px">
-                            {this.renderTotalCircle(this.state.awardCompetitions[this.state.selectedCompetition],
-                            this.state.selectedCompetition)}
+                        <Col xs={4}sm={4}md={4} className="push-bottom-49px">
+                            {this.renderTotalCircle(this.getInitialAward(),
+                            this.getIndexByCompetitionName(this.getInitialAward().competitionName))}
                         </Col>
-                        <Col xs={8}sm={8}md={8}>
+                        <Col xs={7}sm={7}md={7}>
                             <Row className="push-bottom-13px">
                                 <Col xs={4}sm={4}md={4}>
-                                    <label className="grey-text font-size-14px">
-                                        BRONZE</label>
+                                <label className={this.getInitialAward().totalAward.bronze ? 
+                                    "unlocked-award-text font-size-14px" : 
+                                    "locked-award-text font-size-14px"}>BRONZE</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[this.state.selectedCompetition].totalAward.bronze 
+                                    {this.getInitialAward().totalAward.bronze 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
-                                    <label className="red-text reached-award">
-                                        {this.state.awardCompetitions[this.state.selectedCompetition]
-                                            .totalAward.bronzeRequirementStatus}
+                                    <label className={this.getInitialAward().totalAward.bronze ? 
+                                        "reached-award unlocked-award-text":
+                                        "reached-award locked-award-text"}>
+                                        {this.getInitialAward().totalAward.bronzeRequirementStatus}
                                     </label>
                                 </Col>
                             </Row>
                             <Row className="push-bottom-13px">
                                 <Col xs={4}sm={4}md={4}>
-                                    <label className="grey-text font-size-14px">
-                                        SILVER</label>
+                                <label className={this.getInitialAward().totalAward.silver ? 
+                                    "unlocked-award-text font-size-14px" : 
+                                    "locked-award-text font-size-14px"}>SILVER</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[this.state.selectedCompetition].totalAward.silver 
+                                    {this.getInitialAward().totalAward.silver 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
-                                    <label className="red-text reached-award">
-                                        {this.state.awardCompetitions[this.state.selectedCompetition]
-                                            .totalAward.silverRequirementStatus}
+                                <label className={this.getInitialAward().totalAward.silver ? 
+                                        "reached-award unlocked-award-text":
+                                        "reached-award locked-award-text"}>
+                                        {this.getInitialAward().totalAward.silverRequirementStatus}
                                     </label>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col xs={4}sm={4}md={4}>
-                                    <label className="grey-text font-size-14px">
-                                        GOLD</label>
+                                <label className={this.getInitialAward().totalAward.gold ?
+                                    "unlocked-award-text font-size-14px" : 
+                                    "locked-award-text font-size-14px"}>GOLD</label>
                                 </Col>
                                 <Col xs={2}sm={2}md={2}>
-                                    {this.state.awardCompetitions[this.state.selectedCompetition].totalAward.gold 
+                                    {this.getInitialAward().totalAward.gold 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-right-padding">
-                                    <label className="red-text reached-award line-height-15px">
-                                        {this.state.awardCompetitions[this.state.selectedCompetition]
-                                            .totalAward.goldRequirementStatus}
+                                    <label className={this.getInitialAward().totalAward.gold ? 
+                                        "reached-award unlocked-award-text":
+                                        "reached-award locked-award-text"}>
+                                        {this.getInitialAward().totalAward.goldRequirementStatus}
                                     </label>
                                 </Col>
                             </Row>
                         </Col>
                     </Row>
-                </Container>
+                    <div className="line adjust-bottom-line"></div>
+                    </div>
+                </div>
                 //only render when the data has arrived from backend
-                : null} 
+                : null}
             </div>
         )
     }
 }
 
-export default UserProfile;
+
+const mapStateToProps = (state) => ({
+	selectedCompetition: state.awardsReducer.selectedCompetition,
+});
+
+export default connect(mapStateToProps, {setSelectedCompetition})(UserProfile);

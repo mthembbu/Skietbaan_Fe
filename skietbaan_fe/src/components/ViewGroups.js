@@ -14,6 +14,7 @@ import { BASE_URL } from "../actions/types";
 import Switch from "@material-ui/core/Switch";
 import group from "./GroupImages/Group.png";
 import PropTypes from "prop-types";
+import { Row, Col } from "react-bootstrap";
 
 class ViewGroups extends Component {
   constructor(props) {
@@ -25,18 +26,38 @@ class ViewGroups extends Component {
       ids: 0,
       indexs: "",
       selected: "",
-      deleteState: false
+      deleteState: false,
+      height: window.innerHeight,
+      width: window.innerWidth
     };
     this.onChange = this.onChange.bind(this);
     this.delete = this.delete.bind(this);
     this.editGroup = this.editGroup.bind(this);
+    this.updateDimensions = this.updateDimensions.bind(this);
+    this.getBodyHeight = this.getBodyHeight.bind(this);
   }
 
   async componentWillMount() {
+    window.addEventListener("resize", this.updateDimensions);
     await this.props.fetchGroups();
     await this.props.groupDictionary();
   }
-
+  getBodyHeight() {
+    if (this.state.width < 575) {
+      return (this.state.height - 240);
+    } else {
+      return (this.state.height - 184);
+    }
+  }
+  componentDidMount() {
+    this.updateDimensions();
+  }
+  updateDimensions() {
+    this.setState({
+      height: window.innerHeight,
+      width: window.innerWidth
+    });
+  }
   onChange(event) {
     this.setState({ filterText: event.target.value });
   }
@@ -51,8 +72,12 @@ class ViewGroups extends Component {
   async delete(groupId, index) {
     if (this.props.groupsList[index].isActive === false) {
       this.props.groupsList[index].isActive = true;
+      this.props.groupsList[index].highlighted = true;
+
     } else {
       this.props.groupsList[index].isActive = false;
+      this.props.groupsList[index].highlighted = false;
+
     }
     this.props.newGroupArrayState([...this.props.groupsList]);
     await fetch(BASE_URL + "/api/Groups/" + groupId, {
@@ -63,14 +88,31 @@ class ViewGroups extends Component {
       },
       body: JSON.stringify(groupId)
     })
-      .then(function(response) {})
-      .then(function(data) {})
-      .catch(function(data) {});
+      .then(function (response) { })
+      .then(function (data) { })
+      .catch(function (data) { }).catch(err => {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
   }
+  toggleHighlight = (event) => {
+
+    if (this.props.groupsList[event].highlighted === true) {
+      this.props.groupsList[event].highlighted = false;
+      // this.setState({ count: this.state.count - 1 });
+      console.log("true")
+    } else {
+      this.props.groupsList[event].highlighted = true;
+      // this.setState({ count: this.state.count + 1 });
+      console.log("false")
+
+    }
+
+  };
 
   render() {
     const postitems = (
       <div className="the-main">
+      {this.props.groupsList.length===0?null:
         <table className="table-member">
           <tbody>
             {this.props.groupsList
@@ -90,7 +132,9 @@ class ViewGroups extends Component {
                 <tr className="view-group" key={post.id}>
                   <td
                     className={
-                      post.isActive === true ? "first-row" : "first-row-active"
+                      post.isActive === true
+                        ? "first-row"
+                        : "first-row-active"
                     }
                     onClick={() => this.editGroup(post)}
                   >
@@ -121,20 +165,19 @@ class ViewGroups extends Component {
                 </tr>
               ))}
           </tbody>
-        </table>
+        </table>}
       </div>
     );
 
     return (
-      <main className="The-Main">
-        <div
-          className="scrollbar"
-          data-simplebar
-          data-simplebar-auto-hide="false"
-        >
-          {postitems}
-        </div>
-      </main>
+      <Row className="row justify-content-center">
+        <Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position : "inherit"}}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
+          <div className="The-Main" style={{ height: this.getBodyHeight() + "px" }}>
+            {postitems}
+          </div>
+        </Col>
+      </Row>
+
     );
   }
 }

@@ -34,14 +34,12 @@
 
   .navbar-admin {
     background-color: #000000;
-    width: 66%;
+    width: 100%;
     text-align: center;
-    margin-left: 17%;
     top: 0;
     z-index: 100;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
   }
 
   .nav-content {
@@ -53,6 +51,14 @@
     z-index: 100;
     text-align: center;
     background-image: radial-gradient(circle, #ffffff, #000000);
+  }
+  .navbar-bootstrap-col-center-container{
+    background: transparent;
+    padding: 0;
+  }
+  .col-sm-8{
+    max-width: 54%;
+    box-shadow: 13px 2px 18px -10px grey, -6px 1px 9px -6px grey;
   }
 }
 
@@ -86,13 +92,18 @@
     background-color: #000000;
     width: 100%;
     text-align: center;
-    bottom: 0;
-    z-index: 100;
-    position: fixed;
+    position: unset;
     width: 100%;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
     box-shadow: 6px -14px 15px -12px #888888;
+  }
+  
+  .nav-content{
+    bottom: 0;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
   }
 
   .second-row-navbar.expand {
@@ -109,6 +120,11 @@
 
   .columns-v2 {
     width: 25%;
+  }
+  .navbar-bootstrap-col-center-container{
+    padding-right: 15;
+    padding-left: 15;
+    background: transparent;
   }
 }
 

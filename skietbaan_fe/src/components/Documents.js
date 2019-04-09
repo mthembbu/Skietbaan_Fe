@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../components/Documents.css";
 import { getCookie } from "./cookie.js";
 import { Collapse } from "react-collapse";
-import { BASE_URL } from "../actions/types.js";
+import { BASE_URL, handleErrors } from "../actions/types.js";
 
 class Documents extends Component {
   constructor(props) {
@@ -25,19 +25,27 @@ class Documents extends Component {
     }
     let token = getCookie("token");
     fetch(BASE_URL + "/api/Documents/UserLOGS/" + token)
+      .then(handleErrors)
       .then(res => res.json())
       .then(data => {
-        if(this._isMounted){
+        if (this._isMounted) {
           this.setState({ sendLogsReturn: data });
         }
+      })
+      .catch(err => {
+        return Promise.reject();
       });
 
     fetch(BASE_URL + "/api/Documents/UserLOS/" + token)
+      .then(handleErrors)
       .then(res => res.json())
       .then(data => {
-        if(this._isMounted){
-          this.setState({ sendLosReturn: data })
+        if (this._isMounted) {
+          this.setState({ sendLosReturn: data });
         }
+      })
+      .catch(err => {
+        return Promise.reject();
       });
   }
 
@@ -50,7 +58,11 @@ class Documents extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(token)
-    });
+    })
+      .then(handleErrors)
+      .catch(err => {
+        return Promise.reject();
+      });
 
     if (this.state.collapseFilterLOGS) {
       this.setState({
@@ -72,7 +84,11 @@ class Documents extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(token)
-    });
+    })
+      .then(handleErrors)
+      .catch(err => {
+        return Promise.reject();
+      });
 
     if (this.state.collapseFilterLOS) {
       this.setState({
@@ -85,7 +101,7 @@ class Documents extends Component {
     }
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this._isMounted = false;
   }
 
@@ -128,7 +144,10 @@ class Documents extends Component {
               {this.state.sendLogsReturn !== "Document" ? (
                 <div>
                   <b>Letter of Good Standing:</b>
-                  <p>requires 5 more shoots.</p>
+                  <p>
+                    requires you to pay your membership and participate in
+                    atleast one competition
+                  </p>
                 </div>
               ) : null}
             </div>
@@ -168,7 +187,7 @@ class Documents extends Component {
               {this.state.sendLosReturn !== "Document" ? (
                 <div>
                   <b>Letter of Status:</b>
-                  <p>requires further shooting documentation.</p>
+                  <p>{this.state.sendLosReturn}</p>
                 </div>
               ) : null}
             </div>

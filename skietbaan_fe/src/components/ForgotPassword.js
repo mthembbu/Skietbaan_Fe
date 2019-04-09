@@ -30,7 +30,9 @@ class ForgotPassword extends Component {
       }
     )
       .then(res => res.json())
-      .then(data => this.setState({ isSent: data }));
+      .then(data => this.setState({ isSent: data })).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      });
   }
 
   goToLogin() {
@@ -68,12 +70,12 @@ class ForgotPassword extends Component {
             </div>
             <div className="header-container">
               <div className="centre-label">
-                <label className="header-label">FORGOT PASSWORD</label>
+                <label className="header-label-forgot-password">FORGOT PASSWORD</label>
               </div>
               <img
                 src={back}
                 alt="back button"
-                className="back-btn"
+                className="back-btn-forgot-password"
                 onClick={() => this.goToLogin()}
               />
             </div>

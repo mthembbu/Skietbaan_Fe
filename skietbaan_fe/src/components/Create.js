@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Create.css";
 import { getCookie } from "../components/cookie.js";
-import { URL } from "../actions/types.js";
+import { BASE_URL } from "../actions/types.js";
 import { Row, Col } from "react-bootstrap";
 import ViewMembers from "../components/ViewMembers";
 import CreateComp from "../components/CreateComp";
@@ -27,6 +27,8 @@ class Create extends Component {
     this.viewGroups = this.viewGroups.bind(this);
     this.createCompetitions = this.createCompetitions.bind(this);
     this.viewCompetitions = this.viewCompetitions.bind(this);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.toggleNavbar2 = this.toggleNavbar2.bind(this);
   }
 
   groupsPage() {
@@ -57,11 +59,36 @@ class Create extends Component {
     this.setState({ selectedButtonCreateViewCompetitions: 2 });
   }
 
+  toggleNavbar() {
+    this.setState({
+      navbarState: !this.state.navbarState,
+    })
+    var navbar = document.querySelector(".navbar-admin");
+    if (navbar.classList.contains("hidden")) {
+      navbar.classList.remove("hidden");
+    }
+    else {
+      navbar.classList.add("hidden");
+    }
+  }
+
+  toggleNavbar2() {
+    var navbar = document.querySelector(".navbar-admin");
+    if (this.state.lastSize > document.body.clientHeight) {
+      navbar.setAttribute('hidden', 'true');
+      this.toggleNavbar();
+    }
+    else {
+      navbar.removeAttribute('hidden');
+      this.toggleNavbar();
+    }
+  }
+
   componentDidMount() {
     let found = false;
     if (getCookie("token")) {
       let token = getCookie("token");
-      fetch(URL + "/api/features/getuserbytoken/" + token, {
+      fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
         method: "Get",
         headers: {
           Accept: "application/json",
@@ -96,6 +123,8 @@ class Create extends Component {
             }
             window.location = "/registerPage";
           }
+        }).catch(err =>  {
+          /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
         });
     } else {
       window.location = "/registerPage";
@@ -103,6 +132,14 @@ class Create extends Component {
   }
 
   render() {
+    if (this.state.lastSize === 0) {
+      this.state.lastSize = document.body.clientHeight;
+      document.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener("resize", () => {
+          this.toggleNavbar2();
+        })
+      });
+    }
     return (
       <div className="create-container">
       {this.props.page===0?
@@ -122,8 +159,8 @@ class Create extends Component {
                     <button
                       className={
                         this.state.selectedButton === 1
-                          ? "unstyle-button-active btn-block button-fill"
-                          : "unstyle-button btn-block button-fill"
+                          ? "unstyle-create-active btn-block"
+                          : "unstyle-create btn-block"
                       }
                       onClick={this.groupsPage}
                     >
@@ -136,8 +173,8 @@ class Create extends Component {
                     <button
                       className={
                         this.state.selectedButton === 2
-                          ? "unstyle-button-active btn-block button-fill"
-                          : "unstyle-button btn-block button-fill"
+                          ? "unstyle-create-active btn-block button-fill"
+                          : "unstyle-create btn-block button-fill"
                       }
                       onClick={this.competetitionsPage}
                     >
@@ -153,8 +190,8 @@ class Create extends Component {
                     <button
                       className={
                         this.state.selectedButton === 3
-                          ? "unstyle-button-active btn-block button-fill"
-                          : "unstyle-button btn-block button-fill"
+                          ? "unstyle-create-active btn-block button-fill"
+                          : "unstyle-create btn-block button-fill"
                       }
                       onClick={this.membersPage}
                     >
@@ -201,8 +238,8 @@ class Create extends Component {
                         <button
                           className={
                             this.state.selectedButtonCreateViewGroups === 2
-                              ? "unstyle-button-active btn-block button-fill"
-                              : "unstyle-button btn-block button-fill"
+                              ? "unstyle-create-active btn-block button-fill"
+                              : "unstyle-create btn-block button-fill"
                           }
                           onClick={this.viewGroups}
                         >
@@ -225,8 +262,8 @@ class Create extends Component {
                         <button
                           className={
                             this.state.selectedButtonCreateViewCompetitions === 1
-                              ? "unstyle-button-active btn-block button-fill"
-                              : "unstyle-button btn-block button-fill"
+                              ? "unstyle-create-active btn-block button-fill"
+                              : "unstyle-create btn-block button-fill"
                           }
                           onClick={this.createCompetitions}
                         >
@@ -239,8 +276,8 @@ class Create extends Component {
                         <button
                           className={
                             this.state.selectedButtonCreateViewCompetitions === 2
-                              ? "unstyle-button-active btn-block button-fill"
-                              : "unstyle-button btn-block button-fill"
+                              ? "unstyle-create-active btn-block button-fill"
+                              : "unstyle-create btn-block button-fill"
                           }
                           onClick={this.viewCompetitions}
                         >

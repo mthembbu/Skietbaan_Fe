@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+	import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
 import { BASE_URL } from '../actions/types';
@@ -11,6 +11,7 @@ import blackBin from './GroupImages/blackBin.png';
 import whitePlus from './GroupImages/whitePlus.png';
 import { fetchEditUser, pageState } from '../actions/postActions';
 import back from './GroupImages/back.png';
+import { Row, Col } from "react-bootstrap";
 
 class EditGroup extends Component {
 	constructor(props) {
@@ -22,19 +23,35 @@ class EditGroup extends Component {
 			count: 0,
 			selected: 0,
 			check: 'select all',
-			binState: false
+			binState: false,
+			height: window.innerHeight,
+			width: window.innerWidth
 		};
 		this.toggleHighlight = this.toggleHighlight.bind(this);
 		this.onBack = this.onBack.bind(this);
 		this.onChange = this.onChange.bind(this);
 		this.delete = this.delete.bind(this);
 		this.selectAll = this.selectAll.bind(this);
+		this.updateDimensions = this.updateDimensions.bind(this);
+		this.getBodyHeight = this.getBodyHeight.bind(this);
 	}
 
 	async componentDidMount() {
+		this.updateDimensions();
 	 this.props.fetchEditUser(this.props.id);
 	}
-
+    componentWillMount() {
+		window.addEventListener('resize', this.updateDimensions);
+    }
+    getBodyHeight() {
+		return this.state.height - 240;
+	}
+	updateDimensions() {
+		this.setState({
+			height: window.innerHeight,
+			width: window.innerWidth
+		});
+	}
 	onChange(event) {
 		this.setState({ filterText: event.target.value });
 	}
@@ -60,7 +77,9 @@ class EditGroup extends Component {
 			body: JSON.stringify(request)
 		})
 			.then((res) => res.json())
-			.catch(function(data) {});
+			.catch(function(data) {}).catch(err =>  {
+				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+			  });
 		this.props.fetchEditUser(this.props.id);
 	}
 //select user
@@ -118,7 +137,8 @@ class EditGroup extends Component {
 	};
 	render() {
 		const postitems = (
-			<div className="check">
+			<div className="check-edit" style={{ height: this.getBodyHeight() + 'px' }}>
+			{this.props.editGroup===0?null:
 				<ul class="list-group">
 					{this.props.editGroup
 						.filter((post) => {
@@ -146,13 +166,15 @@ class EditGroup extends Component {
 								</label>
 							</li>
 						))}
-				</ul>
+				</ul>}
 			</div>
 		);
 		return (
-			<main className="The-Main">
+			<Row className="row justify-content-center">
+				   <Col sm={8} className="createpage-bootstrap-col-center-container">
+				   <div className="The-Main">
 				<div className="navBar-container">
-					<div className="the-nav-bar">
+					<div className="the-nav-bar-edit">
 						<div className="leftContainer">
 							<img className="back-image" onClick={this.onBack} src={back} alt="" />
 							<label className="center-labels">{this.props.name}</label>
@@ -206,7 +228,9 @@ class EditGroup extends Component {
 						</button>
 					</div>
 				)}
-			</main>
+			</div>
+                   </Col>
+            </Row>
 		);
 	}
 }

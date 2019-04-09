@@ -3,17 +3,20 @@ import { Form } from 'react-bootstrap';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../scss/createcomp.css';
-import { createcomp } from '../actions/competition.action';
-import { getCookie } from '../components/cookie.js';
-import history from "./history";
+import { createComp,compSelectedPages } from '../actions/competition.action';
+import history from './history';
+import { Row, Col } from 'react-bootstrap';
 class CreateComp extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			Name: '',
 			BestScoresNumber: '',
+			Hours: '',
 			Status: true,
-			isExist: false
+			MaximumScore: '',
+			isExist: false,
+		isCreated:false
 		};
 		//binding the onChange method to this commponents
 		this.onChange = this.onChange.bind(this);
@@ -22,7 +25,7 @@ class CreateComp extends Component {
 		this.validate = this.validate.bind(this);
 	}
 	onClick() {
-		history.push("/create")
+		history.push('/create');
 	}
 	/** A method that detects the change in the change in thw textfield */
 	onChange(e) {
@@ -44,81 +47,118 @@ class CreateComp extends Component {
 		e.preventDefault();
 		//calling the method to create a post => compData for the create competition
 		const compData = {
-			Name: this.state.Name /** Don't forget to change to lowercase to avoid case sensitivity conflicts*/,
+			Name: this.state.Name /**TODO: Don't forget to change to lowercase to avoid case sensitivity conflicts*/,
 			BestScoresNumber: this.state.BestScoresNumber,
-			Status: true
+			Hours: this.state.Hours,
+			Status: true,
+			MaximumScore: this.state.MaximumScore
 		};
-		this.props.createcomp(compData);
+		this.props.createComp(compData);
+		if (this.props.isExist == false) {
+			this.setState({isCreated: true})
+		}
 		this.setState({ isExist: this.props.isExist });
+		this.props.compSelectedPages(2);	
 	}
 	render() {
-		if(!getCookie("token")){
-            window.location = "/registerPage";
-        }
 		return (
-			<div>
-				
-				<div class="create-comp-container">
-					<Form onSubmit={this.onSubmit}>
-						<div className="containers-input">
-							<label className="comp-label-container">Competition Name</label>
+			<Row className="row justify-content-center">
+				<Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position : "inherit" }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
+					<div class="create-comp-container">
+						<Form onSubmit={this.onSubmit}>
+							<div className="containers-input">
+								<div className="comp-input-control">
+									<input
+										className="comp-input"
+										type="text"
+										name="Name"
+										id="titleInput"
+										required
+										autoComplete="off"
+										autoCorrect="off"
+										placeholder="Competition Name"
+										value={this.state.Name}
+										onChange={this.onChange}
+									/>
+								</div>
+								<div className={this.props.isExist ? 'error-comp-message' : 'hidden'}>
+									Competition Already Exists
+							</div>
+							</div>
 							<div className="comp-input-control">
 								<input
 									className="comp-input"
-									type="text"
-									name="Name"
-									id="titleInput"
+									type="number"
+									name="BestScoresNumber"
+									id="NumOfScores"
+									min="1"
+									max="12"
 									required
 									autoComplete="off"
 									autoCorrect="off"
-									value={this.state.Name}
+									placeholder="Number of Best Scores"
+									value={this.state.BestScoresNumber}
 									onChange={this.onChange}
 								/>
 							</div>
-							<div className = {this.props.isExist ? "error-comp-message": "hidden"}>Competition Already Exists</div>
-						</div>
-						<div className="comp-input-control">
-							<div>
-								<label className="comp-label-container" onKeyPress={this.validate}>
-									Number of Scores
-								</label>
+
+							<div className="comp-input-control">
+								<input
+									className="comp-input"
+									type="number"
+									name="MaximumScore"
+									id="MaxScore"
+									min="1"
+									max="300"
+									required
+									autoComplete="off"
+									autoCorrect="off"
+									placeholder="Maximum Score"
+									value={this.state.MaximumScore}
+									onChange={this.onChange}
+								/>
 							</div>
-							<input
-								className="comp-input"
-								type="number"
-								name="BestScoresNumber"
-								id="NumOfScores"
-								min="1"
-								max="12"
-								required
-								autoComplete="off"
-								autoCorrect="off"
-								value={this.state.BestScoresNumber}
-								onChange={this.onChange}
-							/>
-						</div> 
-						<div className="comp-submit-btn-container">
-							<button
-								variant="secondary"
-								type="submit"
-								id="submit-btn"
-								className={this.props.isExist && this.props.Name === null ? 
-									(' comp-success-submit-btn') : ('comp-submit-btn')}>
-								{this.props.isExist? 'Competition Created' : 'Create Competition'}
+
+							<div className="comp-input-control">
+								<input
+									className="comp-input"
+									type="number"
+									name="Hours"
+									id="NumOfHours"
+									min="1"
+									max="360"
+									required
+									autoComplete="off"
+									autoCorrect="off"
+									placeholder="Hours Per Competition"
+									value={this.state.Hours}
+									onChange={this.onChange}
+								/>
+							</div>
+							{this.state.isCreated? <label>Competition created</label>:null}
+							<div className="requirements-toggle" />
+							<div className="comp-submit-btn-container">
+								<button
+									variant="secondary"
+									type="submit"
+									id="submit-btn"
+									className="comp-success-submit-btn"
+								>
+									Create Competition
 							</button>
-						</div>
-					</Form>
-				</div>
-			</div>
-			
+							</div>
+						</Form>
+					</div>
+				</Col>
+			</Row>
 		);
 	}
 }
 CreateComp.propTypes = {
-	createcomp: propTypes.func.isRequired
+	createComp: propTypes.func.isRequired
 };
 const mapStatesToprops = (state) => ({
 	newComp: state.compOBJ.selectedComp,
 	isExist: state.compOBJ.isExist
 });
-export default connect(mapStatesToprops, { createcomp })(CreateComp);
+export default connect(mapStatesToprops, { createComp,compSelectedPages })(CreateComp);

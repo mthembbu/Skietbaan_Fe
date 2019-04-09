@@ -10,17 +10,36 @@
 }
 
 .table-search-members {
-  padding-top: 55px;
   background-color: #fdfdfd;
+   z-index: 1;
+    overflow-y: overlay;
 }
-
-@media only screen and (max-width: 575px) {
+.username-search{
+  position: relative;
+  padding-bottom: 14px;
+}
+.search{
+  padding: 14px;
+  text-align: center;
+}
+@media only screen and (min-width: 575px){
+  .username-search {
+    text-align: center;
+    width: 100%;
+    box-shadow: 2px 8px 17px -7px rgba(0,0,0,0.5);
+  }
   .table-search-members {
-    padding-top: 55px;
+    padding-top: 0px;
     background-color: #fdfdfd;
     overflow-y: scroll;
     height: 100%;
-    margin-bottom: 57px;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .table-search-members {
+    background-color: #fdfdfd;
+    overflow-y: scroll;
+    height: 100%;
   }
 
   .centre-view-member {
@@ -55,13 +74,6 @@
   text-align: center;
   color: #fdfdfd;
 }
-
-.username-search {
-  position: fixed;
-  text-align: center;
-  width: 100%;
-}
-
 .user-value {
   background-color: #f3f4f9;
   border-radius: 4px;
@@ -125,9 +137,11 @@
 }
 
 .search {
-  padding: 1px 30px 10px 25px;
+  padding-bottom: 14px;
   background-color: #ffffff;
-  height: 55px;
+  height: 60px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 .user-value {
@@ -184,6 +198,7 @@
 }
 
 .username-and-email {
+  font-family: helvetica;
   font-size: 16px;
   height: 55px;
 }
@@ -196,6 +211,10 @@
 
 .bad {
   color: #be0000;
+}
+
+.view-exp-bad {
+  color: #be0000;
   font-weight: bold;
 }
 
@@ -205,12 +224,14 @@
 }
 
 .expiry-time-column {
-  font-size: 15px;
+  float: right;
+  font-size: 12px;
   height: 55px;
-  padding-left: 10px;
+  padding-right: 23px;
 }
 
 .view-members-exp-expiry-time-column {
+  font-family: helvetica;
   font-size: 15px;
   height: 55px;
   padding-right: 23px;
@@ -244,7 +265,8 @@
 }
 
 .view-members-membership-details {
-  font-size: 13px;
+  font-family: helvetica;
+  font-size: 14px;
   margin-bottom: 20px;
 }
 
@@ -258,4 +280,42 @@
   text-align: center;
   width: 100%;
   padding-right: 25px;
+}
+
+.view-non-members-email {
+  font-size: 14px;
+}
+
+.view-non-members-arrow {
+  width: 10%;
+  float: right;
+  padding-right: 43px;
+  padding-top: 5px;
+}
+
+.view-non-members-image {
+  width: 24px;
+  height: 12px;
+}
+
+.view-non-members-users-email {
+  width: 70%;
+  float: left;
+}
+
+.view-members-icon {
+  float: left;
+  width: 17px;
+  height: 17px;
+  padding-top: 10px;
+  padding-left: 35px;
+}
+
+.view-members-username {
+  float: left;
+}
+
+.view-members-username-email {
+  width: 45%;
+  float: left;
 }

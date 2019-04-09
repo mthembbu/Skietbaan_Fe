@@ -10,6 +10,16 @@
     background-color: #F9F9F9;
 }
 
+.buttons-rectangle{
+    height: 38px;
+    width: 94%;
+    border: 1px solid #BE0000;
+    border-radius: 18px;
+    margin-top: 25px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .competition-buttons-container button{
     outline: none;
 }
@@ -22,14 +32,25 @@
     cursor: pointer;
 }
 
-.scale-medal-img img{
-    width: 31px;
-    height: 52px;  
+.profile-landing-vertical-align{
+    display: inline-flex;
+    vertical-align: sub; 
+    padding-top: 10px;
+ }
+
+.lighter-font{
+    font-weight: lighter
 }
 
-.scale-medal-img{
-    padding-top: 6px;
-    padding-left: 1px;
+ .scale-gun-type-img{
+    float: left;
+    margin-top: -0.5px;
+    margin-left: -1.4px;
+ }
+
+.scale-gun-type-img img{
+    width: 38px;
+    height: 37px;
 }
 
 .button-style{
@@ -41,23 +62,9 @@
     margin-bottom:  10px;
 }
 
-.button-style-active{
-    background-color: #BE0000;
-    color: white;
-}
-
-.button-style-inactive{
-    background-color: transparent;
-}
-
 .scale-arrowupicon-img img{
     width: 34px; 
     height: 17px;
-}
-
-.medal-img img{
-    width: 14px; 
-    height: 25px;
 }
 
 .competition-name-text {	
@@ -78,7 +85,56 @@
 .awards-container{
     width: 100%;
     padding-right: 8px;
-    padding-left: 8px;
+    padding-left: 21px;
+}
+
+.best-month-text{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.awards-container-background{
+    position: relative;
+    bottom: 26px;
+    background-color: #BE0000; 
+    border-radius: 18px;
+    box-shadow: 3px -4px 12px -9px rgba(0,0,0,0.5);
+    margin-left: 9px;
+    margin-right: 9px;
+}
+
+.margin-top-43px{
+    margin-top: 43px;
+}
+
+.margin-top-60px{
+    margin-top: 60px;
+}
+
+.unlocked-award-text{
+    color: #FFFF;
+}
+
+.locked-award-text{
+    color: #DE7F7F
+}
+
+.line{
+    box-sizing: border-box;
+    width: 86%;
+    border: 0.2px solid #DE7F7F;
+}
+
+.adjust-top-line{
+    position: relative;
+    top: 18px;
+    left: 16px;
+}
+
+.adjust-bottom-line{
+    position: relative;
+    top: -24px;
+    left: 16px;
 }
 
 .competition-button-text{
@@ -87,8 +143,12 @@
     font-weight: 300;
 }
 
-.pad-top-128px{
-    padding-top: 128px;
+.pad-award-container{
+    padding-top: 120px;
+}
+
+.pad-top-30px{
+    padding-top: 30px;
 }
 
 .align-accuracy-text{
@@ -109,10 +169,6 @@
     font-weight: unset;
 }
 
-.pad-bottom-16px{
-    padding-bottom: 16px;
-}
-
 .lay-horizontal{
     display: flex;
 }
@@ -123,27 +179,34 @@
 
 .circle{
     position: relative;
-    top: 5px;
+    top: 4px;
     left: 5px;
-    width: 65px;
-    height: 65px;
+    width: 56px;
+    height: 56px;
     border-radius: 100%;
-    font-size: 19px;
     font-weight: bold;
-    padding-top: 18px;
-    padding-left: 6px;
+    padding-top: 17px;
+    padding-left: 4px;
     background-color: #F3F4F9;
     color: #BE0000;
+}
+
+.font-size-18px{
+    font-size: 18px;
+}
+
+.font-size-15px{
+    font-size: 15px;
 }
 
 .circle-bigger{
     position: relative;
     top: 5px;
     left: 5px;
-    width: 90px;
-    height: 90px;
+    width: 80px;
+    height: 80px;
     border-radius: 100%;
-    padding-top: 7px;
+    padding-top: 8px;
     padding-left: 7px;
     background-color: #F3F4F9;
     box-shadow: 0 6px 10px -6px rgba(0,0,0,0.5);
@@ -164,14 +227,18 @@
 .active-border{
     position: relative;
     text-align: center;
-    width: 75px;
-    height: 75px;
+    width: 66px;
+    height: 64px;
     border-radius: 100%;
     background-color: #F3F4F9;
 }
 
-.push-bottom-41px{
-    margin-bottom: 41px
+.push-bottom-49px{
+    margin-bottom: 49px
+}
+
+.push-bottom-13px{
+    margin-bottom: 13px;
 }
 
 .grey-text{
@@ -183,14 +250,6 @@
     height: 22px;
 }
 
-.inherit-height{
-    height: inherit;
-}
-
-.inherit-width{
-    width: inherit;
-}
-
 .remove-right-padding{
     padding-right: 0px;
 }
@@ -199,14 +258,22 @@
     color: #6F839E;
 }
 
+.margin-top-59px{
+    margin-top: 59px;
+}
+
+
+
 .total-text{
     font-size: 24px;
     color: #BE0000;
     padding-top: 20px;
     padding-right: 7px;
+    line-height: 21px;
 }
 
-.width-98px{
+.total-text-alignement{
+    margin-left: -11px;
     width: 98px;
 }
 
@@ -214,7 +281,7 @@
     font-size: 19px;
     font-weight: bold;
     color: #BE0000;
-    padding-top: 24px;
+    padding-top: 20px;
 }
 
 .accuracy-label{
@@ -241,6 +308,24 @@
     margin-top: -1px;
 }
 
+.total-img-scale img{
+    width: 67px;
+    height: 20px;
+    padding-right: 6px;
+}
+
 .push-right-5px{
     margin-right: 5px;
+}
+
+.no-competition{
+    margin-top: 40px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 19px;
+    color: #BE0000;
+}
+
+.award-buttons-container{
+
 }

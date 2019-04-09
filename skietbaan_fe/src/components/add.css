@@ -24,7 +24,7 @@
 	height: 56px;
 	margin-left: auto;
 	margin-right: auto;
-	border: 1px solid #6f839e;
+	border: 1px solid #979797;
 	padding-left: 19px;
 	font-weight: bold;
 	background: #fdfdfd;
@@ -34,16 +34,16 @@
 	display: flex;
 	justify-content: flex-start;
 	color: red;
-	margin-left: 45px;
+	margin:auto;
 	font-size: 12.16px;
 	font: lighter;
 }
 
 .page {
 	background: #ffffffff;
-	height: -webkit-fill-available;
+
 	text-align: center;
-	position: fixed;
+
     width: 100%;
 }
 
@@ -75,13 +75,13 @@
 .add-container {
 	display: flex;
 	justify-content: center;
+	height: -webkit-fill-available;;
 }
 .add:focus {
 	outline: none;
 }
 .add {
 	bottom: 92px;
-	position: fixed;
 	width: 312px;
 	height: 42px;
 	border: 1px solid #BE0000;
@@ -89,6 +89,7 @@
 	background: #BE0000;
 	color: white;
 	font-size: 16px;
+	margin-top: 200px;
 }
 
 .group-label {
@@ -104,5 +105,4 @@
 }
 .add-group-main{
 	width: 100%;
-	position: fixed;
 }

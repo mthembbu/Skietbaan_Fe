@@ -7,7 +7,7 @@ import {
 import '../components/RegisterStyles.css';
 import { validateUsername, validateEmail } from './Validators.js';
 import { getCookie } from './cookie.js';
-import { URL } from '../actions/types.js';
+import { BASE_URL } from '../actions/types.js';
 import back from '../components/assets/Back.png';
 import skietbaan from '../components/assets/skietbaanLogo.png';
 import history from "./history";
@@ -60,42 +60,45 @@ class Login extends Component {
   handleChange({ target }) {
     this.setState({
       [target.name]: target.value,
-    });
-    this.disableButton();
-    let isValid = false;
-    let stateUpdate = {
-      invalidPassword: this.state.invalidPassword,
-      invalidUsername: this.state.invalidUsername,
-      usernameFound: true,
-      passwordFound: true
-    }
-    if (target.name === "passwordValue") {
-      if (target.value.length > 0)
-        stateUpdate.invalidPassword = false;
-      else {
-        stateUpdate.invalidPassword = true;
-      }
-    }
-    if (target.name === "usernameValue") {
-      if (target.value.length > 0)
-        stateUpdate.invalidUsername = false;
-      else {
-        stateUpdate.invalidUsername = true;
-      }
-    }
-
-    if (this.state.usernameValue
-      && this.state.passwordValue
-      && !stateUpdate.invalidUsername
-      && !stateUpdate.invalidPassword) {
-      isValid = true;
-    }
-    this.setState({
-      ...stateUpdate,
-      validForm: isValid
-    }, () => {
+    }, () => { 
       this.disableButton();
-    });
+      let isValid = false;
+      let stateUpdate = {
+        invalidPassword: this.state.invalidPassword,
+        invalidUsername: this.state.invalidUsername,
+        usernameFound: true,
+        passwordFound: true
+      }
+      if (target.name === "passwordValue") {
+        if (target.value.length > 0)
+          stateUpdate.invalidPassword = false;
+        else {
+          stateUpdate.invalidPassword = true;
+        }
+      }
+      if (target.name === "usernameValue") {
+        if (target.value.length > 0)
+          stateUpdate.invalidUsername = false;
+        else {
+          stateUpdate.invalidUsername = true;
+        }
+      }
+  
+      if (this.state.usernameValue
+        && this.state.passwordValue
+        && !stateUpdate.invalidUsername
+        && !stateUpdate.invalidPassword) {
+        isValid = true;
+      }
+      this.setState({
+        ...stateUpdate,
+        validForm: isValid
+      }, () => {
+        this.disableButton();
+      });
+
+    } );
+
   };
 
   validate() {
@@ -135,7 +138,7 @@ class Login extends Component {
           "Password": hash,
         }
       }
-      fetch(URL + "/api/features/login", {
+      fetch(BASE_URL + "/api/features/login", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -163,7 +166,8 @@ class Login extends Component {
             })
           }
         }
-      }).catch(function (data) {
+      }).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
     }
   }
@@ -181,7 +185,20 @@ class Login extends Component {
   render() {
     document.addEventListener('DOMContentLoaded', () => {
       this.toggleNavbar();
-
+      let input = document.getElementById("passwordValue");
+      input.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          document.getElementById("roundButton").click();
+        }
+      });
+      let input2 = document.getElementById("usernameValue");
+      input2.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          document.getElementById("roundButton").click();
+        }
+      });
     }, false);
     if (getCookie("token")) {
       window.location = "/home";
@@ -203,11 +220,10 @@ class Login extends Component {
               onClick={() => this.goToRegister()}></img>
           </div>
         </div>
-        <div className="centre-login">
-          <Form className="form" autoComplete="off">
+        <div className="centre-login-register">
+          <form className="form" autoComplete="off">
 
             <div className="spacing-login">
-              <FormGroup>
                 <input
                   type="text"
                   name="usernameValue"
@@ -218,10 +234,8 @@ class Login extends Component {
                   className="input-user"
                   placeholder="Username or Email"
                 />
-              </FormGroup>
             </div>
             <div className="spacing-login">
-              <FormGroup>
                 <div className="input-label centre-div">
                   <input
                     type="text"
@@ -230,14 +244,14 @@ class Login extends Component {
                     autoComplete="off"
                     value={this.state.passwordValue}
                     onChange={this.handleChange}
-                    className={this.state.toggle 
-                      ? "input-password-show" 
+                    className={this.state.toggle
+                      ? "input-password-show"
                       : "input-password"}
                     placeholder="Password"
                   />
-                  <div className={this.state.passwordValue !== "" 
-                  ? "password-view-icon" 
-                  : "password-icon"}
+                  <div className={this.state.passwordValue !== ""
+                    ? "password-view-icon"
+                    : "password-icon"}
                     onClick={this.togglePassword} name="eye">
                   </div>
                 </div>
@@ -248,16 +262,15 @@ class Login extends Component {
                     && this.usernameValue !== ""
                     ? "hidden" : "error-message"}>Invalid Username or Password</div>
                 </div>
-              </FormGroup>
             </div>
             <div className="login-href">
               <a className="forgot-password-link" href="/forgotPassword" >FORGOT PASSWORD?</a>
             </div>
             <div className="button-container">
-              <Button onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
-                : "buttons-invalid round-button"} >LOGIN</Button>
-            </div>  
-          </Form>
+              <button type="button" onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
+                : "buttons-invalid round-button"}>LOGIN</button>
+            </div>
+          </form>
         </div >
       </div>
     );
