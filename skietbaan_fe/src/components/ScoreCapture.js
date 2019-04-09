@@ -38,7 +38,9 @@ export default class search extends Component {
       eventsAdded: false,
       lastSize: 0,
       somethingClicked: false,
-      maximumScore: 20
+      maximumScore: 20,
+      height: window.innerHeight,
+      width: window.innerWidth
 
     }
 
@@ -53,8 +55,21 @@ export default class search extends Component {
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.toggleNavbar2 = this.toggleNavbar2.bind(this);
     this.toggleIcon = this.toggleIcon.bind(this);
+    this.updateDimensions = this.updateDimensions.bind(this);
+    this.getBodyHeight = this.getBodyHeight.bind(this);
   }
-
+  componentWillMount() {
+    window.addEventListener("resize", this.updateDimensions);
+  }
+  getBodyHeight() {
+    return this.state.height - 370;
+  }
+  updateDimensions() {
+    this.setState({
+      height: window.innerHeight,
+      width: window.innerWidth
+    });
+  }
   handleScore({ target }) {
     this.validate();
     this.setState({
@@ -96,8 +111,8 @@ export default class search extends Component {
       maximumScore: maximumScore
     });
   }
-
   componentDidMount() {
+    this.updateDimensions();
     fetch(BASE_URL + "/api/Competition", {
       method: 'GET',
       headers: {
@@ -455,11 +470,6 @@ export default class search extends Component {
     }
     return (
       <div className="position-relative" autoComplete="off">
-        {/* <Row className="row justify-content-center">
-				   <Col sm={8} className="createpage-bootstrap-col-center-container">
-           
-           </Col>
-        </Row> */}
         <Row className="row justify-content-center">
           <Col sm={8} className="createpage-bootstrap-col-center-container">
             <div className={stateOne || this.state.scoreSaved
@@ -494,7 +504,7 @@ export default class search extends Component {
             <div className="centre-labels">
               <label className="label-competition">Select Competition</label>
             </div>
-            <div className="add-score-competition-container">
+            <div className="add-score-competition-container" style={{ maxHeight: this.getBodyHeight() + "px" }}>
               {competitionItem}
 
               <div className={this.state.somethingClicked === false

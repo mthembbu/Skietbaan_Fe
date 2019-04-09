@@ -23,7 +23,7 @@ export class createPages extends Component {
 			selectedButtonCreateViewGroups: 1,
 			selectedButtonCreateViewCompetitions: 1,
 			selectedValue: 'A',
-      user: []
+            user: []
 		};
 
 		this.groupsPage = this.groupsPage.bind(this);
@@ -59,9 +59,9 @@ export class createPages extends Component {
 	}
 	noShadowOnMember(){
 		if(this.state.selectedButton === 3){
-			return "";
+			return "0px 0px 0px 0px grey";
 		}else{
-			return "0px 15px 15px -17px grey";
+			return "0px 21px 18px -26px grey";
 		}
 	}
   
@@ -170,10 +170,10 @@ export class createPages extends Component {
 								</Col>
 							</Row>
 							<Row className="row justify-content-center">
-								<Col sm={8} className="createpage-bootstrap-col-center-container" style={{ boxShadow : this.noShadowOnMember() }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}                 
-								<div className="temp-container">
+								<Col sm={8} className="createpage-bootstrap-col-center-container" >                 
+								<div className="temp-container" style={{ boxShadow : this.noShadowOnMember() }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
 									<div className={this.state.selectedButton === 3 ? "create-switch-bottom-hide"
-                                                                  : "create-switch-bottom"} >  
+                                                                  : "create-switch-bottom"} >
 										<div
 											className={
 												this.state.selectedButtonCreateViewGroups === 1 ? (

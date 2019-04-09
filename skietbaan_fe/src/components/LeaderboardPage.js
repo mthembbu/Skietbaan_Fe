@@ -46,6 +46,7 @@ class LeaderboardPage extends Component {
         this.getFilterTableHeight = this.getFilterTableHeight.bind(this);
         this.getClickableSpaceSize = this.getClickableSpaceSize.bind(this);
         this.roundOfScores = this.roundOfScores.bind(this);
+        this.disableFilterButton = this.disableFilterButton.bind(this);
     }
     componentDidMount() {
         // Additionally I could have just used an arrow function for the binding `this` to the component...
@@ -161,6 +162,13 @@ class LeaderboardPage extends Component {
             selectedScoreType: value
         });
     }
+    disableFilterButton(){
+        if(this.props.competitions.length === 0){
+            return "not-allowed";
+        }else{
+            return "pointer";
+        }
+      }
     displayMember = (isMember) => {
         if (isMember) {
             return <div className="member-container">
@@ -216,13 +224,13 @@ class LeaderboardPage extends Component {
         }
     }
     onMouseClickFilter() {
-        if (this.state.collapseFilter) {
-            this.setState({
-                collapseFilter: false
-            });
-        } else {
+        if (!this.state.collapseFilter && this.props.competitions.length !== 0) {
             this.setState({
                 collapseFilter: true
+            });
+        } else{
+            this.setState({
+                collapseFilter: false
             });
         }
     }
@@ -405,8 +413,8 @@ class LeaderboardPage extends Component {
                                             </div>
                                         </td>
                                         <td className="filter-icon-col">
-                                            <div className="filter-icon">
-                                                <MDBBtn tag="a" size="lg" floating gradient="purple"
+                                            <div className="filter-icon" >
+                                                <MDBBtn tag="a" size="lg" floating gradient="purple" style={{ cursor : this.disableFilterButton()}}
                                                     onClick={this.onMouseClickFilter} >
                                                     <img src={require('../resources/filter.png')} />
                                                 </MDBBtn>
@@ -520,7 +528,7 @@ class LeaderboardPage extends Component {
                 {/* Current User Section*/}
                 <Motion defaultStyle={{ x: -200, opacity: 0 }}
                     style={{
-                        x: spring(this.state.collapseFilter ? -400 : 0),
+                        x: spring(this.state.collapseFilter ? -500 : 0),
                         opacity: spring(this.state.collapseFilter ? 0.5 : 1, { stiffness: 6, damping: 6, precision: 0.1 })
                     }}>
                     {style => (<div className="userWrapper" style={{

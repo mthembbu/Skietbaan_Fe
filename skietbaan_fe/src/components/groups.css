@@ -542,7 +542,6 @@
 		width: 100%;
 		background-color: white;
 		z-index: 1;
-		position: absolute;
 	}
 }
 
@@ -619,8 +618,15 @@
 	.the-main{
 		margin-bottom: 56px;
 	}
+	.check-edit{
+		margin-bottom: 56px;
+	}
 }
 .check{
+	overflow-y: overlay;
+    z-index: 1;
+}
+.check-edit{
 	overflow-y: overlay;
     z-index: 1;
 }
