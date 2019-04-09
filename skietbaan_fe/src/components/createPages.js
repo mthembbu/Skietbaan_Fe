@@ -14,6 +14,7 @@ import ViewMembersExpiring from '../components/ViewMembersExpiring';
 import ViewComp from '../components/ViewComp';
 import GroupComponent from '../components/GroupComponent';
 import CompComponent from '../components/CompComponent';
+import {compSelectedPages} from '../actions/competition.action';
 export class createPages extends Component {
 	constructor(props) {
 		super(props);
@@ -42,11 +43,13 @@ export class createPages extends Component {
 			case 1:
 				if (this.state.selectedButtonCreateViewGroups === 1) {
 				} else if (this.state.selectedButtonCreateViewGroups === 1) {
+				
 				}
 				break;
 			case 2:
 				if (this.state.selectedButtonCreateViewGroups === 1) {
 				} else if (this.state.selectedButtonCreateViewGroups === 1) {
+					
 				}
 				break;
 			case 3:
@@ -78,10 +81,12 @@ export class createPages extends Component {
 	}
 
 	createGroups() {
+		this.props.compSelectedPages(1);
 		this.setState({ selectedButtonCreateViewGroups: 1 });
 	}
 
 	viewGroups() {
+		this.props.compSelectedPages(2);
 		this.setState({ selectedButtonCreateViewGroups: 2 });
 	}
 
@@ -90,7 +95,9 @@ export class createPages extends Component {
 	}
 
 	viewCompetitions() {
+		this.props.compSelectedPages(2);
 		this.setState({ selectedButtonCreateViewCompetitions: 2 });
+		
 	}
 	handleChange = (event) => {
 		this.setState({ selectedValue: event });
@@ -118,6 +125,7 @@ export class createPages extends Component {
 		} else {
 			window.location = '/registerPage';
 		}
+	
 	}
 
 	render() {
@@ -188,7 +196,7 @@ export class createPages extends Component {
 										</div>
 										<div
 											className={
-												this.state.selectedButtonCreateViewGroups === 2 ? (
+												(this.state.selectedButtonCreateViewGroups === 2 || this.props.compSelectedPages===2)? (
 													'switch-active-right'
 												) : (
 													'switch-inactive'
@@ -258,12 +266,14 @@ export class createPages extends Component {
 					) : this.state.selectedButton === 1 && this.state.selectedButtonCreateViewGroups === 2 ? (
 						<GroupComponent />
 					) : null}
-		
-					{this.state.selectedButton === 2 && this.state.selectedButtonCreateViewGroups === 1 ? (
+						  
+					{/** *this.state.selectedButton === 2 && this.state.selectedButtonCreateViewGroups === 1 ? (
 						<CreateComp />
 					) : this.state.selectedButton === 2 && this.state.selectedButtonCreateViewGroups === 2 ? (
 						<ViewComp />
-					) : null}
+					) : null*/}
+
+					{this.state.selectedButton===2?<CompComponent />:null}
 					{this.state.selectedButton === 3 && this.state.selectedValue === 'A' ? (
 						<ViewNonMembers />
 					) : this.state.selectedButton === 3 && this.state.selectedValue === 'B' ? (
@@ -283,4 +293,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(createPages);
+export default connect(mapStateToProps, {compSelectedPages})(createPages);
