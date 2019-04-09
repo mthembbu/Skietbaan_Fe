@@ -75,7 +75,7 @@ class ForgotPassword extends Component {
               <img
                 src={back}
                 alt="back button"
-                className="back-btn"
+                className="back-btn-forgot-password"
                 onClick={() => this.goToLogin()}
               />
             </div>
