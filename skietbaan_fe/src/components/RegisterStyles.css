@@ -16,7 +16,7 @@
   z-index: 50;
   position: relative;
   background-repeat: no-repeat;
-  height: 90vh;
+  height: 100%;
   background-size: cover;
   background-position: center;
 }
