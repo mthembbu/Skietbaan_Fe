@@ -112,69 +112,66 @@ class ViewGroups extends Component {
   render() {
     const postitems = (
       <div className="the-main">
-        {this.props.groupsList.length === 0 ?
-          <div className="error-message">
-            <label className="error-message-box">No Groups have been created yet.</label></div>
-          :
-          <table className="table-member">
-            <tbody>
-              {this.props.groupsList
-                .filter(post => {
-                  return (
-                    !this.state.filterText ||
-                    post.username
-                      .toLowerCase()
-                      .startsWith(this.state.filterText.toLowerCase()) ||
-                    post.email
-                      .toLowerCase()
-                      .startsWith(this.state.filterText.toLowerCase()) ||
-                    post.memberID.startsWith(this.state.filterText)
-                  );
-                })
-                .map((post, index) => (
-                  <tr className="view-group" key={post.id}>
-                    <td
-                      className={
-                        post.isActive === true
-                          ? "first-row"
-                          : "first-row-active"
-                      }
-                      onClick={() => this.editGroup(post)}
-                    >
-                      {post.name}
-                    </td>
+      {this.props.groupsList.length===0?null:
+        <table className="table-member">
+          <tbody>
+            {this.props.groupsList
+              .filter(post => {
+                return (
+                  !this.state.filterText ||
+                  post.username
+                    .toLowerCase()
+                    .startsWith(this.state.filterText.toLowerCase()) ||
+                  post.email
+                    .toLowerCase()
+                    .startsWith(this.state.filterText.toLowerCase()) ||
+                  post.memberID.startsWith(this.state.filterText)
+                );
+              })
+              .map((post, index) => (
+                <tr className="view-group" key={post.id}>
+                  <td
+                    className={
+                      post.isActive === true
+                        ? "first-row"
+                        : "first-row-active"
+                    }
+                    onClick={() => this.editGroup(post)}
+                  >
+                    {post.name}
+                  </td>
 
-                    <td className="group-container">
-                      {post.isActive === true ? (
-                        <div>
-                          <img src={group} className="groupIcon" alt="" />
-                          <label className="numberOfUser">
-                            {this.props.groupDict[post.id]}
-                          </label>
-                        </div>
-                      ) : null}
-                    </td>
-                    <td>
-                      <div className="group-view">
-                        <Switch
-                          color={"primary"}
-                          className="Active"
-                          focus={true}
-                          checked={post.isActive}
-                          onClick={() => this.delete(post.id, index)}
-                        />
+                  <td className="group-container">
+                    {post.isActive === true ? (
+                      <div>
+                        <img src={group} className="groupIcon" alt="" />
+                        <label className="numberOfUser">
+                          {this.props.groupDict[post.id]}
+                        </label>
                       </div>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>}
+                    ) : null}
+                  </td>
+                  <td>
+                    <div className="group-view">
+                      <Switch
+                        color={"primary"}
+                        className="Active"
+                        focus={true}
+                        checked={post.isActive}
+                        onClick={() => this.delete(post.id, index)}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>}
       </div>
     );
 
     return (
       <Row className="row justify-content-center">
-        <Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position: "inherit" }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
+        <Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position : "inherit"}}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
           <div className="The-Main" style={{ height: this.getBodyHeight() + "px" }}>
             {postitems}
           </div>

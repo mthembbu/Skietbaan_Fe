@@ -48,6 +48,7 @@
 	justify-content: flex-start;
 	white-space: nowrap;
 	overflow: hidden !important;
+	margin-left: 10px;
 }
 
 .center-labels {
@@ -72,6 +73,7 @@
 
 .the-Text {
 	margin-left: 19px;
+	margin-top: 17px;
 	width: 242px;
 	float: left;
 	height: 56px;
@@ -197,7 +199,6 @@
 	font-weight: bold;
 	font-size: 16px;
 	color: #be0000;
-	background: #F5F5F5;
 }
 
 .email {
@@ -212,7 +213,6 @@
 	font-weight: lighter;
 	font-size: 16px;
 	color: #be0000;
-	background: #F5F5F5;
 }
 
 .blabe {
@@ -220,7 +220,7 @@
 	width: 80%;
 	border-radius: 8px;
 	height: 48px;
-
+	padding-left: 10px;
 }
 .blabe2 {
 	margin-left: 19px;
@@ -228,6 +228,7 @@
 	color: #7b7b7b;
 	border-radius: 8px;
 	height: 48px;
+	padding-left: 10px;
 }
 
 .the-boxes {
@@ -449,11 +450,7 @@
 }
 .navBar-container {
 	height: 155px;
-
-}
-.navBar-containerss {
-	height: 124px;
-	margin-top: 56px;
+	box-shadow: 0px 10px 16px -6px rgba(0, 0, 0, 0.33);
 }
 .groupIcon {
 	padding-right: 5px;
@@ -480,6 +477,7 @@
 
 .switchAll {
 	float: right;
+	margin-top: 20px;
 	margin-left: 12px;
 	font-size: 16px;
 	color: #666666;
@@ -501,8 +499,8 @@
 		margin-bottom: 56px;
 	}
 	.the-main{
-		width: 80%;
-		margin-left: 10%;
+		width: 62%;
+		margin-left: 19%;
 		margin-top: 54px;
 	}
 	.BNavBar {
@@ -539,7 +537,6 @@
 	}
 	.The-Main{
 		margin-top: 0px;
-		background: #F5F5F5;
 	}
 	.temp-container{
 		position: absolute;
@@ -639,33 +636,4 @@
 }
 .The-Main{
 	overflow-y: overlay;
-}
-.error-message{
-	border: 1px solid #BE0000;
-	width: 312px;
-	height: 77px;
-	margin-top: 149px;
-}
-.error-message-box{
-	color:#BE0000;
-	font-size: 16px;
-	margin: auto;
-
-}
-td{
-	width: 33.33333333333%;
-}
-
-.group-container{
-	text-align: center;
-}
-.first-row{
-	padding-left: 2%;
-}
-.invalid-user-msg{
-	font-size: 16px;
-	color: #BE0000;
-	font-weight: lighter;
-	margin-left: 14%;
-	margin-top: 7px;
 }

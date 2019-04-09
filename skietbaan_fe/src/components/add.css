@@ -10,7 +10,7 @@
 	width: 100%;
 	display: grid;
 	text-align: -webkit-center;
-	margin-top: 65px;
+	margin-top: 10%;
 }
 
 .texts:focus {
@@ -27,6 +27,7 @@
 	border: 1px solid #979797;
 	padding-left: 19px;
 	font-weight: bold;
+	background: #fdfdfd;
 	color: #000000;
 }
 .errorMsg {
