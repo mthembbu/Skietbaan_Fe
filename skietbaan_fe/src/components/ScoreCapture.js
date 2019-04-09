@@ -151,7 +151,7 @@ export default class search extends Component {
     let Valid = false;
     if (parseFloat(this.state.score) > this.state.maximumScore
       || parseFloat(this.state.score) < 0
-      || this.state.score === "") {
+      || this.state.score === "" || this.state.score === null) {
       this.setState({
         validForm: false,
         validScore: false
