@@ -299,7 +299,7 @@
 }
 
 .submit-button-elements.second{
-    width: 33%;
+    width: 50%;
     text-align: -webkit-center;
 }
 
@@ -484,6 +484,9 @@ input[type=number] {
     .hidden-small{
         display:none;
     }
+    .score-capture-header2{
+        position: fixed !important;
+    }
 }
 
 .score-capture-header2{
@@ -493,7 +496,7 @@ input[type=number] {
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
     box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);
-    position: fixed;
+    position: absolute;
     top: 0px;
     z-index: 100;
 }
