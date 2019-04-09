@@ -46,7 +46,9 @@ class notification extends Component {
       adminToggle: false,
       stateCheck: false,
       speakerClicked: null,
-      announceString: ""
+      announceString: "",
+      height: window.innerHeight,
+      width: window.innerWidth
     };
     this.onDelete = this.onDelete.bind(this);
     this.changeIcon = this.changeIcon.bind(this);
@@ -54,8 +56,9 @@ class notification extends Component {
     this.selectAll = this.selectAll.bind(this);
     this.onChange = this.onChange.bind(this);
     this.disableButton = this.disableButton.bind(this);
+    this.updateDimensions = this.updateDimensions.bind(this);
+    this.getBodyHeight = this.getBodyHeight.bind(this);
   }
-
   onDelete = async () => {
     const deletingArray = [];
     for (var i = 0; i < this.props.notificationsArray.length; i++) {
@@ -144,7 +147,18 @@ class notification extends Component {
       secondToggle: false
     });
   }
-
+  componentWillMount() {
+    window.addEventListener("resize", this.updateDimensions);
+  }
+  getBodyHeight() {
+    return this.state.height - 56;
+  }
+  updateDimensions() {
+    this.setState({
+      height: window.innerHeight,
+      width: window.innerWidth
+    });
+  }
   componentDidMount() {
     if (getCookie("token")) {
       this.props.getNotifications(this.state.token);
@@ -453,7 +467,9 @@ class notification extends Component {
                   <div>{writeAnnouncement}</div>
                 </Collapse>
               ) : (
-                <div className="format-content">{postItems}</div>
+                <div className="format-content" style={{ maxHeight: this.getBodyHeight() + "px" }}>
+                   {postItems}
+                </div>
               )}
               <div>{deleteModal}</div>
             </div>
