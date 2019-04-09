@@ -233,7 +233,7 @@ class Register extends Component {
                   />
                   <div className="error-message-container">
                     <div className={this.state.usernameTaken 
-                      ? "error-message" 
+                      ? "error-message-login" 
                       : "hidden"} > Username already exists</div>
                     </div>
             </div>
@@ -250,7 +250,7 @@ class Register extends Component {
                   />
                   <div className="error-message-container">
                 <div className={this.state.emailTaken 
-                  ? "error-message" 
+                  ? "error-message-login" 
                   : "hidden"} > Email address already in use</div>
                 </div>
             </div>

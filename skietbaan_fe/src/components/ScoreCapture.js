@@ -190,20 +190,21 @@ export default class search extends Component {
     var navbar = document.querySelector(".navbar-admin");
     if (navbar.classList.contains("hidden")) {
       navbar.classList.remove("hidden");
+      navbar.removeAttribute('hidden');
     }
     else {
       navbar.classList.add("hidden");
+      navbar.setAttribute('hidden', 'true');
     }
   }
 
   toggleNavbar2() {
-    var navbar = document.querySelector(".navbar-admin");
+    var body = document.querySelector("body");
     if (this.state.lastSize > document.body.clientHeight) {
-      navbar.setAttribute('hidden', 'true');
       this.toggleNavbar();
-    }
+    } 
     else {
-      navbar.removeAttribute('hidden');
+      
       this.toggleNavbar();
     }
   }
@@ -451,13 +452,13 @@ export default class search extends Component {
                     ? "competition-item active"
                     : "competition-item fade-out")}>
               <li className="li-container"
-                onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name, this.state.competitionsList[i].maximumScore)}>
+                onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name, 
+                this.state.competitionsList[i].maximumScore)}>
                 {this.state.competitionsList[i].name.toUpperCase()}
               </li>
               <div onClick={() => this.cancelClicked()} className="competiton-cancel-button"></div>
             </div>
           </div>);
-
       }
     }
     else {
@@ -481,8 +482,7 @@ export default class search extends Component {
             </div>
           </Col>
         </Row>
-        <Row className="row justify-content-center">
-          <Col sm={8} className="createpage-bootstrap-col-center-container">
+       
           <div className={this.state.scoreSaved
           ? "sucess-container"
           : (stateOne
@@ -504,7 +504,7 @@ export default class search extends Component {
             <div className="centre-labels">
               <label className="label-competition">Select Competition</label>
             </div>
-            <div className="add-score-competition-container" style={{ maxHeight: this.getBodyHeight() + "px" }}>
+            <div className="add-score-competition-container">
               {competitionItem}
 
               <div className={this.state.somethingClicked === false
@@ -646,9 +646,6 @@ export default class search extends Component {
             </div>
           </div>
         </div>
-          </Col>
-        </Row>
-        
       </div>
     )
   }

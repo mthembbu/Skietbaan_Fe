@@ -260,7 +260,7 @@ class Login extends Component {
                     && this.passwordValue !== ""
                     && this.state.usernameFound
                     && this.usernameValue !== ""
-                    ? "hidden" : "error-message"}>Invalid Username or Password</div>
+                    ? "hidden" : "error-message-login"}>Invalid Username or Password</div>
                 </div>
             </div>
             <div className="login-href">
