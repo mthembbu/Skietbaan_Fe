@@ -14,6 +14,7 @@ import ViewMembersExpiring from '../components/ViewMembersExpiring';
 import ViewComp from '../components/ViewComp';
 import GroupComponent from '../components/GroupComponent';
 import CompComponent from '../components/CompComponent';
+import {compSelectedPages} from '../actions/competition.action';
 export class createPages extends Component {
 	constructor(props) {
 		super(props);
@@ -23,7 +24,7 @@ export class createPages extends Component {
 			selectedButtonCreateViewGroups: 1,
 			selectedButtonCreateViewCompetitions: 1,
 			selectedValue: 'A',
-      user: []
+            user: []
 		};
 
 		this.groupsPage = this.groupsPage.bind(this);
@@ -42,11 +43,13 @@ export class createPages extends Component {
 			case 1:
 				if (this.state.selectedButtonCreateViewGroups === 1) {
 				} else if (this.state.selectedButtonCreateViewGroups === 1) {
+				
 				}
 				break;
 			case 2:
 				if (this.state.selectedButtonCreateViewGroups === 1) {
 				} else if (this.state.selectedButtonCreateViewGroups === 1) {
+					
 				}
 				break;
 			case 3:
@@ -59,9 +62,9 @@ export class createPages extends Component {
 	}
 	noShadowOnMember(){
 		if(this.state.selectedButton === 3){
-			return "";
+			return "0px 0px 0px 0px grey";
 		}else{
-			return "0px 15px 15px -17px grey";
+			return "0px 21px 18px -26px grey";
 		}
 	}
   
@@ -78,10 +81,12 @@ export class createPages extends Component {
 	}
 
 	createGroups() {
+		this.props.compSelectedPages(1);
 		this.setState({ selectedButtonCreateViewGroups: 1 });
 	}
 
 	viewGroups() {
+		this.props.compSelectedPages(2);
 		this.setState({ selectedButtonCreateViewGroups: 2 });
 	}
 
@@ -90,7 +95,9 @@ export class createPages extends Component {
 	}
 
 	viewCompetitions() {
+		this.props.compSelectedPages(2);
 		this.setState({ selectedButtonCreateViewCompetitions: 2 });
+		
 	}
 	handleChange = (event) => {
 		this.setState({ selectedValue: event });
@@ -118,6 +125,7 @@ export class createPages extends Component {
 		} else {
 			window.location = '/registerPage';
 		}
+	
 	}
 
 	render() {
@@ -170,10 +178,10 @@ export class createPages extends Component {
 								</Col>
 							</Row>
 							<Row className="row justify-content-center">
-								<Col sm={8} className="createpage-bootstrap-col-center-container" style={{ boxShadow : this.noShadowOnMember() }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}                 
-								<div className="temp-container">
+								<Col sm={8} className="createpage-bootstrap-col-center-container" >                 
+								<div className="temp-container" style={{ boxShadow : this.noShadowOnMember() }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
 									<div className={this.state.selectedButton === 3 ? "create-switch-bottom-hide"
-                                                                  : "create-switch-bottom"} >  
+                                                                  : "create-switch-bottom"} >
 										<div
 											className={
 												this.state.selectedButtonCreateViewGroups === 1 ? (
@@ -188,7 +196,7 @@ export class createPages extends Component {
 										</div>
 										<div
 											className={
-												this.state.selectedButtonCreateViewGroups === 2 ? (
+												(this.state.selectedButtonCreateViewGroups === 2 || this.props.compSelectedPages===2)? (
 													'switch-active-right'
 												) : (
 													'switch-inactive'
@@ -258,12 +266,7 @@ export class createPages extends Component {
 					) : this.state.selectedButton === 1 && this.state.selectedButtonCreateViewGroups === 2 ? (
 						<GroupComponent />
 					) : null}
-		
-					{this.state.selectedButton === 2 && this.state.selectedButtonCreateViewGroups === 1 ? (
-						<CreateComp />
-					) : this.state.selectedButton === 2 && this.state.selectedButtonCreateViewGroups === 2 ? (
-						<ViewComp />
-					) : null}
+					{this.state.selectedButton===2?<CompComponent />:null}
 					{this.state.selectedButton === 3 && this.state.selectedValue === 'A' ? (
 						<ViewNonMembers />
 					) : this.state.selectedButton === 3 && this.state.selectedValue === 'B' ? (
@@ -283,4 +286,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(createPages);
+export default connect(mapStateToProps, {compSelectedPages})(createPages);
