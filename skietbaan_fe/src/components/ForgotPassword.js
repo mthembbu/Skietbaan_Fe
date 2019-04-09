@@ -70,12 +70,12 @@ class ForgotPassword extends Component {
             </div>
             <div className="header-container">
               <div className="centre-label">
-                <label className="header-label">FORGOT PASSWORD</label>
+                <label className="header-label-forgot-password">FORGOT PASSWORD</label>
               </div>
               <img
                 src={back}
                 alt="back button"
-                className="back-btn"
+                className="back-btn-forgot-password"
                 onClick={() => this.goToLogin()}
               />
             </div>

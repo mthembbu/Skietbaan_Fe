@@ -27,6 +27,8 @@ class Create extends Component {
     this.viewGroups = this.viewGroups.bind(this);
     this.createCompetitions = this.createCompetitions.bind(this);
     this.viewCompetitions = this.viewCompetitions.bind(this);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.toggleNavbar2 = this.toggleNavbar2.bind(this);
   }
 
   groupsPage() {
@@ -55,6 +57,31 @@ class Create extends Component {
 
   viewCompetitions() {
     this.setState({ selectedButtonCreateViewCompetitions: 2 });
+  }
+
+  toggleNavbar() {
+    this.setState({
+      navbarState: !this.state.navbarState,
+    })
+    var navbar = document.querySelector(".navbar-admin");
+    if (navbar.classList.contains("hidden")) {
+      navbar.classList.remove("hidden");
+    }
+    else {
+      navbar.classList.add("hidden");
+    }
+  }
+
+  toggleNavbar2() {
+    var navbar = document.querySelector(".navbar-admin");
+    if (this.state.lastSize > document.body.clientHeight) {
+      navbar.setAttribute('hidden', 'true');
+      this.toggleNavbar();
+    }
+    else {
+      navbar.removeAttribute('hidden');
+      this.toggleNavbar();
+    }
   }
 
   componentDidMount() {
@@ -105,6 +132,14 @@ class Create extends Component {
   }
 
   render() {
+    if (this.state.lastSize === 0) {
+      this.state.lastSize = document.body.clientHeight;
+      document.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener("resize", () => {
+          this.toggleNavbar2();
+        })
+      });
+    }
     return (
       <div className="create-container">
       {this.props.page===0?

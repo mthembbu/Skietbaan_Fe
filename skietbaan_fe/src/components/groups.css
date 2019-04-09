@@ -539,10 +539,10 @@
 		margin-top: 0px;
 	}
 	.temp-container{
+		position: absolute;
 		width: 100%;
 		background-color: white;
 		z-index: 1;
-		position: absolute;
 	}
 }
 
@@ -619,8 +619,18 @@
 	.the-main{
 		margin-bottom: 56px;
 	}
+	.check-edit{
+		margin-bottom: 56px;
+	}
+	.temp-container{
+		position: unset;
+	}
 }
 .check{
+	overflow-y: overlay;
+    z-index: 1;
+}
+.check-edit{
 	overflow-y: overlay;
     z-index: 1;
 }

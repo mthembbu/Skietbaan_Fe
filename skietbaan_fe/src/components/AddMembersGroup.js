@@ -123,7 +123,7 @@ class AddMembersGroup extends Component {
 
   render() {
     const postitems = (
-      <div className="check" style={{ height: this.getBodyHeight() + 'px' }}>
+      <div className="check-edit" style={{ height: this.getBodyHeight() + 'px' }}>
       {this.props.existing.length===0?null:
         <ul class="list-group" style={{ textAlign: 'left' }}>
           {this.props.existing
