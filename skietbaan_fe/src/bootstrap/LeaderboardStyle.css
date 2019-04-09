@@ -1078,8 +1078,8 @@
         background-color: transparent;
         height: 75px;
     }
-    .ranking-table-section .ranking-table .rank-row .user-details-table tbody .user-details-row .rank-labels-col .head-table-labels tr .extra-name-col *{
-        width: 100%;
+    .ranking-table-section .ranking-table .rank-row .user-details-table tbody .user-details-row .rank-labels-col .head-table-labels tr .extra-name-col div{
+        width: 90px;
         height: fit-content;
         margin: auto;
         border: solid;
@@ -1088,6 +1088,11 @@
         text-align: left;
         margin-left: 0px;
         padding-left: 0px;
+        margin: 0;
+    }
+    .ranking-table-section .ranking-table .rank-row .rank-col .user-details-table .user-details-row .rank-labels-col .head-table-labels tr .extra-name-col-top div{
+        width: 90px;
+        margin: 0;
     }
     .leaderboard-container .row .boostrap-col-8{
         background-color: #F5F5F5;
