@@ -470,7 +470,7 @@ export default class search extends Component {
       window.location = "/registerPage";
     }
     return (
-      <div className="position-relative" autoComplete="off">
+      <div className="add-score-entire-page-content" autoComplete="off">
         <Row className="row justify-content-center">
           <Col sm={8} className="createpage-bootstrap-col-center-container">
             <div className={stateOne || this.state.scoreSaved
