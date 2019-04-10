@@ -631,6 +631,7 @@
     z-index: 1;
 }
 .check-edit{
+	padding-bottom: 100px;
 	overflow-y: overlay;
     z-index: 1;
 }

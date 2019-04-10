@@ -46,7 +46,7 @@ class ViewGroups extends Component {
     if (this.state.width < 575) {
       return (this.state.height - 240);
     } else {
-      return (this.state.height - 184);
+      return 70;
     }
   }
   componentDidMount() {
@@ -170,13 +170,9 @@ class ViewGroups extends Component {
     );
 
     return (
-      <Row className="row justify-content-center">
-        <Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position : "inherit"}}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
-          <div className="The-Main" style={{ height: this.getBodyHeight() + "px" }}>
+      <div className="The-Main" style={{ height: this.getBodyHeight() + "vh" }}>
             {postitems}
-          </div>
-        </Col>
-      </Row>
+      </div>
 
     );
   }

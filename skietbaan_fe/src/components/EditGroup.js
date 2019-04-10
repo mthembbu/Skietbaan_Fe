@@ -1,4 +1,4 @@
-	import React, { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
 import { BASE_URL } from '../actions/types';
@@ -44,7 +44,11 @@ class EditGroup extends Component {
 		window.addEventListener('resize', this.updateDimensions);
     }
     getBodyHeight() {
-		return this.state.height - 240;
+			if (this.state.width < 575) {
+				return this.state.height - 240;
+			} else {
+				return 79;
+			}
 	}
 	updateDimensions() {
 		this.setState({
@@ -137,7 +141,7 @@ class EditGroup extends Component {
 	};
 	render() {
 		const postitems = (
-			<div className="check-edit" style={{ height: this.getBodyHeight() + 'px' }}>
+			<div className="check-edit" style={{ height: this.getBodyHeight() + 'vh' }}>
 			{this.props.editGroup===0?null:
 				<ul class="list-group">
 					{this.props.editGroup
@@ -170,9 +174,7 @@ class EditGroup extends Component {
 			</div>
 		);
 		return (
-			<Row className="row justify-content-center">
-				   <Col sm={8} className="createpage-bootstrap-col-center-container">
-				   <div className="The-Main">
+			<div className="The-Main">
 				<div className="navBar-container">
 					<div className="the-nav-bar-edit">
 						<div className="leftContainer">
@@ -228,9 +230,7 @@ class EditGroup extends Component {
 						</button>
 					</div>
 				)}
-			</div>
-                   </Col>
-            </Row>
+		</div>
 		);
 	}
 }
