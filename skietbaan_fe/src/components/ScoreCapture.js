@@ -482,7 +482,8 @@ export default class search extends Component {
             </div>
           </Col>
         </Row>
-       
+        <Row className="row justify-content-center">
+          <Col sm={8} className="createpage-bootstrap-col-center-container">
           <div className={this.state.scoreSaved
           ? "sucess-container"
           : (stateOne
@@ -491,7 +492,7 @@ export default class search extends Component {
           <div className={this.state.scoreSaved
             ? "sucess-container"
             : "hidden"}>
-
+          
             <div className="success-container">
               <div className="success">
               </div>
@@ -646,6 +647,8 @@ export default class search extends Component {
             </div>
           </div>
         </div>
+        </Col>
+        </Row>
       </div>
     )
   }
