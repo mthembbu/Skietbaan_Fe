@@ -98,13 +98,8 @@ class ViewGroups extends Component {
 
     if (this.props.groupsList[event].highlighted === true) {
       this.props.groupsList[event].highlighted = false;
-      // this.setState({ count: this.state.count - 1 });
-      console.log("true")
     } else {
       this.props.groupsList[event].highlighted = true;
-      // this.setState({ count: this.state.count + 1 });
-      console.log("false")
-
     }
 
   };
