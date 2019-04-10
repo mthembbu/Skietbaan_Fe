@@ -184,13 +184,13 @@ class EditGroup extends Component {
 						<div className="group-icon-spacing">
 							<div className="plus-next" onClick={() => this.changeBinState()}>
 								<img
-									className="checkbox-delete"
+									className="bin-image"
 									src={this.state.binState ? blackBin : whiteBin}
 									alt=""
 								/>
 							</div>
 							<div className="delete-icons" onClick={() => this.goToNext()}>
-								<img className="checkbox-delete" src={whitePlus} alt="" />
+								<img className="plus-image" src={whitePlus} alt="" />
 							</div>
 						</div>
 					</div>
@@ -205,10 +205,10 @@ class EditGroup extends Component {
 								placeholder="Search"
 							/>
 						</div>
-						{this.state.binState === true ? (
+						{this.state.binState === true && this.props.editGroup.length!=0  ? (
 							<div className="switchAll" onClick={this.selectAll}>
 								<img
-									className="checkbox-delete"
+									className="btn-select-all"
 									src={this.state.count === this.props.editGroup.length ? seleteAll : unSelectAll}
 									alt=""
 								/>

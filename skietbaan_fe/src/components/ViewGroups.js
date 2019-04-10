@@ -112,7 +112,9 @@ class ViewGroups extends Component {
   render() {
     const postitems = (
       <div className="the-main">
-      {this.props.groupsList.length===0?null:
+      {this.props.groupsList.length===0?<div className="view-error-container">
+      <label className="view-error-msg">No Groups have been created yet.</label>
+      </div>:
         <table className="table-member">
           <tbody>
             {this.props.groupsList
@@ -141,7 +143,7 @@ class ViewGroups extends Component {
                     {post.name}
                   </td>
 
-                  <td className="group-container">
+                  <td className="group-container"  onClick={() => this.editGroup(post)}>
                     {post.isActive === true ? (
                       <div>
                         <img src={group} className="groupIcon" alt="" />
@@ -151,7 +153,7 @@ class ViewGroups extends Component {
                       </div>
                     ) : null}
                   </td>
-                  <td>
+                  <td >
                     <div className="group-view">
                       <Switch
                         color={"primary"}
