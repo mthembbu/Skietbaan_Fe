@@ -657,11 +657,9 @@
 }
 .view-error-container{
 	border: 1px solid #BE0000;
-    border-radius: 5px;
+	border-radius: 5px;
+	margin:auto;
     margin-top: 149px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: auto;
     text-align: center;
     padding-top: 28px;
     width: 312px;
