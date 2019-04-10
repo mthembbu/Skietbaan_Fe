@@ -18,7 +18,7 @@
 .username-search{
   position: relative;
   padding-bottom: 14px;
-  box-shadow: 2px 1px 16px -3px #000000;
+  box-shadow: 0px 11px 6px -7px rgba(0,0,0,0.51);
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
 }
@@ -30,7 +30,7 @@
   .username-search {
     text-align: center;
     width: 100%;
-    box-shadow: 2px 1px 16px -3px #000000;
+    box-shadow: 0px 11px 6px -7px rgba(0,0,0,0.51);
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
   }
