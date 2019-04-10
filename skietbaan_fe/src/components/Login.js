@@ -44,6 +44,46 @@ class Login extends Component {
   }
 
   componentDidMount() {
+    let found = false;
+    if (getCookie("token")) {
+      let token = getCookie("token");
+      fetch(URL + "/api/features/getuserbytoken/" + token, {
+        method: "Get",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => response.json())
+        .then(function(data) {
+          if (data === undefined || data === null) {
+            this.setState({
+              isToken: true
+            });
+            found = true;
+          }
+        })
+        .then(data => {
+          if (data === undefined || data === null) {
+            this.setState({
+              isToken: true
+            });
+            found = true;
+          }
+        })
+        .catch(function(data) {
+          if (!getCookie("token") || found === false) {
+            var res = document.cookie;
+            var multiple = res.split(";");
+            for (var i = 0; i < multiple.length; i++) {
+              var key = multiple[i].split("=");
+              document.cookie =
+                key[0] + " =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
+            }
+            window.location = "/login";
+          }
+        });
+      }
     this.disableButton()
   }
 
