@@ -184,7 +184,11 @@ export default class userDetails extends Component {
                       : "user-details-button-container"
                   }
                   onClick={
-                    this.state.detailChanged
+                    this.state.array.name === this.state.nameValue ||
+                    this.state.array.surname === this.state.surnameValue ||
+                    this.state.array.phoneNumber ===
+                      this.state.cellphoneValue ||
+                    this.state.array.email === this.state.emailValue
                       ? this.updateUser
                       : this.handErrorValue
                   }
