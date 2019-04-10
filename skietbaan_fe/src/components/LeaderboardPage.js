@@ -63,7 +63,7 @@ class LeaderboardPage extends Component {
     tokkenValidation(){
         if(this.props.currentUser !== null){
             if(this.props.currentUser.username === "Invalid Tokken"){
-                this.logout();
+                
             }
         }
     }
