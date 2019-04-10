@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import './Create.css';
+import history from './history';
+import { getCookie } from './cookie.js';
+import { BASE_URL } from '../actions/types.js';
 import ViewMembers from '../components/ViewMembers';
 import Radio from '@material-ui/core/Radio';
 import CreateComp from '../components/CreateComp';
@@ -10,7 +13,8 @@ import ViewNonMembers from '../components/ViewNonMembers';
 import ViewMembersExpiring from '../components/ViewMembersExpiring';
 import ViewComp from '../components/ViewComp';
 import GroupComponent from '../components/GroupComponent';
-
+import CompComponent from '../components/CompComponent';
+import {compSelectedPages} from '../actions/competition.action';
 export class createPages extends Component {
 	constructor(props) {
 		super(props);
@@ -19,7 +23,8 @@ export class createPages extends Component {
 			selectedButton: 1,
 			selectedButtonCreateViewGroups: 1,
 			selectedButtonCreateViewCompetitions: 1,
-			selectedValue: 'A'
+			selectedValue: 'A',
+            user: []
 		};
 
 		this.groupsPage = this.groupsPage.bind(this);
@@ -30,8 +35,39 @@ export class createPages extends Component {
 		this.createCompetitions = this.createCompetitions.bind(this);
 		this.viewCompetitions = this.viewCompetitions.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.updateCreateContainer = this.updateCreateContainer.bind(this);
+		this.noShadowOnMember =  this.noShadowOnMember.bind(this);
 	}
-
+	updateCreateContainer() {
+		switch (this.selectedButton) {
+			case 1:
+				if (this.state.selectedButtonCreateViewGroups === 1) {
+				} else if (this.state.selectedButtonCreateViewGroups === 1) {
+				
+				}
+				break;
+			case 2:
+				if (this.state.selectedButtonCreateViewGroups === 1) {
+				} else if (this.state.selectedButtonCreateViewGroups === 1) {
+					
+				}
+				break;
+			case 3:
+				if (this.state.selectedValue === 'A') {
+				} else if (this.state.selectedValue === 'B') {
+				} else if (this.state.selectedValue === 'C') {
+				}
+				break;
+		}
+	}
+	noShadowOnMember(){
+		if(this.state.selectedButton === 3){
+			return "0px 0px 0px 0px grey";
+		}else{
+			return "0px 21px 18px -26px grey";
+		}
+	}
+  
 	groupsPage() {
 		this.setState({ selectedButton: 1 });
 	}
@@ -45,10 +81,12 @@ export class createPages extends Component {
 	}
 
 	createGroups() {
+		this.props.compSelectedPages(1);
 		this.setState({ selectedButtonCreateViewGroups: 1 });
 	}
 
 	viewGroups() {
+		this.props.compSelectedPages(2);
 		this.setState({ selectedButtonCreateViewGroups: 2 });
 	}
 
@@ -57,224 +95,178 @@ export class createPages extends Component {
 	}
 
 	viewCompetitions() {
+		this.props.compSelectedPages(2);
 		this.setState({ selectedButtonCreateViewCompetitions: 2 });
+		
 	}
 	handleChange = (event) => {
 		this.setState({ selectedValue: event });
 	};
+	componentDidMount() {
+		if (getCookie('token') !== null) {
+			let token = getCookie('token');
+			fetch(BASE_URL + '/api/features/getuserbytoken/' + token, {
+				method: 'Get',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				}
+			})
+				.then((response) => response.json())
+				.then(function(data) {
+					if (data.admin === false) {
+						history.push('/home');
+					}
+				})
+				.catch(function(data) {})
+				.catch((err) => {
+					/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+				});
+		} else {
+			window.location = '/registerPage';
+		}
+	
+	}
 
 	render() {
+		if (!getCookie('token')) {
+			window.location = '/registerPage';
+		}
 		return (
 			<div className="create-main-container">
 				{this.props.page === 0 ? (
-                    <div className="create-nav-container">
-					<div className="create-top-nav">
-						<div class="page-name-bar">
-							<label className="create-all-menu">CREATE</label>
-						</div>
-						<div className="first-buttons-container">
-							<Row className="buttons-row">
-								<div className="buttons-squire-rectangle lay-horizontal">
-									<Col id="removeLeftButtonPadding" className="pad-button-text-top">
-										<div>
-											<button
-												className={
-													this.state.selectedButton === 1 ? (
-														'unstyle-button-active btn-block button-fill'
-													) : (
-														'unstyle-button btn-block button-fill'
-													)
-												}
-												onClick={this.groupsPage}
-											>
-												<label className="button-text">GROUPS</label>
-											</button>
+					<div className="create-nav-container">
+						<div className={this.state.selectedButton === 3 ? 'create-top-nav-members' : 'create-top-nav'}>
+							{/* top */}
+							<Row className="row justify-content-center">
+								<Col sm={8} className="createpage-bootstrap-col-center-container">
+									<div class="page-name-bar">
+										<div className="gun-overlay-image">
+											<label className="label-for-score">CREATE</label>
 										</div>
-									</Col>
-									<Col id="padMiddleButton" className="pad-button-text-top">
-										<div>
-											<button
-												className={
-													this.state.selectedButton === 2 ? (
-														'unstyle-button-active btn-block button-fill'
-													) : (
-														'unstyle-button btn-block button-fill'
-													)
-												}
-												onClick={this.comptetitionsPage}
-											>
-												<label className="button-text">COMPETITIONS</label>
-											</button>
-										</div>
-									</Col>
-									<Col id="removeRightButtonPadding" className="pad-button-text-top">
-										<div>
-											<button
-												className={
-													this.state.selectedButton === 3 ? (
-														'unstyle-button-active btn-block button-fill'
-													) : (
-														'unstyle-button btn-block button-fill'
-													)
-												}
-												onClick={this.membersPage}
-											>
-												<label className="button-text">MEMBERS</label>
-											</button>
-										</div>
-									</Col>
-								</div>
+									</div>
+								</Col>
 							</Row>
+							<Row className="row justify-content-center">
+								<Col sm={8} className="createpage-bootstrap-col-center-container">
+									<div className="create-switch-top">
+										<div
+											className={
+												this.state.selectedButton === 1 ? 'switch-active' : 'switch-inactive'
+											}
+											onClick={this.groupsPage}
+										>
+											GROUPS
+										</div>
+										<div
+											className={
+												this.state.selectedButton === 2 ? 'switch-active' : 'switch-inactive'
+											}
+											onClick={this.comptetitionsPage}
+										>
+											COMPETITIONS
+										</div>
+										<div
+											className={
+												this.state.selectedButton === 3 ? 'switch-active' : 'switch-inactive'
+											}
+											onClick={this.membersPage}
+										>
+											MEMBERS
+										</div>
+									</div>
+								</Col>
+							</Row>
+							<Row className="row justify-content-center">
+								<Col sm={8} className="createpage-bootstrap-col-center-container" >                 
+								<div className="temp-container" style={{ boxShadow : this.noShadowOnMember() }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
+									<div className={this.state.selectedButton === 3 ? "create-switch-bottom-hide"
+                                                                  : "create-switch-bottom"} >
+										<div
+											className={
+												this.state.selectedButtonCreateViewGroups === 1 ? (
+													'switch-active-left'
+												) : (
+													'switch-inactive'
+												)
+											}
+											onClick={this.createGroups}
+										>
+											CREATE
+										</div>
+										<div
+											className={
+												(this.state.selectedButtonCreateViewGroups === 2 || this.props.compSelectedPages===2)? (
+													'switch-active-right'
+												) : (
+													'switch-inactive'
+												)
+											}
+											onClick={this.viewGroups}
+										>
+											VIEW
+										</div>
+									</div>
+									</div>
+								</Col>
+							</Row><Row className="row justify-content-center">
+					<Col sm={8} className="createpage-bootstrap-col-center-container">
+          {this.state.selectedButton === 3 ? (
+					<div className="member-radio">
+						<div className="radio-A">
+							<Radio
+								className="a-radio"
+								aria-label="A"
+								checked={this.state.selectedValue === 'A'}
+								onChange={() => this.handleChange('A')}
+								value="b"
+								color={'primary'}
+								name="radio-button-demo"
+								aria-label="B"
+							/>
+
+							<label className="member-user-label">USERS</label>
 						</div>
-						{this.state.selectedButton === 3 ? (
-							<div className="member-radio">
-								<div className="radio-A">
-									<Radio
-										className="a-radio"
-										aria-label="A"
-										checked={this.state.selectedValue === 'A'}
-										onChange={() => this.handleChange('A')}
-										value="b"
-										color={'primary'}
-										name="radio-button-demo"
-										aria-label="B"
-									/>
-
-									<label className="member-user-label">USERS</label>
-								</div>
-								<div className="radio-B">
-									<Radio
-										className="b-radio"
-										aria-label="A"
-										checked={this.state.selectedValue === 'B'}
-										value="b"
-										aria-label="B"
-										color={'primary'}
-										onChange={() => this.handleChange('B')}
-									/>
-									<label className="member-user-label">MEMBERS</label>
-								</div>
-								<div className="radio-C">
-									<Radio
-										className="c-radio"
-										aria-label="A"
-										checked={this.state.selectedValue === 'C'}
-										value="b"
-										aria-label="B"
-										color={'primary'}
-										onChange={() => this.handleChange('C')}
-									/>
-									<label className="member-user-label">EXPIRING</label>
-								</div>
-							</div>
-						) : null}
-
-						<div
-							className={
-								this.state.selectedButton === 1 ? (
-									'content-container pad-top-13px'
-								) : this.state.selectedButton === 2 ? (
-									'content-container pad-top-13px'
-								) : (
-									'content-container'
-								)
-							}
-						>
-							{this.state.selectedButton === 1 ? (
-								<div className="buttons-container">
-									<Row className="buttons-row">
-										<div className="buttons-squire-rectangle lay-horizontal">
-											<Col id="removeLeftButtonPadding" className="pad-button-text-top">
-												<div>
-													<button
-														className={
-															this.state.selectedButtonCreateViewGroups === 1 ? (
-																'unstyle-create-active btn-block button-fill'
-															) : (
-																'unstyle-create btn-block button-fill'
-															)
-														}
-														onClick={this.createGroups}
-													>
-														<label className="button-text">CREATE</label>
-													</button>
-												</div>
-											</Col>
-											<Col id="padMiddleButton" className="pad-button-text-top">
-												<div>
-													<button
-														className={
-															this.state.selectedButtonCreateViewGroups === 2 ? (
-																'unstyle-view-active btn-block button-fill'
-															) : (
-																'unstyle-view btn-block button-fill'
-															)
-														}
-														onClick={this.viewGroups}
-													>
-														<label className="button-text">VIEW</label>
-													</button>
-												</div>
-											</Col>
-										</div>
-									</Row>
-								</div>
-							) : this.state.selectedButton === 2 ? (
-								<div className="buttons-container">
-									<Row className="buttons-row">
-										<div className="buttons-squire-rectangle lay-horizontal">
-											<Col id="removeLeftButtonPadding" className="pad-button-text-top">
-												<div>
-													<button
-														className={
-															this.state.selectedButtonCreateViewCompetitions === 1 ? (
-																'unstyle-create-active btn-block button-fill'
-															) : (
-																'unstyle-create btn-block button-fill'
-															)
-														}
-														onClick={this.createCompetitions}
-													>
-														<label className="button-text">CREATE</label>
-													</button>
-												</div>
-											</Col>
-											<Col id="padMiddleButton" className="pad-button-text-top">
-												<div>
-													<button
-														className={
-															this.state.selectedButtonCreateViewCompetitions === 2 ? (
-																'unstyle-view-active btn-block button-fill'
-															) : (
-																'unstyle-view btn-block button-fill'
-															)
-														}
-														onClick={this.viewCompetitions}
-													>
-														<label className="button-text">VIEW</label>
-													</button>
-												</div>
-											</Col>
-										</div>
-									</Row>
-								</div>
-							) : null}
+						<div className="radio-B">
+							<Radio
+								className="b-radio"
+								aria-label="A"
+								checked={this.state.selectedValue === 'B'}
+								value="b"
+								aria-label="B"
+								color={'primary'}
+								onChange={() => this.handleChange('B')}
+							/>
+							<label className="member-user-label">MEMBERS</label>
+						</div>
+						<div className="radio-C">
+							<Radio
+								className="c-radio"
+								aria-label="A"
+								checked={this.state.selectedValue === 'C'}
+								value="b"
+								aria-label="B"
+								color={'primary'}
+								onChange={() => this.handleChange('C')}
+							/>
+							<label className="member-user-label">EXPIRING</label>
 						</div>
 					</div>
-                    </div>
 				) : null}
-            
+          </Col>
+				</Row>
+						</div>
+					</div>
+				) : null}
+				
+				
 				<div className="components-create">
 					{this.state.selectedButton === 1 && this.state.selectedButtonCreateViewGroups === 1 ? (
 						<AddGroup />
 					) : this.state.selectedButton === 1 && this.state.selectedButtonCreateViewGroups === 2 ? (
 						<GroupComponent />
 					) : null}
-					{this.state.selectedButton === 2 && this.state.selectedButtonCreateViewCompetitions === 1 ? (
-						<CreateComp />
-					) : this.state.selectedButton === 2 && this.state.selectedButtonCreateViewCompetitions === 2 ? (
-						<ViewComp />
-					) : null}
+					{this.state.selectedButton===2?<CompComponent />:null}
 					{this.state.selectedButton === 3 && this.state.selectedValue === 'A' ? (
 						<ViewNonMembers />
 					) : this.state.selectedButton === 3 && this.state.selectedValue === 'B' ? (
@@ -294,4 +286,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(createPages);
+export default connect(mapStateToProps, {compSelectedPages})(createPages);

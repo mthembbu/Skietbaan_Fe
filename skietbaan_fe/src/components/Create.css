@@ -1,315 +1,508 @@
 @media only screen and (min-width: 576px) {
 
-	.create-top-nav {
-		height: 184px;
-		position: fixed;
-		top: 0;
-		width: 100%;
-		z-index: 1;
-		background: #fdfdfd;
-		margin-top: 56px;
-	}
+  .components-create {
+    padding-top: 25px;
+    background-color: white;
+    margin-top: 15px;
+  }
 
-	.components-create{
-		padding-top: 25px;
-		background-color: white;
-	}
+  .content-container {
+    margin-top: 0px;
+  }
 
-	.content-container{
-		margin-top: 0px;
-	}
+  .page-name-create-all {
+    position: center;
+    text-align: center;
+    text-size-adjust: 25px;
+    background-size: 15px;
+    height: 56px;
+    background-image: linear-gradient(to right, #ef3024, #dc0600);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-top: 56px;
+    top: 0;
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+  }
 
-	.page-name-create-all {
-		position: center;
-		text-align: center;
-		text-size-adjust: 25px;
-		background-size: 15px;
-		height: 56px;
-		background-color: #dc0600;
-		border-bottom-left-radius: 20px;
-		border-bottom-right-radius: 20px;
-		margin-top: 56px;
-		top: 0;
-		z-index: 100;
-		position: fixed;
-		width: 100%;
-	}
+  .create-all-page-content {
+    margin-top: 133px;
+    height: 994px;
+  }
 
-	.create-all-page-content {
-		margin-top: 133px;
-		height: 994px;
-	}
+  .create-feature-buttons {
+    position: center;
+    text-align: center;
+    width: 66%;
+    text-align: center;
+    margin-left: 17%;
+    margin-top: 133px;
+  }
 
-	.create-feature-buttons {
-		position: center;
-		text-align: center;
-		width: 66%;
-		text-align: center;
-		margin-left: 17%;
-		margin-top: 133px;
-	}
+  .create-all-groups-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
 
-	.create-all-groups-btn {
-		background-color: transparent;
-		color: #555555;
-		font-size: 14px;
-		font-weight: 300;
-		border: none;
-	}
+  .create-all-competitions-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
 
-	.create-all-competitions-btn {
-		background-color: transparent;
-		color: #555555;
-		font-size: 14px;
-		font-weight: 300;
-		border: none;
-	}
-
-	.create-all-members-btn {
-		background-color: transparent;
-		color: #555555;
-		font-size: 14px;
-		font-weight: 300;
-		border: none;
-	}
-
-	.create-all-btn1 {
-		position: center;
-		text-align: center;
-		width: 33%;
-		float: left;
-	}
-
-	.create-all-btn2 {
-		position: center;
-		text-align: center;
-		width: 33%;
-		float: left;
-	}
-
-	.create-all-btn3 {
-		position: center;
-		text-align: center;
-		width: 33%;
-		float: left;
-	}
+  .create-all-members-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
 }
+
+
+
 .div-container {
-	width: 100%;
-	height: 67px;
+  width: 100%;
+  height: 67px;
 }
 
 @media only screen and (max-width: 575px) {
-	.page-name-create-all {
-		position: center;
-		text-align: center;
-		text-size-adjust: 25px;
-		background-size: 15px;
-		height: 56px;
-		background-color: #dc0600;
-		border-bottom-left-radius: 20px;
-		border-bottom-right-radius: 20px;
-		top: 0;
-		z-index: 100;
-		position: fixed;
-		width: 100%;
-	}
-	/*tu css*/
-	.button-text:focus {
-		outline: none;
-	}
-	.button-fill:focus {
-		outline: none;
-	}
-	/* .create-all-top-nav-bar{
-  height: 184px;
-} */
-	.create-all-menu-header {
-		color: #fdfdfd;
-		font-size: 20px;
-		font-weight: bolder;
-		padding-top: 10px;
-		text-align: center;
-	}
-	/* new stuff */
-	.create-all-page-content {
-		margin-top: 77px;
-	}
+  .temp-container{
+    position: unset !important;
+  }
+  .createpage-bootstrap-col-center-container{
+    padding-right: 15px;
+    padding-left: 15px;
+    background: transparent;
+  }
+  .page-name-create-all {
+    position: center;
+    text-align: center;
+    text-size-adjust: 25px;
+    background-size: 15px;
+    height: 56px;
+    background-image: linear-gradient(to right, #ef3024, #dc0600);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    top: 0;
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+  }
 
-	.create-feature-buttons {
-		position: center;
-		text-align: center;
-		width: 100%;
-		text-align: center;
-		margin-top: 77px;
-	}
+  
 
-	.create-all-groups-btn {
-		background-color: transparent;
-		color: #555555;
-		font-size: 14px;
-		font-weight: 300;
-		border: none;
-	}
+  .button-text:focus {
+    outline: none;
+  }
 
-	.create-all-competitions-btn {
-		background-color: transparent;
-		color: #555555;
-		font-size: 14px;
-		font-weight: 300;
-		border: none;
-	}
+  .button-fill{
+    padding-top: 5px;
+    margin-top: -5px;
+  }
 
-	.create-all-members-btn {
-		background-color: transparent;
-		color: #555555;
-		font-size: 14px;
-		font-weight: 300;
-		border: none;
-	}
+  .button-fill:focus {
+    outline: none;
+  }
 
-	.create-all-btn1 {
-		position: center;
-		text-align: center;
-		width: 33%;
-		float: left;
-	}
+  .create-all-menu-header {
+    color: #fdfdfd;
+    font-size: 20px;
+    font-weight: bolder;
+    padding-top: 10px;
+    text-align: center;
+  }
 
-	.create-all-btn2 {
-		position: center;
-		text-align: center;
-		width: 33%;
-		float: left;
-	}
+  .create-all-page-content {
+    margin-top: 77px;
+  }
 
-	.create-all-btn3 {
-		position: center;
-		text-align: center;
-		width: 33%;
-		float: left;
-	}
+  .create-feature-buttons {
+    position: center;
+    text-align: center;
+    width: 100%;
+    text-align: center;
+    margin-top: 77px;
+  }
+
+  .create-all-groups-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
+
+  .create-all-competitions-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
+
+  .create-all-members-btn {
+    background-color: transparent;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+  }
+}
+.create-switch-boostrap-col{
+  padding: 0px;
 }
 
 #removeRightButtonPadding {
-	padding-right: 0px;
+  padding-right: 0px;
 }
 
 #removeLeftButtonPadding {
-	padding-left: 0px;
+  padding-left: 0px;
 }
 
 #padMiddleButton {
-	text-align: center;
+  text-align: center;
 }
 
 /*the new css of the file*/
 .create-main-container {
-	width: 100%;
+  width: 100%;
 }
 .page-name-bar {
-	height: 67px;
-	background: #be0000;
-	border-bottom-left-radius: 20px;
-	border-bottom-right-radius: 20px;
-	display: flex;
+  height: 67px;
+  background-image: linear-gradient(to right, #ef3024, #dc0600);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  display: flex;
+  box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.33);
+}
+
+@media screen and (min-width:576px)  {
+  .page-name-bar{
+    margin-top: 56px;
+  }
+  .buttons-squire-rectangle{
+    padding-top: 0px;
+  }
+  body{
+    background-repeat: round;
+    background-size: 100%;
+    background-position: 50%;
+    background-image: url(/static/media/desktop-background.bed1bfc6.png);
+  }
+  .create-nav-container{
+    background: transparent !important;
+  }
+  .create-nav-container .create-top-nav{
+    background: transparent;
+  }
+  .create-nav-container .create-top-nav-members{
+    background: transparent;
+  }
+  
+  .create-top-nav{
+    background: transparent;
+  }
+  .create-top-nav .row{
+    background: transparent;
+  }
+  .components-create{
+    background: transparent;
+  }
+  .add-container{
+    background: transparent;
+  }
+  .middle-bar{
+    background: transparent;
+  }
+  .page{
+    background: transparent;
+  }
+  .createpage-bootstrap-col-center-container{
+    background: white;
+    padding: 0;
+  }
+  .create-switch-top{
+    margin-bottom: 5px;
+  }
 }
 
 .first-buttons-container {
-	width: 97%;
+  width: 97%;
 }
-.create-top-nav {
-	height: 184px;
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: 1;
-	background: #fdfdfd;
-}
+
 .create-nav-container {
-	height: 184px;
+  height: 184px;
 }
+
 .create-all-menu {
-	color: #fdfdfd;
-	font-size: 20px;
-	font-weight: bolder;
-	margin-left: 42px;
-	margin-top: 19px;
+  color: #fdfdfd;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 42px;
+  margin-top: 19px;
+  font-family: helvetica;
 }
 
 .buttons-squire-rectangle {
-	height: 32px;
-	width: 100%;
-	border: 1px solid #be0000;
-	border-radius: 18px;
+  height: 32px;
+  width: 90%;
+  border: 1px solid #be0000;
+  border-radius: 18px;
+  padding-top: 4px;
+}
+
+.buttons-squire-rectangle-width{
+  width: 95%;
 }
 
 .buttons-row .col {
-	padding-left: 0px;
-	padding-right: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.buttons-row-one {
+  margin-left: 3%;
+  margin-top: 22px;
+  width: inherit;
+}
+.buttons-row-two {
+  margin-left: 3%;
+  margin-top: 22px;
+  width: inherit;
 }
 
 .unstyle-create-active {
-	background-color: #be0000;
-	color: white;
-	border-bottom-left-radius: 18px;
-	border-top-left-radius: 18px;
-	border: none;
+  background-color: #be0000;
+  color: white;
+  border-bottom-left-radius: 18px;
+  border-top-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  border-top-right-radius: 18px;
+  border: none;
+  box-shadow: 0px 3px 8px -3px #674d4d;
+  outline: none;
+  padding-top: 4px;
 }
+
 .unstyle-create {
-	background-color: transparent;
-	color: black;
-	border-bottom-left-radius: 18px;
-	border-top-left-radius: 18px;
-	border: none;
+  background-color: transparent;
+  color: black;
+  border-bottom-left-radius: 18px;
+  border-top-left-radius: 18px;
+  border: none;
 }
-.unstyle-view-active {
-	background-color: #be0000;
-	color: white;
-	border-bottom-right-radius: 18px;
-	border-top-right-radius: 18px;
-	border: none;
+
+  .unstyle-view-active {
+    background-color: #be0000;
+   color: white;
+  border-bottom-right-radius: 18px;
+  border-top-right-radius: 18px;
+  border: none;
+  box-shadow: 0px 3px 8px -3px #674d4d;
+  outline: none;
+  padding-top: 4px;
+  }
+
+  .unstyle-view {
+    background-color: transparent;
+    color: black;
+    border-bottom-right-radius: 18px;
+    border-top-right-radius: 18px;
+    border: none;
+  }
+
+ .member-user-label {
+   font-weight: lighter;
+   font-size: 16px;
+   height: fit-content;
+   margin: auto;
+   width: 100%;
+   text-align: left;
+  }
+
+  .member-radio {
+    display: flex;
+    width: 345px;
+    margin: auto;
+  }
+
+  .radio-A {
+    padding-right: 3px;
+    display: flex;
+    width: 115px;
+  }
+
+  .radio-B {
+    padding-right: 3px;
+    display: flex;
+    width: 115px;
+  }
+
+  .radio-C {
+     display: flex;
+     width: 115px;
+  }
+
+  .member-radio .radio-A .a-radio {
+    padding-right: 2px;
+  }
+
+  .member-radio .radio-B .b-radio {
+      padding-right: 2px;
+  }
+
+  .member-radio .radio-C .c-radio {
+    padding-right: 2px;
+   }
+
+  .create-main-container {
+      width: 100%;
+  }
+
+  .create-top-nav-members {
+    height: 184px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    background: #fdfdfd;
+  }
+
+/* NO MEDIA QUERY */
+   body{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+    }
+  .create-top-nav {
+	  height: fit-content;
+    padding-bottom: 19px;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    background: #fdfdfd;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+  
+  }
+  .create-switch-top{
+    width: 345px;
+    height: 32px;
+    margin: auto;
+    border: 1px solid #BE0000;
+    margin-top: 21px;
+    margin-bottom: 21px;
+    border-radius: 18px;
+    display: -webkit-box;
+
 }
-.unstyle-view {
-	background-color: transparent;
-	color: black;
-	border-bottom-right-radius: 18px;
-	border-top-right-radius: 18px;
-	border: none;
+.create-switch-top .switch-active{
+  height: 30px;	
+  width: 115px;	
+  border: 1px solid #BE0000;	
+  border-radius: 18px;	
+  box-shadow: 0 3px 8px -3px #674D4D;
+  color: #FAFAFA;	
+  font-family: Helvetica;	
+  font-size: 14px;	
+  font-weight: bold;	
+  line-height: 17px;	
+  text-align: center;
+  background-color: #BE0000;
+  text-align: center;
+  padding-top: 5px;
+  cursor: pointer;
 }
-.member-user-label {
-	font-weight: lighter;
-	font-size: 16px;
-	height: fit-content;
-	margin: auto;
-	width: 100%;
-	text-align: left;
+.create-switch-top .switch-inactive{
+  height: 32px;	
+  width: 115px;
+  border-radius: 18px;
+  color: #555555;	
+  font-family: Helvetica;	
+  font-size: 14px;	
+  font-weight: 300;	
+  line-height: 17px;	
+  text-align: center;
+  padding-top: 6px;
+  cursor: pointer;
 }
-.member-radio {
-	display: flex;
-	margin-top: 8px;
+
+.create-switch-bottom{
+  width: 320px;
+  height: 33px;
+  margin: auto;
+  border: 1px solid #BE0000;
+  margin-bottom: 19px;
+  margin-top: 11px;
+  border-radius: 18px;
+  display: -webkit-box;
 }
-.radio-A {
-	padding-right: 3px;
-	display: flex;
-	width: 30%;
+.create-switch-bottom-hide{
+   display: none;
 }
-.radio-B {
-	padding-right: 3px;
-	display: flex;
-	width: 35%;
+.create-switch-bottom .switch-active-left{
+  height: 32px;	
+  width: 160px;	
+  border: 1px solid #BE0000;	
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+  box-shadow: 0 3px 8px -3px #674D4D;
+  color: #FAFAFA;	
+  font-family: Helvetica;	
+  font-size: 14px;	
+  font-weight: bold;	
+  line-height: 17px;	
+  text-align: center;
+  background-color: #BE0000;
+  text-align: center;
+  padding-top: 5px;
+  cursor: pointer;
 }
-.radio-C {
-	display: flex;
+.create-switch-bottom .switch-active-right{
+  height: 32px;	
+  width: 160px;	
+  border: 1px solid #BE0000;	
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
+  box-shadow: 0 3px 8px -3px #674D4D;
+  color: #FAFAFA;	
+  font-family: Helvetica;	
+  font-size: 14px;	
+  font-weight: bold;	
+  line-height: 17px;	
+  text-align: center;
+  background-color: #BE0000;
+  text-align: center;
+  padding-top: 5px;
+  cursor: pointer;
 }
-.member-radio .radio-A .a-radio {
-	padding-right: 2px;
+.create-switch-bottom .switch-inactive{
+  height: 33px;	
+  width: 160px;
+  border-radius: 18px;
+  color: #555555;	
+  font-family: Helvetica;	
+  font-size: 14px;	
+  font-weight: 300;	
+  line-height: 17px;	
+  text-align: center;
+  padding-top: 6px;
+  cursor: pointer;
 }
-.member-radio .radio-B .b-radio {
-	padding-right: 2px;
-}
-.member-radio .radio-C .c-radio {
-	padding-right: 2px;
-}
-.create-main-container {
-	width: 100%;
+.temp-container{
+  background: white;
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-bottom: 4px;
 }

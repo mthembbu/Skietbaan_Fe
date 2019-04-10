@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import '../components/ScoreCapture.css';
 import { validateScore } from './Validators.js';
 import { getCookie } from './cookie.js';
-import { URL } from '../actions/types.js';
+import { BASE_URL } from '../actions/types.js';
 import cameraGray from '../components/assets/redSubmitButton.png';
 import graySubmit from '../components/assets/btnThatSubmitsRed.png';
 import grayRetry from '../components/assets/redRetry.png';
 import lightgrayback from '../components/assets/Back.png';
 import submit from '../components/assets/biggerRedSubmit.png';
 import camera from '../components/assets/biggerRedCamera.png';
+import { Row, Col } from "react-bootstrap";
 
 export default class search extends Component {
   constructor(props) {
@@ -36,7 +37,10 @@ export default class search extends Component {
       navbarState: false,
       eventsAdded: false,
       lastSize: 0,
-      somethingClicked: false
+      somethingClicked: false,
+      maximumScore: 20,
+      height: window.innerHeight,
+      width: window.innerWidth
 
     }
 
@@ -51,14 +55,29 @@ export default class search extends Component {
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.toggleNavbar2 = this.toggleNavbar2.bind(this);
     this.toggleIcon = this.toggleIcon.bind(this);
+    this.updateDimensions = this.updateDimensions.bind(this);
+    this.getBodyHeight = this.getBodyHeight.bind(this);
   }
-
+  componentWillMount() {
+    window.addEventListener("resize", this.updateDimensions);
+  }
+  getBodyHeight() {
+    return this.state.height - 370;
+  }
+  updateDimensions() {
+    this.setState({
+      height: window.innerHeight,
+      width: window.innerWidth
+    });
+  }
   handleScore({ target }) {
     this.validate();
     this.setState({
       [target.name]: target.value,
     }, () => {
-      if (validateScore(this.state.score) && target.value !== undefined) {
+      if (parseFloat(this.state.score) <= this.state.maximumScore
+        && parseFloat(this.state.score) >= 0
+        && target.value !== undefined) {
         this.setState({
           validScore: true,
           scoreEntered: true
@@ -74,8 +93,7 @@ export default class search extends Component {
   }
 
   cancelClicked() {
-    if(this.state.somethingClicked)
-    {
+    if (this.state.somethingClicked) {
       this.setState({
         somethingClicked: !this.state.somethingClicked,
         clicked: null,
@@ -83,18 +101,19 @@ export default class search extends Component {
     }
   }
 
-  competitionClicked(item, compname) {
+  competitionClicked(item, compname, maximumScore) {
     this.setState({
       somethingClicked: true,
       currState: 2,
       clicked: item,
       competitionName: compname,
-      validCompetition: true
+      validCompetition: true,
+      maximumScore: maximumScore
     });
   }
-
   componentDidMount() {
-    fetch(URL + "/api/Competition", {
+    this.updateDimensions();
+    fetch(BASE_URL + "/api/Competition", {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -103,11 +122,12 @@ export default class search extends Component {
     })
       .then(response => response.json())
       .then(data => this.setState({ competitionsList: data }))
-      .catch(function (data) {
-      });
+      .catch(err => {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
 
     let token = getCookie("token");
-    fetch(URL + "/api/features/getuserbytoken/" + token, {
+    fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
       method: 'Get',
       headers: {
         'Accept': 'application/json',
@@ -121,13 +141,17 @@ export default class search extends Component {
         });
       })
       .catch(function (data) {
-      });
+      }).catch(err => {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      })
 
   }
 
   validate() {
     let Valid = false;
-    if (!validateScore(this.state.score) && this.value === undefined) {
+    if (parseFloat(this.state.score) > this.state.maximumScore
+      || parseFloat(this.state.score) < 0
+      || this.state.score === "" || this.state.score === null) {
       this.setState({
         validForm: false,
         validScore: false
@@ -166,20 +190,21 @@ export default class search extends Component {
     var navbar = document.querySelector(".navbar-admin");
     if (navbar.classList.contains("hidden")) {
       navbar.classList.remove("hidden");
+      navbar.removeAttribute('hidden');
     }
     else {
       navbar.classList.add("hidden");
+      navbar.setAttribute('hidden', 'true');
     }
   }
 
   toggleNavbar2() {
-    var navbar = document.querySelector(".navbar-admin");
+    var body = document.querySelector("body");
     if (this.state.lastSize > document.body.clientHeight) {
-      navbar.setAttribute('hidden', 'true');
       this.toggleNavbar();
-    }
+    } 
     else {
-      navbar.removeAttribute('hidden');
+      
       this.toggleNavbar();
     }
   }
@@ -264,7 +289,7 @@ export default class search extends Component {
         "Longitude": this.state.longitude,
         "Latitude": this.state.latitude
       }
-      fetch(URL + "/api/Scores", {
+      fetch(BASE_URL + "/api/Scores", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -280,7 +305,9 @@ export default class search extends Component {
           if (this.state.navbarState === false) {
             this.toggleNavbar();
           }
-        });
+        }).catch(err => {
+          /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+        })
       setTimeout(function () { window.location = "/scoreCapture"; }, 4000);
 
     }
@@ -291,7 +318,7 @@ export default class search extends Component {
         "CompetitionName": this.state.competitionName,
         "Token": getCookie("token"),
       }
-      fetch(URL + "/api/Scores", {
+      fetch(BASE_URL + "/api/Scores", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -301,7 +328,9 @@ export default class search extends Component {
       }).then(response => response.json())
         .then(data => this.setState({
           scoreSaved: true, currState: 5
-        }));
+        })).catch(err => {
+          /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+        })
       setTimeout(function () { window.location = "/scoreCapture"; }, 5000);
     }
   }
@@ -397,9 +426,7 @@ export default class search extends Component {
       this.toggleNavbar();
     }
   }
-
   render() {
-
     if (this.state.lastSize === 0) {
       this.state.lastSize = document.body.clientHeight;
       document.addEventListener('DOMContentLoaded', () => {
@@ -425,28 +452,38 @@ export default class search extends Component {
                     ? "competition-item active"
                     : "competition-item fade-out")}>
               <li className="li-container"
-                onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name)}>
-                {this.state.competitionsList[i].name}
+                onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name, 
+                this.state.competitionsList[i].maximumScore)}>
+                {this.state.competitionsList[i].name.toUpperCase()}
               </li>
               <div onClick={() => this.cancelClicked()} className="competiton-cancel-button"></div>
             </div>
           </div>);
-
       }
+    }
+    else {
+      competitionItem.push(
+        <div className="not-active">No active competitions</div>
+      )
     }
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
     return (
       <div className="position-relative" autoComplete="off">
-        <div className={stateOne || this.state.scoreSaved
-          ? "hidden"
-          : "score-capture-header"}>
-          <div className="gun-overlay-image">
-            <label className="label-for-score">ADD SCORE</label>
-          </div>
-        </div>
-        <div className={this.state.scoreSaved
+        <Row className="row justify-content-center">
+          <Col sm={8} className="createpage-bootstrap-col-center-container">
+            <div className={stateOne || this.state.scoreSaved
+              ? "hidden"
+              : "score-capture-header"}>
+              <div className="gun-overlay-image">
+                <label className="label-for-score">ADD SCORE</label>
+              </div>
+            </div>
+          </Col>
+        </Row>
+       
+          <div className={this.state.scoreSaved
           ? "sucess-container"
           : (stateOne
             ? "page-content-video"
@@ -467,7 +504,7 @@ export default class search extends Component {
             <div className="centre-labels">
               <label className="label-competition">Select Competition</label>
             </div>
-            <div className="competition-container">
+            <div className="add-score-competition-container">
               {competitionItem}
 
               <div className={this.state.somethingClicked === false
@@ -490,31 +527,27 @@ export default class search extends Component {
                 </div>
               </div>
             </div>
-            <div className="error-message-container">
-              <div className={this.state.validCompetition === false && this.state.validScore === true
-                ? "invalid-comp"
+            <div className="stretched inline-block">
+              <div className={this.state.somethingClicked === true
+                ? "submit-container"
                 : "hidden"}>
-                Select Competition</div>
-            </div>
-            <div className={this.state.somethingClicked === true
-              ? "submit-container"
-              : "hidden"}>
-              <div className={this.state.imageTaken || this.state.showCamera
-                ? "hidden"
-                : "submit-button-elements2"}>
-                <div className="button-hover">
-                  <img src={camera}
-                    id="btnScoreCapture" className="btn-score-capture2"
-                    onClick={() => this.CameraClicked()} alt=''></img>
+                <div className={this.state.imageTaken || this.state.showCamera
+                  ? "hidden"
+                  : "submit-button-elements2"}>
+                  <div className="button-hover">
+                    <img src={camera}
+                      id="btnScoreCapture" className="btn-score-capture2"
+                      onClick={() => this.CameraClicked()} alt=''></img>
+                  </div>
                 </div>
-              </div>
-              <div className={(this.state.showCamera && !this.state.imageTaken)
-                || this.state.imageTaken
-                ? "hidden"
-                : "submit-button-elements2"}>
-                <div className="button-hover ">
-                  <img src={submit} onClick={() => this.getLocation()}
-                    className="button-that-submits" alt=''></img>
+                <div className={(this.state.showCamera && !this.state.imageTaken)
+                  || this.state.imageTaken
+                  ? "hidden"
+                  : "submit-button-elements2"}>
+                  <div className="button-hover ">
+                    <img src={submit} onClick={() => this.getLocation()}
+                      className="button-that-submits" alt=''></img>
+                  </div>
                 </div>
               </div>
             </div>

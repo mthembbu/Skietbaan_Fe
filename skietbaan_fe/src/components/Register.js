@@ -7,7 +7,7 @@ import {
 import '../components/RegisterStyles.css';
 import { validateEmail, validateUsername } from './Validators.js';
 import { getCookie } from './cookie.js';
-import { URL } from '../actions/types.js';
+import { BASE_URL } from '../actions/types.js';
 import skietbaan from '../components/assets/skietbaanLogo.png';
 
 class Register extends Component {
@@ -42,7 +42,7 @@ class Register extends Component {
 
   componentDidMount() {
     this.disableButton();
-    fetch(URL + "/api/User", {
+    fetch(BASE_URL + "/api/User", {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -53,7 +53,8 @@ class Register extends Component {
       .then(data => this.setState({
         users: data,
       }))
-      .catch(function (data) {
+      .catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
   }
 
@@ -70,62 +71,66 @@ class Register extends Component {
   handleChange({ target }) {
     this.setState({
       [target.name]: target.value,
-    });
-    let isValid = false;
-    let stateUpdate = {
-      invalidPassword: this.state.invalidPassword,
-      invalidEmail: this.state.invalidEmail,
-      invalidUsername: this.state.invalidUsername,
-      usernameTaken: false,
-      emailTaken: false
-    }
-    if (target.name === "passwordValue") {
-      if (target.value.length > 0)
-        stateUpdate.invalidPassword = false;
-      else {
-        stateUpdate.invalidPassword = true;
-      }
-    }
-    if (target.name === "emailValue") {
-      stateUpdate.invalidEmail = false;
-      for (var i = 0; i < this.state.users.length; i++) {
-        if (this.state.users[i].email.toLowerCase() == target.value.toLowerCase()) {
-          stateUpdate.emailTaken = true;
-          stateUpdate.invalidEmail = true;
-          break;
-        }
-
-      };
-    };
-    if (target.name === "usernameValue" && target.value.length > 0) {
-      stateUpdate.invalidUsername = false;
-      for (var i = 0; i < this.state.users.length; i++) {
-        if (this.state.users[i].username.toLowerCase() == target.value.toLowerCase()) {
-          stateUpdate.usernameTaken = true;
-          stateUpdate.invalidUsername = true;
-          break;
-        }
-
-      };
-    }
-    else if (target.name === "usernameValue") {
-      stateUpdate.invalidUsername = true;
-    }
-    if (this.state.usernameValue
-      && this.state.passwordValue
-      && this.state.emailValue
-      && validateEmail(this.state.emailValue)
-      && !stateUpdate.invalidUsername
-      && !stateUpdate.invalidEmail
-      && !stateUpdate.invalidPassword) {
-      isValid = true;
-    }
-    this.setState({
-      ...stateUpdate,
-      validForm: isValid
     }, () => {
-      this.disableButton();
-    });
+      let isValid = false;
+      let stateUpdate = {
+        invalidPassword: this.state.invalidPassword,
+        invalidEmail: this.state.invalidEmail,
+        invalidUsername: this.state.invalidUsername,
+        usernameTaken: false,
+        emailTaken: false
+      }
+      if (target.name === "passwordValue") {
+        if (target.value.length > 0)
+          stateUpdate.invalidPassword = false;
+        else {
+          stateUpdate.invalidPassword = true;
+        }
+      }
+      if (target.name === "emailValue") {
+        stateUpdate.invalidEmail = false;
+        for (var i = 0; i < this.state.users.length; i++) {
+          if (this.state.users[i].email.toLowerCase() == target.value.toLowerCase()) {
+            stateUpdate.emailTaken = true;
+            stateUpdate.invalidEmail = true;
+            break;
+          }
+  
+        };
+      };
+      if (target.name === "usernameValue" && target.value.length > 0) {
+        stateUpdate.invalidUsername = false;
+        for (var i = 0; i < this.state.users.length; i++) {
+          if (this.state.users[i].username.toLowerCase() == target.value.toLowerCase()) {
+            stateUpdate.usernameTaken = true;
+            stateUpdate.invalidUsername = true;
+            break;
+          }
+  
+        };
+      }
+      else if (target.name === "usernameValue") {
+        stateUpdate.invalidUsername = true;
+      }
+      if (this.state.usernameValue
+        && this.state.passwordValue
+        && this.state.emailValue
+        && validateEmail(this.state.emailValue)
+        && !stateUpdate.invalidUsername
+        && !stateUpdate.invalidEmail
+        && !stateUpdate.invalidPassword) {
+        isValid = true;
+      }
+      this.setState({
+        ...stateUpdate,
+        validForm: isValid
+      }, () => {
+        this.disableButton();
+      });
+    }
+    
+    );
+
   };
 
   validate() {
@@ -163,7 +168,7 @@ class Register extends Component {
         "Email": this.state.emailValue,
         "Password": hash,
       }
-      fetch(URL + "/api/user", {
+      fetch(BASE_URL + "/api/user", {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -177,7 +182,8 @@ class Register extends Component {
           document.cookie = "token =" + data.token + "; expires =Wed, 18 Dec 2030 12:00:00 UTC";
           window.location = "/home";
         }
-      }).catch(function (data) {
+      }).catch(err =>  {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
     }
   }
@@ -211,11 +217,10 @@ class Register extends Component {
             <button className="button-login" onClick={() => this.goToLogin()}>LOGIN</button>
           </div>
         </div>
-        <div className="centre-login">
-          <Form className="form" autoComplete="off">
+        <div className="centre-login-register">
+          <form className="form" autoComplete="off">
 
             <div className="spacing-login">
-              <FormGroup>
                   <input
                     type="text"
                     name="usernameValue"
@@ -228,14 +233,11 @@ class Register extends Component {
                   />
                   <div className="error-message-container">
                     <div className={this.state.usernameTaken 
-                      ? "error-message" 
+                      ? "error-message-login" 
                       : "hidden"} > Username already exists</div>
                     </div>
-                
-              </FormGroup>
             </div>
             <div className="spacing-login">
-              <FormGroup>
                   <input
                     type="text"
                     name="emailValue"
@@ -248,13 +250,11 @@ class Register extends Component {
                   />
                   <div className="error-message-container">
                 <div className={this.state.emailTaken 
-                  ? "error-message" 
+                  ? "error-message-login" 
                   : "hidden"} > Email address already in use</div>
                 </div>
-              </FormGroup>
             </div>
             <div className="spacing-login">
-              <FormGroup>
                   <div className="input-label centre-div">
                     <input
                       type="text"
@@ -275,7 +275,6 @@ class Register extends Component {
                     </div>
 
                   </div>
-              </FormGroup>
             </div>
             <div className="button-container">
               <Button onClick={this.register} id="roundButton" 
@@ -284,7 +283,7 @@ class Register extends Component {
                 : "buttons-invalid round-button"} 
               >Join</Button>
             </div>
-          </Form>
+          </form>
         </div>
       </div>
     );

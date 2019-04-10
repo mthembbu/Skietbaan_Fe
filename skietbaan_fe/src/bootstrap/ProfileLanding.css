@@ -1,18 +1,135 @@
 @media only screen and (min-width: 576px){
-    .content-container{
+    .award-content-container{
         margin-top: 56px;
+    }
+
+    .user-details-main-container{
+        width: 55% !important;
+    }
+    .profile-bootstrap-col-center-container{
+        background: white;
+        padding: 0;
+    }
+    .documents_background{
+        width: 55% !important;
+    }
+
+    .profile-landing-container{
+        margin-top: 56px;
+    }
+
+    .pad-award-container{
+        padding-top: 86px !important;
+    }
+
+    .fix-top{
+        z-index: 1;
+        position: absolute !important;
+        width: 100% !important;
+        background: white;
+    }
+}
+@media only screen and (max-width: 576px){
+    .profile-bootstrap-col-center-container{
+        background-color: #F5F5F5;
+        padding-right: 15px;
+        padding-left: 15px;
     }
 }
 
-.buttons-container {
+@media only screen and (min-width: 354px) and (max-width: 368px){
+    .profile-buttons-container button{
+        width: 83px !important;
+    }
+}
+
+@media only screen and (max-width: 353px){
+    .profile-buttons-container button{
+        width: 70px !important;
+    }
+}
+
+.profile-landing-container{
+    overflow-y: auto;
+    height: 100vh;
+    background-color: white;
+}
+
+.button-style-active{
+    background-color: #BE0000;
+    color: white;
+}
+
+.button-style-inactive{
+    background-color: transparent;
+}
+
+.profile-buttons-container {
     width: 97%;
+    position: relative;
+    bottom: 12px;
 }
 
-.buttons-container button{
+.profile-buttons-container button{
     outline: none;
+    width: 86px;
+    height: 32px;
 }
 
-.content-container{
+.medal-img img{
+    width: 14px; 
+    height: 23px;
+}
+
+.docs-img-scale img{
+    width: 17px; 
+    height: 23px;
+}
+
+.details-img-scale img{
+    width: 22px; 
+    height: 24px;
+}
+
+.stats-img-scale img{
+    width: 22px; 
+    height: 22px;
+}
+
+.gun-overlay-img-background{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("../components/assets/gunOverlay.png");
+    width: 151px;
+    margin-left: -9px;
+    margin-top: 4px;
+    border-bottom-left-radius: 10px;
+    height: 63px;
+}
+
+.profile-title{
+    font-size: 20px;
+    color: #fdfdfd;
+    font-weight: 600;
+    padding-top: 14px;
+    padding-left: 16px;
+}
+
+.profile-navigation-text{
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 14px;
+    font-family: Helvetica;
+    color: #BE0000;
+}
+
+.profile-navigation-text-align{
+    text-align: center;
+    margin-top: 1px;
+    font-weight: bold;
+}
+
+.award-content-container{
     overflow-y: scroll;
     overflow: hidden;
 }
@@ -41,12 +158,12 @@
 }
 
 .top-bar-rectangle{
-    height: 60px;
+    height: 67px;
     width: 100%;
     margin-left: 0px;
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
-    background: linear-gradient(270deg, #BE0000 0%, #BE0000 100%);
+    background-image: linear-gradient(to right, #ef3024 , #Dc0600);
     box-shadow: -2px 0 14px -1px #674D4D;
 }
 
@@ -60,7 +177,7 @@
     height: 38px;	
     width: 88px;
     padding-top: 5px;
-    margin-top: 11px;
+    margin-top: 14px;
     padding-left: 20px;
     border: 1px solid #FFFFFF;	
     border-radius: 21px;	
@@ -71,14 +188,6 @@
     font-size: 16px;	
     font-weight: 300;	
     text-align: center;
-}
-
-.buttons-rectangle{
-    height: 32px;	
-    width: 100%;	
-    border: 1px solid #BE0000;	
-    border-radius: 18px;	
-    box-shadow: 0 3px 8px -3px #674D4D;
 }
 
 .buttons-row{
@@ -92,21 +201,9 @@
     font-weight: 400;
 }
 
-.button-fill{
-    padding-top: 5px;
-    margin-top: -5px;
-}
-
-.pad-button-text-top{
-    padding-top: 4px;
-}
-
-#remove-right-button-padding{
-    padding-right: 0px;
-}
-
-#remove-left-button-padding{
-    padding-left: 0px;
+.profile-center-top-buttons{
+    display: inline-flex;
+    justify-content: center;
 }
 
 #pad-middle-button{
@@ -126,4 +223,5 @@
     color: white;
     border-radius: 18px;
     border: none;
+    box-shadow: 0px 3px 8px -3px #674d4d;
 }
