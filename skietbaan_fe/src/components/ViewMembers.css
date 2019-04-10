@@ -2,7 +2,7 @@
   margin: 0 auto;
   margin-top: 30px;
   position: center;
-  background: #fdfdfd;
+  background: #ffffff;
 }
 
 .search-member-name {
@@ -10,13 +10,17 @@
 }
 
 .table-search-members {
-  background-color: #fdfdfd;
+  background-color: #f6f6f6;
    z-index: 1;
     overflow-y: overlay;
+    padding-top: 12px;
 }
 .username-search{
   position: relative;
   padding-bottom: 14px;
+  box-shadow: 0px 11px 6px -7px rgba(0,0,0,0.51);
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 .search{
   padding: 14px;
@@ -26,27 +30,31 @@
   .username-search {
     text-align: center;
     width: 100%;
-    box-shadow: 2px 8px 17px -7px rgba(0,0,0,0.5);
+    box-shadow: 0px 11px 6px -7px rgba(0,0,0,0.51);
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
   }
   .table-search-members {
     padding-top: 0px;
     padding: 0 10% 0 10%;
     background-color:  #f6f6f6;
     overflow-y: scroll;
+
   }
 }
 @media only screen and (max-width: 575px) {
   .table-search-members {
-    background-color: #fdfdfd;
+    background-color: #f6f6f6;
     overflow-y: scroll;
     height: 100%;
     color: #666666;
+
   }
 
   .centre-view-member {
     margin: 0 auto;
     position: center;
-    background: #fdfdfd;
+    background: #ffffff;
   }
 }
 
@@ -133,7 +141,7 @@
   border-width: 1.5px;
   border: none;
   color: #ffffff;
-  margin-top: 44px;
+  margin-top: 20px;
   margin-bottom: 25px;
 }
 
@@ -241,7 +249,7 @@
 
 .membership-details {
   font-size: 13px;
-  margin-top: 48px;
+  margin-top: 10px;
   margin-bottom: 20px;
   text-align: center;
   padding-right: 25px;
