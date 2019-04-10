@@ -90,7 +90,7 @@ class notification extends Component {
     });
     this.props.updateIsReadProperty(Id);
     if (Notification === "Award") {
-      var awardCompetitionName = Message.split(":")[1].trim();
+      var awardCompetitionName = Message.split(":")[1];
       this.props.setSelectedCompetition(awardCompetitionName);
       this.props.setSelectedLandingPage(1);
       this.props.history.push("/profile");
@@ -325,7 +325,7 @@ class notification extends Component {
     const postItems = (
       <table className="post-items">
         {this.props.notificationsArray.length <= 0 ? (
-          <text className="empty-screen">No Notifications Available</text>
+          <label className="empty">No Notifications Available</label>
         ) : (
           ""
         )}
@@ -467,8 +467,11 @@ class notification extends Component {
                   <div>{writeAnnouncement}</div>
                 </Collapse>
               ) : (
-                <div className="format-content" style={{ maxHeight: this.getBodyHeight() + "px" }}>
-                   {postItems}
+                <div
+                  className="format-content"
+                  style={{ maxHeight: this.getBodyHeight() + "px" }}
+                >
+                  {postItems}
                 </div>
               )}
               <div>{deleteModal}</div>
