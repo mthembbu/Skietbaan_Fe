@@ -56,9 +56,7 @@ class AddGroup extends Component {
       window.location = "/registerPage";
     }
     return (
-      <Row className="row justify-content-center">
-        <Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position : "inherit"}}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
-          <div className="add-group-main">
+      <div className="add-group-main">
             <div className="page">
               <div className="middle-bar">
                 <input
@@ -82,8 +80,6 @@ class AddGroup extends Component {
               </div>
             </div>
           </div>
-        </Col>
-      </Row>
 
     );
   }

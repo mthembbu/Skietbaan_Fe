@@ -100,8 +100,8 @@ class ForgotPassword extends Component {
     );
 
     return (
-      <div className="forgot-password-page-content">
-        <div className="container-of-elements">
+      <div className="page-content-login">
+        <div className="page-content-login">
           <div className="red-background">
             <div className="welcome-header">
               <img src={skietbaan} className="header-image" alt="" />
@@ -182,7 +182,7 @@ class ForgotPassword extends Component {
               </label>
             )}
           </div>
-          <div className="button-container forgot-password-button">
+          <div className="reset-button-container forgot-password-button">
             <button
               onClick={this.hanldeReseting}
               id="roundButton"
