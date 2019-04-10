@@ -79,12 +79,19 @@
     background-color: #ffffff;
     width: 100%;
     z-index: 50;
-    position: relative;
     height: 100%;
     margin-bottom: 56px;
 }
 
+.add-score-entire-page-content{
+    overflow-y: scroll;
+}
+
 @media screen and (min-width:576px)  {
+    .add-score-entire-page-content{
+        overflow-y: hidden;
+    }
+
     .page-content{
         margin-top: 0px;
         margin-bottom: 0px;
