@@ -23,7 +23,8 @@ class Login extends Component {
       users: [],
       passwordFound: true,
       usernameFound: true,
-      toggle: false
+      toggle: false,
+      isToken: null
     }
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
