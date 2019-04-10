@@ -48,18 +48,29 @@ class LeaderboardPage extends Component {
         this.roundOfScores = this.roundOfScores.bind(this);
         this.disableFilterButton = this.disableFilterButton.bind(this);
         this.tokkenValidation = this.tokkenValidation.bind(this);
+        this.logout = this.logout.bind(this);
     }
+    logout() {
+        var res = document.cookie;
+        var multiple = res.split(";");
+        for (var i = 0; i < multiple.length; i++) {
+        var key = multiple[i].split("=");
+        document.cookie = key[0] + " =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
+        }
+        window.location = "/login";
+        return false;
+      }
     tokkenValidation(){
         if(this.props.currentUser !== null){
             if(this.props.currentUser.username === "Invalid Tokken"){
-                window.location ="/login";
+                this.logout();
             }
         }
     }
     componentDidMount() {
         // Additionally I could have just used an arrow function for the binding `this` to the component...
         window.addEventListener("resize", this.updateDimensions);
-        /*this.tokkenValidation(); */
+        this.tokkenValidation();
     }
     //executed when leaderboard in mounted on main app
     componentWillMount() {
