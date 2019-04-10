@@ -263,12 +263,12 @@ class Login extends Component {
                     ? "hidden" : "error-message-login"}>Invalid Username or Password</div>
                 </div>
             </div>
-            <div className="login-href">
-              <a className="forgot-password-link" href="/forgotPassword" >FORGOT PASSWORD?</a>
-            </div>
             <div className="button-container">
               <button type="button" onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
                 : "buttons-invalid round-button"}>LOGIN</button>
+            </div>
+            <div className="login-href">
+              <a className="forgot-password-link" href="/forgotPassword" >FORGOT PASSWORD?</a>
             </div>
           </form>
         </div >
