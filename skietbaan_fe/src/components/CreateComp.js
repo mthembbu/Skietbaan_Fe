@@ -62,9 +62,7 @@ class CreateComp extends Component {
 	}
 	render() {
 		return (
-			<Row className="row justify-content-center">
-				<Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position : "inherit" }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
-					<div class="create-comp-container">
+			<div class="create-comp-container">
 						<Form onSubmit={this.onSubmit}>
 							<div className="containers-input">
 								<div className="comp-input-control">
@@ -149,8 +147,6 @@ class CreateComp extends Component {
 							</div>
 						</Form>
 					</div>
-				</Col>
-			</Row>
 		);
 	}
 }

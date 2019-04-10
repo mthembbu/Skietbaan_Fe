@@ -30,9 +30,9 @@
   }
   .table-search-members {
     padding-top: 0px;
-    background-color: #fdfdfd;
+    padding: 0 10% 0 10%;
+    background-color:  #f6f6f6;
     overflow-y: scroll;
-    height: 100%;
   }
 }
 @media only screen and (max-width: 575px) {
@@ -40,6 +40,7 @@
     background-color: #fdfdfd;
     overflow-y: scroll;
     height: 100%;
+    color: #666666;
   }
 
   .centre-view-member {

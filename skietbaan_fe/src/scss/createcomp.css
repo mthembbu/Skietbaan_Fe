@@ -126,9 +126,6 @@ button.button-valid {
 }
 
 @media only screen and (min-width: 575px) {
-	.components-create .row .createpage-bootstrap-col-center-container{
-		height: 100vh;
-	}
 	.create-comp-container{
 		padding-top: 40px;
 	}
