@@ -18,7 +18,8 @@ class UserProfile extends Component {
                 hours: -1,
             },
             collapse: false,
-            exceptionCaught: false
+            exceptionCaughtOnAwards: false,
+            exceptionCaughtOnHours: false
         }
         
         this.toggle = this.toggle.bind(this);
@@ -27,6 +28,7 @@ class UserProfile extends Component {
         this.mapCompetitionNameToIndex = {}
         this._isMounted = false;
         this.isBestInMonth = false;
+        this.accuracyReRender = true;
     }
 
     UNSAFE_componentWillMount() {
@@ -50,8 +52,8 @@ class UserProfile extends Component {
                 })
                 this.setState({ awardCompetitions: data });
             }
-        }).catch(() => {
-            this.setState({ exceptionCaught: true });
+        }).catch(err => {
+            this.setState({ exceptionCaughtOnAwards: true });
         });
 
         fetch(BASE_URL + "/api/awards/hours/" + token, {
@@ -65,8 +67,8 @@ class UserProfile extends Component {
             if(this._isMounted){
                 this.setState({ hoursAward: data });
             }
-        }).catch(() => {
-            this.setState({ exceptionCaught: true });
+        }).catch(err => {
+            this.setState({ exceptionCaughtOnHours: true });
         });
     }
 
@@ -107,10 +109,11 @@ class UserProfile extends Component {
             counter++;
             const timeout = setTimeout(() => {
                 this.animateAccuracyCircle(counter, element, index)
-            }, 80)
+            }, 50)
             this.timeouts.push(timeout);
         }else{
             $(`#circle${index}`).html(element.accuracy+"%");
+            this.accuracyReRender = false;
         }
     }
 
@@ -118,18 +121,6 @@ class UserProfile extends Component {
         return(
             <div className="locked-icon">
                 <img src={require("../resources/awardIcons/light-red-locked-icon.png")} alt="lock-icon" />
-            </div>
-        )
-    }
-
-    renderActiveCircle(element,index){
-        return(
-            <div id={index} className="active-border">
-                <div id={`circle${index}`} className={element.accuracy.toString().split(".")[0].length > 2 ? 
-                    "circle font-size-15px" : "circle font-size-18px"}>
-                    <label className="accuracy-text">0%</label>
-                </div>
-                {this.animateAccuracyCircle(0, element, index)}
             </div>
         )
     }
@@ -153,6 +144,7 @@ class UserProfile extends Component {
     }
 
     setSelectedCompetition(competitionName){
+        this.accuracyReRender = true;
         this.props.setSelectedCompetition(competitionName);
         this.toggle();
     }
@@ -183,6 +175,18 @@ class UserProfile extends Component {
         return renderArray;
     }
 
+    renderActiveCircle(counter, element,index){
+        return(
+            <div id={index} className="active-border">
+                <div id={`circle${index}`} className={element.accuracy.toString().split(".")[0].length > 2 ? 
+                    "circle font-size-15px" : "circle font-size-18px"}>
+                    <label className="accuracy-text">0%</label>
+                </div>
+                {this.animateAccuracyCircle(counter, element, index)}
+            </div>
+        )
+    }
+
     renderAccuracyCircle(element, index){
         return(
             <div>
@@ -191,7 +195,9 @@ class UserProfile extends Component {
                 </div>
                 <div className="circle-bigger">
                     {!element.isCompetitionLocked ?
-                        (element.accuracy === 0 ? <label className="accuracy-text">0%</label> : this.renderActiveCircle(element,index))
+                        element.accuracy === 0 ? <label className="accuracy-text">0%</label> :
+                        this.accuracyReRender ? this.renderActiveCircle(0,element,index) : 
+                        this.renderActiveCircle(element.accuracy, element,index)
                         : this.renderRedLockIcon(index)}
                 </div>
             </div>
@@ -253,7 +259,9 @@ class UserProfile extends Component {
     render() {
         return (
             <div className="award-container pad-award-container">
-                {this.state.exceptionCaught ? <div className="no-competition">No Competitions Available</div> :
+                {this.state.exceptionCaughtOnAwards ? 
+                    <div className="no-competition-border">
+                        <label className="no-competition">No competitions available</label></div> :
                 //only render when the data has arrived from backend
                 this.state.awardCompetitions.length > 0 ?
                 <div className="remove-right-padding">
@@ -305,8 +313,12 @@ class UserProfile extends Component {
                     <div className="line adjust-top-line"></div>
                     <Row className="awards-container pad-top-30px">
                         <Col xs={4}sm={4}md={4} className="push-bottom-49px">
-                            {this.renderAccuracyCircle(this.getInitialAward(),
-                                this.getIndexByCompetitionName(this.getInitialAward().competitionName))}
+                            {
+                                this.renderAccuracyCircle(
+                                    this.getInitialAward(),
+                                    this.getIndexByCompetitionName(this.getInitialAward().competitionName)
+                                )
+                            }
                         </Col>
                         <Col xs={7}sm={7}md={7}>
                             <Row className="push-bottom-13px">
