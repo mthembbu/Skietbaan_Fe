@@ -19,6 +19,7 @@ class Groups extends Component {
 			posts: [],
 			groups: [],
 			newArray: [],
+			ids:[],
 			count: 0,
 			st: true,
 			filterText: '',
@@ -38,6 +39,7 @@ class Groups extends Component {
 		fetch(BASE_URL + '/api/user').then((res) => res.json()).then((data) => {
 			this.setState({
 				posts: data.map((users) => {
+					this.state.ids.push(users.id);
 					return {
 						...users,
 						highlighted: false
@@ -121,11 +123,12 @@ class Groups extends Component {
 	}
 
 	toggleHighlight = (event) => {
-		if (this.state.posts[event].highlighted === true) {
-			this.state.posts[event].highlighted = false;
+		const index=this.state.ids.indexOf(event);
+		if (this.state.posts[index].highlighted === true) {
+			this.state.posts[index].highlighted = false;
 			this.setState({ count: this.state.count - 1 });
 		} else {
-			this.state.posts[event].highlighted = true;
+			this.state.posts[index].highlighted = true;
 			this.setState({ count: this.state.count + 1 });
 		}
 	};
@@ -146,7 +149,7 @@ class Groups extends Component {
 							);
 						})
 						.map((post, index) => (
-							<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(index)}>
+							<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(post.id)}>
 								<img
 									className="checkbox-delete"
 									src={post.highlighted == true ? marked : unmarked}

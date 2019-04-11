@@ -76,7 +76,6 @@ export class createPages extends Component {
 	}
 
 	comptetitionsPage() {
-		
 		this.setState({ selectedButton: 2 });
 		this.props.compSelectedPages(1);
 	}
@@ -86,8 +85,9 @@ export class createPages extends Component {
 	}
 
 	createGroups() {
+
 		this.props.pageState(10);
-		this.props.compSelectedPages(2);
+		this.props.compSelectedPages(1);
 		this.setState({ selectedButtonCreateViewGroups: 1 });
 	}
 
@@ -202,7 +202,7 @@ export class createPages extends Component {
 										</div>
 												<div
 													className={
-														(this.state.selectedButton === 1 && this.props.page===0) ||(this.state.selectedButton === 2 && this.props.selectedButton === 2)? (
+														(this.state.selectedButton === 1 && this.props.page===0) ||(this.state.selectedButton === 2 && this.props.compSelectedPage  === 2)? (
 															'switch-active-right'
 														) : (
 																'switch-inactive'
