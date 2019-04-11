@@ -295,7 +295,7 @@
 
 .icon-push-down{
     position: absolute;
-    bottom: 70px;
+    bottom: 85px;
     left: 0;
     margin-left:10%;
     margin-right:10%;
@@ -551,6 +551,17 @@ input[type=number] {
 }
 
 .not-active{
-    font-size: 13px;
-    font-weight: 100;
+    width: 312px;
+    height: 77px;
+    border: 1px #BE0000 solid;
+    margin-top: 101px;
+    border-radius: 5px;
+}
+
+.not-active-message{
+    padding-top: 14px;
+    font-size: 16px;
+    font-weight: 300;
+    color: #BE0000;
+    font-family: helvetica;
 }
