@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { Collapse } from "react-collapse";
 import Moment from "react-moment";
 import "moment-timezone";
+import { selectedPage } from '../actions/postActions';
 import deleteIcon from "../components/Notification-Img/trashcan.png";
 import deleteIconChange from "../components/Notification-Img/blacktrashcan.png";
 import whiteSelectAll from "../components/Notification-Img/white-select-all.png";
@@ -174,6 +175,7 @@ class notification extends Component {
     });
   }
   componentDidMount() {
+    this.props.selectedPage(4)
     if (getCookie("token")) {
       this.props.getNotifications(this.state.token);
     }
@@ -517,6 +519,7 @@ export default connect(
     updateIsReadProperty,
     getNotifications,
     setSelectedCompetition,
-    setSelectedLandingPage
+    setSelectedLandingPage,
+    selectedPage
   }
 )(notification);
