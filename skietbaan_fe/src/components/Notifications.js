@@ -90,7 +90,8 @@ class notification extends Component {
     });
     this.props.updateIsReadProperty(Id);
     if (Notification === "Award") {
-      var awardCompetitionName = Message.split(":")[1];
+      var awardCompetitionName = Message.split(":")[1].trim();
+      console.log(awardCompetitionName);
       this.props.setSelectedCompetition(awardCompetitionName);
       this.props.setSelectedLandingPage(1);
       setTimeout(() => {
