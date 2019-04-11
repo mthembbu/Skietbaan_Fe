@@ -20,9 +20,15 @@ class CreateComp extends Component {
 			Hours: '',
 			Status: true,
 			MaximumScore: '',
-			isExist: false,
+			isExist: false,	
 			toggleRequirements: false,
-		isCreated:false
+			isCreated:false,
+			errorMessageBestScoreNum:"",
+			errorMessageMaxScore:"",
+			errorMessageHours:"",
+			isBestScoreValid: true,
+			isMaxScoreValid:true,
+			isHoursValid:true
 		};
 		//binding the onChange method to this commponents
 		this.onChangeCompName = this.onChangeCompName.bind(this);
@@ -34,6 +40,7 @@ class CreateComp extends Component {
 		this.changeToggle = this.changeToggle.bind(this);
 		
 	}
+
 	onClick() {
 		history.push('/create');
 	}
@@ -49,19 +56,66 @@ class CreateComp extends Component {
 	{
 		if(event.target.value > 12)
 		event.target.value = event.target.value.substr(0,2);
-		this.setState({BestScoresNumber:event.target.value});
+		let isValid = this.validateBestScoreNumber();
+		if(!isValid) {
+			this.setState({errorMessageBestScoreNum: "INVALID NUMBER OF SCORES!"});
+			this.setState({isBestScoreValid:isValid});
+		}
+		else 
+			this.setState({errorMessageBestScoreNum:""});
+			this.setState({BestScoresNumber:event.target.value});
+	}
+	validateBestScoreNumber(){
+		var check = this.state.BestScoresNumber;
+		if(this.state.BestScoresNumber.length == 0 )
+			this.setState({isBestScoreValid:false});
+		if(check.slice(0,1) >=2 && check.length > 1)
+			return false;
+		else  
+			return true;	
 	}
 	/** The method that detects change on MaxScore */
 	onChangeMaxScore(event){
 		if(event.target.value > 2)
-			event.target.value = event.target.value.substr(0,2);
+			event.target.value = event.target.value.substr(0,3);
+		let isValid = this.validateMaxScore();
+		if(!isValid){
+			this.setState({errorMessageMaxScore:"INVALID MAX SCORE!"});
+			this.setState({isMaxScoreValid:isValid});
+		}
+		else 
+			this.setState({errorMessageMaxScore:""});
 			this.setState({MaximumScore: event.target.value});
+	}
+	validateMaxScore(){
+		var check = this.state.MaximumScore;
+		if(this.state.MaximumScore.length == 0)
+			this.setState({isMaxScoreValid:false});
+		if(check.slice(0,3) > 100 || ((check.slice(0,1) > 1 || check.slice(0,2) >99) && check.length > 3) )
+			return false;
+		else return true;		
+
 	}
 	/** The method that detects the changes on the  hours input */
 	onChangeHours(event){
 		if(event.target.value > 3)
 			event.target.value = event.target.value.substr(0,3);
+		let isValid = this.validateHours();	
+			if(!isValid){
+				this.setState({errorMessageHours:"INVALID MAXIMUM HOURS!"});
+				this.setState({isHoursValid:isValid});
+			}
+			else 
+				this.setState({errorMessageHours:""});	
 			this.setState({Hours: event.target.value});
+	}
+	validateHours(){
+		var check = this.state.Hours;
+		if(this.state.Hours.length == 0)
+			this.setState({isHoursValid:false});
+		if(check.slice(0,3) > 360 || ((check.slice(0,1) > 3 || check.slice(0,2) >36) && check.length > 3) )
+			return false;
+		else return true;
 	}
 	/** A method that handles the submit enent for the submit button*/
 	onSubmit(e) {
@@ -126,6 +180,7 @@ class CreateComp extends Component {
 									value={this.state.BestScoresNumber}
 									onChange={this.onChangeBestScoreNum}
 								/>
+								<div style={{fontSize:12,color:"red"}}>{this.state.isBestScoreValid ? null : this.state.errorMessageBestScoreNum}</div>
 							</div>
 
 							<div className="comp-input-control">
@@ -143,6 +198,7 @@ class CreateComp extends Component {
 									value={this.state.MaximumScore}
 									onChange={this.onChangeMaxScore}
 								/>
+							<div style={{fontSize:12,color:"red"}}>{this.state.isMaxScoreValid ? null : this.state.errorMessageMaxScore}</div>	
 							</div>
 							<div className="comp-input-control">
 								<input
@@ -159,6 +215,7 @@ class CreateComp extends Component {
 									value={this.state.Hours}
 									onChange={this.onChangeHours}
 								/>
+							<div style={{fontSize:12,color:"red"}}>{this.state.isHoursValid ? null : this.state.errorMessageHours}</div>	
 							</div>
 							{this.state.isCreated? <label>Competition created</label>:null}	
 							<div className="comp-submit-btn-container">
