@@ -38,16 +38,19 @@ export const fetchGroups = () => dispatch => {
 };
 
 export const AddMemberAction = id => dispatch => {
+  const arr=[];
   fetch(BASE_URL + "/api/Groups/list?id=" + id)
     .then(res => res.json())
     .then(posts => {
       const newdata = posts.map(users => {
         users.highlighted = false;
+        arr.push(users.id);
         return users;
       });
       dispatch({
         type: ADDMEMBERS,
-        payload: newdata
+        payload: newdata,
+        pay:arr
       });
     })
     .catch(err => {
@@ -89,16 +92,19 @@ export const getName = name => {
 };
 
 export const fetchEditUser = groupid => dispatch => {
+  const ar=[];
   fetch(BASE_URL + "/api/Groups/edit?id=" + groupid)
     .then(res => res.json())
     .then(data => {
       const newdata = data.map(user => {
         user.highlighted = false;
+        ar.push(user.id)
         return user;
       });
       dispatch({
         type: EDITGROUPUSERS,
-        payload: newdata
+        payload: newdata,
+        pay:ar
       });
     })
     .catch(err => {

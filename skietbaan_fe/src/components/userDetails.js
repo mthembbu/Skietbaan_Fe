@@ -14,7 +14,9 @@ export default class userDetails extends Component {
       emailValue: "",
       cellphoneValue: "",
       returnValue: "",
-      checkNumberValid: false
+      checkNumberValid: false,
+      inputChanged: false,
+      checkEmailValid: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -43,33 +45,44 @@ export default class userDetails extends Component {
   }
 
   updateUser() {
-    this.state.array.name = this.state.nameValue;
-    this.state.array.phoneNumber = this.state.cellphoneValue;
-    this.state.array.email = this.state.emailValue;
-    this.state.array.surname = this.state.surnameValue;
-    fetch(BASE_URL + "/api/Features/UpdateDetails/", {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(this.state.array)
-    })
-      .then(res => res.json())
-      .then(data => this.setState({ returnValue: data }))
-      .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      });
+    if (
+      this.state.array.name === this.state.nameValue &&
+      this.state.array.phoneNumber === this.state.cellphoneValue &&
+      this.state.array.email === this.state.emailValue &&
+      this.state.array.surname === this.state.surnameValue
+    ) {
+      this.setState({ inputChanged: false });
+    } else {
+      this.state.array.name = this.state.nameValue;
+      this.state.array.phoneNumber = this.state.cellphoneValue;
+      this.state.array.email = this.state.emailValue;
+      this.state.array.surname = this.state.surnameValue;
+      fetch(BASE_URL + "/api/Features/UpdateDetails/", {
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.state.array)
+      })
+        .then(res => res.json())
+        .then(data => this.setState({ returnValue: data }))
+        .catch(err => {
+          /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+        });
+    }
   }
 
   handleChange({ target }) {
     this.setState({
-      [target.name]: target.value
+      [target.name]: target.value,
+      inputChanged: true
     });
   }
-
   handErrorValue() {
-    this.setState({ checkNumberValid: true });
+    this.state.inputChanged === false
+      ? this.setState({ checkNumberValid: false, checkEmailValid: false })
+      : this.setState({ checkNumberValid: true, checkEmailValid: true });
   }
 
   render() {
@@ -154,11 +167,14 @@ export default class userDetails extends Component {
                   className={"user-details-input-container"}
                   value={this.state.emailValue}
                   onChange={this.handleChange}
+                  onClick={this.handErrorValue}
                   placeholder="Email"
                 />
               </div>
 
-              {validateEmail(this.state.emailValue) ? null : (
+              {this.state.checkEmailValid === false ? null : validateEmail(
+                  this.state.emailValue
+                ) ? null : (
                 <label className="user-details-Errors">invalid email</label>
               )}
               {this.state.returnValue === "updated"
@@ -184,11 +200,8 @@ export default class userDetails extends Component {
                       : "user-details-button-container"
                   }
                   onClick={
-                    this.state.array.name === this.state.nameValue ||
-                    this.state.array.surname === this.state.surnameValue ||
-                    this.state.array.phoneNumber ===
-                      this.state.cellphoneValue ||
-                    this.state.array.email === this.state.emailValue
+                    this.state.inputChanged === true &&
+                    validateEmail(this.state.emailValue)
                       ? this.updateUser
                       : this.handErrorValue
                   }

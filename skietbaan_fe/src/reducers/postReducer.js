@@ -31,6 +31,8 @@ const initialState = {
   leaderboardCompetitions: [],
   leaderboardUser:{},
   navSelectedPage:0,
+  idsForUser:[],
+  memberIds:[],
   leaderboardSelectedCompetitionName:"",
   leaderboardSelectedGroupName:"",
   leaderboardTableData: [],
@@ -76,8 +78,10 @@ export default function(state = initialState, action) {
     case ADDMEMBERS:
       return {
         ...state,
-        existing: action.payload
+        existing: action.payload,
+        memberIds: action.pay
       };
+
     case NEWGROUPSTATE:
       return {
         ...state,
@@ -87,7 +91,8 @@ export default function(state = initialState, action) {
     case EDITGROUPUSERS:
       return {
         ...state,
-        editGroup: action.payload
+        editGroup: action.payload,
+        idsForUser: action.pay
       };
     case EMPTY:
       return {

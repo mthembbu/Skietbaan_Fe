@@ -44,9 +44,9 @@ class ViewGroups extends Component {
   }
   getBodyHeight() {
     if (this.state.width < 575) {
-      return (this.state.height - 240);
+      return (this.state.height - 240)+"px";
     } else {
-      return 70;
+      return "70vh";
     }
   }
   componentDidMount() {
@@ -148,7 +148,7 @@ class ViewGroups extends Component {
                       </div>
                     ) : null}
                   </td>
-                  <td >
+                  <td className="switch-container">
                     <div className="group-view">
                       <Switch
                         color={"primary"}
@@ -167,7 +167,7 @@ class ViewGroups extends Component {
     );
 
     return (
-      <div className="The-Main" style={{ height: this.getBodyHeight() + "vh" }}>
+      <div className="The-Main" style={{ height: this.getBodyHeight() }}>
             {postitems}
       </div>
 
