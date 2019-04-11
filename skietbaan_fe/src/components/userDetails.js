@@ -15,8 +15,8 @@ export default class userDetails extends Component {
       cellphoneValue: "",
       returnValue: "",
       checkNumberValid: false,
-      inputchanged: false,
-      checkEmailvalid: false
+      inputChanged: false,
+      checkEmailValid: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -51,7 +51,7 @@ export default class userDetails extends Component {
       this.state.array.email === this.state.emailValue &&
       this.state.array.surname === this.state.surnameValue
     ) {
-      this.setState({ inputchanged: false });
+      this.setState({ inputChanged: false });
     } else {
       this.state.array.name = this.state.nameValue;
       this.state.array.phoneNumber = this.state.cellphoneValue;
@@ -76,13 +76,13 @@ export default class userDetails extends Component {
   handleChange({ target }) {
     this.setState({
       [target.name]: target.value,
-      inputchanged: true
+      inputChanged: true
     });
   }
   handErrorValue() {
-    this.state.inputchanged === false
-      ? this.setState({ checkNumberValid: false, checkEmailvalid: false })
-      : this.setState({ checkNumberValid: true, checkEmailvalid: true });
+    this.state.inputChanged === false
+      ? this.setState({ checkNumberValid: false, checkEmailValid: false })
+      : this.setState({ checkNumberValid: true, checkEmailValid: true });
   }
 
   render() {
@@ -172,7 +172,7 @@ export default class userDetails extends Component {
                 />
               </div>
 
-              {this.state.checkEmailvalid === false ? null : validateEmail(
+              {this.state.checkEmailValid === false ? null : validateEmail(
                   this.state.emailValue
                 ) ? null : (
                 <label className="user-details-Errors">invalid email</label>
@@ -200,7 +200,7 @@ export default class userDetails extends Component {
                       : "user-details-button-container"
                   }
                   onClick={
-                    this.state.inputchanged === true &&
+                    this.state.inputChanged === true &&
                     validateEmail(this.state.emailValue) &&
                     validateNumber(this.state.cellphoneValue)
                       ? this.updateUser
