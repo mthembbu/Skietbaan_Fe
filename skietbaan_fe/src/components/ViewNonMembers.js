@@ -77,9 +77,9 @@ class ViewNonMembers extends Component {
 	}
 	getBodyHeight() {
 		if (this.state.width < 575) {
-			return (this.state.height - 240);
+			return (this.state.height - 240)+"px";
 		  } else {
-			return "";
+			return "69vh";
 		  }
 	}
 	getNonMembers() {
@@ -274,7 +274,7 @@ class ViewNonMembers extends Component {
 						/>
 					</div>
 				</div>
-				<div className="table-search-members" style={{ height: this.getBodyHeight() + 'px' }}>
+				<div className="table-search-members" style={{ height: this.getBodyHeight() }}>
 					{postItems}
 				</div>
 			</div>

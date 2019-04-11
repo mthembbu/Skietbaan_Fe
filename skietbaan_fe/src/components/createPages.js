@@ -94,7 +94,7 @@ export class createPages extends Component {
 	viewGroups() {
 		this.props.pageState(0);
 		this.props.compSelectedPages(2);
-		this.setState({ selectedButtonCreateViewGroups: 2 });	
+		this.setState({ selectedButtonCreateViewGroups: 2 });
 	}
 
 	createCompetitions() {
