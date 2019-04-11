@@ -55,7 +55,7 @@ class NavbarMenu extends Component {
 	}
 
 	isHome() {
-		if (this.props.navSelectedPage===4) {
+		if (this.props.navSelectedPage===0) {
 			return (
 				<img
 					src={NAV_BAR_ICONS.LEADERBOARD_RED}
