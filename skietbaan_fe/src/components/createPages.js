@@ -115,7 +115,7 @@ export class createPages extends Component {
 				.then((response) => response.json())
 				.then(function (data) {
 					if (data.admin === false) {
-						/* history.push('/home'); */
+					   history.push('/home');
 					}
 				})
 				.catch(function (data) { })
