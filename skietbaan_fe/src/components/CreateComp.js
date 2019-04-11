@@ -23,7 +23,7 @@ class CreateComp extends Component {
 		isCreated:false
 		};
 		//binding the onChange method to this commponents
-		this.onChange = this.onChange.bind(this);
+		this.onChangeCompName = this.onChangeCompName.bind(this);
 		this.onChangeBestScoreNum = this.onChangeBestScoreNum.bind(this);
 		this.onChangeMaxScore = this.onChangeMaxScore.bind(this);
 		this.onChangeHours = this.onChangeHours.bind(this);
@@ -36,14 +36,11 @@ class CreateComp extends Component {
 		history.push('/create');
 	}
 	/** A method that detects the change in the change in th textfield */
-	onChange(e) {
-		this.setState({ [e.target.name]: e.target.value });
+	onChangeCompName(event) {
+		if(event.target.value.length > 15)
+			event.target.value = event.target.value.substr(0,15);	
+		this.setState({ [event.target.name]: event.target.value });
 		this.setState({ isExist: false });
-		if (this.state.Name === null && this.state.BestScoresNumber === null) {
-			document.getElementById('submit-btn').disabled = true;
-		} else {
-			document.getElementById('submit-btn').disabled = false;
-		}
 	}
 	/** the method that detects the change in BestSCore */
 	onChangeBestScoreNum(event)
@@ -54,13 +51,13 @@ class CreateComp extends Component {
 	}
 	/** The method that detects change on MaxScore */
 	onChangeMaxScore(event){
-		if(event.target.value > 80)
+		if(event.target.value > 2)
 			event.target.value = event.target.value.substr(0,2);
 			this.setState({MaximumScore: event.target.value});
 	}
 	/** The method that detects the changes on the  hours input */
 	onChangeHours(event){
-		if(event.target.value > 360)
+		if(event.target.value > 3)
 			event.target.value = event.target.value.substr(0,3);
 			this.setState({Hours: event.target.value});
 	}
@@ -97,12 +94,14 @@ class CreateComp extends Component {
 										type="text"
 										name="Name"
 										id="titleInput"
+										min={0}
+										max={15}
 										required
 										autoComplete="off"
 										autoCorrect="off"
 										placeholder="Competition Name"
 										value={this.state.Name}
-										onChange={this.onChange}
+										onChange={this.onChangeCompName}
 									/>
 								</div>
 								<div className={this.props.isExist ? 'error-comp-message' : 'hidden'}>
@@ -142,7 +141,6 @@ class CreateComp extends Component {
 									onChange={this.onChangeMaxScore}
 								/>
 							</div>
-
 							<div className="comp-input-control">
 								<input
 									className="comp-input"
@@ -159,18 +157,7 @@ class CreateComp extends Component {
 									onChange={this.onChangeHours}
 								/>
 							</div>
-							{this.state.isCreated? <label>Competition created</label>:null}
-							
-							<div className="comp-input-control">
-								<Collapsible className="create-comp-collapsible" trigger={<div className="requirements-collapse" onClick={this.changeToggle}> EDIT REQUIREMENTS 
-														<span><img className="down-arrow" src={this.state.toggleRequirements ?upArrow : downArrow} alt=""/></span></div>
-													}>
-        							<div className="requirements-content">
-										<p>This is the collapsible content. It can be any element or React component you like.</p>
-        								<p>It can even be another Collapsible component. Check out the next section!</p>
-									</div>
-     							</Collapsible>
-							</div>	
+							{this.state.isCreated? <label>Competition created</label>:null}	
 							<div className="comp-submit-btn-container">
 								<button
 									variant="secondary"

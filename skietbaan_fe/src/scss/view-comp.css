@@ -386,6 +386,9 @@
 	display: none;
 	width: 100%;
 }
+.standards-label{
+	margin-bottom: 10px;
+}
 /*competitions list display css*/
 .standard-header-label {
 	padding-bottom: 24px;
@@ -484,4 +487,12 @@
 	height: 100%;
 	padding-right: 5%;
 	padding-top: 5px;
+}
+/*media queries*/
+@media only screen and (max-width: 575px) {
+	/*mobile*/
+   .page-contents {
+	height: 72vh !important;
+	margin-top: -3vh;
+   }
 }

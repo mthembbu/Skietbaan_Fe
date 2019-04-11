@@ -93,23 +93,36 @@ class notification extends Component {
       var awardCompetitionName = Message.split(":")[1];
       this.props.setSelectedCompetition(awardCompetitionName);
       this.props.setSelectedLandingPage(1);
-      this.props.history.push("/profile");
+      setTimeout(() => {
+        window.location = "/profile";
+      }, 1000);
     } else if (Notification === "Document") {
       this.props.setSelectedLandingPage(2);
-      this.props.history.push("/profile");
-    } else if (Notification === "Confirmation" || Notification === "Expiry") {
-      this.props.history.push("/notify");
-    } else if (Notification === "Renewal") {
+      setTimeout(() => {
+        window.location = "/profile";
+      }, 1000);
+    } else if (
+      Notification === "Confirmation" ||
+      Notification === "Expiry" ||
+      Notification === "Renewal"
+    ) {
+      setTimeout(() => {
+        this.props.history.push("/notify");
+      }, 1000);
     } else if (Notification === "Competition") {
       var competitionName = Message.split(",")[0];
       this.props.updateSelectedCompetition(competitionName);
-      window.location = "/home";
+      setTimeout(() => {
+        window.location = "/home";
+      }, 1000);
     } else if (Notification === "Group") {
       var groupName = Message.split(",")[0];
       this.props.updateSelectedGroup(groupName);
-      window.location = "/home";
+      setTimeout(() => {
+        window.location = "/home";
+      }, 1000);
     } else {
-      window.location = "/notify";
+      this.props.history.push("/notify");
     }
   };
 

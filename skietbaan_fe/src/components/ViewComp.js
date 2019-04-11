@@ -52,6 +52,12 @@ class ViewComp extends Component {
 		this.handleOnSubmit = this.handleOnSubmit.bind(this);
 		this.updateDimensions = this.updateDimensions.bind(this);
 		this.getBodyHeight = this.getBodyHeight.bind(this);
+		this.onChangeBronzeAccuracy = this.onChangeBronzeAccuracy.bind(this);
+		this.onChangeBronzeTotal = this.onChangeBronzeTotal.bind(this);
+		this.onChangeSilverAccuracy = this.onChangeSilverAccuracy.bind(this);
+		this.onChangeSilverTotal = this.onChangeSilverTotal.bind(this);
+		this.onChangeGoldAccuracy = this.onChangeGoldAccuracy.bind(this);
+		this.onChangeGoldTotal = this.onChangeGoldTotal.bind(this);
 	}
 	componentWillMount() {
 		window.addEventListener('resize', this.updateDimensions);
@@ -208,6 +214,37 @@ class ViewComp extends Component {
 	onChange({ target }) {
 		this.setState({ [target.name]: target.value });
 	}
+	/** The standards onChange Listeners: */
+	onChangeBronzeAccuracy(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({bronzeAccuracy:event.target.value});
+	}
+	onChangeBronzeTotal(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({bronzeTotal:event.target.value});
+	}
+	onChangeSilverAccuracy(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({silverAccuracy:event.target.value});
+	}
+	onChangeSilverTotal(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({silverTotal:event.target.value});
+	}
+	onChangeGoldAccuracy(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({goldAccuracy:event.target.value});
+	}
+	onChangeGoldTotal(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({goldTotal:event.target.value});
+	}
 
 	changeToggle() {
 		this.setState({ toggleRequirements: !this.state.toggleRequirements });
@@ -302,10 +339,10 @@ class ViewComp extends Component {
 											<td>
 												<div class="comp-req-container">
 													<Form>
-														<Container>
-															<Row>
-																<Col xs={4} md={4} />
-																<Col xs={4} md={4}>
+														<Container className="standards-container">
+															<Row className="standards-label">
+																<Col xs={3} md={3} lg={3} />
+																<Col xs={5} md={5} lg={5}>
 																	<div className="accuracy-header-label">
 																		ACCURACY %
 																			</div>
@@ -327,15 +364,15 @@ class ViewComp extends Component {
 																		<input
 																			className="bronze-accuracy-input-control"
 																			type="number"
+																			min={1}
+																			max={100}
 																			name="bronzeAccuracy"
 																			id="B_accuracy"
 																			required
 																			autoComplete="off"
 																			autoCorrect="off"
-																			min="0"
-																			max="100"
 																			value={this.state.bronzeAccuracy}
-																			onChange={this.onChange}
+																			onChange={this.onChangeBronzeAccuracy}
 																		/>
 																	</div>
 																</Col>
@@ -347,12 +384,12 @@ class ViewComp extends Component {
 																			name="bronzeTotal"
 																			id="B_total"
 																			required
-																			min="0"
-																			max="600"
+																			min={1}
+																			max={1000}
 																			autoComplete="off"
 																			autoCorrect="off"
 																			value={this.state.bronzeTotal}
-																			onChange={this.onChange}
+																			onChange={this.onChangeBronzeTotal}
 																		/>
 																	</div>
 																</Col>
@@ -377,7 +414,7 @@ class ViewComp extends Component {
 																			autoComplete="off"
 																			autoCorrect="off"
 																			value={this.state.silverAccuracy}
-																			onChange={this.onChange}
+																			onChange={this.onChangeSilverAccuracy}
 																		/>
 																	</div>
 																</Col>
@@ -394,7 +431,7 @@ class ViewComp extends Component {
 																			autoComplete="off"
 																			autoCorrect="off"
 																			value={this.state.silverTotal}
-																			onChange={this.onChange}
+																			onChange={this.onChangeSilverTotal}
 																		/>
 																	</div>
 																</Col>
@@ -419,7 +456,7 @@ class ViewComp extends Component {
 																			autoComplete="off"
 																			autoCorrect="off"
 																			value={this.state.goldAccuracy}
-																			onChange={this.onChange}
+																			onChange={this.onChangeGoldAccuracy}
 																		/>
 																	</div>
 																</Col>
@@ -436,7 +473,7 @@ class ViewComp extends Component {
 																			autoComplete="off"
 																			autoCorrect="off"
 																			value={this.state.goldTotal}
-																			onChange={this.onChange}
+																			onChange={this.onChangeGoldTotal}
 																		/>
 																	</div>
 																</Col>
