@@ -15,7 +15,7 @@ import ViewComp from '../components/ViewComp';
 import GroupComponent from '../components/GroupComponent';
 import CompComponent from '../components/CompComponent';
 import { compSelectedPages } from '../actions/competition.action';
-import { pageState } from '../actions/postActions';
+import { pageState,selectedPage } from '../actions/postActions';
 export class createPages extends Component {
 	constructor(props) {
 		super(props);
@@ -111,7 +111,7 @@ export class createPages extends Component {
 		this.setState({ selectedValue: event });
 	};
 	componentDidMount() {
-		
+		this.props.selectedPage(1);
 		if (getCookie('token') !== null) {
 			let token = getCookie('token');
 			fetch(BASE_URL + '/api/features/getuserbytoken/' + token, {
@@ -293,4 +293,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, { compSelectedPages,pageState })(createPages);
+export default connect(mapStateToProps, { compSelectedPages,pageState,selectedPage })(createPages);
