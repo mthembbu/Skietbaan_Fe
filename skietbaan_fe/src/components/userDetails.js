@@ -201,8 +201,7 @@ export default class userDetails extends Component {
                   }
                   onClick={
                     this.state.inputChanged === true &&
-                    validateEmail(this.state.emailValue) &&
-                    validateNumber(this.state.cellphoneValue)
+                    validateEmail(this.state.emailValue)
                       ? this.updateUser
                       : this.handErrorValue
                   }
