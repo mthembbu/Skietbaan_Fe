@@ -23,7 +23,8 @@ class Login extends Component {
       users: [],
       passwordFound: true,
       usernameFound: true,
-      toggle: false
+      toggle: false,
+      isToken: null
     }
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -44,6 +45,46 @@ class Login extends Component {
   }
 
   componentDidMount() {
+    let found = false;
+    if (getCookie("token")) {
+      let token = getCookie("token");
+      fetch(URL + "/api/features/getuserbytoken/" + token, {
+        method: "Get",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => response.json())
+        .then(function(data) {
+          if (data === undefined || data === null) {
+            this.setState({
+              isToken: true
+            });
+            found = true;
+          }
+        })
+        .then(data => {
+          if (data === undefined || data === null) {
+            this.setState({
+              isToken: true
+            });
+            found = true;
+          }
+        })
+        .catch(function(data) {
+          if (!getCookie("token") || found === false) {
+            var res = document.cookie;
+            var multiple = res.split(";");
+            for (var i = 0; i < multiple.length; i++) {
+              var key = multiple[i].split("=");
+              document.cookie =
+                key[0] + " =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
+            }
+            window.location = "/login";
+          }
+        });
+      }
     this.disableButton()
   }
 
@@ -260,15 +301,15 @@ class Login extends Component {
                     && this.passwordValue !== ""
                     && this.state.usernameFound
                     && this.usernameValue !== ""
-                    ? "hidden" : "error-message"}>Invalid Username or Password</div>
+                    ? "hidden" : "error-message-login"}>Invalid Username or Password</div>
                 </div>
-            </div>
-            <div className="login-href">
-              <a className="forgot-password-link" href="/forgotPassword" >FORGOT PASSWORD?</a>
             </div>
             <div className="button-container">
               <button type="button" onClick={this.login} id="roundButton" className={this.state.validForm ? "round-button"
                 : "buttons-invalid round-button"}>LOGIN</button>
+            </div>
+            <div className="login-href">
+              <a className="forgot-password-link" href="/forgotPassword" >FORGOT PASSWORD?</a>
             </div>
           </form>
         </div >

@@ -47,10 +47,30 @@ class LeaderboardPage extends Component {
         this.getClickableSpaceSize = this.getClickableSpaceSize.bind(this);
         this.roundOfScores = this.roundOfScores.bind(this);
         this.disableFilterButton = this.disableFilterButton.bind(this);
+        this.tokkenValidation = this.tokkenValidation.bind(this);
+        this.logout = this.logout.bind(this);
+    }
+    logout() {
+        var res = document.cookie;
+        var multiple = res.split(";");
+        for (var i = 0; i < multiple.length; i++) {
+        var key = multiple[i].split("=");
+        document.cookie = key[0] + " =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
+        }
+        window.location = "/login";
+        return false;
+      }
+    tokkenValidation(){
+        if(this.props.currentUser !== null){
+            if(this.props.currentUser.username === "Invalid Tokken"){
+                
+            }
+        }
     }
     componentDidMount() {
         // Additionally I could have just used an arrow function for the binding `this` to the component...
         window.addEventListener("resize", this.updateDimensions);
+        this.tokkenValidation();
     }
     //executed when leaderboard in mounted on main app
     componentWillMount() {
@@ -589,7 +609,8 @@ class LeaderboardPage extends Component {
                                                                                                      <tbody>
                                                                                                          <tr>
                                                                                                              <td className="extra-name-col">{this.props.competitions.length === 0 ? (this.props.currentUser.displayName === null ? this.props.currentUser.username : this.props.currentUser.username )
-                                                                                                                                                                             :(this.props.userResults === null ? 'Something went wrong' 
+                                                                                                                                                                             :(this.props.userResults === null ? (this.props.currentUser !== null ? this.props.currentUser.username
+                                                                                                                                                                                                                                            : "invalid tokken") 
                                                                                                                                                                                                               : (this.props.userResults !== null ? this.props.userResults.username : '--'))}</td>
                                                                                                              <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{this.props.userResults === null ? '--' : (this.props.userResults.best !== 0 ? this.props.userResults.best : '--')}</td>
                                                                                                              <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>

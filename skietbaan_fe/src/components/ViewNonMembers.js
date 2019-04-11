@@ -76,7 +76,11 @@ class ViewNonMembers extends Component {
 		});
 	}
 	getBodyHeight() {
-		return this.state.height - 238;
+		if (this.state.width < 575) {
+			return (this.state.height - 240);
+		  } else {
+			return 70;
+		  }
 	}
 	getNonMembers() {
 		fetch(BASE_URL + '/api/Features/SearchNonMember', {
@@ -86,10 +90,10 @@ class ViewNonMembers extends Component {
 				'Content-Type': 'application/json'
 			}
 		})
-			.then(function(response) {
+			.then(function (response) {
 				return response.json();
 			})
-			.then(function(data) {
+			.then(function (data) {
 				return data;
 			})
 			.then((data) =>
@@ -107,10 +111,10 @@ class ViewNonMembers extends Component {
 				'Content-Type': 'application/json'
 			}
 		})
-			.then(function(response) {
+			.then(function (response) {
 				return response.json();
 			})
-			.then(function(data) {
+			.then(function (data) {
 				return data;
 			})
 			.then((data) =>
@@ -137,7 +141,7 @@ class ViewNonMembers extends Component {
 			},
 			body: JSON.stringify(RequestObject)
 		})
-			.then(function(response) {
+			.then(function (response) {
 				return response.json();
 			})
 			.then((data) => {
@@ -256,28 +260,24 @@ class ViewNonMembers extends Component {
 			</table>
 		);
 		return (
-			<Row className="row justify-content-center">
-				<Col sm={8} className="createpage-bootstrap-col-center-container">
-					<div className="centre-view-member">
-						<div className="username-search">
-							<div className="search">
-								<input
-									autoComplete="off"
-									type="text"
-									className="user-value"
-									id="usernameValue"
-									placeholder="Enter Username"
-									value={this.state.filterText}
-									onChange={this.onChangeText}
-								/>
-							</div>
-						</div>
-						<div className="table-search-members" style={{ height: this.getBodyHeight() + 'px' }}>
-							{postItems}
-						</div>
+			<div className="centre-view-member">
+				<div className="username-search">
+					<div className="search">
+						<input
+							autoComplete="off"
+							type="text"
+							className="user-value"
+							id="usernameValue"
+							placeholder="Enter Username"
+							value={this.state.filterText}
+							onChange={this.onChangeText}
+						/>
 					</div>
-				</Col>
-			</Row>
+				</div>
+				<div className="table-search-members" style={{ height: this.getBodyHeight() + 'vh' }}>
+					{postItems}
+				</div>
+			</div>
 		);
 	}
 }
