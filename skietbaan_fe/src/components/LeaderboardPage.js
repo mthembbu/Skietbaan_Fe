@@ -332,7 +332,7 @@ class LeaderboardPage extends Component {
                                             <div className="membership-icon">
                                                 {post.isMember
                                                     ? <img src={require('../resources/member.png')} />
-                                                    : null}
+                                                    : <img src={require('../resources/guest.png')} />}
                                             </div>
                                             <div className="dedication-icon">
                                                 {post.isCompetitiveShooter
@@ -374,7 +374,7 @@ class LeaderboardPage extends Component {
                                                         <div className="up-arrow">
                                                             <div className="up-arrow-icon">
                                                                 {post.rankStatus === "up"
-                                                                    ? <img src={require('../resources/upArrow.png')} />
+                                                                    ? <img src={require('../resources/accuracyUp.png')} />
                                                                     : null}
                                                             </div>
                                                         </div>
@@ -384,7 +384,7 @@ class LeaderboardPage extends Component {
                                                         <div className="down-arrow">
                                                             <div className="down-arrow-icon">
                                                                 {post.rankStatus === "down"
-                                                                    ? <img src={require('../resources/downArrow.png')} />
+                                                                    ? <img src={require('../resources/accuracyDown.png')} />
                                                                     : null}
                                                             </div>
                                                         </div>
@@ -466,7 +466,7 @@ class LeaderboardPage extends Component {
                                 <div className={this.state.listType == "competitions" ? "hide-my-div" : (this.state.selectedGroup == -1 ? "individual-active" : "individual-inactive")}>
                                     <MDBBtn tag="a" size="lg" floating gradient="purple"
                                         onClick={() => this.setGroupValue(-1)} >
-                                        Overall ranking
+                                        OVERALL
                                         </MDBBtn>
                                 </div>
                                 <div className={this.state.listType == "groups" ? "cat-visible-groups-label" : "hide-my-div"}>
@@ -572,11 +572,10 @@ class LeaderboardPage extends Component {
                                                                                                          <div className="membership-icon">
                                                                                                              {this.props.currentUser.isMember
                                                                                                                  ? <img src={require('../resources/memberW.png')} />
-                                                                                                                 : null}
+                                                                                                                 : <img src={require('../resources/guestW.png')} />}
                                                                                                          </div>
                                                                                                          <div className="dedication-icon">
-                                                                                                             {this.props.competitions.length === 0 ? null
-                                                                                                                                                   : this.props.currentUser.isCompetitiveShooter ? <img src={require('../resources/dedicatedShooterW.png')} />
+                                                                                                             {this.props.currentUser.isCompetitiveShooter ? <img src={require('../resources/dedicatedShooterW.png')} />
                                                                                                                                                                                                   : <img src={require('../resources/standardShooterW.png')} />}
                                                                                                          </div>
                                                                                                      </div>

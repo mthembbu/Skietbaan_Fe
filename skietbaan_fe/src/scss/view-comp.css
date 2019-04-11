@@ -488,3 +488,11 @@
 	padding-right: 5%;
 	padding-top: 5px;
 }
+/*media queries*/
+@media only screen and (max-width: 575px) {
+	/*mobile*/
+   .page-contents {
+	height: 72vh !important;
+	margin-top: -3vh;
+   }
+}
