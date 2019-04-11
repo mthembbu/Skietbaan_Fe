@@ -41,8 +41,7 @@ class AddGroup extends Component {
     if (this.state.groups.indexOf(this.state.name.toLowerCase()) === -1) {
       if (this.state.name.length != 0) {
         this.props.getName(this.state.name);
-       history.push("/Groups");
-        
+        history.push("/Groups");
       } else {
         this.setState({ txt: "group name can't be empty" });
       }
@@ -57,29 +56,29 @@ class AddGroup extends Component {
     }
     return (
       <div className="add-group-main">
-            <div className="page">
-              <div className="middle-bar">
-                <input
-                  className="texts"
-                  type="text"
-                  name="name"
-                  onChange={this.onChange}
-                  value={this.state.name}
-                  autoComplete="off"
-                  autoCorrect="off"
-                  placeholder="Group Name"
-                />
-                {this.state.exist === true ? null : (
-                  <label className="errorMsg">Group Name Already Exists</label>
-                )}
-              </div>
-              <div className="add-container">
-                <button className="add" onClick={this.onClick}>
-                  ADD USERS
-            </button>
-              </div>
-            </div>
+        <div className="page">
+          <div className="middle-bar">
+            <input
+              className="texts"
+              type="text"
+              name="name"
+              onChange={this.onChange}
+              value={this.state.name}
+              autoComplete="off"
+              autoCorrect="off"
+              placeholder="Group Name"
+            />
+            {this.state.exist === true ? null : (
+              <label className="errorMsg">Group Name Already Exists</label>
+            )}
           </div>
+          <div className="add-container">
+            <button className="add" onClick={this.onClick}>
+              ADD USERS
+            </button>
+          </div>
+        </div>
+      </div>
 
     );
   }
