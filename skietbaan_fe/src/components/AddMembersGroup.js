@@ -127,7 +127,6 @@ class AddMembersGroup extends Component {
   }
 
   render() {
-    console.log("render",this.props.memberIds)
     const postitems = (
       <div className="check-edit" style={{ height: this.getBodyHeight() + 'vh'}}>
       {this.props.existing.length===0?null:
