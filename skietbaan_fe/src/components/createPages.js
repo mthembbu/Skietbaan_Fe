@@ -110,7 +110,7 @@ export class createPages extends Component {
 		this.setState({ selectedValue: event });
 	};
 	componentDidMount() {
-		this.props.pageState(0);
+		
 		if (getCookie('token') !== null) {
 			let token = getCookie('token');
 			fetch(BASE_URL + '/api/features/getuserbytoken/' + token, {
@@ -132,6 +132,9 @@ export class createPages extends Component {
 				});
 		} else {
 			window.location = '/registerPage';
+		}
+		if(this.props.page===""){
+			this.props.pageState(10);
 		}
 
 	}
@@ -187,7 +190,7 @@ export class createPages extends Component {
 												: "create-switch-bottom"} >
 												<div
 													className={
-														(this.state.selectedButton === 1 && this.props.page!==0) || (this.state.selectedButton === 2 && this.props.selectedButton !== 2) ? (
+														(this.state.selectedButton === 1 && this.props.page!==0) || (this.state.selectedButton === 2 && this.props.page !== 0) ? (
 															'switch-active-left'
 														) : (
 																'switch-inactive'
@@ -199,7 +202,7 @@ export class createPages extends Component {
 										</div>
 												<div
 													className={
-														(this.state.selectedButton === 1 && this.props.page===0) ||(this.state.selectedButton === 2 && this.props.compSelectedPage  === 2)? (
+														(this.state.selectedButton === 1 && this.props.page===0) ||(this.state.selectedButton === 2 && this.props.page  === 0)? (
 															'switch-active-right'
 														) : (
 																'switch-inactive'
