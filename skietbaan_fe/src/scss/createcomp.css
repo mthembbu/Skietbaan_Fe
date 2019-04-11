@@ -85,6 +85,29 @@
 .containers-input{
 	padding-top: 17px;
 }
+/** CSS for the requirements within the create page*/
+.requirements-collapse{
+	margin: 5px;
+    margin-top: 24px;
+    height: 21px;
+    width: 185px;
+    color: #BE0000;
+    font-family: Helvetica;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 17px;
+    text-align: center;
+    display: inline-flex;
+}
+.requirements-label {
+	margin-right: 3px;
+}
+.down-arrow {
+	width: 12px;
+	height: 12px;
+	margin-bottom: 3px;
+}
+
 
 @media all and (min-width: 480px) {
 	.collapse-css-transition {
@@ -126,9 +149,6 @@ button.button-valid {
 }
 
 @media only screen and (min-width: 575px) {
-	.components-create .row .createpage-bootstrap-col-center-container{
-		height: 100vh;
-	}
 	.create-comp-container{
 		padding-top: 40px;
 	}

@@ -62,7 +62,11 @@ export default class search extends Component {
     window.addEventListener("resize", this.updateDimensions);
   }
   getBodyHeight() {
-    return this.state.height - 370;
+    if (this.state.width < 575) {
+      return (this.state.height - 240);
+    } else {
+      return 70;
+    }
   }
   updateDimensions() {
     this.setState({
@@ -108,8 +112,10 @@ export default class search extends Component {
       clicked: item,
       competitionName: compname,
       validCompetition: true,
-      maximumScore: maximumScore
+      maximumScore: maximumScore,
+      validScore: true
     });
+    document.getElementById("scoreInput").value = "";
   }
   componentDidMount() {
     this.updateDimensions();
@@ -202,9 +208,9 @@ export default class search extends Component {
     var body = document.querySelector("body");
     if (this.state.lastSize > document.body.clientHeight) {
       this.toggleNavbar();
-    } 
+    }
     else {
-      
+
       this.toggleNavbar();
     }
   }
@@ -452,8 +458,8 @@ export default class search extends Component {
                     ? "competition-item active"
                     : "competition-item fade-out")}>
               <li className="li-container"
-                onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name, 
-                this.state.competitionsList[i].maximumScore)}>
+                onClick={() => this.competitionClicked(i, this.state.competitionsList[i].name,
+                  this.state.competitionsList[i].maximumScore)}>
                 {this.state.competitionsList[i].name.toUpperCase()}
               </li>
               <div onClick={() => this.cancelClicked()} className="competiton-cancel-button"></div>
@@ -463,14 +469,16 @@ export default class search extends Component {
     }
     else {
       competitionItem.push(
-        <div className="not-active">No active competitions</div>
+        <div className="not-active"><div className="not-active-message">
+          No Competitions available at this point, we’ll have them ready soon !
+        </div></div>
       )
     }
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
     return (
-      <div className="position-relative" autoComplete="off">
+      <div className="add-score-entire-page-content" autoComplete="off">
         <Row className="row justify-content-center">
           <Col sm={8} className="createpage-bootstrap-col-center-container">
             <div className={stateOne || this.state.scoreSaved
@@ -480,174 +488,170 @@ export default class search extends Component {
                 <label className="label-for-score">ADD SCORE</label>
               </div>
             </div>
-          </Col>
-        </Row>
-        <Row className="row justify-content-center">
-          <Col sm={8} className="createpage-bootstrap-col-center-container">
-          <div className={this.state.scoreSaved
-          ? "sucess-container"
-          : (stateOne
-            ? "page-content-video"
-            : "page-content")}>
-          <div className={this.state.scoreSaved
-            ? "sucess-container"
-            : "hidden"}>
-          
-            <div className="success-container">
-              <div className="success">
-              </div>
-              <label className="label-success-container">SCORE CAPTURED</label>
-            </div>
-          </div>
-          <div className={stateOne || this.state.scoreSaved
-            ? "hidden"
-            : ""}>
-            <div className="centre-labels">
-              <label className="label-competition">Select Competition</label>
-            </div>
-            <div className="add-score-competition-container">
-              {competitionItem}
-
-              <div className={this.state.somethingClicked === false
-                ? "hidden"
-                : "label-score"}>
-                <input type="number"
-                  id="scoreInput"
-                  min="0"
-                  step="1"
-                  autoComplete="off"
-                  name="score"
-                  pattern="\d*"
-                  className="score"
-                  onChange={this.handleScore}
-                  placeholder="Enter Score"></input>
-                <div className="error-message-container">
-                  <div className={this.state.validScore
-                    ? "hidden"
-                    : "invalid-score"}>Enter Valid Score</div>
-                </div>
-              </div>
-            </div>
-            <div className="stretched inline-block">
-              <div className={this.state.somethingClicked === true
-                ? "submit-container"
+            <div className={this.state.scoreSaved
+              ? "sucess-container"
+              : (stateOne
+                ? "page-content-video"
+                : "page-content")}>
+              <div className={this.state.scoreSaved
+                ? "sucess-container"
                 : "hidden"}>
-                <div className={this.state.imageTaken || this.state.showCamera
-                  ? "hidden"
-                  : "submit-button-elements2"}>
-                  <div className="button-hover">
-                    <img src={camera}
-                      id="btnScoreCapture" className="btn-score-capture2"
-                      onClick={() => this.CameraClicked()} alt=''></img>
-                  </div>
-                </div>
-                <div className={(this.state.showCamera && !this.state.imageTaken)
-                  || this.state.imageTaken
-                  ? "hidden"
-                  : "submit-button-elements2"}>
-                  <div className="button-hover ">
-                    <img src={submit} onClick={() => this.getLocation()}
-                      className="button-that-submits" alt=''></img>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <div className={this.state.showCamera
-            ? ""
-            : "hidden"}>
-            <div className={this.state.imageTaken
-              ? "hidden"
-              : "photo-top-label"}>
-              <div className={this.state.imageTaken || this.state.scoreSaved
-                ? "hidden"
-                : "score-capture-header2"}>
-                <div className="gun-overlay-image">
-                  <label className="label-for-capture-score">CAPTURE SCORE</label>
-                  <img src={lightgrayback} onClick={() => this.goBack()} id="back"
-                    className="btn-back" alt='backBtn'></img>
+                <div className="success-container">
+                  <div className="success">
+                  </div>
+                  <label className="label-success-container">SCORE CAPTURED</label>
                 </div>
               </div>
-            </div>
-            <div className={this.state.imageTaken
-              ? "hidden"
-              : "video-container"}>
-              <video id="video" width="310" height="310" className="video" autoPlay></video>
-            </div>
-            <div className={this.state.currState !== 3
-              ? "hidden"
-              : "submit-container icon-push-down no-margin"}>
-              <div className={this.state.currState !== 3
+              <div className={stateOne || this.state.scoreSaved
                 ? "hidden"
-                : "submit-button-elements second float-left"} >
+                : ""}>
+                <div className="centre-labels">
+                  <label className="label-competition">Select Competition</label>
+                </div>
+                <div className="add-score-competition-container">
+                  {competitionItem}
+
+                  <div className={this.state.somethingClicked === false
+                    ? "hidden"
+                    : "label-score"}>
+                    <input type="number"
+                      id="scoreInput"
+                      min="0"
+                      step="1"
+                      autoComplete="off"
+                      name="score"
+                      pattern="\d*"
+                      className="score"
+                      onChange={this.handleScore}
+                      placeholder="Enter Score"></input>
+                    <div className="error-message-container">
+                      <div className={this.state.validScore
+                        ? "hidden"
+                        : "invalid-score"}>Enter Valid Score</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="stretched inline-block">
+                  <div className={this.state.somethingClicked === true
+                    ? "submit-container"
+                    : "hidden"}>
+                    <div className={this.state.imageTaken || this.state.showCamera
+                      ? "hidden"
+                      : "submit-button-elements2"}>
+                      <div className="button-hover">
+                        <img src={camera}
+                          id="btnScoreCapture" className="btn-score-capture2"
+                          onClick={() => this.CameraClicked()} alt=''></img>
+                      </div>
+                    </div>
+                    <div className={(this.state.showCamera && !this.state.imageTaken)
+                      || this.state.imageTaken
+                      ? "hidden"
+                      : "submit-button-elements2"}>
+                      <div className="button-hover ">
+                        <img src={submit} onClick={() => this.getLocation()}
+                          className="button-that-submits" alt=''></img>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className={this.state.showCamera
+                ? ""
+                : "hidden"}>
+                <div className={this.state.imageTaken
+                  ? "hidden"
+                  : "photo-top-label"}>
+                  <div className={this.state.imageTaken || this.state.scoreSaved
+                    ? "hidden"
+                    : "score-capture-header2"}>
+                    <div className="gun-overlay-image">
+                      <label className="label-for-capture-score">CAPTURE SCORE</label>
+                      <img src={lightgrayback} onClick={() => this.goBack()} id="back"
+                        className="btn-back" alt='backBtn'></img>
+                    </div>
+                  </div>
+                </div>
+                <div className={this.state.imageTaken
+                  ? "hidden"
+                  : "video-container"}>
+                  <video id="video" width="310" height="310" className="video" autoPlay></video>
+                </div>
                 <div className={this.state.currState !== 3
                   ? "hidden"
-                  : ""}>
-                  <div className="button-hover">
-                    <div id="FlashImage" alt="" className="flash"
-                      onClick={() => this.flash()}></div>
-                  </div>
-                </div>
-              </div>
-              <div className={this.state.currState !== 3 && this.state.scoreSaved
-                ? "hidden"
-                : "submit-button-elements second float-left"}>
-                <div className="button-hover">
+                  : "submit-container-comp icon-push-down no-margin"}>
                   <div className={this.state.currState !== 3
                     ? "hidden"
-                    : ""}>
-                    <img src={cameraGray} onClick={() => this.takePhoto()} id="snap"
-                      className="btn-score-capture" alt=''></img>
+                    : "submit-button-elements second float-left"} >
+                    <div className={this.state.currState !== 3
+                      ? "hidden"
+                      : ""}>
+                      <div className="button-hover">
+                        <div id="FlashImage" alt="" className="flash"
+                          onClick={() => this.flash()}></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={this.state.currState !== 3 && this.state.scoreSaved
+                    ? "hidden"
+                    : "submit-button-elements second float-left"}>
+                    <div className="button-hover">
+                      <div className={this.state.currState !== 3
+                        ? "hidden"
+                        : ""}>
+                        <img src={cameraGray} onClick={() => this.takePhoto()} id="snap"
+                          className="btn-score-capture" alt=''></img>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className={this.state.imageTaken && !this.state.scoreSaved
+                ? "image-container"
+                : "hidden"}>
+                <div className={!this.state.imageTaken
+                  ? "hidden"
+                  : "photo-top-label"}>
+                  <div className={!this.state.imageTaken
+                    ? "hidden"
+                    : "score-capture-header2"}>
+                    <div className="gun-overlay-image">
+
+                      <label className="label-for-capture-score">Score Captured</label>
+                    </div>
+                  </div>
+                </div>
+                <div className={this.state.imageTaken
+                  ? "video-container"
+                  : "hidden"}>
+                  <canvas id="canvas" width="310" height="310" className="image-view background" ></canvas>
+                </div>
+                <div className="icon-push-down">
+                  <div className={!this.state.imageTaken || this.state.scoreSaved
+                    ? "hidden"
+                    : "submit-button-elements third float-right"}>
+                    <div className="button-hover ">
+                      <img src={graySubmit} onClick={() => this.getLocation()}
+                        className="button-that-submits2" alt=''></img>
+                    </div>
+                  </div>
+                  <div className={this.state.imageTaken && !this.state.scoreSaved
+                    ? "submit-button-elements third float-right"
+                    : "hidden"} >
+                    <div className="button-hover">
+                      <img src={grayRetry}
+                        id="btnScoreCapture" className="retake" onClick={() => this.retakePhoto()}
+                        alt=''>
+                      </img>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className={this.state.imageTaken && !this.state.scoreSaved
-            ? "image-container"
-            : "hidden"}>
-            <div className={!this.state.imageTaken
-              ? "hidden"
-              : "photo-top-label"}>
-              <div className={!this.state.imageTaken
-                ? "hidden"
-                : "score-capture-header2"}>
-                <div className="gun-overlay-image">
-
-                  <label className="label-for-capture-score">Score Captured</label>
-                </div>
-              </div>
-            </div>
-            <div className={this.state.imageTaken
-              ? "video-container"
-              : "hidden"}>
-              <canvas id="canvas" width="310" height="310" className="image-view background" ></canvas>
-            </div>
-            <div className="icon-push-down">
-              <div className={!this.state.imageTaken || this.state.scoreSaved
-                ? "hidden"
-                : "submit-button-elements third float-right"}>
-                <div className="button-hover ">
-                  <img src={graySubmit} onClick={() => this.getLocation()}
-                    className="button-that-submits2" alt=''></img>
-                </div>
-              </div>
-              <div className={this.state.imageTaken && !this.state.scoreSaved
-                ? "submit-button-elements third float-right"
-                : "hidden"} >
-                <div className="button-hover">
-                  <img src={grayRetry}
-                    id="btnScoreCapture" className="retake" onClick={() => this.retakePhoto()}
-                    alt=''>
-                  </img>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        </Col>
+          </Col>
         </Row>
       </div>
     )

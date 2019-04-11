@@ -205,6 +205,7 @@
   }
   .create-nav-container .create-top-nav-members{
     background: transparent;
+    position: absolute;
   }
   
   .create-top-nav{

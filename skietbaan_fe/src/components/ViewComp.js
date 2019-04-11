@@ -52,6 +52,12 @@ class ViewComp extends Component {
 		this.handleOnSubmit = this.handleOnSubmit.bind(this);
 		this.updateDimensions = this.updateDimensions.bind(this);
 		this.getBodyHeight = this.getBodyHeight.bind(this);
+		this.onChangeBronzeAccuracy = this.onChangeBronzeAccuracy.bind(this);
+		this.onChangeBronzeTotal = this.onChangeBronzeTotal.bind(this);
+		this.onChangeSilverAccuracy = this.onChangeSilverAccuracy.bind(this);
+		this.onChangeSilverTotal = this.onChangeSilverTotal.bind(this);
+		this.onChangeGoldAccuracy = this.onChangeGoldAccuracy.bind(this);
+		this.onChangeGoldTotal = this.onChangeGoldTotal.bind(this);
 	}
 	componentWillMount() {
 		window.addEventListener('resize', this.updateDimensions);
@@ -74,7 +80,7 @@ class ViewComp extends Component {
 		if (this.state.width < 575) {
 			return this.state.height - 240;
 		} else {
-			return this.state.height - 184;
+			return 70;
 		}
 	}
 	getDefaultShots() {
@@ -107,8 +113,8 @@ class ViewComp extends Component {
 			},
 			body: JSON.stringify(this.state.numberofshots)
 		})
-			.then(function(response) {})
-			.then(function(data) {})
+			.then(function (response) { })
+			.then(function (data) { })
 			.catch((err) => {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
 			});
@@ -125,9 +131,9 @@ class ViewComp extends Component {
 			},
 			body: JSON.stringify(CompID)
 		})
-			.then(function(response) {})
-			.then(function(data) {})
-			.catch(function(data) {})
+			.then(function (response) { })
+			.then(function (data) { })
+			.catch(function (data) { })
 			.catch((err) => {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
 			});
@@ -154,7 +160,7 @@ class ViewComp extends Component {
 	}
 	//The method that detects the current status and perform the changes
 	changeStatus(status, i) {
-		const newCompOBJArr = [ ...this.props.compOBJ ]; //cloning an array of competition
+		const newCompOBJArr = [...this.props.compOBJ]; //cloning an array of competition
 		newCompOBJArr[i].status = !status; //changing the status of a newly cloned array
 		this.props.updateByIdComp(newCompOBJArr[i], i + 1); //updating the competition status by ID in the back-end
 		const newDict = { ...this.props.dict };
@@ -180,7 +186,7 @@ class ViewComp extends Component {
 			accuracy: this.state.goldAccuracy,
 			total: this.state.goldTotal
 		};
-		const RData = [ BronzeData, SilverData, GoldData ];
+		const RData = [BronzeData, SilverData, GoldData];
 		this.props.updateRequirements(index, RData);
 		this.setState({ toggleRequirements: false });
 	};
@@ -208,6 +214,37 @@ class ViewComp extends Component {
 	onChange({ target }) {
 		this.setState({ [target.name]: target.value });
 	}
+	/** The standards onChange Listeners: */
+	onChangeBronzeAccuracy(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({bronzeAccuracy:event.target.value});
+	}
+	onChangeBronzeTotal(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({bronzeTotal:event.target.value});
+	}
+	onChangeSilverAccuracy(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({silverAccuracy:event.target.value});
+	}
+	onChangeSilverTotal(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({silverTotal:event.target.value});
+	}
+	onChangeGoldAccuracy(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({goldAccuracy:event.target.value});
+	}
+	onChangeGoldTotal(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({goldTotal:event.target.value});
+	}
 
 	changeToggle() {
 		this.setState({ toggleRequirements: !this.state.toggleRequirements });
@@ -219,336 +256,332 @@ class ViewComp extends Component {
 
 	render() {
 		const displayCompetitions = (
-			<Row className="row justify-content-center">
-				<Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position : "inherit" }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
-					<div className="page-contents" style={{ height: this.getBodyHeight() + 'px' }}>
-						<table class="table-view-competitions">
-							<tbody>
-								{this.props.compOBJ.map((compVar, i) => (
-									<tr key={compVar.id} className="table-competition-row">
-										<table>
-											<tr>
-												<td className="td-col">
-													<div>
-														<div
-															className="test1"
-															onClick={() => this.getRequirements(compVar.id)}
-														>
-															<label
-																className={
-																	compVar.status == true ? (
-																		'competition-container'
-																	) : (
-																		'inactive-competition-container'
-																	)
-																}
-															>
-																{compVar.name} {compVar.requirements}
-															</label>
-														</div>
-														<div className="test2">
-															<label className="users-per-comp">
-																{compVar.status == true ? (
-																	<i class=" fa fa-group">
-																		<span class="user-per-comp-num">
-																			{this.props.dict[compVar.id]}
-																		</span>
-																	</i>
-																) : null}
-															</label>
-														</div>
-
-														<div className="test4">
-															<div className="document-icon-container">
-																{compVar.id === this.state.activatedCompetition ? (
-																	<img className="letter-image" src={letterhead} />
-																) : null}
-															</div>
-														</div>
-
-														<div className="test3">
-															<div
-																className={
-																	compVar.status ? 'activeButton' : 'inactiveButton'
-																}
-															>
-																<Switch
-																	color={'primary'}
-																	className={
-																		compVar.status ? (
-																			'activeButton'
-																		) : (
-																			'inactiveButton'
-																		)
-																	}
-																	focus={true}
-																	checked={compVar.status}
-																	onClick={() => this.changeStatus(compVar.status, i)}
-																/>
-															</div>
-														</div>
-													</div>
-												</td>
-											</tr>
-											{compVar.status && (
-												<tr
-													className={
-														this.state.toggleRequirements &&
-														this.state.idCompToggel === compVar.id ? (
-															'table-row-requiremets'
-														) : (
-															'table-row-requiremets-hide'
-														)
-													}
+			<div className="page-contents" style={{ height: this.getBodyHeight() + 'vh' }}>
+				<table class="table-view-competitions">
+					<tbody>
+						{this.props.compOBJ.map((compVar, i) => (
+							<tr key={compVar.id} className="table-competition-row">
+								<table>
+									<tr>
+										<td className="td-col">
+											<div>
+												<div
+													className="test1"
+													onClick={() => this.getRequirements(compVar.id)}
 												>
-													<td>
-														<div class="comp-req-container">
-															<Form>
-																<Container>
-																	<Row>
-																		<Col xs={4} md={4} />
-																		<Col xs={4} md={4}>
-																			<div className="accuracy-header-label">
-																				ACCURACY %
-																			</div>
-																		</Col>
-																		<Col xs={4} md={4}>
-																			<div className="total-header-label">
-																				TOTAL
-																			</div>
-																		</Col>
-																	</Row>
-																	<Row className="bronze-row">
-																		<Col xs={4} md={4}>
-																			<div class="accuracy-header-label">
-																				Bronze Award:{' '}
-																			</div>
-																		</Col>
-																		<Col xs={4} md={4}>
-																			<div className="">
-																				<input
-																					className="bronze-accuracy-input-control"
-																					type="number"
-																					name="bronzeAccuracy"
-																					id="B_accuracy"
-																					required
-																					autoComplete="off"
-																					autoCorrect="off"
-																					min="0"
-																					max="100"
-																					value={this.state.bronzeAccuracy}
-																					onChange={this.onChange}
-																				/>
-																			</div>
-																		</Col>
-																		<Col xs={4} md={4}>
-																			<div className="">
-																				<input
-																					className="bronze-total-input-control"
-																					type="number"
-																					name="bronzeTotal"
-																					id="B_total"
-																					required
-																					min="0"
-																					max="600"
-																					autoComplete="off"
-																					autoCorrect="off"
-																					value={this.state.bronzeTotal}
-																					onChange={this.onChange}
-																				/>
-																			</div>
-																		</Col>
-																	</Row>
+													<label
+														className={
+															compVar.status == true ? (
+																'competition-container'
+															) : (
+																	'inactive-competition-container'
+																)
+														}
+													>
+														{compVar.name} {compVar.requirements}
+													</label>
+												</div>
+												<div className="test2">
+													<label className="users-per-comp">
+														{compVar.status == true ? (
+															<i class=" fa fa-group">
+																<span class="user-per-comp-num">
+																	{this.props.dict[compVar.id]}
+																</span>
+															</i>
+														) : null}
+													</label>
+												</div>
 
-																	<Row className="silver-row">
-																		<Col xs={4} md={4}>
-																			<div class="silver-label">
-																				Silver Award:{' '}
-																			</div>
-																		</Col>
-																		<Col xs={4} md={4}>
-																			<div className="">
-																				<input
-																					className="silver-accuracy-input-control"
-																					type="number"
-																					name="silverAccuracy"
-																					id="S_accuracy"
-																					required
-																					min="0"
-																					max="100"
-																					autoComplete="off"
-																					autoCorrect="off"
-																					value={this.state.silverAccuracy}
-																					onChange={this.onChange}
-																				/>
-																			</div>
-																		</Col>
-																		<Col xs={4} md={4}>
-																			<div className="">
-																				<input
-																					className="silver-total-input-control"
-																					type="number"
-																					name="silverTotal"
-																					id="S_total"
-																					required
-																					min="0"
-																					max="600"
-																					autoComplete="off"
-																					autoCorrect="off"
-																					value={this.state.silverTotal}
-																					onChange={this.onChange}
-																				/>
-																			</div>
-																		</Col>
-																	</Row>
+												<div className="test4">
+													<div className="document-icon-container">
+														{compVar.id === this.state.activatedCompetition ? (
+															<img className="letter-image" src={letterhead} />
+														) : null}
+													</div>
+												</div>
 
-																	<Row>
-																		<Col xs={4} md={4}>
-																			<div class="accuracy-label">
-																				Gold Award:{' '}
-																			</div>
-																		</Col>
-																		<Col xs={4} md={4}>
-																			<div className="">
-																				<input
-																					className="gold-accuracy-input-control"
-																					type="number"
-																					name="goldAccuracy"
-																					id="G_accuracy"
-																					required
-																					min="0"
-																					max="100"
-																					autoComplete="off"
-																					autoCorrect="off"
-																					value={this.state.goldAccuracy}
-																					onChange={this.onChange}
-																				/>
-																			</div>
-																		</Col>
-																		<Col xs={4} md={4}>
-																			<div className="">
-																				<input
-																					className="gold-total-input-control"
-																					type="number"
-																					name="goldTotal"
-																					id="G_total"
-																					required
-																					min="0"
-																					max="600"
-																					autoComplete="off"
-																					autoCorrect="off"
-																					value={this.state.goldTotal}
-																					onChange={this.onChange}
-																				/>
-																			</div>
-																		</Col>
-																	</Row>
-
-																	<Row>
-																		<div className="letter-good-standing-row">
-																			<div className="letter-label">
-																				Selected for Letter of Good Standing
-																			</div>
-																			<div className="letter-icon">
-																				<div className="letter-icon-container">
-																					{compVar.id ===
-																					this.state.activatedCompetition ? (
-																						<img
-																							className="letter-image"
-																							src={letterhead}
-																						/>
-																					) : null}
-																				</div>
-																			</div>
-																			<div className="letter-switch">
-																				<Switch
-																					color={'primary'}
-																					className={
-																						!this.state.isLetterOfStatus ? (
-																							'activeButton'
-																						) : (
-																							'inactiveButton'
-																						)
-																					}
-																					focus={true}
-																					checked={
-																						compVar.id ===
-																						this.state
-																							.activatedCompetition ? (
-																							true
-																						) : (
-																							false
-																						)
-																					}
-																					onClick={() =>
-																						this.makeLetterOfStatus(
-																							compVar.id
-																						)}
-																				/>
-																			</div>
-																		</div>
-																	</Row>
-
-																	<Row>
-																		<Col xs={4} md={4}>
-																			<div class="shots-label">
-																				Shots Needed:{' '}
-																			</div>
-																		</Col>
-																		<Col xs={4} md={4}>
-																			<div className="comp-input-control">
-																				<input
-																					className="shorts-needed-input"
-																					type="number"
-																					name="numberofshots"
-																					id="numberofshots"
-																					autoComplete="off"
-																					autoCorrect="off"
-																					value={
-																						compVar.id ===
-																						this.state
-																							.activatedCompetition ? (
-																							this.state.numberofshots
-																						) : (
-																							0
-																						)
-																					}
-																					onChange={this.onChange}
-																				/>
-																			</div>
-																		</Col>
-																		<Col xs={4} md={4}>
-																			<div className="">
-																				<button
-																					className="requirement-success-submit-btn"
-																					variant="secondary"
-																					type="submit"
-																					id="submit-btn"
-																					onClick={(e) =>
-																						this.handleOnSubmit(
-																							e,
-																							compVar.id
-																						)}
-																				>
-																					UPDATE
-																				</button>
-																			</div>
-																		</Col>
-																	</Row>
-																</Container>
-															</Form>
-														</div>
-													</td>
-												</tr>
-											)}
-										</table>
+												<div className="test3">
+													<div
+														className={
+															compVar.status ? 'activeButton' : 'inactiveButton'
+														}
+													>
+														<Switch
+															color={'primary'}
+															className={
+																compVar.status ? (
+																	'activeButton'
+																) : (
+																		'inactiveButton'
+																	)
+															}
+															focus={true}
+															checked={compVar.status}
+															onClick={() => this.changeStatus(compVar.status, i)}
+														/>
+													</div>
+												</div>
+											</div>
+										</td>
 									</tr>
-								))}
-							</tbody>
-						</table>
-					</div>
-				</Col>
-			</Row>
+									{compVar.status && (
+										<tr
+											className={
+												this.state.toggleRequirements &&
+													this.state.idCompToggel === compVar.id ? (
+														'table-row-requiremets'
+													) : (
+														'table-row-requiremets-hide'
+													)
+											}
+										>
+											<td>
+												<div class="comp-req-container">
+													<Form>
+														<Container className="standards-container">
+															<Row className="standards-label">
+																<Col xs={3} md={3} lg={3} />
+																<Col xs={5} md={5} lg={5}>
+																	<div className="accuracy-header-label">
+																		ACCURACY %
+																			</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="total-header-label">
+																		TOTAL
+																			</div>
+																</Col>
+															</Row>
+															<Row className="bronze-row">
+																<Col xs={4} md={4}>
+																	<div class="accuracy-header-label">
+																		Bronze Award:{' '}
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="bronze-accuracy-input-control"
+																			type="number"
+																			min={1}
+																			max={100}
+																			name="bronzeAccuracy"
+																			id="B_accuracy"
+																			required
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={this.state.bronzeAccuracy}
+																			onChange={this.onChangeBronzeAccuracy}
+																		/>
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="bronze-total-input-control"
+																			type="number"
+																			name="bronzeTotal"
+																			id="B_total"
+																			required
+																			min={1}
+																			max={1000}
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={this.state.bronzeTotal}
+																			onChange={this.onChangeBronzeTotal}
+																		/>
+																	</div>
+																</Col>
+															</Row>
+
+															<Row className="silver-row">
+																<Col xs={4} md={4}>
+																	<div class="silver-label">
+																		Silver Award:{' '}
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="silver-accuracy-input-control"
+																			type="number"
+																			name="silverAccuracy"
+																			id="S_accuracy"
+																			required
+																			min="0"
+																			max="100"
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={this.state.silverAccuracy}
+																			onChange={this.onChangeSilverAccuracy}
+																		/>
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="silver-total-input-control"
+																			type="number"
+																			name="silverTotal"
+																			id="S_total"
+																			required
+																			min="0"
+																			max="600"
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={this.state.silverTotal}
+																			onChange={this.onChangeSilverTotal}
+																		/>
+																	</div>
+																</Col>
+															</Row>
+
+															<Row>
+																<Col xs={4} md={4}>
+																	<div class="accuracy-label">
+																		Gold Award:{' '}
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="gold-accuracy-input-control"
+																			type="number"
+																			name="goldAccuracy"
+																			id="G_accuracy"
+																			required
+																			min="0"
+																			max="100"
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={this.state.goldAccuracy}
+																			onChange={this.onChangeGoldAccuracy}
+																		/>
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="gold-total-input-control"
+																			type="number"
+																			name="goldTotal"
+																			id="G_total"
+																			required
+																			min="0"
+																			max="600"
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={this.state.goldTotal}
+																			onChange={this.onChangeGoldTotal}
+																		/>
+																	</div>
+																</Col>
+															</Row>
+
+															<Row>
+																<div className="letter-good-standing-row">
+																	<div className="letter-label">
+																		Selected for Letter of Good Standing
+																			</div>
+																	<div className="letter-icon">
+																		<div className="letter-icon-container">
+																			{compVar.id ===
+																				this.state.activatedCompetition ? (
+																					<img
+																						className="letter-image"
+																						src={letterhead}
+																					/>
+																				) : null}
+																		</div>
+																	</div>
+																	<div className="letter-switch">
+																		<Switch
+																			color={'primary'}
+																			className={
+																				!this.state.isLetterOfStatus ? (
+																					'activeButton'
+																				) : (
+																						'inactiveButton'
+																					)
+																			}
+																			focus={true}
+																			checked={
+																				compVar.id ===
+																					this.state
+																						.activatedCompetition ? (
+																						true
+																					) : (
+																						false
+																					)
+																			}
+																			onClick={() =>
+																				this.makeLetterOfStatus(
+																					compVar.id
+																				)}
+																		/>
+																	</div>
+																</div>
+															</Row>
+
+															<Row>
+																<Col xs={4} md={4}>
+																	<div class="shots-label">
+																		Shots Needed:{' '}
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="comp-input-control">
+																		<input
+																			className="shorts-needed-input"
+																			type="number"
+																			name="numberofshots"
+																			id="numberofshots"
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={
+																				compVar.id ===
+																					this.state
+																						.activatedCompetition ? (
+																						this.state.numberofshots
+																					) : (
+																						0
+																					)
+																			}
+																			onChange={this.onChange}
+																		/>
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<button
+																			className="requirement-success-submit-btn"
+																			variant="secondary"
+																			type="submit"
+																			id="submit-btn"
+																			onClick={(e) =>
+																				this.handleOnSubmit(
+																					e,
+																					compVar.id
+																				)}
+																		>
+																			UPDATE
+																				</button>
+																	</div>
+																</Col>
+															</Row>
+														</Container>
+													</Form>
+												</div>
+											</td>
+										</tr>
+									)}
+								</table>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
 		);
 		return (
 			<div className="view-page">

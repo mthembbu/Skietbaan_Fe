@@ -386,6 +386,9 @@
 	display: none;
 	width: 100%;
 }
+.standards-label{
+	margin-bottom: 10px;
+}
 /*competitions list display css*/
 .standard-header-label {
 	padding-bottom: 24px;

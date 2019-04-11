@@ -42,7 +42,11 @@ class AddMembersGroup extends Component {
 		window.addEventListener('resize', this.updateDimensions);
   }
   getBodyHeight() {
-		return this.state.height - 240;
+		if (this.state.width < 575) {
+      return (this.state.height - 240);
+    } else {
+      return 78;
+    }
   }
   updateDimensions() {
 		this.setState({
@@ -123,7 +127,7 @@ class AddMembersGroup extends Component {
 
   render() {
     const postitems = (
-      <div className="check-edit" style={{ height: this.getBodyHeight() + 'px' }}>
+      <div className="check-edit" style={{ height: this.getBodyHeight() + 'vh' }}>
       {this.props.existing.length===0?null:
         <ul class="list-group" style={{ textAlign: 'left' }}>
           {this.props.existing
@@ -156,9 +160,7 @@ class AddMembersGroup extends Component {
       </div>
     );
     return (
-      <Row className="row justify-content-center">
-        <Col sm={8} className="createpage-bootstrap-col-center-container">
-          <main className="The-Main">
+          <div className="The-Main">
             <div className="navBar-containers">
               <img className="back-image" onClick={this.onBack} src={back} alt="" />
               <div className="the-nav-bar">
@@ -186,7 +188,7 @@ class AddMembersGroup extends Component {
                   />
                 </div>
                 <div className="switchAll" onClick={this.selectall}>
-                  <img className="checkbox-delete" src={this.state.count === this.props.existing.length ? seleteAll : unSelectAll} alt="" />
+                  <img className="btn-select-all" src={this.state.count === this.props.existing.length ? seleteAll : unSelectAll} alt="" />
                 </div>
               </div>
             </div>
@@ -206,9 +208,7 @@ class AddMembersGroup extends Component {
                 </div>
               </div>
             )}
-          </main>
-        </Col>
-      </Row>
+          </div>
 
     );
   }

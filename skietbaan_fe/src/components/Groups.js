@@ -185,7 +185,7 @@ class Groups extends Component {
 									/>
 								</div>
 								<div className="switchAll" onClick={this.selectall}>
-									<img className="checkbox-delete" src={this.state.count === this.state.posts.length ? seleteAll : unSelectAll} alt="" />
+									<img className="btn-select-all" src={this.state.count === this.state.posts.length ? seleteAll : unSelectAll} alt="" />
 								</div>
 							</div>
 						</div>

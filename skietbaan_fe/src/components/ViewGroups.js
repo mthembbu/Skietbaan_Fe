@@ -46,7 +46,7 @@ class ViewGroups extends Component {
     if (this.state.width < 575) {
       return (this.state.height - 240);
     } else {
-      return (this.state.height - 184);
+      return 70;
     }
   }
   componentDidMount() {
@@ -98,13 +98,8 @@ class ViewGroups extends Component {
 
     if (this.props.groupsList[event].highlighted === true) {
       this.props.groupsList[event].highlighted = false;
-      // this.setState({ count: this.state.count - 1 });
-      console.log("true")
     } else {
       this.props.groupsList[event].highlighted = true;
-      // this.setState({ count: this.state.count + 1 });
-      console.log("false")
-
     }
 
   };
@@ -112,7 +107,9 @@ class ViewGroups extends Component {
   render() {
     const postitems = (
       <div className="the-main">
-      {this.props.groupsList.length===0?null:
+      {this.props.groupsList.length===0?<div className="view-error-container">
+      <label className="view-error-msg">No Groups have been created yet.</label>
+      </div>:
         <table className="table-member">
           <tbody>
             {this.props.groupsList
@@ -141,7 +138,7 @@ class ViewGroups extends Component {
                     {post.name}
                   </td>
 
-                  <td className="group-container">
+                  <td className="group-container"  onClick={() => this.editGroup(post)}>
                     {post.isActive === true ? (
                       <div>
                         <img src={group} className="groupIcon" alt="" />
@@ -151,7 +148,7 @@ class ViewGroups extends Component {
                       </div>
                     ) : null}
                   </td>
-                  <td>
+                  <td >
                     <div className="group-view">
                       <Switch
                         color={"primary"}
@@ -170,13 +167,9 @@ class ViewGroups extends Component {
     );
 
     return (
-      <Row className="row justify-content-center">
-        <Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position : "inherit"}}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
-          <div className="The-Main" style={{ height: this.getBodyHeight() + "px" }}>
+      <div className="The-Main" style={{ height: this.getBodyHeight() + "vh" }}>
             {postitems}
-          </div>
-        </Col>
-      </Row>
+      </div>
 
     );
   }
