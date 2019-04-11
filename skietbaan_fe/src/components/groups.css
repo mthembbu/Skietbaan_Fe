@@ -426,6 +426,7 @@
 	height: 63px;
 	color: #c6c6c6;
 	text-align: left;
+	padding-left: 2%;
 }
 .back-image {
 	padding-left: 30px;
@@ -672,12 +673,17 @@
 	color: #BE0000;
 	font-weight: lighter;
 }
-.table-member td{
-	width: 33.33333333%;
-}
-.group-container{
-	text-align: center;
-}
+
 .The-Main .check-edit{
 	background: #FFFFFF;
+}
+
+.table-member  .group-container{
+	width: 33.33333333%;
+}
+.table-member  .first-row,.first-row-active{
+	width: 50%;
+}
+.table-member .view-group .switch-container{
+	width: 20%;
 }

@@ -15,6 +15,7 @@ import ViewComp from '../components/ViewComp';
 import GroupComponent from '../components/GroupComponent';
 import CompComponent from '../components/CompComponent';
 import { compSelectedPages } from '../actions/competition.action';
+import { pageState } from '../actions/postActions';
 export class createPages extends Component {
 	constructor(props) {
 		super(props);
@@ -69,10 +70,12 @@ export class createPages extends Component {
 	}
 
 	groupsPage() {
+		this.props.pageState(10);
 		this.setState({ selectedButton: 1 });
 	}
 
 	comptetitionsPage() {
+		this.props.compSelectedPages(1);
 		this.setState({ selectedButton: 2 });
 	}
 
@@ -81,16 +84,19 @@ export class createPages extends Component {
 	}
 
 	createGroups() {
+		this.props.pageState(10);
 		this.props.compSelectedPages(1);
 		this.setState({ selectedButtonCreateViewGroups: 1 });
 	}
 
 	viewGroups() {
+		this.props.pageState(0);
 		this.props.compSelectedPages(2);
 		this.setState({ selectedButtonCreateViewGroups: 2 });
 	}
 
 	createCompetitions() {
+		this.props.compSelectedPages(2);
 		this.setState({ selectedButtonCreateViewCompetitions: 1 });
 	}
 
@@ -136,7 +142,7 @@ export class createPages extends Component {
 			<Row className="row justify-content-center">
 				<Col sm={8} className="createpage-bootstrap-col-center-container">
 					<div className="create-main-container">
-						{this.props.page === 0 ? (
+						{this.props.page === 0 || this.props.page===10 ? (
 							<div className="create-nav-container">
 								<div className={this.state.selectedButton === 3 ? 'create-top-nav-members' : 'create-top-nav'}>
 									{/* top */}
@@ -179,7 +185,7 @@ export class createPages extends Component {
 												: "create-switch-bottom"} >
 												<div
 													className={
-														this.state.selectedButtonCreateViewGroups === 1 ? (
+														(this.state.selectedButton === 1 && this.props.page!=0) || (this.state.selectedButton===2 && this.props.compSelectedPages!==2) ? (
 															'switch-active-left'
 														) : (
 																'switch-inactive'
@@ -191,7 +197,7 @@ export class createPages extends Component {
 										</div>
 												<div
 													className={
-														(this.state.selectedButtonCreateViewGroups === 2 || this.props.compSelectedPages === 2) ? (
+														(this.state.selectedButton === 1 && this.props.page===0) || (this.state.selectedButton===2 && this.props.compSelectedPages===2)? (
 															'switch-active-right'
 														) : (
 																'switch-inactive'
@@ -254,12 +260,12 @@ export class createPages extends Component {
 
 
 						<div className="components-create">
-							{this.state.selectedButton === 1 && this.state.selectedButtonCreateViewGroups === 1 ? (
+							{this.state.selectedButton === 1 && this.props.page===10 ? (
 								<AddGroup />
-							) : this.state.selectedButton === 1 && this.state.selectedButtonCreateViewGroups === 2 ? (
+							) : this.state.selectedButton === 1 && this.props.page===0 || this.state.selectedButton === 1 && this.props.page===1 || this.state.selectedButton === 1 && this.props.page===2 ? (
 								<GroupComponent />
 							) : null}
-							{this.state.selectedButton === 2 ? <CompComponent /> : null}
+							{(this.state.selectedButton === 2)? <CompComponent /> : null}
 							{this.state.selectedButton === 3 && this.state.selectedValue === 'A' ? (
 								<ViewNonMembers />
 							) : this.state.selectedButton === 3 && this.state.selectedValue === 'B' ? (
@@ -281,4 +287,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, { compSelectedPages })(createPages);
+export default connect(mapStateToProps, { compSelectedPages,pageState })(createPages);

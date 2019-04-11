@@ -22,7 +22,6 @@ class AddGroup extends Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.props.pageState(0);
     fetch(BASE_URL + "/api/groups")
       .then(res => res.json())
       .then(data =>
@@ -42,7 +41,8 @@ class AddGroup extends Component {
     if (this.state.groups.indexOf(this.state.name.toLowerCase()) === -1) {
       if (this.state.name.length != 0) {
         this.props.getName(this.state.name);
-        history.push("/Groups");
+       history.push("/Groups");
+        
       } else {
         this.setState({ txt: "group name can't be empty" });
       }

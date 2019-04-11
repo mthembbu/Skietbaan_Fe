@@ -7,7 +7,7 @@ import { BASE_URL } from '../actions/types';
 import back from './GroupImages/back.png';
 import unmarked from './GroupImages/Oval.png';
 import marked from './GroupImages/MarkedBox.png';
-import Switch from '@material-ui/core/Switch';
+import history from './history';
 import seleteAll from './GroupImages/seleteAll.png';
 import unSelectAll from './GroupImages/unSelectAll.png';
 import { Row, Col } from "react-bootstrap";
@@ -100,7 +100,8 @@ class Groups extends Component {
 			.catch(function (data) { }).catch(err => {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
 			});
-		window.location = '/create';
+			 this.props.pageState(0);
+			 history.push("/create");
 	}
 
 	selectall() {

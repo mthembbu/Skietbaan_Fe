@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import '../scss/createcomp.css';
 import { createComp,compSelectedPages } from '../actions/competition.action';
 import history from './history';
+import { pageState } from '../actions/postActions';
+
 import { Row, Col } from 'react-bootstrap';
 class CreateComp extends Component {
 	constructor(props) {
@@ -58,7 +60,8 @@ class CreateComp extends Component {
 			this.setState({isCreated: true})
 		}
 		this.setState({ isExist: this.props.isExist });
-		this.props.compSelectedPages(2);	
+		this.props.compSelectedPages(2);
+		this.props.pageState(0);	
 	}
 	render() {
 		return (
@@ -157,4 +160,5 @@ const mapStatesToprops = (state) => ({
 	newComp: state.compOBJ.selectedComp,
 	isExist: state.compOBJ.isExist
 });
-export default connect(mapStatesToprops, { createComp,compSelectedPages })(CreateComp);
+
+export default connect(mapStatesToprops, { createComp,compSelectedPages,pageState })(CreateComp);

@@ -11,7 +11,6 @@ import blackBin from './GroupImages/blackBin.png';
 import whitePlus from './GroupImages/whitePlus.png';
 import { fetchEditUser, pageState } from '../actions/postActions';
 import back from './GroupImages/back.png';
-import { Row, Col } from "react-bootstrap";
 
 class EditGroup extends Component {
 	constructor(props) {
@@ -88,6 +87,7 @@ class EditGroup extends Component {
 	}
 //select user
 	toggleHighlight = (event) => {
+		
 		if (this.state.binState === true) {
 			if (this.props.editGroup[event].highlighted === true) {
 				this.props.editGroup[event].highlighted = false;
@@ -150,6 +150,7 @@ class EditGroup extends Component {
 								!this.state.filterText ||
 								post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
 								post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
+								
 							);
 						})
 						.map((post, index) => (
