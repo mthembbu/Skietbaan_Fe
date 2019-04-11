@@ -110,6 +110,7 @@ export class createPages extends Component {
 		this.setState({ selectedValue: event });
 	};
 	componentDidMount() {
+		this.props.pageState(0);
 		if (getCookie('token') !== null) {
 			let token = getCookie('token');
 			fetch(BASE_URL + '/api/features/getuserbytoken/' + token, {
