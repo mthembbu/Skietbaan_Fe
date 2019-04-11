@@ -42,7 +42,6 @@ export class createPages extends Component {
 	updateCreateContainer() {
 		switch (this.selectedButton) {
 			case 1:
-
 				if (this.state.selectedButtonCreateViewGroups === 1) {
 				} else if (this.state.selectedButtonCreateViewGroups === 1) {
 
@@ -85,7 +84,6 @@ export class createPages extends Component {
 	}
 
 	createGroups() {
-
 		this.props.pageState(10);
 		this.props.compSelectedPages(1);
 		this.setState({ selectedButtonCreateViewGroups: 1 });
@@ -94,9 +92,7 @@ export class createPages extends Component {
 	viewGroups() {
 		this.props.pageState(0);
 		this.props.compSelectedPages(2);
-		this.setState({ selectedButtonCreateViewGroups: 2 });
-		
-		
+		this.setState({ selectedButtonCreateViewGroups: 2 });	
 	}
 
 	createCompetitions() {
