@@ -42,6 +42,7 @@ export class createPages extends Component {
 	updateCreateContainer() {
 		switch (this.selectedButton) {
 			case 1:
+
 				if (this.state.selectedButtonCreateViewGroups === 1) {
 				} else if (this.state.selectedButtonCreateViewGroups === 1) {
 
@@ -70,9 +71,8 @@ export class createPages extends Component {
 	}
 
 	groupsPage() {
-		
-		this.setState({ selectedButton: 1 });
 		this.props.pageState(10);
+		this.setState({ selectedButton: 1 });
 	}
 
 	comptetitionsPage() {
@@ -86,21 +86,20 @@ export class createPages extends Component {
 	}
 
 	createGroups() {
-	
-		this.setState({ selectedButtonCreateViewGroups: 1 });
 		this.props.pageState(10);
 		this.props.compSelectedPages(2);
+		this.setState({ selectedButtonCreateViewGroups: 1 });
 	}
 
 	viewGroups() {
+		this.props.pageState(0);
 		this.props.compSelectedPages(2);
 		this.setState({ selectedButtonCreateViewGroups: 2 });
-		this.props.pageState(0);
+		
 		
 	}
 
 	createCompetitions() {
-
 		this.setState({ selectedButtonCreateViewCompetitions: 1 });
 		this.props.compSelectedPages(2);
 	}
@@ -203,7 +202,7 @@ export class createPages extends Component {
 										</div>
 												<div
 													className={
-														(this.state.selectedButton === 1 && this.props.page===0) && (this.state.selectedButton === 2 && this.props.selectedButton === 2)? (
+														(this.state.selectedButton === 1 && this.props.page===0) ||(this.state.selectedButton === 2 && this.props.selectedButton === 2)? (
 															'switch-active-right'
 														) : (
 																'switch-inactive'
