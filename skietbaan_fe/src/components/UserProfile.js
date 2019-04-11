@@ -53,7 +53,6 @@ class UserProfile extends Component {
                 this.setState({ awardCompetitions: data });
             }
         }).catch(err => {
-            console.log(err);
             this.setState({ exceptionCaughtOnAwards: true });
         });
 
@@ -69,7 +68,6 @@ class UserProfile extends Component {
                 this.setState({ hoursAward: data });
             }
         }).catch(err => {
-            console.log(err);
             this.setState({ exceptionCaughtOnHours: true });
         });
     }
