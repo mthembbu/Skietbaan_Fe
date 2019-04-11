@@ -9,6 +9,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Collapsible from 'react-collapsible';
 import downArrow from '../resources/awardIcons/down-triangle.png';
 import upArrow from '../resources/awardIcons/up-triangle.png';
+import { pageState } from '../actions/postActions';
+
 class CreateComp extends Component {
 	constructor(props) {
 		super(props);
@@ -78,7 +80,8 @@ class CreateComp extends Component {
 			this.setState({isCreated: true})
 		}
 		this.setState({ isExist: this.props.isExist });
-		this.props.compSelectedPages(2);	
+		this.props.compSelectedPages(2);
+		this.props.pageState(0);	
 	}
 	changeToggle(){
 		this.setState({toggleRequirements: !this.state.toggleRequirements});
@@ -180,4 +183,5 @@ const mapStatesToprops = (state) => ({
 	newComp: state.compOBJ.selectedComp,
 	isExist: state.compOBJ.isExist
 });
-export default connect(mapStatesToprops, { createComp,compSelectedPages })(CreateComp);
+
+export default connect(mapStatesToprops, { createComp,compSelectedPages,pageState })(CreateComp);

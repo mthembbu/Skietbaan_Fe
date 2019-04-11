@@ -148,7 +148,7 @@ class ViewGroups extends Component {
                       </div>
                     ) : null}
                   </td>
-                  <td >
+                  <td className="switch-container">
                     <div className="group-view">
                       <Switch
                         color={"primary"}

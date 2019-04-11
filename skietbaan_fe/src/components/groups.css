@@ -299,7 +299,7 @@
 }
 
 .bpanel {
-	position: absolute;
+	position: fixed;
 	right: 0;
 	bottom: 0;
 	background: #f8f8f8;
@@ -309,7 +309,7 @@
 	font-weight: lighter;
 	padding-top: 10px;
 	float: bottom;
-	height: 95px;
+	height: 120px;
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
 }
@@ -426,6 +426,7 @@
 	height: 63px;
 	color: #c6c6c6;
 	text-align: left;
+	padding-left: 2%;
 }
 .back-image {
 	padding-left: 30px;
@@ -449,8 +450,9 @@
 .list-group-item {
 	text-align: left;
 }
-.list-group {
+.list-group-members {
 	text-align: left;
+	margin-top: 120px;
 }
 .navBar-container {
 	height: 155px;
@@ -618,6 +620,7 @@
 @media only screen and (max-width:576px){
 	.check{
 		margin-bottom: 56px;
+
 	}
 	.the-main{
 		margin-bottom: 56px;
@@ -636,7 +639,8 @@
 .check-edit{
 	padding-bottom: 100px;
 	overflow-y: overlay;
-    z-index: 1;
+	z-index: 1;
+
 }
 .The-Main{
 	overflow-y: overlay;
@@ -672,12 +676,17 @@
 	color: #BE0000;
 	font-weight: lighter;
 }
-.table-member td{
-	width: 33.33333333%;
-}
-.group-container{
-	text-align: center;
-}
+
 .The-Main .check-edit{
 	background: #FFFFFF;
+}
+
+.table-member  .group-container{
+	width: 33.33333333%;
+}
+.table-member  .first-row,.first-row-active{
+	width: 50%;
+}
+.table-member .view-group .switch-container{
+	width: 20%;
 }
