@@ -62,7 +62,11 @@ export default class search extends Component {
     window.addEventListener("resize", this.updateDimensions);
   }
   getBodyHeight() {
-    return this.state.height - 370;
+    if (this.state.width < 575) {
+			return (this.state.height - 240);
+		  } else {
+			return 70;
+		  }
   }
   updateDimensions() {
     this.setState({
@@ -473,17 +477,13 @@ export default class search extends Component {
       <div className="add-score-entire-page-content" autoComplete="off">
         <Row className="row justify-content-center">
           <Col sm={8} className="createpage-bootstrap-col-center-container">
-            <div className={stateOne || this.state.scoreSaved
+          <div className={stateOne || this.state.scoreSaved
               ? "hidden"
               : "score-capture-header"}>
               <div className="gun-overlay-image">
                 <label className="label-for-score">ADD SCORE</label>
               </div>
             </div>
-          </Col>
-        </Row>
-        <Row className="row justify-content-center">
-          <Col sm={8} className="createpage-bootstrap-col-center-container">
           <div className={this.state.scoreSaved
           ? "sucess-container"
           : (stateOne
@@ -577,7 +577,7 @@ export default class search extends Component {
             </div>
             <div className={this.state.currState !== 3
               ? "hidden"
-              : "submit-container icon-push-down no-margin"}>
+              : "submit-container-comp icon-push-down no-margin"}>
               <div className={this.state.currState !== 3
                 ? "hidden"
                 : "submit-button-elements second float-left"} >
