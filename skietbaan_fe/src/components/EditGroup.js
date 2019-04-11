@@ -151,8 +151,7 @@ class EditGroup extends Component {
 							return (
 								!this.state.filterText ||
 								post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
-								post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
-								
+								post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())				
 							);
 						})
 						.map((post, index) => (
