@@ -89,11 +89,12 @@ class AddMembersGroup extends Component {
   }
 
   toggleHighlight = event => {
-    if (this.props.existing[event].highlighted === true) {
-      this.props.existing[event].highlighted = false;
+    const index=this.props.memberIds.indexOf(event);
+    if (this.props.existing[index].highlighted === true) {
+      this.props.existing[index].highlighted = false;
       this.setState({ count: this.state.count - 1 });
     } else {
-      this.props.existing[event].highlighted = true;
+      this.props.existing[index].highlighted = true;
       this.setState({ count: this.state.count + 1 });
     }
   };
@@ -127,9 +128,9 @@ class AddMembersGroup extends Component {
 
   render() {
     const postitems = (
-      <div className="check-edit" style={{ height: this.getBodyHeight() + 'vh' }}>
+      <div className="check-edit" style={{ height: this.getBodyHeight() + 'vh'}}>
       {this.props.existing.length===0?null:
-        <ul class="list-group" style={{ textAlign: 'left' }}>
+        <ul class="list-group" style={{ textAlign: 'left' , marginTop: 120+'px'}}>
           {this.props.existing
             .filter((post) => {
               return (
@@ -142,7 +143,7 @@ class AddMembersGroup extends Component {
               <li class="listItem" key={post.id}>
                 <img
                   className="checkbox-delete"
-                  onClick={() => this.toggleHighlight(index)}
+                  onClick={() => this.toggleHighlight(post.id)}
                   src={post.highlighted ? marked : unmarked}
                   alt=""
                 />
@@ -216,7 +217,8 @@ class AddMembersGroup extends Component {
 const mapStateToProps = state => ({
   id: state.posts.groupId,
   name: state.posts.groupName,
-  existing: state.posts.existing
+  existing: state.posts.existing,
+  memberIds:state.posts.memberIds
 });
 export default withRouter(
   connect(

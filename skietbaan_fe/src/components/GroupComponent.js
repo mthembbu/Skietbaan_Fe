@@ -13,7 +13,7 @@ componentDidMount(){
 	render() {
 		return (
 			<div>
-				{this.props.page === 0 ? <ViewGroups /> : this.props.page === 1 ? <EditGroup /> : <AddMembersGroup />}
+				{this.props.page === 0 ? <ViewGroups /> : this.props.page === 1 ? <EditGroup /> : this.props.page===2? <AddMembersGroup />:null}
 			</div>
 		);
 	}
