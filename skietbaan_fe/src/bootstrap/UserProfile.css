@@ -318,11 +318,22 @@
     margin-right: 5px;
 }
 
+.no-competition-border{
+    width: 312px;
+    height: 77px;
+    border: 1px #BE0000 solid;
+    margin-top: 101px;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 22px;
+}
+
 .no-competition{
-    margin-top: 40px;
     text-align: center;
-    font-weight: bold;
-    font-size: 19px;
+    font-size: 16px;
+    font-weight: 300;
+    font-family: helvetica;
     color: #BE0000;
 }
 

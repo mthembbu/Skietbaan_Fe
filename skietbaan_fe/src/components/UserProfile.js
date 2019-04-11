@@ -18,7 +18,8 @@ class UserProfile extends Component {
                 hours: -1,
             },
             collapse: false,
-            exceptionCaught: false
+            exceptionCaughtOnAwards: false,
+            exceptionCaughtOnHours: false
         }
         
         this.toggle = this.toggle.bind(this);
@@ -50,8 +51,9 @@ class UserProfile extends Component {
                 })
                 this.setState({ awardCompetitions: data });
             }
-        }).catch(() => {
-            this.setState({ exceptionCaught: true });
+        }).catch(err => {
+            console.log(err);
+            this.setState({ exceptionCaughtOnAwards: true });
         });
 
         fetch(BASE_URL + "/api/awards/hours/" + token, {
@@ -65,8 +67,9 @@ class UserProfile extends Component {
             if(this._isMounted){
                 this.setState({ hoursAward: data });
             }
-        }).catch(() => {
-            this.setState({ exceptionCaught: true });
+        }).catch(err => {
+            console.log(err);
+            this.setState({ exceptionCaughtOnHours: true });
         });
     }
 
@@ -253,7 +256,9 @@ class UserProfile extends Component {
     render() {
         return (
             <div className="award-container pad-award-container">
-                {this.state.exceptionCaught ? <div className="no-competition">No Competitions Available</div> :
+                {this.state.exceptionCaughtOnAwards ? 
+                    <div className="no-competition-border">
+                        <label className="no-competition">No competitions available</label></div> :
                 //only render when the data has arrived from backend
                 this.state.awardCompetitions.length > 0 ?
                 <div className="remove-right-padding">
