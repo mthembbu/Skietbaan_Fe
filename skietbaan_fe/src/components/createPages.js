@@ -77,6 +77,7 @@ export class createPages extends Component {
 	comptetitionsPage() {
 		this.setState({ selectedButton: 2 });
 		this.props.compSelectedPages(1);
+		this.props.pageState(10);
 	}
 
 	membersPage() {
