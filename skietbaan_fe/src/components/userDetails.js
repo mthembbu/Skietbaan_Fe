@@ -14,7 +14,8 @@ export default class userDetails extends Component {
       emailValue: "",
       cellphoneValue: "",
       returnValue: "",
-      checkNumberValid: false
+      checkNumberValid: false,
+      inputchanged: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -43,31 +44,42 @@ export default class userDetails extends Component {
   }
 
   updateUser() {
-    this.state.array.name = this.state.nameValue;
-    this.state.array.phoneNumber = this.state.cellphoneValue;
-    this.state.array.email = this.state.emailValue;
-    this.state.array.surname = this.state.surnameValue;
-    fetch(BASE_URL + "/api/Features/UpdateDetails/", {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(this.state.array)
-    })
-      .then(res => res.json())
-      .then(data => this.setState({ returnValue: data }))
-      .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      });
+    if (
+      this.state.array.name === this.state.nameValue &&
+      this.state.array.phoneNumber === this.state.cellphoneValue &&
+      this.state.array.email === this.state.emailValue &&
+      this.state.array.surname === this.state.surnameValue
+    ) {
+      this.setState({ inputchanged: false });
+    } else if (!validateEmail(this.state.emailValue)) {
+      this.setState({ inputchanged: false });
+    } else {
+      this.state.array.name = this.state.nameValue;
+      this.state.array.phoneNumber = this.state.cellphoneValue;
+      this.state.array.email = this.state.emailValue;
+      this.state.array.surname = this.state.surnameValue;
+      fetch(BASE_URL + "/api/Features/UpdateDetails/", {
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.state.array)
+      })
+        .then(res => res.json())
+        .then(data => this.setState({ returnValue: data }))
+        .catch(err => {
+          /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+        });
+    }
   }
 
   handleChange({ target }) {
     this.setState({
-      [target.name]: target.value
+      [target.name]: target.value,
+      inputchanged: true
     });
   }
-
   handErrorValue() {
     this.setState({ checkNumberValid: true });
   }
@@ -184,11 +196,7 @@ export default class userDetails extends Component {
                       : "user-details-button-container"
                   }
                   onClick={
-                    this.state.array.name === this.state.nameValue ||
-                    this.state.array.surname === this.state.surnameValue ||
-                    this.state.array.phoneNumber ===
-                      this.state.cellphoneValue ||
-                    this.state.array.email === this.state.emailValue
+                    this.state.inputchanged === true
                       ? this.updateUser
                       : this.handErrorValue
                   }
