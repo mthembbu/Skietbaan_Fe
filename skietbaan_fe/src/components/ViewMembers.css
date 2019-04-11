@@ -39,7 +39,6 @@
     padding: 0 10% 0 10%;
     background-color:  #f6f6f6;
     overflow-y: scroll;
-    height: 70vh;
   }
 }
 @media only screen and (max-width: 575px) {
@@ -47,6 +46,7 @@
     background-color: #f6f6f6;
     overflow-y: scroll;
     color: #666666;
+    padding-bottom: 70px;
   }
 
   .centre-view-member {
