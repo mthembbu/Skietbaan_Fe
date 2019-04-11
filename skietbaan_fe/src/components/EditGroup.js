@@ -88,12 +88,15 @@ class EditGroup extends Component {
 	}
 //select user
 	toggleHighlight = (event) => {
+		
+		const index=this.props.idsForUser.indexOf(event);
+
 		if (this.state.binState === true) {
-			if (this.props.editGroup[event].highlighted === true) {
-				this.props.editGroup[event].highlighted = false;
+			if (this.props.editGroup[index].highlighted === true) {
+				this.props.editGroup[index].highlighted = false;
 				this.setState({ count: this.state.count - 1 });
 			} else {
-				this.props.editGroup[event].highlighted = true;
+				this.props.editGroup[index].highlighted = true;
 				this.setState({ count: this.state.count + 1 });
 			}
 		}
@@ -153,7 +156,7 @@ class EditGroup extends Component {
 							);
 						})
 						.map((post, index) => (
-							<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(index)}>
+							<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(post.id)}>
 								{this.state.binState === true ? (
 									<img
 										className="checkbox-delete"
@@ -238,7 +241,8 @@ const mapStateToProps = (state) => ({
 	id: state.posts.groupId,
 	name: state.posts.groupName,
 	editGroup: state.posts.editGroup,
-	page: state.posts.page
+	page: state.posts.page,
+	idsForUser:state.posts.idsForUser
 });
 
 export default connect(mapStateToProps, { fetchEditUser, pageState })(EditGroup);

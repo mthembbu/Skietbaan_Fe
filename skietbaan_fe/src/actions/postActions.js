@@ -89,16 +89,19 @@ export const getName = name => {
 };
 
 export const fetchEditUser = groupid => dispatch => {
+  const ar=[];
   fetch(BASE_URL + "/api/Groups/edit?id=" + groupid)
     .then(res => res.json())
     .then(data => {
       const newdata = data.map(user => {
         user.highlighted = false;
+        ar.push(user.id)
         return user;
       });
       dispatch({
         type: EDITGROUPUSERS,
-        payload: newdata
+        payload: newdata,
+        pay:ar
       });
     })
     .catch(err => {
