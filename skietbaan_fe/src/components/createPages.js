@@ -70,13 +70,15 @@ export class createPages extends Component {
 	}
 
 	groupsPage() {
-		this.props.pageState(10);
+		
 		this.setState({ selectedButton: 1 });
+		this.props.pageState(10);
 	}
 
 	comptetitionsPage() {
-		this.props.compSelectedPages(1);
+		
 		this.setState({ selectedButton: 2 });
+		this.props.compSelectedPages(1);
 	}
 
 	membersPage() {
@@ -84,25 +86,29 @@ export class createPages extends Component {
 	}
 
 	createGroups() {
-		this.props.pageState(10);
-		this.props.compSelectedPages(1);
+	
 		this.setState({ selectedButtonCreateViewGroups: 1 });
+		this.props.pageState(10);
+		this.props.compSelectedPages(2);
 	}
 
 	viewGroups() {
-		this.props.pageState(0);
 		this.props.compSelectedPages(2);
 		this.setState({ selectedButtonCreateViewGroups: 2 });
+		this.props.pageState(0);
+		
 	}
 
 	createCompetitions() {
-		this.props.compSelectedPages(2);
+
 		this.setState({ selectedButtonCreateViewCompetitions: 1 });
+		this.props.compSelectedPages(2);
 	}
 
 	viewCompetitions() {
-		this.props.compSelectedPages(2);
+		
 		this.setState({ selectedButtonCreateViewCompetitions: 2 });
+		this.props.compSelectedPages(2);
 
 	}
 	handleChange = (event) => {
@@ -185,7 +191,7 @@ export class createPages extends Component {
 												: "create-switch-bottom"} >
 												<div
 													className={
-														(this.state.selectedButton === 1 && this.props.page!=0) || (this.state.selectedButton===2 && this.props.compSelectedPages!==2) ? (
+														(this.state.selectedButton === 1 && this.props.page!==0) || (this.state.selectedButton === 2 && this.props.selectedButton !== 2) ? (
 															'switch-active-left'
 														) : (
 																'switch-inactive'
@@ -197,7 +203,7 @@ export class createPages extends Component {
 										</div>
 												<div
 													className={
-														(this.state.selectedButton === 1 && this.props.page===0) || (this.state.selectedButton===2 && this.props.compSelectedPages===2)? (
+														(this.state.selectedButton === 1 && this.props.page===0) && (this.state.selectedButton === 2 && this.props.selectedButton === 2)? (
 															'switch-active-right'
 														) : (
 																'switch-inactive'
@@ -265,7 +271,7 @@ export class createPages extends Component {
 							) : this.state.selectedButton === 1 && this.props.page===0 || this.state.selectedButton === 1 && this.props.page===1 || this.state.selectedButton === 1 && this.props.page===2 ? (
 								<GroupComponent />
 							) : null}
-							{(this.state.selectedButton === 2)? <CompComponent /> : null}
+							{this.state.selectedButton === 2 ? <CompComponent /> : null}
 							{this.state.selectedButton === 3 && this.state.selectedValue === 'A' ? (
 								<ViewNonMembers />
 							) : this.state.selectedButton === 3 && this.state.selectedValue === 'B' ? (

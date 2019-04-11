@@ -10,7 +10,6 @@ componentDidMount(){
 	this.props.compSelectedPages(1);
 }
 	render() {
-		console.log(this.props.compSelectedPage)
 		return (
 			<div>
 				{this.props.compSelectedPage === 1 ? <CreateComp /> : this.props.compSelectedPage === 2 ? <ViewComp/> : null}
