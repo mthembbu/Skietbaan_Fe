@@ -37,7 +37,6 @@ class UserProfile extends Component {
             history.push("/registerPage");
             return;
         }
-        console.log("fetching")
         fetch(BASE_URL + "/api/awards/" + token, {
             method: "GET",
             headers: {
@@ -70,6 +69,7 @@ class UserProfile extends Component {
         }).catch(err => {
             this.setState({ exceptionCaughtOnHours: true });
         });
+
     }
 
     componentDidMount(){
