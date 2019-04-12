@@ -81,6 +81,8 @@
 
 .create-comp-container {
 	text-align: center;
+	padding-bottom: 15px;
+    overflow-y: overlay;
 }
 .containers-input{
 	padding-top: 17px;

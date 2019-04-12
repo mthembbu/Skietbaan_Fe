@@ -36,7 +36,9 @@ class CreateComp extends Component {
 			silverTotal: '',
 			goldAccuracy: '',
 			goldTotal: '',
-			compID:''
+			compID:'',
+			height: window.innerHeight,
+			width: window.innerWidth
 		};
 		//binding the onChange method to this commponents
 		this.onChangeCompName = this.onChangeCompName.bind(this);
@@ -52,8 +54,29 @@ class CreateComp extends Component {
 		this.onChangeSilverTotal = this.onChangeSilverTotal.bind(this);
 		this.onChangeGoldAccuracy = this.onChangeGoldAccuracy.bind(this);
 		this.onChangeGoldTotal = this.onChangeGoldTotal.bind(this);
+		this.updateDimensions = this.updateDimensions.bind(this);
+		this.getBodyHeight = this.getBodyHeight.bind(this);
 	}
-
+    componentWillMount() {
+		window.addEventListener('resize', this.updateDimensions);
+	}
+	// The method that mounts everytime there is an action detected
+	componentDidMount() {
+		this.updateDimensions();
+	}
+	updateDimensions() {
+		this.setState({
+			height: window.innerHeight,
+			width: window.innerWidth
+		});
+	}
+	getBodyHeight() {
+		if (this.state.width < 575) {
+			return (this.state.height - 240) +"px";
+		} else {
+			return "40vh";
+		}
+	}
 	onClick() {
 		history.push('/create');
 	}
@@ -203,7 +226,7 @@ class CreateComp extends Component {
 	}
 	render() {
 		return (
-			<div class="create-comp-container">
+			<div class="create-comp-container" style={{ maxHeight: this.getBodyHeight() ,height: "fit-content"}}>
 						<Form onSubmit={this.onSubmit}>
 							<div className="containers-input">
 								<div className="comp-input-control">
