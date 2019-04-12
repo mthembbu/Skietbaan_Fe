@@ -11,6 +11,7 @@ import downArrow from '../resources/awardIcons/down-triangle.png';
 import upArrow from '../resources/awardIcons/up-triangle.png';
 import { pageState } from '../actions/postActions';
 import '../scss/view-comp.css';
+import { BASE_URL } from '../actions/types';
 class CreateComp extends Component {
 	constructor(props) {
 		super(props);
@@ -34,7 +35,10 @@ class CreateComp extends Component {
 			silverAccuracy: '',
 			silverTotal: '',
 			goldAccuracy: '',
-			goldTotal: ''
+			goldTotal: '',
+			compID:'',
+			height: window.innerHeight,
+			width: window.innerWidth
 		};
 		//binding the onChange method to this commponents
 		this.onChangeCompName = this.onChangeCompName.bind(this);
@@ -50,8 +54,29 @@ class CreateComp extends Component {
 		this.onChangeSilverTotal = this.onChangeSilverTotal.bind(this);
 		this.onChangeGoldAccuracy = this.onChangeGoldAccuracy.bind(this);
 		this.onChangeGoldTotal = this.onChangeGoldTotal.bind(this);
+		this.updateDimensions = this.updateDimensions.bind(this);
+		this.getBodyHeight = this.getBodyHeight.bind(this);
 	}
-
+    componentWillMount() {
+		window.addEventListener('resize', this.updateDimensions);
+	}
+	// The method that mounts everytime there is an action detected
+	componentDidMount() {
+		this.updateDimensions();
+	}
+	updateDimensions() {
+		this.setState({
+			height: window.innerHeight,
+			width: window.innerWidth
+		});
+	}
+	getBodyHeight() {
+		if (this.state.width < 575) {
+			return (this.state.height - 240) +"px";
+		} else {
+			return "40vh";
+		}
+	}
 	onClick() {
 		history.push('/create');
 	}
@@ -174,19 +199,32 @@ class CreateComp extends Component {
 			MaximumScore: this.state.MaximumScore
 		};
 		this.props.createComp(compData);
+		
+		setTimeout(()=>{
+			fetch(BASE_URL + '/api/Competition/getCompId')
+			.then((response) => response.json())
+			.then((compIdData) => {
+				this.setState({compID:compIdData});
+			})
+			.catch((err) => {
+				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+			});
+			
+		});
 		if (this.props.isExist == false) {
 			this.setState({isCreated: true})
 		}
 		this.setState({ isExist: this.props.isExist });
 		this.props.compSelectedPages(2);
-		this.props.pageState(0);	
+			this.props.pageState(0);
+			
 	}
 	changeToggle(){
 		this.setState({toggleRequirements: !this.state.toggleRequirements});
 	}
 	render() {
 		return (
-			<div class="create-comp-container">
+			<div class="create-comp-container" style={{ maxHeight: this.getBodyHeight() ,height: "fit-content"}}>
 						<Form onSubmit={this.onSubmit}>
 							<div className="containers-input">
 								<div className="comp-input-control">
@@ -262,33 +300,6 @@ class CreateComp extends Component {
 							<div style={{fontSize:12,color:"red"}}>{this.state.isHoursValid ? null : this.state.errorMessageHours}</div>	
 							</div>
 							{this.state.isCreated? <label>Competition created</label>:null}	
-							<div className="comp-input-control">
-								<Collapsible className="create-comp-collapsible" 
-									trigger={<div className="requirements-collapse" onClick={this.changeToggle}>
-								 				<div className="requirements-label">EDIT REQUIREMENTS </div>
-														<span><img className="down-arrow" src={this.state.toggleRequirements ?upArrow : downArrow} alt=""/>
-														</span>
-												</div>}>
-        							<div className="requirements-content">
-										<p> REQUIREMENTS, HERE!</p>
-										<Container className="standards-container">
-															<Row className="standards-label">
-																<Col xs={3} md={3} lg={3} />
-																<Col xs={5} md={5} lg={5}>
-																	<div className="accuracy-header-label">
-																		ACCURACY %
-																			</div>
-																</Col>
-																<Col xs={4} md={4}>
-																	<div className="total-header-label">
-																		TOTAL
-																			</div>
-																</Col>
-															</Row>
-										</Container>					
-									</div>
-     							</Collapsible>
-							</div>
 							<div className="comp-submit-btn-container">
 								<button
 									variant="secondary"
