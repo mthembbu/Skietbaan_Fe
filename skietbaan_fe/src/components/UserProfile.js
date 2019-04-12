@@ -265,7 +265,7 @@ class UserProfile extends Component {
                 //only render when the data has arrived from backend
                 this.state.awardCompetitions.length > 0 ?
                 <div className="remove-right-padding">
-                    <Row>
+                    <Row className="fix-buttons-rectangle">
                         <Col>
                         <a onClick={this.toggle} className="make-cursor-point">
                         <div className="buttons-rectangle">
@@ -282,7 +282,8 @@ class UserProfile extends Component {
                                         {this.getInitialAward().competitionName.toUpperCase()}
                                     </div>
                                     <div className="down-triangle-img-scale">
-                                        <img src={require("../resources/awardIcons/down-triangle.png")} alt="down-triangle">
+                                        <img src={require("../resources/awardIcons/down-triangle.png")}
+                                                    alt="down-triangle">
                                         </img>
                                     </div>
                                 </div>
@@ -290,26 +291,26 @@ class UserProfile extends Component {
                         </div>
                         </a>
                         </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            {this.getInitialAward().bestInMonth.startsWith("Best") ?
-                                this.renderBestInMonth() : null}
-                        </Col>
+                        {
+                            this.state.collapse ? 
+                                <div className="grey-text select-competition-font">Select Competition</div> :
+                                null
+                        }
                     </Row>
                     <Row className="center-content competition-buttons-container">
                         <Col>
                             <Collapse isOpened={this.state.collapse}>
-                                <div className="grey-text select-competition-font">Select Competition</div>
-                                <div className="award-buttons-container">{this.renderCompetitionList()}</div>
-                                <a className="scale-arrowupicon-img" onClick={this.toggle}>
-                                    <img src={require("../resources/awardIcons/arrowUpIcon.png")} alt="lock-icon"></img>
-                                </a>
+                                <div className="push-top-92px">
+                                    <div className="award-buttons-container">{this.renderCompetitionList()}</div>
+                                    <a className="scale-arrowupicon-img" onClick={this.toggle}>
+                                        <img src={require("../resources/awardIcons/arrowUpIcon.png")} alt="lock-icon"></img>
+                                    </a>
+                                </div>
                             </Collapse>
                         </Col>
                     </Row>
-                    <div className={this.isBestInMonth ? "awards-container-background margin-top-43px" :
-                    "awards-container-background margin-top-60px"}>
+                    <div className={this.state.collapse ? "awards-container-background top-1px" :
+                    "awards-container-background top-61px"}>
                     <div className="line adjust-top-line"></div>
                     <Row className="awards-container pad-top-30px">
                         <Col xs={4}sm={4}md={4} className="push-bottom-49px">
@@ -320,7 +321,7 @@ class UserProfile extends Component {
                                 )
                             }
                         </Col>
-                        <Col xs={7}sm={7}md={7}>
+                        <Col xs={8}sm={8}md={8}>
                             <Row className="push-bottom-13px">
                                 <Col xs={4}sm={4}md={4}>
                                     <label className={this.getInitialAward().accuracyAward.bronze ?
@@ -385,7 +386,7 @@ class UserProfile extends Component {
                             {this.renderTotalCircle(this.getInitialAward(),
                             this.getIndexByCompetitionName(this.getInitialAward().competitionName))}
                         </Col>
-                        <Col xs={7}sm={7}md={7}>
+                        <Col xs={8}sm={8}md={8}>
                             <Row className="push-bottom-13px">
                                 <Col xs={4}sm={4}md={4}>
                                 <label className={this.getInitialAward().totalAward.bronze ? 
