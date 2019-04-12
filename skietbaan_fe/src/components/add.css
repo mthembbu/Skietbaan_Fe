@@ -80,7 +80,7 @@
 .add:focus {
 	outline: none;
 }
-.add {
+.add-active {
 	bottom: 92px;
 	width: 312px;
 	height: 42px;
@@ -88,6 +88,17 @@
 	border-radius: 22px;
 	background: #BE0000;
 	color: white;
+	font-size: 16px;
+	margin-top: 200px;
+}
+.add {
+	bottom: 92px;
+	width: 312px;
+	height: 42px;
+	border: 1px solid #D9D9D9;
+	border-radius: 22px;
+	background: transparent;
+	color: #D9D9D9;
 	font-size: 16px;
 	margin-top: 200px;
 }

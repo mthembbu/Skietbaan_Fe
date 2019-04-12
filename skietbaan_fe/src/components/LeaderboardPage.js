@@ -146,12 +146,7 @@ class LeaderboardPage extends Component {
         }
     }
     roundOfScores = (score) =>{
-        var roundedScore = score.toFixed(1);//round off to one decimal place
-        if(score+".0" === roundedScore){//avoid converting intergers to decimals (eg 20 to 20.0)
-            return score;
-        }else{
-            return roundedScore;
-        }
+        return score.toFixed(1);//round off to one decimal place
     }
     setCompetitionValue = (value) => {
         this.setState({
@@ -609,12 +604,13 @@ class LeaderboardPage extends Component {
                                                                                                  <table className="head-table-labels">
                                                                                                      <tbody>
                                                                                                          <tr>
-                                                                                                             <td className="extra-name-col">{this.props.competitions.length === 0 ? (this.props.currentUser.displayName === null ? this.props.currentUser.username : this.props.currentUser.username )
+                                                                                                             <td className="extra-name-col">{this.props.competitions !== null ?(this.props.competitions[0] !== "undifined" ? this.props.currentUser.username 
                                                                                                                                                                              :(this.props.userResults === null ? (this.props.currentUser !== null ? this.props.currentUser.username
                                                                                                                                                                                                                                             : "invalid tokken") 
                                                                                                                                                                                                               : (this.props.userResults !== null ? (this.props.userResults.displayName.length !== 0 ? this.props.userResults.displayName
-                                                                                                                                                                                                                                                                                                    : this.props.userResults.username) : '--'))}</td>
-                                                                                                             <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{this.props.userResults === null ? '--' : (this.props.userResults.best !== 0 ? this.props.userResults.best : '--')}</td>
+                                                                                                                                                                                                                                                                                                    : this.props.userResults.username) : 'null')))
+                                                                                                                                                                              : null}</td>
+                                                                                                             <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{this.props.userResults === null ? '--' : (this.props.userResults.best !== 0 ? this.roundOfScores(this.props.userResults.best) : '--')}</td>
                                                                                                              <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>
                                                                                                                  <div className="member-rank-icons">
                                                                                                                      <div className="up-arrow">
@@ -626,7 +622,7 @@ class LeaderboardPage extends Component {
                                                                                                                          </div>
                                                                                                                      </div>
                                                                                                                      <div className="ranking">
-                                                                                                                         <div className="number">{this.props.userResults == null ? '--' : (this.props.userResults.average != 0 ? this.props.userResults.average : '--')}</div>
+                                                                                                                         <div className="number">{this.props.userResults == null ? '--' : (this.props.userResults.average != 0 ? this.roundOfScores(this.props.userResults.average) : '--')}</div>
                                                                                                                      </div>
                                                                                                                      <div className="down-arrow">
                                                                                                                          <div className="down-arrow-icon">
@@ -637,7 +633,7 @@ class LeaderboardPage extends Component {
                                                                                                                      </div>
                                                                                                                  </div>
                                                                                                              </td>
-                                                                                                             <td className={this.state.selectedRank === "total" ? "score-col-active" : "score-col"}>{this.props.userResults === null ? '--' : (this.props.userResults.total != 0 ? this.props.userResults.total : '--')}</td>
+                                                                                                             <td className={this.state.selectedRank === "total" ? "score-col-active" : "score-col"}>{this.props.userResults === null ? '--' : (this.props.userResults.total != 0 ? this.roundOfScores(this.props.userResults.total) : '--')}</td>
                                                                                                          </tr>
                                                                                                      </tbody>
                                                                                                  </table>
