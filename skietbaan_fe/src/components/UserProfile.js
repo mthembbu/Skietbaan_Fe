@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import {Row, Col } from "react-bootstrap";
 import "../bootstrap/UserProfile.css";
 import $ from "jquery";
 import { getCookie } from "./cookie.js";
@@ -37,7 +37,7 @@ class UserProfile extends Component {
             history.push("/registerPage");
             return;
         }
-
+        console.log("fetching")
         fetch(BASE_URL + "/api/awards/" + token, {
             method: "GET",
             headers: {
@@ -231,10 +231,13 @@ class UserProfile extends Component {
 
     getInitialAward(){
         if(this.props.selectedCompetition.length === 0){
+            
             return this.state.awardCompetitions[0]
         }else{
             var initAward = this.state.awardCompetitions[this.getIndexByCompetitionName(this.props.selectedCompetition)]
             if(initAward === null || initAward === undefined){
+                
+                this.props.setSelectedCompetition(this.state.awardCompetitions[0])
                 return this.state.awardCompetitions[0]
             }
             return initAward;
@@ -299,7 +302,7 @@ class UserProfile extends Component {
                     </Row>
                     <Row className="center-content competition-buttons-container">
                         <Col>
-                            <Collapse isOpened={this.state.collapse}>
+                            <Collapse isOpened={this.state.collapse} fixedHeight={300}>
                                 <div className="push-top-92px">
                                     <div className="award-buttons-container">{this.renderCompetitionList()}</div>
                                     <a className="scale-arrowupicon-img" onClick={this.toggle}>
