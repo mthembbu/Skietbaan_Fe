@@ -110,7 +110,7 @@ class Documents extends Component {
       window.location = "/registerPage";
     }
     return (
-      <div className="documents_background ">
+      <div className="documents-background ">
         <div className="documents-center">
           <div className="label-select-document">
             {this.state.sendLogsReturn === "Document" &&
