@@ -131,13 +131,6 @@ class Documents extends Component {
               }
             >
               Letter of Good Standing
-              {this.state.sendLogsReturn !== "Document" ? (
-                <img
-                  className="document-image-icon"
-                  src={require("../resources/noDoc.png")}
-                  alt=""
-                />
-              ) : null}
             </button>
 
             {this.state.sendLogsReturn !== "Document" ? (
@@ -174,14 +167,7 @@ class Documents extends Component {
                 this.state.sendLosReturn === "Document" ? this.sendLOS : null
               }
             >
-              Letter of Status{" "}
-              {this.state.sendLosReturn !== "Document" ? (
-                <img
-                  className="document-image-icon"
-                  src={require("../resources/noDoc.png")}
-                  alt=""
-                />
-              ) : null}
+              Letter of Dedicated Status
             </button>
 
             {this.state.sendLosReturn !== "Document" ? (
