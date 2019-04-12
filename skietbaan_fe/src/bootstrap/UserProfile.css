@@ -12,7 +12,7 @@
 
 .buttons-rectangle{
     height: 38px;
-    width: 94%;
+    width: 100%;
     border: 1px solid #BE0000;
     border-radius: 18px;
     margin-top: 25px;
@@ -93,9 +93,16 @@
     margin-bottom: 10px;
 }
 
+.top-1px{
+    top: 1px;
+}
+
+.top-61px{
+    top: 61px;
+}
+
 .awards-container-background{
     position: relative;
-    bottom: 26px;
     background-color: #BE0000; 
     border-radius: 18px;
     box-shadow: 3px -4px 12px -9px rgba(0,0,0,0.5);
@@ -177,6 +184,10 @@
     margin-bottom: 21px;
 }
 
+.push-top-92px{
+    margin-top: 92px;
+}
+
 .circle{
     position: relative;
     top: 4px;
@@ -233,8 +244,12 @@
     background-color: #F3F4F9;
 }
 
+.awards-container.col-sm-8.col-md-8.col-8{
+    max-width: 100% !important;
+}
+
 .push-bottom-49px{
-    margin-bottom: 49px
+    margin-bottom: 49px;
 }
 
 .push-bottom-13px{
@@ -337,6 +352,17 @@
     color: #BE0000;
 }
 
-.award-buttons-container{
+.fix-buttons-rectangle{
+    display: block;
+    position: fixed;
+    margin: auto;
+    width: 100%;
+    z-index: 1;
+    background-color: white;
+}
 
+.award-buttons-container{
+    max-height: 184px;
+    overflow-y: overlay;
+    overflow-x: hidden;
 }
