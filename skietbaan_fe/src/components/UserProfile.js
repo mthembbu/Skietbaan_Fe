@@ -313,7 +313,7 @@ class UserProfile extends Component {
                         </Col>
                     </Row>
                     <div className={this.state.collapse ? "awards-container-background top-1px" :
-                    "awards-container-background top-61px"}>
+                    "awards-container-background top-60px"}>
                     <div className="line adjust-top-line"></div>
                     <Row className="awards-container pad-top-30px">
                         <Col xs={4}sm={4}md={4} className="push-bottom-49px">
