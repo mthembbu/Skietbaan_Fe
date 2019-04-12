@@ -38,7 +38,7 @@ export const CHOOSEPAGE = "CHOOSEPAGE";
 export const COMP_PAGE = "COMP_PAGE";
 export const UPDATE_COMP_STATUS = "UPDATE_COMP_STATUS";
 export const PARTICIPANTS_PER_COMP = "PARTICIPANTS_PER_COMP";
-export const BASE_URL = "https://api.scoring.skietbaan.co.za";
+export const BASE_URL = "http://localhost:50859";
 
 //leaderboard types
 export const FETCH_LEADERBOARDFILTER_DATA = "FETCH_LEADERBOARDFILTER_DATA";

@@ -163,7 +163,7 @@ class EditGroup extends Component {
 											alt=""
 										/>
 									) : null}
-									<label className={post.highlighted ? 'blabe2' : 'blabe'}>
+									<label className={post.highlighted ? 'edit-blabe2' : 'edit-blabe'}>
 										<div className={post.highlighted ? 'userName-active' : 'userName'}>
 											{post.username}
 										</div>
