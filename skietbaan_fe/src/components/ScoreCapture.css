@@ -5,7 +5,6 @@
     width: 312px;
     margin: 0 auto;
     color: black;
-    padding-right: 10px;
     font-size: 16px;
     font-weight: bold;
     overflow-y: overlay;
@@ -90,7 +89,7 @@
 
 @media only screen and (max-height: 700px){
     .add-score-competition-container{
-        height:320px;
+        height:400px;
     }
 }
 
@@ -265,7 +264,7 @@
     text-align: center;
     width: 312px;
     display: flex;
-    bottom: 165px;
+    bottom: 245px;
     position: relative;
 }
 .stretched{
