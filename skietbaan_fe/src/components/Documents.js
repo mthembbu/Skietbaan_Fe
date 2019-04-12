@@ -141,10 +141,9 @@ class Documents extends Component {
                   one competition
                 </div>
               </div>
-            ) : null}
-
-            <hr className="documents-div-line" />
-
+            ) : (
+              <div />
+            )}
             <Collapse isOpened={this.state.collapseFilterLOGS}>
               <div className="documents-collapse">
                 Document Sent via email
@@ -155,6 +154,7 @@ class Documents extends Component {
                 />
               </div>
             </Collapse>
+            <hr className="documents-div-line" />
           </div>
           <div className="button-upload-document-2">
             <button
