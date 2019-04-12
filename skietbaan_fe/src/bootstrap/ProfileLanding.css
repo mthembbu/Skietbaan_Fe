@@ -28,6 +28,10 @@
         width: 100% !important;
         background: white;
     }
+
+    .fix-buttons-rectangle{
+        position: absolute !important;
+    }
 }
 @media only screen and (max-width: 576px){
     .profile-bootstrap-col-center-container{
@@ -50,7 +54,7 @@
 }
 
 .profile-landing-container{
-    overflow-y: auto;
+    overflow: hidden;
     height: 100vh;
     background-color: white;
 }
@@ -129,13 +133,8 @@
     font-weight: bold;
 }
 
-.award-content-container{
-    overflow-y: scroll;
-    overflow: hidden;
-}
-
 .fix-top{
-    z-index: 1;
+    z-index: 2;
     position: fixed;
     width: 100%;
     background: white;
