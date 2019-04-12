@@ -107,6 +107,13 @@
 	height: 12px;
 	margin-bottom: 3px;
 }
+.requirements-content{
+	margin: auto;
+    padding: 5px;
+    border: solid 5px yellow;
+    border-radius: 10px;
+    background: #F6F6F6;
+}
 
 
 @media all and (min-width: 480px) {
