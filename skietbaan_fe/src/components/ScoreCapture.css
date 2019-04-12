@@ -564,3 +564,7 @@ input[type=number] {
     color: #BE0000;
     font-family: helvetica;
 }
+
+::-webkit-scrollbar { 
+    display: none; 
+}
