@@ -524,6 +524,7 @@ import { selectedPage } from '../actions/postActions';
                       autoComplete="off"
                       name="score"
                       pattern="\d*"
+                      onClick={() => this.toggleNavbar}
                       className="score"
                       onChange={this.handleScore}
                       placeholder="Enter Score"></input>

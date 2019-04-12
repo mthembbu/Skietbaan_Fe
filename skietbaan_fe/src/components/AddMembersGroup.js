@@ -10,7 +10,6 @@ import back from './GroupImages/back.png';
 import { AddMemberAction, pageState } from '../actions/postActions';
 import seleteAll from './GroupImages/seleteAll.png';
 import unSelectAll from './GroupImages/unSelectAll.png';
-import { Row, Col } from "react-bootstrap";
 
 
 class AddMembersGroup extends Component {
@@ -139,15 +138,15 @@ class AddMembersGroup extends Component {
                 post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
               );
             })
-            .map((post, index) => (
-              <li class="listItem" key={post.id}>
+            .map((post) => (
+              <li class="listItem" key={post.id}  onClick={() => this.toggleHighlight(post.id)}>
                 <img
                   className="checkbox-delete"
-                  onClick={() => this.toggleHighlight(post.id)}
+                 
                   src={post.highlighted ? marked : unmarked}
                   alt=""
                 />
-                <label className={post.highlighted === true ? 'blabe' : 'blabe2'}>
+                <label className={post.highlighted === true ? 'add-blabe' : 'add-blabe2'}>
                   <div className={post.highlighted === true ? 'userName-active' : 'userName'}>
                     {post.username}
                   </div>
