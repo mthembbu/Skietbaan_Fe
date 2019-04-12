@@ -131,26 +131,19 @@ class Documents extends Component {
               }
             >
               Letter of Good Standing
-              {this.state.sendLogsReturn !== "Document" ? (
-                <img
-                  className="document-image-icon"
-                  src={require("../resources/noDoc.png")}
-                  alt=""
-                />
-              ) : null}
             </button>
 
-            <div className="document-requirements3">
-              {this.state.sendLogsReturn !== "Document" ? (
+            {this.state.sendLogsReturn !== "Document" ? (
+              <div className="document-requirements3">
                 <div>
-                  <b>Letter of Good Standing:</b>
-                  <p>
-                    requires you to pay your membership and participate in
-                    atleast one competition
-                  </p>
+                  <b>Letter of Good Standing: </b>
+                  requires you to pay your membership and participate in atleast
+                  one competition
                 </div>
-              ) : null}
-            </div>
+              </div>
+            ) : (
+              <div />
+            )}
             <Collapse isOpened={this.state.collapseFilterLOGS}>
               <div className="documents-collapse">
                 Document Sent via email
@@ -161,6 +154,7 @@ class Documents extends Component {
                 />
               </div>
             </Collapse>
+            <hr className="documents-div-line" />
           </div>
           <div className="button-upload-document-2">
             <button
@@ -173,24 +167,17 @@ class Documents extends Component {
                 this.state.sendLosReturn === "Document" ? this.sendLOS : null
               }
             >
-              Letter of Status{" "}
-              {this.state.sendLosReturn !== "Document" ? (
-                <img
-                  className="document-image-icon"
-                  src={require("../resources/noDoc.png")}
-                  alt=""
-                />
-              ) : null}
+              Letter of Dedicated Status
             </button>
 
-            <div className="document-requirements3">
-              {this.state.sendLosReturn !== "Document" ? (
+            {this.state.sendLosReturn !== "Document" ? (
+              <div className="document-requirements3">
                 <div>
-                  <b>Letter of Status:</b>
-                  <p>{this.state.sendLosReturn}</p>
+                  <b>Letter of Status: </b>
+                  {this.state.sendLosReturn}
                 </div>
-              ) : null}
-            </div>
+              </div>
+            ) : null}
 
             <Collapse isOpened={this.state.collapseFilterLOS}>
               <div className="documents-collapse">

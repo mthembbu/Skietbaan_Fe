@@ -11,7 +11,6 @@ import blackBin from './GroupImages/blackBin.png';
 import whitePlus from './GroupImages/whitePlus.png';
 import { fetchEditUser, pageState } from '../actions/postActions';
 import back from './GroupImages/back.png';
-import { Row, Col } from "react-bootstrap";
 
 class EditGroup extends Component {
 	constructor(props) {
@@ -38,17 +37,17 @@ class EditGroup extends Component {
 
 	async componentDidMount() {
 		this.updateDimensions();
-	 this.props.fetchEditUser(this.props.id);
+		this.props.fetchEditUser(this.props.id);
 	}
-    componentWillMount() {
+	componentWillMount() {
 		window.addEventListener('resize', this.updateDimensions);
-    }
-    getBodyHeight() {
-			if (this.state.width < 575) {
-				return this.state.height - 240;
-			} else {
-				return 79;
-			}
+	}
+	getBodyHeight() {
+		if (this.state.width < 575) {
+			return (this.state.height - 240) +"px";
+		} else {
+			return "66vh";
+		}
 	}
 	updateDimensions() {
 		this.setState({
@@ -81,15 +80,15 @@ class EditGroup extends Component {
 			body: JSON.stringify(request)
 		})
 			.then((res) => res.json())
-			.catch(function(data) {}).catch(err =>  {
+			.catch(function (data) { }).catch(err => {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-			  });
+			});
 		this.props.fetchEditUser(this.props.id);
 	}
-//select user
+	//select user
 	toggleHighlight = (event) => {
-		
-		const index=this.props.idsForUser.indexOf(event);
+
+		const index = this.props.idsForUser.indexOf(event);
 
 		if (this.state.binState === true) {
 			if (this.props.editGroup[index].highlighted === true) {
@@ -144,36 +143,36 @@ class EditGroup extends Component {
 	};
 	render() {
 		const postitems = (
-			<div className="check-edit" style={{ height: this.getBodyHeight() + 'vh' }}>
-			{this.props.editGroup===0?null:
-				<ul class="list-group">
-					{this.props.editGroup
-						.filter((post) => {
-							return (
-								!this.state.filterText ||
-								post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
-								post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
-							);
-						})
-						.map((post, index) => (
-							<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(post.id)}>
-								{this.state.binState === true ? (
-									<img
-										className="checkbox-delete"
-										src={post.highlighted == true ? deleteS : unmarked}
-										alt=""
-									/>
-								) : null}
-								<label className={post.highlighted ? 'blabe2' : 'blabe'}>
-									<div className={post.highlighted ? 'userName-active' : 'userName'}>
-										{post.username}
-									</div>
+			<div className="check-edit" style={{ height: this.getBodyHeight() }}>
+				{this.props.editGroup === 0 ? null :
+					<ul class="list-group">
+						{this.props.editGroup
+							.filter((post) => {
+								return (
+									!this.state.filterText ||
+									post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
+									post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
+								);
+							})
+							.map((post, index) => (
+								<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(post.id)}>
+									{this.state.binState === true ? (
+										<img
+											className="checkbox-delete"
+											src={post.highlighted == true ? deleteS : unmarked}
+											alt=""
+										/>
+									) : null}
+									<label className={post.highlighted ? 'edit-blabe2' : 'edit-blabe'}>
+										<div className={post.highlighted ? 'userName-active' : 'userName'}>
+											{post.username}
+										</div>
 
-									<div className={post.highlighted ? 'emails-active' : 'email'}>{post.email}</div>
-								</label>
-							</li>
-						))}
-				</ul>}
+										<div className={post.highlighted ? 'emails-active' : 'email'}>{post.email}</div>
+									</label>
+								</li>
+							))}
+					</ul>}
 			</div>
 		);
 		return (
@@ -208,7 +207,7 @@ class EditGroup extends Component {
 								placeholder="Search"
 							/>
 						</div>
-						{this.state.binState === true && this.props.editGroup.length!=0  ? (
+						{this.state.binState === true && this.props.editGroup.length != 0 ? (
 							<div className="switchAll" onClick={this.selectAll}>
 								<img
 									className="btn-select-all"
@@ -233,7 +232,7 @@ class EditGroup extends Component {
 						</button>
 					</div>
 				)}
-		</div>
+			</div>
 		);
 	}
 }
@@ -242,7 +241,7 @@ const mapStateToProps = (state) => ({
 	name: state.posts.groupName,
 	editGroup: state.posts.editGroup,
 	page: state.posts.page,
-	idsForUser:state.posts.idsForUser
+	idsForUser: state.posts.idsForUser
 });
 
 export default connect(mapStateToProps, { fetchEditUser, pageState })(EditGroup);

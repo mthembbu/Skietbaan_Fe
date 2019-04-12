@@ -9,6 +9,9 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Collapsible from 'react-collapsible';
 import downArrow from '../resources/awardIcons/down-triangle.png';
 import upArrow from '../resources/awardIcons/up-triangle.png';
+import { pageState } from '../actions/postActions';
+import '../scss/view-comp.css';
+import { BASE_URL } from '../actions/types';
 class CreateComp extends Component {
 	constructor(props) {
 		super(props);
@@ -18,9 +21,24 @@ class CreateComp extends Component {
 			Hours: '',
 			Status: true,
 			MaximumScore: '',
-			isExist: false,
+			isExist: false,	
 			toggleRequirements: false,
-		isCreated:false
+			isCreated:false,
+			errorMessageBestScoreNum:"",
+			errorMessageMaxScore:"",
+			errorMessageHours:"",
+			isBestScoreValid: true,
+			isMaxScoreValid:true,
+			isHoursValid:true,
+			bronzeAccuracy: '',
+			bronzeTotal: '',
+			silverAccuracy: '',
+			silverTotal: '',
+			goldAccuracy: '',
+			goldTotal: '',
+			compID:'',
+			height: window.innerHeight,
+			width: window.innerWidth
 		};
 		//binding the onChange method to this commponents
 		this.onChangeCompName = this.onChangeCompName.bind(this);
@@ -30,11 +48,39 @@ class CreateComp extends Component {
 		this.onSubmit = this.onSubmit.bind(this);
 		this.onClick = this.onClick.bind(this);
 		this.changeToggle = this.changeToggle.bind(this);
-		
+		this.onChangeBronzeAccuracy = this.onChangeBronzeAccuracy.bind(this);
+		this.onChangeBronzeTotal = this.onChangeBronzeTotal.bind(this);
+		this.onChangeSilverAccuracy = this.onChangeSilverAccuracy.bind(this);
+		this.onChangeSilverTotal = this.onChangeSilverTotal.bind(this);
+		this.onChangeGoldAccuracy = this.onChangeGoldAccuracy.bind(this);
+		this.onChangeGoldTotal = this.onChangeGoldTotal.bind(this);
+		this.updateDimensions = this.updateDimensions.bind(this);
+		this.getBodyHeight = this.getBodyHeight.bind(this);
+	}
+    componentWillMount() {
+		window.addEventListener('resize', this.updateDimensions);
+	}
+	// The method that mounts everytime there is an action detected
+	componentDidMount() {
+		this.updateDimensions();
+	}
+	updateDimensions() {
+		this.setState({
+			height: window.innerHeight,
+			width: window.innerWidth
+		});
+	}
+	getBodyHeight() {
+		if (this.state.width < 575) {
+			return (this.state.height - 240) +"px";
+		} else {
+			return "40vh";
+		}
 	}
 	onClick() {
 		history.push('/create');
 	}
+/** **********************************************************************************************/		
 	/** A method that detects the change in the change in th textfield */
 	onChangeCompName(event) {
 		if(event.target.value.length > 15)
@@ -47,19 +93,98 @@ class CreateComp extends Component {
 	{
 		if(event.target.value > 12)
 		event.target.value = event.target.value.substr(0,2);
-		this.setState({BestScoresNumber:event.target.value});
+		let isValid = this.validateBestScoreNumber();
+		if(!isValid) {
+			this.setState({errorMessageBestScoreNum: "INVALID NUMBER OF SCORES!"});
+			this.setState({isBestScoreValid:isValid});
+		}
+		else 
+			this.setState({errorMessageBestScoreNum:""});
+			this.setState({BestScoresNumber:event.target.value});
 	}
+	validateBestScoreNumber(){
+		var check = this.state.BestScoresNumber;
+		if(this.state.BestScoresNumber.length == 0 )
+			this.setState({isBestScoreValid:false});
+		if(check.slice(0,1) >=2 && check.length > 1)
+			return false;
+		else  
+			return true;	
+	}	
 	/** The method that detects change on MaxScore */
 	onChangeMaxScore(event){
 		if(event.target.value > 2)
-			event.target.value = event.target.value.substr(0,2);
+			event.target.value = event.target.value.substr(0,3);
+		let isValid = this.validateMaxScore();
+		if(!isValid){
+			this.setState({errorMessageMaxScore:"INVALID MAX SCORE!"});
+			this.setState({isMaxScoreValid:isValid});
+		}
+		else 
+			this.setState({errorMessageMaxScore:""});
 			this.setState({MaximumScore: event.target.value});
+	}
+	validateMaxScore(){
+		var check = this.state.MaximumScore;
+		if(this.state.MaximumScore.length == 0)
+			this.setState({isMaxScoreValid:false});
+		if(check.slice(0,3) > 100 || ((check.slice(0,1) > 1 || check.slice(0,2) >99) && check.length > 3) )
+			return false;
+		else return true;		
+
 	}
 	/** The method that detects the changes on the  hours input */
 	onChangeHours(event){
 		if(event.target.value > 3)
 			event.target.value = event.target.value.substr(0,3);
+		let isValid = this.validateHours();	
+			if(!isValid){
+				this.setState({errorMessageHours:"INVALID MAXIMUM HOURS!"});
+				this.setState({isHoursValid:isValid});
+			}
+			else 
+				this.setState({errorMessageHours:""});	
 			this.setState({Hours: event.target.value});
+	}
+	validateHours(){
+		var check = this.state.Hours;
+		if(this.state.Hours.length == 0)
+			this.setState({isHoursValid:false});
+		if(check.slice(0,3) > 360 || ((check.slice(0,1) > 3 || check.slice(0,2) >36) && check.length > 3) )
+			return false;
+		else return true;
+	}
+/** **********************************************************************************************/	
+	/** The standards onChange Listeners: */
+	onChangeBronzeAccuracy(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({bronzeAccuracy:event.target.value});
+	}
+	onChangeBronzeTotal(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({bronzeTotal:event.target.value});
+	}
+	onChangeSilverAccuracy(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({silverAccuracy:event.target.value});
+	}
+	onChangeSilverTotal(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({silverTotal:event.target.value});
+	}
+	onChangeGoldAccuracy(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({goldAccuracy:event.target.value});
+	}
+	onChangeGoldTotal(event){
+		if(event.target.value > 3)
+			event.target.value = event.target.value.substr(0,3);
+		this.setState({goldTotal:event.target.value});
 	}
 	/** A method that handles the submit enent for the submit button*/
 	onSubmit(e) {
@@ -74,18 +199,32 @@ class CreateComp extends Component {
 			MaximumScore: this.state.MaximumScore
 		};
 		this.props.createComp(compData);
+		
+		setTimeout(()=>{
+			fetch(BASE_URL + '/api/Competition/getCompId')
+			.then((response) => response.json())
+			.then((compIdData) => {
+				this.setState({compID:compIdData});
+			})
+			.catch((err) => {
+				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+			});
+			
+		});
 		if (this.props.isExist == false) {
 			this.setState({isCreated: true})
 		}
 		this.setState({ isExist: this.props.isExist });
-		this.props.compSelectedPages(2);	
+		this.props.compSelectedPages(2);
+			this.props.pageState(0);
+			
 	}
 	changeToggle(){
 		this.setState({toggleRequirements: !this.state.toggleRequirements});
 	}
 	render() {
 		return (
-			<div class="create-comp-container">
+			<div class="create-comp-container" style={{ maxHeight: this.getBodyHeight() ,height: "fit-content"}}>
 						<Form onSubmit={this.onSubmit}>
 							<div className="containers-input">
 								<div className="comp-input-control">
@@ -123,6 +262,7 @@ class CreateComp extends Component {
 									value={this.state.BestScoresNumber}
 									onChange={this.onChangeBestScoreNum}
 								/>
+								<div style={{fontSize:12,color:"red"}}>{this.state.isBestScoreValid ? null : this.state.errorMessageBestScoreNum}</div>
 							</div>
 
 							<div className="comp-input-control">
@@ -140,6 +280,7 @@ class CreateComp extends Component {
 									value={this.state.MaximumScore}
 									onChange={this.onChangeMaxScore}
 								/>
+							<div style={{fontSize:12,color:"red"}}>{this.state.isMaxScoreValid ? null : this.state.errorMessageMaxScore}</div>	
 							</div>
 							<div className="comp-input-control">
 								<input
@@ -156,6 +297,7 @@ class CreateComp extends Component {
 									value={this.state.Hours}
 									onChange={this.onChangeHours}
 								/>
+							<div style={{fontSize:12,color:"red"}}>{this.state.isHoursValid ? null : this.state.errorMessageHours}</div>	
 							</div>
 							{this.state.isCreated? <label>Competition created</label>:null}	
 							<div className="comp-submit-btn-container">
@@ -180,4 +322,5 @@ const mapStatesToprops = (state) => ({
 	newComp: state.compOBJ.selectedComp,
 	isExist: state.compOBJ.isExist
 });
-export default connect(mapStatesToprops, { createComp,compSelectedPages })(CreateComp);
+
+export default connect(mapStatesToprops, { createComp,compSelectedPages,pageState })(CreateComp);

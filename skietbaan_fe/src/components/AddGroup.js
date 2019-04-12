@@ -5,7 +5,6 @@ import history from "./history";
 import "./add.css";
 import { BASE_URL } from "../actions/types";
 import { getCookie } from "../components/cookie.js";
-import { Row, Col } from "react-bootstrap";
 
 class AddGroup extends Component {
   constructor(props) {
@@ -22,7 +21,6 @@ class AddGroup extends Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.props.pageState(0);
     fetch(BASE_URL + "/api/groups")
       .then(res => res.json())
       .then(data =>
@@ -57,29 +55,29 @@ class AddGroup extends Component {
     }
     return (
       <div className="add-group-main">
-            <div className="page">
-              <div className="middle-bar">
-                <input
-                  className="texts"
-                  type="text"
-                  name="name"
-                  onChange={this.onChange}
-                  value={this.state.name}
-                  autoComplete="off"
-                  autoCorrect="off"
-                  placeholder="Group Name"
-                />
-                {this.state.exist === true ? null : (
-                  <label className="errorMsg">Group Name Already Exists</label>
-                )}
-              </div>
-              <div className="add-container">
-                <button className="add" onClick={this.onClick}>
-                  ADD USERS
-            </button>
-              </div>
-            </div>
+        <div className="page">
+          <div className="middle-bar">
+            <input
+              className="texts"
+              type="text"
+              name="name"
+              onChange={this.onChange}
+              value={this.state.name}
+              autoComplete="off"
+              autoCorrect="off"
+              placeholder="Group Name"
+            />
+            {this.state.exist === true ? null : (
+              <label className="errorMsg">Group Name Already Exists</label>
+            )}
           </div>
+          <div className="add-container">
+            <button className={this.state.name===""?"add":"add-active"} onClick={this.onClick}>
+              ADD USERS
+            </button>
+          </div>
+        </div>
+      </div>
 
     );
   }

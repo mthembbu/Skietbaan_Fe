@@ -7,7 +7,7 @@ import { BASE_URL } from '../actions/types';
 import back from './GroupImages/back.png';
 import unmarked from './GroupImages/Oval.png';
 import marked from './GroupImages/MarkedBox.png';
-import Switch from '@material-ui/core/Switch';
+import history from './history';
 import seleteAll from './GroupImages/seleteAll.png';
 import unSelectAll from './GroupImages/unSelectAll.png';
 import { Row, Col } from "react-bootstrap";
@@ -19,6 +19,7 @@ class Groups extends Component {
 			posts: [],
 			groups: [],
 			newArray: [],
+			ids:[],
 			count: 0,
 			st: true,
 			filterText: '',
@@ -38,6 +39,7 @@ class Groups extends Component {
 		fetch(BASE_URL + '/api/user').then((res) => res.json()).then((data) => {
 			this.setState({
 				posts: data.map((users) => {
+					this.state.ids.push(users.id);
 					return {
 						...users,
 						highlighted: false
@@ -58,11 +60,11 @@ class Groups extends Component {
 	}
 	getBodyHeight() {
 		if (this.state.width < 575) {
-		  return (this.state.height - 240);
+		  return (this.state.height - 240)+"px";
 		} else {
-		  return (this.state.height - 184);
+		  return "66vh";
 		}
-	  }
+	}
 	  updateDimensions() {
 		this.setState({
 		  height: window.innerHeight,
@@ -100,7 +102,8 @@ class Groups extends Component {
 			.catch(function (data) { }).catch(err => {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
 			});
-		window.location = '/create';
+			 this.props.pageState(0);
+			 history.push("/create");
 	}
 
 	selectall() {
@@ -120,11 +123,12 @@ class Groups extends Component {
 	}
 
 	toggleHighlight = (event) => {
-		if (this.state.posts[event].highlighted === true) {
-			this.state.posts[event].highlighted = false;
+		const index=this.state.ids.indexOf(event);
+		if (this.state.posts[index].highlighted === true) {
+			this.state.posts[index].highlighted = false;
 			this.setState({ count: this.state.count - 1 });
 		} else {
-			this.state.posts[event].highlighted = true;
+			this.state.posts[index].highlighted = true;
 			this.setState({ count: this.state.count + 1 });
 		}
 	};
@@ -133,7 +137,7 @@ class Groups extends Component {
 	}
 	render() {
 		const postitems = (
-			<div className="check" style={{ height: this.getBodyHeight() + "px" }}>
+			<div className="check" style={{ height: this.getBodyHeight()}}>
 			{this.state.posts.length===0?null:
 				<ul class="list-group" style={{ textAlign: 'left' }}>
 					{this.state.posts
@@ -145,7 +149,7 @@ class Groups extends Component {
 							);
 						})
 						.map((post, index) => (
-							<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(index)}>
+							<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(post.id)}>
 								<img
 									className="checkbox-delete"
 									src={post.highlighted == true ? marked : unmarked}
@@ -168,7 +172,7 @@ class Groups extends Component {
 			<Row className="row justify-content-center">
 				<Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position: "inherit" }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
 					<div className="The-Main">
-						<div className="navBar-container">
+						<div className="group-navBar-container">
 							<div className="the-nav-bar">
 								<img className="back-image" onClick={this.onBack} src={back} alt="" />
 								<label className="center-label">ADD USERS</label>
