@@ -37,8 +37,7 @@ class ViewComp extends Component {
 			numberofshots: 0,
 			activatedCompetition: null,
 			height: window.innerHeight,
-			width: window.innerWidth,
-			createPageBodyHeight: 500
+			width: window.innerWidth
 		};
 
 		this.changeStatus = this.changeStatus.bind(this);
@@ -67,7 +66,6 @@ class ViewComp extends Component {
 		this.updateDimensions();
 		this.props.fetchComp();
 		this.props.fetchParticipants();
-
 		this.getDefaultShots();
 	}
 	updateDimensions() {
@@ -522,53 +520,6 @@ class ViewComp extends Component {
 																		/>
 																	</div>
 																</div>
-															</Row>
-
-															<Row>
-																<Col xs={4} md={4}>
-																	<div class="shots-label">
-																		Shots Needed:{' '}
-																	</div>
-																</Col>
-																<Col xs={4} md={4}>
-																	<div className="comp-input-control">
-																		<input
-																			className="shorts-needed-input"
-																			type="number"
-																			name="numberofshots"
-																			id="numberofshots"
-																			autoComplete="off"
-																			autoCorrect="off"
-																			value={
-																				compVar.id ===
-																					this.state
-																						.activatedCompetition ? (
-																						this.state.numberofshots
-																					) : (
-																						0
-																					)
-																			}
-																			onChange={this.onChange}
-																		/>
-																	</div>
-																</Col>
-																<Col xs={4} md={4}>
-																	<div className="">
-																		<button
-																			className="requirement-success-submit-btn"
-																			variant="secondary"
-																			type="submit"
-																			id="submit-btn"
-																			onClick={(e) =>
-																				this.handleOnSubmit(
-																					e,
-																					compVar.id
-																				)}
-																		>
-																			UPDATE
-																				</button>
-																	</div>
-																</Col>
 															</Row>
 														</Container>
 													</Form>

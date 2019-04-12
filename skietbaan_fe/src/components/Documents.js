@@ -131,13 +131,6 @@ class Documents extends Component {
               }
             >
               Letter of Good Standing
-              {this.state.sendLogsReturn !== "Document" ? (
-                <img
-                  className="document-image-icon"
-                  src={require("../resources/noDoc.png")}
-                  alt=""
-                />
-              ) : null}
             </button>
 
             {this.state.sendLogsReturn !== "Document" ? (
@@ -148,10 +141,9 @@ class Documents extends Component {
                   one competition
                 </div>
               </div>
-            ) : null}
-
-            <hr className="documents-div-line" />
-
+            ) : (
+              <div />
+            )}
             <Collapse isOpened={this.state.collapseFilterLOGS}>
               <div className="documents-collapse">
                 Document Sent via email
@@ -162,6 +154,7 @@ class Documents extends Component {
                 />
               </div>
             </Collapse>
+            <hr className="documents-div-line" />
           </div>
           <div className="button-upload-document-2">
             <button
@@ -174,14 +167,7 @@ class Documents extends Component {
                 this.state.sendLosReturn === "Document" ? this.sendLOS : null
               }
             >
-              Letter of Status{" "}
-              {this.state.sendLosReturn !== "Document" ? (
-                <img
-                  className="document-image-icon"
-                  src={require("../resources/noDoc.png")}
-                  alt=""
-                />
-              ) : null}
+              Letter of Dedicated Status
             </button>
 
             {this.state.sendLosReturn !== "Document" ? (

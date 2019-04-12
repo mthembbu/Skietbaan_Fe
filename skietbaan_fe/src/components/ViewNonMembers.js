@@ -5,7 +5,6 @@ import { BASE_URL } from '../actions/types.js';
 import arrowUp from '../components/assets/upArrow.png';
 import arrowDown from '../components/assets/downArrow.png';
 import { getCookie } from '../components/cookie.js';
-import { Row, Col } from 'react-bootstrap';
 
 class ViewNonMembers extends Component {
 	constructor(props) {

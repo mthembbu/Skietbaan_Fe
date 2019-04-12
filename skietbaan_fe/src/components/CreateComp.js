@@ -11,6 +11,7 @@ import downArrow from '../resources/awardIcons/down-triangle.png';
 import upArrow from '../resources/awardIcons/up-triangle.png';
 import { pageState } from '../actions/postActions';
 import '../scss/view-comp.css';
+import { BASE_URL } from '../actions/types';
 class CreateComp extends Component {
 	constructor(props) {
 		super(props);
@@ -34,7 +35,10 @@ class CreateComp extends Component {
 			silverAccuracy: '',
 			silverTotal: '',
 			goldAccuracy: '',
-			goldTotal: ''
+			goldTotal: '',
+			compID:'',
+			height: window.innerHeight,
+			width: window.innerWidth
 		};
 		//binding the onChange method to this commponents
 		this.onChangeCompName = this.onChangeCompName.bind(this);
@@ -50,8 +54,29 @@ class CreateComp extends Component {
 		this.onChangeSilverTotal = this.onChangeSilverTotal.bind(this);
 		this.onChangeGoldAccuracy = this.onChangeGoldAccuracy.bind(this);
 		this.onChangeGoldTotal = this.onChangeGoldTotal.bind(this);
+		this.updateDimensions = this.updateDimensions.bind(this);
+		this.getBodyHeight = this.getBodyHeight.bind(this);
 	}
-
+    componentWillMount() {
+		window.addEventListener('resize', this.updateDimensions);
+	}
+	// The method that mounts everytime there is an action detected
+	componentDidMount() {
+		this.updateDimensions();
+	}
+	updateDimensions() {
+		this.setState({
+			height: window.innerHeight,
+			width: window.innerWidth
+		});
+	}
+	getBodyHeight() {
+		if (this.state.width < 575) {
+			return (this.state.height - 240) +"px";
+		} else {
+			return "40vh";
+		}
+	}
 	onClick() {
 		history.push('/create');
 	}
@@ -174,6 +199,20 @@ class CreateComp extends Component {
 			MaximumScore: this.state.MaximumScore
 		};
 		this.props.createComp(compData);
+		
+		setTimeout(()=>{
+			fetch(BASE_URL + '/api/Competition/getCompId')
+			.then((response) => response.json())
+			.then((compIdData) => {
+				this.setState({compID:compIdData});
+			})
+			.catch((err) => {
+				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+			});
+
+
+		},2000);
+
 		if (this.props.isExist == false) {
 			this.setState({isCreated: true})
 		}
@@ -186,7 +225,7 @@ class CreateComp extends Component {
 	}
 	render() {
 		return (
-			<div class="create-comp-container">
+			<div class="create-comp-container" style={{ maxHeight: this.getBodyHeight() ,height: "fit-content"}}>
 						<Form onSubmit={this.onSubmit}>
 							<div className="containers-input">
 								<div className="comp-input-control">
@@ -270,7 +309,6 @@ class CreateComp extends Component {
 														</span>
 												</div>}>
         							<div className="requirements-content">
-										<p> REQUIREMENTS, HERE!</p>
 										<Container className="standards-container">
 															<Row className="standards-label">
 																<Col xs={3} md={3} lg={3} />
@@ -285,6 +323,125 @@ class CreateComp extends Component {
 																			</div>
 																</Col>
 															</Row>
+														<Row className="bronze-row">
+																<Col xs={4} md={4}>
+																	<div class="accuracy-header-label">
+																		Bronze Award:{' '}
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="bronze-accuracy-input-control"
+																			type="number"
+																			min={1}
+																			max={100}
+																			name="bronzeAccuracy"
+																			id="B_accuracy"
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={this.state.bronzeAccuracy}
+																			onChange={this.onChangeBronzeAccuracy}
+																		/>
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="bronze-total-input-control"
+																			type="number"
+																			name="bronzeTotal"
+																			id="B_total"
+																			min={1}
+																			max={1000}
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={this.state.bronzeTotal}
+																			onChange={this.onChangeBronzeTotal}
+																		/>
+																	</div>
+																</Col>
+															</Row>
+
+															<Row className="silver-row">
+																<Col xs={4} md={4}>
+																	<div class="silver-label">
+																		Silver Award:{' '}
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="silver-accuracy-input-control"
+																			type="number"
+																			name="silverAccuracy"
+																			id="S_accuracy"
+																			min="0"
+																			max="100"
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={this.state.silverAccuracy}
+																			onChange={this.onChangeSilverAccuracy}
+																		/>
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="silver-total-input-control"
+																			type="number"
+																			name="silverTotal"
+																			id="S_total"
+																			min="0"
+																			max="600"
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={this.state.silverTotal}
+																			onChange={this.onChangeSilverTotal}
+																		/>
+																	</div>
+																</Col>
+															</Row>
+
+															<Row>
+																<Col xs={4} md={4}>
+																	<div class="accuracy-label">
+																		Gold Award:{' '}
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="gold-accuracy-input-control"
+																			type="number"
+																			name="goldAccuracy"
+																			id="G_accuracy"
+																			min="0"
+																			max="100"
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={this.state.goldAccuracy}
+																			onChange={this.onChangeGoldAccuracy}
+																		/>
+																	</div>
+																</Col>
+																<Col xs={4} md={4}>
+																	<div className="">
+																		<input
+																			className="gold-total-input-control"
+																			type="number"
+																			name="goldTotal"
+																			id="G_total"
+																			min="0"
+																			max="600"
+																			autoComplete="off"
+																			autoCorrect="off"
+																			value={this.state.goldTotal}
+																			onChange={this.onChangeGoldTotal}
+																		/>
+																	</div>
+																</Col>
+															</Row>	
 										</Container>					
 									</div>
      							</Collapsible>
