@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../components/ViewMembers.css';
 import Collapsible from 'react-collapsible';
-import { Row, Col } from 'react-bootstrap';
 import { BASE_URL } from '../actions/types.js';
 import memberIcon from '../components/assets/greyMembershipIcon.png';
 import { getCookie } from '../components/cookie.js';
@@ -167,7 +166,7 @@ class ViewMembers extends Component {
 													<b>{post.username}</b>
 													<div className="view-non-members-email">{post.email}</div>
 												</div>
-												<div className="view-members-icon">
+												<div className="view-exp-members-icon">
 													<img
 														src={memberIcon}
 														className="membership-icon"
