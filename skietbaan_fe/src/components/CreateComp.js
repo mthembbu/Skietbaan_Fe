@@ -212,7 +212,6 @@ class CreateComp extends Component {
 
 
 		},2000);
-		console.log('CompID value: ',this.state.compID);
 
 		if (this.props.isExist == false) {
 			this.setState({isCreated: true})
