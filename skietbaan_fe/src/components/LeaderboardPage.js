@@ -159,7 +159,7 @@ class LeaderboardPage extends Component {
         });
         this.props.updateSelectedCompetition(this.props.competitions[value].label)
         this.validatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(value, this.state.selectedGroup, this.state.selectedRank);
+        this.getLeaderboardData((this.props.competitions[value].value -1), this.state.selectedGroup, this.state.selectedRank);
     }
     setGroupValue = (value) => {
         this.setState({
@@ -171,7 +171,7 @@ class LeaderboardPage extends Component {
             this.props.updateSelectedGroup(this.props.groups[value].label);
         }
         this.validatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(this.state.selectedCompetition, value, this.state.selectedRank);
+        this.getLeaderboardData((this.state.selectedCompetition, this.props.groups[value].value -1), this.state.selectedRank);
     }
     setSelectedRank = (value) => {
         this.setState({

@@ -634,7 +634,8 @@
 }
 .check{
 	overflow-y: overlay;
-    z-index: 1;
+	z-index: 1;
+	
 }
 .check-edit{
 	overflow-y: overlay;
