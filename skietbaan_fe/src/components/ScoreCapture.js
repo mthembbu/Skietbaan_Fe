@@ -531,7 +531,7 @@ import { selectedPage } from '../actions/postActions';
                     <div className="error-message-container">
                       <div className={this.state.validScore
                         ? "hidden"
-                        : "invalid-score"}>Enter Valid Score</div>
+                        : "invalid-score"}>Enter Valid Score. Max: {this.state.maximumScore}</div>
                     </div>
                   </div>
                 </div>
