@@ -16,7 +16,9 @@
   z-index: 50;
   position: relative;
   background-repeat: no-repeat;
-  height: 90vh;
+  height: 70vh;
+  border-bottom-left-radius: 13px;
+  border-bottom-right-radius: 13px;
   background-size: cover;
   background-position: center;
 }
