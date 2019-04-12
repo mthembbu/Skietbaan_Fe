@@ -42,7 +42,7 @@ class AddMembersGroup extends Component {
   }
   getBodyHeight() {
 		if (this.state.width < 575) {
-      return (this.state.height - 260) +"px";
+      return (this.state.height - 160) +"px";
     } else {
       return "66vh";
     }
