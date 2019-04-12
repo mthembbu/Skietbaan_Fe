@@ -172,7 +172,7 @@ class Groups extends Component {
 			<Row className="row justify-content-center">
 				<Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position: "inherit" }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
 					<div className="The-Main">
-						<div className="navBar-container">
+						<div className="group-navBar-container">
 							<div className="the-nav-bar">
 								<img className="back-image" onClick={this.onBack} src={back} alt="" />
 								<label className="center-label">ADD USERS</label>
