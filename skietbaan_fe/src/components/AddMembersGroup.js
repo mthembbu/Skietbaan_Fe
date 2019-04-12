@@ -43,9 +43,9 @@ class AddMembersGroup extends Component {
   }
   getBodyHeight() {
 		if (this.state.width < 575) {
-      return (this.state.height - 240);
+      return (this.state.height - 260) +"px";
     } else {
-      return 78;
+      return "66vh";
     }
   }
   updateDimensions() {
@@ -128,7 +128,7 @@ class AddMembersGroup extends Component {
 
   render() {
     const postitems = (
-      <div className="check-edit" style={{ height: this.getBodyHeight() + 'vh'}}>
+      <div className="check-edit" style={{ height: this.getBodyHeight()}}>
       {this.props.existing.length===0?null:
         <ul class="list-group" style={{ textAlign: 'left' , marginTop: 120+'px'}}>
           {this.props.existing
