@@ -81,7 +81,13 @@ class LeaderboardPage extends Component {
         let token = getCookie("token");
         this.props.fetchleaderboadfilterdata(token);
         this.validatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(this.state.selectedCompetition, this.state.selectedGroup, this.state.selectedRank);
+        var id = 0;
+        if(this.state.selectedCompetition === 0){
+            id =-2;
+        }else{
+            id = this.state.selectedCompetition;
+        }
+        this.getLeaderboardData(id, this.state.selectedGroup, this.state.selectedRank);
     }
     updateDimensions() {
         this.setState({
@@ -146,7 +152,12 @@ class LeaderboardPage extends Component {
         }
     }
     roundOfScores = (score) =>{
-        return score.toFixed(1);//round off to one decimal place
+        var roundedScore = score.toFixed(1);//round off to one decimal place
+        if(score+".0" === roundedScore){//avoid converting intergers to decimals (eg 20 to 20.0)
+            return score;
+        }else{
+            return roundedScore;
+        }
     }
     setCompetitionValue = (value) => {
         this.setState({
@@ -154,7 +165,7 @@ class LeaderboardPage extends Component {
         });
         this.props.updateSelectedCompetition(this.props.competitions[value].label)
         this.validatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(value, this.state.selectedGroup, this.state.selectedRank);
+        this.getLeaderboardData((this.props.competitions[value].value - 1), this.state.selectedGroup, this.state.selectedRank);
     }
     setGroupValue = (value) => {
         this.setState({
@@ -166,7 +177,7 @@ class LeaderboardPage extends Component {
             this.props.updateSelectedGroup(this.props.groups[value].label);
         }
         this.validatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(this.state.selectedCompetition, value, this.state.selectedRank);
+        this.getLeaderboardData(this.state.selectedCompetition, (this.props.groups[value].value - 1), this.state.selectedRank);
     }
     setSelectedRank = (value) => {
         this.setState({
@@ -604,12 +615,11 @@ class LeaderboardPage extends Component {
                                                                                                  <table className="head-table-labels">
                                                                                                      <tbody>
                                                                                                          <tr>
-                                                                                                             <td className="extra-name-col">{this.props.competitions !== null ?(this.props.competitions[0] !== "undifined" ? this.props.currentUser.username 
+                                                                                                             <td className="extra-name-col">{this.props.competitions[0] !== "undefined" ? (this.props.currentUser.displayName === null ? this.props.currentUser.username : this.props.currentUser.username )
                                                                                                                                                                              :(this.props.userResults === null ? (this.props.currentUser !== null ? this.props.currentUser.username
                                                                                                                                                                                                                                             : "invalid tokken") 
                                                                                                                                                                                                               : (this.props.userResults !== null ? (this.props.userResults.displayName.length !== 0 ? this.props.userResults.displayName
-                                                                                                                                                                                                                                                                                                    : this.props.userResults.username) : 'null')))
-                                                                                                                                                                              : null}</td>
+                                                                                                                                                                                                                                                                                                    : this.props.userResults.username) : '--'))}</td>
                                                                                                              <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{this.props.userResults === null ? '--' : (this.props.userResults.best !== 0 ? this.props.userResults.best : '--')}</td>
                                                                                                              <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>
                                                                                                                  <div className="member-rank-icons">
