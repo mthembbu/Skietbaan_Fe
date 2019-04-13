@@ -9,7 +9,6 @@
   .content-container {
     margin-top: 0px;
   }
-
   .page-name-create-all {
     position: center;
     text-align: center;
@@ -187,6 +186,15 @@
 @media screen and (min-width:576px)  {
   .page-name-bar{
     margin-top: 56px;
+  }
+  .create-switch-top{
+    width: 547px !important;
+  }
+  .create-switch-top .switch-active{
+    width: 182.66666666667px !important;
+  }
+  .create-switch-top .switch-inactive{
+    width: 182.66666666667px !important;
   }
   .buttons-squire-rectangle{
     padding-top: 0px;
