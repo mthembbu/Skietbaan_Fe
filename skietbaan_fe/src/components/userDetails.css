@@ -4,13 +4,13 @@
 }
 
 .loader-container-details{
-  margin-top: 235px;
+  margin-top: 150px;
   height: 160px;
 }
 
 @media screen and (min-width:576px){
   .loader-container-details{
-    margin-top: 257px;
+    margin-top: 170px;
     height: 165px;
   }
 }
@@ -122,4 +122,8 @@
   margin-top: 24px;
   justify-content: center;
   bottom: 70px;
+}
+
+.user-details-white{
+  color: #ffffff;
 }
