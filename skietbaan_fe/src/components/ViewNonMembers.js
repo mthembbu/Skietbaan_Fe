@@ -25,7 +25,7 @@ class ViewNonMembers extends Component {
 			width: window.innerWidth,
 			getData: false
 		};
-		this.getNonMembers = this.getNonMembers.bind(this);
+		// this.getNonMembers = this.getNonMembers.bind(this);
 		this.getTimeLeft = this.getTimeLeft.bind(this);
 		this.onChangeText = this.onChangeText.bind(this);
 		this.status = this.status.bind(this);
@@ -98,8 +98,12 @@ class ViewNonMembers extends Component {
 			})
 			.then((data) =>
 				this.setState({
-					array: data,
-					getData: true
+					array: data.map(user=>{
+						return{
+							...user,
+							selected:false
+						}
+					})
 				})
 			);
 	}
@@ -129,11 +133,13 @@ class ViewNonMembers extends Component {
 	}
 
 	updateMember(index) {
+		delete this.state.array[index].selected
 		let RequestObject = {
 			username: this.state.array[index].username,
 			memberID: this.state.membershipsID,
 			memberExpiryDate: this.getCurrentDate() + 'T00:00:00'
 		};
+
 		fetch(BASE_URL + '/api/Features/Update', {
 			method: 'Post',
 			headers: {
@@ -177,8 +183,10 @@ class ViewNonMembers extends Component {
 		this.setState({ membershipsID: event.target.value });
 	}
 
-	onChangeArrow() {
-		this.setState({ arrowChange: !this.state.arrowChange });
+	onChangeArrow=(index)=> {
+		this.setState({membershipsID:""});
+		this.state.array[index].selected=!this.state.array[index].selected;
+		this.forceUpdate();
 	}
 
 	render() {
@@ -204,21 +212,27 @@ class ViewNonMembers extends Component {
 								post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
 							);
 						})
-						.map((post, index) => (
-							<tr className="view-members-user" key={post.id}>
+						.map((posts, index) => (
+							<tr className="view-members-user" key={posts.id} >
 								<td className="first-column">
+							
 									<Collapsible
 										trigger={
-											<div className="username-and-email" onClick={this.onChangeArrow}>
+											<div className="username-and-email" onClick={()=>this.onChangeArrow(index)}>
 												<div className="view-non-members-users-email">
-													<b>{post.username}</b>
-													<div className="view-non-members-email">{post.email}</div>
+													<b>{posts.username}</b>
+													<div className="view-non-members-email">{posts.email}</div>
 												</div>
-												<div className="view-non-members-arrow">
+												
+												<div className="view-non-members-arrow" >
+													{posts.selected===true?<img
+														className="view-non-members-image"
+														src={arrowDown }
+													/>:
 													<img
 														className="view-non-members-image"
-														src={this.state.arrowChange ? arrowUp : arrowDown}
-													/>
+														src={arrowUp}
+													/>}
 												</div>
 											</div>
 										}
@@ -237,11 +251,11 @@ class ViewNonMembers extends Component {
 											</div>
 											<div>
 												<input
+													name
 													type="date"
 													className="view-non-members-text-boxes"
 													id="expdate"
 													value={this.getCurrentDate()}
-													onChange={this.handleChange}
 												/>
 											</div>
 											<div>
