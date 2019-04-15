@@ -424,7 +424,7 @@
 	margin: 20px 40px 56px 28px;
 }
 .view-the-main {
-	margin: 0px 40px 56px 28px;
+	margin: 20px 40px 56px 28px;
 }
 
 .group-name {
@@ -536,6 +536,13 @@
 
 @media only screen and (min-width: 575px) {
 	.add-check-edit .list-group {
+		margin-top: 0px !important;
+	}
+	.view-the-main {
+		margin: 0px 40px 56px 28px;
+	}
+	
+	.adding-check-edit {
 		margin-top: 0px !important;
 	}
 	.bottom-label {
@@ -669,6 +676,7 @@
 }
 
 @media only screen and (max-width: 576px) {
+
 	.check {
 		margin-bottom: 56px;
 	}
@@ -692,6 +700,11 @@
 .check-edit{
 	overflow-y: overlay;
 	z-index: 1;
+}
+.adding-check-edit{
+	overflow-y: overlay;
+	z-index: 1;
+	margin-top: 120px;
 }
 .add-check-edit {
 	padding-bottom: 100px;
