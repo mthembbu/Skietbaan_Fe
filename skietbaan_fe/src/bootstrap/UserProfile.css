@@ -3,6 +3,28 @@
     font-family: helvetica;
 }
 
+.loading-message-profile{
+    color: #BE0000;
+    bottom: 41%;
+    margin: 0 auto;
+    position: relative;
+    font-size: 14px;
+    font-weight: 300;
+    font-family: helvetica;
+    text-align: center;
+}
+
+@media screen and (max-width:576px){
+    .loading-message-profile{
+        bottom: 40%;
+    }
+}
+
+.loader-container-profile{
+    margin-top: 115px;
+    height: 120px;
+}
+
 .competition-buttons-container{
     margin-left: -8px;
     margin-right: -8px;

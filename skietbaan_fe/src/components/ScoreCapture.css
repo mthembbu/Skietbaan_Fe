@@ -311,18 +311,23 @@
 
 .loading-message{
     color: #BE0000;
-    bottom: 155px;
+    bottom: 30%;
     margin: 0 auto;
-    position: absolute;
-    right: 42%;
+    position: relative;
+    text-align: center;
     font-size: 14px;
+    font-weight: 300;
+    font-family: helvetica;
+}
+
+.loading-container-add-score{
+    height: 150px;
 }
 
 .loader {
     margin: auto;
     border: 7px solid transparent;
     border-top: 7px solid #BE0000;
-    margin-top: 80px;
     height: 80px;
     width: 80px;
     -webkit-animation: rotate 0.8s infinite linear;
@@ -330,7 +335,7 @@
     border: 6px solid #BE0000;
     border-right-color: transparent;
     border-radius: 50%;
-    margin-top: 100px;
+    margin-top: 70px;
   }
 
 .target-loader-image{

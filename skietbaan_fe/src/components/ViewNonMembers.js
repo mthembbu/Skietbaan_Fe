@@ -22,7 +22,8 @@ class ViewNonMembers extends Component {
 			navbarState: false,
 			arrowChange: false,
 			height: window.innerHeight,
-			width: window.innerWidth
+			width: window.innerWidth,
+			getData: false
 		};
 		this.getNonMembers = this.getNonMembers.bind(this);
 		this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -97,7 +98,8 @@ class ViewNonMembers extends Component {
 			})
 			.then((data) =>
 				this.setState({
-					array: data
+					array: data,
+					getData: true
 				})
 			);
 	}
@@ -272,6 +274,13 @@ class ViewNonMembers extends Component {
 							onChange={this.onChangeText}
 						/>
 					</div>
+				</div>
+				<div className={this.state.getData === true ? "hidden" : "loader-container-members"}>
+					<div className={this.state.getData === true ? "hidden" : "loader"}>
+					</div>
+					<div className={this.state.getData === true ? "hidden" : "target-loader-image"}>
+					</div>
+					<div className={this.state.getData === true ? "hidden" : "loading-message-members"}>Loading...</div>
 				</div>
 				<div className="table-search-members" style={{ height: this.getBodyHeight() }}>
 					{postItems}
