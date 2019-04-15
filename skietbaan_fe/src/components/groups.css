@@ -532,7 +532,8 @@
 .numberOfUser {
 	color: #555555;
 	vertical-align: middle;
-}/*changed*/
+}
+
 @media only screen and (min-width: 575px) {
 	.add-check-edit .list-group {
 		margin-top: 0px !important;
