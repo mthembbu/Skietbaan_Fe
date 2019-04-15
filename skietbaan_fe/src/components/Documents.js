@@ -12,8 +12,8 @@ class Documents extends Component {
       sendLosReturn: "",
       collapseFilterLOGS: false,
       collapseFilterLOS: false,
-      getData1: false,
-      getData2: false
+      getDataUserLOGS: false,
+      getDataUserLOS: false
     };
     this.sendLOGS = this.sendLOGS.bind(this);
     this.sendLOS = this.sendLOS.bind(this);
@@ -31,7 +31,7 @@ class Documents extends Component {
       .then(res => res.json())
       .then(data => {
         if (this._isMounted) {
-          this.setState({ sendLogsReturn: data, getData1: true });
+          this.setState({ sendLogsReturn: data, getDataUserLOGS: true });
         }
       })
       .catch(err => {
@@ -43,7 +43,7 @@ class Documents extends Component {
       .then(res => res.json())
       .then(data => {
         if (this._isMounted) {
-          this.setState({ sendLosReturn: data, getData2: true });
+          this.setState({ sendLosReturn: data, getDataUserLOS: true });
         }
       })
       .catch(err => {
@@ -113,18 +113,18 @@ class Documents extends Component {
     }
     return (
       <div className="documents-background ">
-        <div className={this.state.getData1 && this.state.getData2
+        <div className={this.state.getDataUserLOGS && this.state.getDataUserLOS
           ? "hidden" : "loader-container-documents"}>
-          <div className={this.state.getData1 && this.state.getData2
+          <div className={this.state.getDataUserLOGS && this.state.getDataUserLOS
             ? "hidden" : "loader"}>
           </div>
-          <div className={this.state.getData1 && this.state.getData2
+          <div className={this.state.getDataUserLOGS && this.state.getDataUserLOS
             ? "hidden" : "target-loader-image"}>
           </div>
-          <div className={this.state.getData1 && this.state.getData2
+          <div className={this.state.getDataUserLOGS && this.state.getDataUserLOS
             ? "hidden" : "loading-message-profile"}>Loading...</div>
         </div>
-        <div className={this.state.getData1 && this.state.getData2 ? "documents-center" : "hidden"}>
+        <div className={this.state.getDataUserLOGS && this.state.getDataUserLOS ? "documents-center" : "hidden"}>
           <div className="label-select-document">
             {this.state.sendLogsReturn === "Document" &&
               this.state.sendLosReturn === "Document"
