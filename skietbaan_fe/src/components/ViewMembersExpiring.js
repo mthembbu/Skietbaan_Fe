@@ -19,7 +19,8 @@ class ViewMembersExpiring extends Component {
 			lastSize: 0,
 			navbarState: false,
 			height: window.innerHeight,
-			width: window.innerWidth
+			width: window.innerWidth,
+			getData: false
 		};
 		this.getExpiringMembers = this.getExpiringMembers.bind(this);
 		this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -73,10 +74,10 @@ class ViewMembersExpiring extends Component {
 	}
 	getBodyHeight() {
 		if (this.state.width < 575) {
-			return (this.state.height - 240)+"px";
-		  } else {
+			return (this.state.height - 240) + "px";
+		} else {
 			return "66vh";
-		  }
+		}
 	}
 	getExpiringMembers() {
 		fetch(BASE_URL + '/api/Features/SearchExpiringMember', {
@@ -94,7 +95,8 @@ class ViewMembersExpiring extends Component {
 			})
 			.then((data) =>
 				this.setState({
-					array: data
+					array: data,
+					getData: true
 				})
 			)
 			.catch((err) => {
@@ -273,7 +275,14 @@ class ViewMembersExpiring extends Component {
 						/>
 					</div>
 				</div>
-				<div className="table-search-members" style={{ height: this.getBodyHeight()  }}>
+				<div className={this.state.getData === true ? "hidden" : "loader-container-members"}>
+					<div className={this.state.getData === true ? "hidden" : "loader"}>
+					</div>
+					<div className={this.state.getData === true ? "hidden" : "target-loader-image"}>
+					</div>
+					<div className={this.state.getData === true ? "hidden" : "loading-message-members"}>Loading...</div>
+				</div>
+				<div className="table-search-members" style={{ height: this.getBodyHeight() }}>
 					{postItems}
 				</div>
 			</div>

@@ -5,6 +5,25 @@
   background: #ffffff;
 }
 
+.loader-container-members{
+  background-color: #f6f6f6;
+  padding-top: 12px;
+  height: 100%;
+}
+
+.loading-message-members{
+  color: #BE0000;
+  margin: 0 auto;
+  padding-left: 42%;
+  padding-right: 42%;
+  font-size: 14px;
+  padding-top: 10px;
+  position: relative;
+  bottom: 60px;
+  font-weight: 300;
+  font-family: helvetica;
+}
+
 .search-member-name {
   background-color: #fdfdfd;
 }
