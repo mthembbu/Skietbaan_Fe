@@ -424,7 +424,7 @@
 	margin: 20px 40px 56px 28px;
 }
 .view-the-main {
-	margin: 0px 40px 56px 28px;
+	margin: 20px 40px 56px 28px;
 }
 
 .group-name {
@@ -538,6 +538,10 @@
 	.add-check-edit .list-group {
 		margin-top: 0px !important;
 	}
+	.view-the-main {
+		margin: 0px 40px 56px 28px;
+	}
+	
 	.adding-check-edit {
 		margin-top: 0px !important;
 	}
@@ -672,6 +676,7 @@
 }
 
 @media only screen and (max-width: 576px) {
+
 	.check {
 		margin-bottom: 56px;
 	}
