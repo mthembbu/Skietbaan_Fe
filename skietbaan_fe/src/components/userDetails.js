@@ -204,7 +204,7 @@ export default class userDetails extends Component {
                     validateEmail(this.state.emailValue)
                       ? this.state.cellphoneValue === null ||
                         this.state.cellphoneValue === undefined
-                        ? null
+                        ? this.updateUser
                         : this.state.cellphoneValue.length === 0
                         ? this.updateUser
                         : validateNumber(this.state.cellphoneValue)
