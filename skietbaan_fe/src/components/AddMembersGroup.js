@@ -44,7 +44,7 @@ class AddMembersGroup extends Component {
 		if (this.state.width < 575) {
       return (this.state.height - 160) +"px";
     } else {
-      return "66vh";
+      return "57vh";
     }
   }
   updateDimensions() {
@@ -129,7 +129,7 @@ class AddMembersGroup extends Component {
     const postitems = (
       <div className="check-edit" style={{ height: this.getBodyHeight()}}>
       {this.props.existing.length===0?null:
-        <ul class="list-group" style={{ textAlign: 'left' , marginTop: 120+'px'}}>
+        <ul class="list-group">
           {this.props.existing
             .filter((post) => {
               return (
@@ -192,9 +192,7 @@ class AddMembersGroup extends Component {
                 </div>
               </div>
             </div>
-            <div className="scrollbar" data-simplebar data-simplebar-auto-hide="false">
               {postitems}
-            </div>
             {this.state.count == 0 ? null : (
               <div className="bottom-panel">
                 <div className="bpanel">
