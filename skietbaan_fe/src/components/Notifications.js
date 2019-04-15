@@ -178,7 +178,6 @@ class notification extends Component {
     if (getCookie("token")) {
       this.props.getNotifications(this.state.token);
     }
-    console.log(this.props.loading);
     this.checkUserType();
   }
 
