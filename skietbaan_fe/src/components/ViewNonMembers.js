@@ -76,10 +76,10 @@ class ViewNonMembers extends Component {
 	}
 	getBodyHeight() {
 		if (this.state.width < 575) {
-			return (this.state.height - 240)+"px";
-		  } else {
+			return (this.state.height - 240) + "px";
+		} else {
 			return "66vh";
-		  }
+		}
 	}
 	getNonMembers() {
 		fetch(BASE_URL + '/api/Features/SearchNonMember', {
@@ -97,16 +97,14 @@ class ViewNonMembers extends Component {
 			})
 			.then((data) =>
 				this.setState({
-					array: data.map(user=>{
-						return{
+					array: data.map(user => {
+						return {
 							...user,
-							selected:false
+							selected: false
 						}
-				
 					}),
-					getData:true
-				})
-			);
+					getData: true
+				}));
 	}
 
 	getTimeLeft() {
@@ -184,9 +182,9 @@ class ViewNonMembers extends Component {
 		this.setState({ membershipsID: event.target.value });
 	}
 
-	onChangeArrow=(index)=> {
-		this.setState({membershipsID:""});
-		this.state.array[index].selected=!this.state.array[index].selected;
+	onChangeArrow = (index) => {
+		this.setState({ membershipsID: "" });
+		this.state.array[index].selected = !this.state.array[index].selected;
 		this.forceUpdate();
 	}
 
@@ -216,24 +214,24 @@ class ViewNonMembers extends Component {
 						.map((posts, index) => (
 							<tr className="view-members-user" key={posts.id} >
 								<td className="first-column">
-							
+
 									<Collapsible
 										trigger={
-											<div className="username-and-email" onClick={()=>this.onChangeArrow(index)}>
+											<div className="username-and-email" onClick={() => this.onChangeArrow(index)}>
 												<div className="view-non-members-users-email">
 													<b>{posts.username}</b>
 													<div className="view-non-members-email">{posts.email}</div>
 												</div>
-												
+
 												<div className="view-non-members-arrow" >
-													{posts.selected===true?<img
+													{posts.selected === true ? <img
 														className="view-non-members-image"
-														src={arrowDown }
-													/>:
-													<img
-														className="view-non-members-image"
-														src={arrowUp}
-													/>}
+														src={arrowDown}
+													/> :
+														<img
+															className="view-non-members-image"
+															src={arrowUp}
+														/>}
 												</div>
 											</div>
 										}
