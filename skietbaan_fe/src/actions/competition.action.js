@@ -23,7 +23,7 @@ export const fetchComp = () => dispatch => {
 };
 //fetch the competition requiremets as per Competition ID
 export const fetchRequirements = CompID => dispatch => {
-  fetch(BASE_URL + "/R/" + CompID)
+   fetch(BASE_URL + "/R/" + CompID)
     .then(response => response.json())
     .then(requirementsData => {
       dispatch({
@@ -92,8 +92,9 @@ export const fetchParticipants = () => dispatch => {
     });
 };
 //creating a single competition
-export const createComp = compData => dispatch => {
-  fetch(BASE_URL + "/api/Competition", {
+export const  createComp = (compData) => dispatch => {
+  let response;
+   fetch(BASE_URL + "/api/Competition/filter", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -102,6 +103,7 @@ export const createComp = compData => dispatch => {
     body: JSON.stringify(compData)
   }).then(res => {
     if (res.ok) {
+      response = res;
       res.json().then(() =>
         dispatch({
           type: NEW_COMP,
@@ -119,6 +121,7 @@ export const createComp = compData => dispatch => {
   }).catch(err =>  {
     /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
   });
+  return response;
 };
 
 export const compSelectedPages = (page) => {
