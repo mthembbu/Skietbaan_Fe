@@ -90,19 +90,14 @@ export default class userDetails extends Component {
   render() {
     return (
       <div className="document-center">
-        {this.state.getDataUser === false ?
+        {this.state.array.length === 0 || this.state.getDataUser === false ?
           <div className={this.state.getDataUser ? "hidden" : "loader-container-details"}>
             <div className={this.state.getDataUser ? "hidden" : "loader"}>
             </div>
             <div className={this.state.getDataUser ? "hidden" : "target-loader-image"}>
             </div>
             <div className={this.state.getDataUser ? "hidden" : "loading-message"}>Loading...</div>
-
-            {setTimeout(() => {
-              window.location="/login"
-		          }, 8000)}
-          </div> 
-          : (
+          </div> : (
             <div className="user-details-main-container user-details-container">
 
               <div className="user-details-scrolls">
