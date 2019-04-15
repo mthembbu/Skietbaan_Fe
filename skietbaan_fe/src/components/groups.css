@@ -423,6 +423,9 @@
 .the-main {
 	margin: 20px 40px 56px 28px;
 }
+.view-the-main {
+	margin: 0px 40px 56px 28px;
+}
 
 .group-name {
 	margin-left: 6px;
@@ -545,6 +548,10 @@
 	.the-main {
 		width: 62%;
 		margin-left: 19%;
+	}
+	.view-the-main {
+		width: 84%;
+		margin-left: 8%;
 	}
 	.add-blabe{
 		width: 80%;

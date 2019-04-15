@@ -188,13 +188,13 @@
     margin-top: 56px;
   }
   .create-switch-top{
-    width: 547px !important;
+    width: 83.53658536585366% !important;
   }
   .create-switch-top .switch-active{
-    width: 182.66666666667px !important;
+    width: 33.3333333333394% !important;
   }
   .create-switch-top .switch-inactive{
-    width: 182.66666666667px !important;
+    width: 33.3333333333394% !important;
   }
   .buttons-squire-rectangle{
     padding-top: 0px;
@@ -423,7 +423,7 @@
   font-family: Helvetica;	
   font-size: 14px;	
   font-weight: bold;	
-  line-height: 17px;	
+  line-height: 18px;	
   text-align: center;
   background-color: #BE0000;
   text-align: center;
@@ -438,7 +438,7 @@
   font-family: Helvetica;	
   font-size: 14px;	
   font-weight: 300;	
-  line-height: 17px;	
+  line-height: 18px;	
   text-align: center;
   padding-top: 6px;
   cursor: pointer;

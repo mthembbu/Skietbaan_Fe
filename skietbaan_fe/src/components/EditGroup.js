@@ -44,9 +44,9 @@ class EditGroup extends Component {
 	}
 	getBodyHeight() {
 		if (this.state.width < 575) {
-			return (this.state.height - 240) +"px";
+			return (this.state.height - 262) +"px";
 		} else {
-			return "66vh";
+			return "59vh";
 		}
 	}
 	updateDimensions() {
