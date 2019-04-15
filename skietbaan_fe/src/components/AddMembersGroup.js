@@ -127,7 +127,7 @@ class AddMembersGroup extends Component {
 
   render() {
     const postitems = (
-      <div className="check-edit" style={{ height: this.getBodyHeight()}}>
+      <div className="adding-check-edit" style={{ height: this.getBodyHeight()}}>
       {this.props.existing.length===0?null:
         <ul class="list-group">
           {this.props.existing
