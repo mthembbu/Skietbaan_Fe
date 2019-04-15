@@ -4,7 +4,7 @@ import {NEW_COMP,
 		PARTICIPANTS_PER_COMP,
 		FETCH_REQ,
 		UPDATE_REQ,
-		COMP_PAGE 
+		COMP_PAGE
 	} 
 	from '../actions/types';
 const initialState = {
@@ -14,7 +14,7 @@ const initialState = {
 	participants:[],
 	dict : {},
 	compSelectedPage:1,
-	isExist: false,
+	isExist: false
 	
 };
 /** A function to detect the state change*/
@@ -56,6 +56,7 @@ export default function(state = initialState, action){
 				...state,
 				compSelectedPage: action.payload
 			};
+		
 		default :
 			return state;	
 	}
