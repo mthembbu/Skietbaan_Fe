@@ -11,7 +11,9 @@ class Documents extends Component {
       sendLogsReturn: "",
       sendLosReturn: "",
       collapseFilterLOGS: false,
-      collapseFilterLOS: false
+      collapseFilterLOS: false,
+      getData1: false,
+      getData2: false
     };
     this.sendLOGS = this.sendLOGS.bind(this);
     this.sendLOS = this.sendLOS.bind(this);
@@ -29,7 +31,7 @@ class Documents extends Component {
       .then(res => res.json())
       .then(data => {
         if (this._isMounted) {
-          this.setState({ sendLogsReturn: data });
+          this.setState({ sendLogsReturn: data, getData1: true });
         }
       })
       .catch(err => {
@@ -41,7 +43,7 @@ class Documents extends Component {
       .then(res => res.json())
       .then(data => {
         if (this._isMounted) {
-          this.setState({ sendLosReturn: data });
+          this.setState({ sendLosReturn: data, getData2: true });
         }
       })
       .catch(err => {
@@ -111,10 +113,21 @@ class Documents extends Component {
     }
     return (
       <div className="documents-background ">
-        <div className="documents-center">
+        <div className={this.state.getData1 && this.state.getData2
+          ? "hidden" : "loader-container-documents"}>
+          <div className={this.state.getData1 && this.state.getData2
+            ? "hidden" : "loader"}>
+          </div>
+          <div className={this.state.getData1 && this.state.getData2
+            ? "hidden" : "target-loader-image"}>
+          </div>
+          <div className={this.state.getData1 && this.state.getData2
+            ? "hidden" : "loading-message-profile"}>Loading...</div>
+        </div>
+        <div className={this.state.getData1 && this.state.getData2 ? "documents-center" : "hidden"}>
           <div className="label-select-document">
             {this.state.sendLogsReturn === "Document" &&
-            this.state.sendLosReturn === "Document"
+              this.state.sendLosReturn === "Document"
               ? "Select Document"
               : "You've got some shooting to do!"}
           </div>
@@ -142,8 +155,8 @@ class Documents extends Component {
                 </div>
               </div>
             ) : (
-              <div />
-            )}
+                <div />
+              )}
             <Collapse isOpened={this.state.collapseFilterLOGS}>
               <div className="documents-collapse">
                 Document Sent via email
