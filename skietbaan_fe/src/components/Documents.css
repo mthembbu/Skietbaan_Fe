@@ -82,7 +82,9 @@
 .documents-center {
   height: 600px;
   overflow: auto;
-  width: 55%;
+  width: 312px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .Documents-btn-active {
@@ -210,4 +212,13 @@
 
 .document-testing-align {
   text-align: center;
+}
+
+@media only screen and (min-width: 576px) {
+  .documents-background {
+    width: 55%;
+  }
+  .documents-center {
+    width: 100%;
+  }
 }
