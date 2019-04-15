@@ -61,14 +61,19 @@ export const GROUPDICT = "GROUPDICT";
 export const EMPTY = "EMPTY";
 export const NEWGROUPSTATE = "NEWGROUPSTATE";
 export const GROUP_DATA_LOADING = "GROUP_DATA_LOADING";
+
 //notification types
 export const FETCH_NOTIFICATION = "FETCH_NOTIFICATION";
 export const UPDATE_IS_READ = "UPDATE_IS_READ";
 export const DATA_LOADING = "DATA_LOADING";
+
 //profile types
 export const PROFILE_SET_SELECTED_COMPETITION =
   "PROFILE_SET_SELECTED_COMPETITION";
 export const LANDING_SET_SELECTED_PAGE = "LANDING_SET_SELECTED_PAGE";
+
+//competition types
+export const COMPETITION_DATA_LOADING = "COMPETITION_DATA_LOADING";
 
 export const handleErrors = response => {
   if (!response.ok) {
