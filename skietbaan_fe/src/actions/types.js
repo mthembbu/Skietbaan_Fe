@@ -63,6 +63,7 @@ export const NEWGROUPSTATE = "NEWGROUPSTATE";
 //notification types
 export const FETCH_NOTIFICATION = "FETCH_NOTIFICATION";
 export const UPDATE_IS_READ = "UPDATE_IS_READ";
+export const DATA_LOADING = "DATA_LOADING";
 //profile types
 export const PROFILE_SET_SELECTED_COMPETITION =
   "PROFILE_SET_SELECTED_COMPETITION";

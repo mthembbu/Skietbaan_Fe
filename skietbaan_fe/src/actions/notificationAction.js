@@ -1,4 +1,9 @@
-import { FETCH_NOTIFICATION, UPDATE_IS_READ, BASE_URL } from "../actions/types";
+import {
+  FETCH_NOTIFICATION,
+  UPDATE_IS_READ,
+  BASE_URL,
+  DATA_LOADING
+} from "../actions/types";
 import confirmation from "../components/Notification-Img/confirmation.png";
 import renewal from "../components/Notification-Img/renewal.png";
 import leaderboard from "../components/Notification-Img/leaderboard-unselected.png";
@@ -21,12 +26,14 @@ export const updateIsReadProperty = id => dispatch => {
         type: UPDATE_IS_READ,
         payload: data
       });
-    }).catch(err =>  {
+    })
+    .catch(err => {
       /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
 
 export const getNotifications = token => dispatch => {
+  dispatch({ type: DATA_LOADING });
   fetch(BASE_URL + "/api/Notification/GetNotificationsByUser?token=" + token)
     .then(response => response.json())
     .then(data => {
@@ -57,7 +64,8 @@ export const getNotifications = token => dispatch => {
         type: FETCH_NOTIFICATION,
         payload: newArray
       });
-    }).catch(err =>  {
+    })
+    .catch(err => {
       /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
