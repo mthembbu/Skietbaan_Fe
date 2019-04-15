@@ -82,9 +82,7 @@
 .documents-center {
   height: 600px;
   overflow: auto;
-  width: 75%;
-  margin-right: auto;
-  margin-left: auto;
+  width: 55%;
 }
 
 .Documents-btn-active {
