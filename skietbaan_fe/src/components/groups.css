@@ -538,6 +538,9 @@
 	.add-check-edit .list-group {
 		margin-top: 0px !important;
 	}
+	.adding-check-edit {
+		margin-top: 0px !important;
+	}
 	.bottom-label {
 		margin-bottom: 56px;
 	}
@@ -692,6 +695,11 @@
 .check-edit{
 	overflow-y: overlay;
 	z-index: 1;
+}
+.adding-check-edit{
+	overflow-y: overlay;
+	z-index: 1;
+	margin-top: 120px;
 }
 .add-check-edit {
 	padding-bottom: 100px;
