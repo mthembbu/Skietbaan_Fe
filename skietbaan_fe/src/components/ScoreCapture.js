@@ -40,7 +40,8 @@ export default class search extends Component {
       somethingClicked: false,
       maximumScore: 20,
       height: window.innerHeight,
-      width: window.innerWidth
+      width: window.innerWidth,
+      getData: false,
 
     }
 
@@ -127,7 +128,7 @@ export default class search extends Component {
       }
     })
       .then(response => response.json())
-      .then(data => this.setState({ competitionsList: data }))
+      .then(data => this.setState({ competitionsList: data, getData: true }))
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       })
@@ -467,7 +468,7 @@ export default class search extends Component {
           </div>);
       }
     }
-    else {
+    else if(this.state.getData === true){
       competitionItem.push(
         <div className="not-active"><div className="not-active-message">
           No Competitions available at this point, we’ll have them ready soon !
@@ -479,6 +480,7 @@ export default class search extends Component {
     }
     return (
       <div className="add-score-entire-page-content" autoComplete="off">
+
         <Row className="row justify-content-center">
           <Col sm={8} className="createpage-bootstrap-col-center-container">
             <div className={stateOne || this.state.scoreSaved
@@ -506,9 +508,15 @@ export default class search extends Component {
               <div className={stateOne || this.state.scoreSaved
                 ? "hidden"
                 : ""}>
+
                 <div className="centre-labels">
                   <label className="label-competition">Select Competition</label>
                 </div>
+                <div className={this.state.getData ? "hidden" : "loader"}>
+                </div>
+                <div className={this.state.getData ? "hidden" : "target-loader-image"}>
+                </div>
+                <div className={this.state.getData ? "hidden" : "loading-message"}>Loading...</div>
                 <div className="add-score-competition-container">
                   {competitionItem}
 
@@ -528,7 +536,7 @@ export default class search extends Component {
                     <div className="error-message-container">
                       <div className={this.state.validScore
                         ? "hidden"
-                        : "invalid-score"}>Enter Valid Score</div>
+                        : "invalid-score"}>Enter Valid Score. Max: {this.state.maximumScore}</div>
                     </div>
                   </div>
                 </div>

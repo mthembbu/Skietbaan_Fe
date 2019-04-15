@@ -59,6 +59,7 @@
   font-size: 16px;
   margin-top: -22px;
   border: none;
+  outline: none;
 }
 
 .round-button:disabled{
@@ -201,7 +202,7 @@
 
 @media screen and (max-width:500px){
   .header-label{
-    padding-right: 33px;
+    padding-right: 40px;
   }
 }
 
