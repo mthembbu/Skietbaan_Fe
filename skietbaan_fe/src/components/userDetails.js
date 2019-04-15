@@ -17,7 +17,7 @@ export default class userDetails extends Component {
       checkNumberValid: false,
       inputChanged: false,
       checkEmailValid: false,
-      getData: false
+      getDataUser: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -38,7 +38,7 @@ export default class userDetails extends Component {
           surnameValue: data.surname,
           emailValue: data.email,
           cellphoneValue: data.phoneNumber,
-          getData: true
+          getDataUser: true
         })
       )
       .catch(err => {
@@ -90,143 +90,152 @@ export default class userDetails extends Component {
   render() {
     return (
       <div className="document-center">
-        {this.state.array.length === 0 ? null : (
-          <div className="user-details-main-container user-details-container">
-          
-            <div className="user-details-scrolls">
-            <div className={this.state.getData ? "hidden" : "loader"}>
-                </div>
-                <div className={this.state.getData ? "hidden" : "target-loader-image"}>
-                </div>
-                <div className={this.state.getData ? "hidden" : "loading-message"}>Loading...</div>
-              <div className="member-details-container">
-                <div className="user-details-heading-container user-details-member-name">
-                  {this.state.array.username.toUpperCase()}
-                </div>
-                {this.state.array.memberID === null ||
-                this.state.array.memberID === undefined ? null : (
-                  <div>
-                    <label className="user-details-heading-container user-details-member-number">
-                      MEMBERSHIP NUMBER:
-                    </label>
+        {this.state.getDataUser === false ?
+          <div className={this.state.getDataUser ? "hidden" : "loader-container-details"}>
+            <div className={this.state.getDataUser ? "hidden" : "loader"}>
+            </div>
+            <div className={this.state.getDataUser ? "hidden" : "target-loader-image"}>
+            </div>
+            <div className={this.state.getDataUser ? "hidden" : "loading-message"}>Loading...</div>
 
-                    <label className="user-details-member-label">
-                      {this.state.array.memberID}
-                    </label>
+            {setTimeout(() => {
+              this.state.getDataUser?this.setState({getDataUser: true}):
+              window.location="/login"
+		          }, 8000)}
+          </div> 
+          : (
+            <div className="user-details-main-container user-details-container">
+
+              <div className="user-details-scrolls">
+
+                <div className="member-details-container">
+                  <div className="user-details-heading-container user-details-member-name">
+                    {this.state.array.username.toUpperCase()}
                   </div>
-                )}
-              </div>
+                  {this.state.array.memberID === null ||
+                    this.state.array.memberID === undefined ? null : (
+                      <div>
+                        <label className="user-details-heading-container user-details-member-number">
+                          MEMBERSHIP NUMBER:
+                    </label>
 
-              <div>
-                <input
-                  type="text"
-                  name="nameValue"
-                  id="nameValue"
-                  autoComplete="off"
-                  className={"user-details-input-container"}
-                  value={this.state.nameValue}
-                  onChange={this.handleChange}
-                  placeholder="Name"
-                />
-              </div>
+                        <label className="user-details-member-label">
+                          {this.state.array.memberID}
+                        </label>
+                      </div>
+                    )}
+                </div>
 
-              <div>
-                <input
-                  type="text"
-                  name="surnameValue"
-                  id="surnameValue"
-                  autoComplete="off"
-                  className={"user-details-input-container"}
-                  value={this.state.surnameValue}
-                  onChange={this.handleChange}
-                  placeholder="Surname"
-                />
-              </div>
+                <div>
+                  <input
+                    type="text"
+                    name="nameValue"
+                    id="nameValue"
+                    autoComplete="off"
+                    className={"user-details-input-container"}
+                    value={this.state.nameValue}
+                    onChange={this.handleChange}
+                    placeholder="Name"
+                  />
+                </div>
 
-              <div>
-                <input
-                  type="number"
-                  name="cellphoneValue"
-                  id="cellphoneValue"
-                  autoComplete="off"
-                  className={"user-details-input-container"}
-                  value={this.state.cellphoneValue}
-                  onChange={this.handleChange}
-                  placeholder="Cell Number"
-                />
-              </div>
+                <div>
+                  <input
+                    type="text"
+                    name="surnameValue"
+                    id="surnameValue"
+                    autoComplete="off"
+                    className={"user-details-input-container"}
+                    value={this.state.surnameValue}
+                    onChange={this.handleChange}
+                    placeholder="Surname"
+                  />
+                </div>
 
-              {this.state.checkNumberValid === false ? null : this.state
+                <div>
+                  <input
+                    type="number"
+                    name="cellphoneValue"
+                    id="cellphoneValue"
+                    autoComplete="off"
+                    className={"user-details-input-container"}
+                    value={this.state.cellphoneValue}
+                    onChange={this.handleChange}
+                    placeholder="Cell Number"
+                  />
+                </div>
+
+                {this.state.checkNumberValid === false ? null : this.state
                   .cellphoneValue === null ? null : this.state.cellphoneValue
-                  .length === 0 ? null : validateNumber(
-                  this.state.cellphoneValue
-                ) ? null : (
-                <label className="user-details-Errors">
-                  invalid Cellphone Number
+                    .length === 0 ? null : validateNumber(
+                      this.state.cellphoneValue
+                    ) ? null : (
+                        <label className="user-details-Errors">
+                          invalid Cellphone Number
                 </label>
-              )}
+                      )}
 
-              <div>
-                <input
-                  type="text"
-                  name="emailValue"
-                  id="emailValue"
-                  autoComplete="off"
-                  className={"user-details-input-container"}
-                  value={this.state.emailValue}
-                  onChange={this.handleChange}
-                  onClick={this.handErrorValue}
-                  placeholder="Email"
-                />
-              </div>
+                <div>
+                  <input
+                    type="text"
+                    name="emailValue"
+                    id="emailValue"
+                    autoComplete="off"
+                    className={"user-details-input-container"}
+                    value={this.state.emailValue}
+                    onChange={this.handleChange}
+                    onClick={this.handErrorValue}
+                    placeholder="Email"
+                  />
+                </div>
 
-              {this.state.checkEmailValid === false ? null : validateEmail(
+                {this.state.checkEmailValid === false ? null : validateEmail(
                   this.state.emailValue
                 ) ? null : (
-                <label className="user-details-Errors">invalid email</label>
-              )}
-              {this.state.returnValue === "updated"
-                ? (setTimeout(() => {
+                    <label className="user-details-Errors">invalid email</label>
+                  )}
+                {this.state.returnValue === "updated"
+                  ? (setTimeout(() => {
                     this.setState({ returnValue: "" });
                   }, 5000),
-                  (
-                    <label className="user-details-Errors">
-                      User Details Updated
+                    (
+                      <label className="user-details-Errors">
+                        User Details Updated
                     </label>
-                  ))
-                : null}
+                    ))
+                  : null}
 
-              <div className="user-details-button-contain ">
-                <button
-                  className={
-                    this.state.array.name === this.state.nameValue &&
-                    this.state.array.surname === this.state.surnameValue &&
-                    this.state.array.phoneNumber ===
-                      this.state.cellphoneValue &&
-                    this.state.array.email === this.state.emailValue
-                      ? "user-details-button-container-active"
-                      : "user-details-button-container"
-                  }
-                  onClick={
-                    this.state.inputChanged === true &&
-                    validateEmail(this.state.emailValue)
-                      ? this.state.cellphoneValue === null ||
-                        this.state.cellphoneValue === undefined
-                        ? this.updateUser
-                        : this.state.cellphoneValue.length === 0
-                        ? this.updateUser
-                        : validateNumber(this.state.cellphoneValue)
-                        ? this.updateUser
+                <div className="user-details-button-contain ">
+                  <button
+                    className={
+                      this.state.array.name === this.state.nameValue &&
+                        this.state.array.surname === this.state.surnameValue &&
+                        this.state.array.phoneNumber ===
+                        this.state.cellphoneValue &&
+                        this.state.array.email === this.state.emailValue
+                        ? "user-details-button-container-active"
+                        : "user-details-button-container"
+                    }
+                    onClick={
+                      this.state.inputChanged === true &&
+                        validateEmail(this.state.emailValue)
+                        ? this.state.cellphoneValue === null ||
+                          this.state.cellphoneValue === undefined
+                          ? this.updateUser
+                          : this.state.cellphoneValue.length === 0
+                            ? this.updateUser
+                            : validateNumber(this.state.cellphoneValue)
+                              ? this.updateUser
+                              : this.handErrorValue
                         : this.handErrorValue
-                      : this.handErrorValue
-                  }
-                >
-                  Update Details
+                    }
+                  >
+                    Update Details
                 </button>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     );
   }

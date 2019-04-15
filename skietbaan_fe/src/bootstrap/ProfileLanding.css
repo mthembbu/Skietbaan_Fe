@@ -54,7 +54,8 @@
 }
 
 .profile-landing-container{
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: overlay;
     height: 100vh;
     background-color: white;
 }
