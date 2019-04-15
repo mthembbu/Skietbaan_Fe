@@ -46,7 +46,7 @@ class ViewGroups extends Component {
     if (this.state.width < 575) {
       return (this.state.height - 240)+"px";
     } else {
-      return "66vh";
+      return "57vh";
     }
   }
   componentDidMount() {
@@ -106,7 +106,7 @@ class ViewGroups extends Component {
 
   render() {
     const postitems = (
-      <div className="the-main">
+      <div className="view-the-main" style={this.state.width>=575?{marginTop:"-19px"}:null}>
       {this.props.groupsList.length===0?<div className="view-error-container">
       <label className="view-error-msg">No Groups have been created yet.</label>
       </div>:

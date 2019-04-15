@@ -10,13 +10,15 @@
 }
 
 .page-content-login{
-  overflow: scroll;
+  overflow-y: overlay;
   background-color: transparent;
   width: 100%;
   z-index: 50;
   position: relative;
   background-repeat: no-repeat;
-  height: 90vh;
+  height: 100vh;
+  border-bottom-left-radius: 13px;
+  border-bottom-right-radius: 13px;
   background-size: cover;
   background-position: center;
 }
@@ -59,6 +61,7 @@
   font-size: 16px;
   margin-top: -22px;
   border: none;
+  outline: none;
 }
 
 .round-button:disabled{
@@ -201,7 +204,7 @@
 
 @media screen and (max-width:500px){
   .header-label{
-    padding-right: 33px;
+    padding-right: 40px;
   }
 }
 

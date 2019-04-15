@@ -19,13 +19,13 @@ class Groups extends Component {
 			posts: [],
 			groups: [],
 			newArray: [],
-			ids:[],
+			ids: [],
 			count: 0,
 			st: true,
 			filterText: '',
 			check: 'Select all',
 			height: window.innerHeight,
-            width: window.innerWidth
+			width: window.innerWidth
 		};
 		this.toggleHighlight = this.toggleHighlight.bind(this);
 		this.handleOnClick = this.handleOnClick.bind(this);
@@ -52,25 +52,25 @@ class Groups extends Component {
 			/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
 		});
 	}
-	componentWillMount(){
+	componentWillMount() {
 		window.addEventListener("resize", this.updateDimensions);
 	}
-	componentDidMount(){
+	componentDidMount() {
 		this.updateDimensions();
 	}
 	getBodyHeight() {
 		if (this.state.width < 575) {
-		  return (this.state.height - 240);
+			return (this.state.height - 235) + "px";
 		} else {
-		  return (this.state.height - 184);
+			return "66vh";
 		}
-	  }
-	  updateDimensions() {
+	}
+	updateDimensions() {
 		this.setState({
-		  height: window.innerHeight,
-		  width: window.innerWidth
+			height: window.innerHeight,
+			width: window.innerWidth
 		});
-	  }
+	}
 	onChange(event) {
 		this.setState({ filterText: event.target.value });
 	}
@@ -102,8 +102,8 @@ class Groups extends Component {
 			.catch(function (data) { }).catch(err => {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
 			});
-			 this.props.pageState(0);
-			 history.push("/create");
+		this.props.pageState(0);
+		history.push("/create");
 	}
 
 	selectall() {
@@ -123,7 +123,7 @@ class Groups extends Component {
 	}
 
 	toggleHighlight = (event) => {
-		const index=this.state.ids.indexOf(event);
+		const index = this.state.ids.indexOf(event);
 		if (this.state.posts[index].highlighted === true) {
 			this.state.posts[index].highlighted = false;
 			this.setState({ count: this.state.count - 1 });
@@ -137,42 +137,42 @@ class Groups extends Component {
 	}
 	render() {
 		const postitems = (
-			<div className="check" style={{ height: this.getBodyHeight() + "px" }}>
-			{this.state.posts.length===0?null:
-				<ul class="list-group" style={{ textAlign: 'left' }}>
-					{this.state.posts
-						.filter((post) => {
-							return (
-								!this.state.filterText ||
-								post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
-								post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
-							);
-						})
-						.map((post, index) => (
-							<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(post.id)}>
-								<img
-									className="checkbox-delete"
-									src={post.highlighted == true ? marked : unmarked}
-									alt=""
-								/>
-								<label className={post.highlighted === true ? 'blabe' : 'blabe2'}>
-									<div className={post.highlighted === true ? 'userName-active' : 'userName'}>
-										{post.username}
-									</div>
-									<div className={post.highlighted === true ? 'emails-active' : 'email'}>
-										{post.email}
-									</div>
-								</label>
-							</li>
-						))}
-				</ul>}
+			<div className="check" style={{ height: this.getBodyHeight() }}>
+				{this.state.posts.length === 0 ? null :
+					<ul class="list-group" style={{ textAlign: 'left' }}>
+						{this.state.posts
+							.filter((post) => {
+								return (
+									!this.state.filterText ||
+									post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
+									post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
+								);
+							})
+							.map((post, index) => (
+								<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(post.id)}>
+									<img
+										className="checkbox-delete"
+										src={post.highlighted == true ? marked : unmarked}
+										alt=""
+									/>
+									<label className={post.highlighted === true ? 'blabe' : 'blabe2'}>
+										<div className={post.highlighted === true ? 'userName-active' : 'userName'}>
+											{post.username}
+										</div>
+										<div className={post.highlighted === true ? 'emails-active' : 'email'}>
+											{post.email}
+										</div>
+									</label>
+								</li>
+							))}
+					</ul>}
 			</div>
 		);
 		return (
 			<Row className="row justify-content-center">
 				<Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position: "inherit" }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
 					<div className="The-Main">
-						<div className="navBar-container">
+						<div className="group-navBar-container">
 							<div className="the-nav-bar">
 								<img className="back-image" onClick={this.onBack} src={back} alt="" />
 								<label className="center-label">ADD USERS</label>
@@ -193,9 +193,7 @@ class Groups extends Component {
 								</div>
 							</div>
 						</div>
-						<div className="scrollbar" data-simplebar data-simplebar-auto-hide="false">
-							{postitems}
-						</div>
+						{postitems}
 						{this.state.count === 0 ? null : (
 							<label className="bottom-label">
 								<button className="create-group" onClick={this.handleOnClick}>

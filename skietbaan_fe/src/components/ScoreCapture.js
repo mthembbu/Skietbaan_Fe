@@ -41,7 +41,8 @@ import { selectedPage } from '../actions/postActions';
       somethingClicked: false,
       maximumScore: 20,
       height: window.innerHeight,
-      width: window.innerWidth
+      width: window.innerWidth,
+      getData: false,
 
     }
 
@@ -129,7 +130,7 @@ import { selectedPage } from '../actions/postActions';
       }
     })
       .then(response => response.json())
-      .then(data => this.setState({ competitionsList: data }))
+      .then(data => this.setState({ competitionsList: data, getData: true }))
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       })
@@ -469,7 +470,7 @@ import { selectedPage } from '../actions/postActions';
           </div>);
       }
     }
-    else {
+    else if(this.state.getData === true){
       competitionItem.push(
         <div className="not-active"><div className="not-active-message">
           No Competitions available at this point, we’ll have them ready soon !
@@ -481,6 +482,7 @@ import { selectedPage } from '../actions/postActions';
     }
     return (
       <div className="add-score-entire-page-content" autoComplete="off">
+
         <Row className="row justify-content-center">
           <Col sm={8} className="createpage-bootstrap-col-center-container">
             <div className={stateOne || this.state.scoreSaved
@@ -508,8 +510,16 @@ import { selectedPage } from '../actions/postActions';
               <div className={stateOne || this.state.scoreSaved
                 ? "hidden"
                 : ""}>
+
                 <div className="centre-labels">
                   <label className="label-competition">Select Competition</label>
+                </div>
+                <div className={this.state.getData ? "hidden" : "loading-container-add-score"}>
+                <div className={this.state.getData ? "hidden" : "loader"}>
+                </div>
+                <div className={this.state.getData ? "hidden" : "target-loader-image"}>
+                </div>
+                <div className={this.state.getData ? "hidden" : "loading-message"}>Loading...</div>
                 </div>
                 <div className="add-score-competition-container">
                   {competitionItem}
@@ -524,13 +534,14 @@ import { selectedPage } from '../actions/postActions';
                       autoComplete="off"
                       name="score"
                       pattern="\d*"
+                      onClick={() => this.toggleNavbar}
                       className="score"
                       onChange={this.handleScore}
                       placeholder="Enter Score"></input>
                     <div className="error-message-container">
                       <div className={this.state.validScore
                         ? "hidden"
-                        : "invalid-score"}>Enter Valid Score</div>
+                        : "invalid-score"}>Enter Valid Score. Max: {this.state.maximumScore}</div>
                     </div>
                   </div>
                 </div>

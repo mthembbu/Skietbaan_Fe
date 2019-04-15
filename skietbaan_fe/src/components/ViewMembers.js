@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../components/ViewMembers.css';
 import Collapsible from 'react-collapsible';
-import { Row, Col } from 'react-bootstrap';
 import { BASE_URL } from '../actions/types.js';
 import memberIcon from '../components/assets/greyMembershipIcon.png';
 import { getCookie } from '../components/cookie.js';
@@ -18,7 +17,8 @@ class ViewMembers extends Component {
 			lastSize: 0,
 			navbarState: false,
 			height: window.innerHeight,
-			width: window.innerWidth
+			width: window.innerWidth,
+			getData: false
 		};
 		this.getAllMembers = this.getAllMembers.bind(this);
 		this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -89,7 +89,8 @@ class ViewMembers extends Component {
 			})
 			.then((data) =>
 				this.setState({
-					array: data
+					array: data,
+					getData: true
 				})
 			)
 			.catch((err) => {
@@ -167,7 +168,7 @@ class ViewMembers extends Component {
 													<b>{post.username}</b>
 													<div className="view-non-members-email">{post.email}</div>
 												</div>
-												<div className="view-members-icon">
+												<div className="view-exp-members-icon">
 													<img
 														src={memberIcon}
 														className="membership-icon"
@@ -226,10 +227,16 @@ class ViewMembers extends Component {
 						/>
 					</div>
 				</div>
+				<div className={this.state.getData ===true ? "hidden" : "loader-container-members"}>
+				<div className={this.state.getData ===true ? "hidden" : "loader"}>
+                </div>
+                <div className={this.state.getData ===true ? "hidden" : "target-loader-image"}>
+                </div>
+                <div className={this.state.getData === true ? "hidden" : "loading-message-members"}>Loading...</div>
+				</div>
 				<div className="table-search-members" style={{ height: this.getBodyHeight() }}>
 					{postItems}
-				</div>
-				
+				</div>	
 			</div>
 		);
 	}

@@ -16,7 +16,8 @@ export default class userDetails extends Component {
       returnValue: "",
       checkNumberValid: false,
       inputChanged: false,
-      checkEmailValid: false
+      checkEmailValid: false,
+      getData: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -36,7 +37,8 @@ export default class userDetails extends Component {
           nameValue: data.name,
           surnameValue: data.surname,
           emailValue: data.email,
-          cellphoneValue: data.phoneNumber
+          cellphoneValue: data.phoneNumber,
+          getData: true
         })
       )
       .catch(err => {
@@ -90,7 +92,13 @@ export default class userDetails extends Component {
       <div className="document-center">
         {this.state.array.length === 0 ? null : (
           <div className="user-details-main-container user-details-container">
+          
             <div className="user-details-scrolls">
+            <div className={this.state.getData ? "hidden" : "loader"}>
+                </div>
+                <div className={this.state.getData ? "hidden" : "target-loader-image"}>
+                </div>
+                <div className={this.state.getData ? "hidden" : "loading-message"}>Loading...</div>
               <div className="member-details-container">
                 <div className="user-details-heading-container user-details-member-name">
                   {this.state.array.username.toUpperCase()}
@@ -202,7 +210,14 @@ export default class userDetails extends Component {
                   onClick={
                     this.state.inputChanged === true &&
                     validateEmail(this.state.emailValue)
-                      ? this.updateUser
+                      ? this.state.cellphoneValue === null ||
+                        this.state.cellphoneValue === undefined
+                        ? this.updateUser
+                        : this.state.cellphoneValue.length === 0
+                        ? this.updateUser
+                        : validateNumber(this.state.cellphoneValue)
+                        ? this.updateUser
+                        : this.handErrorValue
                       : this.handErrorValue
                   }
                 >

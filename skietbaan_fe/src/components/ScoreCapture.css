@@ -2,13 +2,19 @@
     padding-top: 0px;
     list-style-type: none;
     text-align: center;
-    width: 312px;
+    width: 318px;
     margin: 0 auto;
     color: black;
-    padding-right: 10px;
     font-size: 16px;
     font-weight: bold;
     overflow-y: overlay;
+    padding-left: 3px;
+    max-height: 60vh;
+    padding-bottom: 56px;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
 }
 
 .competition-item{
@@ -90,7 +96,7 @@
 
 @media only screen and (max-height: 700px){
     .add-score-competition-container{
-        height:320px;
+        height: 60%;
     }
 }
 
@@ -117,9 +123,6 @@
         height: 95vh !important;
         border-bottom-left-radius: 13px;
         border-bottom-right-radius: 13px;
-    }
-    .submit-container{
-        bottom: -14px !important; 
     }
 }
 
@@ -265,7 +268,7 @@
     text-align: center;
     width: 312px;
     display: flex;
-    bottom: 165px;
+    bottom: 40px;
     position: relative;
 }
 .stretched{
@@ -292,6 +295,63 @@
 .submit-button-elements2{
     width: 312px;
 }
+
+.loader-background{
+    height: 410px;
+    width: 312px;
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    top: 22%;
+    margin: auto;
+    z-index: 100;
+    background-color: black;
+    border-radius: 15px;
+}
+
+.loading-message{
+    color: #BE0000;
+    bottom: 30%;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 300;
+    font-family: helvetica;
+}
+
+.loading-container-add-score{
+    height: 150px;
+}
+
+.loader {
+    margin: auto;
+    border: 7px solid transparent;
+    border-top: 7px solid #BE0000;
+    height: 80px;
+    width: 80px;
+    -webkit-animation: rotate 0.8s infinite linear;
+    animation: rotate 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border: 6px solid #BE0000;
+    border-right-color: transparent;
+    border-radius: 50%;
+    margin-top: 70px;
+  }
+
+.target-loader-image{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-image: url("../components/assets/target.png");
+    height: 100px;
+    position: relative;
+    bottom: 90px;
+  }
+  
+  @keyframes rotate {
+    0%    { transform: rotate(0deg); }
+    100%  { transform: rotate(360deg); }
+  }
 
 .icon-push-down{
     position: absolute;
@@ -564,4 +624,8 @@ input[type=number] {
     font-weight: 300;
     color: #BE0000;
     font-family: helvetica;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
 }

@@ -5,6 +5,25 @@
   background: #ffffff;
 }
 
+.loader-container-members{
+  background-color: #f6f6f6;
+  padding-top: 12px;
+  height: 100%;
+}
+
+.loading-message-members{
+  color: #BE0000;
+  margin: 0 auto;
+  padding-left: 42%;
+  padding-right: 42%;
+  font-size: 14px;
+  padding-top: 10px;
+  position: relative;
+  bottom: 60px;
+  font-weight: 300;
+  font-family: helvetica;
+}
+
 .search-member-name {
   background-color: #fdfdfd;
 }
@@ -35,8 +54,7 @@
     border-bottom-right-radius: 6px;
   }
   .table-search-members {
-    padding-top: 0px;
-    padding: 0 10% 0 10%;
+    padding: 2% 10% 0% 10%;
     background-color:  #f6f6f6;
     overflow-y: scroll;
   }
@@ -47,6 +65,7 @@
     overflow-y: scroll;
     color: #666666;
     padding-bottom: 70px;
+    padding-top: 12px;
   }
 
   .centre-view-member {
@@ -143,6 +162,14 @@
   margin-bottom: 25px;
 }
 
+.view-exp-members::selection {
+  background-color: #FFFFFF;
+  border-radius: 25px;
+  border-color: #be0000;
+  border-width: 1.5px;
+  color: #be0000;
+}
+
 .search {
   padding-bottom: 14px;
   background-color: #ffffff;
@@ -152,7 +179,7 @@
 }
 
 .user-value {
-  background: url("../components/GroupImages/searchBox.png") no-repeat right
+  background: url("../components/assets/newSearchIconRed.png") no-repeat right
     center;
   background-color: #fdfdfd;
   background-size: 22px;
@@ -232,14 +259,14 @@
 
 .expiry-time-column {
   float: right;
-  font-size: 12px;
+  font-size: 14px;
   height: 55px;
   padding-right: 23px;
 }
 
 .view-members-exp-expiry-time-column {
   font-family: helvetica;
-  font-size: 15px;
+  font-size: 14px;
   height: 55px;
   padding-right: 23px;
   float: right;
@@ -325,4 +352,16 @@
 .view-members-username-email {
   width: 45%;
   float: left;
+}
+
+.view-exp-members-email {
+  font-size: 14px;
+}
+
+.view-exp-members-icon {
+  float: left;
+  width: 17px;
+  height: 17px;
+  padding-top: 10px;
+  padding-left: 35px;
 }

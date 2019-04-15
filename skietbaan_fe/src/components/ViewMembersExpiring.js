@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import '../components/ViewMembers.css';
 import Collapsible from 'react-collapsible';
 import { BASE_URL } from '../actions/types.js';
-import memberIcon from '../components/assets/membership-icon.png';
+import memberIcon from '../components/assets/greyMembershipIcon.png';
 import { getCookie } from '../components/cookie.js';
-import Radio from '@material-ui/core/Radio';
-import { Row, Col } from 'react-bootstrap';
 
 class ViewMembersExpiring extends Component {
 	constructor(props) {
@@ -21,7 +19,8 @@ class ViewMembersExpiring extends Component {
 			lastSize: 0,
 			navbarState: false,
 			height: window.innerHeight,
-			width: window.innerWidth
+			width: window.innerWidth,
+			getData: false
 		};
 		this.getExpiringMembers = this.getExpiringMembers.bind(this);
 		this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -75,10 +74,10 @@ class ViewMembersExpiring extends Component {
 	}
 	getBodyHeight() {
 		if (this.state.width < 575) {
-			return (this.state.height - 240)+"px";
-		  } else {
+			return (this.state.height - 240) + "px";
+		} else {
 			return "66vh";
-		  }
+		}
 	}
 	getExpiringMembers() {
 		fetch(BASE_URL + '/api/Features/SearchExpiringMember', {
@@ -96,7 +95,8 @@ class ViewMembersExpiring extends Component {
 			})
 			.then((data) =>
 				this.setState({
-					array: data
+					array: data,
+					getData: true
 				})
 			)
 			.catch((err) => {
@@ -209,31 +209,35 @@ class ViewMembersExpiring extends Component {
 								<td className="first-column">
 									<Collapsible
 										trigger={
-											<div>
-												<div className="view-members-exp-username-and-email">
+											<div className="username-and-email">
+												<div className="view-members-username-email">
 													<b>{post.username}</b>
+													<div className="view-non-members-email">{post.email}</div>
+												</div>
+												<div className="view-exp-members-icon">
 													<img
 														src={memberIcon}
 														className="membership-icon"
 														alt="Is a Member"
 													/>
-													<div>{post.email}</div>
 												</div>
-												<div className="view-members-exp-expiry-time-column">
+												<div className="expiry-time-column">
 													<div
 														className={
 															this.status(this.state.timeLeftOnMembership[index]) ? (
-																'view-exp-bad '
+																'bad'
 															) : (
 																	'okay'
 																)
 														}
 													>
 														<div>
-															{post.memberExpiryDate
-																.substring(0, 10)
-																.split('-')
-																.join('/')}
+															<b>
+																{post.memberExpiryDate
+																	.substring(0, 10)
+																	.split('-')
+																	.join('/')}
+															</b>
 															<div>{this.state.timeLeftOnMembership[index]} Months</div>
 														</div>
 													</div>
@@ -271,7 +275,14 @@ class ViewMembersExpiring extends Component {
 						/>
 					</div>
 				</div>
-				<div className="table-search-members" style={{ height: this.getBodyHeight()  }}>
+				<div className={this.state.getData === true ? "hidden" : "loader-container-members"}>
+					<div className={this.state.getData === true ? "hidden" : "loader"}>
+					</div>
+					<div className={this.state.getData === true ? "hidden" : "target-loader-image"}>
+					</div>
+					<div className={this.state.getData === true ? "hidden" : "loading-message-members"}>Loading...</div>
+				</div>
+				<div className="table-search-members" style={{ height: this.getBodyHeight() }}>
 					{postItems}
 				</div>
 			</div>

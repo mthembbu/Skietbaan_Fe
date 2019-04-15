@@ -15,7 +15,7 @@ import ViewComp from '../components/ViewComp';
 import GroupComponent from '../components/GroupComponent';
 import CompComponent from '../components/CompComponent';
 import { compSelectedPages } from '../actions/competition.action';
-import { pageState,selectedPage } from '../actions/postActions';
+import { pageState, selectedPage } from '../actions/postActions';
 export class createPages extends Component {
 	constructor(props) {
 		super(props);
@@ -102,7 +102,7 @@ export class createPages extends Component {
 	}
 
 	viewCompetitions() {
-		
+
 		this.setState({ selectedButtonCreateViewCompetitions: 2 });
 		this.props.compSelectedPages(2);
 
@@ -124,7 +124,7 @@ export class createPages extends Component {
 				.then((response) => response.json())
 				.then(function (data) {
 					if (data.admin === false) {
-					   history.push('/home');
+						history.push('/home');
 					}
 				})
 				.catch(function (data) { })
@@ -134,7 +134,7 @@ export class createPages extends Component {
 		} else {
 			window.location = '/registerPage';
 		}
-		if(this.props.page===""){
+		if (this.props.page === "") {
 			this.props.pageState(10);
 		}
 
@@ -148,15 +148,15 @@ export class createPages extends Component {
 			<Row className="row justify-content-center">
 				<Col sm={8} className="createpage-bootstrap-col-center-container">
 					<div className="create-main-container">
-						{this.props.page === 0 || this.props.page===10 ? (
+						{this.props.page === 0 || this.props.page === 10 || this.props.page === 5 ? (
 							<div className="create-nav-container">
 								<div className={this.state.selectedButton === 3 ? 'create-top-nav-members' : 'create-top-nav'}>
 									{/* top */}
-										<div class="page-name-bar">
-											<div className="gun-overlay-image">
-												<label className="label-for-score">CREATE</label>
-											</div>
+									<div class="page-name-bar">
+										<div className="gun-overlay-image">
+											<label className="label-for-score">CREATE</label>
 										</div>
+									</div>
 									<Row className="row justify-content-center">
 										<div className="create-switch-top">
 											<div
@@ -191,7 +191,7 @@ export class createPages extends Component {
 												: "create-switch-bottom"} >
 												<div
 													className={
-														(this.state.selectedButton === 1 && this.props.page!==0) || (this.state.selectedButton === 2 && this.props.page !== 0) ? (
+														(this.state.selectedButton === 1 && this.props.page !== 0) || (this.state.selectedButton === 2 && this.props.page !== 0) ? (
 															'switch-active-left'
 														) : (
 																'switch-inactive'
@@ -203,7 +203,7 @@ export class createPages extends Component {
 										</div>
 												<div
 													className={
-														(this.state.selectedButton === 1 && this.props.page===0) ||(this.state.selectedButton === 2 && this.props.page  === 0)? (
+														(this.state.selectedButton === 1 && this.props.page === 0) || (this.state.selectedButton === 2 && this.props.page === 0) ? (
 															'switch-active-right'
 														) : (
 																'switch-inactive'
@@ -217,48 +217,48 @@ export class createPages extends Component {
 										</div>
 									</Row>
 									<Row className="row justify-content-center">
-											{this.state.selectedButton === 3 ? (
-												<div className="member-radio">
-													<div className="radio-A">
-														<Radio
-															className="a-radio"
-															aria-label="A"
-															checked={this.state.selectedValue === 'A'}
-															onChange={() => this.handleChange('A')}
-															value="b"
-															color={'primary'}
-															name="radio-button-demo"
-															aria-label="B"
-														/>
+										{this.state.selectedButton === 3 ? (
+											<div className="member-radio">
+												<div className="radio-A">
+													<Radio
+														className="a-radio"
+														aria-label="A"
+														checked={this.state.selectedValue === 'A'}
+														onChange={() => this.handleChange('A')}
+														value="b"
+														color={'primary'}
+														name="radio-button-demo"
+														aria-label="B"
+													/>
 
-														<label className="member-user-label">USERS</label>
-													</div>
-													<div className="radio-B">
-														<Radio
-															className="b-radio"
-															aria-label="A"
-															checked={this.state.selectedValue === 'B'}
-															value="b"
-															aria-label="B"
-															color={'primary'}
-															onChange={() => this.handleChange('B')}
-														/>
-														<label className="member-user-label">MEMBERS</label>
-													</div>
-													<div className="radio-C">
-														<Radio
-															className="c-radio"
-															aria-label="A"
-															checked={this.state.selectedValue === 'C'}
-															value="b"
-															aria-label="B"
-															color={'primary'}
-															onChange={() => this.handleChange('C')}
-														/>
-														<label className="member-user-label">EXPIRING</label>
-													</div>
+													<label className="member-user-label">USERS</label>
 												</div>
-											) : null}
+												<div className="radio-B">
+													<Radio
+														className="b-radio"
+														aria-label="A"
+														checked={this.state.selectedValue === 'B'}
+														value="b"
+														aria-label="B"
+														color={'primary'}
+														onChange={() => this.handleChange('B')}
+													/>
+													<label className="member-user-label">MEMBERS</label>
+												</div>
+												<div className="radio-C">
+													<Radio
+														className="c-radio"
+														aria-label="A"
+														checked={this.state.selectedValue === 'C'}
+														value="b"
+														aria-label="B"
+														color={'primary'}
+														onChange={() => this.handleChange('C')}
+													/>
+													<label className="member-user-label">EXPIRING</label>
+												</div>
+											</div>
+										) : null}
 									</Row>
 								</div>
 							</div>
@@ -266,9 +266,10 @@ export class createPages extends Component {
 
 
 						<div className="components-create">
-							{this.state.selectedButton === 1 && this.props.page===10 ? (
+			
+							{this.state.selectedButton === 1 && this.props.page === 10 ? (
 								<AddGroup />
-							) : this.state.selectedButton === 1 && this.props.page===0 || this.state.selectedButton === 1 && this.props.page===1 || this.state.selectedButton === 1 && this.props.page===2 ? (
+							) : this.state.selectedButton === 1 && this.props.page === 0 || this.state.selectedButton === 1 && this.props.page === 1 || this.state.selectedButton === 1 && this.props.page === 2 ? (
 								<GroupComponent />
 							) : null}
 							{this.state.selectedButton === 2 ? <CompComponent /> : null}
@@ -293,4 +294,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, { compSelectedPages,pageState,selectedPage })(createPages);
+export default connect(mapStateToProps, { compSelectedPages, pageState, selectedPage })(createPages);

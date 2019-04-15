@@ -9,7 +9,6 @@
   .content-container {
     margin-top: 0px;
   }
-
   .page-name-create-all {
     position: center;
     text-align: center;
@@ -187,6 +186,15 @@
 @media screen and (min-width:576px)  {
   .page-name-bar{
     margin-top: 56px;
+  }
+  .create-switch-top{
+    width: 83.53658536585366% !important;
+  }
+  .create-switch-top .switch-active{
+    width: 33.3333333333394% !important;
+  }
+  .create-switch-top .switch-inactive{
+    width: 33.3333333333394% !important;
   }
   .buttons-squire-rectangle{
     padding-top: 0px;
@@ -395,7 +403,7 @@
   
   }
   .create-switch-top{
-    width: 345px;
+    width: 344px;
     height: 32px;
     margin: auto;
     border: 1px solid #BE0000;
@@ -415,7 +423,7 @@
   font-family: Helvetica;	
   font-size: 14px;	
   font-weight: bold;	
-  line-height: 17px;	
+  line-height: 18px;	
   text-align: center;
   background-color: #BE0000;
   text-align: center;
@@ -430,7 +438,7 @@
   font-family: Helvetica;	
   font-size: 14px;	
   font-weight: 300;	
-  line-height: 17px;	
+  line-height: 18px;	
   text-align: center;
   padding-top: 6px;
   cursor: pointer;

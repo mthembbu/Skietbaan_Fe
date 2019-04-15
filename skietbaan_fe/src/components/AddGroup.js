@@ -5,7 +5,6 @@ import history from "./history";
 import "./add.css";
 import { BASE_URL } from "../actions/types";
 import { getCookie } from "../components/cookie.js";
-import { Row, Col } from "react-bootstrap";
 
 class AddGroup extends Component {
   constructor(props) {
@@ -15,7 +14,8 @@ class AddGroup extends Component {
       txt: "",
       groups: [],
       exist: true,
-      pageState: false
+      pageState: false,
+      height: window.innerHeight
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
@@ -37,6 +37,14 @@ class AddGroup extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  getBodyHeight() {
+		if (this.state.width < 575) {
+			return (this.state.height - 240) +"px";
+		} else {
+			return "66vh";
+		}
+	}
+
   onClick() {
     if (this.state.groups.indexOf(this.state.name.toLowerCase()) === -1) {
       if (this.state.name.length != 0) {
@@ -55,7 +63,7 @@ class AddGroup extends Component {
       window.location = "/registerPage";
     }
     return (
-      <div className="add-group-main">
+      <div className="add-group-main" style={{ height: this.getBodyHeight() }}>
         <div className="page">
           <div className="middle-bar">
             <input
@@ -73,7 +81,7 @@ class AddGroup extends Component {
             )}
           </div>
           <div className="add-container">
-            <button className="add" onClick={this.onClick}>
+            <button className={this.state.name===""?"add":"add-active"} onClick={this.onClick}>
               ADD USERS
             </button>
           </div>

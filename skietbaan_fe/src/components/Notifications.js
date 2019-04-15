@@ -251,6 +251,7 @@ class notification extends Component {
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
+    document.getElementById("announcementButton").disabled = true;
     setTimeout(() => {
       this.setState({
         adminToggle: false
