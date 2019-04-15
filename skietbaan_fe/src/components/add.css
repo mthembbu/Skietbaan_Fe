@@ -41,9 +41,7 @@
 
 .page {
 	background: #F6F6F6;
-
 	text-align: center;
-
     width: 100%;
 }
 
@@ -116,4 +114,5 @@
 }
 .add-group-main{
 	width: 100%;
+	overflow-y: overlay;
 }
