@@ -10,8 +10,9 @@ import lightgrayback from '../components/assets/Back.png';
 import submit from '../components/assets/biggerRedSubmit.png';
 import camera from '../components/assets/biggerRedCamera.png';
 import { Row, Col } from "react-bootstrap";
-
-export default class search extends Component {
+import { connect } from 'react-redux';
+import { selectedPage } from '../actions/postActions';
+ class search extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -119,6 +120,7 @@ export default class search extends Component {
     document.getElementById("scoreInput").value = "";
   }
   componentDidMount() {
+    this.props.selectedPage(2);
     this.updateDimensions();
     fetch(BASE_URL + "/api/Competition", {
       method: 'GET',
@@ -530,6 +532,7 @@ export default class search extends Component {
                       autoComplete="off"
                       name="score"
                       pattern="\d*"
+                      onClick={() => this.toggleNavbar}
                       className="score"
                       onChange={this.handleScore}
                       placeholder="Enter Score"></input>
@@ -665,3 +668,9 @@ export default class search extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) =>({
+  selectedButton : state.landingReducer.selectedLandingPage
+});
+
+export default connect(mapStateToProps, {selectedPage})(search);

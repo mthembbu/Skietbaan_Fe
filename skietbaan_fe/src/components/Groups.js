@@ -60,11 +60,11 @@ class Groups extends Component {
 	}
 	getBodyHeight() {
 		if (this.state.width < 575) {
-		  return (this.state.height - 240);
+		  return (this.state.height - 240)+"px";
 		} else {
-		  return (this.state.height - 184);
+		  return "66vh";
 		}
-	  }
+	}
 	  updateDimensions() {
 		this.setState({
 		  height: window.innerHeight,
@@ -137,7 +137,7 @@ class Groups extends Component {
 	}
 	render() {
 		const postitems = (
-			<div className="check" style={{ height: this.getBodyHeight() + "px" }}>
+			<div className="check" style={{ height: this.getBodyHeight()}}>
 			{this.state.posts.length===0?null:
 				<ul class="list-group" style={{ textAlign: 'left' }}>
 					{this.state.posts
@@ -172,7 +172,7 @@ class Groups extends Component {
 			<Row className="row justify-content-center">
 				<Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position: "inherit" }}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
 					<div className="The-Main">
-						<div className="navBar-container">
+						<div className="group-navBar-container">
 							<div className="the-nav-bar">
 								<img className="back-image" onClick={this.onBack} src={back} alt="" />
 								<label className="center-label">ADD USERS</label>

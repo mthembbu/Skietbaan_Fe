@@ -11,6 +11,7 @@ import { getCookie } from './cookie.js'
 import { MDBBtn } from "mdbreact";
 import { Motion, spring } from "react-motion";
 import '../bootstrap/LeaderboardStyle.css';
+import { selectedPage } from '../actions/postActions';
 
 class LeaderboardPage extends Component {
     constructor(props) {
@@ -71,6 +72,7 @@ class LeaderboardPage extends Component {
         // Additionally I could have just used an arrow function for the binding `this` to the component...
         window.addEventListener("resize", this.updateDimensions);
         this.tokkenValidation();
+        this.props.selectedPage(0)
     }
     //executed when leaderboard in mounted on main app
     componentWillMount() {
@@ -79,7 +81,13 @@ class LeaderboardPage extends Component {
         let token = getCookie("token");
         this.props.fetchleaderboadfilterdata(token);
         this.validatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(this.state.selectedCompetition, this.state.selectedGroup, this.state.selectedRank);
+        var id = 0;
+        if(this.state.selectedCompetition === 0){
+            id =-2;
+        }else{
+            id = this.state.selectedCompetition;
+        }
+        this.getLeaderboardData(id, this.state.selectedGroup, this.state.selectedRank);
     }
     updateDimensions() {
         this.setState({
@@ -157,7 +165,7 @@ class LeaderboardPage extends Component {
         });
         this.props.updateSelectedCompetition(this.props.competitions[value].label)
         this.validatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(value, this.state.selectedGroup, this.state.selectedRank);
+        this.getLeaderboardData((this.props.competitions[value].value - 1), this.state.selectedGroup, this.state.selectedRank);
     }
     setGroupValue = (value) => {
         this.setState({
@@ -169,7 +177,7 @@ class LeaderboardPage extends Component {
             this.props.updateSelectedGroup(this.props.groups[value].label);
         }
         this.validatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(this.state.selectedCompetition, value, this.state.selectedRank);
+        this.getLeaderboardData(this.state.selectedCompetition, (this.props.groups[value].value - 1), this.state.selectedRank);
     }
     setSelectedRank = (value) => {
         this.setState({
@@ -607,10 +615,11 @@ class LeaderboardPage extends Component {
                                                                                                  <table className="head-table-labels">
                                                                                                      <tbody>
                                                                                                          <tr>
-                                                                                                             <td className="extra-name-col">{this.props.competitions.length === 0 ? (this.props.currentUser.displayName === null ? this.props.currentUser.username : this.props.currentUser.username )
+                                                                                                             <td className="extra-name-col">{this.props.competitions[0] !== "undefined" ? (this.props.currentUser.displayName === null ? this.props.currentUser.username : this.props.currentUser.username )
                                                                                                                                                                              :(this.props.userResults === null ? (this.props.currentUser !== null ? this.props.currentUser.username
                                                                                                                                                                                                                                             : "invalid tokken") 
-                                                                                                                                                                                                              : (this.props.userResults !== null ? this.props.userResults.username : '--'))}</td>
+                                                                                                                                                                                                              : (this.props.userResults !== null ? (this.props.userResults.displayName.length !== 0 ? this.props.userResults.displayName
+                                                                                                                                                                                                                                                                                                    : this.props.userResults.username) : '--'))}</td>
                                                                                                              <td className={this.state.selectedRank == "best" ? "score-col-active" : "score-col"}>{this.props.userResults === null ? '--' : (this.props.userResults.best !== 0 ? this.props.userResults.best : '--')}</td>
                                                                                                              <td className={this.state.selectedRank == "average" ? "score-col-active" : "score-col"}>
                                                                                                                  <div className="member-rank-icons">
@@ -667,5 +676,5 @@ const mapStateToProps = state => ({
     selectedCompetitionName: state.posts.leaderboardSelectedCompetitionName,
     selectedScoreType: state.posts.leaderboardSelectedScoreType
 });
-export default connect(mapStateToProps, { fetchleaderboadfilterdata, fetchleaderboadtabledata, updateSelectedCompetition, updateSelectedGroup })(LeaderboardPage);
+export default connect(mapStateToProps, { fetchleaderboadfilterdata, fetchleaderboadtabledata, updateSelectedCompetition, updateSelectedGroup,selectedPage })(LeaderboardPage);
 

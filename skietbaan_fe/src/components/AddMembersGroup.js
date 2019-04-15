@@ -10,7 +10,6 @@ import back from './GroupImages/back.png';
 import { AddMemberAction, pageState } from '../actions/postActions';
 import seleteAll from './GroupImages/seleteAll.png';
 import unSelectAll from './GroupImages/unSelectAll.png';
-import { Row, Col } from "react-bootstrap";
 
 
 class AddMembersGroup extends Component {
@@ -43,9 +42,9 @@ class AddMembersGroup extends Component {
   }
   getBodyHeight() {
 		if (this.state.width < 575) {
-      return (this.state.height - 240);
+      return (this.state.height - 160) +"px";
     } else {
-      return 78;
+      return "66vh";
     }
   }
   updateDimensions() {
@@ -128,7 +127,7 @@ class AddMembersGroup extends Component {
 
   render() {
     const postitems = (
-      <div className="check-edit" style={{ height: this.getBodyHeight() + 'vh'}}>
+      <div className="check-edit" style={{ height: this.getBodyHeight()}}>
       {this.props.existing.length===0?null:
         <ul class="list-group" style={{ textAlign: 'left' , marginTop: 120+'px'}}>
           {this.props.existing
@@ -139,15 +138,15 @@ class AddMembersGroup extends Component {
                 post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
               );
             })
-            .map((post, index) => (
-              <li class="listItem" key={post.id}>
+            .map((post) => (
+              <li class="listItem" key={post.id}  onClick={() => this.toggleHighlight(post.id)}>
                 <img
                   className="checkbox-delete"
-                  onClick={() => this.toggleHighlight(post.id)}
+                 
                   src={post.highlighted ? marked : unmarked}
                   alt=""
                 />
-                <label className={post.highlighted === true ? 'blabe' : 'blabe2'}>
+                <label className={post.highlighted === true ? 'add-blabe' : 'add-blabe2'}>
                   <div className={post.highlighted === true ? 'userName-active' : 'userName'}>
                     {post.username}
                   </div>

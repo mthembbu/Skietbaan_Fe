@@ -5,7 +5,6 @@ import history from "./history";
 import "./add.css";
 import { BASE_URL } from "../actions/types";
 import { getCookie } from "../components/cookie.js";
-import { Row, Col } from "react-bootstrap";
 
 class AddGroup extends Component {
   constructor(props) {
@@ -73,7 +72,7 @@ class AddGroup extends Component {
             )}
           </div>
           <div className="add-container">
-            <button className="add" onClick={this.onClick}>
+            <button className={this.state.name===""?"add":"add-active"} onClick={this.onClick}>
               ADD USERS
             </button>
           </div>
