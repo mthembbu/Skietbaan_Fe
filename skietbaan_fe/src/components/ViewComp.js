@@ -78,9 +78,9 @@ class ViewComp extends Component {
 	}
 	getBodyHeight() {
 		if (this.state.width < 575) {
-			return this.state.height - 240;
+			return (this.state.height - 240) + 'px';
 		} else {
-			return 70;
+			return '55vh';
 		}
 	}
 	getDefaultShots() {
@@ -256,10 +256,10 @@ class ViewComp extends Component {
 
 	render() {
 		const displayCompetitions = (
-			<div className="page-contents" style={{ height: this.getBodyHeight() + 'vh' }}>
+			<div className="page-contents" style={{ height: this.getBodyHeight()}}>
 				<table class="table-view-competitions">
 					<tbody>
-						{this.props.compOBJ.map((compVar, i) => (
+						{ this.props.compOBJ.length === 0 ? <div className="view-error-message">No competitions have been created yet</div>:   (this.props.compOBJ.map((compVar, i) => (
 							<tr key={compVar.id} className="table-competition-row">
 								<table>
 									<tr>
@@ -578,7 +578,7 @@ class ViewComp extends Component {
 									)}
 								</table>
 							</tr>
-						))}
+						)) )}
 					</tbody>
 				</table>
 			</div>

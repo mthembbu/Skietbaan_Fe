@@ -338,6 +338,18 @@ class notification extends Component {
       </div>
     );
 
+    const loader = (
+      <div className="loader-formatting">
+        <div className={this.props.loading ? "hidden" : "loader"} />
+        <div
+          className={this.props.loading ? "hidden" : "target-loader-image"}
+        />
+        <div className={this.props.loading ? "hidden" : "loading-message"}>
+          Loading...
+        </div>
+      </div>
+    );
+
     const postItems = (
       <table className="post-items">
         {this.props.notificationsArray.length <= 0 ? (
@@ -487,7 +499,7 @@ class notification extends Component {
                   className="format-content"
                   style={{ maxHeight: this.getBodyHeight() + "px" }}
                 >
-                  {postItems}
+                  {this.props.loading ? postItems : loader}
                 </div>
               )}
               <div>{deleteModal}</div>
@@ -508,7 +520,8 @@ const mapStateToProps = state => ({
   notificationsArray: state.notificationOBJ.notificationsArray,
   updatedNotification: state.notificationOBJ.updatedNotification,
   awardsSelectedCompetition: state.awardsReducer.selectedCompetition,
-  selectedButton: state.landingReducer.selectedLandingPage
+  selectedButton: state.landingReducer.selectedLandingPage,
+  loading: state.notificationOBJ.loading
 });
 
 export default connect(
