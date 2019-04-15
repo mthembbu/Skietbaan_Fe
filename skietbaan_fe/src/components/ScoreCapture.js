@@ -514,11 +514,13 @@ import { selectedPage } from '../actions/postActions';
                 <div className="centre-labels">
                   <label className="label-competition">Select Competition</label>
                 </div>
+                <div className={this.state.getData ? "hidden" : "loading-container-add-score"}>
                 <div className={this.state.getData ? "hidden" : "loader"}>
                 </div>
                 <div className={this.state.getData ? "hidden" : "target-loader-image"}>
                 </div>
                 <div className={this.state.getData ? "hidden" : "loading-message"}>Loading...</div>
+                </div>
                 <div className="add-score-competition-container">
                   {competitionItem}
 
