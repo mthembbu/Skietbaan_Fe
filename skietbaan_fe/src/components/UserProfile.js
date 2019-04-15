@@ -263,14 +263,18 @@ class UserProfile extends Component {
     render() {
         return (
             <div className="award-container pad-award-container">
-                <div className={this.state.getData ? "hidden" : "loader-container-profile"}>
-                    <div className={this.state.getData ? "hidden" : "loader"}>
+                <div className={this.state.getData && this.state.exceptionCaughtOnAwards === false
+                    ? "hidden" : "loader-container-profile"}>
+                    <div className={this.state.getData && this.state.exceptionCaughtOnAwards === false
+                        ? "hidden" : "loader"}>
                     </div>
-                    <div className={this.state.getData ? "hidden" : "target-loader-image"}>
+                    <div className={this.state.getData && this.state.exceptionCaughtOnAwards === false
+                        ? "hidden" : "target-loader-image"}>
                     </div>
-                    <div className={this.state.getData ? "hidden" : "loading-message-profile"}>Loading...</div>
+                    <div className={this.state.getData && this.state.exceptionCaughtOnAwards === false
+                        ? "hidden" : "loading-message-profile"}>Loading...</div>
                 </div>
-                
+
                 {this.state.exceptionCaughtOnAwards ?
                     <div className="no-competition-border">
                         <label className="no-competition">No competitions available</label></div> :
