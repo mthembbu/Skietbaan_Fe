@@ -25,7 +25,6 @@ class ViewNonMembers extends Component {
 			width: window.innerWidth,
 			getData: false
 		};
-		// this.getNonMembers = this.getNonMembers.bind(this);
 		this.getTimeLeft = this.getTimeLeft.bind(this);
 		this.onChangeText = this.onChangeText.bind(this);
 		this.status = this.status.bind(this);
