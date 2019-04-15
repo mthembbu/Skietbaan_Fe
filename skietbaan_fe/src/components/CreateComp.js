@@ -118,7 +118,7 @@ class CreateComp extends Component {
 	}	
 	/** The method that detects change on MaxScore */
 	onChangeMaxScore(event){
-		if(event.target.value > 2)
+		if(event.target.value > 3)
 			event.target.value = event.target.value.substr(0,3);
 		let isValid = this.validateMaxScore();
 		if(!isValid){
@@ -280,7 +280,7 @@ class CreateComp extends Component {
 									name="MaximumScore"
 									id="MaxScore"
 									min={1} 
-									max={80}
+									max={300}
 									required
 									autoComplete="off"
 									autoCorrect="off"
