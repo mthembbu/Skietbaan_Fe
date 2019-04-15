@@ -3,6 +3,18 @@
   margin-top: 70px;
 }
 
+.loader-container-details{
+  margin-top: 235px;
+  height: 160px;
+}
+
+@media screen and (min-width:576px){
+  .loader-container-details{
+    margin-top: 257px;
+    height: 165px;
+  }
+}
+
 .user-details-scrolls {
   padding-bottom: 150px;
 }
