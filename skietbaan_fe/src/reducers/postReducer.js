@@ -14,27 +14,29 @@ import {
   GROUPDICT,
   CHOOSEPAGE,
   ADDMEMBERS,
-  FETCH_GROUPS
+  FETCH_GROUPS,
+  GROUP_DATA_LOADING
 } from "../actions/types";
 
 const initialState = {
+  loader: null,
   selectedItem: {},
   leaderboardSelectedCompetitionName: [],
   selectedItem: {},
-  groupDict:{},
- upName: "",
-  editGroup:[],
-  groupsList:[],
-  page:"",
-  existing:[],
+  groupDict: {},
+  upName: "",
+  editGroup: [],
+  groupsList: [],
+  page: "",
+  existing: [],
   leaderboardGroups: [],
   leaderboardCompetitions: [],
-  leaderboardUser:{},
-  navSelectedPage:0,
-  idsForUser:[],
-  memberIds:[],
-  leaderboardSelectedCompetitionName:"",
-  leaderboardSelectedGroupName:"",
+  leaderboardUser: {},
+  navSelectedPage: 0,
+  idsForUser: [],
+  memberIds: [],
+  leaderboardSelectedCompetitionName: "",
+  leaderboardSelectedGroupName: "",
   leaderboardTableData: [],
   leaderboardUserData: {
     rank: 0,
@@ -44,13 +46,12 @@ const initialState = {
     average: 0
   },
   groupId: "",
-  groupName: "",
+  groupName: ""
 };
 
 //the function to detect the state change
 export default function(state = initialState, action) {
   switch (action.type) {
-    
     case FETCH_POSTS:
       return {
         ...state,
@@ -60,9 +61,16 @@ export default function(state = initialState, action) {
     case FETCH_GROUPS:
       return {
         ...state,
-        groupsList: action.payload
+        groupsList: action.payload,
+        loader: true
       };
-  
+
+    case GROUP_DATA_LOADING:
+      return {
+        ...state,
+        loader: false
+      };
+
     case GROUPDICT:
       return {
         ...state,
@@ -97,7 +105,7 @@ export default function(state = initialState, action) {
     case EMPTY:
       return {
         ...state,
-        editGroup:action.payload
+        editGroup: action.payload
       };
 
     case CREATEGROUP:
@@ -153,7 +161,7 @@ export default function(state = initialState, action) {
         ...state,
         leaderboardSelectedGroupName: action.payload
       };
-      
+
     default:
       return state;
   }
