@@ -111,9 +111,6 @@ export default class userDetails extends Component {
   hideNav() {
     this.toggleNavbar();
   }
-
-  resizing;
-
   render() {
     return (
       <div className="document-center">
