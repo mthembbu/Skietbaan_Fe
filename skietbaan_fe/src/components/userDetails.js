@@ -18,7 +18,9 @@ export default class userDetails extends Component {
       inputChanged: false,
       checkEmailValid: false,
       isHidden: false,
-      getDataUser: false
+      getDataUser: false,
+      navbarState: false,
+      height: document.body.clientHeight
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -32,8 +34,17 @@ export default class userDetails extends Component {
   componentWillMount() {
     {
       window.addEventListener("resize", () => {
-        console.log("this ran");
-        this.hideNav();
+        if (this.state.height === document.body.clientHeight) {
+          let Navbar = document.querySelector(".navbar-admin");
+          if (Navbar != null) {
+            Navbar.classList.remove("hidden");
+          }
+        } else {
+          let Navbar = document.querySelector(".navbar-admin");
+          if (Navbar != null) {
+            Navbar.classList.add("hidden");
+          }
+        }
       });
     }
   }
@@ -56,6 +67,12 @@ export default class userDetails extends Component {
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", () => {
+      this.hideNav();
+    });
   }
 
   toggleNavbar() {
@@ -109,7 +126,10 @@ export default class userDetails extends Component {
   }
 
   hideNav() {
-    this.toggleNavbar();
+    let Navbar = document.querySelector(".navbar-admin");
+    if (Navbar != null) {
+      Navbar.classList.remove("hidden");
+    }
   }
   render() {
     return (
