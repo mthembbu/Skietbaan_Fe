@@ -146,6 +146,13 @@
   color: #ffffff;
 }
 
+.view-non-members-confirm:focus{
+  outline: none;
+}
+.view-exp-members:focus{
+  outline: none;
+}
+
 .view-exp-members {
   font-weight: lighter;
   font-size: 16px;
