@@ -4,7 +4,9 @@ import Collapsible from 'react-collapsible';
 import { BASE_URL } from '../actions/types.js';
 import memberIcon from '../components/assets/greyMembershipIcon.png';
 import { getCookie } from '../components/cookie.js';
-
+import { Row, Col } from 'react-bootstrap';
+import Export from '../components/assets/Export.png';
+import RedBullet from '../components/assets/RedBullet.png';
 class ViewMembers extends Component {
 	constructor(props) {
 		super(props);
@@ -18,7 +20,8 @@ class ViewMembers extends Component {
 			navbarState: false,
 			height: window.innerHeight,
 			width: window.innerWidth,
-			getData: false
+			getData: false,
+			exportMsg: false
 		};
 		this.getAllMembers = this.getAllMembers.bind(this);
 		this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -135,6 +138,9 @@ class ViewMembers extends Component {
 			return false;
 		}
 	}
+	ExportData = () => {
+		this.setState({ exportMsg: true })
+	}
 
 	render() {
 		if (!getCookie('token')) {
@@ -222,17 +228,31 @@ class ViewMembers extends Component {
 		return (
 			<div className="centre-view-member">
 				<div className="username-search">
-					<div className="search">
-						<input
-							autoComplete="off"
-							type="text"
-							className="user-value"
-							id="usernameValue"
-							placeholder="Enter Username"
-							value={this.state.filterText}
-							onChange={this.onChangeText}
-						/>
-					</div>
+					<Row>
+						<Col>
+							<div className="search">
+								<input
+									autoComplete="off"
+									type="text"
+									className="user-value"
+									id="usernameValue"
+									placeholder="Enter Username"
+									value={this.state.filterText}
+									onChange={this.onChangeText}
+								/>
+
+
+							</div>
+						</Col>
+						<Col className="export-col-container">	<div className="export-container">
+							<img
+								src={Export}
+								className="export-icon"
+								alt="Is a Member"
+								onClick={() => this.ExportData()}
+							/>
+						</div></Col>
+					</Row>
 				</div>
 				<div className={this.state.getData === true ? "hidden" : "loader-container-members"}>
 					<div className={this.state.getData === true ? "hidden" : "loader"}>
@@ -241,9 +261,20 @@ class ViewMembers extends Component {
 					</div>
 					<div className={this.state.getData === true ? "hidden" : "loading-message-members"}>Loading...</div>
 				</div>
-				<div className="table-search-members" style={{ height: this.getBodyHeight() }}>
-					{postItems}
-				</div>
+				{this.state.exportMsg === false ?
+					<div className="table-search-members" style={{ height: this.getBodyHeight() }}>
+						{postItems}
+					</div> :
+					<div className="exportMsg-container"><label className="exportMsg-responce">
+						SBmembers.csv sent to fs@retrorabbit.co.za
+		</label>
+						<img
+							src={RedBullet}
+							className="export-success"
+							alt="Is a Member"
+						/>
+					</div>
+				}
 			</div>
 		);
 	}
