@@ -27,26 +27,18 @@ export default class userDetails extends Component {
     this.updateUser = this.updateUser.bind(this);
     this.mounted = false;
     this.handErrorValue = this.handErrorValue.bind(this);
-    this.hideNav = this.hideNav.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
   }
 
   componentWillMount() {
-    {
       window.addEventListener("resize", () => {
+        let Navbar = document.querySelector(".navbar-admin");
         if (this.state.height === document.body.clientHeight) {
-          let Navbar = document.querySelector(".navbar-admin");
-          if (Navbar != null) {
             Navbar.classList.remove("hidden");
-          }
         } else {
-          let Navbar = document.querySelector(".navbar-admin");
-          if (Navbar != null) {
             Navbar.classList.add("hidden");
-          }
         }
       });
-    }
   }
 
   componentDidMount() {
@@ -67,12 +59,6 @@ export default class userDetails extends Component {
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", () => {
-      this.hideNav();
-    });
   }
 
   toggleNavbar() {
@@ -125,12 +111,6 @@ export default class userDetails extends Component {
       : this.setState({ checkNumberValid: true, checkEmailValid: true });
   }
 
-  hideNav() {
-    let Navbar = document.querySelector(".navbar-admin");
-    if (Navbar != null) {
-      Navbar.classList.remove("hidden");
-    }
-  }
   render() {
     return (
       <div className="document-center">
