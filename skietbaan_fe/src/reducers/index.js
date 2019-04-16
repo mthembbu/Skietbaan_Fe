@@ -5,6 +5,7 @@ import competition from "./createcomp.reducer";
 import notification from "./notificationReducer";
 import userProfileReducer from "./userProfileReducer";
 import profileLandingReducer from "./profileLandingReducer";
+import adminReducer from "./adminReducer";
 
 export default combineReducers({
   posts: postReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   compOBJ: competition,
   notificationOBJ: notification,
   awardsReducer: userProfileReducer,
-  landingReducer: profileLandingReducer
+  landingReducer: profileLandingReducer,
+  adminReducer: adminReducer
 });
