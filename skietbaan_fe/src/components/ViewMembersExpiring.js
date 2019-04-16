@@ -193,6 +193,8 @@ class ViewMembersExpiring extends Component {
 			});
 		}
 		const postItems = (
+			 <div>
+			{(this.state.array.length === 0 && this.state.getData===true)? <div className="view-non-error-container"><label className="view-non-error-msg">No members have been created yet.</label></div>:
 			<table striped hover condensed className="table-member">
 				<tbody>
 					{this.state.array
@@ -258,7 +260,7 @@ class ViewMembersExpiring extends Component {
 							</tr>
 						))}
 				</tbody>
-			</table>
+			</table>}</div>
 		);
 		return (
 			<div className="centre-view-member">

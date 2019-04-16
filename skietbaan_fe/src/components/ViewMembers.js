@@ -68,10 +68,10 @@ class ViewMembers extends Component {
 	}
 	getBodyHeight() {
 		if (this.state.width < 575) {
-			return (this.state.height - 240)+"px";
+			return (this.state.height - 240) + "px";
 		} else {
 			return "66vh";
-		  }
+		}
 	}
 	getAllMembers() {
 		fetch(BASE_URL + '/api/Features/SearchMember', {
@@ -87,11 +87,13 @@ class ViewMembers extends Component {
 			.then(function (data) {
 				return data;
 			})
-			.then((data) =>
+			.then((data) => {
+
 				this.setState({
 					array: data,
-					getData: true
+					getData: true,
 				})
+			}
 			)
 			.catch((err) => {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
@@ -147,70 +149,75 @@ class ViewMembers extends Component {
 			});
 		}
 		const postItems = (
-			<table striped hover condensed className="table-member">
-				<tbody>
-					{this.state.array
-						.filter((post) => {
-							return (
-								!this.state.filterText ||
-								post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
-								post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
-								post.memberID.startsWith(this.state.filterText)
-							);
-						})
-						.map((post, index) => (
-							<tr className="view-members-user" key={post.id}>
-								<td className="first-column">
-									<Collapsible
-										trigger={
-											<div className="username-and-email">
-												<div className="view-members-username-email">
-													<b>{post.username}</b>
-													<div className="view-non-members-email">{post.email}</div>
-												</div>
-												<div className="view-exp-members-icon">
-													<img
-														src={memberIcon}
-														className="membership-icon"
-														alt="Is a Member"
-													/>
-												</div>
-												<div className="expiry-time-column">
-													<div
-														className={
-															this.status(this.state.timeLeftOnMembership[index]) ? (
-																'bad'
-															) : (
-																	'okay'
-																)
-														}
-													>
-														<div>
-															<b>
-																{post.memberExpiryDate
-																	.substring(0, 10)
-																	.split('-')
-																	.join('/')}
-															</b>
-															<div>{this.state.timeLeftOnMembership[index]} Months</div>
+			<div>
+				{(this.state.array.length === 0 && this.state.getData === true) ? <div className="view-non-error-container"><label className="view-non-error-msg">No members have been created yet.</label></div> :
+					<table striped hover condensed className="table-member">
+						<tbody>
+							{this.state.array
+								.filter((post) => {
+									return (
+										!this.state.filterText ||
+										post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
+										post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
+										post.memberID.startsWith(this.state.filterText)
+									);
+								})
+								.map((post, index) => (
+									<tr className="view-members-user" key={post.id}>
+										<td className="first-column">
+											<Collapsible
+												trigger={
+													<div className="username-and-email">
+														<div className="view-members-username-email">
+															<b>{post.username}</b>
+															<div className="view-non-members-email">{post.email}</div>
+														</div>
+														<div className="view-exp-members-icon">
+															<img
+																src={memberIcon}
+																className="membership-icon"
+																alt="Is a Member"
+															/>
+														</div>
+														<div className="expiry-time-column">
+															<div
+																className={
+																	this.status(this.state.timeLeftOnMembership[index]) ? (
+																		'bad'
+																	) : (
+																			'okay'
+																		)
+																}
+															>
+																<div>
+																	<b>
+																		{post.memberExpiryDate
+																			.substring(0, 10)
+																			.split('-')
+																			.join('/')}
+																	</b>
+																	<div>{this.state.timeLeftOnMembership[index]} Months</div>
+																</div>
+															</div>
 														</div>
 													</div>
+												}
+											>
+												<div className="view-members-membership-details">
+													Membership No: <b>{post.memberID}</b>
+													<div>
+														Start of Membership: <b>{post.memberStartDate.substring(0, 10)}</b>
+													</div>
+													<div className="view-member-phone-number">
+														Cell Number:<b> 0847881251</b>
+													</div>
 												</div>
-											</div>
-										}
-									>
-										<div className="view-members-membership-details">
-											Membership No: <b>{post.memberID}</b>
-											<div>
-												Start of Membership: <b>{post.memberStartDate.substring(0, 10)}</b>
-											</div>
-										</div>
-									</Collapsible>
-								</td>
-							</tr>
-						))}
-				</tbody>
-			</table>
+											</Collapsible>
+										</td>
+									</tr>
+								))}
+						</tbody>
+					</table>}</div>
 		);
 		return (
 			<div className="centre-view-member">
@@ -227,16 +234,16 @@ class ViewMembers extends Component {
 						/>
 					</div>
 				</div>
-				<div className={this.state.getData ===true ? "hidden" : "loader-container-members"}>
-				<div className={this.state.getData ===true ? "hidden" : "loader"}>
-                </div>
-                <div className={this.state.getData ===true ? "hidden" : "target-loader-image"}>
-                </div>
-                <div className={this.state.getData === true ? "hidden" : "loading-message-members"}>Loading...</div>
+				<div className={this.state.getData === true ? "hidden" : "loader-container-members"}>
+					<div className={this.state.getData === true ? "hidden" : "loader"}>
+					</div>
+					<div className={this.state.getData === true ? "hidden" : "target-loader-image"}>
+					</div>
+					<div className={this.state.getData === true ? "hidden" : "loading-message-members"}>Loading...</div>
 				</div>
 				<div className="table-search-members" style={{ height: this.getBodyHeight() }}>
 					{postItems}
-				</div>	
+				</div>
 			</div>
 		);
 	}
