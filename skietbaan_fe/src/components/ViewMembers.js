@@ -143,6 +143,7 @@ class ViewMembers extends Component {
 	}
 
 	render() {
+		console.log(this.state.array)
 		if (!getCookie('token')) {
 			window.location = '/registerPage';
 		}
@@ -215,7 +216,7 @@ class ViewMembers extends Component {
 														Start of Membership: <b>{post.memberStartDate.substring(0, 10)}</b>
 													</div>
 													<div className="view-member-phone-number">
-														Cell Number:<b> 0847881251</b>
+														Cell Number:<b> {post.phoneNumber}</b>
 													</div>
 												</div>
 											</Collapsible>
