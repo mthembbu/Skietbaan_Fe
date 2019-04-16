@@ -38,7 +38,7 @@ export const CHOOSEPAGE = "CHOOSEPAGE";
 export const COMP_PAGE = "COMP_PAGE";
 export const UPDATE_COMP_STATUS = "UPDATE_COMP_STATUS";
 export const PARTICIPANTS_PER_COMP = "PARTICIPANTS_PER_COMP";
-export const BASE_URL = "https://api.scoring.skietbaan.co.za";
+export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
 
 //leaderboard types
 export const FETCH_LEADERBOARDFILTER_DATA = "FETCH_LEADERBOARDFILTER_DATA";
@@ -60,14 +60,20 @@ export const ADDMEMBERS = "ADDMEMBERS";
 export const GROUPDICT = "GROUPDICT";
 export const EMPTY = "EMPTY";
 export const NEWGROUPSTATE = "NEWGROUPSTATE";
+export const GROUP_DATA_LOADING = "GROUP_DATA_LOADING";
+
 //notification types
 export const FETCH_NOTIFICATION = "FETCH_NOTIFICATION";
 export const UPDATE_IS_READ = "UPDATE_IS_READ";
 export const DATA_LOADING = "DATA_LOADING";
+
 //profile types
 export const PROFILE_SET_SELECTED_COMPETITION =
   "PROFILE_SET_SELECTED_COMPETITION";
 export const LANDING_SET_SELECTED_PAGE = "LANDING_SET_SELECTED_PAGE";
+
+//competition types
+export const COMPETITION_DATA_LOADING = "COMPETITION_DATA_LOADING";
 
 export const handleErrors = response => {
   if (!response.ok) {
