@@ -38,6 +38,7 @@ export const CHOOSEPAGE = "CHOOSEPAGE";
 export const COMP_PAGE = "COMP_PAGE";
 export const UPDATE_COMP_STATUS = "UPDATE_COMP_STATUS";
 export const PARTICIPANTS_PER_COMP = "PARTICIPANTS_PER_COMP";
+export const CHECK_ADMIN = "CHECK_ADMIN";
 export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
 
 //leaderboard types
