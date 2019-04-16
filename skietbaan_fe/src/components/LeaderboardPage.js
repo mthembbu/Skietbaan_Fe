@@ -578,9 +578,10 @@ class LeaderboardPage extends Component {
                                                                                                  <div className="rank-number-container">
                                                                                                      <div className="member-status-icons">
                                                                                                          <div className="membership-icon">
-                                                                                                             {this.props.currentUser.isMember
+                                                                                                             {this.props.currentUser !== null ? (this.props.currentUser.memberID !==0
                                                                                                                  ? <img src={require('../resources/memberW.png')} />
-                                                                                                                 : <img src={require('../resources/guestW.png')} />}
+                                                                                                                 : <img src={require('../resources/guestW.png')} />) : this.props.userResults !== null ? (this.props.userResults.isMember ? <img src={require('../resources/memberW.png')} />
+                                                                                                                                                                                                                                          : <img src={require('../resources/guestW.png')}/> ): null}
                                                                                                          </div>
                                                                                                          <div className="dedication-icon">
                                                                                                              {this.props.currentUser.isCompetitiveShooter ? <img src={require('../resources/dedicatedShooterW.png')} />
