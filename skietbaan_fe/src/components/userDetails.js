@@ -16,13 +16,18 @@ export default class userDetails extends Component {
       returnValue: "",
       checkNumberValid: false,
       inputChanged: false,
-      checkEmailValid: false
+      checkEmailValid: false,
+      isHidden: false,
+      size: document.body.clientHeight
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.mounted = false;
     this.handErrorValue = this.handErrorValue.bind(this);
+    this.hideNav = this.hideNav.bind(this);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.getsize = this.getsize.bind(this);
   }
 
   componentDidMount() {
@@ -42,6 +47,15 @@ export default class userDetails extends Component {
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
+  }
+
+  toggleNavbar() {
+    let Navbar = document.querySelector(".navbar-admin");
+    if (Navbar.classList.contains("hidden")) {
+      Navbar.classList.remove("hidden");
+    } else {
+      Navbar.classList.add("hidden");
+    }
   }
 
   updateUser() {
@@ -85,7 +99,21 @@ export default class userDetails extends Component {
       : this.setState({ checkNumberValid: true, checkEmailValid: true });
   }
 
+  hideNav() {
+    this.toggleNavbar();
+  }
+  getsize() {
+    this.setState({ size: document.body.clientHeight });
+  }
+
   render() {
+    if (this.state.size === document.body.clientHeight) {
+      document.addEventListener("DOMContentLoaded", () => {
+        window.addEventListener("resize", () => {
+          this.hideNav();
+        });
+      });
+    }
     return (
       <div className="document-center">
         {this.state.array.length === 0 ? null : (
@@ -103,7 +131,7 @@ export default class userDetails extends Component {
                     </label>
 
                     <label className="user-details-member-label">
-                      {this.state.array.memberID}
+                      {this.state.size}
                     </label>
                   </div>
                 )}
