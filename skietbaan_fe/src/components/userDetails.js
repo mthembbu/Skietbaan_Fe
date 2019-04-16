@@ -34,7 +34,6 @@ export default class userDetails extends Component {
   componentWillMount() {
     {
       window.addEventListener("resize", () => {
-        console.log(this.state.height + " " + document.body.clientHeight);
         if (this.state.height === document.body.clientHeight) {
           let Navbar = document.querySelector(".navbar-admin");
           if (Navbar != null) {
@@ -78,12 +77,9 @@ export default class userDetails extends Component {
 
   toggleNavbar() {
     let Navbar = document.querySelector(".navbar-admin");
-    console.log(Navbar);
     if (Navbar.classList.contains("hidden")) {
-      console.log("remove hidden");
       Navbar.classList.remove("hidden");
     } else {
-      console.log("add hidden");
       Navbar.classList.add("hidden");
     }
   }
@@ -137,7 +133,6 @@ export default class userDetails extends Component {
   }
 
   render() {
-    console.log(this.state.navbarState);
     return (
       <div className="document-center">
         {this.state.getDataUser === false ? (
