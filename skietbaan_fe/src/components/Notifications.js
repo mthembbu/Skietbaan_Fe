@@ -50,7 +50,8 @@ class notification extends Component {
       speakerClicked: null,
       announceString: "",
       height: window.innerHeight,
-      width: window.innerWidth
+      width: window.innerWidth,
+      heightOfClient: document.body.clientHeight
     };
     this.onDelete = this.onDelete.bind(this);
     this.changeIcon = this.changeIcon.bind(this);
@@ -163,7 +164,15 @@ class notification extends Component {
     });
   }
   componentWillMount() {
-    window.addEventListener("resize", this.updateDimensions);
+    window.addEventListener("resize", () => { 
+      let Navbar = document.querySelector(".navbar-admin");
+      if (this.state.heightOfClient === document.body.clientHeight) {
+        Navbar.classList.remove("hidden");
+      } else {
+        Navbar.classList.add("hidden");
+      }
+      this.updateDimensions();
+    });
   }
   getBodyHeight() {
     return this.state.height - 56;
