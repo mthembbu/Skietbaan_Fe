@@ -290,7 +290,7 @@
 
   .empty {
     border-style: solid;
-    border-width: thin;
+    border-width: 1px;
     border-color: #be0000;
     color: #be0000;
     margin-top: 30%;
@@ -299,8 +299,9 @@
     padding-right: 20%;
     padding-bottom: 9%;
     font-family: Helvetica;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: lighter;
+    border-radius: 5px;
     border-radius: 5px;
   }
 
@@ -648,7 +649,7 @@
 
   .empty {
     border-style: solid;
-    border-width: thin;
+    border-width: 1px;
     border-color: #be0000;
     color: #be0000;
     margin-top: 30%;
@@ -657,7 +658,7 @@
     padding-right: 20%;
     padding-bottom: 11%;
     font-family: Helvetica;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: lighter;
     border-radius: 5px;
   }

@@ -25,7 +25,8 @@ export class createPages extends Component {
 			selectedButtonCreateViewGroups: 1,
 			selectedButtonCreateViewCompetitions: 1,
 			selectedValue: 'A',
-			user: []
+			user: [],
+			height: document.body.clientHeight
 		};
 
 		this.groupsPage = this.groupsPage.bind(this);
@@ -138,6 +139,17 @@ export class createPages extends Component {
 			this.props.pageState(10);
 		}
 
+	}
+
+	componentWillMount() {
+		window.addEventListener("resize", () => {
+			let Navbar = document.querySelector(".navbar-admin");
+			if (this.state.height === document.body.clientHeight) {
+				Navbar.classList.remove("hidden");
+			} else {
+				Navbar.classList.add("hidden");
+			}
+		});
 	}
 
 	render() {
@@ -266,7 +278,7 @@ export class createPages extends Component {
 
 
 						<div className="components-create">
-			
+
 							{this.state.selectedButton === 1 && this.props.page === 10 ? (
 								<AddGroup />
 							) : this.state.selectedButton === 1 && this.props.page === 0 || this.state.selectedButton === 1 && this.props.page === 1 || this.state.selectedButton === 1 && this.props.page === 2 ? (

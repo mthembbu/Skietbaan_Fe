@@ -36,12 +36,9 @@ class search extends Component {
       validCompetition: true,
       scoreEntered: false,
       navbarState: false,
-      eventsAdded: false,
-      lastSize: document.body.clientHeight,
+      height: document.body.clientHeight,
       somethingClicked: false,
       maximumScore: 20,
-      height: window.innerHeight,
-      width: window.innerWidth,
       getData: false
     };
 
@@ -54,27 +51,20 @@ class search extends Component {
     this.validate = this.validate.bind(this);
     this.getLocation = this.getLocation.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.toggleNavbar2 = this.toggleNavbar2.bind(this);
     this.toggleIcon = this.toggleIcon.bind(this);
-    this.updateDimensions = this.updateDimensions.bind(this);
-    this.getBodyHeight = this.getBodyHeight.bind(this);
   }
+
   componentWillMount() {
-    window.addEventListener("resize", this.updateDimensions);
-  }
-  getBodyHeight() {
-    if (this.state.width < 575) {
-      return this.state.height - 240;
-    } else {
-      return 70;
-    }
-  }
-  updateDimensions() {
-    this.setState({
-      height: window.innerHeight,
-      width: window.innerWidth
+    window.addEventListener("resize", () => {
+      let Navbar = document.querySelector(".navbar-admin");
+      if (this.state.height === document.body.clientHeight) {
+        Navbar.classList.remove("hidden");
+      } else {
+        Navbar.classList.add("hidden");
+      }
     });
   }
+
   handleScore({ target }) {
     this.validate();
     this.setState(
@@ -122,9 +112,9 @@ class search extends Component {
     });
     document.getElementById("scoreInput").value = "";
   }
+  
   componentDidMount() {
     this.props.selectedPage(2);
-    this.updateDimensions();
     fetch(BASE_URL + "/api/Competition", {
       method: "GET",
       headers: {
@@ -147,12 +137,12 @@ class search extends Component {
       }
     })
       .then(response => response.json())
-      .then(function(data) {
+      .then(function (data) {
         this.setState({
           user: data
         });
       })
-      .catch(function(data) {})
+      .catch(function (data) { })
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
@@ -206,15 +196,6 @@ class search extends Component {
     } else {
       navbar.classList.add("hidden");
       navbar.setAttribute("hidden", "true");
-    }
-  }
-
-  toggleNavbar2() {
-    var body = document.querySelector("body");
-    if (this.state.lastSize > document.body.clientHeight) {
-      this.toggleNavbar();
-    } else {
-      this.toggleNavbar();
     }
   }
 
@@ -326,7 +307,7 @@ class search extends Component {
         .catch(err => {
           /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
         });
-      setTimeout(function() {
+      setTimeout(function () {
         window.location = "/scoreCapture";
       }, 4000);
     } else if (Valid && !this.state.scoreSaved) {
@@ -354,7 +335,7 @@ class search extends Component {
         .catch(err => {
           /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
         });
-      setTimeout(function() {
+      setTimeout(function () {
         window.location = "/scoreCapture";
       }, 5000);
     }
@@ -449,13 +430,6 @@ class search extends Component {
     }
   }
   render() {
-    if (this.state.lastSize === document.body.clientHeight) {
-      document.addEventListener("DOMContentLoaded", () => {
-        window.addEventListener("resize", () => {
-          this.toggleNavbar();
-        });
-      });
-    }
 
     const stateOne = this.state.showCamera || this.state.imageTaken;
 
@@ -468,11 +442,11 @@ class search extends Component {
               key={"mykey" + i}
               className={
                 this.state.somethingClicked === false &&
-                this.state.clicked === null
+                  this.state.clicked === null
                   ? "competition-item"
                   : this.state.clicked != null && this.state.clicked === i
-                  ? "competition-item active"
-                  : "competition-item fade-out"
+                    ? "competition-item active"
+                    : "competition-item fade-out"
               }
             >
               <li
@@ -528,8 +502,8 @@ class search extends Component {
                 this.state.scoreSaved
                   ? "sucess-container"
                   : stateOne
-                  ? "page-content-video"
-                  : "page-content"
+                    ? "page-content-video"
+                    : "page-content"
               }
             >
               <div
@@ -635,7 +609,7 @@ class search extends Component {
                     <div
                       className={
                         (this.state.showCamera && !this.state.imageTaken) ||
-                        this.state.imageTaken
+                          this.state.imageTaken
                           ? "hidden"
                           : "submit-button-elements2"
                       }
