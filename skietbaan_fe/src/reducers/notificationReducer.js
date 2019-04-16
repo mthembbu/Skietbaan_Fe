@@ -1,8 +1,13 @@
-import { FETCH_NOTIFICATION, UPDATE_IS_READ } from "../actions/types";
+import {
+  FETCH_NOTIFICATION,
+  UPDATE_IS_READ,
+  DATA_LOADING
+} from "../actions/types";
 
 const initialState = {
   notificationsArray: [],
-  updatedNotification: {}
+  updatedNotification: {},
+  loading: null
 };
 
 export default function(state = initialState, action) {
@@ -10,13 +15,20 @@ export default function(state = initialState, action) {
     case FETCH_NOTIFICATION:
       return {
         ...state,
-        notificationsArray: action.payload
+        notificationsArray: action.payload,
+        loading: true
       };
 
     case UPDATE_IS_READ:
       return {
         ...state,
         updatedNotification: action.payload
+      };
+
+    case DATA_LOADING:
+      return {
+        ...state,
+        loading: false
       };
     default:
       return state;

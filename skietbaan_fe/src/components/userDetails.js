@@ -18,7 +18,8 @@ export default class userDetails extends Component {
       inputChanged: false,
       checkEmailValid: false,
       isHidden: false,
-      size: document.body.clientHeight
+      size: document.body.clientHeight,
+      getDataUser: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -41,7 +42,8 @@ export default class userDetails extends Component {
           nameValue: data.name,
           surnameValue: data.surname,
           emailValue: data.email,
-          cellphoneValue: data.phoneNumber
+          cellphoneValue: data.phoneNumber,
+          getDataUser: true
         })
       )
       .catch(err => {
@@ -116,7 +118,33 @@ export default class userDetails extends Component {
     }
     return (
       <div className="document-center">
-        {this.state.array.length === 0 ? null : (
+        {this.state.getDataUser === false ? (
+          <div
+            className={
+              this.state.getDataUser ? "hidden" : "loader-container-details"
+            }
+          >
+            <div className="user-details-white">
+              {setTimeout(() => {
+                this.state.array
+                  ? this.setState({ getDataUser: true })
+                  : (window.location = "/login");
+              }, 8000)}
+            </div>
+
+            <div className={this.state.getDataUser ? "hidden" : "loader"} />
+            <div
+              className={
+                this.state.getDataUser ? "hidden" : "target-loader-image"
+              }
+            />
+            <div
+              className={this.state.getDataUser ? "hidden" : "loading-message"}
+            >
+              Loading...
+            </div>
+          </div>
+        ) : (
           <div className="user-details-main-container user-details-container">
             <div className="user-details-scrolls">
               <div className="member-details-container">
@@ -131,7 +159,7 @@ export default class userDetails extends Component {
                     </label>
 
                     <label className="user-details-member-label">
-                      {this.state.size}
+                      {this.state.array.memberID}
                     </label>
                   </div>
                 )}

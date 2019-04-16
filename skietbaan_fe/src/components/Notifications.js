@@ -187,9 +187,15 @@ class notification extends Component {
   }
 
   changeIcon() {
-    this.setState({
-      toggle: !this.state.toggle
-    });
+    if (this.props.notificationsArray.length <= 0) {
+      this.setState({
+        toggle: false
+      });
+    } else if (this.props.notificationsArray.length > 0) {
+      this.setState({
+        toggle: !this.state.toggle
+      });
+    }
   }
 
   secondIconChange() {
@@ -334,6 +340,18 @@ class notification extends Component {
             }
             alt=""
           />
+        </div>
+      </div>
+    );
+
+    const loader = (
+      <div className="loader-formatting">
+        <div className={this.props.loading ? "hidden" : "loader"} />
+        <div
+          className={this.props.loading ? "hidden" : "target-loader-image"}
+        />
+        <div className={this.props.loading ? "hidden" : "loading-message"}>
+          Loading...
         </div>
       </div>
     );
@@ -487,7 +505,7 @@ class notification extends Component {
                   className="format-content"
                   style={{ maxHeight: this.getBodyHeight() + "px" }}
                 >
-                  {postItems}
+                  {this.props.loading ? postItems : loader}
                 </div>
               )}
               <div>{deleteModal}</div>
@@ -508,7 +526,8 @@ const mapStateToProps = state => ({
   notificationsArray: state.notificationOBJ.notificationsArray,
   updatedNotification: state.notificationOBJ.updatedNotification,
   awardsSelectedCompetition: state.awardsReducer.selectedCompetition,
-  selectedButton: state.landingReducer.selectedLandingPage
+  selectedButton: state.landingReducer.selectedLandingPage,
+  loading: state.notificationOBJ.loading
 });
 
 export default connect(

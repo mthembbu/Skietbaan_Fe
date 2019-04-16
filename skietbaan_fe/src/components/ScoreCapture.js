@@ -41,7 +41,8 @@ class search extends Component {
       somethingClicked: false,
       maximumScore: 20,
       height: window.innerHeight,
-      width: window.innerWidth
+      width: window.innerWidth,
+      getData: false
     };
 
     this.competitionClicked = this.competitionClicked.bind(this);
@@ -132,7 +133,7 @@ class search extends Component {
       }
     })
       .then(response => response.json())
-      .then(data => this.setState({ competitionsList: data }))
+      .then(data => this.setState({ competitionsList: data, getData: true }))
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
@@ -494,7 +495,7 @@ class search extends Component {
           </div>
         );
       }
-    } else {
+    } else if (this.state.getData === true) {
       competitionItem.push(
         <div className="not-active">
           <div className="not-active-message">
@@ -550,6 +551,27 @@ class search extends Component {
                   <label className="label-competition">
                     Select Competition
                   </label>
+                </div>
+                <div
+                  className={
+                    this.state.getData
+                      ? "hidden"
+                      : "loading-container-add-score"
+                  }
+                >
+                  <div className={this.state.getData ? "hidden" : "loader"} />
+                  <div
+                    className={
+                      this.state.getData ? "hidden" : "target-loader-image"
+                    }
+                  />
+                  <div
+                    className={
+                      this.state.getData ? "hidden" : "loading-message"
+                    }
+                  >
+                    Loading...
+                  </div>
                 </div>
                 <div className="add-score-competition-container">
                   {competitionItem}
