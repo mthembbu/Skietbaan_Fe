@@ -139,6 +139,7 @@
     position: fixed;
     width: 100%;
     background: white;
+    padding-bottom: 2px;
 }
 
 .pad-top-50px{

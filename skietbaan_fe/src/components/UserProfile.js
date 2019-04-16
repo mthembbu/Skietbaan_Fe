@@ -16,10 +16,13 @@ class UserProfile extends Component {
             awardCompetitions : [],
             hoursAward : {
                 hours: -1,
+                getData: false
             },
             collapse: false,
             exceptionCaughtOnAwards: false,
-            exceptionCaughtOnHours: false
+            exceptionCaughtOnHours: false,
+            errorOccured : false,
+            apiResponse : ""
         }
         
         this.toggle = this.toggle.bind(this);
@@ -44,14 +47,16 @@ class UserProfile extends Component {
             }
         })
         .then(res => res.json())
-        .then(data => {
-            if(this._isMounted){
-                data.forEach((element, index) => {
+        .then(_response => {
+            if(this._isMounted && typeof _response != "string"){
+                _response.forEach((element, index) => {
                     this.mapCompetitionNameToIndex[element.competitionName] = index;
                 })
-                this.setState({ awardCompetitions: data });
+                this.setState({ awardCompetitions: _response, getData: true });
+            }else{
+                this.setState({apiResponse : _response, errorOccured : true})
             }
-        }).catch(err => {
+        }).catch(() => {
             this.setState({ exceptionCaughtOnAwards: true });
         });
 
@@ -250,12 +255,30 @@ class UserProfile extends Component {
         }
     }
 
+    renderLoader(){
+        return(
+            <div className={this.state.getData ? "hidden" : "loader-container-profile"}>
+                <div className={this.state.getData ? "hidden" : "loader"}></div>
+                <div className={this.state.getData ? "hidden" : "target-loader-image"}></div>
+                <div className={this.state.getData ? "hidden" : "loading-message-profile"}>Loading...</div>
+            </div>
+        )
+    }
+
     renderBestInMonth(){
         {this.isBestInMonth = true}
         return(
             <div className="grey-text pad-bottom-16px font-size-14px best-month-text">
                 {this.state.awardCompetitions[
                     this.getIndexByCompetitionName(this.props.selectedCompetition)].bestInMonth.toUpperCase()}
+            </div>
+        )
+    }
+
+    renderError(errorMessage){
+        return(
+            <div className="no-competition-border">
+                <label className="no-competition">{errorMessage}</label>
             </div>
         )
     }
@@ -269,8 +292,8 @@ class UserProfile extends Component {
         return (
             <div className="award-container pad-award-container">
                 {this.state.exceptionCaughtOnAwards ? 
-                    <div className="no-competition-border">
-                        <label className="no-competition">No competitions available</label></div> :
+                    this.renderError("Something went wrong") :
+                this.state.errorOccured ? this.renderError(this.state.apiResponse) :
                 //only render when the data has arrived from backend
                 this.state.awardCompetitions.length > 0 ?
                 <div className="remove-right-padding">
@@ -459,7 +482,7 @@ class UserProfile extends Component {
                     </div>
                 </div>
                 //only render when the data has arrived from backend
-                : null}
+                : this.renderLoader()}
             </div>
         )
     }
