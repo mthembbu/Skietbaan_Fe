@@ -187,9 +187,15 @@ class notification extends Component {
   }
 
   changeIcon() {
-    this.setState({
-      toggle: !this.state.toggle
-    });
+    if (this.props.notificationsArray.length <= 0) {
+      this.setState({
+        toggle: false
+      });
+    } else if (this.props.notificationsArray.length > 0) {
+      this.setState({
+        toggle: !this.state.toggle
+      });
+    }
   }
 
   secondIconChange() {
