@@ -5,6 +5,10 @@ import { BASE_URL } from '../actions/types.js';
 import arrowUp from '../components/assets/upArrow.png';
 import arrowDown from '../components/assets/downArrow.png';
 import { getCookie } from '../components/cookie.js';
+import Export from '../components/assets/Export.png';
+import RedBullet from '../components/assets/RedBullet.png';
+import { Row, Col } from 'react-bootstrap';
+
 
 class ViewNonMembers extends Component {
 	constructor(props) {
@@ -23,7 +27,9 @@ class ViewNonMembers extends Component {
 			arrowChange: false,
 			height: window.innerHeight,
 			width: window.innerWidth,
-			getData: false
+			getData: false,
+			membershipIds: [],
+			exportMsg: false
 		};
 		this.getTimeLeft = this.getTimeLeft.bind(this);
 		this.onChangeText = this.onChangeText.bind(this);
@@ -105,6 +111,16 @@ class ViewNonMembers extends Component {
 					}),
 					getData: true
 				}));
+
+		fetch(BASE_URL + "/api/Features/SearchMember")
+			.then(res => res.json())
+			.then(data =>
+				this.setState({
+					membershipIds: data.map(memberIds => memberIds.memberID)
+				})
+			).catch(err => {
+				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+			});
 	}
 
 	getTimeLeft() {
@@ -132,31 +148,32 @@ class ViewNonMembers extends Component {
 	}
 
 	updateMember(index) {
-		delete this.state.array[index].selected
-		let RequestObject = {
-			username: this.state.array[index].username,
-			memberID: this.state.membershipsID,
-			memberExpiryDate: this.getCurrentDate() + 'T00:00:00'
-		};
-
-		fetch(BASE_URL + '/api/Features/Update', {
-			method: 'Post',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(RequestObject)
-		})
-			.then(function (response) {
-				return response.json();
+		if (this.state.membershipIds.indexOf(this.state.membershipsID) === -1) {
+			delete this.state.array[index].selected
+			let RequestObject = {
+				username: this.state.array[index].username,
+				memberID: this.state.membershipsID,
+				memberExpiryDate: this.getCurrentDate() + 'T00:00:00'
+			};
+			fetch(BASE_URL + '/api/Features/Update', {
+				method: 'Post',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(RequestObject)
 			})
-			.then((data) => {
-				this.getNonMembers();
-				this.setState({ filterText: '' });
-			})
-			.catch((err) => {
-				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-			});
+				.then(function (response) {
+					return response.json();
+				})
+				.then((data) => {
+					this.getNonMembers();
+					this.setState({ filterText: '' });
+				})
+				.catch((err) => {
+					/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+				});
+		}
 	}
 
 	onChangeText(event) {
@@ -187,7 +204,9 @@ class ViewNonMembers extends Component {
 		this.state.array[index].selected = !this.state.array[index].selected;
 		this.forceUpdate();
 	}
-
+	ExportData = () => {
+		this.setState({ exportMsg: true })
+	}
 	render() {
 		if (!getCookie('token')) {
 			window.location = '/registerPage';
@@ -201,92 +220,99 @@ class ViewNonMembers extends Component {
 			});
 		}
 		const postItems = (
-			<table striped hover condensed className="table-member">
-				<tbody>
-					{this.state.array
-						.filter((post) => {
-							return (
-								!this.state.filterText ||
-								post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
-								post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
-							);
-						})
-						.map((posts, index) => (
-							<tr className="view-members-user" key={posts.id} >
-								<td className="first-column">
+			<div>
+				{(this.state.array.length === 0 && this.state.getData === true) ? <div className="view-non-error-container"><label className="view-non-error-msg">No members have been created yet.</label></div> :
+					<table striped hover condensed className="table-member">
+						<tbody>
+							{this.state.array
+								.filter((post) => {
+									return (
+										!this.state.filterText ||
+										post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
+										post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
+									);
+								})
+								.map((posts, index) => (
+									<tr className="view-members-user" key={posts.id} >
+										<td className="first-column">
 
-									<Collapsible
-										trigger={
-											<div className="username-and-email" onClick={() => this.onChangeArrow(index)}>
-												<div className="view-non-members-users-email">
-													<b>{posts.username}</b>
-													<div className="view-non-members-email">{posts.email}</div>
-												</div>
+											<Collapsible
+												trigger={
+													<div className="username-and-email" onClick={() => this.onChangeArrow(index)}>
+														<div className="view-non-members-users-email">
+															<b>{posts.username}</b>
+															<div className="view-non-members-email">{posts.email}</div>
+														</div>
 
-												<div className="view-non-members-arrow" >
-													{posts.selected === true ? <img
-														className="view-non-members-image"
-														src={arrowDown}
-													/> :
-														<img
-															className="view-non-members-image"
-															src={arrowUp}
-														/>}
-												</div>
-											</div>
-										}
-									>
-										<div className="membership-details">
-											<div>
-												<input
-													type="text"
-													className="view-non-members-text-boxes"
-													id="membershipID"
-													placeholder="Membership Number"
-													autoComplete="Off"
-													value={this.state.membershipsID}
-													onChange={this.handleChange}
-												/>
-											</div>
-											<div>
-												<input
-													name
-													type="date"
-													className="view-non-members-text-boxes"
-													id="expdate"
-													value={this.getCurrentDate()}
-												/>
-											</div>
-											<div>
-												<button
-													className="view-non-members-confirm"
-													onClick={() => this.updateMember(index)}
-												>
-													CONFIRM MEMBERSHIP
+														<div className="view-non-members-arrow" >
+															{posts.selected === true ? <img
+																className="view-non-members-image"
+																src={arrowDown}
+															/> :
+																<img
+																	className="view-non-members-image"
+																	src={arrowUp}
+																/>}
+														</div>
+													</div>
+												}
+											>
+												<div className="membership-details">
+													<div>
+														<input
+															type="number"
+															className="view-non-members-text-boxes"
+															id="membershipID"
+															placeholder="Membership Number"
+															autoComplete="Off"
+															value={this.state.membershipsID}
+															onChange={this.handleChange}
+														/>
+													</div>
+													<div>
+														<button
+															className="view-non-members-confirm"
+															onClick={() => this.updateMember(index)}
+														>
+															CONFIRM MEMBERSHIP
 												</button>
-											</div>
-										</div>
-									</Collapsible>
-								</td>
-							</tr>
-						))}
-				</tbody>
-			</table>
+													</div>
+												</div>
+											</Collapsible>
+										</td>
+									</tr>
+								))}
+						</tbody>
+					</table>}</div>
 		);
 		return (
 			<div className="centre-view-member">
 				<div className="username-search">
-					<div className="search">
-						<input
-							autoComplete="off"
-							type="text"
-							className="user-value"
-							id="usernameValue"
-							placeholder="Enter Username"
-							value={this.state.filterText}
-							onChange={this.onChangeText}
-						/>
-					</div>
+					<Row>
+						<Col>
+							<div className="search">
+								<input
+									autoComplete="off"
+									type="text"
+									className="user-value"
+									id="usernameValue"
+									placeholder="Enter Username"
+									value={this.state.filterText}
+									onChange={this.onChangeText}
+								/>
+
+
+							</div>
+						</Col>
+						<Col className="export-col-container">	<div className="export-container">
+							<img
+								src={Export}
+								className="export-icon"
+								alt="Is a Member"
+								onClick={() => this.ExportData()}
+							/>
+						</div></Col>
+					</Row>
 				</div>
 				<div className={this.state.getData === true ? "hidden" : "loader-container-members"}>
 					<div className={this.state.getData === true ? "hidden" : "loader"}>
@@ -295,10 +321,22 @@ class ViewNonMembers extends Component {
 					</div>
 					<div className={this.state.getData === true ? "hidden" : "loading-message-members"}>Loading...</div>
 				</div>
-				<div className="table-search-members" style={{ height: this.getBodyHeight() }}>
-					{postItems}
-				</div>
+				{this.state.exportMsg === false ?
+					<div className="table-search-members" style={{ height: this.getBodyHeight() }}>
+						{postItems}
+					</div> :
+					<div className="exportMsg-container"><label className="exportMsg-responce">
+						SBmembers.csv sent to fs@retrorabbit.co.za
+				</label>
+						<img
+							src={RedBullet}
+							className="export-success"
+							alt="Is a Member"
+						/>
+					</div>
+				}
 			</div>
+
 		);
 	}
 }

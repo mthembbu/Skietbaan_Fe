@@ -18,24 +18,27 @@ export default class userDetails extends Component {
       inputChanged: false,
       checkEmailValid: false,
       isHidden: false,
-      getDataUser: false
+      getDataUser: false,
+      navbarState: false,
+      height: document.body.clientHeight
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.mounted = false;
     this.handErrorValue = this.handErrorValue.bind(this);
-    this.hideNav = this.hideNav.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
   }
 
   componentWillMount() {
-    {
       window.addEventListener("resize", () => {
-        console.log("this ran");
-        this.hideNav();
+        let Navbar = document.querySelector(".navbar-admin");
+        if (this.state.height === document.body.clientHeight) {
+            Navbar.classList.remove("hidden");
+        } else {
+            Navbar.classList.add("hidden");
+        }
       });
-    }
   }
 
   componentDidMount() {
@@ -108,9 +111,6 @@ export default class userDetails extends Component {
       : this.setState({ checkNumberValid: true, checkEmailValid: true });
   }
 
-  hideNav() {
-    this.toggleNavbar();
-  }
   render() {
     return (
       <div className="document-center">

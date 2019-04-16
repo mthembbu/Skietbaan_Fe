@@ -255,10 +255,7 @@ class Login extends Component {
             <div className="centre-label">
               <label className="header-label-login">LOGIN</label>
             </div>
-            <img src={back}
-              alt="back button"
-              className="back-btn"
-              onClick={() => this.goToRegister()}></img>
+            <button className="button-login" onClick={() => this.goToRegister()}>REGISTER</button>
           </div>
         </div>
         <div className="centre-login-register">
