@@ -18,7 +18,6 @@ export default class userDetails extends Component {
       inputChanged: false,
       checkEmailValid: false,
       isHidden: false,
-      size: document.body.clientHeight,
       getDataUser: false
     };
 
@@ -28,7 +27,15 @@ export default class userDetails extends Component {
     this.handErrorValue = this.handErrorValue.bind(this);
     this.hideNav = this.hideNav.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.getsize = this.getsize.bind(this);
+  }
+
+  componentWillMount() {
+    {
+      window.addEventListener("resize", () => {
+        console.log("this ran");
+        this.hideNav();
+      });
+    }
   }
 
   componentDidMount() {
@@ -104,18 +111,10 @@ export default class userDetails extends Component {
   hideNav() {
     this.toggleNavbar();
   }
-  getsize() {
-    this.setState({ size: document.body.clientHeight });
-  }
+
+  resizing;
 
   render() {
-    if (this.state.size === document.body.clientHeight) {
-      document.addEventListener("DOMContentLoaded", () => {
-        window.addEventListener("resize", () => {
-          this.hideNav();
-        });
-      });
-    }
     return (
       <div className="document-center">
         {this.state.getDataUser === false ? (
@@ -193,7 +192,7 @@ export default class userDetails extends Component {
 
               <div>
                 <input
-                  type="number"
+                  type="text"
                   name="cellphoneValue"
                   id="cellphoneValue"
                   autoComplete="off"
