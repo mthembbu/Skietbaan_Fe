@@ -24,6 +24,7 @@ class UserProfile extends Component {
             errorOccured : false,
             apiResponse : ""
         }
+        
         this.toggle = this.toggle.bind(this);
         this.logout = this.logout.bind(this);
         this.timeouts = [];
@@ -286,7 +287,7 @@ class UserProfile extends Component {
         this.timeouts.forEach(timeout => clearTimeout(timeout));
         this._isMounted = false;
     }
-    
+
     render() {
         return (
             <div className="award-container pad-award-container">
