@@ -15,7 +15,6 @@ class NavbarMenu extends Component {
     super(props);
 
     this.state = {
-      nav: null,
       numberOfNotifications: 0,
       isHome: true,
       isCreate: false,
@@ -32,28 +31,7 @@ class NavbarMenu extends Component {
     this.isProfile = this.isProfile.bind(this);
     this.isNotifications = this.isNotifications.bind(this);
     this.GoTo = this.GoTo.bind(this);
-    this.checkUserType = this.checkUserType.bind(this);
     this.fetchNumberOfNotification = this.fetchNumberOfNotification.bind(this);
-  }
-
-  checkUserType() {
-    let token = getCookie("token");
-    fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
-      method: "Get",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          nav: data.admin
-        });
-      })
-      .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      });
   }
 
   isHome() {
