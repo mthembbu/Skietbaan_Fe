@@ -246,7 +246,7 @@ class Login extends Component {
     }
 
     return (
-      <div className="page-content-login">
+      <div className="page-content-login" style={{background: "black"}}>
         <div className="red-background">
           <div className="welcome-header">
             <img src={skietbaan} className="header-image" alt=''></img>

@@ -1,3 +1,25 @@
+@media screen and (max-width:576px){
+    .loading-message-profile{
+        bottom: 40%;
+    }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 585px){
+    .limit-width{
+        max-width: 100% !important;
+    }
+}
+
+@media only screen and (max-width: 357px){
+    .limit-width{
+        max-width: 100% !important;
+    }
+}
+
+.limit-width{
+    max-width: 58%;
+}
+
 .award-container{
     text-align: center;
     font-family: helvetica;
@@ -12,12 +34,6 @@
     font-weight: 300;
     font-family: helvetica;
     text-align: center;
-}
-
-@media screen and (max-width:576px){
-    .loading-message-profile{
-        bottom: 40%;
-    }
 }
 
 .loader-container-profile{

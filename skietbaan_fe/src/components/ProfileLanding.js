@@ -23,9 +23,7 @@ class ProfileLanding extends Component {
   }
 
   componentDidMount(){
-    this.props.selectedPage(3);
-    var token = getCookie("token");
-    if (token == undefined) {
+    if (getCookie("token") == undefined) {
         history.push("/registerPage");
         return;
     }
