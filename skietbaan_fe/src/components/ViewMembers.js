@@ -143,7 +143,6 @@ class ViewMembers extends Component {
 	}
 
 	render() {
-		console.log(this.state.array)
 		if (!getCookie('token')) {
 			window.location = '/registerPage';
 		}
