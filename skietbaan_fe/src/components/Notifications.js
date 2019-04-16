@@ -205,26 +205,6 @@ class notification extends Component {
     });
   }
 
-  checkUserType() {
-    let token = getCookie("token");
-    fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
-      method: "Get",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          stateCheck: data.admin
-        });
-      })
-      .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      });
-  }
-
   speakerClick() {
     this.setState({
       adminToggle: !this.state.adminToggle
