@@ -24,6 +24,7 @@ import {
   updateIsReadProperty,
   getNotifications
 } from "../actions/notificationAction";
+import { checkUserType } from "../actions/adminAction";
 import { Row, Col } from "react-bootstrap";
 
 class notification extends Component {
@@ -178,7 +179,7 @@ class notification extends Component {
     if (getCookie("token")) {
       this.props.getNotifications(this.state.token);
     }
-    this.checkUserType();
+    this.props.checkUserType(this.state.token);
   }
 
   onChange(event) {
@@ -202,26 +203,6 @@ class notification extends Component {
     this.setState({
       secondToggle: !this.state.secondToggle
     });
-  }
-
-  checkUserType() {
-    let token = getCookie("token");
-    fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
-      method: "Get",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          stateCheck: data.admin
-        });
-      })
-      .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      });
   }
 
   speakerClick() {
@@ -491,7 +472,7 @@ class notification extends Component {
         <Col sm={8} className="createpage-bootstrap-col-center-container">
           <div className="notifications-body-class">
             <div className="styling-for-gun-overlay">
-              {this.state.stateCheck === false ? (
+              {this.props.isAdmin === false ? (
                 <div>{headingItems}</div>
               ) : (
                 <div>{adminHeadingItems}</div>
@@ -520,14 +501,16 @@ notification.propTypes = {
   notificationsArray: PropTypes.array.isRequired,
   updateIsReadProperty: PropTypes.func.isRequired,
   updateSelectedCompetition: PropTypes.func.isRequired,
-  updateSelectedGroup: PropTypes.func.isRequired
+  updateSelectedGroup: PropTypes.func.isRequired,
+  checkUserType: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
   notificationsArray: state.notificationOBJ.notificationsArray,
   updatedNotification: state.notificationOBJ.updatedNotification,
   awardsSelectedCompetition: state.awardsReducer.selectedCompetition,
   selectedButton: state.landingReducer.selectedLandingPage,
-  loading: state.notificationOBJ.loading
+  loading: state.notificationOBJ.loading,
+  isAdmin: state.adminReducer.isAdmin
 });
 
 export default connect(
@@ -539,6 +522,7 @@ export default connect(
     getNotifications,
     setSelectedCompetition,
     setSelectedLandingPage,
-    selectedPage
+    selectedPage,
+    checkUserType
   }
 )(notification);

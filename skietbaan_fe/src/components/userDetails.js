@@ -131,7 +131,6 @@ export default class userDetails extends Component {
       Navbar.classList.remove("hidden");
     }
   }
-
   render() {
     return (
       <div className="document-center">
