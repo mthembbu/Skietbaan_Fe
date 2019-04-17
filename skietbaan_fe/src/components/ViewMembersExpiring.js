@@ -202,7 +202,9 @@ class ViewMembersExpiring extends Component {
 		}
 		const postItems = (
 			<div>
+
 				{(this.state.array.length === 0 && this.state.getData === true) ? <div className="view-non-error-container"><label className="view-non-error-msg">No users expiring yet.</label></div> :
+
 					<table striped hover condensed className="table-member">
 						<tbody>
 							{this.state.array
