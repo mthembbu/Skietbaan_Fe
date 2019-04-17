@@ -2,7 +2,8 @@ import {
   FETCH_NOTIFICATION,
   UPDATE_IS_READ,
   BASE_URL,
-  DATA_LOADING
+  DATA_LOADING,
+  FETCH_NUMBER_OF_NOTIFICATIONS
 } from "../actions/types";
 import confirmation from "../components/Notification-Img/confirmation.png";
 import renewal from "../components/Notification-Img/renewal.png";
@@ -27,6 +28,20 @@ export const updateIsReadProperty = id => dispatch => {
         payload: data
       });
     })
+    .catch(err => {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+    });
+};
+
+export const fetchNumberOfNotification = token => dispatch => {
+  fetch(BASE_URL + "/api/Notification/GetNumberOfNotifications?token=" + token)
+    .then(response => response.json())
+    .then(data =>
+      dispatch({
+        type: FETCH_NUMBER_OF_NOTIFICATIONS,
+        payload: data
+      })
+    )
     .catch(err => {
       /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
