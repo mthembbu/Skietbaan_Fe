@@ -17,13 +17,29 @@ export default class userDetails extends Component {
       checkNumberValid: false,
       inputChanged: false,
       checkEmailValid: false,
-      getDataUser: false
+      isHidden: false,
+      getDataUser: false,
+      navbarState: false,
+      height: document.body.clientHeight,
+      exceptionCaught: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.mounted = false;
     this.handErrorValue = this.handErrorValue.bind(this);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+  }
+
+  componentWillMount() {
+    window.addEventListener("resize", () => {
+      let Navbar = document.querySelector(".navbar-admin");
+      if (this.state.height === document.body.clientHeight) {
+        Navbar.classList.remove("hidden");
+      } else {
+        Navbar.classList.add("hidden");
+      }
+    });
   }
 
   componentDidMount() {
@@ -42,8 +58,17 @@ export default class userDetails extends Component {
         })
       )
       .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+        this.setState({ exceptionCaught: true })
       });
+  }
+
+  toggleNavbar() {
+    let Navbar = document.querySelector(".navbar-admin");
+    if (Navbar.classList.contains("hidden")) {
+      Navbar.classList.remove("hidden");
+    } else {
+      Navbar.classList.add("hidden");
+    }
   }
 
   updateUser() {
@@ -90,29 +115,30 @@ export default class userDetails extends Component {
   render() {
     return (
       <div className="document-center">
-        {this.state.getDataUser === false ?
-          <div className={this.state.getDataUser ? "hidden" : "loader-container-details"}>
-              <div className="user-details-white">
+        {this.state.getDataUser === false ? (
+          <div
+            className={
+              this.state.getDataUser ? "hidden" : "loader-container-details"
+            }
+          >
+            <div className="user-details-white">
               {setTimeout(() => {
-              this.state.array?this.setState({getDataUser: true}):
-              window.location="/login"
-		          }, 8000)}
-              </div>
-              
-            <div className={this.state.getDataUser ? "hidden" : "loader"}>
+                this.state.array
+                  ? this.setState({ getDataUser: true })
+                  : (window.location = "/login");
+              }, 8000)}
             </div>
-            <div className={this.state.getDataUser ? "hidden" : "target-loader-image"}>
-            </div>
-            <div className={this.state.getDataUser ? "hidden" : "loading-message"}>Loading...</div>
 
-            
-           
-          </div> 
-          : (
+            <div className={this.state.getDataUser === false && this.state.exceptionCaught === false ?
+              "loader" : "hidden"} />
+            <div className={this.state.getDataUser === false && this.state.exceptionCaught === false ?
+              "target-loader-image" : "hidden"} />
+            <div className={this.state.getDataUser === false && this.state.exceptionCaught === false ?
+              "loading-message" : "hidden "}>Loading...</div>
+          </div>
+        ) : (
             <div className="user-details-main-container user-details-container">
-
               <div className="user-details-scrolls">
-
                 <div className="member-details-container">
                   <div className="user-details-heading-container user-details-member-name">
                     {this.state.array.username.toUpperCase()}
@@ -159,7 +185,7 @@ export default class userDetails extends Component {
 
                 <div>
                   <input
-                    type="number"
+                    type="text"
                     name="cellphoneValue"
                     id="cellphoneValue"
                     autoComplete="off"

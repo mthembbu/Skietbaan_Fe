@@ -15,11 +15,13 @@ import {
   FETCH_LEADERBOARDFILTER_DATA,
   FETCH_LEADERBOARDTABLE_DATA,
   UPDATE_SELECTED_COMPETITION,
-  UPDATE_SELECTED_GROUP
+  UPDATE_SELECTED_GROUP,
+  GROUP_DATA_LOADING
 } from "./types";
 
 /** The method to feth the already available data for posts*/
 export const fetchGroups = () => dispatch => {
+  dispatch({ type: GROUP_DATA_LOADING });
   fetch(BASE_URL + "/api/Groups")
     .then(res => res.json())
     .then(group => {
@@ -38,7 +40,7 @@ export const fetchGroups = () => dispatch => {
 };
 
 export const AddMemberAction = id => dispatch => {
-  const arr=[];
+  const arr = [];
   fetch(BASE_URL + "/api/Groups/list?id=" + id)
     .then(res => res.json())
     .then(posts => {
@@ -50,7 +52,7 @@ export const AddMemberAction = id => dispatch => {
       dispatch({
         type: ADDMEMBERS,
         payload: newdata,
-        pay:arr
+        pay: arr
       });
     })
     .catch(err => {
@@ -92,19 +94,19 @@ export const getName = name => {
 };
 
 export const fetchEditUser = groupid => dispatch => {
-  const ar=[];
+  const ar = [];
   fetch(BASE_URL + "/api/Groups/edit?id=" + groupid)
     .then(res => res.json())
     .then(data => {
       const newdata = data.map(user => {
         user.highlighted = false;
-        ar.push(user.id)
+        ar.push(user.id);
         return user;
       });
       dispatch({
         type: EDITGROUPUSERS,
         payload: newdata,
-        pay:ar
+        pay: ar
       });
     })
     .catch(err => {

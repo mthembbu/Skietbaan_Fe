@@ -6,10 +6,12 @@ import {
   BASE_URL,
   FETCH_REQ,
   COMP_PAGE,
-  UPDATE_REQ
+  UPDATE_REQ,
+  COMPETITION_DATA_LOADING
 } from "./types";
 //fetch the array of competitions
 export const fetchComp = () => dispatch => {
+  dispatch({ type: COMPETITION_DATA_LOADING });
   fetch(BASE_URL + "/api/Competition/all")
     .then(res => res.json())
     .then(compData => {
@@ -17,20 +19,22 @@ export const fetchComp = () => dispatch => {
         type: FETCH_COMP,
         payload: compData
       });
-    }).catch(err =>  {
+    })
+    .catch(err => {
       /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
 //fetch the competition requiremets as per Competition ID
 export const fetchRequirements = CompID => dispatch => {
-   fetch(BASE_URL + "/R/" + CompID)
+  fetch(BASE_URL + "/R/" + CompID)
     .then(response => response.json())
     .then(requirementsData => {
       dispatch({
         type: FETCH_REQ,
         payload: requirementsData
       });
-    }).catch(err =>  {
+    })
+    .catch(err => {
       /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
@@ -51,7 +55,8 @@ export const updateRequirements = (compID, rData) => dispatch => {
         type: UPDATE_REQ,
         payload: ReqData
       });
-    }).catch(err =>  {
+    })
+    .catch(err => {
       /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
@@ -74,7 +79,8 @@ export const updateByIdComp = (compData, Id) => dispatch => {
         type: UPDATE_COMP_STATUS,
         payload: comp
       });
-    }).catch(err =>  {
+    })
+    .catch(err => {
       /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
@@ -87,44 +93,47 @@ export const fetchParticipants = () => dispatch => {
         type: PARTICIPANTS_PER_COMP,
         payload: participantsData
       });
-    }).catch(err =>  {
+    })
+    .catch(err => {
       /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
 };
 //creating a single competition
-export const  createComp = (compData) => dispatch => {
+export const createComp = compData => dispatch => {
   let response;
-   fetch(BASE_URL + "/api/Competition/filter", {
+  fetch(BASE_URL + "/api/Competition/filter", {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json"
     },
     body: JSON.stringify(compData)
-  }).then(res => {
-    if (res.ok) {
-      response = res;
-      res.json().then(() =>
-        dispatch({
-          type: NEW_COMP,
-          payload: false
-        })
-      );
-    } else {
-      res.json().then(() => {
-        dispatch({
-          type: NEW_COMP,
-          payload: true
+  })
+    .then(res => {
+      if (res.ok) {
+        response = res;
+        res.json().then(() =>
+          dispatch({
+            type: NEW_COMP,
+            payload: false
+          })
+        );
+      } else {
+        res.json().then(() => {
+          dispatch({
+            type: NEW_COMP,
+            payload: true
+          });
         });
-      });
-    }
-  }).catch(err =>  {
-    /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-  });
+      }
+    })
+    .catch(err => {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+    });
   return response;
 };
 
-export const compSelectedPages = (page) => {
+export const compSelectedPages = page => {
   return dispatch => {
     dispatch({
       type: COMP_PAGE,

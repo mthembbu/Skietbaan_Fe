@@ -128,7 +128,9 @@ class AddMembersGroup extends Component {
   render() {
     const postitems = (
       <div className="adding-check-edit" style={{ height: this.getBodyHeight()}}>
-      {this.props.existing.length===0?null:
+      {this.props.existing.length===0? <div className="edit-no-user-container">
+					<label className="edit-no-user-msg">All users/members have already been added to this group.</label>
+				</div>:
         <ul class="list-group">
           {this.props.existing
             .filter((post) => {

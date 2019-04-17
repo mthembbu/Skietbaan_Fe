@@ -55,7 +55,7 @@
 	color: white;
 	font-weight: bold;
 	font-size: 25px;
-	margin-top: 15px;
+	margin-top: 10px;
 }
 .center-labelss {
 	display: flex;
@@ -763,4 +763,20 @@
 }
 .table-member .view-group .switch-container {
 	width: 20%;
+}
+.edit-no-user-container{
+	width: 312px;
+	height: 77px;
+	border: 1px solid #be0000;
+	margin: auto;
+	text-align: center;
+	border-radius: 5px;
+	margin-top: 40%;
+}
+.edit-no-user-msg{
+	font-size: 16px;
+	color: #be0000;
+	margin: auto;
+	margin-top: 25px;
+	font-weight: lighter;
 }
