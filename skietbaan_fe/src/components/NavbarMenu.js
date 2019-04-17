@@ -9,6 +9,7 @@ import { getCookie } from "../components/cookie.js";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { checkUserType } from "../actions/adminAction";
+import { fetchNumberOfNotification } from "../actions/notificationAction";
 
 class NavbarMenu extends Component {
   constructor(props) {
@@ -137,7 +138,7 @@ class NavbarMenu extends Component {
       return (
         <img
           src={
-            this.state.numberOfNotifications === 0
+            this.props.numberOfNotifications === 0
               ? NAV_BAR_ICONS.NOTIFICATIONS_RED
               : NAV_BAR_ICONS.NOTIFY_RED
           }
@@ -149,7 +150,7 @@ class NavbarMenu extends Component {
       return (
         <img
           src={
-            this.state.numberOfNotifications === 0
+            this.props.numberOfNotifications === 0
               ? NAV_BAR_ICONS.NOTIFICATIONS_GRAY
               : NAV_BAR_ICONS.NOTIFY_GREY
           }
@@ -169,7 +170,7 @@ class NavbarMenu extends Component {
   }
 
   componentDidMount() {
-    this.fetchNumberOfNotification();
+    this.props.fetchNumberOfNotification(this.state.token);
     this.props.checkUserType(this.state.token);
   }
 
@@ -200,10 +201,11 @@ class NavbarMenu extends Component {
 
 const mapStateToProps = state => ({
   navSelectedPage: state.posts.navSelectedPage,
-  isAdmin: state.adminReducer.isAdmin
+  isAdmin: state.adminReducer.isAdmin,
+  numberOfNotifications: state.notificationOBJ.numberOfNotifications
 });
 
 export default connect(
   mapStateToProps,
-  { checkUserType }
+  { checkUserType, fetchNumberOfNotification }
 )(NavbarMenu);
