@@ -29,7 +29,8 @@ class ViewNonMembers extends Component {
 			width: window.innerWidth,
 			getData: false,
 			membershipIds: [],
-			exportMsg: false
+			exportMsg: false,
+			exceptionCaught: false
 		};
 		this.getTimeLeft = this.getTimeLeft.bind(this);
 		this.onChangeText = this.onChangeText.bind(this);
@@ -110,7 +111,10 @@ class ViewNonMembers extends Component {
 						}
 					}),
 					getData: true
-				}));
+				}))
+				.catch(err => {
+					this.setState({ exceptionCaught: true })
+				});
 
 		fetch(BASE_URL + "/api/Features/SearchMember")
 			.then(res => res.json())
@@ -119,7 +123,7 @@ class ViewNonMembers extends Component {
 					membershipIds: data.map(memberIds => memberIds.memberID)
 				})
 			).catch(err => {
-				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+				this.setState({ exceptionCaught: true })
 			});
 	}
 
@@ -314,12 +318,16 @@ class ViewNonMembers extends Component {
 						</div></Col>
 					</Row>
 				</div>
-				<div className={this.state.getData === true ? "hidden" : "loader-container-members"}>
-					<div className={this.state.getData === true ? "hidden" : "loader"}>
+				<div className={this.state.getData === false && this.state.exceptionCaught === false ?
+					"loader-container-members" : "hidden"}>
+					<div className={this.state.getData === false && this.state.exceptionCaught === false ?
+						"loader" : "hidden"}>
 					</div>
-					<div className={this.state.getData === true ? "hidden" : "target-loader-image"}>
+					<div className={this.state.getData === false && this.state.exceptionCaught === false ?
+						"target-loader-image" : "hidden"}>
 					</div>
-					<div className={this.state.getData === true ? "hidden" : "loading-message-members"}>Loading...</div>
+					<div className={this.state.getData === false && this.state.exceptionCaught === false ?
+						"loading-message-members" : "hidden"}>Loading...</div>
 				</div>
 				{this.state.exportMsg === false ?
 					<div className="table-search-members" style={{ height: this.getBodyHeight() }}>
