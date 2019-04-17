@@ -4,7 +4,9 @@ import Collapsible from 'react-collapsible';
 import { BASE_URL } from '../actions/types.js';
 import memberIcon from '../components/assets/greyMembershipIcon.png';
 import { getCookie } from '../components/cookie.js';
-
+import { Row, Col } from 'react-bootstrap';
+import Export from '../components/assets/Export.png';
+import RedBullet from '../components/assets/RedBullet.png';
 class ViewMembersExpiring extends Component {
 	constructor(props) {
 		super(props);
@@ -20,7 +22,9 @@ class ViewMembersExpiring extends Component {
 			navbarState: false,
 			height: window.innerHeight,
 			width: window.innerWidth,
-			getData: false
+			getData: false,
+			exportMsg: false,
+			exceptionCaught: false
 		};
 		this.getExpiringMembers = this.getExpiringMembers.bind(this);
 		this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -100,7 +104,7 @@ class ViewMembersExpiring extends Component {
 				})
 			)
 			.catch((err) => {
-				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+				this.setState({ exceptionCaught: true })
 			});
 	}
 
@@ -179,6 +183,9 @@ class ViewMembersExpiring extends Component {
 		let date = curr.toISOString().substr(0, 10);
 		return date;
 	}
+	ExportData = () => {
+		this.setState({ exportMsg: true })
+	}
 
 	render() {
 		if (!getCookie('token')) {
@@ -193,98 +200,131 @@ class ViewMembersExpiring extends Component {
 			});
 		}
 		const postItems = (
-			<table striped hover condensed className="table-member">
-				<tbody>
-					{this.state.array
-						.filter((post) => {
-							return (
-								!this.state.filterText ||
-								post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
-								post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
-								post.memberID.startsWith(this.state.filterText)
-							);
-						})
-						.map((post, index) => (
-							<tr className="view-members-user" key={post.id}>
-								<td className="first-column">
-									<Collapsible
-										trigger={
-											<div className="username-and-email">
-												<div className="view-members-username-email">
-													<b>{post.username}</b>
-													<div className="view-non-members-email">{post.email}</div>
-												</div>
-												<div className="view-exp-members-icon">
-													<img
-														src={memberIcon}
-														className="membership-icon"
-														alt="Is a Member"
-													/>
-												</div>
-												<div className="expiry-time-column">
-													<div
-														className={
-															this.status(this.state.timeLeftOnMembership[index]) ? (
-																'bad'
-															) : (
-																	'okay'
-																)
-														}
-													>
-														<div>
-															<b>
-																{post.memberExpiryDate
-																	.substring(0, 10)
-																	.split('-')
-																	.join('/')}
-															</b>
-															<div>{this.state.timeLeftOnMembership[index]} Months</div>
+			<div>
+				{(this.state.array.length === 0 && this.state.getData === true) ?
+					<div className="view-non-error-container">
+						<label className="view-non-error-msg">No members have been created yet.</label>
+					</div> :
+					<table striped hover condensed className="table-member">
+						<tbody>
+							{this.state.array
+								.filter((post) => {
+									return (
+										!this.state.filterText ||
+										post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
+										post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
+										post.memberID.startsWith(this.state.filterText)
+									);
+								})
+								.map((post, index) => (
+									<tr className="view-members-user" key={post.id}>
+										<td className="first-column">
+											<Collapsible
+												trigger={
+													<div className="username-and-email">
+														<div className="view-members-username-email">
+															<b>{post.username}</b>
+															<div className="view-non-members-email">{post.email}</div>
+														</div>
+														<div className="view-exp-members-icon">
+															<img
+																src={memberIcon}
+																className="membership-icon"
+																alt="Is a Member"
+															/>
+														</div>
+														<div className="expiry-time-column">
+															<div
+																className={
+																	this.status(this.state.timeLeftOnMembership[index]) ? (
+																		'bad'
+																	) : (
+																			'okay'
+																		)
+																}
+															>
+																<div>
+																	<b>
+																		{post.memberExpiryDate
+																			.substring(0, 10)
+																			.split('-')
+																			.join('/')}
+																	</b>
+																	<div>{this.state.timeLeftOnMembership[index]} Months</div>
+																</div>
+															</div>
 														</div>
 													</div>
-												</div>
-											</div>
-										}
-									>
-										<div className="renew-container">
-											<button
-												className="view-exp-members"
-												onClick={() => this.updateMember(index)}
+												}
 											>
-												RENEW
+												<div className="renew-container">
+													<button
+														className="view-exp-members"
+														onClick={() => this.updateMember(index)}
+													>
+														RENEW
 											</button>
-										</div>
-									</Collapsible>
-								</td>
-							</tr>
-						))}
-				</tbody>
-			</table>
+												</div>
+											</Collapsible>
+										</td>
+									</tr>
+								))}
+						</tbody>
+					</table>}</div>
 		);
 		return (
 			<div className="centre-view-member">
 				<div className="username-search">
-					<div className="search">
-						<input
-							autoComplete="off"
-							type="text"
-							className="user-value"
-							placeholder="Enter Username"
-							id="usernameValue"
-							value={this.state.filterText}
-							onChange={this.onChangeText}
+					<Row>
+						<Col>
+							<div className="search">
+								<input
+									autoComplete="off"
+									type="text"
+									className="user-value"
+									id="usernameValue"
+									placeholder="Enter Username"
+									value={this.state.filterText}
+									onChange={this.onChangeText}
+								/>
+
+
+							</div>
+						</Col>
+						<Col className="export-col-container">	<div className="export-container">
+							<img
+								src={Export}
+								className="export-icon"
+								alt="Is a Member"
+								onClick={() => this.ExportData()}
+							/>
+						</div></Col>
+					</Row>
+				</div>
+				<div className={this.state.getData === false && this.state.exceptionCaught === false ?
+					"loader-container-members" : "hidden"}>
+					<div className={this.state.getData === false && this.state.exceptionCaught === false ?
+						"loader" : "hidden"}>
+					</div>
+					<div className={this.state.getData === false && this.state.exceptionCaught === false ?
+						"target-loader-image" : "hidden"}>
+					</div>
+					<div className={this.state.getData === false && this.state.exceptionCaught === false ?
+						"loading-message-members" : "hidden"}>Loading...</div>
+				</div>
+				{this.state.exportMsg === false ?
+					<div className="table-search-members" style={{ height: this.getBodyHeight() }}>
+						{postItems}
+					</div> : <div className="exportMsg-container"><label className="exportMsg-responce">
+						SBmembers.csv sent to fs@retrorabbit.co.za
+				</label>
+						<img
+							src={RedBullet}
+							className="export-success"
+							alt="Is a Member"
 						/>
 					</div>
-				</div>
-				<div className={this.state.getData === true ? "hidden" : "loader-container-members"}>
-					<div className={this.state.getData === true ? "hidden" : "loader"}>
-					</div>
-					<div className={this.state.getData === true ? "hidden" : "target-loader-image"}>
-					</div>
-					<div className={this.state.getData === true ? "hidden" : "loading-message-members"}>Loading...</div>
-				</div>
-				<div className="table-search-members" style={{ height: this.getBodyHeight() }}>
-					{postItems}
-				</div>
+				}
 			</div>
 		);
 	}
