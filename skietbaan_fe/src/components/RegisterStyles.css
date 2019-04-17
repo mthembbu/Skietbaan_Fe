@@ -98,6 +98,7 @@
 .buttons-invalid:active {
   color: #ebebeb;
   cursor: default;
+  border: 1px lightgray solid;
 }
 
 .buttons-valid {
