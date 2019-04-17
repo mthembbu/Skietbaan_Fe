@@ -173,7 +173,6 @@ class LeaderboardPage extends Component {
         } else {
             this.props.updateSelectedGroup(this.props.groups[value].label);
         }
-
         if(value == -1){
             this.getLeaderboardData(this.props.competitions[this.state.selectedCompetition].value, -1, this.state.selectedRank);
         }else{
@@ -443,7 +442,10 @@ class LeaderboardPage extends Component {
                                                             transform: `translateX(${style.x}px)`,
                                                             opacity: style.opacity
                                                         }} >
-                                                            {this.props.competitions.length != 0 ? this.props.competitions[this.state.selectedCompetition].label : "No Competitions"}
+                                                            {this.props.competitions.length != 0 ? this.state.selectedCompetition == -1 ?
+                                                                this.props.competitions[this.state.selectedCompetition + 1].label : 
+                                                                this.props.competitions[this.state.selectedCompetition].label :
+                                                                "No Competitions"}
                                                         </div>
                                                     )}
                                                 </Motion>
