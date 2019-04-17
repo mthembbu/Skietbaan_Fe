@@ -49,7 +49,6 @@ class NavbarMenu extends Component {
           src={NAV_BAR_ICONS.LEADERBOARD_GRAY}
           className="icon-same-dimensions"
           alt="Leaderboard tab not Selected"
-          onClick={() => this.GoTo("/home")}
         />
       );
     }
@@ -70,7 +69,6 @@ class NavbarMenu extends Component {
           src={NAV_BAR_ICONS.CREATE_GRAY}
           className="icon-same-dimensions"
           alt="Create tab not Selected"
-          onClick={() => this.GoTo("/create")}
         />
       );
     }
@@ -91,7 +89,6 @@ class NavbarMenu extends Component {
           src={NAV_BAR_ICONS.SCORE_CAPTURE_GRAY}
           className="icon-same-dimensions"
           alt="ScoreCapture tab not Selected"
-          onClick={() => this.GoTo("/scoreCapture")}
         />
       );
     }
@@ -112,7 +109,6 @@ class NavbarMenu extends Component {
           src={NAV_BAR_ICONS.PROFILE_GRAY}
           className="profile-icon-grey"
           alt="Profile tab not Selected"
-          onClick={() => this.GoTo("/profile")}
         />
       );
     }
@@ -155,7 +151,6 @@ class NavbarMenu extends Component {
           }
           className="notifications-icon-grey"
           alt="Notification tab not Selected"
-          onClick={() => this.GoTo("/notify")}
         />
       );
     }
@@ -181,13 +176,13 @@ class NavbarMenu extends Component {
             <table className="navbar-admin">
               <tbody>
                 <tr className="first-row-navbar">
-                  <td className="columns">{this.isHome()}</td>
-                  <td className={this.props.isAdmin ? "columns" : "hideAdmin"}>
+                  <td className="columns" onClick={() => this.GoTo("/home")}>{this.isHome()}</td>
+                  <td className={this.props.isAdmin ? "columns" : "hideAdmin"} onClick={() => this.GoTo("/create")}>
                     {this.isCreate()}
                   </td>
-                  <td className="columns">{this.isScoreCapture()}</td>
-                  <td className="columns">{this.isProfile()}</td>
-                  <td className="columns">{this.isNotifications()}</td>
+                  <td className="columns" onClick={() => this.GoTo("/scoreCapture")}>{this.isScoreCapture()} </td>
+                  <td className="columns" onClick={() => this.GoTo("/profile")}>{this.isProfile()}</td>
+                  <td className="columns" onClick={() => this.GoTo("/notify")}>{this.isNotifications()}</td>
                 </tr>
               </tbody>
             </table>
