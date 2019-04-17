@@ -316,7 +316,7 @@ class Register extends Component {
                     : "buttons-invalid round-button"
                 }
               >
-                Join
+                JOIN
               </Button>
             </div>
           </form>
