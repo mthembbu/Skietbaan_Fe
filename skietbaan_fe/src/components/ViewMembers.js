@@ -261,20 +261,10 @@ class ViewMembers extends Component {
 					</div>
 					<div className={this.state.getData === true ? "hidden" : "loading-message-members"}>Loading...</div>
 				</div>
-				{this.state.exportMsg === false ?
+				
 					<div className="table-search-members" style={{ height: this.getBodyHeight() }}>
 						{postItems}
-					</div> :
-					<div className="exportMsg-container"><label className="exportMsg-responce">
-						SBmembers.csv sent to fs@retrorabbit.co.za
-		</label>
-						<img
-							src={RedBullet}
-							className="export-success"
-							alt="Is a Member"
-						/>
-					</div>
-				}
+					</div> 
 			</div>
 		);
 	}
