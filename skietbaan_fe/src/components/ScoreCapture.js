@@ -659,7 +659,8 @@ class search extends Component {
                     width="310"
                     height="310"
                     className="video"
-                    autoPlay
+                    autoplay
+                    playsinline="true"
                   />
                 </div>
                 <div
@@ -676,7 +677,7 @@ class search extends Component {
                         : "submit-button-elements second float-left"
                     }
                   >
-                    <div className={this.state.currState !== 3 ? "hidden" : ""}>
+                    {/* TODO <div className={this.state.currState !== 3 ? "hidden" : ""}>
                       <div className="button-hover">
                         <div
                           id="FlashImage"
@@ -685,7 +686,7 @@ class search extends Component {
                           onClick={() => this.flash()}
                         />
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                   <div
                     className={
