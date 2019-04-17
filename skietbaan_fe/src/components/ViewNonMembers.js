@@ -111,7 +111,10 @@ class ViewNonMembers extends Component {
 						}
 					}),
 					getData: true
-				}));
+				}))
+				.catch(err => {
+					this.setState({ exceptionCaught: true })
+				});
 
 		fetch(BASE_URL + "/api/Features/SearchMember")
 			.then(res => res.json())
