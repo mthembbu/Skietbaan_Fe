@@ -39,7 +39,8 @@ class search extends Component {
       height: document.body.clientHeight,
       somethingClicked: false,
       maximumScore: 20,
-      getData: false
+      getData: false,
+      exceptionCaught: false
     };
 
     this.competitionClicked = this.competitionClicked.bind(this);
@@ -112,7 +113,7 @@ class search extends Component {
     });
     document.getElementById("scoreInput").value = "";
   }
-  
+
   componentDidMount() {
     this.props.selectedPage(2);
     fetch(BASE_URL + "/api/Competition", {
@@ -125,7 +126,7 @@ class search extends Component {
       .then(response => response.json())
       .then(data => this.setState({ competitionsList: data, getData: true }))
       .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+        this.setState({ exceptionCaught: true })
       });
 
     let token = getCookie("token");
@@ -144,7 +145,7 @@ class search extends Component {
       })
       .catch(function (data) { })
       .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+        this.setState({ exceptionCaught: true })
       });
   }
 
@@ -469,7 +470,7 @@ class search extends Component {
           </div>
         );
       }
-    } else if (this.state.getData === true) {
+    } else if (this.state.getData === true || this.state.exceptionCaught === true) {
       competitionItem.push(
         <div className="not-active">
           <div className="not-active-message">
@@ -526,26 +527,14 @@ class search extends Component {
                     Select Competition
                   </label>
                 </div>
-                <div
-                  className={
-                    this.state.getData
-                      ? "hidden"
-                      : "loading-container-add-score"
-                  }
-                >
-                  <div className={this.state.getData ? "hidden" : "loader"} />
-                  <div
-                    className={
-                      this.state.getData ? "hidden" : "target-loader-image"
-                    }
-                  />
-                  <div
-                    className={
-                      this.state.getData ? "hidden" : "loading-message"
-                    }
-                  >
-                    Loading...
-                  </div>
+                <div className={this.state.getData === false && this.state.exceptionCaught === false ?
+                  "loading-container-add-score" : "hidden "}>
+                  <div className={this.state.getData === false && this.state.exceptionCaught === false ?
+                    "loader" : "hidden"} />
+                  <div className={this.state.getData === false && this.state.exceptionCaught === false ?
+                    "target-loader-image" : "hidden"} />
+                  <div className={this.state.getData === false && this.state.exceptionCaught === false ?
+                    "loading-message" : "hidden "}>Loading...</div>
                 </div>
                 <div className="add-score-competition-container">
                   {competitionItem}
