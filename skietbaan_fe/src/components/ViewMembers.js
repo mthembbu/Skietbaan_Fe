@@ -21,7 +21,8 @@ class ViewMembers extends Component {
 			height: window.innerHeight,
 			width: window.innerWidth,
 			getData: false,
-			exportMsg: false
+			exportMsg: false,
+			exceptionCaught: false
 		};
 		this.getAllMembers = this.getAllMembers.bind(this);
 		this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -99,7 +100,7 @@ class ViewMembers extends Component {
 			}
 			)
 			.catch((err) => {
-				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+				this.setState({ exceptionCaught: true })
 			});
 	}
 
@@ -123,7 +124,7 @@ class ViewMembers extends Component {
 				})
 			)
 			.catch((err) => {
-				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+				this.setState({ exceptionCaught: true })
 			});
 	}
 
@@ -156,7 +157,10 @@ class ViewMembers extends Component {
 		}
 		const postItems = (
 			<div>
-				{(this.state.array.length === 0 && this.state.getData === true) ? <div className="view-non-error-container"><label className="view-non-error-msg">No members have been created yet.</label></div> :
+				{(this.state.array.length === 0 && this.state.getData === true) ?
+					<div className="view-non-error-container">
+						<label className="view-non-error-msg">No members have been created yet.</label>
+					</div> :
 					<table striped hover condensed className="table-member">
 						<tbody>
 							{this.state.array
@@ -215,7 +219,7 @@ class ViewMembers extends Component {
 														Start of Membership: <b>{post.memberStartDate.substring(0, 10)}</b>
 													</div>
 													<div className="view-member-phone-number">
-														Cell Number:<b> {post.phoneNumber}</b>
+														Cell Number:<b> {post.phoneNumber==="null"?"083":"none"}</b>
 													</div>
 												</div>
 											</Collapsible>
@@ -254,12 +258,16 @@ class ViewMembers extends Component {
 						</div></Col>
 					</Row>
 				</div>
-				<div className={this.state.getData === true ? "hidden" : "loader-container-members"}>
-					<div className={this.state.getData === true ? "hidden" : "loader"}>
+				<div className={this.state.getData === false && this.state.exceptionCaught === false ?
+					"loader-container-members" : "hidden"}>
+					<div className={this.state.getData === false && this.state.exceptionCaught === false ?
+						"loader" : "hidden"}>
 					</div>
-					<div className={this.state.getData === true ? "hidden" : "target-loader-image"}>
+					<div className={this.state.getData === false && this.state.exceptionCaught === false ?
+						"target-loader-image" : "hidden"}>
 					</div>
-					<div className={this.state.getData === true ? "hidden" : "loading-message-members"}>Loading...</div>
+					<div className={this.state.getData === false && this.state.exceptionCaught === false ?
+						"loading-message-members" : "hidden"}>Loading...</div>
 				</div>
 				{this.state.exportMsg === false ?
 					<div className="table-search-members" style={{ height: this.getBodyHeight() }}>

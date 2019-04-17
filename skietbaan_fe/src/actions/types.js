@@ -39,7 +39,7 @@ export const COMP_PAGE = "COMP_PAGE";
 export const UPDATE_COMP_STATUS = "UPDATE_COMP_STATUS";
 export const PARTICIPANTS_PER_COMP = "PARTICIPANTS_PER_COMP";
 export const CHECK_ADMIN = "CHECK_ADMIN";
-export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
+export const BASE_URL = "https://api.scoring.skietbaan.co.za";
 
 //leaderboard types
 export const FETCH_LEADERBOARDFILTER_DATA = "FETCH_LEADERBOARDFILTER_DATA";
@@ -65,6 +65,7 @@ export const GROUP_DATA_LOADING = "GROUP_DATA_LOADING";
 
 //notification types
 export const FETCH_NOTIFICATION = "FETCH_NOTIFICATION";
+export const FETCH_NUMBER_OF_NOTIFICATIONS = "FETCH_NUMBER_OF_NOTIFICATIONS";
 export const UPDATE_IS_READ = "UPDATE_IS_READ";
 export const DATA_LOADING = "DATA_LOADING";
 
