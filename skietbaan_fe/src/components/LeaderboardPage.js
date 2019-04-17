@@ -531,7 +531,7 @@ class LeaderboardPage extends Component {
                                                     transform: `translateX(${style.x}px)`,
                                                     opacity: style.opacity
                                                 }} >
-                                                    {this.state.selectedGroup == -1 ? "Overall rank" : (this.props.groups.length != 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
+                                                    {this.state.selectedGroup === -1 ? "Overall rank" : (this.props.groups.length !== 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
                                                 </td>
                                             )}
                                         </Motion>
