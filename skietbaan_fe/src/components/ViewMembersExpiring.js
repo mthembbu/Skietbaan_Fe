@@ -4,7 +4,9 @@ import Collapsible from 'react-collapsible';
 import { BASE_URL } from '../actions/types.js';
 import memberIcon from '../components/assets/greyMembershipIcon.png';
 import { getCookie } from '../components/cookie.js';
-
+import { Row, Col } from 'react-bootstrap';
+import Export from '../components/assets/Export.png';
+import RedBullet from '../components/assets/RedBullet.png';
 class ViewMembersExpiring extends Component {
 	constructor(props) {
 		super(props);
@@ -20,7 +22,8 @@ class ViewMembersExpiring extends Component {
 			navbarState: false,
 			height: window.innerHeight,
 			width: window.innerWidth,
-			getData: false
+			getData: false,
+			exportMsg:false
 		};
 		this.getExpiringMembers = this.getExpiringMembers.bind(this);
 		this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -179,6 +182,9 @@ class ViewMembersExpiring extends Component {
 		let date = curr.toISOString().substr(0, 10);
 		return date;
 	}
+	ExportData = () => {
+		this.setState({ exportMsg: true })
+	}
 
 	render() {
 		if (!getCookie('token')) {
@@ -193,6 +199,8 @@ class ViewMembersExpiring extends Component {
 			});
 		}
 		const postItems = (
+			 <div>
+			{(this.state.array.length === 0 && this.state.getData===true)? <div className="view-non-error-container"><label className="view-non-error-msg">No members have been created yet.</label></div>:
 			<table striped hover condensed className="table-member">
 				<tbody>
 					{this.state.array
@@ -258,22 +266,36 @@ class ViewMembersExpiring extends Component {
 							</tr>
 						))}
 				</tbody>
-			</table>
+			</table>}</div>
 		);
 		return (
 			<div className="centre-view-member">
 				<div className="username-search">
-					<div className="search">
-						<input
-							autoComplete="off"
-							type="text"
-							className="user-value"
-							placeholder="Enter Username"
-							id="usernameValue"
-							value={this.state.filterText}
-							onChange={this.onChangeText}
-						/>
-					</div>
+				<Row>
+						<Col>
+							<div className="search">
+								<input
+									autoComplete="off"
+									type="text"
+									className="user-value"
+									id="usernameValue"
+									placeholder="Enter Username"
+									value={this.state.filterText}
+									onChange={this.onChangeText}
+								/>
+
+
+							</div>
+						</Col>
+						<Col className="export-col-container">	<div className="export-container">
+							<img
+								src={Export}
+								className="export-icon"
+								alt="Is a Member"
+								onClick={() => this.ExportData()}
+							/>
+						</div></Col>
+					</Row>
 				</div>
 				<div className={this.state.getData === true ? "hidden" : "loader-container-members"}>
 					<div className={this.state.getData === true ? "hidden" : "loader"}>
@@ -282,9 +304,19 @@ class ViewMembersExpiring extends Component {
 					</div>
 					<div className={this.state.getData === true ? "hidden" : "loading-message-members"}>Loading...</div>
 				</div>
+				{this.state.exportMsg === false ?
 				<div className="table-search-members" style={{ height: this.getBodyHeight() }}>
 					{postItems}
-				</div>
+				</div>:<div className="exportMsg-container"><label className="exportMsg-responce">
+						SBmembers.csv sent to fs@retrorabbit.co.za
+				</label>
+						<img
+							src={RedBullet}
+							className="export-success"
+							alt="Is a Member"
+						/>
+					</div>
+				}
 			</div>
 		);
 	}
