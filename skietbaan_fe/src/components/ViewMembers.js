@@ -219,7 +219,7 @@ class ViewMembers extends Component {
 														Start of Membership: <b>{post.memberStartDate.substring(0, 10)}</b>
 													</div>
 													<div className="view-member-phone-number">
-														Cell Number:<b> {post.phoneNumber}</b>
+														Cell Number:<b> {post.phoneNumber==="null"?"083":"none"}</b>
 													</div>
 												</div>
 											</Collapsible>
@@ -269,10 +269,20 @@ class ViewMembers extends Component {
 					<div className={this.state.getData === false && this.state.exceptionCaught === false ?
 						"loading-message-members" : "hidden"}>Loading...</div>
 				</div>
-				
+				{this.state.exportMsg === false ?
 					<div className="table-search-members" style={{ height: this.getBodyHeight() }}>
 						{postItems}
-					</div> 
+					</div> :
+					<div className="exportMsg-container"><label className="exportMsg-responce">
+						SBmembers.csv sent to fs@retrorabbit.co.za
+		</label>
+						<img
+							src={RedBullet}
+							className="export-success"
+							alt="Is a Member"
+						/>
+					</div>
+				}
 			</div>
 		);
 	}

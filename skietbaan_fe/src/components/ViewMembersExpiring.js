@@ -135,7 +135,7 @@ class ViewMembersExpiring extends Component {
 	updateMember(index) {
 		let RequestObject = {
 			username: this.state.array[index].username,
-			memberExpiryDate: this.getCurrentDate() + 'T00:00:00'
+			memberExpiryDate:this.getCurrentDate() + 'T00:00:00'
 		};
 		fetch(BASE_URL + '/api/Features/RenewMembership', {
 			method: 'Post',
@@ -183,6 +183,7 @@ class ViewMembersExpiring extends Component {
 		let date = curr.toISOString().substr(0, 10);
 		return date;
 	}
+
 	ExportData = () => {
 		this.setState({ exportMsg: true })
 	}
@@ -201,10 +202,9 @@ class ViewMembersExpiring extends Component {
 		}
 		const postItems = (
 			<div>
-				{(this.state.array.length === 0 && this.state.getData === true) ?
-					<div className="view-non-error-container">
-						<label className="view-non-error-msg">No members have been created yet.</label>
-					</div> :
+
+				{(this.state.array.length === 0 && this.state.getData === true) ? <div className="view-non-error-container"><label className="view-non-error-msg">No users expiring yet.</label></div> :
+
 					<table striped hover condensed className="table-member">
 						<tbody>
 							{this.state.array
@@ -257,6 +257,15 @@ class ViewMembersExpiring extends Component {
 													</div>
 												}
 											>
+												<div>
+													<input
+														type="date"
+														className="view-non-members-text-boxes"
+														id="expdate"
+														value={this.state.datevalue}
+														onChange={this.handleDateChange}
+													/>
+												</div>
 												<div className="renew-container">
 													<button
 														className="view-exp-members"
