@@ -13,7 +13,8 @@ class Documents extends Component {
       collapseFilterLOGS: false,
       collapseFilterLOS: false,
       getDataUserLOGS: false,
-      getDataUserLOS: false
+      getDataUserLOS: false,
+      exceptionCaught: false
     };
     this.sendLOGS = this.sendLOGS.bind(this);
     this.sendLOS = this.sendLOS.bind(this);
@@ -35,7 +36,7 @@ class Documents extends Component {
         }
       })
       .catch(err => {
-        return Promise.reject();
+        this.setState({ exceptionCaught: true })
       });
 
     fetch(BASE_URL + "/api/Documents/UserLOS/" + token)
@@ -47,7 +48,7 @@ class Documents extends Component {
         }
       })
       .catch(err => {
-        return Promise.reject();
+        this.setState({ exceptionCaught: true })
       });
   }
 
@@ -113,16 +114,20 @@ class Documents extends Component {
     }
     return (
       <div className="documents-background ">
-        <div className={this.state.getDataUserLOGS && this.state.getDataUserLOS
-          ? "hidden" : "loader-container-documents"}>
-          <div className={this.state.getDataUserLOGS && this.state.getDataUserLOS
-            ? "hidden" : "loader"}>
+        <div className={(this.state.getDataUserLOGS && this.state.getDataUserLOS) === false
+          && this.state.exceptionCaught === false
+          ? "loader-container-documents" : "hidden"}>
+          <div className={(this.state.getDataUserLOGS && this.state.getDataUserLOS) === false
+            && this.state.exceptionCaught === false
+            ? "loader" : "hidden"}>
           </div>
-          <div className={this.state.getDataUserLOGS && this.state.getDataUserLOS
-            ? "hidden" : "target-loader-image"}>
+          <div className={(this.state.getDataUserLOGS && this.state.getDataUserLOS) === false
+            && this.state.exceptionCaught === false
+            ? "target-loader-image" : "hidden"}>
           </div>
-          <div className={this.state.getDataUserLOGS && this.state.getDataUserLOS
-            ? "hidden" : "loading-message-profile"}>Loading...</div>
+          <div className={(this.state.getDataUserLOGS && this.state.getDataUserLOS) === false
+            && this.state.exceptionCaught === false
+            ? "loading-message-profile" : "hidden"}>Loading...</div>
         </div>
         <div className={this.state.getDataUserLOGS && this.state.getDataUserLOS ? "documents-center" : "hidden"}>
           <div className="label-select-document">
