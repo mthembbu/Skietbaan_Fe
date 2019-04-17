@@ -345,7 +345,7 @@ class UserProfile extends Component {
                     "awards-container-background top-60px"}>
                     <div className="line adjust-top-line"></div>
                     <Row className="awards-container pad-top-30px">
-                        <Col xs={4}sm={4}md={4} className="push-bottom-49px">
+                        <Col xs={4}sm={4}md={4} className="push-bottom-49px remove-left-right-paddings">
                             {
                                 this.renderAccuracyCircle(
                                     this.getInitialAward(),
@@ -353,8 +353,8 @@ class UserProfile extends Component {
                                 )
                             }
                         </Col>
-                        <Col className="limit-width">
-                            <Row className="push-bottom-13px">
+                        <Col className="limit-width remove-left-right-paddings">
+                            <Row className="push-bottom-13px safari-flex">
                                 <Col xs={4}sm={4}md={4}>
                                     <label className={this.getInitialAward().accuracyAward.bronze ?
                                         "unlocked-award-text font-size-14px" : 
@@ -365,7 +365,7 @@ class UserProfile extends Component {
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
-                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
+                                <Col xs={6}sm={6}md={6} className="remove-left-right-paddings remove-paddings-for-desktop">
                                     <label className={this.getInitialAward().accuracyAward.bronze ? 
                                         "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
@@ -373,7 +373,7 @@ class UserProfile extends Component {
                                     </label>
                                 </Col>
                             </Row>
-                            <Row className="push-bottom-13px">
+                            <Row className="push-bottom-13px safari-flex">
                                 <Col xs={4}sm={4}md={4}>
                                 <label className={this.getInitialAward().accuracyAward.silver ? 
                                     "unlocked-award-text font-size-14px" : 
@@ -384,7 +384,7 @@ class UserProfile extends Component {
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
-                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
+                                <Col xs={6}sm={6}md={6} className="remove-left-right-paddings remove-paddings-for-desktop">
                                     <label className={this.getInitialAward().accuracyAward.silver ? 
                                         "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
@@ -402,7 +402,7 @@ class UserProfile extends Component {
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
-                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
+                                <Col xs={6}sm={6}md={6} className="remove-left-right-paddings remove-paddings-for-desktop">
                                     <label className={this.getInitialAward().accuracyAward.gold ? 
                                         "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
@@ -414,11 +414,11 @@ class UserProfile extends Component {
                     </Row>
                     <div className="line adjust-bottom-line"></div>
                     <Row className="awards-container">
-                        <Col xs={4}sm={4}md={4} className="push-bottom-49px">
+                        <Col xs={4}sm={4}md={4} className="push-bottom-49px remove-left-right-paddings">
                             {this.renderTotalCircle(this.getInitialAward(),
                             this.getIndexByCompetitionName(this.getInitialAward().competitionName))}
                         </Col>
-                        <Col className="limit-width">
+                        <Col className="limit-width remove-left-right-paddings">
                             <Row className="push-bottom-13px">
                                 <Col xs={4}sm={4}md={4}>
                                 <label className={this.getInitialAward().totalAward.bronze ? 
@@ -430,7 +430,7 @@ class UserProfile extends Component {
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
-                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
+                                <Col xs={6}sm={6}md={6} className="remove-left-right-paddings remove-paddings-for-desktop">
                                     <label className={this.getInitialAward().totalAward.bronze ? 
                                         "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
@@ -449,7 +449,7 @@ class UserProfile extends Component {
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
-                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
+                                <Col xs={6}sm={6}md={6} className="remove-left-right-paddings remove-paddings-for-desktop">
                                 <label className={this.getInitialAward().totalAward.silver ? 
                                         "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
@@ -468,7 +468,7 @@ class UserProfile extends Component {
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
-                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
+                                <Col xs={6}sm={6}md={6} className="remove-left-right-paddings remove-paddings-for-desktop">
                                     <label className={this.getInitialAward().totalAward.gold ? 
                                         "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
