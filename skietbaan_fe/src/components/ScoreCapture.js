@@ -653,9 +653,8 @@ class search extends Component {
                     width="310"
                     height="310"
                     className="video"
-                    autoPlay
+                    autoplay
                     playsinline="true"
-                    webkit-playsinline="true"
                   />
                 </div>
                 <div
