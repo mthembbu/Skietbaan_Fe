@@ -101,9 +101,6 @@ class LeaderboardPage extends Component {
         let token = getCookie("token");
         var CompNum = competition + 1;
         var GroupNum = group;
-        if (group != -1) {
-            GroupNum = group + 1;
-        }
         const filterSelection = {
             selectedCompetition: CompNum,
             selectedGroup: GroupNum,
@@ -132,7 +129,7 @@ class LeaderboardPage extends Component {
         if (this.props.selectedCompetitionName != undefined && this.props.selectedGroupName != undefined) {
             if (this.props.selectedCompetitionName.length > 0) {
                 for (var i = 0; i < this.props.competitions.length; i++) {
-                    if (this.props.competitions[i] === this.props.selectedCompetitionName) {
+                    if (this.props.competitions[i].label === this.props.selectedCompetitionName) {
                         this.setState({
                             selectedCompetition: i
                         });
@@ -177,7 +174,11 @@ class LeaderboardPage extends Component {
             this.props.updateSelectedGroup(this.props.groups[value].label);
         }
         this.validatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(this.state.selectedCompetition, (this.props.groups[value].value - 1), this.state.selectedRank);
+        if(value == -1){
+            this.getLeaderboardData(this.state.selectedCompetition, -1, this.state.selectedRank);
+        }else{
+            this.getLeaderboardData(this.state.selectedCompetition, (this.props.groups[value].value), this.state.selectedRank);
+        }
     }
     setSelectedRank = (value) => {
         this.setState({
