@@ -28,15 +28,7 @@ class Login extends Component {
     this.togglePassword = this.togglePassword.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.goToRegister = this.goToRegister.bind(this);
-    //this.disableButton = this.disableButton.bind(this);
   }
-
-  // disableButton() {
-  //   if (this.state.validForm === true) {
-  //     document.getElementById("roundButton").disabled = false;
-  //   } else document.getElementById("roundButton").disabled = true;
-  // }
-
   componentDidMount() {
     let found = false;
     if (getCookie("token")) {
@@ -96,7 +88,6 @@ class Login extends Component {
         [target.name]: target.value
       },
       () => {
-        //this.disableButton();
         let isValid = false;
         let stateUpdate = {
           invalidPassword: this.state.invalidPassword,
@@ -130,9 +121,7 @@ class Login extends Component {
             ...stateUpdate,
             validForm: isValid
           },
-          () => {
-            //this.disableButton();
-          }
+          () => {}
         );
       }
     );
