@@ -69,10 +69,12 @@
 }
 
 .round-button:disabled {
-  color: #c0c1c2;
+  color: #ebebeb;
   background-color: transparent;
-  border-color: #c0c1c2;
+  border-color: #ebebeb;
   opacity: 80;
+  border: 1px #ebebeb solid;
+  background-color: #fdfdfd;
 }
 
 .round-button:focus {
