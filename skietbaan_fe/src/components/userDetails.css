@@ -3,13 +3,13 @@
   margin-top: 70px;
 }
 
-.loader-container-details{
+.loader-container-details {
   margin-top: 150px;
   height: 160px;
 }
 
-@media screen and (min-width:576px){
-  .loader-container-details{
+@media screen and (min-width: 576px) {
+  .loader-container-details {
     margin-top: 170px;
     height: 165px;
   }
@@ -19,9 +19,8 @@
   padding-bottom: 150px;
 }
 .user-details-heading-container {
-  text-align: center;
   font-family: Helvetica;
-  font-size: 14px;
+  font-size: 12px;
   color: #be0000;
   font-weight: normal;
 }
@@ -29,8 +28,15 @@
   padding-top: 0;
 }
 
+.user-details-exp-icon {
+  width: 12px;
+  height: 12px;
+  margin-left: 5px;
+}
+
 .member-details-container {
-  text-align: center;
+  text-align: left;
+  padding-left: 15px;
   margin-top: 15px;
   width: 85%;
   margin-left: auto;
@@ -49,16 +55,24 @@
 }
 
 .user-details-member-label {
+  color: #555555;
+  font-family: Helvetica;
+  font-size: 12px;
+  padding-left: 5px;
+  font-weight: 500;
+}
+
+.user-details-member-label-expiring {
   color: #be0000;
   font-family: Helvetica;
-  font-size: 14px;
+  font-size: 12px;
   padding-left: 5px;
 }
 
 .user-details-Errors {
   color: #be0000;
   font-family: Helvetica;
-  font-size: 14px;
+  font-size: 12px;
   padding-left: 5px;
 }
 .user-details-main-container {
@@ -124,6 +138,6 @@
   bottom: 70px;
 }
 
-.user-details-white{
+.user-details-white {
   color: #ffffff;
 }

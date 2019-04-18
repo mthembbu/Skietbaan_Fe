@@ -129,10 +129,11 @@ class AddMembersGroup extends Component {
 
   render() {
     const postitems = (
-      <div
-        className="adding-check-edit"
-					<label className="edit-no-user-msg">All users/members have already been added to this group.</label>
-      >
+      <div className="adding-check-edit">
+        <label className="edit-no-user-msg">
+          All users/members have already been added to this group.
+        </label>
+
         {this.props.existing.length === 0 ? (
           <div className="edit-no-user-container">
             <label className="edit-no-user-msg">
