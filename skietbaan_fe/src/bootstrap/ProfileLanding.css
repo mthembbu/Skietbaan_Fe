@@ -1,63 +1,63 @@
-@media only screen and (min-width: 576px){
-    .award-content-container{
-        margin-top: 56px;
-    }
+@media only screen and (min-width: 576px) {
+  .award-content-container {
+    margin-top: 56px;
+  }
 
-    .user-details-main-container{
-        width: 55% !important;
-    }
-    .profile-bootstrap-col-center-container{
-        background: white;
-        padding: 0;
-    }
-    .documents_background{
-        width: 55% !important;
-    }
+  .user-details-main-container {
+    width: 59% !important;
+  }
+  .profile-bootstrap-col-center-container {
+    background: white;
+    padding: 0;
+  }
+  .documents_background {
+    width: 55% !important;
+  }
 
-    .profile-landing-container{
-        height: 86vh;
-        margin-top: 56px;
-    }
+  .profile-landing-container {
+    height: 86vh;
+    margin-top: 56px;
+  }
 
-    .pad-award-container{
-        padding-top: 86px !important;
-    }
+  .pad-award-container {
+    padding-top: 86px !important;
+  }
 
-    .fix-top{
-        z-index: 1;
-        position: absolute !important;
-        width: 100% !important;
-        background: white;
-    }
+  .fix-top {
+    z-index: 1;
+    position: absolute !important;
+    width: 100% !important;
+    background: white;
+  }
 
-    .fix-buttons-rectangle{
-        position: absolute !important;
-    }
+  .fix-buttons-rectangle {
+    position: absolute !important;
+  }
 
-    .awards-container .col-8 .col-sm-8{
-        max-width: 100% !important;
-        background: black;
-    }
+  .awards-container .col-8 .col-sm-8 {
+    max-width: 100% !important;
+    background: black;
+  }
 }
 
-@media only screen and (min-width: 354px) and (max-width: 368px){
-    .profile-buttons-container button{
-        width: 83px !important;
-    }
+@media only screen and (min-width: 354px) and (max-width: 368px) {
+  .profile-buttons-container button {
+    width: 83px !important;
+  }
 }
 
-@media only screen and (max-width: 353px){
-    .profile-buttons-container button{
-        width: 70px !important;
-    }
+@media only screen and (max-width: 353px) {
+  .profile-buttons-container button {
+    width: 70px !important;
+  }
 }
 
-.profile-landing-container{
-    overflow-x: hidden;
-    overflow-y: overlay;
-    height: 100vh;
-    padding-bottom: 125px;
-    background-color: white;
+.profile-landing-container {
+  overflow-x: hidden;
+  overflow-y: overlay;
+  height: 100vh;
+  padding-bottom: 125px;
+  background-color: white;
 }
 
 .ios-profile-landing-container{
@@ -73,164 +73,164 @@
     color: white;
 }
 
-.button-style-inactive{
-    background-color: transparent;
+.button-style-inactive {
+  background-color: transparent;
 }
 
 .profile-buttons-container {
-    width: 100%;
-    position: relative;
-    bottom: 12px;
+  width: 100%;
+  position: relative;
+  bottom: 12px;
 }
 
-.profile-buttons-container button{
-    outline: none;
-    width: 86px;
-    height: 32px;
+.profile-buttons-container button {
+  outline: none;
+  width: 86px;
+  height: 32px;
 }
 
-.medal-img img{
-    width: 14px; 
-    height: 23px;
+.medal-img img {
+  width: 14px;
+  height: 23px;
 }
 
-.docs-img-scale img{
-    width: 17px; 
-    height: 23px;
+.docs-img-scale img {
+  width: 17px;
+  height: 23px;
 }
 
-.details-img-scale img{
-    width: 22px; 
-    height: 24px;
+.details-img-scale img {
+  width: 22px;
+  height: 24px;
 }
 
-.stats-img-scale img{
-    width: 22px; 
-    height: 22px;
+.stats-img-scale img {
+  width: 22px;
+  height: 22px;
 }
 
-.gun-overlay-img-background{
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-image: url("../components/assets/gunOverlay.png");
-    width: 151px;
-    margin-left: -9px;
-    margin-top: 4px;
-    border-bottom-left-radius: 10px;
-    height: 63px;
+.gun-overlay-img-background {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("../components/assets/gunOverlay.png");
+  width: 151px;
+  margin-left: -9px;
+  margin-top: 4px;
+  border-bottom-left-radius: 10px;
+  height: 63px;
 }
 
-.profile-title{
-    font-size: 20px;
-    color: #fdfdfd;
-    font-weight: 700;
-    padding-top: 14px;
-    padding-left: 16px;
+.profile-title {
+  font-size: 20px;
+  color: #fdfdfd;
+  font-weight: 700;
+  padding-top: 14px;
+  padding-left: 16px;
 }
 
-.profile-navigation-text{
-    font-size: 12px;
-    font-weight: bold;
-    line-height: 14px;
-    font-family: Helvetica;
-    color: #BE0000;
+.profile-navigation-text {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 14px;
+  font-family: Helvetica;
+  color: #be0000;
 }
 
-.profile-navigation-text-align{
-    text-align: center;
-    margin-top: 1px;
-    font-weight: bold;
+.profile-navigation-text-align {
+  text-align: center;
+  margin-top: 1px;
+  font-weight: bold;
 }
 
-.fix-top{
-    z-index: 2;
-    position: fixed;
-    width: 100%;
-    background: white;
-    padding-bottom: 2px;
+.fix-top {
+  z-index: 2;
+  position: fixed;
+  width: 100%;
+  background: white;
+  padding-bottom: 2px;
 }
 
-.pad-top-50px{
-    padding-top: 50px;
+.pad-top-50px {
+  padding-top: 50px;
 }
 
-.pad-bottom-13px{
-    padding-bottom: 13px;
+.pad-bottom-13px {
+  padding-bottom: 13px;
 }
 
-.pad-bottom-0px{
-    padding-bottom: 0px;
+.pad-bottom-0px {
+  padding-bottom: 0px;
 }
 
-.lay-horizontal{
-    display: flex;
+.lay-horizontal {
+  display: flex;
 }
 
-.top-bar-rectangle{
-    height: 67px;
-    width: 100%;
-    margin-left: 0px;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    background-image: linear-gradient(to right, #ef3024 , #Dc0600);
-    box-shadow: -2px 0 14px -1px #674D4D;
+.top-bar-rectangle {
+  height: 67px;
+  width: 100%;
+  margin-left: 0px;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  background-image: linear-gradient(to right, #ef3024, #dc0600);
+  box-shadow: -2px 0 14px -1px #674d4d;
 }
 
-.logout-button-right{
-    position:absolute;
-    right:20px;
-    top:0;
+.logout-button-right {
+  position: absolute;
+  right: 20px;
+  top: 0;
 }
 
-.logout-button {	
-    height: 38px;	
-    width: 88px;
-    padding-top: 5px;
-    margin-top: 14px;
-    padding-left: 20px;
-    border: 1px solid #FFFFFF;	
-    border-radius: 21px;	
+.logout-button {
+  height: 38px;
+  width: 88px;
+  padding-top: 5px;
+  margin-top: 14px;
+  padding-left: 20px;
+  border: 1px solid #ffffff;
+  border-radius: 21px;
 }
 
-.logout-text {	
-    color: #FAFAFA;	
-    font-size: 16px;	
-    font-weight: 300;	
-    text-align: center;
+.logout-text {
+  color: #fafafa;
+  font-size: 16px;
+  font-weight: 300;
+  text-align: center;
 }
 
-.buttons-row{
-    margin-left: 0%;
-    margin-top: 22px;
-    width: inherit;
+.buttons-row {
+  margin-left: 0%;
+  margin-top: 22px;
+  width: inherit;
 }
 
-.button-text{
-    font-size: 14px;
-    font-weight: 400;
+.button-text {
+  font-size: 14px;
+  font-weight: 400;
 }
 
-.profile-center-top-buttons{
-    display: inline-flex;
-    justify-content: center;
+.profile-center-top-buttons {
+  display: inline-flex;
+  justify-content: center;
 }
 
-#pad-middle-button{
-    padding-right: 3px;
-    text-align: center;
+#pad-middle-button {
+  padding-right: 3px;
+  text-align: center;
 }
 
-.unstyle-button{
-    border: none;
-    padding: 0;
-    background: none;
-    margin-top: 0px;
+.unstyle-button {
+  border: none;
+  padding: 0;
+  background: none;
+  margin-top: 0px;
 }
 
-.unstyle-button-active{
-    background-color: #BE0000;
-    color: white;
-    border-radius: 18px;
-    border: none;
-    box-shadow: 0px 3px 8px -3px #674d4d;
+.unstyle-button-active {
+  background-color: #be0000;
+  color: white;
+  border-radius: 18px;
+  border: none;
+  box-shadow: 0px 3px 8px -3px #674d4d;
 }

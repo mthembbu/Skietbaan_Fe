@@ -39,8 +39,8 @@ class AddMembersGroup extends Component {
     window.addEventListener("resize", this.updateDimensions);
   }
   getBodyHeight() {
-		if (this.state.width < 575) {
-      return (this.state.height - 275) +"px";
+    if (this.state.width < 575) {
+      return this.state.height - 275 + "px";
     } else {
       return "57vh";
     }
