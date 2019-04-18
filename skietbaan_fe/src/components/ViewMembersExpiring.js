@@ -172,7 +172,6 @@ class ViewMembersExpiring extends Component {
 		var now = new Date();
 
 		if (selectedDate <= now) {
-			console.log("we in")
 			this.setState({ dateCheck: false })
 		} else {
 			this.setState({ dateCheck: true })
@@ -273,7 +272,7 @@ class ViewMembersExpiring extends Component {
 												<div>
 													<input
 														type="date"
-														className="view-non-members-text-boxes"
+														className="view-expiring-members-text-boxes"
 														id="expdate"
 														value={this.state.datevalue}
 														onChange={this.handleDateChange}
