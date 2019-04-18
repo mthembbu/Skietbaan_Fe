@@ -110,9 +110,7 @@ class CreateComp extends Component {
 		if(this.state.Name.length <= 1 ){
 			this.setState({isNameValid:false});
 		}
-		// if(/\S/.test(strcheck)) {
-		// 	this.setState({Name: this.state.Namestrcheck.substr(0,0)});
-		// }
+
 		if(strcheck === "   "){
 
 		}
