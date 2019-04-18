@@ -219,7 +219,7 @@ class CreateComp extends Component {
 	}
 	/** The method that checks all the inputs if whether they are valid or not*/
 	validateAll(){
-							if(this.state.Name.length != 0 && this.state.BestScoresNumber.length != 0 && this.state.Hours.length != 0 && this.state.MaximumScore !=0){
+							if(this.state.Name.length !== 0 && this.state.BestScoresNumber.length !== 0 && this.state.Hours.length !== 0 && this.state.MaximumScore !==0){
 									this.setState({validInputs:true});
 									return true;
 							}else{
@@ -519,10 +519,10 @@ class CreateComp extends Component {
 									variant="secondary"
 									type="submit"
 									id="submit-btn"
-									className={this.state.Name.length != 0 && this.state.BestScoresNumber.length != 0 && this.state.Hours.length != 0 && this.state.MaximumScore !=0 &&
-														 (this.state.bronzeAccuracy.length != 0 && this.state.bronzeTotal.length != 0) &&
-														 (this.state.silverAccuracy.length != 0 && this.state.silverTotal.length != 0) &&
-														 (this.state.goldAccuracy.length != 0 && this.state.goldTotal.length != 0)	?	"comp-success-submit-btn":"comp-not-success-submit-btn"}
+									className={this.state.Name.length !== 0 && this.state.BestScoresNumber.length !== 0 && this.state.Hours.length !== 0 && this.state.MaximumScore !==0 &&
+														 (this.state.bronzeAccuracy.length !== 0 && this.state.bronzeTotal.length !== 0) &&
+														 (this.state.silverAccuracy.length !== 0 && this.state.silverTotal.length !== 0) &&
+														 (this.state.goldAccuracy.length !== 0 && this.state.goldTotal.length !== 0)	?	"comp-success-submit-btn":"comp-not-success-submit-btn"}
 								>
 									CREATE COMPETITION
 							</button>
