@@ -459,7 +459,7 @@ class ViewComp extends Component {
 
                                 <Row>
                                   <Col xs={4} md={4}>
-                                    <div class="accuracy-label">
+                                    <div class="gold-label">
                                       Gold Award:{" "}
                                     </div>
                                   </Col>
