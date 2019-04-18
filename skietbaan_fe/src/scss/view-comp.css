@@ -138,7 +138,7 @@
 	position: center;
 	text-align: center t;
 }
-
+/** A CSS for displaying toggled table*/
 .table-competition-row {
 	border-bottom: solid 1px #bbbcbd;
 	padding-bottom: 1px;
@@ -154,9 +154,17 @@
 	width: 75%;
 }
 
+.toggled-td-col{
+	vertical-align: top;
+	padding-top: 11px;
+	padding-bottom: 11px;
+	width: 75%;
+	background-color:#FFFFFF; 
+}
+
 .page-contents {
-	background-color: transparent;
-	padding: 10%;
+	background-color: #F6F6F6;
+	padding: 5%;
 	z-index: 1;
     overflow-y: overlay;
 }
@@ -241,6 +249,17 @@
 }
 
 .accuracy-label {
+	height: 100%;
+	color: rgba(0, 0, 0, 0.6);
+	font-family: Helvetica;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 0.13px;
+	line-height: 16px;
+	padding: 0px;
+}
+
+.bronze-label{
 	height: 100%;
 	color: rgba(0, 0, 0, 0.6);
 	font-family: Helvetica;
@@ -393,6 +412,7 @@
 .table-row-requiremets {
 	display: table-row;
 	width: 100%;
+	background-color: #FFFFFF;
 }
 
 .table-row-requiremets-hide {
@@ -401,6 +421,7 @@
 }
 .standards-label{
 	margin-bottom: 10px;
+	margin-top: 10px;
 }
 /*competitions list display css*/
 .standard-header-label {
@@ -505,7 +526,11 @@
 @media only screen and (max-width: 575px) {
 	/*mobile*/
    .page-contents {
-	height: 72vh !important;
+	height: 62vh !important;
 	margin-top: -3vh;
+	background-color: #F6F6F6;
+	padding: 2%;
+	margin-top:10px;
+	padding-bottom: 15px;
    }
 }

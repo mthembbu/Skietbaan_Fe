@@ -15,7 +15,7 @@ const initialState = {
   participants: [],
   dict: {},
   compSelectedPage: 1,
-  isExist: false,
+  isCreated: false,
   load: null
 };
 /** A function to detect the state change*/
@@ -24,7 +24,7 @@ export default function(state = initialState, action) {
     case NEW_COMP:
       return {
         ...state,
-        isExist: action.payload
+        isCreated: action.payload
       };
     case FETCH_COMP:
       return {
