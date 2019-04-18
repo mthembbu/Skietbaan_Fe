@@ -18,30 +18,30 @@ class CreateComp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-			Name: "",
-			BestScoresNumber: '',
-			Hours: '',
-			Status: true,
-			MaximumScore: '',
-			isExist: false,	
-			toggleRequirements: false,
-			isCreated:false,
-			errorMessageBestScoreNum:"",
-			errorMessageMaxScore:"",
-			errorMessageHours:"",
-			errorMessageName:"",
-			isBestScoreValid: true,
-			isMaxScoreValid:true,
-			isHoursValid:true,
-			isNameValid:false,
-			bronzeAccuracy: '',
-			bronzeTotal: '',
-			silverAccuracy: '',
-			silverTotal: '',
-			goldAccuracy: '',
-			goldTotal: '',
-			compID:'',
-			validInputs:false,
+      Name: "",
+      BestScoresNumber: "",
+      Hours: "",
+      Status: true,
+      MaximumScore: "",
+      isExist: false,
+      toggleRequirements: false,
+      isCreated: false,
+      errorMessageBestScoreNum: "",
+      errorMessageMaxScore: "",
+      errorMessageHours: "",
+      errorMessageName: "",
+      isBestScoreValid: true,
+      isMaxScoreValid: true,
+      isHoursValid: true,
+      isNameValid: false,
+      bronzeAccuracy: "",
+      bronzeTotal: "",
+      silverAccuracy: "",
+      silverTotal: "",
+      goldAccuracy: "",
+      goldTotal: "",
+      compID: "",
+      validInputs: false,
       height: window.innerHeight,
       width: window.innerWidth,
       token: getCookie("token")
@@ -60,7 +60,7 @@ class CreateComp extends Component {
     this.onChangeSilverTotal = this.onChangeSilverTotal.bind(this);
     this.onChangeGoldAccuracy = this.onChangeGoldAccuracy.bind(this);
     this.onChangeGoldTotal = this.onChangeGoldTotal.bind(this);
-		this.validateAll = this.validateAll.bind(this);
+    this.validateAll = this.validateAll.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
     this.getBodyHeight = this.getBodyHeight.bind(this);
   }
@@ -91,33 +91,30 @@ class CreateComp extends Component {
 
   /** A method that detects the change in the change in th textfield */
   onChangeCompName(event) {
-		let isValid = this.validateCompName();
-		if(!isValid){
-			this.setState({errorMessageName:"COMPETITION ALREADY EXISTS!"});
-			this.setState({isNameValid:isValid});
-		}
-		else {
-			this.setState({isExist:false,errorMessageName:""});
-		}
-		if(event.target.value[0] === " "){
-			event.target.value = event.target.value.slice(0,0);
-		}		
-		this.setState({ [event.target.name]: event.target.value });
-	}
-	validateCompName(){
-		var strcheck = this.state.Name;
-		if(this.state.Name.length <= 1 ){
-			this.setState({isNameValid:false});
-		}
+    let isValid = this.validateCompName();
+    if (!isValid) {
+      this.setState({ errorMessageName: "COMPETITION ALREADY EXISTS!" });
+      this.setState({ isNameValid: isValid });
+    } else {
+      this.setState({ isExist: false, errorMessageName: "" });
+    }
+    if (event.target.value[0] === " ") {
+      event.target.value = event.target.value.slice(0, 0);
+    }
+    this.setState({ [event.target.name]: event.target.value });
+  }
+  validateCompName() {
+    var strcheck = this.state.Name;
+    if (this.state.Name.length <= 1) {
+      this.setState({ isNameValid: false });
+    }
 
-		if(strcheck === "   "){
-
-		}
-	
-	}
-	resetCompProperties(){
-		this.setState({isExist:false, isNameValid:true});
-		}
+    if (strcheck === "   ") {
+    }
+  }
+  resetCompProperties() {
+    this.setState({ isExist: false, isNameValid: true });
+  }
   /** the method that detects the change in BestSCore */
   onChangeBestScoreNum(event) {
     if (event.target.value > 12)
@@ -131,7 +128,7 @@ class CreateComp extends Component {
   }
   validateBestScoreNumber() {
     var check = this.state.BestScoresNumber;
-		if(this.state.BestScoresNumber.length === 0 )
+    if (this.state.BestScoresNumber.length === 0)
       this.setState({ isBestScoreValid: false });
     if (check.slice(0, 1) >= 2 && check.length > 1) return false;
     else return true;
@@ -149,165 +146,183 @@ class CreateComp extends Component {
   }
   validateMaxScore() {
     var check = this.state.MaximumScore;
-		if(this.state.MaximumScore.length === 0)
-			this.setState({isMaxScoreValid:false});
-		if(check.slice(0,3) > 100 || ((check.slice(0,1) > 1 || check.slice(0,2) >99) && check.length > 3) )
-			return false;
-		else return true;		
+    if (this.state.MaximumScore.length === 0)
+      this.setState({ isMaxScoreValid: false });
+    if (
+      check.slice(0, 3) > 100 ||
+      ((check.slice(0, 1) > 1 || check.slice(0, 2) > 99) && check.length > 3)
+    )
+      return false;
+    else return true;
+  }
+  /** The method that detects the changes on the  hours input */
+  onChangeHours(event) {
+    if (event.target.value > 3)
+      event.target.value = event.target.value.substr(0, 3);
+    let isValid = this.validateHours();
+    if (!isValid) {
+      this.setState({ errorMessageHours: "INVALID MAXIMUM HOURS!" });
+      this.setState({ isHoursValid: isValid });
+    } else this.setState({ errorMessageHours: "" });
+    this.setState({ Hours: event.target.value });
+  }
+  validateHours() {
+    var check = this.state.Hours;
+    if (this.state.Hours.length === 0) this.setState({ isHoursValid: false });
+    if (
+      check.slice(0, 3) > 360 ||
+      ((check.slice(0, 1) > 3 || check.slice(0, 2) > 36) && check.length > 3)
+    )
+      return false;
+    else return true;
+  }
+  /** **********************************************************************************************/
 
-	}
-	/** The method that detects the changes on the  hours input */
-	onChangeHours(event){
-		if(event.target.value > 3)
-			event.target.value = event.target.value.substr(0,3);
-		let isValid = this.validateHours();	
-			if(!isValid){
-				this.setState({errorMessageHours:"INVALID MAXIMUM HOURS!"});
-				this.setState({isHoursValid:isValid});
-			}
-			else 
-				this.setState({errorMessageHours:""});	
-			this.setState({Hours: event.target.value});
-	}
-	validateHours(){
-		var check = this.state.Hours;
-		if(this.state.Hours.length === 0)
-			this.setState({isHoursValid:false});
-		if(check.slice(0,3) > 360 || ((check.slice(0,1) > 3 || check.slice(0,2) >36) && check.length > 3) )
-			return false;
-		else return true;
-	}
-/** **********************************************************************************************/	
-	/** The standards onChange Listeners: */
-	onChangeBronzeAccuracy(event){
-		if(event.target.value > 3)
-			event.target.value = event.target.value.substr(0,3);
-		this.setState({bronzeAccuracy:event.target.value});
-	}
-	onChangeBronzeTotal(event){
-		if(event.target.value > 3)
-			event.target.value = event.target.value.substr(0,3);
-		this.setState({bronzeTotal:event.target.value});
-	}
-	onChangeSilverAccuracy(event){
-		if(event.target.value > 3)
-			event.target.value = event.target.value.substr(0,3);
-		this.setState({silverAccuracy:event.target.value});
-	}
-	onChangeSilverTotal(event){
-		if(event.target.value > 3)
-			event.target.value = event.target.value.substr(0,3);
-		this.setState({silverTotal:event.target.value});
-	}
-	onChangeGoldAccuracy(event){
-		if(event.target.value > 3)
-			event.target.value = event.target.value.substr(0,3);
-		this.setState({goldAccuracy:event.target.value});
-	}
-	onChangeGoldTotal(event){
-		if(event.target.value > 3)
-			event.target.value = event.target.value.substr(0,3);
-		this.setState({goldTotal:event.target.value});
-	}
-	/** The method that checks all the inputs if whether they are valid or not*/
-	validateAll(){
-							if(this.state.Name.length !== 0 && this.state.BestScoresNumber.length !== 0 && this.state.Hours.length !== 0 && this.state.MaximumScore !==0){
-									this.setState({validInputs:true});
-									return true;
-							}else{
-										return false;
-							}
-	}
-	/** A method that handles the submit enent for the submit button*/
-	async onSubmit(e) {
-		if(this.validateAll())
-		{
-		/** Preventing the default button action event to occur automatically*/
-		e.preventDefault();
-		//calling the method to create a post => compData for the create competition
-		const compData = {
-			Name: this.state.Name /**TODO: Don't forget to change to lowercase to avoid case sensitivity conflicts*/,
-			BestScoresNumber: this.state.BestScoresNumber,
-			Hours: this.state.Hours,
-			Status: true,
-			MaximumScore: this.state.MaximumScore
-		};
-		const BronzeData = {
-			standard: 'Bronze',
-			accuracy: this.state.bronzeAccuracy,
-			total: this.state.bronzeTotal
-		};
-		const SilverData = {
-			standard: 'Silver',
-			accuracy: this.state.silverAccuracy,
-			total: this.state.silverAccuracy
-		};
-		const GoldData = {
-			standard: 'Gold',
-			accuracy: this.state.goldAccuracy,
-			total: this.state.goldTotal
-		};
-		const RData = [BronzeData, SilverData, GoldData];	
-		const requestedObj={competition:compData,GetRequirements:RData}
-		await this.props.createComp(requestedObj);
-		/** Checking whether the competition has been created or not*/
-		if(this.props.isCreated === true || this.props.isCreated === false){
-			setTimeout(()=>{ 
-			if(this.props.isCreated === true){
-				this.props.compSelectedPages(2);
-				this.props.pageState(0);
-			}	else {
-				this.setState({isExist:true});
-			}
-		},1000);		}
-		
-	}	
-	}
+  /** The standards onChange Listeners: */
+  onChangeBronzeAccuracy(event) {
+    if (event.target.value > 3)
+      event.target.value = event.target.value.substr(0, 3);
+    this.setState({ bronzeAccuracy: event.target.value });
+  }
+  onChangeBronzeTotal(event) {
+    if (event.target.value > 3)
+      event.target.value = event.target.value.substr(0, 3);
+    this.setState({ bronzeTotal: event.target.value });
+  }
+  onChangeSilverAccuracy(event) {
+    if (event.target.value > 3)
+      event.target.value = event.target.value.substr(0, 3);
+    this.setState({ silverAccuracy: event.target.value });
+  }
+  onChangeSilverTotal(event) {
+    if (event.target.value > 3)
+      event.target.value = event.target.value.substr(0, 3);
+    this.setState({ silverTotal: event.target.value });
+  }
+  onChangeGoldAccuracy(event) {
+    if (event.target.value > 3)
+      event.target.value = event.target.value.substr(0, 3);
+    this.setState({ goldAccuracy: event.target.value });
+  }
+  onChangeGoldTotal(event) {
+    if (event.target.value > 3)
+      event.target.value = event.target.value.substr(0, 3);
+    this.setState({ goldTotal: event.target.value });
+  }
+  /** The method that checks all the inputs if whether they are valid or not*/
+  validateAll() {
+    if (
+      this.state.Name.length !== 0 &&
+      this.state.BestScoresNumber.length !== 0 &&
+      this.state.Hours.length !== 0 &&
+      this.state.MaximumScore !== 0
+    ) {
+      this.setState({ validInputs: true });
+      return true;
+    } else {
+      return false;
+    }
+  }
+  /** A method that handles the submit enent for the submit button*/
+  async onSubmit(e) {
+    if (this.validateAll()) {
+      /** Preventing the default button action event to occur automatically*/
+      e.preventDefault();
+      //calling the method to create a post => compData for the create competition
+      const compData = {
+        Name: this.state
+          .Name /**TODO: Don't forget to change to lowercase to avoid case sensitivity conflicts*/,
+        BestScoresNumber: this.state.BestScoresNumber,
+        Hours: this.state.Hours,
+        Status: true,
+        MaximumScore: this.state.MaximumScore
+      };
+      const BronzeData = {
+        standard: "Bronze",
+        accuracy: this.state.bronzeAccuracy,
+        total: this.state.bronzeTotal
+      };
+      const SilverData = {
+        standard: "Silver",
+        accuracy: this.state.silverAccuracy,
+        total: this.state.silverAccuracy
+      };
+      const GoldData = {
+        standard: "Gold",
+        accuracy: this.state.goldAccuracy,
+        total: this.state.goldTotal
+      };
+      this.props.fetchNumberOfNotification(this.state.token);
+      const RData = [BronzeData, SilverData, GoldData];
+      const requestedObj = { competition: compData, GetRequirements: RData };
+      await this.props.createComp(requestedObj);
+      /** Checking whether the competition has been created or not*/
+      if (this.props.isCreated === true || this.props.isCreated === false) {
+        setTimeout(() => {
+          if (this.props.isCreated === true) {
+            this.props.compSelectedPages(2);
+            this.props.pageState(0);
+          } else {
+            this.setState({ isExist: true });
+          }
+        }, 1000);
+      }
+    }
+  }
 
-	changeToggle(){
-		this.setState({toggleRequirements: !this.state.toggleRequirements});
-	}
-	render() {
-		return (
-			<div className="create-comp-container" style={{ maxHeight: this.getBodyHeight() ,height: "fit-content"}}>
-						<Form onSubmit={this.onSubmit}>
-							<div className="containers-input">
-								<div className="comp-input-control">
-									<input
-										className="comp-input"
-										type="text"
-										name="Name"
-										id="titleInput"
-										required
-										autoComplete="off"
-										autoCorrect="off"
-										placeholder="Competition Name"
-										value={this.state.Name}
-										onChange={this.onChangeCompName}
-									/>
-									<div style={{fontSize:12,color:"red"}} className={this.state.isExist ? 'error-comp-message' : 'hidden'}>
-									COMPETITION ALREADY EXISTS!
-							</div>
-								</div>
-								
-							</div>
-							<div className="comp-input-control">
-								<input
-									className="comp-input"
-									type="number"
-									name="BestScoresNumber"
-									id="NumOfScores"
-									min={1}
-									max={12}
-									required
-									autoComplete="off"
-									autoCorrect="off"
-									placeholder="Number of Best Scores"
-									value={this.state.BestScoresNumber}
-									onChange={this.onChangeBestScoreNum}
-								/>
-								<div style={{fontSize:12,color:"red"}}>{this.state.isBestScoreValid ? null : this.state.errorMessageBestScoreNum}</div>
-							</div>
+  changeToggle() {
+    this.setState({ toggleRequirements: !this.state.toggleRequirements });
+  }
+  render() {
+    return (
+      <div
+        className="create-comp-container"
+        style={{ maxHeight: this.getBodyHeight(), height: "fit-content" }}
+      >
+        <Form onSubmit={this.onSubmit}>
+          <div className="containers-input">
+            <div className="comp-input-control">
+              <input
+                className="comp-input"
+                type="text"
+                name="Name"
+                id="titleInput"
+                required
+                autoComplete="off"
+                autoCorrect="off"
+                placeholder="Competition Name"
+                value={this.state.Name}
+                onChange={this.onChangeCompName}
+              />
+              <div
+                style={{ fontSize: 12, color: "red" }}
+                className={this.state.isExist ? "error-comp-message" : "hidden"}
+              >
+                COMPETITION ALREADY EXISTS!
+              </div>
+            </div>
+          </div>
+          <div className="comp-input-control">
+            <input
+              className="comp-input"
+              type="number"
+              name="BestScoresNumber"
+              id="NumOfScores"
+              min={1}
+              max={12}
+              required
+              autoComplete="off"
+              autoCorrect="off"
+              placeholder="Number of Best Scores"
+              value={this.state.BestScoresNumber}
+              onChange={this.onChangeBestScoreNum}
+            />
+            <div style={{ fontSize: 12, color: "red" }}>
+              {this.state.isBestScoreValid
+                ? null
+                : this.state.errorMessageBestScoreNum}
+            </div>
+          </div>
 
           <div className="comp-input-control">
             <input
@@ -383,7 +398,7 @@ class CreateComp extends Component {
                     </Row>
                     <Row className="bronze-row">
                       <Col xs={4} md={4}>
-																	<div className="accuracy-header-label">
+                        <div className="accuracy-header-label" />
                       </Col>
                       <Col xs={4} md={4}>
                         <div className="">
@@ -424,7 +439,7 @@ class CreateComp extends Component {
 
                     <Row className="silver-row">
                       <Col xs={4} md={4}>
-																	<div className="silver-label">
+                        <div className="silver-label" />
                       </Col>
                       <Col xs={4} md={4}>
                         <div className="">
@@ -465,7 +480,7 @@ class CreateComp extends Component {
 
                     <Row>
                       <Col xs={4} md={4}>
-																	<div className="accuracy-label">
+                        <div className="accuracy-label" />
                       </Col>
                       <Col xs={4} md={4}>
                         <div className="">
@@ -511,16 +526,26 @@ class CreateComp extends Component {
 
           <div className="comp-submit-btn-container">
             <button
-									disabled = {this.validateAll}
+              disabled={this.validateAll}
               variant="secondary"
               type="submit"
               id="submit-btn"
-									className={this.state.Name.length !== 0 && this.state.BestScoresNumber.length !== 0 && this.state.Hours.length !== 0 && this.state.MaximumScore !==0 &&
-														 (this.state.bronzeAccuracy.length !== 0 && this.state.bronzeTotal.length !== 0) &&
-														 (this.state.silverAccuracy.length !== 0 && this.state.silverTotal.length !== 0) &&
-														 (this.state.goldAccuracy.length !== 0 && this.state.goldTotal.length !== 0)	?	"comp-success-submit-btn":"comp-not-success-submit-btn"}
+              className={
+                this.state.Name.length !== 0 &&
+                this.state.BestScoresNumber.length !== 0 &&
+                this.state.Hours.length !== 0 &&
+                this.state.MaximumScore !== 0 &&
+                (this.state.bronzeAccuracy.length !== 0 &&
+                  this.state.bronzeTotal.length !== 0) &&
+                (this.state.silverAccuracy.length !== 0 &&
+                  this.state.silverTotal.length !== 0) &&
+                (this.state.goldAccuracy.length !== 0 &&
+                  this.state.goldTotal.length !== 0)
+                  ? "comp-success-submit-btn"
+                  : "comp-not-success-submit-btn"
+              }
             >
-									CREATE COMPETITION
+              CREATE COMPETITION
             </button>
           </div>
         </Form>
@@ -533,7 +558,7 @@ CreateComp.propTypes = {
 };
 const mapStatesToprops = state => ({
   newComp: state.compOBJ.selectedComp,
-	isCreated: state.compOBJ.isCreated
+  isCreated: state.compOBJ.isCreated
 });
 
 export default connect(

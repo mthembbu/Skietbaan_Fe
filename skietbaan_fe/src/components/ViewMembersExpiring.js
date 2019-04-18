@@ -140,35 +140,37 @@ class ViewMembersExpiring extends Component {
   updateMember(index) {
     let RequestObject = {
       username: this.state.array[index].username,
-			memberExpiryDate:this.getCurrentDate() + 'T00:00:00'
-		};
-		fetch(BASE_URL + '/api/Features/RenewMembership', {
-			method: 'Post',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(RequestObject)
-		})
-			.then(function (response) {
-				return response.json();
-			})
-			.then((data) => {
-				this.getExpiringMembers();
-				this.setState({ filterText: '' });
-			})
-			.catch((err) => {
-				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-			});
-	}
+      memberExpiryDate: this.getCurrentDate() + "T00:00:00"
+    };
+    fetch(BASE_URL + "/api/Features/RenewMembership", {
+      method: "Post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(RequestObject)
+    })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(data => {
+        this.getExpiringMembers();
+        this.setState({ filterText: "" });
+        this.props.fetchNumberOfNotification(this.state.token);
+      })
 
-	onChangeText(event) {
-		this.setState({ filterText: event.target.value });
-	}
+      .catch(err => {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      });
+  }
 
-	handleDateChange(event) {
-		this.setState({ dateValue: event.target.value });
-	}
+  onChangeText(event) {
+    this.setState({ filterText: event.target.value });
+  }
+
+  handleDateChange(event) {
+    this.setState({ dateValue: event.target.value });
+  }
 
   status(timeLeft) {
     if (timeLeft < 2 || timeLeft === 2) {
@@ -188,7 +190,6 @@ class ViewMembersExpiring extends Component {
     let date = curr.toISOString().substr(0, 10);
     return date;
   }
-
   ExportData = () => {
     this.setState({ exportMsg: true });
   };
@@ -207,9 +208,10 @@ class ViewMembersExpiring extends Component {
     }
     const postItems = (
       <div>
-
-				{(this.state.array.length === 0 && this.state.getData === true) ? <div className="view-non-error-container"><label className="view-non-error-msg">No users expiring yet.</label></div> :
-
+        {this.state.array.length === 0 && this.state.getData === true ? (
+          <div className="view-non-error-container">
+            <label className="view-non-error-msg">
+              No members have been created yet.
             </label>
           </div>
         ) : (
@@ -274,15 +276,6 @@ class ViewMembersExpiring extends Component {
                           </div>
                         }
                       >
-												<div>
-													<input
-														type="date"
-														className="view-non-members-text-boxes"
-														id="expdate"
-														value={this.state.datevalue}
-														onChange={this.handleDateChange}
-													/>
-												</div>
                         <div className="renew-container">
                           <button
                             className="view-exp-members"
