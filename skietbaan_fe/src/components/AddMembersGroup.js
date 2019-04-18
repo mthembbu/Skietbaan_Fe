@@ -9,8 +9,6 @@ import back from "./GroupImages/back.png";
 import { AddMemberAction, pageState } from "../actions/postActions";
 import seleteAll from "./GroupImages/seleteAll.png";
 import unSelectAll from "./GroupImages/unSelectAll.png";
-import { getCookie } from "./cookie";
-import { fetchNumberOfNotification } from "../actions/notificationAction";
 
 class AddMembersGroup extends Component {
   constructor(props) {
@@ -23,8 +21,7 @@ class AddMembersGroup extends Component {
       count: 0,
       check: "Select all",
       height: window.innerHeight,
-      width: window.innerWidth,
-      token: getCookie("token")
+      width: window.innerWidth
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.onBack = this.onBack.bind(this);
@@ -43,7 +40,7 @@ class AddMembersGroup extends Component {
   }
   getBodyHeight() {
     if (this.state.width < 575) {
-      return this.state.height - 160 + "px";
+      return this.state.height - 275 + "px";
     } else {
       return "57vh";
     }
@@ -85,7 +82,6 @@ class AddMembersGroup extends Component {
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
-    this.props.fetchNumberOfNotification(this.state.token);
     this.props.pageState(1);
   }
 
@@ -120,8 +116,8 @@ class AddMembersGroup extends Component {
       this.setState({ check: "Unselect all" });
     } else {
       this.setState({ count: 0 });
-      for (var i = 0; i < this.props.existing.length; i++) {
-        this.props.existing[i].highlighted = false;
+      for (var j = 0; j < this.props.existing.length; j++) {
+        this.props.existing[j].highlighted = false;
       }
       this.setState({ check: "Select all" });
     }
@@ -129,15 +125,14 @@ class AddMembersGroup extends Component {
 
   render() {
     const postitems = (
-      <div className="adding-check-edit">
-        <label className="edit-no-user-msg">
-          All users/members have already been added to this group.
-        </label>
-
+      <div
+        className="adding-check-edit"
+        style={{ height: this.getBodyHeight() }}
+      >
         {this.props.existing.length === 0 ? (
           <div className="edit-no-user-container">
             <label className="edit-no-user-msg">
-              No users have be added yet.
+              All users/members have already been added to this group.
             </label>
           </div>
         ) : (
@@ -242,7 +237,7 @@ class AddMembersGroup extends Component {
           </div>
         </div>
         {postitems}
-        {this.state.count == 0 ? null : (
+        {this.state.count === 0 ? null : (
           <div className="bottom-panel">
             <div className="bpanel">
               <button className="confirm-group" onClick={this.addUsers}>
@@ -268,6 +263,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { AddMemberAction, pageState, fetchNumberOfNotification }
+    { AddMemberAction, pageState }
   )(AddMembersGroup)
 );

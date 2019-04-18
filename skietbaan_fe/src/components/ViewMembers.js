@@ -141,6 +141,17 @@ class ViewMembers extends Component {
     this.setState({ exportMsg: true });
   };
 
+  status(timeLeft) {
+    if (timeLeft < 2 || timeLeft === 2) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  ExportData = () => {
+    this.setState({ exportMsg: true });
+  };
+
   render() {
     if (!getCookie("token")) {
       window.location = "/registerPage";
@@ -224,16 +235,18 @@ class ViewMembers extends Component {
                         }
                       >
                         <div className="view-members-membership-details">
-                          Membership No: <b>{post.memberID}</b>
+                          MEMBERSHIP NUMBER: <b>{post.memberID}</b>
                           <div>
-                            Start of Membership:{" "}
+                            START OF MEMBERSHIP:{" "}
                             <b>{post.memberStartDate.substring(0, 10)}</b>
                           </div>
                           <div className="view-member-phone-number">
-                            Cell Number:
+                            CELL NUMBER:
                             <b>
                               {" "}
-                              {post.phoneNumber === "null" ? "083" : "none"}
+                              {post.phoneNumber === null
+                                ? "N/A"
+                                : post.phoneNumber}
                             </b>
                           </div>
                         </div>
