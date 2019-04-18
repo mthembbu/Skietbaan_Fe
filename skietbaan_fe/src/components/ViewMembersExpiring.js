@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
-import '../components/ViewMembers.css';
-import Collapsible from 'react-collapsible';
-import { BASE_URL } from '../actions/types.js';
-import memberIcon from '../components/assets/greyMembershipIcon.png';
-import { getCookie } from '../components/cookie.js';
-import { Row, Col } from 'react-bootstrap';
-import Export from '../components/assets/Export.png';
-import RedBullet from '../components/assets/RedBullet.png';
+import React, { Component } from "react";
+import "../components/ViewMembers.css";
+import Collapsible from "react-collapsible";
+import { BASE_URL } from "../actions/types.js";
+import memberIcon from "../components/assets/greyMembershipIcon.png";
+import { getCookie } from "../components/cookie.js";
+import { Row, Col } from "react-bootstrap";
+import Export from "../components/assets/Export.png";
+import RedBullet from "../components/assets/RedBullet.png";
+import { fetchNumberOfNotification } from "../actions/notificationAction";
+import { connect } from "react-redux";
 class ViewMembersExpiring extends Component {
 	constructor(props) {
 		super(props);
@@ -29,7 +31,6 @@ class ViewMembersExpiring extends Component {
 		};
 		this.getExpiringMembers = this.getExpiringMembers.bind(this);
 		this.getTimeLeft = this.getTimeLeft.bind(this);
-		this.onChangeText = this.onChangeText.bind(this);
 		this.status = this.status.bind(this);
 		this.handleRadioChange = this.handleRadioChange.bind(this);
 		this.handleDateChange = this.handleDateChange.bind(this);
@@ -41,97 +42,99 @@ class ViewMembersExpiring extends Component {
 		this.getBodyHeight = this.getBodyHeight.bind(this);
 	}
 
-	toggleNavbar() {
-		this.setState({
-			navbarState: !this.state.navbarState
-		});
-		var navbar = document.querySelector('.navbar-admin');
-		if (navbar.classList.contains('hidden')) {
-			navbar.classList.remove('hidden');
-		} else {
-			navbar.classList.add('hidden');
-		}
-	}
+  toggleNavbar() {
+    this.setState({
+      navbarState: !this.state.navbarState
+    });
+    var navbar = document.querySelector(".navbar-admin");
+    if (navbar.classList.contains("hidden")) {
+      navbar.classList.remove("hidden");
+    } else {
+      navbar.classList.add("hidden");
+    }
+  }
 
-	toggleNavbar2() {
-		var navbar = document.querySelector('.navbar-admin');
-		if (this.state.lastSize > document.body.clientHeight) {
-			navbar.setAttribute('hidden', 'true');
-			this.toggleNavbar();
-		} else {
-			navbar.removeAttribute('hidden');
-			this.toggleNavbar();
-		}
-	}
-	componentWillMount() {
-		window.addEventListener('resize', this.updateDimensions);
-	}
-	componentDidMount() {
-		this.updateDimensions();
-		this.getExpiringMembers();
-		this.getTimeLeft();
-	}
-	updateDimensions() {
-		this.setState({
-			height: window.innerHeight,
-			width: window.innerWidth
-		});
-	}
-	getBodyHeight() {
-		if (this.state.width < 575) {
-			return (this.state.height - 240) + "px";
-		} else {
-			return "66vh";
-		}
-	}
-	getExpiringMembers() {
-		fetch(BASE_URL + '/api/Features/SearchExpiringMember', {
-			method: 'Get',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			}
-		})
-			.then(function (response) {
-				return response.json();
-			})
-			.then(function (data) {
-				return data;
-			})
-			.then((data) =>
-				this.setState({
-					array: data,
-					getData: true
-				})
-			)
-			.catch((err) => {
-				this.setState({ exceptionCaught: true })
-			});
-	}
+  toggleNavbar2() {
+    var navbar = document.querySelector(".navbar-admin");
+    if (this.state.lastSize > document.body.clientHeight) {
+      navbar.setAttribute("hidden", "true");
+      this.toggleNavbar();
+    } else {
+      navbar.removeAttribute("hidden");
+      this.toggleNavbar();
+    }
+  }
+  componentWillMount() {
+    window.addEventListener("resize", this.updateDimensions);
+  }
+  componentDidMount() {
+    this.updateDimensions();
+    this.getExpiringMembers();
+    this.getTimeLeft();
+  }
+  updateDimensions() {
+    this.setState({
+      height: window.innerHeight,
+      width: window.innerWidth
+    });
+  }
+  getBodyHeight() {
+    if (this.state.width < 575) {
+      return this.state.height - 240 + "px";
+    } else {
+      return "66vh";
+    }
+  }
+  getExpiringMembers() {
+    fetch(BASE_URL + "/api/Features/SearchExpiringMember", {
+      method: "Get",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        return data;
+      })
+      .then(
+        data =>
+          this.setState({
+            array: data,
+            getData: true
+          }),
+        this.props.fetchNumberOfNotification(this.state.token)
+      )
+      .catch(err => {
+        this.setState({ exceptionCaught: true });
+      });
+  }
 
-	getTimeLeft() {
-		fetch(BASE_URL + '/api/Features/SearchExpiringMemberTimeLeft', {
-			method: 'Get',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			}
-		})
-			.then(function (response) {
-				return response.json();
-			})
-			.then(function (data) {
-				return data;
-			})
-			.then((data) =>
-				this.setState({
-					timeLeftOnMembership: data
-				})
-			)
-			.catch((err) => {
-				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-			});
-	}
+  getTimeLeft() {
+    fetch(BASE_URL + "/api/Features/SearchExpiringMemberTimeLeft", {
+      method: "Get",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        return data;
+      })
+      .then(data =>
+        this.setState({
+          timeLeftOnMembership: data
+        })
+      )
+      .catch(err => {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      });
+  }
 
 	updateMember(index) {
 		if (this.state.dateCheck === true) {
@@ -159,11 +162,8 @@ class ViewMembersExpiring extends Component {
 					/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
 				});
 		}
-	}
 
-	onChangeText(event) {
-		this.setState({ filterText: event.target.value });
-	}
+  }
 
 	handleDateChange(event) {
 		this.setState({ dateValue: event.target.value });
@@ -178,28 +178,27 @@ class ViewMembersExpiring extends Component {
 		}
 	}
 
-	status(timeLeft) {
-		if (timeLeft < 2 || timeLeft === 2) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+  status(timeLeft) {
+    if (timeLeft < 2 || timeLeft === 2) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-	handleRadioChange(event) {
-		this.setState({ selectedValue: event });
-	}
+  handleRadioChange(event) {
+    this.setState({ selectedValue: event });
+  }
 
-	getCurrentDate() {
-		let curr = new Date();
-		curr.setDate(curr.getDate() + 365);
-		let date = curr.toISOString().substr(0, 10);
-		return date;
-	}
-
-	ExportData = () => {
-		this.setState({ exportMsg: true })
-	}
+  getCurrentDate() {
+    let curr = new Date();
+    curr.setDate(curr.getDate() + 365);
+    let date = curr.toISOString().substr(0, 10);
+    return date;
+  }
+  ExportData = () => {
+    this.setState({ exportMsg: true });
+  };
 
 	render() {
 		if (!getCookie('token')) {
@@ -352,4 +351,7 @@ class ViewMembersExpiring extends Component {
 	}
 }
 
-export default ViewMembersExpiring;
+export default connect(
+  null,
+  { fetchNumberOfNotification }
+)(ViewMembersExpiring);
