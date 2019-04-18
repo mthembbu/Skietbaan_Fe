@@ -68,9 +68,9 @@ class Groups extends Component {
   }
   getBodyHeight() {
     if (this.state.width < 575) {
-      return this.state.height - 235 + "px";
+      return this.state.height - 255 + "px";
     } else {
-      return "66vh";
+      return "59vh";
     }
   }
   updateDimensions() {

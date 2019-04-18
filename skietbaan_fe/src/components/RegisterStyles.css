@@ -9,14 +9,21 @@
   }
 }
 
+@media screen and (max-width:576px){
+  .page-content-login {
+    overflow-y: overlay !important;
+    height: 98vh !important;
+  }
+}
+
 .page-content-login {
-  overflow-y: overlay;
+  overflow-y: hidden;
+  height: 100vh;
   background-color: transparent;
   width: 100%;
   z-index: 50;
   position: relative;
   background-repeat: no-repeat;
-  height: 100vh;
   border-bottom-left-radius: 13px;
   border-bottom-right-radius: 13px;
   background-size: cover;
@@ -69,10 +76,12 @@
 }
 
 .round-button:disabled {
-  color: #c0c1c2;
+  color: #ebebeb;
   background-color: transparent;
-  border-color: #c0c1c2;
+  border-color: #ebebeb;
   opacity: 80;
+  border: 1px #ebebeb solid;
+  background-color: #fdfdfd;
 }
 
 .round-button:focus {
