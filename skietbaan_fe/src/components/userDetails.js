@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "../components/userDetails.css";
 import { getCookie } from "./cookie.js";
 import { BASE_URL } from "../actions/types";
-// import expImage from "../components/assets/warning.png";
 import expImage from "../components/assets/warning.png";
 import { validateEmail, validateNumber } from "./Validators.js";
 
