@@ -11,7 +11,7 @@ import submit from "../components/assets/biggerRedSubmit.png";
 import camera from "../components/assets/biggerRedCamera.png";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
-import { selectedPage } from "../actions/postActions";
+import { selectedPage, updateSelectedCompetition } from "../actions/postActions";
 class search extends Component {
   constructor(props) {
     super(props);
@@ -286,6 +286,7 @@ class search extends Component {
         Longitude: this.state.longitude,
         Latitude: this.state.latitude
       };
+      
       fetch(BASE_URL + "/api/Scores", {
         method: "post",
         headers: {
@@ -296,14 +297,18 @@ class search extends Component {
       })
         .then(response => response.json())
         .then(data => {
-          if (data.indexOf("Score Added Successfully") > -1)
+          if (data.indexOf("Score Added Successfully") > -1){
             this.setState({
               scoreSaved: true,
               currState: 5
             });
+            
+          }
           if (this.state.navbarState === false) {
             this.toggleNavbar();
           }
+
+          this.props.updateSelectedCompetition(this.state.competitionName);
         })
         .catch(err => {
           /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
@@ -327,12 +332,13 @@ class search extends Component {
         body: JSON.stringify(RequestObject)
       })
         .then(response => response.json())
-        .then(data =>
+        .then(data =>{
           this.setState({
             scoreSaved: true,
             currState: 5
           })
-        )
+          this.props.updateSelectedCompetition(this.state.competitionName);
+        })
         .catch(err => {
           /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
         });
@@ -653,8 +659,8 @@ class search extends Component {
                     width="310"
                     height="310"
                     className="video"
-                    autoplay
-                    playsinline="true"
+                    playsInline = {true}
+                    autoPlay
                   />
                 </div>
                 <div
@@ -671,7 +677,7 @@ class search extends Component {
                         : "submit-button-elements second float-left"
                     }
                   >
-                    {/* TODO <div className={this.state.currState !== 3 ? "hidden" : ""}>
+                    <div className={this.state.currState !== 3 ? "hidden" : ""}>
                       <div className="button-hover">
                         <div
                           id="FlashImage"
@@ -680,7 +686,7 @@ class search extends Component {
                           onClick={() => this.flash()}
                         />
                       </div>
-                    </div> */}
+                    </div>
                   </div>
                   <div
                     className={
@@ -794,5 +800,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { selectedPage }
+  { selectedPage, updateSelectedCompetition }
 )(search);
