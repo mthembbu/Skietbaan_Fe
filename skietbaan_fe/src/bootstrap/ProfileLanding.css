@@ -60,9 +60,17 @@
   background-color: white;
 }
 
-.button-style-active {
-  background-color: #be0000;
-  color: white;
+.ios-profile-landing-container{
+    overflow-x: hidden;
+    overflow-y: overlay;
+    height: 100vh;
+    padding-bottom: 200px;
+    background-color: white;
+}
+
+.button-style-active{
+    background-color: #BE0000;
+    color: white;
 }
 
 .button-style-inactive {
