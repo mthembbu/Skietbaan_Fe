@@ -44,11 +44,12 @@ class EditGroup extends Component {
 	}
 	getBodyHeight() {
 		if (this.state.width < 575) {
-			return (this.state.height - 262) +"px";
+			return (this.state.height - 262) + "px";
 		} else {
 			return "59vh";
 		}
 	}
+	
 	updateDimensions() {
 		this.setState({
 			height: window.innerHeight,
@@ -144,7 +145,9 @@ class EditGroup extends Component {
 	render() {
 		const postitems = (
 			<div className="check-edit" style={{ height: this.getBodyHeight() }}>
-				{this.props.editGroup === 0 ? null :
+				{this.props.editGroup.length === 0 ? <div className="edit-no-user-container">
+					<label className="edit-no-user-msg">No users have been created yet.</label>
+				</div> :
 					<ul class="list-group">
 						{this.props.editGroup
 							.filter((post) => {
@@ -218,9 +221,7 @@ class EditGroup extends Component {
 						) : null}
 					</div>
 				</div>
-
-				{postitems}
-
+				{postitems} :
 				{this.state.count == 0 ? null : (
 					<div className="bpanel">
 						<button className="confirm-group" onClick={() => this.delete()}>

@@ -1,3 +1,49 @@
+@media screen and (max-width:576px){
+    .loading-message-profile{
+        bottom: 40%;
+    }
+}
+
+@media screen and (min-width:576px){
+    .remove-paddings-for-desktop{
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 585px){
+    .limit-width{
+        max-width: 100% !important;
+    }
+}
+
+@media only screen and (max-width: 404px){
+    .limit-width{
+        max-width: 100% !important;
+    }
+
+    .remove-left-right-paddings{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .total-text-alignement{
+        width: 97px !important;
+    }
+}
+
+.remove-paddings-for-desktop{}
+
+.limit-width{
+    max-width: 65%;
+}
+
+.safari-flex{
+    display:-webkit-flex
+}
+
+.remove-left-right-paddings{}
+
 .award-container{
     text-align: center;
     font-family: helvetica;
@@ -12,12 +58,6 @@
     font-weight: 300;
     font-family: helvetica;
     text-align: center;
-}
-
-@media screen and (max-width:576px){
-    .loading-message-profile{
-        bottom: 40%;
-    }
 }
 
 .loader-container-profile{
