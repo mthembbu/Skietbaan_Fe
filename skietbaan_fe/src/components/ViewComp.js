@@ -60,14 +60,14 @@ class ViewComp extends Component {
     this.onChangeGoldTotal = this.onChangeGoldTotal.bind(this);
   }
   componentWillMount() {
+    this.props.fetchComp();
     window.addEventListener("resize", this.updateDimensions);
   }
   // The method that mounts everytime there is an action detected
-  componentDidMount() {
+    componentDidMount() {
     this.updateDimensions();
     this.props.fetchComp();
     this.props.fetchParticipants();
-
     this.getDefaultShots();
   }
   updateDimensions() {
@@ -80,7 +80,7 @@ class ViewComp extends Component {
     if (this.state.width < 575) {
       return this.state.height - 240 + "px";
     } else {
-      return "55vh";
+      return "62vh";
     }
   }
   getDefaultShots() {
@@ -270,7 +270,7 @@ class ViewComp extends Component {
 
     const displayCompetitions = (
       <div className="page-contents" style={{ height: this.getBodyHeight() }}>
-        <table class="table-view-competitions">
+        <table className="table-view-competitions">
           <tbody>
             {this.props.compOBJ.length === 0 ? (
               <div className="view-error-message">
@@ -281,7 +281,7 @@ class ViewComp extends Component {
                 <tr key={compVar.id} className="table-competition-row">
                   <table>
                     <tr>
-                      <td className="td-col">
+                      <td className={"td-col"}>
                         <div>
                           <div
                             className="test1"
@@ -301,7 +301,7 @@ class ViewComp extends Component {
                             <label className="users-per-comp">
                               {compVar.status == true ? (
                                 <i class=" fa fa-group">
-                                  <span class="user-per-comp-num">
+                                  <span className="user-per-comp-num">
                                     {this.props.dict[compVar.id]}
                                   </span>
                                 </i>
@@ -357,7 +357,7 @@ class ViewComp extends Component {
                         }
                       >
                         <td>
-                          <div class="comp-req-container">
+                          <div className="comp-req-container">
                             <Form>
                               <Container className="standards-container">
                                 <Row className="standards-label">
@@ -375,7 +375,7 @@ class ViewComp extends Component {
                                 </Row>
                                 <Row className="bronze-row">
                                   <Col xs={4} md={4}>
-                                    <div class="accuracy-header-label">
+                                    <div className="bronze-label">
                                       Bronze Award:{" "}
                                     </div>
                                   </Col>
@@ -417,7 +417,7 @@ class ViewComp extends Component {
 
                                 <Row className="silver-row">
                                   <Col xs={4} md={4}>
-                                    <div class="silver-label">
+                                    <div className="silver-label">
                                       Silver Award:{" "}
                                     </div>
                                   </Col>
@@ -459,7 +459,7 @@ class ViewComp extends Component {
 
                                 <Row>
                                   <Col xs={4} md={4}>
-                                    <div class="accuracy-label">
+                                    <div className="gold-label">
                                       Gold Award:{" "}
                                     </div>
                                   </Col>
@@ -540,8 +540,8 @@ class ViewComp extends Component {
 
                                 <Row>
                                   <Col xs={4} md={4}>
-                                    <div class="shots-label">
-                                      Shots Needed:{" "}
+                                    <div className="shots-label">
+                                      Shoots Needed:{" "}
                                     </div>
                                   </Col>
                                   <Col xs={4} md={4}>
@@ -594,13 +594,14 @@ class ViewComp extends Component {
       </div>
     );
     return (
-      <div className="view-page">
-        <div className="table-competition-container">
-          <div className="content-competitions">
-            {this.props.load ? displayCompetitions : loader}
+        <div className="view-page">
+            <div className="table-competition-container">
+              <div className="content-competitions">
+                {this.props.load ? displayCompetitions : loader}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        
     );
   }
 }
@@ -623,7 +624,8 @@ const mapStateToProps = state => ({
   updatedComp: state.compOBJ.updatedComp,
   dict: state.compOBJ.dict,
   requirements: state.compOBJ.requirements,
-  load: state.compOBJ.load
+  load: state.compOBJ.load,
+  isCreated : state.compOBJ.isCreated
 });
 export default connect(
   mapStateToProps,
