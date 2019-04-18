@@ -21,7 +21,7 @@ class CreateComp extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			Name: '',
+			Name: "",
 			BestScoresNumber: '',
 			Hours: '',
 			Status: true,
@@ -36,6 +36,7 @@ class CreateComp extends Component {
 			isBestScoreValid: true,
 			isMaxScoreValid:true,
 			isHoursValid:true,
+			isNameValid:false,
 			bronzeAccuracy: '',
 			bronzeTotal: '',
 			silverAccuracy: '',
@@ -43,6 +44,7 @@ class CreateComp extends Component {
 			goldAccuracy: '',
 			goldTotal: '',
 			compID:'',
+			validInputs:false,
 			height: window.innerHeight,
 			width: window.innerWidth
 		};
@@ -60,6 +62,7 @@ class CreateComp extends Component {
 		this.onChangeSilverTotal = this.onChangeSilverTotal.bind(this);
 		this.onChangeGoldAccuracy = this.onChangeGoldAccuracy.bind(this);
 		this.onChangeGoldTotal = this.onChangeGoldTotal.bind(this);
+		this.validateAll = this.validateAll.bind(this);
 		this.updateDimensions = this.updateDimensions.bind(this);
 		this.getBodyHeight = this.getBodyHeight.bind(this);
 	}
@@ -89,11 +92,33 @@ class CreateComp extends Component {
 /** **********************************************************************************************/		
 	/** A method that detects the change in the change in th textfield */
 	onChangeCompName(event) {
-		if(event.target.value.length > 15)
-			event.target.value = event.target.value.substr(0,15);	
+		let isValid = this.validateCompName();
+		if(!isValid){
+			this.setState({errorMessageName:"COMPETITION ALREADY EXISTS!"});
+			this.setState({isNameValid:isValid});
+		}
+		else {
+			this.setState({isExist:false,errorMessageName:""});
+		}
+		if(event.target.value[0] === " "){
+			event.target.value = event.target.value.slice(0,0);
+		}		
 		this.setState({ [event.target.name]: event.target.value });
-		this.setState({ isExist: false });
 	}
+	validateCompName(){
+		var strcheck = this.state.Name;
+		if(this.state.Name.length <= 1 ){
+			this.setState({isNameValid:false});
+		}
+
+		if(strcheck === "   "){
+
+		}
+	
+	}
+	resetCompProperties(){
+		this.setState({isExist:false, isNameValid:true});
+		}
 	/** the method that detects the change in BestSCore */
 	onChangeBestScoreNum(event)
 	{
@@ -110,7 +135,7 @@ class CreateComp extends Component {
 	}
 	validateBestScoreNumber(){
 		var check = this.state.BestScoresNumber;
-		if(this.state.BestScoresNumber.length == 0 )
+		if(this.state.BestScoresNumber.length === 0 )
 			this.setState({isBestScoreValid:false});
 		if(check.slice(0,1) >=2 && check.length > 1)
 			return false;
@@ -132,7 +157,7 @@ class CreateComp extends Component {
 	}
 	validateMaxScore(){
 		var check = this.state.MaximumScore;
-		if(this.state.MaximumScore.length == 0)
+		if(this.state.MaximumScore.length === 0)
 			this.setState({isMaxScoreValid:false});
 		if(check.slice(0,3) > 100 || ((check.slice(0,1) > 1 || check.slice(0,2) >99) && check.length > 3) )
 			return false;
@@ -154,7 +179,7 @@ class CreateComp extends Component {
 	}
 	validateHours(){
 		var check = this.state.Hours;
-		if(this.state.Hours.length == 0)
+		if(this.state.Hours.length === 0)
 			this.setState({isHoursValid:false});
 		if(check.slice(0,3) > 360 || ((check.slice(0,1) > 3 || check.slice(0,2) >36) && check.length > 3) )
 			return false;
@@ -192,8 +217,19 @@ class CreateComp extends Component {
 			event.target.value = event.target.value.substr(0,3);
 		this.setState({goldTotal:event.target.value});
 	}
+	/** The method that checks all the inputs if whether they are valid or not*/
+	validateAll(){
+							if(this.state.Name.length !== 0 && this.state.BestScoresNumber.length !== 0 && this.state.Hours.length !== 0 && this.state.MaximumScore !==0){
+									this.setState({validInputs:true});
+									return true;
+							}else{
+										return false;
+							}
+	}
 	/** A method that handles the submit enent for the submit button*/
 	async onSubmit(e) {
+		if(this.validateAll())
+		{
 		/** Preventing the default button action event to occur automatically*/
 		e.preventDefault();
 		//calling the method to create a post => compData for the create competition
@@ -223,17 +259,25 @@ class CreateComp extends Component {
 		const requestedObj={competition:compData,GetRequirements:RData}
 		await this.props.createComp(requestedObj);
 		/** Checking whether the competition has been created or not*/
-		if(this.props.isExist === false){
-			this.props.compSelectedPages(2);
-			this.props.pageState(0);
-		}		
+		if(this.props.isCreated === true || this.props.isCreated === false){
+			setTimeout(()=>{ 
+			if(this.props.isCreated === true){
+				this.props.compSelectedPages(2);
+				this.props.pageState(0);
+			}	else {
+				this.setState({isExist:true});
+			}
+		},1000);		}
+		
+	}	
 	}
+
 	changeToggle(){
 		this.setState({toggleRequirements: !this.state.toggleRequirements});
 	}
 	render() {
 		return (
-			<div class="create-comp-container" style={{ maxHeight: this.getBodyHeight() ,height: "fit-content"}}>
+			<div className="create-comp-container" style={{ maxHeight: this.getBodyHeight() ,height: "fit-content"}}>
 						<Form onSubmit={this.onSubmit}>
 							<div className="containers-input">
 								<div className="comp-input-control">
@@ -242,8 +286,6 @@ class CreateComp extends Component {
 										type="text"
 										name="Name"
 										id="titleInput"
-										min={0}
-										max={15}
 										required
 										autoComplete="off"
 										autoCorrect="off"
@@ -251,10 +293,11 @@ class CreateComp extends Component {
 										value={this.state.Name}
 										onChange={this.onChangeCompName}
 									/>
-								</div>
-								<div className={this.props.isExist ? 'error-comp-message' : 'hidden'}>
-									Competition Already Exists
+									<div style={{fontSize:12,color:"red"}} className={this.state.isExist ? 'error-comp-message' : 'hidden'}>
+									COMPETITION ALREADY EXISTS!
 							</div>
+								</div>
+								
 							</div>
 							<div className="comp-input-control">
 								<input
@@ -334,7 +377,7 @@ class CreateComp extends Component {
 															</Row>
 															<Row className="bronze-row">
 																<Col xs={4} md={4}>
-																	<div class="accuracy-header-label">
+																	<div className="accuracy-header-label">
 																		Bronze Award:{' '}
 																	</div>
 																</Col>
@@ -377,7 +420,7 @@ class CreateComp extends Component {
 
 															<Row className="silver-row">
 																<Col xs={4} md={4}>
-																	<div class="silver-label">
+																	<div className="silver-label">
 																		Silver Award:{' '}
 																	</div>
 																</Col>
@@ -420,7 +463,7 @@ class CreateComp extends Component {
 
 															<Row>
 																<Col xs={4} md={4}>
-																	<div class="accuracy-label">
+																	<div className="accuracy-label">
 																		Gold Award:{' '}
 																	</div>
 																</Col>
@@ -472,12 +515,16 @@ class CreateComp extends Component {
 
 							<div className="comp-submit-btn-container">
 								<button
+									disabled = {this.validateAll}
 									variant="secondary"
 									type="submit"
 									id="submit-btn"
-									className="comp-success-submit-btn"
+									className={this.state.Name.length !== 0 && this.state.BestScoresNumber.length !== 0 && this.state.Hours.length !== 0 && this.state.MaximumScore !==0 &&
+														 (this.state.bronzeAccuracy.length !== 0 && this.state.bronzeTotal.length !== 0) &&
+														 (this.state.silverAccuracy.length !== 0 && this.state.silverTotal.length !== 0) &&
+														 (this.state.goldAccuracy.length !== 0 && this.state.goldTotal.length !== 0)	?	"comp-success-submit-btn":"comp-not-success-submit-btn"}
 								>
-									Create Competition
+									CREATE COMPETITION
 							</button>
 							</div>
 						</Form>
@@ -490,7 +537,7 @@ CreateComp.propTypes = {
 };
 const mapStatesToprops = (state) => ({
 	newComp: state.compOBJ.selectedComp,
-	isExist: state.compOBJ.isExist
+	isCreated: state.compOBJ.isCreated
 });
 
 export default connect(mapStatesToprops, { createComp,compSelectedPages,pageState })(CreateComp);

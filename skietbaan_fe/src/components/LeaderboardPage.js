@@ -19,7 +19,7 @@ class LeaderboardPage extends Component {
         this.state = {
             individual: "Individual Ranking",
             selectedGroup: -1,
-            selectedCompetition: 0,
+            selectedCompetition: -1,
             selectedScoreType: 1,
             selectedRank: "total",
             collapseFilter: false,
@@ -81,13 +81,6 @@ class LeaderboardPage extends Component {
         let token = getCookie("token");
         this.props.fetchleaderboadfilterdata(token);
         this.validatedInitialLeaderboardFilterSelection();
-        var id = 0;
-        if(this.state.selectedCompetition === 0){
-            id =-2;
-        }else{
-            id = this.state.selectedCompetition;
-        }
-        this.getLeaderboardData(id, this.state.selectedGroup, this.state.selectedRank);
     }
     updateDimensions() {
         this.setState({
@@ -99,13 +92,9 @@ class LeaderboardPage extends Component {
     }
     getLeaderboardData = (competition, group, rank) => {
         let token = getCookie("token");
-        var CompNum = competition + 1;
         var GroupNum = group;
-        if (group != -1) {
-            GroupNum = group + 1;
-        }
         const filterSelection = {
-            selectedCompetition: CompNum,
+            selectedCompetition: competition,
             selectedGroup: GroupNum,
             selectedRank: rank,
             userToken: token
@@ -129,26 +118,31 @@ class LeaderboardPage extends Component {
         }
     }
     validatedInitialLeaderboardFilterSelection() {
+        var competition = -1;
+        var group = -1;
         if (this.props.selectedCompetitionName != undefined && this.props.selectedGroupName != undefined) {
             if (this.props.selectedCompetitionName.length > 0) {
                 for (var i = 0; i < this.props.competitions.length; i++) {
-                    if (this.props.competitions[i] === this.props.selectedCompetitionName) {
+                    if (this.props.competitions[i].label === this.props.selectedCompetitionName) {
                         this.setState({
                             selectedCompetition: i
                         });
+                        competition =this.props.competitions[i].value;
                     }
                 }
             }
 
             if (this.props.selectedGroupName.length > 0) {
                 for (var i = 0; i < this.props.groups.length; i++) {
-                    if (this.props.groups[i] === this.props.selectedGroupName) {
+                    if (this.props.groups[i].label === this.props.selectedGroupName) {
                         this.setState({
                             selectedGroup: i
                         });
+                        group =this.props.groups[i].value;
                     }
                 }
             }
+            this.getLeaderboardData(competition, group, this.state.selectedRank);
         }
     }
     roundOfScores = (score) =>{
@@ -164,8 +158,11 @@ class LeaderboardPage extends Component {
             selectedCompetition: value
         });
         this.props.updateSelectedCompetition(this.props.competitions[value].label)
-        this.validatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData((this.props.competitions[value].value - 1), this.state.selectedGroup, this.state.selectedRank);
+        var group = this.state.selectedGroup;
+        if(group> -1){
+            group = this.props.groups[this.state.selectedGroup].value;
+        }
+        this.getLeaderboardData((this.props.competitions[value].value), group, this.state.selectedRank);
     }
     setGroupValue = (value) => {
         this.setState({
@@ -176,14 +173,25 @@ class LeaderboardPage extends Component {
         } else {
             this.props.updateSelectedGroup(this.props.groups[value].label);
         }
-        this.validatedInitialLeaderboardFilterSelection();
-        this.getLeaderboardData(this.state.selectedCompetition, (this.props.groups[value].value - 1), this.state.selectedRank);
+        if(value == -1){
+            this.getLeaderboardData(this.props.competitions[this.state.selectedCompetition].value, -1, this.state.selectedRank);
+        }else{
+            this.getLeaderboardData(this.props.competitions[this.state.selectedCompetition].value, (this.props.groups[value].value), this.state.selectedRank);
+        }
     }
     setSelectedRank = (value) => {
         this.setState({
             selectedRank: value
         });
-        this.getLeaderboardData(this.state.selectedCompetition, this.state.selectedGroup, value);
+        var competition = this.state.selectedCompetition;
+        if(competition >-1){
+            competition = this.props.competitions[this.state.selectedCompetition].value;
+        }
+        var group = this.state.selectedGroup;
+        if(group > -1){
+            group = this.props.groups[this.state.selectedGroup].value;
+        }
+        this.getLeaderboardData(competition, group, value);
     }
     setScoreTypeValue = (value) => {
         this.setState({
@@ -308,8 +316,8 @@ class LeaderboardPage extends Component {
             <Table className="selection-table" >
                 <tbody>
                     {this.props.groups.map((group, index) => (
-                        <tr key={group.value.toString()} onClick={() => this.setGroupValue(index)}
-                            value={group.value}>
+                        <tr key={index} onClick={() => this.setGroupValue(index)}
+                            value={index}>
                             <td className={this.state.selectedGroup === index ? "td-active" : "td-inactive"}>{group.label}</td>
                         </tr>
                     ))}
@@ -320,8 +328,8 @@ class LeaderboardPage extends Component {
             <Table className="selection-table" >
                 <tbody>
                     {this.props.competitions.map((competition, index) => (
-                        <tr key={competition.value.toString()} onClick={() => this.setCompetitionValue(index)}
-                            value={competition.value}>
+                        <tr key={index} onClick={() => this.setCompetitionValue(index)}
+                            value={index}>
                             <td className={this.state.selectedCompetition === index ? "td-active" : "td-inactive"}>{competition.label}</td>
                         </tr>
                     ))}
@@ -434,7 +442,10 @@ class LeaderboardPage extends Component {
                                                             transform: `translateX(${style.x}px)`,
                                                             opacity: style.opacity
                                                         }} >
-                                                            {this.props.competitions.length != 0 ? this.props.competitions[this.state.selectedCompetition].label : "No Competitions"}
+                                                            {this.props.competitions.length != 0 ? this.state.selectedCompetition == -1 ?
+                                                                this.props.competitions[this.state.selectedCompetition + 1].label : 
+                                                                this.props.competitions[this.state.selectedCompetition].label :
+                                                                "No Competitions"}
                                                         </div>
                                                     )}
                                                 </Motion>
@@ -520,7 +531,7 @@ class LeaderboardPage extends Component {
                                                     transform: `translateX(${style.x}px)`,
                                                     opacity: style.opacity
                                                 }} >
-                                                    {this.state.selectedGroup == -1 ? "Overall rank" : (this.props.groups.length != 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
+                                                    {this.state.selectedGroup === -1 ? "Overall rank" : (this.props.groups.length !== 0 ? this.props.groups[this.state.selectedGroup].label : "-------")}
                                                 </td>
                                             )}
                                         </Motion>
