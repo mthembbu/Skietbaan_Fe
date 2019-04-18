@@ -17,14 +17,15 @@ class ViewMembersExpiring extends Component {
 			timeLeftOnMembership: [],
 			filterText: '',
 			selectedValue: false,
-			dateValue: '',
+			dateValue: 'Select Expiry Date',
 			lastSize: 0,
 			navbarState: false,
 			height: window.innerHeight,
 			width: window.innerWidth,
 			getData: false,
 			exportMsg: false,
-			exceptionCaught: false
+			exceptionCaught: false,
+			dateCheck: true
 		};
 		this.getExpiringMembers = this.getExpiringMembers.bind(this);
 		this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -133,28 +134,31 @@ class ViewMembersExpiring extends Component {
 	}
 
 	updateMember(index) {
-		let RequestObject = {
-			username: this.state.array[index].username,
-			memberExpiryDate:this.getCurrentDate() + 'T00:00:00'
-		};
-		fetch(BASE_URL + '/api/Features/RenewMembership', {
-			method: 'Post',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(RequestObject)
-		})
-			.then(function (response) {
-				return response.json();
+		if (this.state.dateCheck === true) {
+			let RequestObject = {
+				username: this.state.array[index].username,
+				EntryDate: this.getCurrentDate() + 'T00:00:00',
+				memberExpiryDate: this.state.dateValue + 'T00:00:00'
+			};
+			fetch(BASE_URL + '/api/Features/RenewMembership', {
+				method: 'Post',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(RequestObject)
 			})
-			.then((data) => {
-				this.getExpiringMembers();
-				this.setState({ filterText: '' });
-			})
-			.catch((err) => {
-				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-			});
+				.then(function (response) {
+					return response.json();
+				})
+				.then((data) => {
+					this.getExpiringMembers();
+					this.setState({ filterText: '' });
+				})
+				.catch((err) => {
+					/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+				});
+		}
 	}
 
 	onChangeText(event) {
@@ -163,6 +167,16 @@ class ViewMembersExpiring extends Component {
 
 	handleDateChange(event) {
 		this.setState({ dateValue: event.target.value });
+		var selectedText = document.getElementById('expdate').value;
+		var selectedDate = new Date(selectedText);
+		var now = new Date();
+
+		if (selectedDate <= now) {
+			console.log("we in")
+			this.setState({ dateCheck: false })
+		} else {
+			this.setState({ dateCheck: true })
+		}
 	}
 
 	status(timeLeft) {
@@ -202,7 +216,6 @@ class ViewMembersExpiring extends Component {
 		}
 		const postItems = (
 			<div>
-
 				{(this.state.array.length === 0 && this.state.getData === true) ? <div className="view-non-error-container"><label className="view-non-error-msg">No users expiring yet.</label></div> :
 
 					<table striped hover condensed className="table-member">
@@ -307,7 +320,8 @@ class ViewMembersExpiring extends Component {
 								alt="Is a Member"
 								onClick={() => this.ExportData()}
 							/>
-						</div></Col>
+						</div>
+						</Col>
 					</Row>
 				</div>
 				<div className={this.state.getData === false && this.state.exceptionCaught === false ?

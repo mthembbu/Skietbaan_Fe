@@ -42,7 +42,7 @@ class AddMembersGroup extends Component {
   }
   getBodyHeight() {
 		if (this.state.width < 575) {
-      return (this.state.height - 160) +"px";
+      return (this.state.height - 275) +"px";
     } else {
       return "57vh";
     }
@@ -118,8 +118,8 @@ class AddMembersGroup extends Component {
       this.setState({ check: "Unselect all" });
     } else {
       this.setState({ count: 0 });
-      for (var i = 0; i < this.props.existing.length; i++) {
-        this.props.existing[i].highlighted = false;
+      for (var j = 0; j < this.props.existing.length; j++) {
+        this.props.existing[j].highlighted = false;
       }
       this.setState({ check: "Select all" });
     }
@@ -195,7 +195,7 @@ class AddMembersGroup extends Component {
               </div>
             </div>
               {postitems}
-            {this.state.count == 0 ? null : (
+            {this.state.count === 0 ? null : (
               <div className="bottom-panel">
                 <div className="bpanel">
                   <button className="confirm-group" onClick={this.addUsers}>
