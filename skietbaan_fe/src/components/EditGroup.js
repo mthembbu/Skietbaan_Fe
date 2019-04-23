@@ -33,6 +33,7 @@ class EditGroup extends Component {
 		this.selectAll = this.selectAll.bind(this);
 		this.updateDimensions = this.updateDimensions.bind(this);
 		this.getBodyHeight = this.getBodyHeight.bind(this);
+		this.extractEmails = this.extractEmails.bind(this);
 	}
 
 	async componentDidMount() {
@@ -49,7 +50,7 @@ class EditGroup extends Component {
 			return "59vh";
 		}
 	}
-	
+
 	updateDimensions() {
 		this.setState({
 			height: window.innerHeight,
@@ -109,6 +110,17 @@ class EditGroup extends Component {
 			this.setState({ binState: false });
 		}
 	};
+	extractEmails(text) {
+		if (this.state.filterText[0] === "@") {
+			let ser = text.search("@")
+			let word = text.substring(ser, text.length)
+			let ss = word.split(".")
+			return ss[0];
+		}
+		else {
+			return text;
+		}
+	}
 
 	onBack() {
 		this.props.pageState(0);
@@ -123,7 +135,7 @@ class EditGroup extends Component {
 
 	selectAll() {
 		if (this.state.binState === true) {
-			if (this.state.check == 'select all') {
+			if (this.state.check === 'select all') {
 				this.setState({ count: this.props.editGroup.length });
 				for (var i = 0; i < this.props.editGroup.length; i++) {
 					this.props.editGroup[i].highlighted = true;
@@ -131,8 +143,8 @@ class EditGroup extends Component {
 				this.setState({ check: 'Unselect all' });
 			} else {
 				this.setState({ count: 0 });
-				for (var i = 0; i < this.props.editGroup.length; i++) {
-					this.props.editGroup[i].highlighted = false;
+				for (var j = 0; j < this.props.editGroup.length; j++) {
+					this.props.editGroup[j].highlighted = false;
 				}
 				this.setState({ check: 'select all' });
 			}
@@ -154,6 +166,7 @@ class EditGroup extends Component {
 								return (
 									!this.state.filterText ||
 									post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
+									(this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase()) ||
 									post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
 								);
 							})
@@ -162,7 +175,7 @@ class EditGroup extends Component {
 									{this.state.binState === true ? (
 										<img
 											className="checkbox-delete"
-											src={post.highlighted == true ? deleteS : unmarked}
+											src={post.highlighted === true ? deleteS : unmarked}
 											alt=""
 										/>
 									) : null}
@@ -210,7 +223,7 @@ class EditGroup extends Component {
 								placeholder="Search"
 							/>
 						</div>
-						{this.state.binState === true && this.props.editGroup.length != 0 ? (
+						{this.state.binState === true && this.props.editGroup.length !== 0 ? (
 							<div className="switchAll" onClick={this.selectAll}>
 								<img
 									className="btn-select-all"
@@ -222,7 +235,7 @@ class EditGroup extends Component {
 					</div>
 				</div>
 				{postitems} :
-				{this.state.count == 0 ? null : (
+				{this.state.count === 0 ? null : (
 					<div className="bpanel">
 						<button className="confirm-group" onClick={() => this.delete()}>
 							DELETE USER

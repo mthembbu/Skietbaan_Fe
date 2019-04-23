@@ -10,6 +10,7 @@ import RedBullet from "../components/assets/RedBullet.png";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { fetchNumberOfNotification } from "../actions/notificationAction";
+import exportClick from "../components/assets/exportPress.png";
 
 class ViewNonMembers extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class ViewNonMembers extends Component {
       membershipsID: "",
       updateName: "",
       indexNumber: 0,
+      dateValue: "",
       lastSize: 0,
       navbarState: false,
       arrowChange: false,
@@ -32,7 +34,10 @@ class ViewNonMembers extends Component {
       membershipIds: [],
       exportMsg: false,
       exceptionCaught: false,
-      token: getCookie("token")
+      token: getCookie("token"),
+      emptyMemberNumber: false,
+      dateCheck: false,
+      exportResponse: ""
     };
     this.getTimeLeft = this.getTimeLeft.bind(this);
     this.onChangeText = this.onChangeText.bind(this);
@@ -45,6 +50,8 @@ class ViewNonMembers extends Component {
     this.onChangeArrow = this.onChangeArrow.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
     this.getBodyHeight = this.getBodyHeight.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
+    this.extractEmails = this.extractEmails.bind(this);
   }
 
   toggleNavbar() {
@@ -87,7 +94,7 @@ class ViewNonMembers extends Component {
     if (this.state.width < 575) {
       return this.state.height - 240 + "px";
     } else {
-      return "66vh";
+      return "57vh";
     }
   }
   getNonMembers() {
@@ -154,13 +161,28 @@ class ViewNonMembers extends Component {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
   }
+  extractEmails(text) {
+    if (this.state.filterText[0] === "@") {
+      let ser = text.search("@");
+      let word = text.substring(ser, text.length);
+      let ss = word.split(".");
+      return ss[0];
+    } else {
+      return text;
+    }
+  }
 
   updateMember(index) {
-    if (this.state.membershipIds.indexOf(this.state.membershipsID) === -1) {
+    if (
+      this.state.membershipIds.indexOf(this.state.membershipsID) === -1 &&
+      this.state.membershipsID.length != "" &&
+      this.state.dateCheck === true
+    ) {
       delete this.state.array[index].selected;
       let RequestObject = {
         username: this.state.array[index].username,
         memberID: this.state.membershipsID,
+        MemberStartDate: this.state.dateValue + "T00:00:00",
         memberExpiryDate: this.getCurrentDate() + "T00:00:00"
       };
       fetch(BASE_URL + "/api/Features/Update", {
@@ -182,6 +204,8 @@ class ViewNonMembers extends Component {
         .catch(err => {
           /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
         });
+    } else {
+      this.setState({ emptyMemberNumber: true });
     }
   }
 
@@ -199,13 +223,24 @@ class ViewNonMembers extends Component {
 
   getCurrentDate() {
     let curr = new Date();
-    curr.setDate(curr.getDate() + 365);
+    curr.setDate(curr.getDate());
     let date = curr.toISOString().substr(0, 10);
     return date;
   }
 
   handleChange(event) {
     this.setState({ membershipsID: event.target.value });
+  }
+  handleDateChange(event) {
+    this.setState({ dateValue: event.target.value });
+    var selectedText = document.getElementById("expdate").value;
+    var selectedDate = new Date(selectedText);
+    var now = new Date();
+    if (selectedDate > now) {
+      this.setState({ dateCheck: false });
+    } else {
+      this.setState({ dateCheck: true });
+    }
   }
 
   onChangeArrow = index => {
@@ -214,7 +249,24 @@ class ViewNonMembers extends Component {
     this.forceUpdate();
   };
   ExportData = () => {
-    this.setState({ exportMsg: true });
+    let token = getCookie("token");
+    let filter = "users";
+    fetch(
+      BASE_URL +
+        `/api/Features/generateCSV?filter=${filter}&adminToken=${token}`,
+      {
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(res => res.json())
+      .then(data => this.setState({ exportResponse: data, exportMsg: true }))
+      .catch(err => {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      });
   };
   render() {
     if (!getCookie("token")) {
@@ -284,7 +336,7 @@ class ViewNonMembers extends Component {
                         }
                       >
                         <div className="membership-details">
-                          <div>
+                          <div className="membership-container">
                             <input
                               type="number"
                               className="view-non-members-text-boxes"
@@ -293,6 +345,22 @@ class ViewNonMembers extends Component {
                               autoComplete="Off"
                               value={this.state.membershipsID}
                               onChange={this.handleChange}
+                            />
+                            {this.state.emptyMemberNumber === false ? null : (
+                              <label className="non-member-same-member-number-error">
+                                Membership number already exists
+                              </label>
+                            )}
+                          </div>
+                          <div>
+                            <input
+                              type="date"
+                              className="view-non-members-date-box"
+                              id="expdate"
+                              required
+                              data-date-format="yyyy-mm-dd"
+                              value={this.state.datevalue}
+                              onChange={this.handleDateChange}
                             />
                           </div>
                           <div>
@@ -337,7 +405,9 @@ class ViewNonMembers extends Component {
                   src={Export}
                   className="export-icon"
                   alt="Is a Member"
-                  onClick={() => this.ExportData()}
+                  onClick={e =>
+                    (e.currentTarget.src = exportClick) && this.ExportData()
+                  }
                 />
               </div>
             </Col>
@@ -385,11 +455,22 @@ class ViewNonMembers extends Component {
             {postItems}
           </div>
         ) : (
-          <div className="exportMsg-container">
-            <label className="exportMsg-responce">
-              SBmembers.csv sent to fs@retrorabbit.co.za
-            </label>
-            <img src={RedBullet} className="export-success" alt="Is a Member" />
+          <div>
+            {this.state.exportResponse !== ""
+              ? setTimeout(() => {
+                  this.setState({ exportMsg: false });
+                }, 2000)
+              : null}
+            <div className="exportMsg-container">
+              <label className="exportMsg-responce">
+                {this.state.exportResponse}
+              </label>
+              <img
+                src={RedBullet}
+                className="export-success"
+                alt="Is a Member"
+              />
+            </div>
           </div>
         )}
       </div>
