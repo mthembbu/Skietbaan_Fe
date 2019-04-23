@@ -124,7 +124,6 @@ class AddMembersGroup extends Component {
   }
 
   render() {
-    console.log(this.props.existing);
     const postitems = (
       <div
         className="adding-check-edit"
