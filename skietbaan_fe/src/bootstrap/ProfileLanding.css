@@ -1,5 +1,5 @@
 @media only screen and (min-width: 576px) {
-  .award-content-container {
+  .profile-content-container {
     margin-top: 56px;
   }
 
@@ -50,6 +50,10 @@
   .profile-buttons-container button {
     width: 70px !important;
   }
+}
+
+.profile-content-container{
+  padding-top: 130px;
 }
 
 .profile-landing-container {

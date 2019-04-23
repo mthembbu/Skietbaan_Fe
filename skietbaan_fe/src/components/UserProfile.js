@@ -244,12 +244,10 @@ class UserProfile extends Component {
 
     getInitialAward(){
         if(this.props.selectedCompetition.length === 0){
-            
             return this.state.awardCompetitions[0]
         }else{
             var initAward = this.state.awardCompetitions[this.getIndexByCompetitionName(this.props.selectedCompetition)]
             if(initAward === null || initAward === undefined){
-                
                 this.props.setSelectedCompetition(this.state.awardCompetitions[0])
                 return this.state.awardCompetitions[0]
             }
@@ -292,7 +290,7 @@ class UserProfile extends Component {
 
     render() {
         return (
-            <div className="award-container pad-award-container">
+            <div className="award-container">
                 {this.state.exceptionCaughtOnAwards ? 
                     this.renderError("Something went wrong") :
                 this.state.errorOccured ? this.renderError(this.state.apiResponse) :

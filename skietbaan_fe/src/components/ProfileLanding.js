@@ -60,7 +60,7 @@ class ProfileLanding extends Component {
 
   render() {
     return (
-      <Row className="row justify-content-center">
+      <Row>
 				   <Col sm={8} className="profile-bootstrap-col-center-container">
            <div className={this.iOS ? "ios-profile-landing-container" : "profile-landing-container"}>
         <div
@@ -182,21 +182,15 @@ class ProfileLanding extends Component {
           </div>
         </div>
         <div
-          className={
-            this.props.selectedButton == 1
-              ? "award-content-container"
-              : this.props.selectedButton == 2 || this.props.selectedButton == 3
-              ? "award-content-container pad-top-50px"
-              : "award-content-container"
-          }
+          className="profile-content-container"
         >
-          {this.props.selectedButton == 1 ? (
+          {this.props.selectedButton === 1 ? (
             <UserProfile />
-          ) : this.props.selectedButton == 2 ? (
+          ) : this.props.selectedButton === 2 ? (
             <Documents />
-          ) : this.props.selectedButton == 3 ? (
+          ) : this.props.selectedButton  === 3 ? (
             <StatisticsPage />
-          ) : this.props.selectedButton == 4 ? (
+          ) : this.props.selectedButton === 4 ? (
             <UserDetails />
           ) : null}
         </div>

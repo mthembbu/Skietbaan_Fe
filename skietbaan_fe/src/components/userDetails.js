@@ -184,7 +184,7 @@ export default class userDetails extends Component {
             </div>
           </div>
         ) : (
-          <div className="user-details-main-container user-details-container">
+          <div className="user-details-main-container">
             <div className="user-details-scrolls">
               <div className="member-details-container">
                 <div className="user-details-heading-container user-details-member-label">
