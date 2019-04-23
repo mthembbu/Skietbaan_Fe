@@ -111,6 +111,7 @@ class ViewMembersExpiring extends Component {
       .catch(err => {
         this.setState({ exceptionCaught: true });
       });
+            this.props.fetchNumberOfNotification(this.state.token)	
   }
 
   getTimeLeft() {
