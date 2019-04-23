@@ -8,7 +8,8 @@ import { Row, Col } from "react-bootstrap";
 import Export from "../components/assets/Export.png";
 import exportClick from "../components/assets/exportPress.png";
 import RedBullet from "../components/assets/RedBullet.png";
-import history from "./history";
+import { fetchNumberOfNotification } from "../actions/notificationAction";
+import { connect } from "react-redux";
 
 class ViewMembersExpiring extends Component {
   constructor(props) {
@@ -412,4 +413,7 @@ class ViewMembersExpiring extends Component {
   }
 }
 
-export default ViewMembersExpiring;
+export default connect(
+  null,
+  { fetchNumberOfNotification }
+)(ViewMembersExpiring);

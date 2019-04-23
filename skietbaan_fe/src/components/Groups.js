@@ -125,8 +125,8 @@ class Groups extends Component {
       this.setState({ check: "Unselect all" });
     } else {
       this.setState({ count: 0 });
-      for (var i = 0; i < this.state.posts.length; i++) {
-        this.state.posts[i].highlighted = false;
+      for (var j = 0; j < this.state.posts.length; j++) {
+        this.state.posts[j].highlighted = false;
       }
       this.setState({ check: "Select all" });
     }

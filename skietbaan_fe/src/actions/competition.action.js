@@ -115,14 +115,14 @@ export const createComp = compData => dispatch => {
         res.json().then(() =>
           dispatch({
             type: NEW_COMP,
-            payload: false
+            payload: true
           })
         );
       } else {
         res.json().then(() => {
           dispatch({
             type: NEW_COMP,
-            payload: true
+            payload: false
           });
         });
       }
@@ -132,7 +132,6 @@ export const createComp = compData => dispatch => {
     });
   return response;
 };
-
 export const compSelectedPages = page => {
   return dispatch => {
     dispatch({

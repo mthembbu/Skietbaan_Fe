@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../components/userDetails.css";
 import { getCookie } from "./cookie.js";
 import { BASE_URL } from "../actions/types";
+import expImage from "../components/assets/warning.png";
 import { validateEmail, validateNumber } from "./Validators.js";
 
 export default class userDetails extends Component {
@@ -21,7 +22,8 @@ export default class userDetails extends Component {
       getDataUser: false,
       navbarState: false,
       height: document.body.clientHeight,
-      exceptionCaught: false
+      exceptionCaught: false,
+      expUsers: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -55,6 +57,28 @@ export default class userDetails extends Component {
           emailValue: data.email,
           cellphoneValue: data.phoneNumber,
           getDataUser: true
+        })
+      )
+      .catch(err => {
+        this.setState({ exceptionCaught: true });
+      });
+
+    fetch(BASE_URL + "/api/Features/SearchExpiringMember", {
+      method: "Get",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        return data;
+      })
+      .then(data =>
+        this.setState({
+          expUsers: data.map(datas => datas.id)
         })
       )
       .catch(err => {
@@ -115,7 +139,10 @@ export default class userDetails extends Component {
   render() {
     return (
       <div className="document-center">
-        {this.state.getDataUser === false ? (
+        {this.state.getDataUser === false ||
+        this.state.array === null ||
+        this.state.array.length === 0 ||
+        this.state.array === undefined ? (
           <div
             className={
               this.state.getDataUser ? "hidden" : "loader-container-details"
@@ -160,19 +187,62 @@ export default class userDetails extends Component {
           <div className="user-details-main-container user-details-container">
             <div className="user-details-scrolls">
               <div className="member-details-container">
-                <div className="user-details-heading-container user-details-member-name">
-                  {this.state.array.username.toUpperCase()}
+                <div className="user-details-heading-container user-details-member-label">
+                  {this.state.array.surname === null ||
+                  this.state.array.surname === "" ||
+                  this.state.array.name === null ||
+                  this.state.array.name === ""
+                    ? this.state.array.username.toUpperCase()
+                    : this.state.array.surname.toUpperCase() +
+                      " " +
+                      this.state.array.name.toUpperCase()}
                 </div>
                 {this.state.array.memberID === null ||
                 this.state.array.memberID === undefined ? null : (
                   <div>
-                    <label className="user-details-heading-container user-details-member-number">
-                      MEMBERSHIP NUMBER:
-                    </label>
-
-                    <label className="user-details-member-label">
-                      {this.state.array.memberID}
-                    </label>
+                    <div>
+                      <label className="user-details-member-label">
+                        MEMBERSHIP NUMBER:
+                      </label>
+                      <label className="user-details-member-label">
+                        <b>{this.state.array.memberID}</b>
+                      </label>
+                    </div>
+                    <div>
+                      <label
+                        className={
+                          this.state.expUsers.indexOf(this.state.array.id) ===
+                          -1
+                            ? "user-details-member-label"
+                            : "user-details-member-label-expiring"
+                        }
+                      >
+                        MEMBER EXPIRY DATE:
+                      </label>
+                      <label
+                        className={
+                          this.state.expUsers.indexOf(this.state.array.id) ===
+                          -1
+                            ? "user-details-member-label"
+                            : "user-details-member-label-expiring"
+                        }
+                      >
+                        <b>
+                          {this.state.array.memberExpiryDate
+                            .substring(0, 10)
+                            .split("-")
+                            .join("/")}
+                        </b>
+                        {this.state.expUsers.indexOf(this.state.array.id) ===
+                        -1 ? null : (
+                          <img
+                            src={expImage}
+                            className="user-details-exp-icon"
+                            alt="Is a Member"
+                          />
+                        )}
+                      </label>
+                    </div>
                   </div>
                 )}
               </div>
@@ -180,7 +250,6 @@ export default class userDetails extends Component {
               <div>
                 <input
                   type="text"
-                  autoComplete="off"
                   name="nameValue"
                   id="nameValue"
                   autoComplete="off"
@@ -195,7 +264,6 @@ export default class userDetails extends Component {
                 <input
                   type="text"
                   name="surnameValue"
-                  autoComplete="off"
                   id="surnameValue"
                   autoComplete="off"
                   className={"user-details-input-container"}
@@ -209,7 +277,6 @@ export default class userDetails extends Component {
                 <input
                   type="text"
                   name="cellphoneValue"
-                  autoComplete="off"
                   id="cellphoneValue"
                   autoComplete="off"
                   className={"user-details-input-container"}
@@ -233,7 +300,6 @@ export default class userDetails extends Component {
                 <input
                   type="text"
                   name="emailValue"
-                  autoComplete="off"
                   id="emailValue"
                   autoComplete="off"
                   className={"user-details-input-container"}
