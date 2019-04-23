@@ -138,7 +138,6 @@ export class createPages extends Component {
 		if (this.props.page === "" || this.props.page!=0 || this.props.page!=10) {
 			this.props.pageState(10);
 		}
-
 	}
 
 	componentWillMount() {

@@ -214,12 +214,12 @@ class ViewMembers extends Component {
 												}
 											>
 												<div className="view-members-membership-details">
-													MEMBERSHIP NUMBER: <b>{post.memberID}</b>
+													CELL NUMBER: <b>{post.phoneNumber===null?"N/A":post.phoneNumber}</b>
 													<div>
-													START OF MEMBERSHIP: <b>{post.memberStartDate.substring(0, 10)}</b>
+													MEMBERSHIP NUMBER: <b>{post.memberID}</b>
 													</div>
 													<div className="view-member-phone-number">
-														CELL NUMBER:<b> {post.phoneNumber===null?"N/A":post.phoneNumber}</b>
+													START OF MEMBERSHIP:<b>{post.memberStartDate.substring(0, 10)}</b>
 													</div>
 												</div>
 											</Collapsible>

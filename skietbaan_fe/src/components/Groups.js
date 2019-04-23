@@ -113,7 +113,7 @@ class Groups extends Component {
       });
     this.props.fetchNumberOfNotification(this.state.token);
     this.props.pageState(0);
-    history.push("/create");
+     history.push("/create");
   }
 
   selectall() {

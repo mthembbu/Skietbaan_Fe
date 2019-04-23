@@ -27,7 +27,7 @@ class ViewMembersExpiring extends Component {
 			getData: false,
 			exportMsg: false,
 			exceptionCaught: false,
-			dateCheck: true
+			dateCheck: false
 		};
 		this.getExpiringMembers = this.getExpiringMembers.bind(this);
 		this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -40,6 +40,7 @@ class ViewMembersExpiring extends Component {
 		this.toggleNavbar2 = this.toggleNavbar2.bind(this);
 		this.updateDimensions = this.updateDimensions.bind(this);
 		this.getBodyHeight = this.getBodyHeight.bind(this);
+		this.expiringDateCheck = this.expiringDateCheck.bind(this);
 	}
 
   toggleNavbar() {
@@ -170,14 +171,22 @@ class ViewMembersExpiring extends Component {
 		var selectedText = document.getElementById('expdate').value;
 		var selectedDate = new Date(selectedText);
 		var now = new Date();
-
-		if (selectedDate <= now) {
-			this.setState({ dateCheck: false })
-		} else {
+		if (selectedDate >= now ) {
 			this.setState({ dateCheck: true })
+		} else {
+			this.setState({ dateCheck: false })
 		}
 	}
 
+	expiringDateCheck (event) {
+		var now = new Date();
+		var selectedDate = new Date(event);
+		if(now > selectedDate){
+			return true;
+		}else{
+			return false;
+		}
+	}
   status(timeLeft) {
     if (timeLeft < 2 || timeLeft === 2) {
       return true;
@@ -192,7 +201,7 @@ class ViewMembersExpiring extends Component {
 
   getCurrentDate() {
     let curr = new Date();
-    curr.setDate(curr.getDate() + 365);
+    curr.setDate(curr.getDate());
     let date = curr.toISOString().substr(0, 10);
     return date;
   }
@@ -245,6 +254,7 @@ class ViewMembersExpiring extends Component {
 															/>
 														</div>
 														<div className="expiry-time-column">
+													
 															<div
 																className={
 																	this.status(this.state.timeLeftOnMembership[index]) ? (
@@ -254,6 +264,7 @@ class ViewMembersExpiring extends Component {
 																		)
 																}
 															>
+																	
 																<div>
 																	<b>
 																		{post.memberExpiryDate
@@ -261,7 +272,11 @@ class ViewMembersExpiring extends Component {
 																			.split('-')
 																			.join('/')}
 																	</b>
-																	<div>{this.state.timeLeftOnMembership[index]} Months</div>
+																	{this.expiringDateCheck(post.memberExpiryDate
+																			.substring(0, 10)
+																			.split('-')
+																			.join('/'))===false?
+																	<div>{this.state.timeLeftOnMembership[index]} Months</div>:<div>{"EXPIRED"}</div>}
 																</div>
 															</div>
 														</div>

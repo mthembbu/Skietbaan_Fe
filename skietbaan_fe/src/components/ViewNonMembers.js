@@ -20,7 +20,7 @@ class ViewNonMembers extends Component {
 			height: 100,
 			timeLeftOnMembership: [],
 			filterText: "",
-			membershipsID: "",
+			membershipsID: '',
 			updateName: "",
 			indexNumber: 0,
 			dateValue: '',
@@ -35,7 +35,7 @@ class ViewNonMembers extends Component {
 			exceptionCaught: false,
 			token: getCookie("token"),
 			emptyMemberNumber: false,
-			dateCheck: true
+			dateCheck: false
 		};
 		this.getTimeLeft = this.getTimeLeft.bind(this);
 		this.onChangeText = this.onChangeText.bind(this);
@@ -160,7 +160,7 @@ class ViewNonMembers extends Component {
 	}
 
 	updateMember(index) {
-		if (this.state.membershipIds.indexOf(this.state.membershipsID) === -1 && this.state.membershipsID.length != "" && this.state.dateCheck === true) {
+		if (this.state.membershipIds.indexOf(this.state.membershipsID) === -1 && this.state.membershipsID.length != '' && this.state.dateCheck === true) {
 			delete this.state.array[index].selected;
 			let RequestObject = {
 				username: this.state.array[index].username,
@@ -219,10 +219,10 @@ class ViewNonMembers extends Component {
 		var selectedText = document.getElementById('expdate').value;
 		var selectedDate = new Date(selectedText);
 		var now = new Date();
-		if (selectedDate > now) {
-			this.setState({ dateCheck: false })
-		} else {
+		if (selectedDate < now) {
 			this.setState({ dateCheck: true })
+		} else {
+			this.setState({ dateCheck: false })
 		}
 	}
 
@@ -329,7 +329,7 @@ class ViewNonMembers extends Component {
 														</div>
 														<div>
 															<button
-																className="view-non-members-confirm"
+																className={(this.state.dateValue!=='' && this.state.membershipsID!=='')?"view-non-members-confirm":"view-non-members-confirm-inactive"}
 																onClick={() => this.updateMember(index)}
 															>
 																CONFIRM MEMBERSHIP
