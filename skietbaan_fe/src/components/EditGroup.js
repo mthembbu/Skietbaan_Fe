@@ -5,9 +5,9 @@ import { BASE_URL } from '../actions/types';
 import unmarked from './GroupImages/Oval.png';
 import deleteS from './GroupImages/deleteS.png';
 import whiteBin from './GroupImages/whiteBin.png';
+import blackBin from './GroupImages/blackBin.png';
 import seleteAll from './GroupImages/seleteAll.png';
 import unSelectAll from './GroupImages/unSelectAll.png';
-import blackBin from './GroupImages/blackBin.png';
 import whitePlus from './GroupImages/whitePlus.png';
 import { fetchEditUser, pageState } from '../actions/postActions';
 import back from './GroupImages/back.png';
@@ -21,7 +21,7 @@ class EditGroup extends Component {
 			filterText: '',
 			count: 0,
 			selected: 0,
-			check: 'select all',
+			check: 'Select all',
 			binState: false,
 			height: window.innerHeight,
 			width: window.innerWidth
@@ -85,13 +85,12 @@ class EditGroup extends Component {
 			.catch(function (data) { }).catch(err => {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
 			});
+		this.setState({ filterText: "" })
 		this.props.fetchEditUser(this.props.id);
 	}
 	//select user
 	toggleHighlight = (event) => {
-
 		const index = this.props.idsForUser.indexOf(event);
-
 		if (this.state.binState === true) {
 			if (this.props.editGroup[index].highlighted === true) {
 				this.props.editGroup[index].highlighted = false;
@@ -131,40 +130,42 @@ class EditGroup extends Component {
 			this.props.editGroup[i].highlighted = false;
 		}
 		this.setState({ count: 0 });
+		this.setState({ check: "Select all" });
 	};
 
-	selectall() {
+	selectAll() {
 		let arr = []
-		this.state.posts.filter(post => {
-		  return (
-			!this.state.filterText ||
-			post.username
-			  .toLowerCase()
-			  .startsWith(this.state.filterText.toLowerCase()) ||
-			post.email
-			  .toLowerCase()
-			  .startsWith(this.state.filterText.toLowerCase()) || (this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
-		  );
+		this.props.editGroup.filter(post => {
+			return (
+				!this.state.filterText ||
+				post.username
+					.toLowerCase()
+					.startsWith(this.state.filterText.toLowerCase()) ||
+				post.email
+					.toLowerCase()
+					.startsWith(this.state.filterText.toLowerCase()) || (this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
+			);
 		}).map(data => arr.push(data.id))
-	
+
 		if (this.state.check === "Select all") {
-		  this.setState({ count: this.state.posts.length });
-		  for (var i = 0; i < arr.length; i++) {
-			(this.state.posts[this.state.ids.indexOf(arr[i])]).highlighted = true;
-		  }
-		  this.setState({ check: "Unselect all" });
+			this.setState({ count: arr.length });
+			for (var i = 0; i < arr.length; i++) {
+				(this.props.editGroup[this.props.idsForUser.indexOf(arr[i])]).highlighted = true;
+			}
+			this.setState({ check: "Unselect all" });
 		} else {
-		  this.setState({ count: 0 });
-		  for (var j = 0; j < arr.length; j++) {
-			(this.state.posts[this.state.ids.indexOf(arr[j])]).highlighted = false;
-		  }
-		  this.setState({ check: "Select all" });
+			this.setState({ count: 0 });
+			for (var j = 0; j < arr.length; j++) {
+				(this.props.editGroup[this.props.idsForUser.indexOf(arr[j])]).highlighted = false;
+			}
+			this.setState({ check: "Select all" });
 		}
-	  }
+	}
 	goToNext = () => {
 		this.props.pageState(2);
 	};
 	render() {
+
 		const postitems = (
 			<div className="check-edit" style={{ height: this.getBodyHeight() }}>
 				{this.props.editGroup.length === 0 ? <div className="edit-no-user-container">

@@ -15,7 +15,9 @@ import ViewComp from '../components/ViewComp';
 import GroupComponent from '../components/GroupComponent';
 import CompComponent from '../components/CompComponent';
 import { compSelectedPages } from '../actions/competition.action';
-import { pageState, selectedPage } from '../actions/postActions';
+import { pageState, selectedPage, binStateFunc } from '../actions/postActions';
+import whiteBin from './GroupImages/whiteBin.png';
+import blackBin from './GroupImages/blackBin.png';
 export class createPages extends Component {
 	constructor(props) {
 		super(props);
@@ -26,7 +28,8 @@ export class createPages extends Component {
 			selectedButtonCreateViewCompetitions: 1,
 			selectedValue: 'A',
 			user: [],
-			height: document.body.clientHeight
+			height: document.body.clientHeight,
+			binState: false
 		};
 
 		this.groupsPage = this.groupsPage.bind(this);
@@ -41,6 +44,7 @@ export class createPages extends Component {
 		this.noShadowOnMember = this.noShadowOnMember.bind(this);
 	}
 	updateCreateContainer() {
+		this.props.binStateFunc(1);
 		switch (this.selectedButton) {
 			case 1:
 				if (this.state.selectedButtonCreateViewGroups === 1) {
@@ -92,6 +96,7 @@ export class createPages extends Component {
 	}
 
 	viewGroups() {
+		this.props.binStateFunc(1);
 		this.props.pageState(0);
 		this.props.compSelectedPages(2);
 		this.setState({ selectedButtonCreateViewGroups: 2 });
@@ -141,6 +146,7 @@ export class createPages extends Component {
 	}
 
 	componentWillMount() {
+		this.props.binStateFunc(1);
 		window.addEventListener("resize", () => {
 			let Navbar = document.querySelector(".navbar-admin");
 			if (this.state.height === document.body.clientHeight) {
@@ -150,6 +156,15 @@ export class createPages extends Component {
 			}
 		});
 	}
+
+
+	changeBinState = () => {
+		if (this.props.binState === 1) {
+			this.props.binStateFunc(2);
+		} else {
+			this.props.binStateFunc(1);
+		}
+	};
 
 	render() {
 		if (!getCookie('token')) {
@@ -166,7 +181,16 @@ export class createPages extends Component {
 									<div class="page-name-bar">
 										<div className="gun-overlay-image">
 											<label className="label-for-score">CREATE</label>
+
 										</div>
+										{this.props.page === 0 ?
+											<div className="plus-next" onClick={() => this.changeBinState()}>
+												<img
+													className="bin-image"
+													src={this.props.binState === 1 ? whiteBin : blackBin}
+													alt=""
+												/>
+											</div> : null}
 									</div>
 									<Row className="row justify-content-center">
 										<div className="create-switch-top">
@@ -211,7 +235,9 @@ export class createPages extends Component {
 													onClick={this.createGroups}
 												>
 													CREATE
+
 										</div>
+
 												<div
 													className={
 														(this.state.selectedButton === 1 && this.props.page === 0) || (this.state.selectedButton === 2 && this.props.page === 0) ? (
@@ -300,9 +326,10 @@ export class createPages extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	page: state.posts.page
+	page: state.posts.page,
+	binState: state.posts.binState
 });
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, { compSelectedPages, pageState, selectedPage })(createPages);
+export default connect(mapStateToProps, { compSelectedPages, pageState, selectedPage, binStateFunc })(createPages);

@@ -41,10 +41,10 @@
 	border-bottom-right-radius: 6px;
 }
 .search {
-  display: flex;
+	display: flex;
 	padding: 14px;
-  text-align: left;
-  margin-left: 5px;
+	text-align: left;
+	margin-left: 5px;
 }
 @media only screen and (min-width: 575px) {
 	.username-search {
@@ -55,7 +55,7 @@
 		border-bottom-right-radius: 6px;
 	}
 	.table-search-members {
-		padding-top: 3%;
+		padding: 3% 5% 0% 5%;
 		background-color: #f6f6f6;
 		overflow-y: scroll;
 	}
@@ -137,7 +137,7 @@
 	background-color: #fdfdfd;
 	border-radius: 4px;
 	line-height: 22px;
-	text-align: left;
+	align-self: center;
 	padding-left: 19px;
 	width: 100%;
 	border: none;
@@ -150,6 +150,7 @@
 	width: 312px;
 	border-radius: 7px;
 	margin-top: 50px;
+	margin-bottom: 7px;
 }
 
 .view-non-members-confirm {
@@ -170,12 +171,11 @@
 	width: 312px;
 	height: 42px;
 	color: #ffffff;
-	border: 1px solid #D9D9D9;
-    border-radius: 22px;
-    background: transparent;
-    color: #D9D9D9;
+	border: 1px solid #d9d9d9;
+	border-radius: 22px;
+	background: transparent;
+	color: #d9d9d9;
 }
-
 
 .view-non-members-confirm:focus {
 	outline: none;
@@ -197,6 +197,22 @@
 	color: #ffffff;
 	margin-top: 20px;
 	margin-bottom: 25px;
+}
+.view-exp-members-inactive {
+	font-weight: lighter;
+	font-size: 16px;
+	border-radius: 25px;
+	width: 312px;
+	height: 42px;
+	border-width: 1.5px;
+	margin-top: 20px;
+	margin-bottom: 25px;
+	border: 1px solid #d9d9d9;
+	background: transparent;
+	color: #d9d9d9;
+}
+.view-exp-members-inactive:focus{
+	outline: none;
 }
 
 .view-exp-members::selection {
@@ -261,7 +277,6 @@
 }
 
 .first-column {
-	padding-left: 25px;
 	width: 65%;
 	height: 55px;
 	text-align: left;
@@ -271,6 +286,7 @@
 	font-family: helvetica;
 	font-size: 16px;
 	height: 55px;
+	padding-left: 20px;
 }
 
 .view-members-exp-username-and-email {
@@ -313,7 +329,6 @@
 	margin-top: 10px;
 	margin-bottom: 20px;
 	text-align: center;
-	padding-right: 25px;
 }
 
 .view-members-exp-membership-details {
@@ -338,20 +353,13 @@
 	font-family: helvetica;
 	font-size: 14px;
 	margin-bottom: 20px;
+	padding-left: 25px;
 }
 
 .membership-icon {
 	height: 17px;
 	width: 17px;
 	margin-left: 4px;
-}
-
-.renew-container {
-	text-align: center;
-	width: 100%;
-	padding-right: 25px;
-	width: 312px;
-	margin-top: 50px;
 }
 
 .view-non-members-email {
@@ -413,54 +421,54 @@
 	width: 312px;
 	height: 77px;
 	border: 1px solid #be0000;
-  margin: auto;
-  text-align: center;
-  padding-top: 20.5px;
-  margin-top: 56px;
+	margin: auto;
+	text-align: center;
+	padding-top: 20.5px;
+	margin-top: 56px;
 }
-.view-member-phone-number{
-  color:#666666;
+.view-member-phone-number {
+	color: #666666;
 }
 
-.export-icon{
-  height: 25px;
-  width: 25px;
+.export-icon {
+	height: 25px;
+	width: 25px;
 }
-.export-col-container{
-  margin: auto;
-  text-align: right;
-  margin-top: 21px;
-  margin-right: 20px;
+.export-col-container {
+	margin: auto;
+	text-align: right;
+	margin-top: 21px;
+	margin-right: 20px;
 }
-.exportMsg-responce{
-  color:#be0000;
-  font-size: 16px;
-  font-weight: lighter;
-  padding-top: 17px;
+.exportMsg-responce {
+	color: #be0000;
+	font-size: 16px;
+	font-weight: lighter;
+	padding-top: 17px;
 }
-.exportMsg-container{
-  width: 339px;
-  height: 78px;
-  border: 1px solid #be0000;
-  border-radius: 10px;
-  margin: auto;
-  margin-top: 52px;
-  text-align: center;
+.exportMsg-container {
+	width: 339px;
+	height: 78px;
+	border: 1px solid #be0000;
+	border-radius: 10px;
+	margin: auto;
+	margin-top: 52px;
+	text-align: center;
 }
-.export-success{
-  width: 66px;
-  height: 16px;
+.export-success {
+	width: 66px;
+	height: 16px;
 }
-.non-member-same-member-number-error{
+.non-member-same-member-number-error {
 	font-size: 12.12px;
-	color: #EA251A;
+	color: #ea251a;
 	margin: auto;
 	font-weight: lighter;
 }
-.membership-container{
-height: 86px;
+.membership-container {
+	height: 86px;
 }
-.view-non-members-date-box{
+.view-non-members-date-box {
 	margin-bottom: 42px;
 	background-color: #fdfdfd;
 	border-radius: 4px;
@@ -478,7 +486,21 @@ height: 86px;
 	width: 312px;
 	border-radius: 7px;
 }
-.non-existing-error-msg{
-	color:#be0000;
-	font-size: 16px;
+.non-member-renew-date-container {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.renew-container {
+	text-align: center;
+	margin: auto;
+	width: 312px;
+	margin-top: 50px;
+}
+.non-member-renew-error-msg {
+	color: #be0000;
+	font-size: 14px;
+	display: flex;
+	justify-content: center;
 }

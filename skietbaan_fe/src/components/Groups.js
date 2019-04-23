@@ -144,7 +144,7 @@ class Groups extends Component {
     }).map(data => arr.push(data.id))
 
     if (this.state.check === "Select all") {
-      this.setState({ count: this.state.posts.length });
+      this.setState({ count: arr.length });
       for (var i = 0; i < arr.length; i++) {
         (this.state.posts[this.state.ids.indexOf(arr[i])]).highlighted = true;
       }
@@ -157,6 +157,13 @@ class Groups extends Component {
       this.setState({ check: "Select all" });
     }
   }
+
+  cancel = () => {
+    for (var i = 0; i < this.state.posts.length; i++) {
+      this.state.posts[i].highlighted = false;
+    }
+    this.setState({ count: 0 });
+  };
 
   toggleHighlight = event => {
     const index = this.state.ids.indexOf(event);
@@ -272,8 +279,11 @@ class Groups extends Component {
             {postitems}
             {this.state.count === 0 ? null : (
               <label className="bottom-label">
+                <button className="cancel-creating-group" onClick={()=>this.cancel()}>
+                  CANCEL
+                </button>
                 <button className="create-group" onClick={this.handleOnClick}>
-                  Create Group
+                  CRETE GROUP
                 </button>
               </label>
             )}

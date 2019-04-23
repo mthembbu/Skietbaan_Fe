@@ -145,21 +145,27 @@
 	z-index: 1;
 	width: 100%;
 }
-.create-group:focus {
-	outline: none;
-}
+
 
 .create-group {
-	margin-right: auto;
-	margin-left: auto;
-	width: 312px;
+	width: 156px;
 	height: 42px;
-	border-radius: 24.5px;
-	font-weight: normal;
-	background: #be0000;
-	font-size: 16px;
-	color: white;
-	border: none;
+	border: 1px solid #be0000;
+	background: #be0000;;
+	border-radius: 25px;
+	font-size: 14px;
+	font-weight: lighter;
+	color:#FFFFFF;
+}
+.cancel-creating-group{
+	width: 156px;
+	height: 42px;
+	border: 1px solid #6A6A6A;
+	background: transparent;
+	border-radius: 25px;
+	font-size: 14px;
+	font-weight: lighter;
+	color: #6A6A6A;
 }
 
 .listItem {
@@ -169,21 +175,14 @@
 }
 
 .bottom-label {
-	position: fixed;
-	right: 0;
+	justify-content: space-evenly;
 	bottom: 0;
 	background: white;
 	width: 100%;
-	height: 115px;
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
-	text-align: center;
-	z-index: 1px;
-	margin: 0px;
-	padding-bottom: 50px;
-	font-size: 16px;
-	font-weight: lighter;
-	padding-top: 10px;
+	display: flex;
+	height: 57px;
 }
 
 .userName {
@@ -541,13 +540,11 @@
 	.view-the-main {
 		margin: 0px 40px 56px 28px;
 	}
-	
+
 	.adding-check-edit {
 		margin-top: 0px !important;
 	}
-	.bottom-label {
-		margin-bottom: 56px;
-	}
+	
 	.bpanel {
 		position: absolute;
 		height: 77px;
@@ -560,7 +557,7 @@
 		width: 84%;
 		margin-left: 8%;
 	}
-	.add-blabe{
+	.add-blabe {
 		width: 80%;
 	}
 
@@ -602,11 +599,11 @@
 	.The-Main {
 		margin-top: 0px;
 	}
-	.edit-The-Main{
-		margin-top: 46px;
+	.edit-The-Main {
+		margin-top: 46px !important;
 	}
-	.add-The-Main{
-		margin-top: 45px;
+	.add-The-Main {
+		margin-top: 45px !important;
 	}
 	.temp-container {
 		position: absolute;
@@ -676,7 +673,6 @@
 }
 
 @media only screen and (max-width: 576px) {
-
 	.check {
 		margin-bottom: 56px;
 	}
@@ -697,11 +693,11 @@
 	overflow-y: overlay;
 	z-index: 1;
 }
-.check-edit{
+.check-edit {
 	overflow-y: overlay;
 	z-index: 1;
 }
-.adding-check-edit{
+.adding-check-edit {
 	overflow-y: overlay;
 	z-index: 1;
 	margin-top: 120px;
@@ -715,10 +711,10 @@
 .The-Main {
 	overflow-y: overlay;
 }
-.edit-The-Main{
+.edit-The-Main {
 	overflow-y: overlay;
 }
-.add-The-Main{
+.add-The-Main {
 	overflow-y: overlay;
 }
 .btn-select-all {
@@ -770,7 +766,7 @@
 .table-member .view-group .switch-container {
 	width: 20%;
 }
-.edit-no-user-container{
+.edit-no-user-container {
 	width: 312px;
 	height: 77px;
 	border: 1px solid #be0000;
@@ -779,10 +775,46 @@
 	border-radius: 5px;
 	margin-top: 40%;
 }
-.edit-no-user-msg{
+.edit-no-user-msg {
 	font-size: 16px;
 	color: #be0000;
 	margin: auto;
 	margin-top: 25px;
 	font-weight: lighter;
+}
+.view-group-delete-box {
+	margin-top: 10px;
+	float: right;
+	width: 28px;
+	height: 28px;
+}
+
+.view-group-confirm-panel{
+	display: flex;
+	justify-content: center ;
+	bottom: 0;
+	position: absolute;
+	height: 57px;
+	width: 93%;
+	background: #FFFFFF;
+}
+.view-group-cancel{
+	width: 156px;
+	height: 42px;
+	border: 1px solid #6A6A6A;
+	background: transparent;
+	font-size: 16px;
+	color:#6A6A6A;
+	border-radius: 25px;
+	margin-right: 23px;
+}
+
+.view-group-delete-confirm{
+	width: 156px;
+	height: 42px;
+	font-size: 16px;
+	color:#FFFFFF;
+	border-radius: 25px;
+	border: 1px solid #EA251A;
+	background: #EA251A;
 }
