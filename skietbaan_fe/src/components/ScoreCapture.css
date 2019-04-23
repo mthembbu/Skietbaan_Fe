@@ -294,6 +294,9 @@
 .stretched{
     width:100%;
 }
+.pull-left{
+    float:left;
+}
 
 .inline-block{
     display:inline-block;
@@ -726,7 +729,9 @@ input[type=number] {
     padding-left: 11px;
     padding-bottom: 7px;
 }
-
+.min-height-22{
+    min-height: 22px;
+}
 .view-scores-photo{
     background-image: url("../components/assets/cameraBlack.png");
     background-repeat: no-repeat;
@@ -734,5 +739,5 @@ input[type=number] {
     background-position: right;
     height: 22px;
     position: relative;
-    bottom: 30px;
+    bottom: 18px;
 }

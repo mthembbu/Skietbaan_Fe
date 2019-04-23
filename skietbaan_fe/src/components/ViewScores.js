@@ -153,10 +153,12 @@ class ViewScores extends Component {
                     <div className="score-content">
                         <div className="user-scores">{this.state.scoresList[i].userScore}
                         </div>
-                        <div className="date-view-score">
+                        <div className="stretched min-height-22">
+                        <div className="date-view-score float-left">
                             {this.formatTime(this.state.scoresList[i].uploadDate)}
                         </div>
                         <div className={this.state.scoresList[i].pictureURL !== "" ? "view-scores-photo" : "hidden"}></div>
+                        </div>
                         <div className="border-line">
                         </div>
                     </div>
