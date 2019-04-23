@@ -22,7 +22,8 @@ import {
 } from "../actions/postActions";
 import {
   updateIsReadProperty,
-  getNotifications
+  getNotifications,
+  fetchNumberOfNotification
 } from "../actions/notificationAction";
 import { checkUserType } from "../actions/adminAction";
 import { Row, Col } from "react-bootstrap";
@@ -82,6 +83,7 @@ class notification extends Component {
         this.setState({
           toggle: false
         });
+        this.props.fetchNumberOfNotification(this.state.token);
       });
     } catch (err) {}
   };
@@ -164,7 +166,7 @@ class notification extends Component {
     });
   }
   componentWillMount() {
-    window.addEventListener("resize", () => { 
+    window.addEventListener("resize", () => {
       let Navbar = document.querySelector(".navbar-admin");
       if (this.state.heightOfClient === document.body.clientHeight) {
         Navbar.classList.remove("hidden");
@@ -532,6 +534,7 @@ export default connect(
     setSelectedCompetition,
     setSelectedLandingPage,
     selectedPage,
-    checkUserType
+    checkUserType,
+    fetchNumberOfNotification
   }
 )(notification);

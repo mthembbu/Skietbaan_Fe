@@ -147,7 +147,7 @@
      .filter-selections .individual-inactive{
          border: solid;
           border-width:thin;
-          border-color: #6F839E;
+          border-color: #6a6a6a;
           border-radius: 18px;
           width: 180px;
           height: 36px;
@@ -155,11 +155,11 @@
           margin-left: auto;
           margin-right: auto;
           margin-top: 2%;
-          color: #6F839E;
+          color: #6a6a6a;
           cursor: pointer;
      }
      .filter-selections .individual-inactive a{
-         color: #6F839E;
+         color: #6a6a6a;
           font-family: Helvetica;
           font-size: 16px;
           vertical-align: inherit;

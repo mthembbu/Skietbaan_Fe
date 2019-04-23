@@ -49,6 +49,7 @@ class EditGroup extends Component {
 			return "59vh";
 		}
 	}
+	
 	updateDimensions() {
 		this.setState({
 			height: window.innerHeight,

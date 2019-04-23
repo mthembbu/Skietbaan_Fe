@@ -9,6 +9,7 @@ import { getCookie } from "../components/cookie.js";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { checkUserType } from "../actions/adminAction";
+import { fetchNumberOfNotification } from "../actions/notificationAction";
 
 class NavbarMenu extends Component {
   constructor(props) {
@@ -49,7 +50,6 @@ class NavbarMenu extends Component {
           src={NAV_BAR_ICONS.LEADERBOARD_GRAY}
           className="icon-same-dimensions"
           alt="Leaderboard tab not Selected"
-          onClick={() => this.GoTo("/home")}
         />
       );
     }
@@ -70,7 +70,6 @@ class NavbarMenu extends Component {
           src={NAV_BAR_ICONS.CREATE_GRAY}
           className="icon-same-dimensions"
           alt="Create tab not Selected"
-          onClick={() => this.GoTo("/create")}
         />
       );
     }
@@ -91,7 +90,6 @@ class NavbarMenu extends Component {
           src={NAV_BAR_ICONS.SCORE_CAPTURE_GRAY}
           className="icon-same-dimensions"
           alt="ScoreCapture tab not Selected"
-          onClick={() => this.GoTo("/scoreCapture")}
         />
       );
     }
@@ -112,7 +110,6 @@ class NavbarMenu extends Component {
           src={NAV_BAR_ICONS.PROFILE_GRAY}
           className="profile-icon-grey"
           alt="Profile tab not Selected"
-          onClick={() => this.GoTo("/profile")}
         />
       );
     }
@@ -137,7 +134,7 @@ class NavbarMenu extends Component {
       return (
         <img
           src={
-            this.state.numberOfNotifications === 0
+            this.props.numberOfNotifications === 0
               ? NAV_BAR_ICONS.NOTIFICATIONS_RED
               : NAV_BAR_ICONS.NOTIFY_RED
           }
@@ -149,13 +146,12 @@ class NavbarMenu extends Component {
       return (
         <img
           src={
-            this.state.numberOfNotifications === 0
+            this.props.numberOfNotifications === 0
               ? NAV_BAR_ICONS.NOTIFICATIONS_GRAY
               : NAV_BAR_ICONS.NOTIFY_GREY
           }
           className="notifications-icon-grey"
           alt="Notification tab not Selected"
-          onClick={() => this.GoTo("/notify")}
         />
       );
     }
@@ -169,7 +165,7 @@ class NavbarMenu extends Component {
   }
 
   componentDidMount() {
-    this.fetchNumberOfNotification();
+    this.props.fetchNumberOfNotification(this.state.token);
     this.props.checkUserType(this.state.token);
   }
 
@@ -181,13 +177,13 @@ class NavbarMenu extends Component {
             <table className="navbar-admin">
               <tbody>
                 <tr className="first-row-navbar">
-                  <td className="columns">{this.isHome()}</td>
-                  <td className={this.props.isAdmin ? "columns" : "hideAdmin"}>
+                  <td className="columns" onClick={() => this.GoTo("/home")}>{this.isHome()}</td>
+                  <td className={this.props.isAdmin ? "columns" : "hideAdmin"} onClick={() => this.GoTo("/create")}>
                     {this.isCreate()}
                   </td>
-                  <td className="columns">{this.isScoreCapture()}</td>
-                  <td className="columns">{this.isProfile()}</td>
-                  <td className="columns">{this.isNotifications()}</td>
+                  <td className="columns" onClick={() => this.GoTo("/scoreCapture")}>{this.isScoreCapture()} </td>
+                  <td className="columns" onClick={() => this.GoTo("/profile")}>{this.isProfile()}</td>
+                  <td className="columns" onClick={() => this.GoTo("/notify")}>{this.isNotifications()}</td>
                 </tr>
               </tbody>
             </table>
@@ -200,10 +196,11 @@ class NavbarMenu extends Component {
 
 const mapStateToProps = state => ({
   navSelectedPage: state.posts.navSelectedPage,
-  isAdmin: state.adminReducer.isAdmin
+  isAdmin: state.adminReducer.isAdmin,
+  numberOfNotifications: state.notificationOBJ.numberOfNotifications
 });
 
 export default connect(
   mapStateToProps,
-  { checkUserType }
+  { checkUserType, fetchNumberOfNotification }
 )(NavbarMenu);

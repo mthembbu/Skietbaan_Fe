@@ -305,7 +305,7 @@ class Register extends Component {
               </div>
             </div>
             <div className="button-container">
-              <button
+              <Button
                 onClick={this.register}
                 id="roundButton"
                 className={
@@ -316,8 +316,8 @@ class Register extends Component {
                     : "buttons-invalid round-button"
                 }
               >
-                Join
-              </button>
+                JOIN
+              </Button>
             </div>
           </form>
         </div>
