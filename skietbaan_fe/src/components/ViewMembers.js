@@ -196,7 +196,7 @@ class ViewMembers extends Component {
 								.map((post, index) => (
 									<tr className="view-members-user" key={post.id}>
 										<td className="first-column">
-											<Collapsible
+											<Collapsible isOpen={true}
 												trigger={
 													<div className="username-and-email">
 														<div className="view-members-username-email">

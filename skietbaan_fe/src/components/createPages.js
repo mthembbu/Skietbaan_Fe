@@ -135,7 +135,7 @@ export class createPages extends Component {
 		} else {
 			window.location = '/registerPage';
 		}
-		if (this.props.page === "" || this.props.page!=0 || this.props.page!=10) {
+		if (this.props.page === "") {
 			this.props.pageState(10);
 		}
 	}

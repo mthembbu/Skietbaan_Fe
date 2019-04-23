@@ -55,7 +55,7 @@
 		border-bottom-right-radius: 6px;
 	}
 	.table-search-members {
-		padding: 2% 10% 0% 10%;
+		padding-top: 3%;
 		background-color: #f6f6f6;
 		overflow-y: scroll;
 	}
@@ -477,4 +477,8 @@ height: 86px;
 	height: 44px;
 	width: 312px;
 	border-radius: 7px;
+}
+.non-existing-error-msg{
+	color:#be0000;
+	font-size: 16px;
 }

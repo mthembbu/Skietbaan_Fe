@@ -602,6 +602,12 @@
 	.The-Main {
 		margin-top: 0px;
 	}
+	.edit-The-Main{
+		margin-top: 46px;
+	}
+	.add-The-Main{
+		margin-top: 45px;
+	}
 	.temp-container {
 		position: absolute;
 		width: 100%;
@@ -647,12 +653,6 @@
 .leftContainer {
 	display: flex;
 	width: 75%;
-}
-
-@media screen and (max-height: 26px) {
-	.center-labels {
-		margin-top: 0px;
-	}
 }
 
 .plus-next {
@@ -713,6 +713,12 @@
 }
 
 .The-Main {
+	overflow-y: overlay;
+}
+.edit-The-Main{
+	overflow-y: overlay;
+}
+.add-The-Main{
 	overflow-y: overlay;
 }
 .btn-select-all {

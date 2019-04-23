@@ -133,24 +133,34 @@ class EditGroup extends Component {
 		this.setState({ count: 0 });
 	};
 
-	selectAll() {
-		if (this.state.binState === true) {
-			if (this.state.check === 'select all') {
-				this.setState({ count: this.props.editGroup.length });
-				for (var i = 0; i < this.props.editGroup.length; i++) {
-					this.props.editGroup[i].highlighted = true;
-				}
-				this.setState({ check: 'Unselect all' });
-			} else {
-				this.setState({ count: 0 });
-				for (var j = 0; j < this.props.editGroup.length; j++) {
-					this.props.editGroup[j].highlighted = false;
-				}
-				this.setState({ check: 'select all' });
-			}
+	selectall() {
+		let arr = []
+		this.state.posts.filter(post => {
+		  return (
+			!this.state.filterText ||
+			post.username
+			  .toLowerCase()
+			  .startsWith(this.state.filterText.toLowerCase()) ||
+			post.email
+			  .toLowerCase()
+			  .startsWith(this.state.filterText.toLowerCase()) || (this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
+		  );
+		}).map(data => arr.push(data.id))
+	
+		if (this.state.check === "Select all") {
+		  this.setState({ count: this.state.posts.length });
+		  for (var i = 0; i < arr.length; i++) {
+			(this.state.posts[this.state.ids.indexOf(arr[i])]).highlighted = true;
+		  }
+		  this.setState({ check: "Unselect all" });
+		} else {
+		  this.setState({ count: 0 });
+		  for (var j = 0; j < arr.length; j++) {
+			(this.state.posts[this.state.ids.indexOf(arr[j])]).highlighted = false;
+		  }
+		  this.setState({ check: "Select all" });
 		}
-	}
-
+	  }
 	goToNext = () => {
 		this.props.pageState(2);
 	};
@@ -192,7 +202,7 @@ class EditGroup extends Component {
 			</div>
 		);
 		return (
-			<div className="The-Main">
+			<div className="edit-The-Main">
 				<div className="navBar-container">
 					<div className="the-nav-bar-edit">
 						<div className="leftContainer">

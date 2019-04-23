@@ -203,7 +203,7 @@ class AddMembersGroup extends Component {
       </div>
     );
     return (
-      <div className="The-Main">
+      <div className="add-The-Main">
         <div className="navBar-containers">
           <img className="back-image" onClick={this.onBack} src={back} alt="" />
           <div className="the-nav-bar">

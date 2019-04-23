@@ -118,28 +118,41 @@ class Groups extends Component {
   }
 
   extractEmails(text) {
-		if (this.state.filterText[0] === "@") {
-			let ser = text.search("@")
-			let word = text.substring(ser, text.length)
-			let ss = word.split(".")
-			return ss[0];
-		}
-		else {
-			return text;
-		}
-	}
+    if (this.state.filterText[0] === "@") {
+      let ser = text.search("@")
+      let word = text.substring(ser, text.length)
+      let ss = word.split(".")
+      return ss[0];
+    }
+    else {
+      return text;
+    }
+  }
 
   selectall() {
+    let arr = []
+    this.state.posts.filter(post => {
+      return (
+        !this.state.filterText ||
+        post.username
+          .toLowerCase()
+          .startsWith(this.state.filterText.toLowerCase()) ||
+        post.email
+          .toLowerCase()
+          .startsWith(this.state.filterText.toLowerCase()) || (this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
+      );
+    }).map(data => arr.push(data.id))
+
     if (this.state.check === "Select all") {
       this.setState({ count: this.state.posts.length });
-      for (var i = 0; i < this.state.posts.length; i++) {
-        this.state.posts[i].highlighted = true;
+      for (var i = 0; i < arr.length; i++) {
+        (this.state.posts[this.state.ids.indexOf(arr[i])]).highlighted = true;
       }
       this.setState({ check: "Unselect all" });
     } else {
       this.setState({ count: 0 });
-      for (var j = 0; j < this.state.posts.length; j++) {
-        this.state.posts[j].highlighted = false;
+      for (var j = 0; j < arr.length; j++) {
+        (this.state.posts[this.state.ids.indexOf(arr[j])]).highlighted = false;
       }
       this.setState({ check: "Select all" });
     }
