@@ -13,6 +13,20 @@
     padding-bottom: 56px;
 }
 
+.view-score-competition-container{
+    padding-top: 0px;
+    list-style-type: none;
+    text-align: center;
+    width: 318px;
+    margin: 0 auto;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    overflow-y: overlay;
+    padding-left: 3px;
+    max-height: 60vh;
+}
+
 ::-webkit-scrollbar { 
     display: none; 
 }
@@ -87,7 +101,13 @@
 
 .page-content{
     margin-top: 56px;
-    background-color: #ffffff;
+    width: 100%;
+    z-index: 50;
+    height: 100%;
+    margin-bottom: 56px;
+}
+
+.page-content-scores-page{
     width: 100%;
     z-index: 50;
     height: 100%;
@@ -237,7 +257,7 @@
     font-size: 25px;
     text-align: center;
     font-weight: lighter;
-    padding-top: 64px;
+    padding-top: 100px;
 }
 
 @media screen and (min-width: 575px){
@@ -628,4 +648,91 @@ input[type=number] {
 
 ::-webkit-scrollbar { 
     display: none; 
+}
+
+.scores-page-switch-top{
+    width: 320px;
+    height: 36px;
+    margin: auto;
+    border: 1px solid #BE0000;
+    top: 96px;
+    border-radius: 18px;
+    display: -webkit-box;
+    position: absolute;
+
+}
+
+.scores-page-switch-top .scores-page-switch-active{
+  height: 35px;	
+  width: 160px;	
+  border: 1px solid #BE0000;	
+  border-radius: 18px;	
+  box-shadow: 0 3px 8px -3px #674D4D;
+  color: #FAFAFA;	
+  font-family: Helvetica;	
+  font-size: 14px;	
+  font-weight: bold;	
+  line-height: 18px;	
+  text-align: center;
+  background-color: #BE0000;
+  text-align: center;
+  padding-top: 8px;
+  cursor: pointer;
+}
+
+.scores-page-switch-top .scores-page-switch-inactive{
+  height: 36px;	
+  width: 160px;
+  border-radius: 18px;
+  color: #666666;	
+  font-family: Helvetica;	
+  font-size: 14px;	
+  font-weight: 300;	
+  line-height: 18px;	
+  text-align: center;
+  padding-top: 9px;
+  cursor: pointer;
+}
+
+.border-line{
+    width: 309px;
+    height: 1px;
+    background-color: #979CB1;
+    z-index: 1;
+}
+
+.user-scores{
+    color: #555555;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: helvetica;
+    text-align: left;
+    padding-top: 15px;
+    padding-left: 12px;
+}
+
+.score-content{
+    width: 309px;
+}
+
+.score-list-container{
+    text-align: -webkit-center;
+}
+
+.date-view-score{
+    font-size: 12px;
+    font-weight: 300;
+    text-align: left;
+    padding-left: 11px;
+    padding-bottom: 7px;
+}
+
+.view-scores-photo{
+    background-image: url("../components/assets/cameraBlack.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+    height: 22px;
+    position: relative;
+    bottom: 30px;
 }

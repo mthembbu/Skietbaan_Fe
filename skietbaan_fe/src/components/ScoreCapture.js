@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../components/ScoreCapture.css";
-import { validateScore } from "./Validators.js";
 import { getCookie } from "./cookie.js";
 import { BASE_URL } from "../actions/types.js";
 import cameraGray from "../components/assets/redSubmitButton.png";
@@ -12,7 +11,7 @@ import camera from "../components/assets/biggerRedCamera.png";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { selectedPage, updateSelectedCompetition } from "../actions/postActions";
-class search extends Component {
+class ScoreCapture extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,6 +52,8 @@ class search extends Component {
     this.getLocation = this.getLocation.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.toggleIcon = this.toggleIcon.bind(this);
+    this.toggleHeader = this.toggleHeader.bind(this);
+    this.toggleToggleBar = this.toggleToggleBar.bind(this);
   }
 
   componentWillMount() {
@@ -93,6 +94,7 @@ class search extends Component {
   }
 
   cancelClicked() {
+    this.toggleToggleBar();
     if (this.state.somethingClicked) {
       this.setState({
         somethingClicked: !this.state.somethingClicked,
@@ -102,6 +104,7 @@ class search extends Component {
   }
 
   competitionClicked(item, compname, maximumScore) {
+    this.toggleToggleBar();
     this.setState({
       somethingClicked: true,
       currState: 2,
@@ -115,7 +118,6 @@ class search extends Component {
   }
 
   componentDidMount() {
-    this.props.selectedPage(2);
     fetch(BASE_URL + "/api/Competition", {
       method: "GET",
       headers: {
@@ -125,25 +127,6 @@ class search extends Component {
     })
       .then(response => response.json())
       .then(data => this.setState({ competitionsList: data, getData: true }))
-      .catch(err => {
-        this.setState({ exceptionCaught: true })
-      });
-
-    let token = getCookie("token");
-    fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
-      method: "Get",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => response.json())
-      .then(function (data) {
-        this.setState({
-          user: data
-        });
-      })
-      .catch(function (data) { })
       .catch(err => {
         this.setState({ exceptionCaught: true })
       });
@@ -186,6 +169,28 @@ class search extends Component {
     return Valid;
   }
 
+  toggleToggleBar() {
+    var navbar = document.querySelector(".scores-page-switch-top");
+    if (navbar.classList.contains("hidden")) {
+      navbar.classList.remove("hidden");
+      navbar.removeAttribute("hidden");
+    } else {
+      navbar.classList.add("hidden");
+      navbar.setAttribute("hidden", "true");
+    }
+  }
+
+  toggleHeader() {
+    var navbar = document.querySelector(".score-capture-header");
+    if (navbar.classList.contains("hidden")) {
+      navbar.classList.remove("hidden");
+      navbar.removeAttribute("hidden");
+    } else {
+      navbar.classList.add("hidden");
+      navbar.setAttribute("hidden", "true");
+    }
+  }
+
   toggleNavbar() {
     this.setState({
       navbarState: !this.state.navbarState
@@ -202,6 +207,7 @@ class search extends Component {
 
   CameraClicked() {
     let Valid = this.validate();
+    this.toggleHeader();
     this.setState({
       flashOn: false
     });
@@ -307,7 +313,7 @@ class search extends Component {
           if (this.state.navbarState === false) {
             this.toggleNavbar();
           }
-
+          this.toggleHeader();
           this.props.updateSelectedCompetition(this.state.competitionName);
         })
         .catch(err => {
@@ -316,35 +322,6 @@ class search extends Component {
       setTimeout(function () {
         window.location = "/scoreCapture";
       }, 4000);
-    } else if (Valid && !this.state.scoreSaved) {
-      let RequestObject = {
-        UserScore: this.state.score / 1,
-        PictureURL: this.state.imageContent,
-        CompetitionName: this.state.competitionName,
-        Token: getCookie("token")
-      };
-      fetch(BASE_URL + "/api/Scores", {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(RequestObject)
-      })
-        .then(response => response.json())
-        .then(data =>{
-          this.setState({
-            scoreSaved: true,
-            currState: 5
-          })
-          this.props.updateSelectedCompetition(this.state.competitionName);
-        })
-        .catch(err => {
-          /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-        });
-      setTimeout(function () {
-        window.location = "/scoreCapture";
-      }, 5000);
     }
   }
 
@@ -424,6 +401,7 @@ class search extends Component {
       imageTaken: false,
       showCamera: false
     });
+    this.toggleHeader();
     let video = document.getElementById("video");
     let stream = video.srcObject;
     let tracks = stream.getTracks();
@@ -493,17 +471,6 @@ class search extends Component {
       <div className="add-score-entire-page-content" autoComplete="off">
         <Row className="row justify-content-center">
           <Col sm={8} className="createpage-bootstrap-col-center-container">
-            <div
-              className={
-                stateOne || this.state.scoreSaved
-                  ? "hidden"
-                  : "score-capture-header"
-              }
-            >
-              <div className="gun-overlay-image">
-                <label className="label-for-score">ADD SCORE</label>
-              </div>
-            </div>
             <div
               className={
                 this.state.scoreSaved
@@ -801,4 +768,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { selectedPage, updateSelectedCompetition }
-)(search);
+)(ScoreCapture);

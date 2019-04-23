@@ -181,7 +181,7 @@ class NavbarMenu extends Component {
                   <td className={this.props.isAdmin ? "columns" : "hideAdmin"} onClick={() => this.GoTo("/create")}>
                     {this.isCreate()}
                   </td>
-                  <td className="columns" onClick={() => this.GoTo("/scoreCapture")}>{this.isScoreCapture()} </td>
+                  <td className="columns" onClick={() => this.GoTo("/scoresPage")}>{this.isScoreCapture()} </td>
                   <td className="columns" onClick={() => this.GoTo("/profile")}>{this.isProfile()}</td>
                   <td className="columns" onClick={() => this.GoTo("/notify")}>{this.isNotifications()}</td>
                 </tr>
