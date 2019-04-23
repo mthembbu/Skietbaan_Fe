@@ -7,6 +7,8 @@ import { getCookie } from "../components/cookie.js";
 import { Row, Col } from "react-bootstrap";
 import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
+import exportClick from "../components/assets/exportPress.png";
+
 class ViewMembers extends Component {
   constructor(props) {
     super(props);
@@ -22,6 +24,7 @@ class ViewMembers extends Component {
       width: window.innerWidth,
       getData: false,
       exportMsg: false,
+      exportResponse: "",
       exceptionCaught: false
     };
     this.getAllMembers = this.getAllMembers.bind(this);
@@ -149,7 +152,24 @@ class ViewMembers extends Component {
     }
   }
   ExportData = () => {
-    this.setState({ exportMsg: true });
+    let token = getCookie("token");
+    let filter = "members";
+    fetch(
+      BASE_URL +
+        `/api/Features/generateCSV?filter=${filter}&adminToken=${token}`,
+      {
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(res => res.json())
+      .then(data => this.setState({ exportResponse: data, exportMsg: true }))
+      .catch(err => {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      });
   };
 
   render() {
@@ -283,7 +303,9 @@ class ViewMembers extends Component {
                   src={Export}
                   className="export-icon"
                   alt="Is a Member"
-                  onClick={() => this.ExportData()}
+                  onClick={e =>
+                    (e.currentTarget.src = exportClick) && this.ExportData()
+                  }
                 />
               </div>
             </Col>
@@ -331,11 +353,22 @@ class ViewMembers extends Component {
             {postItems}
           </div>
         ) : (
-          <div className="exportMsg-container">
-            <label className="exportMsg-responce">
-              SBmembers.csv sent to fs@retrorabbit.co.za
-            </label>
-            <img src={RedBullet} className="export-success" alt="Is a Member" />
+          <div>
+            {this.state.exportResponse !== ""
+              ? setTimeout(() => {
+                  this.setState({ exportMsg: false });
+                }, 2000)
+              : null}
+            <div className="exportMsg-container">
+              <label className="exportMsg-responce">
+                {this.state.exportResponse}
+              </label>
+              <img
+                src={RedBullet}
+                className="export-success"
+                alt="Is a Member"
+              />
+            </div>
           </div>
         )}
       </div>
