@@ -270,7 +270,7 @@ class ViewComp extends Component {
 
     const displayCompetitions = (
       <div className="page-contents" style={{ height: this.getBodyHeight() }}>
-        <table class="table-view-competitions">
+        <table className="table-view-competitions">
           <tbody>
             {this.props.compOBJ.length === 0 ? (
               <div className="view-error-message">
@@ -301,7 +301,7 @@ class ViewComp extends Component {
                             <label className="users-per-comp">
                               {compVar.status == true ? (
                                 <i class=" fa fa-group">
-                                  <span class="user-per-comp-num">
+                                  <span className="user-per-comp-num">
                                     {this.props.dict[compVar.id]}
                                   </span>
                                 </i>
@@ -357,7 +357,7 @@ class ViewComp extends Component {
                         }
                       >
                         <td>
-                          <div class="comp-req-container">
+                          <div className="comp-req-container">
                             <Form>
                               <Container className="standards-container">
                                 <Row className="standards-label">
@@ -375,7 +375,7 @@ class ViewComp extends Component {
                                 </Row>
                                 <Row className="bronze-row">
                                   <Col xs={4} md={4}>
-                                    <div class="bronze-label">
+                                    <div className="bronze-label">
                                       Bronze Award:{" "}
                                     </div>
                                   </Col>
@@ -417,7 +417,7 @@ class ViewComp extends Component {
 
                                 <Row className="silver-row">
                                   <Col xs={4} md={4}>
-                                    <div class="silver-label">
+                                    <div className="silver-label">
                                       Silver Award:{" "}
                                     </div>
                                   </Col>
@@ -459,7 +459,7 @@ class ViewComp extends Component {
 
                                 <Row>
                                   <Col xs={4} md={4}>
-                                    <div class="accuracy-label">
+                                    <div className="gold-label">
                                       Gold Award:{" "}
                                     </div>
                                   </Col>
@@ -540,7 +540,7 @@ class ViewComp extends Component {
 
                                 <Row>
                                   <Col xs={4} md={4}>
-                                    <div class="shots-label">
+                                    <div className="shots-label">
                                       Shoots Needed:{" "}
                                     </div>
                                   </Col>

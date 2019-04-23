@@ -37,14 +37,6 @@ class AddGroup extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  getBodyHeight() {
-		if (this.state.width < 575) {
-			return (this.state.height - 240) +"px";
-		} else {
-			return "66vh";
-		}
-	}
-
   onClick() {
     if (this.state.groups.indexOf(this.state.name.toLowerCase()) === -1) {
       if (this.state.name.length != 0) {
@@ -63,7 +55,7 @@ class AddGroup extends Component {
       window.location = "/registerPage";
     }
     return (
-      <div className="add-group-main" style={{ height: this.getBodyHeight() }}>
+      <div className="add-group-main" >
         <div className="page">
           <div className="middle-bar">
             <input

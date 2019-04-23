@@ -20,6 +20,7 @@ class ProfileLanding extends Component {
     this.details = this.details.bind(this);
     this.stats = this.stats.bind(this);
     this.logout = this.logout.bind(this);
+    this.iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
   }
 
   componentDidMount() {
@@ -65,7 +66,7 @@ class ProfileLanding extends Component {
     return (
       <Row className="row justify-content-center">
         <Col sm={8} className="profile-bootstrap-col-center-container">
-          <div className="profile-landing-container">
+           <div className={this.iOS ? "ios-profile-landing-container" : "profile-landing-container"}>
             <div
               className={
                 this.props.selectedButton == 1
