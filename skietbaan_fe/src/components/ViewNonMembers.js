@@ -49,6 +49,7 @@ class ViewNonMembers extends Component {
 		this.updateDimensions = this.updateDimensions.bind(this);
 		this.getBodyHeight = this.getBodyHeight.bind(this);
 		this.handleDateChange = this.handleDateChange.bind(this);
+		this.extractEmails = this.extractEmails.bind(this);
 	}
 
 	toggleNavbar() {
@@ -91,7 +92,7 @@ class ViewNonMembers extends Component {
 		if (this.state.width < 575) {
 			return this.state.height - 240 + "px";
 		} else {
-			return "66vh";
+			return "57vh";
 		}
 	}
 	getNonMembers() {
@@ -157,6 +158,17 @@ class ViewNonMembers extends Component {
 			.catch(err => {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
 			});
+	}
+	extractEmails(text) {
+		if (this.state.filterText[0] === "@") {
+			let ser = text.search("@")
+			let word = text.substring(ser, text.length)
+			let ss = word.split(".")
+			return ss[0];
+		}
+		else {
+			return text;
+		}
 	}
 
 	updateMember(index) {
@@ -228,9 +240,11 @@ class ViewNonMembers extends Component {
 
 	onChangeArrow = index => {
 		this.setState({ membershipsID: "" });
+		this.setState({emptyMemberNumber:false})
 		this.state.array[index].selected = !this.state.array[index].selected;
 		this.forceUpdate();
 	};
+
 	ExportData = () => {
 		this.setState({ exportMsg: true });
 	};
@@ -266,7 +280,8 @@ class ViewNonMembers extends Component {
 												.startsWith(this.state.filterText.toLowerCase()) ||
 											post.email
 												.toLowerCase()
-												.startsWith(this.state.filterText.toLowerCase())
+												.startsWith(this.state.filterText.toLowerCase())||
+												(this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
 										);
 									})
 									.map((posts, index) => (
@@ -284,7 +299,6 @@ class ViewNonMembers extends Component {
 																	{posts.email}
 																</div>
 															</div>
-
 															<div className="view-non-members-arrow">
 																{posts.selected === true ? (
 																	<img

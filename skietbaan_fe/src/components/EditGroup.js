@@ -33,6 +33,7 @@ class EditGroup extends Component {
 		this.selectAll = this.selectAll.bind(this);
 		this.updateDimensions = this.updateDimensions.bind(this);
 		this.getBodyHeight = this.getBodyHeight.bind(this);
+		this.extractEmails = this.extractEmails.bind(this);
 	}
 
 	async componentDidMount() {
@@ -109,6 +110,17 @@ class EditGroup extends Component {
 			this.setState({ binState: false });
 		}
 	};
+	extractEmails(text) {
+		if (this.state.filterText[0] === "@") {
+			let ser = text.search("@")
+			let word = text.substring(ser, text.length)
+			let ss = word.split(".")
+			return ss[0];
+		}
+		else {
+			return text;
+		}
+	}
 
 	onBack() {
 		this.props.pageState(0);
@@ -154,6 +166,7 @@ class EditGroup extends Component {
 								return (
 									!this.state.filterText ||
 									post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
+									(this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase()) ||
 									post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
 								);
 							})

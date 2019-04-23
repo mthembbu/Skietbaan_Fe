@@ -41,104 +41,109 @@ class ViewMembersExpiring extends Component {
 		this.updateDimensions = this.updateDimensions.bind(this);
 		this.getBodyHeight = this.getBodyHeight.bind(this);
 		this.expiringDateCheck = this.expiringDateCheck.bind(this);
+		this.extractEmails = this.extractEmails.bind(this);
+		this.onChangeText = this.onChangeText.bind(this);
 	}
 
-  toggleNavbar() {
-    this.setState({
-      navbarState: !this.state.navbarState
-    });
-    var navbar = document.querySelector(".navbar-admin");
-    if (navbar.classList.contains("hidden")) {
-      navbar.classList.remove("hidden");
-    } else {
-      navbar.classList.add("hidden");
-    }
-  }
+	toggleNavbar() {
+		this.setState({
+			navbarState: !this.state.navbarState
+		});
+		var navbar = document.querySelector(".navbar-admin");
+		if (navbar.classList.contains("hidden")) {
+			navbar.classList.remove("hidden");
+		} else {
+			navbar.classList.add("hidden");
+		}
+	}
+	onChangeText(event) {
+		this.setState({ filterText: event.target.value });
+	}
 
-  toggleNavbar2() {
-    var navbar = document.querySelector(".navbar-admin");
-    if (this.state.lastSize > document.body.clientHeight) {
-      navbar.setAttribute("hidden", "true");
-      this.toggleNavbar();
-    } else {
-      navbar.removeAttribute("hidden");
-      this.toggleNavbar();
-    }
-  }
-  componentWillMount() {
-    window.addEventListener("resize", this.updateDimensions);
-  }
-  componentDidMount() {
-    this.updateDimensions();
-    this.getExpiringMembers();
-    this.getTimeLeft();
-  }
-  updateDimensions() {
-    this.setState({
-      height: window.innerHeight,
-      width: window.innerWidth
-    });
-  }
-  getBodyHeight() {
-    if (this.state.width < 575) {
-      return this.state.height - 240 + "px";
-    } else {
-      return "66vh";
-    }
-  }
-  getExpiringMembers() {
-    fetch(BASE_URL + "/api/Features/SearchExpiringMember", {
-      method: "Get",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(data) {
-        return data;
-      })
-      .then(
-        data =>
-          this.setState({
-            array: data,
-            getData: true
-          }),
-        this.props.fetchNumberOfNotification(this.state.token)
-      )
-      .catch(err => {
-        this.setState({ exceptionCaught: true });
-      });
-  }
+	toggleNavbar2() {
+		var navbar = document.querySelector(".navbar-admin");
+		if (this.state.lastSize > document.body.clientHeight) {
+			navbar.setAttribute("hidden", "true");
+			this.toggleNavbar();
+		} else {
+			navbar.removeAttribute("hidden");
+			this.toggleNavbar();
+		}
+	}
+	componentWillMount() {
+		window.addEventListener("resize", this.updateDimensions);
+	}
+	componentDidMount() {
+		this.updateDimensions();
+		this.getExpiringMembers();
+		this.getTimeLeft();
+	}
+	updateDimensions() {
+		this.setState({
+			height: window.innerHeight,
+			width: window.innerWidth
+		});
+	}
+	getBodyHeight() {
+		if (this.state.width < 575) {
+			return this.state.height - 240 + "px";
+		} else {
+			return "57vh";
+		}
+	}
+	getExpiringMembers() {
+		fetch(BASE_URL + "/api/Features/SearchExpiringMember", {
+			method: "Get",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json"
+			}
+		})
+			.then(function (response) {
+				return response.json();
+			})
+			.then(function (data) {
+				return data;
+			})
+			.then(
+				data =>
+					this.setState({
+						array: data,
+						getData: true
+					}),
+				this.props.fetchNumberOfNotification(this.state.token)
+			)
+			.catch(err => {
+				this.setState({ exceptionCaught: true });
+			});
+	}
 
-  getTimeLeft() {
-    fetch(BASE_URL + "/api/Features/SearchExpiringMemberTimeLeft", {
-      method: "Get",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(data) {
-        return data;
-      })
-      .then(data =>
-        this.setState({
-          timeLeftOnMembership: data
-        })
-      )
-      .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      });
-  }
+	getTimeLeft() {
+		fetch(BASE_URL + "/api/Features/SearchExpiringMemberTimeLeft", {
+			method: "Get",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json"
+			}
+		})
+			.then(function (response) {
+				return response.json();
+			})
+			.then(function (data) {
+				return data;
+			})
+			.then(data =>
+				this.setState({
+					timeLeftOnMembership: data
+				})
+			)
+			.catch(err => {
+				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+			});
+	}
 
 	updateMember(index) {
-		if (this.state.dateCheck === true) {
+		if (this.state.dateCheck === true && this.state.array[index].AdvanceExpiryDate === null) {
 			let RequestObject = {
 				username: this.state.array[index].username,
 				EntryDate: this.getCurrentDate() + 'T00:00:00',
@@ -164,50 +169,62 @@ class ViewMembersExpiring extends Component {
 				});
 		}
 
-  }
+	}
 
 	handleDateChange(event) {
 		this.setState({ dateValue: event.target.value });
 		var selectedText = document.getElementById('expdate').value;
 		var selectedDate = new Date(selectedText);
 		var now = new Date();
-		if (selectedDate >= now ) {
+		if (selectedDate >= now) {
 			this.setState({ dateCheck: true })
 		} else {
 			this.setState({ dateCheck: false })
 		}
 	}
 
-	expiringDateCheck (event) {
+	expiringDateCheck(event) {
 		var now = new Date();
 		var selectedDate = new Date(event);
-		if(now > selectedDate){
+		if (now > selectedDate) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-  status(timeLeft) {
-    if (timeLeft < 2 || timeLeft === 2) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+	status(timeLeft) {
+		if (timeLeft < 2 || timeLeft === 2) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-  handleRadioChange(event) {
-    this.setState({ selectedValue: event });
-  }
+	handleRadioChange(event) {
+		this.setState({ selectedValue: event });
+	}
 
-  getCurrentDate() {
-    let curr = new Date();
-    curr.setDate(curr.getDate());
-    let date = curr.toISOString().substr(0, 10);
-    return date;
-  }
-  ExportData = () => {
-    this.setState({ exportMsg: true });
-  };
+	getCurrentDate() {
+		let curr = new Date();
+		curr.setDate(curr.getDate());
+		let date = curr.toISOString().substr(0, 10);
+		return date;
+	}
+	ExportData = () => {
+		this.setState({ exportMsg: true });
+	};
+
+	extractEmails(text) {
+		if (this.state.filterText[0] === "@") {
+			let ser = text.search("@")
+			let word = text.substring(ser, text.length)
+			let ss = word.split(".")
+			return ss[0];
+		}
+		else {
+			return text;
+		}
+	}
 
 	render() {
 		if (!getCookie('token')) {
@@ -224,7 +241,6 @@ class ViewMembersExpiring extends Component {
 		const postItems = (
 			<div>
 				{(this.state.array.length === 0 && this.state.getData === true) ? <div className="view-non-error-container"><label className="view-non-error-msg">No users expiring yet.</label></div> :
-
 					<table striped hover condensed className="table-member">
 						<tbody>
 							{this.state.array
@@ -233,6 +249,7 @@ class ViewMembersExpiring extends Component {
 										!this.state.filterText ||
 										post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
 										post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
+										(this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase()) ||
 										post.memberID.startsWith(this.state.filterText)
 									);
 								})
@@ -253,8 +270,9 @@ class ViewMembersExpiring extends Component {
 																alt="Is a Member"
 															/>
 														</div>
+												
 														<div className="expiry-time-column">
-													
+
 															<div
 																className={
 																	this.status(this.state.timeLeftOnMembership[index]) ? (
@@ -264,7 +282,7 @@ class ViewMembersExpiring extends Component {
 																		)
 																}
 															>
-																	
+
 																<div>
 																	<b>
 																		{post.memberExpiryDate
@@ -273,10 +291,10 @@ class ViewMembersExpiring extends Component {
 																			.join('/')}
 																	</b>
 																	{this.expiringDateCheck(post.memberExpiryDate
-																			.substring(0, 10)
-																			.split('-')
-																			.join('/'))===false?
-																	<div>{this.state.timeLeftOnMembership[index]} Months</div>:<div>{"EXPIRED"}</div>}
+																		.substring(0, 10)
+																		.split('-')
+																		.join('/')) === false ?
+																		<div>{this.state.timeLeftOnMembership[index]} Months</div> : <div>{"EXPIRED"}</div>}
 																</div>
 															</div>
 														</div>
@@ -367,6 +385,6 @@ class ViewMembersExpiring extends Component {
 }
 
 export default connect(
-  null,
-  { fetchNumberOfNotification }
+	null,
+	{ fetchNumberOfNotification }
 )(ViewMembersExpiring);

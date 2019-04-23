@@ -32,6 +32,7 @@ class UserProfile extends Component {
         this._isMounted = false;
         this.isBestInMonth = false;
         this.accuracyReRender = true;
+        this.iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
     }
 
     UNSAFE_componentWillMount() {
@@ -93,12 +94,13 @@ class UserProfile extends Component {
     }
 
     toggle() {
-        
         this.setState(state => ({ collapse: !state.collapse }));
         if(!this.state.collapse){
             $(".profile-landing-container").css('padding-bottom', '63px');
+            $(".ios-profile-landing-container").css('padding-bottom', '138px');
         }else{
             $(".profile-landing-container").css('padding-bottom', '125px');
+            $(".ios-profile-landing-container").css('padding-bottom', '200px');
         }
     }
 
@@ -355,12 +357,12 @@ class UserProfile extends Component {
                         </Col>
                         <Col className="limit-width remove-left-right-paddings">
                             <Row className="push-bottom-13px safari-flex">
-                                <Col xs={4}sm={4}md={4}>
+                                <Col xs={this.iOS ? 3 : 4}sm={this.iOS ? 3 : 4}md={this.iOS ? 3 : 4}>
                                     <label className={this.getInitialAward().accuracyAward.bronze ?
                                         "unlocked-award-text font-size-14px" : 
                                         "locked-award-text font-size-14px"}>BRONZE</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2}>
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
                                     {this.getInitialAward().accuracyAward.bronze 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
@@ -374,12 +376,12 @@ class UserProfile extends Component {
                                 </Col>
                             </Row>
                             <Row className="push-bottom-13px safari-flex">
-                                <Col xs={4}sm={4}md={4}>
+                                <Col xs={this.iOS ? 3 : 4}sm={this.iOS ? 3 : 4}md={this.iOS ? 3 : 4}>
                                 <label className={this.getInitialAward().accuracyAward.silver ? 
                                     "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>SILVER</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2}>
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
                                     {this.getInitialAward().accuracyAward.silver 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
@@ -393,11 +395,11 @@ class UserProfile extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={4}sm={4}md={4}>
+                                <Col xs={this.iOS ? 3 : 4}sm={this.iOS ? 3 : 4}md={this.iOS ? 3 : 4}>
                                 <label className={this.getInitialAward().accuracyAward.gold ? "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>GOLD</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2}>
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
                                     {this.getInitialAward().accuracyAward.gold 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
@@ -420,12 +422,12 @@ class UserProfile extends Component {
                         </Col>
                         <Col className="limit-width remove-left-right-paddings">
                             <Row className="push-bottom-13px">
-                                <Col xs={4}sm={4}md={4}>
+                                <Col xs={this.iOS ? 3 : 4}sm={this.iOS ? 3 : 4}md={this.iOS ? 3 : 4}>
                                 <label className={this.getInitialAward().totalAward.bronze ? 
                                     "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>BRONZE</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2}>
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
                                     {this.getInitialAward().totalAward.bronze 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
@@ -439,18 +441,18 @@ class UserProfile extends Component {
                                 </Col>
                             </Row>
                             <Row className="push-bottom-13px">
-                                <Col xs={4}sm={4}md={4}>
+                                <Col xs={this.iOS ? 3 : 4}sm={this.iOS ? 3 : 4}md={this.iOS ? 3 : 4}>
                                 <label className={this.getInitialAward().totalAward.silver ? 
                                     "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>SILVER</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2}>
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
                                     {this.getInitialAward().totalAward.silver 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-left-right-paddings remove-paddings-for-desktop">
-                                <label className={this.getInitialAward().totalAward.silver ? 
+                                    <label className={this.getInitialAward().totalAward.silver ? 
                                         "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
                                         {this.getInitialAward().totalAward.silverRequirementStatus}
@@ -458,12 +460,12 @@ class UserProfile extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={4}sm={4}md={4}>
+                                <Col xs={this.iOS ? 3 : 4}sm={this.iOS ? 3 : 4}md={this.iOS ? 3 : 4}>
                                 <label className={this.getInitialAward().totalAward.gold ?
                                     "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>GOLD</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2}>
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
                                     {this.getInitialAward().totalAward.gold 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
