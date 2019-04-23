@@ -20,7 +20,7 @@ class ViewNonMembers extends Component {
 			height: 100,
 			timeLeftOnMembership: [],
 			filterText: "",
-			membershipsID: "",
+			membershipsID: '',
 			updateName: "",
 			indexNumber: 0,
 			dateValue: '',
@@ -35,7 +35,7 @@ class ViewNonMembers extends Component {
 			exceptionCaught: false,
 			token: getCookie("token"),
 			emptyMemberNumber: false,
-			dateCheck: true
+			dateCheck: false
 		};
 		this.getTimeLeft = this.getTimeLeft.bind(this);
 		this.onChangeText = this.onChangeText.bind(this);
@@ -49,6 +49,7 @@ class ViewNonMembers extends Component {
 		this.updateDimensions = this.updateDimensions.bind(this);
 		this.getBodyHeight = this.getBodyHeight.bind(this);
 		this.handleDateChange = this.handleDateChange.bind(this);
+		this.extractEmails = this.extractEmails.bind(this);
 	}
 
 	toggleNavbar() {
@@ -91,7 +92,7 @@ class ViewNonMembers extends Component {
 		if (this.state.width < 575) {
 			return this.state.height - 240 + "px";
 		} else {
-			return "66vh";
+			return "57vh";
 		}
 	}
 	getNonMembers() {
@@ -158,9 +159,20 @@ class ViewNonMembers extends Component {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
 			});
 	}
+	extractEmails(text) {
+		if (this.state.filterText[0] === "@") {
+			let ser = text.search("@")
+			let word = text.substring(ser, text.length)
+			let ss = word.split(".")
+			return ss[0];
+		}
+		else {
+			return text;
+		}
+	}
 
 	updateMember(index) {
-		if (this.state.membershipIds.indexOf(this.state.membershipsID) === -1 && this.state.membershipsID.length != "" && this.state.dateCheck === true) {
+		if (this.state.membershipIds.indexOf(this.state.membershipsID) === -1 && this.state.membershipsID.length != '' && this.state.dateCheck === true) {
 			delete this.state.array[index].selected;
 			let RequestObject = {
 				username: this.state.array[index].username,
@@ -219,18 +231,20 @@ class ViewNonMembers extends Component {
 		var selectedText = document.getElementById('expdate').value;
 		var selectedDate = new Date(selectedText);
 		var now = new Date();
-		if (selectedDate > now) {
-			this.setState({ dateCheck: false })
-		} else {
+		if (selectedDate < now) {
 			this.setState({ dateCheck: true })
+		} else {
+			this.setState({ dateCheck: false })
 		}
 	}
 
 	onChangeArrow = index => {
 		this.setState({ membershipsID: "" });
+		this.setState({emptyMemberNumber:false})
 		this.state.array[index].selected = !this.state.array[index].selected;
 		this.forceUpdate();
 	};
+
 	ExportData = () => {
 		this.setState({ exportMsg: true });
 	};
@@ -266,7 +280,8 @@ class ViewNonMembers extends Component {
 												.startsWith(this.state.filterText.toLowerCase()) ||
 											post.email
 												.toLowerCase()
-												.startsWith(this.state.filterText.toLowerCase())
+												.startsWith(this.state.filterText.toLowerCase())||
+												(this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
 										);
 									})
 									.map((posts, index) => (
@@ -284,7 +299,6 @@ class ViewNonMembers extends Component {
 																	{posts.email}
 																</div>
 															</div>
-
 															<div className="view-non-members-arrow">
 																{posts.selected === true ? (
 																	<img
@@ -329,7 +343,7 @@ class ViewNonMembers extends Component {
 														</div>
 														<div>
 															<button
-																className="view-non-members-confirm"
+																className={(this.state.dateValue!=='' && this.state.membershipsID!=='')?"view-non-members-confirm":"view-non-members-confirm-inactive"}
 																onClick={() => this.updateMember(index)}
 															>
 																CONFIRM MEMBERSHIP

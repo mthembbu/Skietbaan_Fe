@@ -32,6 +32,7 @@ class ViewMembers extends Component {
     this.toggleNavbar2 = this.toggleNavbar2.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
     this.getBodyHeight = this.getBodyHeight.bind(this);
+    this.extractEmails = this.extractEmails.bind(this);
   }
 
   toggleNavbar() {
@@ -70,11 +71,22 @@ class ViewMembers extends Component {
       width: window.innerWidth
     });
   }
+  extractEmails(text) {
+		if (this.state.filterText[0] === "@") {
+			let ser = text.search("@")
+			let word = text.substring(ser, text.length)
+			let ss = word.split(".")
+			return ss[0];
+		}
+		else {
+			return text;
+		}
+	}
   getBodyHeight() {
     if (this.state.width < 575) {
       return this.state.height - 240 + "px";
     } else {
-      return "66vh";
+      return "57vh";
     }
   }
   getAllMembers() {
@@ -152,195 +164,149 @@ class ViewMembers extends Component {
     this.setState({ exportMsg: true });
   };
 
-  render() {
-    if (!getCookie("token")) {
-      window.location = "/registerPage";
-    }
-    if (this.state.lastSize === 0) {
-      this.state.lastSize = document.body.clientHeight;
-      document.addEventListener("DOMContentLoaded", () => {
-        window.addEventListener("resize", () => {
-          this.toggleNavbar2();
-        });
-      });
-    }
-    const postItems = (
-      <div>
-        {this.state.array.length === 0 && this.state.getData === true ? (
-          <div className="view-non-error-container">
-            <label className="view-non-error-msg">
-              No members have been created yet.
-            </label>
-          </div>
-        ) : (
-          <table striped hover condensed className="table-member">
-            <tbody>
-              {this.state.array
-                .filter(post => {
-                  return (
-                    !this.state.filterText ||
-                    post.username
-                      .toLowerCase()
-                      .startsWith(this.state.filterText.toLowerCase()) ||
-                    post.email
-                      .toLowerCase()
-                      .startsWith(this.state.filterText.toLowerCase()) ||
-                    post.memberID.startsWith(this.state.filterText)
-                  );
-                })
-                .map((post, index) => (
-                  <tr className="view-members-user" key={post.id}>
-                    <td className="first-column">
-                      <Collapsible
-                        trigger={
-                          <div className="username-and-email">
-                            <div className="view-members-username-email">
-                              <b>{post.username}</b>
-                              <div className="view-non-members-email">
-                                {post.email}
-                              </div>
-                            </div>
-                            <div className="view-exp-members-icon">
-                              <img
-                                src={memberIcon}
-                                className="membership-icon"
-                                alt="Is a Member"
-                              />
-                            </div>
-                            <div className="expiry-time-column">
-                              <div
-                                className={
-                                  this.status(
-                                    this.state.timeLeftOnMembership[index]
-                                  )
-                                    ? "bad"
-                                    : "okay"
-                                }
-                              >
-                                <div>
-                                  <b>
-                                    {post.memberExpiryDate
-                                      .substring(0, 10)
-                                      .split("-")
-                                      .join("/")}
-                                  </b>
-                                  <div>
-                                    {this.state.timeLeftOnMembership[index]}{" "}
-                                    Months
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        }
-                      >
-                        <div className="view-members-membership-details">
-                          MEMBERSHIP NUMBER: <b>{post.memberID}</b>
-                          <div>
-                            START OF MEMBERSHIP:{" "}
-                            <b>{post.memberStartDate.substring(0, 10)}</b>
-                          </div>
-                          <div className="view-member-phone-number">
-                            CELL NUMBER:
-                            <b>
-                              {" "}
-                              {post.phoneNumber === null
-                                ? "N/A"
-                                : post.phoneNumber}
-                            </b>
-                          </div>
-                        </div>
-                      </Collapsible>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        )}
-      </div>
-    );
-    return (
-      <div className="centre-view-member">
-        <div className="username-search">
-          <Row>
-            <Col>
-              <div className="search">
-                <input
-                  autoComplete="off"
-                  type="text"
-                  className="user-value"
-                  id="usernameValue"
-                  placeholder="Enter Username"
-                  value={this.state.filterText}
-                  onChange={this.onChangeText}
-                />
-              </div>
-            </Col>
-            <Col className="export-col-container">
-              {" "}
-              <div className="export-container">
-                <img
-                  src={Export}
-                  className="export-icon"
-                  alt="Is a Member"
-                  onClick={() => this.ExportData()}
-                />
-              </div>
-            </Col>
-          </Row>
-        </div>
-        <div
-          className={
-            this.state.getData === false && this.state.exceptionCaught === false
-              ? "loader-container-members"
-              : "hidden"
-          }
-        >
-          <div
-            className={
-              this.state.getData === false &&
-              this.state.exceptionCaught === false
-                ? "loader"
-                : "hidden"
-            }
-          />
-          <div
-            className={
-              this.state.getData === false &&
-              this.state.exceptionCaught === false
-                ? "target-loader-image"
-                : "hidden"
-            }
-          />
-          <div
-            className={
-              this.state.getData === false &&
-              this.state.exceptionCaught === false
-                ? "loading-message-members"
-                : "hidden"
-            }
-          >
-            Loading...
-          </div>
-        </div>
-        {this.state.exportMsg === false ? (
-          <div
-            className="table-search-members"
-            style={{ height: this.getBodyHeight() }}
-          >
-            {postItems}
-          </div>
-        ) : (
-          <div className="exportMsg-container">
-            <label className="exportMsg-responce">
-              SBmembers.csv sent to fs@retrorabbit.co.za
-            </label>
-            <img src={RedBullet} className="export-success" alt="Is a Member" />
-          </div>
-        )}
-      </div>
-    );
-  }
+	render() {
+		if (!getCookie('token')) {
+			window.location = '/registerPage';
+		}
+		if (this.state.lastSize === 0) {
+			this.state.lastSize = document.body.clientHeight;
+			document.addEventListener('DOMContentLoaded', () => {
+				window.addEventListener('resize', () => {
+					this.toggleNavbar2();
+				});
+			});
+		}
+		const postItems = (
+			<div>
+				{(this.state.array.length === 0 && this.state.getData === true) ?
+					<div className="view-non-error-container">
+						<label className="view-non-error-msg">No members have been created yet.</label>
+					</div> :
+					<table striped hover condensed className="table-member">
+						<tbody>
+							{this.state.array
+								.filter((post) => {
+									return (
+										!this.state.filterText ||
+										post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
+										post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
+										post.memberID.startsWith(this.state.filterText)||(this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
+									);
+								})
+								.map((post, index) => (
+									<tr className="view-members-user" key={post.id}>
+										<td className="first-column">
+											<Collapsible
+												trigger={
+													<div className="username-and-email">
+														<div className="view-members-username-email">
+															<b>{post.username}</b>
+															<div className="view-non-members-email">{post.email}</div>
+														</div>
+														<div className="view-exp-members-icon">
+															<img
+																src={memberIcon}
+																className="membership-icon"
+																alt="Is a Member"
+															/>
+														</div>
+														<div className="expiry-time-column">
+															<div
+																className={
+																	this.status(this.state.timeLeftOnMembership[index]) ? (
+																		'bad'
+																	) : (
+																			'okay'
+																		)
+																}
+															>
+																<div>
+																	<b>
+																		{post.memberExpiryDate
+																			.substring(0, 10)
+																			.split('-')
+																			.join('/')}
+																	</b>
+																	<div>{this.state.timeLeftOnMembership[index]} Months</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												}
+											>
+												<div className="view-members-membership-details">
+													CELL NUMBER: <b>{post.phoneNumber===null?"N/A":post.phoneNumber}</b>
+													<div>
+													MEMBERSHIP NUMBER: <b>{post.memberID}</b>
+													</div>
+													<div className="view-member-phone-number">
+													START OF MEMBERSHIP:<b>{post.memberStartDate.substring(0, 10)}</b>
+													</div>
+												</div>
+											</Collapsible>
+										</td>
+									</tr>
+								))}
+						</tbody>
+					</table>}</div>
+		);
+		return (
+			<div className="centre-view-member">
+				<div className="username-search">
+					<Row>
+						<Col>
+							<div className="search">
+								<input
+									autoComplete="off"
+									type="text"
+									className="user-value"
+									id="usernameValue"
+									placeholder="Enter Username"
+									value={this.state.filterText}
+									onChange={this.onChangeText}
+								/>
+
+
+							</div>
+						</Col>
+						<Col className="export-col-container">	<div className="export-container">
+							<img
+								src={Export}
+								className="export-icon"
+								alt="Is a Member"
+								onClick={() => this.ExportData()}
+							/>
+						</div></Col>
+					</Row>
+				</div>
+				<div className={this.state.getData === false && this.state.exceptionCaught === false ?
+					"loader-container-members" : "hidden"}>
+					<div className={this.state.getData === false && this.state.exceptionCaught === false ?
+						"loader" : "hidden"}>
+					</div>
+					<div className={this.state.getData === false && this.state.exceptionCaught === false ?
+						"target-loader-image" : "hidden"}>
+					</div>
+					<div className={this.state.getData === false && this.state.exceptionCaught === false ?
+						"loading-message-members" : "hidden"}>Loading...</div>
+				</div>
+				{this.state.exportMsg === false ?
+					<div className="table-search-members" style={{ height: this.getBodyHeight() }}>
+						{postItems}
+					</div> :
+					<div className="exportMsg-container"><label className="exportMsg-responce">
+						SBmembers.csv sent to fs@retrorabbit.co.za
+		</label>
+						<img
+							src={RedBullet}
+							className="export-success"
+							alt="Is a Member"
+						/>
+					</div>
+				}
+			</div>
+		);
+	}
 }
 
 export default ViewMembers;
