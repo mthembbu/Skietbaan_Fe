@@ -41,7 +41,7 @@ class AddMembersGroup extends Component {
   }
   getBodyHeight() {
     if (this.state.width < 575) {
-      return this.state.height - 275 + "px";
+      return this.state.height - 225 + "px";
     } else {
       return "57vh";
     }
@@ -101,17 +101,29 @@ class AddMembersGroup extends Component {
     this.props.pageState(1);
   }
 
+  togglenav = () => {
+    let Navbar = document.querySelector(".navbar-admin");
+    if (window.innerWidth < 575 && window.innerHeight < 800) {
+      if (Navbar != null) {
+        if (this.state.count !== 0) {
+          Navbar.classList.add("hidden");
+        } else {
+          Navbar.classList.remove("hidden");
+        }
+      }
+    }
+  };
+
   extractEmails(text) {
-		if (this.state.filterText[0] === "@") {
-			let ser = text.search("@")
-			let word = text.substring(ser, text.length)
-			let ss = word.split(".")
-			return ss[0];
-		}
-		else {
-			return text;
-		}
-	}
+    if (this.state.filterText[0] === "@") {
+      let ser = text.search("@");
+      let word = text.substring(ser, text.length);
+      let ss = word.split(".");
+      return ss[0];
+    } else {
+      return text;
+    }
+  }
 
   cancel = () => {
     for (var i = 0; i < this.props.existing.length; i++) {
@@ -137,6 +149,7 @@ class AddMembersGroup extends Component {
   }
 
   render() {
+    this.togglenav();
     const postitems = (
       <div
         className="adding-check-edit"
@@ -159,8 +172,10 @@ class AddMembersGroup extends Component {
                     .startsWith(this.state.filterText.toLowerCase()) ||
                   post.email
                     .toLowerCase()
-                    .startsWith(this.state.filterText.toLowerCase())||
-                    (this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
+                    .startsWith(this.state.filterText.toLowerCase()) ||
+                  this.extractEmails(post.email).startsWith(
+                    this.state.filterText.toLowerCase()
+                  )
                 );
               })
               .map(post => (
