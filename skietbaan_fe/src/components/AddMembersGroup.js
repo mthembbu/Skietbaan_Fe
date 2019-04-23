@@ -30,6 +30,7 @@ class AddMembersGroup extends Component {
     this.selectall = this.selectall.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
     this.getBodyHeight = this.getBodyHeight.bind(this);
+    this.extractEmails = this.extractEmails.bind(this);
   }
   async componentDidMount() {
     this.updateDimensions();
@@ -100,6 +101,18 @@ class AddMembersGroup extends Component {
     this.props.pageState(1);
   }
 
+  extractEmails(text) {
+		if (this.state.filterText[0] === "@") {
+			let ser = text.search("@")
+			let word = text.substring(ser, text.length)
+			let ss = word.split(".")
+			return ss[0];
+		}
+		else {
+			return text;
+		}
+	}
+
   cancel = () => {
     for (var i = 0; i < this.props.existing.length; i++) {
       this.props.existing[i].highlighted = false;
@@ -146,7 +159,8 @@ class AddMembersGroup extends Component {
                     .startsWith(this.state.filterText.toLowerCase()) ||
                   post.email
                     .toLowerCase()
-                    .startsWith(this.state.filterText.toLowerCase())
+                    .startsWith(this.state.filterText.toLowerCase())||
+                    (this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
                 );
               })
               .map(post => (

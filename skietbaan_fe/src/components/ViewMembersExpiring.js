@@ -28,8 +28,8 @@ class ViewMembersExpiring extends Component {
       getData: false,
       exportMsg: false,
       exceptionCaught: false,
-      exportResponse: "",
-      dateCheck: true
+      dateCheck: false,
+      exportResponse: ""
     };
     this.getExpiringMembers = this.getExpiringMembers.bind(this);
     this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -42,6 +42,9 @@ class ViewMembersExpiring extends Component {
     this.toggleNavbar2 = this.toggleNavbar2.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
     this.getBodyHeight = this.getBodyHeight.bind(this);
+    this.expiringDateCheck = this.expiringDateCheck.bind(this);
+    this.extractEmails = this.extractEmails.bind(this);
+    this.onChangeText = this.onChangeText.bind(this);
   }
 
   toggleNavbar() {
@@ -54,6 +57,9 @@ class ViewMembersExpiring extends Component {
     } else {
       navbar.classList.add("hidden");
     }
+  }
+  onChangeText(event) {
+    this.setState({ filterText: event.target.value });
   }
 
   toggleNavbar2() {
@@ -84,7 +90,7 @@ class ViewMembersExpiring extends Component {
     if (this.state.width < 575) {
       return this.state.height - 240 + "px";
     } else {
-      return "66vh";
+      return "57vh";
     }
   }
   getExpiringMembers() {
@@ -139,7 +145,10 @@ class ViewMembersExpiring extends Component {
   }
 
   updateMember(index) {
-    if (this.state.dateCheck === true) {
+    if (
+      this.state.dateCheck === true &&
+      this.state.array[index].AdvanceExpiryDate === null
+    ) {
       let RequestObject = {
         username: this.state.array[index].username,
         EntryDate: this.getCurrentDate() + "T00:00:00",
@@ -171,14 +180,22 @@ class ViewMembersExpiring extends Component {
     var selectedText = document.getElementById("expdate").value;
     var selectedDate = new Date(selectedText);
     var now = new Date();
-
-    if (selectedDate <= now) {
-      this.setState({ dateCheck: false });
-    } else {
+    if (selectedDate >= now) {
       this.setState({ dateCheck: true });
+    } else {
+      this.setState({ dateCheck: false });
     }
   }
 
+  expiringDateCheck(event) {
+    var now = new Date();
+    var selectedDate = new Date(event);
+    if (now > selectedDate) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   status(timeLeft) {
     if (timeLeft < 2 || timeLeft === 2) {
       return true;
@@ -193,7 +210,7 @@ class ViewMembersExpiring extends Component {
 
   getCurrentDate() {
     let curr = new Date();
-    curr.setDate(curr.getDate() + 365);
+    curr.setDate(curr.getDate());
     let date = curr.toISOString().substr(0, 10);
     return date;
   }
@@ -217,6 +234,17 @@ class ViewMembersExpiring extends Component {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
   };
+
+  extractEmails(text) {
+    if (this.state.filterText[0] === "@") {
+      let ser = text.search("@");
+      let word = text.substring(ser, text.length);
+      let ss = word.split(".");
+      return ss[0];
+    } else {
+      return text;
+    }
+  }
 
   render() {
     if (!getCookie("token")) {
@@ -249,6 +277,9 @@ class ViewMembersExpiring extends Component {
                     post.email
                       .toLowerCase()
                       .startsWith(this.state.filterText.toLowerCase()) ||
+                    this.extractEmails(post.email).startsWith(
+                      this.state.filterText.toLowerCase()
+                    ) ||
                     post.memberID.startsWith(this.state.filterText)
                   );
                 })
@@ -271,6 +302,7 @@ class ViewMembersExpiring extends Component {
                                 alt="Is a Member"
                               />
                             </div>
+
                             <div className="expiry-time-column">
                               <div
                                 className={
@@ -288,10 +320,19 @@ class ViewMembersExpiring extends Component {
                                       .split("-")
                                       .join("/")}
                                   </b>
-                                  <div>
-                                    {this.state.timeLeftOnMembership[index]}{" "}
-                                    Months
-                                  </div>
+                                  {this.expiringDateCheck(
+                                    post.memberExpiryDate
+                                      .substring(0, 10)
+                                      .split("-")
+                                      .join("/")
+                                  ) === false ? (
+                                    <div>
+                                      {this.state.timeLeftOnMembership[index]}{" "}
+                                      Months
+                                    </div>
+                                  ) : (
+                                    <div>{"EXPIRED"}</div>
+                                  )}
                                 </div>
                               </div>
                             </div>

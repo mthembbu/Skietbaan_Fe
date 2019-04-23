@@ -37,6 +37,7 @@ class Groups extends Component {
     this.selectall = this.selectall.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
     this.getBodyHeight = this.getBodyHeight.bind(this);
+    this.extractEmails = this.extractEmails.bind(this);
   }
   UNSAFE_componentWillMount() {
     fetch(BASE_URL + "/api/user")
@@ -106,8 +107,8 @@ class Groups extends Component {
       },
       body: JSON.stringify(requestedObj)
     })
-      .then(function(response) {})
-      .catch(function(data) {})
+      .then(function (response) { })
+      .catch(function (data) { })
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
@@ -115,6 +116,18 @@ class Groups extends Component {
     this.props.pageState(0);
     history.push("/create");
   }
+
+  extractEmails(text) {
+		if (this.state.filterText[0] === "@") {
+			let ser = text.search("@")
+			let word = text.substring(ser, text.length)
+			let ss = word.split(".")
+			return ss[0];
+		}
+		else {
+			return text;
+		}
+	}
 
   selectall() {
     if (this.state.check === "Select all") {
@@ -159,7 +172,7 @@ class Groups extends Component {
                     .startsWith(this.state.filterText.toLowerCase()) ||
                   post.email
                     .toLowerCase()
-                    .startsWith(this.state.filterText.toLowerCase())
+                    .startsWith(this.state.filterText.toLowerCase()) || (this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
                 );
               })
               .map((post, index) => (

@@ -36,8 +36,8 @@ class ViewNonMembers extends Component {
       exceptionCaught: false,
       token: getCookie("token"),
       emptyMemberNumber: false,
-      exportResponse: "",
-      dateCheck: true
+      dateCheck: false,
+      exportResponse: ""
     };
     this.getTimeLeft = this.getTimeLeft.bind(this);
     this.onChangeText = this.onChangeText.bind(this);
@@ -51,6 +51,7 @@ class ViewNonMembers extends Component {
     this.updateDimensions = this.updateDimensions.bind(this);
     this.getBodyHeight = this.getBodyHeight.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
+    this.extractEmails = this.extractEmails.bind(this);
   }
 
   toggleNavbar() {
@@ -93,7 +94,7 @@ class ViewNonMembers extends Component {
     if (this.state.width < 575) {
       return this.state.height - 240 + "px";
     } else {
-      return "66vh";
+      return "57vh";
     }
   }
   getNonMembers() {
@@ -159,6 +160,16 @@ class ViewNonMembers extends Component {
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
+  }
+  extractEmails(text) {
+    if (this.state.filterText[0] === "@") {
+      let ser = text.search("@");
+      let word = text.substring(ser, text.length);
+      let ss = word.split(".");
+      return ss[0];
+    } else {
+      return text;
+    }
   }
 
   updateMember(index) {
