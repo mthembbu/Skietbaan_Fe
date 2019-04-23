@@ -1,6 +1,7 @@
 @media only screen and (min-width: 576px) {
   .profile-content-container {
     margin-top: 56px;
+    padding-top: 74px !important;
   }
 
   .user-details-main-container {
@@ -9,6 +10,7 @@
   .profile-bootstrap-col-center-container {
     background: white;
     padding: 0;
+    margin: auto
   }
   .documents_background {
     width: 55% !important;

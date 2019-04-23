@@ -197,7 +197,6 @@ class ProfileLanding extends Component {
       </div>
            </Col>
         </Row>
-        
     );
   }
 }
