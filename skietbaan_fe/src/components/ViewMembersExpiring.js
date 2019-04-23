@@ -141,6 +141,7 @@ class ViewMembersExpiring extends Component {
   updateMember(index) {
     let RequestObject = {
       username: this.state.array[index].username,
+      EntryDate: this.getCurrentDate() + 'T00:00:00',	
       memberExpiryDate: this.getCurrentDate() + "T00:00:00"
     };
     fetch(BASE_URL + "/api/Features/RenewMembership", {
