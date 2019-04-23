@@ -152,26 +152,6 @@ class ViewMembers extends Component {
       return false;
     }
   }
-  ExportData = () => {
-    let token = getCookie("token");
-    let filter = "members";
-    fetch(
-      BASE_URL +
-        `/api/Features/generateCSV?filter=${filter}&adminToken=${token}`,
-      {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      }
-    )
-      .then(res => res.json())
-      .then(data => this.setState({ exportResponse: data, exportMsg: true }))
-      .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      });
-  };
 
   status(timeLeft) {
     if (timeLeft < 2 || timeLeft === 2) {
