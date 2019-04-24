@@ -19,29 +19,17 @@ class ViewScores extends Component {
             token: getCookie("token"),
             scoresList: [],
             getDataScores: false,
+            usersList: [],
             cameraClicked: false,
             someScoreClicked: null,
             lastName: "",
-            duplicate: false
-
+            duplicate: false,
+            competitionId: null
         };
         this.competitionClicked = this.competitionClicked.bind(this);
         this.formatTime = this.formatTime.bind(this);
         this.showPhoto = this.showPhoto.bind(this);
-        this.removeDuplicates = this.removeDuplicates.bind(this)
-    }
-
-    removeDuplicates(name) {
-        if (this.state.lastName === name) {
-            this.setState({
-                duplicate: true
-            })
-        } else {
-            this.setState({
-                lastName: name
-            })
-            return this.state.lastName
-        }
+        this.getScoresForAdmin = this.getScoresForAdmin.bind(this)
     }
 
     showPhoto(item) {
@@ -49,6 +37,31 @@ class ViewScores extends Component {
             cameraClicked: !this.state.cameraClicked,
             someScoreClicked: item
         })
+    }
+
+    getScoresForAdmin(id) {
+        fetch(BASE_URL + "/api/Scores/GetAllScores/" + id +"/" + this.state.competitionId, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            }
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                return data;
+            })
+            .then(data =>
+                this.setState({
+                    scoresList: data,
+                    getDataScores: true
+                })
+            )
+            .catch(err => {
+                this.setState({ exceptionCaught: true })
+            });
     }
 
     formatTime(time) {
@@ -63,6 +76,7 @@ class ViewScores extends Component {
             somethingClicked: true,
             clicked: item,
             competitionName: compName,
+            competitionId: compId
         });
         toggleToggleBar();
         if (compId !== "" && this.props.isAdmin === false) {
@@ -104,7 +118,7 @@ class ViewScores extends Component {
                 })
                 .then(data =>
                     this.setState({
-                        scoresList: data,
+                        usersList: data,
                         getDataScores: true
                     })
                 )
@@ -235,13 +249,13 @@ class ViewScores extends Component {
         }
 
         let adminScoresList = [];
-        if (this.state.scoresList.length !== 0 && this.state.getDataScores !== false && this.props.isAdmin === true) {
-            for (let i = 0; i < this.state.scoresList.length; i++) {
+        if (this.state.usersList.length !== 0 && this.state.getDataScores !== false && this.props.isAdmin === true) {
+            for (let i = 0; i < this.state.usersList.length; i++) {
                 adminScoresList.push(
                     <div className="score-content">
-                        <div className="users-container">
-                            <div className="usernames">{this.state.scoresList[i].username}</div>
-                            <div className="user-emails">{this.state.scoresList[i].email}</div>
+                        <div className="users-container" onlick={() => this.getScoresForAdmin(this.state.usersList[i].id)}>
+                            <div className="usernames">{this.state.usersList[i].username}</div>
+                            <div className="user-emails">{this.state.usersList[i].email}</div>
                         </div>
                         <div className="border-line">
                         </div>
@@ -276,7 +290,6 @@ class ViewScores extends Component {
                                     {adminScoresList}
                                 </div>
                             </div>
-
                         )}
                 </div>
             </div>
