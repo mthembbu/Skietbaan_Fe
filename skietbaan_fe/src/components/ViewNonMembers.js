@@ -37,7 +37,8 @@ class ViewNonMembers extends Component {
       token: getCookie("token"),
       emptyMemberNumber: false,
       dateCheck: false,
-      exportResponse: ""
+      exportResponse: "",
+      dateErrormsg: false
     };
     this.getTimeLeft = this.getTimeLeft.bind(this);
     this.onChangeText = this.onChangeText.bind(this);
@@ -105,10 +106,10 @@ class ViewNonMembers extends Component {
         "Content-Type": "application/json"
       }
     })
-      .then(function(response) {
+      .then(function (response) {
         return response.json();
       })
-      .then(function(data) {
+      .then(function (data) {
         return data;
       })
       .then(data =>
@@ -146,10 +147,10 @@ class ViewNonMembers extends Component {
         "Content-Type": "application/json"
       }
     })
-      .then(function(response) {
+      .then(function (response) {
         return response.json();
       })
-      .then(function(data) {
+      .then(function (data) {
         return data;
       })
       .then(data =>
@@ -173,38 +174,44 @@ class ViewNonMembers extends Component {
   }
 
   updateMember(index) {
-    if (
-      this.state.membershipIds.indexOf(this.state.membershipsID) === -1 &&
-      this.state.membershipsID.length != "" &&
-      this.state.dateCheck === true
-    ) {
-      delete this.state.array[index].selected;
-      let RequestObject = {
-        username: this.state.array[index].username,
-        memberID: this.state.membershipsID,
-        MemberStartDate: this.state.dateValue + "T00:00:00",
-        memberExpiryDate: this.getCurrentDate() + "T00:00:00"
-      };
-      fetch(BASE_URL + "/api/Features/Update", {
-        method: "Post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(RequestObject)
-      })
-        .then(function(response) {
-          return response.json();
-        })
-        .then(data => {
-          this.getNonMembers();
-          this.setState({ filterText: "" });
-          this.props.fetchNumberOfNotification(this.state.token);
-        })
-        .catch(err => {
-          /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-        });
+
+    if (this.state.membershipIds.indexOf(this.state.membershipsID) === -1) {
+      if (this.state.membershipsID.length != "") {
+        if (this.state.dateCheck === true) {
+          delete this.state.array[index].selected;
+          let RequestObject = {
+            username: this.state.array[index].username,
+            memberID: this.state.membershipsID,
+            MemberStartDate: this.state.dateValue + "T00:00:00",
+            memberExpiryDate: this.getCurrentDate() + "T00:00:00"
+          };
+          fetch(BASE_URL + "/api/Features/Update", {
+            method: "Post",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(RequestObject)
+          })
+            .then(function (response) {
+              return response.json();
+            })
+            .then(data => {
+              this.getNonMembers();
+              this.setState({ filterText: "" });
+              this.props.fetchNumberOfNotification(this.state.token);
+            })
+            .catch(err => {
+              /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+            });
+        } else {
+
+        }
+      } else {
+        /*the membershit can not be null */
+      }
     } else {
+      /*the membership is already exist */
       this.setState({ emptyMemberNumber: true });
     }
   }
@@ -237,9 +244,9 @@ class ViewNonMembers extends Component {
     var selectedDate = new Date(selectedText);
     var now = new Date();
     if (selectedDate > now) {
-      this.setState({ dateCheck: false });
+      this.setState({ dateCheck: false, dateErrormsg: true });
     } else {
-      this.setState({ dateCheck: true });
+      this.setState({ dateCheck: true, dateErrormsg: false });
     }
   }
 
@@ -248,12 +255,13 @@ class ViewNonMembers extends Component {
     this.state.array[index].selected = !this.state.array[index].selected;
     this.forceUpdate();
   };
+
   ExportData = () => {
     let token = getCookie("token");
     let filter = "users";
     fetch(
       BASE_URL +
-        `/api/Features/generateCSV?filter=${filter}&adminToken=${token}`,
+      `/api/Features/generateCSV?filter=${filter}&adminToken=${token}`,
       {
         method: "post",
         headers: {
@@ -289,96 +297,99 @@ class ViewNonMembers extends Component {
             </label>
           </div>
         ) : (
-          <table striped hover condensed className="table-member">
-            <tbody>
-              {this.state.array
-                .filter(post => {
-                  return (
-                    !this.state.filterText ||
-                    post.username
-                      .toLowerCase()
-                      .startsWith(this.state.filterText.toLowerCase()) ||
-                    post.email
-                      .toLowerCase()
-                      .startsWith(this.state.filterText.toLowerCase())
-                  );
-                })
-                .map((posts, index) => (
-                  <tr className="view-members-user" key={posts.id}>
-                    <td className="first-column">
-                      <Collapsible
-                        trigger={
-                          <div
-                            className="username-and-email"
-                            onClick={() => this.onChangeArrow(index)}
-                          >
-                            <div className="view-non-members-users-email">
-                              <b>{posts.username}</b>
-                              <div className="view-non-members-email">
-                                {posts.email}
+            <table striped hover condensed className="table-member">
+              <tbody>
+                {this.state.array
+                  .filter(post => {
+                    return (
+                      !this.state.filterText ||
+                      post.username
+                        .toLowerCase()
+                        .startsWith(this.state.filterText.toLowerCase()) ||
+                      post.email
+                        .toLowerCase()
+                        .startsWith(this.state.filterText.toLowerCase())
+                    );
+                  })
+                  .map((posts, index) => (
+                    <tr className="view-members-user" key={posts.id}>
+                      <td className="first-column">
+                        <Collapsible
+                          trigger={
+                            <div
+                              className="username-and-email"
+                              onClick={() => this.onChangeArrow(index)}
+                            >
+                              <div className="view-non-members-users-email">
+                                <b>{posts.username}</b>
+                                <div className="view-non-members-email">
+                                  {posts.email}
+                                </div>
+                              </div>
+
+                              <div className="view-non-members-arrow">
+                                {posts.selected === true ? (
+                                  <img
+                                    className="view-non-members-image"
+                                    src={arrowDown}
+                                  />
+                                ) : (
+                                    <img
+                                      className="view-non-members-image"
+                                      src={arrowUp}
+                                    />
+                                  )}
                               </div>
                             </div>
-
-                            <div className="view-non-members-arrow">
-                              {posts.selected === true ? (
-                                <img
-                                  className="view-non-members-image"
-                                  src={arrowDown}
-                                />
-                              ) : (
-                                <img
-                                  className="view-non-members-image"
-                                  src={arrowUp}
-                                />
+                          }
+                        >
+                          <div className="membership-details">
+                            <div className="membership-container">
+                              <input
+                                type="number"
+                                className="view-non-members-text-boxes"
+                                id="membershipID"
+                                placeholder="Membership Number"
+                                autoComplete="Off"
+                                value={this.state.membershipsID}
+                                onChange={this.handleChange}
+                              />
+                              {this.state.emptyMemberNumber === false ? null : (
+                                <label className="non-member-same-member-number-error">
+                                  Membership number already exists
+                              </label>
                               )}
                             </div>
-                          </div>
-                        }
-                      >
-                        <div className="membership-details">
-                          <div className="membership-container">
-                            <input
-                              type="number"
-                              className="view-non-members-text-boxes"
-                              id="membershipID"
-                              placeholder="Membership Number"
-                              autoComplete="Off"
-                              value={this.state.membershipsID}
-                              onChange={this.handleChange}
-                            />
-                            {this.state.emptyMemberNumber === false ? null : (
-                              <label className="non-member-same-member-number-error">
-                                Membership number already exists
-                              </label>
-                            )}
-                          </div>
-                          <div>
-                            <input
-                              type="date"
-                              className="view-non-members-date-box"
-                              id="expdate"
-                              required
-                              data-date-format="yyyy-mm-dd"
-                              value={this.state.datevalue}
-                              onChange={this.handleDateChange}
-                            />
-                          </div>
-                          <div>
-                            <button
-                              className="view-non-members-confirm"
-                              onClick={() => this.updateMember(index)}
-                            >
-                              CONFIRM MEMBERSHIP
+                            <div className="date-error-msg-cpntainer">
+                              <input
+                                type="date"
+                                className="view-non-members-date-box"
+                                id="expdate"
+                                required
+                                data-date-format="yyyy-mm-dd"
+                                value={this.state.datevalue}
+                                onChange={this.handleDateChange}
+                              />
+                              {this.state.dateErrormsg === true ?
+                                <label className="non-member-Date-error-msg">Date selected is invalid</label> : null}
+                            </div>
+
+                            <div>
+                              <button
+                                className={(this.state.dateValue != "" && this.state.membershipsID != "" && this.state.dateErrormsg===false) ? "view-non-members-confirm" : "view-non-members-confirm-inactive"}
+                                onClick={() => this.updateMember(index)}
+                              >
+                                CONFIRM MEMBERSHIP
                             </button>
+                            </div>
                           </div>
-                        </div>
-                      </Collapsible>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        )}
+                        </Collapsible>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          )}
       </div>
     );
     return (
@@ -423,7 +434,7 @@ class ViewNonMembers extends Component {
           <div
             className={
               this.state.getData === false &&
-              this.state.exceptionCaught === false
+                this.state.exceptionCaught === false
                 ? "loader"
                 : "hidden"
             }
@@ -431,7 +442,7 @@ class ViewNonMembers extends Component {
           <div
             className={
               this.state.getData === false &&
-              this.state.exceptionCaught === false
+                this.state.exceptionCaught === false
                 ? "target-loader-image"
                 : "hidden"
             }
@@ -439,7 +450,7 @@ class ViewNonMembers extends Component {
           <div
             className={
               this.state.getData === false &&
-              this.state.exceptionCaught === false
+                this.state.exceptionCaught === false
                 ? "loading-message-members"
                 : "hidden"
             }
@@ -455,24 +466,24 @@ class ViewNonMembers extends Component {
             {postItems}
           </div>
         ) : (
-          <div>
-            {this.state.exportResponse !== ""
-              ? setTimeout(() => {
+            <div>
+              {this.state.exportResponse !== ""
+                ? setTimeout(() => {
                   this.setState({ exportMsg: false });
                 }, 2000)
-              : null}
-            <div className="exportMsg-container">
-              <label className="exportMsg-responce">
-                {this.state.exportResponse}
-              </label>
-              <img
-                src={RedBullet}
-                className="export-success"
-                alt="Is a Member"
-              />
+                : null}
+              <div className="exportMsg-container">
+                <label className="exportMsg-responce">
+                  {this.state.exportResponse}
+                </label>
+                <img
+                  src={RedBullet}
+                  className="export-success"
+                  alt="Is a Member"
+                />
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     );
   }
