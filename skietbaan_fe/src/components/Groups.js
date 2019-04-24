@@ -77,7 +77,7 @@ class Groups extends Component {
     if (this.state.width < 575) {
       return this.state.height - 200 + "px";
     } else {
-      return "59vh";
+      return "61vh";
     }
   }
   updateDimensions() {

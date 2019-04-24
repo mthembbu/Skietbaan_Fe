@@ -313,11 +313,11 @@ class EditGroup extends Component {
         {this.state.count === 0 ? null : (
           <div className="bpanel">
             <button className="confirm-group" onClick={() => this.delete()}>
-              DELETE USER
+			CANCEL
             </button>
 
             <button className="cancel-delete" onClick={() => this.cancel()}>
-              CANCEL
+              {this.state.count===this.props.editGroup.length?"DELETE ALL":"DELETE USER"} 
             </button>
           </div>
         )}

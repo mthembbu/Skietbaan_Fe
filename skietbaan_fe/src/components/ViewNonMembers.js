@@ -10,6 +10,7 @@ import RedBullet from "../components/assets/RedBullet.png";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { fetchNumberOfNotification } from "../actions/notificationAction";
+import { pageState } from '../actions/postActions';
 import exportClick from "../components/assets/exportPress.png";
 
 class ViewNonMembers extends Component {
@@ -85,6 +86,10 @@ class ViewNonMembers extends Component {
     this.getNonMembers();
     this.getTimeLeft();
   }
+  componentWillUnmount(){
+    this.props.pageState(10);
+  }
+  
   updateDimensions() {
     this.setState({
       height: window.innerHeight,
@@ -491,5 +496,5 @@ class ViewNonMembers extends Component {
 
 export default connect(
   null,
-  { fetchNumberOfNotification }
+  { fetchNumberOfNotification ,pageState }
 )(ViewNonMembers);

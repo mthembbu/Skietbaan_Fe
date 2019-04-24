@@ -60,6 +60,14 @@
     overflow-y: scroll;
   }
 }
+@media only screen and (min-width: 700px) {
+.user-value{
+	margin-left: 15%;
+} 
+.export-container{
+	margin-right: 15%;
+}
+}
 @media only screen and (max-width: 575px) {
   .table-search-members {
     background-color: #f6f6f6;

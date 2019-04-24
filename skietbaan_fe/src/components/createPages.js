@@ -86,7 +86,7 @@ export class createPages extends Component {
 	}
 
 	membersPage() {
-		this.setState({ selectedButton: 3 });
+		this.setState({ selectedButton: 3 , selectedValue:'A' });
 	}
 
 	createGroups() {
