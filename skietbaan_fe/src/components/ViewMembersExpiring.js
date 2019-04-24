@@ -31,7 +31,8 @@ class ViewMembersExpiring extends Component {
 			dateCheck: false,
 			exportResponse: "",
 			dateErrorMgs: false,
-			successMgs: false
+			successMgs: false,
+			AdvanceDateExist:false
 		};
 		this.getExpiringMembers = this.getExpiringMembers.bind(this);
 		this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -178,10 +179,10 @@ class ViewMembersExpiring extends Component {
 					});
 			}
 			else {
-				this.setState({ dateErrorMgs: true })
+				this.setState({ AdvanceDateExist: true })
 			}
 		} else {
-			/*the enter the date from the day or foward*/
+			this.setState({ dateErrorMgs: true })
 		}
 	}
 
@@ -363,6 +364,7 @@ class ViewMembersExpiring extends Component {
 															/>
 														</div> : null}
 													{this.state.dateErrorMgs === true ? <label className="non-member-renew-error-msg">Date selected is invalid</label> : null}
+													{this.state.AdvanceDateExist === true ? <label className="non-member-renew-error-msg">User already been in advance</label> : null}
 													{this.state.successMgs === false ?
 														<div className="renew-container">
 															<button
