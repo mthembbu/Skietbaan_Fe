@@ -87,7 +87,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         existing: action.payload,
-        memberIds: action.pay
+        memberIds: action.pay,
+        loader: true
       };
 
     case NEWGROUPSTATE:
@@ -100,7 +101,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         editGroup: action.payload,
-        idsForUser: action.pay
+        idsForUser: action.pay,
+        loader: true
       };
     case EMPTY:
       return {

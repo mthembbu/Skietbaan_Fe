@@ -40,6 +40,7 @@ export const fetchGroups = () => dispatch => {
 };
 
 export const AddMemberAction = id => dispatch => {
+  dispatch({ type: GROUP_DATA_LOADING });
   const arr = [];
   fetch(BASE_URL + "/api/Groups/list?id=" + id)
     .then(res => res.json())
@@ -94,6 +95,7 @@ export const getName = name => {
 };
 
 export const fetchEditUser = groupid => dispatch => {
+  dispatch({ type: GROUP_DATA_LOADING });
   const ar = [];
   fetch(BASE_URL + "/api/Groups/edit?id=" + groupid)
     .then(res => res.json())

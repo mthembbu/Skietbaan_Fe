@@ -283,7 +283,22 @@ class EditGroup extends Component {
             ) : null}
           </div>
         </div>
-        {postitems} :
+        <div>
+          {this.props.loader === true ? (
+            postitems
+          ) : (
+            <div className={this.props.loader ? "hidden" : "loader-formatting"}>
+              <div className={this.props.loader ? "hidden" : "loader"} />
+              <div
+                className={this.props.loader ? "hidden" : "target-loader-image"}
+              />
+              <div className={this.props.loader ? "hidden" : "loading-message"}>
+                Loading...
+              </div>
+            </div>
+          )}
+        </div>
+
         {this.state.count === 0 ? null : (
           <div className="bpanel">
             <button className="confirm-group" onClick={() => this.delete()}>
@@ -304,7 +319,8 @@ const mapStateToProps = state => ({
   name: state.posts.groupName,
   editGroup: state.posts.editGroup,
   page: state.posts.page,
-  idsForUser: state.posts.idsForUser
+  idsForUser: state.posts.idsForUser,
+  loader: state.posts.loader
 });
 
 export default connect(
