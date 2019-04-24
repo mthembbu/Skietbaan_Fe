@@ -48,7 +48,7 @@ class ViewGroups extends Component {
   }
   getBodyHeight() {
     if (this.state.width < 575) {
-      return this.state.height - 240 + "px";
+      return this.state.height - 180 + "px";
     } else {
       return "57vh";
     }
@@ -139,7 +139,20 @@ class ViewGroups extends Component {
     }
     this.setState({ count: 0 });
   };
+  togglenav = () => {
+    let Navbar = document.querySelector(".navbar-admin");
+    if (window.innerWidth < 575 && window.innerHeight < 800) {
+      if (Navbar != null) {
+        if (this.state.count !== 0) {
+          Navbar.classList.add("hidden");
+        } else {
+          Navbar.classList.remove("hidden");
+        }
+      }
+    }
+  };
   render() {
+    this.togglenav();
     const loader = (
       <div className="loader-formatting">
         <div className={this.props.loader ? "hidden" : "loader"} />

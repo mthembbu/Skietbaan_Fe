@@ -45,7 +45,7 @@ class EditGroup extends Component {
 	}
 	getBodyHeight() {
 		if (this.state.width < 575) {
-			return (this.state.height - 262) + "px";
+			return (this.state.height - 210) + "px";
 		} else {
 			return "59vh";
 		}
@@ -164,8 +164,20 @@ class EditGroup extends Component {
 	goToNext = () => {
 		this.props.pageState(2);
 	};
+	togglenav = () => {
+		let Navbar = document.querySelector(".navbar-admin");
+		if (window.innerWidth < 575 && window.innerHeight < 800) {
+		  if (Navbar != null) {
+			if (this.state.count !== 0) {
+			  Navbar.classList.add("hidden");
+			} else {
+			  Navbar.classList.remove("hidden");
+			}
+		  }
+		}
+	  };
 	render() {
-
+		this.togglenav();
 		const postitems = (
 			<div className="check-edit" style={{ height: this.getBodyHeight() }}>
 				{this.props.editGroup.length === 0 ? <div className="edit-no-user-container">

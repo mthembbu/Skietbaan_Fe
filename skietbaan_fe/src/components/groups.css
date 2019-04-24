@@ -182,6 +182,7 @@
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
 	display: flex;
+	position:absolute;
 	height: 57px;
 }
 
@@ -343,9 +344,9 @@
 	font-weight: lighter;
 	padding-top: 10px;
 	float: bottom;
-	height: 120px;
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
+	padding-bottom: 5px;
 }
 .updatess:focus {
 	outline: none;

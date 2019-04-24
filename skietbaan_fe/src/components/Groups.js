@@ -69,7 +69,7 @@ class Groups extends Component {
   }
   getBodyHeight() {
     if (this.state.width < 575) {
-      return this.state.height - 255 + "px";
+      return this.state.height - 200 + "px";
     } else {
       return "59vh";
     }
@@ -176,9 +176,25 @@ class Groups extends Component {
     }
   };
   onBack() {
+    this.setState({ count: 0 });
     this.props.history.push("/create");
   }
+
+  togglenav = () => {
+    let Navbar = document.querySelector(".navbar-admin");
+    if (window.innerWidth < 575 && window.innerHeight < 800) {
+      if (Navbar != null) {
+        if (this.state.count !== 0) {
+          Navbar.classList.add("hidden");
+        } else {
+          Navbar.classList.remove("hidden");
+        }
+      }
+    }
+  };
   render() {
+    this.togglenav();
+
     const postitems = (
       <div className="check" style={{ height: this.getBodyHeight() }}>
         {this.state.posts.length === 0 ? null : (
