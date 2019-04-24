@@ -331,7 +331,7 @@ class Groups extends Component {
                   CANCEL
                 </button>
                 <button className="create-group" onClick={this.handleOnClick}>
-                  CRETE GROUP
+                  CREATE GROUP
                 </button>
               </label>
             )}
