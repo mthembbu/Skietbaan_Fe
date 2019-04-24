@@ -279,7 +279,22 @@ class AddMembersGroup extends Component {
             </div>
           </div>
         </div>
-        {postitems}
+        <div>
+          {this.props.loader === true ? (
+            postitems
+          ) : (
+            <div className={this.props.loader ? "hidden" : "loader-formatting"}>
+              <div className={this.props.loader ? "hidden" : "loader"} />
+              <div
+                className={this.props.loader ? "hidden" : "target-loader-image"}
+              />
+              <div className={this.props.loader ? "hidden" : "loading-message"}>
+                Loading...
+              </div>
+            </div>
+          )}
+        </div>
+
         {this.state.count === 0 ? null : (
           <div className="bottom-panel">
             <div className="bpanel">
@@ -301,7 +316,8 @@ const mapStateToProps = state => ({
   id: state.posts.groupId,
   name: state.posts.groupName,
   existing: state.posts.existing,
-  memberIds: state.posts.memberIds
+  memberIds: state.posts.memberIds,
+  loader: state.posts.loader
 });
 export default withRouter(
   connect(

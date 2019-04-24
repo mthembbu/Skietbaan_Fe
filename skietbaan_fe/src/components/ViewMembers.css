@@ -469,7 +469,8 @@
 	height: 86px;
 }
 .view-non-members-date-box {
-	margin-bottom: 42px;
+	margin-bottom: 7px;
+	align-self: center;
 	background-color: #fdfdfd;
 	border-radius: 4px;
 	line-height: 22px;
@@ -503,4 +504,35 @@
 	font-size: 14px;
 	display: flex;
 	justify-content: center;
+	font-weight: lighter;
+}
+.confirm-button-container{
+	display: flex;
+	justify-content: center;
+	margin-top: 58px;
+    margin-bottom: 50px;
+
+}
+.confriming-btn{
+	width: 312px;
+	height: 42px;
+	border-radius: 22px;
+	font-size: 16px;
+	font-weight: lighter;
+	color: #BE0000;
+	background: transparent;
+	border: 1px solid #be0000;
+}
+
+.non-member-Date-error-msg{
+	color: #be0000;
+	font-size: 14px;
+	font-weight: lighter;
+	align-self: center;
+}
+
+.date-error-msg-cpntainer{
+	display: flex;
+	flex-direction: column;
+	height: 90px;;
 }

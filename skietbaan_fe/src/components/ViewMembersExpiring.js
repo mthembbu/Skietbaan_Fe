@@ -30,7 +30,8 @@ class ViewMembersExpiring extends Component {
 			exceptionCaught: false,
 			dateCheck: false,
 			exportResponse: "",
-			dateErrorMgs: false
+			dateErrorMgs: false,
+			successMgs: false
 		};
 		this.getExpiringMembers = this.getExpiringMembers.bind(this);
 		this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -81,6 +82,7 @@ class ViewMembersExpiring extends Component {
 		this.getExpiringMembers();
 		this.getTimeLeft();
 	}
+
 	updateDimensions() {
 		this.setState({
 			height: window.innerHeight,
@@ -147,7 +149,7 @@ class ViewMembersExpiring extends Component {
 
 	updateMember(index) {
 		if (this.state.dateCheck === true) {
-			if (this.state.array[index].AdvanceExpiryDate === null) {
+			if (this.state.array[index].advanceExpiryDate === null) {
 				let RequestObject = {
 					username: this.state.array[index].username,
 					EntryDate: this.getCurrentDate() + "T00:00:00",
@@ -167,13 +169,16 @@ class ViewMembersExpiring extends Component {
 					.then(data => {
 						this.getExpiringMembers();
 						this.setState({ filterText: "" });
+						setTimeout(() => {
+							this.setState({ successMgs: true });
+						}, 1000);
 					})
 					.catch(err => {
 						/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
 					});
 			}
 			else {
-				/*when theres already a date of renew*/
+				this.setState({ dateErrorMgs: true })
 			}
 		} else {
 			/*the enter the date from the day or foward*/
@@ -186,9 +191,9 @@ class ViewMembersExpiring extends Component {
 		var selectedDate = new Date(selectedText);
 		var now = new Date();
 		if (selectedDate >= now) {
-			this.setState({ dateCheck: true , dateErrorMgs:false });
+			this.setState({ dateCheck: true, dateErrorMgs: false });
 		} else {
-			this.setState({ dateCheck: false , dateErrorMgs:true });
+			this.setState({ dateCheck: false, dateErrorMgs: true });
 		}
 	}
 
@@ -334,7 +339,7 @@ class ViewMembersExpiring extends Component {
 																				<div>
 																					{this.state.timeLeftOnMembership[index]}{" "}
 																					Months
-                                    </div>
+                             														 </div>
 																			) : (
 																				<div>{"EXPIRED"}</div>
 																			)}
@@ -344,24 +349,30 @@ class ViewMembersExpiring extends Component {
 														</div>
 													}
 												>
-													<div className="non-member-renew-date-container">
-														<input
-															type="date"
-															className="view-expiring-members-text-boxes"
-															id="expdate"
-															value={this.state.datevalue}
-															onChange={this.handleDateChange}
-														/>
-													</div>
+													{this.state.successMgs === false ?
+														<div className="non-member-renew-date-container">
+															<input
+																type="date"
+																className="view-expiring-members-text-boxes"
+																id="expdate"
+																value={this.state.datevalue}
+																onChange={this.handleDateChange}
+															/>
+														</div> : null}
 													{this.state.dateErrorMgs === true ? <label className="non-member-renew-error-msg">Date selected is invalid</label> : null}
-													<div className="renew-container">
-														<button
-															className={this.state.dateValue===""?"view-exp-members-inactive":"view-exp-members"}
-															onClick={() => this.updateMember(index)}
-														>
-															RENEW
-                          </button>
-													</div>
+													{this.state.successMgs === false ?
+														<div className="renew-container">
+															<button
+																className={this.state.dateValue === "" ? "view-exp-members-inactive" : "view-exp-members"}
+																onClick={() => this.updateMember(index)}
+															>
+																RENEW
+                     								     </button>
+														</div> : null}
+													{this.state.successMgs === true ?
+														<div className="confirm-button-container">
+															<button className="confriming-btn">MEMBERSHIP RENEWED </button>
+														</div> : null}
 												</Collapsible>
 											</td>
 										</tr>

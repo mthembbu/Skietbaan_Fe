@@ -28,7 +28,8 @@ class Groups extends Component {
       check: "Select all",
       height: window.innerHeight,
       width: window.innerWidth,
-      token: getCookie("token")
+      token: getCookie("token"),
+      getData: false
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -56,7 +57,12 @@ class Groups extends Component {
 
     fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
-      .then(data => this.setState({ groups: data.name }))
+      .then(data =>
+        this.setState({
+          groups: data.name,
+          getData: true
+        })
+      )
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
@@ -107,8 +113,8 @@ class Groups extends Component {
       },
       body: JSON.stringify(requestedObj)
     })
-      .then(function (response) { })
-      .catch(function (data) { })
+      .then(function(response) {})
+      .catch(function(data) {})
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
@@ -208,7 +214,10 @@ class Groups extends Component {
                     .startsWith(this.state.filterText.toLowerCase()) ||
                   post.email
                     .toLowerCase()
-                    .startsWith(this.state.filterText.toLowerCase()) || (this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
+                    .startsWith(this.state.filterText.toLowerCase()) ||
+                  this.extractEmails(post.email).startsWith(
+                    this.state.filterText.toLowerCase()
+                  )
                 );
               })
               .map((post, index) => (
@@ -290,6 +299,29 @@ class Groups extends Component {
                     alt=""
                   />
                 </div>
+              </div>
+            </div>
+            <div
+              className={
+                this.state.getData === false ? "loader-formatting" : "hidden"
+              }
+            >
+              <div
+                className={this.state.getData === false ? "loader" : "hidden"}
+              />
+              <div
+                className={
+                  this.state.getData === false
+                    ? "target-loader-image"
+                    : "hidden"
+                }
+              />
+              <div
+                className={
+                  this.state.getData === false ? "loading-message" : "hidden"
+                }
+              >
+                Loading...
               </div>
             </div>
             {postitems}
