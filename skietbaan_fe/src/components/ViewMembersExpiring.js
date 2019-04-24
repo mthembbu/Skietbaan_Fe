@@ -193,9 +193,9 @@ class ViewMembersExpiring extends Component {
 	}
 
 	handleDateChange(event) {
+		this.setState({ dateValue: "" });
 		this.setState({ dateValue: event.target.value });
-		var selectedText = document.getElementById("expdate").value;
-		var selectedDate = new Date(selectedText);
+		var selectedDate = new Date(event.target.value);
 		var now = new Date();
 		if (selectedDate > now) {
 			this.setState({ dateCheck: true, dateErrorMgs: false });
@@ -254,6 +254,10 @@ class ViewMembersExpiring extends Component {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
 			});
 	};
+	onChangeArrow = index => {
+		this.setState({dateValue:"",AdvanceDateExist:false,dateErrorMgs: false})		
+		this.forceUpdate();
+	  };
 
 	extractEmails(text) {
 		if (this.state.filterText[0] === "@") {
@@ -308,7 +312,9 @@ class ViewMembersExpiring extends Component {
 											<td className="first-column">
 												<Collapsible
 													trigger={
-														<div className="username-and-email">
+														
+														<div className="username-and-email" onClick={() => this.onChangeArrow(index)}>
+														
 															<div className="view-members-username-email">
 																<b>{post.username}</b>
 																<div className="view-non-members-email">
@@ -374,7 +380,7 @@ class ViewMembersExpiring extends Component {
 													{this.state.successMgs === false ?
 														<div className="renew-container">
 															<button
-																className={this.state.dateValue === "" || this.state.dateErrorMgs===true ? "view-exp-members-inactive" : "view-exp-members"}
+																className={this.state.dateValue === "" || this.state.dateErrorMgs === true? "view-exp-members-inactive" : "view-exp-members"}
 																onClick={() => this.updateMember(index)}
 															>
 																RENEW
