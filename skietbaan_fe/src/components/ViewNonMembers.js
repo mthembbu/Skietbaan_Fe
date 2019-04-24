@@ -39,7 +39,8 @@ class ViewNonMembers extends Component {
       emptyMemberNumber: false,
       dateCheck: false,
       exportResponse: "",
-      dateErrormsg: false
+      dateErrormsg: false,
+      userIndex:0
     };
     this.getTimeLeft = this.getTimeLeft.bind(this);
     this.onChangeText = this.onChangeText.bind(this);
@@ -256,8 +257,13 @@ class ViewNonMembers extends Component {
   }
 
   onChangeArrow = index => {
-    this.setState({ membershipsID: "" });
-    this.state.array[index].selected = !this.state.array[index].selected;
+    if(index!==this.state.userIndex){
+      this.state.array[this.state.userIndex].selected = false;
+      this.state.array[index].selected = !this.state.array[index].selected;
+    }else{
+      this.state.array[index].selected = !this.state.array[index].selected;
+    }
+    this.setState({ membershipsID: "",userIndex:index });
     this.forceUpdate();
   };
 
@@ -320,6 +326,7 @@ class ViewNonMembers extends Component {
                     <tr className="view-members-user" key={posts.id}>
                       <td className="first-column">
                         <Collapsible
+                        open={posts.selected}
                           trigger={
                             <div
                               className="username-and-email"
