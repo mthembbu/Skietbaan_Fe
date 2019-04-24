@@ -69,7 +69,7 @@ class Groups extends Component {
   }
   getBodyHeight() {
     if (this.state.width < 575) {
-      return this.state.height - 255 + "px";
+      return this.state.height - 200 + "px";
     } else {
       return "59vh";
     }
@@ -107,8 +107,8 @@ class Groups extends Component {
       },
       body: JSON.stringify(requestedObj)
     })
-      .then(function (response) { })
-      .catch(function (data) { })
+      .then(function(response) {})
+      .catch(function(data) {})
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
@@ -118,16 +118,15 @@ class Groups extends Component {
   }
 
   extractEmails(text) {
-		if (this.state.filterText[0] === "@") {
-			let ser = text.search("@")
-			let word = text.substring(ser, text.length)
-			let ss = word.split(".")
-			return ss[0];
-		}
-		else {
-			return text;
-		}
-	}
+    if (this.state.filterText[0] === "@") {
+      let ser = text.search("@");
+      let word = text.substring(ser, text.length);
+      let ss = word.split(".");
+      return ss[0];
+    } else {
+      return text;
+    }
+  }
 
   selectall() {
     if (this.state.check === "Select all") {
@@ -158,7 +157,22 @@ class Groups extends Component {
   onBack() {
     this.props.history.push("/create");
   }
+
+  togglenav = () => {
+    let Navbar = document.querySelector(".navbar-admin");
+    if (window.innerWidth < 575 && window.innerHeight < 800) {
+      if (Navbar != null) {
+        if (this.state.count !== 0) {
+          Navbar.classList.add("hidden");
+        } else {
+          Navbar.classList.remove("hidden");
+        }
+      }
+    }
+  };
   render() {
+    this.togglenav();
+
     const postitems = (
       <div className="check" style={{ height: this.getBodyHeight() }}>
         {this.state.posts.length === 0 ? null : (
@@ -172,7 +186,10 @@ class Groups extends Component {
                     .startsWith(this.state.filterText.toLowerCase()) ||
                   post.email
                     .toLowerCase()
-                    .startsWith(this.state.filterText.toLowerCase()) || (this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
+                    .startsWith(this.state.filterText.toLowerCase()) ||
+                  this.extractEmails(post.email).startsWith(
+                    this.state.filterText.toLowerCase()
+                  )
                 );
               })
               .map((post, index) => (
