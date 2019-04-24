@@ -31,7 +31,8 @@ class ViewMembersExpiring extends Component {
 			dateCheck: false,
 			exportResponse: "",
 			dateErrorMgs: false,
-			successMgs: false
+			successMgs: false,
+			AdvanceDateExist:false
 		};
 		this.getExpiringMembers = this.getExpiringMembers.bind(this);
 		this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -178,10 +179,16 @@ class ViewMembersExpiring extends Component {
 					});
 			}
 			else {
-				this.setState({ dateErrorMgs: true })
+				this.setState({ AdvanceDateExist: true })
+				this.setState({ dateErrorMgs: false })
 			}
 		} else {
-			/*the enter the date from the day or foward*/
+			if(this.state.array[index].advanceExpiryDate != null){
+				this.setState({ dateErrorMgs: false })
+			}else{
+				this.setState({ dateErrorMgs: true })
+			}
+			
 		}
 	}
 
@@ -190,9 +197,12 @@ class ViewMembersExpiring extends Component {
 		var selectedText = document.getElementById("expdate").value;
 		var selectedDate = new Date(selectedText);
 		var now = new Date();
-		if (selectedDate >= now) {
+		if (selectedDate > now) {
 			this.setState({ dateCheck: true, dateErrorMgs: false });
-		} else {
+		}else if(now.getFullYear()===selectedDate.getFullYear() && now.getDate()===selectedDate.getDate() && now.getMonth()===selectedDate.getMonth()){
+			this.setState({ dateCheck: true, dateErrorMgs: false });
+		} 
+		else {
 			this.setState({ dateCheck: false, dateErrorMgs: true });
 		}
 	}
@@ -359,11 +369,12 @@ class ViewMembersExpiring extends Component {
 																onChange={this.handleDateChange}
 															/>
 														</div> : null}
-													{this.state.dateErrorMgs === true ? <label className="non-member-renew-error-msg">Date selected is invalid</label> : null}
+													{this.state.AdvanceDateExist===true?null:this.state.dateErrorMgs === true? <label className="non-member-renew-error-msg">Date selected is invalid</label> : null}
+													{this.state.AdvanceDateExist === true ? <label className="non-member-renew-error-msg">User already been renewed in advance</label> : null}
 													{this.state.successMgs === false ?
 														<div className="renew-container">
 															<button
-																className={this.state.dateValue === "" ? "view-exp-members-inactive" : "view-exp-members"}
+																className={this.state.dateValue === "" || this.state.dateErrorMgs===true ? "view-exp-members-inactive" : "view-exp-members"}
 																onClick={() => this.updateMember(index)}
 															>
 																RENEW
