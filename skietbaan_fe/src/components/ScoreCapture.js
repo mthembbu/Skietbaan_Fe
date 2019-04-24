@@ -8,9 +8,9 @@ import grayRetry from "../components/assets/redRetry.png";
 import lightgrayback from "../components/assets/Back.png";
 import submit from "../components/assets/biggerRedSubmit.png";
 import camera from "../components/assets/biggerRedCamera.png";
-import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { selectedPage, updateSelectedCompetition } from "../actions/postActions";
+import {toggleToggleBar, toggleHeader} from "./toggle.js"
 class ScoreCapture extends Component {
   constructor(props) {
     super(props);
@@ -52,8 +52,6 @@ class ScoreCapture extends Component {
     this.getLocation = this.getLocation.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.toggleIcon = this.toggleIcon.bind(this);
-    this.toggleHeader = this.toggleHeader.bind(this);
-    this.toggleToggleBar = this.toggleToggleBar.bind(this);
   }
 
   componentWillMount() {
@@ -94,7 +92,7 @@ class ScoreCapture extends Component {
   }
 
   cancelClicked() {
-    this.toggleToggleBar();
+    toggleToggleBar();
     if (this.state.somethingClicked) {
       this.setState({
         somethingClicked: !this.state.somethingClicked,
@@ -104,7 +102,7 @@ class ScoreCapture extends Component {
   }
 
   competitionClicked(item, compname, maximumScore) {
-    this.toggleToggleBar();
+    toggleToggleBar();
     this.setState({
       somethingClicked: true,
       currState: 2,
@@ -169,28 +167,6 @@ class ScoreCapture extends Component {
     return Valid;
   }
 
-  toggleToggleBar() {
-    var navbar = document.querySelector(".scores-page-switch-top");
-    if (navbar.classList.contains("hidden")) {
-      navbar.classList.remove("hidden");
-      navbar.removeAttribute("hidden");
-    } else {
-      navbar.classList.add("hidden");
-      navbar.setAttribute("hidden", "true");
-    }
-  }
-
-  toggleHeader() {
-    var navbar = document.querySelector(".score-capture-header");
-    if (navbar.classList.contains("hidden")) {
-      navbar.classList.remove("hidden");
-      navbar.removeAttribute("hidden");
-    } else {
-      navbar.classList.add("hidden");
-      navbar.setAttribute("hidden", "true");
-    }
-  }
-
   toggleNavbar() {
     this.setState({
       navbarState: !this.state.navbarState
@@ -207,7 +183,7 @@ class ScoreCapture extends Component {
 
   CameraClicked() {
     let Valid = this.validate();
-    this.toggleHeader();
+    toggleHeader();
     this.setState({
       flashOn: false
     });
@@ -313,7 +289,7 @@ class ScoreCapture extends Component {
           if (this.state.navbarState === false) {
             this.toggleNavbar();
           }
-          this.toggleHeader();
+          toggleHeader();
           this.props.updateSelectedCompetition(this.state.competitionName);
         })
         .catch(err => {
@@ -401,7 +377,7 @@ class ScoreCapture extends Component {
       imageTaken: false,
       showCamera: false
     });
-    this.toggleHeader();
+    toggleHeader();
     let video = document.getElementById("video");
     let stream = video.srcObject;
     let tracks = stream.getTracks();

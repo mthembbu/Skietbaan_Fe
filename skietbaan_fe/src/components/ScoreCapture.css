@@ -135,6 +135,9 @@
         border-bottom-left-radius: 13px;
         border-bottom-right-radius: 13px;
     }
+    .padding-top-40{
+        padding-top: 100px !important;
+    }
 }
 
 .page-content-video{
@@ -711,6 +714,9 @@ input[type=number] {
 
 .score-list-container{
     text-align: -webkit-center;
+    max-height: 63vh;
+    padding-bottom: 56px;
+    overflow-y: overlay;
 }
 
 .date-view-score{
@@ -731,4 +737,33 @@ input[type=number] {
     height: 22px;
     position: relative;
     bottom: 18px;
+}
+
+.padding-top-40{
+    padding-top: 40px;
+}
+
+.image-container-view-scores{
+    padding-top: 31px;
+}
+
+.users-container{
+    padding-top: 16px;
+}
+
+.user-emails{
+    padding-bottom: 6px;
+    text-align: left;
+    padding-left: 11px;
+    color: #555555;
+    font-family: helvetica;
+    font-weight: 300;
+}
+
+.usernames{
+    text-align: left;
+    font-size: 16px;
+    color: #555555;
+    font-weight: bold;
+    padding-left: 11px;
 }

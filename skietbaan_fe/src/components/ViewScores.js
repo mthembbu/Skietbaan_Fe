@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { selectedPage, updateSelectedCompetition } from "../actions/postActions";
 import { BASE_URL } from "../actions/types.js";
-import { Row, Col } from "react-bootstrap";
+import PropTypes from "prop-types";
 import { getCookie } from "./cookie.js";
+import { toggleToggleBar } from "./toggle.js";
+import { checkUserType } from "../actions/adminAction";
 import "../components/ScoreCapture.css";
 class ViewScores extends Component {
     constructor(props) {
@@ -16,10 +18,37 @@ class ViewScores extends Component {
             clicked: null,
             token: getCookie("token"),
             scoresList: [],
-            getDataScores: false
+            getDataScores: false,
+            cameraClicked: false,
+            someScoreClicked: null,
+            lastName: "",
+            duplicate: false
+
         };
         this.competitionClicked = this.competitionClicked.bind(this);
-        this.formatTime = this.formatTime.bind(this)
+        this.formatTime = this.formatTime.bind(this);
+        this.showPhoto = this.showPhoto.bind(this);
+        this.removeDuplicates = this.removeDuplicates.bind(this)
+    }
+
+    removeDuplicates(name) {
+        if (this.state.lastName === name) {
+            this.setState({
+                duplicate: true
+            })
+        } else {
+            this.setState({
+                lastName: name
+            })
+            return this.state.lastName
+        }
+    }
+
+    showPhoto(item) {
+        this.setState({
+            cameraClicked: !this.state.cameraClicked,
+            someScoreClicked: item
+        })
     }
 
     formatTime(time) {
@@ -35,7 +64,8 @@ class ViewScores extends Component {
             clicked: item,
             competitionName: compName,
         });
-        if (compId !== "") {
+        toggleToggleBar();
+        if (compId !== "" && this.props.isAdmin === false) {
             fetch(BASE_URL + "/api/Scores/" + compId + "/" + this.state.token, {
                 method: "GET",
                 headers: {
@@ -58,20 +88,47 @@ class ViewScores extends Component {
                 .catch(err => {
                     this.setState({ exceptionCaught: true })
                 });
+        } else if (this.props.isAdmin) {
+            fetch(BASE_URL + "/api/Scores/GetUsers/" + compId, {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    return data;
+                })
+                .then(data =>
+                    this.setState({
+                        scoresList: data,
+                        getDataScores: true
+                    })
+                )
+                .catch(err => {
+                    this.setState({ exceptionCaught: true })
+                });
         }
+
     }
 
     cancelClicked() {
         if (this.state.somethingClicked) {
+            toggleToggleBar();
             this.setState({
                 somethingClicked: !this.state.somethingClicked,
-                clicked: null
+                clicked: null,
+                cameraClicked: false
             });
         }
     }
 
     componentDidMount() {
         this.props.selectedPage(2);
+        this.props.checkUserType(this.state.token);
         fetch(BASE_URL + "/api/Competition", {
             method: "GET",
             headers: {
@@ -148,17 +205,43 @@ class ViewScores extends Component {
         )
 
         let scoreListForUser = [];
-        if (this.state.scoresList.length !== 0 && this.state.getDataScores !== false) {
+        if (this.state.scoresList.length !== 0 && this.state.getDataScores !== false && this.props.isAdmin === false) {
             for (let i = 0; i < this.state.scoresList.length; i++) {
                 scoreListForUser.push(
-                    <div className="score-content">
+                    <div className={this.state.cameraClicked === false || this.state.someScoreClicked === i ?
+                        "score-content" : "hidden"}>
                         <div className="user-scores">{this.state.scoresList[i].userScore}
                         </div>
                         <div className="stretched min-height-22">
                             <div className="date-view-score float-left">
                                 {this.formatTime(this.state.scoresList[i].uploadDate)}
                             </div>
-                            <div className={this.state.scoresList[i].pictureURL !== "" ? "view-scores-photo" : "hidden"}></div>
+                            <div className={this.state.scoresList[i].pictureURL !== "" ?
+                                "view-scores-photo" : "hidden"} onClick={() => this.showPhoto(i)}>
+                            </div>
+                        </div>
+                        <div className="border-line">
+                        </div>
+                        <div className={this.state.cameraClicked === false || this.state.someScoreClicked !== i
+                            ? "hidden" : "image-container-view-scores"}>
+                            <img className={this.state.cameraClicked === false || this.state.someScoreClicked !== i
+                                ? "hidden" : "image-view background"}
+                                src={this.state.scoresList[i].pictureURL}>
+                            </img>
+                        </div>
+                    </div>
+                )
+            }
+        }
+
+        let adminScoresList = [];
+        if (this.state.scoresList.length !== 0 && this.state.getDataScores !== false && this.props.isAdmin === true) {
+            for (let i = 0; i < this.state.scoresList.length; i++) {
+                adminScoresList.push(
+                    <div className="score-content">
+                        <div className="users-container">
+                            <div className="usernames">{this.state.scoresList[i].username}</div>
+                            <div className="user-emails">{this.state.scoresList[i].email}</div>
                         </div>
                         <div className="border-line">
                         </div>
@@ -169,29 +252,48 @@ class ViewScores extends Component {
 
         return (
             <div className="page-content">
-                        <div className="centre-labels">
-                            <label className="label-competition">
-                                Select Competition
+                <div className={this.state.somethingClicked === true ? "padding-top-40" : "centre-labels"}>
+                    <label className={this.state.somethingClicked === true ? "hidden" : "label-competition"}>
+                        Select Competition
                   </label>
-                        </div>
-                        {loader}
-                        <div className="view-score-competition-container">
-                            {competitionItem}
-                        </div>
-                        <div className={this.state.clicked === null ?
-                            "hidden" : "score-list-container"}>
-                            {scoreListForUser}
-                        </div>
+                </div>
+                {loader}
+                <div className="view-score-competition-container">
+                    {competitionItem}
+                </div>
+                <div className={this.state.clicked === null ?
+                    "hidden" : "score-list-container"}>
+                    {this.props.isAdmin === false ? (
+                        <div>{scoreListForUser}</div>
+                    ) : (
+                            <div className="view-scores-input-container">
+                                <input
+                                    placeholder="Search"
+                                    className="score"
+                                    type="text"
+                                ></input>
+                                <div>
+                                    {adminScoresList}
+                                </div>
+                            </div>
+
+                        )}
+                </div>
             </div>
         )
     }
 }
 
+ViewScores.propTypes = {
+    checkUserType: PropTypes.func.isRequired
+}
+
 const mapStateToProps = state => ({
-    selectedButton: state.landingReducer.selectedLandingPage
+    selectedButton: state.landingReducer.selectedLandingPage,
+    isAdmin: state.adminReducer.isAdmin
 });
 
 export default connect(
     mapStateToProps,
-    { selectedPage, updateSelectedCompetition }
+    { selectedPage, updateSelectedCompetition, checkUserType }
 )(ViewScores);

@@ -109,7 +109,7 @@ export class scorePages extends Component {
                         </div>
 
 
-                        <div className="components-create">
+                        <div className="">
 
                             {this.state.selectedButton === 1 ? (
                                 <ScoreCapture />
@@ -125,7 +125,8 @@ export class scorePages extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    page: state.posts.page
+    page: state.posts.page,
+    isAdmin: state.adminReducer.isAdmin
 });
 
 export default connect(mapStateToProps, { pageStateScore, selectedPage })(scorePages);
