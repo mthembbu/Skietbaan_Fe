@@ -7,6 +7,8 @@ import { getCookie } from "../components/cookie.js";
 import { Row, Col } from "react-bootstrap";
 import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
+import exportClick from "../components/assets/exportPress.png";
+
 class ViewMembers extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +24,9 @@ class ViewMembers extends Component {
       width: window.innerWidth,
       getData: false,
       exportMsg: false,
-      exceptionCaught: false
+      exportResponse: "",
+      exceptionCaught: false,
+      exportResponse: ""
     };
     this.getAllMembers = this.getAllMembers.bind(this);
     this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -32,6 +36,7 @@ class ViewMembers extends Component {
     this.toggleNavbar2 = this.toggleNavbar2.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
     this.getBodyHeight = this.getBodyHeight.bind(this);
+    this.extractEmails = this.extractEmails.bind(this);
   }
 
   toggleNavbar() {
@@ -70,11 +75,21 @@ class ViewMembers extends Component {
       width: window.innerWidth
     });
   }
+  extractEmails(text) {
+    if (this.state.filterText[0] === "@") {
+      let ser = text.search("@");
+      let word = text.substring(ser, text.length);
+      let ss = word.split(".");
+      return ss[0];
+    } else {
+      return text;
+    }
+  }
   getBodyHeight() {
     if (this.state.width < 575) {
       return this.state.height - 240 + "px";
     } else {
-      return "66vh";
+      return "57vh";
     }
   }
   getAllMembers() {
@@ -137,9 +152,6 @@ class ViewMembers extends Component {
       return false;
     }
   }
-  ExportData = () => {
-    this.setState({ exportMsg: true });
-  };
 
   status(timeLeft) {
     if (timeLeft < 2 || timeLeft === 2) {
@@ -149,7 +161,24 @@ class ViewMembers extends Component {
     }
   }
   ExportData = () => {
-    this.setState({ exportMsg: true });
+    let token = getCookie("token");
+    let filter = "members";
+    fetch(
+      BASE_URL +
+        `/api/Features/generateCSV?filter=${filter}&adminToken=${token}`,
+      {
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(res => res.json())
+      .then(data => this.setState({ exportResponse: data, exportMsg: true }))
+      .catch(err => {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      });
   };
 
   render() {
@@ -185,7 +214,10 @@ class ViewMembers extends Component {
                     post.email
                       .toLowerCase()
                       .startsWith(this.state.filterText.toLowerCase()) ||
-                    post.memberID.startsWith(this.state.filterText)
+                    post.memberID.startsWith(this.state.filterText) ||
+                    this.extractEmails(post.email).startsWith(
+                      this.state.filterText.toLowerCase()
+                    )
                   );
                 })
                 .map((post, index) => (
@@ -235,19 +267,18 @@ class ViewMembers extends Component {
                         }
                       >
                         <div className="view-members-membership-details">
-                          MEMBERSHIP NUMBER: <b>{post.memberID}</b>
+                          CELL NUMBER:{" "}
+                          <b>
+                            {post.phoneNumber === null
+                              ? "N/A"
+                              : post.phoneNumber}
+                          </b>
                           <div>
-                            START OF MEMBERSHIP:{" "}
-                            <b>{post.memberStartDate.substring(0, 10)}</b>
+                            MEMBERSHIP NUMBER: <b>{post.memberID}</b>
                           </div>
                           <div className="view-member-phone-number">
-                            CELL NUMBER:
-                            <b>
-                              {" "}
-                              {post.phoneNumber === null
-                                ? "N/A"
-                                : post.phoneNumber}
-                            </b>
+                            START OF MEMBERSHIP:
+                            <b>{post.memberStartDate.substring(0, 10)}</b>
                           </div>
                         </div>
                       </Collapsible>
@@ -283,7 +314,9 @@ class ViewMembers extends Component {
                   src={Export}
                   className="export-icon"
                   alt="Is a Member"
-                  onClick={() => this.ExportData()}
+                  onClick={e =>
+                    (e.currentTarget.src = exportClick) && this.ExportData()
+                  }
                 />
               </div>
             </Col>
@@ -331,11 +364,22 @@ class ViewMembers extends Component {
             {postItems}
           </div>
         ) : (
-          <div className="exportMsg-container">
-            <label className="exportMsg-responce">
-              SBmembers.csv sent to fs@retrorabbit.co.za
-            </label>
-            <img src={RedBullet} className="export-success" alt="Is a Member" />
+          <div>
+            {this.state.exportResponse !== ""
+              ? setTimeout(() => {
+                  this.setState({ exportMsg: false });
+                }, 2000)
+              : null}
+            <div className="exportMsg-container">
+              <label className="exportMsg-responce">
+                {this.state.exportResponse}
+              </label>
+              <img
+                src={RedBullet}
+                className="export-success"
+                alt="Is a Member"
+              />
+            </div>
           </div>
         )}
       </div>

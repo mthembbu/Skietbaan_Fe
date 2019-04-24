@@ -33,6 +33,7 @@ class EditGroup extends Component {
     this.selectAll = this.selectAll.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
     this.getBodyHeight = this.getBodyHeight.bind(this);
+    this.extractEmails = this.extractEmails.bind(this);
   }
 
   async componentDidMount() {
@@ -44,7 +45,7 @@ class EditGroup extends Component {
   }
   getBodyHeight() {
     if (this.state.width < 575) {
-      return this.state.height - 262 + "px";
+      return this.state.height - 210 + "px";
     } else {
       return "59vh";
     }
@@ -109,6 +110,16 @@ class EditGroup extends Component {
       this.setState({ binState: false });
     }
   };
+  extractEmails(text) {
+    if (this.state.filterText[0] === "@") {
+      let ser = text.search("@");
+      let word = text.substring(ser, text.length);
+      let ss = word.split(".");
+      return ss[0];
+    } else {
+      return text;
+    }
+  }
 
   onBack() {
     this.props.pageState(0);
@@ -139,10 +150,25 @@ class EditGroup extends Component {
     }
   }
 
+  togglenav = () => {
+    let Navbar = document.querySelector(".navbar-admin");
+    if (window.innerWidth < 575 && window.innerHeight < 800) {
+      if (Navbar != null) {
+        if (this.state.count !== 0) {
+          Navbar.classList.add("hidden");
+        } else {
+          Navbar.classList.remove("hidden");
+        }
+      }
+    }
+  };
+
   goToNext = () => {
     this.props.pageState(2);
   };
   render() {
+    this.togglenav();
+
     const postitems = (
       <div className="check-edit" style={{ height: this.getBodyHeight() }}>
         {this.props.editGroup.length === 0 ? (
@@ -160,6 +186,9 @@ class EditGroup extends Component {
                   post.username
                     .toLowerCase()
                     .startsWith(this.state.filterText.toLowerCase()) ||
+                  this.extractEmails(post.email).startsWith(
+                    this.state.filterText.toLowerCase()
+                  ) ||
                   post.email
                     .toLowerCase()
                     .startsWith(this.state.filterText.toLowerCase())

@@ -81,7 +81,8 @@ class notification extends Component {
       }).then(() => {
         this.props.getNotifications(this.state.token);
         this.setState({
-          toggle: false
+          toggle: false,
+          count: 0
         });
         this.props.fetchNumberOfNotification(this.state.token);
       });
@@ -133,12 +134,12 @@ class notification extends Component {
 
   markForDeletion = index => {
     if (this.props.notificationsArray[index].markedForDeletion === true) {
-      this.setState({ marked: false });
+      this.setState({ marked: false, count: 0 });
       this.props.notificationsArray[index].markedForDeletion = false;
     } else if (
       this.props.notificationsArray[index].markedForDeletion === false
     ) {
-      this.setState({ marked: true });
+      this.setState({ marked: true, count: 1 });
       this.props.notificationsArray[index].markedForDeletion = true;
     }
   };
@@ -146,10 +147,10 @@ class notification extends Component {
   selectAll = () => {
     for (var i = 0; i < this.props.notificationsArray.length; i++) {
       if (this.props.notificationsArray[i].markedForDeletion === true) {
-        this.setState({ marked: false });
+        this.setState({ marked: false, count: 0 });
         this.props.notificationsArray[i].markedForDeletion = false;
       } else if (this.props.notificationsArray[i].markedForDeletion === false) {
-        this.setState({ marked: true });
+        this.setState({ marked: true, count: 1 });
         this.props.notificationsArray[i].markedForDeletion = true;
       }
     }
@@ -258,10 +259,24 @@ class notification extends Component {
     }, 1000);
   };
 
+  togglenav = () => {
+    let Navbar = document.querySelector(".navbar-admin");
+    if (window.innerWidth < 575 && window.innerHeight < 800) {
+      if (Navbar != null) {
+        if (this.state.count !== 0) {
+          Navbar.classList.add("hidden");
+        } else {
+          Navbar.classList.remove("hidden");
+        }
+      }
+    }
+  };
+
   render() {
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
+    this.togglenav();
 
     let headingItems = (
       <div className="page-heading">
