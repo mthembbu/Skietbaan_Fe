@@ -9,6 +9,7 @@ import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
 import exportClick from "../components/assets/exportPress.png";
 import { fetchNumberOfNotification } from "../actions/notificationAction";
+import { pageState } from '../actions/postActions';
 import { connect } from "react-redux";
 class ViewMembersExpiring extends Component {
   constructor(props) {
@@ -83,7 +84,9 @@ class ViewMembersExpiring extends Component {
     this.getExpiringMembers();
     this.getTimeLeft();
   }
-
+  componentWillUnmount(){
+    this.props.pageState(10);
+  }
   updateDimensions() {
     this.setState({
       height: window.innerHeight,
@@ -540,5 +543,5 @@ class ViewMembersExpiring extends Component {
 
 export default connect(
   null,
-  { fetchNumberOfNotification }
+  { fetchNumberOfNotification ,pageState }
 )(ViewMembersExpiring);
