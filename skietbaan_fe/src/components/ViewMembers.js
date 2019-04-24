@@ -267,7 +267,7 @@ class ViewMembers extends Component {
                         }
                       >
                         <div className="view-members-membership-details">
-                          CELL NUMBER:{" "}
+                          CELLPHONE NUMBER:{" "}
                           <b>
                             {post.phoneNumber === null
                               ? "N/A"
