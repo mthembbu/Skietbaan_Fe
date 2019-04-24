@@ -58,6 +58,10 @@ class ProfileLanding extends Component {
     return false;
   }
 
+  componentWillUnmount(){
+    this.props.setSelectedLandingPage(1);
+  }
+
   render() {
     return (
       <Row>

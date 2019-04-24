@@ -28,7 +28,8 @@ class Groups extends Component {
       check: "Select all",
       height: window.innerHeight,
       width: window.innerWidth,
-      token: getCookie("token")
+      token: getCookie("token"),
+      getData: false
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -56,7 +57,12 @@ class Groups extends Component {
 
     fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
-      .then(data => this.setState({ groups: data.name }))
+      .then(data =>
+        this.setState({
+          groups: data.name,
+          getData: true
+        })
+      )
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
@@ -69,7 +75,7 @@ class Groups extends Component {
   }
   getBodyHeight() {
     if (this.state.width < 575) {
-      return this.state.height - 255 + "px";
+      return this.state.height - 200 + "px";
     } else {
       return "59vh";
     }
@@ -107,8 +113,8 @@ class Groups extends Component {
       },
       body: JSON.stringify(requestedObj)
     })
-      .then(function (response) { })
-      .catch(function (data) { })
+      .then(function(response) {})
+      .catch(function(data) {})
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
@@ -118,32 +124,52 @@ class Groups extends Component {
   }
 
   extractEmails(text) {
-		if (this.state.filterText[0] === "@") {
-			let ser = text.search("@")
-			let word = text.substring(ser, text.length)
-			let ss = word.split(".")
-			return ss[0];
-		}
-		else {
-			return text;
-		}
-	}
+    if (this.state.filterText[0] === "@") {
+      let ser = text.search("@")
+      let word = text.substring(ser, text.length)
+      let ss = word.split(".")
+      return ss[0];
+    }
+    else {
+      return text;
+    }
+  }
 
   selectall() {
+    let arr = []
+    this.state.posts.filter(post => {
+      return (
+        !this.state.filterText ||
+        post.username
+          .toLowerCase()
+          .startsWith(this.state.filterText.toLowerCase()) ||
+        post.email
+          .toLowerCase()
+          .startsWith(this.state.filterText.toLowerCase()) || (this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
+      );
+    }).map(data => arr.push(data.id))
+
     if (this.state.check === "Select all") {
-      this.setState({ count: this.state.posts.length });
-      for (var i = 0; i < this.state.posts.length; i++) {
-        this.state.posts[i].highlighted = true;
+      this.setState({ count: arr.length });
+      for (var i = 0; i < arr.length; i++) {
+        (this.state.posts[this.state.ids.indexOf(arr[i])]).highlighted = true;
       }
       this.setState({ check: "Unselect all" });
     } else {
       this.setState({ count: 0 });
-      for (var j = 0; j < this.state.posts.length; j++) {
-        this.state.posts[j].highlighted = false;
+      for (var j = 0; j < arr.length; j++) {
+        (this.state.posts[this.state.ids.indexOf(arr[j])]).highlighted = false;
       }
       this.setState({ check: "Select all" });
     }
   }
+
+  cancel = () => {
+    for (var i = 0; i < this.state.posts.length; i++) {
+      this.state.posts[i].highlighted = false;
+    }
+    this.setState({ count: 0 });
+  };
 
   toggleHighlight = event => {
     const index = this.state.ids.indexOf(event);
@@ -156,9 +182,25 @@ class Groups extends Component {
     }
   };
   onBack() {
+    this.setState({ count: 0 });
     this.props.history.push("/create");
   }
+
+  togglenav = () => {
+    let Navbar = document.querySelector(".navbar-admin");
+    if (window.innerWidth < 575 && window.innerHeight < 800) {
+      if (Navbar != null) {
+        if (this.state.count !== 0) {
+          Navbar.classList.add("hidden");
+        } else {
+          Navbar.classList.remove("hidden");
+        }
+      }
+    }
+  };
   render() {
+    this.togglenav();
+
     const postitems = (
       <div className="check" style={{ height: this.getBodyHeight() }}>
         {this.state.posts.length === 0 ? null : (
@@ -172,7 +214,10 @@ class Groups extends Component {
                     .startsWith(this.state.filterText.toLowerCase()) ||
                   post.email
                     .toLowerCase()
-                    .startsWith(this.state.filterText.toLowerCase()) || (this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
+                    .startsWith(this.state.filterText.toLowerCase()) ||
+                  this.extractEmails(post.email).startsWith(
+                    this.state.filterText.toLowerCase()
+                  )
                 );
               })
               .map((post, index) => (
@@ -256,11 +301,37 @@ class Groups extends Component {
                 </div>
               </div>
             </div>
+            <div
+              className={
+                this.state.getData === false ? "loader-formatting" : "hidden"
+              }
+            >
+              <div
+                className={this.state.getData === false ? "loader" : "hidden"}
+              />
+              <div
+                className={
+                  this.state.getData === false
+                    ? "target-loader-image"
+                    : "hidden"
+                }
+              />
+              <div
+                className={
+                  this.state.getData === false ? "loading-message" : "hidden"
+                }
+              >
+                Loading...
+              </div>
+            </div>
             {postitems}
             {this.state.count === 0 ? null : (
               <label className="bottom-label">
+                <button className="cancel-creating-group" onClick={()=>this.cancel()}>
+                  CANCEL
+                </button>
                 <button className="create-group" onClick={this.handleOnClick}>
-                  Create Group
+                  CRETE GROUP
                 </button>
               </label>
             )}

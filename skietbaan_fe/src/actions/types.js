@@ -63,6 +63,7 @@ export const GROUPDICT = "GROUPDICT";
 export const EMPTY = "EMPTY";
 export const NEWGROUPSTATE = "NEWGROUPSTATE";
 export const GROUP_DATA_LOADING = "GROUP_DATA_LOADING";
+export const BINSTATE = "BINSTATE";
 
 //notification types
 export const FETCH_NOTIFICATION = "FETCH_NOTIFICATION";
