@@ -469,8 +469,6 @@ class ScoreCapture extends Component {
     }
     return (
       <div className="add-score-entire-page-content" autoComplete="off">
-        <Row className="row justify-content-center">
-          <Col sm={8} className="createpage-bootstrap-col-center-container">
             <div
               className={
                 this.state.scoreSaved
@@ -754,8 +752,6 @@ class ScoreCapture extends Component {
                 </div>
               </div>
             </div>
-          </Col>
-        </Row>
       </div>
     );
   }

@@ -121,15 +121,6 @@
 }
 
 @media screen and (min-width:576px)  {
-
-    .page-content{
-        margin-top: 0px;
-        margin-bottom: 0px;
-        min-height: 95vh;
-        box-shadow: -1px 5px 7px 1px rgba(0,0,0,0.15);
-        border-bottom-left-radius: 13px;
-        border-bottom-right-radius: 13px;
-    }
     .score-capture-header{
         width: 100% !important;
         margin: 0;

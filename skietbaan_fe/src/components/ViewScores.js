@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { selectedPage, updateSelectedCompetition } from "../actions/postActions";
 import { BASE_URL } from "../actions/types.js";
+import { Row, Col } from "react-bootstrap";
 import { getCookie } from "./cookie.js";
 import "../components/ScoreCapture.css";
 class ViewScores extends Component {
@@ -154,10 +155,10 @@ class ViewScores extends Component {
                         <div className="user-scores">{this.state.scoresList[i].userScore}
                         </div>
                         <div className="stretched min-height-22">
-                        <div className="date-view-score float-left">
-                            {this.formatTime(this.state.scoresList[i].uploadDate)}
-                        </div>
-                        <div className={this.state.scoresList[i].pictureURL !== "" ? "view-scores-photo" : "hidden"}></div>
+                            <div className="date-view-score float-left">
+                                {this.formatTime(this.state.scoresList[i].uploadDate)}
+                            </div>
+                            <div className={this.state.scoresList[i].pictureURL !== "" ? "view-scores-photo" : "hidden"}></div>
                         </div>
                         <div className="border-line">
                         </div>
@@ -168,19 +169,19 @@ class ViewScores extends Component {
 
         return (
             <div className="page-content">
-                <div className="centre-labels">
-                    <label className="label-competition">
-                        Select Competition
+                        <div className="centre-labels">
+                            <label className="label-competition">
+                                Select Competition
                   </label>
-                </div>
-                {loader}
-                <div className="view-score-competition-container">
-                    {competitionItem}
-                </div>
-                <div className={this.state.clicked === null ?
-                    "hidden" : "score-list-container"}>
-                    {scoreListForUser}
-                </div>
+                        </div>
+                        {loader}
+                        <div className="view-score-competition-container">
+                            {competitionItem}
+                        </div>
+                        <div className={this.state.clicked === null ?
+                            "hidden" : "score-list-container"}>
+                            {scoreListForUser}
+                        </div>
             </div>
         )
     }

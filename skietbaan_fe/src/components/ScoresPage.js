@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import './ScoreCapture.css';
-import history from './history';
 import { getCookie } from './cookie.js';
 import { BASE_URL } from '../actions/types.js';
 import { pageStateScore } from '../actions/scoresAction';
@@ -75,47 +74,51 @@ export class scorePages extends Component {
 
     render() {
         let headerLabel = (
-            <div className="label-for-score">{this.state.selectedButton === 1 ? "ADD SCORE" : "VIEW SCORES"}</div>  
+            <div className="label-for-score">{this.state.selectedButton === 1 ? "ADD SCORE" : "VIEW SCORES"}</div>
         )
         return (
             <div className="page-content-scores-page">
-                    <div className="score-capture-header">
-                        <div className="gun-overlay-image">
-                            {headerLabel}
-                        </div>
-                        <Row className="row justify-content-center">
-                            <div className="scores-page-switch-top">
-                                <div
-                                    className={
-                                        this.state.selectedButton === 1 ?
-                                            'scores-page-switch-active' : 'scores-page-switch-inactive'
-                                    }
-                                    onClick={this.scoreCapturePage}
-                                >
-                                    ADD SCORES
-										</div>
-                                <div
-                                    className={
-                                        this.state.selectedButton === 2 ?
-                                            'scores-page-switch-active' : 'scores-page-switch-inactive'
-                                    }
-                                    onClick={this.viewScoresPage}
-                                >
-                                    VIEW SCORES
-										</div>
+                <Row className="row justify-content-center">
+                    <Col sm={8} className="createpage-bootstrap-col-center-container">
+                        <div className="score-capture-header">
+                            <div className="gun-overlay-image">
+                                {headerLabel}
                             </div>
-                        </Row>
-                    </div>
+                            <Row className="row justify-content-center">
+                                <div className="scores-page-switch-top">
+                                    <div
+                                        className={
+                                            this.state.selectedButton === 1 ?
+                                                'scores-page-switch-active' : 'scores-page-switch-inactive'
+                                        }
+                                        onClick={this.scoreCapturePage}
+                                    >
+                                        ADD SCORES
+										</div>
+                                    <div
+                                        className={
+                                            this.state.selectedButton === 2 ?
+                                                'scores-page-switch-active' : 'scores-page-switch-inactive'
+                                        }
+                                        onClick={this.viewScoresPage}
+                                    >
+                                        VIEW SCORES
+										</div>
+                                </div>
+                            </Row>
+                        </div>
 
 
-                <div className="components-create">
+                        <div className="components-create">
 
-                    {this.state.selectedButton === 1 ? (
-                        <ScoreCapture />
-                    ) : this.state.selectedButton === 2 ? (
-                        <ViewScores />
-                    ) : null}
-                </div>
+                            {this.state.selectedButton === 1 ? (
+                                <ScoreCapture />
+                            ) : this.state.selectedButton === 2 ? (
+                                <ViewScores />
+                            ) : null}
+                        </div>
+                    </Col>
+                </Row>
             </div>
         );
     }
