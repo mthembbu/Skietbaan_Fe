@@ -190,9 +190,12 @@ class ViewMembersExpiring extends Component {
 		var selectedText = document.getElementById("expdate").value;
 		var selectedDate = new Date(selectedText);
 		var now = new Date();
-		if (selectedDate >= now) {
+		if (selectedDate > now) {
 			this.setState({ dateCheck: true, dateErrorMgs: false });
-		} else {
+		}else if(now.getFullYear()===selectedDate.getFullYear() && now.getDate()===selectedDate.getDate() && now.getMonth()===selectedDate.getMonth()){
+			this.setState({ dateCheck: true, dateErrorMgs: false });
+		} 
+		else {
 			this.setState({ dateCheck: false, dateErrorMgs: true });
 		}
 	}
