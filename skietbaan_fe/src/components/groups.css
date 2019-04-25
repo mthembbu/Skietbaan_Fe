@@ -53,9 +53,9 @@
 
 .center-labels {
 	color: white;
-	font-weight: bold;
-	font-size: 25px;
-	margin-top: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 17px;
 }
 .center-labelss {
 	display: flex;
