@@ -163,7 +163,6 @@
 }
 
 .page-contents {
-	background-color: #F6F6F6;
 	padding: 5%;
 	z-index: 1;
     overflow-y: overlay;
@@ -531,7 +530,6 @@
    .page-contents {
 	height: 62vh !important;
 	margin-top: -3vh;
-	background-color: #F6F6F6;
 	padding: 2%;
 	margin-top:10px;
 	padding-bottom: 15px;
