@@ -181,7 +181,7 @@ class ViewNonMembers extends Component {
   }
 
   updateMember(index) {
-    if (this.state.membershipIds.indexOf(this.state.membershipsID) === -1) {
+    if (this.state.membershipIds.indexOf(this.state.membershipsID.toString()) === -1) {
       if (this.state.membershipsID.length != "") {
         if (this.state.dateCheck === true) {
           let RequestObject = {

@@ -140,6 +140,7 @@
 	height: 44px;
 	width: 312px;
 	border-radius: 7px;
+	align-self: center;
 }
 .view-expiring-members-text-boxes {
 	background-color: #fdfdfd;
@@ -469,12 +470,14 @@
 }
 .non-member-same-member-number-error {
 	font-size: 12.12px;
-	color: #ea251a;
+	color: #be0000;
 	margin: auto;
 	font-weight: lighter;
 }
 .membership-container {
 	height: 86px;
+	display: flex;
+    flex-direction: column;
 }
 .view-non-members-date-box {
 	margin-bottom: 7px;
