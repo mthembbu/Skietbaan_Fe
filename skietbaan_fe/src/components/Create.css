@@ -1,7 +1,7 @@
 @media only screen and (min-width: 576px) {
 
   .components-create {
-    padding-top: 0px;
+    padding-top: 2px;
     background-color: #f6f6f6;
     margin-top: 15px;
   }
@@ -220,9 +220,6 @@
     background: transparent;
   }
   .create-top-nav .row{
-    background: transparent;
-  }
-  .components-create{
     background: transparent;
   }
   .add-container{
