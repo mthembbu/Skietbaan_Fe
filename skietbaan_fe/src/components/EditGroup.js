@@ -92,6 +92,9 @@ class EditGroup extends Component {
 			body: JSON.stringify(request)
 		})
 			.then((res) => res.json())
+			.then(this.setState({
+				binState: false
+			}))
 			.catch(function (data) { }).catch(err => {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
 			});
