@@ -214,6 +214,10 @@
     font-weight: 300;
 }
 
+.padding-top-160{
+    padding-top:160px;
+}
+
 .label-score{
     color: white;
     font-size: 25px;
