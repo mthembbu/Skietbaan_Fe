@@ -37,7 +37,7 @@ class UserProfile extends Component {
 
     UNSAFE_componentWillMount() {
         var token = getCookie("token");
-        if (token == undefined) {
+        if (token === undefined) {
             history.push("/registerPage");
             return;
         }
