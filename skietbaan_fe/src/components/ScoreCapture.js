@@ -40,7 +40,8 @@ class search extends Component {
       somethingClicked: false,
       maximumScore: 20,
       getData: false,
-      exceptionCaught: false
+      exceptionCaught: false,
+      iOS: !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform),
     };
 
     this.competitionClicked = this.competitionClicked.bind(this);
@@ -677,7 +678,7 @@ class search extends Component {
                         : "submit-button-elements second float-left"
                     }
                   >
-                    <div className={this.state.currState !== 3 ? "hidden" : ""}>
+                    <div className={this.state.currState !== 3 || this.state.iOS === true ? "hidden" : ""}>
                       <div className="button-hover">
                         <div
                           id="FlashImage"
