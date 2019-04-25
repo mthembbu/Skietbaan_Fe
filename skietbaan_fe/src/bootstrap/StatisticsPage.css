@@ -1,17 +1,385 @@
 .stats-graph-container{
-
+    margin-left: -30px;
 }
 
 .stats-container{
     background-color: white;
 }
 
-.competition-select-rectangle{
+.stats-container button{
+    outline: none;
+}
+
+.stats-competition-select-rectangle{
     height: 38px;
-    width: 100%;
     border: 1px solid #BE0000;
     border-radius: 18px;
-    margin-top: 25px;
-    margin-right: auto;
-    margin-left: auto;
+    background: linear-gradient(270deg, #EA251A 0%, #BE0000 100%);
+    box-shadow: 0 3px 8px -3px #674D4D;
+    color: #FFFF;
+}
+
+.stats-competition-select-rectangle-big{
+    border: 1px solid #BE0000;
+    border-radius: 18px;
+    background: linear-gradient(270deg, #EA251A 0%, #BE0000 100%);
+    box-shadow: 0 3px 8px -3px #674D4D;
+    color: #FFFF;
+}
+
+.stats-competition-select-rectangle-center{
+    margin-top: 56px;
+}
+
+.stats-center-content{
+    justify-content: center;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 37px;
+}
+
+.stats-button-style-active{
+    height: 36px;	
+    width: 180px;	
+    border: 0.8px solid #555555;	
+    border-radius: 18px;	
+    box-shadow: 0 3px 8px -3px #674D4D;
+    margin-bottom:  10px;
+    background-color: white;
+    color: #493949f5;
+}
+
+.stats-button-style-inactive {
+    height: 36px;	
+    width: 180px;	
+    border: 0.8px solid #555555;	
+    border-radius: 18px;	
+    box-shadow: 0 3px 8px -3px #674D4D;
+    margin-bottom:  10px;
+    background-color: transparent;
+}
+
+.stats-competition-button-text{
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.stats-competition-button-text-active{
+    font-weight: bolder;
+}
+
+.stats-left-button{
+    left: -1px;
+    top: -1px;
+}
+
+.stats-right-button{
+    right: -1px;
+    top: -1px;
+}
+
+.padding-top-5px{
+    padding-top: 5px;
+}
+
+.padding-top-1px{
+    padding-top: 2px;
+}
+
+.stats-competition-text{
+    color: #FFFF;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.stats-inline-text{
+    display: flex;
+    justify-content: center;
+}
+
+.stats-margin-left-7px{
+    margin-left: 7px;
+}
+
+.stats-remove-left-padding{
+    padding-left: 0px;
+}
+
+.competitions-rank-rectangle {
+    height: 36px;
+    border: 1.5px solid #FFFFFF;
+    border-radius: 18px;
+    box-shadow: 0 3px 8px -3px #674D4D;
+    display: flex;
+}
+
+.accuracy-total-rectangle {
+    height: 24px;
+    border: 1px solid #BE0000;
+    border-radius: 18px;
+    display: flex;
+    box-shadow: 0 3px 8px -3px #674D4D;
+}
+
+.competitions-rank-text{
+    font-size: 14px;
+    font-weight: bold;
+    color: #493949f5;
+}
+
+.accuracy-total-text{
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+}
+
+.competitions-rank-text-inactive{
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.accuracy-total-text-inactive{
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.margin-left-right-12px{
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.margin-left-right-69px{
+    margin-left: 69px;
+    margin-right: 69px;
+}
+
+.margin-left-right-8px{
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.margin-top-13px{
+    margin-top: 13px;
+}
+
+.stats-white-button-active{
+    height: 35px;	
+    border-radius: 18px;	
+    background-color: #FFFFFF;	
+    box-shadow: 0 3px 8px -3px #674D4D;
+    text-align: center;
+}
+
+.stats-red-button-active{
+    height: 24px;	
+    border-radius: 18px;	
+    background-color: #BE0000;
+    box-shadow: 0 3px 8px -3px #674D4D;
+    text-align: center;
+}
+
+.stats-white-button-inactive{	
+    background-color: transparent;	
+    text-align: center;
+}
+
+.stats-red-button-inactive{
+    background-color: transparent;	
+    text-align: center;
+}
+
+.white-down-triangle-img-scale{
+    max-width: 15px;
+    max-height: 15px;
+}
+
+.white-down-triangle-img-scale img{
+    width: 14px;
+    height: 14px;
+    margin-top: -1px;
+}
+
+.stats-remove-left-right-paddings{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.stats-competition-container{
+    margin-top: 40px;
+    text-align: center;
+}
+
+.stats-select-competition-text{
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 19px;
+    font-family: Helvetica;
+}
+
+.stats-competitions-list-buttons-container{
+    margin-bottom: 20px;
+}
+
+.scale-white-arrow-up-img{
+    margin-bottom: 20px;
+}
+
+.scale-white-arrow-up-img img{
+    width: 31px;
+    height: 14px;
+}
+
+.margin-bottom-22px{
+    margin-bottom: 22px;
+}
+
+.stats-groups-text{
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 14px;
+}
+
+.legend-rectangle{	
+    height: 34px;	
+    border-radius: 21.5px;	
+    background-color: #F8F8F8;	
+    box-shadow: 3px -4px 12px -9px rgba(0,0,0,0.5);
+}
+
+.font-size-12px{
+    font-size: 12px;
+}
+
+.black-text{
+    color: black;
+}
+
+.red-text{
+    color: #BE0000;
+}
+
+.peach-text{
+    color: #EC6A64;
+}
+
+.scale-group-img{
+    padding-right: 4px;
+}
+
+.scale-group-img img{
+    width: 12px;
+    height: 11px;
+}
+
+.stats-inline{
+    display: flex;
+    line-height: 9px;
+}
+
+.stats-inline-flex{
+    display: flex;
+}
+
+.padding-left-17px{
+    padding-left: 17px;
+}
+
+.scale-group-total-img img{
+    width: 55px;
+    height: 6px;
+}
+
+.scale-group-total-img{
+    margin-left: 17px;
+}
+
+.scale-personal-total-img img{
+    width: 55px;
+    height: 6px;
+}
+
+.scale-personal-total-img{
+    margin-left: 15px;
+}
+
+.total-title{
+    font-size: 18px;
+    font-weight: 300;
+    text-align: center;
+    font-family: Helvetica;
+}
+
+.align-text-center{
+    text-align: center;
+}
+
+.push-bottom-13px{
+    margin-bottom: 13px;
+}
+
+.push-bottom-16px{
+    margin-bottom: 16px;
+}
+
+.grey-color{
+    color: #9D9D9D;
+}
+
+.last-20-container{
+    margin-left: 32px;
+}
+
+.last-20-rectangle {	
+    height: 80px;
+    border-radius: 10px;	
+    background-color: #F8F8F8;	
+    box-shadow: 3px -4px 12px -9px rgba(0,0,0,0.5);
+}
+
+.last-20-text{
+    color:  #202020;
+    font-family: Helvetica;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.margin-left-right-8px{
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.last-20-container hr { 
+    display: block;
+    border-style: inset;
+    border-width: 1px;
+    height: 1px;
+    border: 0;
+    margin-right: 5px;
+    margin-bottom: 1px;
+    background: linear-gradient(100deg, #EA251A 0%, #BE0000 100%);
+}
+
+.font-weight-bold{
+    font-weight: bold;
+}
+
+.stats-arrow-up img{
+    width: 18px;
+    height: 18px;
+}
+
+.stats-arrow-up{
+    margin-left: 4px;
+}
+
+.font-size-16px{
+    font-size: 16px;
+}
+
+.padding-left-15px{
+    padding-left: 15px;
+}
+
+.padding-left-30px{
+    padding-left: 30px;
 }
