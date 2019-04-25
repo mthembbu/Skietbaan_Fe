@@ -13,6 +13,7 @@
     padding-bottom: 56px;
 }
 
+@media screen and (max-width: 576px){
 .view-score-competition-container{
     padding-top: 0px;
     list-style-type: none;
@@ -27,8 +28,13 @@
     max-height: 60vh;
 }
 
-::-webkit-scrollbar { 
-    display: none; 
+    ::-webkit-scrollbar { 
+        display: none !important; 
+    }
+}
+
+.add-score-competition-container::-webkit-scrollbar { 
+    display: none !important; 
 }
 
 .competition-item{
@@ -643,8 +649,6 @@ input[type=number] {
     font-family: helvetica;
 }
 
-::-webkit-scrollbar { 
-    display: none; 
 }
 
 .scores-page-switch-top{
@@ -766,4 +770,3 @@ input[type=number] {
     color: #555555;
     font-weight: bold;
     padding-left: 11px;
-}

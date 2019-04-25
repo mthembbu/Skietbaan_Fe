@@ -13,7 +13,6 @@ import back from './GroupImages/back.png';
 import { fetchEditUser, pageState } from '../actions/postActions';
 import {fetchNumberOfNotification} from "../actions/notificationAction"
 import { getCookie } from "./cookie";
-
 class EditGroup extends Component {
 	constructor(props) {
 		super(props);
