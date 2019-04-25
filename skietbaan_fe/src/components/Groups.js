@@ -29,7 +29,9 @@ class Groups extends Component {
       height: window.innerHeight,
       width: window.innerWidth,
       token: getCookie("token"),
-      getData: false
+      getData: false,
+      heightOfClient: document.body.clientHeight
+
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -68,14 +70,19 @@ class Groups extends Component {
       });
   }
   componentWillMount() {
-    window.addEventListener("resize", this.updateDimensions);
-  }
+    window.addEventListener('resize',this.updateDimensions());
+    this.setState({count:0})
+    let Navbar = document.querySelector(".navbar-admin");
+      if(Navbar!=null){
+        Navbar.classList.remove("hidden");
+      }
+	}
   componentDidMount() {
-    this.updateDimensions();
+    window.addEventListener("resize", this.updateDimensions);
   }
   getBodyHeight() {
     if (this.state.width < 575) {
-      return this.state.height - 200 + "px";
+      return this.state.height - 225 + "px";
     } else {
       return "61vh";
     }
@@ -185,21 +192,25 @@ class Groups extends Component {
     this.setState({ count: 0 });
     this.props.history.push("/create");
   }
-
-  togglenav = () => {
+  keyboardHideNav = ()=>{
     let Navbar = document.querySelector(".navbar-admin");
-    if (window.innerWidth < 575 && window.innerHeight < 800) {
-      if (Navbar != null) {
-        if (this.state.count !== 0) {
-          Navbar.classList.add("hidden");
+    if(Navbar!=null){
+      if (window.innerWidth < 575 && window.innerHeight < 800) {
+        if (this.props.screenSize === document.body.clientHeight) {
+          if(this.state.count === 0){
+            Navbar.classList.remove("hidden");
+          }
+          else{
+            Navbar.classList.add("hidden"); 
+          }          
         } else {
-          Navbar.classList.remove("hidden");
+          Navbar.classList.add("hidden");
         }
       }
     }
-  };
+  }
   render() {
-    this.togglenav();
+    this.keyboardHideNav();
 
     const postitems = (
       <div className="check" style={{ height: this.getBodyHeight() }}>
@@ -343,7 +354,8 @@ class Groups extends Component {
 }
 const mapStateToProps = state => ({
   name: state.posts.groupName,
-  thegroup: state.posts.selectedItem
+  thegroup: state.posts.selectedItem,
+  screenSize: state.posts.screenSize
 });
 
 export default withRouter(

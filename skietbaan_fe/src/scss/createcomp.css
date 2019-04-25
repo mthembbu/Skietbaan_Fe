@@ -93,6 +93,7 @@
 	text-align: center;
 	padding-bottom: 61px;
 	overflow-y: overlay;
+	margin-top: 15px;
 }
 .containers-input{
 	padding-top: 17px;
@@ -169,5 +170,6 @@ button.button-valid {
 @media only screen and (min-width: 575px) {
 	.create-comp-container{
 		padding-top: 1px;
+		margin-top: 21px;
 	}
 }

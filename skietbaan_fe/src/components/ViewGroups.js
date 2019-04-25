@@ -8,7 +8,8 @@ import {
   fetchGroups,
   groupDictionary,
   pageState,
-  emptyState
+  emptyState,
+  setScreenSize
 } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
 import Switch from "@material-ui/core/Switch";
@@ -42,6 +43,7 @@ class ViewGroups extends Component {
   }
 
   async componentWillMount() {
+    this.props.setScreenSize(document.body.clientHeight);
     window.addEventListener("resize", this.updateDimensions);
     await this.props.fetchGroups();
     await this.props.groupDictionary();
@@ -166,7 +168,6 @@ class ViewGroups extends Component {
     const postitems = (
       <div
         className="view-the-main"
-        style={this.state.width >= 575 ? { marginTop: "-19px" } : null}
       >
         {this.props.groupsList.length === 0 ? (
           <div className="view-error-container">
@@ -279,6 +280,7 @@ export default connect(
     newGroupArrayState,
     pageState,
     fetchGroups,
-    emptyState
+    emptyState,
+    setScreenSize
   }
 )(ViewGroups);
