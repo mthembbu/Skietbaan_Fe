@@ -5,13 +5,13 @@
   width: 123px;
 }
 
-.loader-container-documents{
+.loader-container-documents {
   margin-top: 185px;
   height: 120px;
 }
 
-@media screen and (min-width:576px){
-  .loader-container-documents{
+@media screen and (min-width: 576px) {
+  .loader-container-documents {
     margin-top: 150px;
   }
 }
@@ -91,6 +91,7 @@
 }
 
 .documents-center {
+  padding-top: 30px;
   height: 600px;
   overflow: auto;
   width: 312px;
