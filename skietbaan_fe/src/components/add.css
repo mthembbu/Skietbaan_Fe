@@ -27,7 +27,6 @@
 	border: 1px solid #979797;
 	padding-left: 19px;
 	font-weight: bold;
-	background: #fdfdfd;
 	color: #000000;
 }
 .errorMsg {
@@ -40,7 +39,6 @@
 }
 
 .page {
-	background: #F6F6F6;
 	text-align: center;
     width: 100%;
 }
@@ -112,7 +110,12 @@
 	overflow: hidden !important;
 	padding-right: 21px;
 }
+
+@media screen and (max-width:576px){
+	.add-group-main{
+		overflow-y: overlay;
+	}
+}
 .add-group-main{
 	width: 100%;
-	overflow-y: overlay;
 }

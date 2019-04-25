@@ -1,8 +1,7 @@
 @media only screen and (min-width: 576px) {
 
   .components-create {
-    padding-top: 0px;
-    background-color: white;
+    padding-top: 2px;
     margin-top: 15px;
   }
 
@@ -213,16 +212,12 @@
   }
   .create-nav-container .create-top-nav-members{
     background: transparent;
-    position: absolute;
   }
   
   .create-top-nav{
     background: transparent;
   }
   .create-top-nav .row{
-    background: transparent;
-  }
-  .components-create{
     background: transparent;
   }
   .add-container{
@@ -377,8 +372,7 @@
   }
 
   .create-top-nav-members {
-    height: 184px;
-    position: fixed;
+    height: 100%;
     top: 0;
     width: 100%;
     z-index: 1;
@@ -392,12 +386,12 @@
   position: fixed;
     }
   .create-top-nav {
-	  height: fit-content;
+	  height: 100%;
     padding-bottom: 19px;
     top: 0;
     width: 100%;
     z-index: 1;
-    background: #fdfdfd;
+    background: #ffffff;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
   

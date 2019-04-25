@@ -42,6 +42,7 @@ export class createPages extends Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.updateCreateContainer = this.updateCreateContainer.bind(this);
 		this.noShadowOnMember = this.noShadowOnMember.bind(this);
+		this.showHideHeader = this.showHideHeader.bind(this);
 	}
 	updateCreateContainer() {
 		this.props.binStateFunc(1);
@@ -86,7 +87,7 @@ export class createPages extends Component {
 	}
 
 	membersPage() {
-		this.setState({ selectedButton: 3 , selectedValue:'A' });
+		this.setState({ selectedButton: 3, selectedValue: 'A' });
 	}
 
 	createGroups() {
@@ -145,16 +146,34 @@ export class createPages extends Component {
 		}
 	}
 
-	componentWillMount() {
-		this.props.binStateFunc(1);
+	showHideHeader() {
 		window.addEventListener("resize", () => {
-			let Navbar = document.querySelector(".navbar-admin");
+			let Navbar = document.querySelector(".create-main-container");
 			if (this.state.height === document.body.clientHeight) {
-				Navbar.classList.remove("hidden");
+				this.setState({
+					toggle: false
+				});
 			} else {
-				Navbar.classList.add("hidden");
+				this.setState({
+					toggle: true
+				});
 			}
 		});
+	}
+
+	componentWillMount() {
+		this.props.binStateFunc(1);
+		this.showHideHeader();
+		if (window.innerWidth < 575 && window.innerHeight < 800) {
+			window.addEventListener("resize", () => {
+				let Navbar = document.querySelector(".navbar-admin");
+				if (this.state.height === document.body.clientHeight) {
+					Navbar.classList.remove("hidden");
+				} else {
+					Navbar.classList.add("hidden");
+				}
+			})
+		}
 	}
 
 
@@ -167,10 +186,44 @@ export class createPages extends Component {
 	};
 
 	render() {
-		if (!getCookie('token')) {
-			window.location = '/registerPage';
-		}
-		return (
+		const keyBoardVisible = (
+			<Row className="row justify-content-center">
+				<Col sm={8} className="createpage-bootstrap-col-center-container">
+					<div className="">
+						{this.props.page === 0 || this.props.page === 10 || this.props.page === 5 ? (
+							<div className="">
+								<div className={this.state.selectedButton === 3 ? 'create-top-nav-members' : 'create-top-nav'}>
+									{/* top */}
+									<div class="page-name-bar">
+										<div className="gun-overlay-image">
+											<label className="label-for-score">CREATE</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						) : null}
+						<div className="components-create">
+
+							{this.state.selectedButton === 1 && this.props.page === 10 ? (
+								<AddGroup />
+							) : this.state.selectedButton === 1 && this.props.page === 0 || this.state.selectedButton === 1 && this.props.page === 1 || this.state.selectedButton === 1 && this.props.page === 2 ? (
+								<GroupComponent />
+							) : null}
+							{this.state.selectedButton === 2 ? <CompComponent /> : null}
+							{this.state.selectedButton === 3 && this.state.selectedValue === 'A' ? (
+								<ViewNonMembers />
+							) : this.state.selectedButton === 3 && this.state.selectedValue === 'B' ? (
+								<ViewMembers />
+							) : this.state.selectedButton === 3 && this.state.selectedValue === 'C' ? (
+								<ViewMembersExpiring />
+							) : null}
+						</div>
+					</div>
+				</Col>
+			</Row>
+		);
+
+		const noKeyBoardVisible = (
 			<Row className="row justify-content-center">
 				<Col sm={8} className="createpage-bootstrap-col-center-container">
 					<div className="create-main-container">
@@ -321,6 +374,13 @@ export class createPages extends Component {
 					</div>
 				</Col>
 			</Row>
+		);
+
+		if (!getCookie('token')) {
+			window.location = '/registerPage';
+		}
+		return (
+			<div>{this.state.toggle ? keyBoardVisible : noKeyBoardVisible}</div>
 		);
 	}
 }

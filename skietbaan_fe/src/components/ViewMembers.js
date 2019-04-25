@@ -93,9 +93,9 @@ class ViewMembers extends Component {
   }
   getBodyHeight() {
     if (this.state.width < 575) {
-      return this.state.height - 240 + "px";
+      return this.state.height - (240 - 184) + "px";
     } else {
-      return "57vh";
+      return "56vh";
     }
   }
   getAllMembers() {
