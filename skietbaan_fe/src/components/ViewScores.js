@@ -24,7 +24,9 @@ class ViewScores extends Component {
             someScoreClicked: null,
             lastName: "",
             duplicate: false,
-            competitionId: null
+            competitionId: null,
+            userClicked: false,
+            someUserClick: null
         };
         this.competitionClicked = this.competitionClicked.bind(this);
         this.formatTime = this.formatTime.bind(this);
@@ -39,8 +41,12 @@ class ViewScores extends Component {
         })
     }
 
-    getScoresForAdmin(id) {
-        fetch(BASE_URL + "/api/Scores/GetAllScores/" + id +"/" + this.state.competitionId, {
+    getScoresForAdmin(token, item) {
+        this.setState({
+            userClicked: !this.state.userClicked,
+            someUserClick: item
+        })
+        fetch(BASE_URL + "/api/Scores/" + this.state.competitionId + "/" + token, {
             method: "GET",
             headers: {
                 Accept: "application/json",
@@ -72,61 +78,63 @@ class ViewScores extends Component {
     }
 
     competitionClicked(item, compName, compId) {
-        this.setState({
-            somethingClicked: true,
-            clicked: item,
-            competitionName: compName,
-            competitionId: compId
-        });
-        toggleToggleBar();
-        if (compId !== "" && this.props.isAdmin === false) {
-            fetch(BASE_URL + "/api/Scores/" + compId + "/" + this.state.token, {
-                method: "GET",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json"
-                }
-            })
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
-                    return data;
-                })
-                .then(data =>
-                    this.setState({
-                        scoresList: data,
-                        getDataScores: true
-                    })
-                )
-                .catch(err => {
-                    this.setState({ exceptionCaught: true })
-                });
-        } else if (this.props.isAdmin) {
-            fetch(BASE_URL + "/api/Scores/GetUsers/" + compId, {
-                method: "GET",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json"
-                }
-            })
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
-                    return data;
-                })
-                .then(data =>
-                    this.setState({
-                        usersList: data,
-                        getDataScores: true
-                    })
-                )
-                .catch(err => {
-                    this.setState({ exceptionCaught: true })
-                });
-        }
+        if (this.state.clicked == null) {
+            this.setState({
+                somethingClicked: true,
+                clicked: item,
+                competitionName: compName,
+                competitionId: compId
+            });
+            toggleToggleBar();
 
+            if (compId !== "" && this.props.isAdmin === false) {
+                fetch(BASE_URL + "/api/Scores/" + compId + "/" + this.state.token, {
+                    method: "GET",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    }
+                })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        return data;
+                    })
+                    .then(data =>
+                        this.setState({
+                            scoresList: data,
+                            getDataScores: true
+                        })
+                    )
+                    .catch(err => {
+                        this.setState({ exceptionCaught: true })
+                    });
+            } else if (this.props.isAdmin) {
+                fetch(BASE_URL + "/api/Scores/GetUsers/" + compId, {
+                    method: "GET",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    }
+                })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        return data;
+                    })
+                    .then(data =>
+                        this.setState({
+                            usersList: data,
+                            getDataScores: true
+                        })
+                    )
+                    .catch(err => {
+                        this.setState({ exceptionCaught: true })
+                    });
+            }
+        }
     }
 
     cancelClicked() {
@@ -136,7 +144,8 @@ class ViewScores extends Component {
                 somethingClicked: !this.state.somethingClicked,
                 clicked: null,
                 cameraClicked: false,
-                scoresList:[]
+                scoresList: [],
+                usersList: []
             });
         }
     }
@@ -220,7 +229,7 @@ class ViewScores extends Component {
         )
 
         let scoreListForUser = [];
-        if (this.state.scoresList.length !== 0 && this.state.getDataScores !== false && this.props.isAdmin === false) {
+        if (this.state.scoresList.length !== 0 && this.state.getDataScores !== false) {
             for (let i = 0; i < this.state.scoresList.length; i++) {
                 scoreListForUser.push(
                     <div className={this.state.cameraClicked === false || this.state.someScoreClicked === i ?
@@ -253,12 +262,18 @@ class ViewScores extends Component {
         if (this.state.usersList.length !== 0 && this.state.getDataScores !== false && this.props.isAdmin === true) {
             for (let i = 0; i < this.state.usersList.length; i++) {
                 adminScoresList.push(
-                    <div className="score-content">
-                        <div className="users-container" onlick={() => this.getScoresForAdmin(this.state.usersList[i].id)}>
-                            <div className="usernames">{this.state.usersList[i].username}</div>
-                            <div className="user-emails">{this.state.usersList[i].email}</div>
+                    <div className={this.state.userClicked === true ? "hidden" : "score-content"}>
+                        <div className={this.state.userClicked === true ? "hidden" : "users-container"}
+                            onClick={() => this.getScoresForAdmin(this.state.usersList[i].token, i)}>
+                            <div className={this.state.userClicked === true ? "hidden" : "usernames"}>
+                                {this.state.usersList[i].username}</div>
+                            <div className={this.state.userClicked === true ? "hidden" : "user-emails"}>
+                                {this.state.usersList[i].email}</div>
                         </div>
-                        <div className="border-line">
+                        <div className={this.state.userClicked === true ? "hidden" : "border-line"}>
+                        </div>
+                        <div className={this.state.userClicked === false ? "hidden" : "active competition-item active"}>
+                            <div>{this.state.usersList[i].username } </div>
                         </div>
                     </div>
                 )
@@ -284,7 +299,7 @@ class ViewScores extends Component {
                             <div className="view-scores-input-container">
                                 <input
                                     placeholder="Search"
-                                    className="score"
+                                    className={this.state.userClicked === true ? "hidden" : "score"}
                                     type="text"
                                 ></input>
                                 <div>
