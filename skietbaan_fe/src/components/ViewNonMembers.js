@@ -203,7 +203,7 @@ class ViewNonMembers extends Component {
             })
             .then(data => {
               this.setState({ done: true });
-              this.setState({ filterText: "" });
+              this.setState({ filterText: ""});
               this.props.fetchNumberOfNotification(this.state.token);
             })
             .catch(err => {
@@ -307,7 +307,7 @@ class ViewNonMembers extends Component {
         {this.state.array.length === 0 && this.state.getData === true ? (
           <div className="view-non-error-container">
             <label className="view-non-error-msg">
-              No members have been created yet.
+              No users have been created yet.
             </label>
           </div>
         ) : (
@@ -346,12 +346,12 @@ class ViewNonMembers extends Component {
                                 {posts.selected === true ? (
                                   <img
                                     className="view-non-members-image"
-                                    src={arrowDown}
+                                    src={arrowUp}
                                   />
                                 ) : (
                                     <img
                                       className="view-non-members-image"
-                                      src={arrowUp}
+                                      src={arrowDown}
                                     />
                                   )}
                               </div>
