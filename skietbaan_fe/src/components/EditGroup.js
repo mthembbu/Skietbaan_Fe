@@ -9,6 +9,7 @@ import blackBin from './GroupImages/blackBin.png';
 import seleteAll from './GroupImages/seleteAll.png';
 import unSelectAll from './GroupImages/unSelectAll.png';
 import whitePlus from './GroupImages/whitePlus.png';
+import back from './GroupImages/back.png';
 import { fetchEditUser, pageState } from '../actions/postActions';
 import {fetchNumberOfNotification} from "../actions/notificationAction"
 import { getCookie } from "./cookie";
