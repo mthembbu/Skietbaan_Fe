@@ -28,7 +28,8 @@ class ViewMembers extends Component {
       exportMsg: false,
       exportResponse: "",
       exceptionCaught: false,
-      exportResponse: ""
+      exportResponse: "",
+      userIndex:0
     };
     this.getAllMembers = this.getAllMembers.bind(this);
     this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -113,8 +114,13 @@ class ViewMembers extends Component {
       })
       .then(data => {
         this.setState({
-          array: data,
-          getData: true
+          getData: true,
+          array: data.map(user=>{
+            return{
+              ...user,
+              selected:false
+            }
+          })
         });
       })
       .catch(err => {
@@ -186,6 +192,17 @@ class ViewMembers extends Component {
       });
   };
 
+  onChangeArrow = index => {
+    if(index!==this.state.userIndex){
+      this.state.array[this.state.userIndex].selected = false;
+      this.state.array[index].selected = !this.state.array[index].selected;
+    }else{
+      this.state.array[index].selected = !this.state.array[index].selected;
+    }
+    this.setState({ userIndex:index });
+    this.forceUpdate();
+  };
+
   render() {
     if (!getCookie("token")) {
       window.location = "/registerPage";
@@ -229,8 +246,9 @@ class ViewMembers extends Component {
                   <tr className="view-members-user" key={post.id}>
                     <td className="first-column">
                       <Collapsible
+                      open={post.selected}
                         trigger={
-                          <div className="username-and-email">
+                          <div className="username-and-email"  onClick={() => this.onChangeArrow(index)}>
                             <div className="view-members-username-email">
                               <b>{post.username}</b>
                               <div className="view-non-members-email">

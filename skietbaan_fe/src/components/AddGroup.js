@@ -15,10 +15,12 @@ class AddGroup extends Component {
       groups: [],
       exist: true,
       pageState: false,
-      height: window.innerHeight
+			height: window.innerHeight,
+			width: window.innerWidth
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.getBodyHeight = this.getBodyHeight.bind(this);
   }
 
   UNSAFE_componentWillMount() {
@@ -26,7 +28,7 @@ class AddGroup extends Component {
       .then(res => res.json())
       .then(data =>
         this.setState({
-          groups: data.map(names => names.name)
+          groups: data.map(names => names.name.toLowerCase())
         })
       ).catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
@@ -50,12 +52,20 @@ class AddGroup extends Component {
     }
   }
 
+  getBodyHeight() {
+		if (this.state.width < 575) {
+			return (this.state.height - 240) + "px";
+		} else {
+			return "61vh";
+		}
+	}
+
   render() {
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
     return (
-      <div className="add-group-main" >
+      <div className="add-group-main" style={{ height: this.getBodyHeight()}}>
         <div className="page">
           <div className="middle-bar">
             <input
