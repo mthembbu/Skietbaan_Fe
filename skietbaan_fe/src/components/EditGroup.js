@@ -92,6 +92,9 @@ class EditGroup extends Component {
 			body: JSON.stringify(request)
 		})
 			.then((res) => res.json())
+			.then(this.setState({
+				binState: false
+			}))
 			.catch(function (data) { }).catch(err => {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
 			});
@@ -255,7 +258,7 @@ class EditGroup extends Component {
 								src={back}
 								alt=""
 							/>
-							<label className="center-labels">{this.props.name}</label>
+							<label className="center-labels">{this.props.name.toUpperCase()}</label>
 						</div>
 						<div className="group-icon-spacing">
 							<div className="plus-next" onClick={() => this.changeBinState()}>

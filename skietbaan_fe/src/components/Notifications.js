@@ -454,20 +454,20 @@ class notification extends Component {
         }
       >
         <tr className="tr-Class">
+        <td>
+            <button
+              onClick={() => this.onClick_cancel()}
+              className="notifications-modal-cancel"
+            >
+              CANCEL
+            </button>
+          </td>
           <td>
             <button
               className="notifications-modal-confirm"
               onClick={this.onDelete}
             >
               {modalText}
-            </button>
-          </td>
-          <td>
-            <button
-              onClick={() => this.onClick_cancel()}
-              className="notifications-modal-cancel"
-            >
-              CANCEL
             </button>
           </td>
         </tr>
