@@ -98,7 +98,7 @@ class ViewMembersExpiring extends Component {
 		if (this.state.width < 575) {
       return this.state.height - (240 - 184) + "px";
 		} else {
-			return "56vh";
+			return "50vh";
 		}
 	}
 	getExpiringMembers() {
