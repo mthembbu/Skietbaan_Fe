@@ -51,7 +51,7 @@ class EditGroup extends Component {
 		if (this.state.width < 575) {
 			return (this.state.height - 210) + "px";
 		} else {
-			return "59vh";
+			return "63vh";
 		}
 	}
 	changeBinState = () => {

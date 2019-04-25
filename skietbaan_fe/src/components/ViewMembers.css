@@ -1,12 +1,10 @@
 .centre-view-member {
 	margin: 0 auto;
-	margin-top: 30px;
 	position: center;
 	background: #ffffff;
 }
 
 .loader-container-members {
-	background-color: #f6f6f6;
 	padding-top: 12px;
 	height: 100%;
 }
@@ -28,7 +26,6 @@
 }
 
 .table-search-members {
-	background-color: #f6f6f6;
 	z-index: 1;
 	overflow-y: overlay;
 	padding-top: 12px;
@@ -56,7 +53,6 @@
 	}
 	.table-search-members {
 		padding: 3% 5% 0% 5%;
-		background-color: #f6f6f6;
 		overflow-y: scroll;
 	}
 }
@@ -70,7 +66,6 @@
 }
 @media only screen and (max-width: 575px) {
 	.table-search-members {
-		background-color: #f6f6f6;
 		overflow-y: scroll;
 		color: #666666;
 		padding-bottom: 70px;
@@ -259,7 +254,6 @@
 }
 
 .table-member {
-	background-color: #f6f6f6;
 	width: 100%;
 	color: #666666;
 }
