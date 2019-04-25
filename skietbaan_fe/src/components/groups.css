@@ -551,7 +551,7 @@
 		margin-top: 0px !important;
 	}
 	.view-the-main {
-		margin: 0px 40px 56px 28px;
+		margin: 11px 40px 56px 28px;
 	}
 
 	.adding-check-edit {
@@ -614,7 +614,7 @@
 		margin-top: 10px;
 	}
 	.The-Main {
-		margin-top: 0px;
+		margin-top: 34px;
 	}
 	.edit-The-Main {
 		margin-top: 26px !important;
@@ -747,6 +747,7 @@
 
 .The-Main {
 	overflow-y: overlay;
+	margin-top: 10px;
 }
 .edit-The-Main {
 	overflow-y: overlay;

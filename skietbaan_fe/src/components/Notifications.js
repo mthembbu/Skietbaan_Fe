@@ -168,16 +168,16 @@ class notification extends Component {
     });
   }
   componentWillMount() {
-    window.addEventListener("resize", () => {
+		window.addEventListener('resize',  () => {
+			this.updateDimensions()
       let Navbar = document.querySelector(".navbar-admin");
       if (this.state.heightOfClient === document.body.clientHeight) {
         Navbar.classList.remove("hidden");
       } else {
         Navbar.classList.add("hidden");
       }
-      this.updateDimensions();
     });
-  }
+	}
   getBodyHeight() {
     return this.state.height - 56;
   }

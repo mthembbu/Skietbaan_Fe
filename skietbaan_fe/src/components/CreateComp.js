@@ -79,7 +79,7 @@ class CreateComp extends Component {
   }
   getBodyHeight() {
     if (this.state.width < 575) {
-      return this.state.height - (240 - 184) + "px";
+      return this.state.height - (240 - 184) - 145 + "px";
     } else {
       return "55vh";
     }
@@ -398,7 +398,7 @@ class CreateComp extends Component {
                     </Row>
                     <Row className="bronze-row">
                       <Col xs={4} md={4}>
-                        <div className="accuracy-header-label" />
+                        <div className="bronze-label" >Bronze Award:</div>
                       </Col>
                       <Col xs={4} md={4}>
                         <div className="">
@@ -439,7 +439,7 @@ class CreateComp extends Component {
 
                     <Row className="silver-row">
                       <Col xs={4} md={4}>
-                        <div className="silver-label" />
+                        <div className="silver-label">Silver Award:</div>
                       </Col>
                       <Col xs={4} md={4}>
                         <div className="">
@@ -480,7 +480,7 @@ class CreateComp extends Component {
 
                     <Row>
                       <Col xs={4} md={4}>
-                        <div className="accuracy-label" />
+                        <div className="gold-label">Gold Award:</div>
                       </Col>
                       <Col xs={4} md={4}>
                         <div className="">
