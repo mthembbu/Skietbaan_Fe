@@ -12,6 +12,7 @@ import whitePlus from './GroupImages/whitePlus.png';
 import { fetchEditUser, pageState } from '../actions/postActions';
 import {fetchNumberOfNotification} from "../actions/notificationAction"
 import { getCookie } from "./cookie";
+import back from './GroupImages/back.png';
 
 class EditGroup extends Component {
 	constructor(props) {
