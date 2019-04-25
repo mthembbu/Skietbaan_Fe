@@ -183,7 +183,7 @@ export class createPages extends Component {
 											<label className="label-for-score">CREATE</label>
 
 										</div>
-										{this.props.page === 0 ?
+										{(this.props.page === 0 && this.state.selectedButton===1) || (this.props.page===0 && this.state.selectedButton===2) ?
 											<div className="plus-next" onClick={() => this.changeBinState()}>
 												<img
 													className="bin-image"
