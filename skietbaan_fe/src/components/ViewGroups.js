@@ -247,7 +247,7 @@ class ViewGroups extends Component {
         {(this.props.binState === 2 && this.state.count != 0) ?
           <div className="view-group-confirm-panel">
             <button className="view-group-cancel" onClick={() => this.cancel()}>CANCEL</button>
-            <button className="view-group-delete-confirm" onClick={() => this.delete()}>CONFIRM</button>
+            <button className="view-group-delete-confirm" onClick={() => this.delete()}>{this.state.count===this.props.groupsList.length?"DELETE ALL":"DELETE"}</button>
           </div> : null}
       </div>
     );

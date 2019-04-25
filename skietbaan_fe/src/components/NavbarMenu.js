@@ -8,6 +8,7 @@ import { getCookie } from "../components/cookie.js";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { checkUserType } from "../actions/adminAction";
+import { pageState } from '../actions/postActions';
 import { fetchNumberOfNotification } from "../actions/notificationAction";
 
 class NavbarMenu extends Component {
@@ -63,6 +64,7 @@ class NavbarMenu extends Component {
         />
       );
     } else {
+      this.props.pageState(10);
       return (
         <img
           src={NAV_BAR_ICONS.CREATE_GRAY}
@@ -191,5 +193,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { checkUserType, fetchNumberOfNotification }
+  { checkUserType, fetchNumberOfNotification ,pageState}
 )(NavbarMenu);

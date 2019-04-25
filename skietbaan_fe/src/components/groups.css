@@ -296,6 +296,16 @@
   .bottom-panel {
     bottom: 0;
   }
+  .bottom-label{
+	position: relative;
+	justify-content: center;
+}
+.view-group-confirm-panel{
+	width: 100% !important;
+}
+.cancel-creating-group {
+	margin-right: 40px;
+}
 }
 
 .bottom-panel {
@@ -618,17 +628,7 @@
 }
 
 .confirm-group {
-  border-radius: 24.5px;
-  width: 156px;
-  height: 42px;
-  background: red;
-  color: white;
-  margin-left: 16px;
-  justify-content: flex-start;
-  border: 1px solid red;
-}
 
-.cancel-delete {
   border-radius: 24.5px;
   width: 156px;
   margin-right: 16px;
@@ -637,6 +637,18 @@
   color: #6a6a6a;
   float: right;
   border: 1px solid black;
+}
+
+.cancel-delete {
+	border-radius: 24.5px;
+	width: 156px;
+	height: 42px;
+	background: red;
+	color: white;
+	margin-left: 16px;
+	justify-content: flex-start;
+	border: 1px solid red;
+  
 }
 .cancel-delete:focus {
   outline: none;
@@ -811,6 +823,7 @@
 	color:#6A6A6A;
 	border-radius: 25px;
 	margin-right: 23px;
+	font-weight: lighter;
 }
 
 .view-group-delete-confirm{
@@ -821,4 +834,5 @@
 	border-radius: 25px;
 	border: 1px solid #EA251A;
 	background: #EA251A;
+	font-weight: lighter;
 }
