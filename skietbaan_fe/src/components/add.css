@@ -112,8 +112,13 @@
 	overflow: hidden !important;
 	padding-right: 21px;
 }
+
+@media screen and (max-width:576px){
+	.add-group-main{
+		overflow-y: overlay
+	}
+}
 .add-group-main{
 	width: 100%;
-	overflow-y: overlay;
 	background-color: #f6f6f6;
 }
