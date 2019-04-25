@@ -10,7 +10,9 @@ import unSelectAll from "./GroupImages/unSelectAll.png";
 import blackBin from "./GroupImages/blackBin.png";
 import whitePlus from "./GroupImages/whitePlus.png";
 import { fetchEditUser, pageState } from "../actions/postActions";
+import {fetchNumberOfNotification} from "../actions/notificationAction"
 import back from "./GroupImages/back.png";
+import { getCookie } from "./cookie";
 
 class EditGroup extends Component {
   constructor(props) {
@@ -24,7 +26,8 @@ class EditGroup extends Component {
       check: "select all",
       binState: false,
       height: window.innerHeight,
-      width: window.innerWidth
+      width: window.innerWidth,
+      token: getCookie("token")
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.onBack = this.onBack.bind(this);
@@ -38,7 +41,8 @@ class EditGroup extends Component {
 
   async componentDidMount() {
     this.updateDimensions();
-    this.props.fetchEditUser(this.props.id);
+   this.props.fetchEditUser(this.props.id);
+    this.props.fetchNumberOfNotification(this.state.token);
   }
   componentWillMount() {
     window.addEventListener("resize", this.updateDimensions);
@@ -325,5 +329,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchEditUser, pageState }
+  { fetchEditUser, pageState, fetchNumberOfNotification }
 )(EditGroup);
