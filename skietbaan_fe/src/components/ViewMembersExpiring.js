@@ -263,15 +263,16 @@ class ViewMembersExpiring extends Component {
   onChangeArrow = (index) => {
 	if(index!==this.state.userIndex){
 		this.state.array[this.state.userIndex].selected = false;
-		this.state.array[index].selected = !this.state.array[index].selected;
-	  }else{
+		this.state.array[index].selected = true;
+	  }else{		
 		this.state.array[index].selected = !this.state.array[index].selected;
 	  }
     this.setState({
       dateValue: "",
       AdvanceDateExist: false,
       dateErrorMgs: false,
-      successMgs: false
+	  successMgs: false,
+	  userIndex:index
     });
     this.forceUpdate();
   };
@@ -436,7 +437,7 @@ class ViewMembersExpiring extends Component {
                         ) : post.advanceExpiryDate != null ? (
                           <div className="confirm-button-container">
                             <button className="confriming-btn">
-                              MEMBERSHIP will be renewed on{" "}
+                              Membership will be renewed on{" "}
                               {post.advanceExpiryDate
                                 .substring(0, 10)
                                 .split("-")
