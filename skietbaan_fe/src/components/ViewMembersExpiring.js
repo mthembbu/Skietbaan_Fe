@@ -33,7 +33,8 @@ class ViewMembersExpiring extends Component {
       exportResponse: "",
       dateErrorMgs: false,
       successMgs: false,
-      AdvanceDateExist: false
+	  AdvanceDateExist: false,
+	  userIndex:0
     };
     this.getExpiringMembers = this.getExpiringMembers.bind(this);
     this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -173,9 +174,7 @@ class ViewMembersExpiring extends Component {
           .then(data => {
             this.getExpiringMembers();
             this.setState({ filterText: "" });
-            setTimeout(() => {
-              this.setState({ successMgs: true });
-            }, 1000);
+           
           })
           .catch(err => {
             /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
@@ -190,7 +189,10 @@ class ViewMembersExpiring extends Component {
       } else {
         this.setState({ dateErrorMgs: true });
       }
-    }
+	}
+	setTimeout(() => {
+		this.setState({ successMgs: true });
+	  }, 3000);
   }
 
   handleDateChange(event) {
@@ -258,7 +260,13 @@ class ViewMembersExpiring extends Component {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
   };
-  onChangeArrow = () => {
+  onChangeArrow = (index) => {
+	if(index!==this.state.userIndex){
+		this.state.array[this.state.userIndex].selected = false;
+		this.state.array[index].selected = !this.state.array[index].selected;
+	  }else{
+		this.state.array[index].selected = !this.state.array[index].selected;
+	  }
     this.setState({
       dateValue: "",
       AdvanceDateExist: false,
@@ -320,10 +328,11 @@ class ViewMembersExpiring extends Component {
                   <tr className="view-members-user" key={post.id}>
                     <td className="first-column">
                       <Collapsible
+					  open={post.selected}
                         trigger={
                           <div
                             className="username-and-email"
-                            onClick={() => this.onChangeArrow()}
+                            onClick={() => this.onChangeArrow(index)}
                           >
                             <div className="view-members-username-email">
                               <b>{post.username}</b>
