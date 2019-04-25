@@ -10,7 +10,7 @@
   .profile-bootstrap-col-center-container {
     background: white;
     padding: 0;
-    margin: auto
+    margin: auto;
   }
   .documents_background {
     width: 55% !important;
@@ -54,7 +54,7 @@
   }
 }
 
-.profile-content-container{
+.profile-content-container {
   padding-top: 130px;
 }
 
@@ -66,17 +66,17 @@
   background-color: white;
 }
 
-.ios-profile-landing-container{
-    overflow-x: hidden;
-    overflow-y: overlay;
-    height: 100vh;
-    padding-bottom: 200px;
-    background-color: white;
+.ios-profile-landing-container {
+  overflow-x: hidden;
+  overflow-y: overlay;
+  height: 100vh;
+  padding-bottom: 200px;
+  background-color: white;
 }
 
-.button-style-active{
-    background-color: #BE0000;
-    color: white;
+.button-style-active {
+  background-color: #be0000;
+  color: white;
 }
 
 .button-style-inactive {
@@ -142,6 +142,13 @@
   color: #be0000;
 }
 
+.profile-navigation-text2 {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 14px;
+  font-family: Helvetica;
+  color: #000000;
+}
 .profile-navigation-text-align {
   text-align: center;
   margin-top: 1px;
@@ -154,6 +161,7 @@
   width: 100%;
   background: white;
   padding-bottom: 2px;
+  box-shadow: 2px 1px 16px -3px rgba(0, 0, 0, 0.5);
 }
 
 .pad-top-50px {

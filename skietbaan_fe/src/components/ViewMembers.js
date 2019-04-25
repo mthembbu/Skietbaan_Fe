@@ -8,6 +8,8 @@ import { Row, Col } from "react-bootstrap";
 import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
 import exportClick from "../components/assets/exportPress.png";
+import { connect } from "react-redux";
+import { pageState } from '../actions/postActions';
 
 class ViewMembers extends Component {
   constructor(props) {
@@ -68,6 +70,9 @@ class ViewMembers extends Component {
     this.updateDimensions();
     this.getAllMembers();
     this.getTimeLeft();
+  }
+  componentWillUnmount(){
+    this.props.pageState(10);
   }
   updateDimensions() {
     this.setState({
@@ -267,7 +272,7 @@ class ViewMembers extends Component {
                         }
                       >
                         <div className="view-members-membership-details">
-                          CELL NUMBER:{" "}
+                          CELLPHONE NUMBER:{" "}
                           <b>
                             {post.phoneNumber === null
                               ? "N/A"
@@ -387,4 +392,7 @@ class ViewMembers extends Component {
   }
 }
 
-export default ViewMembers;
+export default connect(
+  null,
+  {pageState }
+)(ViewMembers);

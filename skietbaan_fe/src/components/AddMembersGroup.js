@@ -78,11 +78,12 @@ class AddMembersGroup extends Component {
       },
       body: JSON.stringify(request)
     })
-      .then(function(response) {})
-      .then(function(data) {})
+      .then(function (response) { })
+      .then(function (data) { })
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
+    this.setState({ filterText: "" })
     this.props.pageState(1);
   }
 
@@ -116,11 +117,12 @@ class AddMembersGroup extends Component {
 
   extractEmails(text) {
     if (this.state.filterText[0] === "@") {
-      let ser = text.search("@");
-      let word = text.substring(ser, text.length);
-      let ss = word.split(".");
+      let ser = text.search("@")
+      let word = text.substring(ser, text.length)
+      let ss = word.split(".")
       return ss[0];
-    } else {
+    }
+    else {
       return text;
     }
   }
@@ -130,19 +132,33 @@ class AddMembersGroup extends Component {
       this.props.existing[i].highlighted = false;
     }
     this.setState({ count: 0 });
+    this.setState({ check: "Select all" });
   };
 
   selectall() {
+    let arr = []
+    this.props.existing.filter(post => {
+      return (
+        !this.state.filterText ||
+        post.username
+          .toLowerCase()
+          .startsWith(this.state.filterText.toLowerCase()) ||
+        post.email
+          .toLowerCase()
+          .startsWith(this.state.filterText.toLowerCase()) || (this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
+      );
+    }).map(data => arr.push(data.id))
+
     if (this.state.check === "Select all") {
-      this.setState({ count: this.props.existing.length });
-      for (var i = 0; i < this.props.existing.length; i++) {
-        this.props.existing[i].highlighted = true;
+      this.setState({ count: arr.length });
+      for (var i = 0; i < arr.length; i++) {
+        (this.props.existing[this.props.memberIds.indexOf(arr[i])]).highlighted = true;
       }
       this.setState({ check: "Unselect all" });
     } else {
       this.setState({ count: 0 });
-      for (var j = 0; j < this.props.existing.length; j++) {
-        this.props.existing[j].highlighted = false;
+      for (var j = 0; j < arr.length; j++) {
+        (this.props.existing[this.props.memberIds.indexOf(arr[j])]).highlighted = false;
       }
       this.setState({ check: "Select all" });
     }
@@ -162,63 +178,61 @@ class AddMembersGroup extends Component {
             </label>
           </div>
         ) : (
-          <ul class="list-group">
-            {this.props.existing
-              .filter(post => {
-                return (
-                  !this.state.filterText ||
-                  post.username
-                    .toLowerCase()
-                    .startsWith(this.state.filterText.toLowerCase()) ||
-                  post.email
-                    .toLowerCase()
-                    .startsWith(this.state.filterText.toLowerCase()) ||
-                  this.extractEmails(post.email).startsWith(
-                    this.state.filterText.toLowerCase()
-                  )
-                );
-              })
-              .map(post => (
-                <li
-                  class="listItem"
-                  key={post.id}
-                  onClick={() => this.toggleHighlight(post.id)}
-                >
-                  <img
-                    className="checkbox-delete"
-                    src={post.highlighted ? marked : unmarked}
-                    alt=""
-                  />
-                  <label
-                    className={
-                      post.highlighted === true ? "add-blabe" : "add-blabe2"
-                    }
+            <ul class="list-group">
+              {this.props.existing
+                .filter(post => {
+                  return (
+                    !this.state.filterText ||
+                    post.username
+                      .toLowerCase()
+                      .startsWith(this.state.filterText.toLowerCase()) ||
+                    post.email
+                      .toLowerCase()
+                      .startsWith(this.state.filterText.toLowerCase()) ||
+                    (this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
+                  );
+                })
+                .map(post => (
+                  <li
+                    class="listItem"
+                    key={post.id}
+                    onClick={() => this.toggleHighlight(post.id)}
                   >
-                    <div
+                    <img
+                      className="checkbox-delete"
+                      src={post.highlighted ? marked : unmarked}
+                      alt=""
+                    />
+                    <label
                       className={
-                        post.highlighted === true
-                          ? "userName-active"
-                          : "userName"
+                        post.highlighted === true ? "add-blabe" : "add-blabe2"
                       }
                     >
-                      {post.username}
-                    </div>
-                    <div
-                      className={
-                        post.highlighted === true ? "emails-active" : "email"
-                      }
-                    >
-                      {post.email}
-                    </div>
-                  </label>
-                </li>
-              ))}
-          </ul>
-        )}
+                      <div
+                        className={
+                          post.highlighted === true
+                            ? "userName-active"
+                            : "userName"
+                        }
+                      >
+                        {post.username}
+                      </div>
+                      <div
+                        className={
+                          post.highlighted === true ? "emails-active" : "email"
+                        }
+                      >
+                        {post.email}
+                      </div>
+                    </label>
+                  </li>
+                ))}
+            </ul>
+          )}
       </div>
     );
     return (
-      <div className="The-Main">
+      <div className="add-The-Main">
         <div className="navBar-containers">
           <img className="back-image" onClick={this.onBack} src={back} alt="" />
           <div className="the-nav-bar">

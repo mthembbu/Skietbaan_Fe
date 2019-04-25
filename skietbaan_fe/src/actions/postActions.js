@@ -16,7 +16,8 @@ import {
   FETCH_LEADERBOARDTABLE_DATA,
   UPDATE_SELECTED_COMPETITION,
   UPDATE_SELECTED_GROUP,
-  GROUP_DATA_LOADING
+  GROUP_DATA_LOADING,
+  BINSTATE
 } from "./types";
 
 /** The method to feth the already available data for posts*/
@@ -161,14 +162,14 @@ export const fetchleaderboadfilterdata = token => dispatch => {
 export const fetchleaderboadtabledata = filterSelection => dispatch => {
   fetch(
     BASE_URL +
-      "/api/Leaderboard/GetLeaderboardRankings?competitionID=" +
-      filterSelection.selectedCompetition +
-      "&groupID=" +
-      filterSelection.selectedGroup +
-      "&userToken=" +
-      filterSelection.userToken +
-      "&selectedRank=" +
-      filterSelection.selectedRank
+    "/api/Leaderboard/GetLeaderboardRankings?competitionID=" +
+    filterSelection.selectedCompetition +
+    "&groupID=" +
+    filterSelection.selectedGroup +
+    "&userToken=" +
+    filterSelection.userToken +
+    "&selectedRank=" +
+    filterSelection.selectedRank
   )
     .then(res => res.json())
     .then(data =>
@@ -237,6 +238,15 @@ export const selectedPage = num => {
   return dispatch => {
     dispatch({
       type: CHOOSEPAGE,
+      payload: num
+    });
+  };
+};
+
+export const binStateFunc = (num) => {
+  return dispatch => {
+    dispatch({
+      type: BINSTATE,
       payload: num
     });
   };

@@ -9,6 +9,7 @@ import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
 import exportClick from "../components/assets/exportPress.png";
 import { fetchNumberOfNotification } from "../actions/notificationAction";
+import { pageState } from '../actions/postActions';
 import { connect } from "react-redux";
 class ViewMembersExpiring extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class ViewMembersExpiring extends Component {
       timeLeftOnMembership: [],
       filterText: "",
       selectedValue: false,
-      dateValue: "Select Expiry Date",
+      dateValue: "",
       lastSize: 0,
       navbarState: false,
       height: window.innerHeight,
@@ -29,7 +30,10 @@ class ViewMembersExpiring extends Component {
       exportMsg: false,
       exceptionCaught: false,
       dateCheck: false,
-      exportResponse: ""
+      exportResponse: "",
+      dateErrorMgs: false,
+      successMgs: false,
+      AdvanceDateExist: false
     };
     this.getExpiringMembers = this.getExpiringMembers.bind(this);
     this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -79,6 +83,9 @@ class ViewMembersExpiring extends Component {
     this.updateDimensions();
     this.getExpiringMembers();
     this.getTimeLeft();
+  }
+  componentWillUnmount(){
+    this.props.pageState(10);
   }
   updateDimensions() {
     this.setState({
@@ -145,45 +152,62 @@ class ViewMembersExpiring extends Component {
   }
 
   updateMember(index) {
-    if (
-      this.state.dateCheck === true &&
-      this.state.array[index].AdvanceExpiryDate === null
-    ) {
-      let RequestObject = {
-        username: this.state.array[index].username,
-        EntryDate: this.getCurrentDate() + "T00:00:00",
-        memberExpiryDate: this.state.dateValue + "T00:00:00"
-      };
-      fetch(BASE_URL + "/api/Features/RenewMembership", {
-        method: "Post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(RequestObject)
-      })
-        .then(function(response) {
-          return response.json();
+    if (this.state.dateCheck === true) {
+      if (this.state.array[index].advanceExpiryDate === null) {
+        let RequestObject = {
+          username: this.state.array[index].username,
+          EntryDate: this.getCurrentDate() + "T00:00:00",
+          memberExpiryDate: this.state.dateValue + "T00:00:00"
+        };
+        fetch(BASE_URL + "/api/Features/RenewMembership", {
+          method: "Post",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(RequestObject)
         })
-        .then(data => {
-          this.getExpiringMembers();
-          this.setState({ filterText: "" });
-        })
-        .catch(err => {
-          /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-        });
+          .then(function(response) {
+            return response.json();
+          })
+          .then(data => {
+            this.getExpiringMembers();
+            this.setState({ filterText: "" });
+            setTimeout(() => {
+              this.setState({ successMgs: true });
+            }, 1000);
+          })
+          .catch(err => {
+            /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+          });
+      } else {
+        this.setState({ AdvanceDateExist: true });
+        this.setState({ dateErrorMgs: false });
+      }
+    } else {
+      if (this.state.array[index].advanceExpiryDate != null) {
+        this.setState({ dateErrorMgs: false });
+      } else {
+        this.setState({ dateErrorMgs: true });
+      }
     }
   }
 
   handleDateChange(event) {
+    this.setState({ dateValue: "" });
     this.setState({ dateValue: event.target.value });
-    var selectedText = document.getElementById("expdate").value;
-    var selectedDate = new Date(selectedText);
+    var selectedDate = new Date(event.target.value);
     var now = new Date();
-    if (selectedDate >= now) {
-      this.setState({ dateCheck: true });
+    if (selectedDate > now) {
+      this.setState({ dateCheck: true, dateErrorMgs: false });
+    } else if (
+      now.getFullYear() === selectedDate.getFullYear() &&
+      now.getDate() === selectedDate.getDate() &&
+      now.getMonth() === selectedDate.getMonth()
+    ) {
+      this.setState({ dateCheck: true, dateErrorMgs: false });
     } else {
-      this.setState({ dateCheck: false });
+      this.setState({ dateCheck: false, dateErrorMgs: true });
     }
   }
 
@@ -233,6 +257,15 @@ class ViewMembersExpiring extends Component {
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
+  };
+  onChangeArrow = () => {
+    this.setState({
+      dateValue: "",
+      AdvanceDateExist: false,
+      dateErrorMgs: false,
+      successMgs: false
+    });
+    this.forceUpdate();
   };
 
   extractEmails(text) {
@@ -288,7 +321,10 @@ class ViewMembersExpiring extends Component {
                     <td className="first-column">
                       <Collapsible
                         trigger={
-                          <div className="username-and-email">
+                          <div
+                            className="username-and-email"
+                            onClick={() => this.onChangeArrow()}
+                          >
                             <div className="view-members-username-email">
                               <b>{post.username}</b>
                               <div className="view-non-members-email">
@@ -331,7 +367,11 @@ class ViewMembersExpiring extends Component {
                                       Months
                                     </div>
                                   ) : (
-                                    <div>{"EXPIRED"}</div>
+                                    <div>
+                                      {post.advanceExpiryDate != null
+                                        ? "RENEWED"
+                                        : "EXPIRED"}
+                                    </div>
                                   )}
                                 </div>
                               </div>
@@ -339,23 +379,62 @@ class ViewMembersExpiring extends Component {
                           </div>
                         }
                       >
-                        <div>
-                          <input
-                            type="date"
-                            className="view-expiring-members-text-boxes"
-                            id="expdate"
-                            value={this.state.datevalue}
-                            onChange={this.handleDateChange}
-                          />
-                        </div>
-                        <div className="renew-container">
-                          <button
-                            className="view-exp-members"
-                            onClick={() => this.updateMember(index)}
-                          >
-                            RENEW
-                          </button>
-                        </div>
+                        {this.state.successMgs === false &&
+                        post.advanceExpiryDate == null ? (
+                          <div className="non-member-renew-date-container">
+                            <input
+                              type="date"
+                              className="view-expiring-members-text-boxes"
+                              id="expdate"
+                              value={this.state.datevalue}
+                              onChange={this.handleDateChange}
+                            />
+                          </div>
+                        ) : null}
+                        {this.state.AdvanceDateExist === true ? null : this
+                            .state.dateErrorMgs === true ? (
+                          <label className="non-member-renew-error-msg">
+                            Date selected is invalid
+                          </label>
+                        ) : null}
+                        {this.state.AdvanceDateExist === true ? (
+                          <label className="non-member-renew-error-msg">
+                            User already been renewed in advance
+                          </label>
+                        ) : null}
+                        {this.state.successMgs === false &&
+                        post.advanceExpiryDate == null ? (
+                          <div className="renew-container">
+                            <button
+                              className={
+                                this.state.dateValue === "" ||
+                                this.state.dateErrorMgs === true
+                                  ? "view-exp-members-inactive"
+                                  : "view-exp-members"
+                              }
+                              onClick={() => this.updateMember(index)}
+                            >
+                              RENEW
+                            </button>
+                          </div>
+                        ) : null}
+                        {this.state.successMgs === true ? (
+                          <div className="confirm-button-container">
+                            <button className="confriming-btn">
+                              MEMBERSHIP RENEWED{" "}
+                            </button>
+                          </div>
+                        ) : post.advanceExpiryDate != null ? (
+                          <div className="confirm-button-container">
+                            <button className="confriming-btn">
+                              MEMBERSHIP will be renewed on{" "}
+                              {post.advanceExpiryDate
+                                .substring(0, 10)
+                                .split("-")
+                                .join("/")}
+                            </button>
+                          </div>
+                        ) : null}
                       </Collapsible>
                     </td>
                   </tr>
@@ -464,5 +543,5 @@ class ViewMembersExpiring extends Component {
 
 export default connect(
   null,
-  { fetchNumberOfNotification }
+  { fetchNumberOfNotification ,pageState }
 )(ViewMembersExpiring);
