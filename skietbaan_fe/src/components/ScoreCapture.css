@@ -649,7 +649,6 @@ input[type=number] {
     font-family: helvetica;
 }
 
-}
 
 .scores-page-switch-top{
     width: 320px;
@@ -770,3 +769,4 @@ input[type=number] {
     color: #555555;
     font-weight: bold;
     padding-left: 11px;
+}
