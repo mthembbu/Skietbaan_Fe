@@ -101,7 +101,7 @@ class Groups extends Component {
     }
 
     const requestedObj = {
-      name: this.props.name.toLowerCase(),
+      name: this.props.name,
       users: this.state.newArray
     };
 
