@@ -102,17 +102,20 @@ class ScoreCapture extends Component {
   }
 
   competitionClicked(item, compname, maximumScore) {
-    toggleToggleBar();
-    this.setState({
-      somethingClicked: true,
-      currState: 2,
-      clicked: item,
-      competitionName: compname,
-      validCompetition: true,
-      maximumScore: maximumScore,
-      validScore: true
-    });
-    document.getElementById("scoreInput").value = "";
+    if(this.state.clicked == null)
+    {
+      toggleToggleBar();
+      this.setState({
+        somethingClicked: true,
+        currState: 2,
+        clicked: item,
+        competitionName: compname,
+        validCompetition: true,
+        maximumScore: maximumScore,
+        validScore: true
+      });
+      document.getElementById("scoreInput").value = "";
+    }
   }
 
   componentDidMount() {
@@ -288,8 +291,9 @@ class ScoreCapture extends Component {
           }
           if (this.state.navbarState === false) {
             this.toggleNavbar();
+            toggleHeader();
           }
-          toggleHeader();
+
           this.props.updateSelectedCompetition(this.state.competitionName);
         })
         .catch(err => {

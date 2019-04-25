@@ -135,7 +135,8 @@ class ViewScores extends Component {
             this.setState({
                 somethingClicked: !this.state.somethingClicked,
                 clicked: null,
-                cameraClicked: false
+                cameraClicked: false,
+                scoresList:[]
             });
         }
     }
