@@ -40,7 +40,8 @@ class ViewNonMembers extends Component {
       dateCheck: false,
       exportResponse: "",
       dateErrormsg: false,
-      userIndex:0
+      userIndex: 0,
+      done: false
     };
     this.getTimeLeft = this.getTimeLeft.bind(this);
     this.onChangeText = this.onChangeText.bind(this);
@@ -87,10 +88,10 @@ class ViewNonMembers extends Component {
     this.getNonMembers();
     this.getTimeLeft();
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.props.pageState(10);
   }
-  
+
   updateDimensions() {
     this.setState({
       height: window.innerHeight,
@@ -180,11 +181,9 @@ class ViewNonMembers extends Component {
   }
 
   updateMember(index) {
-
     if (this.state.membershipIds.indexOf(this.state.membershipsID) === -1) {
       if (this.state.membershipsID.length != "") {
         if (this.state.dateCheck === true) {
-          delete this.state.array[index].selected;
           let RequestObject = {
             username: this.state.array[index].username,
             memberID: this.state.membershipsID,
@@ -203,13 +202,16 @@ class ViewNonMembers extends Component {
               return response.json();
             })
             .then(data => {
-              this.getNonMembers();
+              this.setState({ done: true });
               this.setState({ filterText: "" });
               this.props.fetchNumberOfNotification(this.state.token);
             })
             .catch(err => {
               /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
             });
+            setTimeout(() => {
+              this.getNonMembers();
+              }, 2000);
         } else {
 
         }
@@ -220,6 +222,7 @@ class ViewNonMembers extends Component {
       /*the membership is already exist */
       this.setState({ emptyMemberNumber: true });
     }
+      this.setState({done:false})
   }
 
   onChangeText(event) {
@@ -257,13 +260,13 @@ class ViewNonMembers extends Component {
   }
 
   onChangeArrow = index => {
-    if(index!==this.state.userIndex){
+    if (index !== this.state.userIndex) {
       this.state.array[this.state.userIndex].selected = false;
       this.state.array[index].selected = !this.state.array[index].selected;
-    }else{
+    } else {
       this.state.array[index].selected = !this.state.array[index].selected;
     }
-    this.setState({ membershipsID: "",userIndex:index });
+    this.setState({ membershipsID: "", userIndex: index });
     this.forceUpdate();
   };
 
@@ -326,7 +329,7 @@ class ViewNonMembers extends Component {
                     <tr className="view-members-user" key={posts.id}>
                       <td className="first-column">
                         <Collapsible
-                        open={posts.selected}
+                          open={posts.selected}
                           trigger={
                             <div
                               className="username-and-email"
@@ -355,7 +358,9 @@ class ViewNonMembers extends Component {
                             </div>
                           }
                         >
+                      
                           <div className="membership-details">
+                          {this.state.done===false?
                             <div className="membership-container">
                               <input
                                 type="number"
@@ -371,29 +376,34 @@ class ViewNonMembers extends Component {
                                   Membership number already exists
                               </label>
                               )}
-                            </div>
-                            <div className="date-error-msg-cpntainer">
-                              <input
-                                type="date"
-                                className="view-non-members-date-box"
-                                id="expdate"
-                                required
-                                data-date-format="yyyy-mm-dd"
-                                value={this.state.datevalue}
-                                onChange={this.handleDateChange}
-                              />
-                              {this.state.dateErrormsg === true ?
-                                <label className="non-member-Date-error-msg">Date selected is invalid</label> : null}
-                            </div>
-
-                            <div>
-                              <button
-                                className={(this.state.dateValue != "" && this.state.membershipsID != "" && this.state.dateErrormsg===false) ? "view-non-members-confirm" : "view-non-members-confirm-inactive"}
-                                onClick={() => this.updateMember(index)}
-                              >
-                                CONFIRM MEMBERSHIP
+                            </div>:null}
+                            {this.state.done === false ?
+                              <div className="date-error-msg-cpntainer">
+                                <input
+                                  type="date"
+                                  className="view-non-members-date-box"
+                                  id="expdate"
+                                  required
+                                  data-date-format="yyyy-mm-dd"
+                                  value={this.state.datevalue}
+                                  onChange={this.handleDateChange}
+                                />
+                                {this.state.dateErrormsg === true ?
+                                  <label className="non-member-Date-error-msg">Date selected is invalid</label> : null}
+                              </div> : null}
+                            {this.state.done === false ?
+                              <div>
+                                <button
+                                  className={(this.state.dateValue != "" && this.state.membershipsID != "" && this.state.dateErrormsg === false) ? "view-non-members-confirm" : "view-non-members-confirm-inactive"}
+                                  onClick={() => this.updateMember(index)}
+                                >
+                                  CONFIRM MEMBERSHIP
                             </button>
-                            </div>
+                              </div> : null}
+                            {this.state.done === true ?
+                              <div className="user-is-a-member-msg-container">
+                                <label className="user-is-a-member-msg">MADE MEMBER SUCCESSFUL</label>
+                              </div> : null}
                           </div>
                         </Collapsible>
                       </td>
@@ -503,5 +513,5 @@ class ViewNonMembers extends Component {
 
 export default connect(
   null,
-  { fetchNumberOfNotification ,pageState }
+  { fetchNumberOfNotification, pageState }
 )(ViewNonMembers);

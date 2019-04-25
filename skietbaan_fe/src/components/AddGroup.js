@@ -28,7 +28,7 @@ class AddGroup extends Component {
       .then(res => res.json())
       .then(data =>
         this.setState({
-          groups: data.map(names => names.name)
+          groups: data.map(names => names.name.toLowerCase())
         })
       ).catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
