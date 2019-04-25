@@ -84,6 +84,12 @@ class CreateComp extends Component {
       return "55vh";
     }
   }
+
+  getContainerHeight(){
+    if(document.body.clientHeight < this.props.screenSize) return this.props.screenSize - document.body.clientHeight;
+    return document.body.clientHeight - 232;
+  }
+
   onClick() {
     history.push("/create");
   }
@@ -277,7 +283,7 @@ class CreateComp extends Component {
     return (
       <div
         className="create-comp-container"
-        style={{ maxHeight: this.getBodyHeight(), height: "fit-content" }}
+        style={{ height:  this.getContainerHeight() +"px"}}
       >
         <Form onSubmit={this.onSubmit}>
           <div className="containers-input">
@@ -558,7 +564,8 @@ CreateComp.propTypes = {
 };
 const mapStatesToprops = state => ({
   newComp: state.compOBJ.selectedComp,
-  isCreated: state.compOBJ.isCreated
+  isCreated: state.compOBJ.isCreated,
+  screenSize: state.posts.screenSize
 });
 
 export default connect(
