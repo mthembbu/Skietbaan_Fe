@@ -262,7 +262,6 @@ class CreateComp extends Component {
       this.props.fetchNumberOfNotification(this.state.token);
       const RData = [BronzeData, SilverData, GoldData];
       const requestedObj = { competition: compData, GetRequirements: RData };
-      console.log(requestedObj)
       await this.props.createComp(requestedObj);
       /** Checking whether the competition has been created or not*/
       if (this.props.isCreated === true || this.props.isCreated === false) {
