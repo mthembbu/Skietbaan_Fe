@@ -293,7 +293,7 @@ class ViewScores extends Component {
                 </div>
                 <div className={this.state.clicked === null ?
                     "hidden" : "score-list-container"}>
-                    {this.props.isAdmin === false ? (
+                    {this.props.isAdmin === false || this.state.scoresList.length !== 0  ? (
                         <div>{scoreListForUser}</div>
                     ) : (
                             <div className="view-scores-input-container">
