@@ -20,8 +20,8 @@ class StatisticsPage extends Component {
             selectedCompetitionRankToggle: 0,
             selectedGroup: -1,
             graphData: [],
-            groupsUsersMap: null,
-            competitionsUsersMap: null,
+            groupsUsersMap: {},
+            competitionsUsersMap: {},
             isFetchDone: false,
             isParticipantsFetchDone: false,
             apiResponse: "",
@@ -193,7 +193,7 @@ class StatisticsPage extends Component {
                     </button>
                 </div>
                 <label className="stats-groups-text">Groups</label>
-                <div className="stats-competitions-list-buttons-container">{this.renderGroupList()}</div>
+                <div className="stats-buttons-container">{this.renderGroupList()}</div>
                 <div className="scale-white-arrow-up-img" onClick={this.toggle}>
                     <img src={require("../resources/awardIcons/white-arrow-up-icon.png")}></img>
                 </div>
@@ -223,7 +223,7 @@ class StatisticsPage extends Component {
         return(
             <div>
                 <label className="stats-select-competition-text">Select Competition</label>
-                <div className="stats-competitions-list-buttons-container">{competitionList}</div>
+                <div className="stats-buttons-container">{competitionList}</div>
                 <div className="scale-white-arrow-up-img" onClick={this.toggle}>
                     <img src={require("../resources/awardIcons/white-arrow-up-icon.png")}></img>
                 </div>
@@ -270,7 +270,8 @@ class StatisticsPage extends Component {
             <div className="stats-container">
                 {this.state.exceptionCaught ? this.renderError("Something went wrong") :
                 this.state.errorOccured ? this.renderError(this.state.apiResponse) :
-                this.props.competitions.length > 0 && this.state.graphData.length > 0 ?
+                this.props.competitions.length > 0 && this.state.graphData.length > 0 && 
+                this.props.groups.length > 0 ?
                     <div>
                         <Collapse isOpened={this.state.collapse} fixedHeight={490}> 
                             <div className="stats-center-content stats-competition-select-rectangle-big">
@@ -368,6 +369,7 @@ class StatisticsPage extends Component {
                                     <Row>
                                         <Col>
                                             <div className="font-size-12px red-text padding-left-17px">
+                                                
                                                 {this.state.selectedGroup === -1 ? "Overall" :
                                                     this.props.groups[this.state.selectedGroup].name
                                                 }
@@ -376,7 +378,6 @@ class StatisticsPage extends Component {
                                                 <div className="scale-group-img">
                                                     <img src={require("../resources/awardIcons/groups-icon.png")}></img>
                                                 </div>
-                                                
                                                  {this.state.selectedGroup === -1 ? 
                                                     this.state.competitionsUsersMap
                                                         [this.props.competitions[this.state.selectedCompetition].name] :
@@ -427,7 +428,7 @@ class StatisticsPage extends Component {
                                             />
                                             <Bar 
                                                 dataKey="value" 
-                                                barSize = {this.getGraphData.length > 10 ? 8 : 30}
+                                                barSize = {data.length > 10 ? 8 : 30}
                                                 fontFamily="sans-serif"
                                             >
                                             {

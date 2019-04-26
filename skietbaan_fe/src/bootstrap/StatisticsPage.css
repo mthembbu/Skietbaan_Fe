@@ -19,6 +19,13 @@
     color: #FFFF;
 }
 
+.stats-buttons-container{
+    max-height: 184px;
+    overflow-y: overlay;
+    overflow-x: hidden;
+    margin-bottom: 20px;
+}
+
 .stats-competition-select-rectangle-big{
     border: 1px solid #BE0000;
     border-radius: 18px;
