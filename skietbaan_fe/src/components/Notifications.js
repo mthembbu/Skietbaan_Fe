@@ -150,7 +150,7 @@ class notification extends Component {
       if (this.state.secondToggle) {
         this.setState({ marked: false, count: 0 });
         this.props.notificationsArray[i].markedForDeletion = false;
-      } else  {
+      } else {
         this.setState({ marked: true, count: 1 });
         this.props.notificationsArray[i].markedForDeletion = true;
       }
@@ -168,8 +168,8 @@ class notification extends Component {
     });
   }
   componentWillMount() {
-		window.addEventListener('resize',  () => {
-			this.updateDimensions()
+    window.addEventListener("resize", () => {
+      this.updateDimensions();
       let Navbar = document.querySelector(".navbar-admin");
       if (this.state.heightOfClient === document.body.clientHeight) {
         Navbar.classList.remove("hidden");
@@ -177,7 +177,7 @@ class notification extends Component {
         Navbar.classList.add("hidden");
       }
     });
-	}
+  }
   getBodyHeight() {
     return this.state.height - 56;
   }
@@ -223,12 +223,13 @@ class notification extends Component {
   }
 
   speakerClick() {
-    this.selectAll();
     this.setState({
       adminToggle: !this.state.adminToggle,
-      toggle : false,
-      secondToggle: false
+      toggle: false,
+      secondToggle: false,
+      count: 0
     });
+    this.state.toggle = false
     if (this.state.adminToggle === false) {
       this.disableButton();
     }
@@ -261,20 +262,24 @@ class notification extends Component {
     document.getElementById("announcementButton").disabled = true;
     setTimeout(() => {
       this.setState({
-        adminToggle: false
+        adminToggle: false,
       });
       window.location = "/notify";
     }, 1000);
   };
 
-  togglenav = () => {
+  keyboardHideNav = () => {
     let Navbar = document.querySelector(".navbar-admin");
-    if (window.innerWidth < 575 && window.innerHeight < 800) {
-      if (Navbar != null) {
-        if (this.state.count !== 0) {
-          Navbar.classList.add("hidden");
+    if (Navbar != null) {
+      if (window.innerWidth < 575 && window.innerHeight < 800) {
+        if (this.props.screenSize === document.body.clientHeight) {
+          if (this.state.count === 0) {
+            Navbar.classList.remove("hidden");
+          } else {
+            Navbar.classList.add("hidden");
+          }
         } else {
-          Navbar.classList.remove("hidden");
+          Navbar.classList.add("hidden");
         }
       }
     }
@@ -284,7 +289,7 @@ class notification extends Component {
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
-    this.togglenav();
+    this.keyboardHideNav();
 
     let headingItems = (
       <div className="page-heading">
@@ -455,7 +460,7 @@ class notification extends Component {
         }
       >
         <tr className="tr-Class">
-        <td>
+          <td>
             <button
               onClick={() => this.onClick_cancel()}
               className="notifications-modal-cancel"
@@ -546,7 +551,8 @@ const mapStateToProps = state => ({
   awardsSelectedCompetition: state.awardsReducer.selectedCompetition,
   selectedButton: state.landingReducer.selectedLandingPage,
   loading: state.notificationOBJ.loading,
-  isAdmin: state.adminReducer.isAdmin
+  isAdmin: state.adminReducer.isAdmin,
+  screenSize: state.posts.screenSize
 });
 
 export default connect(
