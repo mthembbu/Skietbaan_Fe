@@ -7,7 +7,8 @@ import {
   FETCH_REQ,
   COMP_PAGE,
   UPDATE_REQ,
-  COMPETITION_DATA_LOADING
+  COMPETITION_DATA_LOADING,
+  NEWCOMPSTATE
 } from "./types";
 //fetch the array of competitions
 export const fetchComp = () => dispatch => {
@@ -143,6 +144,15 @@ export const compSelectedPages = page => {
     dispatch({
       type: COMP_PAGE,
       payload: page
+    });
+  };
+};
+
+export const newCompArrayState = (data) => {
+  return dispatch => {
+    dispatch({
+      type: NEWCOMPSTATE,
+      payload: data
     });
   };
 };

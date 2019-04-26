@@ -5,7 +5,7 @@ import {
   fetchParticipants,
   fetchRequirements,
   updateRequirements,
-  compSelectedPages
+  compSelectedPages,newCompArrayState
 } from "../actions/competition.action";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -41,7 +41,7 @@ class ViewComp extends Component {
       height: window.innerHeight,
       width: window.innerWidth,
       createPageBodyHeight: 500,
-      count: 0
+      count:0
     };
 
     this.changeStatus = this.changeStatus.bind(this);
@@ -255,25 +255,30 @@ class ViewComp extends Component {
     this.setState({ isLetterOfStatus: !this.state.isLetterOfStatus });
   }
   toggleHighlight = (event) => {
-    const index = this.props.compIds.indexOf(event);
-    if (this.props.compOBJ[index].highlighted === true) {
-      this.props.compOBJ[index].highlighted = false;
-      this.setState({ count: this.state.count - 1 });
-    } else {
-      this.props.compOBJ[index].highlighted = true;
-      this.setState({ count: this.state.count + 1 });
-    }
+		const index = this.props.compIds.indexOf(event);
+			if (this.props.compOBJ[index].highlighted === true) {
+				this.props.compOBJ[index].highlighted = false;
+				this.setState({ count: this.state.count - 1 });
+			} else {
+				this.props.compOBJ[index].highlighted = true;
+				this.setState({ count: this.state.count + 1 });
+			}
   };
-
-  deleteComp(){
+  
+async  deleteComp(){
     const newArray = [];
-    for (var i = 0; i < this.props.compOBJ.length; i++) {
-      if (this.props.compOBJ[i].highlighted === true) {
-        delete this.props.compOBJ[i].highlighted
-        delete this.props.compOBJ.id
-        newArray.push(this.props.compOBJ[i]);
+    const arr=[...this.props.compOBJ];
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].highlighted === true) {
+        delete arr[i].highlighted
+        delete arr.id
+        newArray.push(arr[i]);
+        arr.splice(i,1);
       }
     }
+  
+    this.props.newCompArrayState(arr);
+    this.setState({count:0})
      fetch(BASE_URL + "/api/Competition/delete", {
       method: "POST",
       headers: {
@@ -283,11 +288,12 @@ class ViewComp extends Component {
       body: JSON.stringify(newArray)
     })
     
-    .then(function (response) { this.props.fetchComp();})
+    .then(function (response) { })
       .then(function (data) { })
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
+      this.forceUpdate()
   }
   cancel = () => {
     for (var i = 0; i < this.props.compOBJ.length; i++) {
@@ -307,37 +313,6 @@ class ViewComp extends Component {
     }
   };
 
-  deleteComp() {
-    const newArray = [];
-    for (var i = 0; i < this.props.compOBJ.length; i++) {
-      if (this.props.compOBJ[i].highlighted === true) {
-        delete this.props.compOBJ[i].highlighted
-        delete this.props.compOBJ.id
-        newArray.push(this.props.compOBJ[i]);
-      }
-    }
-    fetch(BASE_URL + "/api/Competition/delete", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newArray)
-    })
-
-      .then(function (response) { this.props.fetchComp(); })
-      .then(function (data) { })
-      .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      });
-  }
-  cancel = () => {
-    for (var i = 0; i < this.props.compOBJ.length; i++) {
-      this.props.compOBJ[i].highlighted = false;
-    }
-    this.setState({ count: 0 });
-  };
-
   togglenav = () => {
     let Navbar = document.querySelector(".navbar-admin");
     if (window.innerWidth < 575 && window.innerHeight < 800) {
@@ -351,7 +326,6 @@ class ViewComp extends Component {
     }
   };
   render() {
-    console.log(this.props.binState)
     this.togglenav()
     const loader = (
       <div className="loader-formatting">
@@ -417,28 +391,28 @@ class ViewComp extends Component {
                             </div>
 
                             <div className="test3">
-                              {this.props.binState === 1 ?
-                                <div
+                            {this.props.binState === 1 ?
+                              <div
+                                className={
+                                  compVar.status
+                                    ? "activeButton"
+                                    : "inactiveButton"
+                                }
+                              >
+                                <Switch
+                                  color={"primary"}
                                   className={
                                     compVar.status
                                       ? "activeButton"
                                       : "inactiveButton"
                                   }
-                                >
-                                  <Switch
-                                    color={"primary"}
-                                    className={
-                                      compVar.status
-                                        ? "activeButton"
-                                        : "inactiveButton"
-                                    }
-                                    focus={true}
-                                    checked={compVar.status}
-                                    onClick={() =>
-                                      this.changeStatus(compVar.status, i)
-                                    }
-                                  />
-                                </div> : <img
+                                  focus={true}
+                                  checked={compVar.status}
+                                  onClick={() =>
+                                    this.changeStatus(compVar.status, i)
+                                  }
+                                /> 
+                              </div>: <img
                                   className="view-group-delete-box"
                                   src={compVar.highlighted === true ? deleteS : unmarked}
                                   alt=""
@@ -485,8 +459,11 @@ class ViewComp extends Component {
                                         <input
                                           className="bronze-accuracy-input-control"
                                           type="number"
+                                          min={1}
+                                          max={100}
                                           name="bronzeAccuracy"
                                           id="B_accuracy"
+                                          required
                                           autoComplete="off"
                                           autoCorrect="off"
                                           value={this.state.bronzeAccuracy}
@@ -501,6 +478,9 @@ class ViewComp extends Component {
                                           type="number"
                                           name="bronzeTotal"
                                           id="B_total"
+                                          required
+                                          min={1}
+                                          max={1000}
                                           autoComplete="off"
                                           autoCorrect="off"
                                           value={this.state.bronzeTotal}
@@ -523,6 +503,9 @@ class ViewComp extends Component {
                                           type="number"
                                           name="silverAccuracy"
                                           id="S_accuracy"
+                                          required
+                                          min="0"
+                                          max="100"
                                           autoComplete="off"
                                           autoCorrect="off"
                                           value={this.state.silverAccuracy}
@@ -537,6 +520,9 @@ class ViewComp extends Component {
                                           type="number"
                                           name="silverTotal"
                                           id="S_total"
+                                          required
+                                          min="0"
+                                          max="600"
                                           autoComplete="off"
                                           autoCorrect="off"
                                           value={this.state.silverTotal}
@@ -577,6 +563,8 @@ class ViewComp extends Component {
                                           name="goldTotal"
                                           id="G_total"
                                           required
+                                          min="0"
+                                          max="600"
                                           autoComplete="off"
                                           autoCorrect="off"
                                           value={this.state.goldTotal}
@@ -690,7 +678,7 @@ class ViewComp extends Component {
         {(this.props.binState === 2 && this.state.count != 0) ?
           <div className="view-group-confirm-panel">
             <button className="view-group-cancel" onClick={() => this.cancel()}>CANCEL</button>
-            <button className="view-group-delete-confirm" onClick={() => this.deleteComp()}>{this.state.count === this.props.compOBJ.length ? "DELETE ALL" : "DELETE"}</button>
+            <button className="view-group-delete-confirm" onClick={() => this.deleteComp()}>{this.state.count===this.props.compOBJ.length?"DELETE ALL":"DELETE"}</button>
           </div> : null}
       </div>
 
@@ -718,8 +706,8 @@ const mapStateToProps = state => ({
   requirements: state.compOBJ.requirements,
   load: state.compOBJ.load,
   isCreated: state.compOBJ.isCreated,
-  compIds: state.compOBJ.compIds,
-  binState: state.posts.binState
+  compIds:state.compOBJ.compIds,
+  binState:state.posts.binState
 });
 export default connect(
   mapStateToProps,
@@ -730,5 +718,6 @@ export default connect(
     fetchRequirements,
     updateRequirements,
     compSelectedPages,
+    newCompArrayState
   }
 )(ViewComp);

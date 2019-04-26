@@ -6,7 +6,8 @@ import {
   FETCH_REQ,
   UPDATE_REQ,
   COMP_PAGE,
-  COMPETITION_DATA_LOADING
+  COMPETITION_DATA_LOADING,
+  NEWCOMPSTATE
 } from "../actions/types";
 const initialState = {
   allComps: [],
@@ -38,6 +39,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         load: false
+      };
+      case NEWCOMPSTATE:
+      return {
+        ...state,
+        allComps: action.payload
       };
     case UPDATE_COMP_STATUS:
       return {
