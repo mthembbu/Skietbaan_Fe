@@ -224,14 +224,14 @@ export class createPages extends Component {
 		);
 
 		const noKeyBoardVisible = (
-			<Row className="row justify-content-center">
+			<Row className="justify-content-center">
 				<Col sm={8} className="createpage-bootstrap-col-center-container">
 					<div className="create-main-container">
 						{this.props.page === 0 || this.props.page === 10 || this.props.page === 5 ? (
 							<div className="create-nav-container">
 								<div className={this.state.selectedButton === 3 ? 'create-top-nav-members' : 'create-top-nav'}>
 									{/* top */}
-									<div class="page-name-bar">
+									<div className="page-name-bar">
 										<div className="gun-overlay-image">
 											<label className="label-for-score">CREATE</label>
 
