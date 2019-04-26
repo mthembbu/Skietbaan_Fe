@@ -243,24 +243,26 @@ class CreateComp extends Component {
         Status: true,
         MaximumScore: this.state.MaximumScore
       };
+
       const BronzeData = {
         standard: "Bronze",
-        accuracy: this.state.bronzeAccuracy,
-        total: this.state.bronzeTotal
+        accuracy: this.state.bronzeAccuracy === "" ? 0 : parseFloat(this.state.bronzeAccuracy),
+        total: this.state.bronzeTotal === "" ? 0 : parseFloat(this.state.bronzeTotal)
       };
       const SilverData = {
         standard: "Silver",
-        accuracy: this.state.silverAccuracy,
-        total: this.state.silverAccuracy
+        accuracy: this.state.silverAccuracy === "" ? 0 : parseFloat(this.state.silverAccuracy),
+        total: this.state.silverTotal === "" ? 0 : parseFloat(this.state.silverTotal)
       };
       const GoldData = {
         standard: "Gold",
-        accuracy: this.state.goldAccuracy,
-        total: this.state.goldTotal
+        accuracy: this.state.goldAccuracy === "" ? 0 : parseFloat(this.state.goldAccuracy),
+        total: this.state.goldTotal === "" ? 0 : parseFloat(this.state.goldTotal)
       };
       this.props.fetchNumberOfNotification(this.state.token);
       const RData = [BronzeData, SilverData, GoldData];
       const requestedObj = { competition: compData, GetRequirements: RData };
+      console.log(requestedObj)
       await this.props.createComp(requestedObj);
       /** Checking whether the competition has been created or not*/
       if (this.props.isCreated === true || this.props.isCreated === false) {
