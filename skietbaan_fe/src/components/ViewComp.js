@@ -267,13 +267,14 @@ class ViewComp extends Component {
   
 async  deleteComp(){
     const newArray = [];
-    const arr=[...this.props.compOBJ];
-    for (var i = 0; i < arr.length; i++) {
-      if (arr[i].highlighted === true) {
-        delete arr[i].highlighted
-        delete arr.id
-        newArray.push(arr[i]);
-        arr.splice(i,1);
+    const arr=[];
+    for (var i = 0; i < this.props.compOBJ.length; i++) {
+      if (this.props.compOBJ[i].highlighted === true) {
+        delete this.props.compOBJ[i].highlighted
+        newArray.push(this.props.compOBJ[i]);
+      }
+      else{ 
+        arr.push(this.props.compOBJ[i])
       }
     }
   
