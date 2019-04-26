@@ -201,6 +201,12 @@ class notification extends Component {
   }
 
   changeIcon() {
+    if (this.state.toggle === true) {
+      this.setState({ count: 0 });
+      for (var i = 0; i < this.props.notificationsArray.length; i++) {
+        this.props.notificationsArray[i].markedForDeletion = false;
+      }
+    }
     if (this.props.notificationsArray.length <= 0) {
       this.setState({
         toggle: false,
