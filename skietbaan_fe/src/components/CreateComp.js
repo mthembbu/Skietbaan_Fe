@@ -403,7 +403,7 @@ class CreateComp extends Component {
                       </Col>
                     </Row>
                     <Row className="bronze-row">
-                      <Col xs={4} md={4}>
+                      <Col xs={4} md={4} className="targeter-class">
                         <div className="bronze-label" >Bronze Award:</div>
                       </Col>
                       <Col xs={4} md={4}>
@@ -444,7 +444,7 @@ class CreateComp extends Component {
                     </Row>
 
                     <Row className="silver-row">
-                      <Col xs={4} md={4}>
+                      <Col xs={4} md={4} className="targeter-class">
                         <div className="silver-label">Silver Award:</div>
                       </Col>
                       <Col xs={4} md={4}>
@@ -485,7 +485,7 @@ class CreateComp extends Component {
                     </Row>
 
                     <Row>
-                      <Col xs={4} md={4}>
+                      <Col xs={4} md={4} className="targeter-class">
                         <div className="gold-label">Gold Award:</div>
                       </Col>
                       <Col xs={4} md={4}>
