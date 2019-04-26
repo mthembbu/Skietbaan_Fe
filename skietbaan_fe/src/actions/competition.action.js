@@ -11,13 +11,19 @@ import {
 } from "./types";
 //fetch the array of competitions
 export const fetchComp = () => dispatch => {
+  const arr=[]
   dispatch({ type: COMPETITION_DATA_LOADING });
   fetch(BASE_URL + "/api/Competition/all")
     .then(res => res.json())
     .then(compData => {
+      const newComp = compData.map(data=>{
+        data.highlighted=false;
+        arr.push(data.id);
+      });
       dispatch({
         type: FETCH_COMP,
-        payload: compData
+        payload: compData,
+        pay:arr
       });
     })
     .catch(err => {

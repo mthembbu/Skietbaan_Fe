@@ -211,7 +211,6 @@ class Groups extends Component {
   }
   render() {
     this.keyboardHideNav();
-
     const postitems = (
       <div className="check" style={{ height: this.getBodyHeight() }}>
         {this.state.posts.length === 0 ? null : (
