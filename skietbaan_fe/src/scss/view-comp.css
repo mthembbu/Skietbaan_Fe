@@ -152,6 +152,7 @@
 	padding-top: 11px;
 	padding-bottom: 11px;
 	width: 75%;
+	cursor: pointer;
 }
 
 .toggled-td-col{
