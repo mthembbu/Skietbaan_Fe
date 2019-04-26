@@ -21,7 +21,9 @@ class AddMembersGroup extends Component {
       count: 0,
       check: "Select all",
       height: window.innerHeight,
-      width: window.innerWidth
+      width: window.innerWidth,
+      heightOfClient: document.body.clientHeight
+
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.onBack = this.onBack.bind(this);
@@ -43,7 +45,7 @@ class AddMembersGroup extends Component {
     if (this.state.width < 575) {
       return this.state.height - 225 + "px";
     } else {
-      return "57vh";
+      return "64vh";
     }
   }
   updateDimensions() {
@@ -102,18 +104,6 @@ class AddMembersGroup extends Component {
     this.props.pageState(1);
   }
 
-  togglenav = () => {
-    let Navbar = document.querySelector(".navbar-admin");
-    if (window.innerWidth < 575 && window.innerHeight < 800) {
-      if (Navbar != null) {
-        if (this.state.count !== 0) {
-          Navbar.classList.add("hidden");
-        } else {
-          Navbar.classList.remove("hidden");
-        }
-      }
-    }
-  };
 
   extractEmails(text) {
     if (this.state.filterText[0] === "@") {
@@ -163,9 +153,27 @@ class AddMembersGroup extends Component {
       this.setState({ check: "Select all" });
     }
   }
+  keyboardHideNav = ()=>{
+    let Navbar = document.querySelector(".navbar-admin");
+    if(Navbar!=null){
+      if (window.innerWidth < 575 && window.innerHeight < 800) {
+        if (this.props.screenSize === document.body.clientHeight) {
+          if(this.state.count === 0){
+            Navbar.classList.remove("hidden");
+          }
+          else{
+            Navbar.classList.add("hidden"); 
+          }          
+        } else {
+          Navbar.classList.add("hidden");
+        }
+      }
+    }
+  }
+
 
   render() {
-    this.togglenav();
+    this.keyboardHideNav();
     const postitems = (
       <div
         className="adding-check-edit"
@@ -317,7 +325,8 @@ const mapStateToProps = state => ({
   name: state.posts.groupName,
   existing: state.posts.existing,
   memberIds: state.posts.memberIds,
-  loader: state.posts.loader
+  loader: state.posts.loader,
+  screenSize: state.posts.screenSize
 });
 export default withRouter(
   connect(

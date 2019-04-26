@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getName, pageState } from "../actions/postActions";
+import { getName, pageState,setScreenSize } from "../actions/postActions";
 import history from "./history";
 import "./add.css";
 import { BASE_URL } from "../actions/types";
@@ -24,6 +24,7 @@ class AddGroup extends Component {
   }
 
   UNSAFE_componentWillMount() {
+    this.props.setScreenSize(document.body.clientHeight);
     fetch(BASE_URL + "/api/groups")
       .then(res => res.json())
       .then(data =>
@@ -33,6 +34,10 @@ class AddGroup extends Component {
       ).catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
+  }
+
+  componentWillMount(){
+    this.props.setScreenSize(document.body.clientHeight);
   }
 
   onChange(e) {
@@ -99,5 +104,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getName, pageState }
+  { getName, pageState,setScreenSize }
 )(AddGroup);

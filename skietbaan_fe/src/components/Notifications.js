@@ -145,11 +145,12 @@ class notification extends Component {
   };
 
   selectAll = () => {
+    this.secondIconChange();
     for (var i = 0; i < this.props.notificationsArray.length; i++) {
-      if (this.props.notificationsArray[i].markedForDeletion === true) {
+      if (this.state.secondToggle) {
         this.setState({ marked: false, count: 0 });
         this.props.notificationsArray[i].markedForDeletion = false;
-      } else if (this.props.notificationsArray[i].markedForDeletion === false) {
+      } else  {
         this.setState({ marked: true, count: 1 });
         this.props.notificationsArray[i].markedForDeletion = true;
       }
@@ -167,16 +168,16 @@ class notification extends Component {
     });
   }
   componentWillMount() {
-    window.addEventListener("resize", () => {
+		window.addEventListener('resize',  () => {
+			this.updateDimensions()
       let Navbar = document.querySelector(".navbar-admin");
       if (this.state.heightOfClient === document.body.clientHeight) {
         Navbar.classList.remove("hidden");
       } else {
         Navbar.classList.add("hidden");
       }
-      this.updateDimensions();
     });
-  }
+	}
   getBodyHeight() {
     return this.state.height - 56;
   }
@@ -202,11 +203,15 @@ class notification extends Component {
   changeIcon() {
     if (this.props.notificationsArray.length <= 0) {
       this.setState({
-        toggle: false
+        toggle: false,
+        adminToggle: false,
+        secondToggle: false
       });
     } else if (this.props.notificationsArray.length > 0) {
       this.setState({
-        toggle: !this.state.toggle
+        toggle: !this.state.toggle,
+        adminToggle: false,
+        secondToggle: false
       });
     }
   }
@@ -218,8 +223,11 @@ class notification extends Component {
   }
 
   speakerClick() {
+    this.selectAll();
     this.setState({
-      adminToggle: !this.state.adminToggle
+      adminToggle: !this.state.adminToggle,
+      toggle : false,
+      secondToggle: false
     });
     if (this.state.adminToggle === false) {
       this.disableButton();
@@ -288,7 +296,7 @@ class notification extends Component {
         <div className="notification-icon-spacing">
           <img
             src={
-              this.state.toggle
+              this.state.toggle && !this.state.secondToggle
                 ? whiteSelectAll
                 : this.state.secondToggle
                 ? blackSelectAll
@@ -298,6 +306,7 @@ class notification extends Component {
             className="select-all"
             alt=""
           />
+
           <img
             src={this.state.toggle ? deleteIconChange : deleteIcon}
             onClick={() => this.changeIcon()}
@@ -322,12 +331,13 @@ class notification extends Component {
             }
             onClick={() => this.speakerClick()}
             className="admin-notification-images"
+            alt=""
           />
         </div>
         <div className="admin-notification-icon-spacing">
           <img
             src={
-              this.state.toggle
+              this.state.toggle && !this.state.secondToggle
                 ? whiteSelectAll
                 : this.state.secondToggle
                 ? blackSelectAll
@@ -445,20 +455,20 @@ class notification extends Component {
         }
       >
         <tr className="tr-Class">
+        <td>
+            <button
+              onClick={() => this.onClick_cancel()}
+              className="notifications-modal-cancel"
+            >
+              CANCEL
+            </button>
+          </td>
           <td>
             <button
               className="notifications-modal-confirm"
               onClick={this.onDelete}
             >
               {modalText}
-            </button>
-          </td>
-          <td>
-            <button
-              onClick={() => this.onClick_cancel()}
-              className="notifications-modal-cancel"
-            >
-              CANCEL
             </button>
           </td>
         </tr>

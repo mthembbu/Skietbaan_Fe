@@ -49,7 +49,7 @@ class UserProfile extends Component {
         })
         .then(res => res.json())
         .then(_response => {
-            if(this._isMounted && typeof _response != "string"){
+            if(this._isMounted && typeof _response !== "string"){
                 _response.forEach((element, index) => {
                     this.mapCompetitionNameToIndex[element.competitionName] = index;
                 })

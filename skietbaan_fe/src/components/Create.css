@@ -2,7 +2,6 @@
 
   .components-create {
     padding-top: 2px;
-    background-color: #f6f6f6;
     margin-top: 15px;
   }
 
@@ -207,13 +206,13 @@
   }
   .create-nav-container{
     background: transparent !important;
+    height: 150px !important;
   }
   .create-nav-container .create-top-nav{
     background: transparent;
   }
   .create-nav-container .create-top-nav-members{
     background: transparent;
-    position: absolute;
   }
   
   .create-top-nav{
@@ -245,7 +244,7 @@
 }
 
 .create-nav-container {
-  height: 184px;
+  height: 173px;
 }
 
 .create-all-menu {

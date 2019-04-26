@@ -27,7 +27,6 @@
 	border: 1px solid #979797;
 	padding-left: 19px;
 	font-weight: bold;
-	background: #fdfdfd;
 	color: #000000;
 }
 .errorMsg {
@@ -40,7 +39,6 @@
 }
 
 .page {
-	background: #F6F6F6;
 	text-align: center;
     width: 100%;
 }
@@ -87,7 +85,7 @@
 	background: #BE0000;
 	color: white;
 	font-size: 16px;
-	margin-top: 200px;
+	margin-top: 100px;
 }
 .add {
 	bottom: 92px;
@@ -98,7 +96,7 @@
 	background: transparent;
 	color: #D9D9D9;
 	font-size: 16px;
-	margin-top: 200px;
+	margin-top: 100px;
 }
 
 .group-label {
@@ -116,10 +114,9 @@
 @media screen and (max-width:576px){
 	.add-group-main{
 		overflow-y: overlay;
-		background-color: #f6f6f6f6;
+		margin-top: 38px;
 	}
 }
 .add-group-main{
 	width: 100%;
-	background-color: #f6f6f6;
 }

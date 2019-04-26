@@ -163,7 +163,6 @@
 }
 
 .page-contents {
-	background-color: #F6F6F6;
 	padding: 5%;
 	z-index: 1;
     overflow-y: overlay;
@@ -268,7 +267,8 @@
 	letter-spacing: 0.13px;
 	line-height: 16px;
 	padding: 0px;
-	text-align: left;
+	text-align: center;
+	padding-top: 14px;
 }
 
 .bronze-total-input-control {
@@ -298,7 +298,8 @@
 	letter-spacing: 0.13px;
 	line-height: 16px;
 	padding: 0px;
-	text-align: left;
+	padding-top: 14px;
+	text-align: center;
 }
 .silver-accuracy-input-control {
 	width: 95px;
@@ -338,14 +339,14 @@
 
 .gold-label {
 	height: 100%;
+	text-align: center;
+    padding-top: 14px;
 	color: rgba(0, 0, 0, 0.6);
 	font-family: Helvetica;
 	font-size: 14px;
 	font-weight: bold;
 	letter-spacing: 0.13px;
 	line-height: 16px;
-	padding: 0px;
-	text-align: left;
 }
 
 .shots-label {
@@ -525,15 +526,30 @@
 	padding-right: 5%;
 	padding-top: 5px;
 }
+
+.targeter-class{display: unset}
 /*media queries*/
 @media only screen and (max-width: 575px) {
 	/*mobile*/
    .page-contents {
 	height: 62vh !important;
 	margin-top: -3vh;
-	background-color: #F6F6F6;
 	padding: 2%;
 	margin-top:10px;
 	padding-bottom: 15px;
    }
+}
+
+@media only screen and (min-width: 575px){
+	.targeter-class{
+		padding-left: 0px !important;
+		padding-right: 0px !important;
+	}
+}
+
+@media only screen and (max-width: 421px){
+	.targeter-class{
+		padding-left: 0px !important;
+		padding-right: 0px !important;
+	}
 }

@@ -17,7 +17,8 @@ import {
   UPDATE_SELECTED_COMPETITION,
   UPDATE_SELECTED_GROUP,
   GROUP_DATA_LOADING,
-  BINSTATE
+  BINSTATE,
+  SCREEN_SIZE
 } from "./types";
 
 /** The method to feth the already available data for posts*/
@@ -251,3 +252,12 @@ export const binStateFunc = (num) => {
     });
   };
 };
+
+export const setScreenSize = (size) =>{
+  return dispatch => {
+    dispatch({
+      type: SCREEN_SIZE,
+      payload: size
+    });
+  }
+}
