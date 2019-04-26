@@ -303,7 +303,7 @@ class ViewNonMembers extends Component {
       });
     }
     const postItems = (
-      <div>
+      <div  style={{ height: this.getBodyHeight() }}>
         {this.state.array.length === 0 && this.state.getData === true ? (
           <div className="view-non-error-container">
             <label className="view-non-error-msg">
@@ -415,7 +415,8 @@ class ViewNonMembers extends Component {
       </div>
     );
     return (
-      <div className="centre-view-member">
+      <div className="centre-view-member"
+      style={{ height: this.getBodyHeight() }}>
         <div className="username-search">
           <Row>
             <Col>
@@ -452,6 +453,7 @@ class ViewNonMembers extends Component {
               ? "loader-container-members"
               : "hidden"
           }
+          style={{ height: this.getBodyHeight() }}
         >
           <div
             className={
@@ -482,7 +484,10 @@ class ViewNonMembers extends Component {
         </div>
         {this.state.exportMsg === false ? (
           <div
-            className="table-search-members"
+            
+            className={this.state.getData === false && this.state.exceptionCaught === false
+              ? "hidden"
+              : "table-search-members"}
             style={{ height: this.getBodyHeight() }}
           >
             {postItems}

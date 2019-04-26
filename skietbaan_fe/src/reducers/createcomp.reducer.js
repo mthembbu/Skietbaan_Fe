@@ -6,7 +6,8 @@ import {
   FETCH_REQ,
   UPDATE_REQ,
   COMP_PAGE,
-  COMPETITION_DATA_LOADING
+  COMPETITION_DATA_LOADING,
+  NEWCOMPSTATE
 } from "../actions/types";
 const initialState = {
   allComps: [],
@@ -16,7 +17,8 @@ const initialState = {
   dict: {},
   compSelectedPage: 1,
   isCreated: false,
-  load: null
+  load: null,
+  compIds:[]
 };
 /** A function to detect the state change*/
 export default function(state = initialState, action) {
@@ -27,15 +29,21 @@ export default function(state = initialState, action) {
         isCreated: action.payload
       };
     case FETCH_COMP:
-      return {
-        ...state,
-        allComps: action.payload,
-        load: true
-      };
+    return {
+      ...state,
+      allComps: action.payload,
+      compIds:action.pay,
+      load: true
+    };
     case COMPETITION_DATA_LOADING:
       return {
         ...state,
         load: false
+      };
+      case NEWCOMPSTATE:
+      return {
+        ...state,
+        allComps: action.payload
       };
     case UPDATE_COMP_STATUS:
       return {

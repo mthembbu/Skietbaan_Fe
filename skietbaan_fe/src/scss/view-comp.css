@@ -152,6 +152,7 @@
 	padding-top: 11px;
 	padding-bottom: 11px;
 	width: 75%;
+	cursor: pointer;
 }
 
 .toggled-td-col{
@@ -458,6 +459,7 @@
 }
 .table-competition-row table tr .td-col div {
 	display: inline-flex;
+	justify-content: center;
 	width: 100%;
 }
 .table-competition-row table tr .td-col div .test1 {
@@ -487,6 +489,9 @@
 }
 .table-competition-row table tr .td-col div .test3 {
 	width: 20%;
+	display: flex;
+	justify-content: center;
+
 }
 
 /*letter of good standing csss*/

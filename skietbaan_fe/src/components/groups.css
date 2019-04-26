@@ -436,7 +436,7 @@
 	margin: 20px 40px 56px 28px;
 }
 .view-the-main {
-	margin: 20px 40px 56px 28px;
+	margin: 20px 20px 56px 20px;
 }
 
 .group-name {
@@ -463,6 +463,7 @@
 	font-weight: lighter;
 	color: #6f839e;
 	background: white;
+	cursor: pointer;
 }
 
 .first-row {
@@ -602,7 +603,7 @@
 		margin-top: -48px;
 	}
 	.group-navBar-container {
-		margin-top: 56px;
+		margin-top: 46px;
 	}
 	.the-nav-bar-edit {
 		position: unset;

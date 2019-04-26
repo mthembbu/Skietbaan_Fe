@@ -15,7 +15,7 @@
 
 .loader-container-members {
 	padding-top: 12px;
-	height: 100%;
+	height: fit-content;
 }
 
 .loading-message-members {
@@ -299,6 +299,7 @@
 	font-size: 16px;
 	height: 55px;
 	padding-left: 20px;
+	cursor: pointer;
 }
 
 .view-members-exp-username-and-email {
@@ -445,7 +446,9 @@
 .export-icon {
 	height: 25px;
 	width: 25px;
+	cursor: pointer;
 }
+
 .export-col-container {
 	margin: auto;
 	text-align: right;
