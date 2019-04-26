@@ -38,7 +38,6 @@ class AddGroup extends Component {
 
   componentWillMount(){
     this.props.setScreenSize(document.body.clientHeight);
-    console.log(document.body.clientHeight)
   }
 
   onChange(e) {

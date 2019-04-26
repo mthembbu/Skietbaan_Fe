@@ -347,7 +347,6 @@
 	font-weight: bold;
 	letter-spacing: 0.13px;
 	line-height: 16px;
-	padding: 0px;
 }
 
 .shots-label {
@@ -527,6 +526,8 @@
 	padding-right: 5%;
 	padding-top: 5px;
 }
+
+.targeter-class{display: unset}
 /*media queries*/
 @media only screen and (max-width: 575px) {
 	/*mobile*/
@@ -537,16 +538,18 @@
 	margin-top:10px;
 	padding-bottom: 15px;
    }
+}
 
-   .gold-label{
-	   text-align: left;
-   }
+@media only screen and (min-width: 575px){
+	.targeter-class{
+		padding-left: 0px !important;
+		padding-right: 0px !important;
+	}
+}
 
-   .silver-label{
-	   text-align: left;
-   }
-
-   .bronze-label{
-	   text-align: left;
-   }
+@media only screen and (max-width: 421px){
+	.targeter-class{
+		padding-left: 0px !important;
+		padding-right: 0px !important;
+	}
 }
