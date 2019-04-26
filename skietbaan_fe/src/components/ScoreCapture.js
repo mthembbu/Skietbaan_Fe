@@ -287,7 +287,7 @@ class search extends Component {
         Longitude: this.state.longitude,
         Latitude: this.state.latitude
       };
-      
+
       fetch(BASE_URL + "/api/Scores", {
         method: "post",
         headers: {
@@ -298,12 +298,12 @@ class search extends Component {
       })
         .then(response => response.json())
         .then(data => {
-          if (data.indexOf("Score Added Successfully") > -1){
+          if (data.indexOf("Score Added Successfully") > -1) {
             this.setState({
               scoreSaved: true,
               currState: 5
             });
-            
+
           }
           if (this.state.navbarState === false) {
             this.toggleNavbar();
@@ -333,7 +333,7 @@ class search extends Component {
         body: JSON.stringify(RequestObject)
       })
         .then(response => response.json())
-        .then(data =>{
+        .then(data => {
           this.setState({
             scoreSaved: true,
             currState: 5
@@ -514,15 +514,15 @@ class search extends Component {
                     : "page-content"
               }
             >
+              <div className={this.state.scoreSaved === true ?
+                "loading-container-add-score padding-top-160" : "hidden "}>
                 <div className={this.state.scoreSaved === true ?
-                  "loading-container-add-score padding-top-160" : "hidden "}>
-                  <div className={this.state.scoreSaved === true?
-                    "loader" : "hidden"} />
-                  <div className={this.state.scoreSaved === true ?
-                    "target-loader-image" : "hidden"} />
-                  <div className={this.state.scoreSaved === true ?
-                    "loading-message" : "hidden "}>Loading...</div>
-                </div>
+                  "loader" : "hidden"} />
+                <div className={this.state.scoreSaved === true ?
+                  "target-loader-image" : "hidden"} />
+                <div className={this.state.scoreSaved === true ?
+                  "loading-message" : "hidden "}>Loading...</div>
+              </div>
               <div
                 className={stateOne || this.state.scoreSaved ? "hidden" : ""}
               >
@@ -540,36 +540,39 @@ class search extends Component {
                   <div className={this.state.getData === false && this.state.exceptionCaught === false ?
                     "loading-message" : "hidden "}>Loading...</div>
                 </div>
-                <div className="add-score-competition-container">
-                  {competitionItem}
+                <div className="scrollbar">
+                  <div className="add-score-competition-container">
+                    {competitionItem}
 
-                  <div
-                    className={
-                      this.state.somethingClicked === false
-                        ? "hidden"
-                        : "label-score"
-                    }
-                  >
-                    <input
-                      type="number"
-                      id="scoreInput"
-                      min="0"
-                      step="1"
-                      autoComplete="off"
-                      name="score"
-                      pattern="\d*"
-                      onClick={() => this.toggleNavbar}
-                      className="score"
-                      onChange={this.handleScore}
-                      placeholder="Enter Score"
-                    />
-                    <div className="error-message-container">
-                      <div
-                        className={
-                          this.state.validScore ? "hidden" : "invalid-score"
-                        }
-                      >
-                        Enter Valid Score. Max: {this.state.maximumScore}
+                    <div
+
+                      className={
+                        this.state.somethingClicked === false
+                          ? "hidden"
+                          : "label-score"
+                      }
+                    >
+                      <input
+                        type="number"
+                        id="scoreInput"
+                        min="0"
+                        step="1"
+                        autoComplete="off"
+                        name="score"
+                        pattern="\d*"
+                        onClick={() => this.toggleNavbar}
+                        className="score"
+                        onChange={this.handleScore}
+                        placeholder="Enter Score"
+                      />
+                      <div className="error-message-container">
+                        <div
+                          className={
+                            this.state.validScore ? "hidden" : "invalid-score"
+                          }
+                        >
+                          Enter Valid Score. Max: {this.state.maximumScore}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -657,7 +660,7 @@ class search extends Component {
                     width="310"
                     height="310"
                     className="video"
-                    playsInline = {true}
+                    playsInline={true}
                     autoPlay
                   />
                 </div>

@@ -7,20 +7,19 @@
     color: black;
     font-size: 16px;
     font-weight: bold;
-    overflow-y: overlay;
     padding-left: 3px;
+}
+
+.scrollbar{
     max-height: 60vh;
     padding-bottom: 56px;
+    overflow-y: overlay;
 }
 
 @media screen and (max-width: 576px){
     ::-webkit-scrollbar { 
         display: none !important; 
     }
-}
-
-.add-score-competition-container::-webkit-scrollbar { 
-    display: none !important; 
 }
 
 .competition-item{
