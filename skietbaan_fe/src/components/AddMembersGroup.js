@@ -306,12 +306,12 @@ class AddMembersGroup extends Component {
         {this.state.count === 0 ? null : (
           <div className="bottom-panel">
             <div className="bpanel">
-              <button className="add-member-confirm-group" onClick={this.addUsers}>
-                ADD USERS
+              <button  className="add-member-cancel-delete" onClick={() => this.cancel()}>
+                 CANCEL
               </button>
 
-              <button className="add-member-cancel-delete" onClick={() => this.cancel()}>
-                CANCEL
+              <button className="add-member-confirm-group" onClick={this.addUsers}>
+              ADD USERS
               </button>
             </div>
           </div>
