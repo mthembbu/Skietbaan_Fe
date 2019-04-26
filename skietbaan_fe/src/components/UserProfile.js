@@ -277,7 +277,7 @@ class UserProfile extends Component {
 
     renderError(errorMessage){
         return(
-            <div className="no-competition-border">
+            <div className="no-competition-border height-77px">
                 <label className="no-competition">{errorMessage}</label>
             </div>
         )

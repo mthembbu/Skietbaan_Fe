@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import {ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Cell, CartesianGrid, Tooltip, Legend} from 'recharts'
+import {ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Cell, CartesianGrid, 
+    Tooltip, Legend, LineChart, Line, ComposedChart} from 'recharts'
 import "../bootstrap/StatisticsPage.css";
 import { Row, Col } from "react-bootstrap";
 import { Collapse } from "react-collapse";
 import { connect } from "react-redux";
 import { BASE_URL } from "../actions/types.js";
 import { getCookie } from "./cookie.js";
+import {fetchComp} from "../actions/competition.action";
+import {fetchGroups} from "../actions/postActions";
 
 class StatisticsPage extends Component {
     constructor(props){
@@ -32,6 +35,8 @@ class StatisticsPage extends Component {
 
     componentDidMount(){
         this._isMounted = true;
+        this.props.fetchComp();
+        this.props.fetchGroups();
         fetch(BASE_URL + "/api/statistics/" + getCookie("token"), {
             method: "GET",
             headers: {
@@ -93,14 +98,9 @@ class StatisticsPage extends Component {
         })
     }
 
-    renderLoader(){
-        return(
-            <div className={this.state.isFetchDone ? "hidden" : "loader-container-profile"}>
-                <div className={this.state.isFetchDone ? "hidden" : "loader"}></div>
-                <div className={this.state.isFetchDone ? "hidden" : "target-loader-image"}></div>
-                <div className={this.state.isFetchDone ? "hidden" : "loading-message-profile"}>Loading...</div>
-            </div>
-        )
+    IsParticipating(competitionName){
+        if(this.mapCompNameToIndex[competitionName] === undefined) return false;
+        return true;
     }
 
     setSelectedCompetition(index){
@@ -118,31 +118,10 @@ class StatisticsPage extends Component {
                              "stats-competition-button-text-active stats-competition-button-text stats-button-style-active" :
                              "stats-competition-button-text stats-competition-button-text stats-button-style-inactive"}
                              onClick={() => this.setSelectedCompetition(index)}>
-                            {element.label}
+                            {element.name}
                         </button>
                     </Col>
                 </Row>
-            </div>
-        )
-    }
-
-    renderCompetitionList(){
-        let renderArray = []
-        this.props.competitions.forEach((element, index) => {
-            renderArray.push(this.selectCompetition(element, index))
-        })
-
-        return renderArray;
-    }
-
-    renderCompetitionToggle(competitionList){
-        return(
-            <div>
-                <label className="stats-select-competition-text">Select Competition</label>
-                <div className="stats-competitions-list-buttons-container">{competitionList}</div>
-                <div className="scale-white-arrow-up-img" onClick={this.toggle}>
-                    <img src={require("../resources/awardIcons/white-arrow-up-icon.png")}></img>
-                </div>
             </div>
         )
     }
@@ -162,7 +141,7 @@ class StatisticsPage extends Component {
                              "stats-competition-button-text-active stats-competition-button-text stats-button-style-active" :
                              "stats-competition-button-text stats-competition-button-text stats-button-style-inactive"}
                              onClick={() => this.setSelectedGroup(index)}>
-                            {element.label}
+                            {element.name}
                         </button>
                     </Col>
                 </Row>
@@ -170,13 +149,35 @@ class StatisticsPage extends Component {
         )
     }
 
-    renderGroupList(){
-        let renderArray = []
-        this.props.groups.forEach((element, index) => {
-            renderArray.push(this.selectGroup(element, index))
+    setSelectedCompetitionRankingToggle(selected){
+        this.setState({
+            selectedCompetitionRankToggle: selected
         })
+    }
 
-        return renderArray;
+    getGraphData(){
+        var compName = this.props.competitions[this.state.selectedCompetition].name
+        return this.state.graphData[this.mapCompNameToIndex[compName]].data;
+    }
+
+    getMaxScore(){
+        var compName = this.props.competitions[this.state.selectedCompetition].name
+        return this.state.graphData[this.mapCompNameToIndex[compName]].competitionMaximum;
+    }
+
+    getAverage(){
+        var compName = this.props.competitions[this.state.selectedCompetition].name;
+        return this.state.graphData[this.mapCompNameToIndex[compName]].average;
+    }
+
+    getMaximumValue(){
+        var compName = this.props.competitions[this.state.selectedCompetition].name;
+        return this.state.graphData[this.mapCompNameToIndex[compName]].max;
+    }
+
+    getMinimumValue(){
+        var compName = this.props.competitions[this.state.selectedCompetition].name;
+        return this.state.graphData[this.mapCompNameToIndex[compName]].min;
     }
 
     renderRankToggle(){
@@ -200,35 +201,54 @@ class StatisticsPage extends Component {
         )
     }
 
-    setSelectedCompetitionRankingToggle(selected){
-        this.setState({
-            selectedCompetitionRankToggle: selected
+    renderError(errorMessage){
+        return(
+            <div className={errorMessage.startsWith("You") ? "no-competition-border-big" : "no-competition-border"}>
+                <label className={errorMessage.startsWith("You") ? "no-competition-big" : "no-competition"}>
+                    {errorMessage}</label>
+            </div>
+        )
+    }
+
+    renderGroupList(){
+        let renderArray = []
+        this.props.groups.forEach((element, index) => {
+            renderArray.push(this.selectGroup(element, index))
         })
+
+        return renderArray;
     }
 
-    getGraphData(){
-        var compName = this.props.competitions[this.state.selectedCompetition].label
-        return this.state.graphData[this.mapCompNameToIndex[compName]].data;
+    renderCompetitionToggle(competitionList){
+        return(
+            <div>
+                <label className="stats-select-competition-text">Select Competition</label>
+                <div className="stats-competitions-list-buttons-container">{competitionList}</div>
+                <div className="scale-white-arrow-up-img" onClick={this.toggle}>
+                    <img src={require("../resources/awardIcons/white-arrow-up-icon.png")}></img>
+                </div>
+            </div>
+        )
+    }
+    
+    renderCompetitionList(){
+        let renderArray = []
+        this.props.competitions.forEach((element, index) => {
+            if(this.IsParticipating(element.name))
+                renderArray.push(this.selectCompetition(element, index))
+        })
+
+        return renderArray;
     }
 
-    getMaxScore(){
-        var compName = this.props.competitions[this.state.selectedCompetition].label
-        return this.state.graphData[this.mapCompNameToIndex[compName]].competitionMaximum;
-    }
-
-    getAverage(){
-        var compName = this.props.competitions[this.state.selectedCompetition].label;
-        return this.state.graphData[this.mapCompNameToIndex[compName]].average;
-    }
-
-    getMaximumValue(){
-        var compName = this.props.competitions[this.state.selectedCompetition].label;
-        return this.state.graphData[this.mapCompNameToIndex[compName]].max;
-    }
-
-    getMinimumValue(){
-        var compName = this.props.competitions[this.state.selectedCompetition].label;
-        return this.state.graphData[this.mapCompNameToIndex[compName]].min;
+    renderLoader(){
+        return(
+            <div className={this.state.isFetchDone ? "hidden" : "loader-container-profile"}>
+                <div className={this.state.isFetchDone ? "hidden" : "loader"}></div>
+                <div className={this.state.isFetchDone ? "hidden" : "target-loader-image"}></div>
+                <div className={this.state.isFetchDone ? "hidden" : "loading-message-profile"}>Loading...</div>
+            </div>
+        )
     }
 
     componentWillUnmount(){
@@ -239,6 +259,7 @@ class StatisticsPage extends Component {
         var data = null;
         var maxScore = 0;
         var list = null;
+
         if(this.state.graphData.length > 0){
             data = this.getGraphData();
             maxScore = this.getMaxScore();
@@ -247,21 +268,23 @@ class StatisticsPage extends Component {
         
         return (
             <div className="stats-container">
-                {this.props.competitions.length > 0 && this.state.graphData.length > 0 ?
+                {this.state.exceptionCaught ? this.renderError("Something went wrong") :
+                this.state.errorOccured ? this.renderError(this.state.apiResponse) :
+                this.props.competitions.length > 0 && this.state.graphData.length > 0 ?
                     <div>
                         <Collapse isOpened={this.state.collapse} fixedHeight={490}> 
                             <div className="stats-center-content stats-competition-select-rectangle-big">
                                 <Row onClick={this.toggle}>
                                     <Col>
                                         <div className="scale-gun-type-img">
-                                            {this.props.competitions[this.state.selectedCompetition].label.includes("Rifle") || 
-                                                this.props.competitions[this.state.selectedCompetition].label.includes("rifle") ?
+                                            {this.props.competitions[this.state.selectedCompetition].name.includes("Rifle") || 
+                                                this.props.competitions[this.state.selectedCompetition].name.includes("rifle") ?
                                                 <img src={require("../resources/awardIcons/rifle-icon.png")}></img>:
                                                 <img src={require("../resources/awardIcons/white-pistol-icon.png")}></img>
                                             }
                                         </div>
                                         <div className="stats-competition-text stats-inline-text">
-                                            {this.props.competitions[this.state.selectedCompetition].label}
+                                            {this.props.competitions[this.state.selectedCompetition].name}
                                             <div className="white-down-triangle-img-scale stats-margin-left-7px">
                                                 <img src={require("../resources/awardIcons/white-down-triangle.png")}
                                                     alt="down-triangle">
@@ -314,14 +337,14 @@ class StatisticsPage extends Component {
                                 onClick={this.toggle}>
                                 <Col className="stats-remove-left-padding">
                                     <div className="scale-gun-type-img">
-                                        {this.props.competitions[this.state.selectedCompetition].label.includes("Rifle") || 
-                                            this.props.competitions[this.state.selectedCompetition].label.includes("rifle") ?
+                                        {this.props.competitions[this.state.selectedCompetition].name.includes("Rifle") || 
+                                            this.props.competitions[this.state.selectedCompetition].name.includes("rifle") ?
                                             <img src={require("../resources/awardIcons/rifle-icon.png")}></img>:
                                             <img src={require("../resources/awardIcons/white-pistol-icon.png")}></img>
                                         }
                                     </div>
                                     <div className="stats-competition-text stats-inline-text">
-                                        {this.props.competitions[this.state.selectedCompetition].label}
+                                        {this.props.competitions[this.state.selectedCompetition].name}
                                         <div className="white-down-triangle-img-scale stats-margin-left-7px">
                                             <img src={require("../resources/awardIcons/white-down-triangle.png")}
                                                 alt="down-triangle">
@@ -346,7 +369,7 @@ class StatisticsPage extends Component {
                                         <Col>
                                             <div className="font-size-12px red-text padding-left-17px">
                                                 {this.state.selectedGroup === -1 ? "Overall" :
-                                                    this.props.groups[this.state.selectedGroup].label
+                                                    this.props.groups[this.state.selectedGroup].name
                                                 }
                                             </div>
                                             <div className="font-size-12px red-text stats-inline padding-left-17px">
@@ -356,8 +379,8 @@ class StatisticsPage extends Component {
                                                 
                                                  {this.state.selectedGroup === -1 ? 
                                                     this.state.competitionsUsersMap
-                                                        [this.props.competitions[this.state.selectedCompetition].label] :
-                                                    this.state.groupsUsersMap[this.props.groups[this.state.selectedGroup].label]
+                                                        [this.props.competitions[this.state.selectedCompetition].name] :
+                                                    this.state.groupsUsersMap[this.props.groups[this.state.selectedGroup].name]
                                                 }
                                                 
                                             </div>
@@ -382,11 +405,10 @@ class StatisticsPage extends Component {
                             <Col>
                                 <div className="stats-graph-container">
                                     <ResponsiveContainer  height={300}>
-                                        <BarChart 
-                                            width={2} 
-                                            height={260} 
-                                            data={data}
-                                            margin={{top: 5, right: 20, left: 20, bottom: 25}}>
+                                        <ComposedChart height={260}
+                                             margin={{top: 5, right: 20, left: 20, bottom: 25}}
+                                             data={data}
+                                            >
                                             <XAxis 
                                                 dataKey="label"
                                                 fontFamily="helvetica"
@@ -406,18 +428,17 @@ class StatisticsPage extends Component {
                                             <Bar 
                                                 dataKey="value" 
                                                 barSize = {this.getGraphData.length > 10 ? 8 : 30}
-                                                    
                                                 fontFamily="sans-serif"
-                                                >
-                                                {
-                                                    data.map((entry, index) => (
-                                                        <Cell key={index} fill={entry.description === "min" ? "#9D9D9D" :
-                                                            entry.description === "max" ? "#BE0000" : "#000000"
-                                                            } />
-                                                    ))
-                                                }
+                                            >
+                                            {
+                                                data.map((entry, index) => (
+                                                    <Cell key={index} fill={entry.description === "min" ? "#9D9D9D" :
+                                                        entry.description === "max" ? "#BE0000" : "#000000"
+                                                        } />
+                                                ))
+                                            }
                                             </Bar>
-                                        </BarChart>
+                                        </ComposedChart>
                                     </ResponsiveContainer>
                                 </div>
                             </Col>
@@ -462,8 +483,8 @@ class StatisticsPage extends Component {
 }
 
 const mapStateToProps = state =>({
-    competitions: state.posts.leaderboardCompetitions,
-    groups: state.posts.leaderboardGroups
+    competitions: state.compOBJ.allComps,
+    groups: state.posts.groupsList
 })
 
-export default connect(mapStateToProps)(StatisticsPage);
+export default connect(mapStateToProps, {fetchComp,fetchGroups})(StatisticsPage);
