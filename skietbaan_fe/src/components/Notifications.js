@@ -223,12 +223,12 @@ class notification extends Component {
   }
 
   speakerClick() {
-    this.selectAll();
     this.setState({
       adminToggle: !this.state.adminToggle,
       toggle : false,
       secondToggle: false
     });
+    this.state.toggle = false
     if (this.state.adminToggle === false) {
       this.disableButton();
     }
@@ -261,7 +261,7 @@ class notification extends Component {
     document.getElementById("announcementButton").disabled = true;
     setTimeout(() => {
       this.setState({
-        adminToggle: false
+        adminToggle: false,
       });
       window.location = "/notify";
     }, 1000);
