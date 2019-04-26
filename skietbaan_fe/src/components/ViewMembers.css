@@ -15,7 +15,7 @@
 
 .loader-container-members {
 	padding-top: 12px;
-	height: 100%;
+	height: fit-content;
 }
 
 .loading-message-members {
