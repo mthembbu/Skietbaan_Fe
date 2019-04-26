@@ -269,7 +269,7 @@ class ViewNonMembers extends Component {
     this.setState({ membershipsID: "", userIndex: index });
     this.forceUpdate();
   };
-
+//extract csv file for all users
   ExportData = () => {
     let token = getCookie("token");
     let filter = "users";
