@@ -26,7 +26,9 @@ class EditGroup extends Component {
 			binState: false,
 			height: window.innerHeight,
       width: window.innerWidth,
-      token: getCookie("token")
+			token: getCookie("token"),
+			heightOfClient: document.body.clientHeight
+
 		};
 		this.toggleHighlight = this.toggleHighlight.bind(this);
 		this.onBack = this.onBack.bind(this);
@@ -45,7 +47,7 @@ class EditGroup extends Component {
     this.props.fetchNumberOfNotification(this.state.token);
 	}
 	componentWillMount() {
-		window.addEventListener('resize', this.updateDimensions);
+    window.addEventListener("resize", this.updateDimensions);
 	}
 	getBodyHeight() {
 		if (this.state.width < 575) {
@@ -92,6 +94,9 @@ class EditGroup extends Component {
 			body: JSON.stringify(request)
 		})
 			.then((res) => res.json())
+			.then(this.setState({
+				binState: false
+			}))
 			.catch(function (data) { }).catch(err => {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
 			});
@@ -164,31 +169,36 @@ class EditGroup extends Component {
 		}
 	}
 
-	togglenav = () => {
-		let Navbar = document.querySelector(".navbar-admin");
-		if (window.innerWidth < 575 && window.innerHeight < 800) {
-			if (Navbar != null) {
-				if (this.state.count !== 0) {
-					Navbar.classList.add("hidden");
-				} else {
-					Navbar.classList.remove("hidden");
-				}
-			}
-		}
-	};
+	keyboardHideNav = ()=>{
+    let Navbar = document.querySelector(".navbar-admin");
+    if(Navbar!=null){
+      if (window.innerWidth < 575 && window.innerHeight < 800) {
+        if (this.props.screenSize === document.body.clientHeight) {
+          if(this.state.count === 0){
+            Navbar.classList.remove("hidden");
+          }
+          else{
+            Navbar.classList.add("hidden"); 
+          }          
+        } else {
+          Navbar.classList.add("hidden");
+        }
+      }
+    }
+  }
 
 	goToNext = () => {
 		this.props.pageState(2);
 	};
 	render() {
-		this.togglenav();
+		this.keyboardHideNav()
 
 		const postitems = (
 			<div className="check-edit" style={{ height: this.getBodyHeight() }}>
 				{this.props.editGroup.length === 0 ? (
 					<div className="edit-no-user-container">
 						<label className="edit-no-user-msg">
-							No users have been created yet.
+							No users in the group
             </label>
 					</div>
 				) : (
@@ -255,7 +265,7 @@ class EditGroup extends Component {
 								src={back}
 								alt=""
 							/>
-							<label className="center-labels">{this.props.name}</label>
+							<label className="center-labels">{this.props.name.toUpperCase()}</label>
 						</div>
 						<div className="group-icon-spacing">
 							<div className="plus-next" onClick={() => this.changeBinState()}>
@@ -333,7 +343,9 @@ const mapStateToProps = state => ({
 	editGroup: state.posts.editGroup,
 	page: state.posts.page,
 	idsForUser: state.posts.idsForUser,
-	loader: state.posts.loader
+	loader: state.posts.loader,
+	screenSize: state.posts.screenSize
+
 });
 
 export default connect(

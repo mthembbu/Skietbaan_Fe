@@ -100,9 +100,9 @@ class ViewNonMembers extends Component {
   }
   getBodyHeight() {
     if (this.state.width < 575) {
-      return this.state.height - (240 - 184) + "px";
+      return this.state.height - (240 - 190) - 190 + "px";
     } else {
-      return "56vh";
+      return "50vh";
     }
   }
   getNonMembers() {
@@ -307,7 +307,7 @@ class ViewNonMembers extends Component {
         {this.state.array.length === 0 && this.state.getData === true ? (
           <div className="view-non-error-container">
             <label className="view-non-error-msg">
-              No users have been created yet.
+              No users available
             </label>
           </div>
         ) : (

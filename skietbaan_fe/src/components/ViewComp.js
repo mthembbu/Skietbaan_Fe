@@ -288,7 +288,8 @@ class ViewComp extends Component {
       },
       body: JSON.stringify(newArray)
     })
-      .then(function (response) { })
+    
+    .then(function (response) { this.props.fetchComp();})
       .then(function (data) { })
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/

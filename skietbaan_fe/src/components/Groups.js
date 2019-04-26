@@ -29,7 +29,8 @@ class Groups extends Component {
       height: window.innerHeight,
       width: window.innerWidth,
       token: getCookie("token"),
-      getData: false
+      getData: false,
+      heightOfClient: document.body.clientHeight
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -113,8 +114,8 @@ class Groups extends Component {
       },
       body: JSON.stringify(requestedObj)
     })
-      .then(function(response) {})
-      .catch(function(data) {})
+      .then(function (response) { })
+      .catch(function (data) { })
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
@@ -327,7 +328,7 @@ class Groups extends Component {
             {postitems}
             {this.state.count === 0 ? null : (
               <label className="bottom-label">
-                <button className="cancel-creating-group" onClick={()=>this.cancel()}>
+                <button className="cancel-creating-group" onClick={() => this.cancel()}>
                   CANCEL
                 </button>
                 <button className="create-group" onClick={this.handleOnClick}>

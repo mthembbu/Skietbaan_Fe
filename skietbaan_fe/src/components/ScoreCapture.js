@@ -514,18 +514,15 @@ class search extends Component {
                     : "page-content"
               }
             >
-              <div
-                className={
-                  this.state.scoreSaved ? "sucess-container" : "hidden"
-                }
-              >
-                <div className="success-container">
-                  <div className="success" />
-                  <label className="label-success-container">
-                    SCORE CAPTURED
-                  </label>
+                <div className={this.state.scoreSaved === true ?
+                  "loading-container-add-score padding-top-160" : "hidden "}>
+                  <div className={this.state.scoreSaved === true?
+                    "loader" : "hidden"} />
+                  <div className={this.state.scoreSaved === true ?
+                    "target-loader-image" : "hidden"} />
+                  <div className={this.state.scoreSaved === true ?
+                    "loading-message" : "hidden "}>Loading...</div>
                 </div>
-              </div>
               <div
                 className={stateOne || this.state.scoreSaved ? "hidden" : ""}
               >

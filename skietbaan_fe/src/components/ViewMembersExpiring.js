@@ -96,9 +96,9 @@ class ViewMembersExpiring extends Component {
 	}
 	getBodyHeight() {
 		if (this.state.width < 575) {
-      return this.state.height - (240 - 184) + "px";
+      return this.state.height - (240 - 184) - 188 + "px";
 		} else {
-			return "56vh";
+			return "50vh";
 		}
 	}
 	getExpiringMembers() {
@@ -429,9 +429,9 @@ class ViewMembersExpiring extends Component {
 														) : null}
 													{this.state.successMgs === true ? (
 														<div className="confirm-button-container">
-															<button className="confriming-btn">
+															<label className="confriming-btn">
 																MEMBERSHIP RENEWED{" "}
-															</button>
+															</label>
 														</div>
 													) : post.advanceExpiryDate != null ? (
 														<div className="confirm-button-container">

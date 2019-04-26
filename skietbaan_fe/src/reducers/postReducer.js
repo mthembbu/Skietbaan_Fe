@@ -16,7 +16,8 @@ import {
   ADDMEMBERS,
   FETCH_GROUPS,
   GROUP_DATA_LOADING,
-  BINSTATE
+  BINSTATE,
+  SCREEN_SIZE
 } from "../actions/types";
 
 const initialState = {
@@ -48,7 +49,8 @@ const initialState = {
     average: 0
   },
   groupId: "",
-  groupName: ""
+  groupName: "",
+  screenSize: 0
 };
 
 //the function to detect the state change
@@ -169,6 +171,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         leaderboardSelectedGroupName: action.payload
+      };
+    case SCREEN_SIZE:
+      return {
+        ...state,
+        screenSize: action.payload
       };
 
     default:

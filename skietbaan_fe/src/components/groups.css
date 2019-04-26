@@ -53,9 +53,9 @@
 
 .center-labels {
 	color: white;
-	font-weight: bold;
-	font-size: 25px;
-	margin-top: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 17px;
 }
 .center-labelss {
 	display: flex;
@@ -551,7 +551,7 @@
 		margin-top: 0px !important;
 	}
 	.view-the-main {
-		margin: 0px 40px 56px 28px;
+		margin: 11px 40px 56px 28px;
 	}
 
 	.adding-check-edit {
@@ -561,7 +561,7 @@
 	.bpanel {
 		display: flex;
 		position: absolute;
-		height: 77px;
+		height: 60px;
 		justify-content: center;
 	}
 	.the-main {
@@ -614,7 +614,7 @@
 		margin-top: 10px;
 	}
 	.The-Main {
-		margin-top: 0px;
+		margin-top: 34px;
 	}
 	.edit-The-Main {
 		margin-top: 26px !important;
@@ -747,6 +747,7 @@
 
 .The-Main {
 	overflow-y: overlay;
+	margin-top: 10px;
 }
 .edit-The-Main {
 	overflow-y: overlay;
@@ -831,9 +832,11 @@
 	justify-content: center;
 	bottom: 0;
 	position: absolute;
-	height: 57px;
+	height: 60px;
 	width: 93%;
-	background: #ffffff;
+	background: #f8f8f8;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 }
 .view-group-cancel {
 	width: 156px;
@@ -845,6 +848,7 @@
 	border-radius: 25px;
 	margin-right: 23px;
 	font-weight: lighter;
+	margin-top: 7px;
 }
 
 .view-group-delete-confirm {
@@ -856,4 +860,5 @@
 	border: 1px solid #ea251a;
 	background: #ea251a;
 	font-weight: lighter;
+	margin-top: 7px;
 }

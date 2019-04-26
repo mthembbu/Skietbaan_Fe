@@ -1,3 +1,12 @@
+@media screen and (max-width:350px)  {
+	.export-col-container{
+		padding-left: 0px;
+		padding-right: 0px;
+		text-align: center !important;
+	}
+}
+
+
 .centre-view-member {
 	margin: 0 auto;
 	position: center;

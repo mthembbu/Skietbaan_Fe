@@ -234,9 +234,8 @@ export class createPages extends Component {
 									<div class="page-name-bar">
 										<div className="gun-overlay-image">
 											<label className="label-for-score">CREATE</label>
-
 										</div>
-										{(this.props.page === 0 && this.state.selectedButton===1) || (this.props.page===0 && this.state.selectedButton===2) ?
+										{(this.props.page === 0 && this.state.selectedButton===1) ||(this.props.page===0 && this.state.selectedButton===2)  ?
 											<div className="plus-next" onClick={() => this.changeBinState()}>
 												<img
 													className="bin-image"
