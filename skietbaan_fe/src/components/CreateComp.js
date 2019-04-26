@@ -84,6 +84,12 @@ class CreateComp extends Component {
       return "55vh";
     }
   }
+
+  getContainerHeight(){
+    if(document.body.clientHeight < this.props.screenSize) return this.props.screenSize - document.body.clientHeight;
+    return document.body.clientHeight - 232;
+  }
+
   onClick() {
     history.push("/create");
   }
@@ -237,20 +243,21 @@ class CreateComp extends Component {
         Status: true,
         MaximumScore: this.state.MaximumScore
       };
+
       const BronzeData = {
         standard: "Bronze",
-        accuracy: this.state.bronzeAccuracy,
-        total: this.state.bronzeTotal
+        accuracy: this.state.bronzeAccuracy === "" ? 0 : parseFloat(this.state.bronzeAccuracy),
+        total: this.state.bronzeTotal === "" ? 0 : parseFloat(this.state.bronzeTotal)
       };
       const SilverData = {
         standard: "Silver",
-        accuracy: this.state.silverAccuracy,
-        total: this.state.silverAccuracy
+        accuracy: this.state.silverAccuracy === "" ? 0 : parseFloat(this.state.silverAccuracy),
+        total: this.state.silverTotal === "" ? 0 : parseFloat(this.state.silverTotal)
       };
       const GoldData = {
         standard: "Gold",
-        accuracy: this.state.goldAccuracy,
-        total: this.state.goldTotal
+        accuracy: this.state.goldAccuracy === "" ? 0 : parseFloat(this.state.goldAccuracy),
+        total: this.state.goldTotal === "" ? 0 : parseFloat(this.state.goldTotal)
       };
       this.props.fetchNumberOfNotification(this.state.token);
       const RData = [BronzeData, SilverData, GoldData];
@@ -277,7 +284,7 @@ class CreateComp extends Component {
     return (
       <div
         className="create-comp-container"
-        style={{ maxHeight: this.getBodyHeight(), height: "fit-content" }}
+        style={{ height:  this.getContainerHeight() +"px"}}
       >
         <Form onSubmit={this.onSubmit}>
           <div className="containers-input">
@@ -397,7 +404,7 @@ class CreateComp extends Component {
                       </Col>
                     </Row>
                     <Row className="bronze-row">
-                      <Col xs={4} md={4}>
+                      <Col xs={4} md={4} className="targeter-class">
                         <div className="bronze-label" >Bronze Award:</div>
                       </Col>
                       <Col xs={4} md={4}>
@@ -438,7 +445,7 @@ class CreateComp extends Component {
                     </Row>
 
                     <Row className="silver-row">
-                      <Col xs={4} md={4}>
+                      <Col xs={4} md={4} className="targeter-class">
                         <div className="silver-label">Silver Award:</div>
                       </Col>
                       <Col xs={4} md={4}>
@@ -479,7 +486,7 @@ class CreateComp extends Component {
                     </Row>
 
                     <Row>
-                      <Col xs={4} md={4}>
+                      <Col xs={4} md={4} className="targeter-class">
                         <div className="gold-label">Gold Award:</div>
                       </Col>
                       <Col xs={4} md={4}>
@@ -558,7 +565,8 @@ CreateComp.propTypes = {
 };
 const mapStatesToprops = state => ({
   newComp: state.compOBJ.selectedComp,
-  isCreated: state.compOBJ.isCreated
+  isCreated: state.compOBJ.isCreated,
+  screenSize: state.posts.screenSize
 });
 
 export default connect(

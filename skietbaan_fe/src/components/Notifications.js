@@ -331,6 +331,7 @@ class notification extends Component {
             }
             onClick={() => this.speakerClick()}
             className="admin-notification-images"
+            alt=""
           />
         </div>
         <div className="admin-notification-icon-spacing">
