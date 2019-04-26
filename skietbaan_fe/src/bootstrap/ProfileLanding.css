@@ -204,6 +204,7 @@
   padding-left: 20px;
   border: 1px solid #ffffff;
   border-radius: 21px;
+  cursor: pointer;
 }
 
 .logout-text {
