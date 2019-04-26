@@ -19,8 +19,8 @@ class ProfileLanding extends Component {
     this.documentsPage = this.documentsPage.bind(this);
     this.details = this.details.bind(this);
     this.logout = this.logout.bind(this);
-    this.iOS =
-      !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+    this.stats = this.stats.bind(this);
+    this.iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
   }
 
   componentDidMount() {
@@ -39,9 +39,9 @@ class ProfileLanding extends Component {
     if (this.props.selectedButton != 2) this.props.setSelectedLandingPage(2);
   }
 
-  // stats(){
-  //   if (this.props.selectedButton != 3) this.props.setSelectedLandingPage(3);
-  // }
+   stats(){
+     if (this.props.selectedButton != 3) this.props.setSelectedLandingPage(3);
+   }
 
   details() {
     if (this.props.selectedButton != 4) this.props.setSelectedLandingPage(4);
@@ -177,7 +177,7 @@ class ProfileLanding extends Component {
                         </div>
                       </button>
                       <div className="profile-navigation-text-align">
-                        <label className="profile-navigation-text2">
+                        <label className="profile-navigation-text">
                           STATS
                         </label>
                       </div>
@@ -220,6 +220,8 @@ class ProfileLanding extends Component {
                 <UserProfile />
               ) : this.props.selectedButton === 2 ? (
                 <Documents />
+              ) : this.props.selectedButton == 3 ? (
+                <StatisticsPage />
               ) : this.props.selectedButton === 4 ? (
                 <UserDetails />
               ) : null}
