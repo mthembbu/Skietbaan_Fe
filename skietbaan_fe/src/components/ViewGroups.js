@@ -102,10 +102,8 @@ class ViewGroups extends Component {
   async deActivate(groupId, index) {
     if (this.props.groupsList[index].isActive === false) {
       this.props.groupsList[index].isActive = true;
-      this.props.groupsList[index].highlighted = true;
     } else {
       this.props.groupsList[index].isActive = false;
-      this.props.groupsList[index].highlighted = false;
     }
 
     this.props.newGroupArrayState([...this.props.groupsList]);
