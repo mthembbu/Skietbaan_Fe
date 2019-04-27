@@ -152,7 +152,7 @@ class ViewGroups extends Component {
     }
   };
   render() {
-    this.togglenav();
+  this.togglenav();
     const loader = (
       <div className="loader-formatting">
         <div className={this.props.loader ? "hidden" : "loader"} />

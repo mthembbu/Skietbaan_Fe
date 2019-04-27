@@ -184,6 +184,9 @@ export class createPages extends Component {
 			}
 			this.props.binStateFunc(2);
 		} else {
+			for (var i = 0; i < this.props.compOBJ.length; i++) {
+				this.props.compOBJ[i].highlighted = false;
+			  }
 			this.props.binStateFunc(1);
 		}
 	};
@@ -392,6 +395,7 @@ const mapStateToProps = (state) => ({
 	page: state.posts.page,
 	binState: state.posts.binState,
 	groupsList: state.posts.groupsList,
+	compOBJ: state.compOBJ.allComps
 });
 
 const mapDispatchToProps = {};
