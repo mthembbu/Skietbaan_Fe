@@ -45,7 +45,7 @@ class AddMembersGroup extends Component {
     if (this.state.width < 575) {
       return this.state.height - 225 + "px";
     } else {
-      return "64vh";
+      return "63vh";
     }
   }
   updateDimensions() {

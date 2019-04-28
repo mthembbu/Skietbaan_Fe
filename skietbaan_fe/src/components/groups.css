@@ -835,7 +835,9 @@
 	position: absolute;
 	height: 57px;
 	width: 93%;
-	background: #ffffff;
+	background: #f8f8f8;
+	border-top-left-radius: 22px;
+	border-top-right-radius: 22px;
 }
 .view-group-cancel {
 	width: 156px;
