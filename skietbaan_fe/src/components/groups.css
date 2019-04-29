@@ -53,9 +53,9 @@
 
 .center-labels {
 	color: white;
-    font-weight: bold;
-    font-size: 20px;
-    margin-top: 17px;
+	font-weight: bold;
+	font-size: 20px;
+	margin-top: 17px;
 }
 .center-labelss {
 	display: flex;
@@ -176,7 +176,7 @@
 .bottom-label {
 	justify-content: space-evenly;
 	bottom: 0;
-	background: white;
+	background: #f8f8f8;
 	width: 100%;
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
@@ -298,6 +298,12 @@
 	.bottom-label {
 		position: relative;
 		justify-content: center;
+		bottom: 12px;
+		height: 58px;
+		background: #f8f8f8;
+		border-bottom-right-radius: 15px;
+		border-bottom-left-radius: 15px;
+		padding-top: 7px;
 	}
 	.view-group-confirm-panel {
 		width: 100% !important;
@@ -576,7 +582,7 @@
 	.add-blabe {
 		width: 80%;
 	}
-	.cancel-delete{
+	.cancel-delete {
 		margin-right: 16px;
 	}
 	.BNavBar {
@@ -656,7 +662,7 @@
 	border-radius: 24.5px;
 	width: 156px;
 	height: 42px;
-	margin-left: 16px;
+	margin-right: 16px;
 	color: white;
 	background: red;
 	justify-content: flex-start;
@@ -804,6 +810,7 @@
 }
 .table-member .view-group .switch-container {
 	width: 20%;
+	justify-content: center;
 }
 .edit-no-user-container {
 	width: 312px;
@@ -830,12 +837,15 @@
 
 .view-group-confirm-panel {
 	display: flex;
+	padding-top: 5px;
 	justify-content: center;
 	bottom: 0;
 	position: absolute;
 	height: 57px;
 	width: 93%;
-	background: #ffffff;
+	background: #f8f8f8;
+	border-top-left-radius: 22px;
+	border-top-right-radius: 22px;
 }
 .view-group-cancel {
 	width: 156px;
