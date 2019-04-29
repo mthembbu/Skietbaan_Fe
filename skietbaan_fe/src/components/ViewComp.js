@@ -5,7 +5,7 @@ import {
   fetchParticipants,
   fetchRequirements,
   updateRequirements,
-  compSelectedPages,newCompArrayState
+  compSelectedPages, newCompArrayState
 } from "../actions/competition.action";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -16,6 +16,7 @@ import { Form, Container, Row, Col } from "react-bootstrap";
 import Switch from "@material-ui/core/Switch";
 import deleteS from './GroupImages/deleteS.png';
 import unmarked from './GroupImages/Oval.png';
+import group from "./GroupImages/groupUser.png";
 
 class ViewComp extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class ViewComp extends Component {
       height: window.innerHeight,
       width: window.innerWidth,
       createPageBodyHeight: 500,
-      count:0
+      count: 0
     };
 
     this.changeStatus = this.changeStatus.bind(this);
@@ -255,32 +256,32 @@ class ViewComp extends Component {
     this.setState({ isLetterOfStatus: !this.state.isLetterOfStatus });
   }
   toggleHighlight = (event) => {
-		const index = this.props.compIds.indexOf(event);
-			if (this.props.compOBJ[index].highlighted === true) {
-				this.props.compOBJ[index].highlighted = false;
-				this.setState({ count: this.state.count - 1 });
-			} else {
-				this.props.compOBJ[index].highlighted = true;
-				this.setState({ count: this.state.count + 1 });
-			}
+    const index = this.props.compIds.indexOf(event);
+    if (this.props.compOBJ[index].highlighted === true) {
+      this.props.compOBJ[index].highlighted = false;
+      this.setState({ count: this.state.count - 1 });
+    } else {
+      this.props.compOBJ[index].highlighted = true;
+      this.setState({ count: this.state.count + 1 });
+    }
   };
-  
-async  deleteComp(){
+
+  async  deleteComp() {
     const newArray = [];
-    const arr=[];
+    const arr = [];
     for (var i = 0; i < this.props.compOBJ.length; i++) {
       if (this.props.compOBJ[i].highlighted === true) {
         delete this.props.compOBJ[i].highlighted
         newArray.push(this.props.compOBJ[i]);
       }
-      else{ 
+      else {
         arr.push(this.props.compOBJ[i])
       }
     }
-  
+
     this.props.newCompArrayState(arr);
-    this.setState({count:0})
-     fetch(BASE_URL + "/api/Competition/delete", {
+    this.setState({ count: 0 })
+    fetch(BASE_URL + "/api/Competition/delete", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -288,13 +289,13 @@ async  deleteComp(){
       },
       body: JSON.stringify(newArray)
     })
-    
-    .then(function (response) { })
+
+      .then(function (response) { })
       .then(function (data) { })
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
-      this.forceUpdate()
+    this.forceUpdate()
   }
   cancel = () => {
     for (var i = 0; i < this.props.compOBJ.length; i++) {
@@ -370,11 +371,14 @@ async  deleteComp(){
                             <div className="test2">
                               <label className="users-per-comp">
                                 {compVar.status == true ? (
-                                  <i class=" fa fa-group">
+                                  <div>
+                                    <div className="icon-spacing">
+                                      <img src={group} className="groupIcon" alt=""></img>
+                                    </div>
                                     <span className="user-per-comp-num">
                                       {this.props.dict[compVar.id]}
                                     </span>
-                                  </i>
+                                  </div>
                                 ) : null}
                               </label>
                             </div>
@@ -392,30 +396,30 @@ async  deleteComp(){
                             </div>
 
                             <div className="test3">
-                            {this.props.binState === 1 ?
-                              <div
-                                className={
-                                  compVar.status
-                                    ? "activeButton"
-                                    : "inactiveButton"
-                                }
-                                style={{justifyContent:"flex-end"}}
-                              >
-                                <Switch
-                                  color={"primary"}
+                              {this.props.binState === 1 ?
+                                <div
                                   className={
                                     compVar.status
                                       ? "activeButton"
                                       : "inactiveButton"
                                   }
+                                style={{justifyContent:"flex-end"}}
+                                >
+                                  <Switch
+                                    color={"primary"}
+                                    className={
+                                      compVar.status
+                                        ? "activeButton"
+                                        : "inactiveButton"
+                                    }
                                  
-                                  focus={true}
-                                  checked={compVar.status}
-                                  onClick={() =>
-                                    this.changeStatus(compVar.status, i)
-                                  }
-                                /> 
-                              </div>: <img
+                                    focus={true}
+                                    checked={compVar.status}
+                                    onClick={() =>
+                                      this.changeStatus(compVar.status, i)
+                                    }
+                                  />
+                                </div> : <img
                                   className="view-group-delete-box"
                                   src={compVar.highlighted === true ? deleteS : unmarked}
                                   alt=""
@@ -681,7 +685,7 @@ async  deleteComp(){
         {(this.props.binState === 2 && this.state.count != 0) ?
           <div className="view-group-confirm-panel">
             <button className="view-group-cancel" onClick={() => this.cancel()}>CANCEL</button>
-            <button className="view-group-delete-confirm" onClick={() => this.deleteComp()}>{this.state.count===this.props.compOBJ.length?"DELETE ALL":"DELETE"}</button>
+            <button className="view-group-delete-confirm" onClick={() => this.deleteComp()}>{this.state.count === this.props.compOBJ.length ? "DELETE ALL" : "DELETE"}</button>
           </div> : null}
       </div>
 
@@ -709,8 +713,8 @@ const mapStateToProps = state => ({
   requirements: state.compOBJ.requirements,
   load: state.compOBJ.load,
   isCreated: state.compOBJ.isCreated,
-  compIds:state.compOBJ.compIds,
-  binState:state.posts.binState
+  compIds: state.compOBJ.compIds,
+  binState: state.posts.binState
 });
 export default connect(
   mapStateToProps,

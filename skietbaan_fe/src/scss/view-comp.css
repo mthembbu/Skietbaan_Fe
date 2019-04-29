@@ -84,6 +84,10 @@
 	content: "\F0C0";
 }
 
+.icon-spacing{
+	padding-top: 13px;
+}
+
 .label-create-competitions {
 	size: 49px;
 	padding-top: 7px;
@@ -472,7 +476,6 @@
 }
 .table-competition-row table tr .td-col div .test2 .users-per-comp {
 	width: 100%;
-	margin-top: 10px;
 }
 .table-competition-row table tr .td-col div .test2 .fa {
 	width: 100%;
