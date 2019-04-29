@@ -76,16 +76,16 @@
 	margin-top: 17px;
 	width: 242px;
 	float: left;
-	height: 56px;
 	font-weight: bold;
-	background: url("./GroupImages/searchBox.png") no-repeat;
-	background-position: right;
-	background-position-x: 205px;
+	background: url("../components/assets/newSearchIconRed.png") no-repeat right;
+	background-size: 22px;
 	font-size: 18px;
 	padding-left: 15px;
 	font-size: 18px;
 	border-radius: 5px;
 	border: 1px solid #7b7b7b;
+	height: 44px;
+	background-position-x: 95%;
 }
 
 .select {
@@ -513,6 +513,7 @@
 }
 .groupIcon {
 	padding-right: 5px;
+	height: 18px;
 }
 .confirm-container {
 	justify-content: flex-start;

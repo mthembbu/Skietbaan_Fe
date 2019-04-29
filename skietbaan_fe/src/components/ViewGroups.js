@@ -13,7 +13,7 @@ import {
 } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
 import Switch from "@material-ui/core/Switch";
-import group from "./GroupImages/Group.png";
+import group from "./GroupImages/groupUser.png";
 import PropTypes from "prop-types";
 import deleteS from './GroupImages/deleteS.png';
 import unmarked from './GroupImages/Oval.png';
