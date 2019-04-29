@@ -173,6 +173,23 @@
     margin-bottom: 7px;
 }
 
+.view-score-input{
+    border-radius: 10px;
+    border: 1px #979797 solid;
+    width: 312px;
+    margin: 0 auto;
+    color: black;
+    background-color: #ffffff;
+    height: 57px;
+    padding-left: 11px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 7px;
+    background: url("../components/assets/newSearchIconRed.png") no-repeat right center;
+    background-position-x: 273px;
+    background-size: 22px;
+}
+
 .invalid-score{
     color:#EA251A;
     float: left;
@@ -799,4 +816,12 @@ input[type=number] {
 .username-and-email-view-scores{
     line-height: 6px;
     padding-top: 2px;
+}
+
+.bin-image-view-score{
+        top: 21px;
+        height: 26px;
+        position: absolute;
+        right: 37px;
+        z-index: 1000;
 }

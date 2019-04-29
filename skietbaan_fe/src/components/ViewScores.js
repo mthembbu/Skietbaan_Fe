@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import { getCookie } from "./cookie.js";
 import { toggleToggleBar } from "./toggle.js";
 import { checkUserType } from "../actions/adminAction";
+import whiteBin from './GroupImages/whiteBin.png';
+import blackBin from './GroupImages/blackBin.png';
 import "../components/ScoreCapture.css";
 class ViewScores extends Component {
     constructor(props) {
@@ -29,7 +31,8 @@ class ViewScores extends Component {
             someUserClick: null,
             originalUserList: [],
             username: "",
-            email: ""
+            email: "",
+            clickedOnBin: false
         };
         this.competitionClicked = this.competitionClicked.bind(this);
         this.formatTime = this.formatTime.bind(this);
@@ -37,6 +40,13 @@ class ViewScores extends Component {
         this.getScoresForAdmin = this.getScoresForAdmin.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.usernameCancelClicked = this.usernameCancelClicked.bind(this);
+        this.changeIcon = this.changeIcon.bind(this)
+    }
+
+    changeIcon() {
+        this.setState({
+            clickedOnBin: !this.state.clickedOnBin
+        })
     }
 
     showPhoto(item) {
@@ -326,6 +336,14 @@ class ViewScores extends Component {
 
         return (
             <div className="page-content">
+                <div className={this.state.userClicked === true ? "":"hidden"}>
+                    <img
+                        className="bin-image-view-score"
+                        src={this.state.clickedOnBin ? blackBin : whiteBin}
+                        alt=""
+                        onClick={() => this.changeIcon()}
+                    />
+                </div>
                 <div className={this.state.somethingClicked === true ? "padding-top-40" : "centre-labels"}>
                     <label className={this.state.somethingClicked === true ? "hidden" : "label-competition"}>
                         Select Competition
@@ -344,7 +362,7 @@ class ViewScores extends Component {
                                 <div className="view-scores-input-container">
                                     <input
                                         placeholder="Search"
-                                        className={this.state.userClicked === true ? "hidden" : "score"}
+                                        className={this.state.userClicked === true ? "hidden" : "view-score-input"}
                                         type="text"
                                         onChange={this.handleSearch}
                                         id="username"
