@@ -33,7 +33,8 @@ class ViewScores extends Component {
             username: "",
             email: "",
             clickedOnBin: false,
-            itemsToDelete: []
+            itemsToDelete: [],
+            toggleDeletionIcon: false
 
         };
         this.competitionClicked = this.competitionClicked.bind(this);
@@ -43,6 +44,13 @@ class ViewScores extends Component {
         this.handleSearch = this.handleSearch.bind(this);
         this.usernameCancelClicked = this.usernameCancelClicked.bind(this);
         this.changeIcon = this.changeIcon.bind(this);
+        this.markedForDeletion = this.markedForDeletion.bind(this)
+    }
+
+    markedForDeletion() {
+        this.setState({
+            toggleDeletionIcon: !this.state.toggleDeletionIcon,
+        })
     }
 
     changeIcon() {
@@ -302,7 +310,7 @@ class ViewScores extends Component {
                             </div>
                         </div>
                         <div
-                            //onClick={() => this.markedForDeletion(this.state.scoresList[i].id)}
+                            onClick={() => this.markedForDeletion(this.state.scoresList[i].id)}
                             className={
                                 this.state.clickedOnBin ?
                                     "delete-icon-view-score"

@@ -827,10 +827,11 @@ input[type=number] {
 
 .delete-icon-view-score{
     background-image: url("./Notification-Img/delete3.png");
-    padding-bottom: 6px;
-    padding-right: 11px;
-    text-align: justify;
     background-repeat: no-repeat;
     background-size: 24px;
-    height: 24px;
+    margin-right: -19px;
+    margin-top: -36px;
+    float: right;
+    width: 28px;
+    height: 28px;
 }
