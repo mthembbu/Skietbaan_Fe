@@ -825,3 +825,13 @@ input[type=number] {
         right: 37px;
         z-index: 1000;
 }
+
+.delete-icon-view-score{
+    background-image: url("./Notification-Img/delete3.png");
+    padding-bottom: 6px;
+    padding-right: 11px;
+    text-align: justify;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    height: 24px;
+}

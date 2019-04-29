@@ -302,10 +302,10 @@ class ViewScores extends Component {
                             </div>
                         </div>
                         <div
-                            onClick={() => this.markedForDeletion(this.state.scoresList[i].id)}
+                            //onClick={() => this.markedForDeletion(this.state.scoresList[i].id)}
                             className={
                                 this.state.clickedOnBin ?
-                                    "notifications-images"
+                                    "delete-icon-view-score"
                                     : "hide"
                             }
                             alt="redirect"
