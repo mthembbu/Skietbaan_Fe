@@ -7,6 +7,10 @@ import { getCookie } from "../components/cookie.js";
 import { Row, Col } from "react-bootstrap";
 import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
+import exportClick from "../components/assets/exportPress.png";
+import { connect } from "react-redux";
+import { pageState } from '../actions/postActions';
+
 class ViewMembers extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +26,10 @@ class ViewMembers extends Component {
       width: window.innerWidth,
       getData: false,
       exportMsg: false,
-      exceptionCaught: false
+      exportResponse: "",
+      exceptionCaught: false,
+      exportResponse: "",
+      userIndex:0
     };
     this.getAllMembers = this.getAllMembers.bind(this);
     this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -32,6 +39,7 @@ class ViewMembers extends Component {
     this.toggleNavbar2 = this.toggleNavbar2.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
     this.getBodyHeight = this.getBodyHeight.bind(this);
+    this.extractEmails = this.extractEmails.bind(this);
   }
 
   toggleNavbar() {
@@ -64,17 +72,30 @@ class ViewMembers extends Component {
     this.getAllMembers();
     this.getTimeLeft();
   }
+  componentWillUnmount(){
+    this.props.pageState(10);
+  }
   updateDimensions() {
     this.setState({
       height: window.innerHeight,
       width: window.innerWidth
     });
   }
+  extractEmails(text) {
+    if (this.state.filterText[0] === "@") {
+      let ser = text.search("@");
+      let word = text.substring(ser, text.length);
+      let ss = word.split(".");
+      return ss[0];
+    } else {
+      return text;
+    }
+  }
   getBodyHeight() {
     if (this.state.width < 575) {
-      return this.state.height - 240 + "px";
+      return this.state.height - (240 - 184) -180 + "px";
     } else {
-      return "66vh";
+      return "50vh";
     }
   }
   getAllMembers() {
@@ -93,8 +114,13 @@ class ViewMembers extends Component {
       })
       .then(data => {
         this.setState({
-          array: data,
-          getData: true
+          getData: true,
+          array: data.map(user=>{
+            return{
+              ...user,
+              selected:false
+            }
+          })
         });
       })
       .catch(err => {
@@ -137,9 +163,6 @@ class ViewMembers extends Component {
       return false;
     }
   }
-  ExportData = () => {
-    this.setState({ exportMsg: true });
-  };
 
   status(timeLeft) {
     if (timeLeft < 2 || timeLeft === 2) {
@@ -149,7 +172,35 @@ class ViewMembers extends Component {
     }
   }
   ExportData = () => {
-    this.setState({ exportMsg: true });
+    let token = getCookie("token");
+    let filter = "members";
+    fetch(
+      BASE_URL +
+        `/api/Features/generateCSV?filter=${filter}&adminToken=${token}`,
+      {
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(res => res.json())
+      .then(data => this.setState({ exportResponse: data, exportMsg: true }))
+      .catch(err => {
+        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+      });
+  };
+
+  onChangeArrow = index => {
+    if(index!==this.state.userIndex){
+      this.state.array[this.state.userIndex].selected = false;
+      this.state.array[index].selected = !this.state.array[index].selected;
+    }else{
+      this.state.array[index].selected = !this.state.array[index].selected;
+    }
+    this.setState({ userIndex:index });
+    this.forceUpdate();
   };
 
   render() {
@@ -165,7 +216,7 @@ class ViewMembers extends Component {
       });
     }
     const postItems = (
-      <div>
+      <div  style={{ height: this.getBodyHeight() }}>
         {this.state.array.length === 0 && this.state.getData === true ? (
           <div className="view-non-error-container">
             <label className="view-non-error-msg">
@@ -185,15 +236,19 @@ class ViewMembers extends Component {
                     post.email
                       .toLowerCase()
                       .startsWith(this.state.filterText.toLowerCase()) ||
-                    post.memberID.startsWith(this.state.filterText)
+                    post.memberID.startsWith(this.state.filterText) ||
+                    this.extractEmails(post.email).startsWith(
+                      this.state.filterText.toLowerCase()
+                    )
                   );
                 })
                 .map((post, index) => (
                   <tr className="view-members-user" key={post.id}>
                     <td className="first-column">
                       <Collapsible
+                      open={post.selected}
                         trigger={
-                          <div className="username-and-email">
+                          <div className="username-and-email"  onClick={() => this.onChangeArrow(index)}>
                             <div className="view-members-username-email">
                               <b>{post.username}</b>
                               <div className="view-non-members-email">
@@ -235,19 +290,18 @@ class ViewMembers extends Component {
                         }
                       >
                         <div className="view-members-membership-details">
-                          MEMBERSHIP NUMBER: <b>{post.memberID}</b>
+                          CELLPHONE NUMBER:{" "}
+                          <b>
+                            {post.phoneNumber === null
+                              ? "N/A"
+                              : post.phoneNumber}
+                          </b>
                           <div>
-                            START OF MEMBERSHIP:{" "}
-                            <b>{post.memberStartDate.substring(0, 10)}</b>
+                            MEMBERSHIP NUMBER: <b>{post.memberID}</b>
                           </div>
                           <div className="view-member-phone-number">
-                            CELL NUMBER:
-                            <b>
-                              {" "}
-                              {post.phoneNumber === null
-                                ? "N/A"
-                                : post.phoneNumber}
-                            </b>
+                            START OF MEMBERSHIP:
+                            <b>{post.memberStartDate.substring(0, 10)}</b>
                           </div>
                         </div>
                       </Collapsible>
@@ -260,7 +314,7 @@ class ViewMembers extends Component {
       </div>
     );
     return (
-      <div className="centre-view-member">
+      <div className="centre-view-member"  style={{ height: this.getBodyHeight() }}>
         <div className="username-search">
           <Row>
             <Col>
@@ -283,7 +337,9 @@ class ViewMembers extends Component {
                   src={Export}
                   className="export-icon"
                   alt="Is a Member"
-                  onClick={() => this.ExportData()}
+                  onClick={e =>
+                    (e.currentTarget.src = exportClick) && this.ExportData()
+                  }
                 />
               </div>
             </Col>
@@ -295,6 +351,7 @@ class ViewMembers extends Component {
               ? "loader-container-members"
               : "hidden"
           }
+          style={{ height: this.getBodyHeight() }}
         >
           <div
             className={
@@ -325,17 +382,30 @@ class ViewMembers extends Component {
         </div>
         {this.state.exportMsg === false ? (
           <div
-            className="table-search-members"
+          className={this.state.getData === false && this.state.exceptionCaught === false
+            ? "hidden"
+            : "table-search-members"}
             style={{ height: this.getBodyHeight() }}
           >
             {postItems}
           </div>
         ) : (
-          <div className="exportMsg-container">
-            <label className="exportMsg-responce">
-              SBmembers.csv sent to fs@retrorabbit.co.za
-            </label>
-            <img src={RedBullet} className="export-success" alt="Is a Member" />
+          <div>
+            {this.state.exportResponse !== ""
+              ? setTimeout(() => {
+                  this.setState({ exportMsg: false });
+                }, 2000)
+              : null}
+            <div className="exportMsg-container">
+              <label className="exportMsg-responce">
+                {this.state.exportResponse}
+              </label>
+              <img
+                src={RedBullet}
+                className="export-success"
+                alt="Is a Member"
+              />
+            </div>
           </div>
         )}
       </div>
@@ -343,4 +413,7 @@ class ViewMembers extends Component {
   }
 }
 
-export default ViewMembers;
+export default connect(
+  null,
+  {pageState }
+)(ViewMembers);

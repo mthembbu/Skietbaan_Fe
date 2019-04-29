@@ -15,7 +15,9 @@ import {
   CHOOSEPAGE,
   ADDMEMBERS,
   FETCH_GROUPS,
-  GROUP_DATA_LOADING
+  GROUP_DATA_LOADING,
+  BINSTATE,
+  SCREEN_SIZE
 } from "../actions/types";
 
 const initialState = {
@@ -33,6 +35,7 @@ const initialState = {
   leaderboardCompetitions: [],
   leaderboardUser: {},
   navSelectedPage: 0,
+  binState: 1,
   idsForUser: [],
   memberIds: [],
   leaderboardSelectedCompetitionName: "",
@@ -46,11 +49,12 @@ const initialState = {
     average: 0
   },
   groupId: "",
-  groupName: ""
+  groupName: "",
+  screenSize: 0
 };
 
 //the function to detect the state change
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_POSTS:
       return {
@@ -76,6 +80,11 @@ export default function(state = initialState, action) {
         ...state,
         groupDict: action.payload
       };
+    case BINSTATE:
+      return {
+        ...state,
+        binState: action.payload
+      };
 
     case UPDATE_GROUPNAME:
       return {
@@ -87,7 +96,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         existing: action.payload,
-        memberIds: action.pay
+        memberIds: action.pay,
+        loader: true
       };
 
     case NEWGROUPSTATE:
@@ -95,12 +105,13 @@ export default function(state = initialState, action) {
         ...state,
         groupsList: action.payload
       };
-
+  
     case EDITGROUPUSERS:
       return {
         ...state,
         editGroup: action.payload,
-        idsForUser: action.pay
+        idsForUser: action.pay,
+        loader: true
       };
     case EMPTY:
       return {
@@ -160,6 +171,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         leaderboardSelectedGroupName: action.payload
+      };
+    case SCREEN_SIZE:
+      return {
+        ...state,
+        screenSize: action.payload
       };
 
     default:

@@ -1,14 +1,21 @@
+@media screen and (max-width:350px)  {
+	.export-col-container{
+		padding-left: 0px;
+		padding-right: 0px;
+		text-align: center !important;
+	}
+}
+
+
 .centre-view-member {
 	margin: 0 auto;
-	margin-top: 30px;
 	position: center;
 	background: #ffffff;
 }
 
 .loader-container-members {
-	background-color: #f6f6f6;
 	padding-top: 12px;
-	height: 100%;
+	height: fit-content;
 }
 
 .loading-message-members {
@@ -28,7 +35,6 @@
 }
 
 .table-search-members {
-	background-color: #f6f6f6;
 	z-index: 1;
 	overflow-y: overlay;
 	padding-top: 12px;
@@ -41,10 +47,10 @@
 	border-bottom-right-radius: 6px;
 }
 .search {
-  display: flex;
+	display: flex;
 	padding: 14px;
-  text-align: left;
-  margin-left: 5px;
+	text-align: left;
+	margin-left: 5px;
 }
 @media only screen and (min-width: 575px) {
 	.username-search {
@@ -55,14 +61,20 @@
 		border-bottom-right-radius: 6px;
 	}
 	.table-search-members {
-		padding: 2% 10% 0% 10%;
-		background-color: #f6f6f6;
+		padding: 3% 5% 0% 5%;
 		overflow-y: scroll;
+	}
+}
+@media only screen and (min-width: 700px) {
+	.user-value {
+		margin-left: 15%;
+	}
+	.export-container {
+		margin-right: 15%;
 	}
 }
 @media only screen and (max-width: 575px) {
 	.table-search-members {
-		background-color: #f6f6f6;
 		overflow-y: scroll;
 		color: #666666;
 		padding-bottom: 70px;
@@ -132,12 +144,13 @@
 	height: 44px;
 	width: 312px;
 	border-radius: 7px;
+	align-self: center;
 }
 .view-expiring-members-text-boxes {
 	background-color: #fdfdfd;
 	border-radius: 4px;
 	line-height: 22px;
-	text-align: left;
+	align-self: center;
 	padding-left: 19px;
 	width: 100%;
 	border: none;
@@ -150,6 +163,7 @@
 	width: 312px;
 	border-radius: 7px;
 	margin-top: 50px;
+	margin-bottom: 7px;
 }
 
 .view-non-members-confirm {
@@ -163,6 +177,17 @@
 	border-width: 1.5px;
 	border: none;
 	color: #ffffff;
+}
+.view-non-members-confirm-inactive {
+	font-weight: lighter;
+	font-size: 16px;
+	width: 312px;
+	height: 42px;
+	color: #ffffff;
+	border: 1px solid #d9d9d9;
+	border-radius: 22px;
+	background: transparent;
+	color: #d9d9d9;
 }
 
 .view-non-members-confirm:focus {
@@ -185,6 +210,22 @@
 	color: #ffffff;
 	margin-top: 20px;
 	margin-bottom: 25px;
+}
+.view-exp-members-inactive {
+	font-weight: lighter;
+	font-size: 16px;
+	border-radius: 25px;
+	width: 312px;
+	height: 42px;
+	border-width: 1.5px;
+	margin-top: 20px;
+	margin-bottom: 25px;
+	border: 1px solid #d9d9d9;
+	background: transparent;
+	color: #d9d9d9;
+}
+.view-exp-members-inactive:focus {
+	outline: none;
 }
 
 .view-exp-members::selection {
@@ -222,7 +263,6 @@
 }
 
 .table-member {
-	background-color: #f6f6f6;
 	width: 100%;
 	color: #666666;
 }
@@ -249,7 +289,6 @@
 }
 
 .first-column {
-	padding-left: 25px;
 	width: 65%;
 	height: 55px;
 	text-align: left;
@@ -259,6 +298,8 @@
 	font-family: helvetica;
 	font-size: 16px;
 	height: 55px;
+	padding-left: 20px;
+	cursor: pointer;
 }
 
 .view-members-exp-username-and-email {
@@ -301,7 +342,6 @@
 	margin-top: 10px;
 	margin-bottom: 20px;
 	text-align: center;
-	padding-right: 25px;
 }
 
 .view-members-exp-membership-details {
@@ -326,20 +366,13 @@
 	font-family: helvetica;
 	font-size: 14px;
 	margin-bottom: 20px;
+	padding-left: 25px;
 }
 
 .membership-icon {
 	height: 17px;
 	width: 17px;
 	margin-left: 4px;
-}
-
-.renew-container {
-	text-align: center;
-	width: 100%;
-	padding-right: 25px;
-	width: 312px;
-	margin-top: 50px;
 }
 
 .view-non-members-email {
@@ -401,55 +434,60 @@
 	width: 312px;
 	height: 77px;
 	border: 1px solid #be0000;
-  margin: auto;
-  text-align: center;
-  padding-top: 20.5px;
-  margin-top: 56px;
+	margin: auto;
+	text-align: center;
+	padding-top: 20.5px;
+	margin-top: 56px;
 }
-.view-member-phone-number{
-  color:#666666;
+.view-member-phone-number {
+	color: #666666;
 }
 
-.export-icon{
-  height: 25px;
-  width: 25px;
+.export-icon {
+	height: 25px;
+	width: 25px;
+	cursor: pointer;
 }
-.export-col-container{
-  margin: auto;
-  text-align: right;
-  margin-top: 21px;
-  margin-right: 20px;
+
+.export-col-container {
+	margin: auto;
+	text-align: right;
+	margin-top: 21px;
+	margin-right: 20px;
 }
-.exportMsg-responce{
-  color:#be0000;
-  font-size: 16px;
-  font-weight: lighter;
-  padding-top: 17px;
+.exportMsg-responce {
+	color: #be0000;
+	font-size: 16px;
+	font-weight: lighter;
+	padding-top: 17px;
 }
-.exportMsg-container{
-  width: 339px;
-  height: 78px;
-  border: 1px solid #be0000;
-  border-radius: 10px;
-  margin: auto;
-  margin-top: 52px;
-  text-align: center;
+.exportMsg-container {
+	width: 339px;
+	height: 78px;
+	border: 1px solid #be0000;
+	border-radius: 10px;
+	margin: auto;
+	margin-top: 52px;
+	text-align: center;
 }
-.export-success{
-  width: 66px;
-  height: 16px;
+.export-success {
+	width: 66px;
+	height: 16px;
 }
-.non-member-same-member-number-error{
+.non-member-same-member-number-error {
 	font-size: 12.12px;
-	color: #EA251A;
+	color: #be0000;
 	margin: auto;
 	font-weight: lighter;
 }
-.membership-container{
-height: 86px;
+.membership-container {
+	height: 86px;
+	display: flex;
+    flex-direction: column;
 }
-.view-non-members-date-box{
-	margin-bottom: 42px;
+.view-non-members-date-box {
+	margin-bottom: 7px;
+	align-self: center;
 	background-color: #fdfdfd;
 	border-radius: 4px;
 	line-height: 22px;
@@ -465,4 +503,78 @@ height: 86px;
 	height: 44px;
 	width: 312px;
 	border-radius: 7px;
+}
+.non-member-renew-date-container {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.renew-container {
+	text-align: center;
+	margin: auto;
+	width: 312px;
+	margin-top: 50px;
+}
+.non-member-renew-error-msg {
+	color: #be0000;
+	font-size: 14px;
+	display: flex;
+	justify-content: center;
+	font-weight: lighter;
+}
+.confirm-button-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 58px;
+	margin-bottom: 50px;
+}
+.confriming-btn {
+	background: url("./GroupImages/MarkedBox.png") no-repeat !important;
+	background-position-y: 5px !important;
+	background-position-x: 270px !important;
+	width: 312px;
+	height: 42px;
+	border-radius: 22px;
+	font-size: 16px;
+	font-weight: lighter;
+	color: #be0000;
+	background: transparent;
+	display: flex;
+	justify-content: center;
+	border: 1.5px solid #be0000;
+}
+
+.non-member-Date-error-msg {
+	color: #be0000;
+	font-size: 14px;
+	font-weight: lighter;
+	align-self: center;
+}
+
+.date-error-msg-cpntainer {
+	display: flex;
+	flex-direction: column;
+	height: 90px;
+}
+.user-is-a-member-msg-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 50px;
+}
+
+.user-is-a-member-msg {
+	background: url("./GroupImages/MarkedBox.png") no-repeat;
+	background-position-y: 5px;
+	background-position-x: 270px;
+	font-size: 16px;
+	color: #be0000;
+	font-weight: lighter;
+	width: 312px;
+	height: 42px;
+	border-radius: 22px;
+	border: 1.5px solid #be0000;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }

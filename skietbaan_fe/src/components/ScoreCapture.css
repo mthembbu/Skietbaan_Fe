@@ -7,14 +7,19 @@
     color: black;
     font-size: 16px;
     font-weight: bold;
-    overflow-y: overlay;
     padding-left: 3px;
-    max-height: 60vh;
-    padding-bottom: 56px;
 }
 
-::-webkit-scrollbar { 
-    display: none; 
+.scrollbar{
+    max-height: 60vh;
+    padding-bottom: 56px;
+    overflow-y: overlay;
+}
+
+@media screen and (max-width: 576px){
+    ::-webkit-scrollbar { 
+        display: none !important; 
+    }
 }
 
 .competition-item{
@@ -206,6 +211,10 @@
     color: #BE0000;
     padding-top: 53px;
     font-weight: 300;
+}
+
+.padding-top-160{
+    padding-top:160px;
 }
 
 .label-score{
@@ -487,7 +496,7 @@ hr{
     background-size: contain;
     background-position: 6px 0px;
     background-image: url("../components/assets/gunOverlay.png");
-    width: 100%;
+    width: 87%;
     height: 63px;
 }
 
@@ -624,8 +633,4 @@ input[type=number] {
     font-weight: 300;
     color: #BE0000;
     font-family: helvetica;
-}
-
-::-webkit-scrollbar { 
-    display: none; 
 }

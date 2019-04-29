@@ -184,7 +184,7 @@ export default class userDetails extends Component {
             </div>
           </div>
         ) : (
-          <div className="user-details-main-container user-details-container">
+          <div className="user-details-main-container">
             <div className="user-details-scrolls">
               <div className="member-details-container">
                 <div className="user-details-heading-container user-details-member-label">
@@ -193,9 +193,9 @@ export default class userDetails extends Component {
                   this.state.array.name === null ||
                   this.state.array.name === ""
                     ? this.state.array.username.toUpperCase()
-                    : this.state.array.surname.toUpperCase() +
+                    : this.state.array.name.toUpperCase() +
                       " " +
-                      this.state.array.name.toUpperCase()}
+                      this.state.array.surname.toUpperCase()}
                 </div>
                 {this.state.array.memberID === null ||
                 this.state.array.memberID === undefined ? null : (

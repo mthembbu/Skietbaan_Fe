@@ -4,11 +4,11 @@ import "font-awesome/css/font-awesome.min.css";
 import "../bootstrap/NavbarMenuStyle.css";
 import history from "./history";
 import { NAV_BAR_ICONS } from "../actions/types.js";
-import { BASE_URL } from "../actions/types.js";
 import { getCookie } from "../components/cookie.js";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { checkUserType } from "../actions/adminAction";
+import { pageState } from '../actions/postActions';
 import { fetchNumberOfNotification } from "../actions/notificationAction";
 
 class NavbarMenu extends Component {
@@ -32,7 +32,6 @@ class NavbarMenu extends Component {
     this.isProfile = this.isProfile.bind(this);
     this.isNotifications = this.isNotifications.bind(this);
     this.GoTo = this.GoTo.bind(this);
-    this.fetchNumberOfNotification = this.fetchNumberOfNotification.bind(this);
   }
 
   isHome() {
@@ -65,6 +64,7 @@ class NavbarMenu extends Component {
         />
       );
     } else {
+      this.props.pageState(10);
       return (
         <img
           src={NAV_BAR_ICONS.CREATE_GRAY}
@@ -115,20 +115,6 @@ class NavbarMenu extends Component {
     }
   }
 
-  fetchNumberOfNotification() {
-    const token = document.cookie;
-    fetch(BASE_URL + "/api/Notification/GetNumberOfNotifications?" + token)
-      .then(response => response.json())
-      .then(data =>
-        this.setState({
-          numberOfNotifications: data
-        })
-      )
-      .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      });
-  }
-
   isNotifications() {
     if (this.props.navSelectedPage === 4) {
       return (
@@ -177,13 +163,27 @@ class NavbarMenu extends Component {
             <table className="navbar-admin">
               <tbody>
                 <tr className="first-row-navbar">
-                  <td className="columns" onClick={() => this.GoTo("/home")}>{this.isHome()}</td>
-                  <td className={this.props.isAdmin ? "columns" : "hideAdmin"} onClick={() => this.GoTo("/create")}>
+                  <td className="columns" onClick={() => this.GoTo("/home")}>
+                    {this.isHome()}
+                  </td>
+                  <td
+                    className={this.props.isAdmin ? "columns" : "hideAdmin"}
+                    onClick={() => this.GoTo("/create")}
+                  >
                     {this.isCreate()}
                   </td>
-                  <td className="columns" onClick={() => this.GoTo("/scoreCapture")}>{this.isScoreCapture()} </td>
-                  <td className="columns" onClick={() => this.GoTo("/profile")}>{this.isProfile()}</td>
-                  <td className="columns" onClick={() => this.GoTo("/notify")}>{this.isNotifications()}</td>
+                  <td
+                    className="columns"
+                    onClick={() => this.GoTo("/scoreCapture")}
+                  >
+                    {this.isScoreCapture()}{" "}
+                  </td>
+                  <td className="columns" onClick={() => this.GoTo("/profile")}>
+                    {this.isProfile()}
+                  </td>
+                  <td className="columns" onClick={() => this.GoTo("/notify")}>
+                    {this.isNotifications()}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -202,5 +202,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { checkUserType, fetchNumberOfNotification }
+  { checkUserType, fetchNumberOfNotification ,pageState}
 )(NavbarMenu);

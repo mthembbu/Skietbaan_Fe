@@ -15,7 +15,9 @@ import ViewComp from '../components/ViewComp';
 import GroupComponent from '../components/GroupComponent';
 import CompComponent from '../components/CompComponent';
 import { compSelectedPages } from '../actions/competition.action';
-import { pageState, selectedPage } from '../actions/postActions';
+import { pageState, selectedPage, binStateFunc } from '../actions/postActions';
+import whiteBin from './GroupImages/whiteBin.png';
+import blackBin from './GroupImages/blackBin.png';
 export class createPages extends Component {
 	constructor(props) {
 		super(props);
@@ -26,7 +28,8 @@ export class createPages extends Component {
 			selectedButtonCreateViewCompetitions: 1,
 			selectedValue: 'A',
 			user: [],
-			height: document.body.clientHeight
+			height: document.body.clientHeight,
+			binState: false
 		};
 
 		this.groupsPage = this.groupsPage.bind(this);
@@ -39,8 +42,10 @@ export class createPages extends Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.updateCreateContainer = this.updateCreateContainer.bind(this);
 		this.noShadowOnMember = this.noShadowOnMember.bind(this);
+		this.showHideHeader = this.showHideHeader.bind(this);
 	}
 	updateCreateContainer() {
+		this.props.binStateFunc(1);
 		switch (this.selectedButton) {
 			case 1:
 				if (this.state.selectedButtonCreateViewGroups === 1) {
@@ -82,7 +87,7 @@ export class createPages extends Component {
 	}
 
 	membersPage() {
-		this.setState({ selectedButton: 3 });
+		this.setState({ selectedButton: 3, selectedValue: 'A' });
 	}
 
 	createGroups() {
@@ -92,6 +97,7 @@ export class createPages extends Component {
 	}
 
 	viewGroups() {
+		this.props.binStateFunc(1);
 		this.props.pageState(0);
 		this.props.compSelectedPages(2);
 		this.setState({ selectedButtonCreateViewGroups: 2 });
@@ -135,39 +141,115 @@ export class createPages extends Component {
 		} else {
 			window.location = '/registerPage';
 		}
-		if (this.props.page === "" || this.props.page!=0 || this.props.page!=10) {
+		if (this.props.page === "") {
 			this.props.pageState(10);
 		}
-
 	}
 
-	componentWillMount() {
+	showHideHeader() {
 		window.addEventListener("resize", () => {
-			let Navbar = document.querySelector(".navbar-admin");
+			let Navbar = document.querySelector(".create-main-container");
 			if (this.state.height === document.body.clientHeight) {
-				Navbar.classList.remove("hidden");
+				this.setState({
+					toggle: false
+				});
 			} else {
-				Navbar.classList.add("hidden");
+				this.setState({
+					toggle: true
+				});
 			}
 		});
 	}
 
-	render() {
-		if (!getCookie('token')) {
-			window.location = '/registerPage';
+	componentWillMount() {
+		this.props.binStateFunc(1);
+		this.showHideHeader();
+		if (window.innerWidth < 575 && window.innerHeight < 800) {
+			window.addEventListener("resize", () => {
+				let Navbar = document.querySelector(".navbar-admin");
+				if (this.state.height === document.body.clientHeight) {
+					Navbar.classList.remove("hidden");
+				} else {
+					Navbar.classList.add("hidden");
+				}
+			})
 		}
-		return (
+	}
+
+
+	changeBinState = () => {
+		if (this.props.binState === 1) {
+			for(var i=0;i<this.props.groupsList.length;i++){
+				this.props.groupsList[i].highlighted = false;
+			}
+			this.props.binStateFunc(2);
+		} else {
+			for (var i = 0; i < this.props.compOBJ.length; i++) {
+				this.props.compOBJ[i].highlighted = false;
+			  }
+			this.props.binStateFunc(1);
+		}
+	};
+
+	render() {
+		const keyBoardVisible = (
 			<Row className="row justify-content-center">
 				<Col sm={8} className="createpage-bootstrap-col-center-container">
-					<div className="create-main-container">
+					<div className="">
 						{this.props.page === 0 || this.props.page === 10 || this.props.page === 5 ? (
-							<div className="create-nav-container">
+							<div className="">
 								<div className={this.state.selectedButton === 3 ? 'create-top-nav-members' : 'create-top-nav'}>
 									{/* top */}
 									<div class="page-name-bar">
 										<div className="gun-overlay-image">
 											<label className="label-for-score">CREATE</label>
 										</div>
+									</div>
+								</div>
+							</div>
+						) : null}
+						<div className="components-create">
+
+							{this.state.selectedButton === 1 && this.props.page === 10 ? (
+								<AddGroup />
+							) : this.state.selectedButton === 1 && this.props.page === 0 || this.state.selectedButton === 1 && this.props.page === 1 || this.state.selectedButton === 1 && this.props.page === 2 ? (
+								<GroupComponent />
+							) : null}
+							{this.state.selectedButton === 2 ? <CompComponent /> : null}
+							{this.state.selectedButton === 3 && this.state.selectedValue === 'A' ? (
+								<ViewNonMembers />
+							) : this.state.selectedButton === 3 && this.state.selectedValue === 'B' ? (
+								<ViewMembers />
+							) : this.state.selectedButton === 3 && this.state.selectedValue === 'C' ? (
+								<ViewMembersExpiring />
+							) : null}
+						</div>
+					</div>
+				</Col>
+			</Row>
+		);
+
+		const noKeyBoardVisible = (
+			<Row className="justify-content-center">
+				<Col sm={8} className="createpage-bootstrap-col-center-container">
+					<div className="create-main-container">
+						{this.props.page === 0 || this.props.page === 10 || this.props.page === 5 ? (
+							<div className="create-nav-container">
+								<div className={this.state.selectedButton === 3 ? 'create-top-nav-members' : 'create-top-nav'}>
+									{/* top */}
+									<div className="page-name-bar">
+										<div className="gun-overlay-image">
+											<label className="label-for-score">CREATE</label>
+
+										</div>
+										{(this.props.page === 0 && this.state.selectedButton===1) ||(this.props.page===0 && this.state.selectedButton===2)  ?
+											<div className="plus-next" onClick={() => this.changeBinState()}>
+												<img
+													className="bin-image"
+													src={this.props.binState === 1 ? whiteBin : blackBin}
+													alt=""
+												/>
+											</div> : null}
 									</div>
 									<Row className="row justify-content-center">
 										<div className="create-switch-top">
@@ -212,7 +294,9 @@ export class createPages extends Component {
 													onClick={this.createGroups}
 												>
 													CREATE
+
 										</div>
+
 												<div
 													className={
 														(this.state.selectedButton === 1 && this.props.page === 0) || (this.state.selectedButton === 2 && this.props.page === 0) ? (
@@ -297,13 +381,23 @@ export class createPages extends Component {
 				</Col>
 			</Row>
 		);
+
+		if (!getCookie('token')) {
+			window.location = '/registerPage';
+		}
+		return (
+			<div>{this.state.toggle ? keyBoardVisible : noKeyBoardVisible}</div>
+		);
 	}
 }
 
 const mapStateToProps = (state) => ({
-	page: state.posts.page
+	page: state.posts.page,
+	binState: state.posts.binState,
+	groupsList: state.posts.groupsList,
+	compOBJ: state.compOBJ.allComps
 });
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, { compSelectedPages, pageState, selectedPage })(createPages);
+export default connect(mapStateToProps, { compSelectedPages, pageState, selectedPage, binStateFunc })(createPages);

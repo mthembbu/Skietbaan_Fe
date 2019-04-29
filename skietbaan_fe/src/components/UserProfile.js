@@ -37,7 +37,7 @@ class UserProfile extends Component {
 
     UNSAFE_componentWillMount() {
         var token = getCookie("token");
-        if (token == undefined) {
+        if (token === undefined) {
             history.push("/registerPage");
             return;
         }
@@ -49,7 +49,7 @@ class UserProfile extends Component {
         })
         .then(res => res.json())
         .then(_response => {
-            if(this._isMounted && typeof _response != "string"){
+            if(this._isMounted && typeof _response !== "string"){
                 _response.forEach((element, index) => {
                     this.mapCompetitionNameToIndex[element.competitionName] = index;
                 })
@@ -244,12 +244,10 @@ class UserProfile extends Component {
 
     getInitialAward(){
         if(this.props.selectedCompetition.length === 0){
-            
             return this.state.awardCompetitions[0]
         }else{
             var initAward = this.state.awardCompetitions[this.getIndexByCompetitionName(this.props.selectedCompetition)]
             if(initAward === null || initAward === undefined){
-                
                 this.props.setSelectedCompetition(this.state.awardCompetitions[0])
                 return this.state.awardCompetitions[0]
             }
@@ -279,7 +277,7 @@ class UserProfile extends Component {
 
     renderError(errorMessage){
         return(
-            <div className="no-competition-border">
+            <div className="no-competition-border height-77px">
                 <label className="no-competition">{errorMessage}</label>
             </div>
         )
@@ -292,7 +290,7 @@ class UserProfile extends Component {
 
     render() {
         return (
-            <div className="award-container pad-award-container">
+            <div className="award-container">
                 {this.state.exceptionCaughtOnAwards ? 
                     this.renderError("Something went wrong") :
                 this.state.errorOccured ? this.renderError(this.state.apiResponse) :

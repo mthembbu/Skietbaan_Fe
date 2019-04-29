@@ -39,6 +39,7 @@ export const COMP_PAGE = "COMP_PAGE";
 export const UPDATE_COMP_STATUS = "UPDATE_COMP_STATUS";
 export const PARTICIPANTS_PER_COMP = "PARTICIPANTS_PER_COMP";
 export const CHECK_ADMIN = "CHECK_ADMIN";
+export const NEWCOMPSTATE = "NEWCOMPSTATE";
 export const BASE_URL = "https://api.scoring.skietbaan.co.za";
 
 //leaderboard types
@@ -62,6 +63,8 @@ export const GROUPDICT = "GROUPDICT";
 export const EMPTY = "EMPTY";
 export const NEWGROUPSTATE = "NEWGROUPSTATE";
 export const GROUP_DATA_LOADING = "GROUP_DATA_LOADING";
+export const BINSTATE = "BINSTATE";
+export const SCREEN_SIZE = "SCREEN_SIZE";
 
 //notification types
 export const FETCH_NOTIFICATION = "FETCH_NOTIFICATION";

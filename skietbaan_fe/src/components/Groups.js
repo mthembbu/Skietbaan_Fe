@@ -28,7 +28,10 @@ class Groups extends Component {
       check: "Select all",
       height: window.innerHeight,
       width: window.innerWidth,
-      token: getCookie("token")
+      token: getCookie("token"),
+      getData: false,
+      heightOfClient: document.body.clientHeight
+
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -37,6 +40,7 @@ class Groups extends Component {
     this.selectall = this.selectall.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
     this.getBodyHeight = this.getBodyHeight.bind(this);
+    this.extractEmails = this.extractEmails.bind(this);
   }
   UNSAFE_componentWillMount() {
     fetch(BASE_URL + "/api/user")
@@ -55,22 +59,32 @@ class Groups extends Component {
 
     fetch(BASE_URL + "/api/Groups")
       .then(res => res.json())
-      .then(data => this.setState({ groups: data.name }))
+      .then(data =>
+        this.setState({
+          groups: data.name,
+          getData: true
+        })
+      )
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
   }
   componentWillMount() {
-    window.addEventListener("resize", this.updateDimensions);
-  }
+    window.addEventListener('resize',this.updateDimensions());
+    this.setState({count:0})
+    let Navbar = document.querySelector(".navbar-admin");
+      if(Navbar!=null){
+        Navbar.classList.remove("hidden");
+      }
+	}
   componentDidMount() {
-    this.updateDimensions();
+    window.addEventListener("resize", this.updateDimensions);
   }
   getBodyHeight() {
     if (this.state.width < 575) {
-      return this.state.height - 255 + "px";
+      return this.state.height - 225 + "px";
     } else {
-      return "59vh";
+      return "61vh";
     }
   }
   updateDimensions() {
@@ -94,7 +108,7 @@ class Groups extends Component {
     }
 
     const requestedObj = {
-      name: this.props.name.toLowerCase(),
+      name: this.props.name,
       users: this.state.newArray
     };
 
@@ -116,21 +130,53 @@ class Groups extends Component {
     history.push("/create");
   }
 
+  extractEmails(text) {
+    if (this.state.filterText[0] === "@") {
+      let ser = text.search("@")
+      let word = text.substring(ser, text.length)
+      let ss = word.split(".")
+      return ss[0];
+    }
+    else {
+      return text;
+    }
+  }
+
   selectall() {
+    let arr = []
+    this.state.posts.filter(post => {
+      return (
+        !this.state.filterText ||
+        post.username
+          .toLowerCase()
+          .startsWith(this.state.filterText.toLowerCase()) ||
+        post.email
+          .toLowerCase()
+          .startsWith(this.state.filterText.toLowerCase()) || (this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
+      );
+    }).map(data => arr.push(data.id))
+
     if (this.state.check === "Select all") {
-      this.setState({ count: this.state.posts.length });
-      for (var i = 0; i < this.state.posts.length; i++) {
-        this.state.posts[i].highlighted = true;
+      this.setState({ count: arr.length });
+      for (var i = 0; i < arr.length; i++) {
+        (this.state.posts[this.state.ids.indexOf(arr[i])]).highlighted = true;
       }
       this.setState({ check: "Unselect all" });
     } else {
       this.setState({ count: 0 });
-      for (var j = 0; j < this.state.posts.length; j++) {
-        this.state.posts[j].highlighted = false;
+      for (var j = 0; j < arr.length; j++) {
+        (this.state.posts[this.state.ids.indexOf(arr[j])]).highlighted = false;
       }
       this.setState({ check: "Select all" });
     }
   }
+
+  cancel = () => {
+    for (var i = 0; i < this.state.posts.length; i++) {
+      this.state.posts[i].highlighted = false;
+    }
+    this.setState({ count: 0 });
+  };
 
   toggleHighlight = event => {
     const index = this.state.ids.indexOf(event);
@@ -143,9 +189,28 @@ class Groups extends Component {
     }
   };
   onBack() {
+    this.setState({ count: 0 });
     this.props.history.push("/create");
   }
+  keyboardHideNav = ()=>{
+    let Navbar = document.querySelector(".navbar-admin");
+    if(Navbar!=null){
+      if (window.innerWidth < 575 && window.innerHeight < 800) {
+        if (this.props.screenSize === document.body.clientHeight) {
+          if(this.state.count === 0){
+            Navbar.classList.remove("hidden");
+          }
+          else{
+            Navbar.classList.add("hidden"); 
+          }          
+        } else {
+          Navbar.classList.add("hidden");
+        }
+      }
+    }
+  }
   render() {
+    this.keyboardHideNav();
     const postitems = (
       <div className="check" style={{ height: this.getBodyHeight() }}>
         {this.state.posts.length === 0 ? null : (
@@ -159,7 +224,10 @@ class Groups extends Component {
                     .startsWith(this.state.filterText.toLowerCase()) ||
                   post.email
                     .toLowerCase()
-                    .startsWith(this.state.filterText.toLowerCase())
+                    .startsWith(this.state.filterText.toLowerCase()) ||
+                  this.extractEmails(post.email).startsWith(
+                    this.state.filterText.toLowerCase()
+                  )
                 );
               })
               .map((post, index) => (
@@ -243,11 +311,37 @@ class Groups extends Component {
                 </div>
               </div>
             </div>
+            <div
+              className={
+                this.state.getData === false ? "loader-formatting" : "hidden"
+              }
+            >
+              <div
+                className={this.state.getData === false ? "loader" : "hidden"}
+              />
+              <div
+                className={
+                  this.state.getData === false
+                    ? "target-loader-image"
+                    : "hidden"
+                }
+              />
+              <div
+                className={
+                  this.state.getData === false ? "loading-message" : "hidden"
+                }
+              >
+                Loading...
+              </div>
+            </div>
             {postitems}
             {this.state.count === 0 ? null : (
               <label className="bottom-label">
+                <button className="cancel-creating-group" onClick={()=>this.cancel()}>
+                  CANCEL
+                </button>
                 <button className="create-group" onClick={this.handleOnClick}>
-                  Create Group
+                  CREATE GROUP
                 </button>
               </label>
             )}
@@ -259,7 +353,8 @@ class Groups extends Component {
 }
 const mapStateToProps = state => ({
   name: state.posts.groupName,
-  thegroup: state.posts.selectedItem
+  thegroup: state.posts.selectedItem,
+  screenSize: state.posts.screenSize
 });
 
 export default withRouter(

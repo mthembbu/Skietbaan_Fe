@@ -7,17 +7,24 @@ import {
   FETCH_REQ,
   COMP_PAGE,
   UPDATE_REQ,
-  COMPETITION_DATA_LOADING
+  COMPETITION_DATA_LOADING,
+  NEWCOMPSTATE
 } from "./types";
 //fetch the array of competitions
 export const fetchComp = () => dispatch => {
+  const arr=[]
   dispatch({ type: COMPETITION_DATA_LOADING });
   fetch(BASE_URL + "/api/Competition/all")
     .then(res => res.json())
     .then(compData => {
+      const newComp = compData.map(data=>{
+        data.highlighted=false;
+        arr.push(data.id);
+      });
       dispatch({
         type: FETCH_COMP,
-        payload: compData
+        payload: compData,
+        pay:arr
       });
     })
     .catch(err => {
@@ -137,6 +144,15 @@ export const compSelectedPages = page => {
     dispatch({
       type: COMP_PAGE,
       payload: page
+    });
+  };
+};
+
+export const newCompArrayState = (data) => {
+  return dispatch => {
+    dispatch({
+      type: NEWCOMPSTATE,
+      payload: data
     });
   };
 };

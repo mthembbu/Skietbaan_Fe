@@ -81,7 +81,8 @@ class notification extends Component {
       }).then(() => {
         this.props.getNotifications(this.state.token);
         this.setState({
-          toggle: false
+          toggle: false,
+          count: 0
         });
         this.props.fetchNumberOfNotification(this.state.token);
       });
@@ -133,23 +134,24 @@ class notification extends Component {
 
   markForDeletion = index => {
     if (this.props.notificationsArray[index].markedForDeletion === true) {
-      this.setState({ marked: false });
+      this.setState({ marked: false, count: 0 });
       this.props.notificationsArray[index].markedForDeletion = false;
     } else if (
       this.props.notificationsArray[index].markedForDeletion === false
     ) {
-      this.setState({ marked: true });
+      this.setState({ marked: true, count: 1 });
       this.props.notificationsArray[index].markedForDeletion = true;
     }
   };
 
   selectAll = () => {
+    this.secondIconChange();
     for (var i = 0; i < this.props.notificationsArray.length; i++) {
-      if (this.props.notificationsArray[i].markedForDeletion === true) {
-        this.setState({ marked: false });
+      if (this.state.secondToggle) {
+        this.setState({ marked: false, count: 0 });
         this.props.notificationsArray[i].markedForDeletion = false;
-      } else if (this.props.notificationsArray[i].markedForDeletion === false) {
-        this.setState({ marked: true });
+      } else {
+        this.setState({ marked: true, count: 1 });
         this.props.notificationsArray[i].markedForDeletion = true;
       }
     }
@@ -167,13 +169,13 @@ class notification extends Component {
   }
   componentWillMount() {
     window.addEventListener("resize", () => {
+      this.updateDimensions();
       let Navbar = document.querySelector(".navbar-admin");
       if (this.state.heightOfClient === document.body.clientHeight) {
         Navbar.classList.remove("hidden");
       } else {
         Navbar.classList.add("hidden");
       }
-      this.updateDimensions();
     });
   }
   getBodyHeight() {
@@ -199,13 +201,23 @@ class notification extends Component {
   }
 
   changeIcon() {
+    if (this.state.toggle === true) {
+      this.setState({ count: 0 });
+      for (var i = 0; i < this.props.notificationsArray.length; i++) {
+        this.props.notificationsArray[i].markedForDeletion = false;
+      }
+    }
     if (this.props.notificationsArray.length <= 0) {
       this.setState({
-        toggle: false
+        toggle: false,
+        adminToggle: false,
+        secondToggle: false
       });
     } else if (this.props.notificationsArray.length > 0) {
       this.setState({
-        toggle: !this.state.toggle
+        toggle: !this.state.toggle,
+        adminToggle: false,
+        secondToggle: false
       });
     }
   }
@@ -218,8 +230,12 @@ class notification extends Component {
 
   speakerClick() {
     this.setState({
-      adminToggle: !this.state.adminToggle
+      adminToggle: !this.state.adminToggle,
+      toggle: false,
+      secondToggle: false,
+      count: 0
     });
+    this.state.toggle = false
     if (this.state.adminToggle === false) {
       this.disableButton();
     }
@@ -252,16 +268,34 @@ class notification extends Component {
     document.getElementById("announcementButton").disabled = true;
     setTimeout(() => {
       this.setState({
-        adminToggle: false
+        adminToggle: false,
       });
       window.location = "/notify";
     }, 1000);
+  };
+
+  keyboardHideNav = () => {
+    let Navbar = document.querySelector(".navbar-admin");
+    if (Navbar != null) {
+      if (window.innerWidth < 575 && window.innerHeight < 800) {
+        if (this.props.screenSize === document.body.clientHeight) {
+          if (this.state.count === 0) {
+            Navbar.classList.remove("hidden");
+          } else {
+            Navbar.classList.add("hidden");
+          }
+        } else {
+          Navbar.classList.add("hidden");
+        }
+      }
+    }
   };
 
   render() {
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
+    this.keyboardHideNav();
 
     let headingItems = (
       <div className="page-heading">
@@ -273,7 +307,7 @@ class notification extends Component {
         <div className="notification-icon-spacing">
           <img
             src={
-              this.state.toggle
+              this.state.toggle && !this.state.secondToggle
                 ? whiteSelectAll
                 : this.state.secondToggle
                 ? blackSelectAll
@@ -283,6 +317,7 @@ class notification extends Component {
             className="select-all"
             alt=""
           />
+
           <img
             src={this.state.toggle ? deleteIconChange : deleteIcon}
             onClick={() => this.changeIcon()}
@@ -307,12 +342,13 @@ class notification extends Component {
             }
             onClick={() => this.speakerClick()}
             className="admin-notification-images"
+            alt=""
           />
         </div>
         <div className="admin-notification-icon-spacing">
           <img
             src={
-              this.state.toggle
+              this.state.toggle && !this.state.secondToggle
                 ? whiteSelectAll
                 : this.state.secondToggle
                 ? blackSelectAll
@@ -432,18 +468,18 @@ class notification extends Component {
         <tr className="tr-Class">
           <td>
             <button
-              className="notifications-modal-confirm"
-              onClick={this.onDelete}
-            >
-              {modalText}
-            </button>
-          </td>
-          <td>
-            <button
               onClick={() => this.onClick_cancel()}
               className="notifications-modal-cancel"
             >
               CANCEL
+            </button>
+          </td>
+          <td>
+            <button
+              className="notifications-modal-confirm"
+              onClick={this.onDelete}
+            >
+              {modalText}
             </button>
           </td>
         </tr>
@@ -521,7 +557,8 @@ const mapStateToProps = state => ({
   awardsSelectedCompetition: state.awardsReducer.selectedCompetition,
   selectedButton: state.landingReducer.selectedLandingPage,
   loading: state.notificationOBJ.loading,
-  isAdmin: state.adminReducer.isAdmin
+  isAdmin: state.adminReducer.isAdmin,
+  screenSize: state.posts.screenSize
 });
 
 export default connect(
