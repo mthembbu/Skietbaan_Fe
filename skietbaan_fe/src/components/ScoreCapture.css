@@ -13,7 +13,7 @@
     padding-bottom: 56px;
 }
 
-@media screen and (max-width: 576px){
+
 .view-score-competition-container{
     padding-top: 0px;
     list-style-type: none;
@@ -28,6 +28,7 @@
     max-height: 60vh;
 }
 
+@media screen and (max-width: 576px){
     ::-webkit-scrollbar { 
         display: none !important; 
     }
@@ -559,6 +560,15 @@ input[type=number] {
     margin-top: -25px;
 }
 
+.view-scores-cancel-button{
+    background: url('../components/assets/whiteCancel.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 28px;
+    width: 28px;
+    position: absolute;
+}
+
 .btn-back{
     float: left;
     height: 30px;
@@ -773,4 +783,20 @@ input[type=number] {
     color: #555555;
     font-weight: bold;
     padding-left: 11px;
+}
+
+.view-scores-username{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.view-scores-email{
+    font-size: 12px;
+    font-weight: 300;
+    padding-top: 11px;
+}
+
+.username-and-email-view-scores{
+    line-height: 6px;
+    padding-top: 2px;
 }

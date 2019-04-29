@@ -26,12 +26,17 @@ class ViewScores extends Component {
             duplicate: false,
             competitionId: null,
             userClicked: false,
-            someUserClick: null
+            someUserClick: null,
+            originalUserList: [],
+            username: "",
+            email: ""
         };
         this.competitionClicked = this.competitionClicked.bind(this);
         this.formatTime = this.formatTime.bind(this);
         this.showPhoto = this.showPhoto.bind(this);
-        this.getScoresForAdmin = this.getScoresForAdmin.bind(this)
+        this.getScoresForAdmin = this.getScoresForAdmin.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
+        this.usernameCancelClicked = this.usernameCancelClicked.bind(this);
     }
 
     showPhoto(item) {
@@ -41,10 +46,26 @@ class ViewScores extends Component {
         })
     }
 
-    getScoresForAdmin(token, item) {
+    handleSearch({ target }) {
+
+        let tempList = [];
+        for (var i = 0; i < this.state.originalUserList.length; i++) {
+            let username = this.state.originalUserList[i].username;
+            let emailAddress = this.state.originalUserList[i].email;
+            if (username.indexOf(target.value) > -1 || emailAddress.indexOf(target.value) > -1)
+                tempList.push(this.state.originalUserList[i]);
+        }
+        this.setState({
+            usersList: tempList
+        });
+    }
+
+    getScoresForAdmin(token, item, emailUser, username) {
         this.setState({
             userClicked: !this.state.userClicked,
-            someUserClick: item
+            someUserClick: item,
+            username: username,
+            email: emailUser
         })
         fetch(BASE_URL + "/api/Scores/" + this.state.competitionId + "/" + token, {
             method: "GET",
@@ -85,6 +106,7 @@ class ViewScores extends Component {
                 competitionName: compName,
                 competitionId: compId
             });
+            document.getElementById("username").value = "";
             toggleToggleBar();
 
             if (compId !== "" && this.props.isAdmin === false) {
@@ -127,7 +149,8 @@ class ViewScores extends Component {
                     .then(data =>
                         this.setState({
                             usersList: data,
-                            getDataScores: true
+                            getDataScores: true,
+                            originalUserList: data
                         })
                     )
                     .catch(err => {
@@ -145,9 +168,18 @@ class ViewScores extends Component {
                 clicked: null,
                 cameraClicked: false,
                 scoresList: [],
-                usersList: []
+                userClicked: false,
+                usersList: [],
+                originalUserList: []
             });
         }
+    }
+
+    usernameCancelClicked() {
+        this.setState({
+            scoresList: [],
+            userClicked: false,
+        });
     }
 
     componentDidMount() {
@@ -204,6 +236,20 @@ class ViewScores extends Component {
                         </div>
                     </div>
                 );
+            }
+            if (this.props.isAdmin === true) {
+                competitionItem.push(
+                    <div className={this.state.userClicked === false ? "hidden" : "competition-item active"}>
+                        <div
+                            onClick={() => this.usernameCancelClicked()}
+                            className="view-scores-cancel-button"
+                        />
+                        <div className="username-and-email-view-scores">
+                            <div className="view-scores-username">{this.state.username}</div>
+                            <div className="view-scores-email">{this.state.email} </div>
+                        </div>
+                    </div>
+                )
             }
         } else if (this.state.getData === true || this.state.exceptionCaught === true) {
             competitionItem.push(
@@ -264,16 +310,14 @@ class ViewScores extends Component {
                 adminScoresList.push(
                     <div className={this.state.userClicked === true ? "hidden" : "score-content"}>
                         <div className={this.state.userClicked === true ? "hidden" : "users-container"}
-                            onClick={() => this.getScoresForAdmin(this.state.usersList[i].token, i)}>
+                            onClick={() => this.getScoresForAdmin(this.state.usersList[i].token, i,
+                                this.state.usersList[i].email, this.state.usersList[i].username)}>
                             <div className={this.state.userClicked === true ? "hidden" : "usernames"}>
                                 {this.state.usersList[i].username}</div>
                             <div className={this.state.userClicked === true ? "hidden" : "user-emails"}>
                                 {this.state.usersList[i].email}</div>
                         </div>
                         <div className={this.state.userClicked === true ? "hidden" : "border-line"}>
-                        </div>
-                        <div className={this.state.userClicked === false ? "hidden" : "active competition-item active"}>
-                            <div>{this.state.usersList[i].username } </div>
                         </div>
                     </div>
                 )
@@ -293,18 +337,23 @@ class ViewScores extends Component {
                 </div>
                 <div className={this.state.clicked === null ?
                     "hidden" : "score-list-container"}>
-                    {this.props.isAdmin === false || this.state.scoresList.length !== 0  ? (
+                    {this.props.isAdmin === false || this.state.scoresList.length !== 0 ? (
                         <div>{scoreListForUser}</div>
                     ) : (
-                            <div className="view-scores-input-container">
-                                <input
-                                    placeholder="Search"
-                                    className={this.state.userClicked === true ? "hidden" : "score"}
-                                    type="text"
-                                ></input>
-                                <div>
-                                    {adminScoresList}
+                            <div>
+                                <div className="view-scores-input-container">
+                                    <input
+                                        placeholder="Search"
+                                        className={this.state.userClicked === true ? "hidden" : "score"}
+                                        type="text"
+                                        onChange={this.handleSearch}
+                                        id="username"
+                                    ></input>
+                                    <div>
+                                        {adminScoresList}
+                                    </div>
                                 </div>
+
                             </div>
                         )}
                 </div>
