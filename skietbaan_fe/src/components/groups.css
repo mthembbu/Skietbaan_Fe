@@ -810,6 +810,7 @@
 }
 .table-member .view-group .switch-container {
 	width: 20%;
+	justify-content: center;
 }
 .edit-no-user-container {
 	width: 312px;
@@ -836,6 +837,7 @@
 
 .view-group-confirm-panel {
 	display: flex;
+	padding-top: 5px;
 	justify-content: center;
 	bottom: 0;
 	position: absolute;

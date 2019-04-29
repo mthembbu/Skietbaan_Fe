@@ -399,6 +399,7 @@ async  deleteComp(){
                                     ? "activeButton"
                                     : "inactiveButton"
                                 }
+                                style={{justifyContent:"flex-end"}}
                               >
                                 <Switch
                                   color={"primary"}
@@ -407,6 +408,7 @@ async  deleteComp(){
                                       ? "activeButton"
                                       : "inactiveButton"
                                   }
+                                 
                                   focus={true}
                                   checked={compVar.status}
                                   onClick={() =>
