@@ -569,7 +569,7 @@
 	.bpanel {
 		display: flex;
 		position: absolute;
-		height: 77px;
+		height: 58px;
 		justify-content: center;
 	}
 	.the-main {
@@ -812,6 +812,7 @@
 .table-member .view-group .switch-container {
 	width: 20%;
 	justify-content: center;
+	padding-right: 15px;
 }
 .edit-no-user-container {
 	width: 312px;
