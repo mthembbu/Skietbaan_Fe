@@ -105,7 +105,7 @@ export default function (state = initialState, action) {
         ...state,
         groupsList: action.payload
       };
-
+  
     case EDITGROUPUSERS:
       return {
         ...state,

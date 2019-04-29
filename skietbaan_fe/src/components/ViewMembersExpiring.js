@@ -450,7 +450,7 @@ class ViewMembersExpiring extends Component {
 			</div>
 		);
 		return (
-			<div className="centre-view-member">
+			<div className="centre-view-member"  style={{ height: this.getBodyHeight() }}>
 				<div className="username-search">
 					<Row>
 						<Col>
@@ -517,7 +517,9 @@ class ViewMembersExpiring extends Component {
 				</div>
 				{this.state.exportMsg === false ? (
 					<div
-						className="table-search-members"
+					className={this.state.getData === false && this.state.exceptionCaught === false
+						? "hidden"
+						: "table-search-members"}
 						style={{ height: this.getBodyHeight() }}
 					>
 						{postItems}
