@@ -85,7 +85,7 @@ class ViewComp extends Component {
     if (this.state.width < 575) {
       return this.state.height - 240 + "px";
     } else {
-      return "62vh";
+      return "60vh";
     }
   }
   getDefaultShots() {
@@ -403,6 +403,7 @@ class ViewComp extends Component {
                                       ? "activeButton"
                                       : "inactiveButton"
                                   }
+                                style={{justifyContent:"flex-end"}}
                                 >
                                   <Switch
                                     color={"primary"}
@@ -411,6 +412,7 @@ class ViewComp extends Component {
                                         ? "activeButton"
                                         : "inactiveButton"
                                     }
+                                 
                                     focus={true}
                                     checked={compVar.status}
                                     onClick={() =>
