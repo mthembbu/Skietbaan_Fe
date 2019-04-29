@@ -32,7 +32,9 @@ class ViewScores extends Component {
             originalUserList: [],
             username: "",
             email: "",
-            clickedOnBin: false
+            clickedOnBin: false,
+            itemsToDelete: []
+
         };
         this.competitionClicked = this.competitionClicked.bind(this);
         this.formatTime = this.formatTime.bind(this);
@@ -40,7 +42,7 @@ class ViewScores extends Component {
         this.getScoresForAdmin = this.getScoresForAdmin.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.usernameCancelClicked = this.usernameCancelClicked.bind(this);
-        this.changeIcon = this.changeIcon.bind(this)
+        this.changeIcon = this.changeIcon.bind(this);
     }
 
     changeIcon() {
@@ -57,7 +59,6 @@ class ViewScores extends Component {
     }
 
     handleSearch({ target }) {
-
         let tempList = [];
         for (var i = 0; i < this.state.originalUserList.length; i++) {
             let username = this.state.originalUserList[i].username;
@@ -300,6 +301,15 @@ class ViewScores extends Component {
                                 "view-scores-photo" : "hidden"} onClick={() => this.showPhoto(i)}>
                             </div>
                         </div>
+                        <div
+                            onClick={() => this.markedForDeletion(this.state.scoresList[i].id)}
+                            className={
+                                this.state.clickedOnBin ?
+                                    "notifications-images"
+                                    : "hide"
+                            }
+                            alt="redirect"
+                        />
                         <div className="border-line">
                         </div>
                         <div className={this.state.cameraClicked === false || this.state.someScoreClicked !== i
@@ -336,7 +346,7 @@ class ViewScores extends Component {
 
         return (
             <div className="page-content">
-                <div className={this.state.userClicked === true ? "":"hidden"}>
+                <div className={this.state.userClicked === true ? "" : "hidden"}>
                     <img
                         className="bin-image-view-score"
                         src={this.state.clickedOnBin ? blackBin : whiteBin}
