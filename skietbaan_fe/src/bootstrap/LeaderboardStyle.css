@@ -69,6 +69,7 @@
          font-size: 14px;
          font-family: Helvetica;
          padding-top: 7px;
+         font-weight: bold;
      }
      .filter-selections .category-selection .choose-groups{
         color: #555555;
@@ -109,6 +110,7 @@
          font-size: 14px;
          font-family: Helvetica;
          padding-top: 7px;
+         font-weight: bold;
      }
      .filter-selections .cat-visible-label{
          color: #6C6C6C;
@@ -416,9 +418,9 @@
     }
     .ranking-table-section .ranking-table .rank-row .underline{
         width: 90%;
-        height: 1px;
+        height: 0px;
         margin: auto;
-        border-bottom: ridge;
+        border-bottom: 1px #A0A0A0 solid;
         margin-top: 2px;
     }
      .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-icon-col{
