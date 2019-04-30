@@ -726,9 +726,8 @@ input[type=number] {
 
 .border-line{
     width: 309px;
-    height: 1px;
-    background-color: #979CB1;
     z-index: 1;
+    border-bottom: 1px #A0A0A0 solid;
 }
 
 .user-scores{

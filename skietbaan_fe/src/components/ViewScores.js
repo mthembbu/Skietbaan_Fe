@@ -136,9 +136,17 @@ class ViewScores extends Component {
     }
 
     changeIcon() {
+        for (var i = 0; i < this.state.scoresList.length; i++) {
+            this.state.scoresList[i].markedForDeletion = false;
+        }
         this.setState({
-            clickedOnBin: !this.state.clickedOnBin
-        })
+            clickedOnBin: !this.state.clickedOnBin,
+            markedForDeletion: false,
+            toggleDeletionIcon: false,
+        });
+        if(this.state.markedForDeletion && this.state.clickedOnBin){
+            this.toggleNavbar();
+        }
     }
 
     showPhoto(item) {
@@ -280,6 +288,7 @@ class ViewScores extends Component {
         this.setState({
             scoresList: [],
             userClicked: false,
+            clickedOnBin: false
         });
     }
 
