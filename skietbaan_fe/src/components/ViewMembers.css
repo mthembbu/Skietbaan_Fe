@@ -571,17 +571,19 @@
 }
 
 .user-is-a-member-msg {
-	background: url("./GroupImages/MarkedBox.png") no-repeat;
-	background-position-y: 5px;
-	background-position-x: 270px;
-	font-size: 16px;
-	color: #be0000;
-	font-weight: lighter;
+	background: url("./GroupImages/selectedIcon.png") no-repeat !important;
+	background-position-y: 7px !important;
+    background-position-x: 270px !important;
+    background-size: 25px !important;
 	width: 312px;
 	height: 42px;
 	border-radius: 22px;
-	border: 1.5px solid #be0000;
+	font-size: 16px;
+	font-weight: lighter;
+	color: #be0000;
+	background: transparent;
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
+	border: 1.5px solid #be0000;
+	padding-top: 9px;
 }
