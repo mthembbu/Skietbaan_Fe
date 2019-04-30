@@ -1,0 +1,108 @@
+.admin-stat-main-container {
+	display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-top: 20px;
+}
+.admin-stat-toddle-bar-container {
+	display: flex;
+    justify-content: center;
+}
+.toddle-bar-bar {
+	width: 88%;
+    display: flex;
+    height: 32px;
+    border-radius: 18px;
+    border: 1px solid black;
+}
+.user-stat-label {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    font-weight: lighter;
+    font-size: 14px;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+}
+.user-stat-label-active {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    background: red;
+    font-weight: lighter;
+    font-size: 14px;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+    height: 31px;
+}
+.admin-stat-as-user {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    font-weight: lighter;
+    font-size: 14px;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+}
+.admin-stat-as-user-active {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    background: red;
+    font-weight: lighter;
+    font-size: 14px;
+    border-top-right-radius: 18px;
+    height: 31px;
+    border-bottom-right-radius: 18px;
+}
+.admin-new-user-container{
+    width: 60%;
+    display: flex;
+    align-self: center;
+    font-size: 14px;
+    font-weight: lighter;
+}
+.stat-number-of-new-users{
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    width: 30px;
+    justify-content: center;
+}
+.new-user-label{
+    display: flex;
+    flex-wrap: wrap;
+    width: 15%;
+    font-size: 14px;
+    font-weight: bold;
+}
+.admin-charts-container{
+    display: flex;
+    align-self: center;
+    width: 80%;
+    height: 257px;
+    justify-content: space-evenly;
+}
+.users-chart{
+    width: 62px;
+    height: 100%;
+    border-radius: 31px;
+    border:1px solid black;
+    background: black;
+}
+
+.user-percentange{
+    height: 20%;
+    background: white;
+    width: 62px;
+    border-radius: 31px;
+    bottom: 0px;
+}
+.new-member-label{
+    display: flex;
+    flex-wrap: wrap;
+    width: 15%;
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 15px;
+}
