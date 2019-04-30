@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import "./groups.css";
 import { BASE_URL } from "../actions/types";
 import { withRouter } from "react-router-dom";
-import marked from "./GroupImages/MarkedBox.png";
+import marked from "./GroupImages/selectedIcon.png";
 import unmarked from "./GroupImages/Oval.png";
 import back from "./GroupImages/back.png";
 import { AddMemberAction, pageState } from "../actions/postActions";

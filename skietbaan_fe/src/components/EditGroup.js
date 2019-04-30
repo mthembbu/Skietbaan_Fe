@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
 import { BASE_URL } from '../actions/types';
-import unmarked from './GroupImages/Oval.png';
+import unmarked from './GroupImages/unmarkedIcon.png';
 import deleteS from './GroupImages/deleteS.png';
 import whiteBin from './GroupImages/whiteBin.png';
 import blackBin from './GroupImages/blackBin.png';
