@@ -530,9 +530,10 @@
 	margin-bottom: 50px;
 }
 .confriming-btn {
-	background: url("./GroupImages/MarkedBox.png") no-repeat !important;
-	background-position-y: 5px !important;
-	background-position-x: 270px !important;
+	background: url("./GroupImages/selectedIcon.png") no-repeat !important;
+	background-position-y: 7px !important;
+    background-position-x: 270px !important;
+    background-size: 25px !important;
 	width: 312px;
 	height: 42px;
 	border-radius: 22px;
