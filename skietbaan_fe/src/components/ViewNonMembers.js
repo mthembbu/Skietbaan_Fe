@@ -403,7 +403,7 @@ class ViewNonMembers extends Component {
                               </div> : null}
                             {this.state.done === true ?
                               <div className="user-is-a-member-msg-container">
-                                <label className="user-is-a-member-msg">MADE MEMBER SUCCESSFUL</label>
+                                <label className="user-is-a-member-msg">MEMBERSHIP CONFIRMED</label>
                               </div> : null}
                           </div>
                         </Collapsible>
