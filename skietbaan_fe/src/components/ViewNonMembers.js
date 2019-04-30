@@ -121,6 +121,7 @@ class ViewNonMembers extends Component {
       })
       .then(data =>
         this.setState({
+          done: false,
           array: data.map(user => {
             return {
               ...user,
