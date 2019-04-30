@@ -835,3 +835,25 @@ input[type=number] {
     width: 28px;
     height: 28px;
 }
+
+.delete-icon-red-view-scores{
+    background: url("./Notification-Img/submit_plus_add_score.png");
+    background-repeat: no-repeat;
+    background-size: 24px;
+    margin-right: -19px;
+    margin-top: -36px;
+    float: right;
+    width: 28px;
+    height: 28px;
+}
+
+.view-scores-photo-admin{
+    background-image: url("../components/assets/cameraBlack.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+    height: 12px;
+    position: relative;
+    bottom: 18px;
+    right: 205px;
+}

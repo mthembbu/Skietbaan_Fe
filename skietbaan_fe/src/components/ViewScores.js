@@ -34,7 +34,9 @@ class ViewScores extends Component {
             email: "",
             clickedOnBin: false,
             itemsToDelete: [],
-            toggleDeletionIcon: false
+            toggleDeletionIcon: false,
+            markedForDeletion: false,
+            amountBeingDeleted: 0,
 
         };
         this.competitionClicked = this.competitionClicked.bind(this);
@@ -44,13 +46,93 @@ class ViewScores extends Component {
         this.handleSearch = this.handleSearch.bind(this);
         this.usernameCancelClicked = this.usernameCancelClicked.bind(this);
         this.changeIcon = this.changeIcon.bind(this);
-        this.markedForDeletion = this.markedForDeletion.bind(this)
+        this.markedForDeletion = this.markedForDeletion.bind(this);
+        this.toggleNavbar = this.toggleNavbar.bind(this);
+        this.delete = this.delete.bind(this);
+        this.cancel = this.cancel.bind(this)
     }
 
-    markedForDeletion() {
+    cancel() {
+        this.toggleNavbar();
+        for (var i = 0; i < this.state.scoresList.length; i++) {
+            this.state.scoresList[i].markedForDeletion = false;
+        }
         this.setState({
-            toggleDeletionIcon: !this.state.toggleDeletionIcon,
+            toggleDeletionIcon: false,
+            clickedOnBin: false,
+            markedForDeletion: false
+        });
+    }
+
+    delete() {
+        const deletingArray = [];
+        for (var i = 0; i < this.state.scoresList.length; i++) {
+            if (this.state.scoresList[i].markedForDeletion === true) {
+                deletingArray.push(this.state.scoresList[i]);
+            }
+        }
+        fetch(BASE_URL + '/api/Scores/DeleteScoresById', {
+            method: 'Post',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(deletingArray)
         })
+            .then((res) => res.json())
+            .then(this.setState({
+                toggleDeletionIcon: false,
+                clickedOnBin: false,
+                markedForDeletion: false
+            }),
+                this.toggleNavbar()
+            )
+            .catch(function (data) { }).catch(err => {
+                /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+            });
+        this.competitionClicked()
+    }
+
+    toggleNavbar() {
+        this.setState({
+            navbarState: !this.state.navbarState
+        });
+        var navbar = document.querySelector(".navbar-admin");
+        if (navbar.classList.contains("hidden")) {
+            navbar.classList.remove("hidden");
+            navbar.removeAttribute("hidden");
+        } else {
+            navbar.classList.add("hidden");
+            navbar.setAttribute("hidden", "true");
+        }
+    }
+
+    markedForDeletion(index) {
+
+        let temp = this.state.scoresList;
+        let amountBeingDeleted = this.state.amountBeingDeleted;
+        if (amountBeingDeleted == 0) {
+            this.toggleNavbar();
+        }
+        if (temp[index].markedForDeletion) {
+            temp[index].markedForDeletion = false;
+            amountBeingDeleted -= 1;
+        }
+        else {
+            temp[index].markedForDeletion = true
+            amountBeingDeleted += 1;
+        }
+
+        if (amountBeingDeleted == 0) {
+            this.toggleNavbar();
+        }
+
+        this.setState({
+            scoresList: temp,
+            markedForDeletion: amountBeingDeleted > 0 ? true : false,
+            amountBeingDeleted: amountBeingDeleted
+        })
+
     }
 
     changeIcon() {
@@ -305,15 +387,23 @@ class ViewScores extends Component {
                             <div className="date-view-score float-left">
                                 {this.formatTime(this.state.scoresList[i].uploadDate)}
                             </div>
-                            <div className={this.state.scoresList[i].pictureURL !== "" ?
-                                "view-scores-photo" : "hidden"} onClick={() => this.showPhoto(i)}>
-                            </div>
+                            {this.props.isAdmin === true ? (
+                                <div className={this.state.scoresList[i].pictureURL !== "" ?
+                                    "view-scores-photo-admin" : "hidden"} onClick={() => this.showPhoto(i)}>
+                                </div>
+                            ) : (
+                                    <div className={this.state.scoresList[i].pictureURL !== "" ?
+                                        "view-scores-photo" : "hidden"} onClick={() => this.showPhoto(i)}>
+                                    </div>
+                                )}
                         </div>
-                        <div
-                            onClick={() => this.markedForDeletion(this.state.scoresList[i].id)}
+                        <div onClick={() => this.markedForDeletion(i)}
                             className={
                                 this.state.clickedOnBin ?
-                                    "delete-icon-view-score"
+                                    typeof this.state.scoresList[i].markedForDeletion == "undefined"
+                                        || !this.state.scoresList[i].markedForDeletion
+                                        ? "delete-icon-view-score"
+                                        : "delete-icon-red-view-scores"
                                     : "hide"
                             }
                             alt="redirect"
@@ -393,6 +483,16 @@ class ViewScores extends Component {
                             </div>
                         )}
                 </div>
+                {this.state.markedForDeletion === false ? null : (
+                    <div className="bpanel">
+                        <button className="cancel-delete" onClick={() => this.cancel()}>
+                            cancel
+                                             </button>
+                        <button className="confirm-group" onClick={() => this.delete()}>
+                            {this.state.amountBeingDeleted > 1 ? "Delete scores" : "Delete score"}
+                        </button>
+                    </div>
+                )}
             </div>
         )
     }
