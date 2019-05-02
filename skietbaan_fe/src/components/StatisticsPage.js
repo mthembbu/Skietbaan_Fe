@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Cell, CartesianGrid, 
-    Tooltip, Legend, LineChart, Line, ComposedChart} from 'recharts'
+import {ResponsiveContainer, Bar, XAxis, YAxis, Cell, CartesianGrid, 
+     Line, ComposedChart} from 'recharts'
 import "../bootstrap/StatisticsPage.css";
 import { Row, Col } from "react-bootstrap";
 import { Collapse } from "react-collapse";
@@ -31,6 +31,8 @@ class StatisticsPage extends Component {
         //prevent setState on unmounted component
         this._isMounted = false;
         this.mapCompNameToIndex = {}
+        this.competitions = []
+        this.groups = []
     }
 
     componentDidMount(){
@@ -48,6 +50,8 @@ class StatisticsPage extends Component {
             if(this._isMounted && typeof _response != "string"){
                 _response.forEach((element, index) => {
                     this.mapCompNameToIndex[element.competitionName] = index
+                    this.competitions.push(element.competitionName)
+                    this.groups.push()
                 });
                 this.setState({graphData : _response, isGraphFetchDone: true });
             }else{
@@ -118,7 +122,7 @@ class StatisticsPage extends Component {
                              "stats-competition-button-text-active stats-competition-button-text stats-button-style-active" :
                              "stats-competition-button-text stats-competition-button-text stats-button-style-inactive"}
                              onClick={() => this.setSelectedCompetition(index)}>
-                            {element.name}
+                            {element}
                         </button>
                     </Col>
                 </Row>
@@ -156,27 +160,27 @@ class StatisticsPage extends Component {
     }
 
     getGraphData(){
-        var compName = this.props.competitions[this.state.selectedCompetition].name
+        var compName = this.competitions[this.state.selectedCompetition]
         return this.state.graphData[this.mapCompNameToIndex[compName]].data;
     }
 
     getMaxScore(){
-        var compName = this.props.competitions[this.state.selectedCompetition].name
+        var compName = this.competitions[this.state.selectedCompetition]
         return this.state.graphData[this.mapCompNameToIndex[compName]].competitionMaximum;
     }
 
     getAverage(){
-        var compName = this.props.competitions[this.state.selectedCompetition].name;
+        var compName = this.competitions[this.state.selectedCompetition]
         return this.state.graphData[this.mapCompNameToIndex[compName]].average;
     }
 
     getMaximumValue(){
-        var compName = this.props.competitions[this.state.selectedCompetition].name;
+        var compName = this.competitions[this.state.selectedCompetition]
         return this.state.graphData[this.mapCompNameToIndex[compName]].max;
     }
 
     getMinimumValue(){
-        var compName = this.props.competitions[this.state.selectedCompetition].name;
+        var compName = this.competitions[this.state.selectedCompetition]
         return this.state.graphData[this.mapCompNameToIndex[compName]].min;
     }
 
@@ -233,8 +237,8 @@ class StatisticsPage extends Component {
     
     renderCompetitionList(){
         let renderArray = []
-        this.props.competitions.forEach((element, index) => {
-            if(this.IsParticipating(element.name))
+        this.competitions.forEach((element, index) => {
+            //if(this.IsParticipating(element.name))
                 renderArray.push(this.selectCompetition(element, index))
         })
 
@@ -247,6 +251,50 @@ class StatisticsPage extends Component {
                 <div className={this.state.isFetchDone ? "hidden" : "loader"}></div>
                 <div className={this.state.isFetchDone ? "hidden" : "target-loader-image"}></div>
                 <div className={this.state.isFetchDone ? "hidden" : "loading-message-profile"}>Loading...</div>
+            </div>
+        )
+    }
+
+    renderGraph(data, maxScore){
+        return(
+            <div className="stats-graph-container">
+                <ResponsiveContainer  height={300}>
+                    <ComposedChart height={260}
+                            margin={{top: 5, right: 20, left: 20, bottom: 25}}
+                            data={data}
+                        >
+                        <XAxis 
+                            dataKey="label"
+                            fontFamily="helvetica"
+                            fontSize={12}
+                            tickSize={0}
+                            dy={10}
+                        />
+                        <YAxis 
+                            type="number" 
+                            domain={[0, maxScore]}
+                            tickCount={25}
+                        />
+                        <CartesianGrid 
+                            vertical={false}
+                            stroke="#ebf3f0"
+                        />
+                        <Bar 
+                            dataKey="value" 
+                            barSize = {data.length > 10 ? 8 : 30}
+                            fontFamily="sans-serif"
+                        >
+                        {
+                            data.map((entry, index) => (
+                                <Cell key={index} fill={entry.description === "min" ? "#9D9D9D" :
+                                    entry.description === "max" ? "#BE0000" : "#000000"
+                                    } />
+                            ))
+                        }
+                        </Bar>
+                        <Line type="monotone" dataKey="uv" stroke="#ff7300" />
+                    </ComposedChart>
+                </ResponsiveContainer>
             </div>
         )
     }
@@ -270,22 +318,21 @@ class StatisticsPage extends Component {
             <div className="stats-container">
                 {this.state.exceptionCaught ? this.renderError("Something went wrong") :
                 this.state.errorOccured ? this.renderError(this.state.apiResponse) :
-                this.props.competitions.length > 0 && this.state.graphData.length > 0 && 
-                this.props.groups.length > 0 ?
+                this.state.graphData.length > 0 && this.props.groups.length > 0 ?
                     <div>
                         <Collapse isOpened={this.state.collapse} fixedHeight={490}> 
                             <div className="stats-center-content stats-competition-select-rectangle-big">
                                 <Row onClick={this.toggle}>
                                     <Col>
                                         <div className="scale-gun-type-img">
-                                            {this.props.competitions[this.state.selectedCompetition].name.includes("Rifle") || 
-                                                this.props.competitions[this.state.selectedCompetition].name.includes("rifle") ?
+                                            {this.competitions[this.state.selectedCompetition].includes("Rifle") || 
+                                                this.competitions[this.state.selectedCompetition].includes("rifle") ?
                                                 <img src={require("../resources/awardIcons/rifle-icon.png")}></img>:
                                                 <img src={require("../resources/awardIcons/white-pistol-icon.png")}></img>
                                             }
                                         </div>
                                         <div className="stats-competition-text stats-inline-text">
-                                            {this.props.competitions[this.state.selectedCompetition].name}
+                                            {this.competitions[this.state.selectedCompetition]}
                                             <div className="white-down-triangle-img-scale stats-margin-left-7px">
                                                 <img src={require("../resources/awardIcons/white-down-triangle.png")}
                                                     alt="down-triangle">
@@ -338,14 +385,14 @@ class StatisticsPage extends Component {
                                 onClick={this.toggle}>
                                 <Col className="stats-remove-left-padding">
                                     <div className="scale-gun-type-img">
-                                        {this.props.competitions[this.state.selectedCompetition].name.includes("Rifle") || 
-                                            this.props.competitions[this.state.selectedCompetition].name.includes("rifle") ?
+                                        {this.competitions[this.state.selectedCompetition].includes("Rifle") || 
+                                            this.competitions[this.state.selectedCompetition].includes("rifle") ?
                                             <img src={require("../resources/awardIcons/rifle-icon.png")}></img>:
                                             <img src={require("../resources/awardIcons/white-pistol-icon.png")}></img>
                                         }
                                     </div>
                                     <div className="stats-competition-text stats-inline-text">
-                                        {this.props.competitions[this.state.selectedCompetition].name}
+                                        {this.competitions[this.state.selectedCompetition]}
                                         <div className="white-down-triangle-img-scale stats-margin-left-7px">
                                             <img src={require("../resources/awardIcons/white-down-triangle.png")}
                                                 alt="down-triangle">
@@ -380,10 +427,9 @@ class StatisticsPage extends Component {
                                                 </div>
                                                  {this.state.selectedGroup === -1 ? 
                                                     this.state.competitionsUsersMap
-                                                        [this.props.competitions[this.state.selectedCompetition].name] :
+                                                        [this.competitions[this.state.selectedCompetition]] :
                                                     this.state.groupsUsersMap[this.props.groups[this.state.selectedGroup].name]
-                                                }
-                                                
+                                                 }
                                             </div>
                                         </Col>
                                         <Col>
@@ -404,44 +450,7 @@ class StatisticsPage extends Component {
                         </Row>
                         <Row>
                             <Col>
-                                <div className="stats-graph-container">
-                                    <ResponsiveContainer  height={300}>
-                                        <ComposedChart height={260}
-                                             margin={{top: 5, right: 20, left: 20, bottom: 25}}
-                                             data={data}
-                                            >
-                                            <XAxis 
-                                                dataKey="label"
-                                                fontFamily="helvetica"
-                                                fontSize={12}
-                                                tickSize={0}
-                                                dy={10}
-                                            />
-                                            <YAxis 
-                                                type="number" 
-                                                domain={[0, maxScore]}
-                                                tickCount={25}
-                                            />
-                                            <CartesianGrid 
-                                                vertical={false}
-                                                stroke="#ebf3f0"
-                                            />
-                                            <Bar 
-                                                dataKey="value" 
-                                                barSize = {data.length > 10 ? 8 : 30}
-                                                fontFamily="sans-serif"
-                                            >
-                                            {
-                                                data.map((entry, index) => (
-                                                    <Cell key={index} fill={entry.description === "min" ? "#9D9D9D" :
-                                                        entry.description === "max" ? "#BE0000" : "#000000"
-                                                        } />
-                                                ))
-                                            }
-                                            </Bar>
-                                        </ComposedChart>
-                                    </ResponsiveContainer>
-                                </div>
+                                {this.renderGraph(data, maxScore)}
                             </Col>
                         </Row>
                         <Row>
@@ -478,7 +487,6 @@ class StatisticsPage extends Component {
                     </div>
                 :this.renderLoader()}
             </div>
-
         )
     }
 }

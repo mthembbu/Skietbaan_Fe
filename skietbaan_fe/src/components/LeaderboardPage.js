@@ -922,7 +922,7 @@ class LeaderboardPage extends Component {
                                                   null
                                                   ? this.props.currentUser
                                                       .username
-                                                  : "invalid tokken"
+                                                  : "invalid token"
                                                 : this.props.userResults !==
                                                   null
                                                 ? this.props.userResults
