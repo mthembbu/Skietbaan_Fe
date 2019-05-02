@@ -1,3 +1,22 @@
+@media screen and (min-width:576px){
+    .margin-left-right-8px{
+        margin-right: 25px !important;
+    }
+
+    .stats-competition-select-rectangle{
+        margin-right: 22px;
+    }
+
+    .stats-graph-container{
+        margin-right: 6px;
+    }
+
+    .stats-center-content{
+        margin-right: 27px !important;
+    }
+}
+
+
 .stats-graph-container{
     margin-left: -30px;
 }
@@ -97,6 +116,7 @@
     color: #FFFF;
     font-size: 20px;
     font-weight: 300;
+    cursor: pointer;
 }
 
 .stats-inline-text{
@@ -348,11 +368,6 @@
     font-family: Helvetica;
     font-size: 12px;
     font-weight: bold;
-}
-
-.margin-left-right-8px{
-    margin-left: 8px;
-    margin-right: 8px;
 }
 
 .last-20-container hr { 
