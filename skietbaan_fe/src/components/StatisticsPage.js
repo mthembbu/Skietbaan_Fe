@@ -9,6 +9,8 @@ import { BASE_URL } from "../actions/types.js";
 import { getCookie } from "./cookie.js";
 import {fetchComp} from "../actions/competition.action";
 import {fetchGroups} from "../actions/postActions";
+import { VictoryBar, VictoryChart, VictoryAxis,
+    VictoryTheme, VictoryLine, VictoryVoronoiContainer} from 'victory';
 
 class StatisticsPage extends Component {
     constructor(props){
@@ -251,6 +253,50 @@ class StatisticsPage extends Component {
         )
     }
 
+    renderGraph(data, maxScore){
+        return(
+            <div className="stats-graph-container">
+                <ResponsiveContainer  height={300}>
+                    <ComposedChart height={260}
+                            margin={{top: 5, right: 20, left: 20, bottom: 25}}
+                            data={data}
+                        >
+                        <XAxis 
+                            dataKey="label"
+                            fontFamily="helvetica"
+                            fontSize={12}
+                            tickSize={0}
+                            dy={10}
+                        />
+                        <YAxis 
+                            type="number" 
+                            domain={[0, maxScore]}
+                            tickCount={25}
+                        />
+                        <CartesianGrid 
+                            vertical={false}
+                            stroke="#ebf3f0"
+                        />
+                        <Bar 
+                            dataKey="value" 
+                            barSize = {data.length > 10 ? 8 : 30}
+                            fontFamily="sans-serif"
+                        >
+                        {
+                            data.map((entry, index) => (
+                                <Cell key={index} fill={entry.description === "min" ? "#9D9D9D" :
+                                    entry.description === "max" ? "#BE0000" : "#000000"
+                                    } />
+                            ))
+                        }
+                        </Bar>
+                        <Line type="monotone" dataKey="uv" stroke="#ff7300" />
+                    </ComposedChart>
+                </ResponsiveContainer>
+            </div>
+        )
+    }
+
     componentWillUnmount(){
         this._isMounted = false;
     }
@@ -382,8 +428,7 @@ class StatisticsPage extends Component {
                                                     this.state.competitionsUsersMap
                                                         [this.props.competitions[this.state.selectedCompetition].name] :
                                                     this.state.groupsUsersMap[this.props.groups[this.state.selectedGroup].name]
-                                                }
-                                                
+                                                 }
                                             </div>
                                         </Col>
                                         <Col>
@@ -404,44 +449,7 @@ class StatisticsPage extends Component {
                         </Row>
                         <Row>
                             <Col>
-                                <div className="stats-graph-container">
-                                    <ResponsiveContainer  height={300}>
-                                        <ComposedChart height={260}
-                                             margin={{top: 5, right: 20, left: 20, bottom: 25}}
-                                             data={data}
-                                            >
-                                            <XAxis 
-                                                dataKey="label"
-                                                fontFamily="helvetica"
-                                                fontSize={12}
-                                                tickSize={0}
-                                                dy={10}
-                                            />
-                                            <YAxis 
-                                                type="number" 
-                                                domain={[0, maxScore]}
-                                                tickCount={25}
-                                            />
-                                            <CartesianGrid 
-                                                vertical={false}
-                                                stroke="#ebf3f0"
-                                            />
-                                            <Bar 
-                                                dataKey="value" 
-                                                barSize = {data.length > 10 ? 8 : 30}
-                                                fontFamily="sans-serif"
-                                            >
-                                            {
-                                                data.map((entry, index) => (
-                                                    <Cell key={index} fill={entry.description === "min" ? "#9D9D9D" :
-                                                        entry.description === "max" ? "#BE0000" : "#000000"
-                                                        } />
-                                                ))
-                                            }
-                                            </Bar>
-                                        </ComposedChart>
-                                    </ResponsiveContainer>
-                                </div>
+                                {this.renderGraph(data, maxScore)}
                             </Col>
                         </Row>
                         <Row>
@@ -478,7 +486,6 @@ class StatisticsPage extends Component {
                     </div>
                 :this.renderLoader()}
             </div>
-
         )
     }
 }

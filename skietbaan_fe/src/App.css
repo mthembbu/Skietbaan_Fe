@@ -96,3 +96,7 @@ button.button-valid {
     transform: rotate(360deg);
   }
 }
+
+.button{
+  outline: none;
+}
