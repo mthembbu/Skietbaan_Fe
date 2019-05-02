@@ -355,6 +355,8 @@
 	position: fixed;
 	right: 0;
 	bottom: 0;
+	display: flex;
+	justify-content: center;
 	background: #f8f8f8;
 	width: 100%;
 	z-index: 5px;
@@ -821,13 +823,13 @@
 	margin: auto;
 	text-align: center;
 	border-radius: 5px;
-	margin-top: 40%;
+	margin-top: 20%;
 }
 .edit-no-user-msg {
 	font-size: 16px;
     color: #be0000;
     margin: auto;
-    margin-top: 12px;
+    margin-top: 25px;
     font-weight: lighter;
 }
 .view-group-delete-box {

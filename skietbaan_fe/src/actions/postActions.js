@@ -17,6 +17,7 @@ import {
   UPDATE_SELECTED_COMPETITION,
   UPDATE_SELECTED_GROUP,
   GROUP_DATA_LOADING,
+  ADMINSTAT,
   BINSTATE,
   SCREEN_SIZE
 } from "./types";
@@ -243,6 +244,21 @@ export const selectedPage = num => {
     });
   };
 };
+
+export const adminstat = () => dispatch => {
+  fetch(BASE_URL + "/adminstat")
+    .then(res => res.json())
+    .then(stat => {
+      dispatch({
+        type: ADMINSTAT,
+        payload: stat
+      });
+    })
+    .catch(err => {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+    });
+};
+
 
 export const binStateFunc = (num) => {
   return dispatch => {

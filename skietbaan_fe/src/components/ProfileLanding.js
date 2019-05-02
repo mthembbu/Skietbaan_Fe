@@ -4,7 +4,7 @@ import "../bootstrap/ProfileLanding.css";
 import UserProfile from "./UserProfile";
 import Documents from "./Documents";
 import UserDetails from "./userDetails";
-import StatisticsPage from "./StatisticsPage";
+import AdminUserStat from "./AdminUserStat";
 import { getCookie } from "./cookie.js";
 import history from "./history";
 import { connect } from "react-redux";
@@ -221,7 +221,7 @@ class ProfileLanding extends Component {
               ) : this.props.selectedButton === 2 ? (
                 <Documents />
               ) : this.props.selectedButton == 3 ? (
-                <StatisticsPage />
+                <AdminUserStat />
               ) : this.props.selectedButton === 4 ? (
                 <UserDetails />
               ) : null}

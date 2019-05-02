@@ -17,10 +17,12 @@ import {
   FETCH_GROUPS,
   GROUP_DATA_LOADING,
   BINSTATE,
-  SCREEN_SIZE
+  SCREEN_SIZE,
+  ADMINSTAT
 } from "../actions/types";
 
 const initialState = {
+  adminstats:{},
   loader: null,
   selectedItem: {},
   leaderboardSelectedCompetitionName: [],
@@ -67,6 +69,11 @@ export default function (state = initialState, action) {
         ...state,
         groupsList: action.payload,
         loader: true
+      };
+    case ADMINSTAT:
+      return {
+        ...state,
+        adminstats: action.payload
       };
 
     case GROUP_DATA_LOADING:
