@@ -179,8 +179,14 @@ export class createPages extends Component {
 
 	changeBinState = () => {
 		if (this.props.binState === 1) {
+			for(var i=0;i<this.props.groupsList.length;i++){
+				this.props.groupsList[i].highlighted = false;
+			}
 			this.props.binStateFunc(2);
 		} else {
+			for (var i = 0; i < this.props.compOBJ.length; i++) {
+				this.props.compOBJ[i].highlighted = false;
+			  }
 			this.props.binStateFunc(1);
 		}
 	};
@@ -387,7 +393,9 @@ export class createPages extends Component {
 
 const mapStateToProps = (state) => ({
 	page: state.posts.page,
-	binState: state.posts.binState
+	binState: state.posts.binState,
+	groupsList: state.posts.groupsList,
+	compOBJ: state.compOBJ.allComps
 });
 
 const mapDispatchToProps = {};

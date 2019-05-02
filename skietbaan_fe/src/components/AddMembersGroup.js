@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import "./groups.css";
 import { BASE_URL } from "../actions/types";
 import { withRouter } from "react-router-dom";
-import marked from "./GroupImages/MarkedBox.png";
+import marked from "./GroupImages/selectedIcon.png";
 import unmarked from "./GroupImages/Oval.png";
 import back from "./GroupImages/back.png";
 import { AddMemberAction, pageState } from "../actions/postActions";
@@ -45,7 +45,7 @@ class AddMembersGroup extends Component {
     if (this.state.width < 575) {
       return this.state.height - 225 + "px";
     } else {
-      return "64vh";
+      return "63vh";
     }
   }
   updateDimensions() {
@@ -306,12 +306,12 @@ class AddMembersGroup extends Component {
         {this.state.count === 0 ? null : (
           <div className="bottom-panel">
             <div className="bpanel">
-              <button className="add-member-confirm-group" onClick={this.addUsers}>
-                ADD USERS
+              <button  className="add-member-cancel-delete" onClick={() => this.cancel()}>
+                 CANCEL
               </button>
 
-              <button className="add-member-cancel-delete" onClick={() => this.cancel()}>
-                CANCEL
+              <button className="add-member-confirm-group" onClick={this.addUsers}>
+              ADD USERS
               </button>
             </div>
           </div>

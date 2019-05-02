@@ -13,7 +13,7 @@ import {
 } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
 import Switch from "@material-ui/core/Switch";
-import group from "./GroupImages/Group.png";
+import group from "./GroupImages/groupUser.png";
 import PropTypes from "prop-types";
 import deleteS from './GroupImages/deleteS.png';
 import unmarked from './GroupImages/Oval.png';
@@ -102,10 +102,8 @@ class ViewGroups extends Component {
   async deActivate(groupId, index) {
     if (this.props.groupsList[index].isActive === false) {
       this.props.groupsList[index].isActive = true;
-      this.props.groupsList[index].highlighted = true;
     } else {
       this.props.groupsList[index].isActive = false;
-      this.props.groupsList[index].highlighted = false;
     }
 
     this.props.newGroupArrayState([...this.props.groupsList]);
@@ -154,7 +152,7 @@ class ViewGroups extends Component {
     }
   };
   render() {
-    this.togglenav();
+  this.togglenav();
     const loader = (
       <div className="loader-formatting">
         <div className={this.props.loader ? "hidden" : "loader"} />

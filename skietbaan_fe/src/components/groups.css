@@ -53,9 +53,9 @@
 
 .center-labels {
 	color: white;
-    font-weight: bold;
-    font-size: 20px;
-    margin-top: 17px;
+	font-weight: bold;
+	font-size: 20px;
+	margin-top: 17px;
 }
 .center-labelss {
 	display: flex;
@@ -76,16 +76,16 @@
 	margin-top: 17px;
 	width: 242px;
 	float: left;
-	height: 56px;
 	font-weight: bold;
-	background: url("./GroupImages/searchBox.png") no-repeat;
-	background-position: right;
-	background-position-x: 205px;
+	background: url("../components/assets/newSearchIconRed.png") no-repeat right;
+	background-size: 22px;
 	font-size: 18px;
 	padding-left: 15px;
 	font-size: 18px;
 	border-radius: 5px;
 	border: 1px solid #7b7b7b;
+	height: 44px;
+	background-position-x: 95%;
 }
 
 .select {
@@ -176,7 +176,7 @@
 .bottom-label {
 	justify-content: space-evenly;
 	bottom: 0;
-	background: white;
+	background: #f8f8f8;
 	width: 100%;
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
@@ -298,6 +298,12 @@
 	.bottom-label {
 		position: relative;
 		justify-content: center;
+		bottom: 12px;
+		height: 58px;
+		background: #f8f8f8;
+		border-bottom-right-radius: 15px;
+		border-bottom-left-radius: 15px;
+		padding-top: 7px;
 	}
 	.view-group-confirm-panel {
 		width: 100% !important;
@@ -457,7 +463,7 @@
 }
 
 .view-group {
-	border-bottom: solid 2px #bbbcbd;
+	border-bottom: solid 1px #bbbcbd;
 	height: 62px;
 	font-size: 18px;
 	font-weight: lighter;
@@ -513,6 +519,7 @@
 }
 .groupIcon {
 	padding-right: 5px;
+	height: 18px;
 }
 .confirm-container {
 	justify-content: flex-start;
@@ -562,7 +569,7 @@
 	.bpanel {
 		display: flex;
 		position: absolute;
-		height: 77px;
+		height: 58px;
 		justify-content: center;
 	}
 	.the-main {
@@ -576,7 +583,7 @@
 	.add-blabe {
 		width: 80%;
 	}
-	.cancel-delete{
+	.cancel-delete {
 		margin-right: 16px;
 	}
 	.BNavBar {
@@ -656,7 +663,7 @@
 	border-radius: 24.5px;
 	width: 156px;
 	height: 42px;
-	margin-left: 16px;
+	margin-right: 16px;
 	color: white;
 	background: red;
 	justify-content: flex-start;
@@ -804,6 +811,8 @@
 }
 .table-member .view-group .switch-container {
 	width: 20%;
+	justify-content: center;
+	padding-right: 15px;
 }
 .edit-no-user-container {
 	width: 312px;
@@ -816,10 +825,10 @@
 }
 .edit-no-user-msg {
 	font-size: 16px;
-	color: #be0000;
-	margin: auto;
-	margin-top: 25px;
-	font-weight: lighter;
+    color: #be0000;
+    margin: auto;
+    margin-top: 12px;
+    font-weight: lighter;
 }
 .view-group-delete-box {
 	margin-top: 10px;
@@ -830,12 +839,15 @@
 
 .view-group-confirm-panel {
 	display: flex;
+	padding-top: 5px;
 	justify-content: center;
 	bottom: 0;
 	position: absolute;
 	height: 57px;
 	width: 93%;
-	background: #ffffff;
+	background: #f8f8f8;
+	border-top-left-radius: 22px;
+	border-top-right-radius: 22px;
 }
 .view-group-cancel {
 	width: 156px;

@@ -695,7 +695,7 @@ class LeaderboardPage extends Component {
                       onClick={this.onMouseClickFilter}
                     >
                       <MDBBtn tag="a" size="lg" floating gradient="purple">
-                        <img src={require("../resources/closefilter.png")} />
+                        <img src={require("../resources/upArrow.png")} />
                       </MDBBtn>
                     </div>
                   </div>
