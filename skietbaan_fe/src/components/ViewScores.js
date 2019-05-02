@@ -297,7 +297,7 @@ class ViewScores extends Component {
                     })
                     .then(data =>
                         this.setState({
-                            scoresList: data,
+                            scoresList: this.calculateDistance(data),
                             getDataScores: true
                         })
                     )
@@ -468,7 +468,8 @@ class ViewScores extends Component {
                                 </div>
                             )}
 
-                        <div className={this.state.scoresList[i].inRange === false ? "distance-view-scores-red" : "distance-view-scores"}>
+                        <div className={this.state.scoresList[i].inRange === false ? 
+                            "distance-view-scores-red" : "distance-view-scores"}>
                             {this.state.scoresList[i].RangeMessage}
                         </div>
                         <img className="in-range-img" src={this.state.scoresList[i].inRange ? inRange : outRange}>
