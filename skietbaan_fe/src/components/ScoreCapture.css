@@ -11,7 +11,7 @@
 }
 
 .scrollbar{
-    max-height: 60vh;
+    max-height: 56vh;
     padding-bottom: 56px;
     overflow-y: overlay;
 }
@@ -26,9 +26,7 @@
     color: black;
     font-size: 16px;
     font-weight: bold;
-    overflow-y: overlay;
     padding-left: 3px;
-    max-height: 60vh;
 }
 
 @media screen and (max-width: 576px){
@@ -749,9 +747,13 @@ input[type=number] {
     width: 309px;
 }
 
+.score-content-admin{
+    width: 309px;
+}
+
 .score-list-container{
     text-align: -webkit-center;
-    max-height: 63vh;
+    max-height: 65vh;
     padding-bottom: 56px;
     overflow-y: overlay;
     overflow-x: hidden;
@@ -836,8 +838,8 @@ input[type=number] {
     background-image: url("./Notification-Img/delete3.png");
     background-repeat: no-repeat;
     background-size: 24px;
-    margin-right: -19px;
-    margin-top: -36px;
+    margin-right: -17px;
+    margin-top: -29px;
     float: right;
     width: 28px;
     height: 28px;
@@ -847,8 +849,8 @@ input[type=number] {
     background: url("./Notification-Img/submit_plus_add_score.png");
     background-repeat: no-repeat;
     background-size: 24px;
-    margin-right: -19px;
-    margin-top: -36px;
+    margin-right: -17px;
+    margin-top: -29px;
     float: right;
     width: 28px;
     height: 28px;
@@ -896,14 +898,24 @@ input[type=number] {
     .score-content{
         width: 79%;
     }
-    .border-line{
+    .border-line-usernames{
         width: 100%;
     }
-    .users-container{
-        padding-left: 21%;
+    .border-line{
+        width: 100%;
     }
     .select-all-view-score{
         top: 75px !important;
         right: 21% !important;
+    }
+    .score-list-container{
+        max-height: 58vh !important;
+    }
+    .view-score-input{
+        width: 65%;
+        background-position-x: 96%;
+    }
+    .score-content-admin{
+        width: 65%;
     }
 }
