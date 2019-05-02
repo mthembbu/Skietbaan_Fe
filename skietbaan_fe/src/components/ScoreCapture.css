@@ -679,7 +679,6 @@ input[type=number] {
     font-family: helvetica;
 }
 
-
 .scores-page-switch-top{
     width: 320px;
     height: 36px;
@@ -730,6 +729,12 @@ input[type=number] {
     border-bottom: 1px #A0A0A0 solid;
 }
 
+.border-line-usernames{
+    width: 309px;
+    z-index: 1;
+    border-bottom: 1px #A0A0A0 solid;
+}
+
 .user-scores{
     color: #555555;
     font-size: 16px;
@@ -749,6 +754,7 @@ input[type=number] {
     max-height: 63vh;
     padding-bottom: 56px;
     overflow-y: overlay;
+    overflow-x: hidden;
 }
 
 .date-view-score{
@@ -758,9 +764,11 @@ input[type=number] {
     padding-left: 11px;
     padding-bottom: 7px;
 }
+
 .min-height-22{
     min-height: 22px;
 }
+
 .view-scores-photo{
     background-image: url("../components/assets/cameraBlack.png");
     background-repeat: no-repeat;
@@ -847,14 +855,11 @@ input[type=number] {
 }
 
 .view-scores-photo-admin{
-    background-image: url("../components/assets/cameraBlack.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: right;
     height: 12px;
-    position: relative;
     bottom: 18px;
-    right: 205px;
+    left: -16px;
+    float: left;
+    position: relative;
 }
 
 .select-all-view-score {
@@ -864,4 +869,41 @@ input[type=number] {
     z-index: 1000;
     text-align: right;
     right: 72px;
+}
+
+.distance-view-scores-red{
+    color: #BE0000;
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.distance-view-scores{
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.in-range-img{
+    height: 21px;
+    position: relative;
+    bottom: 38px;
+}
+
+@media screen and (min-width:576px){
+    .bin-image-view-score{
+        top: 75px !important;
+        right: 9% !important;
+    }
+    .score-content{
+        width: 79%;
+    }
+    .border-line{
+        width: 100%;
+    }
+    .users-container{
+        padding-left: 21%;
+    }
+    .select-all-view-score{
+        top: 75px !important;
+        right: 21% !important;
+    }
 }

@@ -10,6 +10,9 @@ import whiteBin from './GroupImages/whiteBin.png';
 import blackBin from './GroupImages/blackBin.png';
 import whiteSelectAll from "../components/Notification-Img/white-select-all.png";
 import blackSelectAll from "../components/Notification-Img/black-select-all.png";
+import inRange from "../components/assets/inRange.png";
+import outRange from "../components/assets/outRange.png";
+import camera from "../components/assets/cameraBlack.png"
 import "../components/ScoreCapture.css";
 class ViewScores extends Component {
     constructor(props) {
@@ -39,7 +42,8 @@ class ViewScores extends Component {
             toggleDeletionIcon: false,
             markedForDeletion: false,
             amountBeingDeleted: 0,
-            selectAll: false
+            selectAll: false,
+            inRange: null
         };
         this.competitionClicked = this.competitionClicked.bind(this);
         this.formatTime = this.formatTime.bind(this);
@@ -53,6 +57,36 @@ class ViewScores extends Component {
         this.delete = this.delete.bind(this);
         this.cancel = this.cancel.bind(this);
         this.selectAll = this.selectAll.bind(this);
+        this.calculateDistance = this.calculateDistance.bind(this);
+    }
+
+    calculateDistance = (lat1, lon1) => {
+        let lat2 = -25.753695;
+        let lon2 = 28.361592;
+        let R = 6371; // km (change this constant to get miles)
+        let dLat = (lat2 - lat1) * Math.PI / 180;
+        let dLon = (lon2 - lon1) * Math.PI / 180;
+        let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        let d = R * c;
+        if (d > 1) {
+            let result = Math.round(d);
+            if (result > 5) {
+                this.state.inRange = false;
+                return "OUT OF RANGE";
+            }
+            else if (result <= 5) {
+                this.state.inRange = true;
+                return "IN RANGE"
+            }
+        }
+        else if (d <= 1) {
+            let result = Math.round(d * 1000);
+            this.state.inRange = true;
+            return "IN RANGE"
+        }
     }
 
     selectAll() {
@@ -62,11 +96,11 @@ class ViewScores extends Component {
         this.toggleNavbar();
         for (var i = 0; i < this.state.scoresList.length; i++) {
             if (this.state.selectAll) {
-              this.state.scoresList[i].markedForDeletion = false;
+                this.state.scoresList[i].markedForDeletion = false;
             } else {
-              this.state.scoresList[i].markedForDeletion = true;
+                this.state.scoresList[i].markedForDeletion = true;
             }
-          }
+        }
     }
 
     cancel() {
@@ -162,6 +196,7 @@ class ViewScores extends Component {
             clickedOnBin: !this.state.clickedOnBin,
             markedForDeletion: false,
             toggleDeletionIcon: false,
+            selectAll: false
         });
         if (this.state.markedForDeletion && this.state.clickedOnBin) {
             this.toggleNavbar();
@@ -234,9 +269,10 @@ class ViewScores extends Component {
                 competitionName: compName,
                 competitionId: compId
             });
-            document.getElementById("username").value = "";
+            if(this.props.isAdmin === true){
+                document.getElementById("username").value = "";
+            }
             toggleToggleBar();
-
             if (compId !== "" && this.props.isAdmin === false) {
                 fetch(BASE_URL + "/api/Scores/" + compId + "/" + this.state.token, {
                     method: "GET",
@@ -329,7 +365,7 @@ class ViewScores extends Component {
     }
 
     render() {
-
+        console.log(this.state.scoreList)
         let competitionItem = [];
         if (this.state.competitionsList && this.state.competitionsList.length > 0) {
             for (let i = 0; i < this.state.competitionsList.length; i++) {
@@ -411,20 +447,25 @@ class ViewScores extends Component {
                         "score-content" : "hidden"}>
                         <div className="user-scores">{this.state.scoresList[i].userScore}
                         </div>
-                        <div className="stretched min-height-22">
-                            <div className="date-view-score float-left">
-                                {this.formatTime(this.state.scoresList[i].uploadDate)}
-                            </div>
-                            {this.props.isAdmin === true ? (
-                                <div className={this.state.scoresList[i].pictureURL !== "" ?
-                                    "view-scores-photo-admin" : "hidden"} onClick={() => this.showPhoto(i)}>
-                                </div>
-                            ) : (
-                                    <div className={this.state.scoresList[i].pictureURL !== "" ?
-                                        "view-scores-photo" : "hidden"} onClick={() => this.showPhoto(i)}>
-                                    </div>
-                                )}
+                        <div className="date-view-score float-left">
+                            {this.formatTime(this.state.scoresList[i].uploadDate)}
                         </div>
+                        {this.props.isAdmin === true ? (
+                            <img className={this.state.scoresList[i].pictureURL !== "" ?
+                                "view-scores-photo-admin" : "hidden"}
+                                src={camera} onClick={() => this.showPhoto(i)}>
+                            </img>
+                        ) : (
+                                <div className={this.state.scoresList[i].pictureURL !== "" ?
+                                    "view-scores-photo" : "hidden"} onClick={() => this.showPhoto(i)}>
+                                </div>
+                            )}
+
+                        <div className={this.state.inRange === false ? "distance-view-scores-red" : "distance-view-scores"}>
+                            {this.calculateDistance(this.state.scoresList[i].latitude, this.state.scoresList[i].longitude)}
+                        </div>
+                        <img className="in-range-img" src={this.state.inRange ? inRange : outRange}>
+                        </img>
                         <div onClick={() => this.markedForDeletion(i)}
                             className={
                                 this.state.clickedOnBin ?
@@ -436,6 +477,7 @@ class ViewScores extends Component {
                             }
                             alt="redirect"
                         />
+
                         <div className="border-line">
                         </div>
                         <div className={this.state.cameraClicked === false || this.state.someScoreClicked !== i
@@ -489,9 +531,9 @@ class ViewScores extends Component {
                     />
                     <img
                         src={
-                            this.state.clickedOnBin
+                            this.state.clickedOnBin && !this.state.selectAll
                                 ? whiteSelectAll
-                                : this.state.secondToggle
+                                : this.state.selectAll
                                     ? blackSelectAll
                                     : "hidden"
                         }
