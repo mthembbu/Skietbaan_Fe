@@ -61,7 +61,7 @@ class ViewScores extends Component {
     }
 
     calculateDistance = (lat1, lon1) => {
-        if (lat1 === null || lon1 === null) {
+        if ((lat1 === null || lat1 === 0) || (lon1 === null || lon1 === 0)) {
             this.state.inRange = false;
             return "OUT OF RANGE";
         }
@@ -115,7 +115,8 @@ class ViewScores extends Component {
         this.setState({
             toggleDeletionIcon: false,
             clickedOnBin: false,
-            markedForDeletion: false
+            markedForDeletion: false,
+            selectAll: false
         });
     }
 

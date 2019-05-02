@@ -779,6 +779,7 @@ input[type=number] {
     height: 22px;
     position: relative;
     bottom: 18px;
+    cursor: pointer;
 }
 
 .padding-top-40{
@@ -800,6 +801,7 @@ input[type=number] {
     color: #555555;
     font-family: helvetica;
     font-weight: 300;
+    cursor: pointer;
 }
 
 .usernames{
@@ -808,6 +810,7 @@ input[type=number] {
     color: #555555;
     font-weight: bold;
     padding-left: 11px;
+    cursor: pointer;
 }
 
 .view-scores-username{
@@ -832,6 +835,7 @@ input[type=number] {
         position: absolute;
         right: 37px;
         z-index: 1000;
+        cursor: pointer;
 }
 
 .delete-icon-view-score{
@@ -862,6 +866,7 @@ input[type=number] {
     left: -16px;
     float: left;
     position: relative;
+    cursor: pointer;
 }
 
 .select-all-view-score {
@@ -871,6 +876,7 @@ input[type=number] {
     z-index: 1000;
     text-align: right;
     right: 72px;
+    cursor: pointer;
 }
 
 .distance-view-scores-red{
