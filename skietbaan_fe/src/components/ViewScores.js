@@ -83,7 +83,10 @@ class ViewScores extends Component {
             .then(this.setState({
                 toggleDeletionIcon: false,
                 clickedOnBin: false,
-                markedForDeletion: false
+                markedForDeletion: false,
+                scoresList : this.state.scoresList.filter( function( el ) {
+                    return deletingArray.indexOf( el ) < 0;
+                  } )
             }),
                 this.toggleNavbar()
             )
@@ -108,7 +111,6 @@ class ViewScores extends Component {
     }
 
     markedForDeletion(index) {
-
         let temp = this.state.scoresList;
         let amountBeingDeleted = this.state.amountBeingDeleted;
         if (amountBeingDeleted == 0) {
@@ -449,6 +451,14 @@ class ViewScores extends Component {
                     </div>
                 )
             }
+        } else if(this.state.getDataScores){
+            adminScoresList.push(
+                <div className="not-active">
+                    <div className="not-active-message">
+                        No users have submitted scores for this competition
+          </div>
+                </div>
+            );
         }
 
         return (

@@ -301,7 +301,7 @@ class ScoreCapture extends Component {
         });
       setTimeout(function () {
         window.location = "/scoreCapture";
-      }, 4000);
+      }, 2000);
     }
   }
 
