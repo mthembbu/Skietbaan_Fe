@@ -99,7 +99,6 @@ class ViewScores extends Component {
         this.setState({
             selectAll: !this.state.selectAll
         });
-        this.toggleNavbar();
         for (var i = 0; i < this.state.scoresList.length; i++) {
             if (this.state.selectAll) {
                 this.state.scoresList[i].markedForDeletion = false;
@@ -110,7 +109,6 @@ class ViewScores extends Component {
     }
 
     cancel() {
-        this.toggleNavbar();
         for (var i = 0; i < this.state.scoresList.length; i++) {
             this.state.scoresList[i].markedForDeletion = false;
         }
@@ -145,7 +143,6 @@ class ViewScores extends Component {
                     return deletingArray.indexOf(el) < 0;
                 })
             }),
-                this.toggleNavbar()
             )
             .catch(function (data) { }).catch(err => {
                 /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
@@ -171,7 +168,6 @@ class ViewScores extends Component {
         let temp = this.state.scoresList;
         let amountBeingDeleted = this.state.amountBeingDeleted;
         if (amountBeingDeleted == 0) {
-            this.toggleNavbar();
         }
         if (temp[index].markedForDeletion) {
             temp[index].markedForDeletion = false;
@@ -183,7 +179,6 @@ class ViewScores extends Component {
         }
 
         if (amountBeingDeleted == 0) {
-            this.toggleNavbar();
         }
 
         this.setState({
@@ -204,9 +199,6 @@ class ViewScores extends Component {
             toggleDeletionIcon: false,
             selectAll: false
         });
-        if (this.state.markedForDeletion && this.state.clickedOnBin) {
-            this.toggleNavbar();
-        }
     }
 
     showPhoto(item) {
