@@ -856,3 +856,12 @@ input[type=number] {
     bottom: 18px;
     right: 205px;
 }
+
+.select-all-view-score {
+    height: 28px;
+    position: absolute;
+    top: 20px;
+    z-index: 1000;
+    text-align: right;
+    right: 72px;
+}

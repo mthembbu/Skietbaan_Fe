@@ -8,6 +8,8 @@ import { toggleToggleBar } from "./toggle.js";
 import { checkUserType } from "../actions/adminAction";
 import whiteBin from './GroupImages/whiteBin.png';
 import blackBin from './GroupImages/blackBin.png';
+import whiteSelectAll from "../components/Notification-Img/white-select-all.png";
+import blackSelectAll from "../components/Notification-Img/black-select-all.png";
 import "../components/ScoreCapture.css";
 class ViewScores extends Component {
     constructor(props) {
@@ -37,7 +39,7 @@ class ViewScores extends Component {
             toggleDeletionIcon: false,
             markedForDeletion: false,
             amountBeingDeleted: 0,
-
+            selectAll: false
         };
         this.competitionClicked = this.competitionClicked.bind(this);
         this.formatTime = this.formatTime.bind(this);
@@ -49,7 +51,22 @@ class ViewScores extends Component {
         this.markedForDeletion = this.markedForDeletion.bind(this);
         this.toggleNavbar = this.toggleNavbar.bind(this);
         this.delete = this.delete.bind(this);
-        this.cancel = this.cancel.bind(this)
+        this.cancel = this.cancel.bind(this);
+        this.selectAll = this.selectAll.bind(this);
+    }
+
+    selectAll() {
+        this.setState({
+            selectAll: !this.state.selectAll
+        });
+        this.toggleNavbar();
+        for (var i = 0; i < this.state.scoresList.length; i++) {
+            if (this.state.selectAll) {
+              this.state.scoresList[i].markedForDeletion = false;
+            } else {
+              this.state.scoresList[i].markedForDeletion = true;
+            }
+          }
     }
 
     cancel() {
@@ -84,9 +101,9 @@ class ViewScores extends Component {
                 toggleDeletionIcon: false,
                 clickedOnBin: false,
                 markedForDeletion: false,
-                scoresList : this.state.scoresList.filter( function( el ) {
-                    return deletingArray.indexOf( el ) < 0;
-                  } )
+                scoresList: this.state.scoresList.filter(function (el) {
+                    return deletingArray.indexOf(el) < 0;
+                })
             }),
                 this.toggleNavbar()
             )
@@ -146,7 +163,7 @@ class ViewScores extends Component {
             markedForDeletion: false,
             toggleDeletionIcon: false,
         });
-        if(this.state.markedForDeletion && this.state.clickedOnBin){
+        if (this.state.markedForDeletion && this.state.clickedOnBin) {
             this.toggleNavbar();
         }
     }
@@ -451,7 +468,7 @@ class ViewScores extends Component {
                     </div>
                 )
             }
-        } else if(this.state.getDataScores){
+        } else if (this.state.getDataScores) {
             adminScoresList.push(
                 <div className="not-active">
                     <div className="not-active-message">
@@ -469,6 +486,18 @@ class ViewScores extends Component {
                         src={this.state.clickedOnBin ? blackBin : whiteBin}
                         alt=""
                         onClick={() => this.changeIcon()}
+                    />
+                    <img
+                        src={
+                            this.state.clickedOnBin
+                                ? whiteSelectAll
+                                : this.state.secondToggle
+                                    ? blackSelectAll
+                                    : "hidden"
+                        }
+                        onClick={() => this.selectAll()}
+                        className="select-all-view-score"
+                        alt=""
                     />
                 </div>
                 <div className={this.state.somethingClicked === true ? "padding-top-40" : "centre-labels"}>
@@ -502,7 +531,7 @@ class ViewScores extends Component {
                             </div>
                         )}
                 </div>
-                {this.state.markedForDeletion === false ? null : (
+                {this.state.markedForDeletion === false && this.state.selectAll === false ? null : (
                     <div className="bpanel">
                         <button className="cancel-delete" onClick={() => this.cancel()}>
                             cancel
