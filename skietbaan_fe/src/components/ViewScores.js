@@ -61,31 +61,37 @@ class ViewScores extends Component {
     }
 
     calculateDistance = (lat1, lon1) => {
-        let lat2 = -25.753695;
-        let lon2 = 28.361592;
-        let R = 6371; // km (change this constant to get miles)
-        let dLat = (lat2 - lat1) * Math.PI / 180;
-        let dLon = (lon2 - lon1) * Math.PI / 180;
-        let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-            Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        let d = R * c;
-        if (d > 1) {
-            let result = Math.round(d);
-            if (result > 5) {
-                this.state.inRange = false;
-                return "OUT OF RANGE";
+        if (lat1 === null || lon1 === null) {
+            this.state.inRange = false;
+            return "OUT OF RANGE";
+        }
+        else {
+            let lat2 = -25.753695;
+            let lon2 = 28.361592;
+            let R = 6371; // km (change this constant to get miles)
+            let dLat = (lat2 - lat1) * Math.PI / 180;
+            let dLon = (lon2 - lon1) * Math.PI / 180;
+            let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            let d = R * c;
+            if (d > 1) {
+                let result = Math.round(d);
+                if (result > 5) {
+                    this.state.inRange = false;
+                    return "OUT OF RANGE";
+                }
+                else if (result <= 5) {
+                    this.state.inRange = true;
+                    return "IN RANGE"
+                }
             }
-            else if (result <= 5) {
+            else if (d <= 1) {
+                let result = Math.round(d * 1000);
                 this.state.inRange = true;
                 return "IN RANGE"
             }
-        }
-        else if (d <= 1) {
-            let result = Math.round(d * 1000);
-            this.state.inRange = true;
-            return "IN RANGE"
         }
     }
 
@@ -269,7 +275,7 @@ class ViewScores extends Component {
                 competitionName: compName,
                 competitionId: compId
             });
-            if(this.props.isAdmin === true){
+            if (this.props.isAdmin === true) {
                 document.getElementById("username").value = "";
             }
             toggleToggleBar();
@@ -489,13 +495,21 @@ class ViewScores extends Component {
                     </div>
                 )
             }
+        } else if (this.state.scoresList.length === 0 && this.state.getDataScores === true) {
+            scoreListForUser.push(
+                <div className="not-active">
+                    <div className="not-active-message">
+
+                        Sorry, no scores submitted for this competition
+                </div>
+                </div>)
         }
 
         let adminScoresList = [];
         if (this.state.usersList.length !== 0 && this.state.getDataScores !== false && this.props.isAdmin === true) {
             for (let i = 0; i < this.state.usersList.length; i++) {
                 adminScoresList.push(
-                    <div className={this.state.userClicked === true ? "hidden" : "score-content"}>
+                    <div className={this.state.userClicked === true ? "hidden" : "score-content-admin"}>
                         <div className={this.state.userClicked === true ? "hidden" : "users-container"}
                             onClick={() => this.getScoresForAdmin(this.state.usersList[i].token, i,
                                 this.state.usersList[i].email, this.state.usersList[i].username)}>
@@ -504,7 +518,7 @@ class ViewScores extends Component {
                             <div className={this.state.userClicked === true ? "hidden" : "user-emails"}>
                                 {this.state.usersList[i].email}</div>
                         </div>
-                        <div className={this.state.userClicked === true ? "hidden" : "border-line"}>
+                        <div className={this.state.userClicked === true ? "hidden" : "border-line-usernames"}>
                         </div>
                     </div>
                 )
@@ -547,8 +561,10 @@ class ViewScores extends Component {
                   </label>
                 </div>
                 {loader}
-                <div className="view-score-competition-container">
-                    {competitionItem}
+                <div className={this.state.somethingClicked === true ? "" : "scrollbar"}>
+                    <div className="view-score-competition-container">
+                        {competitionItem}
+                    </div>
                 </div>
                 <div className={this.state.clicked === null ?
                     "hidden" : "score-list-container"}>
@@ -563,6 +579,7 @@ class ViewScores extends Component {
                                         type="text"
                                         onChange={this.handleSearch}
                                         id="username"
+                                        autoComplete = "off"
                                     ></input>
                                     <div>
                                         {adminScoresList}
