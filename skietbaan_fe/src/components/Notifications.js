@@ -62,6 +62,7 @@ class notification extends Component {
     this.disableButton = this.disableButton.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
     this.getBodyHeight = this.getBodyHeight.bind(this);
+    this.documentNotification = this.documentNotification.bind(this);
   }
   onDelete = async () => {
     const deletingArray = [];
@@ -167,6 +168,7 @@ class notification extends Component {
       secondToggle: false
     });
   }
+
   componentWillMount() {
     window.addEventListener("resize", () => {
       this.updateDimensions();
@@ -178,6 +180,7 @@ class notification extends Component {
       }
     });
   }
+  
   getBodyHeight() {
     return this.state.height - 56;
   }
@@ -187,9 +190,26 @@ class notification extends Component {
       width: window.innerWidth
     });
   }
+
+  async documentNotification() {
+    if (this.props.userLOGS === true || this.props.userLOS === true) {
+      fetch(BASE_URL + "/api/Notification/AddNotification?token=" + this.state.token, {
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.state.token)
+      })
+        .catch(err => {
+        });
+    }  
+  }
+
   componentDidMount() {
     this.props.selectedPage(4);
     if (getCookie("token")) {
+      this.documentNotification(this.state.token);
       this.props.getNotifications(this.state.token);
     }
     this.props.checkUserType(this.state.token);
@@ -558,7 +578,9 @@ const mapStateToProps = state => ({
   selectedButton: state.landingReducer.selectedLandingPage,
   loading: state.notificationOBJ.loading,
   isAdmin: state.adminReducer.isAdmin,
-  screenSize: state.posts.screenSize
+  screenSize: state.posts.screenSize,
+  userLOGS: state.notificationOBJ.userLOGS,
+  userLOS: state.notificationOBJ.userLOS
 });
 
 export default connect(

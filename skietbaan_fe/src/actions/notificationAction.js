@@ -3,7 +3,9 @@ import {
   UPDATE_IS_READ,
   BASE_URL,
   DATA_LOADING,
-  FETCH_NUMBER_OF_NOTIFICATIONS
+  FETCH_NUMBER_OF_NOTIFICATIONS,
+  USER_LOGS,
+  USER_LOS
 } from "../actions/types";
 import confirmation from "../components/Notification-Img/confirmation.png";
 import renewal from "../components/Notification-Img/renewal.png";
@@ -83,4 +85,24 @@ export const getNotifications = token => dispatch => {
     .catch(err => {
       /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
     });
+};
+
+export const userLOGS = status => {
+  //Return an action
+  return dispatch => {
+    dispatch({
+      type: USER_LOGS,
+      payload: status
+    });
+  };
+};
+
+export const userLOS = status => {
+  //Return an action
+  return dispatch => {
+    dispatch({
+      type: USER_LOS,
+      payload: status
+    });
+  };
 };

@@ -80,6 +80,10 @@ export const LANDING_SET_SELECTED_PAGE = "LANDING_SET_SELECTED_PAGE";
 //competition types
 export const COMPETITION_DATA_LOADING = "COMPETITION_DATA_LOADING";
 
+//document types
+export const USER_LOGS = "USER_LOGS";
+export const USER_LOS = "USER_LOS";
+
 export const handleErrors = response => {
   if (!response.ok) {
     throw Error(response.statusText);

@@ -3,6 +3,8 @@ import "../components/Documents.css";
 import { getCookie } from "./cookie.js";
 import { Collapse } from "react-collapse";
 import { BASE_URL, handleErrors } from "../actions/types.js";
+import { connect } from "react-redux";
+import {userLOGS, userLOS} from "../actions/notificationAction"
 
 class Documents extends Component {
   constructor(props) {
@@ -62,7 +64,7 @@ class Documents extends Component {
       },
       body: JSON.stringify(token)
     })
-      .then(handleErrors)
+      .then(handleErrors, this.props.userLOGS(true))
       .catch(err => {
         return Promise.reject();
       });
@@ -88,7 +90,7 @@ class Documents extends Component {
       },
       body: JSON.stringify(token)
     })
-      .then(handleErrors)
+      .then(handleErrors, this.props.userLOS(true))
       .catch(err => {
         return Promise.reject();
       });
@@ -214,4 +216,9 @@ class Documents extends Component {
   }
 }
 
-export default Documents;
+const mapStateToProps = state => ({
+  userLOGS: state.notificationOBJ.userLOGS,
+  userLOS: state.notificationOBJ.userLOS
+});
+
+export default connect(mapStateToProps, {userLOGS, userLOS})(Documents);

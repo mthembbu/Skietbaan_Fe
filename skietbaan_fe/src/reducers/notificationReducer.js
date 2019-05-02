@@ -2,11 +2,15 @@ import {
   FETCH_NOTIFICATION,
   UPDATE_IS_READ,
   DATA_LOADING,
-  FETCH_NUMBER_OF_NOTIFICATIONS
+  FETCH_NUMBER_OF_NOTIFICATIONS,
+  USER_LOGS,
+  USER_LOS
 } from "../actions/types";
 
 const initialState = {
   notificationsArray: [],
+  userLOGS: false,
+  userLOS: false,
   updatedNotification: {},
   numberOfNotifications: 0,
   loading: null
@@ -38,6 +42,16 @@ export default function(state = initialState, action) {
         ...state,
         numberOfNotifications: action.payload
       };
+    case USER_LOGS:
+      return {
+        ...state,
+        userLOGS: true
+      }
+    case USER_LOS:
+      return {
+        ...state,
+        userLOS: true
+      }
     default:
       return state;
   }
