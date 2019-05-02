@@ -114,6 +114,7 @@
 }
 .requirements-label {
 	margin-right: 3px;
+	cursor: pointer;
 }
 .down-arrow {
 	width: 12px;
