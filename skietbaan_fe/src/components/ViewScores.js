@@ -365,7 +365,6 @@ class ViewScores extends Component {
     }
 
     render() {
-        console.log(this.state.scoreList)
         let competitionItem = [];
         if (this.state.competitionsList && this.state.competitionsList.length > 0) {
             for (let i = 0; i < this.state.competitionsList.length; i++) {
