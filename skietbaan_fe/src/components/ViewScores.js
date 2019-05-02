@@ -60,39 +60,48 @@ class ViewScores extends Component {
         this.calculateDistance = this.calculateDistance.bind(this);
     }
 
-    calculateDistance = (lat1, lon1) => {
-        if ((lat1 === null || lat1 === 0) || (lon1 === null || lon1 === 0)) {
-            this.state.inRange = false;
-            return "OUT OF RANGE";
-        }
-        else {
-            let lat2 = -25.753695;
-            let lon2 = 28.361592;
-            let R = 6371; // km (change this constant to get miles)
-            let dLat = (lat2 - lat1) * Math.PI / 180;
-            let dLon = (lon2 - lon1) * Math.PI / 180;
-            let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                Math.sin(dLon / 2) * Math.sin(dLon / 2);
-            let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            let d = R * c;
-            if (d > 1) {
-                let result = Math.round(d);
-                if (result > 5) {
-                    this.state.inRange = false;
-                    return "OUT OF RANGE";
+    calculateDistance = (scorelist) => {
+        let temp = scorelist;
+        for(var i = 0; i < scorelist.length; i++)
+        {
+            let lat1 = temp[i].latitude;
+            let lon1 = temp[i].longitude;
+            if ((lat1 === null || lat1 === 0) || (lon1 === null || lon1 === 0)) {
+                temp[i].inRange = false;
+                temp[i].RangeMessage =  "OUT OF RANGE"
+            }
+            else {
+                let lat2 = -25.753695;
+                let lon2 = 28.361592;
+                let R = 6371; // km (change this constant to get miles)
+                let dLat = (lat2 - lat1) * Math.PI / 180;
+                let dLon = (lon2 - lon1) * Math.PI / 180;
+                let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+                let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                let d = R * c;
+                if (d > 1) {
+                    let result = Math.round(d);
+                    if (result > 5) {
+                        temp[i].inRange = false;
+                        temp[i].RangeMessage =  "OUT OF RANGE";
+                    }
+                    else if (result <= 5) {
+                        temp[i].inRange = true;
+                        temp[i].RangeMessage =  "IN RANGE"
+                    }
                 }
-                else if (result <= 5) {
-                    this.state.inRange = true;
-                    return "IN RANGE"
+                else if (d <= 1) {
+                    temp[i].inRange = true;
+                    temp[i].RangeMessage =  "IN RANGE"
                 }
             }
-            else if (d <= 1) {
-                let result = Math.round(d * 1000);
-                this.state.inRange = true;
-                return "IN RANGE"
-            }
+
         }
+
+        return temp;
+
     }
 
     selectAll() {
@@ -244,7 +253,7 @@ class ViewScores extends Component {
             })
             .then(data =>
                 this.setState({
-                    scoresList: data,
+                    scoresList: this.calculateDistance(data),
                     getDataScores: true
                 })
             )
@@ -459,10 +468,10 @@ class ViewScores extends Component {
                                 </div>
                             )}
 
-                        <div className={this.state.inRange === false ? "distance-view-scores-red" : "distance-view-scores"}>
-                            {this.calculateDistance(this.state.scoresList[i].latitude, this.state.scoresList[i].longitude)}
+                        <div className={this.state.scoresList[i].inRange === false ? "distance-view-scores-red" : "distance-view-scores"}>
+                            {this.state.scoresList[i].RangeMessage}
                         </div>
-                        <img className="in-range-img" src={this.state.inRange ? inRange : outRange}>
+                        <img className="in-range-img" src={this.state.scoresList[i].inRange ? inRange : outRange}>
                         </img>
                         <div onClick={() => this.markedForDeletion(i)}
                             className={
