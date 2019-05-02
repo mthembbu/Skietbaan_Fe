@@ -12,7 +12,7 @@ import Groups from "./components/Groups";
 import history from "./components/history";
 import notification from "./components/Notifications";
 import Documents from "./components/Documents";
-import ScoreCapture from "./components/ScoreCapture";
+import ScoresPage from "./components/ScoresPage";
 import ProfileLanding from "./components/ProfileLanding";
 import GroupComponent from "./components/GroupComponent";
 import CompComponent from "./components/CompComponent";
@@ -45,7 +45,7 @@ class App extends Component {
                 <Route path="/resetPassword" component={resetPassword} />
                 <Route path="/new-competition" component={CreateComp} exact />
                 <Route path="/AddGroup" component={AddGroup} exact />
-                <Route path="/scoreCapture" component={ScoreCapture} exact />
+                <Route path="/scoresPage" component={ScoresPage} exact />
                 <Route path="/groups" component={Groups} exact />
                 <Route path="/viewComp" component={ViewComp} exact />
                 <Route path="/createComp" component={CreateComp} exact />
