@@ -16,7 +16,7 @@ import Switch from "@material-ui/core/Switch";
 import group from "./GroupImages/groupUser.png";
 import PropTypes from "prop-types";
 import deleteS from './GroupImages/deleteS.png';
-import unmarked from './GroupImages/Oval.png';
+import unmarked from "./Notification-Img/delete3.png";
 
 
 class ViewGroups extends Component {
