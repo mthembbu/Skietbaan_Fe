@@ -4,12 +4,13 @@ import "../bootstrap/ProfileLanding.css";
 import UserProfile from "./UserProfile";
 import Documents from "./Documents";
 import UserDetails from "./userDetails";
-import StatisticsPage from "./StatisticsPage";
+import AdminUserStat from "./AdminUserStat";
 import { getCookie } from "./cookie.js";
 import history from "./history";
 import { connect } from "react-redux";
 import { setSelectedLandingPage } from "../actions/profileLandingAction";
 import { selectedPage } from "../actions/postActions";
+import StatisticsPage from "./StatisticsPage";
 
 class ProfileLanding extends Component {
   constructor(props) {
@@ -216,15 +217,16 @@ class ProfileLanding extends Component {
               </div>
             </div>
             <div className="profile-content-container">
-              {this.props.selectedButton === 1 ? (
+              {this.props.selectedButton === 1 ? 
                 <UserProfile />
-              ) : this.props.selectedButton === 2 ? (
+              : this.props.selectedButton === 2 ? 
                 <Documents />
-              ) : this.props.selectedButton == 3 ? (
-                <StatisticsPage />
-              ) : this.props.selectedButton === 4 ? (
-                <UserDetails />
-              ) : null}
+               : this.props.selectedButton == 3 && this.props.isAdmin===true ? 
+                <AdminUserStat />
+               : this.props.selectedButton == 3 && this.props.isAdmin===false?
+              <StatisticsPage />
+               : this.props.selectedButton === 4 ? 
+                <UserDetails />:null}
             </div>
           </div>
         </Col>
@@ -234,7 +236,8 @@ class ProfileLanding extends Component {
 }
 
 const mapStateToProps = state => ({
-  selectedButton: state.landingReducer.selectedLandingPage
+  selectedButton: state.landingReducer.selectedLandingPage,
+  isAdmin: state.adminReducer.isAdmin
 });
 
 export default connect(

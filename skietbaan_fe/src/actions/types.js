@@ -66,6 +66,7 @@ export const NEWGROUPSTATE = "NEWGROUPSTATE";
 export const GROUP_DATA_LOADING = "GROUP_DATA_LOADING";
 export const BINSTATE = "BINSTATE";
 export const SCREEN_SIZE = "SCREEN_SIZE";
+export const ADMINSTAT = "ADMINSTAT";
 
 //notification types
 export const FETCH_NOTIFICATION = "FETCH_NOTIFICATION";
@@ -80,6 +81,11 @@ export const LANDING_SET_SELECTED_PAGE = "LANDING_SET_SELECTED_PAGE";
 
 //competition types
 export const COMPETITION_DATA_LOADING = "COMPETITION_DATA_LOADING";
+
+//document types
+export const USER_LOGS = "USER_LOGS";
+export const USER_LOS = "USER_LOS";
+export const DOCCIE_SENT = "DOCCIE_SENT";
 
 export const handleErrors = response => {
   if (!response.ok) {

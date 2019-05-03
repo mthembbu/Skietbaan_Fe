@@ -43,7 +43,8 @@ class ViewScores extends Component {
             markedForDeletion: false,
             amountBeingDeleted: 0,
             selectAll: false,
-            inRange: null
+            inRange: null,
+            getDataForScores: false
         };
         this.competitionClicked = this.competitionClicked.bind(this);
         this.formatTime = this.formatTime.bind(this);
@@ -60,40 +61,53 @@ class ViewScores extends Component {
         this.calculateDistance = this.calculateDistance.bind(this);
     }
 
-    calculateDistance = (lat1, lon1) => {
-        let lat2 = -25.753695;
-        let lon2 = 28.361592;
-        let R = 6371; // km (change this constant to get miles)
-        let dLat = (lat2 - lat1) * Math.PI / 180;
-        let dLon = (lon2 - lon1) * Math.PI / 180;
-        let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-            Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        let d = R * c;
-        if (d > 1) {
-            let result = Math.round(d);
-            if (result > 5) {
-                this.state.inRange = false;
-                return "OUT OF RANGE";
+    calculateDistance = (scorelist) => {
+        let temp = scorelist;
+        for (var i = 0; i < scorelist.length; i++) {
+            let lat1 = temp[i].latitude;
+            let lon1 = temp[i].longitude;
+            if ((lat1 === null || lat1 === 0) || (lon1 === null || lon1 === 0)) {
+                temp[i].inRange = false;
+                temp[i].RangeMessage = "OUT OF RANGE"
             }
-            else if (result <= 5) {
-                this.state.inRange = true;
-                return "IN RANGE"
+            else {
+                let lat2 = -25.753695;
+                let lon2 = 28.361592;
+                let R = 6371; // km (change this constant to get miles)
+                let dLat = (lat2 - lat1) * Math.PI / 180;
+                let dLon = (lon2 - lon1) * Math.PI / 180;
+                let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+                let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                let d = R * c;
+                if (d > 1) {
+                    let result = Math.round(d);
+                    if (result > 5) {
+                        temp[i].inRange = false;
+                        temp[i].RangeMessage = "OUT OF RANGE";
+                    }
+                    else if (result <= 5) {
+                        temp[i].inRange = true;
+                        temp[i].RangeMessage = "IN RANGE"
+                    }
+                }
+                else if (d <= 1) {
+                    temp[i].inRange = true;
+                    temp[i].RangeMessage = "IN RANGE"
+                }
             }
+
         }
-        else if (d <= 1) {
-            let result = Math.round(d * 1000);
-            this.state.inRange = true;
-            return "IN RANGE"
-        }
+
+        return temp;
+
     }
 
     selectAll() {
         this.setState({
             selectAll: !this.state.selectAll
         });
-        this.toggleNavbar();
         for (var i = 0; i < this.state.scoresList.length; i++) {
             if (this.state.selectAll) {
                 this.state.scoresList[i].markedForDeletion = false;
@@ -104,14 +118,14 @@ class ViewScores extends Component {
     }
 
     cancel() {
-        this.toggleNavbar();
         for (var i = 0; i < this.state.scoresList.length; i++) {
             this.state.scoresList[i].markedForDeletion = false;
         }
         this.setState({
             toggleDeletionIcon: false,
             clickedOnBin: false,
-            markedForDeletion: false
+            markedForDeletion: false,
+            selectAll: false
         });
     }
 
@@ -139,7 +153,6 @@ class ViewScores extends Component {
                     return deletingArray.indexOf(el) < 0;
                 })
             }),
-                this.toggleNavbar()
             )
             .catch(function (data) { }).catch(err => {
                 /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
@@ -164,9 +177,6 @@ class ViewScores extends Component {
     markedForDeletion(index) {
         let temp = this.state.scoresList;
         let amountBeingDeleted = this.state.amountBeingDeleted;
-        if (amountBeingDeleted == 0) {
-            this.toggleNavbar();
-        }
         if (temp[index].markedForDeletion) {
             temp[index].markedForDeletion = false;
             amountBeingDeleted -= 1;
@@ -177,7 +187,6 @@ class ViewScores extends Component {
         }
 
         if (amountBeingDeleted == 0) {
-            this.toggleNavbar();
         }
 
         this.setState({
@@ -198,9 +207,6 @@ class ViewScores extends Component {
             toggleDeletionIcon: false,
             selectAll: false
         });
-        if (this.state.markedForDeletion && this.state.clickedOnBin) {
-            this.toggleNavbar();
-        }
     }
 
     showPhoto(item) {
@@ -245,8 +251,8 @@ class ViewScores extends Component {
             })
             .then(data =>
                 this.setState({
-                    scoresList: data,
-                    getDataScores: true
+                    scoresList: this.calculateDistance(data),
+                    getDataForScores: true
                 })
             )
             .catch(err => {
@@ -269,7 +275,7 @@ class ViewScores extends Component {
                 competitionName: compName,
                 competitionId: compId
             });
-            if(this.props.isAdmin === true){
+            if (this.props.isAdmin === true) {
                 document.getElementById("username").value = "";
             }
             toggleToggleBar();
@@ -289,8 +295,8 @@ class ViewScores extends Component {
                     })
                     .then(data =>
                         this.setState({
-                            scoresList: data,
-                            getDataScores: true
+                            scoresList: this.calculateDistance(data),
+                            getDataForScores: true
                         })
                     )
                     .catch(err => {
@@ -438,8 +444,20 @@ class ViewScores extends Component {
             </div>
         )
 
+        let loaderForScoresList = (
+            <div className={this.state.getDataForScores === false && this.state.getDataScores === false ?
+                "loading-container-add-score" : "hidden "}>
+                <div className={this.state.getDataForScores === false && this.state.getDataScores === false ?
+                    "loader" : "hidden"} />
+                <div className={this.state.getDataForScores === false && this.state.getDataScores === false ?
+                    "target-loader-image" : "hidden"} />
+                <div className={this.state.getDataForScores === false && this.state.getDataScores === false ?
+                    "loading-message" : "hidden "}>Loading...</div>
+            </div>
+        )
+
         let scoreListForUser = [];
-        if (this.state.scoresList.length !== 0 && this.state.getDataScores !== false) {
+        if (this.state.scoresList.length !== 0 && this.state.getDataForScores !== false) {
             for (let i = 0; i < this.state.scoresList.length; i++) {
                 scoreListForUser.push(
                     <div className={this.state.cameraClicked === false || this.state.someScoreClicked === i ?
@@ -460,10 +478,11 @@ class ViewScores extends Component {
                                 </div>
                             )}
 
-                        <div className={this.state.inRange === false ? "distance-view-scores-red" : "distance-view-scores"}>
-                            {this.calculateDistance(this.state.scoresList[i].latitude, this.state.scoresList[i].longitude)}
+                        <div className={this.state.scoresList[i].inRange === false ?
+                            "distance-view-scores-red" : "distance-view-scores"}>
+                            {this.state.scoresList[i].RangeMessage}
                         </div>
-                        <img className="in-range-img" src={this.state.inRange ? inRange : outRange}>
+                        <img className="in-range-img" src={this.state.scoresList[i].inRange ? inRange : outRange}>
                         </img>
                         <div onClick={() => this.markedForDeletion(i)}
                             className={
@@ -489,13 +508,21 @@ class ViewScores extends Component {
                     </div>
                 )
             }
+        } else if (this.state.scoresList.length === 0 && this.state.getDataForScores === true) {
+            scoreListForUser.push(
+                <div className="not-active">
+                    <div className="not-active-message">
+
+                        Sorry, no scores submitted for this competition
+                </div>
+                </div>)
         }
 
         let adminScoresList = [];
         if (this.state.usersList.length !== 0 && this.state.getDataScores !== false && this.props.isAdmin === true) {
             for (let i = 0; i < this.state.usersList.length; i++) {
                 adminScoresList.push(
-                    <div className={this.state.userClicked === true ? "hidden" : "score-content"}>
+                    <div className={this.state.userClicked === true ? "hidden" : "score-content-admin"}>
                         <div className={this.state.userClicked === true ? "hidden" : "users-container"}
                             onClick={() => this.getScoresForAdmin(this.state.usersList[i].token, i,
                                 this.state.usersList[i].email, this.state.usersList[i].username)}>
@@ -504,7 +531,7 @@ class ViewScores extends Component {
                             <div className={this.state.userClicked === true ? "hidden" : "user-emails"}>
                                 {this.state.usersList[i].email}</div>
                         </div>
-                        <div className={this.state.userClicked === true ? "hidden" : "border-line"}>
+                        <div className={this.state.userClicked === true ? "hidden" : "border-line-usernames"}>
                         </div>
                     </div>
                 )
@@ -547,13 +574,18 @@ class ViewScores extends Component {
                   </label>
                 </div>
                 {loader}
-                <div className="view-score-competition-container">
-                    {competitionItem}
+                <div className={this.state.somethingClicked === true ? "" : "scrollbar"}>
+                    <div className="view-score-competition-container">
+                        {competitionItem}
+                    </div>
                 </div>
                 <div className={this.state.clicked === null ?
                     "hidden" : "score-list-container"}>
                     {this.props.isAdmin === false || this.state.scoresList.length !== 0 ? (
-                        <div>{scoreListForUser}</div>
+                        <div>
+                            {loaderForScoresList}
+                            {scoreListForUser}
+                        </div>
                     ) : (
                             <div>
                                 <div className="view-scores-input-container">
@@ -563,8 +595,10 @@ class ViewScores extends Component {
                                         type="text"
                                         onChange={this.handleSearch}
                                         id="username"
+                                        autoComplete="off"
                                     ></input>
                                     <div>
+                                        {loaderForScoresList}
                                         {adminScoresList}
                                     </div>
                                 </div>
@@ -575,10 +609,10 @@ class ViewScores extends Component {
                 {this.state.markedForDeletion === false && this.state.selectAll === false ? null : (
                     <div className="bpanel">
                         <button className="cancel-delete" onClick={() => this.cancel()}>
-                            cancel
+                            CANCEL
                                              </button>
                         <button className="confirm-group" onClick={() => this.delete()}>
-                            {this.state.amountBeingDeleted > 1 ? "Delete scores" : "Delete score"}
+                            {this.state.amountBeingDeleted > 1 ? "DELETE SCORES" : "DELETE SCORE"}
                         </button>
                     </div>
                 )}
