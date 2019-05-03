@@ -43,7 +43,8 @@ class ViewScores extends Component {
             markedForDeletion: false,
             amountBeingDeleted: 0,
             selectAll: false,
-            inRange: null
+            inRange: null,
+            getDataForScores: false
         };
         this.competitionClicked = this.competitionClicked.bind(this);
         this.formatTime = this.formatTime.bind(this);
@@ -62,13 +63,12 @@ class ViewScores extends Component {
 
     calculateDistance = (scorelist) => {
         let temp = scorelist;
-        for(var i = 0; i < scorelist.length; i++)
-        {
+        for (var i = 0; i < scorelist.length; i++) {
             let lat1 = temp[i].latitude;
             let lon1 = temp[i].longitude;
             if ((lat1 === null || lat1 === 0) || (lon1 === null || lon1 === 0)) {
                 temp[i].inRange = false;
-                temp[i].RangeMessage =  "OUT OF RANGE"
+                temp[i].RangeMessage = "OUT OF RANGE"
             }
             else {
                 let lat2 = -25.753695;
@@ -85,16 +85,16 @@ class ViewScores extends Component {
                     let result = Math.round(d);
                     if (result > 5) {
                         temp[i].inRange = false;
-                        temp[i].RangeMessage =  "OUT OF RANGE";
+                        temp[i].RangeMessage = "OUT OF RANGE";
                     }
                     else if (result <= 5) {
                         temp[i].inRange = true;
-                        temp[i].RangeMessage =  "IN RANGE"
+                        temp[i].RangeMessage = "IN RANGE"
                     }
                 }
                 else if (d <= 1) {
                     temp[i].inRange = true;
-                    temp[i].RangeMessage =  "IN RANGE"
+                    temp[i].RangeMessage = "IN RANGE"
                 }
             }
 
@@ -177,8 +177,6 @@ class ViewScores extends Component {
     markedForDeletion(index) {
         let temp = this.state.scoresList;
         let amountBeingDeleted = this.state.amountBeingDeleted;
-        if (amountBeingDeleted == 0) {
-        }
         if (temp[index].markedForDeletion) {
             temp[index].markedForDeletion = false;
             amountBeingDeleted -= 1;
@@ -254,7 +252,7 @@ class ViewScores extends Component {
             .then(data =>
                 this.setState({
                     scoresList: this.calculateDistance(data),
-                    getDataScores: true
+                    getDataForScores: true
                 })
             )
             .catch(err => {
@@ -298,7 +296,7 @@ class ViewScores extends Component {
                     .then(data =>
                         this.setState({
                             scoresList: this.calculateDistance(data),
-                            getDataScores: true
+                            getDataForScores: true
                         })
                     )
                     .catch(err => {
@@ -446,8 +444,20 @@ class ViewScores extends Component {
             </div>
         )
 
+        let loaderForScoresList = (
+            <div className={this.state.getDataForScores === false && this.state.getDataScores === false ?
+                "loading-container-add-score" : "hidden "}>
+                <div className={this.state.getDataForScores === false && this.state.getDataScores === false ?
+                    "loader" : "hidden"} />
+                <div className={this.state.getDataForScores === false && this.state.getDataScores === false ?
+                    "target-loader-image" : "hidden"} />
+                <div className={this.state.getDataForScores === false && this.state.getDataScores === false ?
+                    "loading-message" : "hidden "}>Loading...</div>
+            </div>
+        )
+
         let scoreListForUser = [];
-        if (this.state.scoresList.length !== 0 && this.state.getDataScores !== false) {
+        if (this.state.scoresList.length !== 0 && this.state.getDataForScores !== false) {
             for (let i = 0; i < this.state.scoresList.length; i++) {
                 scoreListForUser.push(
                     <div className={this.state.cameraClicked === false || this.state.someScoreClicked === i ?
@@ -468,7 +478,7 @@ class ViewScores extends Component {
                                 </div>
                             )}
 
-                        <div className={this.state.scoresList[i].inRange === false ? 
+                        <div className={this.state.scoresList[i].inRange === false ?
                             "distance-view-scores-red" : "distance-view-scores"}>
                             {this.state.scoresList[i].RangeMessage}
                         </div>
@@ -498,7 +508,7 @@ class ViewScores extends Component {
                     </div>
                 )
             }
-        } else if (this.state.scoresList.length === 0 && this.state.getDataScores === true) {
+        } else if (this.state.scoresList.length === 0 && this.state.getDataForScores === true) {
             scoreListForUser.push(
                 <div className="not-active">
                     <div className="not-active-message">
@@ -572,7 +582,10 @@ class ViewScores extends Component {
                 <div className={this.state.clicked === null ?
                     "hidden" : "score-list-container"}>
                     {this.props.isAdmin === false || this.state.scoresList.length !== 0 ? (
-                        <div>{scoreListForUser}</div>
+                        <div>
+                            {loaderForScoresList}
+                            {scoreListForUser}
+                        </div>
                     ) : (
                             <div>
                                 <div className="view-scores-input-container">
@@ -582,9 +595,10 @@ class ViewScores extends Component {
                                         type="text"
                                         onChange={this.handleSearch}
                                         id="username"
-                                        autoComplete = "off"
+                                        autoComplete="off"
                                     ></input>
                                     <div>
+                                        {loaderForScoresList}
                                         {adminScoresList}
                                     </div>
                                 </div>
