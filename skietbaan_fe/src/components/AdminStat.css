@@ -4,13 +4,15 @@
     align-self: center;
 	height: 100%;
     margin-top: 30px;
+    position: absolute;
+    width: 100%;
 }
 .admin-stat-toddle-bar-container {
 	display: flex;
     justify-content: center;
 }
 .toddle-bar-bar {
-	width: 88%;
+	width: 320px;
 	display: flex;
 	height: 32px;
 	border-radius: 18px;
@@ -190,7 +192,7 @@ font-size: 20px;
     display: flex;
 }
 .admin-expiring-third-row{
-    height: 40px;
+    height: 55px;
 }
 .admin-expiring-member-container{
     display: flex;
@@ -212,6 +214,12 @@ font-size: 20px;
 .stat-page-main-container{
     display: flex;
     flex-direction: column;
-	height: 100%;
     margin-top: 30px;
+    overflow-y: scroll;
+}
+
+@media screen and (max-width: 576px){
+    .admin-stat-main-container{
+        width: 93%;
+    }
 }
