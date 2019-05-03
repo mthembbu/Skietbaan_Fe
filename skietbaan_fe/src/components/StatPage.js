@@ -3,10 +3,13 @@ import PropTypes from 'prop-types'
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import './AdminStat.css';
-
+import { adminstat } from '../actions/postActions'
 export class StatPage extends Component {
     static propTypes = {
         prop: PropTypes
+    }
+    componentDidMount() {
+        this.props.adminstat();
     }
 
     render() {
