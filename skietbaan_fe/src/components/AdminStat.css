@@ -1,0 +1,217 @@
+.admin-stat-main-container {
+	display: flex;
+    flex-direction: column;
+    align-self: center;
+	height: 100%;
+    margin-top: 30px;
+}
+.admin-stat-toddle-bar-container {
+	display: flex;
+    justify-content: center;
+}
+.toddle-bar-bar {
+	width: 88%;
+	display: flex;
+	height: 32px;
+	border-radius: 18px;
+	border: 1px solid #BE0000;
+}
+.user-stat-label {
+	display: flex;
+	justify-content: center;
+	width: 50%;
+	font-weight: lighter;
+	font-size: 14px;
+	border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+    padding-top: 3px;
+}
+.user-stat-label-active {
+	display: flex;
+	width: 50%;
+	justify-content: center;
+	background: #BE0000;
+	font-weight: bold;
+    font-size: 14px;
+    color: #FFFFFF;
+	border-top-left-radius: 18px;
+	border-bottom-left-radius: 18px;
+    height: 31px;
+    padding-top: 3px;
+}
+.admin-stat-as-user {
+	display: flex;
+	width: 50%;
+	justify-content: center;
+	font-weight: lighter;
+	font-size: 14px;
+	border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    padding-top: 3px;
+}
+.admin-stat-as-user-active {
+	display: flex;
+	width: 50%;
+	justify-content: center;
+    background: #BE0000;
+    color: #FFFFFF;
+	font-weight: bold;
+	font-size: 14px;
+	border-top-right-radius: 18px;
+	height: 31px;
+    border-bottom-right-radius: 18px;
+    padding-top: 3px;
+}
+.admin-first-row-container{
+    height: 214px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1.5px solid #BE0000;
+    border-bottom: 1.5px solid #BE0000;
+}
+.total-container-col{
+    color: #BE0000;
+    margin-top: 41px;
+}
+.total-number-label{
+    height: 50px;
+    line-height: 40px;
+    font-size: 68px;
+    font-weight: 152px;
+}
+
+.total-number-text{
+    font-size: 20px;
+    font-weight: bold;
+}
+.number-of-new-users{
+    display: flex;
+}
+.no-user{
+    font-size: 52px;
+    font-weight: 300;
+    margin-top: -22px;
+}
+.the-container-for-the-text{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color:#666666;
+}
+.the-container-for-the-text .new-label,.admin-user-label{
+font-size: 20px;
+}
+.new-label{
+    line-height: 12px;
+}
+.this-month-label{
+    font-size: 12px;
+}
+.percentang-of-the-increase-of-user{
+    font-size: 32px;
+    display: flex;
+    justify-content: flex-end;
+    color: #666666;
+}
+.admin-new-user-container{
+    width: 96%;
+    align-self: center;
+}
+.new-user-percentage-container{
+    background: #f8f8f8;
+    padding-top: 10px;
+}
+.total-user-container{
+    margin-bottom: 5px;
+}
+.admin-second-row{
+    height: 228px;
+    width: 96%;
+    align-self: center;
+    margin-top: 40px;
+    border-bottom: 1.5px solid #BE0000;
+}
+.member-first-row{
+    height: 78px;
+    margin-bottom:15px;
+}
+.member-number-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #BE0000;
+}
+.member-label{
+    font-size: 68px;
+    font-weight: 152px;
+    line-height: 60px;
+}
+.member-total-text{
+    font-size: 20px;
+    font-weight: bold;
+}
+.admin-member-row{
+    height: 72px;
+    background: #F8F8F8;
+    color: #666666;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+.admin-member-first-col{
+    display: flex;
+}
+.number-of-new-members{
+    font-size: 52px;
+    font-weight: 300;
+    margin-top: -22px;
+}
+.new-member-text-container .member-new-text,.members-member-text{
+    font-size: 20px;
+    font-weight: bold;
+}
+.member-this-month{
+    font-size: 12px;
+    font-weight: 300;
+}
+.new-member-text-container{
+    display: flex;
+    flex-direction: column;
+}
+.member-new-text{
+    line-height: 12px;
+}
+.admin-member-second-col{
+    font-size: 32px;
+    display: flex;
+    justify-content: flex-end;
+    color: #666666;
+}
+.admin-expiring-first-col{
+    display: flex;
+}
+.admin-expiring-third-row{
+    height: 40px;
+}
+.admin-expiring-member-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 10px;
+    font-size: 20px;
+    color:#EA251A;
+    font-weight: bold;
+    line-height: 23px;
+}
+.admin-number-of-expiring-users{
+    font-size: 52px;
+    font-weight: 58;
+    color: #EA251A;
+    font-weight: 300;
+    margin-top: -19px;
+    margin-right: 3px;
+}
+.stat-page-main-container{
+    display: flex;
+    flex-direction: column;
+	height: 100%;
+    margin-top: 30px;
+}

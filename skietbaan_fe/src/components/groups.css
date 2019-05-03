@@ -821,13 +821,13 @@
 	margin: auto;
 	text-align: center;
 	border-radius: 5px;
-	margin-top: 40%;
+	margin-top: 20%;
 }
 .edit-no-user-msg {
 	font-size: 16px;
     color: #be0000;
     margin: auto;
-    margin-top: 12px;
+    margin-top: 25px;
     font-weight: lighter;
 }
 .view-group-delete-box {
