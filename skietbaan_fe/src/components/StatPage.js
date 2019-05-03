@@ -17,6 +17,8 @@ export class StatPage extends Component {
     }
     render() {
         return (
+            <div>
+            {Object.keys(this.props.adminstats).length > 0 ? 
             <div className="stat-page-main-container" style={{ height: this.getBodyHeight() }}>
                 <Row className="admin-new-user-container">
                     <Col className="admin-first-row-container">
@@ -24,6 +26,7 @@ export class StatPage extends Component {
                             <Col className="total-container-col">
                                 <Row className="number-of-users-and-total-number-container">
                                     <Col className="total-number-label">
+                                        
                                         {this.props.adminstats["total users"]}
                                     </Col>
                                 </Row>
@@ -89,7 +92,8 @@ export class StatPage extends Component {
                         </Row>
                     </Col>
                 </Row>
-
+            </div>
+            :null}
             </div>
         )
     }
