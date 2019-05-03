@@ -609,10 +609,10 @@ class ViewScores extends Component {
                 {this.state.markedForDeletion === false && this.state.selectAll === false ? null : (
                     <div className="bpanel">
                         <button className="cancel-delete" onClick={() => this.cancel()}>
-                            cancel
+                            CANCEL
                                              </button>
                         <button className="confirm-group" onClick={() => this.delete()}>
-                            {this.state.amountBeingDeleted > 1 ? "Delete scores" : "Delete score"}
+                            {this.state.amountBeingDeleted > 1 ? "DELETE SCORES" : "DELETE SCORE"}
                         </button>
                     </div>
                 )}

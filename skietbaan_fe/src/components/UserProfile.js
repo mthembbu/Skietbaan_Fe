@@ -171,7 +171,7 @@ class UserProfile extends Component {
                              "button-style competition-button-text button-style-active" : 
                              "button-style competition-button-text button-style-inactive"}
                              onClick={() => this.setSelectedCompetition(element.competitionName)}>
-                            {element.competitionName}
+                            {element.competitionName.toUpperCase()}
                         </button>
                     </Col>
                 </Row>
