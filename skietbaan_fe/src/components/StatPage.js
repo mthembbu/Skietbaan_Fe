@@ -103,8 +103,4 @@ const mapStateToProps = (state) => ({
     adminstats: state.posts.adminstats
 })
 
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(StatPage)
+export default connect(mapStateToProps, {adminstat})(StatPage)
