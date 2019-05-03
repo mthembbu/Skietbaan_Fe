@@ -3,10 +3,13 @@ import PropTypes from 'prop-types'
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import './AdminStat.css';
-
+import { adminstat } from '../actions/postActions'
 export class StatPage extends Component {
     static propTypes = {
         prop: PropTypes
+    }
+    componentDidMount() {
+        this.props.adminstat();
     }
 
     render() {
@@ -100,8 +103,4 @@ const mapStateToProps = (state) => ({
     adminstats: state.posts.adminstats
 })
 
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(StatPage)
+export default connect(mapStateToProps, {adminstat})(StatPage)
