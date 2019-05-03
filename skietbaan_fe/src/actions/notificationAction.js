@@ -5,7 +5,8 @@ import {
   DATA_LOADING,
   FETCH_NUMBER_OF_NOTIFICATIONS,
   USER_LOGS,
-  USER_LOS
+  USER_LOS,
+  DOCCIE_SENT
 } from "../actions/types";
 import confirmation from "../components/Notification-Img/confirmation.png";
 import renewal from "../components/Notification-Img/renewal.png";
@@ -87,8 +88,7 @@ export const getNotifications = token => dispatch => {
     });
 };
 
-export const userLOGS = status => {
-  //Return an action
+export const updateUserLOGS = status => {
   return dispatch => {
     dispatch({
       type: USER_LOGS,
@@ -97,11 +97,19 @@ export const userLOGS = status => {
   };
 };
 
-export const userLOS = status => {
-  //Return an action
+export const updateUserLOS = status => {
   return dispatch => {
     dispatch({
       type: USER_LOS,
+      payload: status
+    });
+  };
+};
+
+export const sent = status => {
+  return dispatch => {
+    dispatch({
+      type: DOCCIE_SENT,
       payload: status
     });
   };

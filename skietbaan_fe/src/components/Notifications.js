@@ -23,7 +23,8 @@ import {
 import {
   updateIsReadProperty,
   getNotifications,
-  fetchNumberOfNotification
+  fetchNumberOfNotification,
+  sent
 } from "../actions/notificationAction";
 import { checkUserType } from "../actions/adminAction";
 import { Row, Col } from "react-bootstrap";
@@ -80,14 +81,15 @@ class notification extends Component {
         },
         body: JSON.stringify(deletingArray)
       }).then(() => {
+        this.props.fetchNumberOfNotification(this.state.token);
         this.props.getNotifications(this.state.token);
         this.setState({
           toggle: false,
+          secondToggle: false,
           count: 0
         });
-        this.props.fetchNumberOfNotification(this.state.token);
       });
-    } catch (err) {}
+    } catch (err) { }
   };
 
   onClick_View = (Notification, Message, Id) => {
@@ -180,7 +182,7 @@ class notification extends Component {
       }
     });
   }
-  
+
   getBodyHeight() {
     return this.state.height - 56;
   }
@@ -192,24 +194,29 @@ class notification extends Component {
   }
 
   async documentNotification() {
-    if (this.props.userLOGS === true || this.props.userLOS === true) {
-      fetch(BASE_URL + "/api/Notification/AddNotification?token=" + this.state.token, {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(this.state.token)
-      })
-        .catch(err => {
-        });
-    }  
+    fetch(BASE_URL + "/api/Notification/AddNotification?token=" + this.state.token, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state.token)
+    })
+      .then(
+        this.props.sent(true)
+    )
+      .catch(err => {
+      });
   }
 
   componentDidMount() {
     this.props.selectedPage(4);
     if (getCookie("token")) {
-      this.documentNotification(this.state.token);
+      if (this.props.doccieSent === false) {
+        if (this.props.userLOGS === true || this.props.userLOS === true) {
+          this.documentNotification(this.state.token);
+        }
+      }
       this.props.getNotifications(this.state.token);
     }
     this.props.checkUserType(this.state.token);
@@ -281,7 +288,7 @@ class notification extends Component {
       },
       body: JSON.stringify(this.state.announceString)
     })
-      .then(function(response) {})
+      .then(function (response) { })
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
@@ -330,8 +337,8 @@ class notification extends Component {
               this.state.toggle && !this.state.secondToggle
                 ? whiteSelectAll
                 : this.state.secondToggle
-                ? blackSelectAll
-                : "hidden"
+                  ? blackSelectAll
+                  : "hidden"
             }
             onClick={() => this.selectAll()}
             className="select-all"
@@ -371,8 +378,8 @@ class notification extends Component {
               this.state.toggle && !this.state.secondToggle
                 ? whiteSelectAll
                 : this.state.secondToggle
-                ? blackSelectAll
-                : "hidden"
+                  ? blackSelectAll
+                  : "hidden"
             }
             onClick={() => this.selectAll()}
             className="admin-select-all"
@@ -409,8 +416,8 @@ class notification extends Component {
         {this.props.notificationsArray.length <= 0 ? (
           <label className="empty">No Notifications Available</label>
         ) : (
-          ""
-        )}
+            ""
+          )}
         {this.props.notificationsArray.map((post, i) => (
           <tr className="tr-class" key={i}>
             <td className="first-column-notify">
@@ -426,8 +433,8 @@ class notification extends Component {
                   post.markedForDeletion && this.state.toggle
                     ? "notifications-selected-text"
                     : post.isRead === true
-                    ? "notifications-text"
-                    : "notifications-unread"
+                      ? "notifications-text"
+                      : "notifications-unread"
                 }
                 onClick={() =>
                   this.onClick_View(
@@ -463,7 +470,7 @@ class notification extends Component {
 
     let markedItems = [];
 
-    this.props.notificationsArray.forEach(function(notifications) {
+    this.props.notificationsArray.forEach(function (notifications) {
       if (notifications.markedForDeletion) {
         markedItems.push(notifications);
       }
@@ -480,7 +487,7 @@ class notification extends Component {
       <table
         className={
           this.props.notificationsArray.some(post => post.markedForDeletion) &&
-          this.state.toggle
+            this.state.toggle
             ? "notifications-modal"
             : "hidden"
         }
@@ -542,20 +549,20 @@ class notification extends Component {
               {this.props.isAdmin === false ? (
                 <div>{headingItems}</div>
               ) : (
-                <div>{adminHeadingItems}</div>
-              )}
+                  <div>{adminHeadingItems}</div>
+                )}
               {this.state.adminToggle === true ? (
                 <Collapse isOpened={this.state.adminToggle === true}>
                   <div>{writeAnnouncement}</div>
                 </Collapse>
               ) : (
-                <div
-                  className="format-content"
-                  style={{ maxHeight: this.getBodyHeight() + "px" }}
-                >
-                  {this.props.loading ? postItems : loader}
-                </div>
-              )}
+                  <div
+                    className="format-content"
+                    style={{ maxHeight: this.getBodyHeight() + "px" }}
+                  >
+                    {this.props.loading ? postItems : loader}
+                  </div>
+                )}
               <div>{deleteModal}</div>
             </div>
           </div>
@@ -580,7 +587,8 @@ const mapStateToProps = state => ({
   isAdmin: state.adminReducer.isAdmin,
   screenSize: state.posts.screenSize,
   userLOGS: state.notificationOBJ.userLOGS,
-  userLOS: state.notificationOBJ.userLOS
+  userLOS: state.notificationOBJ.userLOS,
+  doccieSent: state.notificationOBJ.doccieSent
 });
 
 export default connect(
@@ -594,6 +602,7 @@ export default connect(
     setSelectedLandingPage,
     selectedPage,
     checkUserType,
-    fetchNumberOfNotification
+    fetchNumberOfNotification,
+    sent
   }
 )(notification);

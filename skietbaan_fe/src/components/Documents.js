@@ -4,7 +4,7 @@ import { getCookie } from "./cookie.js";
 import { Collapse } from "react-collapse";
 import { BASE_URL, handleErrors } from "../actions/types.js";
 import { connect } from "react-redux";
-import {userLOGS, userLOS} from "../actions/notificationAction"
+import { updateUserLOS, updateUserLOGS } from "../actions/notificationAction"
 
 class Documents extends Component {
   constructor(props) {
@@ -23,30 +23,40 @@ class Documents extends Component {
     this._isMounted = false;
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this._isMounted = true;
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
     let token = getCookie("token");
-    fetch(BASE_URL + "/api/Documents/UserLOGS/" + token)
+    await fetch(BASE_URL + "/api/Documents/UserLOGS/" + token)
       .then(handleErrors)
       .then(res => res.json())
       .then(data => {
         if (this._isMounted) {
           this.setState({ sendLogsReturn: data, getDataUserLOGS: true });
         }
+        if (this.state.getDataUserLOGS && this.props.userLOGS === false) {
+          this.props.updateUserLOGS(true);
+        } else {
+          this.props.updateUserLOGS(false);
+        }
       })
       .catch(err => {
         this.setState({ exceptionCaught: true })
       });
 
-    fetch(BASE_URL + "/api/Documents/UserLOS/" + token)
+    await fetch(BASE_URL + "/api/Documents/UserLOS/" + token)
       .then(handleErrors)
       .then(res => res.json())
       .then(data => {
         if (this._isMounted) {
           this.setState({ sendLosReturn: data, getDataUserLOS: true });
+        }
+        if (this.state.getDataUserLOS && this.props.userLOS === false) {
+          this.props.updateUserLOS(true);
+        } else {
+          this.props.updateUserLOS(false);
         }
       })
       .catch(err => {
@@ -64,7 +74,7 @@ class Documents extends Component {
       },
       body: JSON.stringify(token)
     })
-      .then(handleErrors, this.props.userLOGS(true))
+      .then(handleErrors)
       .catch(err => {
         return Promise.reject();
       });
@@ -90,11 +100,10 @@ class Documents extends Component {
       },
       body: JSON.stringify(token)
     })
-      .then(handleErrors, this.props.userLOS(true))
+      .then(handleErrors)
       .catch(err => {
         return Promise.reject();
       });
-
     if (this.state.collapseFilterLOS) {
       this.setState({
         collapseFilterLOS: false
@@ -221,4 +230,4 @@ const mapStateToProps = state => ({
   userLOS: state.notificationOBJ.userLOS
 });
 
-export default connect(mapStateToProps, {userLOGS, userLOS})(Documents);
+export default connect(mapStateToProps, { updateUserLOGS, updateUserLOS })(Documents);
