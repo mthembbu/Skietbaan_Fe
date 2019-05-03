@@ -291,6 +291,13 @@ class ViewNonMembers extends Component {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
   };
+
+  timeout(duration){
+    setTimeout(() => {
+      this.setState({ exportMsg: false });
+    }, duration)
+  }
+
   render() {
     if (!getCookie("token")) {
       window.location = "/registerPage";
@@ -495,20 +502,21 @@ class ViewNonMembers extends Component {
           </div>
         ) : (
             <div>
-              {this.state.exportResponse !== ""
-                ? setTimeout(() => {
-                  this.setState({ exportMsg: false });
-                }, 2000)
-                : null}
+              {this.state.exportResponse !== "" && !this.state.exportResponse.startsWith("Could")
+                ? this.timeout(2000)
+                : this.timeout(6000)}
               <div className="exportMsg-container">
                 <label className="exportMsg-responce">
                   {this.state.exportResponse}
                 </label>
-                <img
-                  src={RedBullet}
-                  className="export-success"
-                  alt="Is a Member"
-                />
+                {this.state.exportResponse !== "" && !this.state.exportResponse.startsWith("Could") ?
+                  <img
+                    src={RedBullet}
+                    className="export-success"
+                    alt="Is a Member"
+                  /> : null
+                }
+
               </div>
             </div>
           )}

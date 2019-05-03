@@ -172,18 +172,9 @@ class NavbarMenu extends Component {
                   >
                     {this.isCreate()}
                   </td>
-                  <td
-                    className="columns"
-                    onClick={() => this.GoTo("/scoreCapture")}
-                  >
-                    {this.isScoreCapture()}{" "}
-                  </td>
-                  <td className="columns" onClick={() => this.GoTo("/profile")}>
-                    {this.isProfile()}
-                  </td>
-                  <td className="columns" onClick={() => this.GoTo("/notify")}>
-                    {this.isNotifications()}
-                  </td>
+                  <td className="columns" onClick={() => this.GoTo("/scoresPage")}>{this.isScoreCapture()} </td>
+                  <td className="columns" onClick={() => this.GoTo("/profile")}>{this.isProfile()}</td>
+                  <td className="columns" onClick={() => this.GoTo("/notify")}>{this.isNotifications()}</td>
                 </tr>
               </tbody>
             </table>
