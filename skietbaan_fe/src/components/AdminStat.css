@@ -113,6 +113,7 @@ font-size: 20px;
 .percentang-of-the-increase-of-user{
     font-size: 32px;
     display: flex;
+    top:-15px;
     justify-content: flex-end;
     color: #666666;
 }

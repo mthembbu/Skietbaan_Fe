@@ -376,7 +376,9 @@
 }
 
 .view-non-members-email {
-	font-size: 14px;
+	font-size: 12px;
+    color: #666666;
+    font-weight: 300;
 }
 
 .view-non-members-arrow {
