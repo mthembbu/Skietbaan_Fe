@@ -9,7 +9,7 @@ import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
-import { fetchNumberOfNotification, exportIsClicked } from "../actions/notificationAction";
+import { fetchNumberOfNotification, exportIsClicked, exportCSV } from "../actions/notificationAction";
 import { pageState } from '../actions/postActions';
 import exportClick from "../components/assets/exportPress.png";
 import deleteButton from '../components/GroupImages/deleteS.png';
@@ -57,6 +57,7 @@ class ViewNonMembers extends Component {
     this.getBodyHeight = this.getBodyHeight.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.extractEmails = this.extractEmails.bind(this);
+    this.ExportData = this.ExportData.bind(this);
   }
 
   toggleNavbar() {
@@ -274,23 +275,9 @@ class ViewNonMembers extends Component {
 
   ExportData = () => {
     let token = getCookie("token");
-    let filter = "users";
-    fetch(
-      BASE_URL +
-      `/api/Features/generateCSV?filter=${filter}&adminToken=${token}`,
-      {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      }
-    )
-      .then(res => res.json())
-      .then(data => this.setState({ exportResponse: data, exportMsg: true }))
-      .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      });
+    const fData = { getFilterName:this.props.filterName, getAdminToken:token };
+    this.props.exportCSV(fData);
+    this.props.exportIsClicked();
   };
 
   timeout(duration){
@@ -311,6 +298,16 @@ class ViewNonMembers extends Component {
         });
       });
     }
+
+    let exportText = "";
+    if (this.props.userIsClicked) {
+      exportText = "EXPORT USERS";
+    } else if (this.props.memberIsClicked) {
+      exportText = "EXPORT MEMBERS";
+    } else if (this.props.expiredIsClicked) {
+      exportText = "EXPORT EXPIRED MEMBERS";
+    }
+
     const postItems = (
       <div  style={{ height: this.getBodyHeight() }}>
         {this.state.array.length === 0 && this.state.getData === true ? (
@@ -442,7 +439,7 @@ class ViewNonMembers extends Component {
               </div>
             </Col> :
               <Col>
-                <button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">EXPORT</button>
+                <button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">{exportText}</button>
               </Col>}
             <Col className="export-col-container">
               {" "}
@@ -531,11 +528,12 @@ const mapStateToProps = (state) => ({
 	isClicked: state.notificationOBJ.isClicked,
 	userIsClicked: state.notificationOBJ.userIsClicked,
 	memberIsClicked: state.notificationOBJ.memberIsClicked,
-	expiredIsClicked: state.notificationOBJ.expiredIsClicked
+  expiredIsClicked: state.notificationOBJ.expiredIsClicked,
+  filterName: state.notificationOBJ.filterName
   });
 
 
 export default connect(
   mapStateToProps,
-  { fetchNumberOfNotification, pageState, exportIsClicked }
+  { fetchNumberOfNotification, pageState, exportIsClicked, exportCSV }
 )(ViewNonMembers);

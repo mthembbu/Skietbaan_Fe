@@ -18,7 +18,7 @@ import whiteBin from './GroupImages/whiteBin.png';
 import blackBin from './GroupImages/blackBin.png';
 import unselected from './GroupImages/unselected-icon.png';
 import selected from './GroupImages/selected-icon.png';
-import { userIsClicked, expiredIsClicked, memberIsClicked } from '../actions/notificationAction';
+import { userIsClicked, expiredIsClicked, memberIsClicked, filterName } from '../actions/notificationAction';
 export class createPages extends Component {
 	constructor(props) {
 		super(props);
@@ -33,7 +33,8 @@ export class createPages extends Component {
 			selectedValue: 'A',
 			user: [],
 			height: document.body.clientHeight,
-			binState: false
+			binState: false,
+			filterNameData: []
 		};
 
 		this.groupsPage = this.groupsPage.bind(this);
@@ -184,10 +185,19 @@ export class createPages extends Component {
 	}
 
 	changeUserIconState = () => {
+		console.log("USer button clicked!");
 		this.setState({
 			userIconIsClicked: !this.state.userIconIsClicked
 		});
 		this.props.userIsClicked();
+
+		if (this.state.filterNameData.indexOf("users") < 0) {
+			this.state.filterNameData.push("users");
+		} else {
+			var index = this.state.filterNameData.indexOf("users");
+			this.state.filterNameData.splice(index, 1);
+		}
+		this.props.filterName(this.state.filterNameData);
 	}
 
 	changeMemberIconState = () => {
@@ -195,6 +205,15 @@ export class createPages extends Component {
 			memberIconIsClicked: !this.state.memberIconIsClicked
 		});
 		this.props.memberIsClicked();
+
+		if (this.state.filterNameData.indexOf("members") < 0) {
+			this.state.filterNameData.push("members");
+		} else {
+			var index = this.state.filterNameData.indexOf("members");
+			this.state.filterNameData.splice(index, 1);
+		}
+		this.props.filterName(this.state.filterNameData);
+		//this.props.filterTitle = "MEMBERS"
 	}
 
 	changeExpiredIconState = () => {
@@ -202,6 +221,14 @@ export class createPages extends Component {
 			expiredIconIsClicked: !this.state.expiredIconIsClicked
 		});
 		this.props.expiredIsClicked();
+		if (this.state.filterNameData.indexOf("expiring") < 0) {
+			this.state.filterNameData.push("expiring");
+		} else {
+			var index = this.state.filterNameData.indexOf("expiring");
+			this.state.filterNameData.splice(index, 1);
+		}
+		this.props.filterName(this.state.filterNameData);
+		//this.props.filterTitle = "EXPIRING"
 	}
 
 	changeBinState = () => {
@@ -389,15 +416,21 @@ export class createPages extends Component {
 											{this.state.selectedButton === 3 ? (
 												<div className="member-radio">
 													<div className="checkbox-A">
-														<img src={this.state.userIconIsClicked ? selected : unselected} className="icon-size" alt="unselected" onClick={this.changeUserIconState}/>
+														<img src={this.state.userIconIsClicked ? selected : unselected}
+															className="icon-size" alt="unselected"
+															onClick={this.changeUserIconState} />
 														<label className="member-user-label">USERS</label>
 													</div>
 													<div className="checkbox-B">
-														<img src={this.state.memberIconIsClicked ? selected : unselected} className="icon-size" alt="unselected" onClick={this.changeMemberIconState}/>
+														<img src={this.state.memberIconIsClicked ? selected : unselected}
+															className="icon-size" alt="unselected"
+															onClick={this.changeMemberIconState} />
 														<label className="member-user-label">MEMBERS</label>
 													</div>
 													<div className="checkbox-C">
-														<img src={this.state.expiredIconIsClicked ? selected : unselected} className="icon-size" alt="unselected" onClick={this.changeExpiredIconState}/>
+														<img src={this.state.expiredIconIsClicked ? selected : unselected}
+															className="icon-size" alt="unselected"
+															onClick={this.changeExpiredIconState} />
 														<label className="member-user-label">EXPIRING</label>
 													</div>
 												</div>
@@ -445,7 +478,12 @@ const mapStateToProps = (state) => ({
 	binState: state.posts.binState,
 	groupsList: state.posts.groupsList,
 	compOBJ: state.compOBJ.allComps,
-	isClicked: state.notificationOBJ.isClicked
+	isClicked: state.notificationOBJ.isClicked,
+	filterTitle: state.notificationOBJ.filterTitle,
+	filterName: state.notificationOBJ.filterName
 });
 
-export default connect(mapStateToProps, { compSelectedPages, pageState, selectedPage, binStateFunc, userIsClicked, memberIsClicked, expiredIsClicked })(createPages);
+export default connect(mapStateToProps, {
+	compSelectedPages, pageState, selectedPage, binStateFunc,
+	userIsClicked, memberIsClicked, expiredIsClicked, filterName
+})(createPages);

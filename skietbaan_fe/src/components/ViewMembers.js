@@ -10,7 +10,7 @@ import RedBullet from "../components/assets/RedBullet.png";
 import exportClick from "../components/assets/exportPress.png";
 import { connect } from "react-redux";
 import { pageState } from '../actions/postActions';
-import { exportIsClicked } from '../actions/notificationAction';
+import { exportIsClicked, exportCSV } from '../actions/notificationAction';
 import deleteButton from '../components/GroupImages/deleteS.png';
 
 class ViewMembers extends Component {
@@ -174,25 +174,12 @@ class ViewMembers extends Component {
       return false;
     }
   }
+
   ExportData = () => {
     let token = getCookie("token");
-    let filter = "members";
-    fetch(
-      BASE_URL +
-      `/api/Features/generateCSV?filter=${filter}&adminToken=${token}`,
-      {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      }
-    )
-      .then(res => res.json())
-      .then(data => this.setState({ exportResponse: data, exportMsg: true }))
-      .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      });
+    const fData = { getFilterName:this.props.filterName, getAdminToken:token };
+    this.props.exportCSV(fData);
+    this.props.exportIsClicked();
   };
 
   onChangeArrow = index => {
@@ -232,14 +219,8 @@ class ViewMembers extends Component {
       exportText = "EXPORT MEMBERS";
     } else if (this.props.expiredIsClicked) {
       exportText = "EXPORT EXPIRED MEMBERS";
-    } else if (this.props.userIsClicked && this.props.memberIsClicked) {
-      exportText = "EXPORT USERS + MEMBERS";
-    } else if (this.props.userIsClicked && this.props.expiredIsClicked) {
-      exportText = "EXPORT USERS + EXPIRED USERS";
-    } else if (this.props.memberIsClicked && this.props.expiredIsClicked) {
-      exportText = "EXPORT MEMBERS + EXPIRED MEMBERS";
     } else {
-      exportText = "EXPORT ALL";
+      exportText = "";
     }
 
     const postItems = (
@@ -366,7 +347,7 @@ class ViewMembers extends Component {
               {" "}
               <div className="export-container">
                 <img
-                  src={this.props.isClicked ? Export : deleteButton}
+                  src={this.props.isClicked ? deleteButton : Export}
                   className="export-icon"
                   alt="Is a Member"
                   onClick={this.props.exportIsClicked}
@@ -451,5 +432,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  { pageState, exportIsClicked }
+  { pageState, exportIsClicked, exportCSV }
 )(ViewMembers);

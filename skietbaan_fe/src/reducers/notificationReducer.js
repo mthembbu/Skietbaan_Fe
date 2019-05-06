@@ -9,11 +9,16 @@ import {
   IS_CLICKED,
   EXPIRED_IS_CLICKED,
   MEMBER_IS_CLICKED,
-  USER_IS_CLICKED
+  USER_IS_CLICKED,
+  EXPORT_CSV,
+  ADD_FILTER_NAME
 } from "../actions/types";
 
 const initialState = {
   notificationsArray: [],
+  filterData: [],
+  filterName: [],
+  filterTitle: "",
   isClicked: false,
   expiredIsClicked: false,
   userIsClicked: false,
@@ -94,6 +99,20 @@ export default function(state = initialState, action) {
         ...state,
         userIsClicked: !state.userIsClicked
       };
+    
+    case EXPORT_CSV:
+      return {
+        ...state,
+        filterData: action.payload
+      };  
+    
+    
+      case ADD_FILTER_NAME:
+      return {
+        ...state,
+        filterName: action.payload
+      };  
+    
     
     default:
       return state;
