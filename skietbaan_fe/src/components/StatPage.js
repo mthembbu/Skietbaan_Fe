@@ -12,15 +12,21 @@ export class StatPage extends Component {
         this.props.adminstat();
     }
 
+    getBodyHeight() {
+        return "57vh";
+    }
     render() {
         return (
-            <div className="stat-page-main-container">
+            <div>
+            {Object.keys(this.props.adminstats).length > 0 ? 
+            <div className="stat-page-main-container" style={{ height: this.getBodyHeight() }}>
                 <Row className="admin-new-user-container">
                     <Col className="admin-first-row-container">
                         <Row className="total-user-container">
                             <Col className="total-container-col">
                                 <Row className="number-of-users-and-total-number-container">
                                     <Col className="total-number-label">
+                                        
                                         {this.props.adminstats["total users"]}
                                     </Col>
                                 </Row>
@@ -86,7 +92,8 @@ export class StatPage extends Component {
                         </Row>
                     </Col>
                 </Row>
-
+            </div>
+            :null}
             </div>
         )
     }
@@ -100,7 +107,8 @@ StatPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    adminstats: state.posts.adminstats
+    adminstats: state.posts.adminstats,
+    isAdmin: state.adminReducer.isAdmin
 })
 
-export default connect(mapStateToProps, {adminstat})(StatPage)
+export default connect(mapStateToProps, { adminstat })(StatPage)

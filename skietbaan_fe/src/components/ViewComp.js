@@ -15,7 +15,7 @@ import letterhead from "./compassets/letterofgoodstanding.png";
 import { Form, Container, Row, Col } from "react-bootstrap";
 import Switch from "@material-ui/core/Switch";
 import deleteS from './GroupImages/deleteS.png';
-import unmarked from './GroupImages/Oval.png';
+import unmarked from "./Notification-Img/delete3.png";
 import group from "./GroupImages/groupUser.png";
 
 class ViewComp extends Component {

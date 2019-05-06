@@ -6,7 +6,7 @@ import { createGroups, pageState } from "../actions/postActions";
 import { BASE_URL } from "../actions/types";
 import back from "./GroupImages/back.png";
 import unmarked from "./GroupImages/Oval.png";
-import marked from "./GroupImages/MarkedBox.png";
+import marked from "./GroupImages/selectedIcon.png";
 import history from "./history";
 import seleteAll from "./GroupImages/seleteAll.png";
 import unSelectAll from "./GroupImages/unSelectAll.png";

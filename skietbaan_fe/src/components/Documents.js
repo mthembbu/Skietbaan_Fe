@@ -178,7 +178,7 @@ class Documents extends Component {
                 Document Sent via email
                 <img
                   className="document-image-icon"
-                  src={require("../resources/sendDoc.png")}
+                  src={require("../components/assets/bulletImage.png")}
                   alt=""
                 />
               </div>
@@ -213,7 +213,7 @@ class Documents extends Component {
                 Document Sent via email
                 <img
                   className="document-image-icon"
-                  src={require("../resources/sendDoc.png")}
+                  src={require("../components/assets/bulletImage.png")}
                   alt=""
                 />
               </div>
