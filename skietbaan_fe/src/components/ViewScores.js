@@ -273,7 +273,8 @@ class ViewScores extends Component {
                 somethingClicked: true,
                 clicked: item,
                 competitionName: compName,
-                competitionId: compId
+                competitionId: compId,
+                selectAll: false
             });
             if (this.props.isAdmin === true) {
                 document.getElementById("username").value = "";
@@ -349,7 +350,8 @@ class ViewScores extends Component {
         this.setState({
             scoresList: [],
             userClicked: false,
-            clickedOnBin: false
+            clickedOnBin: false,
+            selectAll: false
         });
     }
 
