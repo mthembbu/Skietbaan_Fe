@@ -274,7 +274,7 @@ class ViewScores extends Component {
                 clicked: item,
                 competitionName: compName,
                 competitionId: compId,
-                
+
             });
             if (this.props.isAdmin === true) {
                 document.getElementById("username").value = "";
@@ -618,7 +618,7 @@ class ViewScores extends Component {
                             CANCEL
                                              </button>
                         <button className="confirm-group" onClick={() => this.delete()}>
-                            {this.state.amountBeingDeleted > 1 ? "DELETE SCORES" : "DELETE SCORE"}
+                            {this.state.amountBeingDeleted > 1 || this.state.selectAll ? "DELETE SCORES" : "DELETE SCORE"}
                         </button>
                     </div>
                 )}
