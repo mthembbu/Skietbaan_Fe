@@ -106,6 +106,7 @@
   border-radius: 40px;
   background: #be0000;
   transition: all 0.3s ease 0s;
+  box-shadow: #674D4D 0px 3px 8px -3px;
 }
 
 .document-image-icon {
