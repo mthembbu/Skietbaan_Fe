@@ -772,14 +772,11 @@ input[type=number] {
 }
 
 .view-scores-photo{
-    background-image: url("../components/assets/cameraBlack.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: right;
     height: 22px;
     position: relative;
-    bottom: 18px;
+    bottom: 10px;
     cursor: pointer;
+    float: right;
 }
 
 .padding-top-40{
@@ -843,10 +840,11 @@ input[type=number] {
     background-repeat: no-repeat;
     background-size: 24px;
     margin-right: -17px;
-    margin-top: -29px;
+    margin-top: -51px;
     float: right;
     width: 28px;
     height: 28px;
+    cursor: pointer;
 }
 
 .delete-icon-red-view-scores{
@@ -854,19 +852,21 @@ input[type=number] {
     background-repeat: no-repeat;
     background-size: 24px;
     margin-right: -17px;
-    margin-top: -29px;
+    margin-top: -51px;
     float: right;
     width: 28px;
     height: 28px;
+    cursor: pointer;
 }
 
 .view-scores-photo-admin{
-    height: 12px;
+    height: 14px;
     bottom: 18px;
     left: -16px;
     float: left;
     position: relative;
     cursor: pointer;
+    padding-right: 12%;
 }
 
 .select-all-view-score {
@@ -924,4 +924,10 @@ input[type=number] {
     .score-content-admin{
         width: 65%;
     }
+}
+
+.range-spacing{
+    height: fit-content;
+    width: fit-content;
+    padding-left: 105px;
 }

@@ -273,7 +273,8 @@ class ViewScores extends Component {
                 somethingClicked: true,
                 clicked: item,
                 competitionName: compName,
-                competitionId: compId
+                competitionId: compId,
+
             });
             if (this.props.isAdmin === true) {
                 document.getElementById("username").value = "";
@@ -340,7 +341,10 @@ class ViewScores extends Component {
                 scoresList: [],
                 userClicked: false,
                 usersList: [],
-                originalUserList: []
+                originalUserList: [],
+                selectAll: false,
+                markedForDeletion: false,
+                clickedOnBin: false
             });
         }
     }
@@ -349,7 +353,9 @@ class ViewScores extends Component {
         this.setState({
             scoresList: [],
             userClicked: false,
-            clickedOnBin: false
+            clickedOnBin: false,
+            selectAll: false,
+            markedForDeletion: false
         });
     }
 
@@ -473,17 +479,18 @@ class ViewScores extends Component {
                                 src={camera} onClick={() => this.showPhoto(i)}>
                             </img>
                         ) : (
-                                <div className={this.state.scoresList[i].pictureURL !== "" ?
-                                    "view-scores-photo" : "hidden"} onClick={() => this.showPhoto(i)}>
-                                </div>
+                                <img className={this.state.scoresList[i].pictureURL !== "" ?
+                                    "view-scores-photo" : "hidden"} src={camera} onClick={() => this.showPhoto(i)}>
+                                </img>
                             )}
-
-                        <div className={this.state.scoresList[i].inRange === false ?
-                            "distance-view-scores-red" : "distance-view-scores"}>
-                            {this.state.scoresList[i].RangeMessage}
+                        <div className="range-spacing">
+                            <div className={this.state.scoresList[i].inRange === false ?
+                                "distance-view-scores-red" : "distance-view-scores"}>
+                                {this.state.scoresList[i].RangeMessage}
+                            </div>
+                            <img className="in-range-img" src={this.state.scoresList[i].inRange ? inRange : outRange}>
+                            </img>
                         </div>
-                        <img className="in-range-img" src={this.state.scoresList[i].inRange ? inRange : outRange}>
-                        </img>
                         <div onClick={() => this.markedForDeletion(i)}
                             className={
                                 this.state.clickedOnBin ?
@@ -495,7 +502,6 @@ class ViewScores extends Component {
                             }
                             alt="redirect"
                         />
-
                         <div className="border-line">
                         </div>
                         <div className={this.state.cameraClicked === false || this.state.someScoreClicked !== i
@@ -612,7 +618,7 @@ class ViewScores extends Component {
                             CANCEL
                                              </button>
                         <button className="confirm-group" onClick={() => this.delete()}>
-                            {this.state.amountBeingDeleted > 1 ? "DELETE SCORES" : "DELETE SCORE"}
+                            {this.state.amountBeingDeleted > 1 || this.state.selectAll ? "DELETE SCORES" : "DELETE SCORE"}
                         </button>
                     </div>
                 )}
