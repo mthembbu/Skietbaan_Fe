@@ -844,6 +844,7 @@ input[type=number] {
     float: right;
     width: 28px;
     height: 28px;
+    cursor: pointer;
 }
 
 .delete-icon-red-view-scores{
@@ -855,10 +856,11 @@ input[type=number] {
     float: right;
     width: 28px;
     height: 28px;
+    cursor: pointer;
 }
 
 .view-scores-photo-admin{
-    height: 12px;
+    height: 14px;
     bottom: 18px;
     left: -16px;
     float: left;
