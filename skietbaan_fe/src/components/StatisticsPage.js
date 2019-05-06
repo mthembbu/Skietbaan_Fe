@@ -540,7 +540,7 @@ class StatisticsPage extends Component {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col onClick={this.toggle}></Col>
+                                    <Col sm={3} xs={3} lg={3} onClick={this.toggle}></Col>
                                     <Col>
                                         <div className="stats-competition-container">
                                             {this.state.selectedCompetitionRankToggle == 0 ? 
@@ -549,7 +549,7 @@ class StatisticsPage extends Component {
                                             }
                                         </div>
                                     </Col>
-                                    <Col onClick={this.toggle}></Col>
+                                    <Col  sm={3} xs={3} lg={3} onClick={this.toggle}></Col>
                                 </Row>
                             </div>
                         </Collapse>
