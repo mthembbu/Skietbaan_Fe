@@ -14,6 +14,7 @@ export class AdminUserStat extends Component {
     }
     componentDidMount() {
         this.props.adminstat();
+        
     }
     selectButtonUserStat = () => {
         this.setState({ buttonSelected: 0 })
