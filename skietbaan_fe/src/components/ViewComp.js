@@ -255,16 +255,6 @@ class ViewComp extends Component {
   changeStatusOfLogs() {
     this.setState({ isLetterOfStatus: !this.state.isLetterOfStatus });
   }
-  toggleHighlight = (event) => {
-    const index = this.props.compIds.indexOf(event);
-    if (this.props.compOBJ[index].highlighted === true) {
-      this.props.compOBJ[index].highlighted = false;
-      this.setState({ count: this.state.count - 1 });
-    } else {
-      this.props.compOBJ[index].highlighted = true;
-      this.setState({ count: this.state.count + 1 });
-    }
-  };
 
   async  deleteComp() {
     const newArray = [];
@@ -294,7 +284,7 @@ class ViewComp extends Component {
       .then(function (data) { })
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      });
+      });  
     this.forceUpdate()
   }
   cancel = () => {
@@ -304,8 +294,7 @@ class ViewComp extends Component {
     this.setState({ count: 0 });
   };
 
-  toggleHighlight = (event) => {
-    const index = this.props.compIds.indexOf(event);
+  toggleHighlight = (index) => {
     if (this.props.compOBJ[index].highlighted === true) {
       this.props.compOBJ[index].highlighted = false;
       this.setState({ count: this.state.count - 1 });
@@ -423,7 +412,7 @@ class ViewComp extends Component {
                                   className="view-group-delete-box"
                                   src={compVar.highlighted === true ? deleteS : unmarked}
                                   alt=""
-                                  onClick={() => this.toggleHighlight(compVar.id)}
+                                  onClick={() => this.toggleHighlight(i)}
                                 />}
                             </div>
                           </div>
