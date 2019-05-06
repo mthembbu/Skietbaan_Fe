@@ -121,6 +121,7 @@ class ViewNonMembers extends Component {
       })
       .then(data =>
         this.setState({
+          done: false,
           array: data.map(user => {
             return {
               ...user,
@@ -290,6 +291,13 @@ class ViewNonMembers extends Component {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
   };
+
+  timeout(duration){
+    setTimeout(() => {
+      this.setState({ exportMsg: false });
+    }, duration)
+  }
+
   render() {
     if (!getCookie("token")) {
       window.location = "/registerPage";
@@ -402,7 +410,7 @@ class ViewNonMembers extends Component {
                               </div> : null}
                             {this.state.done === true ?
                               <div className="user-is-a-member-msg-container">
-                                <label className="user-is-a-member-msg">MADE MEMBER SUCCESSFUL</label>
+                                <label className="user-is-a-member-msg">MEMBERSHIP CONFIRMED</label>
                               </div> : null}
                           </div>
                         </Collapsible>
@@ -494,20 +502,21 @@ class ViewNonMembers extends Component {
           </div>
         ) : (
             <div>
-              {this.state.exportResponse !== ""
-                ? setTimeout(() => {
-                  this.setState({ exportMsg: false });
-                }, 2000)
-                : null}
+              {this.state.exportResponse !== "" && !this.state.exportResponse.startsWith("Could")
+                ? this.timeout(2000)
+                : this.timeout(6000)}
               <div className="exportMsg-container">
                 <label className="exportMsg-responce">
                   {this.state.exportResponse}
                 </label>
-                <img
-                  src={RedBullet}
-                  className="export-success"
-                  alt="Is a Member"
-                />
+                {this.state.exportResponse !== "" && !this.state.exportResponse.startsWith("Could") ?
+                  <img
+                    src={RedBullet}
+                    className="export-success"
+                    alt="Is a Member"
+                  /> : null
+                }
+
               </div>
             </div>
           )}

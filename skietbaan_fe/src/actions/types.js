@@ -36,6 +36,7 @@ export const FETCH_REQ = "FETCH_REQUIREMENTS";
 export const UPDATE_REQ = "UPDATE_REQUIREMENTS";
 export const CHOOSEPAGE = "CHOOSEPAGE";
 export const COMP_PAGE = "COMP_PAGE";
+export const SCORES_PAGE = "SCORES_PAGE";
 export const UPDATE_COMP_STATUS = "UPDATE_COMP_STATUS";
 export const PARTICIPANTS_PER_COMP = "PARTICIPANTS_PER_COMP";
 export const CHECK_ADMIN = "CHECK_ADMIN";
@@ -65,6 +66,7 @@ export const NEWGROUPSTATE = "NEWGROUPSTATE";
 export const GROUP_DATA_LOADING = "GROUP_DATA_LOADING";
 export const BINSTATE = "BINSTATE";
 export const SCREEN_SIZE = "SCREEN_SIZE";
+export const ADMINSTAT = "ADMINSTAT";
 
 //notification types
 export const FETCH_NOTIFICATION = "FETCH_NOTIFICATION";
@@ -79,6 +81,11 @@ export const LANDING_SET_SELECTED_PAGE = "LANDING_SET_SELECTED_PAGE";
 
 //competition types
 export const COMPETITION_DATA_LOADING = "COMPETITION_DATA_LOADING";
+
+//document types
+export const USER_LOGS = "USER_LOGS";
+export const USER_LOS = "USER_LOS";
+export const DOCCIE_SENT = "DOCCIE_SENT";
 
 export const handleErrors = response => {
   if (!response.ok) {

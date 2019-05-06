@@ -69,6 +69,7 @@
          font-size: 14px;
          font-family: Helvetica;
          padding-top: 7px;
+         font-weight: bold;
      }
      .filter-selections .category-selection .choose-groups{
         color: #555555;
@@ -109,13 +110,14 @@
          font-size: 14px;
          font-family: Helvetica;
          padding-top: 7px;
+         font-weight: bold;
      }
      .filter-selections .cat-visible-label{
          color: #6C6C6C;
          text-align: center;
          font-family: Helvetica;
          font-size: 16px;
-         font-weight: normal;
+         font-weight: bold;
          background: transparent;
          margin-top: 38px;
          margin-bottom: 0%;
@@ -126,14 +128,12 @@
          text-align: center;
          font-family: Helvetica;
          font-size: 18px;
-         background: transport;
-         margin-top: 2%;
+         margin-top: 22px;
          margin-bottom: 0%;
+         font-weight: 300;
      }
      .filter-selections .individual-active{
-         border: solid;
-          border-width:thin;
-          border-color: #6F839E;
+         border: none;
           border-radius: 18px;
           width: 180px;
           height: 36px;
@@ -143,6 +143,7 @@
           margin-top: 2%;
           color: #fdfdfd;
           background-color: #BE0000;
+          box-shadow: #674D4D 0px 3px 8px -3px;
      }
      .filter-selections .individual-inactive{
          border: solid;
@@ -154,7 +155,7 @@
           text-align: center;
           margin-left: auto;
           margin-right: auto;
-          margin-top: 2%;
+          margin-top: 4px;
           color: #6a6a6a;
           cursor: pointer;
      }
@@ -228,9 +229,8 @@
           cursor: pointer;
       }
      .filter-selections .selections-container .row .choose .selection-table tr .td-active{
-         border: solid;
+         border: none;
          border-width:thin;
-         border-color: #6A6A6A;
          border-radius: 18px;
           height: 36px;
           padding: 0%;
@@ -238,8 +238,10 @@
          color: #fdfdfd;
          font-family: Helvetica;
          font-size: 15px;
+         font-weight: normal;
          vertical-align: inherit;
          cursor: pointer;
+         box-shadow: #674D4D 0px 3px 8px -3px
      }
      /*closed filter section*/
      .closed-filter-section{
@@ -416,9 +418,9 @@
     }
     .ranking-table-section .ranking-table .rank-row .underline{
         width: 90%;
-        height: 1px;
+        height: 0px;
         margin: auto;
-        border-bottom: ridge;
+        border-bottom: 1px #A0A0A0 solid;
         margin-top: 2px;
     }
      .ranking-table-section .ranking-table .rank-row .user-details-table .user-details-row .rank-icon-col{

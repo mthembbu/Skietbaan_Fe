@@ -102,14 +102,16 @@
   color: #ffffff;
   letter-spacing: 1px;
   line-height: 15px;
-  border: 1px solid #dc0600;
+  border: 1px solid #be0000;
   border-radius: 40px;
-  background: #dc0600;
+  background: #be0000;
   transition: all 0.3s ease 0s;
+  box-shadow: #674D4D 0px 3px 8px -3px;
 }
 
 .document-image-icon {
   margin-left: 20px;
+  height: 16px;
 }
 
 .documents-collapse {
