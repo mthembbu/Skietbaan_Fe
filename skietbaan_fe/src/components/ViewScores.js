@@ -61,6 +61,17 @@ class ViewScores extends Component {
         this.calculateDistance = this.calculateDistance.bind(this);
     }
 
+    componentWillMount() {
+        window.addEventListener("resize", () => {
+          let Navbar = document.querySelector(".navbar-admin");
+          if (this.state.height === document.body.clientHeight) {
+            Navbar.classList.remove("hidden");
+          } else {
+            Navbar.classList.add("hidden");
+          }
+        });
+      }
+
     calculateDistance = (scorelist) => {
         let temp = scorelist;
         for (var i = 0; i < scorelist.length; i++) {
