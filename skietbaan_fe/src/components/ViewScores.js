@@ -274,7 +274,7 @@ class ViewScores extends Component {
                 clicked: item,
                 competitionName: compName,
                 competitionId: compId,
-                selectAll: false
+                
             });
             if (this.props.isAdmin === true) {
                 document.getElementById("username").value = "";
@@ -341,7 +341,9 @@ class ViewScores extends Component {
                 scoresList: [],
                 userClicked: false,
                 usersList: [],
-                originalUserList: []
+                originalUserList: [],
+                selectAll: false,
+                markedForDeletion: false
             });
         }
     }
@@ -351,7 +353,8 @@ class ViewScores extends Component {
             scoresList: [],
             userClicked: false,
             clickedOnBin: false,
-            selectAll: false
+            selectAll: false,
+            markedForDeletion: false
         });
     }
 
@@ -498,7 +501,6 @@ class ViewScores extends Component {
                             }
                             alt="redirect"
                         />
-
                         <div className="border-line">
                         </div>
                         <div className={this.state.cameraClicked === false || this.state.someScoreClicked !== i
