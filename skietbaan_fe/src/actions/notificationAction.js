@@ -6,7 +6,11 @@ import {
   FETCH_NUMBER_OF_NOTIFICATIONS,
   USER_LOGS,
   USER_LOS,
-  DOCCIE_SENT
+  DOCCIE_SENT,
+  IS_CLICKED,
+  EXPIRED_IS_CLICKED,
+  MEMBER_IS_CLICKED,
+  USER_IS_CLICKED
 } from "../actions/types";
 import confirmation from "../components/Notification-Img/confirmation.png";
 import renewal from "../components/Notification-Img/renewal.png";
@@ -114,3 +118,35 @@ export const sent = status => {
     });
   };
 };
+
+export const exportIsClicked = () => {
+  return dispatch => {
+    dispatch({
+      type: IS_CLICKED
+    });
+  };
+};
+
+export const userIsClicked = () => {
+  return dispatch => {
+    dispatch({
+      type: USER_IS_CLICKED
+    });
+  };
+};
+
+export const memberIsClicked = () => {
+  return dispatch => {
+    dispatch({
+      type: MEMBER_IS_CLICKED
+    });
+  };
+};
+
+export const expiredIsClicked = () => {
+  return dispatch => {
+    dispatch({
+      type: EXPIRED_IS_CLICKED
+    })
+  }
+}

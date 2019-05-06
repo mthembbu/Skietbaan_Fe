@@ -5,11 +5,19 @@ import {
   FETCH_NUMBER_OF_NOTIFICATIONS,
   USER_LOGS,
   USER_LOS,
-  DOCCIE_SENT
+  DOCCIE_SENT,
+  IS_CLICKED,
+  EXPIRED_IS_CLICKED,
+  MEMBER_IS_CLICKED,
+  USER_IS_CLICKED
 } from "../actions/types";
 
 const initialState = {
   notificationsArray: [],
+  isClicked: false,
+  expiredIsClicked: false,
+  userIsClicked: false,
+  memberIsClicked: false,
   doccieSent: false,
   userLOGS: false,
   userLOS: false,
@@ -61,6 +69,30 @@ export default function(state = initialState, action) {
       return {
         ...state,
         doccieSent: action.payload
+      };
+    
+    case IS_CLICKED:
+      return {
+        ...state,
+        isClicked: !state.isClicked
+      };
+    
+    case EXPIRED_IS_CLICKED:
+      return {
+        ...state,
+        expiredIsClicked: !state.expiredIsClicked
+      };
+    
+    case MEMBER_IS_CLICKED:
+      return {
+        ...state,
+        memberIsClicked: !state.memberIsClicked
+      };
+    
+    case USER_IS_CLICKED:
+      return {
+        ...state,
+        userIsClicked: !state.userIsClicked
       };
     
     default:

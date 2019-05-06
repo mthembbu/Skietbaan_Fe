@@ -9,9 +9,10 @@ import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
-import { fetchNumberOfNotification } from "../actions/notificationAction";
+import { fetchNumberOfNotification, exportIsClicked } from "../actions/notificationAction";
 import { pageState } from '../actions/postActions';
 import exportClick from "../components/assets/exportPress.png";
+import deleteButton from '../components/GroupImages/deleteS.png';
 
 class ViewNonMembers extends Component {
   constructor(props) {
@@ -427,7 +428,7 @@ class ViewNonMembers extends Component {
       style={{ height: this.getBodyHeight() }}>
         <div className="username-search">
           <Row>
-            <Col>
+            {this.props.isClicked ? <Col>
               <div className="search">
                 <input
                   autoComplete="off"
@@ -439,17 +440,18 @@ class ViewNonMembers extends Component {
                   onChange={this.onChangeText}
                 />
               </div>
-            </Col>
+            </Col> :
+              <Col>
+                <button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">EXPORT</button>
+              </Col>}
             <Col className="export-col-container">
               {" "}
               <div className="export-container">
                 <img
-                  src={Export}
+                  src={this.props.isClicked ? Export : deleteButton}
                   className="export-icon"
                   alt="Is a Member"
-                  onClick={e =>
-                    (e.currentTarget.src = exportClick) && this.ExportData()
-                  }
+                  onClick={this.props.exportIsClicked}
                 />
               </div>
             </Col>
@@ -525,7 +527,15 @@ class ViewNonMembers extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+	isClicked: state.notificationOBJ.isClicked,
+	userIsClicked: state.notificationOBJ.userIsClicked,
+	memberIsClicked: state.notificationOBJ.memberIsClicked,
+	expiredIsClicked: state.notificationOBJ.expiredIsClicked
+  });
+
+
 export default connect(
-  null,
-  { fetchNumberOfNotification, pageState }
+  mapStateToProps,
+  { fetchNumberOfNotification, pageState, exportIsClicked }
 )(ViewNonMembers);
