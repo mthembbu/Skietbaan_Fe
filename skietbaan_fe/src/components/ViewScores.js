@@ -473,17 +473,18 @@ class ViewScores extends Component {
                                 src={camera} onClick={() => this.showPhoto(i)}>
                             </img>
                         ) : (
-                                <div className={this.state.scoresList[i].pictureURL !== "" ?
-                                    "view-scores-photo" : "hidden"} onClick={() => this.showPhoto(i)}>
-                                </div>
+                                <img className={this.state.scoresList[i].pictureURL !== "" ?
+                                    "view-scores-photo" : "hidden"} src={camera} onClick={() => this.showPhoto(i)}>
+                                </img>
                             )}
-
-                        <div className={this.state.scoresList[i].inRange === false ?
-                            "distance-view-scores-red" : "distance-view-scores"}>
-                            {this.state.scoresList[i].RangeMessage}
+                        <div className="range-spacing">
+                            <div className={this.state.scoresList[i].inRange === false ?
+                                "distance-view-scores-red" : "distance-view-scores"}>
+                                {this.state.scoresList[i].RangeMessage}
+                            </div>
+                            <img className="in-range-img" src={this.state.scoresList[i].inRange ? inRange : outRange}>
+                            </img>
                         </div>
-                        <img className="in-range-img" src={this.state.scoresList[i].inRange ? inRange : outRange}>
-                        </img>
                         <div onClick={() => this.markedForDeletion(i)}
                             className={
                                 this.state.clickedOnBin ?
