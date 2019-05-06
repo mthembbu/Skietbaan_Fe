@@ -864,6 +864,7 @@ input[type=number] {
     float: left;
     position: relative;
     cursor: pointer;
+    padding-right: 12%;
 }
 
 .select-all-view-score {
