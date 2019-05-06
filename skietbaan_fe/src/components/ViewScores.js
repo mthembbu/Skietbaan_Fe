@@ -343,7 +343,8 @@ class ViewScores extends Component {
                 usersList: [],
                 originalUserList: [],
                 selectAll: false,
-                markedForDeletion: false
+                markedForDeletion: false,
+                clickedOnBin: false
             });
         }
     }
