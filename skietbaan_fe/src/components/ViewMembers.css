@@ -445,11 +445,23 @@
 	color: #666666;
 }
 
-.export-icon {
-	height: 28px;
-    width: 28px;
-    cursor: pointer;
-    margin-top: 65px;
+@media all and (min-width: 576px){
+	.export-icon {
+		height: 28px;
+		width: 28px;
+		cursor: pointer;
+		margin-top: 10px;
+   	    margin-right: 17px;
+	}
+}
+
+@media all and (max-width: 575px){
+	.export-icon {
+		height: 28px;
+		width: 28px;
+		cursor: pointer;
+		margin-top: 65px;
+	}
 }
 
 .export-button-css{

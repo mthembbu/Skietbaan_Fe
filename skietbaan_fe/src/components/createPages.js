@@ -422,23 +422,23 @@ export class createPages extends Component {
 												<div className="member-radio">
 													<div className="checkbox-A">
 														<img src={ this.state.selectedValue === 'A' ? selected :
-															this.state.userIconIsClicked === true? selected : unselected}
+															this.state.userIconIsClicked ? selected : unselected}
 															className="icon-size" alt="unselected"
 															onClick={this.changeUserIconState} />
 														<label className="member-user-label">USERS</label>
 													</div>
 													<div className="checkbox-B">
 														<img src={ this.state.selectedValue === 'B' ? selected :
-															this.state.memberIconIsClicked === true ? selected : unselected}
+															this.state.memberIconIsClicked ? selected : unselected}
 															className="icon-size" alt="unselected"
-															onClick={this.changeMemberIconState} />
+															onClick={this.changeMemberIconState } />
 														<label className="member-user-label">MEMBERS</label>
 													</div>
 													<div className="checkbox-C">
 														<img src={ this.state.selectedValue === 'C' ? selected :
-															this.state.expiredIconIsClicked === true ? selected : unselected}
+															this.state.expiredIconIsClicked ? selected : unselected}
 															className="icon-size" alt="unselected"
-															onClick={this.changeExpiredIconState} />
+															onClick={this.changeExpiredIconState } />
 														<label className="member-user-label">EXPIRING</label>
 													</div>
 												</div>

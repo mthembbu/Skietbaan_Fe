@@ -18,7 +18,6 @@ const initialState = {
   notificationsArray: [],
   filterData: [],
   filterName: [],
-  filterTitle: "",
   isClicked: false,
   expiredIsClicked: false,
   userIsClicked: false,
