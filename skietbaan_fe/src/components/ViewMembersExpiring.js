@@ -96,7 +96,7 @@ class ViewMembersExpiring extends Component {
 	}
 	getBodyHeight() {
 		if (this.state.width < 575) {
-      return this.state.height - (240 - 184) - 188 + "px";
+			return this.state.height - (240 - 184) - 188 + "px";
 		} else {
 			return "50vh";
 		}
@@ -172,8 +172,8 @@ class ViewMembersExpiring extends Component {
 						return response.json();
 					})
 					.then(data => {
-						this.setState({ successMgs: true });
-						setTimeout(() => {
+						
+						setTimeout(() => {this.setState({ successMgs: true })
 						}, 3000);
 						this.setState({ filterText: "" });
 
@@ -287,9 +287,9 @@ class ViewMembersExpiring extends Component {
 		}
 	}
 
-	timeout(duration){
+	timeout(duration) {
 		setTimeout(() => {
-		  this.setState({ exportMsg: false });
+			this.setState({ exportMsg: false });
 		}, duration)
 	}
 
@@ -380,7 +380,7 @@ class ViewMembersExpiring extends Component {
 																				<div>
 																					{this.state.timeLeftOnMembership[index]}{" "}
 																					Months
-                                    </div>
+                                  													  </div>
 																			) : (
 																				<div>
 																					{post.advanceExpiryDate != null
@@ -410,12 +410,12 @@ class ViewMembersExpiring extends Component {
 														.state.dateErrorMgs === true ? (
 															<label className="non-member-renew-error-msg">
 																Date selected is invalid
-                          </label>
+                         							 </label>
 														) : null}
 													{this.state.AdvanceDateExist === true ? (
 														<label className="non-member-renew-error-msg">
 															User already been renewed in advance
-                          </label>
+                         								 </label>
 													) : null}
 													{this.state.successMgs === false &&
 														post.advanceExpiryDate == null ? (
@@ -430,7 +430,7 @@ class ViewMembersExpiring extends Component {
 																	onClick={() => this.updateMember(index)}
 																>
 																	RENEW
-                            </button>
+                          								  </button>
 															</div>
 														) : null}
 													{this.state.successMgs === true ? (
@@ -443,7 +443,12 @@ class ViewMembersExpiring extends Component {
 														<div className="confirm-button-container">
 															<button className="confriming-btn">
 																MEMBERSHIP RENEWED
-                            </button>
+																<label className="advance-date-label">{post.advanceExpiryDate
+																				.substring(0, 10)
+																				.split("-")
+																				.join("/")}</label>
+                            						</button>
+													
 														</div>
 													) : null}
 												</Collapsible>
@@ -456,7 +461,7 @@ class ViewMembersExpiring extends Component {
 			</div>
 		);
 		return (
-			<div className="centre-view-member"  style={{ height: this.getBodyHeight() }}>
+			<div className="centre-view-member" style={{ height: this.getBodyHeight() }}>
 				<div className="username-search">
 					<Row>
 						<Col>
@@ -523,9 +528,9 @@ class ViewMembersExpiring extends Component {
 				</div>
 				{this.state.exportMsg === false ? (
 					<div
-					className={this.state.getData === false && this.state.exceptionCaught === false
-						? "hidden"
-						: "table-search-members"}
+						className={this.state.getData === false && this.state.exceptionCaught === false
+							? "hidden"
+							: "table-search-members"}
 						style={{ height: this.getBodyHeight() }}
 					>
 						{postItems}
@@ -544,7 +549,7 @@ class ViewMembersExpiring extends Component {
 										src={RedBullet}
 										className="export-success"
 										alt="Is a Member"
-									/> : null 
+									/> : null
 								}
 							</div>
 						</div>
