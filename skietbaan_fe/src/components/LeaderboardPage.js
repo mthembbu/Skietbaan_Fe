@@ -366,7 +366,7 @@ class LeaderboardPage extends Component {
                     : "td-inactive"
                 }
               >
-                {group.label}
+                {group.label.toUpperCase()}
               </td>
             </tr>
           ))}
@@ -389,7 +389,7 @@ class LeaderboardPage extends Component {
                     : "td-inactive"
                 }
               >
-                {competition.label}
+                {competition.label.toUpperCase()}
               </td>
             </tr>
           ))}

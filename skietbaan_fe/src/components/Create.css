@@ -345,15 +345,43 @@
     width: 115px;
   }
 
+  .checkbox-A{
+    padding-right: 3px;
+    display: flex;
+    width: 115px;
+    margin-top: 17px;
+  }
+
   .radio-B {
     padding-right: 3px;
     display: flex;
     width: 115px;
   }
 
+  .checkbox-B{
+    padding-right: 3px;
+    display: flex;
+    width: 115px;
+    margin-top: 17px;
+  }
+
   .radio-C {
      display: flex;
      width: 115px;
+  }
+
+  .checkbox-C{
+    padding-right: 3px;
+    display: flex;
+    width: 115px;
+    margin-top: 17px;
+  }
+
+  .icon-size{
+    width: 19px;
+    height: 19px;
+    margin-left: 18px;
+    margin-right: 10px;
   }
 
   .member-radio .radio-A .a-radio {

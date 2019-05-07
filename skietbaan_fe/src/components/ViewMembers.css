@@ -376,7 +376,9 @@
 }
 
 .view-non-members-email {
-	font-size: 14px;
+	font-size: 12px;
+    color: #666666;
+    font-weight: 300;
 }
 
 .view-non-members-arrow {
@@ -445,8 +447,22 @@
 
 .export-icon {
 	height: 25px;
-	width: 25px;
-	cursor: pointer;
+    width: 25px;
+    cursor: pointer;
+    margin-top: 68px;
+    margin-right: 11px;
+}
+
+.export-button-css{
+	color: #FAFAFAFA;
+    background-color: #be0000;
+    border-radius: 22px;
+    width: 274px;
+    height: 42px;
+    margin-top: 20px;
+    margin-left: 29px;
+	border: #be0000;
+	font-size: 16px;
 }
 
 @media screen and (min-width: 567px){

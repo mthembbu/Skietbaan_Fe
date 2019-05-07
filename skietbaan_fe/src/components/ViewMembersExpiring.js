@@ -8,9 +8,11 @@ import { Row, Col } from "react-bootstrap";
 import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
 import exportClick from "../components/assets/exportPress.png";
-import { fetchNumberOfNotification } from "../actions/notificationAction";
+import { fetchNumberOfNotification, exportIsClicked, exportCSV } from "../actions/notificationAction";
 import { pageState } from '../actions/postActions';
 import { connect } from "react-redux";
+import deleteButton from '../components/GroupImages/deleteS.png';
+
 class ViewMembersExpiring extends Component {
 	constructor(props) {
 		super(props);
@@ -241,24 +243,11 @@ class ViewMembersExpiring extends Component {
 	}
 	ExportData = () => {
 		let token = getCookie("token");
-		let filter = "expiring";
-		fetch(
-			BASE_URL +
-			`/api/Features/generateCSV?filter=${filter}&adminToken=${token}`,
-			{
-				method: "post",
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json"
-				}
-			}
-		)
-			.then(res => res.json())
-			.then(data => this.setState({ exportResponse: data, exportMsg: true }))
-			.catch(err => {
-				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-			});
+		const fData = { getFilterName: this.props.filterName, getAdminToken: token };
+		this.props.exportCSV(fData);
+		this.props.exportIsClicked();
 	};
+
 	onChangeArrow = (index) => {
 		if (index !== this.state.userIndex) {
 			this.state.array[this.state.userIndex].selected = false;
@@ -305,6 +294,41 @@ class ViewMembersExpiring extends Component {
 				});
 			});
 		}
+
+		const test1 = this.props.userIsClicked === true;
+		const test2 = this.props.memberIsClicked === true;
+		const test3 = this.props.expiredIsClicked === true;
+
+		const check1 = this.props.userIsClicked === true && this.props.memberIsClicked === true;
+		const check2 = this.props.userIsClicked === true && this.props.expiredIsClicked === true;
+		const check3 = this.props.expiredIsClicked === true && this.props.memberIsClicked === true;
+
+		const lastCondition = this.props.userIsClicked === true && this.props.memberIsClicked === true && this.props.expiredIsClicked === true;
+
+		let exportText = "EXPORT EXPIRED MEMBERS";
+
+		if (test1) {
+			exportText = "EXPORT USERS";
+		}
+		if (test2) {
+			exportText = "EXPORT MEMBERS";
+		}
+		if (test3) {
+			exportText = "EXPORT EXPIRED MEMBERS";
+		}
+		if (check1) {
+			exportText = "EXPORT USERS + MEMBERS";
+		}
+		if (check2) {
+			exportText = "EXPORT USERS + EXPIRED MEMBERS";
+		}
+		if (check3) {
+			exportText = "EXPORT MEMBERS + EXPIRED MEMBERS";
+		}
+		if (lastCondition) {
+			exportText = "EXPORT ALL MEMBERS";
+		}
+
 		const postItems = (
 			<div>
 				{this.state.array.length === 0 && this.state.getData === true ? (
@@ -464,7 +488,7 @@ class ViewMembersExpiring extends Component {
 			<div className="centre-view-member" style={{ height: this.getBodyHeight() }}>
 				<div className="username-search">
 					<Row>
-						<Col>
+						{this.props.isClicked === false ? <Col>
 							<div className="search">
 								<input
 									autoComplete="off"
@@ -476,17 +500,18 @@ class ViewMembersExpiring extends Component {
 									onChange={this.onChangeText}
 								/>
 							</div>
-						</Col>
+						</Col> :
+							<Col>
+								<button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">{exportText}</button>
+							</Col>}
 						<Col className="export-col-container">
 							{" "}
 							<div className="export-container">
 								<img
-									src={Export}
+									src={this.props.isClicked === false ? Export : deleteButton}
 									className="export-icon"
 									alt="Is a Member"
-									onClick={e =>
-										(e.currentTarget.src = exportClick) && this.ExportData()
-									}
+									onClick={this.props.exportIsClicked}
 								/>
 							</div>
 						</Col>
@@ -559,7 +584,15 @@ class ViewMembersExpiring extends Component {
 	}
 }
 
+const mapStateToProps = (state) => ({
+	isClicked: state.notificationOBJ.isClicked,
+	userIsClicked: state.notificationOBJ.userIsClicked,
+	memberIsClicked: state.notificationOBJ.memberIsClicked,
+	expiredIsClicked: state.notificationOBJ.expiredIsClicked,
+	exportAll: state.notificationOBJ.exportAll
+});
+
 export default connect(
-	null,
-	{ fetchNumberOfNotification, pageState }
+	mapStateToProps,
+	{ fetchNumberOfNotification, pageState, exportIsClicked, exportCSV }
 )(ViewMembersExpiring);
