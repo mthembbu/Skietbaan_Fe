@@ -79,7 +79,10 @@ export default function(state = initialState, action) {
     case IS_CLICKED:
       return {
         ...state,
-        isClicked: !state.isClicked
+        isClicked: !state.isClicked,
+        userIsClicked: false,
+        memberIsClicked: false,
+        expiredIsClicked: false
       };
     
     case EXPIRED_IS_CLICKED:
@@ -104,7 +107,10 @@ export default function(state = initialState, action) {
       return {
         ...state,
         filterData: action.payload,
-        isClicked: false
+        isClicked: !state.isClicked,
+        userIsClicked: !state.userIsClicked,
+        memberIsClicked: !state.memberIsClicked,
+        expiredIsClicked: !state.expiredIsClicked
       };  
     
     

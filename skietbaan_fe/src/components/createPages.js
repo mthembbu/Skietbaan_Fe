@@ -134,7 +134,7 @@ export class createPages extends Component {
 		} else if (this.state.selectedValue === 'C') {
 			
 		}
-		
+
 		if (getCookie('token') !== null) {
 			let token = getCookie('token');
 			fetch(BASE_URL + '/api/features/getuserbytoken/' + token, {
@@ -422,21 +422,21 @@ export class createPages extends Component {
 												<div className="member-radio">
 													<div className="checkbox-A">
 														<img src={ this.state.selectedValue === 'A' ? selected :
-															this.state.userIconIsClicked ? selected : unselected}
+															this.state.userIconIsClicked === true? selected : unselected}
 															className="icon-size" alt="unselected"
 															onClick={this.changeUserIconState} />
 														<label className="member-user-label">USERS</label>
 													</div>
 													<div className="checkbox-B">
 														<img src={ this.state.selectedValue === 'B' ? selected :
-															this.state.memberIconIsClicked ? selected : unselected}
+															this.state.memberIconIsClicked === true ? selected : unselected}
 															className="icon-size" alt="unselected"
 															onClick={this.changeMemberIconState} />
 														<label className="member-user-label">MEMBERS</label>
 													</div>
 													<div className="checkbox-C">
 														<img src={ this.state.selectedValue === 'C' ? selected :
-															this.state.expiredIconIsClicked ? selected : unselected}
+															this.state.expiredIconIsClicked === true ? selected : unselected}
 															className="icon-size" alt="unselected"
 															onClick={this.changeExpiredIconState} />
 														<label className="member-user-label">EXPIRING</label>
