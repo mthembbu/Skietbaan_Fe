@@ -82,6 +82,7 @@ class ViewScores extends Component {
                 temp[i].RangeMessage = "OUT OF RANGE"
             }
             else {
+
                 let lat2 = -25.753695;
                 let lon2 = 28.361592;
                 let R = 6371; // km (change this constant to get miles)
@@ -366,7 +367,8 @@ class ViewScores extends Component {
             userClicked: false,
             clickedOnBin: false,
             selectAll: false,
-            markedForDeletion: false
+            markedForDeletion: false,
+            cameraClicked: false
         });
     }
 
