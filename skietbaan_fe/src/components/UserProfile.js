@@ -182,7 +182,7 @@ class UserProfile extends Component {
     collapseHeight(){
         var numberOfButtons = Object.keys(this.mapCompetitionNameToIndex).length
         if(numberOfButtons > 4){
-            return numberOfButtons * 46 + 77;
+            return 305;
         }else{
             return numberOfButtons * 46 + 116;
         }

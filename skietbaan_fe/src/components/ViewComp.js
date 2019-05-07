@@ -358,18 +358,19 @@ class ViewComp extends Component {
                               </label>
                             </div>
                             <div className="test2">
-                              <label className="users-per-comp">
+                              <div className="users-per-comp">
                                 {compVar.status == true ? (
                                   <div>
                                     <div className="icon-spacing">
-                                      <img src={group} className="groupIcon" alt=""></img>
-                                    </div>
-                                    <span className="user-per-comp-num">
+                                      <img src={group} className="groupIcon" alt=""/>
+                                       <label className="user-per-comp-num">
                                       {this.props.dict[compVar.id]}
-                                    </span>
+                                    </label>
+                                    </div>
+                                   
                                   </div>
                                 ) : null}
-                              </label>
+                              </div>
                             </div>
 
                             <div className="test4">
