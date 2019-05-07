@@ -127,6 +127,14 @@ export class createPages extends Component {
 	};
 	componentDidMount() {
 		this.props.selectedPage(1);
+		if (this.state.selectedValue === 'A') {
+			
+		} else if (this.state.selectedValue === 'B') {
+			
+		} else if (this.state.selectedValue === 'C') {
+			
+		}
+
 		if (getCookie('token') !== null) {
 			let token = getCookie('token');
 			fetch(BASE_URL + '/api/features/getuserbytoken/' + token, {
@@ -423,14 +431,14 @@ export class createPages extends Component {
 														<img src={ this.state.selectedValue === 'B' ? selected :
 															this.state.memberIconIsClicked ? selected : unselected}
 															className="icon-size" alt="unselected"
-															onClick={this.changeMemberIconState} />
+															onClick={this.changeMemberIconState } />
 														<label className="member-user-label">MEMBERS</label>
 													</div>
 													<div className="checkbox-C">
 														<img src={ this.state.selectedValue === 'C' ? selected :
 															this.state.expiredIconIsClicked ? selected : unselected}
 															className="icon-size" alt="unselected"
-															onClick={this.changeExpiredIconState} />
+															onClick={this.changeExpiredIconState } />
 														<label className="member-user-label">EXPIRING</label>
 													</div>
 												</div>
