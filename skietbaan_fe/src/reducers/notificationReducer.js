@@ -103,7 +103,8 @@ export default function(state = initialState, action) {
     case EXPORT_CSV:
       return {
         ...state,
-        filterData: action.payload
+        filterData: action.payload,
+        isClicked: true
       };  
     
     

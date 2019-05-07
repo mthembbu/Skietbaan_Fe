@@ -287,6 +287,16 @@ class ViewNonMembers extends Component {
   }
 
   render() {
+    const test1 = this.props.userIsClicked === true;
+    const test2 = this.props.memberIsClicked === true;
+    const test3 = this.props.expiredIsClicked === true;
+
+    const check1 = this.props.userIsClicked === true && this.props.memberIsClicked === true;
+    const check2 = this.props.userIsClicked === true && this.props.expiredIsClicked === true;
+    const check3 = this.props.expiredIsClicked === true && this.props.memberIsClicked === true;
+
+    const lastCondition = this.props.userIsClicked === true && this.props.memberIsClicked === true && this.props.expiredIsClicked === true;
+
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
@@ -299,13 +309,28 @@ class ViewNonMembers extends Component {
       });
     }
 
-    let exportText = "";
-    if (this.props.userIsClicked) {
+    let exportText = "EXPORT USERS";
+    
+    if (test1) {
       exportText = "EXPORT USERS";
-    } else if (this.props.memberIsClicked) {
+    } 
+     if (test2) {
       exportText = "EXPORT MEMBERS";
-    } else if (this.props.expiredIsClicked) {
+    } 
+     if (test3) {
       exportText = "EXPORT EXPIRED MEMBERS";
+    } 
+     if (check1) {
+      exportText = "EXPORT USERS + MEMBERS";
+    } 
+     if (check2) { 
+      exportText = "EXPORT USERS + EXPIRED MEMBERS";
+    } 
+     if (check3) { 
+      exportText = "EXPORT MEMBERS + EXPIRED MEMBERS";
+    } 
+     if (lastCondition) { 
+      exportText = "EXPORT ALL MEMBERS";
     }
 
     const postItems = (
@@ -425,7 +450,7 @@ class ViewNonMembers extends Component {
       style={{ height: this.getBodyHeight() }}>
         <div className="username-search">
           <Row>
-            {this.props.isClicked ? <Col>
+            {this.props.isClicked === false ? <Col>
               <div className="search">
                 <input
                   autoComplete="off"
@@ -445,7 +470,7 @@ class ViewNonMembers extends Component {
               {" "}
               <div className="export-container">
                 <img
-                  src={this.props.isClicked ? Export : deleteButton}
+                  src={this.props.isClicked === false ? Export : deleteButton}
                   className="export-icon"
                   alt="Is a Member"
                   onClick={this.props.exportIsClicked}

@@ -8,7 +8,7 @@ import { Row, Col } from "react-bootstrap";
 import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
 import exportClick from "../components/assets/exportPress.png";
-import { fetchNumberOfNotification, exportIsClicked,exportCSV } from "../actions/notificationAction";
+import { fetchNumberOfNotification, exportIsClicked, exportCSV } from "../actions/notificationAction";
 import { pageState } from '../actions/postActions';
 import { connect } from "react-redux";
 import deleteButton from '../components/GroupImages/deleteS.png';
@@ -98,7 +98,7 @@ class ViewMembersExpiring extends Component {
 	}
 	getBodyHeight() {
 		if (this.state.width < 575) {
-      return this.state.height - (240 - 184) - 188 + "px";
+			return this.state.height - (240 - 184) - 188 + "px";
 		} else {
 			return "50vh";
 		}
@@ -247,7 +247,7 @@ class ViewMembersExpiring extends Component {
 		this.props.exportCSV(fData);
 		this.props.exportIsClicked();
 	};
-	
+
 	onChangeArrow = (index) => {
 		if (index !== this.state.userIndex) {
 			this.state.array[this.state.userIndex].selected = false;
@@ -276,9 +276,9 @@ class ViewMembersExpiring extends Component {
 		}
 	}
 
-	timeout(duration){
+	timeout(duration) {
 		setTimeout(() => {
-		  this.setState({ exportMsg: false });
+			this.setState({ exportMsg: false });
 		}, duration)
 	}
 
@@ -295,15 +295,40 @@ class ViewMembersExpiring extends Component {
 			});
 		}
 
-		let exportText = "";
-    if (this.props.userIsClicked) {
-      exportText = "EXPORT USERS";
-    } else if (this.props.memberIsClicked) {
-      exportText = "EXPORT MEMBERS";
-    } else if (this.props.expiredIsClicked) {
-      exportText = "EXPORT EXPIRED MEMBERS";
-    }
-		
+		const test1 = this.props.userIsClicked === true;
+		const test2 = this.props.memberIsClicked === true;
+		const test3 = this.props.expiredIsClicked === true;
+
+		const check1 = this.props.userIsClicked === true && this.props.memberIsClicked === true;
+		const check2 = this.props.userIsClicked === true && this.props.expiredIsClicked === true;
+		const check3 = this.props.expiredIsClicked === true && this.props.memberIsClicked === true;
+
+		const lastCondition = this.props.userIsClicked === true && this.props.memberIsClicked === true && this.props.expiredIsClicked === true;
+
+		let exportText = "EXPORT EXPIRED MEMBERS";
+
+		if (test1) {
+			exportText = "EXPORT USERS";
+		}
+		if (test2) {
+			exportText = "EXPORT MEMBERS";
+		}
+		if (test3) {
+			exportText = "EXPORT EXPIRED MEMBERS";
+		}
+		if (check1) {
+			exportText = "EXPORT USERS + MEMBERS";
+		}
+		if (check2) {
+			exportText = "EXPORT USERS + EXPIRED MEMBERS";
+		}
+		if (check3) {
+			exportText = "EXPORT MEMBERS + EXPIRED MEMBERS";
+		}
+		if (lastCondition) {
+			exportText = "EXPORT ALL MEMBERS";
+		}
+
 		const postItems = (
 			<div>
 				{this.state.array.length === 0 && this.state.getData === true ? (
@@ -455,10 +480,10 @@ class ViewMembersExpiring extends Component {
 			</div>
 		);
 		return (
-			<div className="centre-view-member"  style={{ height: this.getBodyHeight() }}>
+			<div className="centre-view-member" style={{ height: this.getBodyHeight() }}>
 				<div className="username-search">
 					<Row>
-						{this.props.isClicked ? <Col>
+						{this.props.isClicked === false ? <Col>
 							<div className="search">
 								<input
 									autoComplete="off"
@@ -478,7 +503,7 @@ class ViewMembersExpiring extends Component {
 							{" "}
 							<div className="export-container">
 								<img
-									src={this.props.isClicked ? Export : deleteButton}
+									src={this.props.isClicked === false ? Export : deleteButton}
 									className="export-icon"
 									alt="Is a Member"
 									onClick={this.props.exportIsClicked}
@@ -523,9 +548,9 @@ class ViewMembersExpiring extends Component {
 				</div>
 				{this.state.exportMsg === false ? (
 					<div
-					className={this.state.getData === false && this.state.exceptionCaught === false
-						? "hidden"
-						: "table-search-members"}
+						className={this.state.getData === false && this.state.exceptionCaught === false
+							? "hidden"
+							: "table-search-members"}
 						style={{ height: this.getBodyHeight() }}
 					>
 						{postItems}
@@ -544,7 +569,7 @@ class ViewMembersExpiring extends Component {
 										src={RedBullet}
 										className="export-success"
 										alt="Is a Member"
-									/> : null 
+									/> : null
 								}
 							</div>
 						</div>
@@ -560,7 +585,7 @@ const mapStateToProps = (state) => ({
 	memberIsClicked: state.notificationOBJ.memberIsClicked,
 	expiredIsClicked: state.notificationOBJ.expiredIsClicked,
 	exportAll: state.notificationOBJ.exportAll
-  });
+});
 
 export default connect(
 	mapStateToProps,

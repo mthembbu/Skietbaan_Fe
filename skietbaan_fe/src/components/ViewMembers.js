@@ -177,7 +177,7 @@ class ViewMembers extends Component {
 
   ExportData = () => {
     let token = getCookie("token");
-    const fData = { getFilterName:this.props.filterName, getAdminToken:token };
+    const fData = { getFilterName: this.props.filterName, getAdminToken: token };
     this.props.exportCSV(fData);
     this.props.exportIsClicked();
   };
@@ -212,15 +212,38 @@ class ViewMembers extends Component {
       });
     }
 
-    let exportText = "";
-    if (this.props.userIsClicked) {
+    const test1 = this.props.userIsClicked === true;
+    const test2 = this.props.memberIsClicked === true;
+    const test3 = this.props.expiredIsClicked === true;
+
+    const check1 = this.props.userIsClicked === true && this.props.memberIsClicked === true;
+    const check2 = this.props.userIsClicked === true && this.props.expiredIsClicked === true;
+    const check3 = this.props.expiredIsClicked === true && this.props.memberIsClicked === true;
+
+    const lastCondition = this.props.userIsClicked === true && this.props.memberIsClicked === true && this.props.expiredIsClicked === true;
+
+    let exportText = "EXPORT MEMBERS";
+
+    if (test1) {
       exportText = "EXPORT USERS";
-    } else if (this.props.memberIsClicked) {
+    }
+    if (test2) {
       exportText = "EXPORT MEMBERS";
-    } else if (this.props.expiredIsClicked) {
+    }
+    if (test3) {
       exportText = "EXPORT EXPIRED MEMBERS";
-    } else {
-      exportText = "";
+    }
+    if (check1) {
+      exportText = "EXPORT USERS + MEMBERS";
+    }
+    if (check2) {
+      exportText = "EXPORT USERS + EXPIRED MEMBERS";
+    }
+    if (check3) {
+      exportText = "EXPORT MEMBERS + EXPIRED MEMBERS";
+    }
+    if (lastCondition) {
+      exportText = "EXPORT ALL MEMBERS";
     }
 
     const postItems = (
@@ -325,7 +348,7 @@ class ViewMembers extends Component {
       <div className="centre-view-member" style={{ height: this.getBodyHeight() }}>
         <div className="username-search">
           <Row>
-            {this.props.isClicked ?
+            {this.props.isClicked === false ?
               <Col>
                 <div className="search">
                   <input
@@ -340,14 +363,14 @@ class ViewMembers extends Component {
                 </div>
               </Col> :
               <Col>
-                <button onClick={e =>(e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">{exportText}</button>
+                <button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">{exportText}</button>
               </Col>}
 
             <Col className="export-col-container">
               {" "}
               <div className="export-container">
                 <img
-                  src={this.props.isClicked ? deleteButton : Export}
+                  src={this.props.isClicked === false ? Export : deleteButton}
                   className="export-icon"
                   alt="Is a Member"
                   onClick={this.props.exportIsClicked}
@@ -425,9 +448,9 @@ class ViewMembers extends Component {
 
 const mapStateToProps = (state) => ({
   isClicked: state.notificationOBJ.isClicked,
-	userIsClicked: state.notificationOBJ.userIsClicked,
-	memberIsClicked: state.notificationOBJ.memberIsClicked,
-	expiredIsClicked: state.notificationOBJ.expiredIsClicked
+  userIsClicked: state.notificationOBJ.userIsClicked,
+  memberIsClicked: state.notificationOBJ.memberIsClicked,
+  expiredIsClicked: state.notificationOBJ.expiredIsClicked
 });
 
 export default connect(

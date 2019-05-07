@@ -185,7 +185,6 @@ export class createPages extends Component {
 	}
 
 	changeUserIconState = () => {
-		console.log("USer button clicked!");
 		this.setState({
 			userIconIsClicked: !this.state.userIconIsClicked
 		});
@@ -213,7 +212,6 @@ export class createPages extends Component {
 			this.state.filterNameData.splice(index, 1);
 		}
 		this.props.filterName(this.state.filterNameData);
-		//this.props.filterTitle = "MEMBERS"
 	}
 
 	changeExpiredIconState = () => {
@@ -228,7 +226,6 @@ export class createPages extends Component {
 			this.state.filterNameData.splice(index, 1);
 		}
 		this.props.filterName(this.state.filterNameData);
-		//this.props.filterTitle = "EXPIRING"
 	}
 
 	changeBinState = () => {
@@ -366,7 +363,7 @@ export class createPages extends Component {
 											</div>
 										</div>
 									</Row>
-									{this.props.isClicked ?
+									{this.props.isClicked === false ?
 										<Row className="row justify-content-center">
 											{this.state.selectedButton === 3 ? (
 												<div className="member-radio">
@@ -416,19 +413,22 @@ export class createPages extends Component {
 											{this.state.selectedButton === 3 ? (
 												<div className="member-radio">
 													<div className="checkbox-A">
-														<img src={this.state.userIconIsClicked ? selected : unselected}
+														<img src={ this.state.selectedValue === 'A' ? selected :
+															this.state.userIconIsClicked ? selected : unselected}
 															className="icon-size" alt="unselected"
 															onClick={this.changeUserIconState} />
 														<label className="member-user-label">USERS</label>
 													</div>
 													<div className="checkbox-B">
-														<img src={this.state.memberIconIsClicked ? selected : unselected}
+														<img src={ this.state.selectedValue === 'B' ? selected :
+															this.state.memberIconIsClicked ? selected : unselected}
 															className="icon-size" alt="unselected"
 															onClick={this.changeMemberIconState} />
 														<label className="member-user-label">MEMBERS</label>
 													</div>
 													<div className="checkbox-C">
-														<img src={this.state.expiredIconIsClicked ? selected : unselected}
+														<img src={ this.state.selectedValue === 'C' ? selected :
+															this.state.expiredIconIsClicked ? selected : unselected}
 															className="icon-size" alt="unselected"
 															onClick={this.changeExpiredIconState} />
 														<label className="member-user-label">EXPIRING</label>
