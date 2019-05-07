@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
-import {ResponsiveContainer, Bar, XAxis, YAxis, Cell, CartesianGrid, 
-     Line, ComposedChart} from 'recharts'
+import {ResponsiveContainer, Bar, XAxis, YAxis, Cell, CartesianGrid, ComposedChart} from 'recharts'
 import "../bootstrap/StatisticsPage.css";
 import { Row, Col } from "react-bootstrap";
 import { Collapse } from "react-collapse";
-import { connect } from "react-redux";
 import { BASE_URL } from "../actions/types.js";
 import { getCookie } from "./cookie.js";
-import {fetchComp} from "../actions/competition.action";
-import {fetchGroups} from "../actions/postActions";
 
 class StatisticsPage extends Component {
     constructor(props){
@@ -163,7 +159,14 @@ class StatisticsPage extends Component {
     toggle = () =>{
         this.setState({
             collapse: !this.state.collapse
-        })
+        }, () => { this.fetchDataIfChanged() })
+        
+        setTimeout(() => {
+            this.setSelectedCompetitionRankingToggle(0);
+        }, 500);
+    }
+
+    fetchDataIfChanged(){
         if(this.prevSelectedComp !== this.state.selectedCompetition || this.prevSelectedGroup !== this.state.selectedGroup){
             this.fetchOnce = true;
             this.fetchAccuracyData();
@@ -174,6 +177,8 @@ class StatisticsPage extends Component {
         this.setState({
             selectedCompetition: index
         });
+
+        this.setSelectedCompetitionRankingToggle(1);   
     }
 
     selectCompetition(element, index){
@@ -196,7 +201,8 @@ class StatisticsPage extends Component {
     setSelectedGroup(index){
         this.setState({
             selectedGroup: index
-        })
+        })   
+        this.toggle()
     }
 
     selectGroup(element, index){
@@ -342,13 +348,13 @@ class StatisticsPage extends Component {
                     <Col>
                         <div className="legend-text font-size-12px">Group Total Score</div>                            
                         <div className="scale-group-total-img">
-                            <img src={require("../resources/awardIcons/group-total-key.png")}></img>
+                            <img src={require("../resources/awardIcons/grey-bar.png")}></img>
                         </div>
                     </Col>
                     <Col>
                         <div className="black-text font-size-12px">My Total Score</div>
                         <div className="scale-personal-total-img">
-                            <img src={require("../resources/awardIcons/personal-total-key.png")}></img>
+                            <img src={require("../resources/awardIcons/black-bar.png")}></img>
                         </div>
                     </Col>
                 </Row>
@@ -368,7 +374,8 @@ class StatisticsPage extends Component {
                         <XAxis 
                             dataKey="label"
                             fontFamily="helvetica"
-                            fontSize={12}
+                            fontSize={15}
+                            fontWeight={"bold"}
                             tickSize={0}
                             dy={10}
                         />
@@ -384,7 +391,7 @@ class StatisticsPage extends Component {
                         <Bar 
                             dataKey="value" 
                             barSize = {data.length > 10 ? 8 : 30}
-                            fontFamily="sans-serif"
+                            fontFamily="helvetica"
                         >
                         {
                             data.map((entry, index) => (
@@ -394,7 +401,6 @@ class StatisticsPage extends Component {
                             ))
                         }
                         </Bar>
-                        
                     </ComposedChart>
                 </ResponsiveContainer>
             </div>
@@ -412,7 +418,8 @@ class StatisticsPage extends Component {
                         <XAxis 
                             dataKey="label"
                             fontFamily="helvetica"
-                            fontSize={12}
+                            fontSize={15}
+                            fontWeight={"bold"}
                             tickSize={0}
                             dy={10}
                         />
@@ -427,8 +434,10 @@ class StatisticsPage extends Component {
                         />
                         <Bar 
                             dataKey="value" 
-                            barSize = {this.state.accuracyData.data.length > 6 ? 15 : 30}
-                            fontFamily="sans-serif"
+                            barSize = {this.state.accuracyData.data.length > 2 ? 15 : 30}
+                            fontFamily="helvetica"
+                            barCategoryGap={0}
+                            barGap={0}
                         >
                             {
                                 this.state.accuracyData.data.map((entry, index) => (
@@ -439,12 +448,14 @@ class StatisticsPage extends Component {
                             }
                         </Bar>
                         <Bar dataKey="groupValue" 
-                            barSize = {this.state.accuracyData.data.length > 6 ? 15 : 30}
-                            fontFamily="sans-serif"
+                            barSize = {this.state.accuracyData.data.length > 2 ? 15 : 30}
+                            fontFamily="helvetica"
+                            barCategoryGap={0}
+                            barGap={0}
                         >
                             {
                                 this.state.accuracyData.data.map((entry, index) => (
-                                    <Cell key={index} fill="#9D9D9D"
+                                    <Cell key={index} fill="#9D9D9D" d={"M 215 157 h 30 v 88 h -30 Z"}
                                         />
                                 ))
                             }
@@ -492,9 +503,12 @@ class StatisticsPage extends Component {
                                         <div className="stats-competition-text stats-inline-text">
                                             {this.competitions[this.state.selectedCompetition]}
                                             <div className="white-down-triangle-img-scale stats-margin-left-7px">
-                                                <img src={require("../resources/awardIcons/white-down-triangle.png")}
-                                                    alt="down-triangle">
-                                                </img>
+                                                {this.state.collapse ?
+                                                    <img src={require("../resources/awardIcons/white-up-triangle.png")}
+                                                        alt="up-triangle" /> :
+                                                    <img src={require("../resources/awardIcons/white-down-triangle.png")}
+                                                        alt="down-triangle" />
+                                                }
                                             </div>
                                         </div>
                                     </Col>
@@ -526,6 +540,7 @@ class StatisticsPage extends Component {
                                     </Col>
                                 </Row>
                                 <Row>
+                                    <Col sm={3} xs={3} lg={3} onClick={this.toggle}></Col>
                                     <Col>
                                         <div className="stats-competition-container">
                                             {this.state.selectedCompetitionRankToggle == 0 ? 
@@ -534,6 +549,7 @@ class StatisticsPage extends Component {
                                             }
                                         </div>
                                     </Col>
+                                    <Col  sm={3} xs={3} lg={3} onClick={this.toggle}></Col>
                                 </Row>
                             </div>
                         </Collapse>
@@ -602,7 +618,7 @@ class StatisticsPage extends Component {
                                                         {Math.round(this.getAverage())}</div>
                                                 </Col>
                                                 <Col>
-                                                    <div className="grey-color font-size-12px font-weight-bold">LOWEST</div>
+                                                    <div className="peach-text font-size-12px font-weight-bold">LOWEST</div>
                                                     <div className="font-size-16px grey-color padding-left-30px">
                                                         {this.getMinimumValue()}</div>
                                                 </Col>
@@ -667,7 +683,7 @@ class StatisticsPage extends Component {
                                                             {Math.round(this.state.accuracyData.average)}</div>
                                                     </Col>
                                                     <Col>
-                                                        <div className="grey-color font-size-12px font-weight-bold">LOWEST</div>
+                                                        <div className="peach-text font-size-12px font-weight-bold">LOWEST</div>
                                                         <div className="font-size-16px grey-color padding-left-30px">
                                                             {this.state.accuracyData.min}</div>
                                                     </Col>

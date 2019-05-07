@@ -18,15 +18,14 @@ export class StatPage extends Component {
     render() {
         return (
             <div>
-            {Object.keys(this.props.adminstats).length > 0 ? 
-            <div className="stat-page-main-container" style={{ height: this.getBodyHeight() }}>
+            {this.props.adminstats !== undefined && Object.keys(this.props.adminstats).length > 0 ? 
+            <div className="stat-page-main-container">
                 <Row className="admin-new-user-container">
                     <Col className="admin-first-row-container">
                         <Row className="total-user-container">
                             <Col className="total-container-col">
                                 <Row className="number-of-users-and-total-number-container">
                                     <Col className="total-number-label">
-                                        
                                         {this.props.adminstats["total users"]}
                                     </Col>
                                 </Row>
