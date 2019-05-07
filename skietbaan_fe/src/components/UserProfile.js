@@ -314,9 +314,12 @@ class UserProfile extends Component {
                                         {this.getInitialAward().competitionName.toUpperCase()}
                                     </div>
                                     <div className="down-triangle-img-scale">
-                                        <img src={require("../resources/awardIcons/down-triangle.png")}
-                                                    alt="down-triangle">
-                                        </img>
+                                        {this.state.collapse ? 
+                                            <img src={require("../resources/awardIcons/up-triangle.png")}
+                                            alt="up-triangle" /> :    
+                                            <img src={require("../resources/awardIcons/down-triangle.png")}
+                                                        alt="down-triangle" />
+                                        }
                                     </div>
                                 </div>
                             </div>

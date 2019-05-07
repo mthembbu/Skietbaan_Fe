@@ -10,6 +10,8 @@ import RedBullet from "../components/assets/RedBullet.png";
 import exportClick from "../components/assets/exportPress.png";
 import { connect } from "react-redux";
 import { pageState } from '../actions/postActions';
+import { exportIsClicked, exportCSV } from '../actions/notificationAction';
+import deleteButton from '../components/GroupImages/deleteS.png';
 
 class ViewMembers extends Component {
   constructor(props) {
@@ -29,7 +31,7 @@ class ViewMembers extends Component {
       exportResponse: "",
       exceptionCaught: false,
       exportResponse: "",
-      userIndex:0
+      userIndex: 0,
     };
     this.getAllMembers = this.getAllMembers.bind(this);
     this.getTimeLeft = this.getTimeLeft.bind(this);
@@ -72,7 +74,7 @@ class ViewMembers extends Component {
     this.getAllMembers();
     this.getTimeLeft();
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.props.pageState(10);
   }
   updateDimensions() {
@@ -93,11 +95,12 @@ class ViewMembers extends Component {
   }
   getBodyHeight() {
     if (this.state.width < 575) {
-      return this.state.height - (240 - 184) -180 + "px";
+      return this.state.height - (240 - 184) - 180 + "px";
     } else {
       return "50vh";
     }
   }
+
   getAllMembers() {
     fetch(BASE_URL + "/api/Features/SearchMember", {
       method: "Get",
@@ -106,19 +109,19 @@ class ViewMembers extends Component {
         "Content-Type": "application/json"
       }
     })
-      .then(function(response) {
+      .then(function (response) {
         return response.json();
       })
-      .then(function(data) {
+      .then(function (data) {
         return data;
       })
       .then(data => {
         this.setState({
           getData: true,
-          array: data.map(user=>{
-            return{
+          array: data.map(user => {
+            return {
               ...user,
-              selected:false
+              selected: false
             }
           })
         });
@@ -136,10 +139,10 @@ class ViewMembers extends Component {
         "Content-Type": "application/json"
       }
     })
-      .then(function(response) {
+      .then(function (response) {
         return response.json();
       })
-      .then(function(data) {
+      .then(function (data) {
         return data;
       })
       .then(data =>
@@ -171,39 +174,26 @@ class ViewMembers extends Component {
       return false;
     }
   }
+
   ExportData = () => {
     let token = getCookie("token");
-    let filter = "members";
-    fetch(
-      BASE_URL +
-        `/api/Features/generateCSV?filter=${filter}&adminToken=${token}`,
-      {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      }
-    )
-      .then(res => res.json())
-      .then(data => this.setState({ exportResponse: data, exportMsg: true }))
-      .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      });
+    const fData = { getFilterName: this.props.filterName, getAdminToken: token };
+    this.props.exportCSV(fData);
+    this.props.exportIsClicked();
   };
 
   onChangeArrow = index => {
-    if(index!==this.state.userIndex){
+    if (index !== this.state.userIndex) {
       this.state.array[this.state.userIndex].selected = false;
       this.state.array[index].selected = !this.state.array[index].selected;
-    }else{
+    } else {
       this.state.array[index].selected = !this.state.array[index].selected;
     }
-    this.setState({ userIndex:index });
+    this.setState({ userIndex: index });
     this.forceUpdate();
   };
 
-  timeout(duration){
+  timeout(duration) {
     setTimeout(() => {
       this.setState({ exportMsg: false });
     }, duration)
@@ -221,8 +211,43 @@ class ViewMembers extends Component {
         });
       });
     }
+
+    const test1 = this.props.userIsClicked === true;
+    const test2 = this.props.memberIsClicked === true;
+    const test3 = this.props.expiredIsClicked === true;
+
+    const check1 = this.props.userIsClicked === true && this.props.memberIsClicked === true;
+    const check2 = this.props.userIsClicked === true && this.props.expiredIsClicked === true;
+    const check3 = this.props.expiredIsClicked === true && this.props.memberIsClicked === true;
+
+    const lastCondition = this.props.userIsClicked === true && this.props.memberIsClicked === true && this.props.expiredIsClicked === true;
+
+    let exportText = "EXPORT MEMBERS";
+
+    if (test1) {
+      exportText = "EXPORT USERS";
+    }
+    if (test2) {
+      exportText = "EXPORT MEMBERS";
+    }
+    if (test3) {
+      exportText = "EXPORT EXPIRED MEMBERS";
+    }
+    if (check1) {
+      exportText = "EXPORT USERS + MEMBERS";
+    }
+    if (check2) {
+      exportText = "EXPORT USERS + EXPIRED MEMBERS";
+    }
+    if (check3) {
+      exportText = "EXPORT MEMBERS + EXPIRED MEMBERS";
+    }
+    if (lastCondition) {
+      exportText = "EXPORT ALL MEMBERS";
+    }
+
     const postItems = (
-      <div  style={{ height: this.getBodyHeight() }}>
+      <div style={{ height: this.getBodyHeight() }}>
         {this.state.array.length === 0 && this.state.getData === true ? (
           <div className="view-non-error-container">
             <label className="view-non-error-msg">
@@ -230,122 +255,125 @@ class ViewMembers extends Component {
             </label>
           </div>
         ) : (
-          <table striped hover condensed className="table-member">
-            <tbody>
-              {this.state.array
-                .filter(post => {
-                  return (
-                    !this.state.filterText ||
-                    post.username
-                      .toLowerCase()
-                      .startsWith(this.state.filterText.toLowerCase()) ||
-                    post.email
-                      .toLowerCase()
-                      .startsWith(this.state.filterText.toLowerCase()) ||
-                    post.memberID.startsWith(this.state.filterText) ||
-                    this.extractEmails(post.email).startsWith(
-                      this.state.filterText.toLowerCase()
-                    )
-                  );
-                })
-                .map((post, index) => (
-                  <tr className="view-members-user" key={post.id}>
-                    <td className="first-column">
-                      <Collapsible
-                      open={post.selected}
-                        trigger={
-                          <div className="username-and-email"  onClick={() => this.onChangeArrow(index)}>
-                            <div className="view-members-username-email">
-                              <b>{post.username}</b>
-                              <div className="view-non-members-email">
-                                {post.email}
+            <table striped hover condensed className="table-member">
+              <tbody>
+                {this.state.array
+                  .filter(post => {
+                    return (
+                      !this.state.filterText ||
+                      post.username
+                        .toLowerCase()
+                        .startsWith(this.state.filterText.toLowerCase()) ||
+                      post.email
+                        .toLowerCase()
+                        .startsWith(this.state.filterText.toLowerCase()) ||
+                      post.memberID.startsWith(this.state.filterText) ||
+                      this.extractEmails(post.email).startsWith(
+                        this.state.filterText.toLowerCase()
+                      )
+                    );
+                  })
+                  .map((post, index) => (
+                    <tr className="view-members-user" key={post.id}>
+                      <td className="first-column">
+                        <Collapsible
+                          open={post.selected}
+                          trigger={
+                            <div className="username-and-email" onClick={() => this.onChangeArrow(index)}>
+                              <div className="view-members-username-email">
+                                <b>{post.username}</b>
+                                <div className="view-non-members-email">
+                                  {post.email}
+                                </div>
                               </div>
-                            </div>
-                            <div className="view-exp-members-icon">
-                              <img
-                                src={memberIcon}
-                                className="membership-icon"
-                                alt="Is a Member"
-                              />
-                            </div>
-                            <div className="expiry-time-column">
-                              <div
-                                className={
-                                  this.status(
-                                    this.state.timeLeftOnMembership[index]
-                                  )
-                                    ? "bad"
-                                    : "okay"
-                                }
-                              >
-                                <div>
-                                  <b>
-                                    {post.memberExpiryDate
-                                      .substring(0, 10)
-                                      .split("-")
-                                      .join("/")}
-                                  </b>
+                              <div className="view-exp-members-icon">
+                                <img
+                                  src={memberIcon}
+                                  className="membership-icon"
+                                  alt="Is a Member"
+                                />
+                              </div>
+                              <div className="expiry-time-column">
+                                <div
+                                  className={
+                                    this.status(
+                                      this.state.timeLeftOnMembership[index]
+                                    )
+                                      ? "bad"
+                                      : "okay"
+                                  }
+                                >
                                   <div>
-                                    {this.state.timeLeftOnMembership[index]}{" "}
-                                    Months
+                                    <b>
+                                      {post.memberExpiryDate
+                                        .substring(0, 10)
+                                        .split("-")
+                                        .join("/")}
+                                    </b>
+                                    <div>
+                                      {this.state.timeLeftOnMembership[index]}{" "}
+                                      Months
+                                  </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        }
-                      >
-                        <div className="view-members-membership-details">
-                          CELLPHONE NUMBER:{" "}
-                          <b>
-                            {post.phoneNumber === null
-                              ? "N/A"
-                              : post.phoneNumber}
-                          </b>
-                          <div>
-                            MEMBERSHIP NUMBER: <b>{post.memberID}</b>
-                          </div>
-                          <div className="view-member-phone-number">
-                            START OF MEMBERSHIP:
+                          }
+                        >
+                          <div className="view-members-membership-details">
+                            CELLPHONE NUMBER:{" "}
+                            <b>
+                              {post.phoneNumber === null
+                                ? "N/A"
+                                : post.phoneNumber}
+                            </b>
+                            <div>
+                              MEMBERSHIP NUMBER: <b>{post.memberID}</b>
+                            </div>
+                            <div className="view-member-phone-number">
+                              START OF MEMBERSHIP:
                             <b>{post.memberStartDate.substring(0, 10)}</b>
+                            </div>
                           </div>
-                        </div>
-                      </Collapsible>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        )}
+                        </Collapsible>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          )}
       </div>
     );
     return (
-      <div className="centre-view-member"  style={{ height: this.getBodyHeight() }}>
+      <div className="centre-view-member" style={{ height: this.getBodyHeight() }}>
         <div className="username-search">
           <Row>
-            <Col>
-              <div className="search">
-                <input
-                  autoComplete="off"
-                  type="text"
-                  className="user-value"
-                  id="usernameValue"
-                  placeholder="Enter Username"
-                  value={this.state.filterText}
-                  onChange={this.onChangeText}
-                />
-              </div>
-            </Col>
+            {this.props.isClicked === false ?
+              <Col>
+                <div className="search">
+                  <input
+                    autoComplete="off"
+                    type="text"
+                    className="user-value"
+                    id="usernameValue"
+                    placeholder="Enter Username"
+                    value={this.state.filterText}
+                    onChange={this.onChangeText}
+                  />
+                </div>
+              </Col> :
+              <Col>
+                <button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">{exportText}</button>
+              </Col>}
+
             <Col className="export-col-container">
               {" "}
               <div className="export-container">
                 <img
-                  src={Export}
+                  src={this.props.isClicked === false ? Export : deleteButton}
                   className="export-icon"
                   alt="Is a Member"
-                  onClick={e =>
-                    (e.currentTarget.src = exportClick) && this.ExportData()
-                  }
+                  onClick={this.props.exportIsClicked}
                 />
               </div>
             </Col>
@@ -362,7 +390,7 @@ class ViewMembers extends Component {
           <div
             className={
               this.state.getData === false &&
-              this.state.exceptionCaught === false
+                this.state.exceptionCaught === false
                 ? "loader"
                 : "hidden"
             }
@@ -370,7 +398,7 @@ class ViewMembers extends Component {
           <div
             className={
               this.state.getData === false &&
-              this.state.exceptionCaught === false
+                this.state.exceptionCaught === false
                 ? "target-loader-image"
                 : "hidden"
             }
@@ -378,7 +406,7 @@ class ViewMembers extends Component {
           <div
             className={
               this.state.getData === false &&
-              this.state.exceptionCaught === false
+                this.state.exceptionCaught === false
                 ? "loading-message-members"
                 : "hidden"
             }
@@ -388,37 +416,44 @@ class ViewMembers extends Component {
         </div>
         {this.state.exportMsg === false ? (
           <div
-          className={this.state.getData === false && this.state.exceptionCaught === false
-            ? "hidden"
-            : "table-search-members"}
+            className={this.state.getData === false && this.state.exceptionCaught === false
+              ? "hidden"
+              : "table-search-members"}
             style={{ height: this.getBodyHeight() }}
           >
             {postItems}
           </div>
         ) : (
-          <div>
-            {this.state.exportResponse !== "" && !this.state.exportResponse.startsWith("Could")
-              ? this.timeout(2000)
-              : this.timeout(6000)}
-            <div className="exportMsg-container">
-              <label className="exportMsg-responce">
-                {this.state.exportResponse}
-              </label>
-              {this.state.exportResponse !== "" && !this.state.exportResponse.startsWith("Could") ?
-               <img
-                src={RedBullet}
-                className="export-success"
-                alt="Is a Member"
-              /> : null}
+            <div>
+              {this.state.exportResponse !== "" && !this.state.exportResponse.startsWith("Could")
+                ? this.timeout(2000)
+                : this.timeout(6000)}
+              <div className="exportMsg-container">
+                <label className="exportMsg-responce">
+                  {this.state.exportResponse}
+                </label>
+                {this.state.exportResponse !== "" && !this.state.exportResponse.startsWith("Could") ?
+                  <img
+                    src={RedBullet}
+                    className="export-success"
+                    alt="Is a Member"
+                  /> : null}
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  isClicked: state.notificationOBJ.isClicked,
+  userIsClicked: state.notificationOBJ.userIsClicked,
+  memberIsClicked: state.notificationOBJ.memberIsClicked,
+  expiredIsClicked: state.notificationOBJ.expiredIsClicked
+});
+
 export default connect(
-  null,
-  {pageState }
+  mapStateToProps,
+  { pageState, exportIsClicked, exportCSV }
 )(ViewMembers);

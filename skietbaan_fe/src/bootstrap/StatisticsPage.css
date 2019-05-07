@@ -66,7 +66,7 @@
 
 .stats-button-style-active{
     height: 36px;	
-    width: 180px;	
+    width: 100%;	
     border: 0.8px solid #555555;	
     border-radius: 18px;	
     box-shadow: 0 3px 8px -3px #674D4D;
@@ -77,7 +77,7 @@
 
 .stats-button-style-inactive {
     height: 36px;	
-    width: 180px;	
+    width: 100%;	
     border: 0.8px solid #555555;	
     border-radius: 18px;	
     box-shadow: 0 3px 8px -3px #674D4D;
@@ -121,6 +121,10 @@
 
 .stats-inline-text{
     display: flex;
+    justify-content: center;
+}
+
+.stats-center-content{
     justify-content: center;
 }
 

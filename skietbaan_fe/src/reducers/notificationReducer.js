@@ -5,11 +5,24 @@ import {
   FETCH_NUMBER_OF_NOTIFICATIONS,
   USER_LOGS,
   USER_LOS,
-  DOCCIE_SENT
+  DOCCIE_SENT,
+  IS_CLICKED,
+  EXPIRED_IS_CLICKED,
+  MEMBER_IS_CLICKED,
+  USER_IS_CLICKED,
+  EXPORT_CSV,
+  ADD_FILTER_NAME
 } from "../actions/types";
 
 const initialState = {
   notificationsArray: [],
+  filterData: [],
+  filterName: [],
+  filterTitle: "",
+  isClicked: false,
+  expiredIsClicked: false,
+  userIsClicked: false,
+  memberIsClicked: false,
   doccieSent: false,
   userLOGS: false,
   userLOS: false,
@@ -62,6 +75,45 @@ export default function(state = initialState, action) {
         ...state,
         doccieSent: action.payload
       };
+    
+    case IS_CLICKED:
+      return {
+        ...state,
+        isClicked: !state.isClicked
+      };
+    
+    case EXPIRED_IS_CLICKED:
+      return {
+        ...state,
+        expiredIsClicked: !state.expiredIsClicked
+      };
+    
+    case MEMBER_IS_CLICKED:
+      return {
+        ...state,
+        memberIsClicked: !state.memberIsClicked
+      };
+    
+    case USER_IS_CLICKED:
+      return {
+        ...state,
+        userIsClicked: !state.userIsClicked
+      };
+    
+    case EXPORT_CSV:
+      return {
+        ...state,
+        filterData: action.payload,
+        isClicked: true
+      };  
+    
+    
+      case ADD_FILTER_NAME:
+      return {
+        ...state,
+        filterName: action.payload
+      };  
+    
     
     default:
       return state;

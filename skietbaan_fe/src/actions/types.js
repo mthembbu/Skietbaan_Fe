@@ -87,6 +87,14 @@ export const USER_LOGS = "USER_LOGS";
 export const USER_LOS = "USER_LOS";
 export const DOCCIE_SENT = "DOCCIE_SENT";
 
+//member types
+export const IS_CLICKED = "IS_CLICKED";
+export const USER_IS_CLICKED = "USER_IS_CLICKED";
+export const MEMBER_IS_CLICKED = "MEMBER_IS_CLICKED";
+export const EXPIRED_IS_CLICKED = "EXPIRED_IS_CLICKED";
+export const EXPORT_CSV = "EXPORT_CSV";
+export const ADD_FILTER_NAME = "ADD_FILTER_NAME";
+
 export const handleErrors = response => {
   if (!response.ok) {
     throw Error(response.statusText);
