@@ -539,9 +539,9 @@ class StatisticsPage extends Component {
                                         </Row>
                                     </Col>
                                 </Row>
-                                <Row>
-                                    <Col sm={3} xs={3} lg={3} onClick={this.toggle}></Col>
-                                    <Col>
+                                <Row className="stats-center-content">
+                                    <Col sm={2} xs={2} lg={2} onClick={this.toggle}></Col>
+                                    <Col className="stats-remove-left-right-paddings" sm={7} xs={7} lg={7}>
                                         <div className="stats-competition-container">
                                             {this.state.selectedCompetitionRankToggle == 0 ? 
                                                 this.renderCompetitionToggle(list) :
@@ -549,7 +549,7 @@ class StatisticsPage extends Component {
                                             }
                                         </div>
                                     </Col>
-                                    <Col  sm={3} xs={3} lg={3} onClick={this.toggle}></Col>
+                                    <Col sm={2} xs={2} lg={2} onClick={this.toggle}></Col>
                                 </Row>
                             </div>
                         </Collapse>
