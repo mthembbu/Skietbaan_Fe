@@ -104,7 +104,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         filterData: action.payload,
-        isClicked: true
+        isClicked: false
       };  
     
     

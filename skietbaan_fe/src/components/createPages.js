@@ -127,6 +127,14 @@ export class createPages extends Component {
 	};
 	componentDidMount() {
 		this.props.selectedPage(1);
+		if (this.state.selectedValue === 'A') {
+			
+		} else if (this.state.selectedValue === 'B') {
+			
+		} else if (this.state.selectedValue === 'C') {
+			
+		}
+		
 		if (getCookie('token') !== null) {
 			let token = getCookie('token');
 			fetch(BASE_URL + '/api/features/getuserbytoken/' + token, {
