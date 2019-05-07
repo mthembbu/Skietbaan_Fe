@@ -645,3 +645,10 @@
 	align-self: center;
     font-weight: lighter;
 }
+.bottom-line{
+	position: relative;
+    bottom: -47px;
+    width: 94%;
+    z-index: 1;
+    border-bottom: 1px #A0A0A0 solid;
+}

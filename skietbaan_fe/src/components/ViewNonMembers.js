@@ -46,7 +46,8 @@ class ViewNonMembers extends Component {
       dateErrormsg: false,
       date2Errormsg:false,
       userIndex: 0,
-      done: false
+      done: false,
+      lineState:true
     };
     this.getTimeLeft = this.getTimeLeft.bind(this);
     this.onChangeText = this.onChangeText.bind(this);
@@ -392,8 +393,8 @@ class ViewNonMembers extends Component {
                                   {posts.email}
                                 </div>
                               </div>
-
-                              <div className="view-non-members-arrow">
+                              
+                               <div className="view-non-members-arrow">
                                 {posts.selected === true ? (
                                   <img
                                     className="view-non-members-image"
@@ -406,10 +407,12 @@ class ViewNonMembers extends Component {
                                     />
                                   )}
                               </div>
+                              {posts.selected===false?
+                              <div className="bottom-line"/>:null}
                             </div>
+                            
                           }
                         >
-
                           <div className="membership-details">
                             {this.state.done === false ?
                               <div className="membership-container">
