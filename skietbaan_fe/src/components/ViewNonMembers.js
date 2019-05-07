@@ -312,11 +312,9 @@ class ViewNonMembers extends Component {
     const test1 = this.props.userIsClicked === true;
     const test2 = this.props.memberIsClicked === true;
     const test3 = this.props.expiredIsClicked === true;
-
     const check1 = this.props.userIsClicked === true && this.props.memberIsClicked === true;
     const check2 = this.props.userIsClicked === true && this.props.expiredIsClicked === true;
     const check3 = this.props.expiredIsClicked === true && this.props.memberIsClicked === true;
-
     const lastCondition = this.props.userIsClicked === true && this.props.memberIsClicked === true && this.props.expiredIsClicked === true;
 
     if (!getCookie("token")) {
