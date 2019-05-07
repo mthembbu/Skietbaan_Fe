@@ -397,12 +397,12 @@ class ViewNonMembers extends Component {
                                 {posts.selected === true ? (
                                   <img
                                     className="view-non-members-image"
-                                    src={arrowDown}
+                                    src={arrowUp}
                                   />
                                 ) : (
                                     <img
                                       className="view-non-members-image"
-                                      src={arrowUp}
+                                      src={arrowDown}
                                     />
                                   )}
                               </div>
