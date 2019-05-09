@@ -174,8 +174,9 @@ class ViewMembersExpiring extends Component {
 						return response.json();
 					})
 					.then(data => {
-						
-						setTimeout(() => {this.setState({ successMgs: true })
+
+						setTimeout(() => {
+							this.setState({ successMgs: true })
 						}, 3000);
 						this.setState({ filterText: "" });
 
@@ -364,12 +365,15 @@ class ViewMembersExpiring extends Component {
 															className="username-and-email"
 															onClick={() => this.onChangeArrow(index)}
 														>
+															{post.selected===false?
+																<div className="bottom-line" />:null}
 															<div className="view-members-username-email">
 																<b>{post.username}</b>
 																<div className="view-non-members-email">
 																	{post.email}
 																</div>
 															</div>
+														
 															<div className="view-exp-members-icon">
 																<img
 																	src={memberIcon}
@@ -388,6 +392,7 @@ class ViewMembersExpiring extends Component {
 																			: "okay"
 																	}
 																>
+
 																	<div>
 																		<b>
 																			{post.memberExpiryDate
@@ -401,6 +406,7 @@ class ViewMembersExpiring extends Component {
 																				.split("-")
 																				.join("/")
 																		) === false ? (
+
 																				<div>
 																					{this.state.timeLeftOnMembership[index]}{" "}
 																					Months
@@ -413,11 +419,15 @@ class ViewMembersExpiring extends Component {
 																				</div>
 																			)}
 																	</div>
+
 																</div>
+
 															</div>
+
 														</div>
 													}
 												>
+
 													{this.state.successMgs === false &&
 														post.advanceExpiryDate == null ? (
 															<div className="non-member-renew-date-container">
@@ -441,6 +451,7 @@ class ViewMembersExpiring extends Component {
 															User already been renewed in advance
                          								 </label>
 													) : null}
+
 													{this.state.successMgs === false &&
 														post.advanceExpiryDate == null ? (
 															<div className="renew-container">
@@ -457,6 +468,8 @@ class ViewMembersExpiring extends Component {
                           								  </button>
 															</div>
 														) : null}
+
+
 													{this.state.successMgs === true ? (
 														<div className="confirm-button-container">
 															<button className="confriming-btn">
@@ -468,11 +481,11 @@ class ViewMembersExpiring extends Component {
 															<button className="confriming-btn">
 																MEMBERSHIP RENEWED
 																<label className="advance-date-label">{post.advanceExpiryDate
-																				.substring(0, 10)
-																				.split("-")
-																				.join("/")}</label>
-                            						</button>
-													
+																	.substring(0, 10)
+																	.split("-")
+																	.join("/")}</label>
+															</button>
+
 														</div>
 													) : null}
 												</Collapsible>

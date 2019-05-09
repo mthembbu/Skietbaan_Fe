@@ -293,6 +293,8 @@ class ViewMembers extends Component {
                                   alt="Is a Member"
                                 />
                               </div>
+                              {post.selected===false?
+                              <div className="bottom-line"/>:null}
                               <div className="expiry-time-column">
                                 <div
                                   className={
@@ -320,6 +322,7 @@ class ViewMembers extends Component {
                             </div>
                           }
                         >
+                         
                           <div className="view-members-membership-details">
                             CELLPHONE NUMBER:{" "}
                             <b>
