@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { FormGroup, Button, Form } from "reactstrap";
 import "../components/RegisterStyles.css";
 import { validateUsername, validateEmail } from "./Validators.js";
 import { getCookie } from "./cookie.js";
 import { BASE_URL } from "../actions/types.js";
-import back from "../components/assets/Back.png";
 import skietbaan from "../components/assets/skietbaanLogo.png";
 import history from "./history";
 
@@ -149,7 +147,7 @@ class Login extends Component {
 
   login() {
     this.validate();
-    if (this.state.usernameValue != "" && this.state.passwordValue != "") {
+    if (this.state.usernameValue !== "" && this.state.passwordValue !== "") {
       let sha1 = require("sha1");
       let hash = sha1(this.state.passwordValue);
       let RequestObject = "";
@@ -314,8 +312,8 @@ class Login extends Component {
                 onClick={this.login}
                 id="roundButton"
                 className={
-                  this.state.usernameValue != "" &&
-                  this.state.passwordValue != ""
+                  this.state.usernameValue !== "" &&
+                  this.state.passwordValue !== ""
                     ? "round-button"
                     : "buttons-invalid round-button"
                 }
