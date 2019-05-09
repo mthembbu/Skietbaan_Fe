@@ -42,7 +42,6 @@ export const PARTICIPANTS_PER_COMP = "PARTICIPANTS_PER_COMP";
 export const CHECK_ADMIN = "CHECK_ADMIN";
 export const NEWCOMPSTATE = "NEWCOMPSTATE";
 export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
-
 //leaderboard types
 export const FETCH_LEADERBOARDFILTER_DATA = "FETCH_LEADERBOARDFILTER_DATA";
 export const FETCH_LEADERBOARDTABLE_DATA = "FETCH_LEADERBOARDTABLE_DATA";
