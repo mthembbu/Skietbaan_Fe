@@ -12,7 +12,8 @@ import {
   MEMBER_IS_CLICKED,
   USER_IS_CLICKED,
   EXPORT_CSV,
-  ADD_FILTER_NAME
+  ADD_FILTER_NAME,
+  EXPORT_BUTTON_TEXT
 } from "../actions/types";
 import confirmation from "../components/Notification-Img/confirmation.png";
 import renewal from "../components/Notification-Img/renewal.png";
@@ -179,6 +180,15 @@ export const filterName = (fName) => {
     dispatch({
       type: ADD_FILTER_NAME,
       payload: fName
+    });
+  };
+};
+
+export const exportTextName = (name) => {
+  return dispatch => {
+    dispatch({
+      type:EXPORT_BUTTON_TEXT,
+      payload: name
     });
   };
 };

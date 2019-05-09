@@ -11,6 +11,7 @@ import {
   MEMBER_IS_CLICKED,
   USER_IS_CLICKED,
   EXPORT_CSV,
+  EXPORT_BUTTON_TEXT,
   ADD_FILTER_NAME
 } from "../actions/types";
 
@@ -27,7 +28,8 @@ const initialState = {
   userLOS: false,
   updatedNotification: {},
   numberOfNotifications: 0,
-  loading: null
+  loading: null,
+  ExportWrittenText:""
 };
 
 export default function(state = initialState, action) {
@@ -90,6 +92,12 @@ export default function(state = initialState, action) {
         expiredIsClicked: !state.expiredIsClicked
       };
     
+    case EXPORT_BUTTON_TEXT:
+      return {
+        ...state,
+        ExportWrittenText: action.payload
+      };
+    
     case MEMBER_IS_CLICKED:
       return {
         ...state,
@@ -111,8 +119,7 @@ export default function(state = initialState, action) {
         memberIsClicked: !state.memberIsClicked,
         expiredIsClicked: !state.expiredIsClicked
       };  
-    
-    
+
       case ADD_FILTER_NAME:
       return {
         ...state,

@@ -489,7 +489,9 @@ class StatisticsPage extends Component {
                 this.state.errorOccured ? this.renderError(this.state.apiResponse) : 
                 this.state.isGraphFetchDone && this.state.isParticipantsFetchDone ?
                     <div>
-                        <Collapse isOpened={this.state.collapse} fixedHeight={490}> 
+                        <Collapse isOpened={this.state.collapse} 
+                            fixedHeight={this.state.selectedCompetitionRankToggle === 0 ?
+                                490 : 585}> 
                             <div className="stats-center-content stats-competition-select-rectangle-big">
                                 <Row onClick={this.toggle}>
                                     <Col>

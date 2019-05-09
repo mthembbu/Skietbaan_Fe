@@ -507,11 +507,30 @@
 	font-weight: lighter;
 }
 .membership-container {
-	height: 86px;
+	height: 65px;
 	display: flex;
     flex-direction: column;
 }
 .view-non-members-date-box {
+	margin-bottom: 7px;
+	align-self: center;
+	background-color: #fdfdfd;
+	border-radius: 4px;
+	line-height: 22px;
+	text-align: left;
+	padding-left: 19px;
+	width: 100%;
+	border: none;
+	font-family: helvetica;
+	font-size: 16px;
+	font-weight: bold;
+	color: #666666;
+	border: 1px #979797 solid;
+	height: 44px;
+	width: 312px;
+	border-radius: 7px;
+}
+.duration-calender {
 	margin-bottom: 7px;
 	align-self: center;
 	background-color: #fdfdfd;
@@ -561,14 +580,17 @@
     background-position-x: 270px !important;
     background-size: 25px !important;
 	width: 312px;
-	height: 42px;
-	border-radius: 22px;
+	height: 72px;
+	border-radius: 6px;
 	font-size: 16px;
 	font-weight: lighter;
 	color: #be0000;
 	background: transparent;
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+    justify-content: flex-start;
+    padding-left: 65px;
+    padding-top: 12px;
 	border: 1.5px solid #be0000;
 }
 
@@ -582,7 +604,12 @@
 .date-error-msg-cpntainer {
 	display: flex;
 	flex-direction: column;
-	height: 90px;
+	height: 65px;
+}
+.date-duration-of-membership {
+	display: flex;
+	flex-direction: column;
+	height: 70px;
 }
 .user-is-a-member-msg-container {
 	display: flex;
@@ -606,4 +633,15 @@
 	justify-content: center;
 	border: 1.5px solid #be0000;
 	padding-top: 9px;
+}
+.advance-date-label{
+	align-self: center;
+    font-weight: lighter;
+}
+.bottom-line{
+	position: relative;
+    bottom: -47px;
+    width: 94%;
+    z-index: 1;
+    border-bottom: 1px #A0A0A0 solid;
 }
