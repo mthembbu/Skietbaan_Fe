@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FormGroup, Button, Form } from "reactstrap";
+import { Button} from "reactstrap";
 import "../components/RegisterStyles.css";
 import { validateEmail, validateUsername } from "./Validators.js";
 import { getCookie } from "./cookie.js";
@@ -88,7 +88,7 @@ class Register extends Component {
           stateUpdate.emailTaken = false;
           for (var i = 0; i < this.state.users.length; i++) {
             if (
-              this.state.users[i].email.toLowerCase() ==
+              this.state.users[i].email.toLowerCase() ===
               target.value.toLowerCase()
             ) {
               stateUpdate.emailTaken = true;
@@ -102,7 +102,7 @@ class Register extends Component {
           stateUpdate.usernameTaken = false;
           for (var i = 0; i < this.state.users.length; i++) {
             if (
-              this.state.users[i].username.toLowerCase() ==
+              this.state.users[i].username.toLowerCase() ===
               target.value.toLowerCase()
             ) {
               stateUpdate.usernameTaken = true;
@@ -270,7 +270,7 @@ class Register extends Component {
               />
               <div className="error-message-container">
                 {!validateEmail(this.state.emailValue) &&
-                this.state.emailValue != "" ? (
+                this.state.emailValue !== "" ? (
                   <div className={"error-message-login"}> invalid email</div>
                 ) : this.state.emailTaken ? (
                   <div className={"error-message-login"}>
