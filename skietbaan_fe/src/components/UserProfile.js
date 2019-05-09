@@ -179,6 +179,15 @@ class UserProfile extends Component {
         )
     }
 
+    collapseHeight(){
+        var numberOfButtons = Object.keys(this.mapCompetitionNameToIndex).length
+        if(numberOfButtons > 4){
+            return 305;
+        }else{
+            return numberOfButtons * 46 + 116;
+        }
+    }
+
     renderCompetitionList(){
         let renderArray = []
         this.state.awardCompetitions.forEach((element, index) => {
@@ -334,7 +343,7 @@ class UserProfile extends Component {
                     </Row>
                     <Row className="center-content competition-buttons-container">
                         <Col>
-                            <Collapse isOpened={this.state.collapse} fixedHeight={300}>
+                            <Collapse isOpened={this.state.collapse} fixedHeight={this.collapseHeight()}>
                                 <div className="push-top-92px">
                                     <div className="award-buttons-container">{this.renderCompetitionList()}</div>
                                     <a className="scale-arrowupicon-img" onClick={this.toggle}>

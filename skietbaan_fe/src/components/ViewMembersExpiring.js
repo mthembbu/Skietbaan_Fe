@@ -8,9 +8,11 @@ import { Row, Col } from "react-bootstrap";
 import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
 import exportClick from "../components/assets/exportPress.png";
-import { fetchNumberOfNotification } from "../actions/notificationAction";
+import { fetchNumberOfNotification, exportIsClicked, exportCSV } from "../actions/notificationAction";
 import { pageState } from '../actions/postActions';
 import { connect } from "react-redux";
+import deleteButton from '../components/GroupImages/deleteS.png';
+
 class ViewMembersExpiring extends Component {
 	constructor(props) {
 		super(props);
@@ -96,7 +98,7 @@ class ViewMembersExpiring extends Component {
 	}
 	getBodyHeight() {
 		if (this.state.width < 575) {
-      return this.state.height - (240 - 184) - 188 + "px";
+			return this.state.height - (240 - 184) - 188 + "px";
 		} else {
 			return "50vh";
 		}
@@ -115,9 +117,7 @@ class ViewMembersExpiring extends Component {
 			.then(function (data) {
 				return data;
 			})
-			.then(
-				data =>
-					this.setState({
+			.then(data =>this.setState({
 						array: data,
 						getData: true
 					}),
@@ -172,8 +172,9 @@ class ViewMembersExpiring extends Component {
 						return response.json();
 					})
 					.then(data => {
-						this.setState({ successMgs: true });
+
 						setTimeout(() => {
+							this.setState({ successMgs: true })
 						}, 3000);
 						this.setState({ filterText: "" });
 
@@ -241,24 +242,11 @@ class ViewMembersExpiring extends Component {
 	}
 	ExportData = () => {
 		let token = getCookie("token");
-		let filter = "expiring";
-		fetch(
-			BASE_URL +
-			`/api/Features/generateCSV?filter=${filter}&adminToken=${token}`,
-			{
-				method: "post",
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json"
-				}
-			}
-		)
-			.then(res => res.json())
-			.then(data => this.setState({ exportResponse: data, exportMsg: true }))
-			.catch(err => {
-				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-			});
+		const fData = { getFilterName: this.props.filterName, getAdminToken: token };
+		this.props.exportCSV(fData);
+		this.props.exportIsClicked();
 	};
+
 	onChangeArrow = (index) => {
 		if (index !== this.state.userIndex) {
 			this.state.array[this.state.userIndex].selected = false;
@@ -287,9 +275,9 @@ class ViewMembersExpiring extends Component {
 		}
 	}
 
-	timeout(duration){
+	timeout(duration) {
 		setTimeout(() => {
-		  this.setState({ exportMsg: false });
+			this.setState({ exportMsg: false });
 		}, duration)
 	}
 
@@ -305,6 +293,41 @@ class ViewMembersExpiring extends Component {
 				});
 			});
 		}
+
+		const test1 = this.props.userIsClicked === true;
+		const test2 = this.props.memberIsClicked === true;
+		const test3 = this.props.expiredIsClicked === true;
+
+		const check1 = this.props.userIsClicked === true && this.props.memberIsClicked === true;
+		const check2 = this.props.userIsClicked === true && this.props.expiredIsClicked === true;
+		const check3 = this.props.expiredIsClicked === true && this.props.memberIsClicked === true;
+
+		const lastCondition = this.props.userIsClicked === true && this.props.memberIsClicked === true && this.props.expiredIsClicked === true;
+
+		let exportText = "EXPORT EXPIRED MEMBERS";
+
+		if (test1) {
+			exportText = "EXPORT USERS";
+		}
+		if (test2) {
+			exportText = "EXPORT MEMBERS";
+		}
+		if (test3) {
+			exportText = "EXPORT EXPIRED MEMBERS";
+		}
+		if (check1) {
+			exportText = "EXPORT USERS + MEMBERS";
+		}
+		if (check2) {
+			exportText = "EXPORT USERS + EXPIRED MEMBERS";
+		}
+		if (check3) {
+			exportText = "EXPORT MEMBERS + EXPIRED MEMBERS";
+		}
+		if (lastCondition) {
+			exportText = "EXPORT ALL MEMBERS";
+		}
+
 		const postItems = (
 			<div>
 				{this.state.array.length === 0 && this.state.getData === true ? (
@@ -340,12 +363,15 @@ class ViewMembersExpiring extends Component {
 															className="username-and-email"
 															onClick={() => this.onChangeArrow(index)}
 														>
+															{post.selected===false || post.selected===undefined?
+																<div className="bottom-line" />:null}
 															<div className="view-members-username-email">
 																<b>{post.username}</b>
 																<div className="view-non-members-email">
 																	{post.email}
 																</div>
 															</div>
+														
 															<div className="view-exp-members-icon">
 																<img
 																	src={memberIcon}
@@ -364,6 +390,7 @@ class ViewMembersExpiring extends Component {
 																			: "okay"
 																	}
 																>
+
 																	<div>
 																		<b>
 																			{post.memberExpiryDate
@@ -377,10 +404,11 @@ class ViewMembersExpiring extends Component {
 																				.split("-")
 																				.join("/")
 																		) === false ? (
+
 																				<div>
 																					{this.state.timeLeftOnMembership[index]}{" "}
 																					Months
-                                    </div>
+                                  													  </div>
 																			) : (
 																				<div>
 																					{post.advanceExpiryDate != null
@@ -389,11 +417,15 @@ class ViewMembersExpiring extends Component {
 																				</div>
 																			)}
 																	</div>
+
 																</div>
+
 															</div>
+
 														</div>
 													}
 												>
+
 													{this.state.successMgs === false &&
 														post.advanceExpiryDate == null ? (
 															<div className="non-member-renew-date-container">
@@ -410,13 +442,14 @@ class ViewMembersExpiring extends Component {
 														.state.dateErrorMgs === true ? (
 															<label className="non-member-renew-error-msg">
 																Date selected is invalid
-                          </label>
+                         							 </label>
 														) : null}
 													{this.state.AdvanceDateExist === true ? (
 														<label className="non-member-renew-error-msg">
 															User already been renewed in advance
-                          </label>
+                         								 </label>
 													) : null}
+
 													{this.state.successMgs === false &&
 														post.advanceExpiryDate == null ? (
 															<div className="renew-container">
@@ -430,9 +463,11 @@ class ViewMembersExpiring extends Component {
 																	onClick={() => this.updateMember(index)}
 																>
 																	RENEW
-                            </button>
+                          								  </button>
 															</div>
 														) : null}
+
+
 													{this.state.successMgs === true ? (
 														<div className="confirm-button-container">
 															<button className="confriming-btn">
@@ -443,7 +478,12 @@ class ViewMembersExpiring extends Component {
 														<div className="confirm-button-container">
 															<button className="confriming-btn">
 																MEMBERSHIP RENEWED
-                            </button>
+																<label className="advance-date-label">{post.advanceExpiryDate
+																	.substring(0, 10)
+																	.split("-")
+																	.join("/")}</label>
+															</button>
+
 														</div>
 													) : null}
 												</Collapsible>
@@ -456,10 +496,10 @@ class ViewMembersExpiring extends Component {
 			</div>
 		);
 		return (
-			<div className="centre-view-member"  style={{ height: this.getBodyHeight() }}>
+			<div className="centre-view-member" style={{ height: this.getBodyHeight() }}>
 				<div className="username-search">
 					<Row>
-						<Col>
+						{this.props.isClicked === false ? <Col>
 							<div className="search">
 								<input
 									autoComplete="off"
@@ -471,17 +511,18 @@ class ViewMembersExpiring extends Component {
 									onChange={this.onChangeText}
 								/>
 							</div>
-						</Col>
+						</Col> :
+							<Col>
+								<button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">{this.props.ExportWrittenText.toUpperCase()}</button>
+							</Col>}
 						<Col className="export-col-container">
 							{" "}
 							<div className="export-container">
 								<img
-									src={Export}
+									src={this.props.isClicked === false ? Export : deleteButton}
 									className="export-icon"
 									alt="Is a Member"
-									onClick={e =>
-										(e.currentTarget.src = exportClick) && this.ExportData()
-									}
+									onClick={this.props.exportIsClicked}
 								/>
 							</div>
 						</Col>
@@ -523,9 +564,9 @@ class ViewMembersExpiring extends Component {
 				</div>
 				{this.state.exportMsg === false ? (
 					<div
-					className={this.state.getData === false && this.state.exceptionCaught === false
-						? "hidden"
-						: "table-search-members"}
+						className={this.state.getData === false && this.state.exceptionCaught === false
+							? "hidden"
+							: "table-search-members"}
 						style={{ height: this.getBodyHeight() }}
 					>
 						{postItems}
@@ -544,7 +585,7 @@ class ViewMembersExpiring extends Component {
 										src={RedBullet}
 										className="export-success"
 										alt="Is a Member"
-									/> : null 
+									/> : null
 								}
 							</div>
 						</div>
@@ -554,7 +595,16 @@ class ViewMembersExpiring extends Component {
 	}
 }
 
+const mapStateToProps = (state) => ({
+	isClicked: state.notificationOBJ.isClicked,
+	userIsClicked: state.notificationOBJ.userIsClicked,
+	memberIsClicked: state.notificationOBJ.memberIsClicked,
+	expiredIsClicked: state.notificationOBJ.expiredIsClicked,
+	exportAll: state.notificationOBJ.exportAll,
+	ExportWrittenText: state.notificationOBJ.ExportWrittenText
+});
+
 export default connect(
-	null,
-	{ fetchNumberOfNotification, pageState }
+	mapStateToProps,
+	{ fetchNumberOfNotification, pageState, exportIsClicked, exportCSV }
 )(ViewMembersExpiring);

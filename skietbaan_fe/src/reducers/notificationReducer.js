@@ -5,17 +5,31 @@ import {
   FETCH_NUMBER_OF_NOTIFICATIONS,
   USER_LOGS,
   USER_LOS,
-  DOCCIE_SENT
+  DOCCIE_SENT,
+  IS_CLICKED,
+  EXPIRED_IS_CLICKED,
+  MEMBER_IS_CLICKED,
+  USER_IS_CLICKED,
+  EXPORT_CSV,
+  EXPORT_BUTTON_TEXT,
+  ADD_FILTER_NAME
 } from "../actions/types";
 
 const initialState = {
   notificationsArray: [],
+  filterData: [],
+  filterName: [],
+  isClicked: false,
+  expiredIsClicked: false,
+  userIsClicked: false,
+  memberIsClicked: false,
   doccieSent: false,
   userLOGS: false,
   userLOS: false,
   updatedNotification: {},
   numberOfNotifications: 0,
-  loading: null
+  loading: null,
+  ExportWrittenText:""
 };
 
 export default function(state = initialState, action) {
@@ -62,6 +76,56 @@ export default function(state = initialState, action) {
         ...state,
         doccieSent: action.payload
       };
+    
+    case IS_CLICKED:
+      return {
+        ...state,
+        isClicked: !state.isClicked,
+        userIsClicked: false,
+        memberIsClicked: false,
+        expiredIsClicked: false
+      };
+    
+    case EXPIRED_IS_CLICKED:
+      return {
+        ...state,
+        expiredIsClicked: !state.expiredIsClicked
+      };
+    
+    case EXPORT_BUTTON_TEXT:
+      return {
+        ...state,
+        ExportWrittenText: action.payload
+      };
+    
+    case MEMBER_IS_CLICKED:
+      return {
+        ...state,
+        memberIsClicked: !state.memberIsClicked
+      };
+    
+    case USER_IS_CLICKED:
+      return {
+        ...state,
+        userIsClicked: !state.userIsClicked
+      };
+    
+    case EXPORT_CSV:
+      return {
+        ...state,
+        filterData: action.payload,
+        isClicked: !state.isClicked,
+        userIsClicked: !state.userIsClicked,
+        memberIsClicked: !state.memberIsClicked,
+        expiredIsClicked: !state.expiredIsClicked
+      };  
+
+      case ADD_FILTER_NAME:
+      return {
+        ...state,
+        filterName: action.payload
+      };  
+    
     
     default:
       return state;

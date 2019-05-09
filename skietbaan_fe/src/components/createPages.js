@@ -7,21 +7,25 @@ import { getCookie } from './cookie.js';
 import { BASE_URL } from '../actions/types.js';
 import ViewMembers from '../components/ViewMembers';
 import Radio from '@material-ui/core/Radio';
-import CreateComp from '../components/CreateComp';
 import AddGroup from '../components/AddGroup';
 import ViewNonMembers from '../components/ViewNonMembers';
 import ViewMembersExpiring from '../components/ViewMembersExpiring';
-import ViewComp from '../components/ViewComp';
 import GroupComponent from '../components/GroupComponent';
 import CompComponent from '../components/CompComponent';
 import { compSelectedPages } from '../actions/competition.action';
 import { pageState, selectedPage, binStateFunc } from '../actions/postActions';
 import whiteBin from './GroupImages/whiteBin.png';
 import blackBin from './GroupImages/blackBin.png';
+import unselected from './GroupImages/unselected-icon.png';
+import selected from './GroupImages/selected-icon.png';
+import { userIsClicked, expiredIsClicked, memberIsClicked, filterName,exportTextName } from '../actions/notificationAction';
 export class createPages extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			userIconIsClicked: false,
+			memberIconIsClicked: false,
+			expiredIconIsClicked: false,
 			isToken: true,
 			selectedButton: 1,
 			selectedButtonCreateViewGroups: 1,
@@ -29,7 +33,11 @@ export class createPages extends Component {
 			selectedValue: 'A',
 			user: [],
 			height: document.body.clientHeight,
-			binState: false
+			binState: false,
+			filterNameData: ["users"],
+			secondValueA:'a',
+			secondValueB:'d',
+			secondValueC:'d'
 		};
 
 		this.groupsPage = this.groupsPage.bind(this);
@@ -43,6 +51,9 @@ export class createPages extends Component {
 		this.updateCreateContainer = this.updateCreateContainer.bind(this);
 		this.noShadowOnMember = this.noShadowOnMember.bind(this);
 		this.showHideHeader = this.showHideHeader.bind(this);
+		this.changeUserIconState = this.changeUserIconState.bind(this);
+		this.changeMemberIconState = this.changeMemberIconState.bind(this);
+		this.changeExpiredIconState = this.changeExpiredIconState.bind(this);
 	}
 	updateCreateContainer() {
 		this.props.binStateFunc(1);
@@ -87,6 +98,7 @@ export class createPages extends Component {
 	}
 
 	membersPage() {
+		this.props.exportTextName("EXPORT users");
 		this.setState({ selectedButton: 3, selectedValue: 'A' });
 	}
 
@@ -119,6 +131,14 @@ export class createPages extends Component {
 	};
 	componentDidMount() {
 		this.props.selectedPage(1);
+		if (this.state.selectedValue === 'A') {
+			
+		} else if (this.state.selectedValue === 'B') {
+			
+		} else if (this.state.selectedValue === 'C') {
+			
+		}
+
 		if (getCookie('token') !== null) {
 			let token = getCookie('token');
 			fetch(BASE_URL + '/api/features/getuserbytoken/' + token, {
@@ -176,17 +196,129 @@ export class createPages extends Component {
 		}
 	}
 
+	changeUserIconState = () => {
+		if (this.state.filterNameData.indexOf("users") < 0) {
+			this.state.filterNameData.push("users");
+			this.setState({secondValueA:'a'});
+
+			 if(this.state.filterNameData.length===1){
+			 	this.props.exportTextName("EXPORT " +this.state.filterNameData[0].toUpperCase());
+			}
+			 else if(this.state.filterNameData.length===2){
+				let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase()
+			 	this.props.exportTextName(x)
+			 }
+			 else{
+				this.props.exportTextName("EXPORT ALL")
+			 }
+			
+		} else {
+			var index = this.state.filterNameData.indexOf("users");
+			this.state.filterNameData.splice(index, 1);
+			this.setState({secondValueA:'d'});
+
+			 if(this.state.filterNameData.length===1){
+				let x = this.state.filterNameData[0] 
+			 	this.props.exportTextName("EXPORT"+" "+x.toUpperCase());
+			 }
+			 else if(this.state.filterNameData.length===2){
+			 	let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase();
+			 	this.props.exportTextName(x)
+			 }
+			 else if(this.state.filterNameData.length===0){
+			 	this.props.exportTextName("UNSELECTED")
+			 }
+			
+		}
+		this.props.filterName(this.state.filterNameData);
+	}
+
+	changeMemberIconState = () => {
+
+		if (this.state.filterNameData.indexOf("members") < 0) {
+			this.state.filterNameData.push("members");
+			this.setState({secondValueB:'b'});
+
+			 if(this.state.filterNameData.length===1){
+			 	this.props.exportTextName("EXPORT " +this.state.filterNameData[0].toUpperCase());
+			 }
+			 else if(this.state.filterNameData.length===2){
+			 	let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase()
+			 	this.props.exportTextName(x)
+			 }
+			 else{
+			 	this.props.exportTextName("EXPORT ALL")
+			 }
+		} else {
+			var index = this.state.filterNameData.indexOf("members");
+			this.state.filterNameData.splice(index, 1);
+			this.setState({secondValueB:'d'});
+
+			 if(this.state.filterNameData.length===1){
+			 	let x = "EXPORT "+this.state.filterNameData[0].toUpperCase();
+			 	this.props.exportTextName(x);
+			 }
+			 else if(this.state.filterNameData.length===2){
+			 	let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase();
+			 	this.props.exportTextName(x)
+			 }
+			 else if(this.state.filterNameData.length===0) {
+			 	this.props.exportTextName("UNSELECTED")
+			 }
+			
+		}
+		this.props.filterName(this.state.filterNameData);
+	}
+
+	changeExpiredIconState = () => {
+
+		this.props.expiredIsClicked();
+		if (this.state.filterNameData.indexOf("expiring") < 0) {
+			this.state.filterNameData.push("expiring");
+			this.setState({secondValueC:'c'});
+
+			if(this.state.filterNameData.length===1){
+				let x = this.state.filterNameData[0] 
+				this.props.exportTextName("EXPORT"+" "+x.toUpperCase());
+			}
+			else if(this.state.filterNameData.length===2){
+				let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase();
+				this.props.exportTextName(x)
+			}
+			else{
+				this.props.exportTextName("EXPORT ALL")
+			}
+
+		} else {
+			var index = this.state.filterNameData.indexOf("expiring");
+			this.state.filterNameData.splice(index, 1);
+			this.setState({secondValueC:'d'});
+
+			if(this.state.filterNameData.length===1){
+				let x = this.state.filterNameData[0] 
+				this.props.exportTextName("EXPORT"+" "+x.toUpperCase());
+			}
+			else if(this.state.filterNameData.length===2){
+				let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase();
+				this.props.exportTextName(x)
+			}
+			else if(this.state.filterNameData.length===0){
+				this.props.exportTextName("UNSELECTED")
+			}
+		}
+		this.props.filterName(this.state.filterNameData);
+	}
 
 	changeBinState = () => {
 		if (this.props.binState === 1) {
-			for(var i=0;i<this.props.groupsList.length;i++){
+			for (var i = 0; i < this.props.groupsList.length; i++) {
 				this.props.groupsList[i].highlighted = false;
 			}
 			this.props.binStateFunc(2);
 		} else {
 			for (var i = 0; i < this.props.compOBJ.length; i++) {
 				this.props.compOBJ[i].highlighted = false;
-			  }
+			}
 			this.props.binStateFunc(1);
 		}
 	};
@@ -242,7 +374,7 @@ export class createPages extends Component {
 											<label className="label-for-score">CREATE</label>
 
 										</div>
-										{(this.props.page === 0 && this.state.selectedButton===1) ||(this.props.page===0 && this.state.selectedButton===2)  ?
+										{(this.props.page === 0 && this.state.selectedButton === 1) || (this.props.page === 0 && this.state.selectedButton === 2) ?
 											<div className="plus-next" onClick={() => this.changeBinState()}>
 												<img
 													className="bin-image"
@@ -312,50 +444,79 @@ export class createPages extends Component {
 											</div>
 										</div>
 									</Row>
-									<Row className="row justify-content-center">
-										{this.state.selectedButton === 3 ? (
-											<div className="member-radio">
-												<div className="radio-A">
-													<Radio
-														className="a-radio"
-														aria-label="A"
-														checked={this.state.selectedValue === 'A'}
-														onChange={() => this.handleChange('A')}
-														value="b"
-														color={'primary'}
-														name="radio-button-demo"
-														aria-label="B"
-													/>
+									{this.props.isClicked === false ?
+										<Row className="row justify-content-center">
+											{this.state.selectedButton === 3 ? (
+												<div className="member-radio">
+													<div className="radio-A">
+														<Radio
+															className="a-radio"
+															aria-label="A"
+															checked={this.state.selectedValue === 'A'}
+															onChange={() => this.handleChange('A')}
+															value="b"
+															color={'primary'}
+															name="radio-button-demo"
+															aria-label="B"
+														/>
 
-													<label className="member-user-label">USERS</label>
+														<label className="member-user-label">USERS</label>
+													</div>
+													<div className="radio-B">
+														<Radio
+															className="b-radio"
+															aria-label="A"
+															checked={this.state.selectedValue === 'B'}
+															value="b"
+															aria-label="B"
+															color={'primary'}
+															onChange={() => this.handleChange('B')}
+														/>
+														<label className="member-user-label">MEMBERS</label>
+													</div>
+													<div className="radio-C">
+														<Radio
+															className="c-radio"
+															aria-label="A"
+															checked={this.state.selectedValue === 'C'}
+															value="b"
+															aria-label="B"
+															color={'primary'}
+															onChange={() => this.handleChange('C')}
+														/>
+														<label className="member-user-label">EXPIRING</label>
+													</div>
 												</div>
-												<div className="radio-B">
-													<Radio
-														className="b-radio"
-														aria-label="A"
-														checked={this.state.selectedValue === 'B'}
-														value="b"
-														aria-label="B"
-														color={'primary'}
-														onChange={() => this.handleChange('B')}
-													/>
-													<label className="member-user-label">MEMBERS</label>
+											) : null}
+										</Row>
+										:
+										<Row className="row justify-content-center">
+											{this.state.selectedButton === 3 ? (
+												<div className="member-radio">
+													<div className="checkbox-A">
+														<img src={this.state.secondValueA==='a' ? selected :
+														 unselected}
+															className="icon-size" alt="unselected"
+															onClick={this.changeUserIconState} />
+														<label className="member-user-label">USERS</label>
+													</div>
+													<div className="checkbox-B">
+														<img src={ this.state.secondValueB==='b' ? selected : unselected}
+															className="icon-size" alt="unselected"
+															onClick={this.changeMemberIconState } />
+														<label className="member-user-label">MEMBERS</label>
+													</div>
+													<div className="checkbox-C">
+														<img src={ this.state.secondValueC==='c' ? selected : unselected}
+															className="icon-size" alt="unselected"
+															onClick={this.changeExpiredIconState } />
+														<label className="member-user-label">EXPIRING</label>
+													</div>
 												</div>
-												<div className="radio-C">
-													<Radio
-														className="c-radio"
-														aria-label="A"
-														checked={this.state.selectedValue === 'C'}
-														value="b"
-														aria-label="B"
-														color={'primary'}
-														onChange={() => this.handleChange('C')}
-													/>
-													<label className="member-user-label">EXPIRING</label>
-												</div>
-											</div>
-										) : null}
-									</Row>
+											) : null}
+										</Row>
+
+									}
 								</div>
 							</div>
 						) : null}
@@ -395,9 +556,14 @@ const mapStateToProps = (state) => ({
 	page: state.posts.page,
 	binState: state.posts.binState,
 	groupsList: state.posts.groupsList,
-	compOBJ: state.compOBJ.allComps
+	compOBJ: state.compOBJ.allComps,
+	isClicked: state.notificationOBJ.isClicked,
+	filterTitle: state.notificationOBJ.filterTitle,
+	filterName: state.notificationOBJ.filterName,
+	ExportWrittenText: state.notificationOBJ.ExportWrittenText
 });
 
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, { compSelectedPages, pageState, selectedPage, binStateFunc })(createPages);
+export default connect(mapStateToProps, {
+	compSelectedPages, pageState, selectedPage, binStateFunc,
+	userIsClicked, memberIsClicked, expiredIsClicked, filterName,exportTextName
+})(createPages);

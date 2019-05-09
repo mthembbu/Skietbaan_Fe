@@ -6,7 +6,14 @@ import {
   FETCH_NUMBER_OF_NOTIFICATIONS,
   USER_LOGS,
   USER_LOS,
-  DOCCIE_SENT
+  DOCCIE_SENT,
+  IS_CLICKED,
+  EXPIRED_IS_CLICKED,
+  MEMBER_IS_CLICKED,
+  USER_IS_CLICKED,
+  EXPORT_CSV,
+  ADD_FILTER_NAME,
+  EXPORT_BUTTON_TEXT
 } from "../actions/types";
 import confirmation from "../components/Notification-Img/confirmation.png";
 import renewal from "../components/Notification-Img/renewal.png";
@@ -114,3 +121,75 @@ export const sent = status => {
     });
   };
 };
+
+export const exportIsClicked = () => {
+  return dispatch => {
+    dispatch({
+      type: IS_CLICKED
+    });
+  };
+};
+
+export const userIsClicked = () => {
+  return dispatch => {
+    dispatch({
+      type: USER_IS_CLICKED
+    });
+  };
+};
+
+export const memberIsClicked = () => {
+  return dispatch => {
+    dispatch({
+      type: MEMBER_IS_CLICKED
+    });
+  };
+};
+
+export const expiredIsClicked = () => {
+  return dispatch => {
+    dispatch({
+      type: EXPIRED_IS_CLICKED
+    })
+  }
+}
+
+export const exportCSV = (filterData) => dispatch => {
+  fetch(BASE_URL + "/api/features/generateCSV", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(filterData)
+  })
+    .then(response => response.json())
+    .then(data => {
+      dispatch({
+        type:  EXPORT_CSV,
+        payload: filterData
+      });
+    })
+    .catch(err => {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+    });
+}
+
+export const filterName = (fName) => {
+  return dispatch => {
+    dispatch({
+      type: ADD_FILTER_NAME,
+      payload: fName
+    });
+  };
+};
+
+export const exportTextName = (name) => {
+  return dispatch => {
+    dispatch({
+      type:EXPORT_BUTTON_TEXT,
+      payload: name
+    });
+  };
+};
+

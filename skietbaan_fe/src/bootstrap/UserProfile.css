@@ -9,6 +9,11 @@
         padding-left: 0px !important;
         padding-right: 0px !important;
     }
+
+    .award-buttons-container{
+        margin-right: 10px;
+        margin-left: 10px;
+    }
 }
 
 @media only screen and (min-width: 576px) and (max-width: 585px){
@@ -452,4 +457,6 @@
     max-height: 184px;
     overflow-y: overlay;
     overflow-x: hidden;
+    padding-top: 7px;
+    margin-bottom: 7px;
 }

@@ -45,6 +45,7 @@ export const BASE_URL = "https://api.scoring.skietbaan.co.za";
 
 //leaderboard types
 export const FETCH_LEADERBOARDFILTER_DATA = "FETCH_LEADERBOARDFILTER_DATA";
+export const EXPORT_BUTTON_TEXT = "EXPORT_BUTTON_TEXT";
 export const FETCH_LEADERBOARDTABLE_DATA = "FETCH_LEADERBOARDTABLE_DATA";
 export const UPDATE_SELECTED_COMPETITION = "UPDATE_SELECTED_COMPETITION";
 export const UPDATE_SELECTED_GROUP = "UPDATE_SELECTED_GROUP";
@@ -86,6 +87,14 @@ export const COMPETITION_DATA_LOADING = "COMPETITION_DATA_LOADING";
 export const USER_LOGS = "USER_LOGS";
 export const USER_LOS = "USER_LOS";
 export const DOCCIE_SENT = "DOCCIE_SENT";
+
+//member types
+export const IS_CLICKED = "IS_CLICKED";
+export const USER_IS_CLICKED = "USER_IS_CLICKED";
+export const MEMBER_IS_CLICKED = "MEMBER_IS_CLICKED";
+export const EXPIRED_IS_CLICKED = "EXPIRED_IS_CLICKED";
+export const EXPORT_CSV = "EXPORT_CSV";
+export const ADD_FILTER_NAME = "ADD_FILTER_NAME";
 
 export const handleErrors = response => {
   if (!response.ok) {

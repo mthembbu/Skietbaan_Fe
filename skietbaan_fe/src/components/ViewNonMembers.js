@@ -4,14 +4,16 @@ import Collapsible from "react-collapsible";
 import { BASE_URL } from "../actions/types.js";
 import arrowUp from "../components/assets/upArrow.png";
 import arrowDown from "../components/assets/downArrow.png";
+import calender from "../components/assets/calender.png";
 import { getCookie } from "../components/cookie.js";
 import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
-import { fetchNumberOfNotification } from "../actions/notificationAction";
+import { fetchNumberOfNotification, exportIsClicked, exportCSV } from "../actions/notificationAction";
 import { pageState } from '../actions/postActions';
 import exportClick from "../components/assets/exportPress.png";
+import deleteButton from '../components/GroupImages/deleteS.png';
 
 class ViewNonMembers extends Component {
   constructor(props) {
@@ -26,6 +28,7 @@ class ViewNonMembers extends Component {
       updateName: "",
       indexNumber: 0,
       dateValue: "",
+      durationDate:"",
       lastSize: 0,
       navbarState: false,
       arrowChange: false,
@@ -38,10 +41,13 @@ class ViewNonMembers extends Component {
       token: getCookie("token"),
       emptyMemberNumber: false,
       dateCheck: false,
+      date2Check:false,
       exportResponse: "",
       dateErrormsg: false,
+      date2Errormsg:false,
       userIndex: 0,
-      done: false
+      done: false,
+      lineState:true
     };
     this.getTimeLeft = this.getTimeLeft.bind(this);
     this.onChangeText = this.onChangeText.bind(this);
@@ -55,7 +61,9 @@ class ViewNonMembers extends Component {
     this.updateDimensions = this.updateDimensions.bind(this);
     this.getBodyHeight = this.getBodyHeight.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleDate2Change = this.handleDate2Change.bind(this);
     this.extractEmails = this.extractEmails.bind(this);
+    this.ExportData = this.ExportData.bind(this);
   }
 
   toggleNavbar() {
@@ -180,16 +188,22 @@ class ViewNonMembers extends Component {
       return text;
     }
   }
+  _onFocus = (e) => {
+    e.currentTarget.type = "date";
+  }
+  _onBlur = (e) => {
+    e.currentTarget.type = "text";
+  }
 
   updateMember(index) {
     if (this.state.membershipIds.indexOf(this.state.membershipsID.toString()) === -1) {
       if (this.state.membershipsID.length != "") {
-        if (this.state.dateCheck === true) {
+        if (this.state.dateCheck === true && this.state.date2Check===true) {
           let RequestObject = {
             username: this.state.array[index].username,
             memberID: this.state.membershipsID,
             MemberStartDate: this.state.dateValue + "T00:00:00",
-            memberExpiryDate: this.getCurrentDate() + "T00:00:00"
+            memberExpiryDate: this.state.durationDate + "T00:00:00"
           };
           fetch(BASE_URL + "/api/Features/Update", {
             method: "Post",
@@ -210,9 +224,9 @@ class ViewNonMembers extends Component {
             .catch(err => {
               /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
             });
-            setTimeout(() => {
-              this.getNonMembers();
-              }, 2000);
+          setTimeout(() => {
+            this.getNonMembers();
+          }, 2000);
         } else {
 
         }
@@ -223,7 +237,7 @@ class ViewNonMembers extends Component {
       /*the membership is already exist */
       this.setState({ emptyMemberNumber: true });
     }
-      this.setState({done:false})
+    this.setState({ done: false })
   }
 
   onChangeText(event) {
@@ -250,13 +264,24 @@ class ViewNonMembers extends Component {
   }
   handleDateChange(event) {
     this.setState({ dateValue: event.target.value });
-    var selectedText = document.getElementById("expdate").value;
+    var selectedText = document.getElementById("date1").value;
     var selectedDate = new Date(selectedText);
     var now = new Date();
     if (selectedDate > now) {
       this.setState({ dateCheck: false, dateErrormsg: true });
     } else {
       this.setState({ dateCheck: true, dateErrormsg: false });
+    }
+  }
+  handleDate2Change(event) {
+    this.setState({ durationDate: event.target.value });
+    var selectedText = document.getElementById("expdate").value;
+    var selectedDate = new Date(selectedText);
+    var now = new Date();
+    if (selectedDate > now) {
+      this.setState({ date2Check: false, date2Errormsg: true });
+    } else {
+      this.setState({ date2Check: true, date2Errormsg: false });
     }
   }
 
@@ -267,38 +292,32 @@ class ViewNonMembers extends Component {
     } else {
       this.state.array[index].selected = !this.state.array[index].selected;
     }
-    this.setState({ membershipsID: "", userIndex: index });
+    this.setState({ membershipsID: "", userIndex: index,durationDate:"",dateValue:""});
     this.forceUpdate();
   };
 
   ExportData = () => {
     let token = getCookie("token");
-    let filter = "users";
-    fetch(
-      BASE_URL +
-      `/api/Features/generateCSV?filter=${filter}&adminToken=${token}`,
-      {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      }
-    )
-      .then(res => res.json())
-      .then(data => this.setState({ exportResponse: data, exportMsg: true }))
-      .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      });
+    const fData = { getFilterName:this.props.filterName, getAdminToken:token };
+    this.props.exportCSV(fData);
+    this.props.exportIsClicked();
   };
 
-  timeout(duration){
+  timeout(duration) {
     setTimeout(() => {
       this.setState({ exportMsg: false });
     }, duration)
   }
 
   render() {
+    const test1 = this.props.userIsClicked === true;
+    const test2 = this.props.memberIsClicked === true;
+    const test3 = this.props.expiredIsClicked === true;
+    const check1 = this.props.userIsClicked === true && this.props.memberIsClicked === true;
+    const check2 = this.props.userIsClicked === true && this.props.expiredIsClicked === true;
+    const check3 = this.props.expiredIsClicked === true && this.props.memberIsClicked === true;
+    const lastCondition = this.props.userIsClicked === true && this.props.memberIsClicked === true && this.props.expiredIsClicked === true;
+
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
@@ -311,7 +330,7 @@ class ViewNonMembers extends Component {
       });
     }
     const postItems = (
-      <div  style={{ height: this.getBodyHeight() }}>
+      <div style={{ height: this.getBodyHeight() }}>
         {this.state.array.length === 0 && this.state.getData === true ? (
           <div className="view-non-error-container">
             <label className="view-non-error-msg">
@@ -349,60 +368,80 @@ class ViewNonMembers extends Component {
                                   {posts.email}
                                 </div>
                               </div>
-
-                              <div className="view-non-members-arrow">
+                              
+                               <div className="view-non-members-arrow">
                                 {posts.selected === true ? (
                                   <img
                                     className="view-non-members-image"
-                                    src={arrowDown}
+                                    src={arrowUp}
                                   />
                                 ) : (
                                     <img
                                       className="view-non-members-image"
-                                      src={arrowUp}
+                                      src={arrowDown}
                                     />
                                   )}
                               </div>
+                              {posts.selected===false?
+                              <div className="bottom-line"/>:null}
                             </div>
+                            
                           }
                         >
-                      
                           <div className="membership-details">
-                          {this.state.done===false?
-                            <div className="membership-container">
-                              <input
-                                type="number"
-                                className="view-non-members-text-boxes"
-                                id="membershipID"
-                                placeholder="Membership Number"
-                                autoComplete="Off"
-                                value={this.state.membershipsID}
-                                onChange={this.handleChange}
-                              />
-                              {this.state.emptyMemberNumber === false ? null : (
-                                <label className="non-member-same-member-number-error">
-                                  Membership number already exists
+                            {this.state.done === false ?
+                              <div className="membership-container">
+                                <input
+                                  type="number"
+                                  className="view-non-members-text-boxes"
+                                  id="membershipID"
+                                  placeholder="Membership Number"
+                                  autoComplete="Off"
+                                  value={this.state.membershipsID}
+                                  onChange={this.handleChange}
+                                />
+                                {this.state.emptyMemberNumber === false ? null : (
+                                  <label className="non-member-same-member-number-error">
+                                    Membership number already exists
                               </label>
-                              )}
-                            </div>:null}
+                                )}
+                              </div> : null}
                             {this.state.done === false ?
                               <div className="date-error-msg-cpntainer">
                                 <input
-                                  type="date"
+                                  onFocus={this._onFocus}
+                                  onBlur={this._onBlur}
                                   className="view-non-members-date-box"
-                                  id="expdate"
+                                  id="date1"
                                   required
                                   data-date-format="yyyy-mm-dd"
+                                  placeholder="Start date of Membership"
                                   value={this.state.datevalue}
                                   onChange={this.handleDateChange}
                                 />
                                 {this.state.dateErrormsg === true ?
                                   <label className="non-member-Date-error-msg">Date selected is invalid</label> : null}
                               </div> : null}
+                              {this.state.done===false?
+                            <div className="date-duration-of-membership">
+                              <input
+                                onFocus={this._onFocus}
+                                onBlur={this._onBlur}
+                                className="duration-calender"
+                                id="expdate"
+                                required
+                                data-date-format="yyyy-mm-dd"
+                                placeholder="Duration of Membership"
+                                value={this.state.durationDate}
+                                onChange={this.handleDate2Change}
+                              />
+                               {this.state.date2Errormsg === true ?
+                                  <label className="non-member-Date-error-msg">Date selected is invalid</label> : null}
+                            </div>:null}
                             {this.state.done === false ?
                               <div>
                                 <button
-                                  className={(this.state.dateValue != "" && this.state.membershipsID != "" && this.state.dateErrormsg === false) ? "view-non-members-confirm" : "view-non-members-confirm-inactive"}
+                                  className={(this.state.dateValue != "" &&this.state.durationDate!="" && this.state.membershipsID != ""&& this.state.date2Errormsg===false && this.state.dateErrormsg === false) ? "view-non-members-confirm" : "view-non-members-confirm-inactive"}
                                   onClick={() => this.updateMember(index)}
                                 >
                                   CONFIRM MEMBERSHIP
@@ -424,10 +463,10 @@ class ViewNonMembers extends Component {
     );
     return (
       <div className="centre-view-member"
-      style={{ height: this.getBodyHeight() }}>
+        style={{ height: this.getBodyHeight() }}>
         <div className="username-search">
           <Row>
-            <Col>
+            {this.props.isClicked === false ? <Col>
               <div className="search">
                 <input
                   autoComplete="off"
@@ -439,17 +478,18 @@ class ViewNonMembers extends Component {
                   onChange={this.onChangeText}
                 />
               </div>
-            </Col>
+            </Col> :
+              <Col>
+                <button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">{this.props.ExportWrittenText.toUpperCase()}</button>
+              </Col>}
             <Col className="export-col-container">
               {" "}
               <div className="export-container">
                 <img
-                  src={Export}
+                  src={this.props.isClicked === false ? Export : deleteButton}
                   className="export-icon"
                   alt="Is a Member"
-                  onClick={e =>
-                    (e.currentTarget.src = exportClick) && this.ExportData()
-                  }
+                  onClick={this.props.exportIsClicked}
                 />
               </div>
             </Col>
@@ -492,7 +532,7 @@ class ViewNonMembers extends Component {
         </div>
         {this.state.exportMsg === false ? (
           <div
-            
+
             className={this.state.getData === false && this.state.exceptionCaught === false
               ? "hidden"
               : "table-search-members"}
@@ -525,7 +565,17 @@ class ViewNonMembers extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+	isClicked: state.notificationOBJ.isClicked,
+	userIsClicked: state.notificationOBJ.userIsClicked,
+	memberIsClicked: state.notificationOBJ.memberIsClicked,
+  expiredIsClicked: state.notificationOBJ.expiredIsClicked,
+  filterName: state.notificationOBJ.filterName,
+  ExportWrittenText: state.notificationOBJ.ExportWrittenText
+  });
+
+
 export default connect(
-  null,
-  { fetchNumberOfNotification, pageState }
+  mapStateToProps,
+  { fetchNumberOfNotification, pageState, exportIsClicked, exportCSV }
 )(ViewNonMembers);
