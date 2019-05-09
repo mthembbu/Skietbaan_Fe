@@ -293,6 +293,8 @@ class ViewMembers extends Component {
                                   alt="Is a Member"
                                 />
                               </div>
+                              {post.selected===false?
+                              <div className="bottom-line"/>:null}
                               <div className="expiry-time-column">
                                 <div
                                   className={
@@ -363,7 +365,8 @@ class ViewMembers extends Component {
                 </div>
               </Col> :
               <Col>
-                <button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">{exportText}</button>
+                <button onClick={e => (e.currentTarget.src = exportClick) && 
+                  this.ExportData()} className="export-button-css">{exportText}</button>
               </Col>}
 
             <Col className="export-col-container">
