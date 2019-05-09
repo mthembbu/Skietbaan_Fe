@@ -29,7 +29,7 @@ const initialState = {
   updatedNotification: {},
   numberOfNotifications: 0,
   loading: null,
-  writtenText:""
+  ExportWrittenText:""
 };
 
 export default function(state = initialState, action) {
@@ -95,7 +95,7 @@ export default function(state = initialState, action) {
     case EXPORT_BUTTON_TEXT:
       return {
         ...state,
-        writtenText: action.payload
+        ExportWrittenText: action.payload
       };
     
     case MEMBER_IS_CLICKED:

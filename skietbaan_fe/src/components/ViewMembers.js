@@ -365,7 +365,7 @@ class ViewMembers extends Component {
                 </div>
               </Col> :
               <Col>
-                <button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">{this.props.writtenText.toUpperCase()}</button>
+                <button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">{this.props.ExportWrittenText.toUpperCase()}</button>
               </Col>}
 
             <Col className="export-col-container">
@@ -453,7 +453,7 @@ const mapStateToProps = (state) => ({
   userIsClicked: state.notificationOBJ.userIsClicked,
   memberIsClicked: state.notificationOBJ.memberIsClicked,
   expiredIsClicked: state.notificationOBJ.expiredIsClicked,
-  writtenText: state.notificationOBJ.writtenText
+  ExportWrittenText: state.notificationOBJ.ExportWrittenText
 });
 
 export default connect(

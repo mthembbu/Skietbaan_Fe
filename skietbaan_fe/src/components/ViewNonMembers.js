@@ -486,7 +486,7 @@ class ViewNonMembers extends Component {
               </div>
             </Col> :
               <Col>
-                <button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">{this.props.writtenText.toUpperCase()}</button>
+                <button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">{this.props.ExportWrittenText.toUpperCase()}</button>
               </Col>}
             <Col className="export-col-container">
               {" "}
@@ -577,7 +577,7 @@ const mapStateToProps = (state) => ({
 	memberIsClicked: state.notificationOBJ.memberIsClicked,
   expiredIsClicked: state.notificationOBJ.expiredIsClicked,
   filterName: state.notificationOBJ.filterName,
-  writtenText: state.notificationOBJ.writtenText
+  ExportWrittenText: state.notificationOBJ.ExportWrittenText
   });
 
 

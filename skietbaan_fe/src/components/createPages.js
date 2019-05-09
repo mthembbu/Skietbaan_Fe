@@ -324,7 +324,6 @@ export class createPages extends Component {
 	};
 
 	render() {
-		console.log(this.props.writtenText)
 		const keyBoardVisible = (
 			<Row className="row justify-content-center">
 				<Col sm={8} className="createpage-bootstrap-col-center-container">
@@ -561,7 +560,7 @@ const mapStateToProps = (state) => ({
 	isClicked: state.notificationOBJ.isClicked,
 	filterTitle: state.notificationOBJ.filterTitle,
 	filterName: state.notificationOBJ.filterName,
-	writtenText: state.notificationOBJ.writtenText
+	ExportWrittenText: state.notificationOBJ.ExportWrittenText
 });
 
 export default connect(mapStateToProps, {
