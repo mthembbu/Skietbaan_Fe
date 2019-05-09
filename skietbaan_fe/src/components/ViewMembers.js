@@ -363,10 +363,8 @@ class ViewMembers extends Component {
                 </div>
               </Col> :
               <Col>
-              <div className="search">
                 <button onClick={e => (e.currentTarget.src = exportClick) && 
                   this.ExportData()} className="export-button-css">{exportText}</button>
-                  </div>
               </Col>}
 
             <Col className="export-col-container">
