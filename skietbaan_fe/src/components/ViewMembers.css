@@ -642,6 +642,6 @@
 	position: relative;
     bottom: -47px;
     width: 94%;
-    z-index: 1;
+    z-index: 0;
     border-bottom: 1px #A0A0A0 solid;
 }
