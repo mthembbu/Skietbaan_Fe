@@ -18,7 +18,7 @@ import whiteBin from './GroupImages/whiteBin.png';
 import blackBin from './GroupImages/blackBin.png';
 import unselected from './GroupImages/unselected-icon.png';
 import selected from './GroupImages/selected-icon.png';
-import { userIsClicked, expiredIsClicked, memberIsClicked, filterName,exportTextName } from '../actions/notificationAction';
+import { userIsClicked, expiredIsClicked, memberIsClicked, filterName,exportTextName,changeExportState } from '../actions/notificationAction';
 export class createPages extends Component {
 	constructor(props) {
 		super(props);
@@ -96,7 +96,9 @@ export class createPages extends Component {
 		this.props.compSelectedPages(1);
 		this.props.pageState(10);
 	}
-
+	componentWillUnmount(){
+		this.setState({secondValueA:'a',secondValueB:'d',secondValueC:'c'})
+	}
 	membersPage() {
 		this.props.exportTextName("EXPORT users");
 		this.setState({ selectedButton: 3, selectedValue: 'A' });
@@ -121,7 +123,6 @@ export class createPages extends Component {
 	}
 
 	viewCompetitions() {
-
 		this.setState({ selectedButtonCreateViewCompetitions: 2 });
 		this.props.compSelectedPages(2);
 
@@ -184,6 +185,7 @@ export class createPages extends Component {
 	componentWillMount() {
 		this.props.binStateFunc(1);
 		this.showHideHeader();
+		this.props.changeExportState(false)
 		if (window.innerWidth < 575 && window.innerHeight < 800) {
 			window.addEventListener("resize", () => {
 				let Navbar = document.querySelector(".navbar-admin");
@@ -565,5 +567,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
 	compSelectedPages, pageState, selectedPage, binStateFunc,
-	userIsClicked, memberIsClicked, expiredIsClicked, filterName,exportTextName
+	userIsClicked, memberIsClicked, expiredIsClicked, filterName,exportTextName,changeExportState
 })(createPages);

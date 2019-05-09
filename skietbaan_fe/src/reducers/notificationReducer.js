@@ -12,7 +12,8 @@ import {
   USER_IS_CLICKED,
   EXPORT_CSV,
   EXPORT_BUTTON_TEXT,
-  ADD_FILTER_NAME
+  ADD_FILTER_NAME,
+  EXPORTSTATE
 } from "../actions/types";
 
 const initialState = {
@@ -75,6 +76,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         doccieSent: action.payload
+      };
+    case EXPORTSTATE:
+      return {
+        ...state,
+        isClicked: action.payload
       };
     
     case IS_CLICKED:

@@ -10,7 +10,7 @@ import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
-import { fetchNumberOfNotification, exportIsClicked, exportCSV } from "../actions/notificationAction";
+import { fetchNumberOfNotification, exportIsClicked, exportCSV,changeExportState } from "../actions/notificationAction";
 import { pageState } from '../actions/postActions';
 import exportClick from "../components/assets/exportPress.png";
 import deleteButton from '../components/GroupImages/deleteS.png';
@@ -90,6 +90,7 @@ class ViewNonMembers extends Component {
   }
   componentWillMount() {
     window.addEventListener("resize", this.updateDimensions);
+    this.props.changeExportState(false);
   }
   componentDidMount() {
     this.updateDimensions();
@@ -577,5 +578,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  { fetchNumberOfNotification, pageState, exportIsClicked, exportCSV }
+  { fetchNumberOfNotification, pageState, exportIsClicked, exportCSV ,changeExportState}
 )(ViewNonMembers);
