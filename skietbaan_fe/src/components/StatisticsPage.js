@@ -173,6 +173,15 @@ class StatisticsPage extends Component {
         }
     }
 
+    // collapseHeight(){
+    //     var numberOfButtons = Object.keys(this.mapCompetitionNameToIndex).length
+    //     if(numberOfButtons > 4){
+    //         return 305;
+    //     }else{
+    //         return numberOfButtons * 46 + 116;
+    //     }
+    // }
+
     setSelectedCompetition(index){
         this.setState({
             selectedCompetition: index
@@ -489,7 +498,9 @@ class StatisticsPage extends Component {
                 this.state.errorOccured ? this.renderError(this.state.apiResponse) : 
                 this.state.isGraphFetchDone && this.state.isParticipantsFetchDone ?
                     <div>
-                        <Collapse isOpened={this.state.collapse} fixedHeight={490}> 
+                        <Collapse isOpened={this.state.collapse} 
+                            fixedHeight={this.state.selectedCompetitionRankToggle === 0 ?
+                                490 : 585}> 
                             <div className="stats-center-content stats-competition-select-rectangle-big">
                                 <Row onClick={this.toggle}>
                                     <Col>
