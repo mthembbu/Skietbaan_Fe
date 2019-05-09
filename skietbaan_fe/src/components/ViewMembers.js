@@ -322,7 +322,6 @@ class ViewMembers extends Component {
                             </div>
                           }
                         >
-                         
                           <div className="view-members-membership-details">
                             CELLPHONE NUMBER:{" "}
                             <b>

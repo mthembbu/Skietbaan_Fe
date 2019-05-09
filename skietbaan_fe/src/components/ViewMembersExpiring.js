@@ -117,9 +117,7 @@ class ViewMembersExpiring extends Component {
 			.then(function (data) {
 				return data;
 			})
-			.then(
-				data =>
-					this.setState({
+			.then(data =>this.setState({
 						array: data,
 						getData: true
 					}),
@@ -365,7 +363,7 @@ class ViewMembersExpiring extends Component {
 															className="username-and-email"
 															onClick={() => this.onChangeArrow(index)}
 														>
-															{post.selected===false?
+															{post.selected===false || post.selected===undefined?
 																<div className="bottom-line" />:null}
 															<div className="view-members-username-email">
 																<b>{post.username}</b>
