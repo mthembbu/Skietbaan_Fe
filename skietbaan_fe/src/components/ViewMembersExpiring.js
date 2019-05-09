@@ -117,9 +117,7 @@ class ViewMembersExpiring extends Component {
 			.then(function (data) {
 				return data;
 			})
-			.then(
-				data =>
-					this.setState({
+			.then(data =>this.setState({
 						array: data,
 						getData: true
 					}),
@@ -174,8 +172,9 @@ class ViewMembersExpiring extends Component {
 						return response.json();
 					})
 					.then(data => {
-						this.setState({ successMgs: true });
+
 						setTimeout(() => {
+							this.setState({ successMgs: true })
 						}, 3000);
 						this.setState({ filterText: "" });
 
@@ -364,12 +363,15 @@ class ViewMembersExpiring extends Component {
 															className="username-and-email"
 															onClick={() => this.onChangeArrow(index)}
 														>
+															{post.selected===false || post.selected===undefined?
+																<div className="bottom-line" />:null}
 															<div className="view-members-username-email">
 																<b>{post.username}</b>
 																<div className="view-non-members-email">
 																	{post.email}
 																</div>
 															</div>
+														
 															<div className="view-exp-members-icon">
 																<img
 																	src={memberIcon}
@@ -388,6 +390,7 @@ class ViewMembersExpiring extends Component {
 																			: "okay"
 																	}
 																>
+
 																	<div>
 																		<b>
 																			{post.memberExpiryDate
@@ -401,10 +404,11 @@ class ViewMembersExpiring extends Component {
 																				.split("-")
 																				.join("/")
 																		) === false ? (
+
 																				<div>
 																					{this.state.timeLeftOnMembership[index]}{" "}
 																					Months
-                                    </div>
+                                  													  </div>
 																			) : (
 																				<div>
 																					{post.advanceExpiryDate != null
@@ -413,11 +417,15 @@ class ViewMembersExpiring extends Component {
 																				</div>
 																			)}
 																	</div>
+
 																</div>
+
 															</div>
+
 														</div>
 													}
 												>
+
 													{this.state.successMgs === false &&
 														post.advanceExpiryDate == null ? (
 															<div className="non-member-renew-date-container">
@@ -434,13 +442,14 @@ class ViewMembersExpiring extends Component {
 														.state.dateErrorMgs === true ? (
 															<label className="non-member-renew-error-msg">
 																Date selected is invalid
-                          </label>
+                         							 </label>
 														) : null}
 													{this.state.AdvanceDateExist === true ? (
 														<label className="non-member-renew-error-msg">
 															User already been renewed in advance
-                          </label>
+                         								 </label>
 													) : null}
+
 													{this.state.successMgs === false &&
 														post.advanceExpiryDate == null ? (
 															<div className="renew-container">
@@ -454,9 +463,11 @@ class ViewMembersExpiring extends Component {
 																	onClick={() => this.updateMember(index)}
 																>
 																	RENEW
-                            </button>
+                          								  </button>
 															</div>
 														) : null}
+
+
 													{this.state.successMgs === true ? (
 														<div className="confirm-button-container">
 															<button className="confriming-btn">
@@ -467,7 +478,12 @@ class ViewMembersExpiring extends Component {
 														<div className="confirm-button-container">
 															<button className="confriming-btn">
 																MEMBERSHIP RENEWED
-                            </button>
+																<label className="advance-date-label">{post.advanceExpiryDate
+																	.substring(0, 10)
+																	.split("-")
+																	.join("/")}</label>
+															</button>
+
 														</div>
 													) : null}
 												</Collapsible>
