@@ -329,12 +329,6 @@ class ViewNonMembers extends Component {
         });
       });
     }
-    let exportText;
-    this.props.filterName.forEach(name => {
-      exportText= "EXPORT "+name
-    });
-
-
     const postItems = (
       <div style={{ height: this.getBodyHeight() }}>
         {this.state.array.length === 0 && this.state.getData === true ? (
