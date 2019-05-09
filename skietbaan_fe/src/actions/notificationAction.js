@@ -13,7 +13,7 @@ import {
   USER_IS_CLICKED,
   EXPORT_CSV,
   ADD_FILTER_NAME,
-  TEXT_S
+  EXPORT_BUTTON_TEXT
 } from "../actions/types";
 import confirmation from "../components/Notification-Img/confirmation.png";
 import renewal from "../components/Notification-Img/renewal.png";
@@ -184,10 +184,10 @@ export const filterName = (fName) => {
   };
 };
 
-export const thenameoftext = (name) => {
+export const exportTextName = (name) => {
   return dispatch => {
     dispatch({
-      type: TEXT_S,
+      type:EXPORT_BUTTON_TEXT,
       payload: name
     });
   };

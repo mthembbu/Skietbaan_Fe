@@ -11,7 +11,7 @@ import {
   MEMBER_IS_CLICKED,
   USER_IS_CLICKED,
   EXPORT_CSV,
-  TEXT_S,
+  EXPORT_BUTTON_TEXT,
   ADD_FILTER_NAME
 } from "../actions/types";
 
@@ -92,7 +92,7 @@ export default function(state = initialState, action) {
         expiredIsClicked: !state.expiredIsClicked
       };
     
-    case TEXT_S:
+    case EXPORT_BUTTON_TEXT:
       return {
         ...state,
         writtenText: action.payload

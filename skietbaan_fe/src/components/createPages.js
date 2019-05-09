@@ -18,7 +18,7 @@ import whiteBin from './GroupImages/whiteBin.png';
 import blackBin from './GroupImages/blackBin.png';
 import unselected from './GroupImages/unselected-icon.png';
 import selected from './GroupImages/selected-icon.png';
-import { userIsClicked, expiredIsClicked, memberIsClicked, filterName,thenameoftext } from '../actions/notificationAction';
+import { userIsClicked, expiredIsClicked, memberIsClicked, filterName,exportTextName } from '../actions/notificationAction';
 export class createPages extends Component {
 	constructor(props) {
 		super(props);
@@ -98,7 +98,7 @@ export class createPages extends Component {
 	}
 
 	membersPage() {
-		this.props.thenameoftext("EXPORT users");
+		this.props.exportTextName("EXPORT users");
 		this.setState({ selectedButton: 3, selectedValue: 'A' });
 	}
 
@@ -202,14 +202,14 @@ export class createPages extends Component {
 			this.setState({secondValueA:'a'});
 
 			 if(this.state.filterNameData.length===1){
-			 	this.props.thenameoftext("EXPORT " +this.state.filterNameData[0].toUpperCase());
+			 	this.props.exportTextName("EXPORT " +this.state.filterNameData[0].toUpperCase());
 			}
 			 else if(this.state.filterNameData.length===2){
 				let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase()
-			 	this.props.thenameoftext(x)
+			 	this.props.exportTextName(x)
 			 }
 			 else{
-				this.props.thenameoftext("EXPORT ALL")
+				this.props.exportTextName("EXPORT ALL")
 			 }
 			
 		} else {
@@ -219,14 +219,14 @@ export class createPages extends Component {
 
 			 if(this.state.filterNameData.length===1){
 				let x = this.state.filterNameData[0] 
-			 	this.props.thenameoftext("EXPORT"+" "+x.toUpperCase());
+			 	this.props.exportTextName("EXPORT"+" "+x.toUpperCase());
 			 }
 			 else if(this.state.filterNameData.length===2){
 			 	let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase();
-			 	this.props.thenameoftext(x)
+			 	this.props.exportTextName(x)
 			 }
 			 else if(this.state.filterNameData.length===0){
-			 	this.props.thenameoftext("UNSELECTED")
+			 	this.props.exportTextName("UNSELECTED")
 			 }
 			
 		}
@@ -240,14 +240,14 @@ export class createPages extends Component {
 			this.setState({secondValueB:'b'});
 
 			 if(this.state.filterNameData.length===1){
-			 	this.props.thenameoftext("EXPORT " +this.state.filterNameData[0].toUpperCase());
+			 	this.props.exportTextName("EXPORT " +this.state.filterNameData[0].toUpperCase());
 			 }
 			 else if(this.state.filterNameData.length===2){
 			 	let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase()
-			 	this.props.thenameoftext(x)
+			 	this.props.exportTextName(x)
 			 }
 			 else{
-			 	this.props.thenameoftext("EXPORT ALL")
+			 	this.props.exportTextName("EXPORT ALL")
 			 }
 		} else {
 			var index = this.state.filterNameData.indexOf("members");
@@ -256,14 +256,14 @@ export class createPages extends Component {
 
 			 if(this.state.filterNameData.length===1){
 			 	let x = "EXPORT "+this.state.filterNameData[0].toUpperCase();
-			 	this.props.thenameoftext(x);
+			 	this.props.exportTextName(x);
 			 }
 			 else if(this.state.filterNameData.length===2){
 			 	let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase();
-			 	this.props.thenameoftext(x)
+			 	this.props.exportTextName(x)
 			 }
 			 else if(this.state.filterNameData.length===0) {
-			 	this.props.thenameoftext("UNSELECTED")
+			 	this.props.exportTextName("UNSELECTED")
 			 }
 			
 		}
@@ -279,14 +279,14 @@ export class createPages extends Component {
 
 			if(this.state.filterNameData.length===1){
 				let x = this.state.filterNameData[0] 
-				this.props.thenameoftext("EXPORT"+" "+x.toUpperCase());
+				this.props.exportTextName("EXPORT"+" "+x.toUpperCase());
 			}
 			else if(this.state.filterNameData.length===2){
 				let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase();
-				this.props.thenameoftext(x)
+				this.props.exportTextName(x)
 			}
 			else{
-				this.props.thenameoftext("EXPORT ALL")
+				this.props.exportTextName("EXPORT ALL")
 			}
 
 		} else {
@@ -296,14 +296,14 @@ export class createPages extends Component {
 
 			if(this.state.filterNameData.length===1){
 				let x = this.state.filterNameData[0] 
-				this.props.thenameoftext("EXPORT"+" "+x.toUpperCase());
+				this.props.exportTextName("EXPORT"+" "+x.toUpperCase());
 			}
 			else if(this.state.filterNameData.length===2){
 				let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase();
-				this.props.thenameoftext(x)
+				this.props.exportTextName(x)
 			}
 			else if(this.state.filterNameData.length===0){
-				this.props.thenameoftext("UNSELECTED")
+				this.props.exportTextName("UNSELECTED")
 			}
 		}
 		this.props.filterName(this.state.filterNameData);
@@ -566,5 +566,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
 	compSelectedPages, pageState, selectedPage, binStateFunc,
-	userIsClicked, memberIsClicked, expiredIsClicked, filterName,thenameoftext
+	userIsClicked, memberIsClicked, expiredIsClicked, filterName,exportTextName
 })(createPages);
