@@ -45,6 +45,7 @@ export const BASE_URL = "https://api.skietbaan.retrotest.co.za";
 
 //leaderboard types
 export const FETCH_LEADERBOARDFILTER_DATA = "FETCH_LEADERBOARDFILTER_DATA";
+export const TEXT_S = "TEXT_S";
 export const FETCH_LEADERBOARDTABLE_DATA = "FETCH_LEADERBOARDTABLE_DATA";
 export const UPDATE_SELECTED_COMPETITION = "UPDATE_SELECTED_COMPETITION";
 export const UPDATE_SELECTED_GROUP = "UPDATE_SELECTED_GROUP";
