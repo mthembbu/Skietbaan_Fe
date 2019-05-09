@@ -513,7 +513,7 @@ class ViewMembersExpiring extends Component {
 							</div>
 						</Col> :
 							<Col>
-								<button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">{exportText}</button>
+								<button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">{this.props.ExportWrittenText.toUpperCase()}</button>
 							</Col>}
 						<Col className="export-col-container">
 							{" "}
@@ -600,7 +600,8 @@ const mapStateToProps = (state) => ({
 	userIsClicked: state.notificationOBJ.userIsClicked,
 	memberIsClicked: state.notificationOBJ.memberIsClicked,
 	expiredIsClicked: state.notificationOBJ.expiredIsClicked,
-	exportAll: state.notificationOBJ.exportAll
+	exportAll: state.notificationOBJ.exportAll,
+	ExportWrittenText: state.notificationOBJ.ExportWrittenText
 });
 
 export default connect(

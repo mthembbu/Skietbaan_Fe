@@ -329,30 +329,11 @@ class ViewNonMembers extends Component {
         });
       });
     }
+    let exportText;
+    this.props.filterName.forEach(name => {
+      exportText= "EXPORT "+name
+    });
 
-    let exportText = "EXPORT USERS";
-    
-    if (test1) {
-      exportText = "EXPORT USERS";
-    } 
-     if (test2) {
-      exportText = "EXPORT MEMBERS";
-    } 
-     if (test3) {
-      exportText = "EXPORT EXPIRED MEMBERS";
-    } 
-     if (check1) {
-      exportText = "EXPORT USERS + MEMBERS";
-    } 
-     if (check2) { 
-      exportText = "EXPORT USERS + EXPIRED MEMBERS";
-    } 
-     if (check3) { 
-      exportText = "EXPORT MEMBERS + EXPIRED MEMBERS";
-    } 
-     if (lastCondition) { 
-      exportText = "EXPORT ALL MEMBERS";
-    }
 
     const postItems = (
       <div style={{ height: this.getBodyHeight() }}>
@@ -505,7 +486,7 @@ class ViewNonMembers extends Component {
               </div>
             </Col> :
               <Col>
-                <button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">{exportText}</button>
+                <button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">{this.props.ExportWrittenText.toUpperCase()}</button>
               </Col>}
             <Col className="export-col-container">
               {" "}
@@ -595,7 +576,8 @@ const mapStateToProps = (state) => ({
 	userIsClicked: state.notificationOBJ.userIsClicked,
 	memberIsClicked: state.notificationOBJ.memberIsClicked,
   expiredIsClicked: state.notificationOBJ.expiredIsClicked,
-  filterName: state.notificationOBJ.filterName
+  filterName: state.notificationOBJ.filterName,
+  ExportWrittenText: state.notificationOBJ.ExportWrittenText
   });
 
 
