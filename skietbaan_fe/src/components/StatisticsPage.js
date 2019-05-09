@@ -173,15 +173,6 @@ class StatisticsPage extends Component {
         }
     }
 
-    // collapseHeight(){
-    //     var numberOfButtons = Object.keys(this.mapCompetitionNameToIndex).length
-    //     if(numberOfButtons > 4){
-    //         return 305;
-    //     }else{
-    //         return numberOfButtons * 46 + 116;
-    //     }
-    // }
-
     setSelectedCompetition(index){
         this.setState({
             selectedCompetition: index
