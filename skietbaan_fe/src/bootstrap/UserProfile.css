@@ -10,6 +10,10 @@
         padding-right: 0px !important;
     }
 
+    .center-medal-icon{
+        left: 0% !important;
+    }
+
     .award-buttons-container{
         margin-right: 10px;
         margin-left: 10px;
@@ -191,6 +195,11 @@
 
 .locked-award-text{
     color: #DE7F7F
+}
+
+.center-medal-icon{
+    position: relative;
+    left: 1%;
 }
 
 .line{
