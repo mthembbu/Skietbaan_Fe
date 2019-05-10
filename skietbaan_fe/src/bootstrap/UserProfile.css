@@ -194,9 +194,8 @@
 }
 
 .line{
-    box-sizing: border-box;
-    width: 86%;
-    border: 0.2px solid #DE7F7F;
+    width: 89%;
+    border-bottom: 2px solid #DE7F7F;
 }
 
 .adjust-top-line{
