@@ -372,6 +372,7 @@ class ViewScores extends Component {
     componentDidMount() {
         this.props.selectedPage(2);
         this.props.checkUserType(this.state.token);
+        if(this.props.isAdmin){
         fetch(BASE_URL + "/api/Competition", {
             method: "GET",
             headers: {
@@ -384,7 +385,22 @@ class ViewScores extends Component {
             .catch(err => {
                 this.setState({ exceptionCaught: true })
             });
-    }
+        }
+        else if(!this.props.isAdmin){
+            fetch(BASE_URL + "/api/Scores/activeCompetitions/" + this.state.token, {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(response => response.json())
+                .then(data => this.setState({ competitionsList: data, getData: true }))
+                .catch(err => {
+                    this.setState({ exceptionCaught: true })
+                });
+            }
+        }
 
     render() {
         let competitionItem = [];
