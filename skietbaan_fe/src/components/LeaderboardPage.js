@@ -235,7 +235,7 @@ class LeaderboardPage extends Component {
       return (
         <div className="member-container">
           <div className="status-icon">
-            <img src={require("../resources/member.png")} prop=""/>
+            <img src={require("../resources/member.png")} alt=""/>
           </div>
           <div className="label">Member</div>
         </div>
@@ -244,7 +244,7 @@ class LeaderboardPage extends Component {
       return (
         <div className="member-container">
           <div className="status-icon">
-            <img src={require("../resources/guest.png")} prop=""/>
+            <img src={require("../resources/guest.png")} alt=""/>
           </div>
           <div className="label">User</div>
         </div>
@@ -411,19 +411,19 @@ class LeaderboardPage extends Component {
                     <div className="member-status-icons">
                       <div className="membership-icon">
                         {post.isMember ? (
-                          <img src={require("../resources/member.png")} prop=""/>
+                          <img src={require("../resources/member.png")} alt=""/>
                         ) : (
-                          <img src={require("../resources/guest.png")} prop=""/>
+                          <img src={require("../resources/guest.png")} alt=""/>
                         )}
                       </div>
                       <div className="dedication-icon">
                         {post.isCompetitiveShooter ? (
                           <img
-                            src={require("../resources/dedicatedShooter.png")} prop=""
+                            src={require("../resources/dedicatedShooter.png")} alt=""
                           />
                         ) : (
                           <img
-                            src={require("../resources/standardShooter.png")} prop=""
+                            src={require("../resources/standardShooter.png")} alt=""
                           />
                         )}
                       </div>
@@ -436,11 +436,11 @@ class LeaderboardPage extends Component {
                         {post.rank > 3 ? (
                           <div className="number">{post.rank}</div>
                         ) : post.rank === 1 ? (
-                          <img src={require("../resources/rank1.png")} prop=""/>
+                          <img src={require("../resources/rank1.png")} alt=""/>
                         ) : post.rank === 2 ? (
-                          <img src={require("../resources/rank2.png")} prop=""/>
+                          <img src={require("../resources/rank2.png")} alt=""/>
                         ) : post.rank === 3 ? (
-                          <img src={require("../resources/rank3.png")} prop=""/>
+                          <img src={require("../resources/rank3.png")} alt=""/>
                         ) : null}
                       </div>
                       <div className="down-arrow">
@@ -489,7 +489,7 @@ class LeaderboardPage extends Component {
                               <div className="up-arrow-icon">
                                 {post.rankStatus === "up" ? (
                                   <img
-                                    src={require("../resources/accuracyUp.png")} prop=""
+                                    src={require("../resources/accuracyUp.png")} alt=""
                                   />
                                 ) : null}
                               </div>
@@ -505,7 +505,7 @@ class LeaderboardPage extends Component {
                               <div className="down-arrow-icon">
                                 {post.rankStatus === "down" ? (
                                   <img
-                                    src={require("../resources/accuracyDown.png")} prop=""
+                                    src={require("../resources/accuracyDown.png")} alt=""
                                   />
                                 ) : null}
                               </div>
@@ -585,7 +585,7 @@ class LeaderboardPage extends Component {
                           style={{ cursor: this.disableFilterButton() }}
                           onClick={this.onMouseClickFilter}
                         >
-                          <img src={require("../resources/filter.png")} prop=""/>
+                          <img src={require("../resources/filter.png")} alt=""/>
                         </MDBBtn>
                       </div>
                     </td>
@@ -831,11 +831,11 @@ class LeaderboardPage extends Component {
                                               this.props.currentUser.memberID ===
                                                 "" ? (
                                                 <img
-                                                  src={require("../resources/guestW.png")} prop=""
+                                                  src={require("../resources/guestW.png")} alt=""
                                                 />
                                               ) : (
                                                 <img
-                                                  src={require("../resources/memberW.png")} prop=""
+                                                  src={require("../resources/memberW.png")} alt=""
                                                 />
                                               )
                                             ) : this.props.userResults !==
@@ -843,11 +843,11 @@ class LeaderboardPage extends Component {
                                               this.props.userResults
                                                 .isMember ? (
                                                 <img
-                                                  src={require("../resources/memberW.png")} prop=""
+                                                  src={require("../resources/memberW.png")} alt=""
                                                 />
                                               ) : (
                                                 <img
-                                                  src={require("../resources/guestW.png")} prop=""
+                                                  src={require("../resources/guestW.png")} alt=""
                                                 />
                                               )
                                             ) : null}
@@ -856,11 +856,11 @@ class LeaderboardPage extends Component {
                                             {this.props.currentUser
                                               .isCompetitiveShooter ? (
                                               <img
-                                                src={require("../resources/dedicatedShooterW.png")} prop=""
+                                                src={require("../resources/dedicatedShooterW.png")} alt=""
                                               />
                                             ) : (
                                               <img
-                                                src={require("../resources/standardShooterW.png")} prop=""
+                                                src={require("../resources/standardShooterW.png")} alt=""
                                               />
                                             )}
                                           </div>
@@ -882,17 +882,17 @@ class LeaderboardPage extends Component {
                                             ) : this.props.userResults.rank ===
                                               1 ? (
                                               <img
-                                                src={require("../resources/rank1.png")} prop=""
+                                                src={require("../resources/rank1.png")} alt=""
                                               />
                                             ) : this.props.userResults.rank ===
                                               2 ? (
                                               <img
-                                                src={require("../resources/rank2.png")} prop=""
+                                                src={require("../resources/rank2.png")} alt=""
                                               />
                                             ) : this.props.userResults.rank ===
                                               3 ? (
                                               <img
-                                                src={require("../resources/rank3.png")} prop=""
+                                                src={require("../resources/rank3.png")} alt=""
                                               />
                                             ) : null}
                                           </div>
@@ -963,7 +963,7 @@ class LeaderboardPage extends Component {
                                                         .userResults
                                                         .rankStatus === "up" ? (
                                                       <img
-                                                        src={require("../resources/accuracyUp.png")} prop=""
+                                                        src={require("../resources/accuracyUp.png")} alt=""
                                                       />
                                                     ) : null}
                                                   </div>
@@ -988,7 +988,7 @@ class LeaderboardPage extends Component {
                                                         .rankStatus ===
                                                       "down" ? (
                                                       <img
-                                                        src={require("../resources/accuracyDown.png")} prop=""
+                                                        src={require("../resources/accuracyDown.png")} alt=""
                                                       />
                                                     ) : null}
                                                   </div>
