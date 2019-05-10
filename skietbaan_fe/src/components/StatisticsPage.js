@@ -190,7 +190,7 @@ class StatisticsPage extends Component {
                              "stats-competition-button-text-active stats-competition-button-text stats-button-style-active" :
                              "stats-competition-button-text stats-competition-button-text stats-button-style-inactive"}
                              onClick={() => this.setSelectedCompetition(index)}>
-                            {element}
+                            {element.toUpperCase()}
                         </button>
                     </Col>
                 </Row>
@@ -214,7 +214,7 @@ class StatisticsPage extends Component {
                              "stats-competition-button-text-active stats-competition-button-text stats-button-style-active" :
                              "stats-competition-button-text stats-competition-button-text stats-button-style-inactive"}
                              onClick={() => this.setSelectedGroup(index)}>
-                            {element}
+                            {element.toUpperCase()}
                         </button>
                     </Col>
                 </Row>
@@ -503,7 +503,7 @@ class StatisticsPage extends Component {
                                             }
                                         </div>
                                         <div className="stats-competition-text stats-inline-text">
-                                            {this.competitions[this.state.selectedCompetition]}
+                                            {this.competitions[this.state.selectedCompetition].toUpperCase()}
                                             <div className="white-down-triangle-img-scale stats-margin-left-7px">
                                                 {this.state.collapse ?
                                                     <img src={require("../resources/awardIcons/white-up-triangle.png")}
@@ -568,7 +568,7 @@ class StatisticsPage extends Component {
                                         }
                                     </div>
                                     <div className="stats-competition-text stats-inline-text">
-                                        {this.competitions[this.state.selectedCompetition]}
+                                        {this.competitions[this.state.selectedCompetition].toUpperCase()}
                                         <div className="white-down-triangle-img-scale stats-margin-left-7px">
                                             <img src={require("../resources/awardIcons/white-down-triangle.png")}
                                                 alt="down-triangle">
