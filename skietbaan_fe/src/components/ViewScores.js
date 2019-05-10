@@ -198,9 +198,6 @@ class ViewScores extends Component {
             amountBeingDeleted += 1;
         }
 
-        if (amountBeingDeleted == 0) {
-        }
-
         this.setState({
             scoresList: temp,
             markedForDeletion: amountBeingDeleted > 0 ? true : false,
@@ -490,12 +487,12 @@ class ViewScores extends Component {
                             <img className={this.state.scoresList[i].pictureURL !== "" ?
                                 "view-scores-photo-admin" : "hidden"}
                                 src={camera} onClick={() => this.showPhoto(i)}
-                                alt="photo-admin">
+                                alt="admin">
                             </img>
                         ) : (
                                 <img className={this.state.scoresList[i].pictureURL !== "" ?
                                     "view-scores-photo" : "hidden"} src={camera} onClick={() => this.showPhoto(i)}
-                                    alt="photo">
+                                    alt="">
                                 </img>
                             )}
                         <div className="range-spacing">
@@ -524,7 +521,7 @@ class ViewScores extends Component {
                             <img className={this.state.cameraClicked === false || this.state.someScoreClicked !== i
                                 ? "hidden" : "image-view background"}
                                 src={this.state.scoresList[i].pictureURL}
-                                alt="image-view">
+                                alt="view">
                             </img>
                         </div>
                     </div>
