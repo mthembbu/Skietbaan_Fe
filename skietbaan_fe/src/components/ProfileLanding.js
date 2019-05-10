@@ -103,11 +103,11 @@ class ProfileLanding extends Component {
                     <label className="profile-title">PROFILE</label>
                   </div>
                   <div className="logout-button-right">
-                    <a onClick={this.logout}>
+                    <div onClick={this.logout}>
                       <div className="logout-button">
                         <label className="logout-text">Logout</label>
                       </div>
-                    </a>
+                    </div>
                   </div>
                 </Col>
               </Row>
@@ -117,7 +117,7 @@ class ProfileLanding extends Component {
                     <div>
                       <button
                         className={
-                          this.props.selectedButton == 1
+                          this.props.selectedButton === 1
                             ? "unstyle-button-active btn-block "
                             : "unstyle-button btn-block "
                         }
@@ -209,7 +209,7 @@ class ProfileLanding extends Component {
                         onClick={this.details}
                       >
                         <div className="details-img-scale">
-                          {this.props.selectedButton == 4 ? (
+                          {this.props.selectedButton === 4 ? (
                             <img
                               src={require("../resources/awardIcons/details-icon.png")} alt="details-icon"
                             />
