@@ -76,6 +76,8 @@ export class createPages extends Component {
 				} else if (this.state.selectedValue === 'C') {
 				}
 				break;
+			default:
+				break;
 		}
 	}
 	noShadowOnMember() {
@@ -169,7 +171,6 @@ export class createPages extends Component {
 
 	showHideHeader() {
 		window.addEventListener("resize", () => {
-			let Navbar = document.querySelector(".create-main-container");
 			if (this.state.height === document.body.clientHeight) {
 				this.setState({
 					toggle: false
@@ -221,7 +222,7 @@ export class createPages extends Component {
 
 			 if(this.state.filterNameData.length===1){
 				let x = this.state.filterNameData[0] 
-			 	this.props.exportTextName("EXPORT"+" "+x.toUpperCase());
+			 	this.props.exportTextName("EXPORT " + x.toUpperCase());
 			 }
 			 else if(this.state.filterNameData.length===2){
 			 	let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase();
@@ -281,7 +282,7 @@ export class createPages extends Component {
 
 			if(this.state.filterNameData.length===1){
 				let x = this.state.filterNameData[0] 
-				this.props.exportTextName("EXPORT"+" "+x.toUpperCase());
+				this.props.exportTextName("EXPORT "+x.toUpperCase());
 			}
 			else if(this.state.filterNameData.length===2){
 				let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase();
@@ -298,7 +299,7 @@ export class createPages extends Component {
 
 			if(this.state.filterNameData.length===1){
 				let x = this.state.filterNameData[0] 
-				this.props.exportTextName("EXPORT"+" "+x.toUpperCase());
+				this.props.exportTextName("EXPORT "+x.toUpperCase());
 			}
 			else if(this.state.filterNameData.length===2){
 				let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase();
@@ -318,8 +319,8 @@ export class createPages extends Component {
 			}
 			this.props.binStateFunc(2);
 		} else {
-			for (var i = 0; i < this.props.compOBJ.length; i++) {
-				this.props.compOBJ[i].highlighted = false;
+			for (var j = 0; j < this.props.compOBJ.length; j++) {
+				this.props.compOBJ[j].highlighted = false;
 			}
 			this.props.binStateFunc(1);
 		}
@@ -346,7 +347,7 @@ export class createPages extends Component {
 
 							{this.state.selectedButton === 1 && this.props.page === 10 ? (
 								<AddGroup />
-							) : this.state.selectedButton === 1 && this.props.page === 0 || this.state.selectedButton === 1 && this.props.page === 1 || this.state.selectedButton === 1 && this.props.page === 2 ? (
+							) : (this.state.selectedButton === 1 && this.props.page === 0) || (this.state.selectedButton === 1 && this.props.page === 1) || (this.state.selectedButton === 1 && this.props.page === 2) ? (
 								<GroupComponent />
 							) : null}
 							{this.state.selectedButton === 2 ? <CompComponent /> : null}
@@ -459,7 +460,6 @@ export class createPages extends Component {
 															value="b"
 															color={'primary'}
 															name="radio-button-demo"
-															aria-label="B"
 														/>
 
 														<label className="member-user-label">USERS</label>
@@ -467,7 +467,6 @@ export class createPages extends Component {
 													<div className="radio-B">
 														<Radio
 															className="b-radio"
-															aria-label="A"
 															checked={this.state.selectedValue === 'B'}
 															value="b"
 															aria-label="B"
@@ -479,10 +478,9 @@ export class createPages extends Component {
 													<div className="radio-C">
 														<Radio
 															className="c-radio"
-															aria-label="A"
 															checked={this.state.selectedValue === 'C'}
 															value="b"
-															aria-label="B"
+															aria-label="C"
 															color={'primary'}
 															onChange={() => this.handleChange('C')}
 														/>
@@ -528,7 +526,7 @@ export class createPages extends Component {
 
 							{this.state.selectedButton === 1 && this.props.page === 10 ? (
 								<AddGroup />
-							) : this.state.selectedButton === 1 && this.props.page === 0 || this.state.selectedButton === 1 && this.props.page === 1 || this.state.selectedButton === 1 && this.props.page === 2 ? (
+							) : (this.state.selectedButton === 1 && this.props.page === 0) || (this.state.selectedButton === 1 && this.props.page === 1) || (this.state.selectedButton === 1 && this.props.page === 2) ? (
 								<GroupComponent />
 							) : null}
 							{this.state.selectedButton === 2 ? <CompComponent /> : null}

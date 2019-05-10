@@ -308,7 +308,7 @@ class UserProfile extends Component {
                 <div className="remove-right-padding">
                     <Row className="fix-buttons-rectangle">
                         <Col>
-                        <a onClick={this.toggle} className="make-cursor-point">
+                        <div onClick={this.toggle} className="make-cursor-point">
                         <div className="buttons-rectangle">
                             <div className="scale-gun-type-img">
                                 {this.getInitialAward().competitionName.includes("Rifle") || 
@@ -333,7 +333,7 @@ class UserProfile extends Component {
                                 </div>
                             </div>
                         </div>
-                        </a>
+                        </div>
                         </Col>
                         {
                             this.state.collapse ? 
