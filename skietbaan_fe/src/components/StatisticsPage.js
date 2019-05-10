@@ -533,7 +533,7 @@ class StatisticsPage extends Component {
                                                     "stats-white-button-active padding-top-5px" :
                                                     "stats-white-button-inactive padding-top-5px"}
                                                     onClick={() => this.setSelectedCompetitionRankingToggle(1)}>
-                                                    <label className={this.state.selectedCompetitionRankToggle == 1 ?
+                                                    <label className={this.state.selectedCompetitionRankToggle === 1 ?
                                                         "competitions-rank-text" : "competitions-rank-text-inactive"}>
                                                         RANKING BY</label>
                                                 </div>
@@ -673,7 +673,7 @@ class StatisticsPage extends Component {
                                                         <div className="stats-inline-flex">
                                                             <div className="red-text font-size-12px font-weight-bold">HIGHEST</div>
                                                             <div className="stats-arrow-up">
-                                                                <img src={require("../resources/awardIcons/graph-up-icon.png")}/>
+                                                                <img src={require("../resources/awardIcons/graph-up-icon.png")} alt="graph-up-icon"/>
                                                             </div>
                                                         </div>
                                                         <div className="font-size-16px red-text font-weight-bold">
