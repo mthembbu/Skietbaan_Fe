@@ -161,7 +161,7 @@ class ViewComp extends Component {
     for (let i = 0; i < val.length; i++) {
       this.state.status.push(val.compOBJ[i].status);
       this.state.requirements.push(val.compOBJ[i].requirements);
-      if (i == this.state.dict.Id) {
+      if (i === this.state.dict.Id) {
         this.state.dict.push(val.compOBJ[i].dict);
       }
     }
@@ -349,7 +349,7 @@ class ViewComp extends Component {
                             >
                               <label
                                 className={
-                                  compVar.status == true
+                                  compVar.status === true
                                     ? "competition-container"
                                     : "inactive-competition-container"
                                 }
@@ -359,7 +359,7 @@ class ViewComp extends Component {
                             </div>
                             <div className="test2">
                               <div className="users-per-comp">
-                                {compVar.status == true ? (
+                                {compVar.status === true ? (
                                   <div>
                                     <div className="icon-spacing">
                                       <img src={group} className="groupIcon" alt=""/>
@@ -380,6 +380,7 @@ class ViewComp extends Component {
                                     <img
                                       className="letter-image"
                                       src={letterhead}
+                                      alt="letter-head"
                                     />
                                   ) : null}
                               </div>
@@ -583,6 +584,7 @@ class ViewComp extends Component {
                                               <img
                                                 className="letter-image"
                                                 src={letterhead}
+                                                alt=""
                                               />
                                             ) : null}
                                         </div>
@@ -672,7 +674,7 @@ class ViewComp extends Component {
             {this.props.load ? displayCompetitions : loader}
           </div>
         </div>
-        {(this.props.binState === 2 && this.state.count != 0) ?
+        {(this.props.binState === 2 && this.state.count !== 0) ?
           <div className="view-group-confirm-panel">
             <button className="view-group-cancel" onClick={() => this.cancel()}>CANCEL</button>
             <button className="view-group-delete-confirm" onClick={() => this.deleteComp()}>{this.state.count === this.props.compOBJ.length ? "DELETE ALL" : "DELETE"}</button>

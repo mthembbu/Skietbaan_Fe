@@ -4,7 +4,6 @@ import Collapsible from "react-collapsible";
 import { BASE_URL } from "../actions/types.js";
 import arrowUp from "../components/assets/upArrow.png";
 import arrowDown from "../components/assets/downArrow.png";
-import calender from "../components/assets/calender.png";
 import { getCookie } from "../components/cookie.js";
 import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
@@ -198,8 +197,8 @@ class ViewNonMembers extends Component {
 
   updateMember(index) {
     if (this.state.membershipIds.indexOf(this.state.membershipsID.toString()) === -1) {
-      if (this.state.membershipsID.length != "") {
-        if (this.state.dateCheck === true && this.state.date2Check===true) {
+      if (this.state.membershipsID.length !== "") {
+        if (this.state.dateCheck === true && this.state.date2Check === true) {
           let RequestObject = {
             username: this.state.array[index].username,
             memberID: this.state.membershipsID,
@@ -367,12 +366,12 @@ class ViewNonMembers extends Component {
                                 {posts.selected === true ? (
                                   <img
                                     className="view-non-members-image"
-                                    src={arrowUp}
+                                    src={arrowUp} alt="arrow-up"
                                   />
                                 ) : (
                                     <img
                                       className="view-non-members-image"
-                                      src={arrowDown}
+                                      src={arrowDown} alt="arrow-down"
                                     />
                                   )}
                               </div>
@@ -435,7 +434,7 @@ class ViewNonMembers extends Component {
                             {this.state.done === false ?
                               <div>
                                 <button
-                                  className={(this.state.dateValue != "" &&this.state.durationDate!="" && this.state.membershipsID != ""&& this.state.date2Errormsg===false && this.state.dateErrormsg === false) ? "view-non-members-confirm" : "view-non-members-confirm-inactive"}
+                                  className={(this.state.dateValue !== "" &&this.state.durationDate !== "" && this.state.membershipsID !== ""&& this.state.date2Errormsg === false && this.state.dateErrormsg === false) ? "view-non-members-confirm" : "view-non-members-confirm-inactive"}
                                   onClick={() => this.updateMember(index)}
                                 >
                                   CONFIRM MEMBERSHIP

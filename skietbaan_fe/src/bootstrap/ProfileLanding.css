@@ -77,6 +77,7 @@
 .button-style-active {
   background-color: #be0000;
   color: white;
+  border: none !important;
 }
 
 .button-style-inactive {

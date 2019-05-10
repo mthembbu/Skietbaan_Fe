@@ -198,9 +198,6 @@ class ViewScores extends Component {
             amountBeingDeleted += 1;
         }
 
-        if (amountBeingDeleted == 0) {
-        }
-
         this.setState({
             scoresList: temp,
             markedForDeletion: amountBeingDeleted > 0 ? true : false,
@@ -489,11 +486,13 @@ class ViewScores extends Component {
                         {this.props.isAdmin === true ? (
                             <img className={this.state.scoresList[i].pictureURL !== "" ?
                                 "view-scores-photo-admin" : "hidden"}
-                                src={camera} onClick={() => this.showPhoto(i)}>
+                                src={camera} onClick={() => this.showPhoto(i)}
+                                alt="admin">
                             </img>
                         ) : (
                                 <img className={this.state.scoresList[i].pictureURL !== "" ?
-                                    "view-scores-photo" : "hidden"} src={camera} onClick={() => this.showPhoto(i)}>
+                                    "view-scores-photo" : "hidden"} src={camera} onClick={() => this.showPhoto(i)}
+                                    alt="">
                                 </img>
                             )}
                         <div className="range-spacing">
@@ -501,7 +500,7 @@ class ViewScores extends Component {
                                 "distance-view-scores-red" : "distance-view-scores"}>
                                 {this.state.scoresList[i].RangeMessage}
                             </div>
-                            <img className="in-range-img" src={this.state.scoresList[i].inRange ? inRange : outRange}>
+                            <img className="in-range-img" src={this.state.scoresList[i].inRange ? inRange : outRange} alt="in-range">
                             </img>
                         </div>
                         <div onClick={() => this.markedForDeletion(i)}
@@ -521,7 +520,8 @@ class ViewScores extends Component {
                             ? "hidden" : "image-container-view-scores"}>
                             <img className={this.state.cameraClicked === false || this.state.someScoreClicked !== i
                                 ? "hidden" : "image-view background"}
-                                src={this.state.scoresList[i].pictureURL}>
+                                src={this.state.scoresList[i].pictureURL}
+                                alt="view">
                             </img>
                         </div>
                     </div>
