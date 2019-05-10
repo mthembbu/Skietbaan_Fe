@@ -372,10 +372,11 @@ class UserProfile extends Component {
                                         "unlocked-award-text font-size-14px" : 
                                         "locked-award-text font-size-14px"}>BRONZE</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
-                                    {this.getInitialAward().accuracyAward.bronze 
-                                    ? this.renderMedalIcon() : 
-                                    this.renderLockedIcon()}
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": 
+                                    this.getInitialAward().accuracyAward.bronze ? "center-medal-icon" : ""}>
+                                        {this.getInitialAward().accuracyAward.bronze 
+                                        ? this.renderMedalIcon() : 
+                                        this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-left-right-paddings remove-paddings-for-desktop">
                                     <label className={this.getInitialAward().accuracyAward.bronze ? 
@@ -391,11 +392,12 @@ class UserProfile extends Component {
                                     "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>SILVER</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
-                                    {this.getInitialAward().accuracyAward.silver 
-                                    ? this.renderMedalIcon() : 
-                                    this.renderLockedIcon()}
-                                </Col>
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": 
+                                    this.getInitialAward().accuracyAward.silver ? "center-medal-icon" : ""}>
+                                        {this.getInitialAward().accuracyAward.silver 
+                                        ? this.renderMedalIcon() : 
+                                        this.renderLockedIcon()}
+                                    </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-left-right-paddings remove-paddings-for-desktop">
                                     <label className={this.getInitialAward().accuracyAward.silver ? 
                                         "reached-award unlocked-award-text":
@@ -409,10 +411,11 @@ class UserProfile extends Component {
                                 <label className={this.getInitialAward().accuracyAward.gold ? "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>GOLD</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
-                                    {this.getInitialAward().accuracyAward.gold 
-                                    ? this.renderMedalIcon() : 
-                                    this.renderLockedIcon()}
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": 
+                                    this.getInitialAward().accuracyAward.gold ? "center-medal-icon" : ""}>
+                                        {this.getInitialAward().accuracyAward.gold 
+                                        ? this.renderMedalIcon() : 
+                                        this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-left-right-paddings remove-paddings-for-desktop">
                                     <label className={this.getInitialAward().accuracyAward.gold ? 
@@ -437,10 +440,11 @@ class UserProfile extends Component {
                                     "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>BRONZE</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
-                                    {this.getInitialAward().totalAward.bronze 
-                                    ? this.renderMedalIcon() : 
-                                    this.renderLockedIcon()}
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": 
+                                    this.getInitialAward().totalAward.bronze ? "center-medal-icon" : ""}>
+                                        {this.getInitialAward().totalAward.bronze 
+                                        ? this.renderMedalIcon() : 
+                                        this.renderLockedIcon()}
                                 </Col>
                                 <Col xs={6}sm={6}md={6} className="remove-left-right-paddings remove-paddings-for-desktop">
                                     <label className={this.getInitialAward().totalAward.bronze ? 
@@ -456,7 +460,8 @@ class UserProfile extends Component {
                                     "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>SILVER</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": 
+                                    this.getInitialAward().totalAward.silver ? "center-medal-icon" : ""}>
                                     {this.getInitialAward().totalAward.silver 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
@@ -475,8 +480,9 @@ class UserProfile extends Component {
                                     "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>GOLD</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
-                                    {this.getInitialAward().totalAward.gold 
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": 
+                                    this.getInitialAward().totalAward.gold ? "center-medal-icon" : ""}>
+                                    {this.getInitialAward().totalAward.gold
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
