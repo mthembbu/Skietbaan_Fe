@@ -46,7 +46,7 @@ class AddGroup extends Component {
 
   onClick() {
     if (this.state.groups.indexOf(this.state.name.toLowerCase()) === -1) {
-      if (this.state.name.length != 0) {
+      if (this.state.name.length !== 0) {
         this.props.getName(this.state.name);
         history.push("/Groups");
       } else {

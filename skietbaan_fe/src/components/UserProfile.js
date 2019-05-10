@@ -143,7 +143,7 @@ class UserProfile extends Component {
             //TODO: find a better solution for removing background image after the animateAccuracyCircle
             //function is called (remove inline styling)
             <div className="lock-img-scale" style={{backgroundImage : "none"}}>
-                <img src={require("../resources/awardIcons/red-locked-icon.png")} alt="lock image"></img>
+                <img src={require("../resources/awardIcons/red-locked-icon.png")} alt="lock"></img>
             </div>
         )
     }
@@ -151,7 +151,7 @@ class UserProfile extends Component {
     renderMedalIcon(){
         return(
             <div className="medal-img">
-                <img src={require("../resources/awardIcons/medal-icon.png")}></img>
+                <img src={require("../resources/awardIcons/medal-icon.png")} alt="medal-icon"></img>
             </div>
         )
     }
@@ -313,8 +313,8 @@ class UserProfile extends Component {
                             <div className="scale-gun-type-img">
                                 {this.getInitialAward().competitionName.includes("Rifle") || 
                                     this.getInitialAward().competitionName.includes("rifle") ?
-                                    <img src={require("../resources/awardIcons/rifle-icon.png")}></img>:
-                                    <img src={require("../resources/awardIcons/pistol-icon.png")}></img>
+                                    <img src={require("../resources/awardIcons/rifle-icon.png")} alt="rifle-icon"></img>:
+                                    <img src={require("../resources/awardIcons/pistol-icon.png")} alt="pistol-icon"></img>
                                 }
                             </div>
                             <div className="competition-name-text red-text">
