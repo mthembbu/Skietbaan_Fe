@@ -11,7 +11,6 @@ import { connect } from "react-redux";
 import { setSelectedLandingPage } from "../actions/profileLandingAction";
 import { selectedPage } from "../actions/postActions";
 import StatisticsPage from "./StatisticsPage";
-import $ from "jquery";
 
 class ProfileLanding extends Component {
   constructor(props) {
