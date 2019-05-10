@@ -144,12 +144,12 @@ class LeaderboardPage extends Component {
       }
 
       if (this.props.selectedGroupName.length > 0) {
-        for (var i = 0; i < this.props.groups.length; i++) {
-          if (this.props.groups[i].label === this.props.selectedGroupName) {
+        for (var j = 0; j < this.props.groups.length; j++) {
+          if (this.props.groups[j].label === this.props.selectedGroupName) {
             this.setState({
-              selectedGroup: i
+              selectedGroup: j
             });
-            group = this.props.groups[i].value;
+            group = this.props.groups[j].value;
           }
         }
       }
@@ -694,7 +694,7 @@ class LeaderboardPage extends Component {
                       onClick={this.onMouseClickFilter}
                     >
                       <MDBBtn tag="a" size="lg" floating gradient="purple">
-                        <img src={require("../resources/upArrow.png")} />
+                        <img src={require("../resources/upArrow.png")} alt="up-arrow"/>
                       </MDBBtn>
                     </div>
                   </div>

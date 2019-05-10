@@ -346,9 +346,9 @@ class UserProfile extends Component {
                             <Collapse isOpened={this.state.collapse} fixedHeight={this.collapseHeight()}>
                                 <div className="push-top-92px">
                                     <div className="award-buttons-container">{this.renderCompetitionList()}</div>
-                                    <a className="scale-arrowupicon-img" onClick={this.toggle}>
+                                    <div className="scale-arrowupicon-img" onClick={this.toggle}>
                                         <img src={require("../resources/awardIcons/arrowUpIcon.png")} alt="lock-icon"></img>
-                                    </a>
+                                    </div>
                                 </div>
                             </Collapse>
                         </Col>
