@@ -68,6 +68,7 @@ export const GROUP_DATA_LOADING = "GROUP_DATA_LOADING";
 export const BINSTATE = "BINSTATE";
 export const SCREEN_SIZE = "SCREEN_SIZE";
 export const ADMINSTAT = "ADMINSTAT";
+export const EXPORTSTATE = "EXPORTSTATE";
 
 //notification types
 export const FETCH_NOTIFICATION = "FETCH_NOTIFICATION";
