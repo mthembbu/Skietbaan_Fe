@@ -8,7 +8,7 @@ import { Row, Col } from "react-bootstrap";
 import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
 import exportClick from "../components/assets/exportPress.png";
-import { fetchNumberOfNotification, exportIsClicked, exportCSV } from "../actions/notificationAction";
+import { fetchNumberOfNotification, exportIsClicked, exportCSV ,filterName} from "../actions/notificationAction";
 import { pageState } from '../actions/postActions';
 import { connect } from "react-redux";
 import deleteButton from '../components/GroupImages/deleteS.png';
@@ -81,6 +81,7 @@ class ViewMembersExpiring extends Component {
 	}
 	componentWillMount() {
 		window.addEventListener("resize", this.updateDimensions);
+		 this.props.filterName(["expiring"]);
 	}
 	componentDidMount() {
 		this.updateDimensions();
@@ -242,9 +243,11 @@ class ViewMembersExpiring extends Component {
 	}
 	ExportData = () => {
 		let token = getCookie("token");
-		const fData = { getFilterName: this.props.filterName, getAdminToken: token };
+		const fData = { getFilterName: this.props.filterNames, getAdminToken: token };
 		this.props.exportCSV(fData);
 		this.props.exportIsClicked();
+		this.setState({exportMsg:true})
+		this.props.filterName(["expiring"]);
 	};
 
 	onChangeArrow = (index) => {
@@ -292,40 +295,6 @@ class ViewMembersExpiring extends Component {
 					this.toggleNavbar2();
 				});
 			});
-		}
-
-		const test1 = this.props.userIsClicked === true;
-		const test2 = this.props.memberIsClicked === true;
-		const test3 = this.props.expiredIsClicked === true;
-
-		const check1 = this.props.userIsClicked === true && this.props.memberIsClicked === true;
-		const check2 = this.props.userIsClicked === true && this.props.expiredIsClicked === true;
-		const check3 = this.props.expiredIsClicked === true && this.props.memberIsClicked === true;
-
-		const lastCondition = this.props.userIsClicked === true && this.props.memberIsClicked === true && this.props.expiredIsClicked === true;
-
-		let exportText = "EXPORT EXPIRED MEMBERS";
-
-		if (test1) {
-			exportText = "EXPORT USERS";
-		}
-		if (test2) {
-			exportText = "EXPORT MEMBERS";
-		}
-		if (test3) {
-			exportText = "EXPORT EXPIRED MEMBERS";
-		}
-		if (check1) {
-			exportText = "EXPORT USERS + MEMBERS";
-		}
-		if (check2) {
-			exportText = "EXPORT USERS + EXPIRED MEMBERS";
-		}
-		if (check3) {
-			exportText = "EXPORT MEMBERS + EXPIRED MEMBERS";
-		}
-		if (lastCondition) {
-			exportText = "EXPORT ALL MEMBERS";
 		}
 
 		const postItems = (
@@ -522,7 +491,7 @@ class ViewMembersExpiring extends Component {
 									src={this.props.isClicked === false ? Export : deleteButton}
 									className="export-icon"
 									alt="Is a Member"
-									onClick={this.props.exportIsClicked}
+									onClick={()=>this.props.exportIsClicked("expiring")}
 								/>
 							</div>
 						</Col>
@@ -573,20 +542,18 @@ class ViewMembersExpiring extends Component {
 					</div>
 				) : (
 						<div>
-							{this.state.exportResponse !== "" && !this.state.exportResponse.startsWith("Could")
+							{this.props.filterData !== "" && !this.props.filterData.startsWith("Could")
 								? this.timeout(2000)
 								: this.timeout(6000)}
 							<div className="exportMsg-container">
 								<label className="exportMsg-responce">
-									{this.state.exportResponse}
+									{this.props.filterData}
 								</label>
-								{this.state.exportResponse !== "" && !this.state.exportResponse.startsWith("Could") ?
 									<img
 										src={RedBullet}
 										className="export-success"
 										alt="Is a Member"
-									/> : null
-								}
+									/> 
 							</div>
 						</div>
 					)}
@@ -601,10 +568,13 @@ const mapStateToProps = (state) => ({
 	memberIsClicked: state.notificationOBJ.memberIsClicked,
 	expiredIsClicked: state.notificationOBJ.expiredIsClicked,
 	exportAll: state.notificationOBJ.exportAll,
-	ExportWrittenText: state.notificationOBJ.ExportWrittenText
+	ExportWrittenText: state.notificationOBJ.ExportWrittenText,
+	filterNames: state.notificationOBJ.filterName,
+	filterData: state.notificationOBJ.filterData,
+	
 });
 
 export default connect(
 	mapStateToProps,
-	{ fetchNumberOfNotification, pageState, exportIsClicked, exportCSV }
+	{ fetchNumberOfNotification, pageState, exportIsClicked, exportCSV,filterName }
 )(ViewMembersExpiring);

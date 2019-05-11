@@ -14,7 +14,7 @@ import {
   EXPORT_CSV,
   ADD_FILTER_NAME,
   EXPORT_BUTTON_TEXT,
-  EXPORTSTATE
+  EXPORTSTATE,
 } from "../actions/types";
 import confirmation from "../components/Notification-Img/confirmation.png";
 import renewal from "../components/Notification-Img/renewal.png";
@@ -123,10 +123,13 @@ export const sent = status => {
   };
 };
 
-export const exportIsClicked = () => {
+export const exportIsClicked = (name) => {
+  let arr =[]
+  arr.push(name);
   return dispatch => {
     dispatch({
-      type: IS_CLICKED
+      type: IS_CLICKED,
+      payload:arr
     });
   };
 };
@@ -164,11 +167,11 @@ export const exportCSV = (filterData) => dispatch => {
     },
     body: JSON.stringify(filterData)
   })
-    .then(response => response.json())
-    .then(data => {
+    .then(res => res.json())
+    .then(response => {
       dispatch({
         type:  EXPORT_CSV,
-        payload: filterData
+        payload: response
       });
     })
     .catch(err => {
