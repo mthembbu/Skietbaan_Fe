@@ -159,7 +159,7 @@ class Documents extends Component {
                 this.state.sendLogsReturn === "Document" ? this.sendLOGS : null
               }
             >
-              Letter of Good Standing
+              LETTER OF GOOD STANDING
             </button>
 
             {this.state.sendLogsReturn !== "Document" ? (
@@ -196,7 +196,7 @@ class Documents extends Component {
                 this.state.sendLosReturn === "Document" ? this.sendLOS : null
               }
             >
-              Letter of Dedicated Status
+              LETTER OF DEDICATED STATUS
             </button>
 
             {this.state.sendLosReturn !== "Document" ? (

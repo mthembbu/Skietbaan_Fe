@@ -8,7 +8,7 @@ import { Row, Col } from "react-bootstrap";
 import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
 import exportClick from "../components/assets/exportPress.png";
-import { fetchNumberOfNotification, exportIsClicked, exportCSV ,filterName} from "../actions/notificationAction";
+import { fetchNumberOfNotification, exportIsClicked, exportCSV ,filterName ,exportTextName} from "../actions/notificationAction";
 import { pageState } from '../actions/postActions';
 import { connect } from "react-redux";
 import deleteButton from '../components/GroupImages/deleteS.png';
@@ -245,8 +245,8 @@ class ViewMembersExpiring extends Component {
 		let token = getCookie("token");
 		const fData = { getFilterName: this.props.filterNames, getAdminToken: token };
 		this.props.exportCSV(fData);
-		this.props.exportIsClicked();
 		this.setState({exportMsg:true})
+		this.props.exportTextName("EXPORT EXPIRING");
 		this.props.filterName(["expiring"]);
 	};
 
@@ -576,5 +576,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
 	mapStateToProps,
-	{ fetchNumberOfNotification, pageState, exportIsClicked, exportCSV,filterName }
+	{ fetchNumberOfNotification, pageState, exportIsClicked, exportCSV,filterName ,exportTextName}
 )(ViewMembersExpiring);

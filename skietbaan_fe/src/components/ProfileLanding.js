@@ -11,7 +11,6 @@ import { connect } from "react-redux";
 import { setSelectedLandingPage } from "../actions/profileLandingAction";
 import { selectedPage } from "../actions/postActions";
 import StatisticsPage from "./StatisticsPage";
-import $ from "jquery";
 
 class ProfileLanding extends Component {
   constructor(props) {
@@ -34,19 +33,19 @@ class ProfileLanding extends Component {
   }
 
   awardPage() {
-    if (this.props.selectedButton != 1) this.props.setSelectedLandingPage(1);
+    if (this.props.selectedButton !== 1) this.props.setSelectedLandingPage(1);
   }
 
   documentsPage() {
-    if (this.props.selectedButton != 2) this.props.setSelectedLandingPage(2);
+    if (this.props.selectedButton !== 2) this.props.setSelectedLandingPage(2);
   }
 
    stats(){
-     if (this.props.selectedButton != 3) this.props.setSelectedLandingPage(3);
+     if (this.props.selectedButton !== 3) this.props.setSelectedLandingPage(3);
    }
 
   details() {
-    if (this.props.selectedButton != 4) this.props.setSelectedLandingPage(4);
+    if (this.props.selectedButton !== 4) this.props.setSelectedLandingPage(4);
   }
 
   logout() {
@@ -91,9 +90,9 @@ class ProfileLanding extends Component {
           >
             <div
               className={
-                this.props.selectedButton == 1
+                this.props.selectedButton === 1
                   ? "fix-top"
-                  : this.props.selectedButton == 2
+                  : this.props.selectedButton === 2
                   ? "fix-top pad-bottom-0px"
                   : "fix-top"
               }
@@ -125,13 +124,13 @@ class ProfileLanding extends Component {
                         onClick={this.awardPage}
                       >
                         <div className="medal-img">
-                          {this.props.selectedButton == 1 ? (
+                          {this.props.selectedButton === 1 ? (
                             <img
-                              src={require("../resources/awardIcons/medal-icon.png")}
+                              src={require("../resources/awardIcons/medal-icon.png")} alt="medal-icon"
                             />
                           ) : (
                             <img
-                              src={require("../resources/awardIcons/grey-medal-icon.png")}
+                              src={require("../resources/awardIcons/grey-medal-icon.png")} alt="grey-metal-icon"
                             />
                           )}
                         </div>
@@ -147,20 +146,20 @@ class ProfileLanding extends Component {
                     <div>
                       <button
                         className={
-                          this.props.selectedButton == 2
+                          this.props.selectedButton === 2
                             ? "unstyle-button-active btn-block "
                             : "unstyle-button btn-block "
                         }
                         onClick={this.documentsPage}
                       >
                         <div className="docs-img-scale">
-                          {this.props.selectedButton == 2 ? (
+                          {this.props.selectedButton === 2 ? (
                             <img
-                              src={require("../resources/awardIcons/docs-icon.png")}
+                              src={require("../resources/awardIcons/docs-icon.png")} alt="docs-icon"
                             />
                           ) : (
                             <img
-                              src={require("../resources/awardIcons/grey-docs-icon.png")}
+                              src={require("../resources/awardIcons/grey-docs-icon.png")} alt="grey-docs-icon"
                             />
                           )}
                         </div>
@@ -174,20 +173,20 @@ class ProfileLanding extends Component {
                     <div>
                       <button
                         className={
-                          this.props.selectedButton == 3
+                          this.props.selectedButton === 3
                             ? "unstyle-button-active btn-block "
                             : "unstyle-button btn-block "
                         }
                         onClick={this.stats}
                       >
                         <div className="stats-img-scale">
-                          {this.props.selectedButton == 3 ? (
+                          {this.props.selectedButton === 3 ? (
                             <img
-                              src={require("../resources/awardIcons/stats-icon.png")}
+                              src={require("../resources/awardIcons/stats-icon.png")} alt="stats-icon"
                             />
                           ) : (
                             <img
-                              src={require("../resources/awardIcons/grey-stats-icon.png")}
+                              src={require("../resources/awardIcons/grey-stats-icon.png")} alt="grey-stats-icon"
                             />
                           )}
                         </div>
@@ -203,7 +202,7 @@ class ProfileLanding extends Component {
                     <div>
                       <button
                         className={
-                          this.props.selectedButton == 4
+                          this.props.selectedButton === 4
                             ? "unstyle-button-active btn-block "
                             : "unstyle-button btn-block "
                         }
@@ -212,11 +211,11 @@ class ProfileLanding extends Component {
                         <div className="details-img-scale">
                           {this.props.selectedButton == 4 ? (
                             <img
-                              src={require("../resources/awardIcons/details-icon.png")}
+                              src={require("../resources/awardIcons/details-icon.png")} alt="details-icon"
                             />
                           ) : (
                             <img
-                              src={require("../resources/awardIcons/grey-details-icon.png")}
+                              src={require("../resources/awardIcons/grey-details-icon.png")} alt="grey-details-icon"
                             />
                           )}
                         </div>
@@ -236,9 +235,9 @@ class ProfileLanding extends Component {
                 <UserProfile />
               : this.props.selectedButton === 2 ? 
                 <Documents />
-               : this.props.selectedButton == 3 && this.props.isAdmin===true ? 
+               : this.props.selectedButton === 3 && this.props.isAdmin === true ? 
                 <AdminUserStat />
-               : this.props.selectedButton == 3 && this.props.isAdmin===false?
+               : this.props.selectedButton === 3 && this.props.isAdmin === false?
                 <StatisticsPage />
                : this.props.selectedButton === 4 ? 
                 <UserDetails />:null}

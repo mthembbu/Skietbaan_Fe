@@ -10,7 +10,7 @@ import RedBullet from "../components/assets/RedBullet.png";
 import exportClick from "../components/assets/exportPress.png";
 import { connect } from "react-redux";
 import { pageState } from '../actions/postActions';
-import { exportIsClicked, exportCSV,filterName } from '../actions/notificationAction';
+import { exportIsClicked, exportCSV,filterName,exportTextName } from '../actions/notificationAction';
 import deleteButton from '../components/GroupImages/deleteS.png';
 
 class ViewMembers extends Component {
@@ -181,6 +181,7 @@ class ViewMembers extends Component {
     const fData = { getFilterName: this.props.filterNames, getAdminToken: token };
     this.setState({exportMsg:true})
     this.props.exportCSV(fData);
+    this.props.exportTextName("EXPORT MEMBERS");
     this.props.filterName(["members"]);
   };
 
@@ -202,7 +203,7 @@ class ViewMembers extends Component {
   }
 
   render() {
-    if (!getCookie("token")) {
+       if (!getCookie("token")) {
       window.location = "/registerPage";
     }
     if (this.state.lastSize === 0) {
@@ -314,7 +315,6 @@ class ViewMembers extends Component {
       </div>
     );
     return (
-      
       <div className="centre-view-member" style={{ height: this.getBodyHeight() }}>
         <div className="username-search">
           <Row>
@@ -427,5 +427,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  { pageState, exportIsClicked, exportCSV,filterName }
+  { pageState, exportIsClicked, exportCSV,filterName,exportTextName }
 )(ViewMembers);

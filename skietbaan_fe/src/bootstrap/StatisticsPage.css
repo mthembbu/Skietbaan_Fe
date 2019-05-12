@@ -31,7 +31,7 @@
 
 .stats-competition-select-rectangle{
     height: 38px;
-    border: 1px solid #BE0000;
+    border: 1px solid transparent;
     border-radius: 18px;
     background: linear-gradient(270deg, #EA251A 0%, #BE0000 100%);
     box-shadow: 0 3px 8px -3px #674D4D;
@@ -67,7 +67,7 @@
 .stats-button-style-active{
     height: 36px;	
     width: 100%;	
-    border: 0.8px solid #555555;	
+    border: 0.8px solid #ffffff;	
     border-radius: 18px;	
     box-shadow: 0 3px 8px -3px #674D4D;
     margin-bottom:  10px;
@@ -78,7 +78,7 @@
 .stats-button-style-inactive {
     height: 36px;	
     width: 100%;	
-    border: 0.8px solid #555555;	
+    border: 0.8px solid #ffffff;	
     border-radius: 18px;	
     box-shadow: 0 3px 8px -3px #674D4D;
     margin-bottom:  10px;
@@ -105,7 +105,7 @@
 }
 
 .padding-top-5px{
-    padding-top: 5px;
+    padding-top: 6px;
 }
 
 .padding-top-1px{

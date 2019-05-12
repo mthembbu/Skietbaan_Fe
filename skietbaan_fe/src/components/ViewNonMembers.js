@@ -4,13 +4,12 @@ import Collapsible from "react-collapsible";
 import { BASE_URL } from "../actions/types.js";
 import arrowUp from "../components/assets/upArrow.png";
 import arrowDown from "../components/assets/downArrow.png";
-import calender from "../components/assets/calender.png";
 import { getCookie } from "../components/cookie.js";
 import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
-import { fetchNumberOfNotification, exportIsClicked, exportCSV, changeExportState,filterName } from "../actions/notificationAction";
+import { fetchNumberOfNotification, exportIsClicked, exportCSV, changeExportState,filterName ,exportTextName} from "../actions/notificationAction";
 import { pageState } from '../actions/postActions';
 import exportClick from "../components/assets/exportPress.png";
 import deleteButton from '../components/GroupImages/deleteS.png';
@@ -304,6 +303,7 @@ class ViewNonMembers extends Component {
     const fData = { getFilterName: this.props.filterNames, getAdminToken: token};
     this.setState({exportMsg:true})
     this.props.exportCSV(fData);
+    this.props.exportTextName("EXPORT USERS");
     this.props.filterName(["users"]);
   };
 
@@ -369,12 +369,12 @@ class ViewNonMembers extends Component {
                                 {posts.selected === true ? (
                                   <img
                                     className="view-non-members-image"
-                                    src={arrowUp}
+                                    src={arrowUp} alt="arrow-up"
                                   />
                                 ) : (
                                     <img
                                       className="view-non-members-image"
-                                      src={arrowDown}
+                                      src={arrowDown} alt="arrow-down"
                                     />
                                   )}
                               </div>
@@ -572,5 +572,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  { fetchNumberOfNotification, pageState, exportIsClicked, exportCSV, changeExportState,filterName }
+  { fetchNumberOfNotification, pageState, exportIsClicked, exportCSV, changeExportState,filterName,exportTextName }
 )(ViewNonMembers);

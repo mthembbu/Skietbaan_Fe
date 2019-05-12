@@ -25,7 +25,7 @@
 	font-size: 14px;
 	border-top-left-radius: 18px;
     border-bottom-left-radius: 18px;
-    padding-top: 3px;
+    padding-top: 4px;
 }
 .user-stat-label-active {
 	display: flex;
@@ -39,8 +39,8 @@
 	border-top-left-radius: 18px;
 	border-bottom-left-radius: 18px;
     height: 31px;
-    padding-top: 3px;
-    
+    padding-top: 4px;
+    border-radius: 20px;
 }
 .admin-stat-as-user {
 	display: flex;
@@ -50,7 +50,7 @@
 	font-size: 14px;
 	border-top-right-radius: 18px;
     border-bottom-right-radius: 18px;
-    padding-top: 3px;
+    padding-top: 4px;
 }
 .admin-stat-as-user-active {
 	display: flex;
@@ -63,14 +63,15 @@
 	border-top-right-radius: 18px;
 	height: 31px;
     border-bottom-right-radius: 18px;
-    padding-top: 3px;
+    padding-top: 4px;
+    border-radius: 20px;
 }
 .admin-first-row-container{
     height: 214px;
     display: flex;
     flex-direction: column;
-    border-top: 1.5px solid #BE0000;
-    border-bottom: 1.5px solid #BE0000;
+    border-top: 1px solid #BE0000;
+    border-bottom: 1px solid #BE0000;
 }
 .total-container-col{
     color: #BE0000;
@@ -102,13 +103,15 @@
     color:#666666;
 }
 .the-container-for-the-text .new-label,.admin-user-label{
-font-size: 20px;
+    font-size: 20px;
+    font-weight: bold;
 }
 .new-label{
-    line-height: 12px;
+    line-height: 15px;
 }
 .this-month-label{
     font-size: 12px;
+    font-weight: 300;
 }
 .percentang-of-the-increase-of-user{
     font-size: 32px;
@@ -116,6 +119,7 @@ font-size: 20px;
     top:-15px;
     justify-content: flex-end;
     color: #666666;
+    font-weight: 300;
 }
 .admin-new-user-container{
     width: 92%;
@@ -125,6 +129,7 @@ font-size: 20px;
     background: #f8f8f8;
     padding-top: 10px;
     color:#666666;
+    border-radius: 10px;
 }
 .total-user-container{
     margin-bottom: 5px;
@@ -134,7 +139,7 @@ font-size: 20px;
     width: 96%;
     align-self: center;
     margin-top: 40px;
-    border-bottom: 1.5px solid #BE0000;
+    border-bottom: 1px solid #BE0000;
 }
 .member-first-row{
     height: 78px;
@@ -161,6 +166,7 @@ font-size: 20px;
     color: #666666;
     padding-top: 10px;
     margin-bottom: 10px;
+    border-radius: 10px;
 }
 .admin-member-first-col{
     display: flex;
@@ -183,13 +189,14 @@ font-size: 20px;
     flex-direction: column;
 }
 .member-new-text{
-    line-height: 12px;
+    line-height: 15px;
 }
 .admin-member-second-col{
     font-size: 32px;
     display: flex;
     justify-content: flex-end;
     color: #666666;
+    font-weight: 300;
 }
 .admin-expiring-first-col{
     display: flex;
