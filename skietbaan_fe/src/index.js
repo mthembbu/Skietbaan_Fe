@@ -25,4 +25,5 @@ ReactDOM.render(
  ,
   document.getElementById("root")
 );
+window.localStorage.clear();
 serviceWorker.register();
