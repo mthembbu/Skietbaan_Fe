@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { Collapse } from "react-collapse";
 import Moment from "react-moment";
 import "moment-timezone";
+import { selectedPage } from "../actions/postActions";
 import deleteIcon from "../components/Notification-Img/trashcan.png";
 import deleteIconChange from "../components/Notification-Img/blacktrashcan.png";
 import whiteSelectAll from "../components/Notification-Img/white-select-all.png";
@@ -21,8 +22,11 @@ import {
 } from "../actions/postActions";
 import {
   updateIsReadProperty,
-  getNotifications
+  getNotifications,
+  fetchNumberOfNotification,
+  sent
 } from "../actions/notificationAction";
+import { checkUserType } from "../actions/adminAction";
 import { Row, Col } from "react-bootstrap";
 
 class notification extends Component {
@@ -48,7 +52,8 @@ class notification extends Component {
       speakerClicked: null,
       announceString: "",
       height: window.innerHeight,
-      width: window.innerWidth
+      width: window.innerWidth,
+      heightOfClient: document.body.clientHeight
     };
     this.onDelete = this.onDelete.bind(this);
     this.changeIcon = this.changeIcon.bind(this);
@@ -58,6 +63,7 @@ class notification extends Component {
     this.disableButton = this.disableButton.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
     this.getBodyHeight = this.getBodyHeight.bind(this);
+    this.documentNotification = this.documentNotification.bind(this);
   }
   onDelete = async () => {
     const deletingArray = [];
@@ -75,12 +81,15 @@ class notification extends Component {
         },
         body: JSON.stringify(deletingArray)
       }).then(() => {
+        this.props.fetchNumberOfNotification(this.state.token);
         this.props.getNotifications(this.state.token);
         this.setState({
-          toggle: false
+          toggle: false,
+          secondToggle: false,
+          count: 0
         });
       });
-    } catch (err) {}
+    } catch (err) { }
   };
 
   onClick_View = (Notification, Message, Id) => {
@@ -90,48 +99,62 @@ class notification extends Component {
     });
     this.props.updateIsReadProperty(Id);
     if (Notification === "Award") {
-      var awardCompetitionName = Message.split(":")[1];
+      var awardCompetitionName = Message.split(":")[1].trim();
       this.props.setSelectedCompetition(awardCompetitionName);
       this.props.setSelectedLandingPage(1);
-      this.props.history.push("/profile");
+      setTimeout(() => {
+        window.location = "/profile";
+      }, 1000);
     } else if (Notification === "Document") {
       this.props.setSelectedLandingPage(2);
-      this.props.history.push("/profile");
-    } else if (Notification === "Confirmation" || Notification === "Expiry") {
-      this.props.history.push("/notify");
-    } else if (Notification === "Renewal") {
+      setTimeout(() => {
+        window.location = "/profile";
+      }, 1000);
+    } else if (
+      Notification === "Confirmation" ||
+      Notification === "Expiry" ||
+      Notification === "Renewal"
+    ) {
+      setTimeout(() => {
+        this.props.history.push("/notify");
+      }, 1000);
     } else if (Notification === "Competition") {
       var competitionName = Message.split(",")[0];
       this.props.updateSelectedCompetition(competitionName);
-      window.location = "/home";
+      setTimeout(() => {
+        window.location = "/home";
+      }, 1000);
     } else if (Notification === "Group") {
       var groupName = Message.split(",")[0];
       this.props.updateSelectedGroup(groupName);
-      window.location = "/home";
+      setTimeout(() => {
+        window.location = "/home";
+      }, 1000);
     } else {
-      window.location = "/notify";
+      this.props.history.push("/notify");
     }
   };
 
   markForDeletion = index => {
     if (this.props.notificationsArray[index].markedForDeletion === true) {
-      this.setState({ marked: false });
+      this.setState({ marked: false, count: 0 });
       this.props.notificationsArray[index].markedForDeletion = false;
     } else if (
       this.props.notificationsArray[index].markedForDeletion === false
     ) {
-      this.setState({ marked: true });
+      this.setState({ marked: true, count: 1 });
       this.props.notificationsArray[index].markedForDeletion = true;
     }
   };
 
   selectAll = () => {
+    this.secondIconChange();
     for (var i = 0; i < this.props.notificationsArray.length; i++) {
-      if (this.props.notificationsArray[i].markedForDeletion === true) {
-        this.setState({ marked: false });
+      if (this.state.secondToggle) {
+        this.setState({ marked: false, count: 0 });
         this.props.notificationsArray[i].markedForDeletion = false;
-      } else if (this.props.notificationsArray[i].markedForDeletion === false) {
-        this.setState({ marked: true });
+      } else {
+        this.setState({ marked: true, count: 1 });
         this.props.notificationsArray[i].markedForDeletion = true;
       }
     }
@@ -147,9 +170,19 @@ class notification extends Component {
       secondToggle: false
     });
   }
+
   componentWillMount() {
-    window.addEventListener("resize", this.updateDimensions);
+    window.addEventListener("resize", () => {
+      this.updateDimensions();
+      let Navbar = document.querySelector(".navbar-admin");
+      if (this.state.heightOfClient === document.body.clientHeight) {
+        Navbar.classList.remove("hidden");
+      } else {
+        Navbar.classList.add("hidden");
+      }
+    });
   }
+
   getBodyHeight() {
     return this.state.height - 56;
   }
@@ -159,11 +192,34 @@ class notification extends Component {
       width: window.innerWidth
     });
   }
+
+  async documentNotification() {
+    fetch(BASE_URL + "/api/Notification/AddNotification?token=" + this.state.token, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state.token)
+    })
+      .then(
+        this.props.sent(true)
+    )
+      .catch(err => {
+      });
+  }
+
   componentDidMount() {
+    this.props.selectedPage(4);
     if (getCookie("token")) {
+      if (this.props.doccieSent === false) {
+        if (this.props.userLOGS === true || this.props.userLOS === true) {
+          this.documentNotification(this.state.token);
+        }
+      }
       this.props.getNotifications(this.state.token);
     }
-    this.checkUserType();
+    this.props.checkUserType(this.state.token);
   }
 
   onChange(event) {
@@ -172,9 +228,25 @@ class notification extends Component {
   }
 
   changeIcon() {
-    this.setState({
-      toggle: !this.state.toggle
-    });
+    if (this.state.toggle === true) {
+      this.setState({ count: 0 });
+      for (var i = 0; i < this.props.notificationsArray.length; i++) {
+        this.props.notificationsArray[i].markedForDeletion = false;
+      }
+    }
+    if (this.props.notificationsArray.length <= 0) {
+      this.setState({
+        toggle: false,
+        adminToggle: false,
+        secondToggle: false
+      });
+    } else if (this.props.notificationsArray.length > 0) {
+      this.setState({
+        toggle: !this.state.toggle,
+        adminToggle: false,
+        secondToggle: false
+      });
+    }
   }
 
   secondIconChange() {
@@ -183,30 +255,14 @@ class notification extends Component {
     });
   }
 
-  checkUserType() {
-    let token = getCookie("token");
-    fetch(BASE_URL + "/api/features/getuserbytoken/" + token, {
-      method: "Get",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          stateCheck: data.admin
-        });
-      })
-      .catch(err => {
-        /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-      });
-  }
-
   speakerClick() {
     this.setState({
-      adminToggle: !this.state.adminToggle
+      adminToggle: !this.state.adminToggle,
+      toggle: false,
+      secondToggle: false,
+      count: 0
     });
+    this.state.toggle = false
     if (this.state.adminToggle === false) {
       this.disableButton();
     }
@@ -232,22 +288,41 @@ class notification extends Component {
       },
       body: JSON.stringify(this.state.announceString)
     })
-      .then(function(response) {})
+      .then(function (response) { })
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
+    document.getElementById("announcementButton").disabled = true;
     setTimeout(() => {
       this.setState({
-        adminToggle: false
+        adminToggle: false,
       });
       window.location = "/notify";
     }, 1000);
+  };
+
+  keyboardHideNav = () => {
+    let Navbar = document.querySelector(".navbar-admin");
+    if (Navbar != null) {
+      if (window.innerWidth < 575 && window.innerHeight < 800) {
+        if (this.props.screenSize === document.body.clientHeight) {
+          if (this.state.count === 0) {
+            Navbar.classList.remove("hidden");
+          } else {
+            Navbar.classList.add("hidden");
+          }
+        } else {
+          Navbar.classList.add("hidden");
+        }
+      }
+    }
   };
 
   render() {
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
+    this.keyboardHideNav();
 
     let headingItems = (
       <div className="page-heading">
@@ -259,16 +334,17 @@ class notification extends Component {
         <div className="notification-icon-spacing">
           <img
             src={
-              this.state.toggle
+              this.state.toggle && !this.state.secondToggle
                 ? whiteSelectAll
                 : this.state.secondToggle
-                ? blackSelectAll
-                : "hidden"
+                  ? blackSelectAll
+                  : "hidden"
             }
             onClick={() => this.selectAll()}
             className="select-all"
             alt=""
           />
+
           <img
             src={this.state.toggle ? deleteIconChange : deleteIcon}
             onClick={() => this.changeIcon()}
@@ -293,16 +369,17 @@ class notification extends Component {
             }
             onClick={() => this.speakerClick()}
             className="admin-notification-images"
+            alt=""
           />
         </div>
         <div className="admin-notification-icon-spacing">
           <img
             src={
-              this.state.toggle
+              this.state.toggle && !this.state.secondToggle
                 ? whiteSelectAll
                 : this.state.secondToggle
-                ? blackSelectAll
-                : "hidden"
+                  ? blackSelectAll
+                  : "hidden"
             }
             onClick={() => this.selectAll()}
             className="admin-select-all"
@@ -322,13 +399,25 @@ class notification extends Component {
       </div>
     );
 
+    const loader = (
+      <div className="loader-formatting">
+        <div className={this.props.loading ? "hidden" : "loader"} />
+        <div
+          className={this.props.loading ? "hidden" : "target-loader-image"}
+        />
+        <div className={this.props.loading ? "hidden" : "loading-message"}>
+          Loading...
+        </div>
+      </div>
+    );
+
     const postItems = (
       <table className="post-items">
         {this.props.notificationsArray.length <= 0 ? (
           <label className="empty">No Notifications Available</label>
         ) : (
-          ""
-        )}
+            ""
+          )}
         {this.props.notificationsArray.map((post, i) => (
           <tr className="tr-class" key={i}>
             <td className="first-column-notify">
@@ -344,8 +433,8 @@ class notification extends Component {
                   post.markedForDeletion && this.state.toggle
                     ? "notifications-selected-text"
                     : post.isRead === true
-                    ? "notifications-text"
-                    : "notifications-unread"
+                      ? "notifications-text"
+                      : "notifications-unread"
                 }
                 onClick={() =>
                   this.onClick_View(
@@ -381,7 +470,7 @@ class notification extends Component {
 
     let markedItems = [];
 
-    this.props.notificationsArray.forEach(function(notifications) {
+    this.props.notificationsArray.forEach(function (notifications) {
       if (notifications.markedForDeletion) {
         markedItems.push(notifications);
       }
@@ -398,7 +487,7 @@ class notification extends Component {
       <table
         className={
           this.props.notificationsArray.some(post => post.markedForDeletion) &&
-          this.state.toggle
+            this.state.toggle
             ? "notifications-modal"
             : "hidden"
         }
@@ -406,18 +495,18 @@ class notification extends Component {
         <tr className="tr-Class">
           <td>
             <button
-              className="notifications-modal-confirm"
-              onClick={this.onDelete}
-            >
-              {modalText}
-            </button>
-          </td>
-          <td>
-            <button
               onClick={() => this.onClick_cancel()}
               className="notifications-modal-cancel"
             >
               CANCEL
+            </button>
+          </td>
+          <td>
+            <button
+              className="notifications-modal-confirm"
+              onClick={this.onDelete}
+            >
+              {modalText}
             </button>
           </td>
         </tr>
@@ -457,23 +546,23 @@ class notification extends Component {
         <Col sm={8} className="createpage-bootstrap-col-center-container">
           <div className="notifications-body-class">
             <div className="styling-for-gun-overlay">
-              {this.state.stateCheck === false ? (
+              {this.props.isAdmin === false ? (
                 <div>{headingItems}</div>
               ) : (
-                <div>{adminHeadingItems}</div>
-              )}
+                  <div>{adminHeadingItems}</div>
+                )}
               {this.state.adminToggle === true ? (
                 <Collapse isOpened={this.state.adminToggle === true}>
                   <div>{writeAnnouncement}</div>
                 </Collapse>
               ) : (
-                <div
-                  className="format-content"
-                  style={{ maxHeight: this.getBodyHeight() + "px" }}
-                >
-                  {postItems}
-                </div>
-              )}
+                  <div
+                    className="format-content"
+                    style={{ maxHeight: this.getBodyHeight() + "px" }}
+                  >
+                    {this.props.loading ? postItems : loader}
+                  </div>
+                )}
               <div>{deleteModal}</div>
             </div>
           </div>
@@ -486,13 +575,20 @@ notification.propTypes = {
   notificationsArray: PropTypes.array.isRequired,
   updateIsReadProperty: PropTypes.func.isRequired,
   updateSelectedCompetition: PropTypes.func.isRequired,
-  updateSelectedGroup: PropTypes.func.isRequired
+  updateSelectedGroup: PropTypes.func.isRequired,
+  checkUserType: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
   notificationsArray: state.notificationOBJ.notificationsArray,
   updatedNotification: state.notificationOBJ.updatedNotification,
   awardsSelectedCompetition: state.awardsReducer.selectedCompetition,
-  selectedButton: state.landingReducer.selectedLandingPage
+  selectedButton: state.landingReducer.selectedLandingPage,
+  loading: state.notificationOBJ.loading,
+  isAdmin: state.adminReducer.isAdmin,
+  screenSize: state.posts.screenSize,
+  userLOGS: state.notificationOBJ.userLOGS,
+  userLOS: state.notificationOBJ.userLOS,
+  doccieSent: state.notificationOBJ.doccieSent
 });
 
 export default connect(
@@ -503,6 +599,10 @@ export default connect(
     updateIsReadProperty,
     getNotifications,
     setSelectedCompetition,
-    setSelectedLandingPage
+    setSelectedLandingPage,
+    selectedPage,
+    checkUserType,
+    fetchNumberOfNotification,
+    sent
   }
 )(notification);

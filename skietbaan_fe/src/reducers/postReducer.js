@@ -14,25 +14,34 @@ import {
   GROUPDICT,
   CHOOSEPAGE,
   ADDMEMBERS,
-  FETCH_GROUPS
+  FETCH_GROUPS,
+  GROUP_DATA_LOADING,
+  BINSTATE,
+  SCREEN_SIZE,
+  ADMINSTAT
 } from "../actions/types";
 
 const initialState = {
+  adminstats:{},
+  loader: null,
   selectedItem: {},
   leaderboardSelectedCompetitionName: [],
   selectedItem: {},
-  groupDict:{},
- upName: "",
-  editGroup:[],
-  groupsList:[],
-  page:"",
-  existing:[],
+  groupDict: {},
+  upName: "",
+  editGroup: [],
+  groupsList: [],
+  page: "",
+  existing: [],
   leaderboardGroups: [],
   leaderboardCompetitions: [],
-  leaderboardUser:{},
-  navSelectedPage:0,
-  leaderboardSelectedCompetitionName:"",
-  leaderboardSelectedGroupName:"",
+  leaderboardUser: {},
+  navSelectedPage: 0,
+  binState: 1,
+  idsForUser: [],
+  memberIds: [],
+  leaderboardSelectedCompetitionName: "",
+  leaderboardSelectedGroupName: "",
   leaderboardTableData: [],
   leaderboardUserData: {
     rank: 0,
@@ -43,12 +52,12 @@ const initialState = {
   },
   groupId: "",
   groupName: "",
+  screenSize: 0
 };
 
 //the function to detect the state change
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
-    
     case FETCH_POSTS:
       return {
         ...state,
@@ -58,13 +67,30 @@ export default function(state = initialState, action) {
     case FETCH_GROUPS:
       return {
         ...state,
-        groupsList: action.payload
+        groupsList: action.payload,
+        loader: true
       };
-  
+    case ADMINSTAT:
+      return {
+        ...state,
+        adminstats: action.payload
+      };
+
+    case GROUP_DATA_LOADING:
+      return {
+        ...state,
+        loader: false
+      };
+
     case GROUPDICT:
       return {
         ...state,
         groupDict: action.payload
+      };
+    case BINSTATE:
+      return {
+        ...state,
+        binState: action.payload
       };
 
     case UPDATE_GROUPNAME:
@@ -76,23 +102,28 @@ export default function(state = initialState, action) {
     case ADDMEMBERS:
       return {
         ...state,
-        existing: action.payload
+        existing: action.payload,
+        memberIds: action.pay,
+        loader: true
       };
+
     case NEWGROUPSTATE:
       return {
         ...state,
         groupsList: action.payload
       };
-
+  
     case EDITGROUPUSERS:
       return {
         ...state,
-        editGroup: action.payload
+        editGroup: action.payload,
+        idsForUser: action.pay,
+        loader: true
       };
     case EMPTY:
       return {
         ...state,
-        editGroup:action.payload
+        editGroup: action.payload
       };
 
     case CREATEGROUP:
@@ -148,7 +179,12 @@ export default function(state = initialState, action) {
         ...state,
         leaderboardSelectedGroupName: action.payload
       };
-      
+    case SCREEN_SIZE:
+      return {
+        ...state,
+        screenSize: action.payload
+      };
+
     default:
       return state;
   }

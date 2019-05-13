@@ -1,6 +1,73 @@
+@media screen and (max-width:576px){
+    .loading-message-profile{
+        bottom: 40%;
+    }
+}
+
+@media screen and (min-width:576px){
+    .remove-paddings-for-desktop{
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .award-buttons-container{
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 585px){
+    .limit-width{
+        max-width: 100% !important;
+    }
+}
+
+@media only screen and (max-width: 404px){
+    .limit-width{
+        max-width: 100% !important;
+    }
+
+    .remove-left-right-paddings{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .total-text-alignement{
+        width: 97px !important;
+    }
+}
+
+.remove-paddings-for-desktop{display: unset;}
+
+.limit-width{
+    max-width: 65%;
+}
+
+.safari-flex{
+    display:-webkit-flex
+}
+
+.remove-left-right-paddings{display: unset;}
+
 .award-container{
     text-align: center;
     font-family: helvetica;
+}
+
+.loading-message-profile{
+    color: #BE0000;
+    bottom: 41%;
+    margin: 0 auto;
+    position: relative;
+    font-size: 14px;
+    font-weight: 300;
+    font-family: helvetica;
+    text-align: center;
+}
+
+.loader-container-profile{
+    margin-top: 115px;
+    height: 120px;
 }
 
 .competition-buttons-container{
@@ -12,7 +79,7 @@
 
 .buttons-rectangle{
     height: 38px;
-    width: 94%;
+    width: 100%;
     border: 1px solid #BE0000;
     border-radius: 18px;
     margin-top: 25px;
@@ -93,9 +160,16 @@
     margin-bottom: 10px;
 }
 
+.top-1px{
+    top: 1px;
+}
+
+.top-60px{
+    top: 60px;
+}
+
 .awards-container-background{
     position: relative;
-    bottom: 26px;
     background-color: #BE0000; 
     border-radius: 18px;
     box-shadow: 3px -4px 12px -9px rgba(0,0,0,0.5);
@@ -157,11 +231,15 @@
 
 .select-competition-font{
     font-size: 16px;
-    padding-bottom: 5px;
+    font-weight: bold;
 }
 
 .font-size-14px{
     font-size: 14px;
+}
+
+.margin-left-19px{
+    margin-left: 19px;
 }
 
 .reached-award{
@@ -175,6 +253,10 @@
 
 .push-bottom-21px{
     margin-bottom: 21px;
+}
+
+.push-top-92px{
+    margin-top: 92px;
 }
 
 .circle{
@@ -233,8 +315,12 @@
     background-color: #F3F4F9;
 }
 
+.awards-container.col-sm-8.col-md-8.col-8{
+    max-width: 100% !important;
+}
+
 .push-bottom-49px{
-    margin-bottom: 49px
+    margin-bottom: 49px;
 }
 
 .push-bottom-13px{
@@ -318,14 +404,59 @@
     margin-right: 5px;
 }
 
-.no-competition{
-    margin-top: 40px;
+.no-competition-border{
+    width: 312px;
+    height: 77px;
+    border: 1px #BE0000 solid;
+    margin-top: 101px;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 22px;
     text-align: center;
-    font-weight: bold;
-    font-size: 19px;
+}
+
+.no-competition-border-big{
+    width: 312px;
+    height: 86px;
+    border: 1px #BE0000 solid;
+    margin-top: 101px;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 9px;
+    padding-top: 14px;
+}
+
+.no-competition{
+    font-size: 16px;
+    font-weight: 300;
+    font-family: helvetica;
     color: #BE0000;
 }
 
-.award-buttons-container{
+.no-competition-big{
+    font-size: 16px;
+    font-weight: 300;
+    font-family: helvetica;
+    color: #BE0000;
+    line-height: 19px;
+}
 
+.fix-buttons-rectangle{
+    padding-bottom: 4px;
+    display: block;
+    position: fixed;
+    margin: auto;
+    width: 100%;
+    z-index: 1;
+    background-color: white;
+}
+
+.award-buttons-container{
+    max-height: 184px;
+    overflow-y: overlay;
+    overflow-x: hidden;
+    padding-top: 7px;
+    margin-bottom: 7px;
 }

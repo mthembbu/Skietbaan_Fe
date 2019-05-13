@@ -1,17 +1,14 @@
-
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import './groups.css';
-import { BASE_URL } from '../actions/types';
-import { withRouter } from 'react-router-dom';
-import marked from './GroupImages/MarkedBox.png';
-import unmarked from './GroupImages/Oval.png';
-import back from './GroupImages/back.png';
-import { AddMemberAction, pageState } from '../actions/postActions';
-import seleteAll from './GroupImages/seleteAll.png';
-import unSelectAll from './GroupImages/unSelectAll.png';
-import { Row, Col } from "react-bootstrap";
-
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import "./groups.css";
+import { BASE_URL } from "../actions/types";
+import { withRouter } from "react-router-dom";
+import marked from "./GroupImages/selectedIcon.png";
+import unmarked from "./GroupImages/Oval.png";
+import back from "./GroupImages/back.png";
+import { AddMemberAction, pageState } from "../actions/postActions";
+import seleteAll from "./GroupImages/seleteAll.png";
+import unSelectAll from "./GroupImages/unSelectAll.png";
 
 class AddMembersGroup extends Component {
   constructor(props) {
@@ -23,33 +20,40 @@ class AddMembersGroup extends Component {
       selected: "",
       count: 0,
       check: "Select all",
-			height: window.innerHeight,
-			width: window.innerWidth
+      height: window.innerHeight,
+      width: window.innerWidth,
+      heightOfClient: document.body.clientHeight
+
     };
     this.toggleHighlight = this.toggleHighlight.bind(this);
     this.onBack = this.onBack.bind(this);
     this.onChange = this.onChange.bind(this);
     this.addUsers = this.addUsers.bind(this);
     this.selectall = this.selectall.bind(this);
-		this.updateDimensions = this.updateDimensions.bind(this);
-		this.getBodyHeight = this.getBodyHeight.bind(this);
+    this.updateDimensions = this.updateDimensions.bind(this);
+    this.getBodyHeight = this.getBodyHeight.bind(this);
+    this.extractEmails = this.extractEmails.bind(this);
   }
   async componentDidMount() {
     this.updateDimensions();
     await this.props.AddMemberAction(this.props.id);
   }
   componentWillMount() {
-		window.addEventListener('resize', this.updateDimensions);
+    window.addEventListener("resize", this.updateDimensions);
   }
   getBodyHeight() {
-		return this.state.height - 240;
+    if (this.state.width < 575) {
+      return this.state.height - 225 + "px";
+    } else {
+      return "63vh";
+    }
   }
   updateDimensions() {
-		this.setState({
-			height: window.innerHeight,
-			width: window.innerWidth
-		});
-	}
+    this.setState({
+      height: window.innerHeight,
+      width: window.innerWidth
+    });
+  }
   onChange(event) {
     this.setState({ filterText: event.target.value });
   }
@@ -81,15 +85,17 @@ class AddMembersGroup extends Component {
       .catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
+    this.setState({ filterText: "" })
     this.props.pageState(1);
   }
 
   toggleHighlight = event => {
-    if (this.props.existing[event].highlighted === true) {
-      this.props.existing[event].highlighted = false;
+    const index = this.props.memberIds.indexOf(event);
+    if (this.props.existing[index].highlighted === true) {
+      this.props.existing[index].highlighted = false;
       this.setState({ count: this.state.count - 1 });
     } else {
-      this.props.existing[event].highlighted = true;
+      this.props.existing[index].highlighted = true;
       this.setState({ count: this.state.count + 1 });
     }
   };
@@ -98,125 +104,229 @@ class AddMembersGroup extends Component {
     this.props.pageState(1);
   }
 
+
+  extractEmails(text) {
+    if (this.state.filterText[0] === "@") {
+      let ser = text.search("@")
+      let word = text.substring(ser, text.length)
+      let ss = word.split(".")
+      return ss[0];
+    }
+    else {
+      return text;
+    }
+  }
+
   cancel = () => {
     for (var i = 0; i < this.props.existing.length; i++) {
       this.props.existing[i].highlighted = false;
     }
     this.setState({ count: 0 });
+    this.setState({ check: "Select all" });
   };
 
   selectall() {
+    let arr = []
+    this.props.existing.filter(post => {
+      return (
+        !this.state.filterText ||
+        post.username
+          .toLowerCase()
+          .startsWith(this.state.filterText.toLowerCase()) ||
+        post.email
+          .toLowerCase()
+          .startsWith(this.state.filterText.toLowerCase()) || (this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
+      );
+    }).map(data => arr.push(data.id))
+
     if (this.state.check === "Select all") {
-      this.setState({ count: this.props.existing.length });
-      for (var i = 0; i < this.props.existing.length; i++) {
-        this.props.existing[i].highlighted = true;
+      this.setState({ count: arr.length });
+      for (var i = 0; i < arr.length; i++) {
+        (this.props.existing[this.props.memberIds.indexOf(arr[i])]).highlighted = true;
       }
       this.setState({ check: "Unselect all" });
     } else {
       this.setState({ count: 0 });
-      for (var i = 0; i < this.props.existing.length; i++) {
-        this.props.existing[i].highlighted = false;
+      for (var j = 0; j < arr.length; j++) {
+        (this.props.existing[this.props.memberIds.indexOf(arr[j])]).highlighted = false;
       }
       this.setState({ check: "Select all" });
     }
   }
+  keyboardHideNav = ()=>{
+    let Navbar = document.querySelector(".navbar-admin");
+    if(Navbar!=null){
+      if (window.innerWidth < 575 && window.innerHeight < 800) {
+        if (this.props.screenSize === document.body.clientHeight) {
+          if(this.state.count === 0){
+            Navbar.classList.remove("hidden");
+          }
+          else{
+            Navbar.classList.add("hidden"); 
+          }          
+        } else {
+          Navbar.classList.add("hidden");
+        }
+      }
+    }
+  }
+
 
   render() {
+    this.keyboardHideNav();
     const postitems = (
-      <div className="check-edit" style={{ height: this.getBodyHeight() + 'px' }}>
-      {this.props.existing.length===0?null:
-        <ul class="list-group" style={{ textAlign: 'left' }}>
-          {this.props.existing
-            .filter((post) => {
-              return (
-                !this.state.filterText ||
-                post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
-                post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
-              );
-            })
-            .map((post, index) => (
-              <li class="listItem" key={post.id}>
-                <img
-                  className="checkbox-delete"
-                  onClick={() => this.toggleHighlight(index)}
-                  src={post.highlighted ? marked : unmarked}
-                  alt=""
-                />
-                <label className={post.highlighted === true ? 'blabe' : 'blabe2'}>
-                  <div className={post.highlighted === true ? 'userName-active' : 'userName'}>
-                    {post.username}
-                  </div>
-                  <div className={post.highlighted === true ? 'emails-active' : 'email'}>
-                    {post.email}
-                  </div>
-                </label>
-              </li>
-            ))}
-        </ul>}
+      <div
+        className="adding-check-edit"
+        style={{ height: this.getBodyHeight() }}
+      >
+        {this.props.existing.length === 0 ? (
+          <div className="edit-no-user-container">
+            <label className="edit-no-user-msg">
+              All users/members have already been added to this group.
+            </label>
+          </div>
+        ) : (
+            <ul class="list-group">
+              {this.props.existing
+                .filter(post => {
+                  return (
+                    !this.state.filterText ||
+                    post.username
+                      .toLowerCase()
+                      .startsWith(this.state.filterText.toLowerCase()) ||
+                    post.email
+                      .toLowerCase()
+                      .startsWith(this.state.filterText.toLowerCase()) ||
+                    (this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
+                  );
+                })
+                .map(post => (
+                  <li
+                    class="listItem"
+                    key={post.id}
+                    onClick={() => this.toggleHighlight(post.id)}
+                  >
+                    <img
+                      className="checkbox-delete"
+                      src={post.highlighted ? marked : unmarked}
+                      alt=""
+                    />
+                    <label
+                      className={
+                        post.highlighted === true ? "add-blabe" : "add-blabe2"
+                      }
+                    >
+                      <div
+                        className={
+                          post.highlighted === true
+                            ? "userName-active"
+                            : "userName"
+                        }
+                      >
+                        {post.username}
+                      </div>
+                      <div
+                        className={
+                          post.highlighted === true ? "emails-active" : "email"
+                        }
+                      >
+                        {post.email}
+                      </div>
+                    </label>
+                  </li>
+                ))}
+            </ul>
+          )}
       </div>
     );
     return (
-      <Row className="row justify-content-center">
-        <Col sm={8} className="createpage-bootstrap-col-center-container">
-          <main className="The-Main">
-            <div className="navBar-containers">
-              <img className="back-image" onClick={this.onBack} src={back} alt="" />
-              <div className="the-nav-bar">
-                <img className="back-image" onClick={this.onBack} src={back} alt="" />
-                <table className="names-table">
-                  <tbody className="nameTbody">
-                    <tr>
-                      <td className="center-labelss">ADD USERS</td>
-                    </tr>
-                    <tr>
-                      <td className="nameOfGroup">{this.props.name.toUpperCase()}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="BNavBars">
-                <div className="inputBox">
-                  <input
-                    className="the-Text"
-                    id="username"
-                    type="text"
-                    onChange={this.onChange}
-                    autoComplete="off"
-                    placeholder="Search"
-                  />
-                </div>
-                <div className="switchAll" onClick={this.selectall}>
-                  <img className="checkbox-delete" src={this.state.count === this.props.existing.length ? seleteAll : unSelectAll} alt="" />
-                </div>
+      <div className="add-The-Main">
+        <div className="navBar-containers">
+          <img className="back-image" onClick={this.onBack} src={back} alt="" />
+          <div className="the-nav-bar">
+            <img
+              className="back-image"
+              onClick={this.onBack}
+              src={back}
+              alt=""
+            />
+            <table className="names-table">
+              <tbody className="nameTbody">
+                <tr>
+                  <td className="center-labelss">ADD USERS</td>
+                </tr>
+                <tr>
+                  <td className="nameOfGroup">
+                    {this.props.name.toUpperCase()}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="BNavBars">
+            <div className="inputBox">
+              <input
+                className="the-Text"
+                id="username"
+                type="text"
+                onChange={this.onChange}
+                autoComplete="off"
+                placeholder="Search"
+              />
+            </div>
+            <div className="switchAll" onClick={this.selectall}>
+              <img
+                className="btn-select-all"
+                src={
+                  this.state.count === this.props.existing.length
+                    ? seleteAll
+                    : unSelectAll
+                }
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          {this.props.loader === true ? (
+            postitems
+          ) : (
+            <div className={this.props.loader ? "hidden" : "loader-formatting"}>
+              <div className={this.props.loader ? "hidden" : "loader"} />
+              <div
+                className={this.props.loader ? "hidden" : "target-loader-image"}
+              />
+              <div className={this.props.loader ? "hidden" : "loading-message"}>
+                Loading...
               </div>
             </div>
-            <div className="scrollbar" data-simplebar data-simplebar-auto-hide="false">
-              {postitems}
-            </div>
-            {this.state.count == 0 ? null : (
-              <div className="bottom-panel">
-                <div className="bpanel">
-                  <button className="confirm-group" onClick={this.addUsers}>
-                    ADD USERS
-							</button>
+          )}
+        </div>
 
-                  <button className="cancel-delete" onClick={() => this.cancel()}>
-                    CANCEL
+        {this.state.count === 0 ? null : (
+          <div className="bottom-panel">
+            <div className="bpanel">
+              <button  className="add-member-cancel-delete" onClick={() => this.cancel()}>
+                 CANCEL
               </button>
-                </div>
-              </div>
-            )}
-          </main>
-        </Col>
-      </Row>
 
+              <button className="add-member-confirm-group" onClick={this.addUsers}>
+              ADD USERS
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     );
   }
 }
 const mapStateToProps = state => ({
   id: state.posts.groupId,
   name: state.posts.groupName,
-  existing: state.posts.existing
+  existing: state.posts.existing,
+  memberIds: state.posts.memberIds,
+  loader: state.posts.loader,
+  screenSize: state.posts.screenSize
 });
 export default withRouter(
   connect(

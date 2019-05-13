@@ -3,6 +3,8 @@ import "../components/Documents.css";
 import { getCookie } from "./cookie.js";
 import { Collapse } from "react-collapse";
 import { BASE_URL, handleErrors } from "../actions/types.js";
+import { connect } from "react-redux";
+import { updateUserLOS, updateUserLOGS } from "../actions/notificationAction"
 
 class Documents extends Component {
   constructor(props) {
@@ -11,41 +13,54 @@ class Documents extends Component {
       sendLogsReturn: "",
       sendLosReturn: "",
       collapseFilterLOGS: false,
-      collapseFilterLOS: false
+      collapseFilterLOS: false,
+      getDataUserLOGS: false,
+      getDataUserLOS: false,
+      exceptionCaught: false
     };
     this.sendLOGS = this.sendLOGS.bind(this);
     this.sendLOS = this.sendLOS.bind(this);
     this._isMounted = false;
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this._isMounted = true;
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
     let token = getCookie("token");
-    fetch(BASE_URL + "/api/Documents/UserLOGS/" + token)
+    await fetch(BASE_URL + "/api/Documents/UserLOGS/" + token)
       .then(handleErrors)
       .then(res => res.json())
       .then(data => {
         if (this._isMounted) {
-          this.setState({ sendLogsReturn: data });
+          this.setState({ sendLogsReturn: data, getDataUserLOGS: true });
+        }
+        if (this.state.getDataUserLOGS && this.props.userLOGS === false) {
+          this.props.updateUserLOGS(true);
+        } else {
+          this.props.updateUserLOGS(false);
         }
       })
       .catch(err => {
-        return Promise.reject();
+        this.setState({ exceptionCaught: true })
       });
 
-    fetch(BASE_URL + "/api/Documents/UserLOS/" + token)
+    await fetch(BASE_URL + "/api/Documents/UserLOS/" + token)
       .then(handleErrors)
       .then(res => res.json())
       .then(data => {
         if (this._isMounted) {
-          this.setState({ sendLosReturn: data });
+          this.setState({ sendLosReturn: data, getDataUserLOS: true });
+        }
+        if (this.state.getDataUserLOS && this.props.userLOS === false) {
+          this.props.updateUserLOS(true);
+        } else {
+          this.props.updateUserLOS(false);
         }
       })
       .catch(err => {
-        return Promise.reject();
+        this.setState({ exceptionCaught: true })
       });
   }
 
@@ -89,7 +104,6 @@ class Documents extends Component {
       .catch(err => {
         return Promise.reject();
       });
-
     if (this.state.collapseFilterLOS) {
       this.setState({
         collapseFilterLOS: false
@@ -110,11 +124,26 @@ class Documents extends Component {
       window.location = "/registerPage";
     }
     return (
-      <div className="documents_background ">
-        <div className="documents-center">
+      <div className="documents-background ">
+        <div className={(this.state.getDataUserLOGS && this.state.getDataUserLOS) === false
+          && this.state.exceptionCaught === false
+          ? "loader-container-documents" : "hidden"}>
+          <div className={(this.state.getDataUserLOGS && this.state.getDataUserLOS) === false
+            && this.state.exceptionCaught === false
+            ? "loader" : "hidden"}>
+          </div>
+          <div className={(this.state.getDataUserLOGS && this.state.getDataUserLOS) === false
+            && this.state.exceptionCaught === false
+            ? "target-loader-image" : "hidden"}>
+          </div>
+          <div className={(this.state.getDataUserLOGS && this.state.getDataUserLOS) === false
+            && this.state.exceptionCaught === false
+            ? "loading-message-profile" : "hidden"}>Loading...</div>
+        </div>
+        <div className={this.state.getDataUserLOGS && this.state.getDataUserLOS ? "documents-center" : "hidden"}>
           <div className="label-select-document">
             {this.state.sendLogsReturn === "Document" &&
-            this.state.sendLosReturn === "Document"
+              this.state.sendLosReturn === "Document"
               ? "Select Document"
               : "You've got some shooting to do!"}
           </div>
@@ -131,36 +160,30 @@ class Documents extends Component {
               }
             >
               Letter of Good Standing
-              {this.state.sendLogsReturn !== "Document" ? (
-                <img
-                  className="document-image-icon"
-                  src={require("../resources/noDoc.png")}
-                  alt=""
-                />
-              ) : null}
             </button>
 
-            <div className="document-requirements3">
-              {this.state.sendLogsReturn !== "Document" ? (
+            {this.state.sendLogsReturn !== "Document" ? (
+              <div className="document-requirements3">
                 <div>
-                  <b>Letter of Good Standing:</b>
-                  <p>
-                    requires you to pay your membership and participate in
-                    atleast one competition
-                  </p>
+                  <b>Letter of Good Standing: </b>
+                  requires you to pay your membership and participate in atleast
+                  one competition
                 </div>
-              ) : null}
-            </div>
+              </div>
+            ) : (
+                <div />
+              )}
             <Collapse isOpened={this.state.collapseFilterLOGS}>
               <div className="documents-collapse">
                 Document Sent via email
                 <img
                   className="document-image-icon"
-                  src={require("../resources/sendDoc.png")}
+                  src={require("../components/assets/bulletImage.png")}
                   alt=""
                 />
               </div>
             </Collapse>
+            <hr className="documents-div-line" />
           </div>
           <div className="button-upload-document-2">
             <button
@@ -173,31 +196,24 @@ class Documents extends Component {
                 this.state.sendLosReturn === "Document" ? this.sendLOS : null
               }
             >
-              Letter of Status{" "}
-              {this.state.sendLosReturn !== "Document" ? (
-                <img
-                  className="document-image-icon"
-                  src={require("../resources/noDoc.png")}
-                  alt=""
-                />
-              ) : null}
+              Letter of Dedicated Status
             </button>
 
-            <div className="document-requirements3">
-              {this.state.sendLosReturn !== "Document" ? (
+            {this.state.sendLosReturn !== "Document" ? (
+              <div className="document-requirements3">
                 <div>
-                  <b>Letter of Status:</b>
-                  <p>{this.state.sendLosReturn}</p>
+                  <b>Letter of Status: </b>
+                  {this.state.sendLosReturn}
                 </div>
-              ) : null}
-            </div>
+              </div>
+            ) : null}
 
             <Collapse isOpened={this.state.collapseFilterLOS}>
               <div className="documents-collapse">
                 Document Sent via email
                 <img
                   className="document-image-icon"
-                  src={require("../resources/sendDoc.png")}
+                  src={require("../components/assets/bulletImage.png")}
                   alt=""
                 />
               </div>
@@ -209,4 +225,9 @@ class Documents extends Component {
   }
 }
 
-export default Documents;
+const mapStateToProps = state => ({
+  userLOGS: state.notificationOBJ.userLOGS,
+  userLOS: state.notificationOBJ.userLOS
+});
+
+export default connect(mapStateToProps, { updateUserLOGS, updateUserLOS })(Documents);

@@ -1,11 +1,17 @@
-import React, { Component } from 'react';
-import '../components/ViewMembers.css';
-import Collapsible from 'react-collapsible';
-import { BASE_URL } from '../actions/types.js';
-import memberIcon from '../components/assets/membership-icon.png';
-import { getCookie } from '../components/cookie.js';
-import Radio from '@material-ui/core/Radio';
-import { Row, Col } from 'react-bootstrap';
+import React, { Component } from "react";
+import "../components/ViewMembers.css";
+import Collapsible from "react-collapsible";
+import { BASE_URL } from "../actions/types.js";
+import memberIcon from "../components/assets/greyMembershipIcon.png";
+import { getCookie } from "../components/cookie.js";
+import { Row, Col } from "react-bootstrap";
+import Export from "../components/assets/Export.png";
+import RedBullet from "../components/assets/RedBullet.png";
+import exportClick from "../components/assets/exportPress.png";
+import { fetchNumberOfNotification, exportIsClicked, exportCSV } from "../actions/notificationAction";
+import { pageState } from '../actions/postActions';
+import { connect } from "react-redux";
+import deleteButton from '../components/GroupImages/deleteS.png';
 
 class ViewMembersExpiring extends Component {
 	constructor(props) {
@@ -15,17 +21,25 @@ class ViewMembersExpiring extends Component {
 			isOpened: false,
 			height: 100,
 			timeLeftOnMembership: [],
-			filterText: '',
+			filterText: "",
 			selectedValue: false,
-			dateValue: '',
+			dateValue: "",
 			lastSize: 0,
 			navbarState: false,
 			height: window.innerHeight,
-			width: window.innerWidth
+			width: window.innerWidth,
+			getData: false,
+			exportMsg: false,
+			exceptionCaught: false,
+			dateCheck: false,
+			exportResponse: "",
+			dateErrorMgs: false,
+			successMgs: false,
+			AdvanceDateExist: false,
+			userIndex: 0
 		};
 		this.getExpiringMembers = this.getExpiringMembers.bind(this);
 		this.getTimeLeft = this.getTimeLeft.bind(this);
-		this.onChangeText = this.onChangeText.bind(this);
 		this.status = this.status.bind(this);
 		this.handleRadioChange = this.handleRadioChange.bind(this);
 		this.handleDateChange = this.handleDateChange.bind(this);
@@ -35,37 +49,46 @@ class ViewMembersExpiring extends Component {
 		this.toggleNavbar2 = this.toggleNavbar2.bind(this);
 		this.updateDimensions = this.updateDimensions.bind(this);
 		this.getBodyHeight = this.getBodyHeight.bind(this);
+		this.expiringDateCheck = this.expiringDateCheck.bind(this);
+		this.extractEmails = this.extractEmails.bind(this);
+		this.onChangeText = this.onChangeText.bind(this);
 	}
 
 	toggleNavbar() {
 		this.setState({
 			navbarState: !this.state.navbarState
 		});
-		var navbar = document.querySelector('.navbar-admin');
-		if (navbar.classList.contains('hidden')) {
-			navbar.classList.remove('hidden');
+		var navbar = document.querySelector(".navbar-admin");
+		if (navbar.classList.contains("hidden")) {
+			navbar.classList.remove("hidden");
 		} else {
-			navbar.classList.add('hidden');
+			navbar.classList.add("hidden");
 		}
+	}
+	onChangeText(event) {
+		this.setState({ filterText: event.target.value });
 	}
 
 	toggleNavbar2() {
-		var navbar = document.querySelector('.navbar-admin');
+		var navbar = document.querySelector(".navbar-admin");
 		if (this.state.lastSize > document.body.clientHeight) {
-			navbar.setAttribute('hidden', 'true');
+			navbar.setAttribute("hidden", "true");
 			this.toggleNavbar();
 		} else {
-			navbar.removeAttribute('hidden');
+			navbar.removeAttribute("hidden");
 			this.toggleNavbar();
 		}
 	}
 	componentWillMount() {
-		window.addEventListener('resize', this.updateDimensions);
+		window.addEventListener("resize", this.updateDimensions);
 	}
 	componentDidMount() {
 		this.updateDimensions();
 		this.getExpiringMembers();
 		this.getTimeLeft();
+	}
+	componentWillUnmount() {
+		this.props.pageState(10);
 	}
 	updateDimensions() {
 		this.setState({
@@ -74,89 +97,131 @@ class ViewMembersExpiring extends Component {
 		});
 	}
 	getBodyHeight() {
-		return this.state.height - 238;
+		if (this.state.width < 575) {
+			return this.state.height - (240 - 184) - 188 + "px";
+		} else {
+			return "50vh";
+		}
 	}
 	getExpiringMembers() {
-		fetch(BASE_URL + '/api/Features/SearchExpiringMember', {
-			method: 'Get',
+		fetch(BASE_URL + "/api/Features/SearchExpiringMember", {
+			method: "Get",
 			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
+				Accept: "application/json",
+				"Content-Type": "application/json"
 			}
 		})
-			.then(function(response) {
+			.then(function (response) {
 				return response.json();
 			})
-			.then(function(data) {
+			.then(function (data) {
 				return data;
 			})
-			.then((data) =>
-				this.setState({
-					array: data
-				})
+			.then(data =>this.setState({
+						array: data,
+						getData: true
+					}),
+				this.props.fetchNumberOfNotification(this.state.token)
 			)
-			.catch((err) => {
-				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+			.catch(err => {
+				this.setState({ exceptionCaught: true });
 			});
 	}
 
 	getTimeLeft() {
-		fetch(BASE_URL + '/api/Features/SearchExpiringMemberTimeLeft', {
-			method: 'Get',
+		fetch(BASE_URL + "/api/Features/SearchExpiringMemberTimeLeft", {
+			method: "Get",
 			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
+				Accept: "application/json",
+				"Content-Type": "application/json"
 			}
 		})
-			.then(function(response) {
+			.then(function (response) {
 				return response.json();
 			})
-			.then(function(data) {
+			.then(function (data) {
 				return data;
 			})
-			.then((data) =>
+			.then(data =>
 				this.setState({
 					timeLeftOnMembership: data
 				})
 			)
-			.catch((err) => {
+			.catch(err => {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
 			});
 	}
 
 	updateMember(index) {
-		let RequestObject = {
-			username: this.state.array[index].username,
-			memberExpiryDate: this.getCurrentDate() + 'T00:00:00'
-		};
-		fetch(BASE_URL + '/api/Features/RenewMembership', {
-			method: 'Post',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(RequestObject)
-		})
-			.then(function(response) {
-				return response.json();
-			})
-			.then((data) => {
-				this.getExpiringMembers();
-				this.setState({ filterText: '' });
-			})
-			.catch((err) => {
-				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-			});
-	}
+		if (this.state.dateCheck === true) {
+			if (this.state.array[index].advanceExpiryDate === null) {
+				let RequestObject = {
+					username: this.state.array[index].username,
+					EntryDate: this.getCurrentDate() + "T00:00:00",
+					memberExpiryDate: this.state.dateValue + "T00:00:00"
+				};
+				fetch(BASE_URL + "/api/Features/RenewMembership", {
+					method: "Post",
+					headers: {
+						Accept: "application/json",
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(RequestObject)
+				})
+					.then(function (response) {
+						return response.json();
+					})
+					.then(data => {
 
-	onChangeText(event) {
-		this.setState({ filterText: event.target.value });
+						setTimeout(() => {
+							this.setState({ successMgs: true })
+						}, 3000);
+						this.setState({ filterText: "" });
+
+					})
+					.catch(err => {
+						/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+					});
+			} else {
+				this.setState({ AdvanceDateExist: true });
+				this.setState({ dateErrorMgs: false });
+			}
+		} else {
+			if (this.state.array[index].advanceExpiryDate != null) {
+				this.setState({ dateErrorMgs: false });
+			} else {
+				this.setState({ dateErrorMgs: true });
+			}
+		}
 	}
 
 	handleDateChange(event) {
+		this.setState({ dateValue: "" });
 		this.setState({ dateValue: event.target.value });
+		var selectedDate = new Date(event.target.value);
+		var now = new Date();
+		if (selectedDate > now) {
+			this.setState({ dateCheck: true, dateErrorMgs: false });
+		} else if (
+			now.getFullYear() === selectedDate.getFullYear() &&
+			now.getDate() === selectedDate.getDate() &&
+			now.getMonth() === selectedDate.getMonth()
+		) {
+			this.setState({ dateCheck: true, dateErrorMgs: false });
+		} else {
+			this.setState({ dateCheck: false, dateErrorMgs: true });
+		}
 	}
 
+	expiringDateCheck(event) {
+		var now = new Date();
+		var selectedDate = new Date(event);
+		if (now > selectedDate) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	status(timeLeft) {
 		if (timeLeft < 2 || timeLeft === 2) {
 			return true;
@@ -171,112 +236,375 @@ class ViewMembersExpiring extends Component {
 
 	getCurrentDate() {
 		let curr = new Date();
-		curr.setDate(curr.getDate() + 365);
+		curr.setDate(curr.getDate());
 		let date = curr.toISOString().substr(0, 10);
 		return date;
 	}
+	ExportData = () => {
+		let token = getCookie("token");
+		const fData = { getFilterName: this.props.filterName, getAdminToken: token };
+		this.props.exportCSV(fData);
+		this.props.exportIsClicked();
+	};
+
+	onChangeArrow = (index) => {
+		if (index !== this.state.userIndex) {
+			this.state.array[this.state.userIndex].selected = false;
+			this.state.array[index].selected = true;
+		} else {
+			this.state.array[index].selected = !this.state.array[index].selected;
+		}
+		this.setState({
+			dateValue: "",
+			AdvanceDateExist: false,
+			dateErrorMgs: false,
+			successMgs: false,
+			userIndex: index
+		});
+		this.forceUpdate();
+	};
+
+	extractEmails(text) {
+		if (this.state.filterText[0] === "@") {
+			let ser = text.search("@");
+			let word = text.substring(ser, text.length);
+			let ss = word.split(".");
+			return ss[0];
+		} else {
+			return text;
+		}
+	}
+
+	timeout(duration) {
+		setTimeout(() => {
+			this.setState({ exportMsg: false });
+		}, duration)
+	}
 
 	render() {
-		if (!getCookie('token')) {
-			window.location = '/registerPage';
+		if (!getCookie("token")) {
+			window.location = "/registerPage";
 		}
 		if (this.state.lastSize === 0) {
 			this.state.lastSize = document.body.clientHeight;
-			document.addEventListener('DOMContentLoaded', () => {
-				window.addEventListener('resize', () => {
+			document.addEventListener("DOMContentLoaded", () => {
+				window.addEventListener("resize", () => {
 					this.toggleNavbar2();
 				});
 			});
 		}
+
+		const test1 = this.props.userIsClicked === true;
+		const test2 = this.props.memberIsClicked === true;
+		const test3 = this.props.expiredIsClicked === true;
+
+		const check1 = this.props.userIsClicked === true && this.props.memberIsClicked === true;
+		const check2 = this.props.userIsClicked === true && this.props.expiredIsClicked === true;
+		const check3 = this.props.expiredIsClicked === true && this.props.memberIsClicked === true;
+
+		const lastCondition = this.props.userIsClicked === true && this.props.memberIsClicked === true && this.props.expiredIsClicked === true;
+
+		let exportText = "EXPORT EXPIRED MEMBERS";
+
+		if (test1) {
+			exportText = "EXPORT USERS";
+		}
+		if (test2) {
+			exportText = "EXPORT MEMBERS";
+		}
+		if (test3) {
+			exportText = "EXPORT EXPIRED MEMBERS";
+		}
+		if (check1) {
+			exportText = "EXPORT USERS + MEMBERS";
+		}
+		if (check2) {
+			exportText = "EXPORT USERS + EXPIRED MEMBERS";
+		}
+		if (check3) {
+			exportText = "EXPORT MEMBERS + EXPIRED MEMBERS";
+		}
+		if (lastCondition) {
+			exportText = "EXPORT ALL MEMBERS";
+		}
+
 		const postItems = (
-			<table striped hover condensed className="table-member">
-				<tbody>
-					{this.state.array
-						.filter((post) => {
-							return (
-								!this.state.filterText ||
-								post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
-								post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
-								post.memberID.startsWith(this.state.filterText)
-							);
-						})
-						.map((post, index) => (
-							<tr className="view-members-user" key={post.id}>
-								<td className="first-column">
-									<Collapsible
-										trigger={
-											<div>
-												<div className="view-members-exp-username-and-email">
-													<b>{post.username}</b>
-													<img
-														src={memberIcon}
-														className="membership-icon"
-														alt="Is a Member"
-													/>
-													<div>{post.email}</div>
-												</div>
-												<div className="view-members-exp-expiry-time-column">
-													<div
-														className={
-															this.status(this.state.timeLeftOnMembership[index]) ? (
-																'view-exp-bad '
-															) : (
-																'okay'
-															)
-														}
-													>
-														<div>
-															{post.memberExpiryDate
-																.substring(0, 10)
-																.split('-')
-																.join('/')}
-															<div>{this.state.timeLeftOnMembership[index]} Months</div>
+			<div>
+				{this.state.array.length === 0 && this.state.getData === true ? (
+					<div className="view-non-error-container">
+						<label className="view-non-error-msg">No users expiring yet.</label>
+					</div>
+				) : (
+						<table striped hover condensed className="table-member">
+							<tbody>
+								{this.state.array
+									.filter(post => {
+										return (
+											!this.state.filterText ||
+											post.username
+												.toLowerCase()
+												.startsWith(this.state.filterText.toLowerCase()) ||
+											post.email
+												.toLowerCase()
+												.startsWith(this.state.filterText.toLowerCase()) ||
+											this.extractEmails(post.email).startsWith(
+												this.state.filterText.toLowerCase()
+											) ||
+											post.memberID.startsWith(this.state.filterText)
+										);
+									})
+									.map((post, index) => (
+										<tr className="view-members-user" key={post.id}>
+											<td className="first-column">
+												<Collapsible
+													open={post.selected}
+													trigger={
+														<div
+															className="username-and-email"
+															onClick={() => this.onChangeArrow(index)}
+														>
+															{post.selected===false || post.selected===undefined?
+																<div className="bottom-line" />:null}
+															<div className="view-members-username-email">
+																<b>{post.username}</b>
+																<div className="view-non-members-email">
+																	{post.email}
+																</div>
+															</div>
+														
+															<div className="view-exp-members-icon">
+																<img
+																	src={memberIcon}
+																	className="membership-icon"
+																	alt="Is a Member"
+																/>
+															</div>
+
+															<div className="expiry-time-column">
+																<div
+																	className={
+																		this.status(
+																			this.state.timeLeftOnMembership[index]
+																		)
+																			? "bad"
+																			: "okay"
+																	}
+																>
+
+																	<div>
+																		<b>
+																			{post.memberExpiryDate
+																				.substring(0, 10)
+																				.split("-")
+																				.join("/")}
+																		</b>
+																		{this.expiringDateCheck(
+																			post.memberExpiryDate
+																				.substring(0, 10)
+																				.split("-")
+																				.join("/")
+																		) === false ? (
+
+																				<div>
+																					{this.state.timeLeftOnMembership[index]}{" "}
+																					Months
+                                  													  </div>
+																			) : (
+																				<div>
+																					{post.advanceExpiryDate != null
+																						? "RENEWED"
+																						: "EXPIRED"}
+																				</div>
+																			)}
+																	</div>
+
+																</div>
+
+															</div>
+
 														</div>
-													</div>
-												</div>
-											</div>
-										}
-									>
-										<div className="renew-container">
-											<button
-												className="view-exp-members"
-												onClick={() => this.updateMember(index)}
-											>
-												RENEW
-											</button>
-										</div>
-									</Collapsible>
-								</td>
-							</tr>
-						))}
-				</tbody>
-			</table>
+													}
+												>
+
+													{this.state.successMgs === false &&
+														post.advanceExpiryDate == null ? (
+															<div className="non-member-renew-date-container">
+																<input
+																	type="date"
+																	className="view-expiring-members-text-boxes"
+																	id="expdate"
+																	value={this.state.datevalue}
+																	onChange={this.handleDateChange}
+																/>
+															</div>
+														) : null}
+													{this.state.AdvanceDateExist === true ? null : this
+														.state.dateErrorMgs === true ? (
+															<label className="non-member-renew-error-msg">
+																Date selected is invalid
+                         							 </label>
+														) : null}
+													{this.state.AdvanceDateExist === true ? (
+														<label className="non-member-renew-error-msg">
+															User already been renewed in advance
+                         								 </label>
+													) : null}
+
+													{this.state.successMgs === false &&
+														post.advanceExpiryDate == null ? (
+															<div className="renew-container">
+																<button
+																	className={
+																		this.state.dateValue === "" ||
+																			this.state.dateErrorMgs === true
+																			? "view-exp-members-inactive"
+																			: "view-exp-members"
+																	}
+																	onClick={() => this.updateMember(index)}
+																>
+																	RENEW
+                          								  </button>
+															</div>
+														) : null}
+
+
+													{this.state.successMgs === true ? (
+														<div className="confirm-button-container">
+															<button className="confriming-btn">
+																MEMBERSHIP RENEWED{" "}
+															</button>
+														</div>
+													) : post.advanceExpiryDate != null ? (
+														<div className="confirm-button-container">
+															<button className="confriming-btn">
+																MEMBERSHIP RENEWED
+																<label className="advance-date-label">{post.advanceExpiryDate
+																	.substring(0, 10)
+																	.split("-")
+																	.join("/")}</label>
+															</button>
+
+														</div>
+													) : null}
+												</Collapsible>
+											</td>
+										</tr>
+									))}
+							</tbody>
+						</table>
+					)}
+			</div>
 		);
 		return (
-			<Row className="row justify-content-center">
-				<Col sm={8} className="createpage-bootstrap-col-center-container">
-					<div className="centre-view-member">
-						<div className="username-search">
+			<div className="centre-view-member" style={{ height: this.getBodyHeight() }}>
+				<div className="username-search">
+					<Row>
+						{this.props.isClicked === false ? <Col>
 							<div className="search">
 								<input
 									autoComplete="off"
 									type="text"
 									className="user-value"
-									placeholder="Enter Username"
 									id="usernameValue"
+									placeholder="Enter Username"
 									value={this.state.filterText}
 									onChange={this.onChangeText}
 								/>
 							</div>
-						</div>
-						<div className="table-search-members" style={{ height: this.getBodyHeight() + 'px' }}>
-							{postItems}
-						</div>
+						</Col> :
+							<Col>
+								<button onClick={e => (e.currentTarget.src = exportClick) && this.ExportData()} className="export-button-css">{this.props.ExportWrittenText.toUpperCase()}</button>
+							</Col>}
+						<Col className="export-col-container">
+							{" "}
+							<div className="export-container">
+								<img
+									src={this.props.isClicked === false ? Export : deleteButton}
+									className="export-icon"
+									alt="Is a Member"
+									onClick={this.props.exportIsClicked}
+								/>
+							</div>
+						</Col>
+					</Row>
+				</div>
+				<div
+					className={
+						this.state.getData === false && this.state.exceptionCaught === false
+							? "loader-container-members"
+							: "hidden"
+					}
+				>
+					<div
+						className={
+							this.state.getData === false &&
+								this.state.exceptionCaught === false
+								? "loader"
+								: "hidden"
+						}
+					/>
+					<div
+						className={
+							this.state.getData === false &&
+								this.state.exceptionCaught === false
+								? "target-loader-image"
+								: "hidden"
+						}
+					/>
+					<div
+						className={
+							this.state.getData === false &&
+								this.state.exceptionCaught === false
+								? "loading-message-members"
+								: "hidden"
+						}
+					>
+						Loading...
+          </div>
+				</div>
+				{this.state.exportMsg === false ? (
+					<div
+						className={this.state.getData === false && this.state.exceptionCaught === false
+							? "hidden"
+							: "table-search-members"}
+						style={{ height: this.getBodyHeight() }}
+					>
+						{postItems}
 					</div>
-				</Col>
-			</Row>
+				) : (
+						<div>
+							{this.state.exportResponse !== "" && !this.state.exportResponse.startsWith("Could")
+								? this.timeout(2000)
+								: this.timeout(6000)}
+							<div className="exportMsg-container">
+								<label className="exportMsg-responce">
+									{this.state.exportResponse}
+								</label>
+								{this.state.exportResponse !== "" && !this.state.exportResponse.startsWith("Could") ?
+									<img
+										src={RedBullet}
+										className="export-success"
+										alt="Is a Member"
+									/> : null
+								}
+							</div>
+						</div>
+					)}
+			</div>
 		);
 	}
 }
 
-export default ViewMembersExpiring;
+const mapStateToProps = (state) => ({
+	isClicked: state.notificationOBJ.isClicked,
+	userIsClicked: state.notificationOBJ.userIsClicked,
+	memberIsClicked: state.notificationOBJ.memberIsClicked,
+	expiredIsClicked: state.notificationOBJ.expiredIsClicked,
+	exportAll: state.notificationOBJ.exportAll,
+	ExportWrittenText: state.notificationOBJ.ExportWrittenText
+});
+
+export default connect(
+	mapStateToProps,
+	{ fetchNumberOfNotification, pageState, exportIsClicked, exportCSV }
+)(ViewMembersExpiring);

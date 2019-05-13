@@ -3,31 +3,85 @@
   margin-top: 70px;
 }
 
+.loader-container-details {
+  margin-top: 100px;
+  height: 160px;
+}
+
+@media screen and (min-width: 576px) {
+  .loader-container-details {
+    margin-top: 80px;
+    height: 165px;
+  }
+}
+
 .user-details-scrolls {
-  padding-bottom: 150px;
+  padding-top: 30px;
+  padding-bottom: 200px;
 }
 .user-details-heading-container {
-  text-align: center;
   font-family: Helvetica;
-  font-size: 14px;
-  color: #666666;
+  font-size: 12px;
+  color: #be0000;
+  font-weight: normal;
 }
 .user-details-member-number {
-  padding-top: 10px;
+  padding-top: 0;
+}
+
+.user-details-exp-icon {
+  width: 18px;
+  height: 18px;
+  margin-left: 5px;
+  margin-bottom: 4px;
+}
+
+.member-details-container {
+  text-align: left;
+  padding-left: 15px;
+  margin-top: 15px;
+  max-width: 312px;
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  min-height: 36px;
+  margin-bottom: 20px;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  border: 1px solid #be0000;
 }
 
 .user-details-member-name {
-  padding-top: 24px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.user-details-error-message {
+  margin-top: 100px;
 }
 
 .user-details-member-label {
-  text-align: center;
-  padding-top: 10px;
-  color: #be0000;
+  color: #555555;
   font-family: Helvetica;
-  font-size: 14px;
+  font-size: 12px;
+  padding-left: 5px;
+  font-weight: 500;
+  padding-top: 5px;
 }
 
+.user-details-member-label-expiring {
+  color: #be0000;
+  font-family: Helvetica;
+  font-size: 12px;
+  padding-left: 5px;
+}
+
+.user-details-Errors {
+  color: #be0000;
+  font-family: Helvetica;
+  font-size: 12px;
+  padding-left: 5px;
+}
 .user-details-main-container {
   background-color: white;
   text-align: center;
@@ -69,10 +123,28 @@
   height: 42px;
 }
 
+.user-details-button-container-active {
+  font-weight: lighter;
+  font-size: 16px;
+  color: #c0c1c2;
+  letter-spacing: 1px;
+  line-height: 15px;
+  border: 1px solid #c0c1c2;
+  border-radius: 40px;
+  background: transparent;
+  transition: all 0.3s ease 0s;
+  width: 312px;
+  height: 42px;
+}
+
 .user-details-button-contain {
   text-align: center;
   width: 100%;
   margin-top: 24px;
   justify-content: center;
   bottom: 70px;
+}
+
+.user-details-white {
+  color: #ffffff;
 }

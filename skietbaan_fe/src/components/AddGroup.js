@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getName, pageState } from "../actions/postActions";
+import { getName, pageState,setScreenSize } from "../actions/postActions";
 import history from "./history";
 import "./add.css";
 import { BASE_URL } from "../actions/types";
 import { getCookie } from "../components/cookie.js";
-import { Row, Col } from "react-bootstrap";
 
 class AddGroup extends Component {
   constructor(props) {
@@ -15,23 +14,30 @@ class AddGroup extends Component {
       txt: "",
       groups: [],
       exist: true,
-      pageState: false
+      pageState: false,
+			height: window.innerHeight,
+			width: window.innerWidth
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.getBodyHeight = this.getBodyHeight.bind(this);
   }
 
   UNSAFE_componentWillMount() {
-    this.props.pageState(0);
+    this.props.setScreenSize(document.body.clientHeight);
     fetch(BASE_URL + "/api/groups")
       .then(res => res.json())
       .then(data =>
         this.setState({
-          groups: data.map(names => names.name)
+          groups: data.map(names => names.name.toLowerCase())
         })
       ).catch(err => {
         /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
       });
+  }
+
+  componentWillMount(){
+    this.props.setScreenSize(document.body.clientHeight);
   }
 
   onChange(e) {
@@ -51,39 +57,43 @@ class AddGroup extends Component {
     }
   }
 
+  getBodyHeight() {
+		if (this.state.width < 575) {
+			return (this.state.height - 240) + "px";
+		} else {
+			return "61vh";
+		}
+	}
+
   render() {
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
     return (
-      <Row className="row justify-content-center">
-        <Col sm={8} className="createpage-bootstrap-col-center-container" style={{ position : "inherit"}}> {/* inline style to avoid affecting all bootstrap col-sm-8 in all pages */}
-          <div className="add-group-main">
-            <div className="page">
-              <div className="middle-bar">
-                <input
-                  className="texts"
-                  type="text"
-                  name="name"
-                  onChange={this.onChange}
-                  value={this.state.name}
-                  autoComplete="off"
-                  autoCorrect="off"
-                  placeholder="Group Name"
-                />
-                {this.state.exist === true ? null : (
-                  <label className="errorMsg">Group Name Already Exists</label>
-                )}
-              </div>
-              <div className="add-container">
-                <button className="add" onClick={this.onClick}>
-                  ADD USERS
-            </button>
-              </div>
-            </div>
+      <div className="add-group-main" style={{ height: this.getBodyHeight()}}>
+        <div className="page">
+          <div className="middle-bar">
+            <input
+              className="texts"
+              type="text"
+              name="name"
+              onChange={this.onChange}
+              value={this.state.name}
+              autoComplete="off"
+              autoCorrect="off"
+              placeholder="Group Name"
+            />
+            {this.state.exist === true ? null : (
+              <label className="errorMsg">Group Name Already Exists</label>
+            )}
           </div>
-        </Col>
-      </Row>
+          <div className="add-container">
+            <button className={this.state.name===""?"add":"add-active"} onClick={this.onClick}>
+              ADD USERS
+            </button>
+          </div>
+        </div>
+      </div>
 
     );
   }
@@ -94,5 +104,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getName, pageState }
+  { getName, pageState,setScreenSize }
 )(AddGroup);

@@ -36,12 +36,16 @@ export const FETCH_REQ = "FETCH_REQUIREMENTS";
 export const UPDATE_REQ = "UPDATE_REQUIREMENTS";
 export const CHOOSEPAGE = "CHOOSEPAGE";
 export const COMP_PAGE = "COMP_PAGE";
+export const SCORES_PAGE = "SCORES_PAGE";
 export const UPDATE_COMP_STATUS = "UPDATE_COMP_STATUS";
 export const PARTICIPANTS_PER_COMP = "PARTICIPANTS_PER_COMP";
+export const CHECK_ADMIN = "CHECK_ADMIN";
+export const NEWCOMPSTATE = "NEWCOMPSTATE";
 export const BASE_URL = "https://api.scoring.skietbaan.co.za";
 
 //leaderboard types
 export const FETCH_LEADERBOARDFILTER_DATA = "FETCH_LEADERBOARDFILTER_DATA";
+export const EXPORT_BUTTON_TEXT = "EXPORT_BUTTON_TEXT";
 export const FETCH_LEADERBOARDTABLE_DATA = "FETCH_LEADERBOARDTABLE_DATA";
 export const UPDATE_SELECTED_COMPETITION = "UPDATE_SELECTED_COMPETITION";
 export const UPDATE_SELECTED_GROUP = "UPDATE_SELECTED_GROUP";
@@ -60,13 +64,37 @@ export const ADDMEMBERS = "ADDMEMBERS";
 export const GROUPDICT = "GROUPDICT";
 export const EMPTY = "EMPTY";
 export const NEWGROUPSTATE = "NEWGROUPSTATE";
+export const GROUP_DATA_LOADING = "GROUP_DATA_LOADING";
+export const BINSTATE = "BINSTATE";
+export const SCREEN_SIZE = "SCREEN_SIZE";
+export const ADMINSTAT = "ADMINSTAT";
+
 //notification types
 export const FETCH_NOTIFICATION = "FETCH_NOTIFICATION";
+export const FETCH_NUMBER_OF_NOTIFICATIONS = "FETCH_NUMBER_OF_NOTIFICATIONS";
 export const UPDATE_IS_READ = "UPDATE_IS_READ";
+export const DATA_LOADING = "DATA_LOADING";
+
 //profile types
 export const PROFILE_SET_SELECTED_COMPETITION =
   "PROFILE_SET_SELECTED_COMPETITION";
 export const LANDING_SET_SELECTED_PAGE = "LANDING_SET_SELECTED_PAGE";
+
+//competition types
+export const COMPETITION_DATA_LOADING = "COMPETITION_DATA_LOADING";
+
+//document types
+export const USER_LOGS = "USER_LOGS";
+export const USER_LOS = "USER_LOS";
+export const DOCCIE_SENT = "DOCCIE_SENT";
+
+//member types
+export const IS_CLICKED = "IS_CLICKED";
+export const USER_IS_CLICKED = "USER_IS_CLICKED";
+export const MEMBER_IS_CLICKED = "MEMBER_IS_CLICKED";
+export const EXPIRED_IS_CLICKED = "EXPIRED_IS_CLICKED";
+export const EXPORT_CSV = "EXPORT_CSV";
+export const ADD_FILTER_NAME = "ADD_FILTER_NAME";
 
 export const handleErrors = response => {
   if (!response.ok) {

@@ -2,6 +2,7 @@
 	background: #6f839e;
 	border-radius: 20px;
 	color: #fdfdfd;
+	justify-content: flex-end !important;
 	width: 116px;
 	height: 35px;
 	font-weight: lighter;
@@ -11,6 +12,7 @@
 .inactiveButton button {
 	background-color: #fdfdfd;
 	border-radius: 20px;
+	justify-content: flex-end !important;
 	border: 1px #6f839e solid;
 	color: #6f839e;
 	width: 116px;
@@ -65,14 +67,14 @@
 }
 
 .user-per-comp-num {
-	margin: 5px;
-	font-family: helvetica;
-	font-weight: normal;
-	font-size: 18px;
-	color: #555555;
-	width: 0px;
-	height: 30px;
-	padding: 5px;
+	margin-top: -5px;
+    font-family: helvetica;
+    font-weight: 700;
+    font-size: 17px;
+    color: #555555;
+    width: 0px;
+    padding-top: 0px;
+    height: 25px;
 }
 
 .fa-group:before,
@@ -80,6 +82,10 @@
 	font-size: 17px;
 	color: #555555;
 	content: "\F0C0";
+}
+
+.icon-spacing{
+	padding-top: 13px;
 }
 
 .label-create-competitions {
@@ -101,6 +107,19 @@
 	width: 148px;
 	height: 30px;
 	padding: 5px;
+}
+
+.view-error-message {
+    border: 1px solid #be0000;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 149px;
+    text-align: center;
+    padding-top: 28px;
+    width: 312px;
+    height: 77px;
+	background: #ffffff;
+	color: #be0000;
 }
 
 .inactive-competition-container {
@@ -125,7 +144,7 @@
 	position: center;
 	text-align: center t;
 }
-
+/** A CSS for displaying toggled table*/
 .table-competition-row {
 	border-bottom: solid 1px #bbbcbd;
 	padding-bottom: 1px;
@@ -139,13 +158,21 @@
 	padding-top: 11px;
 	padding-bottom: 11px;
 	width: 75%;
+	cursor: pointer;
+}
+
+.toggled-td-col{
+	vertical-align: top;
+	padding-top: 11px;
+	padding-bottom: 11px;
+	width: 75%;
+	background-color:#FFFFFF; 
 }
 
 .page-contents {
-	background-color: transparent;
-	padding: 10%;
+	padding: 5%;
 	z-index: 1;
-    overflow-y: overlay;
+	overflow-y: overlay;
 }
 
 .letter-image {
@@ -238,6 +265,19 @@
 	padding: 0px;
 }
 
+.bronze-label{
+	height: 100%;
+	color: rgba(0, 0, 0, 0.6);
+	font-family: Helvetica;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 0.13px;
+	line-height: 16px;
+	padding: 0px;
+	text-align: center;
+	padding-top: 14px;
+}
+
 .bronze-total-input-control {
 	width: 95px;
 	height: 44px;
@@ -265,6 +305,8 @@
 	letter-spacing: 0.13px;
 	line-height: 16px;
 	padding: 0px;
+	padding-top: 14px;
+	text-align: center;
 }
 .silver-accuracy-input-control {
 	width: 95px;
@@ -304,13 +346,14 @@
 
 .gold-label {
 	height: 100%;
+	text-align: center;
+    padding-top: 14px;
 	color: rgba(0, 0, 0, 0.6);
 	font-family: Helvetica;
 	font-size: 14px;
 	font-weight: bold;
 	letter-spacing: 0.13px;
 	line-height: 16px;
-	padding: 0px;
 }
 
 .shots-label {
@@ -380,11 +423,16 @@
 .table-row-requiremets {
 	display: table-row;
 	width: 100%;
+	background-color: #FFFFFF;
 }
 
 .table-row-requiremets-hide {
 	display: none;
 	width: 100%;
+}
+.standards-label{
+	margin-bottom: 10px;
+	margin-top: 10px;
 }
 /*competitions list display css*/
 .standard-header-label {
@@ -418,6 +466,7 @@
 .table-competition-row table tr .td-col div {
 	display: inline-flex;
 	width: 100%;
+	
 }
 .table-competition-row table tr .td-col div .test1 {
 	width: 45%;
@@ -427,7 +476,6 @@
 }
 .table-competition-row table tr .td-col div .test2 .users-per-comp {
 	width: 100%;
-	margin-top: 10px;
 }
 .table-competition-row table tr .td-col div .test2 .fa {
 	width: 100%;
@@ -446,6 +494,8 @@
 }
 .table-competition-row table tr .td-col div .test3 {
 	width: 20%;
+	display: flex;
+	justify-content: center !important;
 }
 
 /*letter of good standing csss*/
@@ -484,4 +534,35 @@
 	height: 100%;
 	padding-right: 5%;
 	padding-top: 5px;
+}
+
+.targeter-class{display: unset}
+/*media queries*/
+@media only screen and (max-width: 575px) {
+	/*mobile*/
+   .page-contents {
+	height: 62vh !important;
+	margin-top: -3vh;
+	padding: 2%;
+	margin-top:10px;
+	padding-bottom: 15px;
+   }
+}
+
+@media only screen and (min-width: 575px){
+	.targeter-class{
+		padding-left: 0px !important;
+		padding-right: 0px !important;
+	}
+	.table-competition-row table tr .td-col div .test3{
+		justify-content: flex-end !important;
+		margin-right: 15px !important;
+	}
+}
+
+@media only screen and (max-width: 421px){
+	.targeter-class{
+		padding-left: 0px !important;
+		padding-right: 0px !important;
+	}
 }

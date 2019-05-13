@@ -1,15 +1,13 @@
 @media only screen and (min-width: 576px) {
 
   .components-create {
-    padding-top: 25px;
-    background-color: white;
+    padding-top: 2px;
     margin-top: 15px;
   }
 
   .content-container {
     margin-top: 0px;
   }
-
   .page-name-create-all {
     position: center;
     text-align: center;
@@ -188,6 +186,15 @@
   .page-name-bar{
     margin-top: 56px;
   }
+  .create-switch-top{
+    width: 83.53658536585366% !important;
+  }
+  .create-switch-top .switch-active{
+    width: 33.3333333333394% !important;
+  }
+  .create-switch-top .switch-inactive{
+    width: 33.3333333333394% !important;
+  }
   .buttons-squire-rectangle{
     padding-top: 0px;
   }
@@ -199,6 +206,7 @@
   }
   .create-nav-container{
     background: transparent !important;
+    height: 150px !important;
   }
   .create-nav-container .create-top-nav{
     background: transparent;
@@ -211,9 +219,6 @@
     background: transparent;
   }
   .create-top-nav .row{
-    background: transparent;
-  }
-  .components-create{
     background: transparent;
   }
   .add-container{
@@ -239,7 +244,7 @@
 }
 
 .create-nav-container {
-  height: 184px;
+  height: 173px;
 }
 
 .create-all-menu {
@@ -340,15 +345,43 @@
     width: 115px;
   }
 
+  .checkbox-A{
+    padding-right: 3px;
+    display: flex;
+    width: 115px;
+    margin-top: 17px;
+  }
+
   .radio-B {
     padding-right: 3px;
     display: flex;
     width: 115px;
   }
 
+  .checkbox-B{
+    padding-right: 3px;
+    display: flex;
+    width: 115px;
+    margin-top: 17px;
+  }
+
   .radio-C {
      display: flex;
      width: 115px;
+  }
+
+  .checkbox-C{
+    padding-right: 3px;
+    display: flex;
+    width: 115px;
+    margin-top: 17px;
+  }
+
+  .icon-size{
+    width: 19px;
+    height: 19px;
+    margin-left: 18px;
+    margin-right: 10px;
   }
 
   .member-radio .radio-A .a-radio {
@@ -368,12 +401,11 @@
   }
 
   .create-top-nav-members {
-    height: 184px;
-    position: fixed;
+    height: 100%;
     top: 0;
     width: 100%;
     z-index: 1;
-    background: #fdfdfd;
+    background: #ffffff;
   }
 
 /* NO MEDIA QUERY */
@@ -383,23 +415,23 @@
   position: fixed;
     }
   .create-top-nav {
-	  height: fit-content;
+	  height: 100%;
     padding-bottom: 19px;
     top: 0;
     width: 100%;
     z-index: 1;
-    background: #fdfdfd;
+    background: #ffffff;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
   
   }
   .create-switch-top{
-    width: 345px;
+    width: 344px;
     height: 32px;
     margin: auto;
     border: 1px solid #BE0000;
     margin-top: 21px;
-    margin-bottom: 21px;
+    margin-bottom: 5px;
     border-radius: 18px;
     display: -webkit-box;
 
@@ -414,7 +446,7 @@
   font-family: Helvetica;	
   font-size: 14px;	
   font-weight: bold;	
-  line-height: 17px;	
+  line-height: 18px;	
   text-align: center;
   background-color: #BE0000;
   text-align: center;
@@ -429,7 +461,7 @@
   font-family: Helvetica;	
   font-size: 14px;	
   font-weight: 300;	
-  line-height: 17px;	
+  line-height: 18px;	
   text-align: center;
   padding-top: 6px;
   cursor: pointer;

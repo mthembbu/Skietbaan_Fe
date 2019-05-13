@@ -1,18 +1,18 @@
-	import React, { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './groups.css';
 import { BASE_URL } from '../actions/types';
-import unmarked from './GroupImages/Oval.png';
+import unmarked from './GroupImages/unmarkedIcon.png';
 import deleteS from './GroupImages/deleteS.png';
 import whiteBin from './GroupImages/whiteBin.png';
+import blackBin from './GroupImages/blackBin.png';
 import seleteAll from './GroupImages/seleteAll.png';
 import unSelectAll from './GroupImages/unSelectAll.png';
-import blackBin from './GroupImages/blackBin.png';
 import whitePlus from './GroupImages/whitePlus.png';
-import { fetchEditUser, pageState } from '../actions/postActions';
 import back from './GroupImages/back.png';
-import { Row, Col } from "react-bootstrap";
-
+import { fetchEditUser, pageState } from '../actions/postActions';
+import {fetchNumberOfNotification} from "../actions/notificationAction"
+import { getCookie } from "./cookie";
 class EditGroup extends Component {
 	constructor(props) {
 		super(props);
@@ -22,10 +22,13 @@ class EditGroup extends Component {
 			filterText: '',
 			count: 0,
 			selected: 0,
-			check: 'select all',
+			check: 'Select all',
 			binState: false,
 			height: window.innerHeight,
-			width: window.innerWidth
+      width: window.innerWidth,
+			token: getCookie("token"),
+			heightOfClient: document.body.clientHeight
+
 		};
 		this.toggleHighlight = this.toggleHighlight.bind(this);
 		this.onBack = this.onBack.bind(this);
@@ -34,18 +37,32 @@ class EditGroup extends Component {
 		this.selectAll = this.selectAll.bind(this);
 		this.updateDimensions = this.updateDimensions.bind(this);
 		this.getBodyHeight = this.getBodyHeight.bind(this);
+		this.extractEmails = this.extractEmails.bind(this);
+		this.changeBinState = this.changeBinState.bind(this);
 	}
 
 	async componentDidMount() {
 		this.updateDimensions();
-	 this.props.fetchEditUser(this.props.id);
+		this.props.fetchEditUser(this.props.id);
+    this.props.fetchNumberOfNotification(this.state.token);
 	}
-    componentWillMount() {
-		window.addEventListener('resize', this.updateDimensions);
-    }
-    getBodyHeight() {
-		return this.state.height - 240;
+	componentWillMount() {
+    window.addEventListener("resize", this.updateDimensions);
 	}
+	getBodyHeight() {
+		if (this.state.width < 575) {
+			return (this.state.height - 210) + "px";
+		} else {
+			return "63vh";
+		}
+	}
+	changeBinState = () => {
+		if (this.state.binState === false) {
+			this.setState({ binState: true });
+		} else {
+			this.setState({ binState: false });
+		}
+	};
 	updateDimensions() {
 		this.setState({
 			height: window.innerHeight,
@@ -77,29 +94,26 @@ class EditGroup extends Component {
 			body: JSON.stringify(request)
 		})
 			.then((res) => res.json())
-			.catch(function(data) {}).catch(err =>  {
+			.then(this.setState({
+				binState: false
+			}))
+			.catch(function (data) { }).catch(err => {
 				/* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
-			  });
+			});
+		this.setState({ filterText: "" })
 		this.props.fetchEditUser(this.props.id);
 	}
-//select user
+	//select user
 	toggleHighlight = (event) => {
+		const index = this.props.idsForUser.indexOf(event);
 		if (this.state.binState === true) {
-			if (this.props.editGroup[event].highlighted === true) {
-				this.props.editGroup[event].highlighted = false;
+			if (this.props.editGroup[index].highlighted === true) {
+				this.props.editGroup[index].highlighted = false;
 				this.setState({ count: this.state.count - 1 });
 			} else {
-				this.props.editGroup[event].highlighted = true;
+				this.props.editGroup[index].highlighted = true;
 				this.setState({ count: this.state.count + 1 });
 			}
-		}
-	};
-
-	changeBinState = () => {
-		if (this.state.binState === false) {
-			this.setState({ binState: true });
-		} else {
-			this.setState({ binState: false });
 		}
 	};
 
@@ -115,80 +129,154 @@ class EditGroup extends Component {
 	};
 
 	selectAll() {
-		if (this.state.binState === true) {
-			if (this.state.check == 'select all') {
-				this.setState({ count: this.props.editGroup.length });
-				for (var i = 0; i < this.props.editGroup.length; i++) {
-					this.props.editGroup[i].highlighted = true;
-				}
-				this.setState({ check: 'Unselect all' });
-			} else {
-				this.setState({ count: 0 });
-				for (var i = 0; i < this.props.editGroup.length; i++) {
-					this.props.editGroup[i].highlighted = false;
-				}
-				this.setState({ check: 'select all' });
+		let arr = []
+		this.props.editGroup.filter(post => {
+			return (
+				!this.state.filterText ||
+				post.username
+					.toLowerCase()
+					.startsWith(this.state.filterText.toLowerCase()) ||
+				post.email
+					.toLowerCase()
+					.startsWith(this.state.filterText.toLowerCase()) || (this.extractEmails(post.email)).startsWith(this.state.filterText.toLowerCase())
+			);
+		}).map(data => arr.push(data.id))
+
+		if (this.state.check === "Select all") {
+			this.setState({ count: arr.length });
+			for (var i = 0; i < arr.length; i++) {
+				(this.props.editGroup[this.props.idsForUser.indexOf(arr[i])]).highlighted = true;
 			}
+			this.setState({ check: "Unselect all" });
+		} else {
+			this.setState({ count: 0 });
+			for (var j = 0; j < arr.length; j++) {
+				(this.props.editGroup[this.props.idsForUser.indexOf(arr[j])]).highlighted = false;
+			}
+			this.setState({ check: "Select all" });
 		}
 	}
+
+	extractEmails(text) {
+		if (this.state.filterText[0] === "@") {
+			let ser = text.search("@")
+			let word = text.substring(ser, text.length)
+			let ss = word.split(".")
+			return ss[0];
+		}
+		else {
+			return text;
+		}
+	}
+
+	keyboardHideNav = ()=>{
+    let Navbar = document.querySelector(".navbar-admin");
+    if(Navbar!=null){
+      if (window.innerWidth < 575 && window.innerHeight < 800) {
+        if (this.props.screenSize === document.body.clientHeight) {
+          if(this.state.count === 0){
+            Navbar.classList.remove("hidden");
+          }
+          else{
+            Navbar.classList.add("hidden"); 
+          }          
+        } else {
+          Navbar.classList.add("hidden");
+        }
+      }
+    }
+  }
 
 	goToNext = () => {
 		this.props.pageState(2);
 	};
 	render() {
-		const postitems = (
-			<div className="check-edit" style={{ height: this.getBodyHeight() + 'px' }}>
-			{this.props.editGroup===0?null:
-				<ul class="list-group">
-					{this.props.editGroup
-						.filter((post) => {
-							return (
-								!this.state.filterText ||
-								post.username.toLowerCase().startsWith(this.state.filterText.toLowerCase()) ||
-								post.email.toLowerCase().startsWith(this.state.filterText.toLowerCase())
-							);
-						})
-						.map((post, index) => (
-							<li className="listItem" key={post.id} onClick={() => this.toggleHighlight(index)}>
-								{this.state.binState === true ? (
-									<img
-										className="checkbox-delete"
-										src={post.highlighted == true ? deleteS : unmarked}
-										alt=""
-									/>
-								) : null}
-								<label className={post.highlighted ? 'blabe2' : 'blabe'}>
-									<div className={post.highlighted ? 'userName-active' : 'userName'}>
-										{post.username}
-									</div>
+		this.keyboardHideNav()
 
-									<div className={post.highlighted ? 'emails-active' : 'email'}>{post.email}</div>
-								</label>
-							</li>
-						))}
-				</ul>}
+		const postitems = (
+			<div className="check-edit" style={{ height: this.getBodyHeight() }}>
+				{this.props.editGroup.length === 0 ? (
+					<div className="edit-no-user-container">
+						<label className="edit-no-user-msg">
+							No users in the group
+            </label>
+					</div>
+				) : (
+						<ul class="list-group">
+							{this.props.editGroup
+								.filter(post => {
+									return (
+										!this.state.filterText ||
+										post.username
+											.toLowerCase()
+											.startsWith(this.state.filterText.toLowerCase()) ||
+										this.extractEmails(post.email).startsWith(
+											this.state.filterText.toLowerCase()
+										) ||
+										post.email
+											.toLowerCase()
+											.startsWith(this.state.filterText.toLowerCase())
+									);
+								})
+								.map((post, index) => (
+									<li
+										className="listItem"
+										key={post.id}
+										onClick={() => this.toggleHighlight(post.id)}
+									>
+										{this.state.binState === true ? (
+											<img
+												className="checkbox-delete"
+												src={post.highlighted === true ? deleteS : unmarked}
+												alt=""
+											/>
+										) : null}
+										<label
+											className={post.highlighted ? "edit-blabe2" : "edit-blabe"}
+										>
+											<div
+												className={
+													post.highlighted ? "userName-active" : "userName"
+												}
+											>
+												{post.username}
+											</div>
+
+											<div
+												className={post.highlighted ? "emails-active" : "email"}
+											>
+												{post.email}
+											</div>
+										</label>
+									</li>
+								))}
+						</ul>
+					)}
 			</div>
 		);
 		return (
-			<Row className="row justify-content-center">
-				   <Col sm={8} className="createpage-bootstrap-col-center-container">
-				   <div className="The-Main">
+			<div className="edit-The-Main">
 				<div className="navBar-container">
 					<div className="the-nav-bar-edit">
 						<div className="leftContainer">
-							<img className="back-image" onClick={this.onBack} src={back} alt="" />
-							<label className="center-labels">{this.props.name}</label>
+							<img
+								className="back-image"
+								onClick={this.onBack}
+								src={back}
+								alt=""
+							/>
+							<label className="center-labels">{this.props.name.toUpperCase()}</label>
 						</div>
 						<div className="group-icon-spacing">
 							<div className="plus-next" onClick={() => this.changeBinState()}>
 								<img
-									className="checkbox-delete"
+									className="bin-image"
 									src={this.state.binState ? blackBin : whiteBin}
 									alt=""
 								/>
 							</div>
 							<div className="delete-icons" onClick={() => this.goToNext()}>
-								<img className="checkbox-delete" src={whitePlus} alt="" />
+								<img className="plus-image" src={whitePlus} alt="" />
 							</div>
 						</div>
 					</div>
@@ -203,42 +291,64 @@ class EditGroup extends Component {
 								placeholder="Search"
 							/>
 						</div>
-						{this.state.binState === true ? (
-							<div className="switchAll" onClick={this.selectAll}>
-								<img
-									className="checkbox-delete"
-									src={this.state.count === this.props.editGroup.length ? seleteAll : unSelectAll}
-									alt=""
-								/>
-							</div>
-						) : null}
+						{this.state.binState === true &&
+							this.props.editGroup.length !== 0 ? (
+								<div className="switchAll" onClick={this.selectAll}>
+									<img
+										className="btn-select-all"
+										src={
+											this.state.count === this.props.editGroup.length
+												? seleteAll
+												: unSelectAll
+										}
+										alt=""
+									/>
+								</div>
+							) : null}
 					</div>
 				</div>
+				<div>
+					{this.props.loader === true ? (
+						postitems
+					) : (
+							<div className={this.props.loader ? "hidden" : "loader-formatting"}>
+								<div className={this.props.loader ? "hidden" : "loader"} />
+								<div
+									className={this.props.loader ? "hidden" : "target-loader-image"}
+								/>
+								<div className={this.props.loader ? "hidden" : "loading-message"}>
+									Loading...
+              </div>
+							</div>
+						)}
+				</div>
 
-				{postitems}
-
-				{this.state.count == 0 ? null : (
+				{this.state.count === 0 ? null : (
 					<div className="bpanel">
-						<button className="confirm-group" onClick={() => this.delete()}>
-							DELETE USER
-						</button>
-
 						<button className="cancel-delete" onClick={() => this.cancel()}>
 							CANCEL
+			  </button>
+						<button className="confirm-group" onClick={() => this.delete()}>
+							{this.state.count === this.props.editGroup.length ? "DELETE ALL" : "DELETE USER"}
 						</button>
 					</div>
 				)}
 			</div>
-                   </Col>
-            </Row>
 		);
 	}
 }
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
 	id: state.posts.groupId,
 	name: state.posts.groupName,
 	editGroup: state.posts.editGroup,
-	page: state.posts.page
+	page: state.posts.page,
+	idsForUser: state.posts.idsForUser,
+	loader: state.posts.loader,
+	screenSize: state.posts.screenSize
+
 });
 
-export default connect(mapStateToProps, { fetchEditUser, pageState })(EditGroup);
+export default connect(
+	mapStateToProps,
+  { fetchEditUser, pageState, fetchNumberOfNotification }
+)(EditGroup);

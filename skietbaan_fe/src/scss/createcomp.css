@@ -29,7 +29,7 @@
 
 .comp-success-submit-btn {
 	font-weight: lighter;
-	margin-top: 45px;
+	margin-top: 10px;
 	font-size: 16px;
 	background-color: #be0000;
 	border-radius: 25px;
@@ -40,6 +40,20 @@
 	border: none;
 	color: #ffffff;
 	box-shadow: 0px 8px 19px 0px #888;
+}
+
+.comp-not-success-submit-btn{
+	font-weight: lighter;
+    margin-top: 10px;
+    font-size: 16px;
+    background-color: transparent;
+    border-radius: 25px;
+    width: 312px;
+    height: 42px;
+    border-color: #c0c1c2;
+    border-width: 1.5px;
+    border: solid 1px #c0c1c2;
+    color: #c0c1c2;
 }
 
 .inactive-comp-submit-btn {
@@ -72,19 +86,48 @@
 
 .error-comp-message {
 	color: #dc0600;
-	font-size: 10px;
-	margin-bottom: 20px;
-	font-weight: bold;
-	align-content: center;
-	font-family: helvetica;
+	font-size: 12px;
 }
 
 .create-comp-container {
 	text-align: center;
+	padding-bottom: 61px;
+	overflow-y: overlay;
+	margin-top: 15px;
 }
 .containers-input{
 	padding-top: 17px;
 }
+/** CSS for the requirements within the create page*/
+.requirements-collapse{
+	margin: 5px;
+    margin-top: 24px;
+    height: 21px;
+    width: 185px;
+    color: #BE0000;
+    font-family: Helvetica;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 17px;
+    text-align: center;
+    display: inline-flex;
+}
+.requirements-label {
+	margin-right: 3px;
+	cursor: pointer;
+}
+.down-arrow {
+	width: 12px;
+	height: 12px;
+	margin-bottom: 4px;
+}
+.requirements-content{
+	margin: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    background: #FFFFFF;
+}
+
 
 @media all and (min-width: 480px) {
 	.collapse-css-transition {
@@ -126,10 +169,8 @@ button.button-valid {
 }
 
 @media only screen and (min-width: 575px) {
-	.components-create .row .createpage-bootstrap-col-center-container{
-		height: 100vh;
-	}
 	.create-comp-container{
-		padding-top: 40px;
+		padding-top: 1px;
+		margin-top: 21px;
 	}
 }

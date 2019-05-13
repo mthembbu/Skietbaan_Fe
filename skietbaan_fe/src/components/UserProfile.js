@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import {Row, Col } from "react-bootstrap";
 import "../bootstrap/UserProfile.css";
 import $ from "jquery";
 import { getCookie } from "./cookie.js";
@@ -16,9 +16,13 @@ class UserProfile extends Component {
             awardCompetitions : [],
             hoursAward : {
                 hours: -1,
+                getData: false
             },
             collapse: false,
-            exceptionCaught: false
+            exceptionCaughtOnAwards: false,
+            exceptionCaughtOnHours: false,
+            errorOccured : false,
+            apiResponse : ""
         }
         
         this.toggle = this.toggle.bind(this);
@@ -27,15 +31,16 @@ class UserProfile extends Component {
         this.mapCompetitionNameToIndex = {}
         this._isMounted = false;
         this.isBestInMonth = false;
+        this.accuracyReRender = true;
+        this.iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
     }
 
     UNSAFE_componentWillMount() {
         var token = getCookie("token");
-        if (token == undefined) {
+        if (token === undefined) {
             history.push("/registerPage");
             return;
         }
-
         fetch(BASE_URL + "/api/awards/" + token, {
             method: "GET",
             headers: {
@@ -43,15 +48,17 @@ class UserProfile extends Component {
             }
         })
         .then(res => res.json())
-        .then(data => {
-            if(this._isMounted){
-                data.forEach((element, index) => {
+        .then(_response => {
+            if(this._isMounted && typeof _response !== "string"){
+                _response.forEach((element, index) => {
                     this.mapCompetitionNameToIndex[element.competitionName] = index;
                 })
-                this.setState({ awardCompetitions: data });
+                this.setState({ awardCompetitions: _response, getData: true });
+            }else{
+                this.setState({apiResponse : _response, errorOccured : true})
             }
         }).catch(() => {
-            this.setState({ exceptionCaught: true });
+            this.setState({ exceptionCaughtOnAwards: true });
         });
 
         fetch(BASE_URL + "/api/awards/hours/" + token, {
@@ -65,9 +72,10 @@ class UserProfile extends Component {
             if(this._isMounted){
                 this.setState({ hoursAward: data });
             }
-        }).catch(() => {
-            this.setState({ exceptionCaught: true });
+        }).catch(err => {
+            this.setState({ exceptionCaughtOnHours: true });
         });
+
     }
 
     componentDidMount(){
@@ -87,6 +95,13 @@ class UserProfile extends Component {
 
     toggle() {
         this.setState(state => ({ collapse: !state.collapse }));
+        if(!this.state.collapse){
+            $(".profile-landing-container").css('padding-bottom', '63px');
+            $(".ios-profile-landing-container").css('padding-bottom', '138px');
+        }else{
+            $(".profile-landing-container").css('padding-bottom', '125px');
+            $(".ios-profile-landing-container").css('padding-bottom', '200px');
+        }
     }
 
     animateAccuracyCircle(counter, element, index){
@@ -107,10 +122,11 @@ class UserProfile extends Component {
             counter++;
             const timeout = setTimeout(() => {
                 this.animateAccuracyCircle(counter, element, index)
-            }, 80)
+            }, 50)
             this.timeouts.push(timeout);
         }else{
             $(`#circle${index}`).html(element.accuracy+"%");
+            this.accuracyReRender = false;
         }
     }
 
@@ -118,18 +134,6 @@ class UserProfile extends Component {
         return(
             <div className="locked-icon">
                 <img src={require("../resources/awardIcons/light-red-locked-icon.png")} alt="lock-icon" />
-            </div>
-        )
-    }
-
-    renderActiveCircle(element,index){
-        return(
-            <div id={index} className="active-border">
-                <div id={`circle${index}`} className={element.accuracy.toString().split(".")[0].length > 2 ? 
-                    "circle font-size-15px" : "circle font-size-18px"}>
-                    <label className="accuracy-text">0%</label>
-                </div>
-                {this.animateAccuracyCircle(0, element, index)}
             </div>
         )
     }
@@ -153,6 +157,7 @@ class UserProfile extends Component {
     }
 
     setSelectedCompetition(competitionName){
+        this.accuracyReRender = true;
         this.props.setSelectedCompetition(competitionName);
         this.toggle();
     }
@@ -166,12 +171,21 @@ class UserProfile extends Component {
                              "button-style competition-button-text button-style-active" : 
                              "button-style competition-button-text button-style-inactive"}
                              onClick={() => this.setSelectedCompetition(element.competitionName)}>
-                            {element.competitionName}
+                            {element.competitionName.toUpperCase()}
                         </button>
                     </Col>
                 </Row>
             </div>
         )
+    }
+
+    collapseHeight(){
+        var numberOfButtons = Object.keys(this.mapCompetitionNameToIndex).length
+        if(numberOfButtons > 4){
+            return 305;
+        }else{
+            return numberOfButtons * 46 + 116;
+        }
     }
 
     renderCompetitionList(){
@@ -183,6 +197,18 @@ class UserProfile extends Component {
         return renderArray;
     }
 
+    renderActiveCircle(counter, element,index){
+        return(
+            <div id={index} className="active-border">
+                <div id={`circle${index}`} className={element.accuracy.toString().split(".")[0].length > 2 ? 
+                    "circle font-size-15px" : "circle font-size-18px"}>
+                    <label className="accuracy-text">0%</label>
+                </div>
+                {this.animateAccuracyCircle(counter, element, index)}
+            </div>
+        )
+    }
+
     renderAccuracyCircle(element, index){
         return(
             <div>
@@ -191,7 +217,9 @@ class UserProfile extends Component {
                 </div>
                 <div className="circle-bigger">
                     {!element.isCompetitionLocked ?
-                        (element.accuracy === 0 ? <label className="accuracy-text">0%</label> : this.renderActiveCircle(element,index))
+                        element.accuracy === 0 ? <label className="accuracy-text">0%</label> :
+                        this.accuracyReRender ? this.renderActiveCircle(0,element,index) : 
+                        this.renderActiveCircle(element.accuracy, element,index)
                         : this.renderRedLockIcon(index)}
                 </div>
             </div>
@@ -229,10 +257,21 @@ class UserProfile extends Component {
         }else{
             var initAward = this.state.awardCompetitions[this.getIndexByCompetitionName(this.props.selectedCompetition)]
             if(initAward === null || initAward === undefined){
+                this.props.setSelectedCompetition(this.state.awardCompetitions[0])
                 return this.state.awardCompetitions[0]
             }
             return initAward;
         }
+    }
+
+    renderLoader(){
+        return(
+            <div className={this.state.getData ? "hidden" : "loader-container-profile"}>
+                <div className={this.state.getData ? "hidden" : "loader"}></div>
+                <div className={this.state.getData ? "hidden" : "target-loader-image"}></div>
+                <div className={this.state.getData ? "hidden" : "loading-message-profile"}>Loading...</div>
+            </div>
+        )
     }
 
     renderBestInMonth(){
@@ -245,19 +284,29 @@ class UserProfile extends Component {
         )
     }
 
+    renderError(errorMessage){
+        return(
+            <div className="no-competition-border height-77px">
+                <label className="no-competition">{errorMessage}</label>
+            </div>
+        )
+    }
+
     componentWillUnmount() {
         this.timeouts.forEach(timeout => clearTimeout(timeout));
         this._isMounted = false;
     }
-    
+
     render() {
         return (
-            <div className="award-container pad-award-container">
-                {this.state.exceptionCaught ? <div className="no-competition">No Competitions Available</div> :
+            <div className="award-container">
+                {this.state.exceptionCaughtOnAwards ? 
+                    this.renderError("Something went wrong") :
+                this.state.errorOccured ? this.renderError(this.state.apiResponse) :
                 //only render when the data has arrived from backend
                 this.state.awardCompetitions.length > 0 ?
                 <div className="remove-right-padding">
-                    <Row>
+                    <Row className="fix-buttons-rectangle">
                         <Col>
                         <a onClick={this.toggle} className="make-cursor-point">
                         <div className="buttons-rectangle">
@@ -274,53 +323,61 @@ class UserProfile extends Component {
                                         {this.getInitialAward().competitionName.toUpperCase()}
                                     </div>
                                     <div className="down-triangle-img-scale">
-                                        <img src={require("../resources/awardIcons/down-triangle.png")} alt="down-triangle">
-                                        </img>
+                                        {this.state.collapse ? 
+                                            <img src={require("../resources/awardIcons/up-triangle.png")}
+                                            alt="up-triangle" /> :    
+                                            <img src={require("../resources/awardIcons/down-triangle.png")}
+                                                        alt="down-triangle" />
+                                        }
                                     </div>
                                 </div>
                             </div>
                         </div>
                         </a>
                         </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            {this.getInitialAward().bestInMonth.startsWith("Best") ?
-                                this.renderBestInMonth() : null}
-                        </Col>
+                        {
+                            this.state.collapse ? 
+                                <div className="grey-text select-competition-font">Select Competition</div> :
+                                null
+                        }
                     </Row>
                     <Row className="center-content competition-buttons-container">
                         <Col>
-                            <Collapse isOpened={this.state.collapse}>
-                                <div className="grey-text select-competition-font">Select Competition</div>
-                                <div className="award-buttons-container">{this.renderCompetitionList()}</div>
-                                <a className="scale-arrowupicon-img" onClick={this.toggle}>
-                                    <img src={require("../resources/awardIcons/arrowUpIcon.png")} alt="lock-icon"></img>
-                                </a>
+                            <Collapse isOpened={this.state.collapse} fixedHeight={this.collapseHeight()}>
+                                <div className="push-top-92px">
+                                    <div className="award-buttons-container">{this.renderCompetitionList()}</div>
+                                    <a className="scale-arrowupicon-img" onClick={this.toggle}>
+                                        <img src={require("../resources/awardIcons/arrowUpIcon.png")} alt="lock-icon"></img>
+                                    </a>
+                                </div>
                             </Collapse>
                         </Col>
                     </Row>
-                    <div className={this.isBestInMonth ? "awards-container-background margin-top-43px" :
-                    "awards-container-background margin-top-60px"}>
+                    <div className={this.state.collapse ? "awards-container-background top-1px" :
+                    "awards-container-background top-60px"}>
                     <div className="line adjust-top-line"></div>
                     <Row className="awards-container pad-top-30px">
-                        <Col xs={4}sm={4}md={4} className="push-bottom-49px">
-                            {this.renderAccuracyCircle(this.getInitialAward(),
-                                this.getIndexByCompetitionName(this.getInitialAward().competitionName))}
+                        <Col xs={4}sm={4}md={4} className="push-bottom-49px remove-left-right-paddings">
+                            {
+                                this.renderAccuracyCircle(
+                                    this.getInitialAward(),
+                                    this.getIndexByCompetitionName(this.getInitialAward().competitionName)
+                                )
+                            }
                         </Col>
-                        <Col xs={7}sm={7}md={7}>
-                            <Row className="push-bottom-13px">
-                                <Col xs={4}sm={4}md={4}>
+                        <Col className="limit-width remove-left-right-paddings">
+                            <Row className="push-bottom-13px safari-flex">
+                                <Col xs={this.iOS ? 3 : 4}sm={this.iOS ? 3 : 4}md={this.iOS ? 3 : 4}>
                                     <label className={this.getInitialAward().accuracyAward.bronze ?
                                         "unlocked-award-text font-size-14px" : 
                                         "locked-award-text font-size-14px"}>BRONZE</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2}>
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
                                     {this.getInitialAward().accuracyAward.bronze 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
-                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
+                                <Col xs={6}sm={6}md={6} className="remove-left-right-paddings remove-paddings-for-desktop">
                                     <label className={this.getInitialAward().accuracyAward.bronze ? 
                                         "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
@@ -328,18 +385,18 @@ class UserProfile extends Component {
                                     </label>
                                 </Col>
                             </Row>
-                            <Row className="push-bottom-13px">
-                                <Col xs={4}sm={4}md={4}>
+                            <Row className="push-bottom-13px safari-flex">
+                                <Col xs={this.iOS ? 3 : 4}sm={this.iOS ? 3 : 4}md={this.iOS ? 3 : 4}>
                                 <label className={this.getInitialAward().accuracyAward.silver ? 
                                     "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>SILVER</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2}>
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
                                     {this.getInitialAward().accuracyAward.silver 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
-                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
+                                <Col xs={6}sm={6}md={6} className="remove-left-right-paddings remove-paddings-for-desktop">
                                     <label className={this.getInitialAward().accuracyAward.silver ? 
                                         "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
@@ -348,16 +405,16 @@ class UserProfile extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={4}sm={4}md={4}>
+                                <Col xs={this.iOS ? 3 : 4}sm={this.iOS ? 3 : 4}md={this.iOS ? 3 : 4}>
                                 <label className={this.getInitialAward().accuracyAward.gold ? "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>GOLD</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2}>
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
                                     {this.getInitialAward().accuracyAward.gold 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
-                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
+                                <Col xs={6}sm={6}md={6} className="remove-left-right-paddings remove-paddings-for-desktop">
                                     <label className={this.getInitialAward().accuracyAward.gold ? 
                                         "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
@@ -369,23 +426,23 @@ class UserProfile extends Component {
                     </Row>
                     <div className="line adjust-bottom-line"></div>
                     <Row className="awards-container">
-                        <Col xs={4}sm={4}md={4} className="push-bottom-49px">
+                        <Col xs={4}sm={4}md={4} className="push-bottom-49px remove-left-right-paddings">
                             {this.renderTotalCircle(this.getInitialAward(),
                             this.getIndexByCompetitionName(this.getInitialAward().competitionName))}
                         </Col>
-                        <Col xs={7}sm={7}md={7}>
+                        <Col className="limit-width remove-left-right-paddings">
                             <Row className="push-bottom-13px">
-                                <Col xs={4}sm={4}md={4}>
+                                <Col xs={this.iOS ? 3 : 4}sm={this.iOS ? 3 : 4}md={this.iOS ? 3 : 4}>
                                 <label className={this.getInitialAward().totalAward.bronze ? 
                                     "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>BRONZE</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2}>
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
                                     {this.getInitialAward().totalAward.bronze 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
-                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
+                                <Col xs={6}sm={6}md={6} className="remove-left-right-paddings remove-paddings-for-desktop">
                                     <label className={this.getInitialAward().totalAward.bronze ? 
                                         "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
@@ -394,18 +451,18 @@ class UserProfile extends Component {
                                 </Col>
                             </Row>
                             <Row className="push-bottom-13px">
-                                <Col xs={4}sm={4}md={4}>
+                                <Col xs={this.iOS ? 3 : 4}sm={this.iOS ? 3 : 4}md={this.iOS ? 3 : 4}>
                                 <label className={this.getInitialAward().totalAward.silver ? 
                                     "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>SILVER</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2}>
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
                                     {this.getInitialAward().totalAward.silver 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
-                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
-                                <label className={this.getInitialAward().totalAward.silver ? 
+                                <Col xs={6}sm={6}md={6} className="remove-left-right-paddings remove-paddings-for-desktop">
+                                    <label className={this.getInitialAward().totalAward.silver ? 
                                         "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
                                         {this.getInitialAward().totalAward.silverRequirementStatus}
@@ -413,17 +470,17 @@ class UserProfile extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={4}sm={4}md={4}>
+                                <Col xs={this.iOS ? 3 : 4}sm={this.iOS ? 3 : 4}md={this.iOS ? 3 : 4}>
                                 <label className={this.getInitialAward().totalAward.gold ?
                                     "unlocked-award-text font-size-14px" : 
                                     "locked-award-text font-size-14px"}>GOLD</label>
                                 </Col>
-                                <Col xs={2}sm={2}md={2}>
+                                <Col xs={2}sm={2}md={2} className={this.iOS ? "margin-left-19px": ""}>
                                     {this.getInitialAward().totalAward.gold 
                                     ? this.renderMedalIcon() : 
                                     this.renderLockedIcon()}
                                 </Col>
-                                <Col xs={6}sm={6}md={6} className="remove-right-padding">
+                                <Col xs={6}sm={6}md={6} className="remove-left-right-paddings remove-paddings-for-desktop">
                                     <label className={this.getInitialAward().totalAward.gold ? 
                                         "reached-award unlocked-award-text":
                                         "reached-award locked-award-text"}>
@@ -437,7 +494,7 @@ class UserProfile extends Component {
                     </div>
                 </div>
                 //only render when the data has arrived from backend
-                : null}
+                : this.renderLoader()}
             </div>
         )
     }

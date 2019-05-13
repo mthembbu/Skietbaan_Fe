@@ -15,11 +15,16 @@ import {
   FETCH_LEADERBOARDFILTER_DATA,
   FETCH_LEADERBOARDTABLE_DATA,
   UPDATE_SELECTED_COMPETITION,
-  UPDATE_SELECTED_GROUP
+  UPDATE_SELECTED_GROUP,
+  GROUP_DATA_LOADING,
+  ADMINSTAT,
+  BINSTATE,
+  SCREEN_SIZE
 } from "./types";
 
 /** The method to feth the already available data for posts*/
 export const fetchGroups = () => dispatch => {
+  dispatch({ type: GROUP_DATA_LOADING });
   fetch(BASE_URL + "/api/Groups")
     .then(res => res.json())
     .then(group => {
@@ -38,16 +43,20 @@ export const fetchGroups = () => dispatch => {
 };
 
 export const AddMemberAction = id => dispatch => {
+  dispatch({ type: GROUP_DATA_LOADING });
+  const arr = [];
   fetch(BASE_URL + "/api/Groups/list?id=" + id)
     .then(res => res.json())
     .then(posts => {
       const newdata = posts.map(users => {
         users.highlighted = false;
+        arr.push(users.id);
         return users;
       });
       dispatch({
         type: ADDMEMBERS,
-        payload: newdata
+        payload: newdata,
+        pay: arr
       });
     })
     .catch(err => {
@@ -89,16 +98,20 @@ export const getName = name => {
 };
 
 export const fetchEditUser = groupid => dispatch => {
+  dispatch({ type: GROUP_DATA_LOADING });
+  const ar = [];
   fetch(BASE_URL + "/api/Groups/edit?id=" + groupid)
     .then(res => res.json())
     .then(data => {
       const newdata = data.map(user => {
         user.highlighted = false;
+        ar.push(user.id);
         return user;
       });
       dispatch({
         type: EDITGROUPUSERS,
-        payload: newdata
+        payload: newdata,
+        pay: ar
       });
     })
     .catch(err => {
@@ -151,14 +164,14 @@ export const fetchleaderboadfilterdata = token => dispatch => {
 export const fetchleaderboadtabledata = filterSelection => dispatch => {
   fetch(
     BASE_URL +
-      "/api/Leaderboard/GetLeaderboardRankings?competitionID=" +
-      filterSelection.selectedCompetition +
-      "&groupID=" +
-      filterSelection.selectedGroup +
-      "&userToken=" +
-      filterSelection.userToken +
-      "&selectedRank=" +
-      filterSelection.selectedRank
+    "/api/Leaderboard/GetLeaderboardRankings?competitionID=" +
+    filterSelection.selectedCompetition +
+    "&groupID=" +
+    filterSelection.selectedGroup +
+    "&userToken=" +
+    filterSelection.userToken +
+    "&selectedRank=" +
+    filterSelection.selectedRank
   )
     .then(res => res.json())
     .then(data =>
@@ -231,3 +244,36 @@ export const selectedPage = num => {
     });
   };
 };
+
+export const adminstat = () => dispatch => {
+  fetch(BASE_URL + "/adminstat")
+    .then(res => res.json())
+    .then(stat => {
+      dispatch({
+        type: ADMINSTAT,
+        payload: stat
+      });
+    })
+    .catch(err => {
+      /* DO SOMETHING WITH THE  ERROR TYPE CAUGHT*/
+    });
+};
+
+
+export const binStateFunc = (num) => {
+  return dispatch => {
+    dispatch({
+      type: BINSTATE,
+      payload: num
+    });
+  };
+};
+
+export const setScreenSize = (size) =>{
+  return dispatch => {
+    dispatch({
+      type: SCREEN_SIZE,
+      payload: size
+    });
+  }
+}

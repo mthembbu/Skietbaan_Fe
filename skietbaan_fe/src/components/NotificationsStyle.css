@@ -19,6 +19,7 @@
     margin-top: -50px;
     float: left;
     margin-left: 70%;
+    cursor: pointer;
   }
 
   .disabled-button {
@@ -32,6 +33,7 @@
     width: 20px;
     float: left;
     margin-left: 88%;
+    cursor: pointer;
   }
 
   .admin-black-delete-icon {
@@ -41,6 +43,7 @@
     width: 20px;
     float: left;
     margin-left: 88%;
+    cursor: pointer;
   }
 
   .admin-notification-images {
@@ -50,6 +53,7 @@
     margin-top: -50px;
     float: left;
     margin-left: 50%;
+    cursor: pointer;
   }
 
   .announcement-spacing {
@@ -88,7 +92,6 @@
     color: white;
     border-style: none;
     border: none;
-    height: -webkit-fill-available;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -106,8 +109,8 @@
     background-size: 24px;
     height: 24px;
     padding-right: 27px;
-    margin-left: 19px;
-    margin-right: 33px;
+    margin-left: 18px;
+    margin-right: 19px;
   }
 
   .notifications-images:hover {
@@ -266,11 +269,11 @@
   .notifications-modal-confirm {
     font-weight: lighter;
     font-size: 16px;
-    background-color: #dc0600;
+    background-color: #ea251a;
     border-radius: 25px;
     width: 90%;
     height: 42px;
-    border-color: #dc0600;
+    border-color: #ea251a;
     border-width: 1.5px;
     border: none;
   }
@@ -291,7 +294,7 @@
 
   .empty {
     border-style: solid;
-    border-width: thin;
+    border-width: 1px;
     border-color: #be0000;
     color: #be0000;
     margin-top: 30%;
@@ -300,8 +303,9 @@
     padding-right: 20%;
     padding-bottom: 9%;
     font-family: Helvetica;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: lighter;
+    border-radius: 5px;
     border-radius: 5px;
   }
 
@@ -362,7 +366,6 @@
     border-top-left-radius: 20px;
     background: #ffffff;
     height: 56px;
-    margin-bottom: 56px;
   }
 
   .first-column-notify {
@@ -448,6 +451,7 @@
     height: 26px;
     width: 20px;
     float: left;
+    cursor: pointer;
   }
 
   .admin-black-delete-icon {
@@ -624,11 +628,11 @@
   .notifications-modal-confirm {
     font-weight: lighter;
     font-size: 16px;
-    background-color: #dc0600;
+    background-color: #ea251a;
     border-radius: 25px;
     width: 95%;
     height: 42px;
-    border-color: #dc0600;
+    border-color: #ea251a;
     border-width: 1.5px;
     border: none;
   }
@@ -649,7 +653,7 @@
 
   .empty {
     border-style: solid;
-    border-width: thin;
+    border-width: 1px;
     border-color: #be0000;
     color: #be0000;
     margin-top: 30%;
@@ -658,7 +662,7 @@
     padding-right: 20%;
     padding-bottom: 11%;
     font-family: Helvetica;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: lighter;
     border-radius: 5px;
   }
@@ -779,4 +783,9 @@
 .format-content {
   height: fit-content;
   overflow-y: overlay;
+}
+
+.loader-formatting {
+  height: 290px;
+  padding-top: 84px;
 }

@@ -57,9 +57,29 @@
     padding: 0;
   }
   .col-sm-8{
-    max-width: 54%;
-    box-shadow: 13px 2px 18px -10px grey, -6px 1px 9px -6px grey;
+    max-width: 58%;
   }
+  /* Main container css to be consistant with other pages */
+    /* notification and create pages */
+    .createpage-bootstrap-col-center-container{
+      margin-bottom: 5vh !important;
+      z-index: 1;
+      overflow-y: overlay hidden;
+      border-bottom-left-radius: 13px;
+      border-bottom-right-radius: 13px;
+      box-shadow: 2px 1px 16px -3px rgba(127,127,127,0.5);
+      height: 95vh; 
+    }
+    /* profile page */
+   .profile-bootstrap-col-center-container{
+    margin-bottom: 5vh !important;
+    z-index: 1;
+    overflow: overlay hidden;
+    border-bottom-left-radius: 13px;
+    border-bottom-right-radius: 13px;
+    box-shadow: 2px 1px 16px -3px rgba(127,127,127,0.5);
+    height: 95vh;
+    }
 }
 
 @media only screen and (max-width: 575px) {
@@ -140,7 +160,7 @@
 }
 
 .profile-icon-grey {
-  height: 27px;
+  height: 26px;
   width: 28px;
 }
 
