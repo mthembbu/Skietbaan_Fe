@@ -9,7 +9,7 @@ import Export from "../components/assets/Export.png";
 import RedBullet from "../components/assets/RedBullet.png";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
-import { fetchNumberOfNotification, exportIsClicked, exportCSV,changeExportState } from "../actions/notificationAction";
+import { fetchNumberOfNotification, exportIsClicked, exportCSV, changeExportState,filterName ,exportTextName} from "../actions/notificationAction";
 import { pageState } from '../actions/postActions';
 import exportClick from "../components/assets/exportPress.png";
 import deleteButton from '../components/GroupImages/deleteS.png';
@@ -27,7 +27,7 @@ class ViewNonMembers extends Component {
       updateName: "",
       indexNumber: 0,
       dateValue: "",
-      durationDate:"",
+      durationDate: "",
       lastSize: 0,
       navbarState: false,
       arrowChange: false,
@@ -40,13 +40,13 @@ class ViewNonMembers extends Component {
       token: getCookie("token"),
       emptyMemberNumber: false,
       dateCheck: false,
-      date2Check:false,
+      date2Check: false,
       exportResponse: "",
       dateErrormsg: false,
-      date2Errormsg:false,
+      date2Errormsg: false,
       userIndex: 0,
       done: false,
-      lineState:true
+      lineState: true
     };
     this.getTimeLeft = this.getTimeLeft.bind(this);
     this.onChangeText = this.onChangeText.bind(this);
@@ -89,6 +89,7 @@ class ViewNonMembers extends Component {
   }
   componentWillMount() {
     window.addEventListener("resize", this.updateDimensions);
+     this.props.filterName(["users"]);
     this.props.changeExportState(false);
   }
   componentDidMount() {
@@ -197,7 +198,7 @@ class ViewNonMembers extends Component {
 
   updateMember(index) {
     if (this.state.membershipIds.indexOf(this.state.membershipsID.toString()) === -1) {
-      if (this.state.membershipsID.length !== "") {
+      if (this.state.membershipsID.length != "") {
         if (this.state.dateCheck === true && this.state.date2Check === true) {
           let RequestObject = {
             username: this.state.array[index].username,
@@ -215,6 +216,7 @@ class ViewNonMembers extends Component {
           })
             .then(function (response) {
               return response.json();
+
             })
             .then(data => {
               this.setState({ done: true });
@@ -292,15 +294,17 @@ class ViewNonMembers extends Component {
     } else {
       this.state.array[index].selected = !this.state.array[index].selected;
     }
-    this.setState({ membershipsID: "", userIndex: index,durationDate:"",dateValue:""});
+    this.setState({ membershipsID: "", userIndex: index, durationDate: "", dateValue: "" });
     this.forceUpdate();
   };
 
   ExportData = () => {
     let token = getCookie("token");
-    const fData = { getFilterName:this.props.filterName, getAdminToken:token };
+    const fData = { getFilterName: this.props.filterNames, getAdminToken: token};
+    this.setState({exportMsg:true})
     this.props.exportCSV(fData);
-    this.props.exportIsClicked();
+    this.props.exportTextName("EXPORT USERS");
+    this.props.filterName(["users"]);
   };
 
   timeout(duration) {
@@ -310,7 +314,6 @@ class ViewNonMembers extends Component {
   }
 
   render() {
-
     if (!getCookie("token")) {
       window.location = "/registerPage";
     }
@@ -361,8 +364,8 @@ class ViewNonMembers extends Component {
                                   {posts.email}
                                 </div>
                               </div>
-                              
-                               <div className="view-non-members-arrow">
+
+                              <div className="view-non-members-arrow">
                                 {posts.selected === true ? (
                                   <img
                                     className="view-non-members-image"
@@ -375,10 +378,10 @@ class ViewNonMembers extends Component {
                                     />
                                   )}
                               </div>
-                              {posts.selected===false?
-                              <div className="bottom-line"/>:null}
+                              {posts.selected === false ?
+                                <div className="bottom-line" /> : null}
                             </div>
-                            
+
                           }
                         >
                           <div className="membership-details">
@@ -415,26 +418,26 @@ class ViewNonMembers extends Component {
                                 {this.state.dateErrormsg === true ?
                                   <label className="non-member-Date-error-msg">Date selected is invalid</label> : null}
                               </div> : null}
-                              {this.state.done===false?
-                            <div className="date-duration-of-membership">
-                              <input
-                                onFocus={this._onFocus}
-                                onBlur={this._onBlur}
-                                className="duration-calender"
-                                id="expdate"
-                                required
-                                data-date-format="yyyy-mm-dd"
-                                placeholder="Duration of Membership"
-                                value={this.state.durationDate}
-                                onChange={this.handleDate2Change}
-                              />
-                               {this.state.date2Errormsg === true ?
+                            {this.state.done === false ?
+                              <div className="date-duration-of-membership">
+                                <input
+                                  onFocus={this._onFocus}
+                                  onBlur={this._onBlur}
+                                  className="duration-calender"
+                                  id="expdate"
+                                  required
+                                  data-date-format="yyyy-mm-dd"
+                                  placeholder="Duration of Membership"
+                                  value={this.state.durationDate}
+                                  onChange={this.handleDate2Change}
+                                />
+                                {this.state.date2Errormsg === true ?
                                   <label className="non-member-Date-error-msg">Date selected is invalid</label> : null}
-                            </div>:null}
+                              </div> : null}
                             {this.state.done === false ?
                               <div>
                                 <button
-                                  className={(this.state.dateValue !== "" &&this.state.durationDate !== "" && this.state.membershipsID !== ""&& this.state.date2Errormsg === false && this.state.dateErrormsg === false) ? "view-non-members-confirm" : "view-non-members-confirm-inactive"}
+                                  className={(this.state.dateValue != "" && this.state.durationDate != "" && this.state.membershipsID != "" && this.state.date2Errormsg === false && this.state.dateErrormsg === false) ? "view-non-members-confirm" : "view-non-members-confirm-inactive"}
                                   onClick={() => this.updateMember(index)}
                                 >
                                   CONFIRM MEMBERSHIP
@@ -482,7 +485,7 @@ class ViewNonMembers extends Component {
                   src={this.props.isClicked === false ? Export : deleteButton}
                   className="export-icon"
                   alt="Is a Member"
-                  onClick={this.props.exportIsClicked}
+                  onClick={()=>this.props.exportIsClicked("users")}
                 />
               </div>
             </Col>
@@ -535,20 +538,18 @@ class ViewNonMembers extends Component {
           </div>
         ) : (
             <div>
-              {this.state.exportResponse !== "" && !this.state.exportResponse.startsWith("Could")
+              {this.props.filterData !== "" && !this.props.filterData.startsWith("Could")
                 ? this.timeout(2000)
                 : this.timeout(6000)}
               <div className="exportMsg-container">
                 <label className="exportMsg-responce">
-                  {this.state.exportResponse}
+                  {this.props.filterData}
                 </label>
-                {this.state.exportResponse !== "" && !this.state.exportResponse.startsWith("Could") ?
                   <img
                     src={RedBullet}
                     className="export-success"
                     alt="Is a Member"
-                  /> : null
-                }
+                  />
 
               </div>
             </div>
@@ -559,16 +560,17 @@ class ViewNonMembers extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	isClicked: state.notificationOBJ.isClicked,
-	userIsClicked: state.notificationOBJ.userIsClicked,
-	memberIsClicked: state.notificationOBJ.memberIsClicked,
+  isClicked: state.notificationOBJ.isClicked,
+  userIsClicked: state.notificationOBJ.userIsClicked,
+  memberIsClicked: state.notificationOBJ.memberIsClicked,
   expiredIsClicked: state.notificationOBJ.expiredIsClicked,
-  filterName: state.notificationOBJ.filterName,
-  ExportWrittenText: state.notificationOBJ.ExportWrittenText
-  });
+  filterNames: state.notificationOBJ.filterName,
+  ExportWrittenText: state.notificationOBJ.ExportWrittenText,
+  filterData: state.notificationOBJ.filterData,
+});
 
 
 export default connect(
   mapStateToProps,
-  { fetchNumberOfNotification, pageState, exportIsClicked, exportCSV ,changeExportState}
+  { fetchNumberOfNotification, pageState, exportIsClicked, exportCSV, changeExportState,filterName,exportTextName }
 )(ViewNonMembers);
