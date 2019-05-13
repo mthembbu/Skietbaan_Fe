@@ -13,7 +13,7 @@ import {
   EXPORT_CSV,
   EXPORT_BUTTON_TEXT,
   ADD_FILTER_NAME,
-  EXPORTSTATE
+  EXPORTSTATE,
 } from "../actions/types";
 
 const initialState = {
@@ -30,7 +30,8 @@ const initialState = {
   updatedNotification: {},
   numberOfNotifications: 0,
   loading: null,
-  ExportWrittenText:""
+  ExportWrittenText:"",
+  exportResponse:""
 };
 
 export default function(state = initialState, action) {
@@ -86,10 +87,12 @@ export default function(state = initialState, action) {
     case IS_CLICKED:
       return {
         ...state,
+        
         isClicked: !state.isClicked,
         userIsClicked: false,
         memberIsClicked: false,
-        expiredIsClicked: false
+        expiredIsClicked: false,
+        filterName:action.payload
       };
     
     case EXPIRED_IS_CLICKED:
@@ -130,9 +133,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         filterName: action.payload
-      };  
-    
-    
+      }; 
     default:
       return state;
   }
