@@ -308,7 +308,7 @@ class UserProfile extends Component {
                 <div className="remove-right-padding">
                     <Row className="fix-buttons-rectangle">
                         <Col>
-                        <a onClick={this.toggle} className="make-cursor-point">
+                        <div onClick={this.toggle} className="make-cursor-point">
                         <div className="buttons-rectangle">
                             <div className="scale-gun-type-img">
                                 {this.getInitialAward().competitionName.includes("Rifle") || 
@@ -333,7 +333,7 @@ class UserProfile extends Component {
                                 </div>
                             </div>
                         </div>
-                        </a>
+                        </div>
                         </Col>
                         {
                             this.state.collapse ? 
@@ -346,9 +346,9 @@ class UserProfile extends Component {
                             <Collapse isOpened={this.state.collapse} fixedHeight={this.collapseHeight()}>
                                 <div className="push-top-92px">
                                     <div className="award-buttons-container">{this.renderCompetitionList()}</div>
-                                    <a className="scale-arrowupicon-img" onClick={this.toggle}>
+                                    <div className="scale-arrowupicon-img" onClick={this.toggle}>
                                         <img src={require("../resources/awardIcons/arrowUpIcon.png")} alt="lock-icon"></img>
-                                    </a>
+                                    </div>
                                 </div>
                             </Collapse>
                         </Col>

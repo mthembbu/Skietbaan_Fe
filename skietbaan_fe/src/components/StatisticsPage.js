@@ -138,8 +138,8 @@ class StatisticsPage extends Component {
                     for(var i = 0; i < _response.length; i += 2){
                         this.userAccuracyData.push(_response[i]);
                     }
-                    for(var i = 0; i < _response.length; i += 3){
-                        this.groupAccuracyData.push(_response[i]);
+                    for(var j = 0; j < _response.length; j += 3){
+                        this.groupAccuracyData.push(_response[j]);
                     }
                     this.prevSelectedComp = this.state.selectedCompetition;
                     this.prevSelectedGroup = this.state.selectedGroup;
