@@ -52,7 +52,7 @@ export class StatPage extends Component {
                                 </Row>
                             </Col>
                             <Col className="percentang-of-the-increase-of-user">
-                                +{this.props.adminstats["new user percentage"]}%
+                                + {this.props.adminstats["new user percentage"]} %
                     </Col>
                         </Row>
                     </Col>
@@ -77,7 +77,7 @@ export class StatPage extends Component {
                                 </div>
                             </Col>
                             <Col className="admin-member-second-col">
-                                +{this.props.adminstats["new member percentage"]}%
+                                + {this.props.adminstats["new member percentage"]} %
                     </Col>
                         </Row>
                         <Row className="admin-expiring-third-row">

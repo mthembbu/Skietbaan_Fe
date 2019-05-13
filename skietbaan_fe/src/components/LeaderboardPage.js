@@ -7,7 +7,6 @@ import {
 import { fetchleaderboadtabledata } from "../actions/postActions";
 import { updateSelectedCompetition } from "../actions/postActions";
 import { updateSelectedGroup } from "../actions/postActions";
-import Collapsible from "react-collapsible";
 import { Collapse } from "react-collapse";
 import { Table, Col } from "react-bootstrap";
 import { getCookie } from "./cookie.js";
@@ -127,8 +126,8 @@ class LeaderboardPage extends Component {
     var competition = -1;
     var group = -1;
     if (
-      this.props.selectedCompetitionName != undefined &&
-      this.props.selectedGroupName != undefined
+      this.props.selectedCompetitionName !== undefined &&
+      this.props.selectedGroupName !== undefined
     ) {
       if (this.props.selectedCompetitionName.length > 0) {
         for (var i = 0; i < this.props.competitions.length; i++) {
@@ -145,12 +144,12 @@ class LeaderboardPage extends Component {
       }
 
       if (this.props.selectedGroupName.length > 0) {
-        for (var i = 0; i < this.props.groups.length; i++) {
-          if (this.props.groups[i].label === this.props.selectedGroupName) {
+        for (var j = 0; j < this.props.groups.length; j++) {
+          if (this.props.groups[j].label === this.props.selectedGroupName) {
             this.setState({
-              selectedGroup: i
+              selectedGroup: j
             });
-            group = this.props.groups[i].value;
+            group = this.props.groups[j].value;
           }
         }
       }
@@ -190,7 +189,7 @@ class LeaderboardPage extends Component {
     } else {
       this.props.updateSelectedGroup(this.props.groups[value].label);
     }
-    if (value == -1) {
+    if (value === -1) {
       this.getLeaderboardData(
         this.props.competitions[this.state.selectedCompetition].value,
         -1,
@@ -236,7 +235,7 @@ class LeaderboardPage extends Component {
       return (
         <div className="member-container">
           <div className="status-icon">
-            <img src={require("../resources/member.png")} />
+            <img src={require("../resources/member.png")} alt=""/>
           </div>
           <div className="label">Member</div>
         </div>
@@ -245,7 +244,7 @@ class LeaderboardPage extends Component {
       return (
         <div className="member-container">
           <div className="status-icon">
-            <img src={require("../resources/guest.png")} />
+            <img src={require("../resources/guest.png")} alt=""/>
           </div>
           <div className="label">User</div>
         </div>
@@ -287,7 +286,7 @@ class LeaderboardPage extends Component {
     }
   }
   getCurentUserRankNumber(rankingList) {
-    if (rankingList != undefined) {
+    if (rankingList !== undefined) {
       for (var i = 0; i < rankingList.length; i++) {
         if (rankingList[i].username === this.props.userResults.username) {
           return rankingList[i].rank;
@@ -412,19 +411,19 @@ class LeaderboardPage extends Component {
                     <div className="member-status-icons">
                       <div className="membership-icon">
                         {post.isMember ? (
-                          <img src={require("../resources/member.png")} />
+                          <img src={require("../resources/member.png")} alt=""/>
                         ) : (
-                          <img src={require("../resources/guest.png")} />
+                          <img src={require("../resources/guest.png")} alt=""/>
                         )}
                       </div>
                       <div className="dedication-icon">
                         {post.isCompetitiveShooter ? (
                           <img
-                            src={require("../resources/dedicatedShooter.png")}
+                            src={require("../resources/dedicatedShooter.png")} alt=""
                           />
                         ) : (
                           <img
-                            src={require("../resources/standardShooter.png")}
+                            src={require("../resources/standardShooter.png")} alt=""
                           />
                         )}
                       </div>
@@ -437,11 +436,11 @@ class LeaderboardPage extends Component {
                         {post.rank > 3 ? (
                           <div className="number">{post.rank}</div>
                         ) : post.rank === 1 ? (
-                          <img src={require("../resources/rank1.png")} />
+                          <img src={require("../resources/rank1.png")} alt=""/>
                         ) : post.rank === 2 ? (
-                          <img src={require("../resources/rank2.png")} />
+                          <img src={require("../resources/rank2.png")} alt=""/>
                         ) : post.rank === 3 ? (
-                          <img src={require("../resources/rank3.png")} />
+                          <img src={require("../resources/rank3.png")} alt=""/>
                         ) : null}
                       </div>
                       <div className="down-arrow">
@@ -474,7 +473,7 @@ class LeaderboardPage extends Component {
                               : "score-col"
                           }
                         >
-                          {post.best != 0
+                          {post.best !== 0
                             ? this.roundOfScores(post.best)
                             : "--"}
                         </td>
@@ -490,14 +489,14 @@ class LeaderboardPage extends Component {
                               <div className="up-arrow-icon">
                                 {post.rankStatus === "up" ? (
                                   <img
-                                    src={require("../resources/accuracyUp.png")}
+                                    src={require("../resources/accuracyUp.png")} alt=""
                                   />
                                 ) : null}
                               </div>
                             </div>
                             <div className="ranking">
                               <div className="number">
-                                {post.average != 0
+                                {post.average !== 0
                                   ? this.roundOfScores(post.average)
                                   : "--"}
                               </div>
@@ -506,7 +505,7 @@ class LeaderboardPage extends Component {
                               <div className="down-arrow-icon">
                                 {post.rankStatus === "down" ? (
                                   <img
-                                    src={require("../resources/accuracyDown.png")}
+                                    src={require("../resources/accuracyDown.png")} alt=""
                                   />
                                 ) : null}
                               </div>
@@ -520,7 +519,7 @@ class LeaderboardPage extends Component {
                               : "score-col"
                           }
                         >
-                          {post.total != 0
+                          {post.total !== 0
                             ? this.roundOfScores(post.total)
                             : "--"}
                         </td>
@@ -562,8 +561,8 @@ class LeaderboardPage extends Component {
                                 opacity: style.opacity
                               }}
                             >
-                              {this.props.competitions.length != 0
-                                ? this.state.selectedCompetition == -1
+                              {this.props.competitions.length !== 0
+                                ? this.state.selectedCompetition === -1
                                   ? this.props.competitions[
                                       this.state.selectedCompetition + 1
                                     ].label
@@ -586,7 +585,7 @@ class LeaderboardPage extends Component {
                           style={{ cursor: this.disableFilterButton() }}
                           onClick={this.onMouseClickFilter}
                         >
-                          <img src={require("../resources/filter.png")} />
+                          <img src={require("../resources/filter.png")} alt=""/>
                         </MDBBtn>
                       </div>
                     </td>
@@ -599,7 +598,7 @@ class LeaderboardPage extends Component {
                 <div className="category-selection">
                   <div
                     className={
-                      this.state.listType == "competitions"
+                      this.state.listType === "competitions"
                         ? "choose-comps-active"
                         : "choose-comps"
                     }
@@ -616,7 +615,7 @@ class LeaderboardPage extends Component {
                   </div>
                   <div
                     className={
-                      this.state.listType == "groups"
+                      this.state.listType === "groups"
                         ? "choose-groups-active"
                         : "choose-groups"
                     }
@@ -633,15 +632,15 @@ class LeaderboardPage extends Component {
                   </div>
                 </div>
                 <div className="cat-visible-label">
-                  {this.state.listType == "competitions"
+                  {this.state.listType === "competitions"
                     ? "Select Competition"
                     : "Select Ranking"}
                 </div>
                 <div
                   className={
-                    this.state.listType == "competitions"
+                    this.state.listType === "competitions"
                       ? "hide-my-div"
-                      : this.state.selectedGroup == -1
+                      : this.state.selectedGroup === -1
                       ? "individual-active"
                       : "individual-inactive"
                   }
@@ -658,7 +657,7 @@ class LeaderboardPage extends Component {
                 </div>
                 <div
                   className={
-                    this.state.listType == "groups"
+                    this.state.listType === "groups"
                       ? "cat-visible-groups-label"
                       : "hide-my-div"
                   }
@@ -679,7 +678,7 @@ class LeaderboardPage extends Component {
                         style={{ height: this.getClickableSpaceSize() + "px" }}
                         onClick={this.onMouseClickFilter}
                       />
-                      {this.state.listType == "competitions"
+                      {this.state.listType === "competitions"
                         ? competitionsList
                         : groupsList}
                       <div
@@ -695,7 +694,7 @@ class LeaderboardPage extends Component {
                       onClick={this.onMouseClickFilter}
                     >
                       <MDBBtn tag="a" size="lg" floating gradient="purple">
-                        <img src={require("../resources/upArrow.png")} />
+                        <img src={require("../resources/upArrow.png")} alt="up-arrow"/>
                       </MDBBtn>
                     </div>
                   </div>
@@ -740,7 +739,7 @@ class LeaderboardPage extends Component {
                     <td
                       colSpan="1"
                       className={
-                        this.state.selectedRank == "best"
+                        this.state.selectedRank === "best"
                           ? "active-label-col"
                           : "inactive-label-col"
                       }
@@ -751,7 +750,7 @@ class LeaderboardPage extends Component {
                     <td
                       colSpan="1"
                       className={
-                        this.state.selectedRank == "average"
+                        this.state.selectedRank === "average"
                           ? "active-label-col"
                           : "inactive-label-col"
                       }
@@ -762,7 +761,7 @@ class LeaderboardPage extends Component {
                     <td
                       colSpan="1"
                       className={
-                        this.state.selectedRank == "total"
+                        this.state.selectedRank === "total"
                           ? "active-label-col"
                           : "inactive-label-col"
                       }
@@ -829,14 +828,14 @@ class LeaderboardPage extends Component {
                                             {this.props.currentUser !== null ? (
                                               this.props.currentUser
                                                 .memberID === null ||
-                                              this.props.currentUser.memberID ==
+                                              this.props.currentUser.memberID ===
                                                 "" ? (
                                                 <img
-                                                  src={require("../resources/guestW.png")}
+                                                  src={require("../resources/guestW.png")} alt=""
                                                 />
                                               ) : (
                                                 <img
-                                                  src={require("../resources/memberW.png")}
+                                                  src={require("../resources/memberW.png")} alt=""
                                                 />
                                               )
                                             ) : this.props.userResults !==
@@ -844,11 +843,11 @@ class LeaderboardPage extends Component {
                                               this.props.userResults
                                                 .isMember ? (
                                                 <img
-                                                  src={require("../resources/memberW.png")}
+                                                  src={require("../resources/memberW.png")} alt=""
                                                 />
                                               ) : (
                                                 <img
-                                                  src={require("../resources/guestW.png")}
+                                                  src={require("../resources/guestW.png")} alt=""
                                                 />
                                               )
                                             ) : null}
@@ -857,11 +856,11 @@ class LeaderboardPage extends Component {
                                             {this.props.currentUser
                                               .isCompetitiveShooter ? (
                                               <img
-                                                src={require("../resources/dedicatedShooterW.png")}
+                                                src={require("../resources/dedicatedShooterW.png")} alt=""
                                               />
                                             ) : (
                                               <img
-                                                src={require("../resources/standardShooterW.png")}
+                                                src={require("../resources/standardShooterW.png")} alt=""
                                               />
                                             )}
                                           </div>
@@ -883,17 +882,17 @@ class LeaderboardPage extends Component {
                                             ) : this.props.userResults.rank ===
                                               1 ? (
                                               <img
-                                                src={require("../resources/rank1.png")}
+                                                src={require("../resources/rank1.png")} alt=""
                                               />
                                             ) : this.props.userResults.rank ===
                                               2 ? (
                                               <img
-                                                src={require("../resources/rank2.png")}
+                                                src={require("../resources/rank2.png")} alt=""
                                               />
                                             ) : this.props.userResults.rank ===
                                               3 ? (
                                               <img
-                                                src={require("../resources/rank3.png")}
+                                                src={require("../resources/rank3.png")} alt=""
                                               />
                                             ) : null}
                                           </div>
@@ -935,7 +934,7 @@ class LeaderboardPage extends Component {
                                             </td>
                                             <td
                                               className={
-                                                this.state.selectedRank ==
+                                                this.state.selectedRank ===
                                                 "best"
                                                   ? "score-col-active"
                                                   : "score-col"
@@ -950,7 +949,7 @@ class LeaderboardPage extends Component {
                                             </td>
                                             <td
                                               className={
-                                                this.state.selectedRank ==
+                                                this.state.selectedRank ===
                                                 "average"
                                                   ? "score-col-active"
                                                   : "score-col"
@@ -964,7 +963,7 @@ class LeaderboardPage extends Component {
                                                         .userResults
                                                         .rankStatus === "up" ? (
                                                       <img
-                                                        src={require("../resources/accuracyUp.png")}
+                                                        src={require("../resources/accuracyUp.png")} alt=""
                                                       />
                                                     ) : null}
                                                   </div>
@@ -975,7 +974,7 @@ class LeaderboardPage extends Component {
                                                     null
                                                       ? "--"
                                                       : this.props.userResults
-                                                          .average != 0
+                                                          .average !== 0
                                                       ? this.props.userResults
                                                           .average
                                                       : "--"}
@@ -989,7 +988,7 @@ class LeaderboardPage extends Component {
                                                         .rankStatus ===
                                                       "down" ? (
                                                       <img
-                                                        src={require("../resources/accuracyDown.png")}
+                                                        src={require("../resources/accuracyDown.png")} alt=""
                                                       />
                                                     ) : null}
                                                   </div>
@@ -1007,7 +1006,7 @@ class LeaderboardPage extends Component {
                                               {this.props.userResults === null
                                                 ? "--"
                                                 : this.props.userResults
-                                                    .total != 0
+                                                    .total !== 0
                                                 ? this.props.userResults.total
                                                 : "--"}
                                             </td>

@@ -143,7 +143,7 @@ class UserProfile extends Component {
             //TODO: find a better solution for removing background image after the animateAccuracyCircle
             //function is called (remove inline styling)
             <div className="lock-img-scale" style={{backgroundImage : "none"}}>
-                <img src={require("../resources/awardIcons/red-locked-icon.png")} alt="lock image"></img>
+                <img src={require("../resources/awardIcons/red-locked-icon.png")} alt="lock"></img>
             </div>
         )
     }
@@ -151,7 +151,7 @@ class UserProfile extends Component {
     renderMedalIcon(){
         return(
             <div className="medal-img">
-                <img src={require("../resources/awardIcons/medal-icon.png")}></img>
+                <img src={require("../resources/awardIcons/medal-icon.png")} alt="medal-icon"></img>
             </div>
         )
     }
@@ -308,13 +308,13 @@ class UserProfile extends Component {
                 <div className="remove-right-padding">
                     <Row className="fix-buttons-rectangle">
                         <Col>
-                        <a onClick={this.toggle} className="make-cursor-point">
+                        <div onClick={this.toggle} className="make-cursor-point">
                         <div className="buttons-rectangle">
                             <div className="scale-gun-type-img">
                                 {this.getInitialAward().competitionName.includes("Rifle") || 
                                     this.getInitialAward().competitionName.includes("rifle") ?
-                                    <img src={require("../resources/awardIcons/rifle-icon.png")}></img>:
-                                    <img src={require("../resources/awardIcons/pistol-icon.png")}></img>
+                                    <img src={require("../resources/awardIcons/rifle-icon.png")} alt="rifle-icon"></img>:
+                                    <img src={require("../resources/awardIcons/pistol-icon.png")} alt="pistol-icon"></img>
                                 }
                             </div>
                             <div className="competition-name-text red-text">
@@ -333,7 +333,7 @@ class UserProfile extends Component {
                                 </div>
                             </div>
                         </div>
-                        </a>
+                        </div>
                         </Col>
                         {
                             this.state.collapse ? 
@@ -346,9 +346,9 @@ class UserProfile extends Component {
                             <Collapse isOpened={this.state.collapse} fixedHeight={this.collapseHeight()}>
                                 <div className="push-top-92px">
                                     <div className="award-buttons-container">{this.renderCompetitionList()}</div>
-                                    <a className="scale-arrowupicon-img" onClick={this.toggle}>
+                                    <div className="scale-arrowupicon-img" onClick={this.toggle}>
                                         <img src={require("../resources/awardIcons/arrowUpIcon.png")} alt="lock-icon"></img>
-                                    </a>
+                                    </div>
                                 </div>
                             </Collapse>
                         </Col>

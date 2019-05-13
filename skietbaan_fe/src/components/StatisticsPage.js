@@ -138,8 +138,8 @@ class StatisticsPage extends Component {
                     for(var i = 0; i < _response.length; i += 2){
                         this.userAccuracyData.push(_response[i]);
                     }
-                    for(var i = 0; i < _response.length; i += 3){
-                        this.groupAccuracyData.push(_response[i]);
+                    for(var j = 0; j < _response.length; j += 3){
+                        this.groupAccuracyData.push(_response[j]);
                     }
                     this.prevSelectedComp = this.state.selectedCompetition;
                     this.prevSelectedGroup = this.state.selectedGroup;
@@ -190,7 +190,7 @@ class StatisticsPage extends Component {
                              "stats-competition-button-text-active stats-competition-button-text stats-button-style-active" :
                              "stats-competition-button-text stats-competition-button-text stats-button-style-inactive"}
                              onClick={() => this.setSelectedCompetition(index)}>
-                            {element}
+                            {element.toUpperCase()}
                         </button>
                     </Col>
                 </Row>
@@ -214,7 +214,7 @@ class StatisticsPage extends Component {
                              "stats-competition-button-text-active stats-competition-button-text stats-button-style-active" :
                              "stats-competition-button-text stats-competition-button-text stats-button-style-inactive"}
                              onClick={() => this.setSelectedGroup(index)}>
-                            {element}
+                            {element.toUpperCase()}
                         </button>
                     </Col>
                 </Row>
@@ -268,7 +268,7 @@ class StatisticsPage extends Component {
                 <label className="stats-groups-text">Groups</label>
                 <div className="stats-buttons-container">{this.renderGroupList()}</div>
                 <div className="scale-white-arrow-up-img" onClick={this.toggle}>
-                    <img src={require("../resources/awardIcons/white-arrow-up-icon.png")}></img>
+                    <img src={require("../resources/awardIcons/white-arrow-up-icon.png")} alt="arrow-icon"></img>
                 </div>
             </div>
         )
@@ -298,7 +298,7 @@ class StatisticsPage extends Component {
                 <label className="stats-select-competition-text">Select Competition</label>
                 <div className="stats-buttons-container">{competitionList}</div>
                 <div className="scale-white-arrow-up-img" onClick={this.toggle}>
-                    <img src={require("../resources/awardIcons/white-arrow-up-icon.png")}></img>
+                    <img src={require("../resources/awardIcons/white-arrow-up-icon.png")} alt="arrow-icon"></img>
                 </div>
             </div>
         )
@@ -336,7 +336,7 @@ class StatisticsPage extends Component {
                         </div>
                         <div className="font-size-12px red-text stats-inline padding-left-17px">
                             <div className="scale-group-img">
-                                <img src={require("../resources/awardIcons/groups-icon.png")}></img>
+                                <img src={require("../resources/awardIcons/groups-icon.png")} alt="group-icon"></img>
                             </div>
                                 {this.state.selectedGroup === -1 ? 
                                 this.state.competitionsUsersMap
@@ -348,13 +348,13 @@ class StatisticsPage extends Component {
                     <Col>
                         <div className="legend-text font-size-12px">Group Total Score</div>                            
                         <div className="scale-group-total-img">
-                            <img src={require("../resources/awardIcons/grey-bar.png")}></img>
+                            <img src={require("../resources/awardIcons/grey-bar.png")} alt="grey-bar"></img>
                         </div>
                     </Col>
                     <Col>
                         <div className="black-text font-size-12px">My Total Score</div>
                         <div className="scale-personal-total-img">
-                            <img src={require("../resources/awardIcons/black-bar.png")}></img>
+                            <img src={require("../resources/awardIcons/black-bar.png")} alt="black-bar"></img>
                         </div>
                     </Col>
                 </Row>
@@ -498,12 +498,12 @@ class StatisticsPage extends Component {
                                         <div className="scale-gun-type-img">
                                             {this.competitions[this.state.selectedCompetition].includes("Rifle") || 
                                                 this.competitions[this.state.selectedCompetition].includes("rifle") ?
-                                                <img src={require("../resources/awardIcons/rifle-icon.png")}></img>:
-                                                <img src={require("../resources/awardIcons/white-pistol-icon.png")}></img>
+                                                <img src={require("../resources/awardIcons/rifle-icon.png")} alt="rifle-icon"></img>:
+                                                <img src={require("../resources/awardIcons/white-pistol-icon.png")} alt="pistol-icon"></img>
                                             }
                                         </div>
                                         <div className="stats-competition-text stats-inline-text">
-                                            {this.competitions[this.state.selectedCompetition]}
+                                            {this.competitions[this.state.selectedCompetition].toUpperCase()}
                                             <div className="white-down-triangle-img-scale stats-margin-left-7px">
                                                 {this.state.collapse ?
                                                     <img src={require("../resources/awardIcons/white-up-triangle.png")}
@@ -519,21 +519,21 @@ class StatisticsPage extends Component {
                                     <Col>
                                         <Row className="competitions-rank-rectangle margin-left-right-12px">
                                             <Col className="stats-remove-left-right-paddings stats-left-button">
-                                                <div className={this.state.selectedCompetitionRankToggle == 0 ?
+                                                <div className={this.state.selectedCompetitionRankToggle === 0 ?
                                                     "stats-white-button-active padding-top-5px" :
                                                     "stats-white-button-inactive padding-top-5px"}
                                                     onClick={() => this.setSelectedCompetitionRankingToggle(0)}>
-                                                    <label className={this.state.selectedCompetitionRankToggle == 0 ?
+                                                    <label className={this.state.selectedCompetitionRankToggle === 0 ?
                                                         "competitions-rank-text" : "competitions-rank-text-inactive"}>
                                                         COMPETITIONS</label>
                                                 </div>
                                             </Col>
                                             <Col className="stats-remove-left-right-paddings stats-right-button">
-                                                <div className={this.state.selectedCompetitionRankToggle == 1 ?
+                                                <div className={this.state.selectedCompetitionRankToggle === 1 ?
                                                     "stats-white-button-active padding-top-5px" :
                                                     "stats-white-button-inactive padding-top-5px"}
                                                     onClick={() => this.setSelectedCompetitionRankingToggle(1)}>
-                                                    <label className={this.state.selectedCompetitionRankToggle == 1 ?
+                                                    <label className={this.state.selectedCompetitionRankToggle === 1 ?
                                                         "competitions-rank-text" : "competitions-rank-text-inactive"}>
                                                         RANKING BY</label>
                                                 </div>
@@ -545,7 +545,7 @@ class StatisticsPage extends Component {
                                     <Col sm={2} xs={2} lg={2} onClick={this.toggle}></Col>
                                     <Col className="stats-remove-left-right-paddings" sm={7} xs={7} lg={7}>
                                         <div className="stats-competition-container">
-                                            {this.state.selectedCompetitionRankToggle == 0 ? 
+                                            {this.state.selectedCompetitionRankToggle === 0 ? 
                                                 this.renderCompetitionToggle(list) :
                                                 this.renderRankToggle()
                                             }
@@ -563,12 +563,12 @@ class StatisticsPage extends Component {
                                     <div className="scale-gun-type-img">
                                         {this.competitions[this.state.selectedCompetition].includes("Rifle") || 
                                             this.competitions[this.state.selectedCompetition].includes("rifle") ?
-                                            <img src={require("../resources/awardIcons/rifle-icon.png")}></img>:
-                                            <img src={require("../resources/awardIcons/white-pistol-icon.png")}></img>
+                                            <img src={require("../resources/awardIcons/rifle-icon.png")} alt="rifle-icon"></img>:
+                                            <img src={require("../resources/awardIcons/white-pistol-icon.png")} alt="pistol-icon"></img>
                                         }
                                     </div>
                                     <div className="stats-competition-text stats-inline-text">
-                                        {this.competitions[this.state.selectedCompetition]}
+                                        {this.competitions[this.state.selectedCompetition].toUpperCase()}
                                         <div className="white-down-triangle-img-scale stats-margin-left-7px">
                                             <img src={require("../resources/awardIcons/white-down-triangle.png")}
                                                 alt="down-triangle">
@@ -608,7 +608,7 @@ class StatisticsPage extends Component {
                                                     <div className="stats-inline-flex">
                                                         <div className="red-text font-size-12px font-weight-bold">HIGHEST</div>
                                                         <div className="stats-arrow-up">
-                                                            <img src={require("../resources/awardIcons/graph-up-icon.png")}/>
+                                                            <img src={require("../resources/awardIcons/graph-up-icon.png")} alt="graph-up-icon"/>
                                                         </div>
                                                     </div>
                                                     <div className="font-size-16px red-text font-weight-bold">
@@ -673,7 +673,7 @@ class StatisticsPage extends Component {
                                                         <div className="stats-inline-flex">
                                                             <div className="red-text font-size-12px font-weight-bold">HIGHEST</div>
                                                             <div className="stats-arrow-up">
-                                                                <img src={require("../resources/awardIcons/graph-up-icon.png")}/>
+                                                                <img src={require("../resources/awardIcons/graph-up-icon.png")} alt="graph-up-icon"/>
                                                             </div>
                                                         </div>
                                                         <div className="font-size-16px red-text font-weight-bold">

@@ -100,9 +100,9 @@ class Register extends Component {
         if (target.name === "usernameValue" && target.value.length > 0) {
           stateUpdate.invalidUsername = false;
           stateUpdate.usernameTaken = false;
-          for (var i = 0; i < this.state.users.length; i++) {
+          for (var j = 0; j < this.state.users.length; j++) {
             if (
-              this.state.users[i].username.toLowerCase() ===
+              this.state.users[j].username.toLowerCase() ===
               target.value.toLowerCase()
             ) {
               stateUpdate.usernameTaken = true;

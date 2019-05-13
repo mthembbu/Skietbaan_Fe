@@ -238,7 +238,7 @@ class Groups extends Component {
                 >
                   <img
                     className="checkbox-delete"
-                    src={post.highlighted == true ? marked : unmarked}
+                    src={post.highlighted === true ? marked : unmarked}
                     alt=""
                   />
                   <label

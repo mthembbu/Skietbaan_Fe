@@ -34,10 +34,7 @@ export class createPages extends Component {
 			user: [],
 			height: document.body.clientHeight,
 			binState: false,
-			filterNameData: ["users"],
-			secondValueA:'a',
-			secondValueB:'d',
-			secondValueC:'d'
+			filterNameData: []
 		};
 
 		this.groupsPage = this.groupsPage.bind(this);
@@ -76,6 +73,8 @@ export class createPages extends Component {
 				} else if (this.state.selectedValue === 'C') {
 				}
 				break;
+			default:
+				break;
 		}
 	}
 	noShadowOnMember() {
@@ -95,9 +94,6 @@ export class createPages extends Component {
 		this.setState({ selectedButton: 2 });
 		this.props.compSelectedPages(1);
 		this.props.pageState(10);
-	}
-	componentWillUnmount(){
-		this.setState({secondValueA:'a',secondValueB:'d',secondValueC:'c'})
 	}
 	membersPage() {
 		this.props.exportTextName("EXPORT users");
@@ -129,6 +125,17 @@ export class createPages extends Component {
 	}
 	handleChange = (event) => {
 		this.setState({ selectedValue: event });
+		if(event==="A"){
+			this.props.filterName(["users"]);
+			this.props.exportTextName("EXPORT USERS");
+		}else if(event==="B"){
+			this.props.filterName(["members"]);
+			this.props.exportTextName("EXPORT MEMBERS");
+		}else{	
+			this.props.filterName(["expiring"]);
+			this.props.exportTextName("EXPORT EXPIRING");
+
+		}
 	};
 	componentDidMount() {
 		this.props.selectedPage(1);
@@ -169,7 +176,6 @@ export class createPages extends Component {
 
 	showHideHeader() {
 		window.addEventListener("resize", () => {
-			let Navbar = document.querySelector(".create-main-container");
 			if (this.state.height === document.body.clientHeight) {
 				this.setState({
 					toggle: false
@@ -199,15 +205,14 @@ export class createPages extends Component {
 	}
 
 	changeUserIconState = () => {
-		if (this.state.filterNameData.indexOf("users") < 0) {
-			this.state.filterNameData.push("users");
-			this.setState({secondValueA:'a'});
-
-			 if(this.state.filterNameData.length===1){
-			 	this.props.exportTextName("EXPORT " +this.state.filterNameData[0].toUpperCase());
+		const arr = [...this.props.filterNames]
+		if (arr.indexOf("users") < 0) {
+			arr.push("users");
+			 if(arr.length===1){
+			 	this.props.exportTextName("EXPORT " +arr[0].toUpperCase());
 			}
-			 else if(this.state.filterNameData.length===2){
-				let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase()
+			 else if(arr.length===2){
+				let x ="EXPORT "+arr[0].toUpperCase() +"+"+ arr[1].toUpperCase()
 			 	this.props.exportTextName(x)
 			 }
 			 else{
@@ -215,100 +220,89 @@ export class createPages extends Component {
 			 }
 			
 		} else {
-			var index = this.state.filterNameData.indexOf("users");
-			this.state.filterNameData.splice(index, 1);
-			this.setState({secondValueA:'d'});
-
-			 if(this.state.filterNameData.length===1){
-				let x = this.state.filterNameData[0] 
-			 	this.props.exportTextName("EXPORT"+" "+x.toUpperCase());
+			var index = arr.indexOf("users");
+			arr.splice(index, 1);
+			 if(arr.length===1){
+				let x = arr[0] 
+			 	this.props.exportTextName("EXPORT " + x.toUpperCase());
 			 }
-			 else if(this.state.filterNameData.length===2){
-			 	let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase();
+			 else if(arr.length===2){
+			 	let x ="EXPORT "+arr[0].toUpperCase() +"+"+ arr[1].toUpperCase();
 			 	this.props.exportTextName(x)
 			 }
-			 else if(this.state.filterNameData.length===0){
+			 else if(arr.length===0){
 			 	this.props.exportTextName("UNSELECTED")
 			 }
-			
 		}
-		this.props.filterName(this.state.filterNameData);
+		this.props.filterName(arr)
 	}
 
 	changeMemberIconState = () => {
-
-		if (this.state.filterNameData.indexOf("members") < 0) {
-			this.state.filterNameData.push("members");
-			this.setState({secondValueB:'b'});
-
-			 if(this.state.filterNameData.length===1){
-			 	this.props.exportTextName("EXPORT " +this.state.filterNameData[0].toUpperCase());
+		const arr=[...this.props.filterNames]
+		if (arr.indexOf("members") < 0) {
+			arr.push("members");
+			 if(arr.length===1){
+			 	this.props.exportTextName("EXPORT " +arr[0].toUpperCase());
 			 }
-			 else if(this.state.filterNameData.length===2){
-			 	let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase()
+			 else if(arr.length===2){
+			 	let x ="EXPORT "+arr[0].toUpperCase() +"+"+ arr[1].toUpperCase()
 			 	this.props.exportTextName(x)
 			 }
 			 else{
 			 	this.props.exportTextName("EXPORT ALL")
 			 }
 		} else {
-			var index = this.state.filterNameData.indexOf("members");
-			this.state.filterNameData.splice(index, 1);
+			var index = arr.indexOf("members");
+			arr.splice(index, 1);
 			this.setState({secondValueB:'d'});
 
-			 if(this.state.filterNameData.length===1){
-			 	let x = "EXPORT "+this.state.filterNameData[0].toUpperCase();
+			 if(arr.length===1){
+			 	let x = "EXPORT "+arr[0].toUpperCase();
 			 	this.props.exportTextName(x);
 			 }
-			 else if(this.state.filterNameData.length===2){
-			 	let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase();
+			 else if(arr.length===2){
+			 	let x ="EXPORT "+arr[0].toUpperCase() +"+"+ arr[1].toUpperCase();
 			 	this.props.exportTextName(x)
 			 }
-			 else if(this.state.filterNameData.length===0) {
+			 else if(arr.length===0) {
 			 	this.props.exportTextName("UNSELECTED")
 			 }
 			
 		}
-		this.props.filterName(this.state.filterNameData);
+		this.props.filterName(arr);
 	}
 
 	changeExpiredIconState = () => {
-
-		this.props.expiredIsClicked();
-		if (this.state.filterNameData.indexOf("expiring") < 0) {
-			this.state.filterNameData.push("expiring");
-			this.setState({secondValueC:'c'});
-
-			if(this.state.filterNameData.length===1){
-				let x = this.state.filterNameData[0] 
-				this.props.exportTextName("EXPORT"+" "+x.toUpperCase());
+		const arr=[...this.props.filterNames]
+		if (arr.indexOf("expiring") < 0) {
+			arr.push("expiring");
+			if(arr.length===1){
+				let x = arr[0] 
+				this.props.exportTextName("EXPORT "+x.toUpperCase());
 			}
-			else if(this.state.filterNameData.length===2){
-				let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase();
+			else if(arr.length===2){
+				let x ="EXPORT "+arr[0].toUpperCase() +"+"+ arr[1].toUpperCase();
 				this.props.exportTextName(x)
 			}
 			else{
 				this.props.exportTextName("EXPORT ALL")
 			}
-
 		} else {
-			var index = this.state.filterNameData.indexOf("expiring");
-			this.state.filterNameData.splice(index, 1);
-			this.setState({secondValueC:'d'});
-
-			if(this.state.filterNameData.length===1){
-				let x = this.state.filterNameData[0] 
-				this.props.exportTextName("EXPORT"+" "+x.toUpperCase());
+			var index = arr.indexOf("expiring");
+			arr.splice(index, 1);
+			if(arr.length===1){
+				let x = arr[0] 
+				this.props.exportTextName("EXPORT "+x.toUpperCase());
 			}
-			else if(this.state.filterNameData.length===2){
-				let x ="EXPORT "+this.state.filterNameData[0].toUpperCase() +"+"+ this.state.filterNameData[1].toUpperCase();
+			else if(arr.length===2){
+				let x ="EXPORT "+arr[0].toUpperCase() +"+"+ arr[1].toUpperCase();
 				this.props.exportTextName(x)
 			}
-			else if(this.state.filterNameData.length===0){
+			else if(arr.length===0){
 				this.props.exportTextName("UNSELECTED")
 			}
 		}
-		this.props.filterName(this.state.filterNameData);
+		this.props.filterName(arr);
 	}
 
 	changeBinState = () => {
@@ -318,8 +312,8 @@ export class createPages extends Component {
 			}
 			this.props.binStateFunc(2);
 		} else {
-			for (var i = 0; i < this.props.compOBJ.length; i++) {
-				this.props.compOBJ[i].highlighted = false;
+			for (var j = 0; j < this.props.compOBJ.length; j++) {
+				this.props.compOBJ[j].highlighted = false;
 			}
 			this.props.binStateFunc(1);
 		}
@@ -346,7 +340,7 @@ export class createPages extends Component {
 
 							{this.state.selectedButton === 1 && this.props.page === 10 ? (
 								<AddGroup />
-							) : this.state.selectedButton === 1 && this.props.page === 0 || this.state.selectedButton === 1 && this.props.page === 1 || this.state.selectedButton === 1 && this.props.page === 2 ? (
+							) : (this.state.selectedButton === 1 && this.props.page === 0) || (this.state.selectedButton === 1 && this.props.page === 1) || (this.state.selectedButton === 1 && this.props.page === 2) ? (
 								<GroupComponent />
 							) : null}
 							{this.state.selectedButton === 2 ? <CompComponent /> : null}
@@ -459,7 +453,6 @@ export class createPages extends Component {
 															value="b"
 															color={'primary'}
 															name="radio-button-demo"
-															aria-label="B"
 														/>
 
 														<label className="member-user-label">USERS</label>
@@ -467,7 +460,6 @@ export class createPages extends Component {
 													<div className="radio-B">
 														<Radio
 															className="b-radio"
-															aria-label="A"
 															checked={this.state.selectedValue === 'B'}
 															value="b"
 															aria-label="B"
@@ -479,10 +471,9 @@ export class createPages extends Component {
 													<div className="radio-C">
 														<Radio
 															className="c-radio"
-															aria-label="A"
 															checked={this.state.selectedValue === 'C'}
 															value="b"
-															aria-label="B"
+															aria-label="C"
 															color={'primary'}
 															onChange={() => this.handleChange('C')}
 														/>
@@ -496,20 +487,20 @@ export class createPages extends Component {
 											{this.state.selectedButton === 3 ? (
 												<div className="member-radio">
 													<div className="checkbox-A">
-														<img src={this.state.secondValueA==='a' ? selected :
+														<img src={this.props.filterNames.indexOf("users")!=-1 ? selected :
 														 unselected}
 															className="icon-size" alt="unselected"
 															onClick={this.changeUserIconState} />
 														<label className="member-user-label">USERS</label>
 													</div>
 													<div className="checkbox-B">
-														<img src={ this.state.secondValueB==='b' ? selected : unselected}
+														<img src={this.props.filterNames.indexOf("members")!=- 1  ?  selected : unselected  }
 															className="icon-size" alt="unselected"
 															onClick={this.changeMemberIconState } />
 														<label className="member-user-label">MEMBERS</label>
 													</div>
 													<div className="checkbox-C">
-														<img src={ this.state.secondValueC==='c' ? selected : unselected}
+														<img src={this.props.filterNames.indexOf("expiring")!=-1  ? selected : unselected}
 															className="icon-size" alt="unselected"
 															onClick={this.changeExpiredIconState } />
 														<label className="member-user-label">EXPIRING</label>
@@ -528,7 +519,7 @@ export class createPages extends Component {
 
 							{this.state.selectedButton === 1 && this.props.page === 10 ? (
 								<AddGroup />
-							) : this.state.selectedButton === 1 && this.props.page === 0 || this.state.selectedButton === 1 && this.props.page === 1 || this.state.selectedButton === 1 && this.props.page === 2 ? (
+							) : (this.state.selectedButton === 1 && this.props.page === 0) || (this.state.selectedButton === 1 && this.props.page === 1) || (this.state.selectedButton === 1 && this.props.page === 2) ? (
 								<GroupComponent />
 							) : null}
 							{this.state.selectedButton === 2 ? <CompComponent /> : null}
@@ -561,7 +552,7 @@ const mapStateToProps = (state) => ({
 	compOBJ: state.compOBJ.allComps,
 	isClicked: state.notificationOBJ.isClicked,
 	filterTitle: state.notificationOBJ.filterTitle,
-	filterName: state.notificationOBJ.filterName,
+	filterNames: state.notificationOBJ.filterName,
 	ExportWrittenText: state.notificationOBJ.ExportWrittenText
 });
 

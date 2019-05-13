@@ -44,7 +44,8 @@ class ViewScores extends Component {
             amountBeingDeleted: 0,
             selectAll: false,
             inRange: null,
-            getDataForScores: false
+            getDataForScores: false,
+            getDataForAdmin: false
         };
         this.competitionClicked = this.competitionClicked.bind(this);
         this.formatTime = this.formatTime.bind(this);
@@ -63,14 +64,14 @@ class ViewScores extends Component {
 
     componentWillMount() {
         window.addEventListener("resize", () => {
-          let Navbar = document.querySelector(".navbar-admin");
-          if (this.state.height === document.body.clientHeight) {
-            Navbar.classList.remove("hidden");
-          } else {
-            Navbar.classList.add("hidden");
-          }
+            let Navbar = document.querySelector(".navbar-admin");
+            if (this.state.height === document.body.clientHeight) {
+                Navbar.classList.remove("hidden");
+            } else {
+                Navbar.classList.add("hidden");
+            }
         });
-      }
+    }
 
     calculateDistance = (scorelist) => {
         let temp = scorelist;
@@ -198,9 +199,6 @@ class ViewScores extends Component {
             amountBeingDeleted += 1;
         }
 
-        if (amountBeingDeleted == 0) {
-        }
-
         this.setState({
             scoresList: temp,
             markedForDeletion: amountBeingDeleted > 0 ? true : false,
@@ -264,7 +262,7 @@ class ViewScores extends Component {
             .then(data =>
                 this.setState({
                     scoresList: this.calculateDistance(data),
-                    getDataForScores: true
+                    getDataForAdmin: true
                 })
             )
             .catch(err => {
@@ -368,25 +366,42 @@ class ViewScores extends Component {
             clickedOnBin: false,
             selectAll: false,
             markedForDeletion: false,
-            cameraClicked: false
+            cameraClicked: false,
+            getDataForAdmin: false
         });
     }
 
     componentDidMount() {
         this.props.selectedPage(2);
         this.props.checkUserType(this.state.token);
-        fetch(BASE_URL + "/api/Competition", {
-            method: "GET",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            }
-        })
-            .then(response => response.json())
-            .then(data => this.setState({ competitionsList: data, getData: true }))
-            .catch(err => {
-                this.setState({ exceptionCaught: true })
-            });
+        if (this.props.isAdmin) {
+            fetch(BASE_URL + "/api/Competition", {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(response => response.json())
+                .then(data => this.setState({ competitionsList: data, getData: true }))
+                .catch(err => {
+                    this.setState({ exceptionCaught: true })
+                });
+        }
+        else if (!this.props.isAdmin) {
+            fetch(BASE_URL + "/api/Scores/activeCompetitions/" + this.state.token, {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(response => response.json())
+                .then(data => this.setState({ competitionsList: data, getData: true }))
+                .catch(err => {
+                    this.setState({ exceptionCaught: true })
+                });
+        }
     }
 
     render() {
@@ -440,7 +455,7 @@ class ViewScores extends Component {
                     </div>
                 )
             }
-        } else if (this.state.getData === true || this.state.exceptionCaught === true) {
+        } else if (this.state.getDataForAdmin === true || this.state.exceptionCaught === true) {
             competitionItem.push(
                 <div className="not-active">
                     <div className="not-active-message">
@@ -475,10 +490,10 @@ class ViewScores extends Component {
             </div>
         )
 
-        let scoreListForUser = [];
-        if (this.state.scoresList.length !== 0 && this.state.getDataForScores !== false) {
+        let displayScoreList = [];
+        if (this.state.scoresList.length !== 0 && (this.state.getDataForScores !== false || this.state.getDataForAdmin !== false)) {
             for (let i = 0; i < this.state.scoresList.length; i++) {
-                scoreListForUser.push(
+                displayScoreList.push(
                     <div className={this.state.cameraClicked === false || this.state.someScoreClicked === i ?
                         "score-content" : "hidden"}>
                         <div className="user-scores">{this.state.scoresList[i].userScore}
@@ -489,11 +504,13 @@ class ViewScores extends Component {
                         {this.props.isAdmin === true ? (
                             <img className={this.state.scoresList[i].pictureURL !== "" ?
                                 "view-scores-photo-admin" : "hidden"}
-                                src={camera} onClick={() => this.showPhoto(i)}>
+                                src={camera} onClick={() => this.showPhoto(i)}
+                                alt="admin">
                             </img>
                         ) : (
                                 <img className={this.state.scoresList[i].pictureURL !== "" ?
-                                    "view-scores-photo" : "hidden"} src={camera} onClick={() => this.showPhoto(i)}>
+                                    "view-scores-photo" : "hidden"} src={camera} onClick={() => this.showPhoto(i)}
+                                    alt="">
                                 </img>
                             )}
                         <div className="range-spacing">
@@ -501,7 +518,7 @@ class ViewScores extends Component {
                                 "distance-view-scores-red" : "distance-view-scores"}>
                                 {this.state.scoresList[i].RangeMessage}
                             </div>
-                            <img className="in-range-img" src={this.state.scoresList[i].inRange ? inRange : outRange}>
+                            <img className="in-range-img" src={this.state.scoresList[i].inRange ? inRange : outRange} alt="in-range">
                             </img>
                         </div>
                         <div onClick={() => this.markedForDeletion(i)}
@@ -521,26 +538,36 @@ class ViewScores extends Component {
                             ? "hidden" : "image-container-view-scores"}>
                             <img className={this.state.cameraClicked === false || this.state.someScoreClicked !== i
                                 ? "hidden" : "image-view background"}
-                                src={this.state.scoresList[i].pictureURL}>
+                                src={this.state.scoresList[i].pictureURL}
+                                alt="view">
                             </img>
                         </div>
                     </div>
                 )
             }
-        } else if (this.state.scoresList.length === 0 && this.state.getDataForScores === true) {
-            scoreListForUser.push(
+        } else if (this.state.scoresList.length === 0 && this.state.getDataForAdmin === true) {
+            displayScoreList.push(
                 <div className="not-active">
                     <div className="not-active-message">
 
                         Sorry, no scores submitted for this competition
                 </div>
                 </div>)
+        } else if (this.props.isAdmin && this.state.getDataForAdmin === false) {
+            { console.log("pushing") }
+            displayScoreList.push(
+                <div className="loading-container-add-score">
+                    <div className="loader" />
+                    <div className="target-loader-image" />
+                    <div className="loading-message">Loading...</div>
+                </div>
+            )
         }
 
-        let adminScoresList = [];
+        let adminUserList = [];
         if (this.state.usersList.length !== 0 && this.state.getDataScores !== false && this.props.isAdmin === true) {
             for (let i = 0; i < this.state.usersList.length; i++) {
-                adminScoresList.push(
+                adminUserList.push(
                     <div className={this.state.userClicked === true ? "hidden" : "score-content-admin"}>
                         <div className={this.state.userClicked === true ? "hidden" : "users-container"}
                             onClick={() => this.getScoresForAdmin(this.state.usersList[i].token, i,
@@ -555,8 +582,8 @@ class ViewScores extends Component {
                     </div>
                 )
             }
-        } else if (this.state.getDataScores) {
-            adminScoresList.push(
+        } else if (this.state.getDataForAdmin) {
+            adminUserList.push(
                 <div className="not-active">
                     <div className="not-active-message">
                         No users have submitted scores for this competition
@@ -600,10 +627,10 @@ class ViewScores extends Component {
                 </div>
                 <div className={this.state.clicked === null ?
                     "hidden" : "score-list-container"}>
-                    {this.props.isAdmin === false || this.state.scoresList.length !== 0 ? (
+                    {this.props.isAdmin === false ? (
                         <div>
                             {loaderForScoresList}
-                            {scoreListForUser}
+                            {displayScoreList}
                         </div>
                     ) : (
                             <div>
@@ -617,8 +644,8 @@ class ViewScores extends Component {
                                         autoComplete="off"
                                     ></input>
                                     <div>
-                                        {loaderForScoresList}
-                                        {adminScoresList}
+                                        {adminUserList}
+                                        {displayScoreList}
                                     </div>
                                 </div>
 
