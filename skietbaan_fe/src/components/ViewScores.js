@@ -354,7 +354,9 @@ class ViewScores extends Component {
                 originalUserList: [],
                 selectAll: false,
                 markedForDeletion: false,
-                clickedOnBin: false
+                clickedOnBin: false,
+                getDataScores: false,
+                getDataForScores: false
             });
         }
     }
@@ -479,13 +481,37 @@ class ViewScores extends Component {
         )
 
         let loaderForScoresList = (
-            <div className={this.state.getDataForScores === false && this.state.getDataScores === false ?
+            <div className={(this.state.getDataForScores === false) && this.state.getDataScores === false ?
                 "loading-container-add-score" : "hidden "}>
-                <div className={this.state.getDataForScores === false && this.state.getDataScores === false ?
+                <div className={(this.state.getDataForScores === false) && this.state.getDataScores === false ?
                     "loader" : "hidden"} />
-                <div className={this.state.getDataForScores === false && this.state.getDataScores === false ?
+                <div className={(this.state.getDataForScores === false) && this.state.getDataScores === false ?
                     "target-loader-image" : "hidden"} />
-                <div className={this.state.getDataForScores === false && this.state.getDataScores === false ?
+                <div className={(this.state.getDataForScores === false) && this.state.getDataScores === false ?
+                    "loading-message" : "hidden "}>Loading...</div>
+            </div>
+        )
+
+        let loaderForAdmin = (
+            <div className={this.state.userClicked && this.state.getDataForAdmin === false ?
+                "loading-container-add-score" : "hidden "}>
+                <div className={ this.state.userClicked && this.state.getDataForAdmin === false ?
+                    "loader" : "hidden"} />
+                <div className={this.state.userClicked && this.state.getDataForAdmin === false ?
+                    "target-loader-image" : "hidden"} />
+                <div className={this.state.userClicked && this.state.getDataForAdmin === false ?
+                    "loading-message" : "hidden "}>Loading...</div>
+            </div>
+        )
+
+        let loaderForUserList = (
+            <div className={this.state.somethingClicked && this.state.getDataScores === false ?
+                "loading-container-add-score" : "hidden "}>
+                <div className={ this.state.somethingClicked && this.state.getDataScores === false ?
+                    "loader" : "hidden"} />
+                <div className={this.state.somethingClicked && this.state.getDataScores === false ?
+                    "target-loader-image" : "hidden"} />
+                <div className={this.state.somethingClicked && this.state.getDataScores === false ?
                     "loading-message" : "hidden "}>Loading...</div>
             </div>
         )
@@ -549,19 +575,9 @@ class ViewScores extends Component {
             displayScoreList.push(
                 <div className="not-active">
                     <div className="not-active-message">
-
                         Sorry, no scores submitted for this competition
                 </div>
                 </div>)
-        } else if (this.props.isAdmin && this.state.getDataForAdmin === false) {
-            { console.log("pushing") }
-            displayScoreList.push(
-                <div className="loading-container-add-score">
-                    <div className="loader" />
-                    <div className="target-loader-image" />
-                    <div className="loading-message">Loading...</div>
-                </div>
-            )
         }
 
         let adminUserList = [];
@@ -582,14 +598,6 @@ class ViewScores extends Component {
                     </div>
                 )
             }
-        } else if (this.state.getDataForAdmin) {
-            adminUserList.push(
-                <div className="not-active">
-                    <div className="not-active-message">
-                        No users have submitted scores for this competition
-          </div>
-                </div>
-            );
         }
 
         return (
@@ -646,6 +654,8 @@ class ViewScores extends Component {
                                     <div>
                                         {adminUserList}
                                         {displayScoreList}
+                                        {loaderForAdmin}
+                                        {loaderForUserList}
                                     </div>
                                 </div>
 
