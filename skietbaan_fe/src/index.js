@@ -18,6 +18,7 @@ const theme = createMuiTheme({
  * The Provider is the Applications new ROOT-COMPONENT, that houses all of the
  * JS objects from the rootReducer through the store from the './store file'
  */
+window.localStorage.removeItem("persist:skietbaan");
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
     <App />
@@ -25,5 +26,5 @@ ReactDOM.render(
  ,
   document.getElementById("root")
 );
-window.localStorage.clear();
+
 serviceWorker.register();
