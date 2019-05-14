@@ -5,8 +5,10 @@ import storage from "redux-persist/lib/storage";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { persistStore, persistReducer } from "redux-persist";
 
+window.localStorage.removeItem("persist:skietbaan");
+
 const persistConfig = {
-  key: "root",
+  key: "skietbaan",
   storage: storage,
   blacklist: ["compOBJ"]
 };
