@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import {MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+import { BASE_URL } from "./actions/types.js";
 
 const theme = createMuiTheme({
 	palette: {
@@ -19,7 +20,26 @@ const theme = createMuiTheme({
  * JS objects from the rootReducer through the store from the './store file'
  */
 
-window.localStorage.removeItem("persist:skietbaan");
+fetch(BASE_URL + "/api/versionnumber", {
+  method: "GET",
+  headers: {
+      "content-type": "application/json"
+  }
+})
+.then(response => response.json())
+.then(response => {
+  if(typeof response !== "string"){
+    var version = window.localStorage.getItem("version");
+    if(version === null){
+      window.localStorage.setItem("version", response);
+    }else{
+      if(version === response.toString()) return;
+      window.localStorage.removeItem("persist:skietbaan");
+      window.localStorage.setItem("version", response);
+    }
+  }
+})
+
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
     <App />
