@@ -495,7 +495,7 @@ class ViewScores extends Component {
         let loaderForAdmin = (
             <div className={this.state.userClicked && this.state.getDataForAdmin === false ?
                 "loading-container-add-score" : "hidden "}>
-                <div className={ this.state.userClicked && this.state.getDataForAdmin === false ?
+                <div className={this.state.userClicked && this.state.getDataForAdmin === false ?
                     "loader" : "hidden"} />
                 <div className={this.state.userClicked && this.state.getDataForAdmin === false ?
                     "target-loader-image" : "hidden"} />
@@ -507,7 +507,7 @@ class ViewScores extends Component {
         let loaderForUserList = (
             <div className={this.state.somethingClicked && this.state.getDataScores === false ?
                 "loading-container-add-score" : "hidden "}>
-                <div className={ this.state.somethingClicked && this.state.getDataScores === false ?
+                <div className={this.state.somethingClicked && this.state.getDataScores === false ?
                     "loader" : "hidden"} />
                 <div className={this.state.somethingClicked && this.state.getDataScores === false ?
                     "target-loader-image" : "hidden"} />
@@ -653,7 +653,11 @@ class ViewScores extends Component {
                                     ></input>
                                     <div>
                                         {adminUserList}
-                                        {displayScoreList}
+                                        {this.state.userClicked && this.state.somethingClicked ?
+                                            <div>
+                                                {displayScoreList}
+                                            </div>
+                                            : null}
                                         {loaderForAdmin}
                                         {loaderForUserList}
                                     </div>
