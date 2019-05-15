@@ -21,7 +21,7 @@ class LeaderboardPage extends Component {
     this.state = {
       individual: "Individual Ranking",
       selectedGroup: -1,
-      selectedCompetition: -1,
+      selectedCompetition: 0,
       selectedScoreType: 1,
       selectedRank: "total",
       collapseFilter: false,

@@ -6,7 +6,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { persistStore, persistReducer } from "redux-persist";
 
 const persistConfig = {
-  key: "root",
+  key: "skietbaan",
   storage: storage,
   blacklist: ["compOBJ"]
 };

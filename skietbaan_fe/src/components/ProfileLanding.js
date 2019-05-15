@@ -100,7 +100,7 @@ class ProfileLanding extends Component {
               <Row className="top-bar-rectangle">
                 <Col className="lay-horizontal">
                   <div className="gun-overlay-img-background">
-                    <label className="profile-title">PROFILE</label>
+                    <label className="profile-title">PROFILEsipflsk</label>
                   </div>
                   <div className="logout-button-right">
                     <div onClick={this.logout}>
