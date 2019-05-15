@@ -575,7 +575,7 @@ class ViewScores extends Component {
             displayScoreList.push(
                 <div className="not-active">
                     <div className="not-active-message">
-                        Sorry, no scores submitted for this competition
+                        Sorry, no scores have submitted by this user
                 </div>
                 </div>)
         }
@@ -598,6 +598,13 @@ class ViewScores extends Component {
                     </div>
                 )
             }
+        }else if(this.state.usersList.length === 0 && this.state.getDataScores === true){
+            adminUserList.push(
+                <div className="not-active">
+                    <div className="not-active-message">
+                        Sorry, no users scores have submitted scores for this competition
+                </div>
+                </div>)
         }
 
         return (
