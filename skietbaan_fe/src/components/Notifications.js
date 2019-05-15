@@ -377,12 +377,12 @@ class notification extends Component {
             src={
               this.state.toggle && !this.state.secondToggle
                 ? whiteSelectAll
-                : this.state.secondToggle
+                : this.state.toggle && this.state.secondToggle
                   ? blackSelectAll
                   : "hidden"
             }
             onClick={() => this.selectAll()}
-            className="admin-select-all"
+            className={this.state.toggle ? "admin-select-all" : "hidden"}
             alt=""
           />
           <img
