@@ -171,6 +171,7 @@ class StatisticsPage extends Component {
         if(this.prevSelectedComp !== this.state.selectedCompetition || this.prevSelectedGroup !== this.state.selectedGroup){
             this.fetchOnce = true;
             this.fetchAccuracyData();
+            this.state.isAccuracyDataDone = false;
         }
     }
 
