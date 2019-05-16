@@ -10,7 +10,9 @@ import { Container, Row, Col } from "react-bootstrap";
 import Collapsible from "react-collapsible";
 import downArrow from "../resources/awardIcons/down-triangle.png";
 import upArrow from "../resources/awardIcons/up-triangle.png";
+import letterhead from "./compassets/letterofgoodstanding.png";
 import { pageState } from "../actions/postActions";
+import Switch from "@material-ui/core/Switch";
 import "../scss/view-comp.css";
 import { fetchNumberOfNotification } from "../actions/notificationAction";
 import { getCookie } from "./cookie";
@@ -44,7 +46,10 @@ class CreateComp extends Component {
       validInputs: false,
       height: window.innerHeight,
       width: window.innerWidth,
-      token: getCookie("token")
+      token: getCookie("token"),
+      selectedStandard: 1,
+      numberOfShoots: '',
+      isSelectedForLetterOfGoodStanding: false
     };
     //binding the onChange method to this commponents
     this.onChangeCompName = this.onChangeCompName.bind(this);
@@ -63,6 +68,12 @@ class CreateComp extends Component {
     this.validateAll = this.validateAll.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
     this.getBodyHeight = this.getBodyHeight.bind(this);
+    this.displayTotalRequirements = this.displayTotalRequirements.bind(this);
+    this.displayAccuracyRequirements = this.displayAccuracyRequirements.bind(this);
+    this.changeToAccuracy = this.changeToAccuracy.bind(this);
+    this.changeToTotal = this.changeToTotal.bind(this);
+    this.displayLetterOfGoodStanding = this.displayLetterOfGoodStanding.bind(this);
+    this.onChangeNumberOfShoots = this.onChangeNumberOfShoots.bind(this);
   }
   componentWillMount() {
     window.addEventListener("resize", this.updateDimensions);
@@ -215,6 +226,17 @@ class CreateComp extends Component {
       event.target.value = event.target.value.substr(0, 3);
     this.setState({ goldTotal: event.target.value });
   }
+
+  onChangeNumberOfShoots(e){
+      if(e.target.value === 0 || e.target.value === 'e'){
+        e.target.value = e.target.value.substr(0,0);
+      }
+      this.setState({ [e.target.name]: e.target.value });
+    
+  }
+  validateNumberOfShoots(){
+
+  }
   /** The method that checks all the inputs if whether they are valid or not*/
   validateAll() {
     if (
@@ -236,8 +258,7 @@ class CreateComp extends Component {
       e.preventDefault();
       //calling the method to create a post => compData for the create competition
       const compData = {
-        Name: this.state
-          .Name /**TODO: Don't forget to change to lowercase to avoid case sensitivity conflicts*/,
+        Name: this.state.Name /**TODO: Don't forget to change to lowercase to avoid case sensitivity conflicts*/,
         BestScoresNumber: this.state.BestScoresNumber,
         Hours: this.state.Hours,
         Status: true,
@@ -247,17 +268,23 @@ class CreateComp extends Component {
       const BronzeData = {
         standard: "Bronze",
         accuracy: this.state.bronzeAccuracy === "" ? 0 : parseFloat(this.state.bronzeAccuracy),
-        total: this.state.bronzeTotal === "" ? 0 : parseFloat(this.state.bronzeTotal)
+        total: this.state.bronzeTotal === "" ? 0 : parseFloat(this.state.bronzeTotal),
+        statusLetter: this.state.isSelectedForLetterOfGoodStanding,
+        numberOfShoots: this.state.numberOfShoots
       };
       const SilverData = {
         standard: "Silver",
         accuracy: this.state.silverAccuracy === "" ? 0 : parseFloat(this.state.silverAccuracy),
-        total: this.state.silverTotal === "" ? 0 : parseFloat(this.state.silverTotal)
+        total: this.state.silverTotal === "" ? 0 : parseFloat(this.state.silverTotal),
+        statusLetter: this.state.isSelectedForLetterOfGoodStanding,
+        numberOfShoots: this.state.numberOfShoots
       };
       const GoldData = {
         standard: "Gold",
         accuracy: this.state.goldAccuracy === "" ? 0 : parseFloat(this.state.goldAccuracy),
-        total: this.state.goldTotal === "" ? 0 : parseFloat(this.state.goldTotal)
+        total: this.state.goldTotal === "" ? 0 : parseFloat(this.state.goldTotal),
+        statusLetter: this.state.isSelectedForLetterOfGoodStanding,
+        numberOfShoots: this.state.numberOfShoots
       };
       this.props.fetchNumberOfNotification(this.state.token);
       const RData = [BronzeData, SilverData, GoldData];
@@ -276,7 +303,146 @@ class CreateComp extends Component {
       }
     }
   }
+  displayTotalRequirements(){
+    return (<div>
+      <Container className="container justify-content-container total-requirements-container">
+        <Row className="bronze-standard-row">
+        <Col xs={5} md={5} lg={5} className="bronze-header-label-col">
+            <div className="accuracy-header-label">Bronze Award:</div>
+        </Col>
+        <Col xs={7} md={7} className="bronze-input-input-col">
+            <input className="bronze-total-input"
+                  type="number" name="bronzeTotal" id="B_total"
+                  required  min={1}  max={1000}  autoComplete="off"
+                  autoCorrect="off" value={this.state.bronzeTotal}
+                  onChange={this.onChangeBronzeTotal}/>      
+        </Col>
+        </Row>
+        <Row className="silver-standard-row">
+        <Col xs={5} md={5} lg={5} className="silver-header-label-col">
+            <div className="accuracy-header-label">Silver Award:</div>
+        </Col>
+        <Col xs={7} md={7} className="silver-input-input-col">
+            <input className="silver-total-input"
+                  type="number" name="silverTotal" id="S_total"
+                  required min="0" max="600" autoComplete="off"
+                  autoCorrect="off" value={this.state.silverTotal} 
+                  onChange={this.onChangeSilverTotal}
+            />
+        </Col>
+        </Row>
+        <Row className="gold-standard-row">
+        <Col xs={5} md={5} lg={5} className="bronze-header-label-col">
+            <div className="accuracy-header-label">Gold Award:</div>
+        </Col>
+        <Col xs={7} md={7} className="gold-input-input-col">
+          <input className="gold-total-input"
+                type="number" name="goldTotal"id="G_total" 
+                required min="0" max="600" autoComplete="off"
+                autoCorrect="off" value={this.state.goldTotal}
+                onChange={this.onChangeGoldTotal}
+          />
+        </Col>
+        </Row>
+      </Container>
+    </div>);
+  }
 
+  changeToTotal(){
+      this.setState({selectedStandard:1});
+}
+  displayAccuracyRequirements(){
+    return (<div>
+        <Container className="container justify-content-container accuracy-requirements-container">
+        <Row className="bronze-standard-row">
+        <Col xs={5} md={5} lg={5} className="bronze-header-label-col">
+            <div className="accuracy-header-label">Bronze Award:</div>
+        </Col>
+        <Col xs={7} md={7} className="bronze-input-input-col">
+          <input className="bronze-accuracy-input" type="number"
+              min={1} max={100} name="bronzeAccuracy" id="B_accuracy"
+              required placeholder="%" autoComplete="off"
+              autoCorrect="off" value={this.state.bronzeAccuracy}
+              onChange={this.onChangeBronzeAccuracy}
+          />    
+        </Col>
+        </Row>
+        <Row className="silver-standard-row">
+        <Col xs={5} md={5} lg={5} className="silver-header-label-col">
+            <div className="accuracy-header-label">Silver Award:</div>
+        </Col>
+        <Col xs={7} md={7} className="bronze-input-input-col">
+          <input className="silver-accuracy-input" type="number"
+              name="silverAccuracy" id="S_accuracy" required
+              placeholder="%" min="0" max="100"
+              autoComplete="off" autoCorrect="off"
+              value={this.state.silverAccuracy}
+              onChange={this.onChangeSilverAccuracy}
+          />
+        </Col>
+        </Row>
+        <Row className="gold-standard-row">
+        <Col xs={5} md={5} lg={5} className="bronze-header-label-col">
+            <div className="accuracy-header-label">Gold Award:</div>
+        </Col>
+        <Col xs={7} md={7} className="bronze-input-input-col">
+          <input className="gold-accuracy-input" type="number"
+           name="goldAccuracy" id="G_accuracy" required
+           placeholder="%" min="0" max="100"
+           autoComplete="off" autoCorrect="off"
+           value={this.state.goldAccuracy}
+           onChange={this.onChangeGoldAccuracy}
+                          />
+        </Col>
+        </Row>
+      </Container>
+
+    </div>);
+  }
+  changeToAccuracy(){
+  this.setState({selectedStandard:2});
+}
+
+  displayLetterOfGoodStanding(){
+  return (<div>
+           <Container className="container justify-content-container good-standing-container">
+             <Row className="letter-of-status-row">
+               <Col sx={7} sm={7} md={7} className="letter-label-col">
+               <div className="letter-header-label">
+                                        Selected for Letter of Status
+                                    </div>
+               </Col>
+               <Col sx={2} sm={2} md={2} className="letter-image-col">
+                  {this.state.isSelectedForLetterOfGoodStanding ? <img src={letterhead} className="letter-image" alt=""/> : null}
+               </Col>
+               <Col sx={3} sm={3} md={3} className="letter-button-col">
+                <div className="switch-button">
+                  <Switch
+                    color={"primary"}
+                    className={this.state.isSelectedForLetterOfGoodStanding ? "activeButton" : "inactiveButton"}
+                    focus={true} checked={this.state.isSelectedForLetterOfGoodStanding}
+                    onClick={() =>{this.setState({isSelectedForLetterOfGoodStanding: !this.state.isSelectedForLetterOfGoodStanding})} }
+                                  />
+                </div>                  
+               </Col>
+             </Row>
+             <Row className="shoots-row">
+             <Col xs={5} md={5} lg={5} className="shoots-header-label-col">
+             <div className="shoots-needed-header-label">Shoots Needed:</div>
+             </Col>
+             <Col xs={7} md={7} className="shoots-input-col">
+             <input className="number-of-shoots-input" type="number"
+                    name="numberOfShoots" id="numShoots" required
+                    min="0" max="100"
+                    autoComplete="off" autoCorrect="off" 
+                    value={this.state.isSelectedForLetterOfGoodStanding ? this.state.numberOfShoots : 0}
+                    onChange={this.onChangeNumberOfShoots}
+                          />
+             </Col>
+             </Row>
+           </Container>
+         </div>);
+  }
   changeToggle() {
     this.setState({ toggleRequirements: !this.state.toggleRequirements });
   }
@@ -392,139 +558,41 @@ class CreateComp extends Component {
               }
             >
               <div className="requirements-content">
-                <Form>
+                <Form>  
                   <Container className="standards-container">
-                    <Row className="standards-label">
-                      <Col xs={3} md={3} lg={3} />
-                      <Col xs={5} md={5} lg={5}>
-                        <div className="accuracy-header-label">ACCURACY %</div>
+                  <Row className="row justify-row-content requirements-row">
+                    <Col className="requirements-row-container">
+                    
+                  
+                    <Row className="row justify-row-content standards-row">
+                      <Col className="total-standard-button">
+                        <div className={this.state.selectedStandard === 1 ?"total-standard-button-active":"total-standard-button-inactive"}
+                          onClick={this.changeToTotal}
+                        >TOTAL SCORE</div>
                       </Col>
-                      <Col xs={4} md={4}>
-                        <div className="total-header-label">TOTAL</div>
-                      </Col>
+                      <Col className="accuracy-standard-button">
+                        <div className={this.state.selectedStandard === 2 ? 'accuracy-standard-button-active':'accuracy-standard-button-inactive'}
+                          onClick={this.changeToAccuracy}
+                        >ACCURACY</div>
+                      </Col>  
                     </Row>
-                    <Row className="bronze-row">
-                      <Col xs={4} md={4} className="targeter-class">
-                        <div className="bronze-label" >Bronze Award:</div>
-                      </Col>
-                      <Col xs={4} md={4}>
-                        <div className="">
-                          <input
-                            className="bronze-accuracy-input-control"
-                            type="number"
-                            min={1}
-                            max={100}
-                            name="bronzeAccuracy"
-                            id="B_accuracy"
-                            required
-                            placeholder="%"
-                            autoComplete="off"
-                            autoCorrect="off"
-                            value={this.state.bronzeAccuracy}
-                            onChange={this.onChangeBronzeAccuracy}
-                          />
-                        </div>
-                      </Col>
-                      <Col xs={4} md={4}>
-                        <div className="">
-                          <input
-                            className="bronze-total-input-control"
-                            type="number"
-                            name="bronzeTotal"
-                            id="B_total"
-                            required
-                            min={1}
-                            max={1000}
-                            autoComplete="off"
-                            autoCorrect="off"
-                            value={this.state.bronzeTotal}
-                            onChange={this.onChangeBronzeTotal}
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-
-                    <Row className="silver-row">
-                      <Col xs={4} md={4} className="targeter-class">
-                        <div className="silver-label">Silver Award:</div>
-                      </Col>
-                      <Col xs={4} md={4}>
-                        <div className="">
-                          <input
-                            className="silver-accuracy-input-control"
-                            type="number"
-                            name="silverAccuracy"
-                            id="S_accuracy"
-                            required
-                            placeholder="%"
-                            min="0"
-                            max="100"
-                            autoComplete="off"
-                            autoCorrect="off"
-                            value={this.state.silverAccuracy}
-                            onChange={this.onChangeSilverAccuracy}
-                          />
-                        </div>
-                      </Col>
-                      <Col xs={4} md={4}>
-                        <div className="">
-                          <input
-                            className="silver-total-input-control"
-                            type="number"
-                            name="silverTotal"
-                            id="S_total"
-                            required
-                            min="0"
-                            max="600"
-                            autoComplete="off"
-                            autoCorrect="off"
-                            value={this.state.silverTotal}
-                            onChange={this.onChangeSilverTotal}
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-
-                    <Row>
-                      <Col xs={4} md={4} className="targeter-class">
-                        <div className="gold-label">Gold Award:</div>
-                      </Col>
-                      <Col xs={4} md={4}>
-                        <div className="">
-                          <input
-                            className="gold-accuracy-input-control"
-                            type="number"
-                            name="goldAccuracy"
-                            id="G_accuracy"
-                            required
-                            placeholder="%"
-                            min="0"
-                            max="100"
-                            autoComplete="off"
-                            autoCorrect="off"
-                            value={this.state.goldAccuracy}
-                            onChange={this.onChangeGoldAccuracy}
-                          />
-                        </div>
-                      </Col>
-                      <Col xs={4} md={4}>
-                        <div className="">
-                          <input
-                            className="gold-total-input-control"
-                            type="number"
-                            name="goldTotal"
-                            id="G_total"
-                            required
-                            min="0"
-                            max="600"
-                            autoComplete="off"
-                            autoCorrect="off"
-                            value={this.state.goldTotal}
-                            onChange={this.onChangeGoldTotal}
-                          />
-                        </div>
-                      </Col>
-                    </Row>
+                    {/** the two pages to display the standard inputs for the Toatal Score and Accuracy */}
+                      <div className="">
+                        {this.state.selectedStandard === 1 ? (this.displayTotalRequirements()):
+                          (this.state.selectedStandard === 2) ? (this.displayAccuracyRequirements()): null}
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row >
+                      <Col className="col-for-letter-of-good-standing">
+                          <div className="border-bottom"/>
+                      </Col>      
+                  </Row>
+                  <Row className="letter-of-good-standing-row">
+                      <Col className="letter-of-good-standing-col">
+                          {this.displayLetterOfGoodStanding()}
+                      </Col>      
+                  </Row>
                   </Container>
                 </Form>
               </div>

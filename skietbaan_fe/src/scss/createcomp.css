@@ -1,5 +1,5 @@
 .comp-input {
-	width: 312px;
+	width: 80%;
 	height: 56px;
 	border-radius: 5px;
 	border: 1px solid #979797;
@@ -99,6 +99,377 @@
 	padding-top: 17px;
 }
 /** CSS for the requirements within the create page*/
+.standards-row{
+	border: solid 0.8px #BE0000;
+    width: 96%;
+    height: 32.8px;
+    border-radius: 18px;
+    text-align: center;
+	margin: auto;
+	background: #FFFFFF;
+
+}
+.total-standard-button{
+	padding: inherit;
+}
+.accuracy-standard-button{
+	padding: inherit;
+	height: 100%;
+}
+
+.accuracy-standard-button-active{
+	cursor: pointer;   
+	padding: 5px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background: #BE0000;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 14px;
+    border-top-right-radius: 18px;
+    height: 100%;
+	border-bottom-right-radius: 18px;
+}
+.accuracy-standard-button-inactive {
+	cursor: pointer;
+	display: flex;
+    justify-content: center;
+    width: 100%;
+    font-weight: lighter;
+    font-size: 14px;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+    padding: 5px;
+	color: #666666;   
+    
+}
+
+.total-standard-button-active{
+	cursor: pointer;
+	padding: 5px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background: #BE0000;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 14px;
+    border-top-left-radius: 18px;
+    height: 100%;
+	border-bottom-left-radius: 18px;
+}
+.total-standard-button-inactive{
+	cursor: pointer;
+	display: flex;
+    justify-content: center;
+    widows: 100%;
+    font-weight: lighter;
+    font-size: 14px;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+    padding: 5px;
+    color: #666666;
+}
+
+.total-standard-button{
+	padding:0px;
+
+}
+.accuracy-standard-button{
+	padding:0px;
+}
+
+.total-requirements-container{
+	
+    padding: 3px;
+    width: 97%;
+    margin-bottom: 10px;
+	
+}
+
+.accuracy-requirements-container{
+    padding: 3px;
+	width: 97%;
+	margin-bottom: 10px;
+}
+.bronze-standard-row{
+	text-align: center;
+    width: inherit;
+    margin: 5px;
+}
+.silver-standard-row{
+	text-align: center;
+    width: inherit;
+    margin: 5px;
+}
+.gold-standard-row{
+		text-align: center;
+		width: inherit;
+		margin: 5px;
+}
+
+.bronze-header-label-col{    
+	padding-top: 13px;
+	padding-left: 0px;
+	padding-right: 0px;
+	text-align: left;
+}
+
+.silver-header-label-col{
+	padding-top: 13px;
+	padding-left: 0px;
+	padding-right: 0px;
+	text-align: left;
+}
+.silver-header-label-col{
+	padding-top: 13px;
+	padding-left: 0px;
+	padding-right: 0px;
+	text-align: left;
+}
+
+.accuracy-header-label {
+	height: 100%;
+    color: rgba(0,0,0,.6);
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: .13px;
+    line-height: 16px;
+	padding: 0;
+}
+.bronze-total-input{
+	width: 100%;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #979797;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
+	font-style: normal;
+	text-align: center;
+}
+.silver-total-input {
+	width: 100%;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #979797;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
+	font-style: normal;
+	text-align: center;
+}
+.gold-total-input {
+	width: 100%;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #979797;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
+	font-style: normal;
+	text-align: center;
+}
+.bronze-accuracy-input{
+	width: 100%;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #979797;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
+	font-style: normal;
+	text-align: center;
+}
+.silver-accuracy-input{
+	width: 100%;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #979797;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
+	font-style: normal;
+	text-align: center;
+}
+.gold-accuracy-input{
+	width: 100%;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #979797;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
+	font-style: normal;
+	text-align: center;
+}
+
+.bronze-input-input-col{padding: 0px;}
+.silver-input-input-col{padding: 0px;}
+.gold-input-input-col{padding: 0px;}
+.shoots-header-label-col{
+	padding: 0px;
+    text-align: left;
+}
+
+/** CSS for the letter of good standing UI*/
+.good-standing-container{
+    padding: 3px;
+    width: 97%;
+}
+
+.letter-of-status-row{ 
+	text-align: center;
+	width: inherit;
+	margin: 5px;
+	height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.shoots-row{
+	text-align: center;
+	width: inherit;
+	margin: 5px;
+}
+.shoots-input-col{
+	padding: 0px;
+}
+.number-of-shoots-input{
+	width: 100%;
+	height: 44px;
+	border-radius: 5px;
+	border: 1px solid #979797;
+	padding: 10px;
+	-webkit-text-decoration-color: #666666;
+	text-decoration-color: #666666;
+	background-color: #ffffff;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	color: #666666;
+	font-family: helvetica;
+	font-style: normal;
+	text-align: center;
+}
+
+.shoots-needed-header-label{
+	height: 100%;
+    color: rgba(0,0,0,.6);
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: .13px;
+    line-height: 16px;
+    padding: 0;
+    padding-top: 15px;
+}
+.letter-label-col{
+	padding: 0px;
+	text-align: left;
+	width: fit-content;
+}
+.letter-header-label{
+	height: 100%;
+    color: rgba(0,0,0,.6);
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: .13px;
+    line-height: 16px;
+    padding: 0;
+    padding-top: 15px;
+}
+
+.letter-image {
+	width: 18px;
+	height: 24px;
+}
+
+.letter-image-col{
+	padding: 0px;
+	padding-top: 14px;
+	width: fit-content;
+	margin: auto;
+}
+.switch-button-active{
+	background: #6f839e;
+	border-radius: 20px;
+	color: #fdfdfd;
+	justify-content: flex-end !important;
+	width: 116px;
+	height: 35px;
+	font-weight: lighter;
+	font-family: helvetica;
+}
+.switch-button-inactive{
+	background-color: #fdfdfd;
+	border-radius: 20px;
+	justify-content: flex-end !important;
+	border: 1px #6f839e solid;
+	color: #6f839e;
+	width: 116px;
+	height: 35px;
+	font-weight: lighter;
+	font-family: helvetica;
+	border-color: #6f839e;
+}
+
+.letter-button-col{
+	padding: 0px;
+    text-align: right;
+	width: fit-content;
+}
+/**Here we place the code into the button containers
+accuracy-standard-button {}
+display: flex;
+    justify-content: center;
+    font-weight: lighter;
+    font-size: 14px;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+    padding: 5px;
+    color: #666666;
+ */
+
 .requirements-collapse{
 	margin: 5px;
     margin-top: 24px;
@@ -125,7 +496,7 @@
 	margin: 10px;
     padding: 5px;
     border-radius: 10px;
-    background: #FFFFFF;
+    background: #F6F6F6;
 }
 
 

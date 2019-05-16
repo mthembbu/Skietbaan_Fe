@@ -182,17 +182,23 @@ class ViewComp extends Component {
     const BronzeData = {
       standard: "Bronze",
       accuracy: this.state.bronzeAccuracy,
-      total: this.state.bronzeTotal
+      total: this.state.bronzeTotal,
+      statusLetter: this.state.isLetterOfStatus,
+      numberOfShoots: this.state.numberofshots
     };
     const SilverData = {
       standard: "Silver",
       accuracy: this.state.silverAccuracy,
-      total: this.state.silverTotal
+      total: this.state.silverTotal,
+      statusLetter: this.state.isLetterOfStatus,
+      numberOfShoots: this.state.numberofshots
     };
     const GoldData = {
       standard: "Gold",
       accuracy: this.state.goldAccuracy,
-      total: this.state.goldTotal
+      total: this.state.goldTotal,
+      statusLetter: this.state.isLetterOfStatus,
+      numberOfShoots: this.state.numberofshots
     };
     const RData = [BronzeData, SilverData, GoldData];
     this.props.updateRequirements(index, RData);
@@ -212,7 +218,9 @@ class ViewComp extends Component {
           silverAccuracy: requirementsData[1].accuracy,
           silverTotal: requirementsData[1].total,
           goldAccuracy: requirementsData[2].accuracy,
-          goldTotal: requirementsData[2].total
+          goldTotal: requirementsData[2].total,
+          isLetterOfStatus: requirementsData[2].statusLetter,
+          numberofshots: requirementsData[2].numberOfShoots
         });
       })
       .catch(err => {
