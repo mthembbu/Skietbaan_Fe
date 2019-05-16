@@ -521,7 +521,8 @@ class ViewScores extends Component {
             for (let i = 0; i < this.state.scoresList.length; i++) {
                 displayScoreList.push(
                     <div className={this.state.cameraClicked === false || this.state.someScoreClicked === i ?
-                        "score-content" : "hidden"}>
+                        "score-content" : "hidden"}
+                        onClick={this.state.scoresList[i].pictureURL !== "" ? () => this.showPhoto(i) : null}>
                         <div className="user-scores">{this.state.scoresList[i].userScore}
                         </div>
                         <div className="date-view-score float-left">
@@ -529,14 +530,11 @@ class ViewScores extends Component {
                         </div>
                         {this.props.isAdmin === true ? (
                             <img className={this.state.scoresList[i].pictureURL !== "" ?
-                                "view-scores-photo-admin" : "hidden"}
-                                src={camera} onClick={() => this.showPhoto(i)}
-                                alt="admin">
+                                "view-scores-photo-admin" : "hidden"} src={camera} alt="admin">
                             </img>
                         ) : (
                                 <img className={this.state.scoresList[i].pictureURL !== "" ?
-                                    "view-scores-photo" : "hidden"} src={camera} onClick={() => this.showPhoto(i)}
-                                    alt="">
+                                    "view-scores-photo" : "hidden"} src={camera} alt="">
                                 </img>
                             )}
                         <div className="range-spacing">
@@ -598,7 +596,7 @@ class ViewScores extends Component {
                     </div>
                 )
             }
-        }else if(this.state.usersList.length === 0 && this.state.getDataScores === true){
+        } else if (this.state.usersList.length === 0 && this.state.getDataScores === true) {
             adminUserList.push(
                 <div className="not-active">
                     <div className="not-active-message">
