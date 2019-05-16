@@ -73,7 +73,7 @@ class StatisticsPage extends Component {
     }
 
     fetchParticipants(){
-        fetch(BASE_URL + "/api/statistics/participants", {
+        fetch(BASE_URL + "/api/statistics/participants/" + getCookie("token"), {
             method: "GET",
             headers: {
                 "content-type": "application/json"
@@ -83,7 +83,8 @@ class StatisticsPage extends Component {
         .then(_response => {
             if(this._isMounted){
                 Object.keys(_response).forEach((element) =>{
-                    this.groups.push(element);
+                    if(_response[element].isParticipant)
+                        this.groups.push(element);
                 });
                 if(typeof _response !== "string"){
                     this.setState({groupsUsersMap : _response, isParticipantsFetchDone: true });
@@ -97,7 +98,7 @@ class StatisticsPage extends Component {
     }
 
     fetchCompetitionParticipants(){    
-        fetch(BASE_URL + "/api/statistics/competition-participants", {
+        fetch(BASE_URL + "/api/statistics/competition-participants/", {
             method: "GET",
             headers: {
                 "content-type": "application/json"
@@ -338,10 +339,10 @@ class StatisticsPage extends Component {
                             <div className="scale-group-img">
                                 <img src={require("../resources/awardIcons/groups-icon.png")} alt="group-icon"></img>
                             </div>
-                                {this.state.selectedGroup === -1 ? 
+                                {this.state.selectedGroup === -1 ?
                                 this.state.competitionsUsersMap
                                     [this.competitions[this.state.selectedCompetition]] :
-                                this.state.groupsUsersMap[this.groups[this.state.selectedGroup]]
+                                this.state.groupsUsersMap[this.groups[this.state.selectedGroup]].count
                                 }
                         </div>
                     </Col>
