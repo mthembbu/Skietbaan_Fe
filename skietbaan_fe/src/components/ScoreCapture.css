@@ -676,9 +676,15 @@ input[type=number] {
     width: 309px;
 }
 
+@media screen and (max-height: 550px ){
+    .score-list-container{
+        max-height: 53vh !important;
+    }
+}
+
 .score-list-container{
     text-align: -webkit-center;
-    max-height: 65vh;
+    max-height: 63vh;
     padding-bottom: 56px;
     overflow-y: overlay;
     overflow-x: hidden;
@@ -840,7 +846,7 @@ input[type=number] {
         right: 21% !important;
     }
     .score-list-container{
-        max-height: 58vh !important;
+        max-height: 60vh !important;
     }
     .view-score-input{
         width: 65%;
@@ -852,7 +858,7 @@ input[type=number] {
 }
 
 .range-spacing{
-    height: fit-content;
-    width: fit-content;
+    height: 27px;
+    width: 200px;
     padding-left: 105px;
 }
