@@ -66,7 +66,7 @@
 
   .announcement-text {
     margin-top: 140px;
-    width: 578px;
+    width: 90%;
   }
 
   .outer-header-div {
@@ -230,7 +230,6 @@
   .notifications-text {
     color: #000000;
     text-decoration-line: none;
-    text-align: justify;
     text-justify: newspaper;
     font-weight: lighter;
     font-family: helvetica;
@@ -242,7 +241,6 @@
   .notifications-selected-text {
     color: red;
     text-decoration-line: none;
-    text-align: justify;
     text-justify: newspaper;
     font-weight: lighter;
     font-family: helvetica;
@@ -253,7 +251,6 @@
 
   .notifications-a {
     padding-left: 47px;
-    text-align: justify;
     text-justify: newspaper;
     text-decoration: none;
   }
@@ -423,7 +420,6 @@
     background: url("./Notification-Img/submit_plus_add_score.png");
     padding-bottom: 6px;
     padding-right: 11px;
-    text-align: justify;
     background-repeat: no-repeat;
     background-size: 24px;
     height: 24px;
@@ -589,7 +585,6 @@
   .notifications-text {
     color: #000000;
     text-decoration-line: none;
-    text-align: justify;
     text-justify: newspaper;
     font-weight: lighter;
     font-family: helvetica;
@@ -601,7 +596,6 @@
   .notifications-selected-text {
     color: red;
     text-decoration-line: none;
-    text-align: justify;
     text-justify: newspaper;
     font-weight: lighter;
     font-family: helvetica;
