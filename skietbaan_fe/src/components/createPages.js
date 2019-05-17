@@ -379,32 +379,37 @@ export class createPages extends Component {
 												/>
 											</div> : null}
 									</div>
-									<Row className="row justify-content-center">
+									<Row className="row justify-content-center groups-comp-members-row">
 										<div className="create-switch-top">
-											<div
-												className={
-													this.state.selectedButton === 1 ? 'switch-active' : 'switch-inactive'
+											<Col classname="groups-col">
+											<div className={
+													this.state.selectedButton === 1 ? 'switch-groups-active' : 'switch-groups-inactive'
 												}
 												onClick={this.groupsPage}
 											>
 												GROUPS
 										</div>
-											<div
+											</Col>
+										<Col classname="competition-col">
+										<div id="competitions-column"
 												className={
-													this.state.selectedButton === 2 ? 'switch-active' : 'switch-inactive'
+													this.state.selectedButton === 2 ? 'switch-competition-active' : 'switch-competition-inactive'
 												}
 												onClick={this.comptetitionsPage}
 											>
 												COMPETITIONS
 										</div>
-											<div
+										</Col>
+										<Col classname="member-col">
+										<div
 												className={
-													this.state.selectedButton === 3 ? 'switch-active' : 'switch-inactive'
+													this.state.selectedButton === 3 ? 'switch-member-active' : 'switch-member-inactive'
 												}
 												onClick={this.membersPage}
 											>
 												MEMBERS
 										</div>
+										</Col>
 										</div>
 									</Row>
 									<Row className="row justify-content-center">
