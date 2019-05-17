@@ -654,12 +654,14 @@ input[type=number] {
     width: 309px;
     z-index: 1;
     border-bottom: 1px #A0A0A0 solid;
+    margin: auto;
 }
 
 .border-line-usernames{
     width: 309px;
     z-index: 1;
     border-bottom: 1px #A0A0A0 solid;
+    margin: auto;
 }
 
 .user-scores{

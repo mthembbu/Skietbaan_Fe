@@ -4,10 +4,10 @@ import createRed from "../components/navbar-icons/new-nav-icons/new-create-red.p
 import createGray from "../components/navbar-icons/new-nav-icons/new-create-grey.png";
 import leaderboardRed from "../components/navbar-icons/new-nav-icons/new-leaderboard-red.png";
 import leaderboardGray from "../components/navbar-icons/new-nav-icons/new-leaderboard-grey.png";
-import notificationsRed from "../components/navbar-icons/new-nav-icons/new-notification-red.png";
-import notificationsGray from "../components/navbar-icons/new-nav-icons/new-notification-grey.png";
-import notifyGrey from "../components/navbar-icons/notify-gray.png";
-import notifyRed from "../components/navbar-icons/notify-red.png";
+import notifyGray from "../components/navbar-icons/more-grey-circle.png";
+import notifyRed from "../components/navbar-icons/more-red-circle.png";
+import moreGrey from "../components/navbar-icons/new-nav-icons/new-more-grey.png";
+import moreRed from "../components/navbar-icons/new-nav-icons/new-more-red.png"
 import scorecaptureRed from "../components/navbar-icons/new-nav-icons/new-add-score-red.png";
 import scorecaptureGray from "../components/navbar-icons/new-nav-icons/new-add-score-grey.png";
 
@@ -18,9 +18,9 @@ export const NAV_BAR_ICONS = {
   CREATE_GRAY: createGray,
   LEADERBOARD_RED: leaderboardRed,
   LEADERBOARD_GRAY: leaderboardGray,
-  NOTIFICATIONS_RED: notificationsRed,
-  NOTIFICATIONS_GRAY: notificationsGray,
-  NOTIFY_GREY: notifyGrey,
+  MORE_RED: moreRed,
+  NOTIFY_GREY: notifyGray,
+  MORE_GREY: moreGrey,
   NOTIFY_RED: notifyRed,
   SCORE_CAPTURE_RED: scorecaptureRed,
   SCORE_CAPTURE_GRAY: scorecaptureGray

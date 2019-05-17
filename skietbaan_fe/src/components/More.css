@@ -1,0 +1,48 @@
+.padding-top-100{
+    padding-top: 100px;
+}
+
+@media screen and (min-width:576px){
+    .padding-top-100{
+        padding-top: 170px;
+    }
+    .more-image{
+        left: 9% !important;
+    }
+    .more-label{
+        left: 14% !important;
+    }
+}
+
+.text-align-centre{
+    text-align: center;
+}
+
+.more-image{
+    height: 30px;
+    position: relative;
+    left: 36px;
+    top: 20px;
+}
+
+.more-image-container{
+    height: 68px;
+    cursor: pointer;
+}
+
+.more-label{
+    position: relative;
+    left: 52px;
+    font-size: 16px;
+    color: #555555;
+    font-weight: bold;
+    font-family: helvetica;
+    top: 24px;
+}
+
+.more-border-line{
+    width: 85%;
+    z-index: 1;
+    border-bottom: 1px #A0A0A0 solid;
+    margin: auto;
+}
