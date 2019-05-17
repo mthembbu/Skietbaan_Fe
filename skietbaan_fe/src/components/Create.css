@@ -426,16 +426,133 @@
   
   }
   .create-switch-top{
-    width: 344px;
+    width: 85%;
     height: 32px;
     margin: auto;
-    border: 1px solid #BE0000;
+    border: 0.95px solid #BE0000;
     margin-top: 21px;
     margin-bottom: 5px;
     border-radius: 18px;
-    display: -webkit-box;
+    display: inline-flex;
+    justify-content: space-between;
 
 }
+
+/** the css for the top toggle between groups - competition - members */
+.groups-comp-members-row .create-switch-top  div{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.groups-col{
+  text-align: -webkit-center;
+}
+.create-switch-top .switch-groups-active{
+  height: 100%;	
+  width: 100%;	
+  border: 1px solid #BE0000;	
+  border-radius: 18px;	
+  box-shadow: 0 3px 8px -3px #674D4D;
+  color: #FAFAFA;	
+  font-family: Helvetica;	
+  font-size: 14px;	
+  font-weight: bold;	
+  line-height: 18px;	
+  text-align: center;
+  background-color: #BE0000;
+  text-align: center;
+  padding-top: 5px;
+  cursor: pointer;
+}
+.create-switch-top .switch-groups-inactive{
+  height: 100%;	
+  width: 100%;
+  border-radius: 18px;
+  color: #555555;	
+  font-family: Helvetica;	
+  font-size: 14px;	
+  font-weight: 300;	
+  line-height: 18px;	
+  text-align: center;
+  padding-top: 6px;
+  cursor: pointer;
+  margin: auto;
+}
+
+.create-switch-top div #competitions-column{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.create-switch-top .switch-competition-active{
+  /* padding-right: 10px;
+  padding-left: 10px; */
+
+  height: 100%;
+    width: 108%;
+    border: 1px solid #BE0000;
+    border-radius: 18px;
+    box-shadow: 0 3px 8px -3px #674D4D;
+    color: #FAFAFA;
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 18px;
+    background-color: #BE0000;
+    text-align: center;
+    padding-top: 5px;
+    cursor: pointer;
+}
+.create-switch-top .switch-competition-inactive{
+  height: 32px;	
+  width: 100%;
+  border-radius: 18px;
+  color: #555555;	
+  font-family: Helvetica;	
+  font-size: 14px;	
+  font-weight: 300;	
+  line-height: 18px;	
+  text-align: center;
+  padding-top: 6px;
+  cursor: pointer;
+  margin: auto;
+}
+
+.create-switch-top div{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.create-switch-top .switch-member-active{
+  height: 30px;	
+  width: 100%;	
+  border: 1px solid #BE0000;	
+  border-radius: 18px;	
+  box-shadow: 0 3px 8px -3px #674D4D;
+  color: #FAFAFA;	
+  font-family: Helvetica;	
+  font-size: 14px;	
+  font-weight: bold;	
+  line-height: 18px;	
+  text-align: center;
+  background-color: #BE0000;
+  text-align: center;
+  padding-top: 5px;
+  cursor: pointer;
+}
+.create-switch-top .switch-member-inactive{
+  height: 100%;	
+  width: 100%;
+  border-radius: 18px;
+  color: #555555;	
+  font-family: Helvetica;	
+  font-size: 14px;	
+  font-weight: 300;	
+  line-height: 18px;	
+  text-align: center;
+  padding-top: 6px;
+  cursor: pointer;
+  margin: auto;
+}
+
 .create-switch-top .switch-active{
   height: 30px;	
   width: 115px;	
@@ -467,6 +584,7 @@
   cursor: pointer;
 }
 
+/** END of the top toggle between groups - competition - members */
 .create-switch-bottom{
   width: 320px;
   height: 33px;
@@ -481,7 +599,7 @@
    display: none;
 }
 .create-switch-bottom .switch-active-left{
-  height: 32px;	
+  height: 31px;	
   width: 160px;	
   border: 1px solid #BE0000;	
   border-top-left-radius: 18px;
