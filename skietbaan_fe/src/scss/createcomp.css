@@ -181,7 +181,6 @@
 }
 
 .total-requirements-container{
-	
     padding: 3px;
     width: 97%;
     margin-bottom: 10px;
@@ -204,9 +203,9 @@
     margin: 5px;
 }
 .gold-standard-row{
-		text-align: center;
-		width: inherit;
-		margin: 5px;
+	text-align: center;
+	width: inherit;
+	margin: 5px;
 }
 
 .bronze-header-label-col{    
