@@ -22,6 +22,7 @@ import ViewComp from "./components/ViewComp";
 import CreateComp from "./components/CreateComp";
 import createPages from "./components/createPages";
 import resetPassword from "./components/resetPassword";
+import more from "./components/More.js"
 import MetaTags from "react-meta-tags";
 import { PersistGate } from "redux-persist/integration/react";
 //app.js
@@ -49,6 +50,7 @@ class App extends Component {
                 <Route path="/groups" component={Groups} exact />
                 <Route path="/viewComp" component={ViewComp} exact />
                 <Route path="/createComp" component={CreateComp} exact />
+                <Route path="/more" component={more} exact />
                 <Route path="/notify" component={notification} exact />
                 <Route path="/documents" component={Documents} exact />
                 <Route path="/profile" component={ProfileLanding} exact />

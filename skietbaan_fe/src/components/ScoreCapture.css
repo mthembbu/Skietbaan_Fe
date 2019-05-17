@@ -142,6 +142,10 @@
     .padding-top-40{
         padding-top: 100px !important;
     }
+    .view-scores-back-button{
+        top: 293px !important;
+        left: 8% !important;
+    }
 }
 
 .page-content-video{
@@ -650,12 +654,14 @@ input[type=number] {
     width: 309px;
     z-index: 1;
     border-bottom: 1px #A0A0A0 solid;
+    margin: auto;
 }
 
 .border-line-usernames{
     width: 309px;
     z-index: 1;
     border-bottom: 1px #A0A0A0 solid;
+    margin: auto;
 }
 
 .user-scores{
@@ -861,4 +867,11 @@ input[type=number] {
     height: 27px;
     width: 200px;
     padding-left: 105px;
+}
+
+.view-scores-back-button{
+    height: 29px;
+    position: absolute;
+    left: 28px;
+    top: 231px;
 }
