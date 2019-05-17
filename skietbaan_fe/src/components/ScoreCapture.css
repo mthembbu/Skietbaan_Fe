@@ -142,6 +142,10 @@
     .padding-top-40{
         padding-top: 100px !important;
     }
+    .view-scores-back-button{
+        top: 293px !important;
+        left: 8% !important;
+    }
 }
 
 .page-content-video{
