@@ -30,7 +30,7 @@ class NavbarMenu extends Component {
     this.isCreate = this.isCreate.bind(this);
     this.isScoreCapture = this.isScoreCapture.bind(this);
     this.isProfile = this.isProfile.bind(this);
-    this.isNotifications = this.isNotifications.bind(this);
+    this.isMore = this.isMore.bind(this);
     this.GoTo = this.GoTo.bind(this);
   }
 
@@ -115,13 +115,13 @@ class NavbarMenu extends Component {
     }
   }
 
-  isNotifications() {
+  isMore() {
     if (this.props.navSelectedPage === 4) {
       return (
         <img
           src={
             this.props.numberOfNotifications === 0
-              ? NAV_BAR_ICONS.NOTIFICATIONS_RED
+              ? NAV_BAR_ICONS.MORE_RED
               : NAV_BAR_ICONS.NOTIFY_RED
           }
           className="notifications-icon-grey"
@@ -133,7 +133,7 @@ class NavbarMenu extends Component {
         <img
           src={
             this.props.numberOfNotifications === 0
-              ? NAV_BAR_ICONS.NOTIFICATIONS_GRAY
+              ? NAV_BAR_ICONS.MORE_GREY
               : NAV_BAR_ICONS.NOTIFY_GREY
           }
           className="notifications-icon-grey"
@@ -174,7 +174,7 @@ class NavbarMenu extends Component {
                   </td>
                   <td className="columns" onClick={() => this.GoTo("/scoresPage")}>{this.isScoreCapture()} </td>
                   <td className="columns" onClick={() => this.GoTo("/profile")}>{this.isProfile()}</td>
-                  <td className="columns" onClick={() => this.GoTo("/notify")}>{this.isNotifications()}</td>
+                  <td className="columns" onClick={() => this.GoTo("/notify")}>{this.isMore()}</td>
                 </tr>
               </tbody>
             </table>
