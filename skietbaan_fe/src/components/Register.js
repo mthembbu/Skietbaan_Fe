@@ -221,7 +221,7 @@ class Register extends Component {
               />
               <div className="error-message-container">
               {this.state.invalidUsername & this.state.buttonClicked ? (
-                  <div className={"error-message-login"}> invalid username</div>
+                  <div className={"error-message-login"}> Invalid username</div>
                 ) : this.state.usernameTaken ? ( <div className={"error-message-login"}>
                     Username already in use
                   </div>
@@ -241,7 +241,7 @@ class Register extends Component {
               />
               <div className="error-message-container">
                 {this.state.invalidEmail & this.state.buttonClicked ? (
-                  <div className={"error-message-login"}> invalid email</div>
+                  <div className={"error-message-login"}> Invalid email</div>
                 ) : this.state.emailTaken ? ( <div className={"error-message-login"}>
                     Email address already in use
                   </div>
@@ -262,7 +262,7 @@ class Register extends Component {
                 />
                 <div className="error-message-container">
                 {this.state.invalidPassword & this.state.buttonClicked ? (
-                  <div className={"error-message-login"}> invalid email</div>
+                  <div className={"error-message-login"}> Invalid password</div>
                 ) : null}
                 </div>
                 <div
