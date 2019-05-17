@@ -7,6 +7,9 @@ import { connect } from "react-redux";
 import { checkUserType } from "../actions/adminAction";
 import { selectedPage } from "../actions/postActions";
 import { pageState } from '../actions/postActions';
+import newsfeed from "../components/navbar-icons/newsfeed.png";
+import notifications from "../components/navbar-icons/notifications.png";
+import messenger from "../components/navbar-icons/messenger.png";
 import { fetchNumberOfNotification } from "../actions/notificationAction";
 
 class More extends Component {
@@ -44,10 +47,26 @@ class More extends Component {
                                 <div className="label-for-score">MORE</div>
                             </div>
                         </div>
+
+                        <div className="padding-top-100"></div>
+                        <div className="more-border-line"></div>
+                        <div className="more-image-container">
+                            <img src={newsfeed} className="more-image"></img>
+                            <label className="more-label">NEWSFEED</label>
+                        </div>
+                        <div className="more-border-line"></div>
+                        <div className="more-image-container" onClick={() => this.GoTo("/notify")}>
+                            <img src={notifications} className="more-image"></img>
+                            <label className="more-label">NOTIFICATIONS</label>
+                        </div>
+                        <div className="more-border-line"></div>
+                        <div className="more-image-container">
+                            <img src={messenger} className="more-image"></img>
+                            <label className="more-label">MESSENGER</label>
+                        </div>
+                        <div className="more-border-line"></div>
                     </Col>
                 </Row>
-                <div className="padding-top-100"></div>
-                    <div className="border-line"></div>
             </div>
         );
     }
