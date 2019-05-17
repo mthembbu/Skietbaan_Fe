@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { getCookie } from "./cookie.js";
 import { toggleToggleBar } from "./toggle.js";
 import { checkUserType } from "../actions/adminAction";
+import backButton from "../components/assets/backButtonForImage.png"
 import whiteBin from './GroupImages/whiteBin.png';
 import blackBin from './GroupImages/blackBin.png';
 import whiteSelectAll from "../components/Notification-Img/white-select-all.png";
@@ -523,6 +524,7 @@ class ViewScores extends Component {
                     <div className={this.state.cameraClicked === false || this.state.someScoreClicked === i ?
                         "score-content" : "hidden"}
                         onClick={this.state.scoresList[i].pictureURL !== "" ? () => this.showPhoto(i) : null}>
+                        <img src={backButton} className={this.state.cameraClicked ? "view-scores-back-button" : "hidden"}></img>
                         <div className="user-scores">{this.state.scoresList[i].userScore}
                         </div>
                         <div className="date-view-score float-left">

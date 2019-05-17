@@ -862,3 +862,10 @@ input[type=number] {
     width: 200px;
     padding-left: 105px;
 }
+
+.view-scores-back-button{
+    height: 29px;
+    position: absolute;
+    left: 28px;
+    top: 231px;
+}
