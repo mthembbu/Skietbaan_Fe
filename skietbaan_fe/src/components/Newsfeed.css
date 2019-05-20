@@ -1,0 +1,45 @@
+.newsfeed-back-button{
+    height: 30px;
+    position: absolute;
+    top: 19px;
+    left: 12px;
+}
+
+.label-for-newsfeed{
+    font-size: 20px;
+    color: #fdfdfd;
+    font-weight: bold;
+    padding-top: 14px;
+    padding-left: 38px;
+}
+
+.newsfeed-skietbaan-logo{
+    width: 103px;
+    height: 41px;
+    position: relative;
+    left: 10px;
+    float: left;
+}
+
+.padding-top-80{
+    padding-top: 80px;
+}
+
+@media screen and (min-width:576px){
+    .padding-top-80{
+        padding-top: 130px !important;
+    }
+}
+
+.label-container-welcome-text{
+    width: 150px;
+    float: left;
+    margin-left: 23px;
+}
+
+.newsfeed-welcome-text{
+    font-size: 16px;
+    font-weight: 300;
+    color: #212527;
+    line-height: 20px;
+}

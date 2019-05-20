@@ -24,6 +24,7 @@ import createPages from "./components/createPages";
 import resetPassword from "./components/resetPassword";
 import more from "./components/More.js"
 import MetaTags from "react-meta-tags";
+import newsfeed from "./components/Newsfeed.js";
 import { PersistGate } from "redux-persist/integration/react";
 //app.js
 class App extends Component {
@@ -57,6 +58,7 @@ class App extends Component {
                 <Route path={"/ViewGroups"} component={GroupComponent} exact />
                 <Route path={"/CompComponent"} component={CompComponent} exact />
                 <Route path="/create" component={createPages} exact />
+                <Route path="/newsfeed" component={newsfeed} exact />
                 <Redirect from="/" to="/home" />
               </Switch>
             </Router>

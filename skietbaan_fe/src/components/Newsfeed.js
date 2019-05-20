@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../components/More.css";
+import "../components/Newsfeed.css";
 import history from "./history";
 import { getCookie } from "../components/cookie.js";
 import { Row, Col } from "react-bootstrap";
@@ -7,12 +7,12 @@ import { connect } from "react-redux";
 import { checkUserType } from "../actions/adminAction";
 import { selectedPage } from "../actions/postActions";
 import { pageState } from '../actions/postActions';
-import newsfeed from "../components/navbar-icons/newsfeed.png";
-import notifications from "../components/navbar-icons/notifications.png";
-import messenger from "../components/navbar-icons/messenger.png";
 import { fetchNumberOfNotification } from "../actions/notificationAction";
+import backButton from "../components/assets/back-button-white.png";
+import skietbaanLogo from "../components/assets/skietbaanLogo.png";
+import downArrow from "../components/assets/downArrow.png";
 
-class More extends Component {
+class Newsfeed extends Component {
     constructor(props) {
         super(props);
 
@@ -38,33 +38,30 @@ class More extends Component {
     }
 
     render() {
+        let aboveMembers = []
+        aboveMembers.push(
+            <div className="above-members-container padding-top-80">
+                <img src={skietbaanLogo} className="newsfeed-skietbaan-logo" ></img>
+                <div className="label-container-welcome-text">
+                    <label className="newsfeed-welcome-text"> Welcome to our new members this month. </label>
+                </div>
+            </div>
+        )
+        let newMembersContainer = []
+
+        
+
         return (
             <div className="page-content-scores-page">
                 <Row className="row justify-content-center">
                     <Col sm={8} className="createpage-bootstrap-col-center-container">
                         <div className="score-capture-header">
                             <div className="gun-overlay-image">
-                                <div className="label-for-score">MORE</div>
+                                <img src={backButton} className="newsfeed-back-button" onClick={() => this.GoTo("/more")}></img>
+                                <div className="label-for-newsfeed">NEWSFEED</div>
                             </div>
                         </div>
-
-                        <div className="padding-top-100"></div>
-                        <div className="more-border-line"></div>
-                        <div className="more-image-container" onClick={() => this.GoTo("/newsfeed")}>
-                            <img src={newsfeed} className="more-image"></img>
-                            <label className="more-label">NEWSFEED</label>
-                        </div>
-                        <div className="more-border-line"></div>
-                        <div className="more-image-container" onClick={() => this.GoTo("/notify")}>
-                            <img src={notifications} className="more-image"></img>
-                            <label className="more-label">NOTIFICATIONS</label>
-                        </div>
-                        <div className="more-border-line"></div>
-                        <div className="more-image-container">
-                            <img src={messenger} className="more-image"></img>
-                            <label className="more-label">MESSENGER</label>
-                        </div>
-                        <div className="more-border-line"></div>
+                        {aboveMembers}
                     </Col>
                 </Row>
             </div>
@@ -83,4 +80,4 @@ export default connect(
     {
         checkUserType, fetchNumberOfNotification, pageState, selectedPage,
     }
-)(More);
+)(Newsfeed);
