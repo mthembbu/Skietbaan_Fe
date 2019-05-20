@@ -11,6 +11,7 @@ import { fetchNumberOfNotification } from "../actions/notificationAction";
 import backButton from "../components/assets/back-button-white.png";
 import skietbaanLogo from "../components/assets/skietbaanLogo.png";
 import downArrow from "../components/assets/downArrow.png";
+import memberIcon from "../components/Notification-Img/confirmation.png";
 
 class Newsfeed extends Component {
     constructor(props) {
@@ -41,16 +42,23 @@ class Newsfeed extends Component {
         let aboveMembers = []
         aboveMembers.push(
             <div className="above-members-container padding-top-80">
-                <img src={skietbaanLogo} className="newsfeed-skietbaan-logo" ></img>
+                <img src={skietbaanLogo} className="newsfeed-skietbaan-logo" alt="skietbaan"></img>
                 <div className="label-container-welcome-text">
                     <label className="newsfeed-welcome-text"> Welcome to our new members this month. </label>
                 </div>
-                <img src={downArrow} className="newsfeed-down-arrow"></img>
+                <img src={downArrow} className="newsfeed-down-arrow" alt="down-arrow"></img>
             </div>
         )
         let newMembersContainer = []
         newMembersContainer.push(
-
+            <div className="newsfeed-new-member-container">
+                <div className="circle-member-icon">
+                    <img src={memberIcon} className="newsfeed-member-icon"></img>
+                </div>
+                <div className="newsfeed-username-container">
+                    <label className="newsfeed-username">Shareece Doe</label>
+                </div>
+            </div>
         )
 
         return (
@@ -59,11 +67,13 @@ class Newsfeed extends Component {
                     <Col sm={8} className="createpage-bootstrap-col-center-container">
                         <div className="score-capture-header">
                             <div className="gun-overlay-image">
-                                <img src={backButton} className="newsfeed-back-button" onClick={() => this.GoTo("/more")}></img>
+                                <img src={backButton} className="newsfeed-back-button"
+                                    onClick={() => this.GoTo("/more")} alt="back-button"></img>
                                 <div className="label-for-newsfeed">NEWSFEED</div>
                             </div>
                         </div>
                         {aboveMembers}
+                        {newMembersContainer}
                     </Col>
                 </Row>
             </div>

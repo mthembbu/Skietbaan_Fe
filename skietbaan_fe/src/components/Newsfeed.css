@@ -51,3 +51,40 @@
     top: 17px;
     height: 15px;
 }
+
+.newsfeed-new-member-container{
+    height: 116px;
+    margin-top: 46px;
+    background-color: #F4F4F4;
+}
+
+.newsfeed-username-container{
+    width: 41px;
+    float: left;
+    position: relative;
+    left: 15px;
+    top: 72px;
+}
+
+.newsfeed-username{
+    font-size: 12px;
+    color: #555555;
+    font-weight: 300;
+}
+
+.newsfeed-member-icon{
+    height: 16px;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+}
+
+.circle-member-icon{
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+    position: absolute;
+    bottom: 53px;
+    left: 63px;
+}
