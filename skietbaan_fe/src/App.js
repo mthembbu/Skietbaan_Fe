@@ -15,6 +15,7 @@ import Documents from "./components/Documents";
 import ScoresPage from "./components/ScoresPage";
 import ProfileLanding from "./components/ProfileLanding";
 import GroupComponent from "./components/GroupComponent";
+import chatContainer from "./components/Chat/chatContainer";
 import CompComponent from "./components/CompComponent";
 import "./App.css";
 import ForgotPassword from "./components/ForgotPassword";
@@ -56,6 +57,7 @@ class App extends Component {
                 <Route path="/documents" component={Documents} exact />
                 <Route path="/profile" component={ProfileLanding} exact />
                 <Route path={"/ViewGroups"} component={GroupComponent} exact />
+                <Route path={"/chatContainer"} component={chatContainer} exact />
                 <Route path={"/CompComponent"} component={CompComponent} exact />
                 <Route path="/create" component={createPages} exact />
                 <Route path="/newsfeed" component={newsfeed} exact />

@@ -68,6 +68,10 @@ export const BINSTATE = "BINSTATE";
 export const SCREEN_SIZE = "SCREEN_SIZE";
 export const ADMINSTAT = "ADMINSTAT";
 export const EXPORTSTATE = "EXPORTSTATE";
+export const CONNECTUSER = "CONNECTUSER";
+export const SENDMESSAGE = "SENDMESSAGE";
+export const GETMESSAGE = "GETMESSAGE";
+export const EMPTYMESSAGEARRAY = "EMPTYMESSAGEARRAY";
 
 //notification types
 export const FETCH_NOTIFICATION = "FETCH_NOTIFICATION";
