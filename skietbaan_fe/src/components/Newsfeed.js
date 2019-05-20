@@ -45,11 +45,13 @@ class Newsfeed extends Component {
                 <div className="label-container-welcome-text">
                     <label className="newsfeed-welcome-text"> Welcome to our new members this month. </label>
                 </div>
+                <img src={downArrow} className="newsfeed-down-arrow"></img>
             </div>
         )
         let newMembersContainer = []
+        newMembersContainer.push(
 
-        
+        )
 
         return (
             <div className="page-content-scores-page">

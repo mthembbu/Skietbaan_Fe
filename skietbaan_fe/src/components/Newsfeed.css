@@ -43,3 +43,11 @@
     color: #212527;
     line-height: 20px;
 }
+
+.newsfeed-down-arrow{
+    position: relative;
+    float: right;
+    right: 21px;
+    top: 17px;
+    height: 15px;
+}
