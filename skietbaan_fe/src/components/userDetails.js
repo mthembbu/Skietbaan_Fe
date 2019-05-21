@@ -49,6 +49,7 @@ export default class userDetails extends Component {
       let Navbar = document.querySelector(".navbar-admin");
       if (this.state.height === document.body.clientHeight) {
         Navbar.classList.remove("hidden");
+        this.setState({ imageSelector: false });
       } else {
         Navbar.classList.add("hidden");
       }
@@ -169,12 +170,16 @@ export default class userDetails extends Component {
   HideNav = () => {
     let Navbar = document.querySelector(".navbar-admin");
     if (Navbar != null) {
-      if (Navbar.classList.contains("hidden")) {
-        Navbar.classList.remove("hidden");
-        this.setState({ imageSelector: false });
+      if (window.innerWidth < 575 && window.innerHeight < 800) {
+        if (Navbar.classList.contains("hidden")) {
+          Navbar.classList.remove("hidden");
+          this.setState({ imageSelector: false });
+        } else {
+          Navbar.classList.add("hidden");
+          this.setState({ imageSelector: true });
+        }
       } else {
-        Navbar.classList.add("hidden");
-        this.setState({ imageSelector: true });
+        this.setState({ imageSelector: !this.state.imageSelector });
       }
     }
   };
@@ -197,7 +202,6 @@ export default class userDetails extends Component {
   };
 
   render() {
-    console.log(this.state.ProfilePicture);
     return (
       <div className="document-center">
         {this.state.getDataUser === false ||

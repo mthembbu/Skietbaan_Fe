@@ -23,6 +23,10 @@
     margin-top: 80px;
     height: 165px;
   }
+  .details-image-selector {
+    bottom: 39px !important;
+    width: 60% !important;
+  }
 }
 
 .user-details-scrolls {
