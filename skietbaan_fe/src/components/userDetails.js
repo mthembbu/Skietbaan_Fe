@@ -3,6 +3,12 @@ import "../components/userDetails.css";
 import { getCookie } from "./cookie.js";
 import { BASE_URL } from "../actions/types";
 import expImage from "../components/assets/warning.png";
+import defaultImage from "../components/profileNotifications/holder.png";
+import cameraImage from "../components/profileNotifications/camera.png";
+import cancelActive from "../components/profileNotifications/cancelActive.png";
+import cancelInactive from "../components/profileNotifications/cancelInactive.png";
+import capture from "../components/profileNotifications/capture.png";
+import upload from "../components/profileNotifications/upload.png";
 import { validateEmail, validateNumber } from "./Validators.js";
 
 export default class userDetails extends Component {
@@ -23,7 +29,11 @@ export default class userDetails extends Component {
       navbarState: false,
       height: document.body.clientHeight,
       exceptionCaught: false,
-      expUsers: []
+      expUsers: [],
+      file: "",
+      imagePreviewUrl: "",
+      ProfilePicture: "",
+      imageSelector: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -31,6 +41,7 @@ export default class userDetails extends Component {
     this.mounted = false;
     this.handErrorValue = this.handErrorValue.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.HideNav = this.HideNav.bind(this);
   }
 
   componentWillMount() {
@@ -56,6 +67,7 @@ export default class userDetails extends Component {
           surnameValue: data.surname,
           emailValue: data.email,
           cellphoneValue: data.phoneNumber,
+          ProfilePicture: data.profilePicture,
           getDataUser: true
         })
       )
@@ -95,12 +107,29 @@ export default class userDetails extends Component {
     }
   }
 
+  _handleImageChange(e) {
+    e.preventDefault();
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    if (file != undefined || file != null) {
+      reader.onloadend = () => {
+        this.setState({
+          file: file,
+          ProfilePicture: reader.result,
+          inputChanged: true
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   updateUser() {
     if (
       this.state.array.name === this.state.nameValue &&
       this.state.array.phoneNumber === this.state.cellphoneValue &&
       this.state.array.email === this.state.emailValue &&
-      this.state.array.surname === this.state.surnameValue
+      this.state.array.surname === this.state.surnameValue &&
+      this.state.array.profilePicture === this.state.ProfilePicture
     ) {
       this.setState({ inputChanged: false });
     } else {
@@ -108,6 +137,7 @@ export default class userDetails extends Component {
       this.state.array.phoneNumber = this.state.cellphoneValue;
       this.state.array.email = this.state.emailValue;
       this.state.array.surname = this.state.surnameValue;
+      this.state.array.profilePicture = this.state.ProfilePicture;
       fetch(BASE_URL + "/api/Features/UpdateDetails/", {
         method: "post",
         headers: {
@@ -136,7 +166,38 @@ export default class userDetails extends Component {
       : this.setState({ checkNumberValid: true, checkEmailValid: true });
   }
 
+  HideNav = () => {
+    let Navbar = document.querySelector(".navbar-admin");
+    if (Navbar != null) {
+      if (Navbar.classList.contains("hidden")) {
+        Navbar.classList.remove("hidden");
+        this.setState({ imageSelector: false });
+      } else {
+        Navbar.classList.add("hidden");
+        this.setState({ imageSelector: true });
+      }
+    }
+  };
+
+  componentWillUnmount() {
+    this.showNav();
+  }
+  showNav = () => {
+    let Navbar = document.querySelector(".navbar-admin");
+    if (Navbar != null) {
+      if (this.state.imageSelector) {
+        Navbar.classList.remove("hidden");
+        this.setState({ imageSelector: false });
+      }
+    }
+  };
+
+  removeProfile = () => {
+    this.setState({ ProfilePicture: "" });
+  };
+
   render() {
+    console.log(this.state.ProfilePicture);
     return (
       <div className="document-center">
         {this.state.getDataUser === false ||
@@ -185,66 +246,99 @@ export default class userDetails extends Component {
           </div>
         ) : (
           <div className="user-details-main-container">
-            <div className="user-details-scrolls">
+            <div className="user-details-scrolls" onClick={this.showNav}>
               <div className="member-details-container">
-                <div className="user-details-heading-container user-details-member-label">
-                  {this.state.array.surname === null ||
-                  this.state.array.surname === "" ||
-                  this.state.array.name === null ||
-                  this.state.array.name === ""
-                    ? this.state.array.username.toUpperCase()
-                    : this.state.array.name.toUpperCase() +
-                      " " +
-                      this.state.array.surname.toUpperCase()}
-                </div>
-                {this.state.array.memberID === null ||
-                this.state.array.memberID === undefined ? null : (
-                  <div>
+                <div>
+                  <div className="user-details-heading-container user-details-member-label">
+                    {this.state.array.surname === null ||
+                    this.state.array.surname === "" ||
+                    this.state.array.name === null ||
+                    this.state.array.name === ""
+                      ? this.state.array.username.toUpperCase()
+                      : this.state.array.name.toUpperCase() +
+                        " " +
+                        this.state.array.surname.toUpperCase()}
                     <div>
-                      <label className="user-details-member-label">
-                        MEMBERSHIP NUMBER:
-                      </label>
-                      <label className="user-details-member-label">
-                        <b>{this.state.array.memberID}</b>
-                      </label>
-                    </div>
-                    <div>
-                      <label
-                        className={
-                          this.state.expUsers.indexOf(this.state.array.id) ===
-                          -1
-                            ? "user-details-member-label"
-                            : "user-details-member-label-expiring"
-                        }
-                      >
-                        MEMBER EXPIRY DATE:
-                      </label>
-                      <label
-                        className={
-                          this.state.expUsers.indexOf(this.state.array.id) ===
-                          -1
-                            ? "user-details-member-label"
-                            : "user-details-member-label-expiring"
-                        }
-                      >
-                        <b>
-                          {this.state.array.memberExpiryDate
-                            .substring(0, 10)
-                            .split("-")
-                            .join("/")}
-                        </b>
-                        {this.state.expUsers.indexOf(this.state.array.id) ===
-                        -1 ? null : (
-                          <img
-                            src={expImage}
-                            className="user-details-exp-icon"
-                            alt="Is a Member"
-                          />
-                        )}
-                      </label>
+                      <hr className="details-div-line" />
                     </div>
                   </div>
-                )}
+
+                  {this.state.array.memberID === null ||
+                  this.state.array.memberID === undefined ? null : (
+                    <div>
+                      <div>
+                        <label className="user-details-member-label">
+                          MEMBERSHIP NUMBER:
+                        </label>
+                        <label className="user-details-member-label">
+                          <b>{this.state.array.memberID}</b>
+                        </label>
+                      </div>
+                      <div>
+                        <label
+                          className={
+                            this.state.expUsers.indexOf(this.state.array.id) ===
+                            -1
+                              ? "user-details-member-label"
+                              : "user-details-member-label-expiring"
+                          }
+                        >
+                          MEMBER EXPIRY DATE:
+                        </label>
+                        <label
+                          className={
+                            this.state.expUsers.indexOf(this.state.array.id) ===
+                            -1
+                              ? "user-details-member-label"
+                              : "user-details-member-label-expiring"
+                          }
+                        >
+                          <b>
+                            {this.state.array.memberExpiryDate
+                              .substring(0, 10)
+                              .split("-")
+                              .join("/")}
+                          </b>
+                          {this.state.expUsers.indexOf(this.state.array.id) ===
+                          -1 ? null : (
+                            <img
+                              src={expImage}
+                              className="user-details-exp-icon"
+                              alt="Is a Member"
+                            />
+                          )}
+                        </label>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <div className="image-upload">
+                    <label for="button-input">
+                      {this.state.ProfilePicture === null ||
+                      this.state.ProfilePicture === undefined ||
+                      this.state.ProfilePicture === "" ? (
+                        <img
+                          className="details-placeholder-style"
+                          src={defaultImage}
+                        />
+                      ) : (
+                        <img
+                          className="details-placeholder-style"
+                          src={"data:image/jpeg;" + this.state.ProfilePicture}
+                        />
+                      )}
+
+                      <img className="details-camera-style" src={cameraImage} />
+                    </label>
+
+                    <input
+                      id="button-input"
+                      type="button"
+                      onClick={this.HideNav}
+                    />
+                  </div>
+                </div>
               </div>
 
               <div>
@@ -333,7 +427,9 @@ export default class userDetails extends Component {
                     this.state.array.surname === this.state.surnameValue &&
                     this.state.array.phoneNumber ===
                       this.state.cellphoneValue &&
-                    this.state.array.email === this.state.emailValue
+                    this.state.array.email === this.state.emailValue &&
+                    this.state.array.profilePicture ===
+                      this.state.ProfilePicture
                       ? "user-details-button-container-active"
                       : "user-details-button-container"
                   }
@@ -357,6 +453,60 @@ export default class userDetails extends Component {
             </div>
           </div>
         )}
+        {this.state.imageSelector ? (
+          <div className="details-image-selector">
+            <label className="details-image-selector-label">
+              EDIT PROFILE PICTURE
+            </label>
+
+            <div className="details-image-selector-icons-container">
+              <div>
+                <div className="image-upload">
+                  <label for="file-input">
+                    <img
+                      className="details-image-selector-icons"
+                      src={upload}
+                    />
+                  </label>
+
+                  <input
+                    id="file-input"
+                    type="file"
+                    onChange={e => this._handleImageChange(e)}
+                  />
+                </div>
+              </div>
+              <div>
+                <div className="image-upload">
+                  <label for="remove-input">
+                    <img
+                      className="details-image-selector-icons"
+                      src={
+                        this.state.ProfilePicture === "" ||
+                        this.state.ProfilePicture === null ||
+                        this.state.ProfilePicture === undefined
+                          ? cancelInactive
+                          : cancelActive
+                      }
+                    />
+                  </label>
+
+                  <input
+                    id="remove-input"
+                    type="button"
+                    onClick={
+                      this.state.ProfilePicture === "" ||
+                      this.state.ProfilePicture === null ||
+                      this.state.ProfilePicture === undefined
+                        ? null
+                        : this.removeProfile
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
       </div>
     );
   }
