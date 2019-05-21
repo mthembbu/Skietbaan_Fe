@@ -6,6 +6,7 @@ import notification from "./notificationReducer";
 import userProfileReducer from "./userProfileReducer";
 import profileLandingReducer from "./profileLandingReducer";
 import adminReducer from "./adminReducer";
+import chatReducer from './chatReducer'
 
 export default combineReducers({
   posts: postReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   notificationOBJ: notification,
   awardsReducer: userProfileReducer,
   landingReducer: profileLandingReducer,
-  adminReducer: adminReducer
+  adminReducer: adminReducer,
+  chatReducer:chatReducer
 });
