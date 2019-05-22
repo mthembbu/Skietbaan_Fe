@@ -198,10 +198,11 @@ export default class userDetails extends Component {
   };
 
   removeProfile = () => {
-    this.setState({ ProfilePicture: "" });
+    this.setState({ ProfilePicture: "", inputChanged: true });
   };
 
   render() {
+    console.log(this.state.inputChanged);
     return (
       <div className="document-center">
         {this.state.getDataUser === false ||
