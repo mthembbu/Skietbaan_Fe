@@ -206,11 +206,12 @@ class AddMembersGroup extends Component {
                     key={post.id}
                     onClick={() => this.toggleHighlight(post.id)}
                   >
+                    <div className="addMember-image-container">
                     <img
                       className="checkbox-delete"
                       src={post.highlighted ? marked : unmarked}
                       alt=""
-                    />
+                    /></div>  
                     <label
                       className={
                         post.highlighted === true ? "add-blabe" : "add-blabe2"

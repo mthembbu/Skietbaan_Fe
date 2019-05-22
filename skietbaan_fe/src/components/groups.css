@@ -215,7 +215,7 @@
 
 .edit-blabe {
 	margin-left: 19px;
-	width: 80%;
+	width: 65%;
 	border-radius: 8px;
 	height: 48px;
 	padding-left: 10px;
@@ -309,7 +309,7 @@
 		width: 100% !important;
 	}
 	.cancel-creating-group {
-		margin-right: 40px;
+		margin-right: 16px;
 	}
 }
 
@@ -353,18 +353,18 @@
 
 .bpanel {
 	position: fixed;
-    right: 0;
-    bottom: 0;
-    background: #f8f8f8;
-    width: 100%;
-    z-index: 1000;
-    font-size: 16px;
-    font-weight: lighter;
-    padding-top: 10px;
-    float: bottom;
-    border-top-left-radius: 13px;
-    border-top-right-radius: 13px;
-    padding-bottom: 5px;
+	right: 0;
+	bottom: 0;
+	background: #f8f8f8;
+	width: 100%;
+	z-index: 1000;
+	font-size: 16px;
+	font-weight: lighter;
+	padding-top: 10px;
+	float: bottom;
+	border-top-left-radius: 13px;
+	border-top-right-radius: 13px;
+	padding-bottom: 5px;
 }
 .updatess:focus {
 	outline: none;
@@ -553,6 +553,12 @@
 	color: #555555;
 	vertical-align: middle;
 }
+.edit-image-cont {
+	width: 100%;
+}
+.addMember-image-container{
+	width: 100%;
+}
 
 @media only screen and (min-width: 575px) {
 	.add-check-edit .list-group {
@@ -561,7 +567,23 @@
 	.view-the-main {
 		margin: 11px 40px 56px 28px;
 	}
-
+	.switchAll {
+		float: right;
+		margin-top: 20px;
+		margin-left: 12px;
+		font-size: 16px;
+		color: #666666;
+		font-weight: lighter;
+		width: 23%;
+		display: flex;
+		justify-content: center;
+	}
+	.edit-image-cont {
+		width: 92%;
+	}
+	.addMember-image-container {
+		width: 92%;
+	}
 	.adding-check-edit {
 		margin-top: 0px !important;
 	}
@@ -663,20 +685,21 @@
 	border-radius: 24.5px;
 	width: 156px;
 	height: 42px;
+	margin-left: 16px;
 	margin-right: 16px;
-	color: white;
-	background: red;
 	justify-content: flex-start;
-	border: 1px solid red;
+	background: transparent;
+	border: 1px solid black;
+	color: #6a6a6a;
 }
 .add-member-confirm-group {
 	border-radius: 24.5px;
 	width: 156px;
 	margin-right: 16px;
 	height: 42px;
-	background: transparent;
-	border: 1px solid black;
-	color: #6a6a6a;
+	color: white;
+	background: red;
+	border: 1px solid red;
 	float: right;
 }
 .cancel-delete:focus {
@@ -700,10 +723,13 @@
 .plus-next {
 	float: right;
 	margin-top: 5px;
+	order: 1;
 }
 
 .group-icon-spacing {
 	width: 30%;
+	display: flex;
+	justify-content: center;
 }
 
 .delete-icons {
@@ -825,10 +851,10 @@
 }
 .edit-no-user-msg {
 	font-size: 16px;
-    color: #be0000;
-    margin: auto;
-    margin-top: 13px;
-    font-weight: lighter;
+	color: #be0000;
+	margin: auto;
+	margin-top: 13px;
+	font-weight: lighter;
 }
 .view-group-delete-box {
 	margin-top: 10px;

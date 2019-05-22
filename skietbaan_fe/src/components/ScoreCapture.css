@@ -480,7 +480,7 @@ hr{
     background-size: contain;
     background-position: 6px 0px;
     background-image: url("../components/assets/gunOverlay.png");
-    width: 87%;
+    width: 82%;
     height: 63px;
 }
 
@@ -860,6 +860,15 @@ input[type=number] {
     }
     .score-content-admin{
         width: 65%;
+    }
+    .gun-overlay-image{
+        margin-top: 4px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: 6px 0px;
+        background-image: url("../components/assets/gunOverlay.png");
+        width: 86%;
+        height: 63px;
     }
 }
 
