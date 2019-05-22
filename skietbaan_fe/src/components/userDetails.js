@@ -202,7 +202,6 @@ export default class userDetails extends Component {
   };
 
   render() {
-    console.log(this.state.inputChanged);
     return (
       <div className="document-center">
         {this.state.getDataUser === false ||
