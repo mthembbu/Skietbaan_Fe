@@ -7,7 +7,7 @@ import defaultImage from "../components/profileNotifications/holder.png";
 import cameraImage from "../components/profileNotifications/camera.png";
 import cancelActive from "../components/profileNotifications/cancelActive.png";
 import cancelInactive from "../components/profileNotifications/cancelInactive.png";
-import capture from "../components/profileNotifications/capture.png";
+import shooter from "../components/profileNotifications/shooter.png";
 import upload from "../components/profileNotifications/upload.png";
 import { validateEmail, validateNumber } from "./Validators.js";
 
@@ -253,20 +253,44 @@ export default class userDetails extends Component {
             <div className="user-details-scrolls" onClick={this.showNav}>
               <div className="member-details-container">
                 <div>
-                  <div className="user-details-heading-container user-details-member-label">
-                    {this.state.array.surname === null ||
-                    this.state.array.surname === "" ||
-                    this.state.array.name === null ||
-                    this.state.array.name === ""
-                      ? this.state.array.username.toUpperCase()
-                      : this.state.array.name.toUpperCase() +
-                        " " +
-                        this.state.array.surname.toUpperCase()}
+                  <div className="user-details-heading-container user-details-username">
                     <div>
-                      <hr className="details-div-line" />
+                      <img
+                        className="user-deails-member-shooting"
+                        src={shooter}
+                      />
+                    </div>
+                    <div className="user-deails-member-textdown">
+                      {this.state.array.surname === null ||
+                      this.state.array.surname === "" ||
+                      this.state.array.name === null ||
+                      this.state.array.name === ""
+                        ? this.state.array.username.toUpperCase()
+                        : this.state.array.name.toUpperCase() +
+                          " " +
+                          this.state.array.surname.toUpperCase()}
+                      {this.state.array.memberID === null ||
+                      this.state.array.memberID === "" ? (
+                        <img
+                          className="user-details-membertype-icon"
+                          src={require("../resources/guestW.png")}
+                          alt=""
+                        />
+                      ) : (
+                        <img
+                          className="user-details-membertype-icon"
+                          src={require("../resources/memberW.png")}
+                          alt=""
+                        />
+                      )}
+                      <div className="user-details-shooter-type-text">
+                        {"Competative shooter"}
+                      </div>
                     </div>
                   </div>
-
+                  <div>
+                    <hr className="details-div-line" />
+                  </div>
                   {this.state.array.memberID === null ||
                   this.state.array.memberID === undefined ? null : (
                     <div>
