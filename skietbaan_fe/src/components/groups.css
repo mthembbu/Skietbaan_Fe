@@ -291,6 +291,9 @@
 	margin-left: 32px;
 	outline: none;
 }
+.group-image-container{
+	width: 100%;
+}
 @media screen and (min-width: 576px) {
 	.bottom-panel {
 		bottom: 0;
@@ -310,6 +313,9 @@
 	}
 	.cancel-creating-group {
 		margin-right: 16px;
+	}
+	.group-image-container{
+		width: 92%;
 	}
 }
 

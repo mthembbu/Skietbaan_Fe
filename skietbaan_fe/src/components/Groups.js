@@ -235,12 +235,14 @@ class Groups extends Component {
                   className="listItem"
                   key={post.id}
                   onClick={() => this.toggleHighlight(post.id)}
+                >`
+                <div className="group-image-container"
                 >
                   <img
                     className="checkbox-delete"
                     src={post.highlighted === true ? marked : unmarked}
                     alt=""
-                  />
+                  /></div>
                   <label
                     className={post.highlighted === true ? "blabe" : "blabe2"}
                   >
