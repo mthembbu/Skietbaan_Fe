@@ -225,11 +225,12 @@ class EditGroup extends Component {
 										onClick={() => this.toggleHighlight(post.id)}
 									>
 										{this.state.binState === true ? (
+											<div className="edit-image-cont">
 											<img
 												className="checkbox-delete"
 												src={post.highlighted === true ? deleteS : unmarked}
 												alt=""
-											/>
+											/></div>
 										) : null}
 										<label
 											className={post.highlighted ? "edit-blabe2" : "edit-blabe"}
