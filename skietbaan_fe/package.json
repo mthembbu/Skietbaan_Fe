@@ -53,7 +53,7 @@
     "yarn": "^1.13.0"
   },
   "devDependencies": {
-    "ajv": "^6.0.0",
+    "ajv": "^6.12.3",
     "cross-env": "^5.2.0",
     "redux-devtools-extension": "^2.13.8"
   },
